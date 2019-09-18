@@ -11,6 +11,7 @@ export class HomeComponent implements OnInit {
   scorecards: Object;
   config: any;
   count: any;
+  filter:any;
 
   public labels: any = {};
 
