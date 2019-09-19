@@ -1,8 +1,9 @@
 # ScoreCard
 
-  [![Maintainability](https://api.codeclimate.com/v1/badges/a88fd4b6e49e763c2c6b/maintainability)](https://codeclimate.com/github/hisptz/scorecard-app/maintainability)
-  [![Test Coverage](https://api.codeclimate.com/v1/badges/a88fd4b6e49e763c2c6b/test_coverage)](https://codeclimate.com/github/hisptz/scorecard-app/test_coverage)
-  [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+[![Build Status](https://travis-ci.org/hisptz/scorecard-app.svg?branch=develop)](https://travis-ci.org/hisptz/scorecard-app)
+[![Maintainability](https://api.codeclimate.com/v1/badges/a88fd4b6e49e763c2c6b/maintainability)](https://codeclimate.com/github/hisptz/scorecard-app/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/a88fd4b6e49e763c2c6b/test_coverage)](https://codeclimate.com/github/hisptz/scorecard-app/test_coverage)
+[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.2.3.
 
