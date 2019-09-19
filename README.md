@@ -4,7 +4,15 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/a88fd4b6e49e763c2c6b/maintainability)](https://codeclimate.com/github/hisptz/scorecard-app/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/a88fd4b6e49e763c2c6b/test_coverage)](https://codeclimate.com/github/hisptz/scorecard-app/test_coverage)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+ [![Greenkeeper badge](https://badges.greenkeeper.io/hisptz/scorecard-app.svg)](https://greenkeeper.io/)
 
+ests or correcting existing tests 
+  build:    Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm) 
+  ci:       Changes to our CI configuration files and scripts (example scopes: Travis, Circle, BrowserStack, SauceLabs) 
+❯ chore:    Other changes that don't modify src or test files 
+  revert:   Reverts a previous commit 
+  feat:     A new feature 
+  fix:      A bug fix 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.2.3.
 
 ## Development server
