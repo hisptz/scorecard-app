@@ -12,6 +12,7 @@ export class HomeComponent implements OnInit {
   config: any;
   count: any;
   filter:any;
+  type:any;
 
   public labels: any = {};
 
@@ -35,5 +36,7 @@ export class HomeComponent implements OnInit {
     }
   );
   }
-
+  click() {
+    this.type = 'card';
+  }
 }
