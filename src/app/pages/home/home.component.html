@@ -12,8 +12,11 @@
     <button
       style="height: 34px;margin-right: 3px"
       class="btn btn-outline-secondary btn-sm cursor"
-      (click) = "click()"
+      (click) = "changeView()"
       >
+      <i class="fa fa-list" *ngIf="type == 'thumbnails'"></i>
+      <i class="fa fa-th-large" *ngIf="type == 'list'"></i>
+      <i class="fa fa-th" *ngIf="type == 'card'"></i>
     </button>
     <button style="height: 34px" class="btn btn-outline-secondary btn-sm float-md-right cursor">
       Create<i class="fa fa-plus" aria-hidden="true"></i>
@@ -45,7 +48,7 @@
       </div>
     </div>
     <!--pagination control-->
-    <div class = "container">
+    <div>
       <pagination-controls (pageChange)="pageChanged($event)" [previousLabel]="labels.previousLabel" 
       [nextLabel]="labels.nextLabel">
       </pagination-controls>
