@@ -48,15 +48,12 @@ export class HomeComponent implements OnInit {
     switch (this.nums) {
       case 1:
         this.type = "list";
-          console.log("It is a Sunday.");
           break;
        case 2:
           this.type = "thumbnails";
-        console.log("It is a Monday.");
         break;
         case 3:
           this.type = "card";
-        console.log("It is a Monday.");
         break;
     }
   }
