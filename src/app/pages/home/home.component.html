@@ -35,11 +35,11 @@
                <h4>{{card.name}}</h4>
                <p>{{ card.description }}</p>
                <div>
-                  <a style="cursor: pointer" class="btn btn-outline-primary sans-pro" role="button">view</a>
-                  <a class="btn btn-outline-info sans-pro" role="button" style="cursor: pointer">
+                  <a mat-raised-button matTooltip="View {{card.name}}" style="cursor: pointer" class="btn btn-outline-primary sans-pro" role="button">view</a>
+                  <a mat-raised-button matTooltip="View {{card.name}}" class="btn btn-outline-info sans-pro" role="button" style="cursor: pointer">
                       <i class="fa fa-pencil text-primary"></i>
                   </a>
-                  <button class="btn btn-outline-dark sans-pro" role="button" style="cursor: pointer">
+                  <button mat-raised-button matTooltip="View {{card.name}}" class="btn btn-outline-dark sans-pro" role="button" style="cursor: pointer">
                       <i class="fa fa-trash-o text-danger"></i>
                   </button>
                </div>
