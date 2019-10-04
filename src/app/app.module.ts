@@ -9,7 +9,6 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
-import {MatTooltipModule} from '@angular/material/tooltip';
 
 import { reducers, metaReducers } from './store/reducers';
 import { effects } from './store/effects';
@@ -48,7 +47,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     FormsModule,
     HttpClientModule,
     RoutingModule,
-    MatTooltipModule,
     CoreModule.forRoot({
       namespace: 'iapps',
       version: 1,
