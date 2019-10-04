@@ -1,5 +1,5 @@
 <!--header-->
-<div class="container-fluid">
+<div class="container-fluid" style="padding:50px">
   <div class="row">
     <div class="col-md-2 col-xs-12">
       <img src="assets/images/score.png" >
@@ -25,9 +25,15 @@
   </div>
   
   <!--scorecard views and details-->
-  <div *ngIf="scorecards" style="margin-top: 50px">
+  <div *ngIf="scorecards">
     <div [ngClass]="[type === 'list' ? '' : '',type === 'thumbnails' ? 'flex-container' : '',type === 'card' ? 'row' : '']">
-          <div [ngClass]="[type === 'list' ? 'row' : '',type === 'thumbnails' ? 'flex row' : '',type === 'card' ? 'col-md-4 cardStyle' : '']" *ngFor="let card of scorecards |filter:filter| paginate: config">
+          <div [ngClass]="[type === 'list' ? 'row listanimate' : '',type === 'thumbnails' ? 'flex row' : '',type === 'card' ? 'col-md-4 cardStyle' : '']" 
+          *ngFor="let card of scorecards |filter:filter| paginate: config"
+          [@visibilityChanged]="current_hovered_card === card.id ? 'hoovered': 'notHovered'"
+          (mouseenter) ="mouseEnter(card.id)"
+          (mouseleave) ="mouseLeave(card.id)"
+          @fadeSmooth
+          >
             <div [ngClass]="[type === 'list' ? 'col-md-3' : '',type === 'thumbnails' ? 'col-md-4' : '',type === 'card' ? '' : '']" >
               <img src="assets/images/scorecard.png">
             </div>
@@ -35,11 +41,11 @@
                <h4>{{card.name}}</h4>
                <p>{{ card.description }}</p>
                <div>
-                  <a style="cursor: pointer" class="btn btn-outline-primary sans-pro" role="button">view</a>
-                  <a class="btn btn-outline-info sans-pro" role="button" style="cursor: pointer">
+                  <a matTooltip="View {{card.name}}" style="cursor: pointer" class="btn btn-outline-primary sans-pro" role="button">view</a>
+                  <a matTooltip="Edit {{card.name}}" class="btn btn-outline-info sans-pro" role="button" style="cursor: pointer">
                       <i class="fa fa-pencil text-primary"></i>
                   </a>
-                  <button class="btn btn-outline-dark sans-pro" role="button" style="cursor: pointer">
+                  <button matTooltip="Delete {{card.name}}" class="btn btn-outline-dark sans-pro" role="button" style="cursor: pointer">
                       <i class="fa fa-trash-o text-danger"></i>
                   </button>
                </div>
@@ -48,7 +54,7 @@
       </div>
     </div>
     <!--pagination control-->
-    <div>
+    <div style="margin-top: 2%">
       <pagination-controls (pageChange)="pageChanged($event)" [previousLabel]="labels.previousLabel" 
       [nextLabel]="labels.nextLabel">
       </pagination-controls>
