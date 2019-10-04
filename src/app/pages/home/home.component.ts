@@ -1,17 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { CardsService } from '../../core/services/cards.service';
 import { repeat } from 'rxjs/operators';
+import {fadeSmooth, visibilityChanged} from '../../shared/animations/animations';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+  animations: [
+    visibilityChanged,
+    fadeSmooth
+  ]
 })
 export class HomeComponent implements OnInit {
 
   nums:number;
   counter:number=0;
 
+  current_hovered_card = '';
   scorecards: Object;
   config: any;
   count: any;
@@ -56,5 +62,12 @@ export class HomeComponent implements OnInit {
           this.type = "card";
         break;
     }
+  }
+  mouseEnter(scorecardId) {
+    this.current_hovered_card = scorecardId;
+  }
+
+  mouseLeave() {
+    this.current_hovered_card = '';
   }
 }

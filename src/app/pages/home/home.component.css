@@ -1,17 +1,20 @@
 .flex-container {
     display: flex;
     flex-flow: row wrap;
-    padding-left: 2%;
   }
   .flex {
-    width: 40%;
-    height: 75px;
-    margin:3%;
+    width: 45%;
+    padding: 2%;
+    margin-left:3%;
   }
   .thumbImage{
     padding-left: 30%;
   }
   .cardStyle{
     text-align:center;
+    padding: 3%;
+  }
+  .listanimate{
+    padding: 2%;
   }
   
