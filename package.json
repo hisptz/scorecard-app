@@ -60,7 +60,7 @@
     "@ngrx/schematics": "^8.3.0",
     "@types/jasmine": "^3.4.0",
     "@types/jasminewd2": "^2.0.6",
-    "@types/node": "~13.5.1",
+    "@types/node": "~13.7.0",
     "codelyzer": "^5.0.1",
     "commitizen": "^4.0.3",
     "cz-conventional-changelog": "^3.0.2",
