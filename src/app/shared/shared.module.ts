@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { MatButtonModule } from '@angular/material/button';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -16,6 +17,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatMenuModule } from '@angular/material/menu';
+import { OptionsComponent } from './components/options/options.component';
+import { MatRippleModule} from '@angular/material';
+import { InfoMenuComponent } from './components/info-menu/info-menu.component';
+
 
 @NgModule({
   imports: [
@@ -34,7 +40,10 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatInputModule,
     MatCheckboxModule,
     MatSlideToggleModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatMenuModule,
+    MatButtonToggleModule,
+    MatRippleModule
   ],
   exports: [
     MatButtonModule,
@@ -51,8 +60,13 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatInputModule,
     MatCheckboxModule,
     MatSlideToggleModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatMenuModule,
+    MatButtonToggleModule,
+    MatRippleModule,
+    OptionsComponent,
+    InfoMenuComponent
   ],
-  declarations: []
+  declarations: [OptionsComponent, InfoMenuComponent]
 })
 export class SharedModule { }
