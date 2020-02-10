@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --prod --aot && cd dist/scorecard && zip -r -D scorecard.zip .",
+    "build": "ng build --prod --aot && cd dist/scorecard",
     "test": "ng test",
     "test:travis": "ng test -- --no-watch --no-progress --code-coverage --browsers=ChromeHeadlessCI",
     "lint": "ng lint",
@@ -16,10 +16,11 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "^8.2.7",
-    "@angular/cdk": "^8.2.0",
+    "@angular/cdk": "^8.2.3",
     "@angular/common": "^8.2.7",
     "@angular/compiler": "^8.2.7",
     "@angular/core": "^8.2.7",
+    "@angular/flex-layout": "^9.0.0-beta.29",
     "@angular/forms": "^8.2.7",
     "@angular/material": "^8.2.0",
     "@angular/platform-browser": "^8.2.7",
