@@ -1,0 +1,13 @@
+.row {
+    margin-bottom: 1em; 
+ }
+ .info-item {
+     position: relative;
+     font-size: 0.7em;
+     /* height: em; */
+     /* margin-right: 1em; */
+ }
+ .info-item p {
+    margin-top: auto;
+    margin-bottom: auto;
+ }
