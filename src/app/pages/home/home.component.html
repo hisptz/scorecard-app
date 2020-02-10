@@ -1,65 +1,117 @@
 <!--header-->
-<div class="container-fluid" >
+<div class="container-fluid">
   <div class="row">
-    <div class="col-md-2 col-xs-12"   style="padding-left: 50px; cursor: pointer;">
-      <img src="assets/images/score.png" >
+    <div
+      class="col-md-2 col-xs-12"
+      style="padding-left: 50px; cursor: pointer;"
+    >
+      <img src="assets/images/score.png" />
     </div>
-    <mat-form-field  class="col-md-8 col-xs-12" style="margin-top: 14px">
+    <mat-form-field class="col-md-7 col-xs-12" style="margin-top: 14px">
       <mat-label for="">Search score card by name</mat-label>
-      <input matInput type="search" 
-       [(ngModel)]="filter">
+      <input matInput type="search" [(ngModel)]="filter" />
     </mat-form-field>
-    <div class="col-md-2 col-xs-12 hidden-sm" style="margin-top: 14px">
-    <button
-       mat-raised-button
-      style="height: 34px;margin-right: 3px"
-      (click) = "changeView()"
-      >
-      <i class="fa fa-list" *ngIf="type == 'thumbnails'"></i>
-      <i class="fa fa-th-large" *ngIf="type == 'list'"></i>
-      <i class="fa fa-th" *ngIf="type == 'card'"></i>
-    </button>
-    <button (click)="createNew()"  mat-raised-button style="height: 34px" class="btn-sm float-md-right cursor">
-      Create&nbsp;<i class="fa fa-plus" aria-hidden="true"></i>
-    </button>
-      </div>
-  </div><hr>
-  
+    <div
+      class="col-md-3 col-xs-12 hidden-sm float-md-right"
+      style="margin-top: 14px"
+    >
+      <app-info-menu class="pull-left"></app-info-menu>&nbsp;
+      <button mat-raised-button (click)="changeView()">
+        <i class="fa fa-list" *ngIf="type == 'thumbnails'"></i>
+        <i class="fa fa-th-large" *ngIf="type == 'list'"></i>
+        <i class="fa fa-th" *ngIf="type == 'card'"></i>
+      </button>&nbsp;
+     
+      <button (click)="createNew()" mat-raised-button class="btn-sm   cursor">
+        Create&nbsp;<i class="fa fa-plus" aria-hidden="true"></i>
+      </button>&nbsp;
+    </div>
+  </div>
+  <hr />
+
   <!--scorecard views and details-->
   <!-- -->
   <div *ngIf="scorecards">
-    <div [ngClass]="[type === 'list' ? '' : '',type === 'thumbnails' ? 'flex-container' : '',type === 'card' ? 'row' : '']">
-          <mat-card [ngClass]="[type === 'list' ? 'row listanimate' : '',type === 'thumbnails' ? 'flex row' : '',type === 'card' ? 'col-md-4 cardStyle' : '']" 
-          *ngFor="let card of scorecards |filter:filter| paginate: config"
-          [@visibilityChanged]="current_hovered_card === card.id ? 'hoovered': 'notHovered'"
-          (mouseenter) ="mouseEnter(card.id)"
-          (mouseleave) ="mouseLeave(card.id)"
-          @fadeSmooth
-          >
-            <div [ngClass]="[type === 'list' ? 'col-md-3' : '',type === 'thumbnails' ? 'col-md-4' : '',type === 'card' ? '' : '']" >
-              <img src="assets/images/scorecard.png">
-            </div>
-            <div [ngClass]="[type === 'list' ? 'col-md-9' : '',type === 'thumbnails' ? 'col-md-8' : '',type === 'card' ? '' : '']" >
-               <h4>{{card.name}}</h4>
-               <p>{{ card.description }}</p>
-               <div>
-                  <a mat-raised-button color="primary" matTooltip="View {{card.name}}" style="cursor: pointer" class="sans-pro" role="button">view</a>&nbsp;
-                  <a mat-raised-button matTooltip="Edit {{card.name}}" class="sans-pro" role="button" style="cursor: pointer">
-                      <i class="fa fa-pencil text-primary"></i>
-                  </a>&nbsp;
-                  <button mat-raised-button color="warn" matTooltip="Delete {{card.name}}" class="sans-pro" role="button" style="cursor: pointer">
-                      <i class="fa fa-trash-o "></i>
-                  </button>
-               </div>
-            </div>
-          </mat-card>
-      </div>
+    <div
+      [ngClass]="[
+        type === 'list' ? '' : '',
+        type === 'thumbnails' ? 'flex-container' : '',
+        type === 'card' ? 'row' : ''
+      ]"
+    >
+      <mat-card
+        [ngClass]="[
+          type === 'list' ? 'row listanimate' : '',
+          type === 'thumbnails' ? 'flex row' : '',
+          type === 'card' ? 'col-md-4 cardStyle' : ''
+        ]"
+        *ngFor="let card of scorecards | filter: filter | paginate: config"
+        [@visibilityChanged]="
+          current_hovered_card === card.id ? 'hoovered' : 'notHovered'
+        "
+        (mouseenter)="mouseEnter(card.id)"
+        (mouseleave)="mouseLeave(card.id)"
+        @fadeSmooth
+      >
+        <div
+          [ngClass]="[
+            type === 'list' ? 'col-md-3' : '',
+            type === 'thumbnails' ? 'col-md-4' : '',
+            type === 'card' ? '' : ''
+          ]"
+        >
+          <img src="assets/images/scorecard.png" />
+        </div>
+        <div
+          [ngClass]="[
+            type === 'list' ? 'col-md-9' : '',
+            type === 'thumbnails' ? 'col-md-8' : '',
+            type === 'card' ? '' : ''
+          ]"
+        >
+          <h4>{{ card.name }}</h4>
+          <p>{{ card.description }}</p>
+          <div>
+            <a
+              mat-raised-button
+              color="primary"
+              matTooltip="View {{ card.name }}"
+              style="cursor: pointer"
+              class="sans-pro"
+              role="button"
+              >view</a
+            >&nbsp;
+            <a
+              mat-raised-button
+              matTooltip="Edit {{ card.name }}"
+              class="sans-pro"
+              role="button"
+              style="cursor: pointer"
+            >
+              <i class="fa fa-pencil text-primary"></i> </a
+            >&nbsp;
+            <button
+              mat-raised-button
+              color="warn"
+              matTooltip="Delete {{ card.name }}"
+              class="sans-pro"
+              role="button"
+              style="cursor: pointer"
+            >
+              <i class="fa fa-trash-o "></i>
+            </button>
+          </div>
+        </div>
+      </mat-card>
     </div>
-    <!--pagination control-->
-    <div class="pagination-section" style="margin-top: 2%;">
-      <pagination-controls (pageChange)="pageChanged($event)" [previousLabel]="labels.previousLabel" 
-      [nextLabel]="labels.nextLabel">
-      </pagination-controls>
-    </div>
-   
-    
+  </div>
+  <!--pagination control-->
+  <div class="pagination-section" style="margin-top: 2%;">
+    <pagination-controls
+      (pageChange)="pageChanged($event)"
+      [previousLabel]="labels.previousLabel"
+      [nextLabel]="labels.nextLabel"
+    >
+    </pagination-controls>
+  </div>
+</div>
