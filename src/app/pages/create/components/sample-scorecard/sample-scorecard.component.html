@@ -1,0 +1,30 @@
+<app-title-area></app-title-area>
+<div style="padding-left: 50px; padding-right: 50px;"  class="container-fluid">
+    <div class="row">
+        
+            <table style="width: 100%;" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    
+                <ng-container matColumnDef="selection">
+                  <td mat-cell *matCellDef="let element"> 
+                    <mat-form-field *ngIf="element.type === 'group'">
+                        <mat-label>{{ element.selection }}</mat-label>
+                        <mat-select  multiple>
+                          <mat-option></mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                  </td>
+                </ng-container>
+              
+                <ng-container matColumnDef="description">
+                  <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+                </ng-container>
+              
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+           </table>
+              
+    
+     
+     
+    </div>
+    
+</div>
