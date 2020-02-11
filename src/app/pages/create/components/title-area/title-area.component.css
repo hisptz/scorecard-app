@@ -11,3 +11,8 @@
     margin-top: auto;
     margin-bottom: auto;
  }
+ .info-item .info-box {
+    width: 5em; 
+    min-height: 1em; 
+    border: 0.8px solid lightgray;
+ }

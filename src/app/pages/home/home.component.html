@@ -1,6 +1,6 @@
 <!--header-->
-<div class="container-fluid">
-  <div class="row">
+<div class="container-fluid ">
+  <div class="row mat-elevation-z3" style="margin-bottom: 1em;">
     <div
       class="col-md-2 col-xs-12"
       style="padding-left: 50px; cursor: pointer;"
@@ -16,18 +16,18 @@
       style="margin-top: 14px; padding-right: 0 !important; "
     >
       <app-info-menu ></app-info-menu>
-      <button mat-raised-button (click)="changeView()">
+      <button mat-stroked-button (click)="changeView()">
         <i class="fa fa-list" *ngIf="type == 'thumbnails'"></i>
         <i class="fa fa-th-large" *ngIf="type == 'list'"></i>
         <i class="fa fa-th" *ngIf="type == 'card'"></i>
       </button>
      
-      <button (click)="createNew()" mat-raised-button class="btn-sm   cursor">
+      <button (click)="createNew()" mat-stroked-button class="btn-sm cursor">
         Create&nbsp;<i class="fa fa-plus" aria-hidden="true"></i>
       </button>
     </div>
   </div>
-  <hr />
+  
 
   <!--scorecard views and details-->
   <!-- -->
