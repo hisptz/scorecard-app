@@ -8,3 +8,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     flex-direction: row;
     justify-content: center;
 }
+button:focus, button:active:focus, button.active:focus {
+    outline: none !important;
+    outline-style: none !important;
+    }
+    .operations-section button, 
+    .operations-section app-options,
+    .operations-section app-info-menu
+      {
+      margin-left: 0.5em;
+    }    

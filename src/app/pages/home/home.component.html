@@ -12,19 +12,19 @@
       <input matInput type="search" [(ngModel)]="filter" />
     </mat-form-field>
     <div
-      class="col-md-3 col-xs-12 hidden-sm float-md-right"
-      style="margin-top: 14px"
+      class="col-md-3 col-xs-12 hidden-sm  operations-section"
+      style="margin-top: 14px; padding-right: 0 !important; "
     >
-      <app-info-menu class="pull-left"></app-info-menu>&nbsp;
+      <app-info-menu ></app-info-menu>
       <button mat-raised-button (click)="changeView()">
         <i class="fa fa-list" *ngIf="type == 'thumbnails'"></i>
         <i class="fa fa-th-large" *ngIf="type == 'list'"></i>
         <i class="fa fa-th" *ngIf="type == 'card'"></i>
-      </button>&nbsp;
+      </button>
      
       <button (click)="createNew()" mat-raised-button class="btn-sm   cursor">
         Create&nbsp;<i class="fa fa-plus" aria-hidden="true"></i>
-      </button>&nbsp;
+      </button>
     </div>
   </div>
   <hr />
