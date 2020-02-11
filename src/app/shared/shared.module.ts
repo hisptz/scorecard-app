@@ -21,6 +21,10 @@ import { MatMenuModule } from '@angular/material/menu';
 import { OptionsComponent } from './components/options/options.component';
 import { MatRippleModule} from '@angular/material';
 import { InfoMenuComponent } from './components/info-menu/info-menu.component';
+import { SharingDialogComponent } from './dialogs/sharing-dialog/sharing-dialog.component';
+import { PeriodDialogComponent } from './dialogs/period-dialog/period-dialog.component';
+import { OrganisationUnitDialogComponent } from './dialogs/organisation-unit-dialog/organisation-unit-dialog.component';
+
 
 
 @NgModule({
@@ -67,6 +71,6 @@ import { InfoMenuComponent } from './components/info-menu/info-menu.component';
     OptionsComponent,
     InfoMenuComponent
   ],
-  declarations: [OptionsComponent, InfoMenuComponent]
+  declarations: [OptionsComponent, InfoMenuComponent, SharingDialogComponent, PeriodDialogComponent, OrganisationUnitDialogComponent]
 })
 export class SharedModule { }
