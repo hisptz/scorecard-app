@@ -1,12 +1,11 @@
-<div class="container-fluid mat-elevation-z3" style="padding-left: 50px; padding-top: 2rem; padding-bottom: 2rem;">
+
   <app-title-area></app-title-area>
   
     <div class="row">
       <div class="col-md-4">
-        <button mat-stroked-button  style=" color: gray;" ><i class="fa fa-share-alt"></i>&nbsp; Sharing</button>
-        <button mat-stroked-button  style=" color: gray;"  ><i class="fa fa-clock-o"></i>&nbsp; Period </button>
-        <button mat-stroked-button  style=" color: gray;" ><i class="fa fa-building-o"></i>&nbsp; Organisation Unit </button>
+        <button mat-stroked-button (click)="openSharingDialog()"  style=" color: gray;" ><i class="fa fa-share-alt"></i>&nbsp; Sharing</button>
+        <button mat-stroked-button (click)="openPeriodDialog()"  style=" color: gray;"  ><i class="fa fa-clock-o"></i>&nbsp; Period </button>
+        <button mat-stroked-button (click)="openOrgUnitDialog()"  style=" color: gray;" ><i class="fa fa-building-o"></i>&nbsp; Organisation Unit </button>
       </div>
     </div>
  
-</div>

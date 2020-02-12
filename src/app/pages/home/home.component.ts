@@ -3,6 +3,7 @@ import { CardsService } from '../../core/services/cards.service';
 import { repeat } from 'rxjs/operators';
 import {fadeSmooth, visibilityChanged} from '../../shared/animations/animations';
 import { Router } from '@angular/router';
+import { PageEvent } from '@angular/material';
 
 @Component({
   selector: 'app-home',
@@ -25,6 +26,7 @@ export class HomeComponent implements OnInit {
   filter:any;
   type:any ="card";
 
+
   public labels: any = {};
 
   constructor(private data: CardsService, private router: Router) {
@@ -37,13 +39,13 @@ export class HomeComponent implements OnInit {
   }
  
   pageChanged(event){
-    this.config.currentPage = event;
-
+    this.config.currentPage = event.pageIndex + 1;
    }
 
   ngOnInit() {
-    this.data.getCards().subscribe(data => {
+    this.data.getCards().subscribe((data: any) => {
       this.scorecards = data
+      this.config.totalItems = data.length;
     }
   );
   }

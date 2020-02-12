@@ -19,7 +19,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatMenuModule } from '@angular/material/menu';
 import { OptionsComponent } from './components/options/options.component';
-import { MatRippleModule} from '@angular/material';
+import { MatRippleModule, MatDialogModule} from '@angular/material';
 import { InfoMenuComponent } from './components/info-menu/info-menu.component';
 import { SharingDialogComponent } from './dialogs/sharing-dialog/sharing-dialog.component';
 import { PeriodDialogComponent } from './dialogs/period-dialog/period-dialog.component';
@@ -47,7 +47,8 @@ import { OrganisationUnitDialogComponent } from './dialogs/organisation-unit-dia
     MatProgressBarModule,
     MatMenuModule,
     MatButtonToggleModule,
-    MatRippleModule
+    MatRippleModule,
+    MatDialogModule
   ],
   exports: [
     MatButtonModule,
@@ -68,9 +69,11 @@ import { OrganisationUnitDialogComponent } from './dialogs/organisation-unit-dia
     MatMenuModule,
     MatButtonToggleModule,
     MatRippleModule,
+    MatDialogModule,
     OptionsComponent,
     InfoMenuComponent
   ],
-  declarations: [OptionsComponent, InfoMenuComponent, SharingDialogComponent, PeriodDialogComponent, OrganisationUnitDialogComponent]
+  declarations: [OptionsComponent, InfoMenuComponent, SharingDialogComponent, PeriodDialogComponent, OrganisationUnitDialogComponent],
+  entryComponents: [SharingDialogComponent, PeriodDialogComponent, OrganisationUnitDialogComponent]
 })
 export class SharedModule { }
