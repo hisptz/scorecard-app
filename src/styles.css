@@ -17,4 +17,8 @@ button:focus, button:active:focus, button.active:focus {
     .operations-section app-info-menu
       {
       margin-left: 0.5em;
-    }    
+    }  
+    
+.cursor {
+  cursor: pointer;
+}
