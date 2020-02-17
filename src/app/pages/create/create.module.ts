@@ -7,6 +7,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { SampleScorecardComponent } from './components/sample-scorecard/sample-scorecard.component';
 import { TitleAreaComponent } from './components/title-area/title-area.component';
 import { BasicDetailsComponent } from './components/basic-details/basic-details.component';
+import { DataSelectionComponent } from './components/data-selection/data-selection.component';
 
 const routes: Routes = [
   {
@@ -16,7 +17,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [CreateComponent, CreateHeaderComponent, SampleScorecardComponent, TitleAreaComponent, BasicDetailsComponent],
+  declarations: [CreateComponent, CreateHeaderComponent, SampleScorecardComponent, TitleAreaComponent, BasicDetailsComponent, DataSelectionComponent],
   imports: [
     CommonModule, 
     RouterModule.forChild(routes),
