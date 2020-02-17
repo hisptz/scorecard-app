@@ -1,1 +1,69 @@
-<p>data-selection works!</p>
+<div class="row">
+    <div class="col-sm-12">
+        <mat-chip-list aria-label="Data selection">
+            <mat-chip selected>Indicators</mat-chip>
+            <mat-chip>Data Elements</mat-chip>
+            <mat-chip>Data Sets</mat-chip>
+            <mat-chip >Program Indicators</mat-chip>
+            <mat-chip>Event Data Items</mat-chip>
+            <mat-chip>Custom function</mat-chip>
+        </mat-chip-list>
+    </div>
+</div>
+<div class="row" style="margin-top: 2rem;">
+    <div class="col-md-5">
+        <mat-list class="group-list">
+            <mat-list-item>
+                <mat-form-field style="width: 100%;">
+                    <mat-label>Search group by name</mat-label>
+                    <input matInput type="text">
+                </mat-form-field>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item class="group-list-item">Focused Antenantla</mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item class="group-list-item">Full Immunization</mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item class="group-list-item">PMTCT-ART</mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item class="group-list-item">Severe Acute Malnutrition</mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item class="group-list-item">Skilled Birth Delivery</mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item class="group-list-item">Vitamin A Supplemention</mat-list-item>
+            <mat-divider></mat-divider>
+        </mat-list>
+       
+    </div>
+    <div class="col-md-7">
+        <mat-list>
+            <mat-list-item>
+                <mat-form-field style="width: 100%;">
+                    <mat-label>Search item by name</mat-label>
+                    <input matInput type="text">
+                </mat-form-field>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item class="group-list-item">Access to ANC Services</mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item class="group-list-item">Availability of Tetanus Toxoid</mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item class="group-list-item">Effective Coverage/Quality FANC Lab Tests</mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item class="group-list-item">Initial Utilization ANC</mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item class="group-list-item">Availability of Trained FANC Providers</mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item class="group-list-item">Continous Utilization ANC Visits</mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item class="group-list-item">Effective Coverage/Quality FANC Visits</mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item class="group-list-item">Continous Utilization Breastfeeding</mat-list-item>
+            <mat-divider></mat-divider>
+        </mat-list>
+        <mat-paginator class="group-list-item" [length]="100"
+              [pageSize]="10"
+              [pageSizeOptions]="[5, 10, 25, 100]">
+        </mat-paginator>
+    </div>
+</div>
