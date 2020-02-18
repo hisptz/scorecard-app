@@ -22,3 +22,9 @@ button:focus, button:active:focus, button.active:focus {
 .cursor {
   cursor: pointer;
 }
+.sub-heading {
+  /* margin-top: 2em;  */
+  color: gray;
+  font-weight: bold;
+  font-size: 0.9em;
+}
