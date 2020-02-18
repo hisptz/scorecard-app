@@ -1,0 +1,106 @@
+
+
+<div class="container-fluid" >
+    <div class="row" >
+        <div
+        class="col-md-3 "
+        style="cursor: pointer;"
+      >
+        <mat-form-field style="width: 100%;">
+            <mat-select multiple>
+                <mat-optgroup [label]="'Trainingland'">
+                    <mat-option>Animal Region</mat-option> 
+                    <mat-option>Food Region</mat-option>    
+                </mat-optgroup>
+            </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-md-4 col-xs-offset-3">
+        <mat-form-field style="width: 100%;">
+            <mat-select multiple>
+                <mat-optgroup [label]="'Trainingland'">
+                    <mat-option>Animal Region</mat-option> 
+                    <mat-option>Food Region</mat-option>    
+                </mat-optgroup>
+            </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-md-5 col-xs-12 operations-section" style="margin-top: 10px">
+        <button
+            mat-stroked-button
+            class="pull-right cursor"
+            style="height: 35px; "
+            >
+            <i class="fa fa-refresh text-info"></i>
+            <!-- &nbsp;<span>Excel</span> -->
+        </button>
+        <button
+            mat-stroked-button
+            class="pull-right cursor"
+            style="height: 35px; "
+        >
+            <i class="fa fa-upload text-info"></i>
+            <!-- &nbsp;<span>Excel</span> -->
+        </button>
+        <button
+            mat-stroked-button
+            class="pull-right cursor"
+            style="height: 35px; "
+        >
+            <i class="fa fa-upload text-info"></i>
+            <!-- &nbsp;<span>Excel</span> -->
+        </button>
+        <button
+            mat-stroked-button
+            class="pull-right cursor"
+            style="height: 35px; "
+        >
+            <i class="fa fa-file-excel-o text-info"></i>&nbsp;
+            <!-- <span>Excel</span> -->
+        </button>
+        
+        <button
+            mat-stroked-button
+            class="pull-right cursor"
+            style="height: 35px; "
+        >
+            <i class="fa fa-print text-info"></i>&nbsp;
+            <!-- <span>Print</span> -->
+        </button>
+        <button
+            mat-stroked-button
+            class="pull-right cursor"
+            style="height: 35px;"
+        >
+            <i class="fa fa-edit"></i>&nbsp;
+            <!-- <span>Edit</span> -->
+        </button>
+        <app-options class="pull-right"></app-options>
+      </div>
+    </div>
+    <div class="row">
+        <div class="row col-sm-2 info-item">
+            <div class="info-box" style="background-color: green;"></div>&nbsp;
+            <p>Target achieved / on track</p>
+        </div>
+        <div class="row col-sm-3 info-item" >
+            <div class="info-box" style="background-color: yellow; "></div>&nbsp;
+            <p>Progress, but more effort required</p>
+        </div>
+        <div class="row col-sm-2 info-item">
+            <div class="info-box" style="background-color: red;"></div>&nbsp;
+            <p>Not on track</p>
+        </div>
+        <div class="row col-sm-2 info-item">
+            <div class="info-box" style="background-color: lightgray; "></div>&nbsp;
+            <p>N/A</p>
+        </div>
+        <div class="row col-sm-2 info-item">
+            <div class="info-box" style="background-color: white; "></div>&nbsp;
+            <p>No data</p>
+        </div>
+    </div>
+    <div class="row">
+        <button style="margin-right: auto; margin-left: auto;"  mat-stroked-button><i class="fa fa-pencil"></i>&nbsp;Highlighted Indicators</button>
+    </div>
+</div>
