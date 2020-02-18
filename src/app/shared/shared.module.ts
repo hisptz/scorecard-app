@@ -24,6 +24,7 @@ import { InfoMenuComponent } from './components/info-menu/info-menu.component';
 import { SharingDialogComponent } from './dialogs/sharing-dialog/sharing-dialog.component';
 import { PeriodDialogComponent } from './dialogs/period-dialog/period-dialog.component';
 import { OrganisationUnitDialogComponent } from './dialogs/organisation-unit-dialog/organisation-unit-dialog.component';
+import { LegendDefintionListComponent } from './components/legend-defintion-list/legend-defintion-list.component';
 
 
 
@@ -77,7 +78,12 @@ import { OrganisationUnitDialogComponent } from './dialogs/organisation-unit-dia
     OptionsComponent,
     InfoMenuComponent
   ],
-  declarations: [OptionsComponent, InfoMenuComponent, SharingDialogComponent, PeriodDialogComponent, OrganisationUnitDialogComponent],
+  declarations: [OptionsComponent,
+                 InfoMenuComponent,
+                 SharingDialogComponent,
+                 PeriodDialogComponent,
+                 OrganisationUnitDialogComponent,
+                 LegendDefintionListComponent],
   entryComponents: [SharingDialogComponent, PeriodDialogComponent, OrganisationUnitDialogComponent]
 })
 export class SharedModule { }
