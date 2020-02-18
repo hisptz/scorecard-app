@@ -18,6 +18,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatMenuModule } from '@angular/material/menu';
+import { ColorPickerModule } from 'ngx-color-picker';
 import { OptionsComponent } from './components/options/options.component';
 import { MatRippleModule, MatDialogModule, MatListModule} from '@angular/material';
 import { InfoMenuComponent } from './components/info-menu/info-menu.component';
@@ -25,7 +26,7 @@ import { SharingDialogComponent } from './dialogs/sharing-dialog/sharing-dialog.
 import { PeriodDialogComponent } from './dialogs/period-dialog/period-dialog.component';
 import { OrganisationUnitDialogComponent } from './dialogs/organisation-unit-dialog/organisation-unit-dialog.component';
 import { LegendDefintionListComponent } from './components/legend-defintion-list/legend-defintion-list.component';
-import { MatColorPickerModule } from 'mat-color-picker';
+import { LegendColorPickerComponent } from './components/legend-color-picker/legend-color-picker.component';
 
 
 
@@ -53,7 +54,7 @@ import { MatColorPickerModule } from 'mat-color-picker';
     MatDialogModule,
     MatChipsModule,
     MatListModule,
-    MatColorPickerModule
+    ColorPickerModule
   ],
   exports: [
     MatButtonModule,
@@ -77,16 +78,19 @@ import { MatColorPickerModule } from 'mat-color-picker';
     MatChipsModule,
     MatListModule,
     MatDialogModule,
-    MatColorPickerModule,
+    ColorPickerModule,
     OptionsComponent,
-    InfoMenuComponent
+    InfoMenuComponent,
+    LegendDefintionListComponent,
+    LegendColorPickerComponent
   ],
   declarations: [OptionsComponent,
                  InfoMenuComponent,
                  SharingDialogComponent,
                  PeriodDialogComponent,
                  OrganisationUnitDialogComponent,
-                 LegendDefintionListComponent],
+                 LegendDefintionListComponent,
+                 LegendColorPickerComponent],
   entryComponents: [SharingDialogComponent, PeriodDialogComponent, OrganisationUnitDialogComponent]
 })
 export class SharedModule { }
