@@ -25,6 +25,7 @@ import { SharingDialogComponent } from './dialogs/sharing-dialog/sharing-dialog.
 import { PeriodDialogComponent } from './dialogs/period-dialog/period-dialog.component';
 import { OrganisationUnitDialogComponent } from './dialogs/organisation-unit-dialog/organisation-unit-dialog.component';
 import { LegendDefintionListComponent } from './components/legend-defintion-list/legend-defintion-list.component';
+import { MatColorPickerModule } from 'mat-color-picker';
 
 
 
@@ -51,7 +52,8 @@ import { LegendDefintionListComponent } from './components/legend-defintion-list
     MatRippleModule,
     MatDialogModule,
     MatChipsModule,
-    MatListModule
+    MatListModule,
+    MatColorPickerModule
   ],
   exports: [
     MatButtonModule,
@@ -75,6 +77,7 @@ import { LegendDefintionListComponent } from './components/legend-defintion-list
     MatChipsModule,
     MatListModule,
     MatDialogModule,
+    MatColorPickerModule,
     OptionsComponent,
     InfoMenuComponent
   ],
