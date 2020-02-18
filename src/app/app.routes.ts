@@ -11,6 +11,10 @@ export const routes: Routes = [
   {
     path: 'create',
    loadChildren: () => import('./pages/create/create.module').then(m => m.CreateModule)
+  },
+  {
+    path: 'view',
+   loadChildren: () => import('./pages/view/view.module').then(m => m.ViewModule)
   }
 ];
 
