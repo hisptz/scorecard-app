@@ -1,1 +1,27 @@
-<p>legend-defintion-list works!</p>
+<span class="sub-heading">Legend definition</span>
+<div class="row" *ngFor="let legend of legendDefinitions" style="color: gray;">
+  
+        <app-legend-color-picker [color]="legend.color" class="col-md-3"></app-legend-color-picker>
+        <mat-form-field class="col-md-8" >
+        <input matInput type="text" value="{{ legend.definition }}">
+        </mat-form-field>
+        <i class="col-md-1 fa fa-trash text-danger cursor" *ngIf="legend.canBeDeleted"></i>
+ 
+</div>
+<span class="sub-heading">Legend definition</span>
+<div class="row" style="color: gray;">
+  
+        <app-legend-color-picker [color]="'#FFF'" class="col-md-3"></app-legend-color-picker>
+        <mat-form-field class="col-md-8" >
+           <input matInput type="text" value="">
+        </mat-form-field>
+        <i class="col-md-1 fa fa-plus text-primary  cursor" ></i>
+</div>
+<span class="sub-heading">Additional labels</span>
+<div class="row" style="color: gray;">
+  
+        <mat-form-field class="col-md-11" >
+           <input matInput type="text" value="">
+        </mat-form-field>
+        <i class="col-md-1 fa fa-plus-circle text-success  cursor" ></i>
+</div>
