@@ -27,6 +27,7 @@ import { PeriodDialogComponent } from './dialogs/period-dialog/period-dialog.com
 import { OrganisationUnitDialogComponent } from './dialogs/organisation-unit-dialog/organisation-unit-dialog.component';
 import { LegendDefintionListComponent } from './components/legend-defintion-list/legend-defintion-list.component';
 import { LegendColorPickerComponent } from './components/legend-color-picker/legend-color-picker.component';
+import { SelectorsComponent } from './components/selectors/selectors.component';
 
 
 
@@ -90,7 +91,8 @@ import { LegendColorPickerComponent } from './components/legend-color-picker/leg
                  PeriodDialogComponent,
                  OrganisationUnitDialogComponent,
                  LegendDefintionListComponent,
-                 LegendColorPickerComponent],
+                 LegendColorPickerComponent,
+                 SelectorsComponent],
   entryComponents: [SharingDialogComponent, PeriodDialogComponent, OrganisationUnitDialogComponent]
 })
 export class SharedModule { }
