@@ -55,7 +55,8 @@ import { SelectorsComponent } from './components/selectors/selectors.component';
     MatDialogModule,
     MatChipsModule,
     MatListModule,
-    ColorPickerModule
+    ColorPickerModule,
+    MatTableModule
   ],
   exports: [
     MatButtonModule,
@@ -84,7 +85,8 @@ import { SelectorsComponent } from './components/selectors/selectors.component';
     InfoMenuComponent,
     LegendDefintionListComponent,
     LegendColorPickerComponent,
-    SelectorsComponent
+    SelectorsComponent,
+    MatTableModule
   ],
   declarations: [OptionsComponent,
                  InfoMenuComponent,
