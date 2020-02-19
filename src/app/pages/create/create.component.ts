@@ -1,9 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { MatDialog } from '@angular/material';
-import { SharingDialogComponent } from 'src/app/shared/dialogs/sharing-dialog/sharing-dialog.component';
-import { PeriodDialogComponent } from 'src/app/shared/dialogs/period-dialog/period-dialog.component';
-import { OrganisationUnitDialogComponent } from 'src/app/shared/dialogs/organisation-unit-dialog/organisation-unit-dialog.component';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-create',
@@ -11,24 +6,9 @@ import { OrganisationUnitDialogComponent } from 'src/app/shared/dialogs/organisa
   styleUrls: ['./create.component.css']
 })
 export class CreateComponent implements OnInit {
-
-  constructor(private dialog: MatDialog) { }
+  selectorButtonsToShow = ['sharing', 'period', 'orgunit'];
+  constructor() { }
 
   ngOnInit() {
-  }
-  openSharingDialog(): void {
-    const dialogRef = this.dialog.open(SharingDialogComponent, {
-      width: '250px'
-    });
-  }
-  openPeriodDialog(): void {
-    const dialogRef = this.dialog.open(PeriodDialogComponent, {
-      width: '250px'
-    });
-  }
-  openOrgUnitDialog() {
-    const dialogRef = this.dialog.open(OrganisationUnitDialogComponent, {
-      width: '250px'
-    });
   }
 }

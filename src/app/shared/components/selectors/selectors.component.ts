@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { SharingDialogComponent } from '../../dialogs/sharing-dialog/sharing-dialog.component';
+import { PeriodDialogComponent } from '../../dialogs/period-dialog/period-dialog.component';
+import { OrganisationUnitDialogComponent } from '../../dialogs/organisation-unit-dialog/organisation-unit-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-selectors',
@@ -6,10 +10,29 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./selectors.component.css']
 })
 export class SelectorsComponent implements OnInit {
-
-  constructor() { }
+  @Input() buttonsToShow: [string];
+  constructor(private dialog: MatDialog) { }
 
   ngOnInit() {
   }
+  openSharingDialog(): void {
+    const dialogRef = this.dialog.open(SharingDialogComponent, {
+      width: '250px'
+    });
+  }
+  openPeriodDialog(): void {
+    const dialogRef = this.dialog.open(PeriodDialogComponent, {
+      width: '250px'
+    });
+  }
+  openOrgUnitDialog() {
+    const dialogRef = this.dialog.open(OrganisationUnitDialogComponent, {
+      width: '250px'
+    });
+  }
+  canBeShown(name: string): boolean {
+    return this.buttonsToShow.includes(name);
+  }
+
 
 }

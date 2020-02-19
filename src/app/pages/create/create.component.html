@@ -4,13 +4,7 @@
 </div> 
 <div class="mat-elevation-z2" >   
      <!-- <small>Write the title, Description and start</small> -->
-     <div class="row">
-          <div class="col-md-4">
-            <button mat-stroked-button (click)="openSharingDialog()"  style=" color: black;" ><i class="fa fa-share-alt"></i>&nbsp; Sharing</button>
-            <button mat-stroked-button (click)="openPeriodDialog()"  style=" color: black;"  ><i class="fa fa-clock-o"></i>&nbsp; Period </button>
-            <button mat-stroked-button (click)="openOrgUnitDialog()"  style=" color: black;" ><i class="fa fa-building-o"></i>&nbsp; Organisation Unit </button>
-          </div>
-        </div>
+     <app-selectors [buttonsToShow]="selectorButtonsToShow"></app-selectors>
      <div class="row" style="margin-top: 2rem;">
          <app-basic-details class="col-md-3"></app-basic-details>
          <app-data-selection class="col-md-5"></app-data-selection>

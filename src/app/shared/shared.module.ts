@@ -83,7 +83,8 @@ import { SelectorsComponent } from './components/selectors/selectors.component';
     OptionsComponent,
     InfoMenuComponent,
     LegendDefintionListComponent,
-    LegendColorPickerComponent
+    LegendColorPickerComponent,
+    SelectorsComponent
   ],
   declarations: [OptionsComponent,
                  InfoMenuComponent,
