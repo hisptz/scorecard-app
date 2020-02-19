@@ -1,3 +1,6 @@
+.col-md-4 {
+   padding-left: 0 !important;
+}
 .col-md-4 button {
     margin-right: 0.5em;
 }
