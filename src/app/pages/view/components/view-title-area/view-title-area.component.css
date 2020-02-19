@@ -16,3 +16,10 @@
     min-height: 2.5em; 
     border: 0.8px solid lightgray;
  }
+ .info-down-part {
+   font-size: 1em; 
+   color: gray;
+ }
+ .info-down-part .fa-trophy {
+    font-size: 1.8em;
+ }

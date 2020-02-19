@@ -4,17 +4,6 @@
     <div class="row" >
       
        <app-selectors  class="col-md-6" style="width: 100%; padding-left: 0 !important;" [buttonsToShow]="selectorButtonsToShow"></app-selectors>
-     
-      <!-- <div class="col-md-4 col-xs-offset-3">
-        <mat-form-field style="width: 100%;">
-            <mat-select multiple>
-                <mat-optgroup [label]="'Trainingland'">
-                    <mat-option>Animal Region</mat-option> 
-                    <mat-option>Food Region</mat-option>    
-                </mat-optgroup>
-            </mat-select>
-        </mat-form-field>
-      </div> -->
       <div class="col-md-6  operations-section" style="margin-top: 10px; ">
         <button
             mat-stroked-button
@@ -68,6 +57,9 @@
         <app-options class="pull-right"></app-options>
       </div>
     </div>
+    <div class="text-center" >
+        <h3 style="font-size: 1.2em; font-weight: bold;">MINISTRY OF HEALTH - TRAINING LAND LEAGUE TABLE</h3>
+    </div>
     <div class="row" style="margin-top: 2rem;">
         <div class="row col-sm-2 info-item">
             <div class="info-box" style="background-color: green;"></div>&nbsp;
@@ -90,7 +82,11 @@
             <p>No data</p>
         </div>
     </div>
-    <div class="row">
-        
+    <div class="row info-down-part" >
+      <span class="col-md-2"><i class="fa fa-caret-up"></i>&nbsp; Increase from last period</span>  
+      <span class="col-md-2"><i class="fa fa-caret-down"></i>&nbsp; Decrease from last period</span>  
+      <span class="col-md-1"><i class="fa fa-trophy" style="color: yellow;"></i>&nbsp; 1st place</span> 
+      <span class="col-md-1"><i class="fa fa-trophy" style="color: lightgray; "></i>&nbsp; 2nd place</span> 
+      <span class="col-md-1"><i class="fa fa-trophy" style="color: brown; "></i>&nbsp; 3rd place</span>  
     </div>
 </div>

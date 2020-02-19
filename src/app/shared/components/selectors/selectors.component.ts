@@ -17,17 +17,17 @@ export class SelectorsComponent implements OnInit {
   }
   openSharingDialog(): void {
     const dialogRef = this.dialog.open(SharingDialogComponent, {
-      width: '250px'
+      width: '1000px'
     });
   }
   openPeriodDialog(): void {
     const dialogRef = this.dialog.open(PeriodDialogComponent, {
-      width: '250px'
+      width: '1000px'
     });
   }
   openOrgUnitDialog() {
     const dialogRef = this.dialog.open(OrganisationUnitDialogComponent, {
-      width: '250px'
+      width: '1000px'
     });
   }
   canBeShown(name: string): boolean {
