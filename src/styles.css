@@ -23,8 +23,22 @@ button:focus, button:active:focus, button.active:focus {
   cursor: pointer;
 }
 .sub-heading {
-  /* margin-top: 2em;  */
   color: gray;
   font-weight: bold;
   font-size: 0.9em;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-infix {
+  padding: 15px;
+}
+.mat-form-field-infix {
+    padding:0;
+    border-top: 0;
+}
+
+/* change top and padding-top as per required */
+
+.mat-form-field-label-wrapper {
+   top: -0.84375em;
+   padding-top: 0.84375em;
 }
