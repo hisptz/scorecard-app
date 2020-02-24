@@ -1,12 +1,16 @@
+
 .flex-container {
     display: flex;
     flex-flow: row wrap;
+    flex-wrap: wrap;
+    justify-content: 
   }
   .flex {
     width: 45%;
     padding: 2%;
     margin-left:3%;
   }
+  
   .thumbImage{
     padding-left: 30%;
   }
@@ -17,3 +21,40 @@
   .listanimate{
     padding: 2%;
   } 
+  
+  .card-layout {
+    position: relative;
+    margin-right: 1em;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .card-layout .actions-icon-btn {
+    position: absolute;
+    top: 5%;
+    right: 5%;
+    font-size: bold;
+    
+  }
+.thumbnail-layout {
+    position: relative;
+    margin-bottom: 1em;
+    margin-right: 1em;
+    height: 200px;
+    display: flex;
+    flex-direction: row;
+    
+}
+.thumbnail-layout .actions-icon-btn {
+  position: absolute;
+  top: 5%;
+  right: 5%;
+  font-size: bold;
+  
+}
+th, td {
+  padding: 1.5em;
+}

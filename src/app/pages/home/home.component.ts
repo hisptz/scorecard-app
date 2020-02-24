@@ -44,7 +44,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.data.getCards().subscribe((data: any) => {
-      this.scorecards = data
+      this.scorecards = data;
       this.config.totalItems = data.length;
     }
   );

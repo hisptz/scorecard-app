@@ -8,54 +8,9 @@
   <i class="fa fa-question-circle"></i>&nbsp; <i class="fa fa-caret-down"></i>
 </button>
 <mat-menu #appMenu="matMenu" overlapTrigger="false">
-  <span>
+ 
     <button mat-menu-item>Take a tour</button>
     <button mat-menu-item>User Manual</button>
-    <mat-button-toggle-group
-      mat-menu-item
-      style="display: flex; width: 10rem; justify-content: center;"
-      name="language"
-      aria-label="Language"
-    >
-      <mat-button-toggle value="en">En</mat-button-toggle>
-      <mat-button-toggle value="fr">Fr</mat-button-toggle>
-      <mat-button-toggle value="pt">Pt</mat-button-toggle>
-    </mat-button-toggle-group>
-    <button mat-menu-item [matMenuTriggerFor]="langMenu">
-      More <i class="fa fa-plus"></i>
-    </button>
-  </span>
-</mat-menu>
-<mat-menu #langMenu="matMenu">
-  <div
-    style="display: flex; width: 10rem; flex-direction: column; justify-content: center;"
-  >
-    <mat-button-toggle-group
-      mat-menu-item
-      name="language"
-      aria-label="Language"
-    >
-      <mat-button-toggle value="en">En</mat-button-toggle>
-      <mat-button-toggle value="fr">Fr</mat-button-toggle>
-      <mat-button-toggle value="pt">Pt</mat-button-toggle>
-    </mat-button-toggle-group>
-    <mat-button-toggle-group
-      mat-menu-item
-      name="language"
-      aria-label="Language"
-    >
-      <mat-button-toggle value="en">En</mat-button-toggle>
-      <mat-button-toggle value="fr">Fr</mat-button-toggle>
-      <mat-button-toggle value="pt">Pt</mat-button-toggle>
-    </mat-button-toggle-group>
-    <mat-button-toggle-group
-      mat-menu-item
-      name="language"
-      aria-label="Language"
-    >
-      <mat-button-toggle value="en">En</mat-button-toggle>
-      <mat-button-toggle value="fr">Fr</mat-button-toggle>
-      <mat-button-toggle value="pt">Pt</mat-button-toggle>
-    </mat-button-toggle-group>
-  </div>
+    
+  
 </mat-menu>
