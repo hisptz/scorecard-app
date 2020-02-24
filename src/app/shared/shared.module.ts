@@ -20,7 +20,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatMenuModule } from '@angular/material/menu';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { OptionsComponent } from './components/options/options.component';
-import { MatRippleModule, MatDialogModule, MatListModule} from '@angular/material';
+import { MatRippleModule, MatDialogModule, MatListModule, MatIconModule} from '@angular/material';
 import { InfoMenuComponent } from './components/info-menu/info-menu.component';
 import { SharingDialogComponent } from './dialogs/sharing-dialog/sharing-dialog.component';
 import { PeriodDialogComponent } from './dialogs/period-dialog/period-dialog.component';
@@ -56,7 +56,8 @@ import { SelectorsComponent } from './components/selectors/selectors.component';
     MatChipsModule,
     MatListModule,
     ColorPickerModule,
-    MatTableModule
+    MatTableModule,
+    MatInputModule
   ],
   exports: [
     MatButtonModule,
@@ -86,7 +87,8 @@ import { SelectorsComponent } from './components/selectors/selectors.component';
     LegendDefintionListComponent,
     LegendColorPickerComponent,
     SelectorsComponent,
-    MatTableModule
+    MatTableModule,
+    MatIconModule
   ],
   declarations: [OptionsComponent,
                  InfoMenuComponent,
