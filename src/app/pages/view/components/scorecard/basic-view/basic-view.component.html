@@ -1,12 +1,47 @@
 
 <div class="row">
   <div class="col-md-12">
-    <table style="width: 100%;" mat-table [dataSource]="sampleTableData" class="mat-elevation-z8">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>
+            <mat-form-field appearance="outline"  style="width: 100;">
+              <mat-label>Search for orgunit here</mat-label>
+              <input matInput type="text">
+            </mat-form-field>
+          </th>
+          <th>Availability of Vaccines BCG</th>
+          <th>Availability of Vaccines DPT </th>
+          <th>DPT1 Coverage</th>
+          <th>DPT2 Coverage</th>
+          <th>DPT3 Coverage</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of sampleTableData">
+           <td>{{data.orgunit}}</td>
+           <td 
+           [ngClass]="{'not-on-track': data.bcg < 40,'progress-required': data.bcg >40 && data.bcg < 70,'on-track': data.bcg >= 70}"
+           >{{data.bcg}}</td>
+           <td
+           [ngClass]="{'not-on-track': data.dpt < 40,'progress-required': data.dpt >40 && data.dpt < 70,'on-track': data.dpt >= 70}"
+           >{{data.dpt}}</td>
+           <td
+           [ngClass]="{'not-on-track': data.dpt1_coverage < 40,'progress-required': data.dpt1_coverage >40 && data.dpt1_coverage < 70,'on-track': data.dpt1_coverage >= 70}"
+           >{{data.dpt1_coverage}}</td>
+           <td
+           [ngClass]="{'not-on-track': data.dpt2_coverage < 40,'progress-required': data.dpt2_coverage >40 && data.dpt2_coverage < 70,'on-track': data.dpt2_coverage >= 70}"
+           >{{data.dpt2_coverage}}</td>
+           <td
+             [ngClass]="{'not-on-track': data.dpt3_coverage < 40,'progress-required': data.dpt3_coverage >40 && data.dpt3_coverage < 70,'on-track': data.dpt3_coverage >= 70}"
+           >{{data.dpt3_coverage}}</td>
+        </tr>
+      </tbody>
 
-      <!--- Note that these columns can be defined in any order.
-            The actual rendered columns are set as a property on the row definition" -->
+    </table>
+    <!-- <table style="width: 100%;" mat-table [dataSource]="sampleTableData" class="mat-elevation-z8">
+
     
-      <!-- Position Column -->
       <ng-container matColumnDef="orgunit">
        
         <th mat-header-cell *matHeaderCellDef> 
@@ -31,7 +66,7 @@
            
       </ng-container>
     
-      <!-- Weight Column -->
+    
       <ng-container matColumnDef="dpt">
         <th mat-header-cell *matHeaderCellDef> Availability of Vaccines DPT </th>
         <td mat-cell 
@@ -67,7 +102,7 @@
      
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
+    </table> -->
     
   </div>
 </div>

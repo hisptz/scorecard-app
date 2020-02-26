@@ -16,15 +16,15 @@ import { PageEvent } from '@angular/material';
 })
 export class HomeComponent implements OnInit {
 
-  nums:number;
-  counter:number=0;
+  nums: number;
+  counter= 0;
 
   current_hovered_card = '';
   scorecards: Object;
   config: any;
   count: any;
-  filter:any;
-  type:any ="card";
+  filter: any;
+  type: any = 'card';
 
 
   public labels: any = {};
@@ -37,8 +37,8 @@ export class HomeComponent implements OnInit {
       totalItems: this.count
     };
   }
- 
-  pageChanged(event){
+
+  pageChanged(event) {
     this.config.currentPage = event.pageIndex + 1;
    }
 
@@ -53,19 +53,19 @@ export class HomeComponent implements OnInit {
      this.router.navigate(['create']);
   }
   changeView() {
-    if(this.counter > 2){
+    if (this.counter > 2) {
       this.counter = 0;
     }
-    this.nums=this.counter += 1;
+    this.nums = this.counter += 1;
     switch (this.nums) {
       case 1:
-        this.type = "list";
+        this.type = 'list';
           break;
        case 2:
-          this.type = "thumbnails";
+          this.type = 'thumbnails';
         break;
         case 3:
-          this.type = "card";
+          this.type = 'card';
         break;
     }
   }
@@ -75,5 +75,9 @@ export class HomeComponent implements OnInit {
 
   mouseLeave() {
     this.current_hovered_card = '';
+  }
+  viewScorecard(event) {
+    console.log(event);
+    this.router.navigate(['/view']);
   }
 }

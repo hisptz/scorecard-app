@@ -1,5 +1,5 @@
 <!--header-->
-  <div class="container-fluid mat-elevation-z2" style="margin-bottom: 1em;">
+  <div class="container-fluid mat-elevation-z2" style="margin-bottom: 2em;">
     <div class="row">
       <div
         class="col-md-3 col-xs-12"
@@ -41,16 +41,17 @@
   </div>
 
   <!--scorecard views and details-->
-  <!-- -->
-  <div class="container-fluid">
-      <div class="flex-container" [ngStyle]="{'justify-content':type === 'card' ? 'center': 'start' }" *ngIf= "type !== 'list'">
-        <mat-card    
+  <!-- [ngStyle]="{'justify-content':type === 'card' ? 'center': 'start' }"-->
+  <div class="container-fluid" >
+      <div class="flex-container" [ngStyle]="{'justify-content':type === 'card' ? 'center': 'start' }"  *ngIf= "type !== 'list'">
+        <mat-card    class="cursor"
+                   (click)="viewScorecard($event)"
                     [ngClass]="[
                     type === 'thumbnails' ? 'col-md-5 thumbnail-layout' : '',
                     type === 'card' ? 'card-layout col-md-3' : ''
                   ]"
                   *ngFor="let card of scorecards | filter: filter | paginate: config">
-          <mat-icon class="actions-icon-btn cursor"  matRipple matTooltip="Edit or Delete a scorecard" [matMenuTriggerFor]="actionsMenu">more_vert</mat-icon>
+          <mat-icon class="actions-icon-btn cursor" (click)="$event.stopPropagation()"  matRipple matTooltip="Edit or Delete a scorecard" [matMenuTriggerFor]="actionsMenu">more_vert</mat-icon>
           <mat-menu #actionsMenu="matMenu">
             <button mat-menu-item><mat-icon class="text-warning">edit</mat-icon>Edit</button>
             <button mat-menu-item><mat-icon class="text-danger">delete</mat-icon>Delete</button>
@@ -61,9 +62,9 @@
         </div>
         <div
         class="scorecard-content"
-         
+       
         >
-          <h4><a routerLink="/view" matTooltip="View a scorecard">{{ card.name }}</a></h4>
+          <h4>{{ card.name }}</h4>
           <p>{{ card.description }}</p>
          
         </div>
@@ -71,7 +72,7 @@
         </mat-card>
       </div>
       <div class="flex-container mat-elevation-z1" *ngIf= "type === 'list'">
-        <table class="table table-sm">
+        <table class="table table-hover">
           <thead>
             <tr>
               <th>Name</th>
@@ -81,12 +82,12 @@
             </tr>
           </thead>
           <tbody>
-            <tr  *ngFor="let card of scorecards | filter: filter | paginate: config">
-              <td><a routerLink="/view" matTooltip="View a scorecard"><img style="height: 2.5em; width: 3em;" src="assets/images/scorecard.png" /> &nbsp;{{ card.name }}</a></td>
+            <tr class="cursor" (click)="viewScorecard($event)" matTooltip="View a scorecard" *ngFor="let card of scorecards | filter: filter | paginate: config">
+              <td><img style="height: 2.5em; width: 3em;" src="assets/images/scorecard.png" /> &nbsp;{{ card.name }}</td>
               <td>{{ card.description }}</td>
               <td></td>
               <td>
-                <mat-icon class="actions-icon-btn cursor" matRipple matTooltip="Edit or Delete a scorecard" [matMenuTriggerFor]="actionsMenu">more_horiz</mat-icon>
+                <mat-icon class="actions-icon-btn cursor" (click)="$event.stopPropagation()" matRipple matTooltip="Edit or Delete a scorecard" [matMenuTriggerFor]="actionsMenu">more_vert</mat-icon>
                 <mat-menu #actionsMenu="matMenu">
                   <button mat-menu-item><mat-icon class="text-warning">edit</mat-icon>Edit</button>
                   <button mat-menu-item><mat-icon class="text-danger">delete</mat-icon>Delete</button>
@@ -160,7 +161,7 @@
             <button
               mat-raised-button
               color="warn"
-              matTooltip="Delete {{ card.name }}"
+              matTooltip="Delete {{ card.ame }}"
               class="sans-pro"
               role="button"
               style="cursor: pointer"
@@ -174,7 +175,7 @@
 
   <!-- </div> -->
   <!--pagination control-->
-  <button mat-fab style="position: fixed; right: 2%; bottom: 4%;" (click)="createNew()" 
+  <button mat-fab color="primary" style="position: fixed; right: 2%; bottom: 4%;" (click)="createNew()" 
   matTooltip="Create a new scorecard"><mat-icon>add</mat-icon></button>
   <div class="pagination-section" style="margin-top: 2%;">
     <mat-paginator [length]="config.totalItems"
