@@ -6,7 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./options.component.css']
 })
 export class OptionsComponent implements OnInit {
-
+  showBase: boolean = false;
+  menuUp: boolean= false;
   constructor() { }
 
   ngOnInit() {

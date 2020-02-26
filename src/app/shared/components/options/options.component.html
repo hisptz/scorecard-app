@@ -1,3 +1,32 @@
-<button  mat-stroked-button class="cursor" style="height: 35px;margin-left: 5px" >
+<button  [matMenuTriggerFor]="optionsMenu" mat-stroked-button class="cursor" style="height: 35px;margin-left: 5px" >
     <i class="fa fa-cog"></i>&nbsp; Options
 </button>
+<mat-menu #optionsMenu="matMenu" >
+    <div  (click)="$event.stopPropagation()" style="width: 500px; overflow-x: hidden !important;">
+        <div class="row" style="overflow-x: hidden !important;">
+            <div class="col-md-6" style="overflow-x: hidden !important; margin-left: 0.5em;">
+                <small><strong>Display Settings</strong></small>
+                <mat-list>
+                    <mat-list-item> <mat-checkbox (click)="$event.stopPropagation()">Legend</mat-checkbox></mat-list-item>
+                    <mat-list-item> <mat-checkbox (click)="$event.stopPropagation()">Title</mat-checkbox></mat-list-item>
+                    <mat-list-item> <mat-checkbox (click)="$event.stopPropagation()">Item Number</mat-checkbox></mat-list-item>  
+                    <mat-list-item> <mat-checkbox (click)="$event.stopPropagation()">Empty rows</mat-checkbox></mat-list-item>
+                    <mat-list-item> <mat-checkbox (click)="$event.stopPropagation()">Show Hierachy</mat-checkbox></mat-list-item>
+                    <mat-list-item> <mat-checkbox (click)="$event.stopPropagation()">League Table</mat-checkbox></mat-list-item>
+                    <mat-list-item> <mat-checkbox (click)="$event.stopPropagation()">Cups in indicators</mat-checkbox></mat-list-item>
+                </mat-list>
+            </div><mat-divider [vertical]="true"></mat-divider>
+            <div class="col-md-5" style="overflow-x: hidden !important;">
+                <small><strong>Best/Worst</strong></small>
+                <mat-list>
+                    <mat-list-item> <mat-checkbox (click)="$event.stopPropagation()">All</mat-checkbox></mat-list-item>
+                    <mat-list-item> <mat-checkbox (click)="$event.stopPropagation()">Top Three</mat-checkbox></mat-list-item>
+                    <mat-list-item> <mat-checkbox (click)="$event.stopPropagation()">Top Five</mat-checkbox></mat-list-item>
+                    <mat-list-item> <mat-checkbox (click)="$event.stopPropagation()">Top Ten</mat-checkbox></mat-list-item>
+                    <mat-list-item> <mat-checkbox (click)="$event.stopPropagation()" >Below Average</mat-checkbox></mat-list-item>
+                    <mat-list-item> <mat-checkbox (click)="$event.stopPropagation()">Above Average</mat-checkbox></mat-list-item>
+                </mat-list>
+            </div>
+        </div>
+    </div>
+</mat-menu>
