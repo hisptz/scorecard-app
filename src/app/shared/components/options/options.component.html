@@ -9,17 +9,17 @@
 <mat-menu #optionsMenu="matMenu">
   <div
     (click)="$event.stopPropagation()"
-    style="width: 500px; overflow-x: hidden !important;"
+    style="width: 370px; overflow-x: hidden !important;"
   >
     <div class="row" style="overflow-x: hidden !important;">
       <div
         class="col-md-6"
         style="overflow-x: hidden !important; margin-left: 0.5em;"
       >
-        <small><strong>Display Settings</strong></small>
+        <strong>Display Settings</strong>
         <mat-list>
           <mat-list-item *ngFor="let setting of displaySettings">
-            <mat-checkbox (click)="$event.stopPropagation()">{{
+            <mat-checkbox class="option-item" color="primary" (click)="$event.stopPropagation()">{{
               setting.name
             }}</mat-checkbox></mat-list-item
           >
@@ -27,10 +27,10 @@
       </div>
       <mat-divider [vertical]="true"></mat-divider>
       <div class="col-md-5" style="overflow-x: hidden !important;">
-        <small><strong>Best/Worst</strong></small>
+        <strong>Best/Worst</strong>
         <mat-list>
           <mat-list-item *ngFor="let setting of bestWorstSettings">
-            <mat-checkbox (click)="$event.stopPropagation()">{{
+            <mat-checkbox class="option-item" color="primary" (click)="$event.stopPropagation()">{{
               setting.name
             }}</mat-checkbox></mat-list-item
           >
