@@ -29,7 +29,6 @@ import { NgxDhis2MenuModule } from '@iapps/ngx-dhis2-menu';
 import * as fromPages from './pages';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
-import { NgxDhis2PeriodFilterModule } from '@iapps/ngx-dhis2-period-filter';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
@@ -65,11 +64,7 @@ export function HttpLoaderFactory(http: HttpClient) {
      /**
      * Organisation unit module
      */
-   
-    /**
-     * Period filter module
-     */
-    NgxDhis2PeriodFilterModule,
+
     /**
      * Translation module
      */
