@@ -1,2 +1,6 @@
-<h3>Period Selection</h3>
-<div style="height: 400px;"></div>
+<ngx-dhis2-period-filter 
+[selectedPeriods]="selectedPeriods"
+[selectedPeriodType]="bottleneckPeriodType"
+[periodFilterConfig]="periodFilterConfig" (close)="onFilterUpdate($event, 'CLOSE')"
+(update)="onFilterUpdate($event, 'UPDATE')">
+</ngx-dhis2-period-filter>

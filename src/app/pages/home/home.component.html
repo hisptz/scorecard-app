@@ -91,7 +91,7 @@
                 <mat-icon class="actions-icon-btn cursor" (click)="$event.stopPropagation()" matRipple matTooltip="Edit or Delete a scorecard" [matMenuTriggerFor]="actionsMenu">more_vert</mat-icon>
                 <mat-menu #actionsMenu="matMenu">
                   <button mat-menu-item><mat-icon class="text-warning">edit</mat-icon>Edit</button>
-                  <button mat-menu-item><mat-icon class="text-danger">delete</mat-icon>Delete</button>
+                  <button mat-menu-item (click)="openDeleteDialog(card.name)"><mat-icon class="text-danger">delete</mat-icon>Delete</button>
                 </mat-menu>
               </td>
             </tr>

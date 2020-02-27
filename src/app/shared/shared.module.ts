@@ -32,6 +32,8 @@ import { LegendDefintionListComponent } from './components/legend-defintion-list
 import { LegendColorPickerComponent } from './components/legend-color-picker/legend-color-picker.component';
 import { SelectorsComponent } from './components/selectors/selectors.component';
 import { DeleteScorecardDialogComponent } from './dialogs/delete-scorecard-dialog/delete-scorecard-dialog.component';
+import { NgxDhis2OrgUnitFilterModule } from '@iapps/ngx-dhis2-org-unit-filter';
+import { NgxDhis2PeriodFilterModule} from '@iapps/ngx-dhis2-period-filter';
 
 
 
@@ -61,7 +63,9 @@ import { DeleteScorecardDialogComponent } from './dialogs/delete-scorecard-dialo
     MatListModule,
     ColorPickerModule,
     MatTableModule,
-    MatInputModule
+    MatInputModule,
+    NgxDhis2OrgUnitFilterModule,
+    NgxDhis2PeriodFilterModule
   ],
   exports: [
     MatButtonModule,
@@ -92,7 +96,9 @@ import { DeleteScorecardDialogComponent } from './dialogs/delete-scorecard-dialo
     LegendColorPickerComponent,
     SelectorsComponent,
     MatTableModule,
-    MatIconModule
+    MatIconModule,
+    NgxDhis2OrgUnitFilterModule,
+    NgxDhis2PeriodFilterModule
   ],
   declarations: [OptionsComponent,
                  InfoMenuComponent,
