@@ -28,6 +28,7 @@ import { OrganisationUnitDialogComponent } from './dialogs/organisation-unit-dia
 import { LegendDefintionListComponent } from './components/legend-defintion-list/legend-defintion-list.component';
 import { LegendColorPickerComponent } from './components/legend-color-picker/legend-color-picker.component';
 import { SelectorsComponent } from './components/selectors/selectors.component';
+import { DeleteScorecardDialogComponent } from './dialogs/delete-scorecard-dialog/delete-scorecard-dialog.component';
 
 
 
@@ -97,7 +98,8 @@ import { SelectorsComponent } from './components/selectors/selectors.component';
                  OrganisationUnitDialogComponent,
                  LegendDefintionListComponent,
                  LegendColorPickerComponent,
-                 SelectorsComponent],
-  entryComponents: [SharingDialogComponent, PeriodDialogComponent, OrganisationUnitDialogComponent]
+                 SelectorsComponent,
+                 DeleteScorecardDialogComponent],
+  entryComponents: [SharingDialogComponent, PeriodDialogComponent, OrganisationUnitDialogComponent, DeleteScorecardDialogComponent]
 })
 export class SharedModule { }
