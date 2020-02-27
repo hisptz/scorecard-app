@@ -3,7 +3,8 @@ import { CardsService } from '../../core/services/cards.service';
 import { repeat, take } from 'rxjs/operators';
 import {fadeSmooth, visibilityChanged} from '../../shared/animations/animations';
 import { Router } from '@angular/router';
-import { PageEvent, MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { PageEvent } from '@angular/material/paginator';
 import { DeleteScorecardDialogComponent } from 'src/app/shared/dialogs/delete-scorecard-dialog/delete-scorecard-dialog.component';
 
 @Component({
