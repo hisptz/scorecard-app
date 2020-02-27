@@ -3,7 +3,8 @@ import { CardsService } from '../../core/services/cards.service';
 import { repeat } from 'rxjs/operators';
 import {fadeSmooth, visibilityChanged} from '../../shared/animations/animations';
 import { Router } from '@angular/router';
-import { PageEvent } from '@angular/material';
+import { PageEvent, MatDialog } from '@angular/material';
+import { DeleteScorecardDialogComponent } from 'src/app/shared/dialogs/delete-scorecard-dialog/delete-scorecard-dialog.component';
 
 @Component({
   selector: 'app-home',
@@ -29,7 +30,7 @@ export class HomeComponent implements OnInit {
 
   public labels: any = {};
 
-  constructor(private data: CardsService, private router: Router) {
+  constructor(private data: CardsService, private router: Router, public dialog: MatDialog) {
 
     this.config = {
       itemsPerPage: 3,
@@ -79,5 +80,15 @@ export class HomeComponent implements OnInit {
   viewScorecard(event) {
     console.log(event);
     this.router.navigate(['/view']);
+  }
+  openDeleteDialog(scorecardName) {
+    const dialogRef = this.dialog.open(DeleteScorecardDialogComponent, {
+      width: '500px',
+      data: {name: scorecardName}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 }

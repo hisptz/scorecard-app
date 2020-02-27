@@ -45,6 +45,7 @@
   <div class="container-fluid" >
       <div class="flex-container" [ngStyle]="{'justify-content':type === 'card' ? 'center': 'start' }"  *ngIf= "type !== 'list'">
         <mat-card    class="cursor"
+                    @fadeSmooth
                    (click)="viewScorecard($event)"
                     [ngClass]="[
                     type === 'thumbnails' ? 'col-md-5 thumbnail-layout' : '',
@@ -54,7 +55,7 @@
           <mat-icon class="actions-icon-btn cursor" (click)="$event.stopPropagation()"  matRipple matTooltip="Edit or Delete a scorecard" [matMenuTriggerFor]="actionsMenu">more_vert</mat-icon>
           <mat-menu #actionsMenu="matMenu">
             <button mat-menu-item><mat-icon class="text-warning">edit</mat-icon>Edit</button>
-            <button mat-menu-item><mat-icon class="text-danger">delete</mat-icon>Delete</button>
+            <button mat-menu-item (click)="openDeleteDialog(card.name)"><mat-icon class="text-danger">delete</mat-icon>Delete</button>
           </mat-menu>
           
           <div class="scorecard-header">
@@ -72,7 +73,7 @@
         </mat-card>
       </div>
       <div class="flex-container mat-elevation-z1" *ngIf= "type === 'list'">
-        <table class="table table-hover">
+        <table @fadeSmooth class="table table-hover">
           <thead>
             <tr>
               <th>Name</th>
