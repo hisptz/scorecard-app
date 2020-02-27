@@ -7,7 +7,7 @@ import { MatMenuTrigger } from '@angular/material';
   styleUrls: ['./info-menu.component.css']
 })
 export class InfoMenuComponent implements OnInit {
-  @ViewChild(MatMenuTrigger, {static: false}) trigger: MatMenuTrigger;
+  @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
   constructor() { }
 
   ngOnInit() {

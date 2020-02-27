@@ -32,7 +32,7 @@ export class CoreModule {
     }
   }
 
-  static forRoot(config: IndexDbServiceConfig): ModuleWithProviders {
+  static forRoot(config: IndexDbServiceConfig): ModuleWithProviders<CoreModule> {
     return {
       ngModule: CoreModule,
       providers: [
