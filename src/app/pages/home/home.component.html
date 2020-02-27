@@ -41,7 +41,7 @@
   </div>
 
   <!--scorecard views and details-->
-  <!-- [ngStyle]="{'justify-content':type === 'card' ? 'center': 'start' }"-->
+
   <div class="container-fluid" >
       <div class="flex-container" [ngStyle]="{'justify-content':type === 'card' ? 'center': 'start' }"  *ngIf= "type !== 'list'">
         <mat-card    class="cursor"
@@ -99,85 +99,11 @@
         </table>
       </div>  
   
-  <!-- <div *ngIf="scorecards">
-    <div
-      [ngClass]="[
-        type === 'list' ? '' : '',
-        type === 'thumbnails' ? 'flex-container' : '',
-        type === 'card' ? 'row' : ''
-      ]"
-    >
-      <mat-card
-        [ngClass]="[
-          type === 'list' ? 'row listanimate' : '',
-          type === 'thumbnails' ? 'flex row' : '',
-          type === 'card' ? 'col-md-4 cardStyle' : ''
-        ]"
-        *ngFor="let card of scorecards | filter: filter | paginate: config"
-        [@visibilityChanged]="
-          current_hovered_card === card.id ? 'hoovered' : 'notHovered'
-        "
-        (mouseenter)="mouseEnter(card.id)"
-        (mouseleave)="mouseLeave(card.id)"
-        @fadeSmooth
-      >
-        <div
-          [ngClass]="[
-            type === 'list' ? 'col-md-3' : '',
-            type === 'thumbnails' ? 'col-md-4' : '',
-            type === 'card' ? '' : ''
-          ]"
-        >
-          <img src="assets/images/scorecard.png" />
-        </div>
-        <div
-          [ngClass]="[
-            type === 'list' ? 'col-md-9' : '',
-            type === 'thumbnails' ? 'col-md-8' : '',
-            type === 'card' ? '' : ''
-          ]"
-        >
-          <h4>{{ card.name }}</h4>
-          <p>{{ card.description }}</p>
-          <div>
-            <a
-              routerLink="/view"
-              mat-raised-button
-              color="primary"
-              matTooltip="View {{ card.name }}"
-              style="cursor: pointer"
-              class="sans-pro"
-              role="button"
-              >view</a
-            >&nbsp;
-            <a
-              mat-raised-button
-              matTooltip="Edit {{ card.name }}"
-              class="sans-pro"
-              role="button"
-              style="cursor: pointer"
-            >
-              <i class="fa fa-pencil text-primary"></i> </a
-            >&nbsp;
-            <button
-              mat-raised-button
-              color="warn"
-              matTooltip="Delete {{ card.ame }}"
-              class="sans-pro"
-              role="button"
-              style="cursor: pointer"
-            >
-              <i class="fa fa-trash-o "></i>
-            </button>
-          </div>
-        </div>
-      </mat-card>
-    </div> -->
-
-  <!-- </div> -->
-  <!--pagination control-->
+  
+  <!--Create a scorecard button-->
   <button mat-fab color="primary" style="position: fixed; right: 2%; bottom: 4%;" (click)="createNew()" 
   matTooltip="Create a new scorecard"><mat-icon>add</mat-icon></button>
+   <!--pagination control-->
   <div class="pagination-section" style="margin-top: 2%;">
     <mat-paginator [length]="config.totalItems"
               [pageSize]="config.itemsPerPage"

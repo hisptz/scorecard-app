@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CardsService } from '../../core/services/cards.service';
-import { repeat } from 'rxjs/operators';
+import { repeat, take } from 'rxjs/operators';
 import {fadeSmooth, visibilityChanged} from '../../shared/animations/animations';
 import { Router } from '@angular/router';
 import { PageEvent, MatDialog } from '@angular/material';
@@ -78,7 +78,6 @@ export class HomeComponent implements OnInit {
     this.current_hovered_card = '';
   }
   viewScorecard(event) {
-    console.log(event);
     this.router.navigate(['/view']);
   }
   openDeleteDialog(scorecardName) {
@@ -87,8 +86,8 @@ export class HomeComponent implements OnInit {
       data: {name: scorecardName}
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+    dialogRef.afterClosed().pipe(take(1)).subscribe(result => {
+
     });
   }
 }
