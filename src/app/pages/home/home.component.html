@@ -1,115 +1,115 @@
 <!--header-->
-  <div class="container-fluid mat-elevation-z2" style="margin-bottom: 2em;">
-    <div class="row">
-      <div
-        class="col-md-3 col-xs-12"
-        style="cursor: pointer;"
-      >
-        <img src="assets/images/score.png" />
-      </div>
-        <mat-form-field appearance="outline"  class="col-md-6 col-xs-12"  >
-          <input matInput type="search" matTooltip="Type to search for a scorecard" class="search-field" [(ngModel)]="filter" placeholder="Search score card by name" />
-          <mat-icon style="margin-top: auto; margin-bottom: auto;" matPrefix>search</mat-icon>
-        
-        </mat-form-field>
-      <div class="col-md-3 col-xs-12 operations-section" style="margin-top: 5px">
-        <button mat-stroked-button 
-                class="pull-right cursor" 
-                (click)="changeView()"
-                matTooltip="List View"
-                >
-          <i class="fa fa-list" *ngIf="type == 'thumbnails'"></i>
-          <i class="fa fa-th-large" *ngIf="type == 'list'"></i>
-          <i class="fa fa-th" *ngIf="type == 'card'"></i>
-        </button>
-        <button [matMenuTriggerFor]="settingsMenu"
-                mat-stroked-button
-                class="pull-right cursor"><mat-icon>settings</mat-icon>
-        </button>
-        <mat-menu #settingsMenu="matMenu">
-          <button mat-menu-item [matMenuTriggerFor]="langMenu">Language</button>
-        </mat-menu>
-        <mat-menu #langMenu="matMenu">
-         <button mat-menu-item>En</button>
-         <button mat-menu-item>Fr</button>
-         <button mat-menu-item>Pt</button>
-        </mat-menu>
-        <app-info-menu class="pull-right"></app-info-menu>
-      </div>
+<div class="container-fluid mat-elevation-z2">
+  <div class="row">
+    <div class="col-md-2 col-xs-12 mt-2 p-1">
+      <a routerLink="/" class="d-flex align-items-center scorecard-brand">
+        <img height="32" src="assets/images/score.png" />
+        <div class="ml-2">Scorecard</div>
+      </a>
     </div>
-    
+    <mat-form-field appearance="outline" class="col-md-6 col-xs-12 mt-1">
+      <input matInput type="search" matTooltip="Type to search for a scorecard" class="search-field"
+        [(ngModel)]="filter" placeholder="Search score card by name" />
+      <mat-icon inline=true class="mr-2" style="font-size: 20px;" matPrefix>search</mat-icon>
+
+    </mat-form-field>
+    <div class="col-md-4 col-xs-12 operations-section mt-2">
+      <button mat-stroked-button class="pull-right cursor" (click)="changeView()" matTooltip="List View">
+        <i class="fa fa-list" *ngIf="type == 'thumbnails'"></i>
+        <i class="fa fa-th-large" *ngIf="type == 'list'"></i>
+        <i class="fa fa-th" *ngIf="type == 'card'"></i>
+      </button>
+      <button [matMenuTriggerFor]="settingsMenu" mat-stroked-button class="pull-right cursor">
+        <mat-icon>settings</mat-icon>
+      </button>
+      <mat-menu #settingsMenu="matMenu">
+        <button mat-menu-item [matMenuTriggerFor]="langMenu">Language</button>
+      </mat-menu>
+      <mat-menu #langMenu="matMenu">
+        <button mat-menu-item>En</button>
+        <button mat-menu-item>Fr</button>
+        <button mat-menu-item>Pt</button>
+      </mat-menu>
+      <app-info-menu class="pull-right"></app-info-menu>
+    </div>
   </div>
 
-  <!--scorecard views and details-->
+</div>
 
-  <div class="container-fluid" >
-      <div class="flex-container" [ngStyle]="{'justify-content':type === 'card' ? 'center': 'start' }"  *ngIf= "type !== 'list'">
-        <mat-card    class="cursor"
-                    @fadeSmooth
-                   (click)="viewScorecard($event)"
-                    [ngClass]="[
+<!--scorecard views and details-->
+
+<div class="container-fluid mt-3">
+  <div class="flex-container" [ngStyle]="{'justify-content':type === 'card' ? 'center': 'start' }"
+    *ngIf="type !== 'list'">
+    <mat-card class="cursor" @fadeSmooth (click)="viewScorecard($event)" [ngClass]="[
                     type === 'thumbnails' ? 'col-md-5 thumbnail-layout' : '',
                     type === 'card' ? 'card-layout col-md-3' : ''
-                  ]"
-                  *ngFor="let card of scorecards | filter: filter | paginate: config">
-          <mat-icon class="actions-icon-btn cursor" (click)="$event.stopPropagation()"  matRipple matTooltip="Edit or Delete a scorecard" [matMenuTriggerFor]="actionsMenu">more_vert</mat-icon>
-          <mat-menu #actionsMenu="matMenu">
-            <button mat-menu-item><mat-icon class="text-warning">edit</mat-icon>Edit</button>
-            <button mat-menu-item (click)="openDeleteDialog(card.name)"><mat-icon class="text-danger">delete</mat-icon>Delete</button>
-          </mat-menu>
-          
-          <div class="scorecard-header">
-          <img src="assets/images/scorecard.png" />
-        </div>
-        <div
-        class="scorecard-content"
-       
-        >
-          <h4>{{ card.name }}</h4>
-          <p>{{ card.description }}</p>
-         
-        </div>
-           
-        </mat-card>
+                  ]" *ngFor="let card of scorecards | filter: filter | paginate: config">
+      <mat-icon class="actions-icon-btn cursor" (click)="$event.stopPropagation()" matRipple
+        matTooltip="Edit or Delete a scorecard" [matMenuTriggerFor]="actionsMenu">more_vert</mat-icon>
+      <mat-menu #actionsMenu="matMenu">
+        <button mat-menu-item>
+          <mat-icon class="text-warning">edit</mat-icon>Edit
+        </button>
+        <button mat-menu-item (click)="openDeleteDialog(card.name)">
+          <mat-icon class="text-danger">delete</mat-icon>Delete
+        </button>
+      </mat-menu>
+
+      <div class="scorecard-header">
+        <img src="assets/images/scorecard.png" />
       </div>
-      <div class="flex-container mat-elevation-z1" *ngIf= "type === 'list'">
-        <table @fadeSmooth class="table table-hover">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Description</th>
-              <th>Last modified</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="cursor" (click)="viewScorecard($event)" matTooltip="View a scorecard" *ngFor="let card of scorecards | filter: filter | paginate: config">
-              <td><img style="height: 2.5em; width: 3em;" src="assets/images/scorecard.png" /> &nbsp;{{ card.name }}</td>
-              <td>{{ card.description }}</td>
-              <td></td>
-              <td>
-                <mat-icon class="actions-icon-btn cursor" (click)="$event.stopPropagation()" matRipple matTooltip="Edit or Delete a scorecard" [matMenuTriggerFor]="actionsMenu">more_vert</mat-icon>
-                <mat-menu #actionsMenu="matMenu">
-                  <button mat-menu-item><mat-icon class="text-warning">edit</mat-icon>Edit</button>
-                  <button mat-menu-item (click)="openDeleteDialog(card.name)"><mat-icon class="text-danger">delete</mat-icon>Delete</button>
-                </mat-menu>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>  
-  
-  
+      <div class="scorecard-content">
+        <h4>{{ card.name }}</h4>
+        <p>{{ card.description }}</p>
+
+      </div>
+
+    </mat-card>
+  </div>
+  <div class="flex-container mat-elevation-z1" *ngIf="type === 'list'">
+    <table @fadeSmooth class="table table-hover">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Last modified</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="cursor" (click)="viewScorecard($event)" matTooltip="View a scorecard"
+          *ngFor="let card of scorecards | filter: filter | paginate: config">
+          <td><img style="height: 2.5em; width: 3em;" src="assets/images/scorecard.png" /> &nbsp;{{ card.name }}</td>
+          <td>{{ card.description }}</td>
+          <td></td>
+          <td>
+            <mat-icon class="actions-icon-btn cursor" (click)="$event.stopPropagation()" matRipple
+              matTooltip="Edit or Delete a scorecard" [matMenuTriggerFor]="actionsMenu">more_vert</mat-icon>
+            <mat-menu #actionsMenu="matMenu">
+              <button mat-menu-item>
+                <mat-icon class="text-warning">edit</mat-icon>Edit
+              </button>
+              <button mat-menu-item (click)="openDeleteDialog(card.name)">
+                <mat-icon class="text-danger">delete</mat-icon>Delete
+              </button>
+            </mat-menu>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
   <!--Create a scorecard button-->
-  <button mat-fab color="primary" style="position: fixed; right: 2%; bottom: 4%;" (click)="createNew()" 
-  matTooltip="Create a new scorecard"><mat-icon>add</mat-icon></button>
-   <!--pagination control-->
+  <button mat-fab color="primary" style="position: fixed; right: 2%; bottom: 4%;" (click)="createNew()"
+    matTooltip="Create a new scorecard">
+    <mat-icon>add</mat-icon>
+  </button>
+  <!--pagination control-->
   <div class="pagination-section" style="margin-top: 2%;">
-    <mat-paginator [length]="config.totalItems"
-              [pageSize]="config.itemsPerPage"
-              [pageSizeOptions]="[config.itemsPerPage]"
-              (page)="pageChanged($event)"
-              >
+    <mat-paginator [length]="config.totalItems" [pageSize]="config.itemsPerPage"
+      [pageSizeOptions]="[config.itemsPerPage]" (page)="pageChanged($event)">
     </mat-paginator>
   </div>
 </div>
