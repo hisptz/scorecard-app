@@ -8,45 +8,95 @@
       </a>
     </div>
     <mat-form-field appearance="outline" class="col-md-6 col-xs-12 mt-1">
-      <input matInput type="search" matTooltip="Type to search for a scorecard" class="search-field"
-        [(ngModel)]="filter" placeholder="Search score card by name" />
-      <mat-icon inline=true class="mr-2" style="font-size: 20px;" matPrefix>search</mat-icon>
-
+      <input
+        matInput
+        type="search"
+        matTooltip="Type to search for a scorecard"
+        class="search-field"
+        [(ngModel)]="filter"
+        placeholder="Search score card by name"
+      />
+      <mat-icon inline="true" class="mr-2" style="font-size: 20px;" matPrefix
+        >search</mat-icon
+      >
     </mat-form-field>
     <div class="col-md-4 col-xs-12 operations-section mt-2">
-      <button mat-stroked-button class="pull-right cursor" (click)="changeView()" matTooltip="List View">
-        <i class="fa fa-list" *ngIf="type == 'thumbnails'"></i>
-        <i class="fa fa-th-large" *ngIf="type == 'list'"></i>
-        <i class="fa fa-th" *ngIf="type == 'card'"></i>
+      <button
+        mat-stroked-button
+        class="pull-right cursor"
+        (click)="changeView()"
+      >
+        <mat-icon *ngIf="type == 'thumbnails'">format_list_bulleted</mat-icon>
+        <mat-icon *ngIf="type == 'list'">grid_on</mat-icon>
+        <mat-icon *ngIf="type == 'card'">view_module</mat-icon>
       </button>
-      <button [matMenuTriggerFor]="settingsMenu" mat-stroked-button class="pull-right cursor">
+      <button
+        [matMenuTriggerFor]="settingsMenu"
+        mat-stroked-button
+        class="pull-right cursor"
+      >
         <mat-icon>settings</mat-icon>
       </button>
       <mat-menu #settingsMenu="matMenu">
         <button mat-menu-item [matMenuTriggerFor]="langMenu">Language</button>
       </mat-menu>
       <mat-menu #langMenu="matMenu">
-        <button mat-menu-item>En</button>
-        <button mat-menu-item>Fr</button>
-        <button mat-menu-item>Pt</button>
+        <button mat-menu-item>
+          <img
+            style="height: 1.2em; width: 2em;"
+            src="assets/icons/flags/uk.svg"
+            alt="En"
+          />
+          En
+        </button>
+        <button mat-menu-item>
+          <img
+            style="height: 1.2em; width: 2em;"
+            src="assets/icons/flags/fr.svg"
+            alt="En"
+          />
+          Fr
+        </button>
+        <button mat-menu-item>
+          <img
+            style="height: 1.2em; width: 2em;"
+            src="assets/icons/flags/pt.svg"
+            alt="En"
+          />
+          Pt
+        </button>
       </mat-menu>
       <app-info-menu class="pull-right"></app-info-menu>
     </div>
   </div>
-
 </div>
 
 <!--scorecard views and details-->
 
 <div class="container-fluid mt-3">
-  <div class="flex-container" [ngStyle]="{'justify-content':type === 'card' ? 'center': 'start' }"
-    *ngIf="type !== 'list'">
-    <mat-card class="cursor" @fadeSmooth (click)="viewScorecard($event)" [ngClass]="[
-                    type === 'thumbnails' ? 'col-md-5 thumbnail-layout' : '',
-                    type === 'card' ? 'card-layout col-md-3' : ''
-                  ]" *ngFor="let card of scorecards | filter: filter | paginate: config">
-      <mat-icon class="actions-icon-btn cursor" (click)="$event.stopPropagation()" matRipple
-        matTooltip="Edit or Delete a scorecard" [matMenuTriggerFor]="actionsMenu">more_vert</mat-icon>
+  <div
+    class="flex-container"
+    [ngStyle]="{ 'justify-content': type === 'card' ? 'center' : 'start' }"
+    *ngIf="type !== 'list'"
+  >
+    <mat-card
+      class="cursor"
+      @fadeSmooth
+      (click)="viewScorecard($event)"
+      [ngClass]="[
+        type === 'thumbnails' ? 'col-md-5 thumbnail-layout' : '',
+        type === 'card' ? 'card-layout col-md-3' : ''
+      ]"
+      *ngFor="let card of scorecards | filter: filter | paginate: config"
+    >
+      <mat-icon
+        class="actions-icon-btn cursor"
+        (click)="$event.stopPropagation()"
+        matRipple
+        matTooltip="Edit or Delete a scorecard"
+        [matMenuTriggerFor]="actionsMenu"
+        >more_vert</mat-icon
+      >
       <mat-menu #actionsMenu="matMenu">
         <button mat-menu-item>
           <mat-icon class="text-warning">edit</mat-icon>Edit
@@ -62,9 +112,7 @@
       <div class="scorecard-content">
         <h4>{{ card.name }}</h4>
         <p>{{ card.description }}</p>
-
       </div>
-
     </mat-card>
   </div>
   <div class="flex-container mat-elevation-z1" *ngIf="type === 'list'">
@@ -78,14 +126,30 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="cursor" (click)="viewScorecard($event)" matTooltip="View a scorecard"
-          *ngFor="let card of scorecards | filter: filter | paginate: config">
-          <td><img style="height: 2.5em; width: 3em;" src="assets/images/scorecard.png" /> &nbsp;{{ card.name }}</td>
+        <tr
+          class="cursor"
+          (click)="viewScorecard($event)"
+          matTooltip="View a scorecard"
+          *ngFor="let card of scorecards | filter: filter | paginate: config"
+        >
+          <td>
+            <img
+              style="height: 2.5em; width: 3em;"
+              src="assets/images/scorecard.png"
+            />
+            &nbsp;{{ card.name }}
+          </td>
           <td>{{ card.description }}</td>
           <td></td>
           <td>
-            <mat-icon class="actions-icon-btn cursor" (click)="$event.stopPropagation()" matRipple
-              matTooltip="Edit or Delete a scorecard" [matMenuTriggerFor]="actionsMenu">more_vert</mat-icon>
+            <mat-icon
+              class="actions-icon-btn cursor"
+              (click)="$event.stopPropagation()"
+              matRipple
+              matTooltip="Edit or Delete a scorecard"
+              [matMenuTriggerFor]="actionsMenu"
+              >more_vert</mat-icon
+            >
             <mat-menu #actionsMenu="matMenu">
               <button mat-menu-item>
                 <mat-icon class="text-warning">edit</mat-icon>Edit
@@ -100,16 +164,24 @@
     </table>
   </div>
 
-
   <!--Create a scorecard button-->
-  <button mat-fab color="primary" style="position: fixed; right: 2%; bottom: 4%;" (click)="createNew()"
-    matTooltip="Create a new scorecard">
+  <button
+    mat-fab
+    color="primary"
+    style="position: fixed; right: 2%; bottom: 4%;"
+    (click)="createNew()"
+    matTooltip="Create a new scorecard"
+  >
     <mat-icon>add</mat-icon>
   </button>
   <!--pagination control-->
   <div class="pagination-section" style="margin-top: 2%;">
-    <mat-paginator [length]="config.totalItems" [pageSize]="config.itemsPerPage"
-      [pageSizeOptions]="[config.itemsPerPage]" (page)="pageChanged($event)">
+    <mat-paginator
+      [length]="config.totalItems"
+      [pageSize]="config.itemsPerPage"
+      [pageSizeOptions]="[config.itemsPerPage]"
+      (page)="pageChanged($event)"
+    >
     </mat-paginator>
   </div>
 </div>

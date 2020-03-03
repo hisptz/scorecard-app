@@ -56,6 +56,7 @@ import { NgxDhis2PeriodFilterModule} from '@iapps/ngx-dhis2-period-filter';
     MatSlideToggleModule,
     MatProgressBarModule,
     MatMenuModule,
+    MatIconModule,
     MatButtonToggleModule,
     MatRippleModule,
     MatDialogModule,
