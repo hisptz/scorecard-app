@@ -110,8 +110,8 @@
         <img src="assets/images/scorecard.png" />
       </div>
       <div class="scorecard-content">
-        <h4>{{ card.name }}</h4>
-        <p>{{ card.description }}</p>
+        <h4>{{ card.name | truncate:[20, '...'] }}</h4>
+        <p>{{ card.description | truncate:[30, '...'] }}</p>
       </div>
     </mat-card>
   </div>

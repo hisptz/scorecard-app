@@ -34,6 +34,7 @@ import { SelectorsComponent } from './components/selectors/selectors.component';
 import { DeleteScorecardDialogComponent } from './dialogs/delete-scorecard-dialog/delete-scorecard-dialog.component';
 import { NgxDhis2OrgUnitFilterModule } from '@iapps/ngx-dhis2-org-unit-filter';
 import { NgxDhis2PeriodFilterModule} from '@iapps/ngx-dhis2-period-filter';
+import { TruncatePipe } from './pipes/truncate.pipe';
 
 
 
@@ -99,7 +100,8 @@ import { NgxDhis2PeriodFilterModule} from '@iapps/ngx-dhis2-period-filter';
     MatTableModule,
     MatIconModule,
     NgxDhis2OrgUnitFilterModule,
-    NgxDhis2PeriodFilterModule
+    NgxDhis2PeriodFilterModule,
+    TruncatePipe
   ],
   declarations: [OptionsComponent,
                  InfoMenuComponent,
@@ -109,7 +111,8 @@ import { NgxDhis2PeriodFilterModule} from '@iapps/ngx-dhis2-period-filter';
                  LegendDefintionListComponent,
                  LegendColorPickerComponent,
                  SelectorsComponent,
-                 DeleteScorecardDialogComponent],
+                 DeleteScorecardDialogComponent,
+                 TruncatePipe],
   entryComponents: [SharingDialogComponent, PeriodDialogComponent, OrganisationUnitDialogComponent, DeleteScorecardDialogComponent]
 })
 export class SharedModule { }
