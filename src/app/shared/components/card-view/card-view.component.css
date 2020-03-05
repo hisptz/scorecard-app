@@ -1,0 +1,26 @@
+.card-view {
+  position: relative;
+  width: 283.5px;
+  height: 200px;
+}
+.card-view:hover,
+.card-view:focus,
+.card-view:active {
+  border: none;
+  -webkit-transform: scale(1.05);
+  transform: scale(1.05);
+  transition: 0.7s;
+}
+.actions-icon-btn {
+  position: absolute;
+  top: 2%;
+  right: 2%;
+  font-size: bold;
+}
+h4 {
+  font-size: 1.2em;
+}
+p {
+  font-size: 0.9em;
+  color: gray;
+}
