@@ -54,22 +54,15 @@ export class HomeComponent implements OnInit {
   createNew() {
      this.router.navigate(['create']);
   }
-  changeView() {
-    if (this.counter > 2) {
-      this.counter = 0;
+  getViewType(event) {
+    if ( event ) {
+      this.type = event;
+    } else {
+      this.type = 'list';
     }
-    this.nums = this.counter += 1;
-    switch (this.nums) {
-      case 1:
-        this.type = 'list';
-          break;
-       case 2:
-          this.type = 'thumbnails';
-        break;
-        case 3:
-          this.type = 'card';
-        break;
-    }
+  }
+  getSearchFilter(event) {
+    this.filter = event;
   }
   mouseEnter(scorecardId) {
     this.current_hovered_card = scorecardId;

@@ -31,6 +31,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 
 import {NgxPaginationModule} from 'ngx-pagination';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { HomeHeaderComponent } from './pages/home/home-header/home-header.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -38,7 +39,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 }
 
 @NgModule({
-  declarations: [AppComponent, ...fromPages.pages],
+  declarations: [AppComponent, ...fromPages.pages, HomeHeaderComponent],
   imports: [
     BrowserModule,
     NgxPaginationModule,
