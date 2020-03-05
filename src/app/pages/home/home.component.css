@@ -24,7 +24,7 @@
   .listanimate{
     padding: 2%;
   } 
-  .card-layout:hover, 
+  /* .card-layout:hover, 
   .card-layout:focus,
   .card-layout:active,
   .thumbnail-layout:hover,
@@ -81,4 +81,8 @@ th, td {
 .scorecard-content p{
   font-size: 0.9em;
   color: gray;
+} */
+:host ::ng-deep.mat-paginator .mat-paginator-container {
+  min-height: 35px !important;
+  padding: 0 4px !important;
 }

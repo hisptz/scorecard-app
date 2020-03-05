@@ -21,15 +21,7 @@
       >
     </mat-form-field>
     <div class="col-md-4 col-xs-12 operations-section mt-2">
-      <button
-        mat-stroked-button
-        class="pull-right cursor"
-        (click)="changeView()"
-      >
-        <mat-icon *ngIf="type == 'thumbnails'">format_list_bulleted</mat-icon>
-        <mat-icon *ngIf="type == 'list'">grid_on</mat-icon>
-        <mat-icon *ngIf="type == 'card'">view_module</mat-icon>
-      </button>
+      
       <button
         [matMenuTriggerFor]="settingsMenu"
         mat-stroked-button

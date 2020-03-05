@@ -1,13 +1,57 @@
 <!--header-->
-<app-home-header
-  (viewType)="getViewType($event)"
-  (searchFilter)="getSearchFilter($event)"
->
-</app-home-header>
+<app-home-header (searchFilter)="getSearchFilter($event)"> </app-home-header>
 <!--scorecard views and details-->
+<div class="d-flex flex-row-reverse p-1 mt-1" *ngIf="scorecards$ | async;let cards">
+  <mat-paginator
+    class="pull-right"
+    [length]="cards.length"
+    [pageSize]="config.itemsPerPage"
+    [pageSizeOptions]="config.itemsPerPageArr"
+    (page)="pageChanged($event)"
+  >
+  </mat-paginator>
+  <button mat-stroked-button class="mr-5 cursor" (click)="changeView()">
+    <mat-icon *ngIf="type == 'thumbnails'">format_list_bulleted</mat-icon>
+    <mat-icon *ngIf="type == 'list'">grid_on</mat-icon>
+    <mat-icon *ngIf="type == 'card'">view_module</mat-icon>
+  </button>
+</div>
 
 <div class="container-fluid mt-3">
-  <div
+  <div @fadeSmooth class="d-flex flex-wrap" *ngIf="type === 'card'">
+    <app-card-view
+      *ngFor="
+        let card of scorecards$ | async | filter: filter | paginate: config
+      "
+      [card]="card"
+    ></app-card-view>
+  </div>
+  <div @fadeSmooth class="d-flex flex-wrap" *ngIf="type === 'thumbnails'">
+    <app-thumbnail-view
+      *ngFor="let thumbnail of scorecards$ | async | filter: filter | paginate: config"
+      [thumbnail]="thumbnail"
+    ></app-thumbnail-view>
+  </div>
+  <table @fadeSmooth class="table table-hover" *ngIf="type === 'list'">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Last modified</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+         (click)="viewScorecard()"
+        app-list-view
+        *ngFor="let row of scorecards$ | async | filter: filter | paginate: config"
+        [row]="row"
+      ></tr>
+    </tbody>
+  </table>
+
+  <!--<div
     class="flex-container"
     [ngStyle]="{ 'justify-content': type === 'card' ? 'center' : 'start' }"
     *ngIf="type !== 'list'"
@@ -95,7 +139,7 @@
         </tr>
       </tbody>
     </table>
-  </div>
+  </div> -->
 
   <!--Create a scorecard button-->
   <button
@@ -108,7 +152,7 @@
     <mat-icon>add</mat-icon>
   </button>
   <!--pagination control-->
-  <div class="pagination-section" style="margin-top: 2%;">
+  <!-- <div class="pagination-section" style="margin-top: 2%;">
     <mat-paginator
       [length]="config.totalItems"
       [pageSize]="config.itemsPerPage"
@@ -116,5 +160,5 @@
       (page)="pageChanged($event)"
     >
     </mat-paginator>
-  </div>
+  </div> -->
 </div>

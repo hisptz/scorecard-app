@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
   counter= 0;
 
   current_hovered_card = '';
-  scorecards: Object;
+  scorecards$: Object;
   config: any;
   count: any;
   filter: any;
@@ -31,26 +31,27 @@ export class HomeComponent implements OnInit {
 
   public labels: any = {};
 
-  constructor(private data: CardsService, private router: Router, public dialog: MatDialog) {
+  constructor(private cardService: CardsService, private router: Router) {
 
     this.config = {
-      itemsPerPage: 3,
+      itemsPerPage: 12,
       currentPage: 1,
-      totalItems: this.count
+      totalItems: this.count,
+      itemsPerPageArr: [6, 12, 18]
     };
   }
 
   pageChanged(event) {
+    this.config.itemsPerPage = event.pageSize;
     this.config.currentPage = event.pageIndex + 1;
    }
 
   ngOnInit() {
-    this.data.getCards().subscribe((data: any) => {
-      this.scorecards = data;
-      this.config.totalItems = data.length;
-    }
-  );
+    this.getScorecards();
   }
+  getScorecards() {
+      this.scorecards$ = this.cardService.getCards();
+   }
   createNew() {
      this.router.navigate(['create']);
   }
@@ -59,6 +60,26 @@ export class HomeComponent implements OnInit {
       this.type = event;
     } else {
       this.type = 'list';
+    }
+  }
+  viewScorecard() {
+    this.router.navigate(['/view']);
+  }
+  changeView() {
+    if (this.counter > 2) {
+      this.counter = 0;
+    }
+    this.nums = this.counter += 1;
+    switch (this.nums) {
+      case 1:
+        this.type = 'list';
+          break;
+       case 2:
+          this.type = 'thumbnails';
+        break;
+        case 3:
+          this.type = 'card';
+        break;
     }
   }
   getSearchFilter(event) {
@@ -70,18 +91,5 @@ export class HomeComponent implements OnInit {
 
   mouseLeave() {
     this.current_hovered_card = '';
-  }
-  viewScorecard(event) {
-    this.router.navigate(['/view']);
-  }
-  openDeleteDialog(scorecardName) {
-    const dialogRef = this.dialog.open(DeleteScorecardDialogComponent, {
-      width: '500px',
-      data: {name: scorecardName}
-    });
-
-    dialogRef.afterClosed().pipe(take(1)).subscribe(result => {
-
-    });
   }
 }
