@@ -1,6 +1,7 @@
-.col-md-4 {
-   padding-left: 0 !important;
+.d-flex, .flex-row {
+   padding: 0 !important;
+   margin: 0 !important;
 }
-.col-md-4 button {
+.flex-row button {
     margin-right: 0.5em;
 }
