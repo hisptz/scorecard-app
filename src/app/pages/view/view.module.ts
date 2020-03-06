@@ -8,6 +8,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { ScorecardComponent } from './components/scorecard/scorecard.component';
 import { ScorecardHeaderComponent } from './components/scorecard/scorecard-header/scorecard-header.component';
 import { BasicViewComponent } from './components/scorecard/basic-view/basic-view.component';
+import { ViewSetupComponent } from './components/view-setup/view-setup.component';
 
 
 const routes: Routes = [
@@ -18,7 +19,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [ViewComponent, ViewHeaderComponent, ViewTitleAreaComponent, ScorecardComponent, ScorecardHeaderComponent, BasicViewComponent],
+  declarations: [ViewComponent, ViewHeaderComponent, ViewTitleAreaComponent, ScorecardComponent, ScorecardHeaderComponent, BasicViewComponent, ViewSetupComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

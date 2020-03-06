@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./view-title-area.component.css']
 })
 export class ViewTitleAreaComponent implements OnInit {
-  selectorButtonsToShow = ['period', 'orgunit'];
+ 
   constructor() { }
 
   ngOnInit() {

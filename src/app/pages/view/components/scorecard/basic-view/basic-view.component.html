@@ -21,18 +21,23 @@
         <tr *ngFor="let data of sampleTableData">
            <td>{{data.orgunit}}</td>
            <td 
+             style="width: 5%;"
            [ngClass]="{'not-on-track': data.bcg < 40,'progress-required': data.bcg >40 && data.bcg < 70,'on-track': data.bcg >= 70}"
            >{{data.bcg}}</td>
            <td
+           style="width: 5%;"
            [ngClass]="{'not-on-track': data.dpt < 40,'progress-required': data.dpt >40 && data.dpt < 70,'on-track': data.dpt >= 70}"
            >{{data.dpt}}</td>
            <td
+           style="width: 5%;"
            [ngClass]="{'not-on-track': data.dpt1_coverage < 40,'progress-required': data.dpt1_coverage >40 && data.dpt1_coverage < 70,'on-track': data.dpt1_coverage >= 70}"
            >{{data.dpt1_coverage}}</td>
            <td
+           style="width: 5%;"
            [ngClass]="{'not-on-track': data.dpt2_coverage < 40,'progress-required': data.dpt2_coverage >40 && data.dpt2_coverage < 70,'on-track': data.dpt2_coverage >= 70}"
            >{{data.dpt2_coverage}}</td>
            <td
+           style="width: 5%;"
              [ngClass]="{'not-on-track': data.dpt3_coverage < 40,'progress-required': data.dpt3_coverage >40 && data.dpt3_coverage < 70,'on-track': data.dpt3_coverage >= 70}"
            >{{data.dpt3_coverage}}</td>
         </tr>
