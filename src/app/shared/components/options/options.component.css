@@ -5,3 +5,6 @@
     font-size: 0.9em;
     color: gray;
   }
+::ng-deep.mat-list-item{
+   height: 35px !important;
+  }
