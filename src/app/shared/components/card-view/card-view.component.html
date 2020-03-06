@@ -20,7 +20,7 @@
   </div>
 
   <mat-card-content class="text-center">
-    <h4>{{ card.name }}</h4>
-    <p>{{ card.description }}</p>
+    <h4>{{ card.name | truncate: [20, '...'] }}</h4>
+    <p>{{ card.description | truncate: [30, '...'] }}</p>
   </mat-card-content>
 </mat-card>

@@ -20,8 +20,8 @@
     </div>
   
     <mat-card-content>
-      <h4>{{ thumbnail.name }}</h4>
-      <p>{{ thumbnail.description }}</p>
+      <h4>{{ thumbnail.name | truncate: [20, '...'] }}</h4>
+      <p>{{ thumbnail.description | truncate: [30, '...'] }}</p>
     </mat-card-content>
   </mat-card>
   
