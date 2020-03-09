@@ -17,11 +17,14 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [CreateComponent, CreateHeaderComponent, SampleScorecardComponent, TitleAreaComponent, BasicDetailsComponent, DataSelectionComponent],
-  imports: [
-    CommonModule, 
-    RouterModule.forChild(routes),
-    SharedModule
-  ]
+  declarations: [
+    CreateComponent,
+    CreateHeaderComponent,
+    SampleScorecardComponent,
+    TitleAreaComponent,
+    BasicDetailsComponent,
+    DataSelectionComponent
+  ],
+  imports: [CommonModule, RouterModule.forChild(routes), SharedModule]
 })
-export class CreateModule { }
+export class CreateModule {}

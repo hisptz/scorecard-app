@@ -42,8 +42,12 @@ button.active:focus {
 }
 
 .mat-form-field-appearance-outline .mat-form-field-label {
-  top: 1.47em;
+  top: 1.45em;
   margin-top: 0;
+}
+
+.mat-form-field-wrapper {
+  padding-bottom: 0;
 }
 
 .scorecard-brand {

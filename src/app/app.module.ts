@@ -1,37 +1,29 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';   
+import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-import { AppComponent } from './app.component';
-import { StoreModule } from '@ngrx/store';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { NgxDhis2MenuModule } from '@iapps/ngx-dhis2-menu';
 import { EffectsModule } from '@ngrx/effects';
-
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { environment } from '../environments/environment';
-import { SharedModule } from 'src/app/shared/shared.module';
-
-import { reducers, metaReducers } from './store/reducers';
-import { effects } from './store/effects';
-
 import {
   RouterStateSerializer,
   StoreRouterConnectingModule
 } from '@ngrx/router-store';
-import { RouteSerializer, CoreModule } from './core';
-import { RoutingModule } from './app.routes';
-
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
-
-import { NgxDhis2MenuModule } from '@iapps/ngx-dhis2-menu';
-import * as fromPages from './pages';
-import { ServiceWorkerModule } from '@angular/service-worker';
-
-import {NgxPaginationModule} from 'ngx-pagination';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import { HomeHeaderComponent } from './pages/home/home-header/home-header.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { SharedModule } from 'src/app/shared/shared.module';
+
+import { environment } from '../environments/environment';
+import { AppComponent } from './app.component';
+import { RoutingModule } from './app.routes';
+import { CoreModule, RouteSerializer } from './core';
+import { effects } from './store/effects';
+import { metaReducers, reducers } from './store/reducers';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -39,7 +31,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 }
 
 @NgModule({
-  declarations: [AppComponent, ...fromPages.pages, HomeHeaderComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     NgxPaginationModule,
@@ -62,14 +54,14 @@ export function HttpLoaderFactory(http: HttpClient) {
      * Menu  module
      */
     NgxDhis2MenuModule,
-     /**
+    /**
      * Organisation unit module
      */
 
     /**
      * Translation module
      */
-  
+
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

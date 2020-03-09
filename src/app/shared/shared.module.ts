@@ -33,13 +33,11 @@ import { LegendColorPickerComponent } from './components/legend-color-picker/leg
 import { SelectorsComponent } from './components/selectors/selectors.component';
 import { DeleteScorecardDialogComponent } from './dialogs/delete-scorecard-dialog/delete-scorecard-dialog.component';
 import { NgxDhis2OrgUnitFilterModule } from '@iapps/ngx-dhis2-org-unit-filter';
-import { NgxDhis2PeriodFilterModule} from '@iapps/ngx-dhis2-period-filter';
+import { NgxDhis2PeriodFilterModule } from '@iapps/ngx-dhis2-period-filter';
 import { TruncatePipe } from './pipes/truncate.pipe';
 import { CardViewComponent } from './components/card-view/card-view.component';
 import { ThumbnailViewComponent } from './components/thumbnail-view/thumbnail-view.component';
 import { ListViewComponent } from './components/list-view/list-view.component';
-
-
 
 @NgModule({
   imports: [
@@ -109,19 +107,26 @@ import { ListViewComponent } from './components/list-view/list-view.component';
     ThumbnailViewComponent,
     ListViewComponent
   ],
-  declarations: [OptionsComponent,
-                 InfoMenuComponent,
-                 SharingDialogComponent,
-                 PeriodDialogComponent,
-                 OrganisationUnitDialogComponent,
-                 LegendDefintionListComponent,
-                 LegendColorPickerComponent,
-                 SelectorsComponent,
-                 DeleteScorecardDialogComponent,
-                 TruncatePipe,
-                 CardViewComponent,
-                 ThumbnailViewComponent,
-                 ListViewComponent],
-  entryComponents: [SharingDialogComponent, PeriodDialogComponent, OrganisationUnitDialogComponent, DeleteScorecardDialogComponent]
+  declarations: [
+    OptionsComponent,
+    InfoMenuComponent,
+    SharingDialogComponent,
+    PeriodDialogComponent,
+    OrganisationUnitDialogComponent,
+    LegendDefintionListComponent,
+    LegendColorPickerComponent,
+    SelectorsComponent,
+    DeleteScorecardDialogComponent,
+    TruncatePipe,
+    CardViewComponent,
+    ThumbnailViewComponent,
+    ListViewComponent
+  ],
+  entryComponents: [
+    SharingDialogComponent,
+    PeriodDialogComponent,
+    OrganisationUnitDialogComponent,
+    DeleteScorecardDialogComponent
+  ]
 })
-export class SharedModule { }
+export class SharedModule {}

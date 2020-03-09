@@ -7,26 +7,13 @@
       </a>
     </div>
     <mat-form-field appearance="outline" class="col-md-6 col-xs-12 mt-1">
-      <input
-        matInput
-        type="search"
-        matTooltip="Type to search for a scorecard"
-        class="search-field"
-        [(ngModel)]="filter"
-        (ngModelChange)="sendSearchText($event)"
-        placeholder="Search score card by name"
-      />
-      <mat-icon inline="true" class="mr-2" style="font-size: 20px;" matPrefix
-        >search</mat-icon
-      >
+      <input matInput type="search" matTooltip="Type to search for a scorecard" class="search-field"
+        [(ngModel)]="filter" (ngModelChange)="sendSearchText($event)" placeholder="Search score card by name" />
+      <mat-icon inline="true" class="mr-2" style="font-size: 20px;" matPrefix>search</mat-icon>
     </mat-form-field>
     <div class="col-md-4 col-xs-12 operations-section mt-2">
-      
-      <button
-        [matMenuTriggerFor]="settingsMenu"
-        mat-stroked-button
-        class="pull-right cursor"
-      >
+
+      <button [matMenuTriggerFor]="settingsMenu" mat-stroked-button class="pull-right cursor">
         <mat-icon>settings</mat-icon>
       </button>
       <mat-menu #settingsMenu="matMenu">
@@ -34,27 +21,15 @@
       </mat-menu>
       <mat-menu #langMenu="matMenu">
         <button mat-menu-item>
-          <img
-            style="height: 1.2em; width: 2em;"
-            src="assets/icons/flags/uk.svg"
-            alt="En"
-          />
+          <img style="height: 1.2em; width: 2em;" src="assets/icons/flags/uk.svg" alt="En" />
           En
         </button>
         <button mat-menu-item>
-          <img
-            style="height: 1.2em; width: 2em;"
-            src="assets/icons/flags/fr.svg"
-            alt="En"
-          />
+          <img style="height: 1.2em; width: 2em;" src="assets/icons/flags/fr.svg" alt="En" />
           Fr
         </button>
         <button mat-menu-item>
-          <img
-            style="height: 1.2em; width: 2em;"
-            src="assets/icons/flags/pt.svg"
-            alt="En"
-          />
+          <img style="height: 1.2em; width: 2em;" src="assets/icons/flags/pt.svg" alt="En" />
           Pt
         </button>
       </mat-menu>
