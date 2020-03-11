@@ -6,6 +6,7 @@ import {
   fadeSmooth,
   visibilityChanged
 } from '../../../../shared/animations/animations';
+import { ViewTypes } from '../../constants/view-types.constant';
 
 @Component({
   selector: 'app-home',
@@ -23,12 +24,14 @@ export class HomeComponent implements OnInit {
   count: any;
   filter: any;
   type: any = 'card';
+  currentViewType: string;
+  viewTypes: any;
 
   public labels: any = {};
 
   constructor(private cardService: CardsService, private router: Router) {
     this.config = {
-      itemsPerPage: 12,
+      itemsPerPage: 18,
       currentPage: 1,
       totalItems: this.count,
       itemsPerPageArr: [6, 12, 18]
@@ -41,6 +44,8 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.viewTypes = ViewTypes;
+    this.currentViewType = ViewTypes.CARD;
     this.getScorecards();
   }
   getScorecards() {
@@ -59,22 +64,9 @@ export class HomeComponent implements OnInit {
   viewScorecard() {
     this.router.navigate(['/view']);
   }
-  changeView() {
-    if (this.counter > 2) {
-      this.counter = 0;
-    }
-    this.nums = this.counter += 1;
-    switch (this.nums) {
-      case 1:
-        this.type = 'list';
-        break;
-      case 2:
-        this.type = 'thumbnails';
-        break;
-      case 3:
-        this.type = 'card';
-        break;
-    }
+
+  onChangeView(viewType: string) {
+    this.currentViewType = viewType;
   }
   getSearchFilter(event) {
     this.filter = event;
@@ -85,5 +77,9 @@ export class HomeComponent implements OnInit {
 
   mouseLeave() {
     this.current_hovered_card = '';
+  }
+
+  onView(id) {
+    this.router.navigate(['/view']);
   }
 }

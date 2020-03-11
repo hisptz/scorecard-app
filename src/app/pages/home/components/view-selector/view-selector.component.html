@@ -1,0 +1,5 @@
+<button mat-icon-button class="muted" (click)="onChangeView()">
+    <mat-icon *ngIf="viewType === viewTypes.THUMBNAIL">format_list_bulleted</mat-icon>
+    <mat-icon *ngIf="viewType == viewTypes.LIST">grid_on</mat-icon>
+    <mat-icon *ngIf="viewType == viewTypes.CARD">view_module</mat-icon>
+</button>

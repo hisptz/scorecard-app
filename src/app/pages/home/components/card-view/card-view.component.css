@@ -1,0 +1,9 @@
+.card-view-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card-item-container {
+  flex: 1;
+  margin: 5px 10px 5px 0;
+}

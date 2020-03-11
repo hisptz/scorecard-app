@@ -1,56 +1,58 @@
-<!--header-->
-<app-home-header (searchFilter)="getSearchFilter($event)"> </app-home-header>
-<!--scorecard views and details-->
-<div class="d-flex flex-row-reverse p-1 mt-1" *ngIf="scorecards$ | async;let cards">
-  <mat-paginator
-    class="pull-right"
-    [length]="cards.length"
-    [pageSize]="config.itemsPerPage"
-    [pageSizeOptions]="config.itemsPerPageArr"
-    (page)="pageChanged($event)"
-  >
-  </mat-paginator>
-  <button mat-stroked-button class="mr-5 cursor" (click)="changeView()">
-    <mat-icon *ngIf="type == 'thumbnails'">format_list_bulleted</mat-icon>
-    <mat-icon *ngIf="type == 'list'">grid_on</mat-icon>
-    <mat-icon *ngIf="type == 'card'">view_module</mat-icon>
-  </button>
+<div class="home-container">
+  <!--header-->
+  <app-home-header (searchFilter)="getSearchFilter($event)"> </app-home-header>
+  <!-- end of header -->
+
+  <!-- home content container -->
+  <div class="home-content" *ngIf="scorecards$ | async as scorecards">
+    <div class="home-content-header">
+      <app-view-selector (changeView)="onChangeView($event)"></app-view-selector>
+      <mat-paginator [length]="scorecards.length" [pageSize]="config.itemsPerPage" [hidePageSize]="true"
+        [pageSizeOptions]="config.itemsPerPageArr" (page)="pageChanged($event)">
+      </mat-paginator>
+    </div>
+
+    <!-- scorecard view -->
+    <div class="scorecard-view">
+      <!-- card view -->
+      <div @fadeSmooth *ngIf="currentViewType === viewTypes.CARD">
+        <app-card-view [scorecards]="scorecards" [paginationConfig]="config" [searchTerm]="filter"
+          (viewScorecard)="onView($event)"></app-card-view>
+      </div>
+      <!-- end of card view -->
+
+      <!-- thumbnail  view -->
+      <div @fadeSmooth *ngIf="currentViewType === viewTypes.THUMBNAIL">
+        <app-thumbnail-view *ngFor="let thumbnail of scorecards$ | async | filter: filter | paginate: config"
+          [thumbnail]="thumbnail"></app-thumbnail-view>
+      </div>
+      <!-- end of thumbnail  view -->
+
+      <!-- list view -->
+      <table @fadeSmooth class="table table-hover" *ngIf="currentViewType === viewTypes.LIST">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Last modified</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr (click)="viewScorecard()" app-list-view *ngFor="let row of scorecards | filter: filter | paginate: config"
+            [row]="row"></tr>
+        </tbody>
+      </table>
+      <!-- end of list view -->
+    </div>
+    <!-- end of scorecard view -->
+
+  </div>
+  <!-- end of home content container -->
+
 </div>
 
 <div class="container-fluid mt-3">
-  <div @fadeSmooth class="d-flex flex-wrap" *ngIf="type === 'card'">
-    <app-card-view
-      *ngFor="
-        let card of scorecards$ | async | filter: filter | paginate: config
-      "
-      [card]="card"
-    ></app-card-view>
-  </div>
-  <div @fadeSmooth class="d-flex flex-wrap" *ngIf="type === 'thumbnails'">
-    <app-thumbnail-view
-      *ngFor="let thumbnail of scorecards$ | async | filter: filter | paginate: config"
-      [thumbnail]="thumbnail"
-    ></app-thumbnail-view>
-  </div>
-  <table @fadeSmooth class="table table-hover" *ngIf="type === 'list'">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Last modified</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr
-         (click)="viewScorecard()"
-        app-list-view
-        *ngFor="let row of scorecards$ | async | filter: filter | paginate: config"
-        [row]="row"
-      ></tr>
-    </tbody>
-  </table>
-
   <!--<div
     class="flex-container"
     [ngStyle]="{ 'justify-content': type === 'card' ? 'center' : 'start' }"
@@ -142,13 +144,8 @@
   </div> -->
 
   <!--Create a scorecard button-->
-  <button
-    mat-fab
-    color="primary"
-    style="position: fixed; right: 2%; bottom: 4%;"
-    (click)="createNew()"
-    matTooltip="Create a new scorecard"
-  >
+  <button mat-fab color="primary" style="position: fixed; right: 2%; bottom: 4%;" (click)="createNew()"
+    matTooltip="Create a new scorecard">
     <mat-icon>add</mat-icon>
   </button>
   <!--pagination control-->

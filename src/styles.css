@@ -6,8 +6,9 @@ body {
 }
 body {
   margin: 0;
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  background-color: #f4f6f8;
 }
+
 .pagination-section {
   width: 100%;
   display: flex;
@@ -59,4 +60,8 @@ button.active:focus {
 
 .muted {
   color: gray;
+}
+
+.mat-paginator {
+  background: transparent;
 }

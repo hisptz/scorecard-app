@@ -35,7 +35,6 @@ import { DeleteScorecardDialogComponent } from './dialogs/delete-scorecard-dialo
 import { NgxDhis2OrgUnitFilterModule } from '@iapps/ngx-dhis2-org-unit-filter';
 import { NgxDhis2PeriodFilterModule } from '@iapps/ngx-dhis2-period-filter';
 import { TruncatePipe } from './pipes/truncate.pipe';
-import { CardViewComponent } from './components/card-view/card-view.component';
 import { ThumbnailViewComponent } from './components/thumbnail-view/thumbnail-view.component';
 import { ListViewComponent } from './components/list-view/list-view.component';
 import { SettingsMenuComponent } from './components/settings-menu/settings-menu.component';
@@ -104,7 +103,6 @@ import { SettingsMenuComponent } from './components/settings-menu/settings-menu.
     NgxDhis2OrgUnitFilterModule,
     NgxDhis2PeriodFilterModule,
     TruncatePipe,
-    CardViewComponent,
     ThumbnailViewComponent,
     ListViewComponent,
     SettingsMenuComponent
@@ -120,7 +118,6 @@ import { SettingsMenuComponent } from './components/settings-menu/settings-menu.
     SelectorsComponent,
     DeleteScorecardDialogComponent,
     TruncatePipe,
-    CardViewComponent,
     ThumbnailViewComponent,
     ListViewComponent,
     SettingsMenuComponent

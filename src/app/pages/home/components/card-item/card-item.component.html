@@ -1,0 +1,20 @@
+<mat-card *ngIf="scorecard" class="card-item" (click)="onViewScorecard($event)">
+    <mat-icon class="actions-icon-btn cursor" (click)="$event.stopPropagation()" matTooltip="Edit or Delete a scorecard"
+        [matMenuTriggerFor]="actionsMenu">more_vert</mat-icon>
+    <mat-menu #actionsMenu="matMenu">
+        <button mat-menu-item>
+            <mat-icon class="muted">edit</mat-icon>Edit
+        </button>
+        <button mat-menu-item (click)="openDeleteDialog(scorecard.name)">
+            <mat-icon class="muted">delete</mat-icon>Delete
+        </button>
+    </mat-menu>
+    <div class="flex-row card-item-logo">
+        <img class="w-90 h-100" src="assets/images/scorecard.png" />
+    </div>
+
+    <mat-card-content class="text-center">
+        <h4>{{ scorecard.name | truncate: [20, '...'] }}</h4>
+        <p>{{ scorecard.description | truncate: [30, '...'] }}</p>
+    </mat-card-content>
+</mat-card>
