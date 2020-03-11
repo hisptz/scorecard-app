@@ -1,0 +1,44 @@
+.home-header-container {
+  display: flex;
+  position: fixed;
+  top: 48px;
+  width: 100%;
+  z-index: 200;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+  padding-left: 15px;
+  padding-right: 15px;
+  height: 50px;
+}
+
+.home-header-left-block {
+  width: 50%;
+}
+
+.home-header-right-block {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.home-header-brand {
+  display: flex;
+  align-items: center;
+  height: 50px;
+}
+
+.home-header-brand img {
+  height: 30px;
+}
+
+.home-header-brand-title {
+  color: #5f6368;
+  margin-left: 7px;
+  font-size: 18px;
+  padding-top: 3px;
+}
+
+.home-header-search {
+  margin-left: 5rem;
+  width: 80%;
+}

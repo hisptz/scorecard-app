@@ -38,6 +38,7 @@ import { TruncatePipe } from './pipes/truncate.pipe';
 import { CardViewComponent } from './components/card-view/card-view.component';
 import { ThumbnailViewComponent } from './components/thumbnail-view/thumbnail-view.component';
 import { ListViewComponent } from './components/list-view/list-view.component';
+import { SettingsMenuComponent } from './components/settings-menu/settings-menu.component';
 
 @NgModule({
   imports: [
@@ -105,7 +106,8 @@ import { ListViewComponent } from './components/list-view/list-view.component';
     TruncatePipe,
     CardViewComponent,
     ThumbnailViewComponent,
-    ListViewComponent
+    ListViewComponent,
+    SettingsMenuComponent
   ],
   declarations: [
     OptionsComponent,
@@ -120,7 +122,8 @@ import { ListViewComponent } from './components/list-view/list-view.component';
     TruncatePipe,
     CardViewComponent,
     ThumbnailViewComponent,
-    ListViewComponent
+    ListViewComponent,
+    SettingsMenuComponent
   ],
   entryComponents: [
     SharingDialogComponent,

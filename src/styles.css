@@ -42,7 +42,7 @@ button.active:focus {
 }
 
 .mat-form-field-appearance-outline .mat-form-field-label {
-  top: 1.45em;
+  top: 1.7em;
   margin-top: 0;
 }
 
@@ -55,4 +55,8 @@ button.active:focus {
   text-decoration: none !important;
   font-size: 20px;
   color: #222222;
+}
+
+.muted {
+  color: gray;
 }

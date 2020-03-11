@@ -1,16 +1,7 @@
-<button
-  style="color: gray;"
-  mat-stroked-button
-  class="cursor"
-  (mouseenter)="handleQnMenu('open')"
-  [matMenuTriggerFor]="appMenu"
->
-  <mat-icon>info</mat-icon> 
+<button class="muted" mat-icon-button (mouseenter)="handleQnMenu('open')" [matMenuTriggerFor]="appMenu">
+  <mat-icon>info</mat-icon>
 </button>
 <mat-menu #appMenu="matMenu" overlapTrigger="false">
- 
-    <button mat-menu-item>Take a tour</button>
-    <button mat-menu-item>User Manual</button>
-    
-  
+  <button mat-menu-item>Take a tour</button>
+  <button mat-menu-item>User Manual</button>
 </mat-menu>
