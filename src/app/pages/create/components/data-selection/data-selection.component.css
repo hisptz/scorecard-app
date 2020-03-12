@@ -1,0 +1,6 @@
+.mat-chip-list-wrapper, .mat-standard-chip{
+    margin: 0 !important;
+}
+.group-list-item {
+    font-size: 0.75em;
+}

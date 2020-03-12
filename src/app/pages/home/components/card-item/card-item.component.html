@@ -1,0 +1,10 @@
+<mat-card *ngIf="scorecard" class="card-item" (click)="onViewScorecard($event)">
+    <app-actions-menu class="actions-icon-btn" [scorecard]="scorecard"></app-actions-menu>
+    <div class="flex-row card-item-logo">
+        <img class="w-90 h-100" src="assets/images/scorecard.png" />
+    </div>
+    <mat-card-content class="text-center">
+        <div class="card-item-title">{{ scorecard.name | truncate: [20, '...'] }}</div>
+        <div class="card-item-subtitle muted">{{ scorecard.description | truncate: [30, '...'] }}</div>
+    </mat-card-content>
+</mat-card>

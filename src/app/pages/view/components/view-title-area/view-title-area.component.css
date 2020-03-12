@@ -1,0 +1,35 @@
+/* .row {
+    margin-bottom: 1em; 
+ } */
+.info-item {
+  position: relative;
+  font-size: 0.8em;
+  /* height: em; */
+  /* margin-right: 1em; */
+}
+/* .info-item p {
+    margin-top: auto;
+    margin-bottom: auto;
+ } */
+.info-item .info-box {
+  width: 4em;
+  height: 1.5em;
+  border: 0.8px solid lightgray;
+}
+.info-down-part {
+  font-size: 0.8em;
+  color: gray;
+}
+.info-down-part .fa-trophy {
+  font-size: 1.8em;
+}
+@media (max-width: 768px) {
+  .area-section {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+  }
+  p {
+    margin-bottom: 0 !important;
+  }
+}

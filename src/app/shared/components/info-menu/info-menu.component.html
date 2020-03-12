@@ -1,0 +1,7 @@
+<button class="muted" mat-icon-button (mouseenter)="handleQnMenu('open')" [matMenuTriggerFor]="appMenu">
+  <mat-icon>help_outline</mat-icon>
+</button>
+<mat-menu #appMenu="matMenu" overlapTrigger="false">
+  <button mat-menu-item>Take a tour</button>
+  <button mat-menu-item>User Manual</button>
+</mat-menu>

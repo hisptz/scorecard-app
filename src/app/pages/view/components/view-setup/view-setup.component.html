@@ -1,0 +1,35 @@
+<div class="d-flex flex-row">
+    <app-selectors
+      class="mr-auto"
+      style="width: 100%; padding-left: 0 !important; margin: 0 !important;"
+      [buttonsToShow]="selectorButtonsToShow"
+    ></app-selectors>
+    <div class="d-flex flex-row operations-section">
+        <app-options ></app-options>
+      <button
+        mat-stroked-button
+        class="pull-right cursor"
+        style="height: 35px; "
+        [matMenuTriggerFor]="downloadMenu"
+      >
+        <mat-icon>get_app</mat-icon> Download
+      </button>
+
+      <mat-menu #downloadMenu="matMenu">
+        <button mat-menu-item>CSV</button>
+        <button mat-menu-item>Excel</button>
+        <button mat-menu-item>Export metadata</button>
+        <button mat-menu-item>Export data</button>
+      </mat-menu>
+
+      
+    </div>
+  </div>
+  <div class="d-flex flex-row my-1 justify-content-center">
+    <span class="badge badge-secondary p-3 mr-1 cursor" 
+      >Period: 2 selected &nbsp;<u>Reset</u></span
+    >
+    <span class="badge badge-secondary p-3 cursor"
+      >Org Unit: 1 selected <u>Reset</u></span
+    >
+  </div>

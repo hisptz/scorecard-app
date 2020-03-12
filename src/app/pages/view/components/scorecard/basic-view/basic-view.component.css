@@ -1,0 +1,12 @@
+.not-on-track {
+    background-color: red;
+} 
+.on-track {
+    background-color: green;
+} Org Unit
+.progress-required {
+    background-color: yellow;
+}
+th {
+    font-size: 0.8em;
+}

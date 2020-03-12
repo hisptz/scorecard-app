@@ -1,0 +1,34 @@
+.thumbnail-item {
+  position: relative;
+  display: flex;
+  cursor: pointer;
+}
+
+.thumbnail-item:hover {
+  border: none;
+  -webkit-transform: scale(1.05);
+  transform: scale(1.01);
+  transition: 0.7s;
+}
+
+.thumbnail-item-logo,
+.thumbnail-item-content {
+  margin-top: 10px;
+}
+
+.thumbnail-item-content {
+  margin-left: 10px;
+}
+
+.thumbnail-item-logo img {
+  height: 90px;
+}
+
+.thumbnail-item-title {
+  font-size: 1.1em;
+}
+
+.thumbnail-item-subtitle {
+  margin-top: 5px;
+  font-size: 0.9em;
+}
