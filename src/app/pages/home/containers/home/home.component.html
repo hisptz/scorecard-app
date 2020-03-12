@@ -16,15 +16,17 @@
     <div class="scorecard-view">
       <!-- card view -->
       <div @fadeSmooth *ngIf="currentViewType === viewTypes.CARD">
-        <app-card-view [scorecards]="scorecards" [paginationConfig]="config" [searchTerm]="filter"
-          (viewScorecard)="onView($event)"></app-card-view>
+        <app-card-thumbnail-view [scorecards]="scorecards" [paginationConfig]="config" [searchTerm]="filter"
+          [viewType]="currentViewType" [viewTypes]="viewTypes" (viewScorecard)="onView($event)">
+        </app-card-thumbnail-view>
       </div>
       <!-- end of card view -->
 
       <!-- thumbnail  view -->
       <div @fadeSmooth *ngIf="currentViewType === viewTypes.THUMBNAIL">
-        <app-thumbnail-view *ngFor="let thumbnail of scorecards$ | async | filter: filter | paginate: config"
-          [thumbnail]="thumbnail"></app-thumbnail-view>
+        <app-card-thumbnail-view [scorecards]="scorecards" [paginationConfig]="config" [searchTerm]="filter"
+          [viewType]="currentViewType" [viewTypes]="viewTypes" (viewScorecard)="onView($event)">
+        </app-card-thumbnail-view>
       </div>
       <!-- end of thumbnail  view -->
 

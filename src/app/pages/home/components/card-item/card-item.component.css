@@ -4,20 +4,11 @@
   height: 250px;
   padding: 15px;
 }
-.card-item:hover,
-.card-item:focus,
-.card-item:active {
+.card-item:hover {
   border: none;
   -webkit-transform: scale(1.05);
   transform: scale(1.01);
   transition: 0.7s;
-}
-.actions-icon-btn {
-  position: absolute;
-  top: 2%;
-  right: 2%;
-  font-size: bold;
-  z-index: 100;
 }
 
 .card-item-logo {
@@ -26,10 +17,10 @@
   margin-top: 10px;
 }
 
-h4 {
+.card-item-title {
   font-size: 1.2em;
 }
-p {
+
+.card-item-subtitle {
   font-size: 0.9em;
-  color: gray;
 }

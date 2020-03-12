@@ -1,6 +1,0 @@
-<div class="card-view-list">
-  <div class="card-item-container"
-    *ngFor="let scorecard of scorecards | filter: searchTerm | paginate: paginationConfig">
-    <app-card-item [scorecard]="scorecard" (viewScorecard)="onViewScorecard($event)"></app-card-item>
-  </div>
-</div>

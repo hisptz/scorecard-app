@@ -65,3 +65,9 @@ button.active:focus {
 .mat-paginator {
   background: transparent;
 }
+
+.actions-icon-btn {
+  position: absolute;
+  top: 1%;
+  right: 1%;
+}

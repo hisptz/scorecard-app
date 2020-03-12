@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ThumbnailViewComponent } from './thumbnail-view.component';
+import { ActionsMenuComponent } from './actions-menu.component';
 
-describe('ThumbnailViewComponent', () => {
-  let component: ThumbnailViewComponent;
-  let fixture: ComponentFixture<ThumbnailViewComponent>;
+describe('ActionsMenuComponent', () => {
+  let component: ActionsMenuComponent;
+  let fixture: ComponentFixture<ActionsMenuComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ThumbnailViewComponent ]
+      declarations: [ ActionsMenuComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ThumbnailViewComponent);
+    fixture = TestBed.createComponent(ActionsMenuComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

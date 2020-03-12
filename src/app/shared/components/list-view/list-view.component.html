@@ -1,18 +1,12 @@
 <td>
-  <img height="30" width="30" src="assets/images/scorecard.png" />
+  <img height="30" width="20" src="assets/images/scorecard.png" />
   &nbsp;{{ row.name | truncate: [20, '...'] }}
 </td>
 <td>{{ row.description | truncate: [30, '...']}}</td>
-<td></td>
+<td>3 days ago</td>
 <td>
-  <mat-icon
-    class="actions-icon-btn cursor"
-    (click)="$event.stopPropagation()"
-    matRipple
-    matTooltip="Edit or Delete a scorecard"
-    [matMenuTriggerFor]="actionsMenu"
-    >more_vert</mat-icon
-  >
+  <mat-icon class="" (click)="$event.stopPropagation()" matRipple matTooltip="Edit or Delete a scorecard"
+    [matMenuTriggerFor]="actionsMenu">more_vert</mat-icon>
   <mat-menu #actionsMenu="matMenu">
     <button mat-menu-item>
       <mat-icon class="text-warning">edit</mat-icon>Edit

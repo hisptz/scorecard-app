@@ -1,0 +1,16 @@
+<div
+  [ngClass]="{'card-view-list': viewType === viewTypes.CARD, 'thumbnail-view-list':viewType === viewTypes.THUMBNAIL}">
+  <div class="card-item-container"
+    *ngFor="let scorecard of scorecards | filter: searchTerm | paginate: paginationConfig">
+    <!-- card item -->
+    <app-card-item *ngIf="viewType === viewTypes.CARD" [scorecard]="scorecard"
+      (viewScorecard)="onViewScorecard($event)"></app-card-item>
+    <!-- end of card item -->
+
+    <!-- thumbnail item -->
+    <app-thumbnail-item *ngIf="viewType === viewTypes.THUMBNAIL" [scorecard]="scorecard"
+      (viewScorecard)="onViewScorecard($event)"></app-thumbnail-item>
+    <!-- end of thumbnail item -->
+
+  </div>
+</div>

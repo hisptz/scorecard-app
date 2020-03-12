@@ -4,33 +4,23 @@ import { take } from 'rxjs/internal/operators/take';
 import { DeleteScorecardDialogComponent } from 'src/app/shared/dialogs/delete-scorecard-dialog/delete-scorecard-dialog.component';
 
 @Component({
-  selector: 'app-card-view',
-  templateUrl: './card-view.component.html',
-  styleUrls: ['./card-view.component.css']
+  selector: 'app-card-thumbnail-view',
+  templateUrl: './card-thumbnail-view.component.html',
+  styleUrls: ['./card-thumbnail-view.component.css']
 })
-export class CardViewComponent implements OnInit {
-  @Input() card: any;
+export class CardThumbnailViewComponent implements OnInit {
   @Input() scorecards: any;
   @Input() searchTerm: string;
   @Input() paginationConfig: any;
+  @Input() viewType: string;
+  @Input() viewTypes: any;
 
   @Output() viewScorecard: EventEmitter<string> = new EventEmitter<string>();
-  constructor(public dialog: MatDialog) {}
+  constructor() {}
 
   ngOnInit(): void {}
 
   onViewScorecard(id: string) {
     this.viewScorecard.emit(id);
-  }
-  openDeleteDialog(scorecardName) {
-    const dialogRef = this.dialog.open(DeleteScorecardDialogComponent, {
-      width: '500px',
-      data: { name: scorecardName }
-    });
-
-    dialogRef
-      .afterClosed()
-      .pipe(take(1))
-      .subscribe(result => {});
   }
 }
