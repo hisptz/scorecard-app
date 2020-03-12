@@ -42,3 +42,18 @@
   margin-left: 5rem;
   width: 80%;
 }
+
+@media (max-width: 950px) {
+  .home-header-brand-title {
+    display: none;
+  }
+
+  .home-header-search {
+    margin-left: 0.5rem;
+    width: 90%;
+  }
+
+  .home-header-left-block {
+    width: 67%;
+  }
+}
