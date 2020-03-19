@@ -24,7 +24,7 @@ import { RoutingModule } from './app.routes';
 import { CoreModule, RouteSerializer } from './core';
 import { effects } from './store/effects';
 import { metaReducers, reducers } from './store/reducers';
-
+import { TourMatMenuModule } from 'ngx-tour-md-menu';
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -76,6 +76,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     StoreRouterConnectingModule.forRoot(),
 
     !environment.production ? StoreDevtoolsModule.instrument() : [],
+    TourMatMenuModule.forRoot(),
 
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production
