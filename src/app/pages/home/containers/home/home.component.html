@@ -6,7 +6,7 @@
   <!-- home content container -->
   <div class="home-content" *ngIf="scorecards$ | async as scorecards">
     <div class="home-content-header">
-      <app-view-selector (changeView)="onChangeView($event)"></app-view-selector>
+      <app-view-selector  tourAnchor="home.listview" (changeView)="onChangeView($event)"></app-view-selector>
       <mat-paginator [length]="scorecards.length" [pageSize]="config.itemsPerPage" [hidePageSize]="true"
         [pageSizeOptions]="config.itemsPerPageArr" (page)="pageChanged($event)">
       </mat-paginator>
@@ -41,7 +41,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr (click)="viewScorecard()" app-list-view *ngFor="let row of scorecards | filter: filter | paginate: config"
+          <tr class="cursor" (click)="viewScorecard()" app-list-view *ngFor="let row of scorecards | filter: filter | paginate: config"
             [row]="row"></tr>
         </tbody>
       </table>
@@ -146,7 +146,7 @@
   </div> -->
 
   <!--Create a scorecard button-->
-  <button mat-fab color="primary" style="position: fixed; right: 2%; bottom: 4%;" (click)="createNew()"
+  <button mat-fab tourAnchor="home.create" color="primary" style="position: fixed; right: 2%; bottom: 4%;" (click)="createNew()"
     matTooltip="Create a new scorecard">
     <mat-icon>add</mat-icon>
   </button>

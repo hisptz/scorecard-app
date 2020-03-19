@@ -1,11 +1,11 @@
 <div class="home-header-container mat-elevation-z1">
   <div class="home-header-left-block">
-    <div class="home-header-brand">
+    <div class="home-header-brand" tourAnchor="home.start.tour">
       <img src="assets/images/score.png" />
-      <div class="home-header-brand-title text-muted">
+      <div class="home-header-brand-title text-muted" >
         Scorecards
       </div>
-      <mat-form-field appearance="outline" class="home-header-search">
+      <mat-form-field tourAnchor="home.search" appearance="outline" class="home-header-search">
         <input matInput type="search" matTooltip="Type to search for a scorecard" class="search-field"
           [(ngModel)]="filter" (ngModelChange)="sendSearchText($event)" placeholder="Search score card by name" />
         <mat-icon inline="true" class="mr-2" style="font-size: 20px;" matPrefix>search</mat-icon>
@@ -13,7 +13,7 @@
     </div>
   </div>
   <div class="home-header-right-block">
-    <app-info-menu></app-info-menu>
+    <app-info-menu (tourEvent)="manageTour($event)"></app-info-menu>
     <app-settings-menu></app-settings-menu>
   </div>
 </div>
