@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { TourService } from 'ngx-tour-md-menu';
+import tourSteps from '../../../../shared/tourGuide/tour.view';
 
 @Component({
   selector: 'app-view-header',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ViewHeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(private tourService: TourService) { }
 
   ngOnInit() {
+    this.tourService.initialize(tourSteps || []);
   }
-
+  manageTour(event) {
+    if ( event ) {
+       this.tourService.start();
+    }
+ }
 }
