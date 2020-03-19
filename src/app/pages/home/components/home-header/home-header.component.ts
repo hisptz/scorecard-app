@@ -1,4 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { TourService } from 'ngx-tour-md-menu';
+import tourSteps from '../../../../shared/tourGuide/tour.home';
 
 @Component({
   selector: 'app-home-header',
@@ -8,9 +10,16 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 export class HomeHeaderComponent implements OnInit {
   filter: any;
   @Output() searchFilter = new EventEmitter<string>();
-  constructor() { }
+  constructor(private tourService: TourService) { }
 
   ngOnInit(): void {
+    this.tourService.initialize(tourSteps || []);
+  }
+
+  manageTour(event) {
+     if ( event ) {
+        this.tourService.start();
+     }
   }
   // changeView() {
   //   if (this.counter > 2) {
@@ -33,5 +42,6 @@ export class HomeHeaderComponent implements OnInit {
   sendSearchText(event) {
     this.searchFilter.emit(this.filter);
   }
+ 
 
 }

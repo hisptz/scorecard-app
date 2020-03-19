@@ -7,6 +7,7 @@ import {
   visibilityChanged
 } from '../../../../shared/animations/animations';
 import { ViewTypes } from '../../constants/view-types.constant';
+import { TourService } from 'ngx-tour-core';
 
 @Component({
   selector: 'app-home',
@@ -29,7 +30,7 @@ export class HomeComponent implements OnInit {
 
   public labels: any = {};
 
-  constructor(private cardService: CardsService, private router: Router) {
+  constructor(private cardService: CardsService, private router: Router, private tourService: TourService) {
     this.config = {
       itemsPerPage: 18,
       currentPage: 1,

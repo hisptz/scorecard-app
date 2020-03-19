@@ -37,6 +37,7 @@ import { OrganisationUnitDialogComponent } from './dialogs/organisation-unit-dia
 import { PeriodDialogComponent } from './dialogs/period-dialog/period-dialog.component';
 import { SharingDialogComponent } from './dialogs/sharing-dialog/sharing-dialog.component';
 import { TruncatePipe } from './pipes/truncate.pipe';
+import { TourMatMenuModule } from 'ngx-tour-md-menu';
 
 @NgModule({
   imports: [
@@ -67,7 +68,8 @@ import { TruncatePipe } from './pipes/truncate.pipe';
     MatTableModule,
     MatInputModule,
     NgxDhis2OrgUnitFilterModule,
-    NgxDhis2PeriodFilterModule
+    NgxDhis2PeriodFilterModule,
+    TourMatMenuModule
   ],
   exports: [
     MatButtonModule,
@@ -103,7 +105,8 @@ import { TruncatePipe } from './pipes/truncate.pipe';
     NgxDhis2PeriodFilterModule,
     TruncatePipe,
     ListViewComponent,
-    SettingsMenuComponent
+    SettingsMenuComponent,
+    TourMatMenuModule
   ],
   declarations: [
     OptionsComponent,

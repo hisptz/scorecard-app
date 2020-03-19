@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { MatMenuTrigger } from '@angular/material/menu';
+import { TourService } from 'ngx-tour-core';
 
 @Component({
   selector: 'app-info-menu',
@@ -8,16 +9,22 @@ import { MatMenuTrigger } from '@angular/material/menu';
 })
 export class InfoMenuComponent implements OnInit {
   @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
-  constructor() { }
+  constructor(public tourService: TourService) {}
+  tourStart = false;
 
-  ngOnInit() {
-  }
+  @Output() tourEvent = new EventEmitter<boolean>();
+
+  ngOnInit() {}
   handleQnMenu(op: string) {
-    if(op === 'open') {
+    if (op === 'open') {
       this.trigger.openMenu();
     } else {
       this.trigger.closeMenu();
     }
   }
 
+  startTour() {
+    this.tourStart = true;
+    this.tourEvent.emit(this.tourStart);
+  }
 }

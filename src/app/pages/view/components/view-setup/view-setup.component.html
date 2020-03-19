@@ -5,12 +5,13 @@
       [buttonsToShow]="selectorButtonsToShow"
     ></app-selectors>
     <div class="d-flex flex-row operations-section">
-        <app-options ></app-options>
+        <app-options tourAnchor="view.options" ></app-options>
       <button
         mat-stroked-button
         class="pull-right cursor"
         style="height: 35px; "
         [matMenuTriggerFor]="downloadMenu"
+        tourAnchor="view.download"
       >
         <mat-icon>get_app</mat-icon> Download
       </button>
