@@ -1,0 +1,52 @@
+<div class="manage-container">
+    <!-- header -->
+    <app-manage-header></app-manage-header>
+    <!-- end of header -->
+
+    <!-- content -->
+    <div class="app-content">
+        <mat-card>
+            <mat-horizontal-stepper linear #stepper>
+                <mat-step [stepControl]="">
+                    <ng-template matStepLabel>Basic</ng-template>
+                    <div class="mt-3">
+                        <mat-form-field class="w-100 mb-3" appearance="outline">
+                            <mat-label>Title</mat-label>
+                            <input matInput placeholder="Placeholder">
+                        </mat-form-field>
+                        <mat-form-field class="w-100 mb-3" appearance="outline">
+                            <mat-label>Description</mat-label>
+                            <textarea [rows]="5" matInput></textarea>
+                        </mat-form-field>
+                        <h6>Custom Header</h6>
+                    </div>
+                    <button mat-button matStepperNext>Next</button>
+                </mat-step>
+                <mat-step>
+                    <ng-template matStepLabel>Data Configuration</ng-template>
+                    <button mat-button matStepperPrevious>Back</button>
+                    <button mat-button matStepperNext>Next</button>
+                </mat-step>
+                <mat-step>
+                    <ng-template matStepLabel>Highlighted Indicators</ng-template>
+                    <button mat-button matStepperPrevious>Back</button>
+                    <button mat-button matStepperNext>Next</button>
+                </mat-step>
+                <mat-step>
+                    <ng-template matStepLabel>Access</ng-template>
+                    <button mat-button matStepperPrevious>Back</button>
+                    <button mat-button matStepperNext>Next</button>
+                </mat-step>
+                <mat-step>
+                    <ng-template matStepLabel>Options</ng-template>
+                    <p>You are now done.</p>
+                    <div>
+                        <button mat-button matStepperPrevious>Back</button>
+                        <button mat-button (click)="stepper.reset()">Reset</button>
+                    </div>
+                </mat-step>
+            </mat-horizontal-stepper>
+        </mat-card>
+    </div>
+    <!-- end of content -->
+</div>

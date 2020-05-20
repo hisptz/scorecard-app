@@ -5,27 +5,32 @@ export const routes: Routes = [
   {
     path: '',
     loadChildren: () =>
-      import('./pages/home/home.module').then(m => m.HomeModule)
+      import('./pages/home/home.module').then((m) => m.HomeModule),
   },
   {
     path: 'create',
     loadChildren: () =>
-      import('./pages/create/create.module').then(m => m.CreateModule)
+      import('./pages/create/create.module').then((m) => m.CreateModule),
+  },
+  {
+    path: 'manage',
+    loadChildren: () =>
+      import('./pages/manage/manage.module').then((m) => m.ManageModule),
   },
   {
     path: 'view',
     loadChildren: () =>
-      import('./pages/view/view.module').then(m => m.ViewModule)
-  }
+      import('./pages/view/view.module').then((m) => m.ViewModule),
+  },
 ];
 
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, {
       useHash: true,
-      preloadingStrategy: PreloadAllModules
-    })
+      preloadingStrategy: PreloadAllModules,
+    }),
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class RoutingModule {}

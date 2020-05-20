@@ -55,7 +55,7 @@ export class HomeComponent implements OnInit {
   getScorecards() {
     this.scorecards$ = this.cardService.getCards();
   }
-  createNew() {
+  onCreateNew() {
     this.router.navigate(['create']);
   }
   getViewType(event) {

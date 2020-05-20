@@ -1,20 +1,5 @@
-.home-header-container {
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  align-items: center;
-  padding-left: 15px;
-  padding-right: 15px;
-}
-
 .home-header-left-block {
   width: 50%;
-  padding-bottom: 10px;
-}
-
-.home-header-right-block {
-  display: flex;
-  justify-content: flex-end;
   padding-bottom: 10px;
 }
 
@@ -40,6 +25,12 @@
 }
 
 @media (max-width: 950px) {
+  .home-header-search {
+    width: 100%;
+  }
+  .home-header-add-button {
+    display: none;
+  }
   .home-header-container {
     display: block;
   }
