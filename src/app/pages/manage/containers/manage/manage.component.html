@@ -19,6 +19,7 @@
                             <textarea [rows]="5" matInput></textarea>
                         </mat-form-field>
                         <h6>Custom Header</h6>
+                        <ckeditor id="editor" [editor]="Editor" data="<p>Hello, world!</p>"></ckeditor>
                     </div>
                     <button mat-button matStepperNext>Next</button>
                 </mat-step>
