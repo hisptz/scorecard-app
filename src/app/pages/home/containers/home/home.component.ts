@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { CardsService } from '../../../../core/services/cards.service';
 import {
   fadeSmooth,
-  visibilityChanged
+  visibilityChanged,
 } from '../../../../shared/animations/animations';
 import { ViewTypes } from '../../constants/view-types.constant';
 import { TourService } from 'ngx-tour-core';
@@ -13,7 +13,7 @@ import { TourService } from 'ngx-tour-core';
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  animations: [visibilityChanged, fadeSmooth]
+  animations: [visibilityChanged, fadeSmooth],
 })
 export class HomeComponent implements OnInit {
   nums: number;
@@ -30,18 +30,21 @@ export class HomeComponent implements OnInit {
 
   public labels: any = {};
 
-  constructor(private cardService: CardsService, private router: Router, private tourService: TourService) {
+  constructor(
+    private cardService: CardsService,
+    private router: Router,
+    private tourService: TourService
+  ) {
     this.config = {
       itemsPerPage: 18,
       currentPage: 1,
       totalItems: this.count,
-      itemsPerPageArr: [6, 12, 18]
+      itemsPerPageArr: [6, 12, 18],
     };
   }
 
-  pageChanged(event) {
-    this.config.itemsPerPage = event.pageSize;
-    this.config.currentPage = event.pageIndex + 1;
+  onPageChange(paginationConfig: any) {
+    this.config = paginationConfig;
   }
 
   ngOnInit() {
@@ -69,6 +72,7 @@ export class HomeComponent implements OnInit {
   onChangeView(viewType: string) {
     this.currentViewType = viewType;
   }
+
   getSearchFilter(event) {
     this.filter = event;
   }

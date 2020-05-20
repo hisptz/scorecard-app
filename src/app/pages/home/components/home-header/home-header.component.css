@@ -1,24 +1,21 @@
 .home-header-container {
   display: flex;
-  position: fixed;
-  top: 48px;
   width: 100%;
-  z-index: 200;
   justify-content: space-between;
   align-items: center;
-  background-color: #ffffff;
   padding-left: 15px;
   padding-right: 15px;
-  height: 50px;
 }
 
 .home-header-left-block {
   width: 50%;
+  padding-bottom: 10px;
 }
 
 .home-header-right-block {
   display: flex;
   justify-content: flex-end;
+  padding-bottom: 10px;
 }
 
 .home-header-brand {
@@ -39,21 +36,19 @@
 }
 
 .home-header-search {
-  margin-left: 5rem;
   width: 80%;
 }
 
 @media (max-width: 950px) {
-  .home-header-brand-title {
-    display: none;
-  }
-
-  .home-header-search {
-    margin-left: 0.5rem;
-    width: 90%;
+  .home-header-container {
+    display: block;
   }
 
   .home-header-left-block {
-    width: 67%;
+    width: 100%;
+  }
+
+  .home-header-right-block {
+    width: 100%;
   }
 }
