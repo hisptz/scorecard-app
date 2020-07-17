@@ -19,13 +19,13 @@ export interface Scorecard {
   };
 }
 
-interface OrgUnitSelection {
+export interface OrgUnitSelection {
   /**
    * TODO: There may be couple of implementation that needs additional options
    * eg. 1. BRN use case
    *     2. Population use cases, usually population are provided on district level
    */
-  items: Array<{ id: string; name: string; type: string }>;
+  items: Array<{ id: string; name?: string; type?: string }>;
 }
 
 export interface PeriodSelection {
