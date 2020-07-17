@@ -1,4 +1,4 @@
-interface Scorecard {
+export interface Scorecard {
   id: string;
   name: string;
   title: string;
@@ -28,7 +28,7 @@ interface OrgUnitSelection {
   items: Array<{ id: string; name: string; type: string }>;
 }
 
-interface PeriodSelection {
+export interface PeriodSelection {
   /**
    * TODO: there may be more
    */
@@ -67,12 +67,13 @@ interface ScorecardFooterOptions {
   showTitle?: boolean;
 }
 
-interface Legend {
+export interface Legend {
   id: string;
   endValue?: number;
   color: string;
   name: string;
   startValue?: number;
+  default: boolean;
 }
 
 interface DataSelection {
@@ -124,9 +125,9 @@ interface ScorecardIndicator {
   bottleneckIndicatorGroups: BottleneckIndicatorGroup[];
 }
 
-interface ScorecardAccess {
+export interface ScorecardAccess {
   id: string;
-  access: 'rw----';
+  access: string;
 }
 interface ScorecardIndicatorLegendSet {
   max: number;
