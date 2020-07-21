@@ -36,25 +36,23 @@ export interface PeriodSelection {
 }
 
 // Predefined values for averageDisplayType
-enum RecordsDisplayType {   // Merge AveragedisplayType and shown_records
+export enum AverageDisplayType {
   ALL = 'ALL',
   BELOW_AVERAGE = 'BELOW_AVERAGE',
   ABOVE_AVERAGE = 'ABOVE_AVERAGE',
-  TOP_THREE = 'TOP_THREE',
-  TOP_FIVE = 'TOP_FIVE',
-  TOP_TEN  = 'TOP_TEN'
 }
 
-interface ScorecardOptions {
+
+export interface ScorecardOptions {
   isEditable: boolean;
   displayOptions: ScorecardDisplayOptions;
   isRankPositionLast?: boolean;
   footerOptions?: ScorecardFooterOptions;
-  recordsDisplayType?: RecordsDisplayType;
+  averageDisplayType?: AverageDisplayType;
 }
-interface ScorecardDisplayOptions {
+export interface ScorecardDisplayOptions {
   showAverageInRow?: boolean;
-  showAverageInColumn: boolean;
+  showAverageInColumn?: boolean;
   showLeagueTable?: boolean;
   showLeagueTableAll?: boolean; // TODO: Need to understand this from user manual and come up with best name
   showDataInColumn?: boolean;
@@ -62,8 +60,8 @@ interface ScorecardDisplayOptions {
   showRank?: boolean;
   showHierarchy?: boolean;
 }
-interface ScorecardFooterOptions {
-  showGeneratedDate?: string;
+export interface ScorecardFooterOptions {
+  showGeneratedDate?: boolean;
   showTitle?: boolean;
 }
 
