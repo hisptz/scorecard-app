@@ -12,6 +12,7 @@ import { getLegendDefinitions } from './conversion/get-legend-definitions.helper
 import { getScorecardAccess } from './conversion/get-scorecard-access.helper';
 import { getOrgunitSelection } from './conversion/get-orgunit-selection.helper';
 import { getScorecardOptions } from './conversion/get-scorecard-options.helper';
+import { getDataSelection } from './conversion/get-data-selection.helper';
 export function getSanitizedScorecard(oldScorecard) {
   if (oldScorecard) {
     const headerData = oldScorecard.header
@@ -32,7 +33,9 @@ export function getSanitizedScorecard(oldScorecard) {
       oldScorecard.orgunit_settings.selected_orgunits
         ? getOrgunitSelection(oldScorecard.orgunit_settings.selected_orgunits)
         : getOrgunitSelection([]);
-    const options: ScorecardOptions = getScorecardOptions(oldScorecard);    
+    const options: ScorecardOptions = getScorecardOptions(oldScorecard);
+    const user = oldScorecard.user ? oldScorecard.user : { user: '' };
+    const dataSelection = getDataSelection(oldScorecard?.data_settings);
     console.log({
       ...headerData,
       legendDefinitions,
@@ -40,7 +43,9 @@ export function getSanitizedScorecard(oldScorecard) {
       userGroupAccesses,
       userAccesses,
       orgUnitSelection,
-      options
+      options,
+      user,
+      dataSelection
     });
   }
 }

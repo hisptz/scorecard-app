@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SelectorsComponent } from './selectors.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 describe('SelectorsComponent', () => {
   let component: SelectorsComponent;
@@ -8,7 +9,8 @@ describe('SelectorsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SelectorsComponent ]
+      declarations: [ SelectorsComponent ],
+      imports: [ MatDialogModule ]
     })
     .compileComponents();
   }));
