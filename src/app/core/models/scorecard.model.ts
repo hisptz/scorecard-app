@@ -74,11 +74,11 @@ export interface Legend {
   default: boolean;
 }
 
-interface DataSelection {
+export interface DataSelection {
   indicatorGroups: ScorecardIndicatorGroup[];
 }
 
-interface ScorecardIndicatorGroup {
+export interface ScorecardIndicatorGroup {
   id: string;
   title: string;
   sortOrder: number;
@@ -89,37 +89,33 @@ interface ScorecardIndicatorGroup {
   indicatorHolders: IndicatorHolder[];
 }
 
-interface IndicatorHolder {
+export interface IndicatorHolder {
   id: string;
-  sortOrder: number;
   indicators: ScorecardIndicator[];
 }
-interface IndicatorHolderGroup {
-  id: number;
-  name: string;
-  holderStyle: string;
-  backgroundColor: string;
-  indicatorHolderIds: number[];
-}
 
-interface ScorecardIndicator {
+
+export interface ScorecardIndicator {
   id: string;
   name: string;
   title?: string;
   value: number;
+  values?: any[];
+  loading: boolean;
   weight: number;
+  tooltip?: any[];
   legendSet: ScorecardIndicatorLegendSet[];
   calculation: string;
   isHighGood?: boolean;
   showTopArrow: boolean;
-  arrowOptions: ScorecardIndicatorArrowOption[];
-  labelOptions: ScorecardIndicatorLabelOptions;
+  arrowOptions: ScorecardIndicatorArrowOptions;
+  labelOptions?: ScorecardIndicatorLabelOptions;
   showLegend: boolean;
   functionToUse: string;
   showBottomArrow: boolean;
   bottleneckIndicators: BottleneckIndicator[];
   useBottleneckGroups: boolean;
-  additionalLabelValues: ScorecardAdditionalLabel;
+  additionalLabelValues?: ScorecardAdditionalLabel;
   bottleneckIndicatorGroups: BottleneckIndicatorGroup[];
 }
 
@@ -132,12 +128,12 @@ interface ScorecardIndicatorLegendSet {
   min: number;
   color: string;
 }
-interface ScorecardIndicatorArrowOption {
-  display: boolean;
+export interface ScorecardIndicatorArrowOptions {
+  show: boolean;
   effectiveGap: number;
 }
-interface ScorecardIndicatorLabelOptions {
-  display: boolean;
+export interface ScorecardIndicatorLabelOptions {
+  show: boolean;
   effectiveGap: number;
 }
 interface BottleneckIndicator {
