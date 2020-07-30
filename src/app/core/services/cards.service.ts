@@ -9,6 +9,9 @@ export class CardsService {
   constructor(private http: HttpClient) { }
 
   getCards() {
-    return this.http.get('assets/data.json')
+    return this.http.get('assets/data.json');
+  }
+  getScorecardById(id = 'UFavu5CSkTy') {
+    return this.http.get(`/api/dataStore/scorecards/${id}`); 
   }
 }
