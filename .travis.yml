@@ -33,6 +33,7 @@ install:
   - npm install
 
 script:
+  - npm run test:travis
   - npm run build
 
 notifications:
