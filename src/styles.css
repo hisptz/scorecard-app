@@ -71,3 +71,29 @@ button.active:focus {
   top: 1%;
   right: 1%;
 }
+
+.app-header-container {
+  display: flex;
+  position: fixed;
+  top: 48px;
+  z-index: 1000;
+  background-color: #ffffff;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 10px;
+}
+
+.app-header-right-block {
+  display: flex;
+  justify-content: flex-end;
+  padding-bottom: 10px;
+}
+.app-content {
+  padding-left: 15px;
+  padding-right: 15px;
+  width: 100%;
+  margin-top: 130px;
+}

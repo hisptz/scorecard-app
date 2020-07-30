@@ -18,12 +18,14 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatStepperModule } from '@angular/material/stepper';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { NgxDhis2OrgUnitFilterModule } from '@iapps/ngx-dhis2-org-unit-filter';
 import { NgxDhis2PeriodFilterModule } from '@iapps/ngx-dhis2-period-filter';
 import { ColorPickerModule } from 'ngx-color-picker';
+import { TourMatMenuModule } from 'ngx-tour-md-menu';
 
 import { InfoMenuComponent } from './components/info-menu/info-menu.component';
 import { LegendColorPickerComponent } from './components/legend-color-picker/legend-color-picker.component';
@@ -37,7 +39,6 @@ import { OrganisationUnitDialogComponent } from './dialogs/organisation-unit-dia
 import { PeriodDialogComponent } from './dialogs/period-dialog/period-dialog.component';
 import { SharingDialogComponent } from './dialogs/sharing-dialog/sharing-dialog.component';
 import { TruncatePipe } from './pipes/truncate.pipe';
-import { TourMatMenuModule } from 'ngx-tour-md-menu';
 
 @NgModule({
   imports: [
@@ -67,9 +68,10 @@ import { TourMatMenuModule } from 'ngx-tour-md-menu';
     ColorPickerModule,
     MatTableModule,
     MatInputModule,
+    MatStepperModule,
     NgxDhis2OrgUnitFilterModule,
     NgxDhis2PeriodFilterModule,
-    TourMatMenuModule
+    TourMatMenuModule,
   ],
   exports: [
     MatButtonModule,
@@ -94,6 +96,7 @@ import { TourMatMenuModule } from 'ngx-tour-md-menu';
     MatListModule,
     MatDialogModule,
     ColorPickerModule,
+    MatStepperModule,
     OptionsComponent,
     InfoMenuComponent,
     LegendDefintionListComponent,
@@ -106,7 +109,7 @@ import { TourMatMenuModule } from 'ngx-tour-md-menu';
     TruncatePipe,
     ListViewComponent,
     SettingsMenuComponent,
-    TourMatMenuModule
+    TourMatMenuModule,
   ],
   declarations: [
     OptionsComponent,
@@ -120,13 +123,13 @@ import { TourMatMenuModule } from 'ngx-tour-md-menu';
     DeleteScorecardDialogComponent,
     TruncatePipe,
     ListViewComponent,
-    SettingsMenuComponent
+    SettingsMenuComponent,
   ],
   entryComponents: [
     SharingDialogComponent,
     PeriodDialogComponent,
     OrganisationUnitDialogComponent,
-    DeleteScorecardDialogComponent
-  ]
+    DeleteScorecardDialogComponent,
+  ],
 })
 export class SharedModule {}

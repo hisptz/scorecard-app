@@ -22,79 +22,27 @@
 .listanimate {
   padding: 2%;
 }
-/* .card-layout:hover, 
-  .card-layout:focus,
-  .card-layout:active,
-  .thumbnail-layout:hover,
-  .thumbnail-layout:focus,
-  .thumbnail-layout:active 
-  {
-    border: none;
-    -webkit-transform: scale(1.1);
-          transform: scale(1.1);
-     transition: 0.7s;     
-  } 
-  .card-layout, .thumbnail-layout {
-    margin-right: 3em;
-  }
-  .card-layout {
-    width: 100%;
-    position: relative;
-    height: 400px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    z-index: 1;
-  }
-  
-  .card-layout .actions-icon-btn {
-    position: absolute;
-    top: 5%;
-    right: 5%;
-    font-size: bold;
-  }
-.thumbnail-layout {
-  width: 100%;
-    position: relative;
-    margin-bottom: 2em;
-    height: 200px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    
-}
-.thumbnail-layout .actions-icon-btn {
-  position: absolute;
-  top: 5%;
-  right: 5%;
-  font-size: bold;
-}
-th, td {
-  padding: 1.5em;
-}
-.scorecard-content h4{
-   font-size: 1.2em;
-}
-.scorecard-content p{
-  font-size: 0.9em;
-  color: gray;
-} */
+
 :host ::ng-deep.mat-paginator .mat-paginator-container {
   min-height: 35px !important;
   padding: 0 4px !important;
 }
 
-.home-content {
-  padding-left: 15px;
-  padding-right: 15px;
-  width: 100%;
-  margin-top: 110px;
-}
-
 .home-content-header {
   display: flex;
   justify-content: flex-end;
+}
+
+.home-add-button {
+  position: fixed;
+  right: 15px;
+  bottom: 15px;
+}
+
+@media (min-width: 950px) {
+  .home-add-button {
+    display: none;
+  }
 }
 
 .scorecard-view {
