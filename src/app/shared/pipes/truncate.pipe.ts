@@ -8,8 +8,17 @@ export class TruncatePipe implements PipeTransform {
     if (!value) {
       return value;
     }
-    const limit = args && args.length > 0 ? parseInt(args[0], 10) : 20;
-    const trail = args && args.length > 1 ? args[1] : '...';
-    return value.length > limit ? value.substring(0, limit) + trail : value;
+
+    const truncateParams = getTruncateParams(args);
+    return value.length > truncateParams.limit
+      ? value.substring(0, truncateParams.limit) + truncateParams.trail
+      : value;
   }
+}
+
+function getTruncateParams(args: string[]) {
+  return {
+    limit: args && args.length > 0 ? parseInt(args[0], 10) : 20,
+    trail: args && args.length > 1 ? args[1] : '...',
+  };
 }
