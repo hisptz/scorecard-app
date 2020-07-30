@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ViewSetupComponent } from './view-setup.component';
+import { MatMenuModule } from '@angular/material/menu';
 
 describe('ViewSetupComponent', () => {
   let component: ViewSetupComponent;
@@ -8,9 +9,9 @@ describe('ViewSetupComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ViewSetupComponent ]
-    })
-    .compileComponents();
+      imports: [MatMenuModule],
+      declarations: [ViewSetupComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

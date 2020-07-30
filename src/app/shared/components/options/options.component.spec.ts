@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { OptionsComponent } from './options.component';
+import { MatMenuModule } from '@angular/material/menu';
 
 describe('OptionsComponent', () => {
   let component: OptionsComponent;
@@ -8,9 +9,9 @@ describe('OptionsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ OptionsComponent ]
-    })
-    .compileComponents();
+      imports: [MatMenuModule],
+      declarations: [OptionsComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

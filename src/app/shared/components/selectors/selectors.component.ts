@@ -7,32 +7,30 @@ import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-selectors',
   templateUrl: './selectors.component.html',
-  styleUrls: ['./selectors.component.css']
+  styleUrls: ['./selectors.component.css'],
 })
 export class SelectorsComponent implements OnInit {
-  @Input() buttonsToShow: [string];
-  constructor(private dialog: MatDialog) { }
+  @Input() buttonsToShow: string[];
+  constructor(private dialog: MatDialog) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
+
   openSharingDialog(): void {
     const dialogRef = this.dialog.open(SharingDialogComponent, {
-      width: '1000px'
+      width: '1000px',
     });
   }
   openPeriodDialog(): void {
     const dialogRef = this.dialog.open(PeriodDialogComponent, {
-      width: '1000px'
+      width: '1000px',
     });
   }
   openOrgUnitDialog() {
     const dialogRef = this.dialog.open(OrganisationUnitDialogComponent, {
-      width: '1000px'
+      width: '1000px',
     });
   }
   canBeShown(name: string): boolean {
-    return this.buttonsToShow.includes(name);
+    return (this.buttonsToShow || []).includes(name);
   }
-
-
 }
