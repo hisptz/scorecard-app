@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ActionsMenuComponent } from './actions-menu.component';
+import { MatDialog } from '@angular/material/dialog';
+import { MatMenuModule } from '@angular/material/menu';
 
 describe('ActionsMenuComponent', () => {
   let component: ActionsMenuComponent;
@@ -8,9 +10,10 @@ describe('ActionsMenuComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ActionsMenuComponent ]
-    })
-    .compileComponents();
+      imports: [MatMenuModule],
+      declarations: [ActionsMenuComponent],
+      providers: [{ provide: MatDialog, useValue: null }],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

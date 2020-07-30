@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { InfoMenuComponent } from './info-menu.component';
+import { TourService } from 'ngx-tour-core';
+import { MatMenuModule } from '@angular/material/menu';
 
 describe('InfoMenuComponent', () => {
   let component: InfoMenuComponent;
@@ -8,9 +10,10 @@ describe('InfoMenuComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ InfoMenuComponent ]
-    })
-    .compileComponents();
+      imports: [MatMenuModule],
+      declarations: [InfoMenuComponent],
+      providers: [{ provide: TourService, useValue: null }],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
