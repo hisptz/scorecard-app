@@ -13,7 +13,7 @@ import { getScorecardAccess } from './conversion/get-scorecard-access.helper';
 import { getOrgunitSelection } from './conversion/get-orgunit-selection.helper';
 import { getScorecardOptions } from './conversion/get-scorecard-options.helper';
 import { getDataSelection } from './conversion/get-data-selection.helper';
-export function getSanitizedScorecard(oldScorecard) {
+export function getSanitizedScorecard(oldScorecard, id) {
   if (oldScorecard) {
     const headerData = oldScorecard.header
       ? getHeaderData(oldScorecard.header)
@@ -38,6 +38,7 @@ export function getSanitizedScorecard(oldScorecard) {
     const dataSelection = getDataSelection(oldScorecard?.data_settings);
     console.log({
       ...headerData,
+      id,
       legendDefinitions,
       periodSelection,
       userGroupAccesses,
@@ -47,5 +48,16 @@ export function getSanitizedScorecard(oldScorecard) {
       user,
       dataSelection
     });
+    return {
+      ...headerData,
+      legendDefinitions,
+      periodSelection,
+      userGroupAccesses,
+      userAccesses,
+      orgUnitSelection,
+      options,
+      user,
+      dataSelection, id
+    };
   }
 }
