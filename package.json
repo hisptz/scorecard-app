@@ -48,7 +48,7 @@
     "dexie": "^3.0.1",
     "font-awesome": "^4.7.0",
     "ng2-search-filter": "^0.5.1",
-    "ngx-color-picker": "^9.1.0",
+    "ngx-color-picker": "^10.0.1",
     "ngx-pagination": "^5.0.0",
     "ngx-tour-core": "^4.1.1",
     "ngx-tour-md-menu": "^4.1.1",
