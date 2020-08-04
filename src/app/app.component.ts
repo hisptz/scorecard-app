@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Title } from '@angular/platform-browser';
+import {loadOldScorecards} from './store/actions/scorecard-data-migration.actions';
 
 @Component({
   selector: 'app-root',

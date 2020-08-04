@@ -40,7 +40,7 @@ export class ScorecardEffects {
       mergeMap(() =>
         this.cardsService.getScorecardById().pipe(
           map((data: any) => {
-            const newScorecard = getSanitizedScorecard(data);
+            // const newScorecard = getSanitizedScorecard(data);
             // console.log({ newScorecard });
             return loadScorecardSuccess({ data });
           }),

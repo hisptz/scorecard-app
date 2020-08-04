@@ -8,6 +8,9 @@ import {
 } from '../../../../shared/animations/animations';
 import { ViewTypes } from '../../constants/view-types.constant';
 import { TourService } from 'ngx-tour-core';
+import {Store} from '@ngrx/store';
+import {State} from '../../../../store/reducers';
+import {loadOldScorecards} from '../../../../store/actions/scorecard-data-migration.actions';
 
 @Component({
   selector: 'app-home',
@@ -33,7 +36,8 @@ export class HomeComponent implements OnInit {
   constructor(
     private cardService: CardsService,
     private router: Router,
-    private tourService: TourService
+    private tourService: TourService,
+    private store: Store<State>
   ) {
     this.config = {
       itemsPerPage: 18,
@@ -51,6 +55,7 @@ export class HomeComponent implements OnInit {
     this.viewTypes = ViewTypes;
     this.currentViewType = ViewTypes.CARD;
     this.getScorecards();
+    this.store.dispatch(loadOldScorecards());
   }
   getScorecards() {
     this.scorecards$ = this.cardService.getCards();
