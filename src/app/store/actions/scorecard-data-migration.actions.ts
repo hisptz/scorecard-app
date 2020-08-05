@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store';
+import {ScorecardMigrationSummary} from '../../core/models/scorecard-migration.model';
 
 export const loadOldScorecards = createAction(
   '[ScorecardDataMigration] Load Old Scorecards'
@@ -26,4 +27,8 @@ export const changeOldScorecardsToNewFormatFailure = createAction(
     '[ScorecardDataMigration] Change Old Scorecard To new Scorecard Failure',
     props<{ error: any }>()
 );
-export const completeScorecardMigration = createAction('[ScorecardDataMigration] Complete Scorecard Migration');
+export const updateMigrationStatus = createAction('[ScorecardDataMigration] Update Migration Status',
+    props<{ notificationType: string, message: string, progressValue: number }>()
+);
+export const completeScorecardMigration = createAction('[ScorecardDataMigration] Complete Scorecard Migration',
+                                                      props<{ summary: ScorecardMigrationSummary}>());
