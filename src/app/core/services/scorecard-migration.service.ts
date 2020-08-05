@@ -1,17 +1,25 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 import {catchError, take} from 'rxjs/operators';
-import { throwError } from 'rxjs';
-import { getSanitizedScorecard } from '../helpers/get-sanitized-scorecard.helper';
+import {throwError} from 'rxjs';
+import {getSanitizedScorecard} from '../helpers/get-sanitized-scorecard.helper';
 import {getScorecardListItem} from '../helpers/get-scorecard-list-item.helper';
 import {ScorecardService} from './scorecard.service';
+import {Store} from '@ngrx/store';
+import {State} from '../../store/reducers';
+import {updateMigrationStatus} from '../../store/actions/scorecard-data-migration.actions';
+import {
+    getMessageForMigrationProgressStatus,
+    getProgressValueForMigrationProgressStatus
+} from '../helpers/conversion/get-data-for-migration-progress-status.helper';
+import {ItemSavedResponse, ScorecardMigrationStage, ScorecardMigrationSummary} from '../models/scorecard-migration.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ScorecardMigrationService {
 
-  constructor(private http$: HttpClient, private scorecardService: ScorecardService) { }
+  constructor(private http$: HttpClient, private scorecardService: ScorecardService, private store: Store<State>) { }
   getOldScorecards() {
     return this.http$.get('/api/dataStore/scorecards').pipe(
       catchError((error) => throwError(error))
@@ -41,7 +49,7 @@ export class ScorecardMigrationService {
         );
         });
     }
-  getOldScorecardPromise(id: string) {
+  getOldScorecardPromise(id: string): any {
        return new Promise((resolve, reject) => {this.scorecardService.getOldScorecardById(id).pipe(take(1)).subscribe(
         (data) => {
           resolve(data);
@@ -52,35 +60,144 @@ export class ScorecardMigrationService {
       );
        });
   }
+  // Format all scorecard to a new format
  async getFormattedScorecard(ids: any[]) {
+     // Update Progress Status on starting Format process
+     this.store.dispatch(updateMigrationStatus({
+         notificationType: 'PROGRESS',
+         message: getMessageForMigrationProgressStatus(ScorecardMigrationStage.FORMAT_OLD_SCORECARDS),
+          progressValue: getProgressValueForMigrationProgressStatus(ScorecardMigrationStage.FORMAT_OLD_SCORECARDS)}
+          ));
     const scorecardArr = [];
+    const processProgressValue = Math.floor(30 / ids.length) || 0; // Calculate value to add on progress value
+     let counter = 30;
     if ( ids && ids.length) {
       for (const id of ids) {
+          counter +=  processProgressValue;
+          try {
+              // Get Old Scorecard by ID
+              const oldScorecard = await this.getOldScorecardPromise(id).then(card => card).catch(err => {
+                 this.updateErrorFormatSpecificScorecard(err, id, counter); // Update error status when request fails
+              });
+              // Get Scorecard name
+              const oldScorecardName = oldScorecard && oldScorecard.header && oldScorecard.header.title ? oldScorecard.header.title : '';
+              // Update progress on format of current scorecard
+              this.store.dispatch(updateMigrationStatus({
+                  notificationType: 'PROGRESS',
+                  message: getMessageForMigrationProgressStatus(ScorecardMigrationStage.FORMAT_SPECIFIC_OLD_SCORECARD, oldScorecardName),
+                  progressValue: getProgressValueForMigrationProgressStatus(ScorecardMigrationStage.FORMAT_SPECIFIC_OLD_SCORECARD,
+                      counter)}
+              ));
+              // Get Formatted scorecard/ new scorecard
+              const newScorecard = getSanitizedScorecard(oldScorecard, id);
+              if (newScorecard) {
+                  scorecardArr.push(newScorecard); // Add scorecard in a list of new scorecard if it's perfectly formatted
+              }
+          } catch (e) {
+              // Update error status when there is an error in the process
+              this.updateErrorFormatSpecificScorecard(e, id, counter);
+          }
 
-        const oldScorecard = await this.getOldScorecardPromise(id);
-        const newScorecard = getSanitizedScorecard(oldScorecard, id);
-        if (newScorecard) {
-            scorecardArr.push(newScorecard);
-        }
       }
     }
     return scorecardArr;
   }
 
-  async formatOldScorecard(ids: any[]) {
-     const formattedScorecards = await this.getFormattedScorecard(ids);
+  async formatOldScorecard(ids: any[])  {
+     // const summary: ScorecardMigrationSummary = {message: '', listItemsResponses: [], detailItemsResponses: []};
+     const formattedScorecards = await this.getFormattedScorecard(ids); // Get list of scorecards in a new format
       let scorecardListResponses = [];
       let scorecardDetailsResponses = [];
      if (formattedScorecards && formattedScorecards.length) {
+         const processProgressValue = Math.floor(30 / (ids.length * 2)) || 0; // Calculate value to add on progress value
+         let counter = 60;
         for (const scorecard of formattedScorecards) {
-           const listResponse = await this.createScorecardListItem(scorecard).then(item => item).catch(error => error);
-           const detailResponse = await this.createScorecardDetailsItem(scorecard).then(item => item).catch(error => error);
+           const scorecardName = scorecard && scorecard.name ? scorecard.name : '';
+           const listResponse = await this.createScorecardListItem(scorecard).then(item => {
+               // const itemResponse: ItemSavedResponse = {name: scorecardName, status: 'SUCCESS'};
+               counter += processProgressValue;
+               this.updateSaveListItemStatus('PROGRESS', ScorecardMigrationStage.SAVE_LIST_ITEM, counter, item, scorecardName);
+               // summary.listItemsResponses.push(itemResponse);
+               return item;
+           }).catch(error => {
+              // const itemResponse: ItemSavedResponse = {name: scorecardName, status: 'FAILED'};
+               counter += processProgressValue;
+               this.updateSaveListItemStatus('ERROR', ScorecardMigrationStage.ERROR_SAVE_LIST_ITEM, counter, error, scorecardName);
+             //  summary.listItemsResponses.push(itemResponse);
+               return error;
+           });
+           const detailResponse = await this.createScorecardDetailsItem(scorecard).then(item => {
+              // const itemResponse: ItemSavedResponse = {name: scorecardName, status: 'SUCCESS'};
+               counter += processProgressValue;
+               this.updateSaveDetailItemStatus('PROGRESS', ScorecardMigrationStage.SAVE_DETAIL_ITEM, counter, item, scorecardName);
+               // summary.detailItemsResponses.push(itemResponse);
+               return item;
+           }).catch(error => {
+               // const itemResponse: ItemSavedResponse = {name: scorecardName, status: 'FAILED'};
+               counter += processProgressValue;
+               this.updateSaveDetailItemStatus('PROGRESS', ScorecardMigrationStage.SAVE_DETAIL_ITEM, counter, error, scorecardName);
+               // summary.detailItemsResponses.push(itemResponse);
+               return error;
+           });
             scorecardListResponses = [...scorecardListResponses, listResponse];
             scorecardDetailsResponses = [...scorecardDetailsResponses, detailResponse];
         }
+     } else {
+         this.updateErrorMigrationProcess();
      }
-     return {...{}, scorecardListResponses, scorecardDetailsResponses };
+     return {scorecardListResponses, scorecardDetailsResponses};
   }
+  private updateErrorFormatSpecificScorecard(error: any, messageCustomValue?: any, processProgressValue?: number): void {
+      const message = error && error.message ? error.message :
+          getMessageForMigrationProgressStatus(ScorecardMigrationStage.ERROR_FORMAT_SPECIFIC_OLD_SCORECARD, messageCustomValue);
+      this.store.dispatch(updateMigrationStatus({
+          notificationType: 'ERROR',
+          message,
+          progressValue: getProgressValueForMigrationProgressStatus(ScorecardMigrationStage.ERROR_FORMAT_SPECIFIC_OLD_SCORECARD,
+              processProgressValue)}
+      ));
+  }
+    private updateErrorMigrationProcess(): void {
+      this.store.dispatch(updateMigrationStatus({
+          notificationType: 'ERROR',
+          message: getMessageForMigrationProgressStatus(ScorecardMigrationStage.ERROR_MIGRATION),
+          progressValue: getProgressValueForMigrationProgressStatus(ScorecardMigrationStage.ERROR_MIGRATION)
+      }));
+    }
 
+    updateSaveListItemStatus(type: string, stage: ScorecardMigrationStage, progressValue: number, response ?: any, scorecardName?: string) {
+      if (ScorecardMigrationStage.SAVE_LIST_ITEM) {
+          this.store.dispatch(updateMigrationStatus({
+              notificationType: type,
+              message: getMessageForMigrationProgressStatus(stage, scorecardName),
+              progressValue: getProgressValueForMigrationProgressStatus(stage, progressValue)
+          }));
+      } else {
+          const message = response && response.message ? response.message : getMessageForMigrationProgressStatus(stage, scorecardName);
+          this.store.dispatch(updateMigrationStatus({
+              notificationType: type,
+              message,
+              progressValue: getProgressValueForMigrationProgressStatus(stage, progressValue)
+          }));
+      }
+    }
+    updateSaveDetailItemStatus(type: string, stage: ScorecardMigrationStage, progressValue: number, response ?: any, scorecardName?: string) {
+        if (ScorecardMigrationStage.SAVE_DETAIL_ITEM) {
+            this.store.dispatch(updateMigrationStatus({
+                notificationType: type,
+                message: getMessageForMigrationProgressStatus(stage, scorecardName),
+                progressValue: getProgressValueForMigrationProgressStatus(stage, progressValue)
+            }));
+        } else {
+            const message = response && response.message  ?
+                response.message : getMessageForMigrationProgressStatus(stage, scorecardName);
+            this.store.dispatch(updateMigrationStatus({
+                notificationType: type,
+                message,
+                progressValue: getProgressValueForMigrationProgressStatus(stage, progressValue)
+            }));
+        }
+
+    }
 
 }
