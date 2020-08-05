@@ -55,7 +55,6 @@ export class HomeComponent implements OnInit {
     this.viewTypes = ViewTypes;
     this.currentViewType = ViewTypes.CARD;
     this.getScorecards();
-    this.store.dispatch(loadOldScorecards());
   }
   getScorecards() {
     this.scorecards$ = this.cardService.getCards();
