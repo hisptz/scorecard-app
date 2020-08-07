@@ -1,56 +1,102 @@
-<div class="home-container" *ngIf="scorecards$ | async as scorecards">
-  <!--header-->
-  <app-home-header [paginationConfig]="config" [scorecardLength]="scorecards?.length"
-    (searchFilter)="getSearchFilter($event)" (changeView)="onChangeView($event)" (pageChange)="onPageChange($event)">
-  </app-home-header>
-  <!-- end of header -->
-
-  <!-- home content container -->
-  <div class="app-content home-content">
-    <!-- scorecard view -->
-    <div class="scorecard-view">
-      <!-- card view -->
-      <div @fadeSmooth *ngIf="currentViewType === viewTypes.CARD">
-        <app-card-thumbnail-view [scorecards]="scorecards" [paginationConfig]="config" [searchTerm]="filter"
-          [viewType]="currentViewType" [viewTypes]="viewTypes" (viewScorecard)="onView($event)">
-        </app-card-thumbnail-view>
-      </div>
-      <!-- end of card view -->
-
-      <!-- thumbnail  view -->
-      <div @fadeSmooth *ngIf="currentViewType === viewTypes.THUMBNAIL">
-        <app-card-thumbnail-view [scorecards]="scorecards" [paginationConfig]="config" [searchTerm]="filter"
-          [viewType]="currentViewType" [viewTypes]="viewTypes" (viewScorecard)="onView($event)">
-        </app-card-thumbnail-view>
-      </div>
-      <!-- end of thumbnail  view -->
-
-      <!-- list view -->
-      <table @fadeSmooth class="table table-hover" *ngIf="currentViewType === viewTypes.LIST">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Last modified</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="cursor" (click)="viewScorecard()" app-list-view
-            *ngFor="let row of scorecards | filter: filter | paginate: config" [row]="row"></tr>
-        </tbody>
-      </table>
-      <!-- end of list view -->
+<div>
+  <div class="home-container" *ngIf="scorecards$ | async as scorecards">
+    <div
+      class="mat-elevation-z1"
+      style="width: 100%; padding: 1em; text-align: center;"
+      *ngIf="
+        (migrationLoadingStatus$ | async) &&
+        (migrationNotification$ | async) as notification
+      "
+    >
+      <i>{{ notification.message }}</i>
+      <mat-progress-bar
+        mode="determinate"
+        [value]="notification.progressValue"
+      ></mat-progress-bar>
+      <b>{{ notification.progressValue }}%</b>
     </div>
-    <!-- end of scorecard view -->
+    <!--header-->
+    <app-home-header
+      [paginationConfig]="config"
+      [scorecardLength]="scorecards?.length"
+      (searchFilter)="getSearchFilter($event)"
+      (changeView)="onChangeView($event)"
+      (pageChange)="onPageChange($event)"
+      *ngIf="!(migrationLoadingStatus$ | async)"
+    >
+    </app-home-header>
+    <!-- end of header -->
 
+    <!-- home content container -->
+    <div
+      [ngClass]="{
+        'header-content-margin': !(migrationLoadingStatus$ | async)
+      }"
+      class="app-content home-content"
+    >
+      <!-- scorecard view -->
+      <div class="scorecard-view">
+        <!-- card view -->
+        <div @fadeSmooth *ngIf="currentViewType === viewTypes.CARD">
+          <app-card-thumbnail-view
+            [scorecards]="scorecards"
+            [paginationConfig]="config"
+            [searchTerm]="filter"
+            [viewType]="currentViewType"
+            [viewTypes]="viewTypes"
+            (viewScorecard)="onView($event)"
+          >
+          </app-card-thumbnail-view>
+        </div>
+        <!-- end of card view -->
+
+        <!-- thumbnail  view -->
+        <div @fadeSmooth *ngIf="currentViewType === viewTypes.THUMBNAIL">
+          <app-card-thumbnail-view
+            [scorecards]="scorecards"
+            [paginationConfig]="config"
+            [searchTerm]="filter"
+            [viewType]="currentViewType"
+            [viewTypes]="viewTypes"
+            (viewScorecard)="onView($event)"
+          >
+          </app-card-thumbnail-view>
+        </div>
+        <!-- end of thumbnail  view -->
+
+        <!-- list view -->
+        <table
+          @fadeSmooth
+          class="table table-hover"
+          *ngIf="currentViewType === viewTypes.LIST"
+        >
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Last modified</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              class="cursor"
+              (click)="viewScorecard()"
+              app-list-view
+              *ngFor="let row of scorecards | filter: filter | paginate: config"
+              [row]="row"
+            ></tr>
+          </tbody>
+        </table>
+        <!-- end of list view -->
+      </div>
+      <!-- end of scorecard view -->
+    </div>
+    <!-- end of home content container -->
   </div>
-  <!-- end of home content container -->
 
-</div>
-
-<div class="container-fluid mt-3">
-  <!--<div
+  <div class="container-fluid mt-3">
+    <!--<div
     class="flex-container"
     [ngStyle]="{ 'justify-content': type === 'card' ? 'center' : 'start' }"
     *ngIf="type !== 'list'"
@@ -140,17 +186,22 @@
     </table>
   </div> -->
 
-  <!--Create a scorecard button-->
-  <div class="home-add-button">
-    <button mat-fab tourAnchor="home.create" color="primary" [routerLink]="['create']"
-      matTooltip="Create a new scorecard">
-      <span>
-        <mat-icon>add</mat-icon>
-      </span>
-    </button>
-  </div>
-  <!--pagination control-->
-  <!-- <div class="pagination-section" style="margin-top: 2%;">
+    <!--Create a scorecard button-->
+    <div class="home-add-button">
+      <button
+        mat-fab
+        tourAnchor="home.create"
+        color="primary"
+        [routerLink]="['create']"
+        matTooltip="Create a new scorecard"
+      >
+        <span>
+          <mat-icon>add</mat-icon>
+        </span>
+      </button>
+    </div>
+    <!--pagination control-->
+    <!-- <div class="pagination-section" style="margin-top: 2%;">
     <mat-paginator
       [length]="config.totalItems"
       [pageSize]="config.itemsPerPage"
@@ -159,4 +210,5 @@
     >
     </mat-paginator>
   </div> -->
+  </div>
 </div>

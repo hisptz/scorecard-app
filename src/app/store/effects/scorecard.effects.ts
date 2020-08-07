@@ -45,7 +45,6 @@ export class ScorecardEffects {
             return loadScorecardSuccess({ data });
           }),
           catchError((error) => {
-            console.log({ error });
             return of(loadScorecardFailure(error));
           })
         )

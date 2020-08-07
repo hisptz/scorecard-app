@@ -14,6 +14,11 @@ export class ScorecardService {
         catchError((error) => throwError(error))
     );
   }
+  deleteOldScorecard(id) {
+    return this.http$.delete(`/api/dataStore/scorecards/${id}`).pipe(
+        catchError((error) => throwError(error))
+    );
+  }
   createScorecardListItem(item) {
     return item && item.id ?  this.http$.post(`/api/dataStore/scorecard-list/${item.id}`, item).pipe(
         catchError((error) => throwError(error))

@@ -28,7 +28,7 @@ export const changeOldScorecardsToNewFormatFailure = createAction(
     props<{ error: any }>()
 );
 export const updateMigrationStatus = createAction('[ScorecardDataMigration] Update Migration Status',
-    props<{ notificationType: string, message: string, progressValue: number }>()
+    props<{ notificationType: string, message: string, progressValue: number, summary?: ScorecardMigrationSummary}>()
 );
 export const completeScorecardMigration = createAction('[ScorecardDataMigration] Complete Scorecard Migration',
                                                       props<{ summary: ScorecardMigrationSummary}>());

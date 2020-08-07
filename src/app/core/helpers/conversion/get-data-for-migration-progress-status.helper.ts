@@ -48,6 +48,17 @@ export function getMessageForMigrationProgressStatus(stage: ScorecardMigrationSt
             const scorecardName = customValue && typeof customValue === 'string' ? customValue : '';
             return `Saving detail item '${scorecardName}' failed, migration continues with other scorecards...`;
         }
+        case ScorecardMigrationStage.DELETE_OLD_SCORECARD: {
+            const scorecardName = customValue && typeof customValue === 'string' ? customValue : '';
+            return `Deleted scorecard '${scorecardName}' from old scorecard list`;
+        }
+        case ScorecardMigrationStage.ERROR_DELETE_OLD_SCORECARD: {
+            const scorecardName = customValue && typeof customValue === 'string' ? customValue : '';
+            return `Deleting scorecard '${scorecardName}' from old scorecard list failed`;
+        }
+        case ScorecardMigrationStage.END_MIGRATION: {
+            return 'The migration process has ended, Please see the process summary';
+        }
         default: {
             return 'Scorecard data migration is in progress';
         }
@@ -75,6 +86,9 @@ export function getProgressValueForMigrationProgressStatus(stage: ScorecardMigra
         }
         case ScorecardMigrationStage.FORMAT_OLD_SCORECARDS: {
             return 30;
+        }
+        case ScorecardMigrationStage.END_MIGRATION: {
+            return 100;
         }
         default: {
             return customValue || 0;

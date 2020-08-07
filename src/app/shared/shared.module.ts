@@ -40,6 +40,7 @@ import { PeriodDialogComponent } from './dialogs/period-dialog/period-dialog.com
 import { SharingDialogComponent } from './dialogs/sharing-dialog/sharing-dialog.component';
 import { TruncatePipe } from './pipes/truncate.pipe';
 
+
 @NgModule({
   imports: [
     CommonModule,
@@ -123,7 +124,7 @@ import { TruncatePipe } from './pipes/truncate.pipe';
     DeleteScorecardDialogComponent,
     TruncatePipe,
     ListViewComponent,
-    SettingsMenuComponent,
+    SettingsMenuComponent
   ],
   entryComponents: [
     SharingDialogComponent,

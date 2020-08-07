@@ -8,9 +8,11 @@ import {
 } from '../../../../shared/animations/animations';
 import { ViewTypes } from '../../constants/view-types.constant';
 import { TourService } from 'ngx-tour-core';
-import {Store} from '@ngrx/store';
+import {select, Store} from '@ngrx/store';
 import {State} from '../../../../store/reducers';
 import {loadOldScorecards} from '../../../../store/actions/scorecard-data-migration.actions';
+import {Observable} from 'rxjs';
+import {getMigrationLoadingStatus, getMigrationNotification} from '../../../../store/selectors/scorecard-data-migration.selectors';
 
 @Component({
   selector: 'app-home',
@@ -32,6 +34,8 @@ export class HomeComponent implements OnInit {
   viewTypes: any;
 
   public labels: any = {};
+  migrationNotification$: Observable<any>;
+  migrationLoadingStatus$: Observable<any>;
 
   constructor(
     private cardService: CardsService,
@@ -55,6 +59,8 @@ export class HomeComponent implements OnInit {
     this.viewTypes = ViewTypes;
     this.currentViewType = ViewTypes.CARD;
     this.getScorecards();
+    this.migrationNotification$ = this.store.pipe(select(getMigrationNotification));
+    this.migrationLoadingStatus$ = this.store.pipe(select(getMigrationLoadingStatus));
   }
   getScorecards() {
     this.scorecards$ = this.cardService.getCards();

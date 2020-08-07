@@ -36,18 +36,6 @@ export function getSanitizedScorecard(oldScorecard, id) {
     const options: ScorecardOptions = getScorecardOptions(oldScorecard);
     const user = oldScorecard.user ? oldScorecard.user : { user: '' };
     const dataSelection = getDataSelection(oldScorecard?.data_settings);
-    console.log({
-      ...headerData,
-      id,
-      legendDefinitions,
-      periodSelection,
-      userGroupAccesses,
-      userAccesses,
-      orgUnitSelection,
-      options,
-      user,
-      dataSelection
-    });
     return {
       ...headerData,
       legendDefinitions,

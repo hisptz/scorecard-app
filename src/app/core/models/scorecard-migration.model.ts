@@ -17,13 +17,18 @@ export enum ScorecardMigrationStage {
     ERROR_SAVE_LIST_ITEM = 'ERROR_SAVE_LIST_ITEM',
     SAVE_DETAIL_ITEM = 'SAVE_DETAIL_ITEM',
     ERROR_SAVE_DETAIL_ITEM = 'ERROR_DETAIL_ITEM',
+    DELETE_OLD_SCORECARD = 'DELETE_OLD_SCORECARD',
+    ERROR_DELETE_OLD_SCORECARD = 'ERROR_DELETE_OLD_SCORECARD',
+    END_MIGRATION = 'END_MIGRATION'
 }
 export interface ScorecardMigrationSummary {
     message: string;
     listItemsResponses?: ItemSavedResponse[];
     detailItemsResponses?: ItemSavedResponse[];
+    deleteItemResponses?: ItemSavedResponse[];
 }
 export interface ItemSavedResponse {
     name: string;
     status: string;
+    message?: string;
 }

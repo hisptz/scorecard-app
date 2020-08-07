@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Title } from '@angular/platform-browser';
 import {loadOldScorecards} from './store/actions/scorecard-data-migration.actions';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,7 @@ import {loadOldScorecards} from './store/actions/scorecard-data-migration.action
 export class AppComponent {
   constructor(
     private translate: TranslateService,
-    private titleService: Title
+    private titleService: Title,
   ) {
     // this language will be used as a fallback when a translation isn't found in the current language
     this.translate.setDefaultLang('en');
