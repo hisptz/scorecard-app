@@ -13,39 +13,46 @@ import { getScorecardAccess } from './conversion/get-scorecard-access.helper';
 import { getOrgunitSelection } from './conversion/get-orgunit-selection.helper';
 import { getScorecardOptions } from './conversion/get-scorecard-options.helper';
 import { getDataSelection } from './conversion/get-data-selection.helper';
-export function getSanitizedScorecard(oldScorecard, id) {
+export function getSanitizedScorecard(oldScorecard, id: string): Scorecard {
+  let scorecard: Scorecard = {
+    id: '',
+    name: '',
+    title: '',
+    legendDefinitions: [],
+    dataSelection: null,
+    orgUnitSelection: null,
+    options: null,
+    periodSelection: null,
+    highlightedIndicators: null,
+    publicAccess: '',
+    userGroupAccesses: [],
+    userAccesses: [],
+    user: {
+      id: ''
+    },
+  };
   if (oldScorecard) {
+    scorecard = {...scorecard, id, customHeader: '', ...getScorecardAccess(oldScorecard?.user_groups)};
     const headerData = oldScorecard.header
       ? getHeaderData(oldScorecard.header)
       : {};
-    const legendDefinitions: Legend[] = oldScorecard.legendset_definitions
+    scorecard = { ...scorecard, ...headerData };
+    scorecard.legendDefinitions = oldScorecard.legendset_definitions
       ? getLegendDefinitions(oldScorecard.legendset_definitions)
       : [];
-    const periodSelection: PeriodSelection = oldScorecard.selected_periods
+    scorecard.periodSelection = oldScorecard.selected_periods
       ? getPeriodSelectionData(oldScorecard.selected_periods)
       : getPeriodSelectionData([]);
-    const userGroupAccesses: ScorecardAccess[] = oldScorecard.user_groups
-      ? getScorecardAccess(oldScorecard.user_groups)
-      : [];
-    const userAccesses: ScorecardAccess[] = [];
-    const orgUnitSelection: OrgUnitSelection =
+    scorecard.userAccesses = [];
+    scorecard.orgUnitSelection =
       oldScorecard.orgunit_settings &&
       oldScorecard.orgunit_settings.selected_orgunits
         ? getOrgunitSelection(oldScorecard.orgunit_settings.selected_orgunits)
         : getOrgunitSelection([]);
-    const options: ScorecardOptions = getScorecardOptions(oldScorecard);
-    const user = oldScorecard.user ? oldScorecard.user : { user: '' };
-    const dataSelection = getDataSelection(oldScorecard?.data_settings);
-    return {
-      ...headerData,
-      legendDefinitions,
-      periodSelection,
-      userGroupAccesses,
-      userAccesses,
-      orgUnitSelection,
-      options,
-      user,
-      dataSelection, id
-    };
+    scorecard.options = getScorecardOptions(oldScorecard);
+    scorecard.user = oldScorecard.user ? oldScorecard.user : { user: '' };
+    scorecard.dataSelection = getDataSelection(oldScorecard?.data_settings);
+    return scorecard;
   }
+  return null;
 }

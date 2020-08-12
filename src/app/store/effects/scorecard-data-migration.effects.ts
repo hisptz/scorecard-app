@@ -21,6 +21,8 @@ import {
   ScorecardMigrationStage,
   ScorecardMigrationSummary,
 } from '../../core/models/scorecard-migration.model';
+import { MatDialog } from '@angular/material/dialog';
+import { ScorecardMigrationSummaryDialogComponent } from 'src/app/shared/dialogs/scorecard-migration-summary-dialog/scorecard-migration-summary-dialog.component';
 
 @Injectable()
 export class ScorecardDataMigrationEffects implements OnInitEffects {
@@ -60,18 +62,18 @@ export class ScorecardDataMigrationEffects implements OnInitEffects {
             }
           }),
           catchError((error) => {
-           
-            if(error && error.status && error.status === 404) {
-              console.log({ error });
-              this.store.dispatch(updateMigrationStatus({
-                notificationType: 'COMPLETE',
-                message: getMessageForMigrationProgressStatus(
-                  ScorecardMigrationStage.NONE_OLD_SCORECARD_PRESENT
-                ),
-                progressValue: getProgressValueForMigrationProgressStatus(
-                  ScorecardMigrationStage.NONE_OLD_SCORECARD_PRESENT
-                ),
-              }));
+            if (error && error.status && error.status === 404) {
+              this.store.dispatch(
+                updateMigrationStatus({
+                  notificationType: 'COMPLETE',
+                  message: getMessageForMigrationProgressStatus(
+                    ScorecardMigrationStage.NONE_OLD_SCORECARD_PRESENT
+                  ),
+                  progressValue: getProgressValueForMigrationProgressStatus(
+                    ScorecardMigrationStage.NONE_OLD_SCORECARD_PRESENT
+                  ),
+                })
+              );
             }
             return of(loadOldScorecardsFailure({ error }));
           })
@@ -131,7 +133,26 @@ export class ScorecardDataMigrationEffects implements OnInitEffects {
       ofType(updateMigrationStatus),
       tap((action) => {
         if (action && action.progressValue && action.progressValue === 100) {
-          this.store.dispatch(completeScorecardMigration({ summary: action?.summary }));
+          this.store.dispatch(
+            completeScorecardMigration({ summary: action?.summary })
+          );
+        }
+      }),
+      catchError((error) =>
+        of(changeOldScorecardsToNewFormatFailure({ error }))
+      )
+    );
+  }
+  @Effect({ dispatch: false })
+  completeScorecardMigration(): Observable<Action> {
+    return this.actions$.pipe(
+      ofType(completeScorecardMigration),
+      tap((action) => {
+        if (action && action.summary) {
+          // const dialogRef = this.dialog.open(ScorecardMigrationSummaryDialogComponent, {
+          //   width: '250px',
+          //   data: action.summary
+          // });
         }
       }),
       catchError((error) =>
@@ -145,6 +166,7 @@ export class ScorecardDataMigrationEffects implements OnInitEffects {
   constructor(
     private actions$: Actions,
     private scorecardMigration: ScorecardMigrationService,
-    private store: Store<State>
+    private store: Store<State>,
+    private dialog: MatDialog
   ) {}
 }
