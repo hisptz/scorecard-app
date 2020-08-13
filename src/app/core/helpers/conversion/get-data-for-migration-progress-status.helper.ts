@@ -85,42 +85,53 @@ export function getProgressValueForMigrationProgressStatus(
 ): number {
   let progressValue = 0;
   switch (stage) {
-    case ScorecardMigrationStage.CHECK_OLD_SCORECARDS: {
+    case ScorecardMigrationStage.CHECK_OLD_SCORECARDS:
       progressValue = 0;
       break;
-    }
-    case ScorecardMigrationStage.ERROR_LOADING_OLD_SCORECARDS: {
+    case ScorecardMigrationStage.ERROR_LOADING_OLD_SCORECARDS:
       progressValue = -1;
       break;
-    }
-    case ScorecardMigrationStage.NONE_OLD_SCORECARD_PRESENT: {
-      progressValue = 100;
-      break;
-    }
-    case ScorecardMigrationStage.OLD_SCORECARDS_PRESENT: {
+    case ScorecardMigrationStage.OLD_SCORECARDS_PRESENT:
       progressValue = 10;
       break;
-    }
-    case ScorecardMigrationStage.START_MIGRATION: {
+    case ScorecardMigrationStage.START_MIGRATION:
       progressValue = 20;
       break;
-    }
-    case ScorecardMigrationStage.ERROR_MIGRATION: {
-      progressValue = 100;
-      break;
-    }
-    case ScorecardMigrationStage.FORMAT_OLD_SCORECARDS: {
+    case ScorecardMigrationStage.FORMAT_OLD_SCORECARDS:
       progressValue = 30;
       break;
-    }
-    case ScorecardMigrationStage.END_MIGRATION: {
+    case ScorecardMigrationStage.ERROR_MIGRATION:
+    case ScorecardMigrationStage.NONE_OLD_SCORECARD_PRESENT:
+    case ScorecardMigrationStage.END_MIGRATION:
       progressValue = 100;
       break;
-    }
-    default: {
+    default:
       progressValue = customValue || 0;
       break;
-    }
+  }
+  return progressValue;
+}
+function getProgressValue(stage: ScorecardMigrationStage, value?: number) {
+  let progressValue = 0;
+  switch (stage) {
+    case ScorecardMigrationStage.OLD_SCORECARDS_PRESENT:
+      progressValue = 10;
+      break;
+    case ScorecardMigrationStage.START_MIGRATION:
+      progressValue = 20;
+      break;
+    case ScorecardMigrationStage.FORMAT_OLD_SCORECARDS:
+      progressValue = 30;
+      break;
+    case ScorecardMigrationStage.ERROR_LOADING_OLD_SCORECARDS:
+    case ScorecardMigrationStage.ERROR_MIGRATION:
+    case ScorecardMigrationStage.NONE_OLD_SCORECARD_PRESENT:
+    case ScorecardMigrationStage.END_MIGRATION:
+      progressValue = 100;
+      break;
+    default:
+      progressValue = value || 0;
+      break;
   }
   return progressValue;
 }
