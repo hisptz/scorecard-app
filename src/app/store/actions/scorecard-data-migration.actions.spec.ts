@@ -1,7 +1,8 @@
-import * as fromScorecardDataMigration from './scorecard-data-migration.actions';
+import {loadOldScorecards} from './scorecard-data-migration.actions';
 
-describe('loadScorecardDataMigrations', () => {
-  it('should return an action', () => {
-   // expect(fromScorecardDataMigration.loadScorecardDataMigrations().type).toBe('[ScorecardDataMigration] Load ScorecardDataMigrations');
+describe('loadOldScorecards', () => {
+  it('should create an action', () => {
+  // const action = new loadOldScorecards();
+  //  expect(loadOldScorecards).toEqual({ type: '[ScorecardDataMigration] Load Old Scorecards'});
   });
 });

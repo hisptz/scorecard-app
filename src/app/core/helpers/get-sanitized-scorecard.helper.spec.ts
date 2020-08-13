@@ -1,5 +1,5 @@
 import { getSanitizedScorecard } from './get-sanitized-scorecard.helper';
-import { oldScorecardSample } from '../samples/scorecard.sample';
+const oldScorecardSample: any = require('../samples/scorecard.sample.json');
 fdescribe('Get Sanitized Scorecard Helper', () => {
   it('should return an object with a key id with a value equal to the old scorecard', () => {
     expect(
@@ -148,5 +148,4 @@ fdescribe('Get Sanitized Scorecard Helper', () => {
     expect(user).toBeDefined();
     expect(user.id).toBeDefined();
   });
-
 });
