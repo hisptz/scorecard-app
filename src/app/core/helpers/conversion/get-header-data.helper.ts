@@ -1,10 +1,11 @@
 export function getHeaderData(header) {
-  const newHeaderData = {};
-  newHeaderData['name'] = header && header.title ? header.title : '';
-  newHeaderData['title'] = header && header.title ? header.title : '';
-  newHeaderData['description'] =
-    header && header.description ? header.description : '';
-  newHeaderData['subtitle'] =
-    header && header.sub_title ? header.sub_title : '';
+  let newHeaderData = {};
+  if (header) {
+    const name = header.title ? header.title : '';
+    const title = header.title ? header.title : '';
+    const description = header.description ? header.description : '';
+    const subtitle = header.sub_title ? header.sub_title : '';
+    newHeaderData = { ...{}, name, title, description, subtitle };
+  }
   return newHeaderData;
 }
