@@ -1,29 +1,27 @@
 import { ScorecardDisplayOptions } from '../../models/scorecard.model';
 
 export function getScorecardDisplayOptions(scorecard): ScorecardDisplayOptions {
-  const scorecardDisplayOptions: ScorecardDisplayOptions = {};
+  let scorecardDisplayOptions: ScorecardDisplayOptions = {};
   if (scorecard) {
-    scorecardDisplayOptions.showAverageInRow = scorecard.show_average_in_row
-      ? true
-      : false;
-    scorecardDisplayOptions.showAverageInColumn = scorecard.show_average_in_column
-      ? true
-      : false;
-    scorecardDisplayOptions.showLeagueTable = scorecard.show_league_table
-      ? true
-      : false;
-    scorecardDisplayOptions.showLeagueTableAll = scorecard.show_league_table_all
-      ? true
-      : false;
-    scorecardDisplayOptions.showScore = scorecard.show_score ? true : false;
-    scorecardDisplayOptions.showRank = scorecard.show_rank ? true : false;
-    scorecardDisplayOptions.showHierarchy = scorecard.show_hierarchy
-      ? true
-      : false;
-    scorecardDisplayOptions.showDataInColumn = scorecard.show_data_in_column
-      ? true
-      : false;
+    const showAverageInRow = scorecard.show_average_in_row ? true : false;
+    const showAverageInColumn = scorecard.show_average_in_column ? true : false;
+    const showLeagueTable = scorecard.show_league_table ? true : false;
+    const showLeagueTableAll = scorecard.show_league_table_all ? true : false;
+    const showScore = scorecard.show_score ? true : false;
+    const showRank = scorecard.show_rank ? true : false;
+    const showHierarchy = scorecard.show_hierarchy ? true : false;
+    const showDataInColumn = scorecard.show_data_in_column ? true : false;
+    scorecardDisplayOptions = {
+      ...scorecardDisplayOptions,
+      showAverageInColumn,
+      showAverageInRow,
+      showDataInColumn,
+      showHierarchy,
+      showLeagueTable,
+      showLeagueTableAll,
+      showRank,
+      showScore,
+    };
   }
-
   return scorecardDisplayOptions;
 }
