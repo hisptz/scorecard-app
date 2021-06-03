@@ -43,7 +43,7 @@
     "@ngx-translate/core": "^13.0.0",
     "@ngx-translate/http-loader": "^6.0.0",
     "bootstrap": "^4.5.0",
-    "core-js": "^3.6.5",
+    "core-js": "^3.13.1",
     "d2": "^31.8.1",
     "dexie": "^3.0.1",
     "font-awesome": "^4.7.0",
