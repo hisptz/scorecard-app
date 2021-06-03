@@ -8,6 +8,8 @@
     "build": "d2-app-scripts build",
     "start": "d2-app-scripts start",
     "test": "d2-app-scripts test",
+    "e2e-interactive": "d2-utils-cypress open",
+    "e2e": "cypress run",
     "deploy": "d2-app-scripts deploy"
   },
   "devDependencies": {
@@ -19,6 +21,7 @@
     "@dhis2/app-runtime": "^2.8.0",
     "@dhis2/app-service-datastore": "^1.0.0-alpha.2",
     "@iapps/period-utilities": "^1.0.0-beta.4",
+    "cypress": "7.4.0",
     "luxon": "^1.27.0",
     "recoil": "^0.3.1"
   }
