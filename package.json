@@ -45,7 +45,7 @@
     "bootstrap": "^4.5.0",
     "core-js": "^3.6.5",
     "d2": "^31.8.1",
-    "dexie": "^3.0.1",
+    "dexie": "^3.0.3",
     "font-awesome": "^4.7.0",
     "ng2-search-filter": "^0.5.1",
     "ngx-color-picker": "^9.1.0",
