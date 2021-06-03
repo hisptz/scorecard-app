@@ -44,7 +44,7 @@
     "@ngx-translate/http-loader": "^6.0.0",
     "bootstrap": "^4.5.0",
     "core-js": "^3.6.5",
-    "d2": "^31.8.1",
+    "d2": "^31.10.0",
     "dexie": "^3.0.1",
     "font-awesome": "^4.7.0",
     "ng2-search-filter": "^0.5.1",
