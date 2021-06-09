@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import React, {useMemo} from 'react'
 import {DHIS2ValueTypes} from "../../constants";
 import {FormFieldModel} from "../../models";
+import LegendDefinitionField from "./components/LegendDefinitionField";
 import classes from './CustomField.module.css'
 
 const {Field} = ReactFinalForm;
@@ -15,7 +16,7 @@ export default function CustomField({field}) {
         value: code
     })), [optionSet?.options]);
     const component = useMemo(() => {
-        if (optionSet) {
+        if (optionSet && optionSet.options) {
             return SingleSelectFieldFF
         } else {
             switch (valueType) {
@@ -28,6 +29,8 @@ export default function CustomField({field}) {
                     return TextAreaFieldFF
                 case DHIS2ValueTypes.TRUE_ONLY.name:
                     return CheckboxFieldFF
+                case DHIS2ValueTypes.LEGEND_DEFINITION.name:
+                    return LegendDefinitionField
                 default:
                     return InputFieldFF
             }

@@ -25,14 +25,11 @@ const DHIS2ValueTypes = {
         name: 'LONG_TEXT',
         formName: 'textarea'
     },
-    COLOR_PICKER: {
-        name: 'COLOR_PICKER',
-        formName: 'colorpicker'
-    },
-    ICON_PICKER: {
-        name: 'ICON_PICKER',
-        formName: 'iconpicker'
+    LEGEND_DEFINITION: {
+        name: 'LEGEND_DEFINITION',
+        formName: 'legendDefinition'
     }
+
 }
 
 export default DHIS2ValueTypes;
