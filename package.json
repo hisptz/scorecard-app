@@ -15,7 +15,9 @@
   "devDependencies": {
     "@dhis2/cli-app-scripts": "^6.2.0",
     "@dhis2/cli-style": "^8.3.0",
-    "@dhis2/cli-utils-cypress": "^7.0.1"
+    "@dhis2/cli-utils-cypress": "^7.0.1",
+    "cucumber": "^7.0.0-rc.0",
+    "cypress-cucumber-preprocessor": "^4.1.2"
   },
   "dependencies": {
     "@dhis2/app-runtime": "^2.8.0",
@@ -28,5 +30,8 @@
     "prop-types": "^15.7.2",
     "react-color": "^2.19.3",
     "recoil": "^0.3.1"
+  },
+  "cypress-cucumber-preprocessor": {
+    "nonGlobalStepDefinitions": true
   }
 }
