@@ -12,7 +12,7 @@ export default function CustomForm({onSubmit, fields, formReference}) {
                 ({handleSubmit})=>(
                     <form ref={formReference} onSubmit={handleSubmit}>
                         {
-                            map(fields, (field)=><CustomField field={field} />)
+                            map(fields, (field)=><CustomField key={field.id} field={field} />)
                         }
                     </form>
                 )

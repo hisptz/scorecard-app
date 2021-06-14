@@ -10,21 +10,26 @@
     "test": "d2-app-scripts test",
     "e2e-interactive": "d2-utils-cypress open",
     "e2e": "cypress run",
+    "cy:ct": "yarn cypress open-ct",
     "deploy": "d2-app-scripts deploy"
   },
   "devDependencies": {
+    "@cypress/react": "^5.9.1",
+    "@cypress/webpack-dev-server": "^1.3.1",
     "@dhis2/cli-app-scripts": "^6.2.0",
     "@dhis2/cli-style": "^8.3.0",
     "@dhis2/cli-utils-cypress": "^7.0.1",
     "cucumber": "^7.0.0-rc.0",
-    "cypress-cucumber-preprocessor": "^4.1.2"
+    "cypress-cucumber-preprocessor": "^4.1.2",
+    "eslint-plugin-cypress": "^2.11.3",
+    "react": "16.14.0"
   },
   "dependencies": {
     "@dhis2/app-runtime": "^2.8.0",
     "@dhis2/app-service-datastore": "^1.0.0-alpha.2",
     "@dhis2/ui": "^6.8.0",
     "@iapps/period-utilities": "^1.0.0-beta.4",
-    "cypress": "7.4.0",
+    "cypress": "^7.5.0",
     "lodash": "^4.17.21",
     "luxon": "^1.27.0",
     "prop-types": "^15.7.2",

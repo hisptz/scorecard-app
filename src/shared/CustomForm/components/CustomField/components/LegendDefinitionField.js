@@ -53,12 +53,12 @@ export default function LegendDefinitionField({input,  ...props}) {
 
     return (
         <Field  name={name} label={label} value={value}  {...props} {...input} >
-            <div className={classes['legend-definition-container']}>
-                <div onClick={e => setReference(e.currentTarget)} style={{background: color, borderColor: color}} className={classes['legend-color']}>
+            <div id={name} className={classes['legend-definition-container']}>
+                <div id={`color-selector-btn-${name}`} onClick={e => setReference(e.currentTarget)} style={{background: color, borderColor: color}} className={classes['legend-color']}>
                     {color}
                 </div>
                 <div className={classes['legend-input']}>
-                    <Input onChange={onNameChange} value={legendName} />
+                    <Input dataTest={`legend-definition-text-${name}`} onChange={onNameChange} value={legendName} />
                 </div>
             </div>
             {
