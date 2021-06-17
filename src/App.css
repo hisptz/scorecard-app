@@ -6,6 +6,9 @@
     align-items: center;
     justify-content: center;
     font-size: 1rem;
+    min-height: 763px;
+    min-width: 1366px;
+    overflow: auto;
 }
 
 .column{
@@ -25,6 +28,10 @@
 
 .center{
     justify-content: center;
+}
+
+.align-items-center{
+    align-items: center;
 }
 .space-between {
     justify-content: space-between;
@@ -70,6 +77,27 @@
 .pr-16{
     padding-right: 16px;
 }
+
+/*padding - 32*/
+.p-32{
+    padding: 32px;
+}
+
+.pt-32{
+    padding-top:32px;
+}
+.pb-32{
+    padding-bottom:32px;
+}
+
+.pl-32{
+    padding-left: 32px;
+}
+
+.pr-32{
+    padding-right: 32px;
+}
+
 
 .w-100{
     width: 100%;

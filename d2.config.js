@@ -4,7 +4,7 @@ const config = {
     entryPoints: {
         app: './src/App',
     },
-    dataStoreNamespace: 'Scorecard_App_Hisptz'
+    dataStoreNamespace: 'Scorecard_App_HISPTZ'
 }
 
 module.exports = config

@@ -1,16 +1,13 @@
 import React from 'react'
+import EmptyScoreCardList from "./Components/EmptyScoreCardList";
 
 
+export default function ScoreCardList() {
 
 
-export default function ScoreCardList(){
-
-
-    return(
-        <div className='container'>
-            <div className='column'>
-
-            </div>
+    return (
+        <div>
+            <EmptyScoreCardList onNewClick={console.log}/>
         </div>
     )
 }
