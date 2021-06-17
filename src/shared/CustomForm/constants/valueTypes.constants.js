@@ -28,8 +28,15 @@ const DHIS2ValueTypes = {
     LEGEND_DEFINITION: {
         name: 'LEGEND_DEFINITION',
         formName: 'legendDefinition'
+    },
+    RICH_TEXT: {
+        name: 'RICH_TEXT',
+        formName: 'richText'
+    },
+    LEGEND_MIN_MAX:{
+        name: 'LEGEND_MIN_MAX',
+        formName: 'legendMinMax'
     }
-
 }
 
 export default DHIS2ValueTypes;

@@ -11,7 +11,6 @@ const MockComponent = ({fields, onSubmit}) =>{
     return(
         <div>
             <CustomForm fields={fields} formReference={formRef} onSubmit={(data)=>{
-                console.log(data)
                 onSubmit(data)
             }
             }/>

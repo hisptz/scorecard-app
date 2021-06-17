@@ -5,9 +5,12 @@ import React, {useMemo} from 'react'
 import {DHIS2ValueTypes} from "../../constants";
 import {FormFieldModel} from "../../models";
 import LegendDefinitionField from "./components/LegendDefinitionField";
+import LegendMinMax from "./components/LegendMinMax";
+import RichTextEditor from "./components/RichTextEditor";
 import classes from './CustomField.module.css'
 
 const {Field} = ReactFinalForm;
+
 
 export default function CustomField({field}) {
     const {name, formName, valueType, validations, min, max, mandatory, optionSet, disabled} = field || {}
@@ -31,6 +34,10 @@ export default function CustomField({field}) {
                     return CheckboxFieldFF
                 case DHIS2ValueTypes.LEGEND_DEFINITION.name:
                     return LegendDefinitionField
+                case DHIS2ValueTypes.RICH_TEXT.name:
+                    return RichTextEditor
+                case DHIS2ValueTypes.LEGEND_MIN_MAX.name:
+                    return LegendMinMax
                 default:
                     return InputFieldFF
             }
@@ -43,6 +50,9 @@ export default function CustomField({field}) {
                 name={name}
                 label={formName}
                 validate={validations}
+                legendDefinition={{
+                name: 'Target Reached/ Goal Achieved', color: '#000000' }
+                }
                 min={min}
                 max={max}
                 type={type}

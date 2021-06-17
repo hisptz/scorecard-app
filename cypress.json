@@ -3,14 +3,21 @@
   "testFiles": "**/*.feature",
   "chromeWebSecurity": false,
   "reporter": "cypress-multi-reporters",
-  "video": false,
+  "video": true,
   "experimentalStudio": true,
   "viewportWidth": 1366,
   "viewportHeight": 768,
   "defaultCommandTimeout": 4000,
   "projectId": "9ps7gr",
   "component": {
+    "baseUrl": "http://localhost:8082",
     "testFiles": "**/*.test.{js,ts,jsx,tsx}",
-    "componentFolder": "src"
+    "componentFolder": "src",
+    "env": {
+      "dhis2_username": "admin",
+      "dhis2_password": "district",
+      "dhis2_base_url": "http://localhost:8082",
+      "dhis2_datatest_prefix": "dhis2-scorecard"
+    }
   }
 }

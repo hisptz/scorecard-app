@@ -1,10 +1,9 @@
-import { Button, alphaNumeric } from '@dhis2/ui'
+import { Button,} from '@dhis2/ui'
 import {map} from 'lodash'
 import React, {useRef} from 'react'
 import CustomForm from "../../shared/CustomForm";
 import {DHIS2ValueTypes} from "../../shared/CustomForm/constants"
 import {FormFieldModel} from "../../shared/CustomForm/models";
-
 
 export default function ExampleForms() {
 
@@ -16,7 +15,6 @@ export default function ExampleForms() {
         mandatory: true,
         min: 5,
         max: 50,
-        validations: alphaNumeric
     })),]
 
     const ref = useRef(HTMLFormElement);
@@ -24,7 +22,7 @@ export default function ExampleForms() {
     return (
         <div style={{width: '25%'}}>
             <CustomForm formReference={ref} onSubmit={console.log} fields={fields}/>
-            <Button primary onClick={()=> ref.current.requestSubmit()} >Submit</Button>
+            <Button primary onClick={ref.current.requestSubmit} >Submit</Button>
         </div>
     )
 }
