@@ -1,13 +1,17 @@
-import React from 'react'
-import classes from './App.module.css'
 import {DataStoreProvider} from "@dhis2/app-service-datastore";
+import React from 'react'
 import {RecoilRoot} from "recoil";
+import './App.css'
+import Router from "./modules/Router";
+import {FullPageLoader} from "./shared/Loaders";
+
+
 
 const MyApp = () => (
-    <DataStoreProvider namespace={'Scorecard_App_Hisptz'} loadingComponent={<div>Loading...</div>}>
+    <DataStoreProvider namespace={'Scorecard_App_Hisptz'} loadingComponent={<FullPageLoader/>}>
         <RecoilRoot>
-           <div className={classes.container}>
-               <h1>Welcome to Scorecard!</h1>
+           <div className='main-container'>
+               <Router/>
            </div>
         </RecoilRoot>
     </DataStoreProvider>
