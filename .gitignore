@@ -6,3 +6,4 @@ build
 .env
 logs
 cypress.env.json
+yarn.lock
