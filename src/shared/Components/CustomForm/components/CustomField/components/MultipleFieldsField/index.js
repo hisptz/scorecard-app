@@ -11,7 +11,7 @@ export default function MultipleFieldsField({name, value, onChange, multipleFiel
     const [fields, setFields] = useState([]);
     useEffect(() => {
         function setInitialFields() {
-            const count = value?.value?.length || initialFieldCount || 1
+            const count = value?.length || initialFieldCount || 1
             let i = 0
             const fields = []
             for (i; i < count; i++) {

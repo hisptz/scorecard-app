@@ -6,14 +6,14 @@ import CustomField from "./components/CustomField";
 import {FormFieldModel} from "./models";
 
 const {Form} = ReactFinalForm
-export default function CustomForm({onSubmit, fields, formReference}) {
+export default function CustomForm({onSubmit, fields, formReference, initialValues}) {
     return (
-        <Form onSubmit={onSubmit}>
+        <Form onSubmit={onSubmit} initialValues={initialValues}>
             {
-                ({handleSubmit})=>(
+                ({handleSubmit}) => (
                     <form ref={formReference} onSubmit={handleSubmit}>
                         {
-                            map(fields, (field)=><CustomField key={field?.id} field={field} />)
+                            map(fields, (field) => <CustomField key={field?.id} field={field}/>)
                         }
                     </form>
                 )
@@ -26,6 +26,7 @@ CustomForm.propTypes = {
     formReference: PropTypes.any.isRequired,
     onSubmit: PropTypes.func.isRequired,
     fields: PropTypes.arrayOf(PropTypes.instanceOf(FormFieldModel)),
+    initialValues: PropTypes.object
 }
 
 

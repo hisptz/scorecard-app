@@ -52,10 +52,27 @@ export default function GeneralScorecardForm({formReference}) {
         }),
     ]
 
+    const initialValues = {
+        legendDefinitions:[
+            {
+                color: "#417505",
+                name: 'Target Reached'
+            },
+            {
+                color: "#f8e71c",
+                name: "Average"
+            },
+            {
+                color: "#d0021b",
+                name: "Poor Performance"
+            }
+        ]
+    }
+
     return (
         <div className='container'>
             <div className='column space-between'>
-                <CustomForm formReference={formReference} onSubmit={console.log} fields={formFields}/>
+                <CustomForm initialValues={initialValues} formReference={formReference} onSubmit={console.log} fields={formFields}/>
             </div>
         </div>
     )
