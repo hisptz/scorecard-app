@@ -1,4 +1,4 @@
-import {CheckboxFieldFF, InputFieldFF, ReactFinalForm, SingleSelectFieldFF, TextAreaFieldFF} from '@dhis2/ui';
+import {CheckboxField, InputField, ReactFinalForm, SingleSelectField, TextAreaField} from '@dhis2/ui';
 import {map} from 'lodash'
 import PropTypes from 'prop-types'
 import React, {useMemo} from 'react'
@@ -6,62 +6,92 @@ import {DHIS2ValueTypes} from "../../constants";
 import {FormFieldModel} from "../../models";
 import LegendDefinitionField from "./components/LegendDefinitionField";
 import LegendMinMax from "./components/LegendMinMax";
+import MultipleFieldsField from "./components/MultipleFieldsField";
 import RichTextEditor from "./components/RichTextEditor";
 import classes from './CustomField.module.css'
 
 const {Field} = ReactFinalForm;
 
-
-export default function CustomField({field}) {
-    const {name, formName, valueType, validations, min, max, mandatory, optionSet, disabled} = field || {}
+export function CustomInput({input, valueType, optionSet, ...props}) {
+    const type = useMemo(() => DHIS2ValueTypes[valueType].formName, [valueType]);
     const options = useMemo(() => map(optionSet?.options, ({name, code}) => ({
         label: name,
         value: code
     })), [optionSet?.options]);
-    const component = useMemo(() => {
+    const Input = useMemo(() => {
         if (optionSet && optionSet.options) {
-            return SingleSelectFieldFF
+            return SingleSelectField
         } else {
             switch (valueType) {
                 case DHIS2ValueTypes.DATE.name:
                 case DHIS2ValueTypes.TEXT.name:
                 case DHIS2ValueTypes.NUMBER.name:
                 case DHIS2ValueTypes.INTEGER.name:
-                    return InputFieldFF
+                    return InputField
                 case DHIS2ValueTypes.LONG_TEXT.name:
-                    return TextAreaFieldFF
+                    return TextAreaField
                 case DHIS2ValueTypes.TRUE_ONLY.name:
-                    return CheckboxFieldFF
+                    return CheckboxField
                 case DHIS2ValueTypes.LEGEND_DEFINITION.name:
                     return LegendDefinitionField
                 case DHIS2ValueTypes.RICH_TEXT.name:
                     return RichTextEditor
                 case DHIS2ValueTypes.LEGEND_MIN_MAX.name:
                     return LegendMinMax
+                case DHIS2ValueTypes.MULTIPLE_FIELDS.name:
+                    return MultipleFieldsField
                 default:
-                    return InputFieldFF
+                    return InputField
             }
         }
-    }, [optionSet, valueType]);
-    const type = useMemo(() => DHIS2ValueTypes[valueType].formName, [valueType]);
+    }, [type]);
+
+    const onChange = input.onChange;
+
+    return (<div className={classes['field-container']}>
+        <Input {...props} type={type} options={options} {...input} onChange={({value})=>onChange(value)} />
+    </div>)
+}
+
+
+CustomInput.propTypes = {
+    input: PropTypes.object.isRequired,
+    valueType: PropTypes.string.isRequired,
+    optionSet: PropTypes.object
+};
+
+
+export default function CustomField({field, ...props}) {
+    const {
+        name,
+        formName,
+        valueType,
+        validations,
+        min,
+        max,
+        mandatory,
+        optionSet,
+        disabled,
+        multipleField
+    } = field || {}
+
     return (
-        <div className={classes['field-container']}>
+
             <Field
                 name={name}
                 label={formName}
                 validate={validations}
-                legendDefinition={{
-                name: 'Target Reached/ Goal Achieved', color: '#000000' }
-                }
+                multipleField={multipleField}
                 min={min}
                 max={max}
-                type={type}
+                valueType={valueType}
                 required={mandatory}
                 disabled={disabled}
-                options={options}
-                component={component}
+                optionSet={optionSet}
+                component={CustomInput}
+                {...props}
             />
-        </div>
+
     )
 }
 

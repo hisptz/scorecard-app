@@ -63,7 +63,7 @@ export default function useDataSources(selectedDataSourceType, selectedGroup) {
         const filterType = selectedDataSourceType.filterType || 'eq'
         if (selectedGroup?.id) filter.push(`${selectedDataSourceType.groupKey}:eq:${selectedGroup.id}`)
         if (selectedDataSourceType.resource === 'dataItems') filter.push(`dimensionItemType:${filterType}:${selectedDataSourceType.dimensionItemType}`)
-        if(searchKeyword) filter.push(`displayName:like:${searchKeyword}`)
+        if(searchKeyword) filter.push(`displayName:ilike:${searchKeyword}`)
         const updatedQuery = query(selectedDataSourceType.resource);
         return await engine.query(updatedQuery, {
             variables: {

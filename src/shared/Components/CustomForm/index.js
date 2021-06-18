@@ -3,6 +3,7 @@ import {map} from 'lodash'
 import PropTypes from 'prop-types'
 import React from 'react'
 import CustomField from "./components/CustomField";
+import {FormFieldModel} from "./models";
 
 const {Form} = ReactFinalForm
 export default function CustomForm({onSubmit, fields, formReference}) {
@@ -12,7 +13,7 @@ export default function CustomForm({onSubmit, fields, formReference}) {
                 ({handleSubmit})=>(
                     <form ref={formReference} onSubmit={handleSubmit}>
                         {
-                            map(fields, (field)=><CustomField key={field.id} field={field} />)
+                            map(fields, (field)=><CustomField key={field?.id} field={field} />)
                         }
                     </form>
                 )
@@ -24,7 +25,7 @@ export default function CustomForm({onSubmit, fields, formReference}) {
 CustomForm.propTypes = {
     formReference: PropTypes.any.isRequired,
     onSubmit: PropTypes.func.isRequired,
-    fields: PropTypes.arrayOf(PropTypes.instanceOf(HTMLFormElement)),
+    fields: PropTypes.arrayOf(PropTypes.instanceOf(FormFieldModel)),
 }
 
 

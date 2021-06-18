@@ -1,5 +1,6 @@
 import React from "react";
 import {MemoryRouter, Route, Switch} from 'react-router-dom'
+import Admin from "../Admin";
 import EmptyScoreCardList from "../Main";
 import ExampleForms from "../test/Forms";
 
@@ -14,6 +15,10 @@ export default function Router() {
             pathname: '/test',
             component: ExampleForms
         },
+        {
+            pathname: '/admin',
+            component: Admin
+        }
     ]
 
     return (

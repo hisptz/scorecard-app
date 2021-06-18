@@ -36,6 +36,10 @@ const DHIS2ValueTypes = {
     LEGEND_MIN_MAX:{
         name: 'LEGEND_MIN_MAX',
         formName: 'legendMinMax'
+    },
+    MULTIPLE_FIELDS:{
+        name: 'MULTIPLE_FIELDS',
+        formName: 'multipleFields'
     }
 }
 

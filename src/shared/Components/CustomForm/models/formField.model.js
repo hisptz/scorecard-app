@@ -11,7 +11,8 @@ export default class FormFieldModel {
                     min,
                     max,
                     dependants,
-                    disabled
+                    disabled,
+        multipleField
                 }) {
         this.id = id;
         this.disabled = disabled;
@@ -24,6 +25,7 @@ export default class FormFieldModel {
         this.min = min; //min value for number and date fields
         this.max = max; //max value for number and date fields
         this.dependants = dependants; //Array of field Ids this form field depends on for validation
+        this.multipleField = multipleField
     }
 
 

@@ -24,6 +24,7 @@ function ColorPickerPopper({reference, value, onClose, onChange}) {
         </Popover>
     )
 }
+
 ColorPickerPopper.propTypes = {
     reference: PropTypes.object,
     value: PropTypes.string,
@@ -32,33 +33,39 @@ ColorPickerPopper.propTypes = {
 };
 
 
-export default function LegendDefinitionField({input,  ...props}) {
-    const {name, label,value = {color: '#FFFF00', name: 'Legend One'}, onChange,} = input
-    const {color, name: legendName} = value;
+export default function LegendDefinitionField({name, label, value, onChange, ...props}) {
+    const {color, name: legendName} = value || {};
     const [reference, setReference] = useState(undefined);
 
-    const onColorChange = (color) =>{
+    const onColorChange = (color) => {
         onChange({
-            ...value,
-            color
+            name,
+            value: {
+                ...value,
+                color
+            }
         })
     }
 
-    const onNameChange = (newName) =>{
+    const onNameChange = (newName) => {
         onChange({
-            ...value,
-            name: newName.value
+            name,
+            value: {
+                ...value,
+                name: newName.value
+            }
         })
     }
 
     return (
-        <Field  name={name} label={label} value={value}  {...props} {...input} >
+        <Field name={name} label={label} value={value}  {...props} >
             <div id={name} className={classes['legend-definition-container']}>
-                <div id={`color-selector-btn-${name}`} onClick={e => setReference(e.currentTarget)} style={{background: color, borderColor: color}} className={classes['legend-color']}>
+                <div id={`color-selector-btn-${name}`} onClick={e => setReference(e.currentTarget)}
+                     style={{background: color, borderColor: color}} className={classes['legend-color']}>
                     {color}
                 </div>
                 <div className={classes['legend-input']}>
-                    <Input dataTest={`legend-definition-text-${name}`} onChange={onNameChange} value={legendName} />
+                    <Input dataTest={`legend-definition-text-${name}`} onChange={onNameChange} value={legendName}/>
                 </div>
             </div>
             {
@@ -71,6 +78,9 @@ export default function LegendDefinitionField({input,  ...props}) {
 }
 
 LegendDefinitionField.propTypes = {
-    input: PropTypes.object
+    name: PropTypes.string.isRequired,
+    onChange: PropTypes.func.isRequired,
+    label: PropTypes.string,
+    value: PropTypes.object
 };
 
