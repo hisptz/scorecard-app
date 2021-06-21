@@ -32,7 +32,7 @@ const steps = [
 ];
 
 export default function ScoreCardManagement() {
-    const {width, height} = useMediaQuery()
+    const {width} = useMediaQuery()
     const [activeStep, setActiveStep] = useState(steps[0]);
     const formRef = useRef(HTMLFormElement);
 
@@ -41,7 +41,7 @@ export default function ScoreCardManagement() {
     return (
         <div className='container'>
             <div className='column'>
-                <div>
+                <div >
                     <Stepper>
                         {
                             steps.map(step => (
@@ -54,13 +54,17 @@ export default function ScoreCardManagement() {
                         }
                     </Stepper>
                 </div>
-                <div className='container bordered background-white' style={{width: width * .96}}>
-                    <div className='column p-16' style={{height: '100%', justifyContent: 'space-between'}}>
-                        {<Component formReference={formRef}/>}
-                        <ButtonStrip end>
-                            <Button>Cancel</Button>
-                            <Button primary onClick={() => formRef.current.requestSubmit()}>Next</Button>
-                        </ButtonStrip>
+                <div className='row'>
+                    <div className='column center' style={{flex: 1}}>
+                        <div className='container bordered background-white center' style={{width: width * .96}}>
+                            <div className='column p-16' style={{height: '100%', justifyContent: 'space-between'}}>
+                                {<Component formReference={formRef}/>}
+                                <ButtonStrip end>
+                                    <Button>Cancel</Button>
+                                    <Button primary onClick={() => formRef.current.requestSubmit()}>Next</Button>
+                                </ButtonStrip>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

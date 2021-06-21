@@ -4,7 +4,7 @@
     align-items: center;
     font-size: 1rem;
     min-height: 715px;
-    min-width: 1366px;
+    min-width: 1362px; /* considering the scrollbar */
     overflow: auto;
 }
 

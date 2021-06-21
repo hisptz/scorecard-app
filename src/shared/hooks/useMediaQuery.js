@@ -4,7 +4,7 @@ function getWindowDimensions() {
     const {innerWidth: width, innerHeight: height} = window;
     return {
         width: width > 1366 ? width : 1366,
-        height: (height > 763 ? height : 763) - 48
+        height: (height > 763 ? height : 763) - 48 //considering the appbar
     };
 }
 

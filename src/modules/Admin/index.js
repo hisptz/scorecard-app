@@ -12,7 +12,7 @@ export default function Admin() {
     ]
 
     return (
-        <div>
+        <div className='pb-32'>
             <MemoryRouter initialEntries={routes} initialIndex={0} >
                 <Switch>
                     {

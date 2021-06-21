@@ -22,7 +22,6 @@ export default function MultipleFieldsField({name, value, onChange, multipleFiel
             }
             setFields(fields)
         }
-
         setInitialFields();
     }, []);
 
@@ -82,6 +81,7 @@ export default function MultipleFieldsField({name, value, onChange, multipleFiel
         </Field>
     )
 }
+
 MultipleFieldsField.propTypes = {
     multipleField: PropTypes.object.isRequired,
     name: PropTypes.string.isRequired,
