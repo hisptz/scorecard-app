@@ -53,7 +53,7 @@ export default function MultipleFieldsField({name, value, onChange, multipleFiel
 
     return (
         <Field {...props} className='w-50'>
-            <div {...props} className='column'>
+            <div className='column'>
                 {
                     fields.map((field, index) => {
                         const input = {

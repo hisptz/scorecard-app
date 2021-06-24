@@ -1,9 +1,10 @@
-import {CheckboxField, InputField, ReactFinalForm, SingleSelectField, TextAreaField} from '@dhis2/ui';
+import {InputField, ReactFinalForm, SingleSelectField, TextAreaField} from '@dhis2/ui';
 import {map} from 'lodash'
 import PropTypes from 'prop-types'
 import React, {useMemo} from 'react'
 import {DHIS2ValueTypes} from "../../constants";
 import {FormFieldModel} from "../../models";
+import CustomCheckboxField from "./components/CustomCheckboxField";
 import LegendDefinitionField from "./components/LegendDefinitionField";
 import LegendMinMax from "./components/LegendMinMax";
 import MultipleFieldsField from "./components/MultipleFieldsField";
@@ -31,7 +32,7 @@ export function CustomInput({input, valueType, optionSet, ...props}) {
                 case DHIS2ValueTypes.LONG_TEXT.name:
                     return TextAreaField
                 case DHIS2ValueTypes.TRUE_ONLY.name:
-                    return CheckboxField
+                    return CustomCheckboxField
                 case DHIS2ValueTypes.LEGEND_DEFINITION.name:
                     return LegendDefinitionField
                 case DHIS2ValueTypes.RICH_TEXT.name:
@@ -49,7 +50,7 @@ export function CustomInput({input, valueType, optionSet, ...props}) {
     const onChange = input.onChange;
 
     return (<div className={classes['field-container']}>
-        <Input {...props} type={type} options={options} {...input} onChange={({value})=>onChange(value)} />
+        <Input {...input} {...props} type={type} options={options} onChange={({value})=>onChange(value)} />
     </div>)
 }
 
@@ -72,7 +73,8 @@ export default function CustomField({field, ...props}) {
         mandatory,
         optionSet,
         disabled,
-        multipleField
+        multipleField,
+        legendDefinition
     } = field || {}
 
     return (
@@ -89,6 +91,7 @@ export default function CustomField({field, ...props}) {
                 disabled={disabled}
                 optionSet={optionSet}
                 component={CustomInput}
+                legendDefinition={legendDefinition}
                 {...props}
             />
 

@@ -40,6 +40,7 @@
     "lodash": "^4.17.21",
     "luxon": "^1.27.0",
     "prop-types": "^15.7.2",
+    "react-beautiful-dnd": "^13.1.0",
     "react-color": "^2.19.3",
     "react-router-dom": "^5.2.0",
     "recoil": "^0.3.1"

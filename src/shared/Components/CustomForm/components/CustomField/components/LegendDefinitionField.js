@@ -33,7 +33,7 @@ ColorPickerPopper.propTypes = {
 };
 
 
-export default function LegendDefinitionField({name, label, value, onChange, ...props}) {
+export default function LegendDefinitionField({name, label, value, onChange}) {
     const {color, name: legendName} = value || {};
     const [reference, setReference] = useState(undefined);
 
@@ -58,7 +58,7 @@ export default function LegendDefinitionField({name, label, value, onChange, ...
     }
 
     return (
-        <Field name={name} label={label} value={value}  {...props} >
+        <Field name={name} label={label} value={value}  >
             <div id={name} className={classes['legend-definition-container']}>
                 <div id={`color-selector-btn-${name}`} onClick={e => setReference(e.currentTarget)}
                      style={{background: color, borderColor: color}} className={classes['legend-color']}>

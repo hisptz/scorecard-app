@@ -27,7 +27,6 @@ export default function useDataSources(selectedDataSourceType, selectedGroup) {
 
 
     const search =  async (keyword) =>{
-        console.log(keyword);
         setLoading(true);
         try{
             setPage(1);

@@ -12,25 +12,29 @@ const dataSourcesTypes = [
         resource: 'indicators',
         groupResource: 'indicatorGroups',
         dimensionItemType: 'INDICATOR',
-        groupKey: 'indicatorGroups.id'
+        groupKey: 'indicatorGroups.id',
+        type: 'indicator'
     },
     {
         label: 'Data Elements',
         resource: 'dataElements',
         groupResource: 'dataElementGroups',
         dimensionItemType: 'DATA_ELEMENT',
-        groupKey: 'dataElementGroups.id'
+        groupKey: 'dataElementGroups.id',
+        type: 'dataElement'
     },
     {
         label: 'Data Sets',
-        resource: 'dataSets'
+        resource: 'dataSets',
+        type: 'dataSet'
     },
     {
         label: 'Program Indicators',
         resource: 'dataItems',
         dimensionItemType: 'PROGRAM_INDICATOR',
         groupKey: 'programId',
-        groupResource: 'programs'
+        groupResource: 'programs',
+        type: 'programIndicator'
     },
     {
         label: 'Event Data Items',
@@ -38,12 +42,13 @@ const dataSourcesTypes = [
         dimensionItemType: '[PROGRAM_DATA_ELEMENT,PROGRAM_ATTRIBUTE]',
         filterType: 'in',
         groupKey: 'programId',
-        groupResource: 'programs'
+        groupResource: 'programs',
+        type: 'programDataItem'
 
     },
 ]
 
-export default function DataSourceSelector({onSubmit}) {
+export default function DataSourceSelector({onSubmit, disabled}) {
     const [selectedDataSourceType, setSelectedDataSourceType] = useState(dataSourcesTypes[0]);
     const [selectedGroup, setSelectedGroup] = useState();
     const [selectedDataSources, setSelectedDataSources] = useState([]);
@@ -62,8 +67,8 @@ export default function DataSourceSelector({onSubmit}) {
     }
 
     return (
-        <div className='start w-100 main-container'>
-            <div className='column bordered'>
+        <div className='start'>
+            <div className='column bordered overflow-auto'>
                 <div className='row p-16'>
                     {
                         dataSourcesTypes.map(source => <Chip onClick={() => onDataSourceTypeChange(source)}
@@ -76,7 +81,7 @@ export default function DataSourceSelector({onSubmit}) {
                                    selectedDataType={selectedDataSourceType}/>
 
                     <div className='pt-16'>
-                        <DataSource selected={selectedDataSources} onChange={onDataSourceSelect}
+                        <DataSource disabled={disabled} selected={selectedDataSources} onChange={onDataSourceSelect}
                                     selectedGroup={selectedGroup} selectedDataSourceType={selectedDataSourceType}/>
                     </div>
                 </div>
@@ -85,6 +90,7 @@ export default function DataSourceSelector({onSubmit}) {
     )
 }
 DataSourceSelector.propTypes = {
-    onSubmit: PropTypes.func.isRequired
+    onSubmit: PropTypes.func.isRequired,
+    disabled: PropTypes.array
 };
 

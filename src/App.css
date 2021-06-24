@@ -28,6 +28,10 @@ body {
     flex-direction: column;
 }
 
+.overflow-auto {
+    overflow: auto;
+}
+
 .row {
     display: flex;
     flex-direction: row;
@@ -45,13 +49,22 @@ body {
 .align-items-center {
     align-items: center;
 }
+.align-items-end{
+    align-items: flex-end;
+}
 
 .space-between {
     justify-content: space-between;
 }
-
+.end{
+    justify-content: end;
+}
 .space-evenly {
     justify-content: space-evenly;
+}
+
+.flex-1{
+    flex: 1;
 }
 
 .p-8 {
@@ -123,10 +136,12 @@ body {
 .w-50 {
     width: 50%;
 }
-.w-75{
+
+.w-75 {
     width: 75%;
 }
-.w-25{
+
+.w-25 {
     width: 25%;
 }
 
@@ -190,21 +205,76 @@ div.jsx-1730587817 {
 .MuiTypography-root.MuiStepLabel-label.MuiStepLabel-active.MuiTypography-body2.MuiTypography-displayBlock {
     color: #FFFFFF;
 }
+
 .MuiTypography-root.MuiStepLabel-label.MuiTypography-body2.MuiTypography-displayBlock {
     font-weight: bold;
 }
 
-.MuiStep-root.MuiStep-horizontal{
+.MuiStep-root.MuiStep-horizontal {
     margin: 0 8px;
     padding: 8px;
     border-radius: 8px;
 }
 
-.MuiStepConnector-line.MuiStepConnector-lineHorizontal{
+.MuiStepConnector-line.MuiStepConnector-lineHorizontal {
     border-width: 2px;
 }
-.MuiPaper-root.MuiStepper-root.MuiStepper-horizontal.MuiPaper-elevation0{
+
+.MuiPaper-root.MuiStepper-root.MuiStepper-horizontal.MuiPaper-elevation0 {
     background: transparent;
 }
 
 
+/*Accordion*/
+.accordion-title {
+    font-size: 16px;
+    margin: 0;
+}
+
+.accordion-title-edit {
+    display: none !important;
+}
+
+.accordion-title-container:hover > .accordion-title-edit {
+    display: block !important;
+}
+
+/*Data Source */
+.data-source.bordered {
+    border-radius: 4px;
+    margin-bottom: 8px;
+}
+
+.data-source.close-icon {
+    width: 32px;
+    height: 32px;
+}
+
+.data-source.avatar {
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+    text-align: center;
+}
+
+.data-source.name {
+    margin: 0;
+    padding-left: 16px;
+}
+
+.info-box{
+    padding: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #F8F9FA;
+    border-radius: 8px;
+}
+
+.info-box-title{
+    color: #4A5768;
+}
+.info-box-list> li{
+    margin-bottom: 16px;
+    color: #4A5768;
+}
