@@ -16,7 +16,7 @@ export default function EmptyScoreCardList() {
     return (
         <div className='center'>
             <div className='column center' style={{height}}>
-                <div className='bordered text-center center column background-white'
+                <div className='container-bordered text-center center column background-white'
                      style={{height: height * .6, width: width * .5, borderRadius: 8}}>
                     <div className='p-32 '>
                         <ScorecardIllustration style={{height: height*.15}}/>

@@ -13,6 +13,7 @@ export default class FormFieldModel {
                     dependants,
                     disabled,
         multipleField,
+        multipleFields,
         legendDefinition
                 }) {
         this.id = id;
@@ -28,6 +29,7 @@ export default class FormFieldModel {
         this.dependants = dependants; //Array of field Ids this form field depends on for validation
         this.multipleField = multipleField;
         this.legendDefinition = legendDefinition;
+        this.multipleFields = multipleFields
     }
 
 

@@ -149,7 +149,7 @@ body {
     text-align: center;
 }
 
-.bordered {
+.container-bordered {
     box-sizing: border-box;
     border-radius: 4px;
     border: 1px solid #A0ADBA;
@@ -240,7 +240,7 @@ div.jsx-1730587817 {
 }
 
 /*Data Source */
-.data-source.bordered {
+.data-source.container-bordered {
     border-radius: 4px;
     margin-bottom: 8px;
 }
@@ -269,6 +269,14 @@ div.jsx-1730587817 {
     justify-content: center;
     background: #F8F9FA;
     border-radius: 8px;
+}
+
+.header-row{
+    border-bottom: 1px solid rgb(232, 237, 242) !important;
+}
+
+.table-header{
+    font-weight: bold;
 }
 
 .info-box-title{

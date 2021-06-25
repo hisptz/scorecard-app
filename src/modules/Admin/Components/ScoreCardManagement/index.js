@@ -1,6 +1,8 @@
 import {Button, ButtonStrip} from '@dhis2/ui'
 import {Step, StepLabel, Stepper} from "@material-ui/core";
-import React, {useRef, useState} from 'react'
+import {findIndex} from "lodash";
+import React, {useMemo, useRef, useState} from 'react'
+import {useHistory} from "react-router-dom";
 import useMediaQuery from "../../../../shared/hooks/useMediaQuery";
 import AccessScorecardForm from "./Components/Access";
 import DataConfigurationScorecardForm from "./Components/DataConfiguration";
@@ -33,15 +35,35 @@ const steps = [
 
 export default function ScoreCardManagement() {
     const {width} = useMediaQuery()
+    const history = useHistory();
     const [activeStep, setActiveStep] = useState(steps[0]);
     const formRef = useRef(HTMLFormElement);
 
     const Component = activeStep.component;
 
+    const onNextStep = () => {
+        const index = findIndex(steps, ['label', activeStep.label])
+        if (index !== steps.length - 1) {
+            setActiveStep(steps[index + 1])
+        }
+    }
+    const onPreviousStep = () => {
+        const index = findIndex(steps, ['label', activeStep.label])
+        if (index !== 0) {
+            setActiveStep(steps[index - 1])
+        }
+    }
+    const onCancel = () => {
+        history.replace('/home')
+    }
+
+    const hasNextStep = useMemo(() => findIndex(steps, ['label', activeStep.label]) !== (steps.length - 1), [activeStep]);
+    const hasPreviousStep = useMemo(() => findIndex(steps, ['label', activeStep.label]) > 0, [activeStep]);
+
     return (
         <div className='container'>
             <div className='column'>
-                <div >
+                <div>
                     <Stepper>
                         {
                             steps.map(step => (
@@ -56,16 +78,24 @@ export default function ScoreCardManagement() {
                 </div>
                 <div className='row'>
                     <div className='column center' style={{flex: 1}}>
-                        <div className='container bordered background-white center' style={{width: width * .96}}>
+                        <div className='container container-bordered background-white center' style={{width: width * .96}}>
                             <div className='column p-16' style={{height: '100%', justifyContent: 'space-between'}}>
                                 {<Component formReference={formRef}/>}
                                 <ButtonStrip end>
-                                    <Button>Cancel</Button>
-                                    <Button primary onClick={() => formRef.current.requestSubmit()}>Next</Button>
+                                    <Button disabled={!hasPreviousStep}
+                                            onClick={onPreviousStep}>Previous</Button>
+                                    <Button primary disabled={!hasNextStep}
+                                            onClick={onNextStep}>Next</Button>
                                 </ButtonStrip>
                             </div>
                         </div>
                     </div>
+                </div>
+                <div className='row center p-32'>
+                    <ButtonStrip center>
+                        <Button onClick={onCancel}>Cancel</Button>
+                        <Button primary>Save</Button>
+                    </ButtonStrip>
                 </div>
             </div>
         </div>

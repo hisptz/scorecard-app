@@ -8,13 +8,10 @@ import {ScorecardEditState, ScorecardStateSelector} from "../../../../../../core
 import {updateListFromDragAndDrop} from "../../../../../../shared/utils/dnd";
 import DataGroups from "./Components/DataGroups";
 import DataSourceConfiguration from "./Components/DataGroups/Components/DataSourceConfiguration";
+import PreviewScorecardTable from "./Components/PreviewScorecardTable";
 import {generateNewGroupData} from "./utils";
 
 
-// TODO: Implementation of data source configuration
-// TODO: Saving values to state
-// TODO: Save general values to state
-// TODO: Implement the preview table
 // TODO: Implement linking by button
 // TODO: Implement linking by dnd
 
@@ -22,9 +19,8 @@ import {generateNewGroupData} from "./utils";
 export default function DataConfigurationScorecardForm() {
     const [dataSourceGroups, updateDataSourceGroups] = useRecoilState(ScorecardStateSelector('dataSourceGroups'))
     const [targetOnLevels, updateTargetOnLevels] = useRecoilState(ScorecardStateSelector('targetOnLevels'))
-    const setScorecardEditState = useSetRecoilState(ScorecardEditState)
+    const setScorecardEditState= useSetRecoilState(ScorecardEditState)
     const groups = dataSourceGroups;
-
     const onGroupAdd = async () => {
         await updateDataSourceGroups((prevState = []) => (
             [...prevState, generateNewGroupData(groups)]
@@ -49,7 +45,7 @@ export default function DataConfigurationScorecardForm() {
         <div className='container'>
             <div className='row'>
                 <div className='column p-16 w-25'>
-                    <div className='bordered' style={{minHeight: 500, height: '100%'}}>
+                    <div className='container-bordered' style={{minHeight: 500, height: '100%'}}>
                         <div className='row space-between pr-16 pt-16'>
                             <p style={{margin: 0}} className='pl-16'>Set Target on Levels</p>
                             <Checkbox checked={targetOnLevels}
@@ -65,12 +61,17 @@ export default function DataConfigurationScorecardForm() {
                                     <DataGroups/>
                                 </DragDropContext>
                         }
-                        <div className='p-8 column align-items-center'>
+                        <div className='p-8 column' style={{alignItems: 'start'}}>
                             <Button onClick={onGroupAdd} icon={<AddIcon/>}>Add Group</Button>
                         </div>
                     </div>
                 </div>
                 <div className='w-75 column p-16 center'>
+                    <div className='row pb-16'>
+                        <div className='column'>
+                            {!isEmpty(dataSourceGroups) && <PreviewScorecardTable/>}
+                        </div>
+                    </div>
                     <div className='row flex-1 align-items-center'>
                         <DataSourceConfiguration/>
                     </div>

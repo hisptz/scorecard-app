@@ -2,7 +2,21 @@ import {cloneDeep, get as _get, set as _set} from 'lodash'
 import {atom, selectorFamily} from "recoil";
 
 const defaultValue = {
-    dataSourceGroups: []
+    dataSourceGroups: [],
+    legendDefinitions:[
+        {
+            color: "#417505",
+            name: 'Target Reached'
+        },
+        {
+            color: "#f8e71c",
+            name: "Average"
+        },
+        {
+            color: "#d0021b",
+            name: "Poor Performance"
+        }
+    ]
 }
 
 const ScorecardState = atom({

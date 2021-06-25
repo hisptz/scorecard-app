@@ -10,6 +10,7 @@ import {FormFieldModel} from "../../../../../../../../../../../../shared/Compone
 const {Form, FormSpy} = ReactFinalForm
 export default function DataSourceConfigurationForm() {
     const scorecardEditState = useRecoilValue(ScorecardEditState);
+    const legendDefinitions = useRecoilValue(ScorecardStateSelector('legendDefinitions'))
     const selectedGroupIndex = scorecardEditState?.selectedGroupIndex;
     const selectedDataSourceIndex = scorecardEditState?.selectedDataSourceIndex;
     const path = ['dataSourceGroups', selectedGroupIndex, 'dataSources', selectedDataSourceIndex]
@@ -18,7 +19,6 @@ export default function DataSourceConfigurationForm() {
         const updateValues = {...selectedDataSource, ...values}
         updateSelectedDataSource(updateValues)
     })
-
     return (
         <div className='container p-16'>
             <Form onSubmit={console.log} initialValues={selectedDataSource}>
@@ -86,18 +86,23 @@ export default function DataSourceConfigurationForm() {
                                     </div>
                                     <Divider/>
                                     <div className='row'>
-                                        <div className='column'>
+                                        <div className='column w-100'>
+
                                             <CustomField field={new FormFieldModel({
-                                                id: 'targetReached',
-                                                formName: 'Target Reached',
-                                                mandatory: false,
-                                                name: 'targetReached',
-                                                legendDefinition: {
-                                                    name: 'Target Reached',
-                                                    color: '#00FF00'
-                                                },
-                                                valueType: DHIS2ValueTypes.LEGEND_MIN_MAX.name
-                                            })}/>
+                                                id: 'legendRanges',
+                                                name: 'legendRanges',
+                                                formName: 'Legend Ranges',
+                                                valueType: DHIS2ValueTypes.MULTIPLE_FIELDS.name,
+                                                multipleFields: legendDefinitions?.map(legend=>(new FormFieldModel({
+                                                    id: legend.name,
+                                                    mandatory: false,
+                                                    name: legend.name,
+                                                    legendDefinition: legend,
+                                                    valueType: DHIS2ValueTypes.LEGEND_MIN_MAX.name
+                                                })))
+                                            })}
+                                            />
+
                                         </div>
                                     </div>
                                 </div>

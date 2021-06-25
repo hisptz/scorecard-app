@@ -1,11 +1,14 @@
+import {cloneDeep, debounce} from 'lodash'
 import PropTypes from 'prop-types'
 import React from 'react'
+import {useRecoilState} from "recoil";
+import ScorecardState from "../../../../../../core/state/scorecard";
 import CustomForm from "../../../../../../shared/Components/CustomForm";
 import {DHIS2ValueTypes} from "../../../../../../shared/Components/CustomForm/constants";
 import {FormFieldModel} from "../../../../../../shared/Components/CustomForm/models";
 
 export default function GeneralScorecardForm({formReference}) {
-
+    const [scorecardState, setScorecardState] = useRecoilState(ScorecardState)
     const formFields = [
         new FormFieldModel({
             id: 'title',
@@ -52,27 +55,18 @@ export default function GeneralScorecardForm({formReference}) {
         }),
     ]
 
-    const initialValues = {
-        legendDefinitions:[
-            {
-                color: "#417505",
-                name: 'Target Reached'
-            },
-            {
-                color: "#f8e71c",
-                name: "Average"
-            },
-            {
-                color: "#d0021b",
-                name: "Poor Performance"
-            }
-        ]
-    }
+    const onChange = debounce(({values}) => {
+        setScorecardState(prevState => ({
+            ...cloneDeep(prevState),
+            ...values
+        }))
+    })
 
     return (
         <div className='container'>
             <div className='column space-between'>
-                <CustomForm initialValues={initialValues} formReference={formReference} onSubmit={console.log} fields={formFields}/>
+                <CustomForm onChange={onChange} initialValues={scorecardState} formReference={formReference}
+                            onSubmit={console.log} fields={formFields}/>
             </div>
         </div>
     )

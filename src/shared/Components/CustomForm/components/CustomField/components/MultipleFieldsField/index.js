@@ -7,21 +7,32 @@ import React, {useEffect, useState} from 'react'
 import {FormFieldModel} from "../../../../models";
 import {CustomInput} from "../../index";
 
-export default function MultipleFieldsField({name, value, onChange, multipleField, initialFieldCount, ...props}) {
+export default function MultipleFieldsField({
+                                                name,
+                                                value,
+                                                onChange,
+                                                multipleField,
+                                                initialFieldCount,
+                                                multipleFields,
+                                                ...props
+                                            }) {
     const [fields, setFields] = useState([]);
     useEffect(() => {
         function setInitialFields() {
-            const count = value?.length || initialFieldCount || 1
-            let i = 0
-            const fields = []
-            for (i; i < count; i++) {
-                const newField = new FormFieldModel({...multipleField});
-                set(newField, ['id'], `${newField.id}-${fields.length}`)
-                set(newField, ['name'], `${newField.id}-${fields.length}`)
-                fields.push(newField)
+            if (multipleField) {
+                const count = value?.length || initialFieldCount || 1
+                let i = 0
+                const fields = []
+                for (i; i < count; i++) {
+                    const newField = new FormFieldModel({...multipleField});
+                    set(newField, ['id'], `${newField.id}-${fields.length}`)
+                    set(newField, ['name'], `${newField.id}-${fields.length}`)
+                    fields.push(newField)
+                }
+                setFields(fields)
             }
-            setFields(fields)
         }
+
         setInitialFields();
     }, []);
 
@@ -50,12 +61,11 @@ export default function MultipleFieldsField({name, value, onChange, multipleFiel
         }
         onChange({value: tempValue, name})
     }
-
     return (
-        <Field {...props} className='w-50'>
+        <Field {...props}>
             <div className='column'>
                 {
-                    fields.map((field, index) => {
+                    multipleField ? fields.map((field, index) => {
                         const input = {
                             name: field.name,
                             onChange: (value) => onFieldValueChange(index, value),
@@ -72,21 +82,44 @@ export default function MultipleFieldsField({name, value, onChange, multipleFiel
                                                                  onClick={() => onDeleteField(field, index)}
                             >Delete</Button></div>
                         </div>
+                    }) : multipleFields?.map((field, index) => {
+                        const input = {
+                            name: field.name,
+                            onChange: (value) => onFieldValueChange(index, value),
+                            value: value?.[index]
+                        }
+                        return <div key={`${field?.id}-${index}`} className='row align-items-center w-100'>
+                            <div className='column'>
+                                <CustomInput onChange={(v) => onFieldValueChange(index, v)}
+                                             valueType={field.valueType} input={input} {...field} />
+                            </div>
+                            {
+                                multipleField && <div className='column'>
+                                    <Button disabled={index === 0 && fields.length === 1}
+                                            icon={<DeleteIcon/>}
+                                            onClick={() => onDeleteField(field, index)}
+                                    >Delete</Button></div>
+                            }
+                        </div>
                     })
+
                 }
-                <div className='w-50'>
-                    <Button icon={<AddIcon/>} onClick={onAddField}>Add Item</Button>
-                </div>
+                {
+                    multipleField && <div className='w-50'>
+                        <Button icon={<AddIcon/>} onClick={onAddField}>Add Item</Button>
+                    </div>
+                }
             </div>
         </Field>
     )
 }
 
 MultipleFieldsField.propTypes = {
-    multipleField: PropTypes.object.isRequired,
     name: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
     initialFieldCount: PropTypes.number,
+    multipleField: PropTypes.object,
+    multipleFields: PropTypes.arrayOf(PropTypes.instanceOf(FormFieldModel)),
     value: PropTypes.any,
 
 };

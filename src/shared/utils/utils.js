@@ -18,3 +18,9 @@ export function uid() {
     }
     return uid;
 }
+
+
+export function generateRandomValues(max) {
+    const maxNo = max || 100
+    return Math.floor(Math.random() * maxNo)
+}

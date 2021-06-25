@@ -36,7 +36,7 @@ const Accordion = withStyles({
 
 const AccordionSummary = withStyles({
     root: {
-        backgroundColor: 'rgba(0, 0, 0, .03)',
+        background: '#F8F9FA',
         borderBottom: '1px solid rgba(0, 0, 0, .125)',
         marginBottom: -1,
         minHeight: 56,
@@ -201,7 +201,7 @@ export default function DataGroup({handleAccordionChange, expanded, index, onDel
                             }
                         </AccordionSummary>
                         <AccordionDetails>
-                            <div className='column align-items-center'>
+                            <div className='column'>
                                 {
                                     isEmpty(dataSources) ?
                                         <div className='column w-100 text-center center' style={{height: 100}}>

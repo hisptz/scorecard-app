@@ -13,21 +13,25 @@ export default function LegendMinMax({name, value, onChange, legendDefinition,})
                          style={{backgroundColor: color, border: `1px solid ${color}`, height: 16, width: 24}}/>
                     <label className='pl-8'>{legendName}</label>
                 </div>
-                <div className='row space-between'><InputField value={value.min} type='number' onChange={({value: newValue}) => {
+                <div className='row space-between'><InputField value={value?.min} type='number' onChange={({value: newValue}) => {
                     onChange({
                         name,
                         value: {
                             ...value,
+                            name: legendName,
+                            color,
                             min: newValue
                         }
                     })
                 }
                 } className='pr-8' label='Min'/>
-                    <InputField value={value.max} type='number' onChange={({value: newValue}) => {
+                    <InputField value={value?.max} type='number' onChange={({value: newValue}) => {
                         onChange({
                             name,
                             value: {
                                 ...value,
+                                name: legendName,
+                                color,
                                 max: newValue
                             }
                         })

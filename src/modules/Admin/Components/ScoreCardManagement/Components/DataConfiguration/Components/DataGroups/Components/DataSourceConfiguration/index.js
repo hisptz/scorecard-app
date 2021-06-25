@@ -12,7 +12,7 @@ export default function DataSourceConfiguration() {
             <div className={`row ${isNaN(selectedDataSourceIndex) && 'center'}`}>
                 {
                     !isNaN(selectedDataSourceIndex) ?
-                        <div className='bordered' style={{width: '30%'}}>
+                        <div className='container-bordered' >
                             <div className='column'>
                                 <div className='p16'>
                                     <DataConfigurationScorecardForm />

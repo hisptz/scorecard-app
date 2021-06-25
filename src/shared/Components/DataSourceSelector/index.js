@@ -68,7 +68,7 @@ export default function DataSourceSelector({onSubmit, disabled}) {
 
     return (
         <div className='start'>
-            <div className='column bordered overflow-auto'>
+            <div className='column container-bordered overflow-auto'>
                 <div className='row p-16'>
                     {
                         dataSourcesTypes.map(source => <Chip onClick={() => onDataSourceTypeChange(source)}

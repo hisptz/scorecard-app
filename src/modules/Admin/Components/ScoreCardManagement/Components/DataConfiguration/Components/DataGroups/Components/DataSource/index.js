@@ -33,7 +33,7 @@ export default function DataSource({index, onDelete}) {
                                     }))
                                 }
                             }}
-                            className='bordered data-source p-8 w-100' style={{background: selected && colors.grey300}}>
+                            className='container-bordered data-source p-8 w-100' style={{background: selected && colors.grey300}}>
                             <div className='row space-between align-items-center'>
                                 <div className='row align-items-center '>
                                     <Avatar className='data-source avatar'>{getDataSourceShortName(type)}</Avatar>

@@ -74,7 +74,8 @@ export default function CustomField({field, ...props}) {
         optionSet,
         disabled,
         multipleField,
-        legendDefinition
+        legendDefinition,
+        multipleFields
     } = field || {}
 
     return (
@@ -92,6 +93,7 @@ export default function CustomField({field, ...props}) {
                 optionSet={optionSet}
                 component={CustomInput}
                 legendDefinition={legendDefinition}
+                multipleFields={multipleFields}
                 {...props}
             />
 
