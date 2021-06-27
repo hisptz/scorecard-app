@@ -10,14 +10,14 @@
   "defaultCommandTimeout": 4000,
   "projectId": "9ps7gr",
   "component": {
-    "baseUrl": "http://localhost:8082",
+    "baseUrl": "http://localhost:8080",
     "testFiles": "**/*.test.{js,ts,jsx,tsx}",
     "componentFolder": "src",
     "env": {
-      "dhis2_username": "admin",
-      "dhis2_password": "district",
-      "dhis2_base_url": "http://localhost:8082",
-      "dhis2_datatest_prefix": "dhis2-scorecard"
+      "dhis2Username": "admin",
+      "dhis2Password": "district",
+      "dhis2BaseUrl": "http://localhost:8080",
+      "dhis2DatatestPrefix": "dhis2-scorecard"
     }
   }
 }
