@@ -39,6 +39,8 @@ import { OrganisationUnitDialogComponent } from './dialogs/organisation-unit-dia
 import { PeriodDialogComponent } from './dialogs/period-dialog/period-dialog.component';
 import { SharingDialogComponent } from './dialogs/sharing-dialog/sharing-dialog.component';
 import { TruncatePipe } from './pipes/truncate.pipe';
+import { ScorecardMigrationSummaryDialogComponent } from './dialogs/scorecard-migration-summary-dialog/scorecard-migration-summary-dialog.component';
+
 
 @NgModule({
   imports: [
@@ -124,12 +126,14 @@ import { TruncatePipe } from './pipes/truncate.pipe';
     TruncatePipe,
     ListViewComponent,
     SettingsMenuComponent,
+    ScorecardMigrationSummaryDialogComponent
   ],
   entryComponents: [
     SharingDialogComponent,
     PeriodDialogComponent,
     OrganisationUnitDialogComponent,
     DeleteScorecardDialogComponent,
+    ScorecardMigrationSummaryDialogComponent
   ],
 })
 export class SharedModule {}

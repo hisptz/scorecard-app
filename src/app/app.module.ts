@@ -16,7 +16,6 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { SharedModule } from 'src/app/shared/shared.module';
 
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
@@ -25,6 +24,7 @@ import { CoreModule, RouteSerializer } from './core';
 import { effects } from './store/effects';
 import { metaReducers, reducers } from './store/reducers';
 import { TourMatMenuModule } from 'ngx-tour-md-menu';
+import {MatDialogModule} from '@angular/material/dialog';
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -38,7 +38,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     Ng2SearchPipeModule,
     FormsModule,
     HttpClientModule,
-    SharedModule,
     RoutingModule,
     CoreModule.forRoot({
       namespace: 'iapps',
@@ -47,6 +46,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         users: 'id'
       }
     }),
+      MatDialogModule,
     BrowserAnimationsModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     EffectsModule.forRoot(effects),
