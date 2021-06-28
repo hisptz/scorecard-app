@@ -116,7 +116,7 @@ export default function OrgUnitFilter({value, onUpdate}) {
             </div>
             <div className='row pt-16'>
                 <div className='column'>
-                    <SingleSelectField loading={levelsAndGroupsLoading} error={levelsAndGroupsError}
+                    <SingleSelectField clearable loading={levelsAndGroupsLoading} error={levelsAndGroupsError}
                                        validationText={levelsAndGroupsError?.message}
                                        onChange={onLevelSelect} selected={selectedLevel}
                                        label='Select Level'>
@@ -127,7 +127,7 @@ export default function OrgUnitFilter({value, onUpdate}) {
                     </SingleSelectField>
                 </div>
                 <div className='column'>
-                    <SingleSelectField loading={levelsAndGroupsLoading} error={levelsAndGroupsError}
+                    <SingleSelectField clearable loading={levelsAndGroupsLoading} error={levelsAndGroupsError}
                                        validationText={levelsAndGroupsError?.message}
                                        onChange={onGroupSelect} selected={selectedGroup}
                                        label='Select Group'>
