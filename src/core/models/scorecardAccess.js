@@ -6,11 +6,11 @@ export default class ScorecardAccess {
   }
 
   get id() {
-    this.scorecardAccess ? this.scorecardAccess.id : undefined;
+    return  this.scorecardAccess ? this.scorecardAccess.id : undefined;
   }
 
   get access() {
-    this.scorecardAccess
+    return this.scorecardAccess
       ? this.scorecardAccess.access
       : ScorecardAccessType.READ_ONLY;
   }

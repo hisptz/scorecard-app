@@ -3,7 +3,12 @@ export default class DataSelection {
     this.dataSelection = dataSelection;
   }
 
+
   get indicatorGroups() {
     return [];
   }
 }
+
+
+
+
