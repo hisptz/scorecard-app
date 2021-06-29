@@ -1,11 +1,15 @@
 export default class ScorecardOption {
   constructor(scorecardOptions) {
-    this.scorecardOptions = scorecardOptions;
+    this._scorecardOptions = scorecardOptions;
   }
 
+
+
   get averageDisplayType() {
-    return this.scorecardOptions
-      ? this.scorecardOptions.averageDisplayType
+    return this._scorecardOptions
+      ? this._scorecardOptions.averageDisplayType
       : undefined;
   }
+
+
 }

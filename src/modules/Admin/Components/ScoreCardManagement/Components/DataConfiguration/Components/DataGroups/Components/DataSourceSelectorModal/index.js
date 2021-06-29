@@ -5,6 +5,8 @@ import React, {useState} from 'react'
 import DataSourceSelector from "../../../../../../../../../../shared/Components/DataSourceSelector";
 
 
+//TODO: Refactor to shared
+
 export default function DataSourceSelectorModal({onClose, open, onSelect, disabled}) {
     const [selectedItems, setSelectedItems] = useState([]);
 
