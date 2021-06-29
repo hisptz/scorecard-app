@@ -1,7 +1,7 @@
 {
   "name": "scorecard",
   "version": "1.0.0",
-  "description": "",
+  "description": "Scorecard Application",
   "license": "BSD-3-Clause",
   "private": true,
   "scripts": {
