@@ -20,12 +20,13 @@ export default function HighlightedDataSourceConfigurationForm() {
     })
 
     return (
-        <div className='w-50 container-bordered'>
+        !isNaN(selectedHighlightedIndicatorIndex) ?
+            <div className='w-50 container-bordered'>
             {
                 selectedHighlightedIndicator &&
                 <DataSourceConfigurationForm defaultValues={selectedHighlightedIndicator}
                                              legendDefinitions={legendDefinitions} onFormChange={onChange}/>
             }
-        </div>
+        </div> : null
     )
 }

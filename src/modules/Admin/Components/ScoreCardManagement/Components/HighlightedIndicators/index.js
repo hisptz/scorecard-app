@@ -1,6 +1,7 @@
 import {Button} from '@dhis2/ui'
 import AddIcon from "@material-ui/icons/Add";
-import React, {useState} from 'react'
+import {isEmpty} from 'lodash'
+import React, {Fragment, useState} from 'react'
 import {useRecoilState} from "recoil";
 import {ScorecardStateSelector} from "../../../../../../core/state/scorecard";
 import DataSourceSelectorModal from "../DataConfiguration/Components/DataGroups/Components/DataSourceSelectorModal";
@@ -10,7 +11,6 @@ import HighlightedIndicatorsTable from "./Table";
 export default function HighlightedIndicatorsScorecardForm() {
     const [highlightedIndicators, setHighlightedIndicators] = useRecoilState(ScorecardStateSelector('highlightedIndicators'))
     const [addOpen, setAddOpen] = useState(false);
-
 
     const onAddClick = () => {
         setAddOpen(true)
@@ -25,21 +25,29 @@ export default function HighlightedIndicatorsScorecardForm() {
     }
 
     return (
-        <div className='container'>
+        <div className='column' style={{height: '100%'}}>
             <h3>Highlighted Indicators</h3>
-            <div className='row'>
-                <Button onClick={onAddClick} primary icon={<AddIcon/>}>Add</Button>
-            </div>
-            <div className='row'>
-                <div className='column pt-32'>
-                    <HighlightedIndicatorsTable/>
-                </div>
-                <div className='column'>
-                    <div className='pl-16 pt-32'>
-                        <HighlightedDataSourceConfigurationForm  />
+            {
+                !isEmpty(highlightedIndicators) ?
+                    <Fragment>
+                        <div className='row '>
+                            <Button onClick={onAddClick} primary icon={<AddIcon/>}>Add</Button>
+                        </div>
+                        <div className='row'>
+                            <div className='column pt-32'>
+                                <HighlightedIndicatorsTable/>
+                            </div>
+                            <div className='column'>
+                                <div className='pl-16 pt-32'>
+                                    <HighlightedDataSourceConfigurationForm/>
+                                </div>
+                            </div>
+                        </div>
+                    </Fragment> :
+                    <div className='row align-items-center center flex-1' >
+                        <Button onClick={onAddClick} primary icon={<AddIcon/>}>Add Highlighted Indicator</Button>
                     </div>
-                </div>
-            </div>
+            }
             {
                 addOpen && <DataSourceSelectorModal open={addOpen} onSelect={onAdd}
                                                     disabled={highlightedIndicators?.map(({id}) => id)}

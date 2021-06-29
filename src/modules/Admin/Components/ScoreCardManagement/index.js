@@ -34,7 +34,7 @@ const steps = [
 ];
 
 export default function ScoreCardManagement() {
-    const {width} = useMediaQuery()
+    const {width, height} = useMediaQuery()
     const history = useHistory();
     const [activeStep, setActiveStep] = useState(steps[0]);
     const formRef = useRef(HTMLFormElement);
@@ -61,7 +61,7 @@ export default function ScoreCardManagement() {
     const hasPreviousStep = useMemo(() => findIndex(steps, ['label', activeStep.label]) > 0, [activeStep]);
 
     return (
-        <div className='container'>
+        <div className='container' >
             <div className='column'>
                 <div>
                     <Stepper>
@@ -78,7 +78,7 @@ export default function ScoreCardManagement() {
                 </div>
                 <div className='row'>
                     <div className='column center' style={{flex: 1}}>
-                        <div className='container container-bordered background-white center' style={{width: width * .96}}>
+                        <div className='container container-bordered background-white center' style={{width: width * .96, minHeight: height*.8}}>
                             <div className='column p-16' style={{height: '100%', justifyContent: 'space-between'}}>
                                 {<Component formReference={formRef}/>}
                                 <ButtonStrip end>
