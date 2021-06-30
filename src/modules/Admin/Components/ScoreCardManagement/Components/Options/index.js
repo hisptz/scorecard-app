@@ -2,25 +2,23 @@ import {CheckboxField, Radio} from '@dhis2/ui'
 import React from 'react'
 import {useRecoilState} from "recoil";
 import AverageDisplayType from "../../../../../../core/constants/averageDisplayType";
+import ScorecardOptions from "../../../../../../core/models/scorecardOptions";
 import {ScorecardStateSelector} from "../../../../../../core/state/scorecard";
-
 
 export default function OptionsScorecardForm() {
     const [scorecardOptions, setScorecardOptions] = useRecoilState(ScorecardStateSelector('scorecardOptions'))
 
     const onChange = (value) => ({checked}) => {
-        setScorecardOptions(prevState => ({
-            ...prevState,
-            [value]: checked,
-        }))
+
+        setScorecardOptions(prevState => {
+            return ScorecardOptions.set(prevState, value, checked)
+        })
     }
 
     const onAverageChange = (value) => {
-        setScorecardOptions(prevState => ({
-            ...prevState,
-            averageDisplayType: value
-        }))
+        setScorecardOptions(prevState => (ScorecardOptions.set(prevState,'averageDisplayType', value)))
     }
+
 
     return (
         <div className='container p-16'>
@@ -47,18 +45,24 @@ export default function OptionsScorecardForm() {
                     </div>
                     <h3>Average</h3>
                     <div className='column'>
-                        <Radio onChange={()=>onAverageChange(AverageDisplayType.ALL)} checked={scorecardOptions?.averageDisplayType === AverageDisplayType.ALL}
+                        <Radio onChange={() => onAverageChange(AverageDisplayType.ALL)}
+                               checked={scorecardOptions?.averageDisplayType === AverageDisplayType.ALL}
                                value={AverageDisplayType.ALL} label='All'/>
-                        <Radio onChange={()=>onAverageChange(AverageDisplayType.BELOW_AVERAGE)} checked={scorecardOptions?.averageDisplayType === AverageDisplayType.BELOW_AVERAGE}
+                        <Radio onChange={() => onAverageChange(AverageDisplayType.BELOW_AVERAGE)}
+                               checked={scorecardOptions?.averageDisplayType === AverageDisplayType.BELOW_AVERAGE}
                                value={AverageDisplayType.BELOW_AVERAGE} label='Below Average'/>
-                        <Radio onChange={()=>onAverageChange(AverageDisplayType.ABOVE_AVERAGE)} checked={scorecardOptions?.averageDisplayType === AverageDisplayType.ABOVE_AVERAGE}
+                        <Radio onChange={() => onAverageChange(AverageDisplayType.ABOVE_AVERAGE)}
+                               checked={scorecardOptions?.averageDisplayType === AverageDisplayType.ABOVE_AVERAGE}
                                value={AverageDisplayType.ABOVE_AVERAGE} label='Above Average'/>
                     </div>
                     <h3>Options</h3>
                     <div className='column'>
-                        <CheckboxField checked={scorecardOptions?.score} onChange={onChange('score')} value='score' label='Score'/>
-                        <CheckboxField checked={scorecardOptions?.arrows} onChange={onChange('arrows')} value='arrows' label='Arrows'/>
-                        <CheckboxField checked={scorecardOptions?.showDataInRows} onChange={onChange('showDataInRows')} value='showDataInRows' label='Show Data in Rows'/>
+                        <CheckboxField checked={scorecardOptions?.score} onChange={onChange('score')} value='score'
+                                       label='Score'/>
+                        <CheckboxField checked={scorecardOptions?.arrows} onChange={onChange('arrows')} value='arrows'
+                                       label='Arrows'/>
+                        <CheckboxField checked={scorecardOptions?.showDataInRows} onChange={onChange('showDataInRows')}
+                                       value='showDataInRows' label='Show Data in Rows'/>
                     </div>
                 </div>
             </div>

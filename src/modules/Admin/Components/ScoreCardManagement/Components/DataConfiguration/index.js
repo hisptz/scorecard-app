@@ -11,16 +11,15 @@ import DataSourceConfiguration from "./Components/DataGroups/Components/DataSour
 import PreviewScorecardTable from "./Components/PreviewScorecardTable";
 import {generateNewGroupData} from "./utils";
 
-
 // TODO: Implement linking by button
 // TODO: Implement linking by dnd
-
 
 export default function DataConfigurationScorecardForm() {
     const [dataSourceGroups, updateDataSourceGroups] = useRecoilState(ScorecardStateSelector('dataSourceGroups'))
     const [targetOnLevels, updateTargetOnLevels] = useRecoilState(ScorecardStateSelector('targetOnLevels'))
-    const setScorecardEditState= useSetRecoilState(ScorecardEditState)
+    const setScorecardEditState = useSetRecoilState(ScorecardEditState)
     const groups = dataSourceGroups;
+
     const onGroupAdd = async () => {
         await updateDataSourceGroups((prevState = []) => (
             [...prevState, generateNewGroupData(groups)]
@@ -42,8 +41,8 @@ export default function DataConfigurationScorecardForm() {
     }
 
     return (
-        <div className='container'>
-            <div className='row'>
+        <div className='container' style={{height: '100%'}}>
+            <div className='row' style={{height: '100%'}}>
                 <div className='column p-16 w-25'>
                     <div className='container-bordered' style={{minHeight: 500, height: '100%'}}>
                         <div className='row space-between pr-16 pt-16'>

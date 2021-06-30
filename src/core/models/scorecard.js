@@ -15,10 +15,16 @@ export default class Scorecard {
     get id() {
         return this.scorecard ? this.scorecard.id : undefined;
     }
-
+    set id(value){
+        this.scorecard.id = value;
+    }
 
     get name() {
         return this.scorecard ? this.scorecard.name : undefined;
+    }
+
+    set name(value){
+        this.scorecard.name = value
     }
 
     get title() {

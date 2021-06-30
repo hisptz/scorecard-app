@@ -1,5 +1,6 @@
 import {cloneDeep, get as _get, set as _set} from 'lodash'
 import {atom, selectorFamily} from "recoil";
+import ScorecardOptions from "../models/scorecardOptions";
 
 const defaultValue = {
     dataSourceGroups: [],
@@ -16,7 +17,8 @@ const defaultValue = {
             color: "#d0021b",
             name: "Poor Performance"
         }
-    ]
+    ],
+    scorecardOptions: new ScorecardOptions()
 }
 
 const ScorecardState = atom({
