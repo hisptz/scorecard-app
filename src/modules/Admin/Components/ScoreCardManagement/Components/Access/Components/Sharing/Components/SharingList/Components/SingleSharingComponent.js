@@ -1,44 +1,46 @@
 import {Button, ButtonStrip, colors, MenuItem} from '@dhis2/ui'
 import DeleteIcon from '@material-ui/icons/Close';
 import EditIcon from "@material-ui/icons/Edit";
-import ShareIcon from '@material-ui/icons/Share';
-import {cloneDeep, find, set} from 'lodash'
+import {cloneDeep, set} from 'lodash'
 import PropTypes from 'prop-types'
 import React, {useState} from 'react'
-import {ACCESS_TYPES} from "../../../../../../../../../../../shared/constants/sharing";
+import ScorecardAccess from "../../../../../../../../../../../core/models/scorecardAccess";
+import {getAccessIcon, getAccessName} from "../../../utils";
 import SharingMenu from "./SharingMenu";
 
 export default function SingleSharingComponent({access, onDelete, onAccessChange}) {
-    const {userGroup, access: selectedAccessId} = access;
-    const selectedAccess = find(ACCESS_TYPES, ['id', selectedAccessId])
+    const {id, access: selectedAccess, type, displayName} = access;
     const [ref, setRef] = useState()
 
-    const onChange = (id) => {
+    const onChange = (newAccess) => {
         const updatedAccess = cloneDeep(access)
-        set(updatedAccess, ['access'], id)
+        set(updatedAccess, ['access'], newAccess)
         onAccessChange(updatedAccess)
         setRef(undefined)
     }
 
     return (
         <MenuItem
-            icon={<ShareIcon/>}
+            icon={getAccessIcon(type)}
             label={
                 <div className='row space-between align-items-center'>
                     <div className='column'>
-                        <p style={{margin: 2, fontSize: 16}}>{userGroup?.displayName}</p>
-                        <p style={{color: colors.grey500, fontSize: 14, margin: 0}}>{selectedAccess?.label}</p>
+                        <p style={{margin: 2, fontSize: 16}}>{displayName}</p>
+                        <p style={{color: colors.grey500, fontSize: 14, margin: 0}}>{getAccessName(selectedAccess)}</p>
                     </div>
                     <div className='column align-items-end'>
                         <ButtonStrip>
                             <Button onClick={(_, e) => setRef(e.currentTarget)} icon={<EditIcon/>}>Edit</Button>
-                            <Button onClick={() => {
-                                onDelete(access)
-                            }} destructive icon={<DeleteIcon/>}>Remove</Button>
+                            {
+                                Boolean(onDelete) &&
+                                <Button onClick={() => {
+                                    onDelete(access)
+                                }} destructive icon={<DeleteIcon/>}>Remove</Button>
+                            }
                         </ButtonStrip>
                     </div>
                     {ref &&
-                    <SharingMenu reference={ref} onClose={() => setRef(undefined)} selectedAccessId={selectedAccessId}
+                    <SharingMenu reference={ref} onClose={() => setRef(undefined)} selectedAccess={selectedAccess}
                                  onAccessChange={onChange}/>}
                 </div>}>
         </MenuItem>
@@ -46,8 +48,8 @@ export default function SingleSharingComponent({access, onDelete, onAccessChange
 }
 
 SingleSharingComponent.propTypes = {
-    access: PropTypes.object.isRequired,
+    access: PropTypes.instanceOf(ScorecardAccess).isRequired,
     onAccessChange: PropTypes.func.isRequired,
-    onDelete: PropTypes.func.isRequired
+    onDelete: PropTypes.func
 };
 

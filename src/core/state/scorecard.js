@@ -1,10 +1,12 @@
 import {cloneDeep, get as _get, set as _set} from 'lodash'
 import {atom, selectorFamily} from "recoil";
+import ScorecardAccessType from "../constants/scorecardAccessType";
+import ScorecardAccess from "../models/scorecardAccess";
 import ScorecardOptions from "../models/scorecardOptions";
 
 const defaultValue = {
     dataSourceGroups: [],
-    legendDefinitions:[
+    legendDefinitions: [
         {
             color: "#417505",
             name: 'Target Reached'
@@ -18,7 +20,10 @@ const defaultValue = {
             name: "Poor Performance"
         }
     ],
-    scorecardOptions: new ScorecardOptions()
+    scorecardOptions: new ScorecardOptions(),
+    publicAccess: new ScorecardAccess({id: 'public', type: 'public', access: ScorecardAccessType.NO_ACCESS, displayName: 'Public'}),
+    userGroupAccesses: [],
+    userAccesses: []
 }
 
 const ScorecardState = atom({

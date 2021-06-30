@@ -3,8 +3,9 @@ import CheckIcon from '@material-ui/icons/Check';
 import PropTypes from 'prop-types'
 import React, {Fragment} from 'react'
 import {ACCESS_TYPES} from "../../../../../../../../../../../shared/constants/sharing";
+import {getAccessName} from "../../../utils";
 
-export default function SharingMenu({reference, onClose, selectedAccessId, onAccessChange}) {
+export default function SharingMenu({reference, onClose, selectedAccess, onAccessChange}) {
 
 
     return (
@@ -12,10 +13,11 @@ export default function SharingMenu({reference, onClose, selectedAccessId, onAcc
             <Popper reference={reference} placement='bottom-start'>
                 <FlyoutMenu>
                     {
-                        ACCESS_TYPES?.map(({label, id}) => (
-                            <Fragment key={id}>
-                                <MenuItem onClick={()=>onAccessChange(id)} active={selectedAccessId === id} label={label}
-                                          icon={selectedAccessId === id && <CheckIcon/>}/>
+                        ACCESS_TYPES?.map((accessType) => (
+                            <Fragment key={accessType}>
+                                <MenuItem onClick={() => onAccessChange(accessType)}
+                                          active={selectedAccess === accessType} label={getAccessName(accessType)}
+                                          icon={selectedAccess === accessType && <CheckIcon/>}/>
                             </Fragment>
                         ))
                     }
@@ -27,7 +29,7 @@ export default function SharingMenu({reference, onClose, selectedAccessId, onAcc
 
 SharingMenu.propTypes = {
     reference: PropTypes.object.isRequired,
-    selectedAccessId: PropTypes.string.isRequired,
+    selectedAccess: PropTypes.string.isRequired,
     onAccessChange: PropTypes.func.isRequired,
     onClose: PropTypes.func.isRequired
 };
