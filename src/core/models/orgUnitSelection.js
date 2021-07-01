@@ -1,11 +1,16 @@
-export default class OrgUnitSelection {
-  constructor(orgUnitSelection) {
-    this.orgUnitSelection = orgUnitSelection;
-  }
+import DataModel from "./base";
 
-  get items() {
-    return (this.orgUnitSelection ? this.orgUnitSelection.items : []).map(
-      (item) => new SelectionItem(item)
-    );
-  }
+export default class OrgUnitSelection extends DataModel {
+
+    get defaults() {
+        return {
+            level: '',
+            group: '',
+            orgUnitIds: [],
+            userSubX2Unit: false,
+            userSubUnit: false,
+            userOrgUnit: false
+        }
+    }
+
 }

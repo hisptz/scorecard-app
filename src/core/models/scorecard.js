@@ -39,7 +39,7 @@ export default class Scorecard {
         return this.scorecard ? this.scorecard.description : undefined;
     }
 
-// TODO: Find ways to dynamically attach selected orgunit and period
+// TODO: Find ways to dynamically attach selected orgUnit and period
     get customHeader() {
         return this.scorecard ? this.scorecard.customHeader : undefined;
     }

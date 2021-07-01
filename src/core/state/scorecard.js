@@ -1,6 +1,7 @@
 import {cloneDeep, get as _get, set as _set} from 'lodash'
 import {atom, selectorFamily} from "recoil";
 import ScorecardAccessType from "../constants/scorecardAccessType";
+import OrgUnitSelection from "../models/orgUnitSelection";
 import ScorecardAccess from "../models/scorecardAccess";
 import ScorecardOptions from "../models/scorecardOptions";
 
@@ -21,9 +22,16 @@ const defaultValue = {
         }
     ],
     scorecardOptions: new ScorecardOptions(),
-    publicAccess: new ScorecardAccess({id: 'public', type: 'public', access: ScorecardAccessType.NO_ACCESS, displayName: 'Public'}),
+    publicAccess: new ScorecardAccess({
+        id: 'public',
+        type: 'public',
+        access: ScorecardAccessType.NO_ACCESS,
+        displayName: 'Public'
+    }),
+    orgUnitSelection: new OrgUnitSelection(),
     userGroupAccesses: [],
-    userAccesses: []
+    userAccesses: [],
+    highlightedIndicators: []
 }
 
 const ScorecardState = atom({

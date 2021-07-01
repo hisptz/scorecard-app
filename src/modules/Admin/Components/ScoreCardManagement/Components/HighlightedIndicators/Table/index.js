@@ -13,20 +13,22 @@ import React from 'react'
 import {useRecoilState} from "recoil";
 import {ScorecardEditState, ScorecardStateSelector} from "../../../../../../../core/state/scorecard";
 
+
+const columns = [
+    {
+        label: 'Name',
+        path: 'displayName'
+    },
+    {
+        label: 'Label',
+        path: 'label'
+    },
+]
+
 export default function HighlightedIndicatorsTable() {
     const [highlightedIndicators, setHighlightedIndicators] = useRecoilState(ScorecardStateSelector('highlightedIndicators'))
     const [scorecardEditState, setScorecardEditorState] = useRecoilState(ScorecardEditState)
 
-    const columns = [
-        {
-            label: 'Name',
-            path: 'displayName'
-        },
-        {
-            label: 'Label',
-            path: 'label'
-        },
-    ]
 
     const onRowClick = (index) => {
         setScorecardEditorState(prevState => ({

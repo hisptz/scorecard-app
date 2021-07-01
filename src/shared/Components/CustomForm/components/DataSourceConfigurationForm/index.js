@@ -77,11 +77,10 @@ export default function DataSourceConfigurationForm({defaultValues, onFormChange
                                     <Divider/>
                                     <div className='row'>
                                         <div className='column w-100'>
-
                                             <CustomField field={new FormFieldModel({
-                                                id: 'legendRanges',
-                                                name: 'legendRanges',
-                                                formName: 'Legend Ranges',
+                                                id: 'legends',
+                                                name: 'legends',
+                                                formName: 'Legends',
                                                 valueType: DHIS2ValueTypes.MULTIPLE_FIELDS.name,
                                                 multipleFields: legendDefinitions?.map(legend => (new FormFieldModel({
                                                     id: legend.name,

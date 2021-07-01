@@ -114,7 +114,7 @@ export default function OrgUnitFilter({value, onUpdate}) {
                     }
                 </div>
             </div>
-            <div className='row pt-16'>
+            <div className='row pt-32 w-75'>
                 <div className='column'>
                     <SingleSelectField clearable loading={levelsAndGroupsLoading} error={levelsAndGroupsError}
                                        validationText={levelsAndGroupsError?.message}
