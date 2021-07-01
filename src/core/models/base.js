@@ -27,8 +27,15 @@ export default class DataModel {
         return updatedObject;
     }
 
+
+}
+
+
+export class SavableDataModel extends DataModel{
+
     static async save(object, set) {
         console.log('Saving object', object)
     }
-
 }
+
+

@@ -2,6 +2,7 @@ import {cloneDeep, get as _get, set as _set} from 'lodash'
 import {atom, selectorFamily} from "recoil";
 import ScorecardAccessType from "../constants/scorecardAccessType";
 import OrgUnitSelection from "../models/orgUnitSelection";
+import Scorecard from "../models/scorecard";
 import ScorecardAccess from "../models/scorecardAccess";
 import ScorecardOptions from "../models/scorecardOptions";
 
@@ -36,7 +37,7 @@ const defaultValue = {
 
 const ScorecardState = atom({
     key: 'active-scorecard',
-    default: defaultValue
+    default: new Scorecard(defaultValue)
 })
 
 const ScorecardStateSelector = selectorFamily({

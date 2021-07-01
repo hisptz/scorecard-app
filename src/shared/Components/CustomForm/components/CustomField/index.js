@@ -1,10 +1,11 @@
-import {InputField, ReactFinalForm, SingleSelectField, TextAreaField} from '@dhis2/ui';
+import {InputField, ReactFinalForm, TextAreaField} from '@dhis2/ui';
 import {map} from 'lodash'
 import PropTypes from 'prop-types'
 import React, {useMemo} from 'react'
 import {DHIS2ValueTypes} from "../../constants";
 import {FormFieldModel} from "../../models";
 import CustomCheckboxField from "./components/CustomCheckboxField";
+import CustomSingleSelect from "./components/CustomSingleSelect";
 import LegendDefinitionField from "./components/LegendDefinitionField";
 import LegendMinMax from "./components/LegendMinMax";
 import MultipleFieldsField from "./components/MultipleFieldsField";
@@ -15,13 +16,13 @@ const {Field} = ReactFinalForm;
 
 export function CustomInput({input, valueType, optionSet, ...props}) {
     const type = useMemo(() => DHIS2ValueTypes[valueType].formName, [valueType]);
-    const options = useMemo(() => map(optionSet?.options, ({name, code}) => ({
+    const options = map(optionSet?.options, ({name, code}) => ({
         label: name,
         value: code
-    })), [optionSet?.options]);
+    }))
     const Input = useMemo(() => {
         if (optionSet && optionSet.options) {
-            return SingleSelectField
+            return CustomSingleSelect
         } else {
             switch (valueType) {
                 case DHIS2ValueTypes.DATE.name:
@@ -50,7 +51,7 @@ export function CustomInput({input, valueType, optionSet, ...props}) {
     const onChange = input.onChange;
 
     return (<div className={classes['field-container']}>
-        <Input {...input} {...props} type={type} options={options} onChange={({value})=>onChange(value)} />
+        <Input {...input} {...props} type={type} options={options} onChange={({value}) => onChange(value)}/>
     </div>)
 }
 
@@ -80,22 +81,22 @@ export default function CustomField({field, ...props}) {
 
     return (
 
-            <Field
-                name={name}
-                label={formName}
-                validate={validations}
-                multipleField={multipleField}
-                min={min}
-                max={max}
-                valueType={valueType}
-                required={mandatory}
-                disabled={disabled}
-                optionSet={optionSet}
-                component={CustomInput}
-                legendDefinition={legendDefinition}
-                multipleFields={multipleFields}
-                {...props}
-            />
+        <Field
+            name={name}
+            label={formName}
+            validate={validations}
+            multipleField={multipleField}
+            min={min}
+            max={max}
+            valueType={valueType}
+            required={mandatory}
+            disabled={disabled}
+            optionSet={optionSet}
+            component={CustomInput}
+            legendDefinition={legendDefinition}
+            multipleFields={multipleFields}
+            {...props}
+        />
 
     )
 }
