@@ -286,3 +286,7 @@ div.jsx-1730587817 {
     margin-bottom: 16px;
     color: #4A5768;
 }
+
+.layer-1{
+    z-index: 2;
+}

@@ -1,8 +1,7 @@
-import {useDataQuery} from "@dhis2/app-runtime";
-import {Button, Field, SingleSelectField, SingleSelectOption} from '@dhis2/ui'
+import {Button, SingleSelectField, SingleSelectOption} from '@dhis2/ui'
 import AddIcon from "@material-ui/icons/Add";
 import React, {useState} from 'react'
-import {useSetRecoilState} from "recoil";
+import {useRecoilState} from "recoil";
 import ScorecardAccess from "../../../../../../../../../../../core/models/scorecardAccess";
 import {ScorecardStateSelector} from "../../../../../../../../../../../core/state/scorecard";
 import {ACCESS_TYPES} from "../../../../../../../../../../../shared/constants/sharing";
@@ -12,10 +11,12 @@ import UserAndUserGroupSelector from "../../UserAndUserGroupSelector";
 
 
 export default function AddSharingAccess() {
-    const setUserAccess = useSetRecoilState(ScorecardStateSelector('userAccesses'))
-    const setUserGroupAccess = useSetRecoilState(ScorecardStateSelector('userGroupAccesses'))
+    const [userAccess, setUserAccess] = useRecoilState(ScorecardStateSelector('userAccesses'))
+    const [userGroupAccess, setUserGroupAccess] = useRecoilState(ScorecardStateSelector('userGroupAccesses'))
     const [selectedUserGroup, setSelectedUserGroup] = useState();
     const [selectedAccess, setSelectedAccess] = useState();
+
+    const selectedList = [...(userAccess ?? []), ...(userGroupAccess ?? [])]
 
     const onAdd = () => {
         if (selectedAccess && selectedUserGroup) {
@@ -48,7 +49,7 @@ export default function AddSharingAccess() {
     return (
             <div className='row align-items-end'>
                 <div className='column pr-16' style={{width: '50%'}}>
-                    <UserAndUserGroupSelector selected={selectedUserGroup} onChange={setSelectedUserGroup}/>
+                    <UserAndUserGroupSelector selectedList={selectedList?.map(({id})=>id)} selected={selectedUserGroup} onChange={setSelectedUserGroup}/>
                 </div>
                 <div className='column pr-16' style={{width: '30%'}}>
                     <SingleSelectField required selected={selectedAccess} onChange={({selected}) => {

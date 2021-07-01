@@ -1,22 +1,19 @@
 import {FlyoutMenu, InputField, MenuItem, Popper} from '@dhis2/ui'
-import {debounce} from "lodash";
+import {debounce, filter, isEmpty} from "lodash";
 import PropTypes from 'prop-types'
-import React, {Fragment, useRef, useState} from 'react'
+import React, {Fragment, useEffect, useRef, useState} from 'react'
 import {getAccessIcon} from "../../utils";
 import useSearchUserAndUserGroup from "./hooks/useSearch";
 
 
 function UserAndUserGroupsMenu({data, onSelect, reference, onClose}) {
-    console.log(reference)
-
     const onSelectElement = (selected) => {
         onSelect(selected)
         onClose()
     }
-
     return (
         reference ?
-            <Popper reference={reference} placement='bottom-start'>
+            <Popper className='layer-1' reference={reference} placement='bottom-start'>
                 <FlyoutMenu maxHeight="400px">
                     {
                         data?.map((element) => (
@@ -39,7 +36,7 @@ UserAndUserGroupsMenu.propTypes = {
 };
 
 
-export default function UserAndUserGroupSelector({selected, onChange}) {
+export default function UserAndUserGroupSelector({selected, onChange, selectedList=[]}) {
     const [value, setValue] = useState(selected?.displayName);
     const {data, loading, error, setKeyword} = useSearchUserAndUserGroup(value)
     const reference = useRef()
@@ -48,6 +45,13 @@ export default function UserAndUserGroupSelector({selected, onChange}) {
     const onSearch = debounce(() => {
         setKeyword(value?.trim())
     }, 1000)
+
+    //Clears the field on submit
+    useEffect(() => {
+        if (!selected) {
+            setValue(undefined)
+        }
+    }, [selected])
 
     const onKeywordChange = ({value: keyword}, event) => {
         setValue(keyword)
@@ -67,9 +71,10 @@ export default function UserAndUserGroupSelector({selected, onChange}) {
                             label='Select User or User Group' value={value} onChange={onKeywordChange}/>
             </div>
             {
-                (inputReference && data) &&
+                (inputReference && !isEmpty(data)) &&
                 <UserAndUserGroupsMenu onClose={() => setInputReference(undefined)} reference={inputReference}
-                                       onSelect={onValueSelect} data={data}/>
+                                       onSelect={onValueSelect}
+                                       data={filter(data, ({id}) => !selectedList?.includes(id))}/>
             }
         </Fragment>
     )
@@ -78,5 +83,6 @@ export default function UserAndUserGroupSelector({selected, onChange}) {
 UserAndUserGroupSelector.propTypes = {
     onChange: PropTypes.func.isRequired,
     selected: PropTypes.object,
+    selectedList: PropTypes.arrayOf(PropTypes.string)
 };
 
