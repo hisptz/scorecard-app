@@ -1,9 +1,9 @@
 import { Button,} from '@dhis2/ui'
 import {map} from 'lodash'
 import React, {useRef} from 'react'
-import CustomForm from "../../shared/CustomForm";
-import {DHIS2ValueTypes} from "../../shared/CustomForm/constants"
-import {FormFieldModel} from "../../shared/CustomForm/models";
+import CustomForm from "../../shared/Components/CustomForm";
+import {DHIS2ValueTypes} from "../../shared/Components/CustomForm/constants"
+import {FormFieldModel} from "../../shared/Components/CustomForm/models";
 
 export default function ExampleForms() {
 

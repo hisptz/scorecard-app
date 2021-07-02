@@ -3,12 +3,12 @@ import React from 'react'
 import {RecoilRoot} from "recoil";
 import './App.css'
 import Router from "./modules/Router";
-import {FullPageLoader} from "./shared/Loaders";
-
+import {FullPageLoader} from "./shared/Components/Loaders";
+import './locales'
 
 
 const MyApp = () => (
-    <DataStoreProvider namespace={'Scorecard_App_Hisptz'} loadingComponent={<FullPageLoader/>}>
+    <DataStoreProvider namespace={'Scorecard_App_HISPTZ'} loadingComponent={<FullPageLoader/>}>
         <RecoilRoot>
            <div className='main-container'>
                <Router/>

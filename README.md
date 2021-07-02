@@ -1,3 +1,5 @@
+# Scorecard
+
 This project was bootstrapped with [DHIS2 Application Platform](https://github.com/dhis2/app-platform).
 
 ## Available Scripts
