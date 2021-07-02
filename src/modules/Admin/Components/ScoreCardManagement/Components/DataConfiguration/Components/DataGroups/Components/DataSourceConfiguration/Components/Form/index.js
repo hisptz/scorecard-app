@@ -19,8 +19,11 @@ export default function SelectedDataSourceConfigurationForm() {
     })
 
     return (
-        <DataSourceConfigurationForm defaultValues={selectedDataSource} legendDefinitions={legendDefinitions}
-                                     onFormChange={onFormChange}/>
+        <DataSourceConfigurationForm
+            defaultValues={selectedDataSource}
+            legendDefinitions={legendDefinitions}
+            onFormChange={onFormChange}
+        />
     )
 }
 

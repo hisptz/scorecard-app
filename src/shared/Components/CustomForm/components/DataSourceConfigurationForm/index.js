@@ -8,7 +8,6 @@ import CustomField from "../CustomField";
 const {Form, FormSpy} = ReactFinalForm
 
 export default function DataSourceConfigurationForm({defaultValues, onFormChange, legendDefinitions}) {
-    console.log('form')
     return (
         <div className='container p-16'>
             <Form onSubmit={console.log} initialValues={defaultValues}>
