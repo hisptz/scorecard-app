@@ -2,6 +2,7 @@ import {remove, set} from 'lodash'
 import React from 'react'
 import {Droppable} from "react-beautiful-dnd";
 import {useRecoilState, useResetRecoilState} from "recoil";
+import DataSelection from "../../../../../../../../core/models/dataSelection";
 import  {ScorecardEditState, ScorecardStateSelector} from "../../../../../../../../core/state/scorecard";
 import DataGroup from "./Components/DataGroup";
 
@@ -9,9 +10,9 @@ import DataGroup from "./Components/DataGroup";
 export default function DataGroups() {
 
     const [expanded, setExpanded] = React.useState('panel1');
-    const [scorecardState, setScorecardState] = useRecoilState(ScorecardStateSelector('dataSourceGroups'));
+    const [dataSelection, setDataSelection] = useRecoilState(ScorecardStateSelector('dataSelection'));
     const resetEditState = useResetRecoilState(ScorecardEditState)
-    const groups = scorecardState || []
+    const {dataGroups: groups} = dataSelection || new DataSelection();
 
     const handleAccordionChange = (panel) => (event, newExpanded) => {
         setExpanded(newExpanded ? panel : false);
@@ -20,14 +21,14 @@ export default function DataGroups() {
     const onDeleteGroup = (id) => {
         const updatedGroupList = [...groups]
         remove(updatedGroupList, ['id', id])
-        setScorecardState([...updatedGroupList])
+        setDataSelection(prevState=>DataSelection.set(prevState, 'dataGroups', updatedGroupList))
         resetEditState()
     }
 
     const onGroupUpdate = (index, newGroupData) => {
         const updatedGroupList = [...groups]
         set(updatedGroupList, [index], newGroupData)
-        setScorecardState([...updatedGroupList])
+        setDataSelection(prevState=>DataSelection.set(prevState, 'dataGroups', updatedGroupList))
     }
 
     return (

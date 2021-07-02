@@ -12,9 +12,12 @@ import PropTypes from "prop-types";
 import React, {useState} from "react";
 import {DragDropContext, Draggable, Droppable} from "react-beautiful-dnd";
 import {useRecoilState} from "recoil";
+import ScorecardIndicator from "../../../../../../../../../../core/models/scorecardIndicator";
+import ScorecardIndicatorGroup from "../../../../../../../../../../core/models/scorecardIndicatorGroup";
+import ScorecardIndicatorHolder from "../../../../../../../../../../core/models/scorecardIndicatorHolder";
 import {ScorecardEditState, ScorecardStateSelector} from "../../../../../../../../../../core/state/scorecard";
 import {updateListFromDragAndDrop} from "../../../../../../../../../../shared/utils/dnd";
-import DataSource from "../DataSource";
+import DataSourceHolder from "../DataSourceHolder";
 import DataSourceSelectorModal from "../DataSourceSelectorModal";
 
 const Accordion = withStyles({
@@ -60,43 +63,44 @@ const AccordionDetails = withStyles((theme) => ({
 
 export default function DataGroup({handleAccordionChange, expanded, index, onDelete}) {
     const [scorecardEditorState, setScorecardEditorState] = useRecoilState(ScorecardEditState)
-    const path = ['dataSourceGroups', index]
+    const path = ['dataSelection', 'dataGroups', index]
     const [group, setGroup] = useRecoilState(ScorecardStateSelector(path))
-    const {title, id, dataSources} = group || {};
+    const {title, id, dataHolders} = group ?? new ScorecardIndicatorGroup();
     const [openAdd, setOpenAdd] = useState(false);
     const [titleEditOpen, setTitleEditOpen] = useState(false);
     const [titleEditValue, setTitleEditValue] = useState(title);
+
     const onDragEnd = (result) => {
         const {destination, source} = result || {};
-        setGroup({
-            ...group,
-            dataSources: updateListFromDragAndDrop(dataSources, source?.index, destination?.index)
-        })
+        setGroup(prevState => ScorecardIndicatorGroup.set(prevState, 'dataHolders', updateListFromDragAndDrop(prevState?.dataHolders, source?.index, destination?.index)))
         setScorecardEditorState((prevState) => {
-            if (prevState.selectedDataSourceIndex === source?.index) {
+            if (prevState.selectedDataHolderIndex === source?.index) {
                 return {
                     ...prevState,
-                    selectedDataSourceIndex: destination?.index
+                    selectedDataHolderIndex: destination?.index
                 }
             }
             return prevState;
         })
     }
-    const onDataSourceAdd = (addedDataSources) => {
-        const newDataSources = addedDataSources.map(dataSource => ({...dataSource, label: dataSource.displayName}))
-        const updatedDataSources = [...dataSources, ...newDataSources]
-        setGroup({
-            ...group,
-            dataSources: updatedDataSources
-        })
 
+    const onDataSourceAdd = (addedDataSources) => {
+        //Assigns each of the selected indicator to its own holder
+        const newDataSources = addedDataSources.map(dataSource => (new ScorecardIndicatorHolder({
+            dataSources: [new ScorecardIndicator({
+                ...dataSource,
+                label: dataSource.displayName
+            })]
+        })))
+        const updatedDataSources = [...dataHolders, ...newDataSources]
+        setGroup(prevState => ScorecardIndicatorGroup.set(prevState, 'dataHolders', updatedDataSources))
     }
 
     function onExpand(event, newExpanded) {
         if (newExpanded) {
             setScorecardEditorState((prevState) => ({
                 ...prevState,
-                selectedDataSourceIndex: undefined,
+                selectedDataHolderIndex: undefined,
                 selectedGroupIndex: index
             }))
         }
@@ -105,19 +109,16 @@ export default function DataGroup({handleAccordionChange, expanded, index, onDel
 
     const onDataSourceDelete = (deletedDataSourceIndex) => {
         try {
-            if (scorecardEditorState.selectedDataSourceIndex === deletedDataSourceIndex) {
+            if (scorecardEditorState.selectedDataHolderIndex === deletedDataSourceIndex) {
                 setScorecardEditorState(prevState => ({
                     ...prevState,
-                    selectedDataSourceIndex: undefined
+                    selectedDataHolderIndex: undefined
                 }))
             }
-            const updatedDataSources = cloneDeep(dataSources) || [];
+            const updatedDataSources = cloneDeep(dataHolders) || [];
             if (!isEmpty(updatedDataSources)) {
                 updatedDataSources.splice(deletedDataSourceIndex, 1);
-                setGroup(prevState => ({
-                    ...prevState,
-                    dataSources: updatedDataSources
-                }))
+                setGroup(prevState => ScorecardIndicatorGroup.set(prevState, 'dataHolders', updatedDataSources))
             }
         } catch (e) {
             console.log(e)
@@ -130,11 +131,7 @@ export default function DataGroup({handleAccordionChange, expanded, index, onDel
             setTitleEditValue(title)
             setTitleEditOpen(false)
         } else {
-            const newGroupData = {
-                ...group,
-                title: titleEditValue
-            }
-            setGroup(newGroupData)
+            setGroup(prevState => ScorecardIndicatorGroup.set(prevState, 'title', titleEditValue))
             setTitleEditOpen(false)
         }
     }
@@ -203,7 +200,7 @@ export default function DataGroup({handleAccordionChange, expanded, index, onDel
                         <AccordionDetails>
                             <div className='column'>
                                 {
-                                    isEmpty(dataSources) ?
+                                    isEmpty(dataHolders) ?
                                         <div className='column w-100 text-center center' style={{height: 100}}>
                                             <p style={{color: colors.grey600}}>Add a data source</p>
                                         </div> :
@@ -214,11 +211,14 @@ export default function DataGroup({handleAccordionChange, expanded, index, onDel
                                                         <div className='w-100' {...provided.droppableProps}
                                                              ref={provided.innerRef}>
                                                             {
-                                                                dataSources?.map((source, index) => (
-                                                                    <DataSource onDelete={onDataSourceDelete}
-                                                                                key={source.id}
-                                                                                source={source}
-                                                                                index={index}/>))
+                                                                dataHolders?.map((source, index) => (
+                                                                    <DataSourceHolder
+                                                                        dataHolder={source}
+                                                                        onDelete={onDataSourceDelete}
+                                                                        key={source.id}
+                                                                        id={source.id}
+                                                                        index={index}
+                                                                    />))
                                                             }
                                                             {provided.placeholder}
                                                         </div>
@@ -233,7 +233,7 @@ export default function DataGroup({handleAccordionChange, expanded, index, onDel
                             </div>
                             {
                                 openAdd &&
-                                <DataSourceSelectorModal disabled={dataSources.map(({id}) => id)}
+                                <DataSourceSelectorModal disabled={dataHolders.map(({id}) => id)}
                                                          onSelect={onDataSourceAdd} onClose={() => setOpenAdd(false)}
                                                          open={openAdd}/>
                             }

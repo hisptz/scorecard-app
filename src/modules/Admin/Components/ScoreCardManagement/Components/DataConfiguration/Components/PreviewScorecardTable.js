@@ -26,11 +26,10 @@ const CustomTableCell = withStyles({
 
 })(TableCell)
 
-
 function PreviewCustomCell({config}) {
-    const {legendRanges, showColors, id} = config;
+    const {legends, showColors, id} = config?.dataSources?.[0];
     const value = useMemo(generateRandomValues, []);
-    const legend = getLegend(value, legendRanges)
+    const legend = getLegend(value, legends)
     return <CustomTableCell style={{background: `${showColors && legend?.color}`}} align='center' bordered
                             key={`${id}-data`} id={id}>{value}</CustomTableCell>
 }
@@ -39,12 +38,11 @@ PreviewCustomCell.propTypes = {
     config: PropTypes.object.isRequired
 };
 
-
 export default function PreviewScorecardTable() {
-    const dataSourceGroups = useRecoilValue(ScorecardStateSelector('dataSourceGroups'))
-    const columns = useMemo(() => [...dataSourceGroups], [dataSourceGroups]);
+    const {dataGroups} = useRecoilValue(ScorecardStateSelector('dataSelection'))
+    const columns = useMemo(() => [...dataGroups], [dataGroups]);
     return (
-        <div className='container column w-100'>
+        <div className='column'>
             <DataTable bordered width='100%'>
                 <DataTableHead>
                     <DataTableRow>
@@ -53,15 +51,15 @@ export default function PreviewScorecardTable() {
                         {
                             columns?.map(column => (
                                 <DataTableCell align='center' className='table-header' bordered
-                                               colSpan={column?.dataSources?.length}
+                                               colSpan={column?.dataHolders?.length}
                                                key={column.id}>{column.title}</DataTableCell>))
                         }
                     </DataTableRow>
                     <DataTableRow>
                         {
-                            flattenDeep(columns.map(({dataSources}) => dataSources)).map(({id, label}) => (
-                                <DataTableCell className='header-row' bordered key={id}
-                                               id={id}>{label}</DataTableCell>))
+                            flattenDeep(columns.map(({dataHolders}) => dataHolders)).map(({dataSources}) => (
+                                <DataTableCell className='header-row' bordered key={dataSources[0]?.id}
+                                               id={dataSources[0]?.id}>{dataSources[0]?.label}</DataTableCell>))
                         }
                     </DataTableRow>
                 </DataTableHead>
@@ -71,8 +69,8 @@ export default function PreviewScorecardTable() {
                             Bo
                         </DataTableCell>
                         {
-                            flattenDeep(columns.map(({dataSources}) => dataSources)).map((config) => (
-                                <PreviewCustomCell key={config.id} config={config} />))
+                            flattenDeep(columns?.map(({dataHolders}) => dataHolders)).map((config) => (
+                                <PreviewCustomCell key={config.id} config={config}/>))
                         }
                     </DataTableRow>
                 </DataTableBody>

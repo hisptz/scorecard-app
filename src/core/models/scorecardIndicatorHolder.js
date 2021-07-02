@@ -1,21 +1,12 @@
-import ScorecardIndicator from "./scorecardIndicator";
+import {uid} from "../../shared/utils/utils";
+import DataModel from "./base";
 
-export default class ScorecardIndicatorHolder {
-  constructor(indicatorHolder) {
-    this.indicatorHolder = indicatorHolder;
+export default class ScorecardIndicatorHolder extends DataModel{
+  get defaults() {
+    return {
+      id: uid(),
+      dataSources: []
+    }
   }
 
-  get id() {
-    return this.indicatorHolder ? this.indicatorHolder.id : undefined;
-  }
-
-  get sortOrder() {
-    return this.indicatorHolder ? this.indicatorHolder.sortOrder : 0;
-  }
-
-  get indicators() {
-    return (this.indicatorHolder ? this.indicatorHolder.indicators : []).map(
-      (indicator) => new ScorecardIndicator(indicator)
-    );
-  }
 }

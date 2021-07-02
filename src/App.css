@@ -66,6 +66,9 @@ body {
 .flex-1{
     flex: 1;
 }
+.p-4{
+    padding: 4px;
+}
 
 .p-8 {
     padding: 8px;
@@ -242,7 +245,6 @@ div.jsx-1730587817 {
 /*Data Source */
 .data-source.container-bordered {
     border-radius: 4px;
-    margin-bottom: 8px;
 }
 
 .data-source.close-icon {

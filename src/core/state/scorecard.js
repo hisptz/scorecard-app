@@ -7,7 +7,6 @@ import ScorecardAccess from "../models/scorecardAccess";
 import ScorecardOptions from "../models/scorecardOptions";
 
 const defaultValue = {
-    dataSourceGroups: [],
     legendDefinitions: [
         {
             color: "#417505",

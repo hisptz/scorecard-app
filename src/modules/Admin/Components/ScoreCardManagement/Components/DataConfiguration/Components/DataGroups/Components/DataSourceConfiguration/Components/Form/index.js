@@ -1,6 +1,7 @@
-import {debounce} from 'lodash'
+import {cloneDeep, set} from 'lodash'
 import React from 'react'
 import {useRecoilState, useRecoilValue} from "recoil";
+import ScorecardIndicator from "../../../../../../../../../../../../core/models/scorecardIndicator";
 import {ScorecardEditState, ScorecardStateSelector} from "../../../../../../../../../../../../core/state/scorecard";
 import DataSourceConfigurationForm
     from "../../../../../../../../../../../../shared/Components/CustomForm/components/DataSourceConfigurationForm";
@@ -9,22 +10,35 @@ export default function SelectedDataSourceConfigurationForm() {
     const scorecardEditState = useRecoilValue(ScorecardEditState);
     const legendDefinitions = useRecoilValue(ScorecardStateSelector('legendDefinitions'))
     const selectedGroupIndex = scorecardEditState?.selectedGroupIndex;
-    const selectedDataSourceIndex = scorecardEditState?.selectedDataSourceIndex;
-    const path = ['dataSourceGroups', selectedGroupIndex, 'dataSources', selectedDataSourceIndex]
-    const [selectedDataSource, updateSelectedDataSource] = useRecoilState(ScorecardStateSelector(path));
+    const selectedDataHolderIndex = scorecardEditState?.selectedDataHolderIndex;
+    const path = ['dataSelection', 'dataGroups', selectedGroupIndex, 'dataHolders', selectedDataHolderIndex]
+    const [selectedDataHolder, updateSelectedDataHolder] = useRecoilState(ScorecardStateSelector(path));
 
-    const onFormChange = debounce(({values}) => {
-        const updateValues = {...selectedDataSource, ...values}
-        updateSelectedDataSource(updateValues)
-    })
+    const onFormChange = (index) => ({values}) => {
+        const updatedList = cloneDeep(selectedDataHolder?.dataSources)
+        set(updatedList, [index], values)
+        updateSelectedDataHolder(prevState => ScorecardIndicator.set(prevState, 'dataSources', updatedList))
+    }
 
     return (
-        <DataSourceConfigurationForm
-            defaultValues={selectedDataSource}
-            legendDefinitions={legendDefinitions}
-            onFormChange={onFormChange}
-        />
+        selectedDataHolder?.dataSources?.map((dataSource, index) => (
+            <div key={dataSource.id} className='column w-50' style={{height: '100%'}}>
+                <div className='container-bordered'>
+                    <div className='column'>
+                        <div className='p-16'>
+                            <DataSourceConfigurationForm
+                                defaultValues={dataSource}
+                                legendDefinitions={legendDefinitions}
+                                onFormChange={onFormChange(index)}
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        ))
     )
 }
+
+
 
 
