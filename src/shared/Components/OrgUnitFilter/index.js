@@ -118,7 +118,7 @@ export default function OrgUnitFilter({value, onUpdate}) {
                 <div className='column'>
                     <SingleSelectField clearable loading={levelsAndGroupsLoading} error={levelsAndGroupsError}
                                        validationText={levelsAndGroupsError?.message}
-                                       onChange={onLevelSelect} selected={selectedLevel}
+                                       onChange={onLevelSelect} selected={!isEmpty(levels) && selectedLevel}
                                        label='Select Level'>
                         {
                             levels?.map(({displayName, id}) => (
@@ -129,7 +129,7 @@ export default function OrgUnitFilter({value, onUpdate}) {
                 <div className='column'>
                     <SingleSelectField clearable loading={levelsAndGroupsLoading} error={levelsAndGroupsError}
                                        validationText={levelsAndGroupsError?.message}
-                                       onChange={onGroupSelect} selected={selectedGroup}
+                                       onChange={onGroupSelect} selected={!isEmpty(groups) && selectedGroup}
                                        label='Select Group'>
                         {
                             groups?.map(({displayName, id}) => (
