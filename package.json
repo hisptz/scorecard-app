@@ -27,7 +27,7 @@
     "react": "16.14.0"
   },
   "dependencies": {
-    "@dhis2/analytics": "^19.0.3",
+    "@dhis2/analytics": "^20.0.1",
     "@dhis2/app-runtime": "^2.8.0",
     "@dhis2/app-service-datastore": "^1.0.0-alpha.2",
     "@dhis2/ui": "^6.8.0",
