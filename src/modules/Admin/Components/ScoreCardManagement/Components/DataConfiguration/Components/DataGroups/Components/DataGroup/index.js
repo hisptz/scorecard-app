@@ -7,9 +7,11 @@ import AddIcon from "@material-ui/icons/Add";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import {cloneDeep, isEmpty} from "lodash";
+import LinkIcon from '@material-ui/icons/Link';
+import UnlinkIcon from "@material-ui/icons/LinkOff";
+import {cloneDeep, find, flattenDeep, head, isEmpty, last, findIndex} from "lodash";
 import PropTypes from "prop-types";
-import React, {useState} from "react";
+import React, {useCallback, useState} from "react";
 import {DragDropContext, Draggable, Droppable} from "react-beautiful-dnd";
 import {useRecoilState} from "recoil";
 import ScorecardIndicator from "../../../../../../../../../../core/models/scorecardIndicator";
@@ -19,6 +21,7 @@ import {ScorecardEditState, ScorecardStateSelector} from "../../../../../../../.
 import {updateListFromDragAndDrop} from "../../../../../../../../../../shared/utils/dnd";
 import DataSourceHolder from "../DataSourceHolder";
 import DataSourceSelectorModal from "../DataSourceSelectorModal";
+import {customChunk} from "./utils";
 
 const Accordion = withStyles({
     root: {
@@ -61,6 +64,71 @@ const AccordionDetails = withStyles((theme) => ({
     },
 }))(MuiAccordionDetails);
 
+
+function LinkingContainer({chunk, onDataSourceDelete, chunkIndex, onLink, onUnlink, dataHolders}) {
+    const linkable = chunk.length > 1;
+    const hasLink = head(chunk)?.dataSources?.length > 1;
+
+    const getIndex = useCallback(
+        (id) => {
+            return findIndex(dataHolders, ['id', id])
+        },
+        [chunk],
+    );
+    const onLinkClick = () => {
+        const indexOfMergedHolder = getIndex(head(chunk)?.id)
+        const indexOfDeletedHolder = getIndex(last(chunk)?.id)
+        onLink(indexOfMergedHolder, indexOfDeletedHolder)
+    }
+
+    const onUnlinkClick = () => {
+        onUnlink(head(chunk).id)
+    }
+
+    const onIconClick = () => {
+        hasLink ? onUnlinkClick() : onLinkClick()
+    }
+
+    return (
+        <div className='linking-container'>
+            <div className='row align-items-center'>
+                <div className='column'>
+                    {
+                        chunk?.map((source) => (
+                            <DataSourceHolder
+                                onUnlink={onUnlinkClick}
+                                dataHolder={source}
+                                onDelete={onDataSourceDelete}
+                                key={source.id}
+                                id={source.id}
+                                index={getIndex(source.id)}
+                            />
+                        ))
+                    }
+                </div>
+                <div className='link-button-container'>
+                    <IconButton onClick={onIconClick} disabled={!linkable && !hasLink}>
+                        {
+                            (linkable || hasLink) && (hasLink ? <UnlinkIcon className='link-button'/> :
+                                <LinkIcon className='link-button'/>)
+                        }
+                    </IconButton>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+LinkingContainer.propTypes = {
+    chunk: PropTypes.array.isRequired,
+    chunkIndex: PropTypes.number.isRequired,
+    dataHolders: PropTypes.arrayOf(PropTypes.instanceOf(ScorecardIndicatorHolder)).isRequired,
+    onDataSourceDelete: PropTypes.func.isRequired,
+    onLink: PropTypes.func.isRequired,
+    onUnlink: PropTypes.func.isRequired
+};
+
+
 export default function DataGroup({handleAccordionChange, expanded, index, onDelete}) {
     const [scorecardEditorState, setScorecardEditorState] = useRecoilState(ScorecardEditState)
     const path = ['dataSelection', 'dataGroups', index]
@@ -69,6 +137,33 @@ export default function DataGroup({handleAccordionChange, expanded, index, onDel
     const [openAdd, setOpenAdd] = useState(false);
     const [titleEditOpen, setTitleEditOpen] = useState(false);
     const [titleEditValue, setTitleEditValue] = useState(title);
+
+    const onLink = (indexOfMergedHolder, indexOfTheDeletedHolder) => {
+        const dataSourceToLink = head(dataHolders[indexOfTheDeletedHolder]?.dataSources)
+        const mergedHolder = dataHolders[indexOfMergedHolder]?.linkDataSource(dataSourceToLink)
+        const updatedHolderList = [...dataHolders]
+        updatedHolderList.splice(indexOfMergedHolder, 1, mergedHolder)
+        updatedHolderList.splice(indexOfTheDeletedHolder, 1)
+        setGroup(prevState => ScorecardIndicatorGroup.set(prevState, 'dataHolders', updatedHolderList))
+    }
+
+    const onUnlink = (id) => {
+        //get the linked holder by id
+        const dataHolder = find(dataHolders, ['id', id])
+        const dataHolderIndex = findIndex(dataHolders, ['id', id])
+        //create a new holder for the last dataSource
+        const newDataHolder = new ScorecardIndicatorHolder({
+            dataSources: [
+                last(dataHolder?.dataSources)
+            ]
+        })
+        const dataHolderToModify = cloneDeep(dataHolder)
+        const modifiedDataHolder = ScorecardIndicatorHolder.set(dataHolderToModify, 'dataSources', dataHolderToModify?.dataSources?.splice(0, 1))
+        const updatedHolderList = [...dataHolders]
+        updatedHolderList.splice(dataHolderIndex, 1, modifiedDataHolder)
+        updatedHolderList.splice(dataHolderIndex, 0, newDataHolder)
+        setGroup(prevState => ScorecardIndicatorGroup.set(prevState, 'dataHolders', updatedHolderList))
+    }
 
     const onDragEnd = (result) => {
         const {destination, source} = result || {};
@@ -135,6 +230,9 @@ export default function DataGroup({handleAccordionChange, expanded, index, onDel
             setTitleEditOpen(false)
         }
     }
+
+    const dataHolderChunks = customChunk(dataHolders);
+    const selectedDataSourcesIds = flattenDeep(dataHolders.map(({dataSources}) => dataSources)).map(({id}) => id)
 
     return (
         <Draggable index={index} draggableId={id}>
@@ -211,14 +309,16 @@ export default function DataGroup({handleAccordionChange, expanded, index, onDel
                                                         <div className='w-100' {...provided.droppableProps}
                                                              ref={provided.innerRef}>
                                                             {
-                                                                dataHolders?.map((source, index) => (
-                                                                    <DataSourceHolder
-                                                                        dataHolder={source}
-                                                                        onDelete={onDataSourceDelete}
-                                                                        key={source.id}
-                                                                        id={source.id}
-                                                                        index={index}
-                                                                    />))
+                                                                dataHolderChunks?.map((chunk, i) => (
+                                                                    <LinkingContainer
+                                                                        dataHolders={dataHolders}
+                                                                        onUnlink={onUnlink}
+                                                                        onLink={onLink} chunk={chunk}
+                                                                        chunkIndex={i}
+                                                                        onDataSourceDelete={onDataSourceDelete}
+                                                                        key={`${i}-linking-container-${group?.id}`}
+                                                                    />
+                                                                ))
                                                             }
                                                             {provided.placeholder}
                                                         </div>
@@ -233,9 +333,10 @@ export default function DataGroup({handleAccordionChange, expanded, index, onDel
                             </div>
                             {
                                 openAdd &&
-                                <DataSourceSelectorModal disabled={dataHolders.map(({id}) => id)}
-                                                         onSelect={onDataSourceAdd} onClose={() => setOpenAdd(false)}
-                                                         open={openAdd}/>
+                                <DataSourceSelectorModal
+                                    disabled={selectedDataSourcesIds}
+                                    onSelect={onDataSourceAdd} onClose={() => setOpenAdd(false)}
+                                    open={openAdd}/>
                             }
                         </AccordionDetails>
                     </Accordion>
