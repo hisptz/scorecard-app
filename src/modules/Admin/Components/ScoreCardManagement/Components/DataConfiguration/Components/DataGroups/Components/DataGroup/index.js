@@ -13,12 +13,13 @@ import {cloneDeep, find, flattenDeep, head, isEmpty, last, findIndex} from "loda
 import PropTypes from "prop-types";
 import React, {useCallback, useState} from "react";
 import {DragDropContext, Draggable, Droppable} from "react-beautiful-dnd";
-import {useRecoilState} from "recoil";
+import {useRecoilState, useRecoilValue} from "recoil";
 import ScorecardIndicator from "../../../../../../../../../../core/models/scorecardIndicator";
 import ScorecardIndicatorGroup from "../../../../../../../../../../core/models/scorecardIndicatorGroup";
 import ScorecardIndicatorHolder from "../../../../../../../../../../core/models/scorecardIndicatorHolder";
 import {ScorecardEditState, ScorecardStateSelector} from "../../../../../../../../../../core/state/scorecard";
 import {updateListFromDragAndDrop} from "../../../../../../../../../../shared/utils/dnd";
+import {generateLegendDefaults} from "../../../../utils";
 import DataSourceHolder from "../DataSourceHolder";
 import DataSourceSelectorModal from "../DataSourceSelectorModal";
 import {customChunk} from "./utils";
@@ -65,7 +66,7 @@ const AccordionDetails = withStyles((theme) => ({
 }))(MuiAccordionDetails);
 
 
-function LinkingContainer({chunk, onDataSourceDelete, chunkIndex, onLink, onUnlink, dataHolders}) {
+function LinkingContainer({chunk, onDataSourceDelete, onLink, onUnlink, dataHolders}) {
     const linkable = chunk.length > 1;
     const hasLink = head(chunk)?.dataSources?.length > 1;
 
@@ -121,7 +122,6 @@ function LinkingContainer({chunk, onDataSourceDelete, chunkIndex, onLink, onUnli
 
 LinkingContainer.propTypes = {
     chunk: PropTypes.array.isRequired,
-    chunkIndex: PropTypes.number.isRequired,
     dataHolders: PropTypes.arrayOf(PropTypes.instanceOf(ScorecardIndicatorHolder)).isRequired,
     onDataSourceDelete: PropTypes.func.isRequired,
     onLink: PropTypes.func.isRequired,
@@ -131,12 +131,15 @@ LinkingContainer.propTypes = {
 
 export default function DataGroup({handleAccordionChange, expanded, index, onDelete}) {
     const [scorecardEditorState, setScorecardEditorState] = useRecoilState(ScorecardEditState)
+    const legendDefinitions = useRecoilValue(ScorecardStateSelector('legendDefinitions'))
     const path = ['dataSelection', 'dataGroups', index]
     const [group, setGroup] = useRecoilState(ScorecardStateSelector(path))
     const {title, id, dataHolders} = group ?? new ScorecardIndicatorGroup();
     const [openAdd, setOpenAdd] = useState(false);
     const [titleEditOpen, setTitleEditOpen] = useState(false);
     const [titleEditValue, setTitleEditValue] = useState(title);
+
+
 
     const onLink = (indexOfMergedHolder, indexOfTheDeletedHolder) => {
         const dataSourceToLink = head(dataHolders[indexOfTheDeletedHolder]?.dataSources)
@@ -184,7 +187,8 @@ export default function DataGroup({handleAccordionChange, expanded, index, onDel
         const newDataSources = addedDataSources.map(dataSource => (new ScorecardIndicatorHolder({
             dataSources: [new ScorecardIndicator({
                 ...dataSource,
-                label: dataSource.displayName
+                label: dataSource.displayName,
+                legends: generateLegendDefaults(legendDefinitions, 100)
             })]
         })))
         const updatedDataSources = [...dataHolders, ...newDataSources]
