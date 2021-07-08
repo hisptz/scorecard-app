@@ -17,8 +17,7 @@ Feature: List Scorecards
     Scenario: Accessing scorecard empty list
         Given an authorized department officer
         When opening a list of available scorecards
-        And there are no configured scorecards
-        Then I should be presented with a message "There are no configured scorecards"
+        Then I should be presented with a message "Welcome to Scorecard App"
 
 
 

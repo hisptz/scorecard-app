@@ -25,10 +25,12 @@ And(
 /**
  * Scenario: Accessing scorecard empty list
  */
-Given("an authorized department officer", () => {});
-When("opening a list of available scorecards", () => {});
-And("there are no configured scorecards", () => {});
-Then(
-  'I should be presented with a message "There are no configured scorecards"',
-  () => {}
-);
+Given("an authorized department officer", () => {
+  cy.visit("/");
+});
+When("opening a list where there are no available scorecards", () => {});
+Then("I should be presented with a message {string}", (content) => {
+  cy.get('[data-test="welcome-scorcard-title"]')
+    .contains(content)
+    .should("be.visible");
+});
