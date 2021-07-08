@@ -41,7 +41,7 @@ export default function DataSourceHolder({dataHolder, id, index, onDelete}) {
                                     }))
                                 }
                             }} className='column center' style={{
-                                border: `1px solid ${colors.grey200}`,
+                                border: hasLinked && `1px solid ${colors.grey400}`,
                                 background: selected && `${colors.teal200}`,
                                 padding: hasLinked && 8,
                                 marginBottom: 8

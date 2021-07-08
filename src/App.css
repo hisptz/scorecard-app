@@ -318,7 +318,7 @@ td.data-cell{
     left: auto;
     right: auto;
     width: auto;
-    height: 45px;
+    height: 47px;
     font-size: 14px;
     background: rgb(255, 255, 255);
     color: rgb(33, 41, 52);
@@ -331,6 +331,8 @@ td.data-cell:last-child{
 
 .linked-table-cell{
     margin: 0;
+    max-width: 200px;
+    max-height: 47px;
 }
 .bottom {
     position: relative;

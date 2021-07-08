@@ -10,5 +10,12 @@ export function generateNewGroupData(groups) {
 
 
 export function getLegend(value, legends) {
-    return find(legends, ({startValue: min, endValue: max}) => parseInt(min) < value && parseInt(max) >= value)
+    return find(legends, (legend) => {
+        if (legend) {
+            const {startValue, endValue} = legend;
+            console.log(startValue)
+            return +startValue <= value && +endValue > value
+        }
+        return false;
+    });
 }
