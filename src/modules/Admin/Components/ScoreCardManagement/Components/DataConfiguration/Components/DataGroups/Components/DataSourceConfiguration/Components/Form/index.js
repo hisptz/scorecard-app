@@ -14,28 +14,32 @@ export default function SelectedDataSourceConfigurationForm() {
     const path = ['dataSelection', 'dataGroups', selectedGroupIndex, 'dataHolders', selectedDataHolderIndex]
     const [selectedDataHolder, updateSelectedDataHolder] = useRecoilState(ScorecardStateSelector(path));
 
-    const onFormChange = (index) => ({values}) => {
-        const updatedList = cloneDeep(selectedDataHolder?.dataSources)
-        set(updatedList, [index], values)
-        updateSelectedDataHolder(prevState => ScorecardIndicator.set(prevState, 'dataSources', updatedList))
+    const onFormChange = (index) => ({values, dirty}) => {
+        if (dirty) {
+            const updatedList = cloneDeep(selectedDataHolder?.dataSources)
+            set(updatedList, [index], values)
+            updateSelectedDataHolder(prevState => ScorecardIndicator.set(prevState, 'dataSources', updatedList))
+        }
     }
 
     return (
-        selectedDataHolder?.dataSources?.map((dataSource, index) => (
-            <div key={dataSource.id} className='column w-50' style={{height: '100%'}}>
-                <div className='container-bordered'>
-                    <div className='column'>
-                        <div className='p-16'>
-                            <DataSourceConfigurationForm
-                                defaultValues={dataSource}
-                                legendDefinitions={legendDefinitions}
-                                onFormChange={onFormChange(index)}
-                            />
+        selectedDataHolder?.dataSources?.map((dataSource, index) => {
+            return (
+                <div key={dataSource.id} className='column w-50 data-source-form-container' style={{height: '100%'}}>
+                    <div className='container-bordered'>
+                        <div className='column'>
+                            <div className='p-16'>
+                                <DataSourceConfigurationForm
+                                    defaultValues={dataSource}
+                                    legendDefinitions={legendDefinitions}
+                                    onFormChange={onFormChange(index)}
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        ))
+            )
+        }) || null
     )
 }
 
