@@ -1,6 +1,5 @@
 import {find} from 'lodash'
 import ScorecardIndicatorGroup from "../../../../../../core/models/scorecardIndicatorGroup";
-import ScorecardLegend from "../../../../../../core/models/scorecardLegend";
 
 export function generateNewGroupData(groups) {
 
@@ -20,25 +19,4 @@ export function getLegend(value, legends) {
     });
 }
 
-export function generateLegendDefaults(legendDefinition = [], weight) {
-    if (legendDefinition) {
-        const actualWeight = weight ?? 100; //sets 100 as the default weight
-        const range = actualWeight / legendDefinition?.length
-        const values = []
-        let legendDefinitionIterator = legendDefinition.length - 1;
-        for (let i = 0; i < actualWeight; i += range) {
-            const {id, color, name} = legendDefinition[legendDefinitionIterator];
-            values.push(new ScorecardLegend({
-                startValue: `${Math.floor(i)}`,
-                endValue: `${Math.floor(i + range)}`,
-                id,
-                color,
-                name
-            }))
-            legendDefinitionIterator--
-        }
-        return values.reverse();
-    }
-    return []
-}
 

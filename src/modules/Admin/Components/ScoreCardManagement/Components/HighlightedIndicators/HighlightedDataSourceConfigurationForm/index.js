@@ -21,7 +21,7 @@ export default function HighlightedDataSourceConfigurationForm() {
 
     return (
         !isNaN(selectedHighlightedIndicatorIndex) ?
-            <div className='w-50 container-bordered'>
+            <div className='container-bordered'>
             {
                 selectedHighlightedIndicator &&
                 <DataSourceConfigurationForm defaultValues={selectedHighlightedIndicator}
