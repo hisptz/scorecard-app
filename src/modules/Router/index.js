@@ -1,7 +1,7 @@
 import React from "react";
 import {MemoryRouter, Route, Switch} from 'react-router-dom'
 import Admin from "../Admin";
-import EmptyScoreCardList from "../Main";
+import Main from "../Main";
 import ExampleForms from "../test/Forms";
 
 export default function Router() {
@@ -9,7 +9,7 @@ export default function Router() {
     const pages = [
         {
             pathname: '/home',
-            component: EmptyScoreCardList
+            component: Main
         },
         {
             pathname: '/test',

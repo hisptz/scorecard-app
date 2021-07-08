@@ -1,10 +1,13 @@
+import {useAlert} from "@dhis2/app-runtime";
+import {useSavedObjectList} from "@dhis2/app-service-datastore";
 import {Button, ButtonStrip} from '@dhis2/ui'
 import {Step, StepLabel, Stepper} from "@material-ui/core";
 import {findIndex} from "lodash";
 import React, {useMemo, useRef, useState} from 'react'
 import {useHistory} from "react-router-dom";
-import {useRecoilValue} from "recoil";
-import ScorecardState from "../../../../core/state/scorecard";
+import {useRecoilValue, useResetRecoilState} from "recoil";
+import Scorecard from "../../../../core/models/scorecard";
+import ScorecardState, {ScorecardEditState} from "../../../../core/state/scorecard";
 import useMediaQuery from "../../../../shared/hooks/useMediaQuery";
 import AccessScorecardForm from "./Components/Access";
 import DataConfigurationScorecardForm from "./Components/DataConfiguration";
@@ -35,10 +38,13 @@ const steps = [
     }
 ];
 
-const defaultScorecard = {
-}
-
 export default function ScoreCardManagement() {
+    const [, functions] = useSavedObjectList({global: true})
+    const resetScorecardState = useResetRecoilState(ScorecardState)
+    const resetScorecardEditState = useResetRecoilState(ScorecardEditState)
+    const {scorecardId} = useRecoilValue(ScorecardEditState)
+    const {show} = useAlert(({message}) => message, ({type}) => ({...type, duration: 3000}))
+    const [saving, setSaving] = useState(false);
     const {width, height} = useMediaQuery()
     const history = useHistory();
     const [activeStep, setActiveStep] = useState(steps[0]);
@@ -61,8 +67,23 @@ export default function ScoreCardManagement() {
     const onCancel = () => {
         history.replace('/home')
     }
-    const onSave = () => {
-        console.log(JSON.stringify(scorecardState))
+    const onSave = async () => {
+        try {
+            setSaving(true);
+            if (scorecardId) {
+                await Scorecard.update(scorecardId, scorecardState, functions);
+            } else {
+                await Scorecard.save(scorecardState, functions);
+            }
+            setSaving(false)
+            resetScorecardState()
+            resetScorecardEditState()
+            history.replace('/home')
+            show({message: 'Configuration saved Successfully', type: {success: true}})
+        } catch (e) {
+            show({message: e?.message ?? e.details, type: {info: true}})
+            setSaving(false)
+        }
     }
 
     const hasNextStep = useMemo(() => findIndex(steps, ['label', activeStep.label]) !== (steps.length - 1), [activeStep]);
@@ -105,7 +126,7 @@ export default function ScoreCardManagement() {
                 <div className='row center p-32'>
                     <ButtonStrip center>
                         <Button onClick={onCancel}>Cancel</Button>
-                        <Button onClick={onSave} primary>Save</Button>
+                        <Button disabled={saving} onClick={onSave} primary>Save</Button>
                     </ButtonStrip>
                 </div>
             </div>
