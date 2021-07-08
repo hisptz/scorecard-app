@@ -2,7 +2,9 @@
  * Scenario: Accessing Scorecard List
  */
 
-Given("authorized department officer", () => {});
+Given("authorized department officer", () => {
+  cy.visit("/");
+});
 
 When("opening a list of available scorecards", () => {});
 
@@ -14,7 +16,9 @@ Then(
 /**
  * Scenario: Accessing many scorecards
  */
-Given("authorized department officer", () => {});
+Given("authorized department officer", () => {
+  cy.visit("/");
+});
 When("opening a list of many scorecards", () => {});
 Then("I should be presented with a chunked list of scorecards", () => {});
 And(

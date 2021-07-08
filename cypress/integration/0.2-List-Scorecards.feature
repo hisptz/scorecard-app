@@ -16,7 +16,7 @@ Feature: List Scorecards
     @focus
     Scenario: Accessing scorecard empty list
         Given an authorized department officer
-        When opening a list of available scorecards
+        When opening a list where there are no available scorecards
         Then I should be presented with a message "Welcome to Scorecard App"
 
 
