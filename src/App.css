@@ -6,6 +6,7 @@
     min-height: 715px;
     min-width: 1362px; /* considering the scrollbar */
     overflow: auto;
+    height: 100%;
 }
 
 .popper {
@@ -39,7 +40,7 @@ body {
 }
 
 .start {
-    justify-content: start;
+    justify-content: flex-start;
 }
 
 .center {
@@ -59,7 +60,7 @@ body {
 }
 
 .end {
-    justify-content: end;
+    justify-content: flex-end;
 }
 
 .space-evenly {

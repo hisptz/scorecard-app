@@ -4,7 +4,7 @@ import React from 'react'
 import {useHistory} from "react-router-dom";
 import {useSetRecoilState} from "recoil";
 import ScorecardState, {ScorecardEditState} from "../../../../../core/state/scorecard";
-import {ReactComponent as ScorecardIllustration} from '../../../../../resources/images/scorecards_illustration.svg'
+import holderImage from '../../../../../resources/images/img.png'
 
 
 export default function ScorecardListCard({scorecard}) {
@@ -14,7 +14,8 @@ export default function ScorecardListCard({scorecard}) {
     const setScorecardEditState = useSetRecoilState(ScorecardEditState)
 
     const onView = () => {
-
+        setScorecardState(scorecard)
+        history.replace('/view')
     }
 
     const onEdit = () => {
@@ -28,12 +29,12 @@ export default function ScorecardListCard({scorecard}) {
     }
 
     return (
-        <div className='container-bordered p-16' style={{margin: 16, textAlign: 'center'}}>
-            <ScorecardIllustration style={{height: 100, width: 200}}/>
+        <div className='container-bordered p-32' style={{margin: 16, textAlign: 'center', background: 'white'}}>
+            <img alt='img' src={holderImage} style={{height: 100, width: 200}}/>
             <h3>{title}</h3>
-            <p>{subtitle}</p>
+            <p  >{subtitle}</p>
             <ButtonStrip middle>
-                <Button primary>View</Button>
+                <Button onClick={onView} primary>View</Button>
                 <Button onClick={onEdit}>Edit</Button>
                 <Button destructive>Delete</Button>
             </ButtonStrip>
