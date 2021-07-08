@@ -1,12 +1,10 @@
 import React from 'react'
-import EmptyScoreCardList from "./Components/EmptyScoreCardList";
+import ScorecardList from "./Components/ScorecardList";
 
 
-export default function ScoreCardList() {
+export default function Main() {
 
     return (
-        <div>
-            <EmptyScoreCardList />
-        </div>
+        <ScorecardList/>
     )
 }

@@ -31,10 +31,14 @@ export default class DataModel {
 }
 
 
-export class SavableDataModel extends DataModel{
+export class SavableDataModel extends DataModel {
 
-    static async save(object, set) {
-        console.log('Saving object', object)
+    static async save(object, functions) {
+        return await functions.add(JSON.parse(JSON.stringify(object)))
+    }
+
+    static async update(id, object, functions) {
+        return await functions.replace(id, JSON.parse(JSON.stringify(object)))
     }
 }
 

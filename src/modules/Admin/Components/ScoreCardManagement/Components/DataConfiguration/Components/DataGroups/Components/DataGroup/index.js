@@ -19,7 +19,7 @@ import ScorecardIndicatorGroup from "../../../../../../../../../../core/models/s
 import ScorecardIndicatorHolder from "../../../../../../../../../../core/models/scorecardIndicatorHolder";
 import {ScorecardEditState, ScorecardStateSelector} from "../../../../../../../../../../core/state/scorecard";
 import {updateListFromDragAndDrop} from "../../../../../../../../../../shared/utils/dnd";
-import {generateLegendDefaults} from "../../../../utils";
+import {generateLegendDefaults} from "../../../../../../../../../../shared/utils/utils";
 import DataSourceHolder from "../DataSourceHolder";
 import DataSourceSelectorModal from "../DataSourceSelectorModal";
 import {customChunk} from "./utils";
@@ -195,7 +195,7 @@ export default function DataGroup({handleAccordionChange, expanded, index, onDel
         setGroup(prevState => ScorecardIndicatorGroup.set(prevState, 'dataHolders', updatedDataSources))
     }
 
-    function onExpand(event, newExpanded) {
+    const onExpand = (event, newExpanded)=> {
         if (newExpanded) {
             setScorecardEditorState((prevState) => ({
                 ...prevState,
