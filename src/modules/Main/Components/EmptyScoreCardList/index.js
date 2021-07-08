@@ -41,7 +41,11 @@ export default function EmptyScoreCardList() {
             </p>
           </div>
           <div className="pt-16">
-            <Button onClick={onNewScorecardClick} primary>
+            <Button
+              onClick={onNewScorecardClick}
+              dataTest={"new-scorecard-button"}
+              primary
+            >
               {i18n.t("New Scorecard")}
             </Button>
           </div>
