@@ -13,4 +13,9 @@ export default class ScorecardIndicatorGroup extends DataModel {
             }
         }
     }
+    constructor(attributes) {
+        super(attributes);
+
+    }
+
 }

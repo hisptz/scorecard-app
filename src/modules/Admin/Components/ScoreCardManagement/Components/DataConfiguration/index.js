@@ -12,7 +12,6 @@ import DataSourceConfiguration from "./Components/DataGroups/Components/DataSour
 import PreviewScorecardTable from "./Components/PreviewScorecardTable";
 import {generateNewGroupData} from "./utils";
 
-// TODO: Implement linking by button
 // TODO: Implement linking by dnd
 
 export default function DataConfigurationScorecardForm() {
