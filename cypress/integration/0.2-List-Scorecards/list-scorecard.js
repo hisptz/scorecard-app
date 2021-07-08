@@ -38,3 +38,27 @@ Then("I should be presented with a message {string}", (content) => {
     .contains(content)
     .should("be.visible");
 });
+
+/**
+ * Scenario: Listing Scorecards on card view
+ */
+Given("authorized department officer", () => {
+  cy.visit("/");
+});
+When("opening a list of available scorecards", () => {});
+Then(
+  "I should be presented with a {string} of already configured scorecards",
+  (content) => {}
+);
+
+/**
+ * Scenario: Listing Scorecards on thumbnail view
+ */
+Given("authorized department officer", () => {
+  cy.visit("/");
+});
+When("opening a list of available scorecards", () => {});
+Then(
+  "I should be presented with a {string} of already configured scorecards",
+  (content) => {}
+);
