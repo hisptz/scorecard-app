@@ -2,7 +2,9 @@
  * Scenario: Accessing Scorecard List
  */
 
-Given("authorized department officer", () => {});
+Given("authorized department officer", () => {
+  cy.visit("/");
+});
 
 When("opening a list of available scorecards", () => {});
 
@@ -14,7 +16,9 @@ Then(
 /**
  * Scenario: Accessing many scorecards
  */
-Given("authorized department officer", () => {});
+Given("authorized department officer", () => {
+  cy.visit("/");
+});
 When("opening a list of many scorecards", () => {});
 Then("I should be presented with a chunked list of scorecards", () => {});
 And(
@@ -25,10 +29,36 @@ And(
 /**
  * Scenario: Accessing scorecard empty list
  */
-Given("an authorized department officer", () => {});
+Given("an authorized department officer", () => {
+  cy.visit("/");
+});
+When("opening a list where there are no available scorecards", () => {});
+Then("I should be presented with a message {string}", (content) => {
+  cy.get('[data-test="welcome-scorcard-title"]')
+    .contains(content)
+    .should("be.visible");
+});
+
+/**
+ * Scenario: Listing Scorecards on card view
+ */
+Given("authorized department officer", () => {
+  cy.visit("/");
+});
 When("opening a list of available scorecards", () => {});
-And("there are no configured scorecards", () => {});
 Then(
-  'I should be presented with a message "There are no configured scorecards"',
-  () => {}
+  "I should be presented with a {string} of already configured scorecards",
+  (content) => {}
+);
+
+/**
+ * Scenario: Listing Scorecards on thumbnail view
+ */
+Given("authorized department officer", () => {
+  cy.visit("/");
+});
+When("opening a list of available scorecards", () => {});
+Then(
+  "I should be presented with a {string} of already configured scorecards",
+  (content) => {}
 );

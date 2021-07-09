@@ -16,9 +16,22 @@ Feature: List Scorecards
     @focus
     Scenario: Accessing scorecard empty list
         Given an authorized department officer
+        When opening a list where there are no available scorecards
+        Then I should be presented with a message "Welcome to Scorecard App"
+
+    @focus
+    Scenario: Listing Scorecards on card view
+        Given authorized department officer
         When opening a list of available scorecards
-        And there are no configured scorecards
-        Then I should be presented with a message "There are no configured scorecards"
+        Then I should be presented with a "cards" of already configured scorecards
+
+    @focus
+    Scenario: Listing Scorecards on thumbnail view
+        Given authorized department officer
+        When opening a list of available scorecards
+        Then I should be presented with a "thumbnails" of already configured scorecards
+
+
 
 
 
