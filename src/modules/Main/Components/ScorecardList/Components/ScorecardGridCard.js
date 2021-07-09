@@ -10,7 +10,7 @@ import holderImage from '../../../../../resources/images/img.png'
 import DeleteConfirmation from "../../../../../shared/Components/DeleteConfirmation";
 
 
-export default function ScorecardListCard({scorecardId}) {
+export default function ScorecardGridCard({scorecardId}) {
     const [scorecard, {remove}] = useSavedObject(scorecardId)
     const {title, subtitle, id} = scorecard
     const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
@@ -47,33 +47,25 @@ export default function ScorecardListCard({scorecardId}) {
     }
 
     return (
-        <div className='container-bordered p-32' style={{margin: 16, background: 'white'}}>
-            <div className='row space-between align-items-center'>
-                <div className='row'>
-                    <img alt='img' src={holderImage} style={{height: 100, width: 200, paddingRight: 32}}/>
-                   <div className='column start'>
-                       <h3>{title}</h3>
-                       <p style={{color: colors.grey600, margin: 0}}>{subtitle}</p>
-                   </div>
-                </div>
-                <div className='row end'>
-                    <ButtonStrip middle>
-                        <Button onClick={onView} primary>View</Button>
-                        <Button onClick={onEdit}>Edit</Button>
-                        <Button onClick={() => setDeleteConfirmOpen(true)} destructive>Delete</Button>
-                    </ButtonStrip>
-                    {
-                        deleteConfirmOpen &&
-                        <DeleteConfirmation component={<p>Are you sure you want to delete scorecard <b>{title}</b></p>} onConfirm={onDelete}
-                                            onCancel={() => setDeleteConfirmOpen(false)}/>
-                    }
-                </div>
-            </div>
+        <div className='container-bordered p-32' style={{margin: 16, textAlign: 'center', background: 'white'}}>
+            <img alt='img' src={holderImage} style={{height: 100, width: 200}}/>
+            <h3>{title}</h3>
+            <p style={{color: colors.grey600}}>{subtitle}</p>
+            <ButtonStrip middle>
+                <Button onClick={onView} primary>View</Button>
+                <Button onClick={onEdit}>Edit</Button>
+                <Button onClick={() => setDeleteConfirmOpen(true)} destructive>Delete</Button>
+            </ButtonStrip>
+            {
+                deleteConfirmOpen &&
+                <DeleteConfirmation component={<p>Are you sure you want to delete scorecard <b>{title}</b></p>} onConfirm={onDelete}
+                                    onCancel={() => setDeleteConfirmOpen(false)}/>
+            }
         </div>
     )
 }
 
-ScorecardListCard.propTypes = {
+ScorecardGridCard.propTypes = {
     scorecardId: PropTypes.string
 };
 
