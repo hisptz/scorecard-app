@@ -1,7 +1,7 @@
 import {Button, ButtonStrip, colors} from '@dhis2/ui'
 import React from 'react'
 import {useHistory} from "react-router-dom";
-import {useRecoilValue, useSetRecoilState} from "recoil";
+import {useRecoilValue, useResetRecoilState, useSetRecoilState} from "recoil";
 import ScorecardState, {ScorecardEditState} from "../../../../core/state/scorecard";
 import {ReactComponent as UnderConstruction} from '../../../../resources/images/scorecard_under_construction.svg'
 
@@ -9,14 +9,17 @@ export default function ScorecardView() {
     const history = useHistory();
     const setEditState = useSetRecoilState(ScorecardEditState)
     const {title, subtitle, id} = useRecoilValue(ScorecardState) ?? {}
+    const resetScorecardState = useResetRecoilState(ScorecardState)
 
     const onEdit = () => {
         setEditState({scorecardId: id})
-        history.replace('/admin')
+        history.push('/admin')
     }
 
     const onHome = () => {
-        history.replace('/home')
+        resetScorecardState();
+        setEditState({})
+        history.goBack()
     }
 
 

@@ -65,7 +65,7 @@ export default function ScoreCardManagement() {
         }
     }
     const onCancel = () => {
-        history.replace('/home')
+        history.goBack()
     }
     const onSave = async () => {
         try {
@@ -76,9 +76,8 @@ export default function ScoreCardManagement() {
                 await Scorecard.save(scorecardState, functions);
             }
             setSaving(false)
-            resetScorecardState()
             resetScorecardEditState()
-            history.replace('/home')
+            history.goBack()
             show({message: 'Configuration saved Successfully', type: {success: true}})
         } catch (e) {
             show({message: e?.message ?? e.details, type: {info: true}})

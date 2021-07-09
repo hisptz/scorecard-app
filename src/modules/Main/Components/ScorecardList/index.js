@@ -13,7 +13,6 @@ export default function ScorecardList() {
     const history = useHistory();
     const [scorecardList] = useSavedObjectList({global: true})
 
-    console.log(scorecardList)
     return (
         isEmpty(scorecardList) ? <EmptyScoreCardList/>: <div className='column'>
             <div className='row p-16'>
@@ -21,7 +20,7 @@ export default function ScorecardList() {
                     <ButtonStrip end>
                         <Button icon={<HelpIcon/>}>Help</Button>
                         <Button icon={<ViewModuleIcon/>}/>
-                        <Button onClick={()=>history.replace('/admin')} primary icon={<AddIcon/>}>Add New Scorecard</Button>
+                        <Button onClick={()=>history.push('/admin')} primary icon={<AddIcon/>}>Add New Scorecard</Button>
                     </ButtonStrip>
                 </div>
             </div>
@@ -32,7 +31,7 @@ export default function ScorecardList() {
             </div>
             <div className='scorecard-list-container grid p-32'>
                 {
-                    scorecardList?.map(scorecard => (<ScorecardListCard key={scorecard.id} scorecard={scorecard}/>))
+                    scorecardList?.map(scorecard => (<ScorecardListCard key={scorecard.id} scorecardId={scorecard?.id}/>))
                 }
             </div>
         </div>
