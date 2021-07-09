@@ -10,7 +10,7 @@ export default function EmptyScoreCardList() {
   const history = useHistory();
 
   const onNewScorecardClick = () => {
-    history.replace("/admin");
+    history.push("/admin");
   };
 
   return (
