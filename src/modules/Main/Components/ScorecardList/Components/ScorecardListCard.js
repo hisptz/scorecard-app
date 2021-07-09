@@ -31,7 +31,14 @@ export default function ScorecardListCard({scorecardId}) {
     }
 
     const onDelete = () => {
-        remove()
+        try{
+            remove()
+        } catch (e){
+            show({
+                message: e.message,
+                type: {info: true}
+            })
+        }
         show({
             message: 'Scorecard deleted successfully',
             type: {success: true}
