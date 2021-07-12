@@ -8,7 +8,7 @@ import './locales'
 
 
 const MyApp = () => (
-    <DataStoreProvider namespace={'Scorecard_App_HISPTZ'} loadingComponent={<FullPageLoader/>}>
+    <DataStoreProvider namespace={'hisptz-scorecard'} loadingComponent={<FullPageLoader/>}>
         <RecoilRoot>
            <div className='main-container'>
                <Router/>
