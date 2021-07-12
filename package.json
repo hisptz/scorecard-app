@@ -35,7 +35,7 @@
     "cypress": "^7.5.0",
     "jodit-react": "^1.0.88",
     "lodash": "^4.17.21",
-    "luxon": "^1.27.0",
+    "luxon": "^2.0.1",
     "prop-types": "^15.7.2",
     "react-color": "^2.19.3",
     "react-router-dom": "^5.2.0",
