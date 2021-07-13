@@ -5,8 +5,8 @@ import AddIcon from "@material-ui/icons/Add";
 import HelpIcon from '@material-ui/icons/Help';
 import ListViewIcon from '@material-ui/icons/Reorder';
 import GridViewIcon from '@material-ui/icons/ViewModule';
-import {isEmpty} from 'lodash'
-import React, {Suspense} from 'react'
+import {debounce, isEmpty} from 'lodash'
+import React, {Suspense, useEffect, useState} from 'react'
 import {useHistory} from "react-router-dom";
 import {useResetRecoilState} from "recoil";
 import ScorecardState, {ScorecardIdState} from "../../../../core/state/scorecard";
@@ -22,6 +22,8 @@ export default function ScorecardList() {
     const history = useHistory();
     const [scorecardViewType, {set}] = useSetting('scorecardViewType')
     const {scorecards} = useAllScorecards()
+    const [keyword, setKeyword] = useState();
+    const [filteredScorecards, setFilteredScorecards] = useState(scorecards)
     const {show} = useAlert(({message}) => message, ({type}) => ({...type, duration: 3000}))
 
     const onViewChange = () => {
@@ -47,10 +49,27 @@ export default function ScorecardList() {
         }
     }
 
+    const onSearch = debounce((keyword) => {
+        setFilteredScorecards(() => {
+            return scorecards.filter(({id, title, description}) => {
+                const index = `${id}${title}${description}`.toLowerCase()
+                return index.match(new RegExp(keyword.toLowerCase()))
+            })
+        })
+    })
+
+    useEffect(() => {
+        if (keyword) {
+            onSearch(keyword)
+        } else {
+            setFilteredScorecards(scorecards)
+        }
+    }, [keyword]);
+
     const onAddClick = () => {
         resetScorecardState();
         resetScorecardIdState();
-        history.push('/admin')
+        history.push('/admin', {from: 'home'})
     }
 
     return (
@@ -76,12 +95,14 @@ export default function ScorecardList() {
                         </div>
                         <div className='row p-16 center'>
                             <div className='column w-50'>
-                                <Input placeholder="Search"/>
+                                <Input value={keyword} onChange={({value}) => {
+                                    setKeyword(value)
+                                }} placeholder="Search"/>
                             </div>
                         </div>
                         {
-                            scorecardViewType === 'grid' ? <GridScorecardDisplay scorecards={scorecards}/> :
-                                <ListScorecardDisplay scorecards={scorecards}/>
+                            scorecardViewType === 'grid' ? <GridScorecardDisplay scorecards={filteredScorecards}/> :
+                                <ListScorecardDisplay scorecards={filteredScorecards}/>
                         }
                     </div>
             }
