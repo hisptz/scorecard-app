@@ -1,9 +1,9 @@
-import useScorecard from "./useScorecard";
+import  {useDeleteScorecard} from "./useScorecard";
 import useScorecardsSummary from "./useScorecardsSummary";
 
 export default function useAllScorecards() {
     const {removeSingleScorecardSummary, error, loading, summary, updateLoading} = useScorecardsSummary()
-    const {remove, removeLoading, error: removeError} = useScorecard('');
+    const {remove, loading: removeLoading, error: removeError} = useDeleteScorecard('', {lazy: true});
 
     const deleteScorecard = async (id) => {
         await remove({
@@ -13,7 +13,7 @@ export default function useAllScorecards() {
     }
 
     return {
-        scorecards: summary?.scorecards,
+        scorecards: summary,
         error: error ?? removeError,
         loading,
         removeLoading: removeLoading || updateLoading,
