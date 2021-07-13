@@ -1,39 +1,37 @@
 import {useAlert} from "@dhis2/app-runtime";
-import {useSavedObject} from "@dhis2/app-service-datastore";
 import {Button, ButtonStrip, colors} from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import React, {useState} from 'react'
 import {useHistory} from "react-router-dom";
 import {useSetRecoilState} from "recoil";
-import ScorecardState, {ScorecardEditState} from "../../../../../core/state/scorecard";
+import {ScorecardIdState} from "../../../../../core/state/scorecard";
 import holderImage from '../../../../../resources/images/img.png'
 import DeleteConfirmation from "../../../../../shared/Components/DeleteConfirmation";
+import {useDeleteScorecard} from "../../../../../shared/hooks/datastore/useScorecard";
 
 
-export default function ScorecardGridCard({scorecardId}) {
-    const [scorecard, {remove}] = useSavedObject(scorecardId)
-    const {title, subtitle, id} = scorecard
+export default function ScorecardGridCard({scorecard}) {
+    const {title, description, id} = scorecard;
     const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
     const history = useHistory()
-    const setScorecardState = useSetRecoilState(ScorecardState)
-    const setScorecardEditState = useSetRecoilState(ScorecardEditState)
+    const setScorecardIdState = useSetRecoilState(ScorecardIdState)
+    const {remove} = useDeleteScorecard(id)
     const {show} = useAlert(({message}) => message, ({type}) => ({...type, duration: 3000}))
 
     const onView = () => {
-        setScorecardState(scorecard)
-        history.push('/view')
+        setScorecardIdState(id)
+        history.push('/view', {from: 'home'})
     }
 
     const onEdit = () => {
-        setScorecardState(scorecard)
-        setScorecardEditState({scorecardId: id})
-        history.push('/admin')
+        setScorecardIdState(id)
+        history.push('/admin', {from: 'home'})
     }
 
-    const onDelete = () => {
-        try{
-            remove()
-        } catch (e){
+    const onDelete = async () => {
+        try {
+            await remove()
+        } catch (e) {
             show({
                 message: e.message,
                 type: {info: true}
@@ -50,7 +48,7 @@ export default function ScorecardGridCard({scorecardId}) {
         <div className='container-bordered p-32' style={{margin: 16, textAlign: 'center', background: 'white'}}>
             <img alt='img' src={holderImage} style={{height: 100, width: 200}}/>
             <h3>{title}</h3>
-            <p style={{color: colors.grey600}}>{subtitle}</p>
+            <p style={{color: colors.grey600}}>{description}</p>
             <ButtonStrip middle>
                 <Button onClick={onView} primary>View</Button>
                 <Button onClick={onEdit}>Edit</Button>
@@ -58,7 +56,8 @@ export default function ScorecardGridCard({scorecardId}) {
             </ButtonStrip>
             {
                 deleteConfirmOpen &&
-                <DeleteConfirmation component={<p>Are you sure you want to delete scorecard <b>{title}</b></p>} onConfirm={onDelete}
+                <DeleteConfirmation component={<p>Are you sure you want to delete scorecard <b>{title}</b></p>}
+                                    onConfirm={onDelete}
                                     onCancel={() => setDeleteConfirmOpen(false)}/>
             }
         </div>
@@ -66,6 +65,6 @@ export default function ScorecardGridCard({scorecardId}) {
 }
 
 ScorecardGridCard.propTypes = {
-    scorecardId: PropTypes.string
+    scorecard: PropTypes.object
 };
 

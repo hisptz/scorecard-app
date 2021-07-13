@@ -1,38 +1,38 @@
 import {useAlert} from "@dhis2/app-runtime";
-import {useSavedObject} from "@dhis2/app-service-datastore";
 import {Button, ButtonStrip, colors} from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import React, {useState} from 'react'
 import {useHistory} from "react-router-dom";
 import {useSetRecoilState} from "recoil";
-import ScorecardState, {ScorecardEditState} from "../../../../../core/state/scorecard";
+import {ScorecardIdState} from "../../../../../core/state/scorecard";
 import holderImage from '../../../../../resources/images/img.png'
 import DeleteConfirmation from "../../../../../shared/Components/DeleteConfirmation";
+import {useDeleteScorecard} from "../../../../../shared/hooks/datastore/useScorecard";
 
 
-export default function ScorecardListCard({scorecardId}) {
-    const [scorecard, {remove}] = useSavedObject(scorecardId)
-    const {title, subtitle, id} = scorecard
+export default function ScorecardListCard({scorecard}) {
+    const {title, description, id} = scorecard
+
+
     const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
     const history = useHistory()
-    const setScorecardState = useSetRecoilState(ScorecardState)
-    const setScorecardEditState = useSetRecoilState(ScorecardEditState)
+    const {remove} = useDeleteScorecard(id)
+    const setScorecardIdState = useSetRecoilState(ScorecardIdState)
     const {show} = useAlert(({message}) => message, ({type}) => ({...type, duration: 3000}))
 
     const onView = () => {
-        setScorecardState(scorecard)
-        history.push('/view')
+        setScorecardIdState(id)
+        history.push('/view', {from: 'home'})
     }
 
     const onEdit = () => {
-        setScorecardState(scorecard)
-        setScorecardEditState({scorecardId: id})
-        history.push('/admin')
+        setScorecardIdState(id)
+        history.push('/admin', {from: 'home'})
     }
 
-    const onDelete = () => {
+    const onDelete = async () => {
         try{
-            remove()
+           await remove()
         } catch (e){
             show({
                 message: e.message,
@@ -53,7 +53,7 @@ export default function ScorecardListCard({scorecardId}) {
                     <img alt='img' src={holderImage} style={{height: 100, width: 200, paddingRight: 32}}/>
                    <div className='column start'>
                        <h3>{title}</h3>
-                       <p style={{color: colors.grey600, margin: 0}}>{subtitle}</p>
+                       <p style={{color: colors.grey600, margin: 0}}>{description}</p>
                    </div>
                 </div>
                 <div className='row end'>
@@ -74,6 +74,6 @@ export default function ScorecardListCard({scorecardId}) {
 }
 
 ScorecardListCard.propTypes = {
-    scorecardId: PropTypes.string
+    scorecard: PropTypes.object
 };
 

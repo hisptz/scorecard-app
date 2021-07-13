@@ -4,12 +4,10 @@ import ScorecardListCard from "./ScorecardListCard";
 
 
 export default function ListScorecardDisplay({scorecards}) {
-
-
     return (
         <div className='column'>
             {
-                scorecards?.map(({id}) => (<ScorecardListCard scorecardId={id} key={id}/>))
+                scorecards?.map((scorecard) => (<ScorecardListCard scorecard={scorecard} key={scorecard?.id}/>))
             }
         </div>
     )

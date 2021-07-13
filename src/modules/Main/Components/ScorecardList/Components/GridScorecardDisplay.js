@@ -10,7 +10,7 @@ export default function GridScorecardDisplay({scorecards}){
         <div className='scorecard-list-container grid p-32'>
             {
                 scorecards?.map(scorecard => (
-                    <ScorecardGridCard key={scorecard.id} scorecardId={scorecard?.id}/>))
+                    <ScorecardGridCard key={scorecard.id} scorecard={scorecard}/>))
             }
         </div>
     )
