@@ -22,12 +22,12 @@ export default function ScorecardListCard({scorecard}) {
 
     const onView = () => {
         setScorecardIdState(id)
-        history.push('/view', )
+        history.push('/view', {from: 'home'})
     }
 
     const onEdit = () => {
         setScorecardIdState(id)
-        history.push('/admin', {id})
+        history.push('/admin', {from: 'home'})
     }
 
     const onDelete = async () => {

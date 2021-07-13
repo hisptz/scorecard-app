@@ -3,7 +3,7 @@ import {Button, ButtonStrip} from '@dhis2/ui'
 import {Step, StepLabel, Stepper} from "@material-ui/core";
 import {findIndex} from "lodash";
 import React, {Suspense, useMemo, useRef, useState} from 'react'
-import {useHistory} from "react-router-dom";
+import {useHistory, useLocation} from "react-router-dom";
 import {useRecoilValue, useResetRecoilState} from "recoil";
 import Scorecard from "../../../../core/models/scorecard";
 import ScorecardState, {ScorecardEditState, ScorecardIdState} from "../../../../core/state/scorecard";
@@ -51,6 +51,7 @@ export default function ScoreCardManagement() {
     const [saving, setSaving] = useState(false);
     const {width, height} = useMediaQuery()
     const history = useHistory();
+    const location = useLocation()
     const [activeStep, setActiveStep] = useState(steps[0]);
     const formRef = useRef(HTMLFormElement);
     const Component = activeStep.component;
@@ -61,18 +62,21 @@ export default function ScoreCardManagement() {
             setActiveStep(steps[index + 1])
         }
     }
+
     const onPreviousStep = () => {
         const index = findIndex(steps, ['label', activeStep.label])
         if (index !== 0) {
             setActiveStep(steps[index - 1])
         }
     }
+
     const onCancel = () => {
         resetScorecardState();
         resetScorecardIdState();
         resetScorecardEditState()
-        history.goBack()
+        history.goBack();
     }
+
     const onSave = async () => {
         try {
             setSaving(true);
@@ -82,7 +86,12 @@ export default function ScoreCardManagement() {
                 await Scorecard.save(scorecardState, add);
             }
             setSaving(false)
-            history.replace('/view')
+            if (location?.state?.from === 'home') {
+                resetScorecardState();
+                resetScorecardIdState();
+            }
+            resetScorecardEditState()
+            history.goBack()
             show({message: 'Configuration saved Successfully', type: {success: true}})
         } catch (e) {
             show({message: e?.message ?? e.details, type: {info: true}})

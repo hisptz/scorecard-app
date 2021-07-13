@@ -20,18 +20,18 @@ export default function ScorecardGridCard({scorecard}) {
 
     const onView = () => {
         setScorecardIdState(id)
-        history.push('/view')
+        history.push('/view', {from: 'home'})
     }
 
     const onEdit = () => {
         setScorecardIdState(id)
-        history.push('/admin')
+        history.push('/admin', {from: 'home'})
     }
 
     const onDelete = async () => {
-        try{
+        try {
             await remove()
-        } catch (e){
+        } catch (e) {
             show({
                 message: e.message,
                 type: {info: true}
@@ -56,7 +56,8 @@ export default function ScorecardGridCard({scorecard}) {
             </ButtonStrip>
             {
                 deleteConfirmOpen &&
-                <DeleteConfirmation component={<p>Are you sure you want to delete scorecard <b>{title}</b></p>} onConfirm={onDelete}
+                <DeleteConfirmation component={<p>Are you sure you want to delete scorecard <b>{title}</b></p>}
+                                    onConfirm={onDelete}
                                     onCancel={() => setDeleteConfirmOpen(false)}/>
             }
         </div>

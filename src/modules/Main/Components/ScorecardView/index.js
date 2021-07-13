@@ -13,13 +13,13 @@ export default function ScorecardView() {
     const {title, subtitle} = useRecoilValue(ScorecardState) ?? {}
 
     const onEdit = () => {
-        history.push('/admin')
+        history.push('/admin', {from: 'view'})
     }
 
     const onHome = () => {
         resetScorecardState();
         resetScorecardIdState();
-        history.goBack()
+        history.replace('/home')
     }
 
     return (
