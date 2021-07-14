@@ -15,6 +15,7 @@ import useAllScorecards from "../../../../shared/hooks/datastore/useAllScorecard
 import EmptyScoreCardList from "../EmptyScoreCardList";
 import GridScorecardDisplay from "./Components/GridScorecardDisplay";
 import ListScorecardDisplay from "./Components/ListScorecardDisplay";
+import PaginatedDisplay from "./Components/PaginatedDisplay";
 
 export default function ScorecardList() {
     const resetScorecardState = useResetRecoilState(ScorecardState)
@@ -100,10 +101,10 @@ export default function ScorecardList() {
                                 }} placeholder="Search"/>
                             </div>
                         </div>
-                        {
-                            scorecardViewType === 'grid' ? <GridScorecardDisplay scorecards={filteredScorecards}/> :
-                                <ListScorecardDisplay scorecards={filteredScorecards}/>
-                        }
+                        <PaginatedDisplay
+                            scorecards={filteredScorecards}
+                            pageSize={scorecardViewType === 'grid' ? 8 : 5}
+                            listComponent={scorecardViewType === 'grid' ? GridScorecardDisplay : ListScorecardDisplay}/>
                     </div>
             }
         </Suspense>
