@@ -1,25 +1,31 @@
 import {Button, ButtonStrip, colors} from '@dhis2/ui'
-import React, {Suspense} from 'react'
-import {useHistory} from "react-router-dom";
-import {useRecoilValue, useResetRecoilState} from "recoil";
+import React, {Suspense, useEffect} from 'react'
+import {useHistory, useParams} from "react-router-dom";
+import {useRecoilValue, useResetRecoilState, useSetRecoilState} from "recoil";
 import ScorecardState, {ScorecardIdState} from "../../../../core/state/scorecard";
 import {ReactComponent as UnderConstruction} from '../../../../resources/images/scorecard_under_construction.svg'
 import {FullPageLoader} from "../../../../shared/Components/Loaders";
 
 export default function ScorecardView() {
+    const {id: scorecardId} = useParams()
     const history = useHistory();
+    const setScorecardIdState = useSetRecoilState(ScorecardIdState)
     const resetScorecardState = useResetRecoilState(ScorecardState)
     const resetScorecardIdState = useResetRecoilState(ScorecardIdState)
     const {title, subtitle} = useRecoilValue(ScorecardState) ?? {}
 
+    useEffect(() => {
+        setScorecardIdState(scorecardId)
+    }, [scorecardId]);
+
     const onEdit = () => {
-        history.push('/admin', {from: 'view'})
+        history.push(`/edit/${scorecardId}`, {from: 'view'})
     }
 
     const onHome = () => {
         resetScorecardState();
         resetScorecardIdState();
-        history.replace('/home')
+        history.replace('/')
     }
 
     return (

@@ -1,6 +1,7 @@
 const config = {
     type: 'app',
     name: 'Scorecard',
+    title: "Scorecard",
     entryPoints: {
         app: './src/App',
     },

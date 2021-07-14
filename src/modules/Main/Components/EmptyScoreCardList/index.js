@@ -16,7 +16,7 @@ export default function EmptyScoreCardList() {
     const onNewScorecardClick = () => {
         resetScorecardIdState()
         resetScorecardState()
-        history.push('/admin', {from: 'home'})
+        history.push('/add', {from: 'home'})
     };
 
     return (

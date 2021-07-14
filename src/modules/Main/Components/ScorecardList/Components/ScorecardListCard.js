@@ -12,22 +12,17 @@ import {useDeleteScorecard} from "../../../../../shared/hooks/datastore/useScore
 
 export default function ScorecardListCard({scorecard}) {
     const {title, description, id} = scorecard
-
-
     const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
     const history = useHistory()
     const {remove} = useDeleteScorecard(id)
-    const setScorecardIdState = useSetRecoilState(ScorecardIdState)
     const {show} = useAlert(({message}) => message, ({type}) => ({...type, duration: 3000}))
 
     const onView = () => {
-        setScorecardIdState(id)
-        history.push('/view', {from: 'home'})
+        history.push(`/view/${id}`, {from: 'home'})
     }
 
     const onEdit = () => {
-        setScorecardIdState(id)
-        history.push('/admin', {from: 'home'})
+        history.push(`/edit/${id}`, {from: 'home'})
     }
 
     const onDelete = async () => {

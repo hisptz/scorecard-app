@@ -7,6 +7,13 @@ export function getDataSourceShortName(name = '') {
 
 }
 
+
+
+export function getMountPoint(baseUrl=''){
+    const domainReg = /(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]/
+    const protocolReg = /https?: \/\//
+}
+
 export function uid() {
     const letters = 'abcdefghijklmnopqrstuvwxyz' + 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     const allowedChars = '0123456789' + letters;

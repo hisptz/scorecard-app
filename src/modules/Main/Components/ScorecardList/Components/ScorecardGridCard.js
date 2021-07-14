@@ -3,8 +3,6 @@ import {Button, ButtonStrip, colors} from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import React, {useState} from 'react'
 import {useHistory} from "react-router-dom";
-import {useSetRecoilState} from "recoil";
-import {ScorecardIdState} from "../../../../../core/state/scorecard";
 import holderImage from '../../../../../resources/images/img.png'
 import DeleteConfirmation from "../../../../../shared/Components/DeleteConfirmation";
 import {useDeleteScorecard} from "../../../../../shared/hooks/datastore/useScorecard";
@@ -14,18 +12,15 @@ export default function ScorecardGridCard({scorecard}) {
     const {title, description, id} = scorecard;
     const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
     const history = useHistory()
-    const setScorecardIdState = useSetRecoilState(ScorecardIdState)
     const {remove} = useDeleteScorecard(id)
     const {show} = useAlert(({message}) => message, ({type}) => ({...type, duration: 3000}))
 
     const onView = () => {
-        setScorecardIdState(id)
-        history.push('/view', {from: 'home'})
+        history.push(`/view/${id}`, {from: 'home'})
     }
 
     const onEdit = () => {
-        setScorecardIdState(id)
-        history.push('/admin', {from: 'home'})
+        history.push(`/edit/${id}`, {from: 'home'})
     }
 
     const onDelete = async () => {

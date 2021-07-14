@@ -2,9 +2,9 @@ import {useAlert} from "@dhis2/app-runtime";
 import {Button, ButtonStrip} from '@dhis2/ui'
 import {Step, StepLabel, Stepper} from "@material-ui/core";
 import {findIndex} from "lodash";
-import React, {Suspense, useMemo, useRef, useState} from 'react'
-import {useHistory, useLocation} from "react-router-dom";
-import {useRecoilValue, useResetRecoilState} from "recoil";
+import React, {Suspense, useEffect, useMemo, useRef, useState} from 'react'
+import {useHistory, useParams} from "react-router-dom";
+import {useRecoilValue, useResetRecoilState, useSetRecoilState} from "recoil";
 import Scorecard from "../../../../core/models/scorecard";
 import ScorecardState, {ScorecardEditState, ScorecardIdState} from "../../../../core/state/scorecard";
 import {FullPageLoader} from "../../../../shared/Components/Loaders";
@@ -40,21 +40,29 @@ const steps = [
 ];
 
 export default function ScoreCardManagement() {
+    const {id: scorecardId} = useParams()
+    const setScorecardIdState = useSetRecoilState(ScorecardIdState)
     const resetScorecardEditState = useResetRecoilState(ScorecardEditState)
     const resetScorecardIdState = useResetRecoilState(ScorecardIdState)
-    const resetScorecardState = useResetRecoilState(ScorecardState)
     const scorecardState = useRecoilValue(ScorecardState)
-    const scorecardId = useRecoilValue(ScorecardIdState)
     const {update} = useUpdateScorecard(scorecardId)
     const {add} = useAddScorecard()
     const {show} = useAlert(({message}) => message, ({type}) => ({...type, duration: 3000}))
     const [saving, setSaving] = useState(false);
     const {width, height} = useMediaQuery()
     const history = useHistory();
-    const location = useLocation()
     const [activeStep, setActiveStep] = useState(steps[0]);
     const formRef = useRef(HTMLFormElement);
     const Component = activeStep.component;
+
+    useEffect(() => {
+        setScorecardIdState(scorecardId)
+    }, [scorecardId]);
+
+    const reset = () => {
+        resetScorecardEditState()
+        resetScorecardIdState();
+    }
 
     const onNextStep = () => {
         const index = findIndex(steps, ['label', activeStep.label])
@@ -71,10 +79,8 @@ export default function ScoreCardManagement() {
     }
 
     const onCancel = () => {
-        resetScorecardState();
-        resetScorecardIdState();
-        resetScorecardEditState()
-        history.goBack();
+        reset()
+        history.goBack()
     }
 
     const onSave = async () => {
@@ -86,11 +92,7 @@ export default function ScoreCardManagement() {
                 await Scorecard.save(scorecardState, add);
             }
             setSaving(false)
-            if (location?.state?.from === 'home') {
-                resetScorecardState();
-                resetScorecardIdState();
-            }
-            resetScorecardEditState()
+            reset();
             history.goBack()
             show({message: 'Configuration saved Successfully', type: {success: true}})
         } catch (e) {

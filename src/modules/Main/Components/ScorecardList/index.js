@@ -70,7 +70,7 @@ export default function ScorecardList() {
     const onAddClick = () => {
         resetScorecardState();
         resetScorecardIdState();
-        history.push('/admin', {from: 'home'})
+        history.push('/add', {from: 'home'})
     }
 
     return (
