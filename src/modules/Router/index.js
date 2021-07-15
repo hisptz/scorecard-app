@@ -1,5 +1,5 @@
 import React from "react";
-import {HashRouter, Route, Switch} from 'react-router-dom'
+import {HashRouter, Redirect, Route, Switch} from 'react-router-dom'
 import ScoreCardManagement from "../Admin/Components/ScoreCardManagement";
 import Main from "../Main";
 import ScorecardView from "../Main/Components/ScorecardView";
@@ -31,11 +31,14 @@ export default function Router() {
 
     return (
         <HashRouter basename='/'>
-            <Switch >
+            <Switch>
                 {
                     pages.map(({pathname, component}) => (
                         <Route key={pathname} path={pathname} component={component}/>))
                 }
+                <Route path='/*'>
+                    <Redirect to={'/'}/>
+                </Route>
             </Switch>
         </HashRouter>
     )

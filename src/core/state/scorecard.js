@@ -39,7 +39,6 @@ const defaultValue = {
 
 const ScorecardIdState = atom({
     key: 'scorecard-id',
-    default: ''
 })
 
 const ScorecardSummaryState = atom({
@@ -62,7 +61,6 @@ const ScorecardState = atom({
         get: async ({get}) => {
             const scorecardId = get(ScorecardIdState)
             const engine = useDataEngine();
-            console.log(scorecardId)
             if (scorecardId) {
                 const {scorecard, error} = await getScorecard(scorecardId, engine)
                 if (error) throw error;

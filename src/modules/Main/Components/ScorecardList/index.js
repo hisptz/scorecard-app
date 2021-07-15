@@ -8,10 +8,9 @@ import GridViewIcon from '@material-ui/icons/ViewModule';
 import {debounce, isEmpty} from 'lodash'
 import React, {Suspense, useEffect, useState} from 'react'
 import {useHistory} from "react-router-dom";
-import {useResetRecoilState} from "recoil";
-import ScorecardState, {ScorecardIdState} from "../../../../core/state/scorecard";
+import {useRecoilValue, useResetRecoilState} from "recoil";
+import ScorecardState, {ScorecardIdState, ScorecardSummaryState} from "../../../../core/state/scorecard";
 import {FullPageLoader} from "../../../../shared/Components/Loaders";
-import useAllScorecards from "../../../../shared/hooks/datastore/useAllScorecards";
 import EmptyScoreCardList from "../EmptyScoreCardList";
 import GridScorecardDisplay from "./Components/GridScorecardDisplay";
 import ListScorecardDisplay from "./Components/ListScorecardDisplay";
@@ -22,10 +21,12 @@ export default function ScorecardList() {
     const resetScorecardIdState = useResetRecoilState(ScorecardIdState)
     const history = useHistory();
     const [scorecardViewType, {set}] = useSetting('scorecardViewType')
-    const {scorecards} = useAllScorecards()
+    const scorecards = useRecoilValue(ScorecardSummaryState)
     const [keyword, setKeyword] = useState();
     const [filteredScorecards, setFilteredScorecards] = useState(scorecards)
     const {show} = useAlert(({message}) => message, ({type}) => ({...type, duration: 3000}))
+
+    console.log(scorecards)
 
     const onViewChange = () => {
         try {
@@ -65,7 +66,7 @@ export default function ScorecardList() {
         } else {
             setFilteredScorecards(scorecards)
         }
-    }, [keyword]);
+    }, [keyword, scorecards]);
 
     const onAddClick = () => {
         resetScorecardState();

@@ -34,6 +34,7 @@ export default function ScorecardListCard({scorecard}) {
                 type: {info: true}
             })
         }
+        setDeleteConfirmOpen(false)
         show({
             message: 'Scorecard deleted successfully',
             type: {success: true}

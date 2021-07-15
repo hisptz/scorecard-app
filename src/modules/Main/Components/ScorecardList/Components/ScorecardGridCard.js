@@ -32,6 +32,7 @@ export default function ScorecardGridCard({scorecard}) {
                 type: {info: true}
             })
         }
+        setDeleteConfirmOpen(false)
         show({
             message: 'Scorecard deleted successfully',
             type: {success: true}

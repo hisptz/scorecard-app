@@ -1,9 +1,10 @@
 import {useDataEngine, useDataMutation, useDataQuery} from "@dhis2/app-runtime";
-import {get} from 'lodash'
+import {get, set} from 'lodash'
 import {useEffect, useState} from "react";
 import {useSetRecoilState} from "recoil";
 import {DATASTORE_ENDPOINT, DATASTORE_SCORECARD_SUMMARY_INCLUDE_KEYS} from "../../../core/constants/config";
 import ScorecardState from "../../../core/state/scorecard";
+import {uid} from "../../utils/utils";
 import useScorecardsSummary from "./useScorecardsSummary";
 
 function generateScorecardSummary(data) {
@@ -102,10 +103,11 @@ export function useAddScorecard() {
     const add = async (data) => {
         try {
             setLoading(true)
+            const id = uid()
+            set(data, 'id', id)
             const scorecardSummary = generateScorecardSummary(data)
             await addSingleScorecardSummary(scorecardSummary);
-            const response = await engine.mutate(generateCreateMutation(data?.id), {variables: {data}})
-            console.log(response)
+            await engine.mutate(generateCreateMutation(id), {variables: {data}})
         } catch (e) {
             setExecutionError(e)
         }

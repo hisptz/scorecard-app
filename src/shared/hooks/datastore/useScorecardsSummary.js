@@ -47,10 +47,10 @@ export default function useScorecardsSummary() {
         try {
             const updatedList = cloneDeep(summary) ?? [];
             updatedList.splice(findIndex(updatedList, ['id', id]), 1)
+            setSummary(() => updatedList)
             await update({
                 data: updatedList
             })
-            setSummary(() => updatedList)
         } catch (e) {
             setExecutionError(e)
         }

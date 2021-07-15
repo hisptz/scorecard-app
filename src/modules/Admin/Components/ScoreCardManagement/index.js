@@ -54,7 +54,7 @@ export default function ScoreCardManagement() {
     const [activeStep, setActiveStep] = useState(steps[0]);
     const formRef = useRef(HTMLFormElement);
     const Component = activeStep.component;
-
+    console.log(scorecardId)
     useEffect(() => {
         setScorecardIdState(scorecardId)
     }, [scorecardId]);
@@ -86,6 +86,7 @@ export default function ScoreCardManagement() {
     const onSave = async () => {
         try {
             setSaving(true);
+            console.log(scorecardId)
             if (scorecardId) {
                 await Scorecard.update(scorecardState, update);
             } else {
