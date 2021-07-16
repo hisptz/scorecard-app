@@ -316,14 +316,16 @@ div.jsx-1730587817 {
 
 td.data-cell{
     border-right: 1px solid rgb(232, 237, 242);
-    left: auto;
-    right: auto;
-    width: auto;
+    max-height: 47px;
+    max-width: 201px;
+    width: 200px;
     height: 47px;
     font-size: 14px;
     background: rgb(255, 255, 255);
     color: rgb(33, 41, 52);
     border-bottom: 1px solid rgb(232, 237, 242);
+    margin: 0;
+    padding: 0;
 }
 
 td.data-cell:last-child{

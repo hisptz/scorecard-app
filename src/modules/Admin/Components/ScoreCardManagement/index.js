@@ -54,7 +54,6 @@ export default function ScoreCardManagement() {
     const [activeStep, setActiveStep] = useState(steps[0]);
     const formRef = useRef(HTMLFormElement);
     const Component = activeStep.component;
-    console.log(scorecardId)
     useEffect(() => {
         setScorecardIdState(scorecardId)
     }, [scorecardId]);
@@ -65,6 +64,10 @@ export default function ScoreCardManagement() {
     }
 
     const onNextStep = () => {
+        if(!hasNextStep){
+            onSave()
+            return
+        }
         const index = findIndex(steps, ['label', activeStep.label])
         if (index !== steps.length - 1) {
             setActiveStep(steps[index + 1])
@@ -133,8 +136,8 @@ export default function ScoreCardManagement() {
                                         <ButtonStrip end>
                                             <Button disabled={!hasPreviousStep}
                                                     onClick={onPreviousStep}>Previous</Button>
-                                            <Button primary disabled={!hasNextStep}
-                                                    onClick={onNextStep}>Next</Button>
+                                            <Button primary disabled={saving}
+                                                    onClick={onNextStep}>{!hasNextStep ? saving ? 'Saving...' : 'Save' : 'Next'}</Button>
                                         </ButtonStrip>
                                     </div>
                                 </div>
@@ -144,7 +147,7 @@ export default function ScoreCardManagement() {
                     <div className='row center p-32'>
                         <ButtonStrip center>
                             <Button onClick={onCancel}>Cancel</Button>
-                            <Button disabled={saving} onClick={onSave} primary>Save</Button>
+                            <Button disabled={saving} onClick={onSave} primary>{saving ? 'Saving...' : 'Save'}</Button>
                         </ButtonStrip>
                     </div>
                 </div>
