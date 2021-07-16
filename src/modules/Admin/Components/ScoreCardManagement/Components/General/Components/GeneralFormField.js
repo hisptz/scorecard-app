@@ -28,4 +28,5 @@ export default function GeneralFormField({ field, dataTest }) {
 
 GeneralFormField.propTypes = {
   field: PropTypes.instanceOf(FormFieldModel).isRequired,
+  dataTest: PropTypes.string
 };

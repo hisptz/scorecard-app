@@ -1,5 +1,8 @@
+import {useDataEngine} from "@dhis2/app-runtime";
 import {cloneDeep, get as _get, set as _set} from 'lodash'
-import {atom, selectorFamily} from "recoil";
+import {atom, selector, selectorFamily} from "recoil";
+import getScorecard from "../../shared/services/getScorecard";
+import getScorecardSummary from "../../shared/services/getScorecardSummary";
 import ScorecardAccessType from "../constants/scorecardAccessType";
 import OrgUnitSelection from "../models/orgUnitSelection";
 import Scorecard from "../models/scorecard";
@@ -34,9 +37,45 @@ const defaultValue = {
     highlightedIndicators: []
 }
 
+const ScorecardIdState = atom({
+    key: 'scorecard-id',
+})
+
+const ScorecardSummaryState = atom({
+    key: 'scorecard-summary',
+    default: selector({
+        key: 'scorecard-summary-selector',
+        get: async () => {
+            const engine = useDataEngine();
+            const {summary, error} = await getScorecardSummary(engine)
+            if (error) throw error;
+            return summary;
+        },
+    })
+})
+
 const ScorecardState = atom({
     key: 'active-scorecard',
-    default: new Scorecard(defaultValue)
+    default: selector({
+        key: 'active-scorecard-default',
+        get: async ({get}) => {
+            const scorecardId = get(ScorecardIdState)
+            const engine = useDataEngine();
+            if (scorecardId) {
+                const {scorecard, error} = await getScorecard(scorecardId, engine)
+                if (error) throw error;
+                return scorecard
+            }
+            return new Scorecard(defaultValue)
+        }
+    }),
+    effects_UNSTABLE: [
+        ({trigger, resetSelf}) => {
+            if (trigger === 'get') {
+                resetSelf()
+            }
+        }
+    ]
 })
 
 const ScorecardStateSelector = selectorFamily({
@@ -51,4 +90,4 @@ const ScorecardEditState = atom({
 })
 
 export default ScorecardState;
-export {ScorecardEditState, ScorecardStateSelector}
+export {ScorecardEditState, ScorecardStateSelector, ScorecardIdState, ScorecardSummaryState}

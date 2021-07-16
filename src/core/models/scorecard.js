@@ -12,7 +12,7 @@ export default class Scorecard extends SavableDataModel {
         return {
             id: uid(),
             name: '',
-            title: '',
+            title: 'Untitled',
             subtitle: '',
             description: '',
             customHeader: '',

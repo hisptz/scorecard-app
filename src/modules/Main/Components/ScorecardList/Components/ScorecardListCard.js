@@ -1,43 +1,70 @@
-import {Button, ButtonStrip} from '@dhis2/ui'
+import {useAlert} from "@dhis2/app-runtime";
+import {Button, ButtonStrip, colors} from '@dhis2/ui'
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, {useState} from 'react'
 import {useHistory} from "react-router-dom";
 import {useSetRecoilState} from "recoil";
-import ScorecardState, {ScorecardEditState} from "../../../../../core/state/scorecard";
+import {ScorecardIdState} from "../../../../../core/state/scorecard";
 import holderImage from '../../../../../resources/images/img.png'
+import DeleteConfirmation from "../../../../../shared/Components/DeleteConfirmation";
+import {useDeleteScorecard} from "../../../../../shared/hooks/datastore/useScorecard";
 
 
 export default function ScorecardListCard({scorecard}) {
-    const {title, subtitle, id} = scorecard
+    const {title, description, id} = scorecard
+    const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
     const history = useHistory()
-    const setScorecardState = useSetRecoilState(ScorecardState)
-    const setScorecardEditState = useSetRecoilState(ScorecardEditState)
+    const {remove} = useDeleteScorecard(id)
+    const {show} = useAlert(({message}) => message, ({type}) => ({...type, duration: 3000}))
 
     const onView = () => {
-        setScorecardState(scorecard)
-        history.replace('/view')
+        history.push(`/view/${id}`, {from: 'home'})
     }
 
     const onEdit = () => {
-        setScorecardState(scorecard)
-        setScorecardEditState({scorecardId: id})
-        history.replace('/admin')
+        history.push(`/edit/${id}`, {from: 'home'})
     }
 
-    const onDelete = () => {
+    const onDelete = async () => {
+        try{
+           await remove()
+        } catch (e){
+            show({
+                message: e.message,
+                type: {info: true}
+            })
+        }
+        setDeleteConfirmOpen(false)
+        show({
+            message: 'Scorecard deleted successfully',
+            type: {success: true}
+        })
 
     }
 
     return (
-        <div className='container-bordered p-32' style={{margin: 16, textAlign: 'center', background: 'white'}}>
-            <img alt='img' src={holderImage} style={{height: 100, width: 200}}/>
-            <h3>{title}</h3>
-            <p  >{subtitle}</p>
-            <ButtonStrip middle>
-                <Button onClick={onView} primary>View</Button>
-                <Button onClick={onEdit}>Edit</Button>
-                <Button destructive>Delete</Button>
-            </ButtonStrip>
+        <div className='container-bordered p-32' style={{margin: 16, background: 'white'}}>
+            <div className='row space-between align-items-center'>
+                <div className='row'>
+                    <img alt='img' src={holderImage} style={{height: 100, width: 200, paddingRight: 32}}/>
+                   <div className='column start'>
+                       <h3>{title}</h3>
+                       <p style={{color: colors.grey600, margin: 0}}>{description}</p>
+                   </div>
+                </div>
+                <div className='row end'>
+                    <ButtonStrip middle>
+                        <Button onClick={onView} primary>View</Button>
+                        <Button onClick={onEdit}>Edit</Button>
+                        <Button onClick={() => setDeleteConfirmOpen(true)} destructive>Delete</Button>
+                    </ButtonStrip>
+                    {
+                        deleteConfirmOpen &&
+                        <DeleteConfirmation component={<p>Are you sure you want to delete scorecard <b>{title}</b></p>} onConfirm={onDelete}
+                                            onCancel={() => setDeleteConfirmOpen(false)}/>
+                    }
+                </div>
+            </div>
         </div>
     )
 }

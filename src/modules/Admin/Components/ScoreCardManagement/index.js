@@ -1,15 +1,20 @@
 import { useAlert } from "@dhis2/app-runtime";
-import { useSavedObjectList } from "@dhis2/app-service-datastore";
 import { Button, ButtonStrip } from "@dhis2/ui";
 import { Step, StepLabel, Stepper } from "@material-ui/core";
 import { findIndex } from "lodash";
-import React, { useMemo, useRef, useState } from "react";
-import { useHistory } from "react-router-dom";
-import { useRecoilValue, useResetRecoilState } from "recoil";
+import React, { Suspense, useEffect, useMemo, useRef, useState } from "react";
+import { useHistory, useParams } from "react-router-dom";
+import { useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil";
 import Scorecard from "../../../../core/models/scorecard";
 import ScorecardState, {
   ScorecardEditState,
+  ScorecardIdState,
 } from "../../../../core/state/scorecard";
+import { FullPageLoader } from "../../../../shared/Components/Loaders";
+import {
+  useAddScorecard,
+  useUpdateScorecard,
+} from "../../../../shared/hooks/datastore/useScorecard";
 import useMediaQuery from "../../../../shared/hooks/useMediaQuery";
 import AccessScorecardForm from "./Components/Access";
 import DataConfigurationScorecardForm from "./Components/DataConfiguration";
@@ -41,10 +46,13 @@ const steps = [
 ];
 
 export default function ScoreCardManagement() {
-  const [, functions] = useSavedObjectList({ global: true });
-  const resetScorecardState = useResetRecoilState(ScorecardState);
+  const { id: scorecardId } = useParams();
+  const setScorecardIdState = useSetRecoilState(ScorecardIdState);
   const resetScorecardEditState = useResetRecoilState(ScorecardEditState);
-  const { scorecardId } = useRecoilValue(ScorecardEditState);
+  const resetScorecardIdState = useResetRecoilState(ScorecardIdState);
+  const scorecardState = useRecoilValue(ScorecardState);
+  const { update } = useUpdateScorecard(scorecardId);
+  const { add } = useAddScorecard();
   const { show } = useAlert(
     ({ message }) => message,
     ({ type }) => ({ ...type, duration: 3000 })
@@ -54,36 +62,51 @@ export default function ScoreCardManagement() {
   const history = useHistory();
   const [activeStep, setActiveStep] = useState(steps[0]);
   const formRef = useRef(HTMLFormElement);
-  const scorecardState = useRecoilValue(ScorecardState);
   const Component = activeStep.component;
+  useEffect(() => {
+    setScorecardIdState(scorecardId);
+  }, [scorecardId]);
+
+  const reset = () => {
+    resetScorecardEditState();
+    resetScorecardIdState();
+  };
 
   const onNextStep = () => {
+    if (!hasNextStep) {
+      onSave();
+      return;
+    }
     const index = findIndex(steps, ["label", activeStep.label]);
     if (index !== steps.length - 1) {
       setActiveStep(steps[index + 1]);
     }
   };
+
   const onPreviousStep = () => {
     const index = findIndex(steps, ["label", activeStep.label]);
     if (index !== 0) {
       setActiveStep(steps[index - 1]);
     }
   };
+
   const onCancel = () => {
-    history.replace("/home");
+    reset();
+    history.goBack();
   };
+
   const onSave = async () => {
     try {
       setSaving(true);
+      console.log(scorecardId);
       if (scorecardId) {
-        await Scorecard.update(scorecardId, scorecardState, functions);
+        await Scorecard.update(scorecardState, update);
       } else {
-        await Scorecard.save(scorecardState, functions);
+        await Scorecard.save(scorecardState, add);
       }
       setSaving(false);
-      resetScorecardState();
-      resetScorecardEditState();
-      history.replace("/home");
+      reset();
+      history.goBack();
       show({
         message: "Configuration saved Successfully",
         type: { success: true },
@@ -104,71 +127,67 @@ export default function ScoreCardManagement() {
   );
 
   return (
-    <div className="container">
-      <div className="column">
-        <div>
-          <Stepper>
-            {steps?.map((step) => (
-              <Step
-                style={
-                  step === activeStep ? { background: "#00695c" } : undefined
-                }
-                active={step === activeStep}
-                onClick={() => setActiveStep(step)}
-                key={`${step.label}-step`}
-              >
-                <StepLabel>{step.label}</StepLabel>
-              </Step>
-            ))}
-          </Stepper>
-        </div>
-        <div className="row">
-          <div className="column center" style={{ flex: 1 }}>
-            <div
-              className="container container-bordered background-white center"
-              style={{ width: width * 0.96, minHeight: height * 0.8 }}
-            >
-              <div className="row" style={{ height: "100%" }}>
-                <div
-                  className="column p-16"
-                  style={{ height: "100%", justifyContent: "space-between" }}
+    <Suspense fallback={<FullPageLoader />}>
+      <div className="container">
+        <div className="column">
+          <div>
+            <Stepper>
+              {steps?.map((step) => (
+                <Step
+                  style={
+                    step === activeStep ? { background: "#00695c" } : undefined
+                  }
+                  active={step === activeStep}
+                  onClick={() => setActiveStep(step)}
+                  key={`${step.label}-step`}
                 >
-                  {<Component formReference={formRef} />}
-                  <ButtonStrip end>
-                    <Button
-                      disabled={!hasPreviousStep}
-                      onClick={onPreviousStep}
-                    >
-                      Previous
-                    </Button>
-                    <Button
-                      primary
-                      dataTest={"scorecard-admin-next-button"}
-                      disabled={!hasNextStep}
-                      onClick={onNextStep}
-                    >
-                      Next
-                    </Button>
-                  </ButtonStrip>
+                  <StepLabel>{step.label}</StepLabel>
+                </Step>
+              ))}
+            </Stepper>
+          </div>
+          <div className="row">
+            <div className="column center" style={{ flex: 1 }}>
+              <div
+                className="container container-bordered background-white center"
+                style={{ width: width * 0.96, minHeight: height * 0.8 }}
+              >
+                <div className="row" style={{ height: "100%" }}>
+                  <div
+                    className="column p-16"
+                    style={{ height: "100%", justifyContent: "space-between" }}
+                  >
+                    {<Component formReference={formRef} />}
+                    <ButtonStrip end>
+                      <Button
+                        disabled={!hasPreviousStep}
+                        onClick={onPreviousStep}
+                      >
+                        Previous
+                      </Button>
+                      <Button primary disabled={saving} onClick={onNextStep}>
+                        {!hasNextStep
+                          ? saving
+                            ? "Saving..."
+                            : "Save"
+                          : "Next"}
+                      </Button>
+                    </ButtonStrip>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div className="row center p-32">
-          <ButtonStrip center>
-            <Button onClick={onCancel}>Cancel</Button>
-            <Button
-              dataTest={"scorecard-save-button"}
-              disabled={saving}
-              onClick={onSave}
-              primary
-            >
-              Save
-            </Button>
-          </ButtonStrip>
+          <div className="row center p-32">
+            <ButtonStrip center>
+              <Button onClick={onCancel}>Cancel</Button>
+              <Button disabled={saving} onClick={onSave} primary>
+                {saving ? "Saving..." : "Save"}
+              </Button>
+            </ButtonStrip>
+          </div>
         </div>
       </div>
-    </div>
+    </Suspense>
   );
 }
