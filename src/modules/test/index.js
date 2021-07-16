@@ -1,5 +1,5 @@
 import React from "react";
-import DataSourceSelector from "../../shared/DataSourceSelector";
+import DataSourceSelector from "../../shared/Components/DataSourceSelector";
 
 
 

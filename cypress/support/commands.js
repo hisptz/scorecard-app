@@ -23,3 +23,18 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add("loadDataSourceFixture", () => {
+  cy.intercept(
+    "GET",
+    Cypress.env("dhis2BaseUrl") +
+      "/api/36/indicatorGroups?fields=displayName,id,indicators%5BdisplayName%2Cid%5D",
+    { fixture: "indicatorGroups.json" }
+  );
+  cy.intercept(
+    "GET",
+    Cypress.env("dhis2BaseUrl") +
+      "/api/36/indicators?page=1&fields=displayName,id&order=displayName%3Aasc",
+    { fixture: "indicators.json" }
+  );
+});

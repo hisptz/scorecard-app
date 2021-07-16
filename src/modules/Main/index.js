@@ -1,16 +1,10 @@
 import React from 'react'
+import ScorecardList from "./Components/ScorecardList";
 
 
+export default function Main() {
 
-
-export default function ScoreCardList(){
-
-
-    return(
-        <div className='container'>
-            <div className='column'>
-
-            </div>
-        </div>
+    return (
+        <ScorecardList/>
     )
 }

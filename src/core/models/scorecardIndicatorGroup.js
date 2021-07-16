@@ -1,34 +1,21 @@
-import ScorecardIndicatorHolder from "./scorecardIndicatorHolder";
+import {uid} from "../../shared/utils/utils";
+import DataModel from "./base";
 
-export default class ScorecardIndicatorGroup {
-  constructor(indicatorGroup) {
-    this.indicatorGroup = indicatorGroup;
-  }
+export default class ScorecardIndicatorGroup extends DataModel {
+    get defaults() {
+        return {
+            id: uid(),
+            title: '',
+            dataHolders: [],
+            style: {
+                backgroundColor: '#FFFFFF',
+                color: '#000000'
+            }
+        }
+    }
+    constructor(attributes) {
+        super(attributes);
 
-  get id() {
-    return this.indicatorGroup ? this.indicatorGroup.id : undefined;
-  }
+    }
 
-  get title() {
-    return this.indicatorGroup ? this.indicatorGroup.title : undefined;
-  }
-
-  get sortOrder() {
-    return this.indicatorGroup ? this.indicatorGroup.sortOrder : 0;
-  }
-
-  get indicatorHolders() {
-    return (
-      this.indicatorGroup ? this.indicatorGroup.indicatorHolders : []
-    ).map((indicatorHolder) => new ScorecardIndicatorHolder(indicatorHolder));
-  }
-
-  get style() {
-    return this.indicatorGroup && this.indicatorGroup.style
-      ? this.indicatorGroup.style
-      : {
-          backgroundColor: "#fffffff",
-          color: "#000",
-        };
-  }
 }

@@ -5,11 +5,23 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-06-02T11:41:07.167Z\n"
-"PO-Revision-Date: 2021-06-02T11:41:07.167Z\n"
+"POT-Creation-Date: 2021-06-22T12:19:36.377Z\n"
+"PO-Revision-Date: 2021-06-22T12:19:36.377Z\n"
 
-msgid "Hello {{name}}"
-msgstr "Hello {{name}}"
+msgid "Add Data source"
+msgstr "Add Data source"
 
-msgid "Welcome to Scorecard!"
-msgstr "Welcome to Scorecard!"
+msgid "Cancel"
+msgstr "Cancel"
+
+msgid "Add"
+msgstr "Add"
+
+msgid "Welcome to Scorecard App!"
+msgstr "Welcome to Scorecard App!"
+
+msgid "Create a scorecard instantly, over tea break"
+msgstr "Create a scorecard instantly, over tea break"
+
+msgid "New Scorecard"
+msgstr "New Scorecard"

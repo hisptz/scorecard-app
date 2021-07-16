@@ -1,12 +1,11 @@
-export default class DataSelection {
-  constructor(dataSelection) {
-    this.dataSelection = dataSelection;
-  }
+import DataModel from "./base";
 
-
-  get indicatorGroups() {
-    return [];
-  }
+export default class DataSelection extends DataModel {
+    get defaults() {
+        return {
+            dataGroups: []
+        }
+    }
 }
 
 
