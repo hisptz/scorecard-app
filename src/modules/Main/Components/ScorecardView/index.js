@@ -1,10 +1,11 @@
-import {Button, ButtonStrip, colors} from '@dhis2/ui'
+import {colors} from "@dhis2/ui";
 import React, {Suspense, useEffect} from 'react'
 import {useHistory, useParams} from "react-router-dom";
 import {useRecoilValue, useResetRecoilState, useSetRecoilState} from "recoil";
 import ScorecardState, {ScorecardIdState} from "../../../../core/state/scorecard";
-import {ReactComponent as UnderConstruction} from '../../../../resources/images/scorecard_under_construction.svg'
+import {ReactComponent as UnderConstruction} from "../../../../resources/images/scorecard_under_construction.svg";
 import {FullPageLoader} from "../../../../shared/Components/Loaders";
+import ScorecardViewHeader from "./Components/Header";
 
 export default function ScorecardView() {
     const {id: scorecardId} = useParams()
@@ -30,19 +31,8 @@ export default function ScorecardView() {
 
     return (
         <Suspense fallback={<FullPageLoader/>}>
+            <ScorecardViewHeader/>
             <div className='column p-32' style={{height: '100%', width: '100%'}}>
-                <div className='row space-between'>
-                    <div className='column'>
-                        <h2>{title}</h2>
-                        <p>{subtitle}</p>
-                    </div>
-                    <div className='column'>
-                        <ButtonStrip end>
-                            <Button onClick={onEdit}>Edit</Button>
-                            <Button onClick={onHome}>Home</Button>
-                        </ButtonStrip>
-                    </div>
-                </div>
                 <div className='flex-1 column align-items-center center'>
                     <UnderConstruction style={{width: 400, height: 200}}/>
                     <p style={{color: colors.grey700, fontStyle: 'italic', fontSize: 20}}>This page is under
