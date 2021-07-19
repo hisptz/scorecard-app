@@ -6,6 +6,7 @@ import {FilterComponentTypes} from "../../../../../../core/constants/selection";
 import ScorecardState, {ScorecardIdState, ScorecardViewSelector} from "../../../../../../core/state/scorecard";
 import OrgUnitSelectorModal from "../../../../../../shared/Components/OrgUnitSelectorModal";
 import PeriodSelectorModal from "../../../../../../shared/Components/PeriodSelectorModal";
+import ScorecardOptionsModal from "../../../../../../shared/Components/ScorecardOptionsModal";
 import SelectionWrapper from "../../../../../../shared/Components/SelectionWrapper";
 
 export default function ScorecardViewHeader() {
@@ -13,11 +14,13 @@ export default function ScorecardViewHeader() {
     const scorecardId = useRecoilValue(ScorecardIdState)
     const [orgUnitSelection, setOrgUnitSelection] = useRecoilState(ScorecardViewSelector('orgUnitSelection'))
     const [periodSelection, setPeriodSelection] = useRecoilState(ScorecardViewSelector('periodSelection'))
+    const [scorecardOptions, setScorecardOptions] = useRecoilState(ScorecardViewSelector('options'))
     const resetScorecardState = useResetRecoilState(ScorecardState)
     const resetScorecardIdState = useResetRecoilState(ScorecardIdState)
 
     const [orgUnitSelectionOpen, setOrgUnitSelectionOpen] = useState(false);
     const [periodSelectionOpen, setPeriodSelectionOpen] = useState(false);
+    const [optionsOpen, setOptionsOpen] = useState(false);
 
     const onEdit = () => {
         history.push(`/edit/${scorecardId}`, {from: 'view'})
@@ -54,7 +57,7 @@ export default function ScorecardViewHeader() {
                             <Button>Refresh</Button>
                         </ButtonStrip>
                         <ButtonStrip>
-                            <Button>Options</Button>
+                            <Button onClick={() => setOptionsOpen(true)}>Options</Button>
                             <Button onClick={onEdit}>Edit</Button>
                             <Button>Print</Button>
                             <Button>Help</Button>
@@ -66,8 +69,12 @@ export default function ScorecardViewHeader() {
                                                                       onSelect={setOrgUnitSelection}/>
                     }{
                     periodSelectionOpen &&
-                    <PeriodSelectorModal  initialValue={periodSelection} onClose={() => setPeriodSelectionOpen(false)}
+                    <PeriodSelectorModal initialValue={periodSelection} onClose={() => setPeriodSelectionOpen(false)}
                                          onSelect={setPeriodSelection}/>
+                }{
+                    optionsOpen &&
+                    <ScorecardOptionsModal onClose={() => setOptionsOpen(false)} initialValues={scorecardOptions}
+                                           onSelect={setScorecardOptions}/>
                 }
                 </div>
             </Card>

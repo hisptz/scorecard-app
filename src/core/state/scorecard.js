@@ -94,10 +94,11 @@ const ScorecardViewState = atom({
     default: selector({
         key: 'scorecardViewStateSelector',
         get: ({get}) => {
-            const {orgUnitSelection, periodSelection} = get(ScorecardState) ?? {}
+            const {orgUnitSelection, periodSelection, options} = get(ScorecardState) ?? {}
             return {
                 orgUnitSelection,
-                periodSelection
+                periodSelection,
+                options
             }
         }
     })
