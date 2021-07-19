@@ -12,7 +12,6 @@ export function getLegend(value, legends) {
     return find(legends, (legend) => {
         if (legend) {
             const {startValue, endValue} = legend;
-            console.log(startValue)
             return +startValue <= value && +endValue > value
         }
         return false;

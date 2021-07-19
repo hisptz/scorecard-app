@@ -16,8 +16,9 @@ export default function CustomLinkedCell({top, bottom}) {
     return (
         <td className='data-cell'>
             <LinkedCellSvg topStatus={topDisplayArrows && 'increasing'}
-                           bottomStatus={bottomDisplayArrows && 'decreasing'} topColor={showTopColors && topColor}
-                           bottomColor={showBottomColors && bottomColor}
+                           bottomStatus={bottomDisplayArrows && 'decreasing'}
+                           topColor={showTopColors ? topColor : undefined}
+                           bottomColor={showBottomColors ? bottomColor : undefined}
                            bottomValue={bottomValue} topValue={topValue}/>
         </td>
     )
