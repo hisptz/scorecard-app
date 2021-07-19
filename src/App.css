@@ -395,4 +395,17 @@ table{
 .selection-text-box{
     margin: auto 16px;
     border-left: 4px solid #28468B;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    text-align: start;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+.selection-text-box>p{
+    padding-left: 16px;
+    font-size: 16px;
+    color: #4A5768;
+    overflow-x: auto;
 }

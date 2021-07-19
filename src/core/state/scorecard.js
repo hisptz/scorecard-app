@@ -89,5 +89,32 @@ const ScorecardEditState = atom({
     default: {}
 })
 
+const ScorecardViewState = atom({
+    key: 'scorecardViewState',
+    default: selector({
+        key: 'scorecardViewStateSelector',
+        get: ({get}) => {
+            const {orgUnitSelection, periodSelection} = get(ScorecardState) ?? {}
+            return {
+                orgUnitSelection,
+                periodSelection
+            }
+        }
+    })
+})
+
+const ScorecardViewSelector = selectorFamily({
+    key: 'scorecardViewSelectorFamily',
+    get: path => ({get}) => _get(get(ScorecardViewState), path),
+    set: path => ({set}, newValue) => set(ScorecardViewState, prevState => _set(cloneDeep(prevState), path, newValue))
+})
+
 export default ScorecardState;
-export {ScorecardEditState, ScorecardStateSelector, ScorecardIdState, ScorecardSummaryState}
+export {
+    ScorecardEditState,
+    ScorecardStateSelector,
+    ScorecardIdState,
+    ScorecardSummaryState,
+    ScorecardViewState,
+    ScorecardViewSelector
+}
