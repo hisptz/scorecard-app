@@ -18,3 +18,10 @@ exclude_patterns:
   - '.github'
   - 'i18n'
   - 'node_modules'
+
+plugins:
+  eslint:
+    enabled: true
+    channel: "eslint-7"
+
+

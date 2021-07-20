@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-07-19T10:01:49.753Z\n"
-"PO-Revision-Date: 2021-07-19T10:01:49.753Z\n"
+"POT-Creation-Date: 2021-07-20T06:17:24.203Z\n"
+"PO-Revision-Date: 2021-07-20T06:17:24.203Z\n"
 
 msgid "Add Data source"
 msgstr "Add Data source"
@@ -26,8 +26,8 @@ msgstr "Create a scorecard instantly, over tea break"
 msgid "New Scorecard"
 msgstr "New Scorecard"
 
-msgid "Selected organisation unit"
-msgstr "Selected organisation unit"
-
 msgid "Selected period"
 msgstr "Selected period"
+
+msgid "Selected organisation unit"
+msgstr "Selected organisation unit"
