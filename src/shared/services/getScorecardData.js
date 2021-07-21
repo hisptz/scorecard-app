@@ -1,5 +1,6 @@
 import { Period } from "@iapps/period-utilities";
 import { flatten } from "lodash";
+import { Fn } from "@iapps/function-analytics";
 export default async function getScorecardData(scorecard) {
   const selectedOrgUnits = _getSelectedOrgUnits(scorecard.orgUnitSelection);
   const { currentPeriods, previousPeriods } = _getSelectedPeriods(
@@ -24,11 +25,47 @@ export default async function getScorecardData(scorecard) {
 
 function _getScorecardData(selections) {
   const { selectedOrgUnits, selectedPeriods, selectedData } = selections;
-  console.log(selectedOrgUnits, selectedPeriods, selectedData);
+  const { normalDataItems, customDataItems } = selectedData;
 
-  return new Promise((resolve, reject) =>
-    resolve({ data: { value: "previous" } })
-  );
+  return new Promise((resolve, reject) => {
+    Promise.all([
+      _getNormalScorecardData({
+        selectedOrgUnits,
+        selectedPeriods,
+        selectedDataItems: normalDataItems,
+      }),
+      _getCustomScorecardData({
+        selectedOrgUnits,
+        selectedPeriods,
+        selectedDataItems: customDataItems,
+      }),
+    ])
+      .then((res) => {
+        console.log(res);
+        resolve(res);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+}
+
+function _getNormalScorecardData(selections) {
+  const { selectedOrgUnits, selectedPeriods, selectedDataItems } = selections;
+  return new Fn.Analytics()
+    .setOrgUnit(selectedOrgUnits?.join(";"))
+    .setPeriod(selectedPeriods?.join(";"))
+    .setData(selectedDataItems.map((dataItem) => dataItem.id).join(";"))
+    .get();
+}
+
+function _getCustomScorecardData(selections) {
+  const { selectedOrgUnits, selectedPeriods, selectedDataItems } = selections;
+  if (selectedDataItems?.length === 0)
+    return new Promise((resolve) => resolve(null));
+
+  // TODO Add implementation when there is custom indicator
+  new Promise((resolve) => resolve(null));
 }
 
 // TODO Derive selected period from period selection if supplied

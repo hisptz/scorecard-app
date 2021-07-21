@@ -10,7 +10,8 @@ import FullPageError from "./shared/Components/Errors/FullPageError";
 import { Fn } from "@iapps/function-analytics";
 
 const MyApp = () => {
-  Fn.init({ baseUrl: "../../../" });
+  const url = process.env.REACT_APP_DHIS2_BASE_URL || "";
+  Fn.init({ baseUrl: url + "/api/" });
   return (
     <DataStoreProvider
       namespace={"hisptz-scorecard"}
