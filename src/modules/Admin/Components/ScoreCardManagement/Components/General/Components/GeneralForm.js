@@ -69,7 +69,7 @@ export default function GeneralForm() {
             id: "customHeader",
             name: "customHeader",
             mandatory: true,
-            formName: "Custom Header",
+            formName: "Custom ScorecardViewHeader",
             valueType: DHIS2ValueTypes.RICH_TEXT.name,
           })
         }

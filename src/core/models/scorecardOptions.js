@@ -12,7 +12,8 @@ export default class ScorecardOption extends DataModel {
             emptyRows: false,
             showHierarchy: false,
             averageColumn: false,
-            averageRow: false
+            averageRow: false,
+            highlightedIndicators: false
         }
     }
 }
