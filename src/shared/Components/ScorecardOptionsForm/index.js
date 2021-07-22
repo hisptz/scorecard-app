@@ -27,6 +27,8 @@ export default function ScorecardOptionsForm({options, onChange}){
                                        label='Average Column'/>
                         <CheckboxField checked={options?.averageRow} onChange={onChange('averageRow')}
                                        value='averageRow' label='Average Row'/>
+                        <CheckboxField checked={options?.highlightedIndicators} onChange={onChange('highlightedIndicators')}
+                                       value='averageRow' label='Highlighted Indicators'/>
                     </div>
                     <h3>Average</h3>
                     <div className='column'>

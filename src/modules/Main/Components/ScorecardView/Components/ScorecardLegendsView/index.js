@@ -11,7 +11,7 @@ export default function ScorecardLegendsView() {
         showLegends ? <div className='row space-between'>
             <div className='row align-items-center w-50'>
                 {
-                    legends.map(legend => (<LegendView key={legend.color} legend={legend}/>))
+                    legends?.map(legend => (<LegendView key={legend.color} legend={legend}/>))
                 }
             </div>
             <div className='row align-items-center w-50 end'>

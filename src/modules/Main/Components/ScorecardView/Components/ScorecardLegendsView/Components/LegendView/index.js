@@ -3,7 +3,7 @@ import React from 'react'
 
 
 export default function LegendView({legend}) {
-    const {name, color} = legend;
+    const {name, color} = legend ?? {color: '#FFFFFF'};
     return (
         <div className='row align-items-center'>
             <div style={{
