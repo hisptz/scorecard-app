@@ -1,10 +1,10 @@
+import i18n from '@dhis2/d2-i18n'
 import {Divider, ReactFinalForm} from "@dhis2/ui";
 import PropTypes from 'prop-types'
 import React from "react";
 import {DHIS2ValueTypes} from "../../constants";
 import {FormFieldModel} from "../../models";
 import CustomField from "../CustomField";
-
 const {Form, FormSpy} = ReactFinalForm
 
 export default function DataSourceConfigurationForm({defaultValues, onFormChange, legendDefinitions}) {
@@ -19,7 +19,7 @@ export default function DataSourceConfigurationForm({defaultValues, onFormChange
                                 <div className='column'>
                                     <CustomField field={new FormFieldModel({
                                         id: 'displayName',
-                                        formName: 'Name',
+                                        formName: i18n.t('Name'),
                                         mandatory: true,
                                         name: 'displayName',
                                         disabled: true,
@@ -27,14 +27,14 @@ export default function DataSourceConfigurationForm({defaultValues, onFormChange
                                     })}/>
                                     <CustomField field={new FormFieldModel({
                                         id: 'label',
-                                        formName: 'Label',
+                                        formName: i18n.t('Label'),
                                         mandatory: true,
                                         name: 'label',
                                         valueType: DHIS2ValueTypes.TEXT.name
                                     })}/>
                                     <CustomField field={new FormFieldModel({
                                         id: 'weight',
-                                        formName: 'Weight',
+                                        formName: i18n.t('Weight'),
                                         mandatory: false,
                                         name: 'weight',
                                         valueType: DHIS2ValueTypes.NUMBER.name
@@ -43,7 +43,7 @@ export default function DataSourceConfigurationForm({defaultValues, onFormChange
                                         <div className='column pr-16'>
                                             <CustomField field={new FormFieldModel({
                                                 id: 'effectiveGap',
-                                                formName: 'Effective Gap',
+                                                formName: i18n.t('Effective Gap'),
                                                 mandatory: false,
                                                 name: 'effectiveGap',
                                                 valueType: DHIS2ValueTypes.NUMBER.name
@@ -52,21 +52,21 @@ export default function DataSourceConfigurationForm({defaultValues, onFormChange
                                         <div className='column pl-16'>
                                             <CustomField field={new FormFieldModel({
                                                 id: 'displayArrows',
-                                                formName: 'Display Arrows',
+                                                formName: i18n.t('Display Arrows'),
                                                 mandatory: false,
                                                 name: 'displayArrows',
                                                 valueType: DHIS2ValueTypes.TRUE_ONLY.name
                                             })}/>
                                             <CustomField field={new FormFieldModel({
                                                 id: 'highIsGood',
-                                                formName: 'High is Good',
+                                                formName: i18n.t('High is Good'),
                                                 mandatory: false,
                                                 name: 'highIsGood',
                                                 valueType: DHIS2ValueTypes.TRUE_ONLY.name
                                             })}/>
                                             <CustomField field={new FormFieldModel({
                                                 id: 'showColors',
-                                                formName: 'Show Colors',
+                                                formName: i18n.t('Show Colors'),
                                                 mandatory: false,
                                                 name: 'showColors',
                                                 valueType: DHIS2ValueTypes.TRUE_ONLY.name
@@ -79,7 +79,7 @@ export default function DataSourceConfigurationForm({defaultValues, onFormChange
                                             <CustomField field={new FormFieldModel({
                                                 id: 'legends',
                                                 name: 'legends',
-                                                formName: 'Legends',
+                                                formName: i18n.t('Legends'),
                                                 valueType: DHIS2ValueTypes.MULTIPLE_FIELDS.name,
                                                 multipleFields: legendDefinitions?.map(legend => (new FormFieldModel({
                                                     id: legend.name,

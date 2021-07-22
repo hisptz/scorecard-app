@@ -1,5 +1,6 @@
 import {useAlert} from "@dhis2/app-runtime";
 import {useSetting} from "@dhis2/app-service-datastore";
+import i18n from '@dhis2/d2-i18n'
 import {Button, ButtonStrip, Input, Tooltip} from '@dhis2/ui'
 import AddIcon from "@material-ui/icons/Add";
 import HelpIcon from '@material-ui/icons/Help';
@@ -25,8 +26,6 @@ export default function ScorecardList() {
     const [keyword, setKeyword] = useState();
     const [filteredScorecards, setFilteredScorecards] = useState(scorecards)
     const {show} = useAlert(({message}) => message, ({type}) => ({...type, duration: 3000}))
-
-    console.log(scorecards)
 
     const onViewChange = () => {
         try {
@@ -83,15 +82,15 @@ export default function ScorecardList() {
                         <div className='row p-16'>
                             <div className='w-100'>
                                 <ButtonStrip end>
-                                    <Button icon={<HelpIcon/>}>Help</Button>
+                                    <Button icon={<HelpIcon/>}>{i18n.t('Help')}</Button>
                                     <Tooltip
-                                        content={`Change to ${scorecardViewType === 'grid' ? 'list' : 'grid'} view`}>
+                                        content={i18n.t('Change to {{viewType}} view', {viewType: scorecardViewType === 'grid' ? i18n.t('list') : i18n.t('grid')})}>
                                         <Button onClick={onViewChange}
                                                 icon={scorecardViewType === 'grid' ? <ListViewIcon/> :
                                                     <GridViewIcon/>}/>
                                     </Tooltip>
-                                    <Button onClick={onAddClick} primary icon={<AddIcon/>}>Add New
-                                        Scorecard</Button>
+                                    <Button onClick={onAddClick} primary
+                                            icon={<AddIcon/>}>{i18n.t('Add New Scorecard')}</Button>
                                 </ButtonStrip>
                             </div>
                         </div>
@@ -99,7 +98,7 @@ export default function ScorecardList() {
                             <div className='column w-50'>
                                 <Input value={keyword} onChange={({value}) => {
                                     setKeyword(value)
-                                }} placeholder="Search"/>
+                                }} placeholder={i18n.t('Search')}/>
                             </div>
                         </div>
                         <PaginatedDisplay

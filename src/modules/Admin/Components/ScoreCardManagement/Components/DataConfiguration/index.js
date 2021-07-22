@@ -1,3 +1,4 @@
+import i18n from '@dhis2/d2-i18n'
 import { Button, Checkbox, colors } from "@dhis2/ui";
 import AddIcon from "@material-ui/icons/Add";
 import { isEmpty } from "lodash";
@@ -68,17 +69,17 @@ export default function DataConfigurationScorecardForm() {
           >
             <div className="row space-between pr-16 pt-16">
               <p style={{ margin: 0 }} className="pl-16">
-                Set Target on Levels
+                {i18n.t('Set Target on Levels')}
               </p>
               <Checkbox
                 checked={targetOnLevels}
                 onChange={() => updateTargetOnLevels((prevState) => !prevState)}
               />
             </div>
-            <h4 className="pl-16">Groups</h4>
+            <h4 className="pl-16">{i18n.t('Groups')}</h4>
             {isEmpty(groups) ? (
               <div className="column center text-center">
-                <p style={{ color: colors.grey700 }}>Add a group to start</p>
+                <p style={{ color: colors.grey700 }}>{i18n.t('Add a group to start')}</p>
               </div>
             ) : (
               <DragDropContext onDragEnd={onDragEnd}>
@@ -91,7 +92,7 @@ export default function DataConfigurationScorecardForm() {
                 icon={<AddIcon />}
                 dataTest="scocecard-add-group-button"
               >
-                Add Group
+                {i18n.t('Add Group')}
               </Button>
             </div>
           </div>

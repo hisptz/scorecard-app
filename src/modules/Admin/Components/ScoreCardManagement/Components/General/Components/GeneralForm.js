@@ -1,9 +1,9 @@
+import i18n from '@dhis2/d2-i18n'
 import { PeriodType } from "@iapps/period-utilities";
 import React from "react";
 import { DHIS2ValueTypes } from "../../../../../../../shared/Components/CustomForm/constants";
 import { FormFieldModel } from "../../../../../../../shared/Components/CustomForm/models";
 import GeneralFormField from "./GeneralFormField";
-
 //TODO: Styling using media queries instead
 
 export default function GeneralForm() {
@@ -17,7 +17,7 @@ export default function GeneralForm() {
             id: "title",
             name: "title",
             mandatory: true,
-            formName: "Title",
+            formName: i18n.t('Title'),
             valueType: DHIS2ValueTypes.TEXT.name,
           })
         }
@@ -28,7 +28,7 @@ export default function GeneralForm() {
             id: "subtitle",
             name: "subtitle",
             mandatory: false,
-            formName: "Subtitle",
+            formName: i18n.t('Subtitle'),
             valueType: DHIS2ValueTypes.TEXT.name,
           })
         }
@@ -39,7 +39,7 @@ export default function GeneralForm() {
             id: "description",
             name: "description",
             mandatory: true,
-            formName: "Description",
+            formName: i18n.t('Description'),
             valueType: DHIS2ValueTypes.LONG_TEXT.name,
           })
         }
@@ -51,7 +51,7 @@ export default function GeneralForm() {
               id: "periodType",
               name: "periodType",
               mandatory: true,
-              formName: "Period Type",
+              formName: i18n.t('Period Type'),
               valueType: DHIS2ValueTypes.TEXT.name,
               optionSet: {
                 options: periodTypes?.map(({ name, id }) => ({
@@ -69,7 +69,7 @@ export default function GeneralForm() {
             id: "customHeader",
             name: "customHeader",
             mandatory: true,
-            formName: "Custom ScorecardViewHeader",
+            formName: i18n.t('Custom Header'),
             valueType: DHIS2ValueTypes.RICH_TEXT.name,
           })
         }
@@ -80,7 +80,7 @@ export default function GeneralForm() {
             new FormFieldModel({
               id: "legendDefinitions",
               name: "legendDefinitions",
-              formName: "Legend Definitions",
+              formName: i18n.t('Legend Definitions'),
               valueType: DHIS2ValueTypes.MULTIPLE_FIELDS.name,
               multipleField: new FormFieldModel({
                 id: "legendDefinition",
@@ -97,7 +97,7 @@ export default function GeneralForm() {
             new FormFieldModel({
               id: "additionalLabels",
               name: "additionalLabels",
-              formName: "Additional Labels",
+              formName: i18n.t('Additional Labels'),
               valueType: DHIS2ValueTypes.MULTIPLE_FIELDS.name,
               multipleField: new FormFieldModel({
                 id: "additionalLabel",

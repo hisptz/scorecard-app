@@ -1,3 +1,4 @@
+import i18n from '@dhis2/d2-i18n'
 import React from 'react'
 import {useRecoilValue} from "recoil";
 import {ScorecardStateSelector, ScorecardViewSelector} from "../../../../../../core/state/scorecard";
@@ -9,7 +10,7 @@ export default function ScorecardLegendsView() {
     const legends = useRecoilValue(ScorecardStateSelector('legendDefinitions'))
     return (
         showLegends ? <div className='column'>
-            <div><h3>Legends</h3></div>
+            <div><h3>{i18n.t('Legends')}</h3></div>
             <div className='row space-between'>
                 <div className='row align-items-center w-50'>
                     {
@@ -19,11 +20,11 @@ export default function ScorecardLegendsView() {
                 <div className='row align-items-center w-50 end'>
                     <div className='pr-16'>
                         <svg height={14} width={14}><IncreasingArrows y={0} x={7}/></svg>
-                        &nbsp; Increased from last period
+                        &nbsp; {i18n.t('Increased from last period')}
                     </div>
                     <div>
                         <svg height={14} width={14}><DecreasingArrows y={14} x={7}/></svg>
-                        &nbsp; Decreased from last period
+                        &nbsp; {i18n.t('Decreased from last period')}
                     </div>
                 </div>
             </div>

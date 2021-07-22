@@ -1,3 +1,4 @@
+import i18n from '@dhis2/d2-i18n'
 import {Button, ButtonStrip, colors, MenuItem} from '@dhis2/ui'
 import DeleteIcon from '@material-ui/icons/Close';
 import EditIcon from "@material-ui/icons/Edit";
@@ -7,9 +8,8 @@ import React, {useState} from 'react'
 import ScorecardAccess from "../../../../../../../../../../../core/models/scorecardAccess";
 import {getAccessIcon, getAccessName} from "../../../utils";
 import SharingMenu from "./SharingMenu";
-
 export default function SingleSharingComponent({access, onDelete, onAccessChange}) {
-    const {id, access: selectedAccess, type, displayName} = access;
+    const { access: selectedAccess, type, displayName} = access;
     const [ref, setRef] = useState()
 
     const onChange = (newAccess) => {
@@ -30,12 +30,12 @@ export default function SingleSharingComponent({access, onDelete, onAccessChange
                     </div>
                     <div className='column align-items-end'>
                         <ButtonStrip>
-                            <Button onClick={(_, e) => setRef(e.currentTarget)} icon={<EditIcon/>}>Edit</Button>
+                            <Button onClick={(_, e) => setRef(e.currentTarget)} icon={<EditIcon/>}>{i18n.t('Edit')}</Button>
                             {
                                 Boolean(onDelete) &&
                                 <Button onClick={() => {
                                     onDelete(access)
-                                }} destructive icon={<DeleteIcon/>}>Remove</Button>
+                                }} destructive icon={<DeleteIcon/>}>{i18n.t('Remove')}</Button>
                             }
                         </ButtonStrip>
                     </div>

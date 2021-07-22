@@ -1,4 +1,5 @@
 import { useAlert } from "@dhis2/app-runtime";
+import i18n from '@dhis2/d2-i18n'
 import { Button, ButtonStrip } from "@dhis2/ui";
 import { Step, StepLabel, Stepper } from "@material-ui/core";
 import { findIndex } from "lodash";
@@ -21,26 +22,25 @@ import DataConfigurationScorecardForm from "./Components/DataConfiguration";
 import GeneralScorecardForm from "./Components/General";
 import HighlightedIndicatorsScorecardForm from "./Components/HighlightedIndicators";
 import OptionsScorecardForm from "./Components/Options";
-
 const steps = [
   {
-    label: "General",
+    label: i18n.t('General'),
     component: GeneralScorecardForm,
   },
   {
-    label: "Data Configuration",
+    label: i18n.t('Data Configuration'),
     component: DataConfigurationScorecardForm,
   },
   {
-    label: "Highlighted Indicators",
+    label: i18n.t('Highlighted Indicators'),
     component: HighlightedIndicatorsScorecardForm,
   },
   {
-    label: "Access",
+    label: i18n.t('Access'),
     component: AccessScorecardForm,
   },
   {
-    label: "Options",
+    label: i18n.t('Options'),
     component: OptionsScorecardForm,
   },
 ];
@@ -98,7 +98,6 @@ export default function ScoreCardManagement() {
   const onSave = async () => {
     try {
       setSaving(true);
-      console.log(scorecardId);
       if (scorecardId) {
         await Scorecard.update(scorecardState, update);
       } else {
@@ -108,7 +107,7 @@ export default function ScoreCardManagement() {
       reset();
       history.goBack();
       show({
-        message: "Configuration saved Successfully",
+        message: i18n.t("Configuration saved Successfully"),
         type: { success: true },
       });
     } catch (e) {
@@ -163,14 +162,14 @@ export default function ScoreCardManagement() {
                         disabled={!hasPreviousStep}
                         onClick={onPreviousStep}
                       >
-                        Previous
+                        {i18n.t('Previous')}
                       </Button>
                       <Button primary disabled={saving} onClick={onNextStep}>
                         {!hasNextStep
                           ? saving
-                            ? "Saving..."
-                            : "Save"
-                          : "Next"}
+                            ? `${i18n.t('Saving')}...`
+                            : i18n.t('Save')
+                          : i18n.t('Next')}
                       </Button>
                     </ButtonStrip>
                   </div>
@@ -180,9 +179,9 @@ export default function ScoreCardManagement() {
           </div>
           <div className="row center p-32">
             <ButtonStrip center>
-              <Button onClick={onCancel}>Cancel</Button>
+              <Button onClick={onCancel}>{i18n.t('Cancel')}</Button>
               <Button disabled={saving} onClick={onSave} primary>
-                {saving ? "Saving..." : "Save"}
+                {saving ? `${i18n.t('Saving')}...` : i18n.t('Save')}
               </Button>
             </ButtonStrip>
           </div>

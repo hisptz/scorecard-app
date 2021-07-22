@@ -2,12 +2,12 @@ import {Avatar, IconButton} from "@material-ui/core";
 import CloseIcon from '@material-ui/icons/Close';
 import PropTypes from 'prop-types'
 import React from 'react'
-import {Draggable} from "react-beautiful-dnd";
 import ScorecardIndicator from "../../../../../../../../../../core/models/scorecardIndicator";
 import {getDataSourceShortName} from "../../../../../../../../../../shared/utils/utils";
 
-export default function DataSource({dataSource, index, onDelete, hasLinked}) {
-    const {id, label, type} = dataSource ?? new ScorecardIndicator();
+
+export default function DataSource({dataSource, index, onDelete,}) {
+    const {label, type} = dataSource ?? new ScorecardIndicator();
     return (
             <div>
                 <div
@@ -33,7 +33,6 @@ export default function DataSource({dataSource, index, onDelete, hasLinked}) {
 
 DataSource.propTypes = {
     dataSource: PropTypes.instanceOf(ScorecardIndicator).isRequired,
-    hasLinked: PropTypes.bool.isRequired,
     index: PropTypes.number.isRequired,
     onDelete: PropTypes.func.isRequired,
 };

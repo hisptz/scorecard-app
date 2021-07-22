@@ -1,3 +1,4 @@
+import i18n from '@dhis2/d2-i18n'
 import {  colors } from "@dhis2/ui";
 import React, { Suspense, useEffect } from "react";
 import {  useParams } from "react-router-dom";
@@ -10,7 +11,6 @@ import { FullPageLoader } from "../../../../shared/Components/Loaders";import Hi
 import ScorecardHeader from "./Components/ScorecardHeader";
 import ScorecardLegendsView from "./Components/ScorecardLegendsView";
 import ScorecardViewHeader from "./Components/ScorecardViewHeader";
-
 export default function ScorecardView() {
     const {id: scorecardId} = useParams()
     const setScorecardIdState = useSetRecoilState(ScorecardIdState)
@@ -28,8 +28,7 @@ export default function ScorecardView() {
                 <HighlightedIndicatorsView/>
                 <div className='flex-1 column align-items-center center'>
                     <UnderConstruction style={{width: 400, height: 200}}/>
-                    <p style={{color: colors.grey700, fontStyle: 'italic', fontSize: 20}}>This page is under
-                        construction</p>
+                    <p style={{color: colors.grey700, fontStyle: 'italic', fontSize: 20}}>{i18n.t('This page is under construction')}</p>
                 </div>
             </div>
         </Suspense>

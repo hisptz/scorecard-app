@@ -1,3 +1,4 @@
+import i18n from '@dhis2/d2-i18n'
 import {
     Box,
     CenteredContent,
@@ -13,6 +14,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import useOrgUnitLevelsAndGroups from "./hooks/getLevelsAndGroups";
 import useOrgUnitsRoot from "./hooks/useOrgUnitsRoot";
+
 
 export default function OrgUnitFilter({value, onUpdate}) {
     const {roots, error, loading} = useOrgUnitsRoot();
@@ -85,9 +87,12 @@ export default function OrgUnitFilter({value, onUpdate}) {
         <Box minHeight='600px'>
             <div style={{minHeight: 400}} className='container-bordered'>
                 <div style={{background: colors.grey200}} className='row space-between p-16'>
-                    <CheckboxField checked={userOrgUnit} onChange={onUserOrUnitChange} label='User organisation unit'/>
-                    <CheckboxField checked={userSubUnit} onChange={onUserSubUnitsChange} label='User sub-units'/>
-                    <CheckboxField checked={userSubX2Unit} onChange={onUserSubX2Units} label='User sub-x2-units'/>
+                    <CheckboxField checked={userOrgUnit} onChange={onUserOrUnitChange}
+                                   label={i18n.t('User organisation unit')}/>
+                    <CheckboxField checked={userSubUnit} onChange={onUserSubUnitsChange}
+                                   label={i18n.t('User sub-units')}/>
+                    <CheckboxField checked={userSubX2Unit} onChange={onUserSubX2Units}
+                                   label={i18n.t('User sub-x2-units')}/>
                 </div>
                 {
                     error && <CenteredContent><p>{error?.message || error.toString()}</p></CenteredContent>
@@ -119,7 +124,7 @@ export default function OrgUnitFilter({value, onUpdate}) {
                     <SingleSelectField clearable loading={levelsAndGroupsLoading} error={levelsAndGroupsError}
                                        validationText={levelsAndGroupsError?.message}
                                        onChange={onLevelSelect} selected={!isEmpty(levels) && selectedLevel}
-                                       label='Select Level'>
+                                       label={i18n.t('Select Level')}>
                         {
                             levels?.map(({displayName, id}) => (
                                 <SingleSelectOption label={displayName} value={id} key={id}/>))
@@ -130,7 +135,7 @@ export default function OrgUnitFilter({value, onUpdate}) {
                     <SingleSelectField clearable loading={levelsAndGroupsLoading} error={levelsAndGroupsError}
                                        validationText={levelsAndGroupsError?.message}
                                        onChange={onGroupSelect} selected={!isEmpty(groups) && selectedGroup}
-                                       label='Select Group'>
+                                       label={i18n.t('Select Group')}>
                         {
                             groups?.map(({displayName, id}) => (
                                 <SingleSelectOption label={displayName} value={id} key={id}/>))

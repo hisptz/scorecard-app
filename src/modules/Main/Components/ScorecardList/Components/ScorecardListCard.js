@@ -1,14 +1,12 @@
 import {useAlert} from "@dhis2/app-runtime";
+import i18n from '@dhis2/d2-i18n'
 import {Button, ButtonStrip, colors} from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import React, {useState} from 'react'
 import {useHistory} from "react-router-dom";
-import {useSetRecoilState} from "recoil";
-import {ScorecardIdState} from "../../../../../core/state/scorecard";
 import holderImage from '../../../../../resources/images/img.png'
 import DeleteConfirmation from "../../../../../shared/Components/DeleteConfirmation";
 import {useDeleteScorecard} from "../../../../../shared/hooks/datastore/useScorecard";
-
 
 export default function ScorecardListCard({scorecard}) {
     const {title, description, id} = scorecard
@@ -36,7 +34,7 @@ export default function ScorecardListCard({scorecard}) {
         }
         setDeleteConfirmOpen(false)
         show({
-            message: 'Scorecard deleted successfully',
+            message: i18n.t('Scorecard deleted successfully'),
             type: {success: true}
         })
 
@@ -54,13 +52,13 @@ export default function ScorecardListCard({scorecard}) {
                 </div>
                 <div className='row end'>
                     <ButtonStrip middle>
-                        <Button onClick={onView} primary>View</Button>
-                        <Button onClick={onEdit}>Edit</Button>
-                        <Button onClick={() => setDeleteConfirmOpen(true)} destructive>Delete</Button>
+                        <Button onClick={onView} primary>{i18n.t('View')}</Button>
+                        <Button onClick={onEdit}>{i18n.t('Edit')}</Button>
+                        <Button onClick={() => setDeleteConfirmOpen(true)} destructive>{i18n.t('Delete')}</Button>
                     </ButtonStrip>
                     {
                         deleteConfirmOpen &&
-                        <DeleteConfirmation component={<p>Are you sure you want to delete scorecard <b>{title}</b></p>} onConfirm={onDelete}
+                        <DeleteConfirmation component={<p>{i18n.t('Are you sure you want to delete scorecard')}:<b>{title}</b></p>} onConfirm={onDelete}
                                             onCancel={() => setDeleteConfirmOpen(false)}/>
                     }
                 </div>

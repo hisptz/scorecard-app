@@ -1,3 +1,4 @@
+import i18n from '@dhis2/d2-i18n'
 import {
     Button,
     DataTable,
@@ -12,7 +13,6 @@ import {cloneDeep, get, isEmpty, remove} from 'lodash'
 import React from 'react'
 import {useRecoilState} from "recoil";
 import {ScorecardEditState, ScorecardStateSelector} from "../../../../../../../core/state/scorecard";
-
 
 const columns = [
     {
@@ -65,7 +65,7 @@ export default function HighlightedIndicatorsTable() {
                                 }
                                 <DataTableCell align='center'>
                                     <Button destructive onClick={() => onRemove(data?.id)}
-                                            icon={<DeleteIcon/>}>Remove</Button>
+                                            icon={<DeleteIcon/>}>{i18n.t('Remove')}</Button>
                                 </DataTableCell>
                             </DataTableRow>))
                     }

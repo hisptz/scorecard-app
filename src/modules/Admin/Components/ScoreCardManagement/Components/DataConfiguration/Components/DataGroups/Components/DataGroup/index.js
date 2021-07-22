@@ -1,4 +1,5 @@
-import { Button, ButtonStrip, colors, Input } from "@dhis2/ui";
+import i18n from '@dhis2/d2-i18n'
+import { Button, ButtonStrip, colors, Input, Tooltip } from "@dhis2/ui";
 import { IconButton, withStyles } from "@material-ui/core";
 import MuiAccordion from "@material-ui/core/Accordion";
 import MuiAccordionDetails from "@material-ui/core/AccordionDetails";
@@ -34,6 +35,7 @@ import { generateLegendDefaults } from "../../../../../../../../../../shared/uti
 import DataSourceHolder from "../DataSourceHolder";
 import DataSourceSelectorModal from "../DataSourceSelectorModal";
 import { customChunk } from "./utils";
+
 
 const Accordion = withStyles({
   root: {
@@ -122,14 +124,16 @@ function LinkingContainer({
           ))}
         </div>
         <div className="link-button-container">
-          <IconButton onClick={onIconClick} disabled={!linkable && !hasLink}>
-            {(linkable || hasLink) &&
+          <Tooltip content={i18n.t('Click to {{linkAction}}', {linkAction: hasLink ? i18n.t('unlink'): i18n.t('link')})}>
+            <IconButton onClick={onIconClick} disabled={!linkable && !hasLink}>
+              {(linkable || hasLink) &&
               (hasLink ? (
-                <UnlinkIcon className="link-button" />
+                  <UnlinkIcon className="link-button" />
               ) : (
-                <LinkIcon className="link-button" />
+                  <LinkIcon className="link-button" />
               ))}
-          </IconButton>
+            </IconButton>
+          </Tooltip>
         </div>
       </div>
     </div>
@@ -333,7 +337,7 @@ export default function DataGroup({
                 <div className="column ">
                   <ButtonStrip end>
                     <Button onClick={onTitleEditSubmit} primary>
-                      Save
+                      {i18n.t('Save')}
                     </Button>
                     <Button
                       onClick={(_, event) => {
@@ -342,7 +346,7 @@ export default function DataGroup({
                         setTitleEditValue(title);
                       }}
                     >
-                      Cancel
+                      {i18n.t('Cancel')}
                     </Button>
                   </ButtonStrip>
                 </div>
@@ -380,7 +384,7 @@ export default function DataGroup({
                   }}
                   icon={<DeleteIcon />}
                 >
-                  Delete
+                  {i18n.t('Delete')}
                 </Button>
               </div>
             )}
@@ -392,7 +396,7 @@ export default function DataGroup({
                   className="column w-100 text-center center"
                   style={{ height: 100 }}
                 >
-                  <p style={{ color: colors.grey600 }}>Add a data source</p>
+                  <p style={{ color: colors.grey600 }}>{i18n.t('Add a data source')}</p>
                 </div>
               ) : (
                 <DragDropContext onDragEnd={onDragEnd}>
@@ -426,7 +430,7 @@ export default function DataGroup({
                   onClick={() => setOpenAdd(true)}
                   icon={<AddIcon />}
                 >
-                  Add Item
+                  {i18n.t('Add Item')}
                 </Button>
               </div>
             </div>

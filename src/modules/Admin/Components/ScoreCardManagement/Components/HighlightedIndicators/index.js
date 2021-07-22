@@ -1,3 +1,4 @@
+import i18n from '@dhis2/d2-i18n'
 import {Button} from '@dhis2/ui'
 import AddIcon from "@material-ui/icons/Add";
 import {isEmpty} from 'lodash'
@@ -9,7 +10,6 @@ import {generateLegendDefaults} from "../../../../../../shared/utils/utils";
 import DataSourceSelectorModal from "../DataConfiguration/Components/DataGroups/Components/DataSourceSelectorModal";
 import HighlightedDataSourceConfigurationForm from "./HighlightedDataSourceConfigurationForm";
 import HighlightedIndicatorsTable from "./Table";
-
 export default function HighlightedIndicatorsScorecardForm() {
     const [highlightedIndicators, setHighlightedIndicators] = useRecoilState(ScorecardStateSelector('highlightedIndicators'))
     const legendDefinitions = useRecoilValue(ScorecardStateSelector('legendDefinitions'))
@@ -37,12 +37,12 @@ export default function HighlightedIndicatorsScorecardForm() {
 
     return (
         <div className='column' style={{height: '100%', marginBottom:16}}>
-            <h3>Highlighted Indicators</h3>
+            <h3>{i18n.t('Highlighted Indicators')}</h3>
             {
                 !isEmpty(highlightedIndicators) ?
                     <Fragment>
                         <div className='row '>
-                            <Button onClick={onAddClick} primary icon={<AddIcon/>}>Add</Button>
+                            <Button onClick={onAddClick} primary icon={<AddIcon/>}>{i18n.t('Add')}</Button>
                         </div>
                         <div className='row'>
                             <div className='column pt-32 w-75'>
@@ -56,7 +56,7 @@ export default function HighlightedIndicatorsScorecardForm() {
                         </div>
                     </Fragment> :
                     <div className='row align-items-center center flex-1'>
-                        <Button onClick={onAddClick} primary icon={<AddIcon/>}>Add Highlighted Indicator</Button>
+                        <Button onClick={onAddClick} primary icon={<AddIcon/>}>{i18n.t('Add Highlighted Indicator')}</Button>
                     </div>
             }
             {

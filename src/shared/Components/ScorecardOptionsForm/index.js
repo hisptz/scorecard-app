@@ -1,55 +1,57 @@
+import i18n from '@dhis2/d2-i18n'
 import {CheckboxField, Radio} from "@dhis2/ui";
 import PropTypes from 'prop-types'
 import React from "react";
 import AverageDisplayType from "../../../core/constants/averageDisplayType";
 
-export default function ScorecardOptionsForm({options, onChange}){
+export default function ScorecardOptionsForm({options, onChange}) {
 
-    return(
+    return (
         <div className='container p-16'>
             <div className='row'>
                 <div className='column'>
-                    <h3>Visibility</h3>
+                    <h3>{i18n.t('Visibility')}</h3>
                     <div className='column'>
                         <CheckboxField checked={options?.legend} onChange={onChange('legend')} value='legend'
-                                       label='Legend'/>
+                                       label={i18n.t('Legend')}/>
                         <CheckboxField checked={options?.title} onChange={onChange('title')} value='title'
-                                       label='Title'/>
+                                       label={i18n.t('Title')}/>
                         <CheckboxField checked={options?.itemNumber} onChange={onChange('itemNumber')}
-                                       value='itemNumber' label='Item Number'/>
+                                       value='itemNumber' label={i18n.t('Item Number')}/>
                         <CheckboxField checked={options?.emptyRows} onChange={onChange('emptyRows')}
-                                       value='emptyRows' label='Empty Rows'/>
+                                       value='emptyRows' label={i18n.t('Empty Rows')}/>
                         <CheckboxField checked={options?.showHierarchy} onChange={onChange('showHierarchy')}
                                        value='showHierarchy'
-                                       label='Show Hierarchy'/>
+                                       label={i18n.t('Show Hierarchy')}/>
                         <CheckboxField checked={options?.averageColumn} onChange={onChange('averageColumn')}
                                        value='averageColumn'
-                                       label='Average Column'/>
+                                       label={i18n.t('Average Column')}/>
                         <CheckboxField checked={options?.averageRow} onChange={onChange('averageRow')}
-                                       value='averageRow' label='Average Row'/>
-                        <CheckboxField checked={options?.highlightedIndicators} onChange={onChange('highlightedIndicators')}
-                                       value='averageRow' label='Highlighted Indicators'/>
+                                       value='averageRow' label={i18n.t('Average Row')}/>
+                        <CheckboxField checked={options?.highlightedIndicators}
+                                       onChange={onChange('highlightedIndicators')}
+                                       value='averageRow' label={i18n.t('Highlighted Indicators')}/>
                     </div>
-                    <h3>Average</h3>
+                    <h3>{i18n.t('Average')}</h3>
                     <div className='column'>
                         <Radio onChange={() => onChange('averageDisplayType')(AverageDisplayType.ALL)}
                                checked={options?.averageDisplayType === AverageDisplayType.ALL}
-                               value={AverageDisplayType.ALL} label='All'/>
+                               value={AverageDisplayType.ALL} label={i18n.t('All')}/>
                         <Radio onChange={() => onChange('averageDisplayType')(AverageDisplayType.BELOW_AVERAGE)}
                                checked={options?.averageDisplayType === AverageDisplayType.BELOW_AVERAGE}
-                               value={AverageDisplayType.BELOW_AVERAGE} label='Below Average'/>
+                               value={AverageDisplayType.BELOW_AVERAGE} label={i18n.t('Below Average')}/>
                         <Radio onChange={() => onChange('averageDisplayType')(AverageDisplayType.ABOVE_AVERAGE)}
                                checked={options?.averageDisplayType === AverageDisplayType.ABOVE_AVERAGE}
-                               value={AverageDisplayType.ABOVE_AVERAGE} label='Above Average'/>
+                               value={AverageDisplayType.ABOVE_AVERAGE} label={i18n.t('Above Average')}/>
                     </div>
-                    <h3>Options</h3>
+                    <h3>{i18n.t('Options')}</h3>
                     <div className='column'>
                         <CheckboxField checked={options?.score} onChange={onChange('score')} value='score'
-                                       label='Score'/>
+                                       label={i18n.t('Score')}/>
                         <CheckboxField checked={options?.arrows} onChange={onChange('arrows')} value='arrows'
-                                       label='Arrows'/>
+                                       label={i18n.t('Arrows')}/>
                         <CheckboxField checked={options?.showDataInRows} onChange={onChange('showDataInRows')}
-                                       value='showDataInRows' label='Show Data in Rows'/>
+                                       value='showDataInRows' label={i18n.t('Show Data in Rows')}/>
                     </div>
                 </div>
             </div>

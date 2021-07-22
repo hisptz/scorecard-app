@@ -1,3 +1,4 @@
+import i18n from '@dhis2/d2-i18n'
 import {Button, SingleSelectField, SingleSelectOption} from '@dhis2/ui'
 import AddIcon from "@material-ui/icons/Add";
 import React, {useState} from 'react'
@@ -7,7 +8,6 @@ import {ScorecardStateSelector} from "../../../../../../../../../../../core/stat
 import {ACCESS_TYPES} from "../../../../../../../../../../../shared/constants/sharing";
 import {getAccessName} from "../../../utils";
 import UserAndUserGroupSelector from "../../UserAndUserGroupSelector";
-
 export default function AddSharingAccess() {
     const [userAccess, setUserAccess] = useRecoilState(ScorecardStateSelector('userAccesses'))
     const [userGroupAccess, setUserGroupAccess] = useRecoilState(ScorecardStateSelector('userGroupAccesses'))
@@ -53,7 +53,7 @@ export default function AddSharingAccess() {
             <div className='column pr-16' style={{width: '30%'}}>
                 <SingleSelectField required selected={selectedAccess} onChange={({selected}) => {
                     setSelectedAccess(selected)
-                }} label='Select Access'>
+                }} label={i18n.t('Select Access')}>
                     {
                         ACCESS_TYPES?.map(accessType => (<SingleSelectOption value={accessType} key={accessType}
                                                                              label={getAccessName(accessType)}/>))
@@ -61,7 +61,7 @@ export default function AddSharingAccess() {
                 </SingleSelectField>
             </div>
             <div className='column' style={{width: '20%'}}>
-                <Button onClick={onAdd} primary icon={<AddIcon/>}>Add</Button>
+                <Button onClick={onAdd} primary icon={<AddIcon/>}>{i18n.t('Add')}</Button>
             </div>
         </div>
     )

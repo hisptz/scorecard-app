@@ -1,8 +1,8 @@
+import i18n from '@dhis2/d2-i18n'
 import React from 'react'
 import {useRecoilValue} from "recoil";
 import {ScorecardStateSelector, ScorecardViewSelector} from "../../../../../../core/state/scorecard";
 import HighlightedIndicator from "./Components/HighlightedIndicator";
-
 
 export default function HighlightedIndicatorsView() {
     const highlightedIndicators = useRecoilValue(ScorecardStateSelector('highlightedIndicators'))
@@ -10,7 +10,7 @@ export default function HighlightedIndicatorsView() {
     return (
         showHighlightedIndicators ?
             <div className='column'>
-                <div><h3>Highlighted Indicators</h3></div>
+                <div><h3>{i18n.t('Highlighted Indicators')}</h3></div>
                 <div className='grid highlighted-indicators-container'>
                     {
                         highlightedIndicators?.map(highlightedIndicator => (
