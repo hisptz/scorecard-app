@@ -5,7 +5,7 @@ import {
 } from "@dhis2/app-runtime";
 import { get, set } from "lodash";
 import { useEffect, useState } from "react";
-import { useSetRecoilState } from "recoil";
+import {useSetRecoilState} from "recoil";
 import {
   DATASTORE_ENDPOINT,
   DATASTORE_SCORECARD_SUMMARY_INCLUDE_KEYS,

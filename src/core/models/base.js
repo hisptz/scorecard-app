@@ -33,8 +33,9 @@ export default class DataModel {
 
 export class SavableDataModel extends DataModel {
 
-    static async save(object, addFunction) {
-        return await addFunction(JSON.parse(JSON.stringify(object)))
+    static async save(object, addFunction, user) {
+        const newObject = {...object, user: {id: user?.id}}
+        return await addFunction(JSON.parse(JSON.stringify(newObject)))
     }
 
     static async update(object, updateFunction) {
