@@ -6,7 +6,7 @@ import useDataGroups from "./hooks/useDataGroups";
 
 export default function GroupSelector({selectedDataType, onSelect, selectedGroup}) {
     const {loading, groups, error} = useDataGroups(selectedDataType);
-    const disabled = useMemo(() => isEmpty(selectedDataType) || isEmpty(selectedDataType.groupResource), [selectedDataType.groupResource, groups, loading]);
+    const disabled = useMemo(() => (isEmpty(selectedDataType) || isEmpty(selectedDataType.groupResource) && selectedDataType.type !== 'customFunction' ), [selectedDataType.groupResource, groups, loading]);
 
     return (
         <div className='pb-8'>

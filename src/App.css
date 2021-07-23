@@ -38,6 +38,9 @@ body {
     flex-direction: row;
     width: 100%;
 }
+.wrap{
+    flex-wrap: wrap;
+}
 
 .start {
     justify-content: flex-start;

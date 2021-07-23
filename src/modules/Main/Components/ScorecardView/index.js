@@ -1,15 +1,14 @@
-import i18n from '@dhis2/d2-i18n'
-import {  colors } from "@dhis2/ui";
 import React, { Suspense, useEffect } from "react";
 import {  useParams } from "react-router-dom";
 import {  useSetRecoilState } from "recoil";
 import  {
   ScorecardIdState,
 } from "../../../../core/state/scorecard";
-import { ReactComponent as UnderConstruction } from "../../../../resources/images/scorecard_under_construction.svg";
-import { FullPageLoader } from "../../../../shared/Components/Loaders";import HighlightedIndicatorsView from "./Components/HighlightedIndicatorsView";
+import { FullPageLoader } from "../../../../shared/Components/Loaders";
+import HighlightedIndicatorsView from "./Components/HighlightedIndicatorsView";
 import ScorecardHeader from "./Components/ScorecardHeader";
 import ScorecardLegendsView from "./Components/ScorecardLegendsView";
+import ScorecardTable from "./Components/ScorecardTable";
 import ScorecardViewHeader from "./Components/ScorecardViewHeader";
 export default function ScorecardView() {
     const {id: scorecardId} = useParams()
@@ -26,9 +25,8 @@ export default function ScorecardView() {
                 <ScorecardHeader/>
                 <ScorecardLegendsView/>
                 <HighlightedIndicatorsView/>
-                <div className='flex-1 column align-items-center center'>
-                    <UnderConstruction style={{width: 400, height: 200}}/>
-                    <p style={{color: colors.grey700, fontStyle: 'italic', fontSize: 20}}>{i18n.t('This page is under construction')}</p>
+                <div className='column align-items-center pt-16'>
+                    <ScorecardTable />
                 </div>
             </div>
         </Suspense>

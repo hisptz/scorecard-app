@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-07-22T10:11:52.904Z\n"
-"PO-Revision-Date: 2021-07-22T10:11:52.904Z\n"
+"POT-Creation-Date: 2021-07-22T13:03:57.842Z\n"
+"PO-Revision-Date: 2021-07-22T13:03:57.842Z\n"
 
 msgid "Organisation Unit"
 msgstr "Organisation Unit"
@@ -178,9 +178,6 @@ msgstr "Increased from last period"
 
 msgid "Decreased from last period"
 msgstr "Decreased from last period"
-
-msgid "This page is under construction"
-msgstr "This page is under construction"
 
 msgid "Name"
 msgstr "Name"

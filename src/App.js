@@ -8,10 +8,12 @@ import {FullPageLoader} from "./shared/Components/Loaders";
 import "./locales";
 import FullPageError from "./shared/Components/Errors/FullPageError";
 import {Fn} from "@iapps/function-analytics";
+import {useConfig} from "@dhis2/app-runtime";
 
 const MyApp = () => {
-    const url = process.env.REACT_APP_DHIS2_BASE_URL || "";
-    Fn.init({baseUrl: url + "/api/"});
+    const {baseUrl} = useConfig()
+    // const url = process.env.REACT_APP_DHIS2_BASE_URL || "";
+    Fn.init({baseUrl: baseUrl + "/api/"});
     return (
         <DataStoreProvider
             namespace={"hisptz-scorecard"}

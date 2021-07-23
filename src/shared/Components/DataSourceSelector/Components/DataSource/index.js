@@ -28,7 +28,6 @@ export default function DataSource({selectedDataSourceType, selectedGroup, onCha
         onSearchChange(keyword);
     }
 
-
     return (
         <Field error={error} validationText={error?.message}>
             <Transfer

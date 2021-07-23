@@ -45,7 +45,11 @@ const dataSourcesTypes = [
         groupResource: 'programs',
         type: 'programDataItem'
 
-    },
+    },{
+        label: 'Custom Functions',
+        resource: 'dataStore/functions',
+        type: 'customFunction'
+    }
 ]
 
 export default function DataSourceSelector({onSubmit, disabled}) {
@@ -68,8 +72,8 @@ export default function DataSourceSelector({onSubmit, disabled}) {
 
     return (
         <div className='start'>
-            <div className='column container-bordered overflow-auto'>
-                <div className='row p-16'>
+            <div className='column container-bordered'>
+                <div className='row p-16 wrap'>
                     {
                         dataSourcesTypes.map(source => <Chip onClick={() => onDataSourceTypeChange(source)}
                                                              selected={selectedDataSourceType.label === source.label}
