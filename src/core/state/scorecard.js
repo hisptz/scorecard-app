@@ -1,8 +1,7 @@
-import { useDataEngine } from "@dhis2/app-runtime";
-import { cloneDeep, get as _get, set as _set } from "lodash";
-import { atom, selector, selectorFamily } from "recoil";
+import {useDataEngine} from "@dhis2/app-runtime";
+import {cloneDeep, get as _get, set as _set} from "lodash";
+import {atom, selector, selectorFamily} from "recoil";
 import getScorecard from "../../shared/services/getScorecard";
-import getScorecardData from "../../shared/services/getScorecardData";
 import getScorecardSummary from "../../shared/services/getScorecardSummary";
 import ScorecardAccessType from "../constants/scorecardAccessType";
 import OrgUnitSelection from "../models/orgUnitSelection";
@@ -55,7 +54,7 @@ const ScorecardSummaryState = atom({
     })
 })
 
-const ScorecardState = atom({
+const ScorecardConfState = atom({
     key: 'active-scorecard',
     default: selector({
         key: 'active-scorecard-default',
@@ -79,13 +78,42 @@ const ScorecardState = atom({
     ]
 })
 
-const ScorecardStateSelector = selectorFamily({
-    key: 'scorecard-state-selector',
-    get: path => ({get}) => _get(get(ScorecardState), path),
-    set: path => ({set}, newValue) => set(ScorecardState, prevState => _set(cloneDeep(prevState), path, newValue))
+const ScorecardDataState = atom({
+    key: 'scorecardDataState',
+    default: selector({
+        key: 'scorecardDataStateSelector',
+        get: async ({get}) => {
+            const {orgUnitSelection, periodSelection} = get(ScorecardViewState) //Current period and org unit selections
+            const scorecardConfig = get(ScorecardConfState)
+            //TODO: Implement the getScorecard data function and return the results from here @rajey
+
+            //expected output format
+            // return {
+            //     'indicatorId-orgUnit-period': {
+            //         previousValue: 45,
+            //         currentValue: 12,
+            //     }
+            // }
+            return {}
+        }
+    })
 })
 
-const ScorecardEditState = atom({
+
+const ScorecardDataStateSelector = selectorFamily({
+    key: 'scorecardDataStateSelectorFamily',
+    get: (key) => () => {
+
+    }
+})
+
+const ScorecardConfigStateSelector = selectorFamily({
+    key: 'scorecard-state-selector',
+    get: path => ({get}) => _get(get(ScorecardConfState), path),
+    set: path => ({set}, newValue) => set(ScorecardConfState, prevState => _set(cloneDeep(prevState), path, newValue))
+})
+
+const ScorecardConfigEditState = atom({
     key: 'scorecard-edit-state',
     default: {}
 })
@@ -95,7 +123,7 @@ const ScorecardViewState = atom({
     default: selector({
         key: 'scorecardViewStateSelector',
         get: ({get}) => {
-            const {orgUnitSelection, periodSelection, options} = get(ScorecardState) ?? {}
+            const {orgUnitSelection, periodSelection, options} = get(ScorecardConfState) ?? {}
             return {
                 orgUnitSelection,
                 periodSelection,
@@ -111,12 +139,13 @@ const ScorecardViewSelector = selectorFamily({
     set: path => ({set}, newValue) => set(ScorecardViewState, prevState => _set(cloneDeep(prevState), path, newValue))
 })
 
-export default ScorecardState;
+export default ScorecardConfState;
 export {
-    ScorecardEditState,
-    ScorecardStateSelector,
+    ScorecardConfigEditState,
+    ScorecardConfigStateSelector,
     ScorecardIdState,
     ScorecardSummaryState,
     ScorecardViewState,
-    ScorecardViewSelector
+    ScorecardViewSelector,
+    ScorecardDataState
 }
