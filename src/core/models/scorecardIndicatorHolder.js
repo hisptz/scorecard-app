@@ -12,9 +12,9 @@ export default class ScorecardIndicatorHolder extends DataModel {
 
     constructor(attributes) {
         super(attributes);
-        this.linkDataSource = this.linkDataSource.bind(this)
     }
-    linkDataSource(scorecardIndicator = new ScorecardIndicator()) {
-        return ScorecardIndicatorHolder.set(this, 'dataSources', [...this.dataSources, scorecardIndicator])
+
+    static linkDataSource(holder = new ScorecardIndicatorHolder(), scorecardIndicator = new ScorecardIndicator()) {
+        return ScorecardIndicatorHolder.set(holder, 'dataSources', [...holder.dataSources, scorecardIndicator])
     }
 }
