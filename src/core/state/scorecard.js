@@ -102,8 +102,8 @@ const ScorecardDataState = atom({
 
 const ScorecardDataStateSelector = selectorFamily({
     key: 'scorecardDataStateSelectorFamily',
-    get: (key) => () => {
-
+    get: (key) => ({get}) => {
+        return _get(get(ScorecardDataState), key)
     }
 })
 
@@ -147,5 +147,6 @@ export {
     ScorecardSummaryState,
     ScorecardViewState,
     ScorecardViewSelector,
-    ScorecardDataState
+    ScorecardDataState,
+    ScorecardDataStateSelector
 }
