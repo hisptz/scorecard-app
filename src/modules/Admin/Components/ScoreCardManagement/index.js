@@ -7,7 +7,7 @@ import React, {Suspense, useEffect, useMemo, useRef, useState} from "react";
 import {useHistory, useParams} from "react-router-dom";
 import {useRecoilValue, useResetRecoilState, useSetRecoilState} from "recoil";
 import Scorecard from "../../../../core/models/scorecard";
-import ScorecardState, {ScorecardEditState, ScorecardIdState,} from "../../../../core/state/scorecard";
+import ScorecardConfState, {ScorecardConfigEditState, ScorecardIdState,} from "../../../../core/state/scorecard";
 import {UserState} from "../../../../core/state/user";
 import {FullPageLoader} from "../../../../shared/Components/Loaders";
 import {useAddScorecard, useUpdateScorecard,} from "../../../../shared/hooks/datastore/useScorecard";
@@ -45,9 +45,9 @@ export default function ScoreCardManagement() {
     const {id: scorecardId} = useParams();
     const user = useRecoilValue(UserState)
     const setScorecardIdState = useSetRecoilState(ScorecardIdState);
-    const resetScorecardEditState = useResetRecoilState(ScorecardEditState);
+    const resetScorecardEditState = useResetRecoilState(ScorecardConfigEditState);
     const resetScorecardIdState = useResetRecoilState(ScorecardIdState);
-    const scorecardState = useRecoilValue(ScorecardState);
+    const scorecardState = useRecoilValue(ScorecardConfState);
     const {update} = useUpdateScorecard(scorecardId);
     const {add} = useAddScorecard();
     const {show} = useAlert(

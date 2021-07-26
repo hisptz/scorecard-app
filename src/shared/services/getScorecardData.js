@@ -1,6 +1,7 @@
+import { Fn } from "@iapps/function-analytics";
 import { Period } from "@iapps/period-utilities";
 import { flatten } from "lodash";
-import { Fn } from "@iapps/function-analytics";
+
 export default async function getScorecardData(scorecard) {
   const selectedOrgUnits = _getSelectedOrgUnits(scorecard.orgUnitSelection);
   const { currentPeriods, previousPeriods } = _getSelectedPeriods(

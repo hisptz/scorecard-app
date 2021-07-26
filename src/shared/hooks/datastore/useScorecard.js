@@ -10,7 +10,7 @@ import {
   DATASTORE_ENDPOINT,
   DATASTORE_SCORECARD_SUMMARY_INCLUDE_KEYS,
 } from "../../../core/constants/config";
-import ScorecardState from "../../../core/state/scorecard";
+import ScorecardConfState from "../../../core/state/scorecard";
 import { uid } from "../../utils/utils";
 import useScorecardsSummary from "./useScorecardsSummary";
 
@@ -125,7 +125,7 @@ export function useAddScorecard() {
 }
 
 export default function useScorecard() {
-  const setScorecardState = useSetRecoilState(ScorecardState);
+  const setScorecardState = useSetRecoilState(ScorecardConfState);
   const { loading, data, error, refetch } = useDataQuery(query, { lazy: true });
 
   const set = async (id) => {

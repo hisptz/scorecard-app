@@ -2,14 +2,14 @@ import {Menu, MenuDivider} from '@dhis2/ui'
 import {cloneDeep, remove, set} from 'lodash'
 import React, {Fragment, useMemo} from 'react'
 import {useRecoilState} from "recoil";
-import {ScorecardStateSelector} from "../../../../../../../../../../core/state/scorecard";
+import {ScorecardConfigStateSelector} from "../../../../../../../../../../core/state/scorecard";
 import SingleSharingComponent from "./Components/SingleSharingComponent";
 
 
 export default function SharingList() {
-    const [publicAccess, setPublicAccess] = useRecoilState(ScorecardStateSelector('publicAccess'))
-    const [userGroupAccesses, setUserGroupAccesses] = useRecoilState(ScorecardStateSelector('userGroupAccesses'))
-    const [userAccesses, setUserAccesses] = useRecoilState(ScorecardStateSelector('userAccesses'))
+    const [publicAccess, setPublicAccess] = useRecoilState(ScorecardConfigStateSelector('publicAccess'))
+    const [userGroupAccesses, setUserGroupAccesses] = useRecoilState(ScorecardConfigStateSelector('userGroupAccesses'))
+    const [userAccesses, setUserAccesses] = useRecoilState(ScorecardConfigStateSelector('userAccesses'))
 
     const userAndUserGroupAccesses = useMemo(() => [...(userAccesses || []), ...(userGroupAccesses || [])], [userAccesses, userGroupAccesses]);
 

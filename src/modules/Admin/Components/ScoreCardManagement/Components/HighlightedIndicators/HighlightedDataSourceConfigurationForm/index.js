@@ -1,14 +1,14 @@
 import {debounce} from "lodash";
 import React from 'react'
 import {useRecoilState, useRecoilValue} from "recoil";
-import {ScorecardEditState, ScorecardStateSelector} from "../../../../../../../core/state/scorecard";
+import {ScorecardConfigEditState, ScorecardConfigStateSelector} from "../../../../../../../core/state/scorecard";
 import DataSourceConfigurationForm
     from "../../../../../../../shared/Components/CustomForm/components/DataSourceConfigurationForm";
 
 export default function HighlightedDataSourceConfigurationForm() {
-    const {selectedHighlightedIndicatorIndex} = useRecoilValue(ScorecardEditState)
-    const [selectedHighlightedIndicator, setSelectedHighlightedIndicator] = useRecoilState(ScorecardStateSelector(['highlightedIndicators', selectedHighlightedIndicatorIndex]))
-    const legendDefinitions = useRecoilValue(ScorecardStateSelector('legendDefinitions'))
+    const {selectedHighlightedIndicatorIndex} = useRecoilValue(ScorecardConfigEditState)
+    const [selectedHighlightedIndicator, setSelectedHighlightedIndicator] = useRecoilState(ScorecardConfigStateSelector(['highlightedIndicators', selectedHighlightedIndicatorIndex]))
+    const legendDefinitions = useRecoilValue(ScorecardConfigStateSelector('legendDefinitions'))
 
     const onChange = debounce(({values, dirty}) => {
         if (dirty) {

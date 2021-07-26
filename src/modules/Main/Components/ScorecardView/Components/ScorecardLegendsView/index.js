@@ -1,13 +1,13 @@
 import i18n from '@dhis2/d2-i18n'
 import React from 'react'
 import {useRecoilValue} from "recoil";
-import {ScorecardStateSelector, ScorecardViewSelector} from "../../../../../../core/state/scorecard";
+import {ScorecardConfigStateSelector, ScorecardViewSelector} from "../../../../../../core/state/scorecard";
 import {DecreasingArrows, IncreasingArrows} from "../../../../../../shared/Components/ScorecardCell/Components/Arrows";
 import LegendView from "./Components/LegendView";
 
 export default function ScorecardLegendsView() {
     const {legend: showLegends} = useRecoilValue(ScorecardViewSelector('options'))
-    const legends = useRecoilValue(ScorecardStateSelector('legendDefinitions'))
+    const legends = useRecoilValue(ScorecardConfigStateSelector('legendDefinitions'))
     return (
         showLegends ? <div className='column'>
             <div><h3>{i18n.t('Legends')}</h3></div>

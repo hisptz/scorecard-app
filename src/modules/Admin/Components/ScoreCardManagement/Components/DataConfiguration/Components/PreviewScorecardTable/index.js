@@ -2,11 +2,11 @@ import {DataTable, DataTableBody, DataTableCell, DataTableHead, DataTableRow} fr
 import {flattenDeep} from 'lodash'
 import React, {useMemo} from 'react'
 import {useRecoilValue} from "recoil";
-import {ScorecardStateSelector} from "../../../../../../../../core/state/scorecard";
+import {ScorecardConfigStateSelector} from "../../../../../../../../core/state/scorecard";
 import PreviewCustomCell from "./Components/PreviewCustomCell";
 
 export default function PreviewScorecardTable() {
-    const {dataGroups} = useRecoilValue(ScorecardStateSelector('dataSelection'))
+    const {dataGroups} = useRecoilValue(ScorecardConfigStateSelector('dataSelection'))
     const columns = useMemo(() => [...dataGroups], [dataGroups]);
     return (
         <div className='column' style={{width: '100%', overflowX: 'auto'}}>

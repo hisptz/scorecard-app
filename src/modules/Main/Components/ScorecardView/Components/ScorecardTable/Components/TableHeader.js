@@ -10,10 +10,10 @@ import {
 } from '@dhis2/ui'
 import React from 'react'
 import {useRecoilValue} from "recoil";
-import ScorecardState from "../../../../../../../core/state/scorecard";
+import ScorecardConfState from "../../../../../../../core/state/scorecard";
 
 export default function TableHeader(){
-    const {dataSelection} = useRecoilValue(ScorecardState)
+    const {dataSelection} = useRecoilValue(ScorecardConfState)
     console.log(dataSelection)
 
     return(

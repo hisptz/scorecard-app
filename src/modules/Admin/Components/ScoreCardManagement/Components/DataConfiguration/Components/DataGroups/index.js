@@ -3,15 +3,15 @@ import React from 'react'
 import {Droppable} from "react-beautiful-dnd";
 import {useRecoilState, useResetRecoilState} from "recoil";
 import DataSelection from "../../../../../../../../core/models/dataSelection";
-import  {ScorecardEditState, ScorecardStateSelector} from "../../../../../../../../core/state/scorecard";
+import  {ScorecardConfigEditState, ScorecardConfigStateSelector} from "../../../../../../../../core/state/scorecard";
 import DataGroup from "./Components/DataGroup";
 
 
 export default function DataGroups() {
 
     const [expanded, setExpanded] = React.useState('panel1');
-    const [dataSelection, setDataSelection] = useRecoilState(ScorecardStateSelector('dataSelection'));
-    const resetEditState = useResetRecoilState(ScorecardEditState)
+    const [dataSelection, setDataSelection] = useRecoilState(ScorecardConfigStateSelector('dataSelection'));
+    const resetEditState = useResetRecoilState(ScorecardConfigEditState)
     const {dataGroups: groups} = dataSelection || new DataSelection();
 
     const handleAccordionChange = (panel) => (event, newExpanded) => {
