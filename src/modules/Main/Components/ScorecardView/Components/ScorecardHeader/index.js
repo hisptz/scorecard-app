@@ -2,13 +2,13 @@ import {colors} from '@dhis2/ui'
 import React from 'react'
 import JsxParser from 'react-jsx-parser'
 import {useRecoilValue} from "recoil";
-import {ScorecardStateSelector, ScorecardViewSelector} from "../../../../../../core/state/scorecard";
+import {ScorecardConfigStateSelector, ScorecardViewSelector} from "../../../../../../core/state/scorecard";
 
 export default function ScorecardHeader() {
     const {title: showTitle} = useRecoilValue(ScorecardViewSelector('options'))
-    const customHeader = useRecoilValue(ScorecardStateSelector('customHeader'))
-    const title = useRecoilValue(ScorecardStateSelector('title'))
-    const subtitle = useRecoilValue(ScorecardStateSelector('subtitle'))
+    const customHeader = useRecoilValue(ScorecardConfigStateSelector('customHeader'))
+    const title = useRecoilValue(ScorecardConfigStateSelector('title'))
+    const subtitle = useRecoilValue(ScorecardConfigStateSelector('subtitle'))
     return (
         showTitle ? <div>
             {

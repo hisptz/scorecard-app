@@ -3,13 +3,13 @@ import {Button, colors} from "@dhis2/ui";
 import React from "react";
 import {useHistory} from "react-router-dom";
 import {useResetRecoilState} from "recoil";
-import ScorecardState, {ScorecardIdState} from "../../../../core/state/scorecard";
+import ScorecardConfState, {ScorecardIdState} from "../../../../core/state/scorecard";
 import {ReactComponent as ScorecardIllustration} from "../../../../resources/images/scorecard_illustration.svg";
 import useMediaQuery from "../../../../shared/hooks/useMediaQuery";
 
 export default function EmptyScoreCardList() {
     const resetScorecardIdState = useResetRecoilState(ScorecardIdState)
-    const resetScorecardState = useResetRecoilState(ScorecardState)
+    const resetScorecardState = useResetRecoilState(ScorecardConfState)
     const {width, height} = useMediaQuery();
     const history = useHistory();
 

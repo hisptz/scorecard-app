@@ -2,17 +2,17 @@ import {cloneDeep, set} from 'lodash'
 import React from 'react'
 import {useRecoilState, useRecoilValue} from "recoil";
 import ScorecardIndicator from "../../../../../../../../../../../../core/models/scorecardIndicator";
-import {ScorecardEditState, ScorecardStateSelector} from "../../../../../../../../../../../../core/state/scorecard";
+import {ScorecardConfigEditState, ScorecardConfigStateSelector} from "../../../../../../../../../../../../core/state/scorecard";
 import DataSourceConfigurationForm
     from "../../../../../../../../../../../../shared/Components/CustomForm/components/DataSourceConfigurationForm";
 
 export default function SelectedDataSourceConfigurationForm() {
-    const scorecardEditState = useRecoilValue(ScorecardEditState);
-    const legendDefinitions = useRecoilValue(ScorecardStateSelector('legendDefinitions'))
+    const scorecardEditState = useRecoilValue(ScorecardConfigEditState);
+    const legendDefinitions = useRecoilValue(ScorecardConfigStateSelector('legendDefinitions'))
     const selectedGroupIndex = scorecardEditState?.selectedGroupIndex;
     const selectedDataHolderIndex = scorecardEditState?.selectedDataHolderIndex;
     const path = ['dataSelection', 'dataGroups', selectedGroupIndex, 'dataHolders', selectedDataHolderIndex]
-    const [selectedDataHolder, updateSelectedDataHolder] = useRecoilState(ScorecardStateSelector(path));
+    const [selectedDataHolder, updateSelectedDataHolder] = useRecoilState(ScorecardConfigStateSelector(path));
 
     const onFormChange = (index) => ({values, dirty}) => {
         if (dirty) {

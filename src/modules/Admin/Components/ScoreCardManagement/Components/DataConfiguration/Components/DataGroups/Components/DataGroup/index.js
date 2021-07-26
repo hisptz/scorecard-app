@@ -27,8 +27,8 @@ import ScorecardIndicator from "../../../../../../../../../../core/models/scorec
 import ScorecardIndicatorGroup from "../../../../../../../../../../core/models/scorecardIndicatorGroup";
 import ScorecardIndicatorHolder from "../../../../../../../../../../core/models/scorecardIndicatorHolder";
 import {
-  ScorecardEditState,
-  ScorecardStateSelector,
+  ScorecardConfigEditState,
+  ScorecardConfigStateSelector,
 } from "../../../../../../../../../../core/state/scorecard";
 import { updateListFromDragAndDrop } from "../../../../../../../../../../shared/utils/dnd";
 import { generateLegendDefaults } from "../../../../../../../../../../shared/utils/utils";
@@ -156,12 +156,12 @@ export default function DataGroup({
   onDelete,
 }) {
   const [scorecardEditorState, setScorecardEditorState] =
-    useRecoilState(ScorecardEditState);
+    useRecoilState(ScorecardConfigEditState);
   const legendDefinitions = useRecoilValue(
-    ScorecardStateSelector("legendDefinitions")
+    ScorecardConfigStateSelector("legendDefinitions")
   );
   const path = ["dataSelection", "dataGroups", index];
-  const [group, setGroup] = useRecoilState(ScorecardStateSelector(path));
+  const [group, setGroup] = useRecoilState(ScorecardConfigStateSelector(path));
   const { title, id, dataHolders } = group ?? new ScorecardIndicatorGroup();
   const [openAdd, setOpenAdd] = useState(false);
   const [titleEditOpen, setTitleEditOpen] = useState(false);

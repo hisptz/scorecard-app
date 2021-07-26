@@ -7,8 +7,8 @@ import { DragDropContext } from "react-beautiful-dnd";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import DataSelection from "../../../../../../core/models/dataSelection";
 import {
-  ScorecardEditState,
-  ScorecardStateSelector,
+  ScorecardConfigEditState,
+  ScorecardConfigStateSelector,
 } from "../../../../../../core/state/scorecard";
 import { updateListFromDragAndDrop } from "../../../../../../shared/utils/dnd";
 import DataGroups from "./Components/DataGroups";
@@ -20,12 +20,12 @@ import { generateNewGroupData } from "./utils";
 
 export default function DataConfigurationScorecardForm() {
   const [dataSelection, updateDataSelection] = useRecoilState(
-    ScorecardStateSelector("dataSelection")
+    ScorecardConfigStateSelector("dataSelection")
   );
   const [targetOnLevels, updateTargetOnLevels] = useRecoilState(
-    ScorecardStateSelector("targetOnLevels")
+    ScorecardConfigStateSelector("targetOnLevels")
   );
-  const setScorecardEditState = useSetRecoilState(ScorecardEditState);
+  const setScorecardEditState = useSetRecoilState(ScorecardConfigEditState);
   const { dataGroups: groups } = dataSelection ?? new DataSelection();
 
   const onGroupAdd = () => {
