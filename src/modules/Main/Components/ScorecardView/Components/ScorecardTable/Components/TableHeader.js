@@ -26,7 +26,7 @@ export default function TableHeader() {
                 <DataTableCell fixed left={"0"} width={"50px"}>&nbsp;</DataTableCell>
                 {
                     dataGroups?.map(({dataHolders}) => (dataHolders?.map(({id, dataSources}) => (
-                        <DataTableCell fixed colSpan={`${periods?.length}`} bordered align='center'
+                        <DataTableCell width={`${periods?.length * 200}px`} fixed colSpan={`${periods?.length}`} bordered align='center'
                                        key={id}>{dataSources?.length > 1 ? `${dataSources[0]?.displayName}/${dataSources[1]?.displayName}` : dataSources[0]?.displayName}</DataTableCell>))))
                 }
             </DataTableRow>
@@ -35,7 +35,7 @@ export default function TableHeader() {
                 {
                     dataGroups?.map(({dataHolders}) => (dataHolders?.map(({id}) => (
                         periods?.map(({name, id: periodId}) => (
-                            <DataTableCell width={"100px"} fixed className='scorecard-table-cell'  bordered align='center' key={`${id}-${periodId}`}>{name}</DataTableCell>))
+                            <DataTableCell width={"200px"} fixed className='scorecard-table-cell'  bordered align='center' key={`${id}-${periodId}`}>{name}</DataTableCell>))
                     ))))
                 }
             </DataTableRow>

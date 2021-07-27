@@ -318,6 +318,7 @@ div.jsx-1730587817 {
 /*linked table cell*/
 
 td.data-cell{
+    min-width: 200px;
     border-right: 1px solid rgb(232, 237, 242);
     max-height: 47px;
     max-width: 201px;
