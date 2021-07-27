@@ -161,7 +161,6 @@ export default function DataGroup({
     const [titleEditValue, setTitleEditValue] = useState(title);
 
     const onLink = (indexOfMergedHolder, indexOfTheDeletedHolder) => {
-        console.log({indexOfTheDeletedHolder, indexOfMergedHolder})
         const dataSourceToLink = head(
             dataHolders[indexOfTheDeletedHolder]?.dataSources
         );

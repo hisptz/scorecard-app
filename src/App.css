@@ -331,9 +331,7 @@ td.data-cell{
     padding: 0;
 }
 
-td.data-cell:last-child{
-    border-bottom: 1px solid transparent;
-}
+
 
 .linked-table-cell{
     margin: 0;
@@ -413,3 +411,33 @@ table{
     overflow-x: auto;
 }
 
+.scorecard-table-header{
+    font-weight: bold !important;
+    font-size: 16px;
+}
+
+.scorecard-table-cell{
+
+}
+/*.scorecard-org-unit-cell{*/
+/*    min-width: 300px ;*/
+/*}*/
+
+td.jsx-1369417008{
+    max-width: 40px !important;
+    background:  rgb(243, 245, 247);
+    position: sticky;
+    left: 0;
+    top: auto;
+    z-index: 1;
+}
+td.jsx-1369417008:hover{
+    background: rgb(232, 237, 242)
+}
+td.jsx-1369417008::selection{
+    background: rgb(232, 237, 242)
+}
+
+.scorecard-org-unit-cell{
+    background: #E8EDF2;
+}
