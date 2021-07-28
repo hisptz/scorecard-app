@@ -2,7 +2,7 @@ import {useAlert} from "@dhis2/app-runtime";
 import i18n from '@dhis2/d2-i18n'
 import {Button, ButtonStrip, colors} from '@dhis2/ui'
 import PropTypes from 'prop-types'
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {useHistory} from "react-router-dom";
 import holderImage from '../../../../../resources/images/img.png'
 import DeleteConfirmation from "../../../../../shared/Components/DeleteConfirmation";
@@ -12,7 +12,7 @@ export default function ScorecardGridCard({scorecard}) {
     const {title, description, id} = scorecard;
     const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
     const history = useHistory()
-    const {remove} = useDeleteScorecard(id)
+    const {remove, error: deleteError} = useDeleteScorecard(id)
     const {show} = useAlert(({message}) => message, ({type}) => ({...type, duration: 3000}))
 
     const onView = () => {
@@ -40,6 +40,12 @@ export default function ScorecardGridCard({scorecard}) {
 
     }
 
+    useEffect(() => {
+        if (deleteError) {
+            show({message: deleteError?.message ?? deleteError.toString(), type: {info: true}})
+        }
+    }, [deleteError])
+
     return (
         <div className='container-bordered p-32' style={{margin: 16, textAlign: 'center', background: 'white'}}>
             <img alt='img' src={holderImage} style={{height: 100, width: 200}}/>
@@ -52,9 +58,10 @@ export default function ScorecardGridCard({scorecard}) {
             </ButtonStrip>
             {
                 deleteConfirmOpen &&
-                <DeleteConfirmation component={<p>{i18n.t('Are you sure you want to delete scorecard ')}:<b>{title}</b></p>}
-                                    onConfirm={onDelete}
-                                    onCancel={() => setDeleteConfirmOpen(false)}/>
+                <DeleteConfirmation
+                    component={<p>{i18n.t('Are you sure you want to delete scorecard ')}:<b>{title}</b></p>}
+                    onConfirm={onDelete}
+                    onCancel={() => setDeleteConfirmOpen(false)}/>
             }
         </div>
     )

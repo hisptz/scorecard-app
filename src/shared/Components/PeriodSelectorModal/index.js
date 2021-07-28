@@ -1,7 +1,7 @@
 import {PeriodDimension} from "@dhis2/analytics";
 import {Button, ButtonStrip, Modal, ModalActions, ModalContent, ModalTitle} from "@dhis2/ui";
 import PropTypes from "prop-types";
-import React, {useState} from "react";
+import React, { useState} from "react";
 
 
 export default function PeriodSelectorModal({initialValue, onSelect, onClose}) {
@@ -37,5 +37,5 @@ export default function PeriodSelectorModal({initialValue, onSelect, onClose}) {
 PeriodSelectorModal.propTypes = {
     onClose: PropTypes.func.isRequired,
     onSelect: PropTypes.func.isRequired,
-    initialValue: PropTypes.object
+    initialValue: PropTypes.object,
 };

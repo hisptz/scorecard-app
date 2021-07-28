@@ -5,7 +5,7 @@ import {ScorecardConfigStateSelector} from "../../../../../../core/state/scoreca
 import ScorecardOptionsForm from "../../../../../../shared/Components/ScorecardOptionsForm";
 
 export default function OptionsScorecardForm() {
-    const [scorecardOptions, setScorecardOptions] = useRecoilState(ScorecardConfigStateSelector('scorecardOptions'))
+    const [scorecardOptions, setScorecardOptions] = useRecoilState(ScorecardConfigStateSelector('options'))
 
     const onChange = (key) => (newValue) => {
         setScorecardOptions(prevState => {

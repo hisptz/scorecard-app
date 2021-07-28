@@ -1,3 +1,4 @@
+import produce from "immer";
 import {cloneDeep, defaultsDeep} from 'lodash'
 
 
@@ -34,11 +35,14 @@ export default class DataModel {
 export class SavableDataModel extends DataModel {
 
     static async save(object, addFunction, user) {
-        const newObject = {...object, user: {id: user?.id}}
-        return await addFunction(JSON.parse(JSON.stringify(newObject)))
+        const newObject = produce(JSON.parse(JSON.stringify(object)), draft => {
+            draft.user = {id: user?.id}
+        })
+        return await addFunction(newObject)
     }
 
     static async update(object, updateFunction) {
+
         return await updateFunction(JSON.parse(JSON.stringify(object)))
     }
 }
