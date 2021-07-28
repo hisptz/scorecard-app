@@ -1,4 +1,4 @@
-import {useDataEngine} from "@dhis2/app-runtime";
+import {Period} from "@iapps/period-utilities";
 import {cloneDeep, get as _get, set as _set} from "lodash";
 import {atom, selector, selectorFamily} from "recoil";
 import getScorecard from "../../shared/services/getScorecard";
@@ -8,6 +8,7 @@ import OrgUnitSelection from "../models/orgUnitSelection";
 import Scorecard from "../models/scorecard";
 import ScorecardAccess from "../models/scorecardAccess";
 import ScorecardOptions from "../models/scorecardOptions";
+import {EngineState} from "./engine";
 
 const defaultValue = {
     legendDefinitions: [
@@ -45,8 +46,8 @@ const ScorecardSummaryState = atom({
     key: 'scorecard-summary',
     default: selector({
         key: 'scorecard-summary-selector',
-        get: async () => {
-            const engine = useDataEngine();
+        get: async ({get}) => {
+            const engine = get(EngineState);
             const {summary, error} = await getScorecardSummary(engine)
             if (error) throw error;
             return summary;
@@ -60,22 +61,16 @@ const ScorecardConfState = atom({
         key: 'active-scorecard-default',
         get: async ({get}) => {
             const scorecardId = get(ScorecardIdState)
-            const engine = useDataEngine();
+            const engine = get(EngineState)
             if (scorecardId) {
                 const {scorecard, error} = await getScorecard(scorecardId, engine)
                 if (error) throw error;
+                console.log(scorecard)
                 return scorecard
             }
             return new Scorecard(defaultValue)
         }
     }),
-    effects_UNSTABLE: [
-        ({trigger, resetSelf}) => {
-            if (trigger === 'get') {
-                resetSelf()
-            }
-        }
-    ]
 })
 
 const ScorecardDataState = atom({
@@ -123,10 +118,15 @@ const ScorecardViewState = atom({
     default: selector({
         key: 'scorecardViewStateSelector',
         get: ({get}) => {
-            const {orgUnitSelection, periodSelection, options} = get(ScorecardConfState) ?? {}
+            const {orgUnitSelection, options, periodType} = get(ScorecardConfState) ?? {}
+            console.log(options)
+            const currentPeriod = new Period()
+            if (periodType) currentPeriod.setType(periodType)
             return {
                 orgUnitSelection,
-                periodSelection,
+                periodSelection: {
+                    periods: currentPeriod?.get()?.list()
+                },
                 options
             }
         }

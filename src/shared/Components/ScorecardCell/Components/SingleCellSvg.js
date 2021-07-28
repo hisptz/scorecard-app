@@ -3,7 +3,6 @@ import React from 'react'
 import {DecreasingArrows, IncreasingArrows} from "./Arrows";
 
 export default function SingleCellSvg({color, value, status}) {
-    console.log({color})
     return (
         <svg width={200} height={47} style={{display: 'block'}}>
             <polygon points="0 0 0 47 200 47 200 0" style={{fill: color ?? '#FFFFFF'}}/>

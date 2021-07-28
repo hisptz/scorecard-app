@@ -6,7 +6,7 @@ export default class OrgUnitSelection extends DataModel {
         return {
             level: '',
             group: '',
-            orgUnitIds: [],
+            orgUnits: [],
             userSubX2Unit: false,
             userSubUnit: false,
             userOrgUnit: false

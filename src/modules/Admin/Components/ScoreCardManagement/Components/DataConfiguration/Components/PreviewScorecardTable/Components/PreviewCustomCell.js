@@ -6,12 +6,11 @@ import {getLegend} from "../../../utils";
 import CustomLinkedCell from "./CustomLinkedCell";
 
 export default function PreviewCustomCell({config}) {
-    const hasLinked = config?.dataSources.length > 1;
+    const hasLinked = config?.dataSources?.length > 1;
     const [top, bottom] = config?.dataSources ?? [];
     const {legends, showColors, id, displayArrows} = top ?? {};
     const value = useMemo(generateRandomValues, []);
     const legend = getLegend(value, legends)
-
 
     return hasLinked ? <CustomLinkedCell bottom={bottom} top={top}/> :
         <td className='data-cell' align='center'
