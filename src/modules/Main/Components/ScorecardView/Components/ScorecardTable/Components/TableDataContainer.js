@@ -21,7 +21,7 @@ export default function DataContainer({dataSources, orgUnitId, periodId}) {
     const bottomLegend = getLegend(bottomValue, bottom?.legends)
 
     return (
-        dataSources?.length > 1 ? <LinkedCellSvg topValue={topValue} topColor={topLegend?.color} bottomValue={bottomValue} bottomColor={bottomLegend?.color}  />: <SingleCellSvg value={topValue} color={topLegend?.color} />
+        dataSources?.length > 1 ? <LinkedCellSvg topValue={topValue} topColor={topLegend?.color} bottomValue={bottomValue} bottomColor={bottomLegend?.color}  />: <SingleCellSvg value={`${topValue}`} color={topLegend?.color} />
     )
 }
 
