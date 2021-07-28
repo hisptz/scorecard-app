@@ -52,6 +52,7 @@ export default function useScorecardsSummary() {
                 data: updatedList
             })
         } catch (e) {
+            console.log(e)
             setExecutionError(e)
         }
     }

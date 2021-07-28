@@ -26,7 +26,7 @@ export default function ScorecardView() {
                 <ScorecardLegendsView/>
                 <HighlightedIndicatorsView/>
                 <div className='column align-items-center pt-16 flex-1'>
-                    <ScorecardTable orgUnits={orgUnits}/>
+                    <ScorecardTable nested={false} orgUnits={orgUnits}/>
                 </div>
             </div>
         </Suspense>

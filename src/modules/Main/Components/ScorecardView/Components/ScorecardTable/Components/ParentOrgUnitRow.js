@@ -3,10 +3,11 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import {useRecoilValue} from "recoil";
 import ScorecardConfState, {ScorecardViewSelector} from "../../../../../../../core/state/scorecard";
+import OrgUnitContainer from "./OrgUnitContainer";
 import DataContainer from "./TableDataContainer";
 
 export default function ParentOrgUnitRow({orgUnit}){
-    const {id, displayName} = orgUnit ?? {};
+    const {id} = orgUnit ?? {};
     const {dataSelection} = useRecoilValue(ScorecardConfState)
     const {periods} = useRecoilValue(ScorecardViewSelector('periodSelection')) ?? []
     const {dataGroups} = dataSelection
@@ -18,7 +19,7 @@ export default function ParentOrgUnitRow({orgUnit}){
             <DataTableCell fixed
                            left={"50px"}
                            className='scorecard-org-unit-cell'>
-                {displayName}
+                <OrgUnitContainer orgUnit={orgUnit}/>
             </DataTableCell>
             {
                 dataGroups?.map(({id: groupId, dataHolders}) => (

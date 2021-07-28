@@ -4,10 +4,11 @@ import React from "react";
 import {useRecoilValue} from "recoil";
 import ScorecardConfState, {ScorecardViewSelector} from "../../../../../../../core/state/scorecard";
 import ScorecardTable from "../index";
+import OrgUnitContainer from "./OrgUnitContainer";
 import DataContainer from "./TableDataContainer";
 
 export default function ChildOrgUnitRow({orgUnit, expandedOrgUnit, onExpand}) {
-    const {id, displayName} = orgUnit ?? {};
+    const {id} = orgUnit ?? {};
     const {dataSelection} = useRecoilValue(ScorecardConfState)
     const {periods} = useRecoilValue(ScorecardViewSelector('periodSelection')) ?? []
     const {dataGroups} = dataSelection
@@ -24,12 +25,12 @@ export default function ChildOrgUnitRow({orgUnit, expandedOrgUnit, onExpand}) {
             }
             expandableContent={
                 <div className="p-16">
-                    <ScorecardTable orgUnits={[orgUnit]}/>
+                    <ScorecardTable nested={true} orgUnits={[orgUnit]}/>
                 </div>
             } key={id}
             bordered>
             <DataTableCell fixed left={"50px"}>
-                {displayName}
+                <OrgUnitContainer orgUnit={orgUnit}/>
             </DataTableCell>
             {
                 dataGroups?.map(({id: groupId, dataHolders}) => (

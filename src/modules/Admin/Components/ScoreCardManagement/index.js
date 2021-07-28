@@ -108,6 +108,7 @@ export default function ScoreCardManagement() {
                 type: {success: true},
             });
         } catch (e) {
+            console.log(e)
             show({message: e?.message ?? e.details, type: {info: true}});
             setSaving(false);
         }

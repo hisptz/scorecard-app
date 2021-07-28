@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useMemo, useState} from 'react'
 import LinkedCellSvg from "../../../../../../../shared/Components/ScorecardCell/Components/LinkedCellSvg";
 import SingleCellSvg from "../../../../../../../shared/Components/ScorecardCell/Components/SingleCellSvg";
 import {generateRandomValues} from "../../../../../../../shared/utils/utils";
@@ -8,7 +8,7 @@ import {getLegend} from "../../../../../../Admin/Components/ScoreCardManagement/
 export default function DataContainer({dataSources, orgUnitId, periodId}) {
     const [data, setData] = useState();
     const [top, bottom] = dataSources ?? [];
-    const topValue = generateRandomValues(100)
+    const topValue = useMemo(() => generateRandomValues(100), []);
     const topLegend = getLegend(topValue, top?.legends)
 
 
@@ -17,7 +17,7 @@ export default function DataContainer({dataSources, orgUnitId, periodId}) {
     }, [orgUnitId, periodId, dataSources]);
 
 
-    const bottomValue = generateRandomValues(100);
+    const bottomValue = useMemo(() => generateRandomValues(100), []);
     const bottomLegend = getLegend(bottomValue, bottom?.legends)
 
     return (

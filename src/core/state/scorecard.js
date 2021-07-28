@@ -65,6 +65,7 @@ const ScorecardConfState = atom({
             if (scorecardId) {
                 const {scorecard, error} = await getScorecard(scorecardId, engine)
                 if (error) throw error;
+                console.log(scorecard)
                 return scorecard
             }
             return new Scorecard(defaultValue)
@@ -118,6 +119,7 @@ const ScorecardViewState = atom({
         key: 'scorecardViewStateSelector',
         get: ({get}) => {
             const {orgUnitSelection, options, periodType} = get(ScorecardConfState) ?? {}
+            console.log(options)
             const currentPeriod = new Period()
             if (periodType) currentPeriod.setType(periodType)
             return {
