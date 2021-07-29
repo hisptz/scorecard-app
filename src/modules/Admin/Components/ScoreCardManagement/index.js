@@ -47,7 +47,7 @@ export default function ScoreCardManagement() {
     const setScorecardIdState = useSetRecoilState(ScorecardIdState);
     const resetScorecardEditState = useResetRecoilState(ScorecardConfigEditState);
     const resetScorecardIdState = useResetRecoilState(ScorecardIdState);
-    const scorecardState = useRecoilValue(ScorecardConfState);
+    const scorecardState = useRecoilValue(ScorecardConfState(scorecardId));
     const {update} = useUpdateScorecard(scorecardId);
     const {add} = useAddScorecard();
     const {show} = useAlert(
@@ -60,14 +60,15 @@ export default function ScoreCardManagement() {
     const [activeStep, setActiveStep] = useState(steps[0]);
     const formRef = useRef(HTMLFormElement);
     const Component = activeStep.component;
+
+
     useEffect(() => {
         setScorecardIdState(scorecardId);
+        return () => {
+            resetScorecardIdState();
+            resetScorecardEditState();
+        }
     }, [scorecardId]);
-
-    const reset = () => {
-        resetScorecardEditState();
-        resetScorecardIdState();
-    };
 
     const onNextStep = () => {
         if (!hasNextStep) {
@@ -88,7 +89,6 @@ export default function ScoreCardManagement() {
     };
 
     const onCancel = () => {
-        reset();
         history.goBack();
     };
 
@@ -101,7 +101,6 @@ export default function ScoreCardManagement() {
                 await Scorecard.save(scorecardState, add, user);
             }
             setSaving(false);
-            reset();
             history.goBack();
             show({
                 message: i18n.t("Configuration saved Successfully"),

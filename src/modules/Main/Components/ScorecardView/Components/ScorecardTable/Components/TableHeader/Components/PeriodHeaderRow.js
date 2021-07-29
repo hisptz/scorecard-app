@@ -1,13 +1,12 @@
 import {DataTableCell, DataTableRow} from "@dhis2/ui";
 import React from "react";
 import {useRecoilValue} from "recoil";
-import ScorecardConfState, {ScorecardViewSelector} from "../../../../../../../../../core/state/scorecard";
+import {ScorecardConfigStateSelector, ScorecardViewSelector} from "../../../../../../../../../core/state/scorecard";
 
 
 export default function PeriodHeaderRow() {
-    const {dataSelection} = useRecoilValue(ScorecardConfState)
+    const {dataGroups} = useRecoilValue(ScorecardConfigStateSelector('dataSelection')) ?? {}
     const {periods} = useRecoilValue(ScorecardViewSelector('periodSelection')) ?? []
-    const {dataGroups} = dataSelection
     return (
         <DataTableRow>
             <DataTableCell fixed left={"0"} width={"50px"}>&nbsp;</DataTableCell>

@@ -1,6 +1,6 @@
 import {Period} from "@iapps/period-utilities";
-import {cloneDeep, get as _get, set as _set} from "lodash";
-import {atom, selector, selectorFamily} from "recoil";
+import {cloneDeep, flattenDeep, get as _get, set as _set} from "lodash";
+import {atom, atomFamily, selector, selectorFamily} from "recoil";
 import getScorecard from "../../shared/services/getScorecard";
 import getScorecardSummary from "../../shared/services/getScorecardSummary";
 import ScorecardAccessType from "../constants/scorecardAccessType";
@@ -42,58 +42,50 @@ const ScorecardIdState = atom({
     key: 'scorecard-id',
 })
 
-const ScorecardSummaryState = atom({
-    key: 'scorecard-summary',
-    default: selector({
-        key: 'scorecard-summary-selector',
-        get: async ({get}) => {
-            const engine = get(EngineState);
-            const {summary, error} = await getScorecardSummary(engine)
-            if (error) throw error;
-            return summary;
-        },
-    })
+const ScorecardSummaryState = selector({
+    key: 'scorecard-summary-selector',
+    get: async ({get}) => {
+        const engine = get(EngineState);
+        const {summary, error} = await getScorecardSummary(engine)
+        if (error) throw error;
+        return summary;
+    },
 })
 
-const ScorecardConfState = atom({
-    key: 'active-scorecard',
-    default: selector({
-        key: 'active-scorecard-default',
-        get: async ({get}) => {
-            const scorecardId = get(ScorecardIdState)
+const ScorecardForceUpdateState = atomFamily({
+    key: 'scorecardForceUpdateState',
+    default: 0
+})
+
+const ScorecardConfState = atomFamily({
+    key: 'scorecard-config',
+    default: selectorFamily({
+        key: 'active-scorecard-config',
+        get: (scorecardId) => async ({get}) => {
             const engine = get(EngineState)
             if (scorecardId) {
+
                 const {scorecard, error} = await getScorecard(scorecardId, engine)
+
                 if (error) throw error;
-                console.log(scorecard)
                 return scorecard
             }
             return new Scorecard(defaultValue)
         }
-    }),
-})
-
-const ScorecardDataState = atom({
-    key: 'scorecardDataState',
-    default: selector({
-        key: 'scorecardDataStateSelector',
-        get: async ({get}) => {
-            const {orgUnitSelection, periodSelection} = get(ScorecardViewState) //Current period and org unit selections
-            const scorecardConfig = get(ScorecardConfState)
-            //TODO: Implement the getScorecard data function and return the results from here @rajey
-
-            //expected output format
-            // return {
-            //     'indicatorId-orgUnit-period': {
-            //         previousValue: 45,
-            //         currentValue: 12,
-            //     }
-            // }
-            return {}
-        }
     })
 })
 
+const ScorecardDataState = selector({
+    key: 'scorecardDataStateDefault',
+    get: async ({get}) => {
+        const orgUnits = get(ScorecardViewSelector('orgUnitSelection'))?.orgUnits?.map(({id}) => id)
+        const periods = get(ScorecardViewSelector('periodSelection'))?.periods.map(({id}) => id)
+        const dataGroups = get(ScorecardConfigStateSelector('dataSelection'))?.dataGroups
+        const indicators = flattenDeep(flattenDeep(dataGroups.map(({dataHolders}) => dataHolders))?.map(({dataSources}) => dataSources))
+        console.log({orgUnits, periods, dataGroups, indicators})
+
+    }
+})
 
 const ScorecardDataStateSelector = selectorFamily({
     key: 'scorecardDataStateSelectorFamily',
@@ -104,8 +96,15 @@ const ScorecardDataStateSelector = selectorFamily({
 
 const ScorecardConfigStateSelector = selectorFamily({
     key: 'scorecard-state-selector',
-    get: path => ({get}) => _get(get(ScorecardConfState), path),
-    set: path => ({set}, newValue) => set(ScorecardConfState, prevState => _set(cloneDeep(prevState), path, newValue))
+    get: path => ({get}) => {
+        const scorecardId = get(ScorecardIdState)
+
+        return _get(get(ScorecardConfState(scorecardId)), path)
+    },
+    set: path => ({set, get}, newValue) => {
+        const scorecardId = get(ScorecardIdState)
+         set(ScorecardConfState(scorecardId), prevState => _set(cloneDeep(prevState), path, newValue))
+    }
 })
 
 const ScorecardConfigEditState = atom({
@@ -114,14 +113,17 @@ const ScorecardConfigEditState = atom({
 })
 
 const ScorecardViewState = atom({
-    key: 'scorecardViewState',
+    key: 'scorecard-view-config',
     default: selector({
         key: 'scorecardViewStateSelector',
         get: ({get}) => {
-            const {orgUnitSelection, options, periodType} = get(ScorecardConfState) ?? {}
-            console.log(options)
+            const scorecardId = get(ScorecardIdState)
+            const {orgUnitSelection, options, periodType} = get(ScorecardConfState(scorecardId)) ?? {}
             const currentPeriod = new Period()
-            if (periodType) currentPeriod.setType(periodType)
+
+            if (periodType) {
+                currentPeriod.setType(periodType)
+            }
             return {
                 orgUnitSelection,
                 periodSelection: {
@@ -148,5 +150,6 @@ export {
     ScorecardViewState,
     ScorecardViewSelector,
     ScorecardDataState,
-    ScorecardDataStateSelector
+    ScorecardDataStateSelector,
+    ScorecardForceUpdateState
 }

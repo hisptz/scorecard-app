@@ -1,7 +1,7 @@
 import React, {Suspense, useEffect} from "react";
 import {useParams} from "react-router-dom";
-import {useRecoilValue, useSetRecoilState} from "recoil";
-import {ScorecardIdState, ScorecardViewSelector,} from "../../../../core/state/scorecard";
+import {useRecoilValue, useResetRecoilState, useSetRecoilState} from "recoil";
+import {ScorecardIdState, ScorecardViewSelector, ScorecardViewState,} from "../../../../core/state/scorecard";
 import {FullPageLoader} from "../../../../shared/Components/Loaders";
 import HighlightedIndicatorsView from "./Components/HighlightedIndicatorsView";
 import ScorecardHeader from "./Components/ScorecardHeader";
@@ -12,10 +12,16 @@ import ScorecardViewHeader from "./Components/ScorecardViewHeader";
 export default function ScorecardView() {
     const {id: scorecardId} = useParams()
     const setScorecardIdState = useSetRecoilState(ScorecardIdState)
+    const resetIdState = useResetRecoilState(ScorecardIdState)
+    const resetViewState = useResetRecoilState(ScorecardViewState)
     const {orgUnits} = useRecoilValue(ScorecardViewSelector('orgUnitSelection'))
 
     useEffect(() => {
         setScorecardIdState(scorecardId)
+        return () => {
+            resetIdState()
+            resetViewState()
+        }
     }, [scorecardId]);
 
     return (
@@ -26,7 +32,9 @@ export default function ScorecardView() {
                 <ScorecardLegendsView/>
                 <HighlightedIndicatorsView/>
                 <div className='column align-items-center pt-16 flex-1'>
-                    <ScorecardTable nested={false} orgUnits={orgUnits}/>
+                    <Suspense fallback={<FullPageLoader/>}>
+                        <ScorecardTable nested={false} orgUnits={orgUnits}/>
+                    </Suspense>
                 </div>
             </div>
         </Suspense>

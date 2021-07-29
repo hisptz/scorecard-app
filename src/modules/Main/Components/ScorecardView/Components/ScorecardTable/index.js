@@ -1,11 +1,10 @@
 import {useAlert} from "@dhis2/app-runtime";
-import {DataTable, DataTableBody} from '@dhis2/ui'
+import {DataTable, DataTableBody,} from '@dhis2/ui'
 import {head, isEmpty} from 'lodash'
 import PropTypes from 'prop-types'
 import React, {Fragment, useEffect, useMemo, useState} from 'react'
 import {useRecoilValue} from "recoil";
-import ScorecardConfState, {ScorecardViewSelector} from "../../../../../../core/state/scorecard";
-import {FullPageLoader} from "../../../../../../shared/Components/Loaders";
+import {ScorecardConfigStateSelector, ScorecardViewSelector} from "../../../../../../core/state/scorecard";
 import useMediaQuery from "../../../../../../shared/hooks/useMediaQuery";
 import {
     useOrganisationUnitChildren,
@@ -15,15 +14,15 @@ import ChildOrgUnitRow from "./Components/ChildOrgUnitRow";
 import EmptyDataGroups from "./Components/EmptyDataGroups";
 import ParentOrgUnitRow from "./Components/ParentOrgUnitRow";
 import TableHeader from "./Components/TableHeader";
+import TableLoader from "./Components/TableLoader";
 import {getTableWidth} from "./services/utils";
 
 export default function ScorecardTable({orgUnits, nested}) {
     const {width: screenWidth} = useMediaQuery()
-    const {dataSelection} = useRecoilValue(ScorecardConfState)
+    const {dataGroups} = useRecoilValue(ScorecardConfigStateSelector('dataSelection')) ?? {}
     const {periods} = useRecoilValue(ScorecardViewSelector('periodSelection')) ?? []
     const searchKeyword = useRecoilValue(ScorecardViewSelector('orgUnitSearchKeyword'))
-    const {dataGroups} = dataSelection
-    const tableWidth = useMemo(() => getTableWidth(periods, dataGroups, screenWidth), [periods, dataGroups, dataSelection]);
+    const tableWidth = useMemo(() => getTableWidth(periods, dataGroups, screenWidth), [periods, dataGroups]);
     const {loading, error, orgUnits: childrenOrgUnits, setId} = useOrganisationUnitChildren()
     const {
         orgUnits: searchResults,
@@ -70,10 +69,10 @@ export default function ScorecardTable({orgUnits, nested}) {
             {
                 isEmpty(dataGroups) ? <EmptyDataGroups/> :
                     <DataTable width={`${tableWidth}px`} scrollWidth={`${screenWidth}px`} layout='fixed'>
-                        <TableHeader nested={nested} />
+                        <TableHeader nested={nested}/>
                         <DataTableBody>
                             {
-                                loading ? <FullPageLoader/> : <Fragment>
+                                loading ? <TableLoader/> : <Fragment>
                                     {
                                         filteredOrgUnits?.map((orgUnit) => (
                                             <ParentOrgUnitRow key={`${orgUnit?.id}-row`} orgUnit={orgUnit}/>))

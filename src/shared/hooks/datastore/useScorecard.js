@@ -121,8 +121,8 @@ export function useAddScorecard() {
     };
 }
 
-export default function useScorecard() {
-    const setScorecardState = useSetRecoilState(ScorecardConfState);
+export default function useScorecard(scorecardId) {
+    const setScorecardState = useSetRecoilState(ScorecardConfState(scorecardId));
     const {loading, data, error, refetch} = useDataQuery(query, {lazy: true});
 
     const set = async (id) => {

@@ -25,6 +25,7 @@
     "cucumber": "^7.0.0-rc.0",
     "cypress": "7.7.0",
     "cypress-cucumber-preprocessor": "^4.1.2",
+    "cz-conventional-changelog": "3.3.0",
     "eslint-plugin-cypress": "^2.11.3",
     "react": "16.14.0"
   },
@@ -51,5 +52,10 @@
   },
   "cypress-cucumber-preprocessor": {
     "nonGlobalStepDefinitions": true
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }

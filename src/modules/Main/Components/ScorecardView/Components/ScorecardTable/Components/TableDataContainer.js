@@ -1,12 +1,14 @@
 import PropTypes from 'prop-types'
-import React, {useEffect, useMemo, useState} from 'react'
+import React, {useEffect, useMemo} from 'react'
+import {useRecoilValue} from "recoil";
+import {ScorecardDataState} from "../../../../../../../core/state/scorecard";
 import LinkedCellSvg from "../../../../../../../shared/Components/ScorecardCell/Components/LinkedCellSvg";
 import SingleCellSvg from "../../../../../../../shared/Components/ScorecardCell/Components/SingleCellSvg";
 import {generateRandomValues} from "../../../../../../../shared/utils/utils";
 import {getLegend} from "../../../../../../Admin/Components/ScoreCardManagement/Components/DataConfiguration/utils";
 
 export default function DataContainer({dataSources, orgUnitId, periodId}) {
-    const [data, setData] = useState();
+    const data = useRecoilValue(ScorecardDataState)
     const [top, bottom] = dataSources ?? [];
     const topValue = useMemo(() => generateRandomValues(100), []);
     const topLegend = getLegend(topValue, top?.legends)
@@ -21,7 +23,10 @@ export default function DataContainer({dataSources, orgUnitId, periodId}) {
     const bottomLegend = getLegend(bottomValue, bottom?.legends)
 
     return (
-        dataSources?.length > 1 ? <LinkedCellSvg topValue={topValue} topColor={topLegend?.color} bottomValue={bottomValue} bottomColor={bottomLegend?.color}  />: <SingleCellSvg value={`${topValue}`} color={topLegend?.color} />
+        dataSources?.length > 1 ?
+            <LinkedCellSvg topValue={topValue} topColor={topLegend?.color} bottomValue={bottomValue}
+                           bottomColor={bottomLegend?.color}/> :
+            <SingleCellSvg value={`${topValue}`} color={topLegend?.color}/>
     )
 }
 

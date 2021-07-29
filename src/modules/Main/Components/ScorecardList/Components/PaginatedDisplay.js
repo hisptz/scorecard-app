@@ -35,7 +35,7 @@ export default function PaginatedDisplay({pageSize = 8, scorecards = [], listCom
 }
 
 PaginatedDisplay.propTypes = {
-    listComponent: PropTypes.node.isRequired,
+    listComponent: PropTypes.any.isRequired,
     pageSize: PropTypes.number.isRequired,
     scorecards: PropTypes.array.isRequired
 };

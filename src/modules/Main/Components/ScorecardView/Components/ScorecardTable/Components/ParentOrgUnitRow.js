@@ -2,17 +2,16 @@ import {DataTableCell, DataTableRow} from "@dhis2/ui";
 import PropTypes from 'prop-types'
 import React from 'react'
 import {useRecoilValue} from "recoil";
-import ScorecardConfState, {ScorecardViewSelector} from "../../../../../../../core/state/scorecard";
+import {ScorecardConfigStateSelector, ScorecardViewSelector} from "../../../../../../../core/state/scorecard";
 import OrgUnitContainer from "./OrgUnitContainer";
 import DataContainer from "./TableDataContainer";
 
-export default function ParentOrgUnitRow({orgUnit}){
+export default function ParentOrgUnitRow({orgUnit}) {
     const {id} = orgUnit ?? {};
-    const {dataSelection} = useRecoilValue(ScorecardConfState)
+    const {dataGroups} = useRecoilValue(ScorecardConfigStateSelector('dataSelection')) ?? {}
     const {periods} = useRecoilValue(ScorecardViewSelector('periodSelection')) ?? []
-    const {dataGroups} = dataSelection
 
-    return(
+    return (
         <DataTableRow key={id}
                       bordered>
             <DataTableCell fixed left={"0"} width={"50px"}>&nbsp;</DataTableCell>

@@ -15,7 +15,7 @@ export default function ScorecardViewHeader() {
     const [orgUnitSelection, setOrgUnitSelection] = useRecoilState(ScorecardViewSelector('orgUnitSelection'))
     const [periodSelection, setPeriodSelection] = useRecoilState(ScorecardViewSelector('periodSelection'))
     const [scorecardOptions, setScorecardOptions] = useRecoilState(ScorecardViewSelector('options'))
-    const resetScorecardState = useResetRecoilState(ScorecardConfState)
+    const resetScorecardState = useResetRecoilState(ScorecardConfState(scorecardId))
     const resetScorecardIdState = useResetRecoilState(ScorecardIdState)
 
     const [orgUnitSelectionOpen, setOrgUnitSelectionOpen] = useState(false);

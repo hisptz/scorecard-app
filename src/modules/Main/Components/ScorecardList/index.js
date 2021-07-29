@@ -10,7 +10,7 @@ import {debounce, isEmpty} from 'lodash'
 import React, {Suspense, useEffect, useState} from 'react'
 import {useHistory} from "react-router-dom";
 import {useRecoilValue, useResetRecoilState} from "recoil";
-import ScorecardConfState, {ScorecardIdState, ScorecardSummaryState} from "../../../../core/state/scorecard";
+import {ScorecardIdState, ScorecardSummaryState} from "../../../../core/state/scorecard";
 import {FullPageLoader} from "../../../../shared/Components/Loaders";
 import EmptyScoreCardList from "../EmptyScoreCardList";
 import GridScorecardDisplay from "./Components/GridScorecardDisplay";
@@ -18,7 +18,6 @@ import ListScorecardDisplay from "./Components/ListScorecardDisplay";
 import PaginatedDisplay from "./Components/PaginatedDisplay";
 
 export default function ScorecardList() {
-    const resetScorecardState = useResetRecoilState(ScorecardConfState)
     const resetScorecardIdState = useResetRecoilState(ScorecardIdState)
     const history = useHistory();
     const [scorecardViewType, {set}] = useSetting('scorecardViewType')
@@ -68,7 +67,6 @@ export default function ScorecardList() {
     }, [keyword, scorecards]);
 
     const onAddClick = () => {
-        resetScorecardState();
         resetScorecardIdState();
         history.push('/add', {from: 'home'})
     }

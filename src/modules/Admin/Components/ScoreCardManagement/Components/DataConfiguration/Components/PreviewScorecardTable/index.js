@@ -6,7 +6,7 @@ import {ScorecardConfigStateSelector} from "../../../../../../../../core/state/s
 import PreviewCustomCell from "./Components/PreviewCustomCell";
 
 export default function PreviewScorecardTable() {
-    const {dataGroups} = useRecoilValue(ScorecardConfigStateSelector('dataSelection'))
+    const {dataGroups} = useRecoilValue(ScorecardConfigStateSelector('dataSelection')) ?? {}
     const columns = useMemo(() => [...dataGroups], [dataGroups]);
     return (
         <div className='column' style={{width: '100%', overflowX: 'auto'}}>
