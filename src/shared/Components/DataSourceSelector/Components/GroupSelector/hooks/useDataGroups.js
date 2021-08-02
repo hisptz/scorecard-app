@@ -10,18 +10,6 @@ export default function useDataGroups(initialSelectedDataType) {
     const [loading, setLoading] = useState(customFunctionsState.state === "loading");
     const [error, setError] = useState();
     const engine = useDataEngine()
-    const query = {
-        groups: {
-            resource: initialSelectedDataType?.groupResource,
-            params: {
-                fields: [
-                    'displayName',
-                    'id',
-                    `${initialSelectedDataType.resource}[displayName,id]`
-                ]
-            }
-        }
-    }
 
     const customFunctions = useMemo(() => {
         if (customFunctionsState.state === 'hasValue') {
@@ -39,14 +27,14 @@ export default function useDataGroups(initialSelectedDataType) {
             if (initialSelectedDataType.type === 'customFunction') {
                 setData(customFunctions)
             } else {
-                if (initialSelectedDataType && initialSelectedDataType.groupResource) {
+                if (initialSelectedDataType) {
                     setLoading(true)
                     try {
-                        const response = await engine.query(query)
+                        const response = await initialSelectedDataType.getGroups(engine)
+                        console.log(response)
                         if (response) {
-                            setData(response.groups?.[`${initialSelectedDataType.groupResource}`])
+                            setData(response)
                         }
-
                     } catch (e) {
                         setError(e);
                     }

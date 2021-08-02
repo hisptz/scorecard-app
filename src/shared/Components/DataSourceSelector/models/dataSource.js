@@ -1,17 +1,21 @@
-
-
-
-
-export default class DataSource{
-    constructor() {
+export default class DataSource {
+    constructor({label, type}) {
+        this.label = label;
+        this.type = type;
         this.getDataSources = this.getDataSources.bind(this)
         this.getGroups = this.getGroups.bind(this)
     }
 
-    getGroups(){
-
+    async getGroups(engine) {
+        return;
     }
-    getDataSources(){
 
+    async getDataSources(engine, {filter, page}) {
+        return;
     }
+
+    async filter(engine, {selectedGroup, page}){
+        return;
+    }
+
 }
