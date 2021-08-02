@@ -14,8 +14,6 @@ const MyApp = () => {
     const {baseUrl, apiVersion} = useConfig()
     Fn.init({
         baseUrl: `${baseUrl}/api/${apiVersion}/`,
-        username: 'admin',
-        password: 'district'
     });
     return (
         <DataStoreProvider
