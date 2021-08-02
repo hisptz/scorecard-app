@@ -4,6 +4,7 @@ import {head, isEmpty} from 'lodash'
 import PropTypes from 'prop-types'
 import React, {Fragment, useEffect, useMemo, useState} from 'react'
 import {useRecoilValue} from "recoil";
+import {PeriodResolverState} from "../../../../../../core/state/period";
 import {ScorecardConfigStateSelector, ScorecardViewSelector} from "../../../../../../core/state/scorecard";
 import useMediaQuery from "../../../../../../shared/hooks/useMediaQuery";
 import {
@@ -20,9 +21,13 @@ import {getTableWidth} from "./services/utils";
 export default function ScorecardTable({orgUnits, nested}) {
     const {width: screenWidth} = useMediaQuery()
     const {dataGroups} = useRecoilValue(ScorecardConfigStateSelector('dataSelection')) ?? {}
-    const {periods} = useRecoilValue(ScorecardViewSelector('periodSelection')) ?? []
+    const periods = useRecoilValue(PeriodResolverState) ?? []
     const searchKeyword = useRecoilValue(ScorecardViewSelector('orgUnitSearchKeyword'))
-    const tableWidth = useMemo(() => getTableWidth(periods, dataGroups, screenWidth), [periods, dataGroups]);
+    const tableWidth = useMemo(() => {
+        console.log({periodLength: periods.length})
+        return getTableWidth(periods, dataGroups, screenWidth)
+    }, [periods, dataGroups]);
+    console.log(tableWidth)
     const {loading, error, orgUnits: childrenOrgUnits, setId} = useOrganisationUnitChildren()
     const {
         orgUnits: searchResults,

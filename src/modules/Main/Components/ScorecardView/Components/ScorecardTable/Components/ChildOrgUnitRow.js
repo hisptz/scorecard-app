@@ -2,7 +2,8 @@ import {DataTableCell, DataTableRow} from "@dhis2/ui";
 import PropTypes from 'prop-types'
 import React from "react";
 import {useRecoilValue} from "recoil";
-import {ScorecardConfigStateSelector, ScorecardViewSelector} from "../../../../../../../core/state/scorecard";
+import {PeriodResolverState} from "../../../../../../../core/state/period";
+import {ScorecardConfigStateSelector} from "../../../../../../../core/state/scorecard";
 import ScorecardTable from "../index";
 import OrgUnitContainer from "./OrgUnitContainer";
 import DataContainer from "./TableDataContainer";
@@ -10,7 +11,7 @@ import DataContainer from "./TableDataContainer";
 export default function ChildOrgUnitRow({orgUnit, expandedOrgUnit, onExpand}) {
     const {id} = orgUnit ?? {};
     const {dataGroups} = useRecoilValue(ScorecardConfigStateSelector('dataSelection')) ?? {}
-    const {periods} = useRecoilValue(ScorecardViewSelector('periodSelection')) ?? []
+    const periods = useRecoilValue(PeriodResolverState) ?? []
     return (
         <DataTableRow
             expanded={id === expandedOrgUnit}

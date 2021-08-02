@@ -11,9 +11,12 @@ import {Fn} from "@iapps/function-analytics";
 import {useConfig} from "@dhis2/app-runtime";
 
 const MyApp = () => {
-    const {baseUrl} = useConfig()
-    // const url = process.env.REACT_APP_DHIS2_BASE_URL || "";
-    Fn.init({baseUrl: baseUrl + "/api/"});
+    const {baseUrl, apiVersion} = useConfig()
+    Fn.init({
+        baseUrl: `${baseUrl}/api/${apiVersion}/`,
+        username: 'admin',
+        password: 'district'
+    });
     return (
         <DataStoreProvider
             namespace={"hisptz-scorecard"}

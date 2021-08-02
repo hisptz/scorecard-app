@@ -24,6 +24,7 @@ export default function ScorecardView() {
         }
     }, [scorecardId]);
 
+
     return (
         <Suspense fallback={<FullPageLoader/>}>
             <ScorecardViewHeader/>

@@ -1,7 +1,8 @@
 import {Period} from "@iapps/period-utilities";
-import {cloneDeep, flattenDeep, get as _get, set as _set} from "lodash";
+import {cloneDeep, find, flattenDeep, get as _get, set as _set, zipObjectDeep} from "lodash";
 import {atom, atomFamily, selector, selectorFamily} from "recoil";
 import getScorecard from "../../shared/services/getScorecard";
+import getScorecardCellData from "../../shared/services/getScorecardCellData";
 import getScorecardSummary from "../../shared/services/getScorecardSummary";
 import ScorecardAccessType from "../constants/scorecardAccessType";
 import OrgUnitSelection from "../models/orgUnitSelection";
@@ -9,6 +10,8 @@ import Scorecard from "../models/scorecard";
 import ScorecardAccess from "../models/scorecardAccess";
 import ScorecardOptions from "../models/scorecardOptions";
 import {EngineState} from "./engine";
+import {PeriodResolverState} from "./period";
+
 
 const defaultValue = {
     legendDefinitions: [
@@ -75,22 +78,44 @@ const ScorecardConfState = atomFamily({
     })
 })
 
-const ScorecardDataState = selector({
-    key: 'scorecardDataStateDefault',
-    get: async ({get}) => {
-        const orgUnits = get(ScorecardViewSelector('orgUnitSelection'))?.orgUnits?.map(({id}) => id)
-        const periods = get(ScorecardViewSelector('periodSelection'))?.periods.map(({id}) => id)
-        const dataGroups = get(ScorecardConfigStateSelector('dataSelection'))?.dataGroups
-        const indicators = flattenDeep(flattenDeep(dataGroups.map(({dataHolders}) => dataHolders))?.map(({dataSources}) => dataSources))
-        console.log({orgUnits, periods, dataGroups, indicators})
-
-    }
+const ScorecardDataState = atomFamily({
+    key: 'scorecard-data-state',
+    default: {},
+    effects_UNSTABLE: ({orgUnitId, periods, dataSources}) => [
+        ({setSelf}) => {
+            const analyticsPromise = getScorecardCellData({
+                orgUnit: orgUnitId,
+                periods: periods.map(({id}) => id),
+                dataSources
+            }).then(({_data: analytics}) => {
+                const rows = analytics?.rows;
+                return rows?.map((row) =>
+                    zipObjectDeep(analytics?.headers
+                        ?.map(({name}) => name), row))
+            })
+            setSelf(analyticsPromise)
+        }
+    ]
 })
 
 const ScorecardDataStateSelector = selectorFamily({
     key: 'scorecardDataStateSelectorFamily',
     get: (key) => ({get}) => {
-        return _get(get(ScorecardDataState), key)
+        const periods = get(PeriodResolverState)
+        const {dataGroups} = get(ScorecardConfigStateSelector('dataSelection'))
+        const dataSources = flattenDeep(flattenDeep(dataGroups.map(({dataHolders}) => dataHolders))?.map(({dataSources}) => dataSources))?.map(({id}) => id)
+        const [orgUnit, dataSource, period] = key.split('-')
+        if (dataSource !== 'undefined') {
+            const data = find(get(ScorecardDataState({orgUnitId: orgUnit, periods, dataSources})), ({
+                                                                                                        dx,
+                                                                                                        pe,
+                                                                                                        ou
+                                                                                                    }) => {
+                return ou === orgUnit && dx === dataSource && pe === period
+            })
+            return _get(data, ['value'])
+        }
+        return null
     }
 })
 
@@ -103,7 +128,7 @@ const ScorecardConfigStateSelector = selectorFamily({
     },
     set: path => ({set, get}, newValue) => {
         const scorecardId = get(ScorecardIdState)
-         set(ScorecardConfState(scorecardId), prevState => _set(cloneDeep(prevState), path, newValue))
+        set(ScorecardConfState(scorecardId), prevState => _set(cloneDeep(prevState), path, newValue))
     }
 })
 
