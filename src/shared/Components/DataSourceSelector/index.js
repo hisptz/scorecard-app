@@ -26,7 +26,9 @@ const dataSourcesTypes = [
     {
         label: 'Data Sets',
         resource: 'dataSets',
-        type: 'dataSet'
+        type: 'dataSet',
+        groupKey: 'dataSets.id',
+        groupResource: 'dataSets'
     },
     {
         label: 'Program Indicators',
@@ -45,7 +47,8 @@ const dataSourcesTypes = [
         groupResource: 'programs',
         type: 'programDataItem'
 
-    },{
+    },
+    {
         label: 'Custom Functions',
         resource: 'dataStore/functions',
         type: 'customFunction'
