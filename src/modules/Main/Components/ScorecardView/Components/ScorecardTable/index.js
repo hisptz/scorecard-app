@@ -61,7 +61,7 @@ export default function ScorecardTable({
       .setPeriods(periods)
       .setOrgUnits([...(orgUnits || []), ...(childrenOrgUnits || [])])
       .setPeriodType(periodType)
-      .get();
+      .load();
   }
 
   const { show } = useAlert(
@@ -125,6 +125,7 @@ export default function ScorecardTable({
                   <ParentOrgUnitRow
                     key={`${orgUnit?.id}-row`}
                     orgUnit={orgUnit}
+                    scorecardDataEngine={scorecardDataEngine}
                   />
                 ))}
                 {childrenOrgUnits?.map((orgUnit) => (

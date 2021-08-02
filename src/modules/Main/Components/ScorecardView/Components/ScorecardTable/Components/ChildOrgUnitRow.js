@@ -58,6 +58,7 @@ export default function ChildOrgUnitRow({
                 orgUnitId={id}
                 dataSources={dataSources}
                 periodId={periodId}
+                scorecardDataEngine={scorecardDataEngine}
               />
             </td>
           ))

@@ -1,7 +1,11 @@
 import { flatten, uniqBy } from "lodash";
 import { Period } from "@iapps/period-utilities";
 import { Fn } from "@iapps/function-analytics";
+import { BehaviorSubject } from "rxjs";
+import { switchMap, filter, map } from "rxjs/operators";
 export default class ScorecardDataEngine {
+  _dataEntities$ = new BehaviorSubject({});
+  _loading$ = new BehaviorSubject();
   constructor() {
     if (!ScorecardDataEngine.instance) {
       ScorecardDataEngine.instance = this;
@@ -43,18 +47,53 @@ export default class ScorecardDataEngine {
     return this;
   }
 
-  get() {
+  load() {
     if (!this._loading && this._canLoadData()) {
       this._loading = true;
+      this._loading$.next(this._loading);
 
       this._getScorecardData({
         selectedOrgUnits: this._selectedOrgUnits.map((orgUnit) => orgUnit.id),
         selectedPeriods: this._selectedPeriods.map((period) => period.id),
         selectedData: this._selectedData,
-      }).then((res) => {
-        console.log(res);
-      });
+      })
+        .then((res) => {
+          this._loading = false;
+          this._loading$.next(this._loading);
+
+          (res || []).forEach((analytics) => {
+            (analytics?.rows || []).forEach((row) => {
+              const dataEntityId = `${row?.dx?.id}_${row?.ou?.id}_${row?.pe?.id}`;
+              this._dataEntities = {
+                ...(this._dataEntities || {}),
+                [dataEntityId]: row.value,
+              };
+            });
+
+            this._dataEntities$.next(this._dataEntities);
+          });
+        })
+        .catch((error) => {
+          this._loading = false;
+          this._loading$.next(this._loading);
+          this._loadingError = error;
+        });
     }
+  }
+
+  get loading$() {
+    return this._loading$.asObservable();
+  }
+
+  get dataEntities$() {
+    return this._dataEntities$.asObservable();
+  }
+
+  get(id) {
+    return this._loading$.asObservable().pipe(
+      filter((loading) => !loading),
+      map(() => (this._dataEntities ? this._dataEntities[id] : null))
+    );
   }
 
   _canLoadData() {
@@ -84,7 +123,6 @@ export default class ScorecardDataEngine {
         }),
       ])
         .then((res) => {
-          console.log(res);
           resolve(res);
         })
         .catch((error) => {
