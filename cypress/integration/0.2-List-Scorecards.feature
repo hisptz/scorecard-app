@@ -23,13 +23,15 @@ Feature: List Scorecards
     Scenario: Listing Scorecards on card view
         Given authorized department officer
         When opening a list of available scorecards
-        Then I should be presented with a "cards" of already configured scorecards
+        And choose to view scorecards in card orientation
+        Then I should be presented with a cards of already configured scorecards
 
     @focus
     Scenario: Listing Scorecards on thumbnail view
         Given authorized department officer
         When opening a list of available scorecards
-        Then I should be presented with a "thumbnails" of already configured scorecards
+        And choose to view scorecards in thumbnail orientation
+        Then I should be presented with a thumbnails of already configured scorecards
 
 
 
