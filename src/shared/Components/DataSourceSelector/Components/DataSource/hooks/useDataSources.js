@@ -5,21 +5,6 @@ import {useRecoilValueLoadable} from "recoil";
 import {CustomFunctionsState} from "../../../../../../core/state/customFunctions";
 
 
-const query = (resource) => ({
-    sources: {
-        resource,
-        params: ({page, filter}) => ({
-            page,
-            fields: [
-                'displayName',
-                'id'
-            ],
-            filter,
-            order: 'displayName:asc'
-        })
-    }
-})
-
 export default function useDataSources(selectedDataSourceType, selectedGroup) {
     const customFunctions = useRecoilValueLoadable(CustomFunctionsState)
     const [page, setPage] = useState(1);
@@ -78,8 +63,8 @@ export default function useDataSources(selectedDataSourceType, selectedGroup) {
                 setTotalPages(undefined)
                 setData([])
                 const response = await fetchData(1, keyword);
-                setData([...response.sources?.[selectedDataSourceType.resource]])
-                setTotalPages(response.sources.pager.pageCount)
+                setData([...response?.data])
+                setTotalPages(response.pager.pageCount)
                 setError(undefined)
             } catch (e) {
                 setError(e)
@@ -96,7 +81,7 @@ export default function useDataSources(selectedDataSourceType, selectedGroup) {
                     setLoading(true)
                     setPage(prevPage => prevPage + 1)
                     const response = await fetchData(page + 1);
-                    setData([...data, ...response.sources?.[selectedDataSourceType.resource]])
+                    setData([...data, ...response?.data])
                     setError(undefined)
                     setLoading(false)
                 } catch (e) {
@@ -108,18 +93,10 @@ export default function useDataSources(selectedDataSourceType, selectedGroup) {
     }
 
     async function fetchData(currentPage, searchKeyword) {
-        const filter = [];
-        const filterType = selectedDataSourceType.filterType || 'eq'
-        if (selectedGroup?.id) filter.push(`${selectedDataSourceType.groupKey}:eq:${selectedGroup.id}`)
-        if (selectedDataSourceType.resource === 'dataItems') filter.push(`dimensionItemType:${filterType}:${selectedDataSourceType.dimensionItemType}`)
-        if (searchKeyword) filter.push(`displayName:ilike:${searchKeyword}`)
-        const updatedQuery = query(selectedDataSourceType.resource);
-        return await engine.query(updatedQuery, {
-            variables: {
-                page: currentPage,
-                filter,
-            }
-        })
+        if (searchKeyword || selectedGroup) {
+            return await selectedDataSourceType.filter(engine, {page: currentPage, searchKeyword, selectedGroup})
+        }
+        return await selectedDataSourceType.getDataSources(engine, {page: currentPage})
     }
 
     useEffect(() => {
@@ -144,8 +121,8 @@ export default function useDataSources(selectedDataSourceType, selectedGroup) {
                         setTotalPages(undefined)
                         setData([])
                         const response = await fetchData(1);
-                        setData([...response.sources?.[selectedDataSourceType.resource]])
-                        setTotalPages(response.sources.pager.pageCount)
+                        setData(response?.data)
+                        setTotalPages(response?.pager.pageCount)
                         setError(undefined)
                     } catch (e) {
                         setLoading(false)
