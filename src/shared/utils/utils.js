@@ -48,3 +48,13 @@ export function generateLegendDefaults(legendDefinition = [], weight) {
     return []
 }
 
+export function updatePager(pager, itemListLength){
+    const {page, pageSize} = pager;
+
+    return {
+        page,
+        pageSize,
+        pageCount: Math.ceil(itemListLength/pageSize),
+        total: itemListLength
+    }
+}
