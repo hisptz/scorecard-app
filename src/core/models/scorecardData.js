@@ -1,10 +1,9 @@
-import { flatten, uniqBy } from "lodash";
+import { flatten, uniqBy, find } from "lodash";
 import { Period } from "@iapps/period-utilities";
 import { Fn } from "@iapps/function-analytics";
 import { BehaviorSubject } from "rxjs";
 import { switchMap, filter, map } from "rxjs/operators";
 export default class ScorecardDataEngine {
-  _dataEntities$ = new BehaviorSubject({});
   _loading$ = new BehaviorSubject();
   constructor() {
     if (!ScorecardDataEngine.instance) {
@@ -25,15 +24,26 @@ export default class ScorecardDataEngine {
   }
 
   setPeriods(periods) {
+    let previousPeriods = [];
     this._selectedPeriods = uniqBy(
-      flatten(
-        (periods || []).map((period) => {
-          const currentPeriod = new Period().getById(period.id);
-          return currentPeriod ? [period, currentPeriod.lastPeriod] : [period];
-        })
-      ),
+      (periods || []).map((period) => {
+        const currentPeriod = new Period().getById(period.id);
+        previousPeriods = [...previousPeriods, currentPeriod.lastPeriod];
+        return currentPeriod || period;
+      }),
       "id"
     );
+
+    previousPeriods.forEach((previousPeriod) => {
+      const currentPeriod = find(this._selectedPeriods, [
+        "id",
+        previousPeriod.id,
+      ]);
+
+      if (!currentPeriod) {
+        this._selectedPeriods = [...this._selectedPeriods, previousPeriod];
+      }
+    });
     return this;
   }
 
@@ -61,16 +71,35 @@ export default class ScorecardDataEngine {
           this._loading = false;
           this._loading$.next(this._loading);
 
-          (res || []).forEach((analytics) => {
-            (analytics?.rows || []).forEach((row) => {
-              const dataEntityId = `${row?.dx?.id}_${row?.ou?.id}_${row?.pe?.id}`;
-              this._dataEntities = {
-                ...(this._dataEntities || {}),
-                [dataEntityId]: row.value,
-              };
-            });
+          const rows = flatten(
+            (res || [])
+              .filter((analytics) => analytics)
+              .map((analytics) => {
+                return analytics.rows;
+              })
+          );
 
-            this._dataEntities$.next(this._dataEntities);
+          rows.forEach((row) => {
+            const dataEntityId = `${row?.dx?.id}_${row?.ou?.id}_${row?.pe?.id}`;
+            const previousPeriod = find(this._selectedPeriods, [
+              "id",
+              row?.pe?.id,
+            ])?.lastPeriod;
+
+            const previousPeriodRow = rows.find(
+              (previuosRow) =>
+                previuosRow?.dx?.id === row?.dx?.id &&
+                previuosRow?.ou?.id === row?.ou?.id &&
+                previuosRow?.pe?.id === previousPeriod?.id
+            );
+
+            this._dataEntities = {
+              ...(this._dataEntities || {}),
+              [dataEntityId]: {
+                current: row.value,
+                previous: previousPeriodRow?.value,
+              },
+            };
           });
         })
         .catch((error) => {
