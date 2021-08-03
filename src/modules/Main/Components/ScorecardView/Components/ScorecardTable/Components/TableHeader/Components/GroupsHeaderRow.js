@@ -3,11 +3,12 @@ import {debounce} from 'lodash'
 import PropTypes from 'prop-types'
 import React, {useEffect, useState} from "react";
 import {useRecoilState, useRecoilValue} from "recoil";
+import {PeriodResolverState} from "../../../../../../../../../core/state/period";
 import {ScorecardConfigStateSelector, ScorecardViewSelector} from "../../../../../../../../../core/state/scorecard";
 
 export default function GroupsHeaderRow({nested}) {
     const {dataGroups} = useRecoilValue(ScorecardConfigStateSelector('dataSelection')) ?? {}
-    const {periods} = useRecoilValue(ScorecardViewSelector('periodSelection')) ?? []
+    const periods = useRecoilValue(PeriodResolverState) ?? []
     const [keyword, setKeyword] = useRecoilState(ScorecardViewSelector('orgUnitSearchKeyword'))
 
     const [searchValue, setSearchValue] = useState(keyword);
