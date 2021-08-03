@@ -19,9 +19,7 @@ export default function ScorecardView() {
   const setScorecardIdState = useSetRecoilState(ScorecardIdState);
   const resetIdState = useResetRecoilState(ScorecardIdState);
   const resetViewState = useResetRecoilState(ScorecardViewState);
-  const { orgUnits } = useRecoilValue(
-    ScorecardViewSelector("orgUnitSelection")
-  );
+  const { orgUnits } = useRecoilValue(ScorecardViewSelector("orgUnitSelection"));
   const scorecardDataEngine = new ScorecardDataEngine();
 
   useEffect(() => {

@@ -1,51 +1,51 @@
-import { DataTableCell, DataTableRow } from "@dhis2/ui";
+import {DataTableCell, DataTableRow} from "@dhis2/ui";
 import PropTypes from "prop-types";
 import React from "react";
-import { useRecoilValue } from "recoil";
-import {
-  ScorecardConfigStateSelector,
-  ScorecardViewSelector,
-} from "../../../../../../../core/state/scorecard";
+import {useRecoilValue} from "recoil";
+import ScorecardDataEngine from "../../../../../../../core/models/scorecardData";
+import {PeriodResolverState} from "../../../../../../../core/state/period";
+import {ScorecardConfigStateSelector,} from "../../../../../../../core/state/scorecard";
 import OrgUnitContainer from "./OrgUnitContainer";
 import DataContainer from "./TableDataContainer";
 
-export default function ParentOrgUnitRow({ orgUnit, scorecardDataEngine }) {
-  const { id } = orgUnit ?? {};
-  const { dataGroups } =
+export default function ParentOrgUnitRow({orgUnit, scorecardDataEngine}) {
+    const {id} = orgUnit ?? {};
+    const {dataGroups} =
     useRecoilValue(ScorecardConfigStateSelector("dataSelection")) ?? {};
-  const { periods } =
-    useRecoilValue(ScorecardViewSelector("periodSelection")) ?? [];
+    const periods =
+    useRecoilValue(PeriodResolverState) ?? [];
 
-  return (
-    <DataTableRow key={id} bordered>
-      <DataTableCell fixed left={"0"} width={"50px"}>
-        &nbsp;
-      </DataTableCell>
-      <DataTableCell fixed left={"50px"} className="scorecard-org-unit-cell">
-        <OrgUnitContainer orgUnit={orgUnit} />
-      </DataTableCell>
-      {dataGroups?.map(({ id: groupId, dataHolders }) =>
-        dataHolders?.map(({ id: holderId, dataSources }) =>
-          periods?.map(({ id: periodId }) => (
-            <td
-              className="data-cell"
-              align="center"
-              key={`${groupId}-${holderId}-${periodId}`}
-            >
-              <DataContainer
-                orgUnitId={id}
-                dataSources={dataSources}
-                periodId={periodId}
-                scorecardDataEngine={scorecardDataEngine}
-              />
-            </td>
-          ))
-        )
-      )}
-    </DataTableRow>
-  );
+    return (
+        <DataTableRow key={id} bordered>
+            <DataTableCell fixed left={"0"} width={"50px"}>
+                &nbsp;
+            </DataTableCell>
+            <DataTableCell fixed left={"50px"} className="scorecard-org-unit-cell">
+                <OrgUnitContainer orgUnit={orgUnit}/>
+            </DataTableCell>
+            {dataGroups?.map(({id: groupId, dataHolders}) =>
+                dataHolders?.map(({id: holderId, dataSources}) =>
+                    periods?.map(({id: periodId}) => (
+                        <td
+                            className="data-cell"
+                            align="center"
+                            key={`${groupId}-${holderId}-${periodId}`}
+                        >
+                            <DataContainer
+                                orgUnitId={id}
+                                dataSources={dataSources}
+                                periodId={periodId}
+                                scorecardDataEngine={scorecardDataEngine}
+                            />
+                        </td>
+                    ))
+                )
+            )}
+        </DataTableRow>
+    );
 }
 
 ParentOrgUnitRow.propTypes = {
-  orgUnit: PropTypes.object.isRequired,
+    orgUnit: PropTypes.object.isRequired,
+    scorecardDataEngine: PropTypes.instanceOf(ScorecardDataEngine)
 };

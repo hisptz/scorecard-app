@@ -4,7 +4,9 @@ import { head, isEmpty } from "lodash";
 import PropTypes from "prop-types";
 import React, { Fragment, useEffect, useMemo, useState } from "react";
 import { useRecoilValue } from "recoil";
-import ScorecardConfState, {
+import ScorecardDataEngine from "../../../../../../core/models/scorecardData";
+import {PeriodResolverState} from "../../../../../../core/state/period";
+import {
   ScorecardConfigStateSelector,
   ScorecardViewSelector,
 } from "../../../../../../core/state/scorecard";
@@ -32,8 +34,8 @@ export default function ScorecardTable({
   const { periodType } =
     useRecoilValue(ScorecardConfigStateSelector("periodType")) ?? {};
 
-  const { periods } =
-    useRecoilValue(ScorecardViewSelector("periodSelection")) ?? [];
+  const periods  =
+    useRecoilValue(PeriodResolverState) ?? [];
   const searchKeyword = useRecoilValue(
     ScorecardViewSelector("orgUnitSearchKeyword")
   );
@@ -54,15 +56,6 @@ export default function ScorecardTable({
     setKeyword,
     error: searchError,
   } = useSearchOrganisationUnit();
-
-  if (!loading && !error) {
-    scorecardDataEngine
-      .setDataGroups(dataGroups)
-      .setPeriods(periods)
-      .setOrgUnits([...(orgUnits || []), ...(childrenOrgUnits || [])])
-      .setPeriodType(periodType)
-      .load();
-  }
 
   const { show } = useAlert(
     ({ message }) => message,
@@ -104,6 +97,21 @@ export default function ScorecardTable({
       });
     }
   }, [error, searchError]);
+
+  useEffect(() => {
+
+    if (!loading && !error) {
+      scorecardDataEngine
+          .setDataGroups(dataGroups)
+          .setPeriods(periods)
+          .setOrgUnits([...(orgUnits || []), ...(childrenOrgUnits || [])])
+          .setPeriodType(periodType)
+          .load();
+    }
+    return () => {
+
+    };
+  }, [dataGroups, orgUnits, childrenOrgUnits, periodType]);
 
   return (
     <div className="w-100 pb-32 flex-1">
@@ -149,4 +157,5 @@ export default function ScorecardTable({
 ScorecardTable.propTypes = {
   nested: PropTypes.bool.isRequired,
   orgUnits: PropTypes.arrayOf(PropTypes.object).isRequired,
+  scorecardDataEngine: PropTypes.instanceOf(ScorecardDataEngine)
 };

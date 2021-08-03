@@ -1,15 +1,16 @@
-import { flatten, uniqBy, find } from "lodash";
-import { Period } from "@iapps/period-utilities";
 import { Fn } from "@iapps/function-analytics";
+import { Period } from "@iapps/period-utilities";
+import { flatten, uniqBy, find } from "lodash";
 import { BehaviorSubject } from "rxjs";
-import { switchMap, filter, map } from "rxjs/operators";
+import { filter, map } from "rxjs/operators";
+
+
 export default class ScorecardDataEngine {
   _loading$ = new BehaviorSubject();
   constructor() {
     if (!ScorecardDataEngine.instance) {
       ScorecardDataEngine.instance = this;
     }
-
     return ScorecardDataEngine.instance;
   }
 
@@ -25,10 +26,11 @@ export default class ScorecardDataEngine {
 
   setPeriods(periods) {
     let previousPeriods = [];
+    console.log(periods)
     this._selectedPeriods = uniqBy(
       (periods || []).map((period) => {
-        const currentPeriod = new Period().getById(period.id);
-        previousPeriods = [...previousPeriods, currentPeriod.lastPeriod];
+        const currentPeriod = new Period().getById(period?.id);
+        previousPeriods = [...previousPeriods, currentPeriod?.lastPeriod];
         return currentPeriod || period;
       }),
       "id"
@@ -37,9 +39,8 @@ export default class ScorecardDataEngine {
     previousPeriods.forEach((previousPeriod) => {
       const currentPeriod = find(this._selectedPeriods, [
         "id",
-        previousPeriod.id,
+        previousPeriod?.id,
       ]);
-
       if (!currentPeriod) {
         this._selectedPeriods = [...this._selectedPeriods, previousPeriod];
       }
@@ -61,10 +62,9 @@ export default class ScorecardDataEngine {
     if (!this._loading && this._canLoadData()) {
       this._loading = true;
       this._loading$.next(this._loading);
-
       this._getScorecardData({
-        selectedOrgUnits: this._selectedOrgUnits.map((orgUnit) => orgUnit.id),
-        selectedPeriods: this._selectedPeriods.map((period) => period.id),
+        selectedOrgUnits: this._selectedOrgUnits.map((orgUnit) => orgUnit?.id),
+        selectedPeriods: this._selectedPeriods.map((period) => period?.id),
         selectedData: this._selectedData,
       })
         .then((res) => {
