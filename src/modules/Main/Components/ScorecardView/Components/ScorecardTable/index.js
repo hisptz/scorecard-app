@@ -18,16 +18,16 @@ import TableHeader from "./Components/TableHeader";
 import TableLoader from "./Components/TableLoader";
 import {getTableWidth} from "./services/utils";
 
+
 export default function ScorecardTable({orgUnits, nested}) {
     const {width: screenWidth} = useMediaQuery()
     const {dataGroups} = useRecoilValue(ScorecardConfigStateSelector('dataSelection')) ?? {}
     const periods = useRecoilValue(PeriodResolverState) ?? []
     const searchKeyword = useRecoilValue(ScorecardViewSelector('orgUnitSearchKeyword'))
     const tableWidth = useMemo(() => {
-        console.log({periodLength: periods.length})
         return getTableWidth(periods, dataGroups, screenWidth)
     }, [periods, dataGroups]);
-    console.log(tableWidth)
+
     const {loading, error, orgUnits: childrenOrgUnits, setId} = useOrganisationUnitChildren()
     const {
         orgUnits: searchResults,
@@ -68,6 +68,7 @@ export default function ScorecardTable({orgUnits, nested}) {
             show({message: searchError?.message ?? searchError?.details, type: {info: true}})
         }
     }, [error, searchError])
+
 
     return (
         <div className='w-100 pb-32 flex-1'>

@@ -1,9 +1,9 @@
 import {DataTableCell, DataTableRow} from "@dhis2/ui";
 import PropTypes from 'prop-types'
 import React from 'react'
-import {useRecoilValue} from "recoil";
+import {useRecoilValue, useRecoilValueLoadable} from "recoil";
 import {PeriodResolverState} from "../../../../../../../core/state/period";
-import {ScorecardConfigStateSelector} from "../../../../../../../core/state/scorecard";
+import {ScorecardConfigStateSelector, ScorecardDataState} from "../../../../../../../core/state/scorecard";
 import OrgUnitContainer from "./OrgUnitContainer";
 import DataContainer from "./TableDataContainer";
 
@@ -11,6 +11,7 @@ export default function ParentOrgUnitRow({orgUnit}) {
     const {id} = orgUnit ?? {};
     const {dataGroups} = useRecoilValue(ScorecardConfigStateSelector('dataSelection')) ?? {}
     const periods = useRecoilValue(PeriodResolverState) ?? []
+    const data = useRecoilValueLoadable(ScorecardDataState(id))
     return (
         <DataTableRow key={id}
                       bordered>
@@ -21,7 +22,7 @@ export default function ParentOrgUnitRow({orgUnit}) {
                 <OrgUnitContainer orgUnit={orgUnit}/>
             </DataTableCell>
             {
-                dataGroups?.map(({id: groupId, dataHolders}) => (
+                data.state === 'hasValue' ? dataGroups?.map(({id: groupId, dataHolders}) => (
                     dataHolders?.map(({id: holderId, dataSources}) => (
                         periods?.map(({id: periodId}) => (
                             <td className='data-cell' align='center'
@@ -31,7 +32,7 @@ export default function ParentOrgUnitRow({orgUnit}) {
                             </td>
                         ))
                     ))
-                ))
+                )) : null
             }
         </DataTableRow>
     )

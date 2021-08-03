@@ -9,8 +9,8 @@ import LoadingCell from "./Components/LoadingCell";
 
 export default function DataContainer({dataSources, orgUnitId, periodId}) {
     const [top, bottom] = dataSources ?? [];
-    const topData = useRecoilValueLoadable(ScorecardDataStateSelector(`${orgUnitId}-${top.id}-${periodId}`))
-    const bottomData = useRecoilValueLoadable(ScorecardDataStateSelector(`${orgUnitId}-${bottom?.id}-${periodId}`))
+    const topData = useRecoilValueLoadable(ScorecardDataStateSelector({orgUnit: orgUnitId, period: periodId, dataSource: top?.id}))
+    const bottomData = useRecoilValueLoadable(ScorecardDataStateSelector({orgUnit: orgUnitId, period: periodId, dataSource: bottom?.id}))
     const {color: topColor} = getLegend(topData.contents, top?.legends) ?? {}
     const {color: bottomColor} = getLegend(bottomData.contents, bottom?.legends) ?? {}
 

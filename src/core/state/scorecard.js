@@ -12,7 +12,6 @@ import ScorecardOptions from "../models/scorecardOptions";
 import {EngineState} from "./engine";
 import {PeriodResolverState} from "./period";
 
-
 const defaultValue = {
     legendDefinitions: [
         {
@@ -78,39 +77,36 @@ const ScorecardConfState = atomFamily({
     })
 })
 
-const ScorecardDataState = atomFamily({
+
+const ScorecardDataState = selectorFamily({
     key: 'scorecard-data-state',
-    default: {},
-    effects_UNSTABLE: ({orgUnitId, periods, dataSources}) => [
-        ({setSelf}) => {
-            const analyticsPromise = getScorecardCellData({
-                orgUnit: orgUnitId,
-                periods: periods.map(({id}) => id),
-                dataSources
-            }).then(({_data: analytics}) => {
-                const rows = analytics?.rows;
-                return rows?.map((row) =>
-                    zipObjectDeep(analytics?.headers
-                        ?.map(({name}) => name), row))
-            })
-            setSelf(analyticsPromise)
+    get: (orgUnitId) => async ({get}) => {
+        const periods = get(PeriodResolverState)
+        const {dataGroups} = get(ScorecardConfigStateSelector('dataSelection'))
+        const dataSources = flattenDeep(flattenDeep(dataGroups.map(({dataHolders}) => dataHolders))?.map(({dataSources}) => dataSources))?.map(({id}) => id)
+        const {_data: analytics} = await getScorecardCellData({
+            orgUnit: orgUnitId,
+            periods: periods.map(({id}) => id),
+            dataSources
+        })
+        if (analytics) {
+            const rows = analytics?.rows;
+            return rows?.map((row) =>
+                zipObjectDeep(analytics?.headers
+                    ?.map(({name}) => name), row))
         }
-    ]
+    }
 })
 
 const ScorecardDataStateSelector = selectorFamily({
     key: 'scorecardDataStateSelectorFamily',
-    get: (key) => ({get}) => {
-        const periods = get(PeriodResolverState)
-        const {dataGroups} = get(ScorecardConfigStateSelector('dataSelection'))
-        const dataSources = flattenDeep(flattenDeep(dataGroups.map(({dataHolders}) => dataHolders))?.map(({dataSources}) => dataSources))?.map(({id}) => id)
-        const [orgUnit, dataSource, period] = key.split('-')
+    get: ({orgUnit, period, dataSource}) => ({get}) => {
         if (dataSource !== 'undefined') {
-            const data = find(get(ScorecardDataState({orgUnitId: orgUnit, periods, dataSources})), ({
-                                                                                                        dx,
-                                                                                                        pe,
-                                                                                                        ou
-                                                                                                    }) => {
+            const data = find(get(ScorecardDataState(orgUnit)), ({
+                                                                     dx,
+                                                                     pe,
+                                                                     ou
+                                                                 }) => {
                 return ou === orgUnit && dx === dataSource && pe === period
             })
             return _get(data, ['value'])
@@ -176,5 +172,5 @@ export {
     ScorecardViewSelector,
     ScorecardDataState,
     ScorecardDataStateSelector,
-    ScorecardForceUpdateState
+    ScorecardForceUpdateState,
 }

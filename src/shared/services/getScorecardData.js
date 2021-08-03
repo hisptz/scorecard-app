@@ -42,7 +42,6 @@ function _getScorecardData(selections) {
             }),
         ])
             .then((res) => {
-                console.log(res);
                 resolve(res);
             })
             .catch((error) => {
