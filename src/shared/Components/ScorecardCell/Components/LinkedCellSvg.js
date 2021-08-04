@@ -12,18 +12,23 @@ export default function LinkedCellSvg({
                                           bottomStatus,
                                       }) {
 
+    const width = 150;
+    const height = 47;
+    const fontSize = 14;
+    const padding = 12;
+
     return (
-        <svg width={200} height={47} viewBox="0 0 200 47" style={{display: 'block'}}>
-            <polygon points={`0,0 0,47 200, 0`}
+        <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} style={{display: 'block'}}>
+            <polygon points={`0,0 0,${height} ${width}, 0`}
                      style={{fill: topColor ?? '#FFFFFF', strokeWidth: 1, stroke: 'rgb(232, 237, 242)'}}/>
-            <text fontSize={14} x={10} y={23}>{topValue}</text>
-            {topStatus && (topStatus === 'increasing' ? <IncreasingArrows y={9} x={34}/> : topStatus === 'decreasing' ?
-                <DecreasingArrows y={23} x={34}/>: null)}
-            <polygon points={`200,0 200,47 0,47`}
+            <text fontSize={fontSize} x={padding + fontSize} y={fontSize + padding}>{topValue}</text>
+            {topStatus && (topStatus === 'increasing' ? <IncreasingArrows y={padding} x={padding}/> :
+                <DecreasingArrows  y={padding + fontSize} x={padding}/>)}
+            <polygon points={`${width},0 ${width},${height} 0,${height}`}
                      style={{fill: bottomColor ?? '#FFFFFF', strokeWidth: 1, stroke: 'rgb(232, 237, 242)'}}/>
-            <text fontSize={14} x={170} y="75%">{bottomValue}</text>
-            {bottomStatus && (bottomStatus === 'increasing' ? <IncreasingArrows y={21} x={160}/> : bottomStatus === 'decreasing' ?
-                <DecreasingArrows y={35} x={160}/>: null) }
+            <text fontSize={fontSize} x={width/2 + padding} y={height - padding}>{bottomValue}</text>
+            {bottomStatus && (bottomStatus === 'increasing' ? <IncreasingArrows y={height - (fontSize + padding)} x={width - padding}/> :
+                <DecreasingArrows y={height - padding} x={width - padding}/>)}
         </svg>
     )
 }

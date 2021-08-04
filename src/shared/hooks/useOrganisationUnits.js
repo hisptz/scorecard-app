@@ -24,7 +24,7 @@ export function useOrganisationUnitChildren(orgUnitId = '') {
         }
     }, [id]);
     return {
-        orgUnits: id ? data?.orgUnit?.children : [],
+        orgUnits: id ? data?.orgUnit?.children ?? [] : [],
         loading,
         error,
         setId
@@ -50,6 +50,11 @@ const orgUnitSearchQuery = {
         params: ({keyword}) => ({
             filter: [
                 `id:ilike:${keyword}`
+            ],
+            fields: [
+                'id',
+                'displayName',
+                'path'
             ]
         })
     },
