@@ -1,8 +1,8 @@
 import React, {Suspense, useEffect} from "react";
 import {useParams} from "react-router-dom";
 import {useRecoilValue, useResetRecoilState, useSetRecoilState} from "recoil";
+import ScorecardDataEngine from "../../../../core/models/scorecardData";
 import {
-    scorecardDataEngine,
     ScorecardIdState,
     ScorecardViewSelector,
     ScorecardViewState,
@@ -20,7 +20,7 @@ export default function ScorecardView() {
     const resetIdState = useResetRecoilState(ScorecardIdState);
     const resetViewState = useResetRecoilState(ScorecardViewState);
     const {orgUnits} = useRecoilValue(ScorecardViewSelector("orgUnitSelection"));
-
+    const scorecardDataEngine = new ScorecardDataEngine()
     useEffect(() => {
         setScorecardIdState(scorecardId);
         return () => {

@@ -3,7 +3,7 @@ import {DataTable, DataTableBody,} from '@dhis2/ui'
 import {head, isEmpty} from 'lodash'
 import PropTypes from 'prop-types'
 import React, {Fragment, useEffect, useMemo, useState} from 'react'
-import {useRecoilValue, waitForAll, waitForNone} from "recoil";
+import {useRecoilValue, waitForAll} from "recoil";
 import {PeriodResolverState} from "../../../../../../core/state/period";
 import {
     ScorecardConfigStateSelector,

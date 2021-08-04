@@ -3,7 +3,6 @@ import {selectorFamily} from "recoil";
 import {EngineState} from "./engine";
 const {atomFamily} = require("recoil");
 
-
 const orgUnitQuery = {
     orgUnit: {
         resource: 'organisationUnits',
