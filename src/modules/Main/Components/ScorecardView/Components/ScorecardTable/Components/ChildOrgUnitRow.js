@@ -1,10 +1,10 @@
 import {DataTableCell, DataTableRow} from "@dhis2/ui";
 import PropTypes from "prop-types";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {useRecoilValue} from "recoil";
 import ScorecardDataEngine from "../../../../../../../core/models/scorecardData";
 import {PeriodResolverState} from "../../../../../../../core/state/period";
-import {ScorecardConfigStateSelector,} from "../../../../../../../core/state/scorecard";
+import {ScorecardConfigStateSelector, ScorecardViewSelector,} from "../../../../../../../core/state/scorecard";
 import ScorecardTable from "../index";
 import OrgUnitContainer from "./OrgUnitContainer";
 import DataContainer from "./TableDataContainer";
@@ -15,12 +15,21 @@ export default function ChildOrgUnitRow({
                                             onExpand,
                                             scorecardDataEngine,
                                         }) {
+    const {emptyRows} = useRecoilValue(ScorecardViewSelector('options'))
+    const [isEmpty, setIsEmpty] = useState(false);
     const {id} = orgUnit ?? {};
     const {dataGroups} =
     useRecoilValue(ScorecardConfigStateSelector("dataSelection")) ?? {};
     const periods =
         useRecoilValue(PeriodResolverState) ?? [];
-    return (
+    useEffect(() => {
+        const rowStatusSub = scorecardDataEngine.isRowEmpty(orgUnit).subscribe(setIsEmpty)
+        return () => {
+            rowStatusSub.unsubscribe()
+        }
+    }, [orgUnit])
+
+    return ( (emptyRows || !isEmpty) &&
         <DataTableRow
             expanded={id === expandedOrgUnit}
             onExpandToggle={() => {

@@ -43,7 +43,7 @@ export default function DataContainer({
         }
     }, [orgUnitId, periodId, top, bottom]);
 
-    return loading ? <LoadingCell/> : dataSources?.length > 1 ? (
+    return (loading && !topData) ? <LoadingCell/> : dataSources?.length > 1 ? (
         <LinkedDataCell bottomData={bottomData} topData={topData} bottomColor={bottomColor} topColor={topColor}/>
     ) : (
         <SingleDataCell data={topData} color={topColor}/>

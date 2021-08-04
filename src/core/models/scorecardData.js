@@ -1,6 +1,6 @@
 import {Fn} from "@iapps/function-analytics";
 import {Period} from "@iapps/period-utilities";
-import {find, flatten, uniqBy} from "lodash";
+import {find, flatten, uniqBy, mapValues, isEmpty} from "lodash";
 import {BehaviorSubject} from "rxjs";
 import {filter, map} from "rxjs/operators";
 
@@ -107,6 +107,16 @@ export default class ScorecardDataEngine {
         }
     }
 
+    isRowEmpty(orgUnit){
+       return this._loading$.asObservable().pipe(filter(loading=>!loading), map(()=>{
+           const data = this._dataEntities;
+           const rows = flatten(Object.values(mapValues(data, (value, key)=>{
+               if(key.match(RegExp(orgUnit))) return value;
+           })))
+           console.log(rows)
+           return isEmpty(rows)
+       }))
+    }
 
     get loading$() {
         return this._loading$.asObservable();
