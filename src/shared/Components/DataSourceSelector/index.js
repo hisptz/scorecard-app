@@ -3,10 +3,13 @@ import PropTypes from 'prop-types'
 import React, {useState} from 'react'
 import DataSource from "./Components/DataSource";
 import GroupSelector from "./Components/GroupSelector";
+import CustomFunctions from "./models/customFunctions";
+import DataSets from "./models/dataSets";
+import NativeDataSource from "./models/nativeDataSource";
 
 
 //TODO: Store in datastore
-const dataSourcesTypes = [
+const nativeDataSources = [
     {
         label: 'Indicators',
         resource: 'indicators',
@@ -22,11 +25,6 @@ const dataSourcesTypes = [
         dimensionItemType: 'DATA_ELEMENT',
         groupKey: 'dataElementGroups.id',
         type: 'dataElement'
-    },
-    {
-        label: 'Data Sets',
-        resource: 'dataSets',
-        type: 'dataSet'
     },
     {
         label: 'Program Indicators',
@@ -45,15 +43,13 @@ const dataSourcesTypes = [
         groupResource: 'programs',
         type: 'programDataItem'
 
-    },{
-        label: 'Custom Functions',
-        resource: 'dataStore/functions',
-        type: 'customFunction'
-    }
-]
+    },
+].map(source => new NativeDataSource(source))
+const dataSetConfig = new DataSets({label: 'Data Sets'})
+const customFunctionsConfig = new CustomFunctions({label: 'Custom Functions'})
 
 export default function DataSourceSelector({onSubmit, disabled}) {
-    const [selectedDataSourceType, setSelectedDataSourceType] = useState(dataSourcesTypes[0]);
+    const [selectedDataSourceType, setSelectedDataSourceType] = useState(nativeDataSources[0]);
     const [selectedGroup, setSelectedGroup] = useState();
     const [selectedDataSources, setSelectedDataSources] = useState([]);
     const onGroupChange = (group) => {
@@ -75,10 +71,19 @@ export default function DataSourceSelector({onSubmit, disabled}) {
             <div className='column container-bordered'>
                 <div className='row p-16 wrap'>
                     {
-                        dataSourcesTypes.map(source => <Chip onClick={() => onDataSourceTypeChange(source)}
-                                                             selected={selectedDataSourceType.label === source.label}
-                                                             key={`chip-${source.label}`}>{source.label}</Chip>)
+                        nativeDataSources.map(source => <Chip
+                            onClick={() => onDataSourceTypeChange(source)}
+                            selected={selectedDataSourceType.label === source.label}
+                            key={`chip-${source.label}`}>{source.label}</Chip>)
                     }
+                    <Chip onClick={() => onDataSourceTypeChange(dataSetConfig)}
+                          selected={selectedDataSourceType.label === dataSetConfig.label}>
+                        {dataSetConfig.label}
+                    </Chip>
+                    <Chip onClick={() => onDataSourceTypeChange(customFunctionsConfig)}
+                          selected={selectedDataSourceType.label === customFunctionsConfig.label}>
+                        {customFunctionsConfig.label}
+                    </Chip>
                 </div>
                 <div className='column start w-100 p-16'>
                     <GroupSelector selectedGroup={selectedGroup} onSelect={onGroupChange}

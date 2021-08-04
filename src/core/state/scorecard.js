@@ -1,6 +1,6 @@
-import {Period} from "@iapps/period-utilities";
-import {cloneDeep, find, flattenDeep, get as _get, set as _set, zipObjectDeep} from "lodash";
-import {atom, atomFamily, selector, selectorFamily} from "recoil";
+import { Period } from "@iapps/period-utilities";
+import { cloneDeep, find,flattenDeep, get as _get, set as _set , zipObjectDeep} from "lodash";
+import { atom, atomFamily, selector, selectorFamily } from "recoil";
 import getScorecard from "../../shared/services/getScorecard";
 import getScorecardCellData from "../../shared/services/getScorecardCellData";
 import getScorecardSummary from "../../shared/services/getScorecardSummary";
@@ -9,7 +9,7 @@ import OrgUnitSelection from "../models/orgUnitSelection";
 import Scorecard from "../models/scorecard";
 import ScorecardAccess from "../models/scorecardAccess";
 import ScorecardOptions from "../models/scorecardOptions";
-import {EngineState} from "./engine";
+import { EngineState } from "./engine";
 import {PeriodResolverState} from "./period";
 
 const defaultValue = {

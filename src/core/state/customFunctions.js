@@ -1,4 +1,3 @@
-import {useDataEngine} from "@dhis2/app-runtime";
 import {atom, selector} from "recoil";
 import getCustomFunctions from "../../shared/services/getCustomFunctions";
 import {EngineState} from "./engine";
@@ -13,9 +12,9 @@ export const CustomFunctionsKeysState = atom({
     key: 'customFunctionsKeys',
     default: selector({
         key: 'customFunctionKeysSelector',
-        get: async () => {
+        get: async ({get}) => {
             try {
-                const engine = useDataEngine();
+                const engine = get(EngineState);
                 const {keys} = await engine.query(customFunctionsKeysQuery)
                 if (keys) return keys;
                 return []
