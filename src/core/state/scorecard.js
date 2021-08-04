@@ -102,14 +102,26 @@ const ScorecardDataStateSelector = selectorFamily({
     key: 'scorecardDataStateSelectorFamily',
     get: ({orgUnit, period, dataSource}) => ({get}) => {
         if (dataSource !== 'undefined') {
-            const data = find(get(ScorecardDataState(orgUnit)), ({
+            const currentData = find(get(ScorecardDataState(orgUnit)), ({
                                                                      dx,
                                                                      pe,
                                                                      ou
                                                                  }) => {
                 return ou === orgUnit && dx === dataSource && pe === period
             })
-            return _get(data, ['value'])
+            const previousData = find(get(ScorecardDataState(orgUnit)), ({
+                                                                     dx,
+                                                                     pe,
+                                                                     ou
+                                                                 }) => {
+                const previousPeriod = new Period().getById(period).lastPeriod;
+                return ou === orgUnit && dx === dataSource && pe === previousPeriod?.id
+            })
+
+            return {
+                current: _get(currentData, ['value']),
+                previous: _get(previousData, ['value'])
+            }
         }
         return null
     }

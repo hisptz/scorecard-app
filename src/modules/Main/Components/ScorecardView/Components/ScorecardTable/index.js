@@ -3,9 +3,13 @@ import {DataTable, DataTableBody,} from '@dhis2/ui'
 import {head, isEmpty} from 'lodash'
 import PropTypes from 'prop-types'
 import React, {Fragment, useEffect, useMemo, useState} from 'react'
-import {useRecoilValue} from "recoil";
+import {useRecoilValue, waitForAll, waitForNone} from "recoil";
 import {PeriodResolverState} from "../../../../../../core/state/period";
-import {ScorecardConfigStateSelector, ScorecardViewSelector} from "../../../../../../core/state/scorecard";
+import {
+    ScorecardConfigStateSelector,
+    ScorecardDataState,
+    ScorecardViewSelector
+} from "../../../../../../core/state/scorecard";
 import useMediaQuery from "../../../../../../shared/hooks/useMediaQuery";
 import {
     useOrganisationUnitChildren,
@@ -43,6 +47,9 @@ export default function ScorecardTable({orgUnits, nested}) {
         }
         return orgUnits;
     }, [searchResults, orgUnits, searchKeyword]);
+
+    const data = waitForAll([...filteredOrgUnits, ...(childrenOrgUnits ?? [])].map(({id}) => ScorecardDataState(id)))
+    console.log(data)
 
     useEffect(() => {
         if (!isEmpty(searchKeyword)) {

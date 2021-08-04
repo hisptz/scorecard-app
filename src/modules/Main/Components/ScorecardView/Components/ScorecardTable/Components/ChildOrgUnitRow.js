@@ -7,6 +7,7 @@ import {ScorecardConfigStateSelector, ScorecardDataState} from "../../../../../.
 import ScorecardTable from "../index";
 import OrgUnitContainer from "./OrgUnitContainer";
 import DataContainer from "./TableDataContainer";
+import LoadingCell from "./TableDataContainer/Components/LoadingCell";
 
 export default function ChildOrgUnitRow({orgUnit, expandedOrgUnit, onExpand}) {
     const {id} = orgUnit ?? {};
@@ -33,6 +34,18 @@ export default function ChildOrgUnitRow({orgUnit, expandedOrgUnit, onExpand}) {
             <DataTableCell fixed left={"50px"}>
                 <OrgUnitContainer orgUnit={orgUnit}/>
             </DataTableCell>
+            {
+                data.state === 'loading' && dataGroups?.map(({id: groupId, dataHolders}) => (
+                    dataHolders?.map(({id: holderId}) => (
+                        periods?.map(({id: periodId}) => (
+                            <td className='data-cell' align='center'
+                                key={`${groupId}-${holderId}-${periodId}`}>
+                                <LoadingCell/>
+                            </td>
+                        ))
+                    ))
+                ))
+            }
             {
                 data.state === 'hasValue' ? dataGroups?.map(({id: groupId, dataHolders}) => (
                     dataHolders?.map(({id: holderId, dataSources}) => (
