@@ -5,9 +5,13 @@ import SingleCellSvg from "../../../../../../../../../shared/Components/Scorecar
 
 export function SingleDataCell({data, color}) {
     const {current, previous} = data ?? {};
-    const increasing = useMemo(() => current > previous, [current, previous]);
+    const increasing = useMemo(() => {
+        if (current > previous) return 'increasing'
+        if (current < previous) return 'decreasing'
+        return null
+    }, [current, previous]);
     return (
-        <SingleCellSvg status={increasing ? 'increasing' : 'decreasing'} value={`${current ?? ''}`} color={color}/>
+        <SingleCellSvg status={increasing} value={`${current ?? ''}`} color={color}/>
     )
 }
 
@@ -21,8 +25,16 @@ export function LinkedDataCell({topData, bottomData, topColor, bottomColor}) {
     const {current: topCurrent, previous: topPrevious} = topData ?? {};
     const {current: bottomCurrent, previous: bottomPrevious} = bottomData ?? {};
 
-    const topIncreasing = useMemo(() => topCurrent > topPrevious, [topCurrent, topPrevious]);
-    const bottomIncreasing = useMemo(() => bottomCurrent > bottomPrevious, [bottomCurrent, bottomPrevious]);
+    const topIncreasing = useMemo(() => {
+        if (topCurrent > topPrevious) return 'increasing'
+        if (topCurrent < topPrevious) return 'decreasing'
+        return null
+    }, [topCurrent, topPrevious]);
+    const bottomIncreasing = useMemo(() => {
+        if (bottomCurrent > bottomPrevious) return 'increasing'
+        if (bottomCurrent < bottomPrevious) return 'decreasing'
+        return null
+    }, [bottomCurrent, bottomPrevious]);
 
     return (
         <LinkedCellSvg
@@ -30,8 +42,8 @@ export function LinkedDataCell({topData, bottomData, topColor, bottomColor}) {
             topColor={topColor}
             bottomValue={bottomCurrent}
             bottomColor={bottomColor}
-            topStatus={topIncreasing ? 'increasing' : 'decreasing'}
-            bottomStatus={bottomIncreasing ? 'increasing' : 'decreasing'}
+            topStatus={topIncreasing}
+            bottomStatus={bottomIncreasing}
         />
     )
 }

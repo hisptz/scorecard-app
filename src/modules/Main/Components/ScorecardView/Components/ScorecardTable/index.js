@@ -104,15 +104,12 @@ export default function ScorecardTable({
           scorecardDataEngine
               .setDataGroups(dataGroups)
               .setPeriods(periods)
-              .setOrgUnits([...(orgUnits || []), ...(childrenOrgUnits || [])])
+              .setOrgUnits([...(filteredOrgUnits ?? []), ...(childrenOrgUnits ?? [])])
               .setPeriodType(periodType)
               .load();
       }
     }
-    return () => {
-
-    };
-  }, [dataGroups, orgUnits, childrenOrgUnits, periodType]);
+  }, [dataGroups, filteredOrgUnits, childrenOrgUnits, periodType]);
 
   return (
     <div className="w-100 pb-32 flex-1">

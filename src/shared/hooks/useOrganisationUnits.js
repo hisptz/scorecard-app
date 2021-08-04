@@ -50,6 +50,11 @@ const orgUnitSearchQuery = {
         params: ({keyword}) => ({
             filter: [
                 `id:ilike:${keyword}`
+            ],
+            fields: [
+                'id',
+                'displayName',
+                'path'
             ]
         })
     },
