@@ -3,6 +3,7 @@ import React, {useEffect, useState} from "react";
 import ScorecardDataEngine from "../../../../../../../../core/models/scorecardData";
 import {getLegend} from "../../../../../../../Admin/Components/ScoreCardManagement/Components/DataConfiguration/utils";
 import {LinkedDataCell, SingleDataCell} from "./Components/DataCells";
+import LoadingCell from "./Components/LoadingCell";
 
 export default function DataContainer({
                                           dataSources,
@@ -10,29 +11,39 @@ export default function DataContainer({
                                           periodId,
                                           scorecardDataEngine,
                                       }) {
+    const [loading, setLoading] = useState(false);
     const [topData, setTopData] = useState();
     const [bottomData, setBottomData] = useState();
     const [top, bottom] = dataSources ?? [];
     const {color: topColor} = getLegend(topData?.current, top?.legends) ?? {};
     const {color: bottomColor} = getLegend(bottomData?.current, bottom?.legends) ?? {};
 
+
+    const topKey = `${top.id}_${orgUnitId}_${periodId}`
+    const bottomKey = `${bottom?.id}_${orgUnitId}_${periodId}`
+
     useEffect(() => {
-        const topKey = `${top.id}_${orgUnitId}_${periodId}`
-        const bottomKey = `${bottom?.id}_${orgUnitId}_${periodId}`
+        const loadingSub = scorecardDataEngine.loading$.subscribe(setLoading)
+        return () => {
+            loadingSub.unsubscribe();
+        };
+    }, [orgUnitId, periodId, top, bottom]);
+
+    useEffect(() => {
         const topSub = scorecardDataEngine
             .get(topKey)
             .subscribe(setTopData);
         const bottomSub = scorecardDataEngine
             .get(bottomKey)
             .subscribe(setBottomData);
-
+        //Cleanup
         return () => {
             topSub.unsubscribe()
             bottomSub.unsubscribe();
         }
-    }, [orgUnitId, periodId, dataSources]);
+    }, [orgUnitId, periodId, top, bottom]);
 
-    return dataSources?.length > 1 ? (
+    return loading ? <LoadingCell/> : dataSources?.length > 1 ? (
         <LinkedDataCell bottomData={bottomData} topData={topData} bottomColor={bottomColor} topColor={topColor}/>
     ) : (
         <SingleDataCell data={topData} color={topColor}/>

@@ -99,14 +99,15 @@ export default function ScorecardTable({
   }, [error, searchError]);
 
   useEffect(() => {
-
     if (!loading && !error) {
-      scorecardDataEngine
-          .setDataGroups(dataGroups)
-          .setPeriods(periods)
-          .setOrgUnits([...(orgUnits || []), ...(childrenOrgUnits || [])])
-          .setPeriodType(periodType)
-          .load();
+      if((orgUnits.length === 1 && !isEmpty(childrenOrgUnits)) || orgUnits.length > 1){
+          scorecardDataEngine
+              .setDataGroups(dataGroups)
+              .setPeriods(periods)
+              .setOrgUnits([...(orgUnits || []), ...(childrenOrgUnits || [])])
+              .setPeriodType(periodType)
+              .load();
+      }
     }
     return () => {
 

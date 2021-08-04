@@ -20,7 +20,6 @@ const PeriodResolverState = selector({
                 const actualPeriods = isArray(periodInstance?.iso) ? periodInstance?.iso : [periodInstance?.iso];
                 allPeriods = allPeriods.concat(actualPeriods)
             }
-            console.log(uniqBy(allPeriods, 'id'))
             return uniqBy(compact(allPeriods), 'id');
         }
         return []

@@ -8,9 +8,12 @@ import ScorecardAccessType from "../constants/scorecardAccessType";
 import OrgUnitSelection from "../models/orgUnitSelection";
 import Scorecard from "../models/scorecard";
 import ScorecardAccess from "../models/scorecardAccess";
+import ScorecardDataEngine from "../models/scorecardData";
 import ScorecardOptions from "../models/scorecardOptions";
 import { EngineState } from "./engine";
 import {PeriodResolverState} from "./period";
+
+
 
 const defaultValue = {
     legendDefinitions: [
@@ -76,6 +79,8 @@ const ScorecardConfState = atomFamily({
         }
     })
 })
+
+const scorecardDataEngine = new ScorecardDataEngine();
 
 const ScorecardDataState = atomFamily({
     key: 'scorecard-data-state',
@@ -175,5 +180,6 @@ export {
     ScorecardViewSelector,
     ScorecardDataState,
     ScorecardDataStateSelector,
-    ScorecardForceUpdateState
+    ScorecardForceUpdateState,
+    scorecardDataEngine
 }

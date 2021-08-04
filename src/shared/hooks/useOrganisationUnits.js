@@ -24,7 +24,7 @@ export function useOrganisationUnitChildren(orgUnitId = '') {
         }
     }, [id]);
     return {
-        orgUnits: id ? data?.orgUnit?.children : [],
+        orgUnits: id ? data?.orgUnit?.children ?? [] : [],
         loading,
         error,
         setId
