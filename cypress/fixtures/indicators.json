@@ -1,0 +1,261 @@
+{
+  "pager": {
+    "page": 1,
+    "pageCount": 2,
+    "total": 77,
+    "pageSize": 50,
+    "nextPage": "https://play.dhis2.org/2.36.3/api/36/indicators.json?page=2&paging=true&fields=id%2CdisplayName%2CdimensionItemType&order=displayShortName%3Aasc"
+  },
+  "indicators": [
+    {
+      "id": "Uvn6LCg7dVU",
+      "displayName": "ANC 1 Coverage",
+      "dimensionItemType": "INDICATOR"
+    },
+    {
+      "id": "ReUHfIn0pTQ",
+      "displayName": "ANC 1-3 Dropout Rate",
+      "dimensionItemType": "INDICATOR"
+    },
+    {
+      "id": "OdiHJayrsKo",
+      "displayName": "ANC 2 Coverage",
+      "dimensionItemType": "INDICATOR"
+    },
+    {
+      "id": "sB79w2hiLp8",
+      "displayName": "ANC 3 Coverage",
+      "dimensionItemType": "INDICATOR"
+    },
+    {
+      "id": "AUqdhY4mpvp",
+      "displayName": "ANC => 4 Coverage",
+      "dimensionItemType": "INDICATOR"
+    },
+    {
+      "id": "dwEq7wi6nXV",
+      "displayName": "ANC IPT 1 Coverage",
+      "dimensionItemType": "INDICATOR"
+    },
+    {
+      "id": "c8fABiNpT0B",
+      "displayName": "ANC IPT 2 Coverage",
+      "dimensionItemType": "INDICATOR"
+    },
+    {
+      "id": "Tt5TAvdfdVK",
+      "displayName": "ANC LLITN coverage",
+      "dimensionItemType": "INDICATOR"
+    },
+    {
+      "id": "puykO1tbcdi",
+      "displayName": "ANC TT2 coverage",
+      "dimensionItemType": "INDICATOR"
+    },
+    {
+      "id": "Lzg9LtG1xg3",
+      "displayName": "ANC visits per clinical professional",
+      "dimensionItemType": "INDICATOR"
+    },
+    {
+      "id": "dy1a1mseGR7",
+      "displayName": "ANC visits total",
+      "dimensionItemType": "INDICATOR"
+    },
+    {
+      "id": "iCBpPh3ehjg",
+      "displayName": "BCG Coverage - Adjusted for reporting",
+      "dimensionItemType": "INDICATOR"
+    },
+    {
+      "id": "FnYCr2EAzWS",
+      "displayName": "BCG Coverage <1y",
+      "dimensionItemType": "INDICATOR"
+    },
+    {
+      "id": "OEWO2PpiUKx",
+      "displayName": "BCG Stock PHU",
+      "dimensionItemType": "INDICATOR"
+    },
+    {
+      "id": "Z33QjkcycFQ",
+      "displayName": "BCG doses coverage at facility",
+      "dimensionItemType": "INDICATOR"
+    },
+    {
+      "id": "ulgL07PF8rq",
+      "displayName": "Births attended by skilled health personnel (registered live births)",
+      "dimensionItemType": "INDICATOR"
+    },
+    {
+      "id": "elTqMUTRgdk",
+      "displayName": "Births attended by skilled health personnel (estimated pregancies)",
+      "dimensionItemType": "INDICATOR"
+    },
+    {
+      "id": "gNAXtpqAqW2",
+      "displayName": "Births total",
+      "dimensionItemType": "INDICATOR"
+    },
+    {
+      "id": "ryFBhJdetdM",
+      "displayName": "ER Census reports produced Result vs Target",
+      "dimensionItemType": "INDICATOR"
+    },
+    {
+      "id": "MkXHDfrFRKV",
+      "displayName": "ER Children trained on key survival skills Result vs Target",
+      "dimensionItemType": "INDICATOR"
+    },
+    {
+      "id": "po1QxztD1K1",
+      "displayName": "Complicated deliveries total",
+      "dimensionItemType": "INDICATOR"
+    },
+    {
+      "id": "aRabHjSGuGK",
+      "displayName": "Consumption vs population",
+      "dimensionItemType": "INDICATOR"
+    },
+    {
+      "id": "JIVMtpjVZqJ",
+      "displayName": "Diarrhoea <5 y incidence rate (%)",
+      "dimensionItemType": "INDICATOR"
+    },
+    {
+      "id": "d9thHOJMROr",
+      "displayName": "Dropout rate Penta 1 - Measles",
+      "dimensionItemType": "INDICATOR"
+    },
+    {
+      "id": "EdN7qlmI5FS",
+      "displayName": "Dropout rate Penta 1 - 3",
+      "dimensionItemType": "INDICATOR"
+    },
+    {
+      "id": "X3taFC1HtE5",
+      "displayName": "Exclusive breast feeding at Penta 3",
+      "dimensionItemType": "INDICATOR"
+    },
+    {
+      "id": "eTDtyyaSA7f",
+      "displayName": "FIC <1y",
+      "dimensionItemType": "INDICATOR"
+    },
+    {
+      "id": "IT8EAeFRAat",
+      "displayName": "FIC <1y - Adjusted for reporting",
+      "dimensionItemType": "INDICATOR"
+    },
+    {
+      "id": "sMTMkudvLCD",
+      "displayName": "HIV: testing and counseling 15-24y",
+      "dimensionItemType": "INDICATOR"
+    },
+    {
+      "id": "lOiynlltFdy",
+      "displayName": "HIV: testing and counseling 25-49y",
+      "dimensionItemType": "INDICATOR"
+    },
+    {
+      "id": "lI5Q5vkydYu",
+      "displayName": "HIV: testing and counseling <15y",
+      "dimensionItemType": "INDICATOR"
+    },
+    {
+      "id": "btgZ1oeF9pJ",
+      "displayName": "HIV: testing and counseling >49y",
+      "dimensionItemType": "INDICATOR"
+    },
+    {
+      "id": "W7MxOZjZ1VC",
+      "displayName": "IPT doses total",
+      "dimensionItemType": "INDICATOR"
+    },
+    {
+      "id": "gKv1pdjF3wM",
+      "displayName": "Inpatient cases per 10 000 population",
+      "dimensionItemType": "INDICATOR"
+    },
+    {
+      "id": "TwdhB9Db4Po",
+      "displayName": "Inpatient cases under 5 y per 100 00 population",
+      "dimensionItemType": "INDICATOR"
+    },
+    {
+      "id": "zkukIvlFlhy",
+      "displayName": "Inpatient visits per 10 000 people",
+      "dimensionItemType": "INDICATOR"
+    },
+    {
+      "id": "RdkKj1rVp8R",
+      "displayName": "Live births in the community",
+      "dimensionItemType": "INDICATOR"
+    },
+    {
+      "id": "Rigf2d2Zbjp",
+      "displayName": "Live births in the PHU",
+      "dimensionItemType": "INDICATOR"
+    },
+    {
+      "id": "tcs5YGnjiKo",
+      "displayName": "Maternal death rate by registered live births",
+      "dimensionItemType": "INDICATOR"
+    },
+    {
+      "id": "FbKK4ofIv5R",
+      "displayName": "Measles Coverage <1y",
+      "dimensionItemType": "INDICATOR"
+    },
+    {
+      "id": "loEBZlcsTlx",
+      "displayName": "Measles Stock End Balance",
+      "dimensionItemType": "INDICATOR"
+    },
+    {
+      "id": "joIQbN4L1Ok",
+      "displayName": "Moderate malnutrition rate",
+      "dimensionItemType": "INDICATOR"
+    },
+    {
+      "id": "GfYjGL16D0W",
+      "displayName": "NVP during labour rate",
+      "dimensionItemType": "INDICATOR"
+    },
+    {
+      "id": "n5nS0SmkUpq",
+      "displayName": "OPV 0 Coverage <1y",
+      "dimensionItemType": "INDICATOR"
+    },
+    {
+      "id": "YlTWksXEhEO",
+      "displayName": "OPV 1 Coverage <1y",
+      "dimensionItemType": "INDICATOR"
+    },
+    {
+      "id": "QsuBK2pMfkk",
+      "displayName": "OPV 2 Coverage <1y",
+      "dimensionItemType": "INDICATOR"
+    },
+    {
+      "id": "JoEzWYGdX7s",
+      "displayName": "OPV 3 Coverage <1y",
+      "dimensionItemType": "INDICATOR"
+    },
+    {
+      "id": "bASXd9ukRGD",
+      "displayName": "OPV Stock PHU",
+      "dimensionItemType": "INDICATOR"
+    },
+    {
+      "id": "n0GE1ISYrdM",
+      "displayName": "PHU delivery rate (by ANC1)",
+      "dimensionItemType": "INDICATOR"
+    },
+    {
+      "id": "EoYar8UxddG",
+      "displayName": "PHU delivery rate (by registered live births)",
+      "dimensionItemType": "INDICATOR"
+    }
+  ]
+}
