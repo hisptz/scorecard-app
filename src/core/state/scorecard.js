@@ -8,6 +8,7 @@ import ScorecardAccessType from "../constants/scorecardAccessType";
 import OrgUnitSelection from "../models/orgUnitSelection";
 import Scorecard from "../models/scorecard";
 import ScorecardAccess from "../models/scorecardAccess";
+import ScorecardDataEngine from "../models/scorecardData";
 import ScorecardOptions from "../models/scorecardOptions";
 import {EngineState} from "./engine";
 import {PeriodResolverState} from "./period";
@@ -39,6 +40,8 @@ const defaultValue = {
     userAccesses: [],
     highlightedIndicators: []
 }
+
+const scorecardDataEngine = new ScorecardDataEngine()
 
 const ScorecardIdState = atom({
     key: 'scorecard-id',
@@ -176,4 +179,5 @@ export {
     ScorecardDataState,
     ScorecardDataStateSelector,
     ScorecardForceUpdateState,
+    scorecardDataEngine,
 }

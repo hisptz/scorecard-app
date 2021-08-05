@@ -1,7 +1,6 @@
 import React, {Suspense, useEffect} from "react";
 import {useParams} from "react-router-dom";
 import {useRecoilValue, useResetRecoilState, useSetRecoilState} from "recoil";
-import ScorecardDataEngine from "../../../../core/models/scorecardData";
 import {ScorecardIdState, ScorecardViewState,} from "../../../../core/state/scorecard";
 import {FullPageLoader} from "../../../../shared/Components/Loaders";
 import HighlightedIndicatorsView from "./Components/HighlightedIndicatorsView";
@@ -16,7 +15,6 @@ export default function ScorecardView() {
     const resetIdState = useResetRecoilState(ScorecardIdState);
     const {orgUnits} = useRecoilValue(ScorecardViewState("orgUnitSelection"));
     const resetOrgUnitSelection = useResetRecoilState(ScorecardViewState("orgUnitSelection"))
-    const scorecardDataEngine = new ScorecardDataEngine()
     useEffect(() => {
         setScorecardIdState(scorecardId);
         return () => {
@@ -37,7 +35,6 @@ export default function ScorecardView() {
                         <ScorecardTable
                             nested={false}
                             orgUnits={orgUnits}
-                            scorecardDataEngine={scorecardDataEngine}
                         />
                     </Suspense>
                 </div>

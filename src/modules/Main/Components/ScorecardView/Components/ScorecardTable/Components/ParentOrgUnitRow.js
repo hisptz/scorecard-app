@@ -1,43 +1,48 @@
 import {DataTableCell, DataTableRow} from "@dhis2/ui";
 import PropTypes from 'prop-types'
 import React from 'react'
-import {useRecoilValue, useRecoilValueLoadable} from "recoil";
+import {useRecoilValue} from "recoil";
 import {PeriodResolverState} from "../../../../../../../core/state/period";
-import {ScorecardConfigStateSelector, ScorecardDataState} from "../../../../../../../core/state/scorecard";
+import {ScorecardConfigStateSelector} from "../../../../../../../core/state/scorecard";
 import OrgUnitContainer from "./OrgUnitContainer";
 import DataContainer from "./TableDataContainer";
 
 export default function ParentOrgUnitRow({orgUnit}) {
     const {id} = orgUnit ?? {};
-    const {dataGroups} = useRecoilValue(ScorecardConfigStateSelector('dataSelection')) ?? {}
-    const periods = useRecoilValue(PeriodResolverState) ?? []
-    const data = useRecoilValueLoadable(ScorecardDataState(id))
+    const {dataGroups} =
+    useRecoilValue(ScorecardConfigStateSelector("dataSelection")) ?? {};
+    const periods =
+        useRecoilValue(PeriodResolverState) ?? [];
+
     return (
-        <DataTableRow key={id}
-                      bordered>
-            <DataTableCell fixed left={"0"} width={"50px"}>&nbsp;</DataTableCell>
-            <DataTableCell fixed
-                           left={"50px"}
-                           className='scorecard-org-unit-cell'>
+        <DataTableRow key={id} bordered>
+            <DataTableCell fixed left={"0"} width={"50px"}>
+                &nbsp;
+            </DataTableCell>
+            <DataTableCell fixed left={"50px"} className="scorecard-org-unit-cell">
                 <OrgUnitContainer orgUnit={orgUnit}/>
             </DataTableCell>
-            {
-                data.state === 'hasValue' ? dataGroups?.map(({id: groupId, dataHolders}) => (
-                    dataHolders?.map(({id: holderId, dataSources}) => (
-                        periods?.map(({id: periodId}) => (
-                            <td className='data-cell' align='center'
-                                key={`${groupId}-${holderId}-${periodId}`}>
-                                <DataContainer orgUnitId={id} dataSources={dataSources}
-                                               periodId={periodId}/>
-                            </td>
-                        ))
+            {dataGroups?.map(({id: groupId, dataHolders}) =>
+                dataHolders?.map(({id: holderId, dataSources}) =>
+                    periods?.map(({id: periodId}) => (
+                        <td
+                            className="data-cell"
+                            align="center"
+                            key={`${groupId}-${holderId}-${periodId}`}
+                        >
+                            <DataContainer
+                                orgUnitId={id}
+                                dataSources={dataSources}
+                                periodId={periodId}
+                            />
+                        </td>
                     ))
-                )) : null
-            }
+                )
+            )}
         </DataTableRow>
-    )
+    );
 }
 
 ParentOrgUnitRow.propTypes = {
-    orgUnit: PropTypes.object.isRequired
+    orgUnit: PropTypes.object.isRequired,
 };

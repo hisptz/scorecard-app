@@ -1,11 +1,15 @@
 import {useAlert} from "@dhis2/app-runtime";
-import {DataTable, DataTableBody,} from '@dhis2/ui'
+import {DataTable, DataTableBody} from '@dhis2/ui'
 import {head, isEmpty} from 'lodash'
 import PropTypes from 'prop-types'
 import React, {Fragment, useEffect, useMemo, useState} from 'react'
 import {useRecoilValue, useResetRecoilState} from "recoil";
 import {PeriodResolverState} from "../../../../../../core/state/period";
-import {ScorecardConfigStateSelector, ScorecardViewState} from "../../../../../../core/state/scorecard";
+import {
+    ScorecardConfigStateSelector,
+    scorecardDataEngine,
+    ScorecardViewState
+} from "../../../../../../core/state/scorecard";
 import useMediaQuery from "../../../../../../shared/hooks/useMediaQuery";
 import {
     useOrganisationUnitChildren,
@@ -23,6 +27,7 @@ export default function ScorecardTable({orgUnits, nested}) {
     const {width: screenWidth} = useMediaQuery()
     const {dataGroups} = useRecoilValue(ScorecardConfigStateSelector('dataSelection')) ?? {}
     const periods = useRecoilValue(PeriodResolverState) ?? []
+    const {periodType} = useRecoilValue(ScorecardViewState('periodSelection'))
     const searchKeyword = useRecoilValue(ScorecardViewState('orgUnitSearchKeyword'))
     const resetKeyword = useResetRecoilState(ScorecardViewState('orgUnitSearchKeyword'))
     const tableWidth = useMemo(() => {
@@ -81,6 +86,19 @@ export default function ScorecardTable({orgUnits, nested}) {
             resetKeyword();
         };
     }, []);
+
+    useEffect(() => {
+        if (!loading && !error) {
+            if ((orgUnits.length === 1 && !isEmpty(childrenOrgUnits)) || orgUnits.length > 1) {
+                scorecardDataEngine
+                    .setDataGroups(dataGroups)
+                    .setPeriods(periods)
+                    .setOrgUnits([...(filteredOrgUnits ?? []), ...(childrenOrgUnits ?? [])])
+                    .setPeriodType(periodType)
+                    .load();
+            }
+        }
+    }, [dataGroups, filteredOrgUnits, childrenOrgUnits, periodType]);
 
     return (
         <div className='w-100 pb-32 flex-1'>
