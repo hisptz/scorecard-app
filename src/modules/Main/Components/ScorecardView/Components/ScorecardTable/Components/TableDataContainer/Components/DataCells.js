@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types'
 import React, {useMemo} from "react";
 import {useRecoilValue} from "recoil";
-import {ScorecardViewSelector} from "../../../../../../../../../core/state/scorecard";
+import {ScorecardViewState} from "../../../../../../../../../core/state/scorecard";
 import LinkedCellSvg from "../../../../../../../../../shared/Components/ScorecardCell/Components/LinkedCellSvg";
 import SingleCellSvg from "../../../../../../../../../shared/Components/ScorecardCell/Components/SingleCellSvg";
 
 export function SingleDataCell({data, color}) {
-    const {arrows} = useRecoilValue(ScorecardViewSelector('options')) ?? {}
+    const {arrows} = useRecoilValue(ScorecardViewState('options')) ?? {}
     const {current, previous} = data ?? {};
     const increasing = useMemo(() => {
         if (arrows) {
@@ -31,7 +31,7 @@ SingleDataCell.propTypes = {
 export function LinkedDataCell({topData, bottomData, topColor, bottomColor}) {
     const {current: topCurrent, previous: topPrevious} = topData ?? {};
     const {current: bottomCurrent, previous: bottomPrevious} = bottomData ?? {};
-    const {arrows} = useRecoilValue(ScorecardViewSelector('options')) ?? {}
+    const {arrows} = useRecoilValue(ScorecardViewState('options')) ?? {}
 
     const topIncreasing = useMemo(() => {
         if (arrows) {

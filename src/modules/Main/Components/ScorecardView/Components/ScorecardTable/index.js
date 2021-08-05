@@ -3,13 +3,9 @@ import {DataTable, DataTableBody,} from '@dhis2/ui'
 import {head, isEmpty} from 'lodash'
 import PropTypes from 'prop-types'
 import React, {Fragment, useEffect, useMemo, useState} from 'react'
-import {useRecoilValue, waitForAll} from "recoil";
+import {useRecoilValue, useResetRecoilState} from "recoil";
 import {PeriodResolverState} from "../../../../../../core/state/period";
-import {
-    ScorecardConfigStateSelector,
-    ScorecardDataState,
-    ScorecardViewSelector
-} from "../../../../../../core/state/scorecard";
+import {ScorecardConfigStateSelector, ScorecardViewState} from "../../../../../../core/state/scorecard";
 import useMediaQuery from "../../../../../../shared/hooks/useMediaQuery";
 import {
     useOrganisationUnitChildren,
@@ -27,16 +23,17 @@ export default function ScorecardTable({orgUnits, nested}) {
     const {width: screenWidth} = useMediaQuery()
     const {dataGroups} = useRecoilValue(ScorecardConfigStateSelector('dataSelection')) ?? {}
     const periods = useRecoilValue(PeriodResolverState) ?? []
-    const searchKeyword = useRecoilValue(ScorecardViewSelector('orgUnitSearchKeyword'))
+    const searchKeyword = useRecoilValue(ScorecardViewState('orgUnitSearchKeyword'))
+    const resetKeyword = useResetRecoilState(ScorecardViewState('orgUnitSearchKeyword'))
     const tableWidth = useMemo(() => {
         return getTableWidth(periods, dataGroups, screenWidth)
     }, [periods, dataGroups]);
 
-    const {loading, error, orgUnits: childrenOrgUnits, setId} = useOrganisationUnitChildren()
     const {
         orgUnits: searchResults,
-        setKeyword,
+        updateKeyword,
         error: searchError,
+        loading: searchLoading
     } = useSearchOrganisationUnit()
     const {show} = useAlert(({message}) => message, ({type}) => ({...type, duration: 3000}))
     const [expandedOrgUnit, setExpandedOrgUnit] = useState();
@@ -47,25 +44,28 @@ export default function ScorecardTable({orgUnits, nested}) {
         }
         return orgUnits;
     }, [searchResults, orgUnits, searchKeyword]);
+    const {
+        loading,
+        error,
+        orgUnits: childrenOrgUnits,
+        setId
+    } = useOrganisationUnitChildren(filteredOrgUnits?.length === 1 ? head(filteredOrgUnits)?.id : null)
 
-    const data = waitForAll([...filteredOrgUnits, ...(childrenOrgUnits ?? [])].map(({id}) => ScorecardDataState(id)))
-    console.log(data)
+    useEffect(() => {
+        if (filteredOrgUnits.length === 1) setId(head(filteredOrgUnits)?.id)
+        else setId(undefined)
+        return () => {
+            setId(undefined)
+        };
+    }, [filteredOrgUnits?.length]);
 
     useEffect(() => {
         if (!isEmpty(searchKeyword)) {
-            setKeyword(searchKeyword)
+            updateKeyword(searchKeyword)
         } else {
-            setKeyword(undefined)
+            updateKeyword(undefined)
         }
     }, [searchKeyword]);
-
-    useEffect(() => {
-        if (filteredOrgUnits?.length === 1) {
-            setId(head(filteredOrgUnits)?.id)
-        } else {
-            setId(undefined)
-        }
-    }, [filteredOrgUnits])
 
     useEffect(() => {
         if (error) {
@@ -76,6 +76,11 @@ export default function ScorecardTable({orgUnits, nested}) {
         }
     }, [error, searchError])
 
+    useEffect(() => {
+        return () => {
+            resetKeyword();
+        };
+    }, []);
 
     return (
         <div className='w-100 pb-32 flex-1'>
@@ -85,7 +90,7 @@ export default function ScorecardTable({orgUnits, nested}) {
                         <TableHeader nested={nested}/>
                         <DataTableBody>
                             {
-                                loading ? <TableLoader/> : <Fragment>
+                                loading ? <TableLoader/> : searchLoading ? <td>Searching...</td> : <Fragment>
                                     {
                                         filteredOrgUnits?.map((orgUnit) => (
                                             <ParentOrgUnitRow key={`${orgUnit?.id}-row`} orgUnit={orgUnit}/>))

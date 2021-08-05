@@ -1,32 +1,17 @@
 import {useDataQuery} from "@dhis2/app-runtime";
 import {debounce, isEmpty} from 'lodash'
-import {useEffect, useMemo, useState} from "react";
+import {useEffect, useMemo, useRef, useState} from "react";
+import {useRecoilValueLoadable} from "recoil";
+import {OrgUnitChildren} from "../../core/state/orgUnit";
 
-const orgUnitChildrenQuery = {
-    orgUnit: {
-        resource: 'organisationUnits',
-        id: ({id}) => id,
-        params: {
-            fields: [
-                'children[level,id,displayName,path]'
-            ]
-        },
-    }
-}
 
 export function useOrganisationUnitChildren(orgUnitId = '') {
     const [id, setId] = useState(orgUnitId);
-    const {data, loading, error, refetch} = useDataQuery(orgUnitChildrenQuery, {variables: {id: orgUnitId}, lazy: true})
-
-    useEffect(() => {
-        if (id) {
-            refetch({id})
-        }
-    }, [id]);
+    const {state, contents} = useRecoilValueLoadable(OrgUnitChildren(id))
     return {
-        orgUnits: id ? data?.orgUnit?.children ?? [] : [],
-        loading,
-        error,
+        loading: state === 'loading',
+        orgUnits: state === 'hasValue' ? contents : [],
+        error: state === 'hasError' ? contents : undefined,
         setId
     }
 }
@@ -63,7 +48,7 @@ const orgUnitSearchQuery = {
 export function useSearchOrganisationUnit() {
     const [keyword, setKeyword] = useState();
     const {data, error, loading, refetch} = useDataQuery(orgUnitSearchQuery, {lazy: true})
-
+    const updateKeyword = useRef(debounce(setKeyword, 1000, {trailing: true, leading: false}))
     const orgUnits = useMemo(() => {
         if (!isEmpty(data)) {
             const idResponse = data?.idQuery?.organisationUnits ?? [];
@@ -75,7 +60,7 @@ export function useSearchOrganisationUnit() {
 
     useEffect(() => {
         if (!isEmpty(keyword)) {
-            debounce(() => refetch({keyword}), 1000)()
+            refetch({keyword})
         }
     }, [keyword]);
 
@@ -83,6 +68,6 @@ export function useSearchOrganisationUnit() {
         orgUnits,
         error,
         loading,
-        setKeyword
+        updateKeyword: updateKeyword.current
     }
 }

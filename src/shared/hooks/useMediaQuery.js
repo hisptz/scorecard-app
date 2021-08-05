@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useLayoutEffect, useState} from 'react';
 
 function getWindowDimensions() {
     const {innerWidth: width, innerHeight: height} = window;
@@ -11,7 +11,7 @@ function getWindowDimensions() {
 export default function useMediaQuery() {
     const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         function handleResize() {
             setWindowDimensions(getWindowDimensions());
         }

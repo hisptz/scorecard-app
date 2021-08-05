@@ -17,6 +17,18 @@ const orgUnitQuery = {
     }
 }
 
+const orgUnitChildrenQuery = {
+    orgUnit: {
+        resource: 'organisationUnits',
+        id: ({id}) => id,
+        params: {
+            fields: [
+                'children[level,id,displayName,path]'
+            ]
+        },
+    }
+}
+
 export const OrgUnits = selectorFamily({
     key: 'orgUnitSelector',
     get: (id) => async ({get}) => {
@@ -42,4 +54,15 @@ export const OrgUnitPathState = atomFamily({
             return orgUnitNames.join('/')
         }
     })
+})
+
+
+export const OrgUnitChildren = selectorFamily({
+    key: 'orgUnitChildren',
+    get: (orgUnitId)=> async ({get})=>{
+        const engine = get(EngineState)
+        const {orgUnit} = await engine.query(orgUnitChildrenQuery, {variables:{id: orgUnitId}})
+
+        return orgUnit?.children ?? []
+    }
 })

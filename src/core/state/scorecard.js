@@ -1,6 +1,6 @@
-import { Period } from "@iapps/period-utilities";
-import { cloneDeep, find,flattenDeep, get as _get, set as _set , zipObjectDeep} from "lodash";
-import { atom, atomFamily, selector, selectorFamily } from "recoil";
+import {Period} from "@iapps/period-utilities";
+import {cloneDeep, find, flattenDeep, get as _get, set as _set, zipObjectDeep} from "lodash";
+import {atom, atomFamily, selector, selectorFamily} from "recoil";
 import getScorecard from "../../shared/services/getScorecard";
 import getScorecardCellData from "../../shared/services/getScorecardCellData";
 import getScorecardSummary from "../../shared/services/getScorecardSummary";
@@ -9,7 +9,7 @@ import OrgUnitSelection from "../models/orgUnitSelection";
 import Scorecard from "../models/scorecard";
 import ScorecardAccess from "../models/scorecardAccess";
 import ScorecardOptions from "../models/scorecardOptions";
-import { EngineState } from "./engine";
+import {EngineState} from "./engine";
 import {PeriodResolverState} from "./period";
 
 const defaultValue = {
@@ -66,9 +66,7 @@ const ScorecardConfState = atomFamily({
         get: (scorecardId) => async ({get}) => {
             const engine = get(EngineState)
             if (scorecardId) {
-
                 const {scorecard, error} = await getScorecard(scorecardId, engine)
-
                 if (error) throw error;
                 return scorecard
             }
@@ -103,17 +101,17 @@ const ScorecardDataStateSelector = selectorFamily({
     get: ({orgUnit, period, dataSource}) => ({get}) => {
         if (dataSource !== 'undefined') {
             const currentData = find(get(ScorecardDataState(orgUnit)), ({
-                                                                     dx,
-                                                                     pe,
-                                                                     ou
-                                                                 }) => {
+                                                                            dx,
+                                                                            pe,
+                                                                            ou
+                                                                        }) => {
                 return ou === orgUnit && dx === dataSource && pe === period
             })
             const previousData = find(get(ScorecardDataState(orgUnit)), ({
-                                                                     dx,
-                                                                     pe,
-                                                                     ou
-                                                                 }) => {
+                                                                             dx,
+                                                                             pe,
+                                                                             ou
+                                                                         }) => {
                 const previousPeriod = new Period().getById(period).lastPeriod;
                 return ou === orgUnit && dx === dataSource && pe === previousPeriod?.id
             })
@@ -131,7 +129,6 @@ const ScorecardConfigStateSelector = selectorFamily({
     key: 'scorecard-state-selector',
     get: path => ({get}) => {
         const scorecardId = get(ScorecardIdState)
-
         return _get(get(ScorecardConfState(scorecardId)), path)
     },
     set: path => ({set, get}, newValue) => {
@@ -145,34 +142,29 @@ const ScorecardConfigEditState = atom({
     default: {}
 })
 
-const ScorecardViewState = atom({
+const ScorecardViewState = atomFamily({
     key: 'scorecard-view-config',
-    default: selector({
+    default: selectorFamily({
         key: 'scorecardViewStateSelector',
-        get: ({get}) => {
+        get: (key) => ({get}) => {
             const scorecardId = get(ScorecardIdState)
-            const {orgUnitSelection, options, periodType} = get(ScorecardConfState(scorecardId)) ?? {}
-            const currentPeriod = new Period()
-
-            if (periodType) {
-                currentPeriod.setType(periodType)
+            const configState = get(ScorecardConfState(scorecardId))
+            if (key === 'periodSelection') {
+                const {periodType} = configState;
+                const currentPeriod = new Period()
+                if (periodType) {
+                    currentPeriod.setType(periodType)
+                }
+                return {
+                    periods: currentPeriod?.get()?.list(),
+                    periodType
+                }
             }
-            return {
-                orgUnitSelection,
-                periodSelection: {
-                    periods: currentPeriod?.get()?.list()
-                },
-                options
-            }
+            return configState[key];
         }
     })
 })
 
-const ScorecardViewSelector = selectorFamily({
-    key: 'scorecardViewSelectorFamily',
-    get: path => ({get}) => _get(get(ScorecardViewState), path),
-    set: path => ({set}, newValue) => set(ScorecardViewState, prevState => _set(cloneDeep(prevState), path, newValue))
-})
 
 export default ScorecardConfState;
 export {
@@ -181,7 +173,6 @@ export {
     ScorecardIdState,
     ScorecardSummaryState,
     ScorecardViewState,
-    ScorecardViewSelector,
     ScorecardDataState,
     ScorecardDataStateSelector,
     ScorecardForceUpdateState,

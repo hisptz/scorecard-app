@@ -2,12 +2,12 @@ import i18n from '@dhis2/d2-i18n'
 import {isEmpty} from 'lodash'
 import React from 'react'
 import {useRecoilValue} from "recoil";
-import {ScorecardConfigStateSelector, ScorecardViewSelector} from "../../../../../../core/state/scorecard";
+import {ScorecardConfigStateSelector, ScorecardViewState} from "../../../../../../core/state/scorecard";
 import HighlightedIndicator from "./Components/HighlightedIndicator";
 
 export default function HighlightedIndicatorsView() {
     const highlightedIndicators = useRecoilValue(ScorecardConfigStateSelector('highlightedIndicators'))
-    const {highlightedIndicators: showHighlightedIndicators} = useRecoilValue(ScorecardViewSelector('options'))
+    const {highlightedIndicators: showHighlightedIndicators} = useRecoilValue(ScorecardViewState('options'))
     return (
         showHighlightedIndicators && !isEmpty(highlightedIndicators) ?
             <div className='column'>

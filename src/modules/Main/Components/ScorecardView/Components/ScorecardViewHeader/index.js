@@ -3,7 +3,7 @@ import React, {useState} from 'react'
 import {useHistory} from "react-router-dom";
 import {useRecoilState, useRecoilValue, useResetRecoilState} from "recoil";
 import {FilterComponentTypes} from "../../../../../../core/constants/selection";
-import ScorecardConfState, {ScorecardIdState, ScorecardViewSelector} from "../../../../../../core/state/scorecard";
+import ScorecardConfState, {ScorecardIdState, ScorecardViewState} from "../../../../../../core/state/scorecard";
 import OrgUnitSelectorModal from "../../../../../../shared/Components/OrgUnitSelectorModal";
 import PeriodSelectorModal from "../../../../../../shared/Components/PeriodSelectorModal";
 import ScorecardOptionsModal from "../../../../../../shared/Components/ScorecardOptionsModal";
@@ -12,9 +12,9 @@ import SelectionWrapper from "../../../../../../shared/Components/SelectionWrapp
 export default function ScorecardViewHeader() {
     const history = useHistory();
     const scorecardId = useRecoilValue(ScorecardIdState)
-    const [orgUnitSelection, setOrgUnitSelection] = useRecoilState(ScorecardViewSelector('orgUnitSelection'))
-    const [periodSelection, setPeriodSelection] = useRecoilState(ScorecardViewSelector('periodSelection'))
-    const [scorecardOptions, setScorecardOptions] = useRecoilState(ScorecardViewSelector('options'))
+    const [orgUnitSelection, setOrgUnitSelection] = useRecoilState(ScorecardViewState('orgUnitSelection'))
+    const [periodSelection, setPeriodSelection] = useRecoilState(ScorecardViewState('periodSelection'))
+    const [scorecardOptions, setScorecardOptions] = useRecoilState(ScorecardViewState('options'))
     const resetScorecardState = useResetRecoilState(ScorecardConfState(scorecardId))
     const resetScorecardIdState = useResetRecoilState(ScorecardIdState)
 

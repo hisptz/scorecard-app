@@ -2,12 +2,12 @@ import i18n from '@dhis2/d2-i18n'
 import {isEmpty} from 'lodash'
 import React from 'react'
 import {useRecoilValue} from "recoil";
-import {ScorecardConfigStateSelector, ScorecardViewSelector} from "../../../../../../core/state/scorecard";
+import {ScorecardConfigStateSelector, ScorecardViewState} from "../../../../../../core/state/scorecard";
 import {DecreasingArrows, IncreasingArrows} from "../../../../../../shared/Components/ScorecardCell/Components/Arrows";
 import LegendView from "./Components/LegendView";
 
 export default function ScorecardLegendsView() {
-    const {legend: showLegends} = useRecoilValue(ScorecardViewSelector('options'))
+    const {legend: showLegends} = useRecoilValue(ScorecardViewState('options'))
     const legends = useRecoilValue(ScorecardConfigStateSelector('legendDefinitions'))
     return (
         showLegends && !isEmpty(legends) ?

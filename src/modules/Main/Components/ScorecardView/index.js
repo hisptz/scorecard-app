@@ -2,11 +2,7 @@ import React, {Suspense, useEffect} from "react";
 import {useParams} from "react-router-dom";
 import {useRecoilValue, useResetRecoilState, useSetRecoilState} from "recoil";
 import ScorecardDataEngine from "../../../../core/models/scorecardData";
-import {
-    ScorecardIdState,
-    ScorecardViewSelector,
-    ScorecardViewState,
-} from "../../../../core/state/scorecard";
+import {ScorecardIdState, ScorecardViewState,} from "../../../../core/state/scorecard";
 import {FullPageLoader} from "../../../../shared/Components/Loaders";
 import HighlightedIndicatorsView from "./Components/HighlightedIndicatorsView";
 import ScorecardHeader from "./Components/ScorecardHeader";
@@ -18,14 +14,14 @@ export default function ScorecardView() {
     const {id: scorecardId} = useParams();
     const setScorecardIdState = useSetRecoilState(ScorecardIdState);
     const resetIdState = useResetRecoilState(ScorecardIdState);
-    const resetViewState = useResetRecoilState(ScorecardViewState);
-    const {orgUnits} = useRecoilValue(ScorecardViewSelector("orgUnitSelection"));
+    const {orgUnits} = useRecoilValue(ScorecardViewState("orgUnitSelection"));
+    const resetOrgUnitSelection = useResetRecoilState(ScorecardViewState("orgUnitSelection"))
     const scorecardDataEngine = new ScorecardDataEngine()
     useEffect(() => {
         setScorecardIdState(scorecardId);
         return () => {
             resetIdState();
-            resetViewState();
+            resetOrgUnitSelection()
         };
     }, [scorecardId]);
 
