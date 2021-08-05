@@ -1,11 +1,21 @@
-export default class ScorecardOption {
-  constructor(scorecardOptions) {
-    this.scorecardOptions = scorecardOptions;
-  }
+import AverageDisplayType from '../constants/averageDisplayType'
+import DataModel from "./base";
 
-  get averageDisplayType() {
-    return this.scorecardOptions
-      ? this.scorecardOptions.averageDisplayType
-      : undefined;
-  }
+
+export default class ScorecardOption extends DataModel {
+    get defaults() {
+        return {
+            averageDisplayType: AverageDisplayType.ALL,
+            legend: true,
+            title: true,
+            itemNumber: true,
+            emptyRows: false,
+            showHierarchy: false,
+            averageColumn: false,
+            averageRow: false,
+            highlightedIndicators: false
+        }
+    }
 }
+
+

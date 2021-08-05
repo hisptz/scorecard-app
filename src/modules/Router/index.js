@@ -1,29 +1,47 @@
 import React from "react";
-import {MemoryRouter, Route, Switch} from 'react-router-dom'
-import Test from "../test";
+import {HashRouter, Redirect, Route, Switch} from 'react-router-dom'
+import useSetDataEngine from "../../core/hooks/useSetDataEngine";
+import ScoreCardManagement from "../Admin/Components/ScoreCardManagement";
+import Main from "../Main";
+import ScorecardView from "../Main/Components/ScorecardView";
 import ExampleForms from "../test/Forms";
 
+const pages = [
+    {
+        pathname: '/test',
+        component: ExampleForms
+    },
+    {
+        pathname: '/edit/:id',
+        component: ScoreCardManagement
+    },
+    {
+        pathname: '/add',
+        component: ScoreCardManagement
+    },
+    {
+        pathname: '/view/:id',
+        component: ScorecardView
+    },
+    {
+        pathname: '/',
+        component: Main
+    }
+]
+
 export default function Router() {
-
-    const pages = [
-        {
-            pathname: '/home',
-            component: Test
-        },
-        {
-            pathname: '/test',
-            component: ExampleForms
-        },
-    ]
-
+    useSetDataEngine();
     return (
-        <MemoryRouter initialIndex={0} initialEntries={pages}>
+        <HashRouter basename='/'>
             <Switch>
                 {
                     pages.map(({pathname, component}) => (
                         <Route key={pathname} path={pathname} component={component}/>))
                 }
+                <Route path='/*'>
+                    <Redirect to={'/'}/>
+                </Route>
             </Switch>
-        </MemoryRouter>
+        </HashRouter>
     )
 }

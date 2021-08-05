@@ -1,21 +1,20 @@
+import {uid} from "../../shared/utils/utils";
+import DataModel from "./base";
 import ScorecardIndicator from "./scorecardIndicator";
 
-export default class ScorecardIndicatorHolder {
-  constructor(indicatorHolder) {
-    this.indicatorHolder = indicatorHolder;
-  }
+export default class ScorecardIndicatorHolder extends DataModel {
+    get defaults() {
+        return {
+            id: uid(),
+            dataSources: []
+        }
+    }
 
-  get id() {
-    return this.indicatorHolder ? this.indicatorHolder.id : undefined;
-  }
+    constructor(attributes) {
+        super(attributes);
+    }
 
-  get sortOrder() {
-    return this.indicatorHolder ? this.indicatorHolder.sortOrder : 0;
-  }
-
-  get indicators() {
-    return (this.indicatorHolder ? this.indicatorHolder.indicators : []).map(
-      (indicator) => new ScorecardIndicator(indicator)
-    );
-  }
+    static linkDataSource(holder = new ScorecardIndicatorHolder(), scorecardIndicator = new ScorecardIndicator()) {
+        return ScorecardIndicatorHolder.set(holder, 'dataSources', [...holder.dataSources, scorecardIndicator])
+    }
 }

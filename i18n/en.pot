@@ -5,11 +5,266 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-06-02T11:41:07.167Z\n"
-"PO-Revision-Date: 2021-06-02T11:41:07.167Z\n"
+"POT-Creation-Date: 2021-07-28T07:49:24.286Z\n"
+"PO-Revision-Date: 2021-07-28T07:49:24.286Z\n"
 
-msgid "Hello {{name}}"
-msgstr "Hello {{name}}"
+msgid "Organisation Unit"
+msgstr "Organisation Unit"
 
-msgid "Welcome to Scorecard!"
-msgstr "Welcome to Scorecard!"
+msgid "Select Access"
+msgstr "Select Access"
+
+msgid "Add"
+msgstr "Add"
+
+msgid "Edit"
+msgstr "Edit"
+
+msgid "Remove"
+msgstr "Remove"
+
+msgid "Sharing"
+msgstr "Sharing"
+
+msgid "Shared With"
+msgstr "Shared With"
+
+msgid "Add Access"
+msgstr "Add Access"
+
+msgid "No Access"
+msgstr "No Access"
+
+msgid "Can Read"
+msgstr "Can Read"
+
+msgid "Can Read and Write"
+msgstr "Can Read and Write"
+
+msgid "Click to {{linkAction}}"
+msgstr "Click to {{linkAction}}"
+
+msgid "unlink"
+msgstr "unlink"
+
+msgid "link"
+msgstr "link"
+
+msgid "Save"
+msgstr "Save"
+
+msgid "Cancel"
+msgstr "Cancel"
+
+msgid "Delete"
+msgstr "Delete"
+
+msgid "Add a data source"
+msgstr "Add a data source"
+
+msgid "Add Item"
+msgstr "Add Item"
+
+msgid "Add Data source"
+msgstr "Add Data source"
+
+msgid "Set Target on Levels"
+msgstr "Set Target on Levels"
+
+msgid "Groups"
+msgstr "Groups"
+
+msgid "Add a group to start"
+msgstr "Add a group to start"
+
+msgid "Add Group"
+msgstr "Add Group"
+
+msgid "Title"
+msgstr "Title"
+
+msgid "Subtitle"
+msgstr "Subtitle"
+
+msgid "Description"
+msgstr "Description"
+
+msgid "Period Type"
+msgstr "Period Type"
+
+msgid "Custom Header"
+msgstr "Custom Header"
+
+msgid "Legend Definitions"
+msgstr "Legend Definitions"
+
+msgid "Additional Labels"
+msgstr "Additional Labels"
+
+msgid "Highlighted Indicators"
+msgstr "Highlighted Indicators"
+
+msgid "Add Highlighted Indicator"
+msgstr "Add Highlighted Indicator"
+
+msgid "General"
+msgstr "General"
+
+msgid "Data Configuration"
+msgstr "Data Configuration"
+
+msgid "Access"
+msgstr "Access"
+
+msgid "Options"
+msgstr "Options"
+
+msgid "Configuration saved Successfully"
+msgstr "Configuration saved Successfully"
+
+msgid "Previous"
+msgstr "Previous"
+
+msgid "Saving"
+msgstr "Saving"
+
+msgid "Next"
+msgstr "Next"
+
+msgid "Welcome to Scorecard App!"
+msgstr "Welcome to Scorecard App!"
+
+msgid "Create a scorecard instantly, over tea break"
+msgstr "Create a scorecard instantly, over tea break"
+
+msgid "New Scorecard"
+msgstr "New Scorecard"
+
+msgid "Scorecard deleted successfully"
+msgstr "Scorecard deleted successfully"
+
+msgid "View"
+msgstr "View"
+
+msgid "Are you sure you want to delete scorecard "
+msgstr "Are you sure you want to delete scorecard "
+
+msgid "Are you sure you want to delete scorecard"
+msgstr "Are you sure you want to delete scorecard"
+
+msgid "Help"
+msgstr "Help"
+
+msgid "Change to {{viewType}} view"
+msgstr "Change to {{viewType}} view"
+
+msgid "list"
+msgstr "list"
+
+msgid "grid"
+msgstr "grid"
+
+msgid "Add New Scorecard"
+msgstr "Add New Scorecard"
+
+msgid "Search"
+msgstr "Search"
+
+msgid "Legends"
+msgstr "Legends"
+
+msgid "Increased from last period"
+msgstr "Increased from last period"
+
+msgid "Decreased from last period"
+msgstr "Decreased from last period"
+
+msgid "There are no configured indicators for this scorecard"
+msgstr "There are no configured indicators for this scorecard"
+
+msgid "Name"
+msgstr "Name"
+
+msgid "Label"
+msgstr "Label"
+
+msgid "Weight"
+msgstr "Weight"
+
+msgid "Effective Gap"
+msgstr "Effective Gap"
+
+msgid "Display Arrows"
+msgstr "Display Arrows"
+
+msgid "High is Good"
+msgstr "High is Good"
+
+msgid "Show Colors"
+msgstr "Show Colors"
+
+msgid "Are you sure you want to delete this entity?"
+msgstr "Are you sure you want to delete this entity?"
+
+msgid "User organisation unit"
+msgstr "User organisation unit"
+
+msgid "User sub-units"
+msgstr "User sub-units"
+
+msgid "User sub-x2-units"
+msgstr "User sub-x2-units"
+
+msgid "Select Level"
+msgstr "Select Level"
+
+msgid "Select Group"
+msgstr "Select Group"
+
+msgid "Visibility"
+msgstr "Visibility"
+
+msgid "Legend"
+msgstr "Legend"
+
+msgid "Item Number"
+msgstr "Item Number"
+
+msgid "Empty Rows"
+msgstr "Empty Rows"
+
+msgid "Show Hierarchy"
+msgstr "Show Hierarchy"
+
+msgid "Average Column"
+msgstr "Average Column"
+
+msgid "Average Row"
+msgstr "Average Row"
+
+msgid "Average"
+msgstr "Average"
+
+msgid "All"
+msgstr "All"
+
+msgid "Below Average"
+msgstr "Below Average"
+
+msgid "Above Average"
+msgstr "Above Average"
+
+msgid "Score"
+msgstr "Score"
+
+msgid "Arrows"
+msgstr "Arrows"
+
+msgid "Show Data in Rows"
+msgstr "Show Data in Rows"
+
+msgid "Selected period"
+msgstr "Selected period"
+
+msgid "Selected organisation unit"
+msgstr "Selected organisation unit"

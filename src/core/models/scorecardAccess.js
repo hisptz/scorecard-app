@@ -1,17 +1,14 @@
 import ScorecardAccessType from "../constants/scorecardAccessType";
+import DataModel from "./base";
 
-export default class ScorecardAccess {
-  constructor(scorecardAccess) {
-    this.scorecardAccess = scorecardAccess;
-  }
+export default class ScorecardAccess extends DataModel {
 
-  get id() {
-    return  this.scorecardAccess ? this.scorecardAccess.id : undefined;
-  }
-
-  get access() {
-    return this.scorecardAccess
-      ? this.scorecardAccess.access
-      : ScorecardAccessType.READ_ONLY;
-  }
+    get defaults() {
+        return {
+            id: undefined,
+            type: 'userGroup',
+            access: ScorecardAccessType.NO_ACCESS,
+            displayName: ''
+        }
+    }
 }
