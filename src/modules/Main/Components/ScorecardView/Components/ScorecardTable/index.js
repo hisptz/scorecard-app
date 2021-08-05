@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import React, { Fragment, useEffect, useMemo, useState } from "react";
 import { useRecoilValue } from "recoil";
 import ScorecardDataEngine from "../../../../../../core/models/scorecardData";
-import {PeriodResolverState} from "../../../../../../core/state/period";
+import { PeriodResolverState } from "../../../../../../core/state/period";
 import {
   ScorecardConfigStateSelector,
   ScorecardViewSelector,
@@ -34,8 +34,7 @@ export default function ScorecardTable({
   const { periodType } =
     useRecoilValue(ScorecardConfigStateSelector("periodType")) ?? {};
 
-  const periods  =
-    useRecoilValue(PeriodResolverState) ?? [];
+  const periods = useRecoilValue(PeriodResolverState) ?? [];
   const searchKeyword = useRecoilValue(
     ScorecardViewSelector("orgUnitSearchKeyword")
   );
@@ -100,13 +99,19 @@ export default function ScorecardTable({
 
   useEffect(() => {
     if (!loading && !error) {
-      if((orgUnits.length === 1 && !isEmpty(childrenOrgUnits)) || orgUnits.length > 1){
-          scorecardDataEngine
-              .setDataGroups(dataGroups)
-              .setPeriods(periods)
-              .setOrgUnits([...(filteredOrgUnits ?? []), ...(childrenOrgUnits ?? [])])
-              .setPeriodType(periodType)
-              .load();
+      if (
+        (orgUnits?.length === 1 && !isEmpty(childrenOrgUnits)) ||
+        orgUnits?.length > 1
+      ) {
+        scorecardDataEngine
+          .setDataGroups(dataGroups)
+          .setPeriods(periods)
+          .setOrgUnits([
+            ...(filteredOrgUnits ?? []),
+            ...(childrenOrgUnits ?? []),
+          ])
+          .setPeriodType(periodType)
+          .load();
       }
     }
   }, [dataGroups, filteredOrgUnits, childrenOrgUnits, periodType]);
@@ -155,5 +160,5 @@ export default function ScorecardTable({
 ScorecardTable.propTypes = {
   nested: PropTypes.bool.isRequired,
   orgUnits: PropTypes.arrayOf(PropTypes.object).isRequired,
-  scorecardDataEngine: PropTypes.instanceOf(ScorecardDataEngine)
+  scorecardDataEngine: PropTypes.instanceOf(ScorecardDataEngine),
 };
