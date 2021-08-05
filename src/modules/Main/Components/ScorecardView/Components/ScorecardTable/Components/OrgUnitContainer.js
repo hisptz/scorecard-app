@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types'
 import {useRecoilValue, useRecoilValueLoadable} from "recoil";
 import {OrgUnitPathState} from "../../../../../../../core/state/orgUnit";
-import {ScorecardViewSelector} from "../../../../../../../core/state/scorecard";
+import {ScorecardViewState} from "../../../../../../../core/state/scorecard";
 
 export default function OrgUnitContainer({orgUnit}) {
     const pathNamesState = useRecoilValueLoadable(OrgUnitPathState(orgUnit?.path))
-    const {showHierarchy} = useRecoilValue(ScorecardViewSelector('options'))
+    const {showHierarchy} = useRecoilValue(ScorecardViewState('options'))
 
     return (
         showHierarchy ?

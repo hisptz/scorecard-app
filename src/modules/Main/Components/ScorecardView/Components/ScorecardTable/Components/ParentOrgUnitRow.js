@@ -1,19 +1,18 @@
 import {DataTableCell, DataTableRow} from "@dhis2/ui";
-import PropTypes from "prop-types";
-import React from "react";
+import PropTypes from 'prop-types'
+import React from 'react'
 import {useRecoilValue} from "recoil";
-import ScorecardDataEngine from "../../../../../../../core/models/scorecardData";
 import {PeriodResolverState} from "../../../../../../../core/state/period";
-import {ScorecardConfigStateSelector,} from "../../../../../../../core/state/scorecard";
+import {ScorecardConfigStateSelector} from "../../../../../../../core/state/scorecard";
 import OrgUnitContainer from "./OrgUnitContainer";
 import DataContainer from "./TableDataContainer";
 
-export default function ParentOrgUnitRow({orgUnit, scorecardDataEngine}) {
+export default function ParentOrgUnitRow({orgUnit}) {
     const {id} = orgUnit ?? {};
     const {dataGroups} =
     useRecoilValue(ScorecardConfigStateSelector("dataSelection")) ?? {};
     const periods =
-    useRecoilValue(PeriodResolverState) ?? [];
+        useRecoilValue(PeriodResolverState) ?? [];
 
     return (
         <DataTableRow key={id} bordered>
@@ -35,7 +34,6 @@ export default function ParentOrgUnitRow({orgUnit, scorecardDataEngine}) {
                                 orgUnitId={id}
                                 dataSources={dataSources}
                                 periodId={periodId}
-                                scorecardDataEngine={scorecardDataEngine}
                             />
                         </td>
                     ))
@@ -47,5 +45,4 @@ export default function ParentOrgUnitRow({orgUnit, scorecardDataEngine}) {
 
 ParentOrgUnitRow.propTypes = {
     orgUnit: PropTypes.object.isRequired,
-    scorecardDataEngine: PropTypes.instanceOf(ScorecardDataEngine)
 };

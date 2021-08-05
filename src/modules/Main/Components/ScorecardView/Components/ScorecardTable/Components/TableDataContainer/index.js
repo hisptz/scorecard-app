@@ -1,16 +1,11 @@
-import PropTypes from "prop-types";
-import React, {useEffect, useState} from "react";
-import ScorecardDataEngine from "../../../../../../../../core/models/scorecardData";
+import PropTypes from 'prop-types'
+import React, {useEffect, useState} from 'react'
+import {scorecardDataEngine} from "../../../../../../../../core/state/scorecard";
 import {getLegend} from "../../../../../../../Admin/Components/ScoreCardManagement/Components/DataConfiguration/utils";
 import {LinkedDataCell, SingleDataCell} from "./Components/DataCells";
 import LoadingCell from "./Components/LoadingCell";
 
-export default function DataContainer({
-                                          dataSources,
-                                          orgUnitId,
-                                          periodId,
-                                          scorecardDataEngine,
-                                      }) {
+export default function DataContainer({dataSources, orgUnitId, periodId}) {
     const [loading, setLoading] = useState(false);
     const [topData, setTopData] = useState();
     const [bottomData, setBottomData] = useState();
@@ -53,6 +48,7 @@ export default function DataContainer({
 DataContainer.propTypes = {
     dataSources: PropTypes.array,
     orgUnitId: PropTypes.string,
-    periodId: PropTypes.string,
-    scorecardDataEngine: PropTypes.instanceOf(ScorecardDataEngine)
+    periodId: PropTypes.string
 };
+
+

@@ -3,12 +3,12 @@ import { DataTable, DataTableBody } from "@dhis2/ui";
 import { head, isEmpty } from "lodash";
 import PropTypes from "prop-types";
 import React, { Fragment, useEffect, useMemo, useState } from "react";
-import { useRecoilValue } from "recoil";
-import ScorecardDataEngine from "../../../../../../core/models/scorecardData";
+import { useRecoilValue, useResetRecoilState } from "recoil";
 import { PeriodResolverState } from "../../../../../../core/state/period";
 import {
   ScorecardConfigStateSelector,
-  ScorecardViewSelector,
+  scorecardDataEngine,
+  ScorecardViewState,
 } from "../../../../../../core/state/scorecard";
 import useMediaQuery from "../../../../../../shared/hooks/useMediaQuery";
 import {
@@ -22,40 +22,28 @@ import TableHeader from "./Components/TableHeader";
 import TableLoader from "./Components/TableLoader";
 import { getTableWidth } from "./services/utils";
 
-export default function ScorecardTable({
-  orgUnits,
-  nested,
-  scorecardDataEngine,
-}) {
+export default function ScorecardTable({ orgUnits, nested }) {
   const { width: screenWidth } = useMediaQuery();
   const { dataGroups } =
     useRecoilValue(ScorecardConfigStateSelector("dataSelection")) ?? {};
-
-  const { periodType } =
-    useRecoilValue(ScorecardConfigStateSelector("periodType")) ?? {};
-
   const periods = useRecoilValue(PeriodResolverState) ?? [];
+  const { periodType } = useRecoilValue(ScorecardViewState("periodSelection"));
   const searchKeyword = useRecoilValue(
-    ScorecardViewSelector("orgUnitSearchKeyword")
+    ScorecardViewState("orgUnitSearchKeyword")
   );
-  const tableWidth = useMemo(
-    () => getTableWidth(periods, dataGroups, screenWidth),
-    [periods, dataGroups]
+  const resetKeyword = useResetRecoilState(
+    ScorecardViewState("orgUnitSearchKeyword")
   );
-
-  const {
-    loading,
-    error,
-    orgUnits: childrenOrgUnits,
-    setId,
-  } = useOrganisationUnitChildren();
+  const tableWidth = useMemo(() => {
+    return getTableWidth(periods, dataGroups, screenWidth);
+  }, [periods, dataGroups]);
 
   const {
     orgUnits: searchResults,
-    setKeyword,
+    updateKeyword,
     error: searchError,
+    loading: searchLoading,
   } = useSearchOrganisationUnit();
-
   const { show } = useAlert(
     ({ message }) => message,
     ({ type }) => ({ ...type, duration: 3000 })
@@ -68,22 +56,30 @@ export default function ScorecardTable({
     }
     return orgUnits;
   }, [searchResults, orgUnits, searchKeyword]);
+  const {
+    loading,
+    error,
+    orgUnits: childrenOrgUnits,
+    setId,
+  } = useOrganisationUnitChildren(
+    filteredOrgUnits?.length === 1 ? head(filteredOrgUnits)?.id : null
+  );
+
+  useEffect(() => {
+    if (filteredOrgUnits.length === 1) setId(head(filteredOrgUnits)?.id);
+    else setId(undefined);
+    return () => {
+      setId(undefined);
+    };
+  }, [filteredOrgUnits?.length]);
 
   useEffect(() => {
     if (!isEmpty(searchKeyword)) {
-      setKeyword(searchKeyword);
+      updateKeyword(searchKeyword);
     } else {
-      setKeyword(undefined);
+      updateKeyword(undefined);
     }
   }, [searchKeyword]);
-
-  useEffect(() => {
-    if (filteredOrgUnits?.length === 1) {
-      setId(head(filteredOrgUnits)?.id);
-    } else {
-      setId(undefined);
-    }
-  }, [filteredOrgUnits]);
 
   useEffect(() => {
     if (error) {
@@ -98,10 +94,16 @@ export default function ScorecardTable({
   }, [error, searchError]);
 
   useEffect(() => {
+    return () => {
+      resetKeyword();
+    };
+  }, []);
+
+  useEffect(() => {
     if (!loading && !error) {
       if (
-        (orgUnits?.length === 1 && !isEmpty(childrenOrgUnits)) ||
-        orgUnits?.length > 1
+        (orgUnits.length === 1 && !isEmpty(childrenOrgUnits)) ||
+        orgUnits.length > 1
       ) {
         scorecardDataEngine
           .setDataGroups(dataGroups)
@@ -130,13 +132,14 @@ export default function ScorecardTable({
           <DataTableBody>
             {loading ? (
               <TableLoader />
+            ) : searchLoading ? (
+              <td>Searching...</td>
             ) : (
               <Fragment>
                 {filteredOrgUnits?.map((orgUnit) => (
                   <ParentOrgUnitRow
                     key={`${orgUnit?.id}-row`}
                     orgUnit={orgUnit}
-                    scorecardDataEngine={scorecardDataEngine}
                   />
                 ))}
                 {childrenOrgUnits?.map((orgUnit) => (
@@ -145,7 +148,6 @@ export default function ScorecardTable({
                     onExpand={setExpandedOrgUnit}
                     orgUnit={orgUnit}
                     expandedOrgUnit={expandedOrgUnit}
-                    scorecardDataEngine={scorecardDataEngine}
                   />
                 ))}
               </Fragment>
@@ -160,5 +162,4 @@ export default function ScorecardTable({
 ScorecardTable.propTypes = {
   nested: PropTypes.bool.isRequired,
   orgUnits: PropTypes.arrayOf(PropTypes.object).isRequired,
-  scorecardDataEngine: PropTypes.instanceOf(ScorecardDataEngine),
 };

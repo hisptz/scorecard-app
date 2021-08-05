@@ -3,7 +3,6 @@ import {selectorFamily} from "recoil";
 import {EngineState} from "./engine";
 const {atomFamily} = require("recoil");
 
-
 const orgUnitQuery = {
     orgUnit: {
         resource: 'organisationUnits',
@@ -15,6 +14,18 @@ const orgUnitQuery = {
                 'path'
             ]
         }
+    }
+}
+
+const orgUnitChildrenQuery = {
+    orgUnit: {
+        resource: 'organisationUnits',
+        id: ({id}) => id,
+        params: {
+            fields: [
+                'children[level,id,displayName,path]'
+            ]
+        },
     }
 }
 
@@ -43,4 +54,15 @@ export const OrgUnitPathState = atomFamily({
             return orgUnitNames.join('/')
         }
     })
+})
+
+
+export const OrgUnitChildren = selectorFamily({
+    key: 'orgUnitChildren',
+    get: (orgUnitId)=> async ({get})=>{
+        const engine = get(EngineState)
+        const {orgUnit} = await engine.query(orgUnitChildrenQuery, {variables:{id: orgUnitId}})
+
+        return orgUnit?.children ?? []
+    }
 })
