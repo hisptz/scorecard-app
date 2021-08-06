@@ -1,6 +1,6 @@
 import React from 'react'
 import {Route, Switch, useRouteMatch} from "react-router-dom";
-import ScoreCardManagement from "./Components/ScoreCardManagement";
+import ScoreCardManagement from "../Main/Components/ScoreCardManagement";
 
 export default function Admin() {
     const {url} = useRouteMatch()
