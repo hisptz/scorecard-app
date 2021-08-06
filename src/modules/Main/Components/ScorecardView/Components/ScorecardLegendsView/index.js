@@ -21,11 +21,11 @@ export default function ScorecardLegendsView() {
                     </div>
                     <div className='row align-items-center w-50 end'>
                         <div className='pr-16'>
-                            <svg height={14} width={14}><IncreasingArrows y={0} x={7}/></svg>
+                            <svg height={14} width={14}><IncreasingArrows fontSize={14} y={0} x={7}/></svg>
                             &nbsp; {i18n.t('Increased from last period')}
                         </div>
                         <div>
-                            <svg height={14} width={14}><DecreasingArrows y={14} x={7}/></svg>
+                            <svg height={14} width={14}><DecreasingArrows fontSize={14} y={14} x={7}/></svg>
                             &nbsp; {i18n.t('Decreased from last period')}
                         </div>
                     </div>

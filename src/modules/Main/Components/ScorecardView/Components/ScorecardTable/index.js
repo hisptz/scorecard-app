@@ -71,7 +71,7 @@ export default function ScorecardTable({ orgUnits, nested }) {
     return () => {
       setId(undefined);
     };
-  }, [filteredOrgUnits?.length]);
+  }, [filteredOrgUnits]);
 
   useEffect(() => {
     if (!isEmpty(searchKeyword)) {
