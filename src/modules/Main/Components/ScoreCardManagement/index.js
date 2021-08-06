@@ -53,6 +53,7 @@ export default function ScoreCardManagement() {
   const setScorecardIdState = useSetRecoilState(ScorecardIdState);
   const resetScorecardEditState = useResetRecoilState(ScorecardConfigEditState);
   const resetScorecardIdState = useResetRecoilState(ScorecardIdState);
+  const resetScorecardConfState = useResetRecoilState(ScorecardConfState(scorecardId))
   const scorecardState = useRecoilValue(ScorecardConfState(scorecardId));
   const { update } = useUpdateScorecard(scorecardId);
   const { add } = useAddScorecard();
@@ -72,6 +73,7 @@ export default function ScoreCardManagement() {
     return () => {
       resetScorecardIdState();
       resetScorecardEditState();
+      resetScorecardConfState()
     };
   }, [scorecardId]);
 

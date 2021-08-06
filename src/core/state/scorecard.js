@@ -45,17 +45,20 @@ const ScorecardIdState = atom({
     key: 'scorecard-id',
 })
 
-const ScorecardSummaryState = selector({
-    key: 'scorecard-summary-selector',
-    get: async ({get}) => {
-        const engine = get(EngineState);
-        const {summary, error} = await getScorecardSummary(engine)
-        if (error) throw error;
-        return summary;
-    },
+const ScorecardSummaryState = atom({
+    key: 'scorecard-summary',
+    default: selector({
+        key: 'scorecard-summary-selector',
+        get: async ({get}) => {
+            const engine = get(EngineState);
+            const {summary, error} = await getScorecardSummary(engine)
+            if (error) throw error;
+            return summary;
+        },
 })
-
-const ScorecardForceUpdateState = atomFamily({
+})
+//This is to force a data re-fetch when a scorecard is updated
+const ScorecardRequestId = atomFamily({
     key: 'scorecardForceUpdateState',
     default: 0
 })
@@ -66,6 +69,7 @@ const ScorecardConfState = atomFamily({
         key: 'active-scorecard-config',
         get: (scorecardId) => async ({get}) => {
             const engine = get(EngineState)
+            get(ScorecardRequestId(scorecardId))
             if (scorecardId) {
                 const {scorecard, error} = await getScorecard(scorecardId, engine)
                 if (error) throw error;
@@ -125,6 +129,6 @@ export {
     ScorecardIdState,
     ScorecardSummaryState,
     ScorecardViewState,
-    ScorecardForceUpdateState,
+    ScorecardRequestId,
     scorecardDataEngine,
 }
