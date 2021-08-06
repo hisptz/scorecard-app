@@ -6,7 +6,7 @@ import {LinkedDataCell, SingleDataCell} from "./Components/DataCells";
 import LoadingCell from "./Components/LoadingCell";
 
 export default function DataContainer({dataSources, orgUnitId, periodId}) {
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState();
     const [topData, setTopData] = useState();
     const [bottomData, setBottomData] = useState();
     const [top, bottom] = dataSources ?? [];
@@ -18,16 +18,13 @@ export default function DataContainer({dataSources, orgUnitId, periodId}) {
     const bottomKey = `${bottom?.id}_${orgUnitId}_${periodId}`
 
     useEffect(() => {
-        const loadingSub = scorecardDataEngine.loading$.subscribe(setLoading)
-        return () => {
-            loadingSub.unsubscribe();
-        };
-    }, [orgUnitId, periodId, top, bottom]);
-
-    useEffect(() => {
+        setLoading(true)
         const topSub = scorecardDataEngine
             .get(topKey)
-            .subscribe(setTopData);
+            .subscribe((data)=>{
+                setTopData(data)
+                setLoading(false)
+            });
         const bottomSub = scorecardDataEngine
             .get(bottomKey)
             .subscribe(setBottomData);
@@ -39,7 +36,7 @@ export default function DataContainer({dataSources, orgUnitId, periodId}) {
     }, [orgUnitId, periodId, top, bottom]);
 
     return loading ? <LoadingCell/> : dataSources?.length > 1 ? (
-        <LinkedDataCell bottomData={bottomData} topData={topData} bottomColor={bottomColor} topColor={topColor}/>
+        <LinkedDataCell  bottomData={bottomData} topData={topData} bottomColor={bottomColor} topColor={topColor}/>
     ) : (
         <SingleDataCell data={topData} color={topColor}/>
     );
