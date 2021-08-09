@@ -55,7 +55,7 @@ const ScorecardSummaryState = atom({
             if (error) throw error;
             return summary;
         },
-})
+    })
 })
 //This is to force a data re-fetch when a scorecard is updated
 const ScorecardRequestId = atomFamily({
@@ -81,15 +81,26 @@ const ScorecardConfState = atomFamily({
 })
 
 
-const ScorecardConfigStateSelector = selectorFamily({
-    key: 'scorecard-state-selector',
-    get: path => ({get}) => {
-        const scorecardId = get(ScorecardIdState)
-        return _get(get(ScorecardConfState(scorecardId)), path)
+const ScorecardConfigDirtyState = atomFamily({
+    key: 'scorecard-config-edit-state',
+    default: selectorFamily({
+        key: 'scorecard-state-default',
+        get: path => ({get}) => {
+            const scorecardId = get(ScorecardIdState)
+            return _get(get(ScorecardConfState(scorecardId)), path)
+        },
+    }),
+})
+
+const ScorecardConfigDirtySelector = selectorFamily({
+    key: 'scorecard-dirty-state-selector',
+    get: ({key, path}) => ({get}) => {
+        return _get(get(ScorecardConfigDirtyState(key)), path)
     },
-    set: path => ({set, get}, newValue) => {
-        const scorecardId = get(ScorecardIdState)
-        set(ScorecardConfState(scorecardId), prevState => _set(cloneDeep(prevState), path, newValue))
+    set: ({key, path}) => ({get, set}, newValue) => {
+        const object = get(ScorecardConfigDirtyState(key))
+        const newObject = _set(cloneDeep(object), path, newValue)
+        set(ScorecardConfigDirtyState(key), newObject)
     }
 })
 
@@ -125,10 +136,11 @@ const ScorecardViewState = atomFamily({
 export default ScorecardConfState;
 export {
     ScorecardConfigEditState,
-    ScorecardConfigStateSelector,
+    ScorecardConfigDirtyState,
     ScorecardIdState,
     ScorecardSummaryState,
     ScorecardViewState,
     ScorecardRequestId,
     scorecardDataEngine,
+    ScorecardConfigDirtySelector
 }

@@ -4,13 +4,13 @@ import AddIcon from "@material-ui/icons/Add";
 import React, {useState} from 'react'
 import {useRecoilState} from "recoil";
 import ScorecardAccess from "../../../../../../../../../../../core/models/scorecardAccess";
-import {ScorecardConfigStateSelector} from "../../../../../../../../../../../core/state/scorecard";
+import {ScorecardConfigDirtyState} from "../../../../../../../../../../../core/state/scorecard";
 import {ACCESS_TYPES} from "../../../../../../../../../../../shared/constants/sharing";
 import {getAccessName} from "../../../utils";
 import UserAndUserGroupSelector from "../../UserAndUserGroupSelector";
 export default function AddSharingAccess() {
-    const [userAccess, setUserAccess] = useRecoilState(ScorecardConfigStateSelector('userAccesses'))
-    const [userGroupAccess, setUserGroupAccess] = useRecoilState(ScorecardConfigStateSelector('userGroupAccesses'))
+    const [userAccess, setUserAccess] = useRecoilState(ScorecardConfigDirtyState('userAccesses'))
+    const [userGroupAccess, setUserGroupAccess] = useRecoilState(ScorecardConfigDirtyState('userGroupAccesses'))
     const [selectedUserGroup, setSelectedUserGroup] = useState();
     const [selectedAccess, setSelectedAccess] = useState();
 

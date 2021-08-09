@@ -1,7 +1,7 @@
 import { useAlert } from "@dhis2/app-runtime";
 import i18n from "@dhis2/d2-i18n";
 import { Button, ButtonStrip } from "@dhis2/ui";
-import { Step, StepLabel, Stepper } from "@material-ui/core";
+import {decomposeColor, Step, StepLabel, Stepper} from "@material-ui/core";
 import { findIndex } from "lodash";
 import React, { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
@@ -100,24 +100,7 @@ export default function ScoreCardManagement() {
   };
 
   const onSave = async () => {
-    try {
-      setSaving(true);
-      if (scorecardId) {
-        await Scorecard.update(scorecardState, update);
-      } else {
-        await Scorecard.save(scorecardState, add, user);
-      }
-      setSaving(false);
-      history.goBack();
-      show({
-        message: i18n.t("Configuration saved Successfully"),
-        type: { success: true },
-      });
-    } catch (e) {
-      console.log(e);
-      show({ message: e?.message ?? e.details, type: { info: true } });
-      setSaving(false);
-    }
+    console.log(scorecardState)
   };
 
   const hasNextStep = useMemo(
@@ -160,7 +143,7 @@ export default function ScoreCardManagement() {
                     className="column p-16"
                     style={{ height: "100%", justifyContent: "space-between" }}
                   >
-                    {<Component formReference={formRef} />}
+                    {<Component formRef={formRef} />}
                     <ButtonStrip end>
                       <Button
                         disabled={!hasPreviousStep}

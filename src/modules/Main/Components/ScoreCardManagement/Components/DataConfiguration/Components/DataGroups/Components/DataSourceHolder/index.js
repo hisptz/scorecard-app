@@ -4,14 +4,17 @@ import React from 'react'
 import {Draggable} from "react-beautiful-dnd";
 import {useRecoilState, useSetRecoilState} from "recoil";
 import ScorecardIndicatorHolder from "../../../../../../../../../../core/models/scorecardIndicatorHolder";
-import {ScorecardConfigEditState, ScorecardConfigStateSelector} from "../../../../../../../../../../core/state/scorecard";
+import {
+    ScorecardConfigDirtySelector,
+    ScorecardConfigEditState
+} from "../../../../../../../../../../core/state/scorecard";
 import DataSource from "../DataSource";
 
 export default function DataSourceHolder({dataHolder, id, index, onDelete}) {
     const {dataSources} = dataHolder ?? new ScorecardIndicatorHolder();
     const [scorecardEditState, setScorecardEditState] = useRecoilState(ScorecardConfigEditState)
-    const path = ['dataSelection', 'dataGroups', scorecardEditState.selectedGroupIndex, 'dataHolders', index]
-    const updateDataHolder = useSetRecoilState(ScorecardConfigStateSelector(path))
+    const path = ['dataGroups', scorecardEditState.selectedGroupIndex, 'dataHolders', index]
+    const updateDataHolder = useSetRecoilState(ScorecardConfigDirtySelector({key: 'dataSelection', path}))
 
     const selected = scorecardEditState.selectedDataHolderIndex === index;
     const hasLinked = dataSources?.length > 1;

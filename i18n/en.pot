@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-08-06T10:03:47.249Z\n"
-"PO-Revision-Date: 2021-08-06T10:03:47.249Z\n"
+"POT-Creation-Date: 2021-08-06T12:05:28.309Z\n"
+"PO-Revision-Date: 2021-08-06T12:05:28.309Z\n"
 
 msgid "Welcome to Scorecard App!"
 msgstr "Welcome to Scorecard App!"
@@ -127,9 +127,6 @@ msgstr "Access"
 
 msgid "Options"
 msgstr "Options"
-
-msgid "Configuration saved Successfully"
-msgstr "Configuration saved Successfully"
 
 msgid "Previous"
 msgstr "Previous"

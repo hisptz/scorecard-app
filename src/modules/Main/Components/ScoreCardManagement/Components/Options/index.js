@@ -1,11 +1,11 @@
 import React from 'react'
 import {useRecoilState} from "recoil";
 import ScorecardOptions from "../../../../../../core/models/scorecardOptions";
-import {ScorecardConfigStateSelector} from "../../../../../../core/state/scorecard";
+import {ScorecardConfigDirtyState} from "../../../../../../core/state/scorecard";
 import ScorecardOptionsForm from "../../../../../../shared/Components/ScorecardOptionsForm";
 
 export default function OptionsScorecardForm() {
-    const [scorecardOptions, setScorecardOptions] = useRecoilState(ScorecardConfigStateSelector('options'))
+    const [scorecardOptions, setScorecardOptions] = useRecoilState(ScorecardConfigDirtyState('options'))
 
     const onChange = (key) => (newValue) => {
         setScorecardOptions(prevState => {

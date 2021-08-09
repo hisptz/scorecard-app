@@ -2,11 +2,11 @@ import i18n from '@dhis2/d2-i18n'
 import React from 'react'
 import {useRecoilState} from "recoil";
 import OrgUnitSelection from "../../../../../../../../core/models/orgUnitSelection";
-import {ScorecardConfigStateSelector} from "../../../../../../../../core/state/scorecard";
+import {ScorecardConfigDirtyState} from "../../../../../../../../core/state/scorecard";
 import OrgUnitFilter from "../../../../../../../../shared/Components/OrgUnitFilter";
 
 export default function OrgUnit() {
-    const [organisationUnit, setOrganisationUnit] = useRecoilState(ScorecardConfigStateSelector('orgUnitSelection'))
+    const [organisationUnit, setOrganisationUnit] = useRecoilState(ScorecardConfigDirtyState('orgUnitSelection'))
 
     const onSetOrgUnit = (values) => {
         setOrganisationUnit(prevState => OrgUnitSelection.setObject(prevState, values))

@@ -5,14 +5,14 @@ import {isEmpty} from 'lodash'
 import React, {Fragment, useState} from 'react'
 import {useRecoilState, useRecoilValue, useSetRecoilState} from "recoil";
 import ScorecardIndicator from "../../../../../../core/models/scorecardIndicator";
-import {ScorecardConfigEditState, ScorecardConfigStateSelector} from "../../../../../../core/state/scorecard";
+import {ScorecardConfigEditState, ScorecardConfigDirtyState} from "../../../../../../core/state/scorecard";
 import {generateLegendDefaults} from "../../../../../../shared/utils/utils";
 import DataSourceSelectorModal from "../DataConfiguration/Components/DataGroups/Components/DataSourceSelectorModal";
 import HighlightedDataSourceConfigurationForm from "./HighlightedDataSourceConfigurationForm";
 import HighlightedIndicatorsTable from "./Table";
 export default function HighlightedIndicatorsScorecardForm() {
-    const [highlightedIndicators, setHighlightedIndicators] = useRecoilState(ScorecardConfigStateSelector('highlightedIndicators'))
-    const legendDefinitions = useRecoilValue(ScorecardConfigStateSelector('legendDefinitions'))
+    const [highlightedIndicators, setHighlightedIndicators] = useRecoilState(ScorecardConfigDirtyState('highlightedIndicators'))
+    const legendDefinitions = useRecoilValue(ScorecardConfigDirtyState('legendDefinitions'))
     const setScorecardEditorState = useSetRecoilState(ScorecardConfigEditState)
     const [addOpen, setAddOpen] = useState(false);
 

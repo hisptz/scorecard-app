@@ -12,7 +12,7 @@ import DeleteIcon from "@material-ui/icons/Close";
 import {cloneDeep, get, isEmpty, remove} from 'lodash'
 import React from 'react'
 import {useRecoilState} from "recoil";
-import {ScorecardConfigEditState, ScorecardConfigStateSelector} from "../../../../../../../core/state/scorecard";
+import {ScorecardConfigEditState, ScorecardConfigDirtyState} from "../../../../../../../core/state/scorecard";
 
 const columns = [
     {
@@ -26,7 +26,7 @@ const columns = [
 ]
 
 export default function HighlightedIndicatorsTable() {
-    const [highlightedIndicators, setHighlightedIndicators] = useRecoilState(ScorecardConfigStateSelector('highlightedIndicators'))
+    const [highlightedIndicators, setHighlightedIndicators] = useRecoilState(ScorecardConfigDirtyState('highlightedIndicators'))
     const [scorecardEditState, setScorecardEditorState] = useRecoilState(ScorecardConfigEditState)
 
 
