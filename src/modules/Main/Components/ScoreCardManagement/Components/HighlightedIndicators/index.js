@@ -10,6 +10,7 @@ import {generateLegendDefaults} from "../../../../../../shared/utils/utils";
 import DataSourceSelectorModal from "../DataConfiguration/Components/DataGroups/Components/DataSourceSelectorModal";
 import HighlightedDataSourceConfigurationForm from "./HighlightedDataSourceConfigurationForm";
 import HighlightedIndicatorsTable from "./Table";
+
 export default function HighlightedIndicatorsScorecardForm() {
     const [highlightedIndicators, setHighlightedIndicators] = useRecoilState(ScorecardConfigDirtyState('highlightedIndicators'))
     const legendDefinitions = useRecoilValue(ScorecardConfigDirtyState('legendDefinitions'))
