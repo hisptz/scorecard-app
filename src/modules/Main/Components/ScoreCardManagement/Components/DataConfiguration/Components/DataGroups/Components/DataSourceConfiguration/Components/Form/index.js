@@ -3,9 +3,9 @@ import React from 'react'
 import {useRecoilState, useRecoilValue} from "recoil";
 import ScorecardIndicator from "../../../../../../../../../../../../core/models/scorecardIndicator";
 import {
-    ScorecardConfigEditState,
+    ScorecardConfigDirtySelector,
     ScorecardConfigDirtyState,
-    ScorecardConfigDirtySelector
+    ScorecardConfigEditState
 } from "../../../../../../../../../../../../core/state/scorecard";
 import DataSourceConfigurationForm
     from "../../../../../../../../../../../../shared/Components/CustomForm/components/DataSourceConfigurationForm";
@@ -16,7 +16,10 @@ export default function SelectedDataSourceConfigurationForm() {
     const selectedGroupIndex = scorecardEditState?.selectedGroupIndex;
     const selectedDataHolderIndex = scorecardEditState?.selectedDataHolderIndex;
     const path = ['dataGroups', selectedGroupIndex, 'dataHolders', selectedDataHolderIndex]
-    const [selectedDataHolder, updateSelectedDataHolder] = useRecoilState(ScorecardConfigDirtySelector({key: 'dataSelection',path}));
+    const [selectedDataHolder, updateSelectedDataHolder] = useRecoilState(ScorecardConfigDirtySelector({
+        key: 'dataSelection',
+        path
+    }));
 
     const onFormChange = (index) => ({values, dirty}) => {
         if (dirty) {
