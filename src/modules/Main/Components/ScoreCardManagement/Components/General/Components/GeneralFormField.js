@@ -10,7 +10,6 @@ export default function GeneralFormField({field, dataTest}) {
     const onChange = (newValue) => {
         setValue(newValue);
     };
-    console.log(value)
     const input = useMemo(() => ({
         value,
         onChange,
