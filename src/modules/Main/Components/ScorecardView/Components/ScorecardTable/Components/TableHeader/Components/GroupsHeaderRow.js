@@ -4,10 +4,10 @@ import PropTypes from 'prop-types'
 import React, {useEffect, useState} from "react";
 import {useRecoilState, useRecoilValue} from "recoil";
 import {PeriodResolverState} from "../../../../../../../../../core/state/period";
-import {ScorecardConfigStateSelector, ScorecardViewState} from "../../../../../../../../../core/state/scorecard";
+import {ScorecardConfigDirtyState, ScorecardViewState} from "../../../../../../../../../core/state/scorecard";
 
 export default function GroupsHeaderRow({nested}) {
-    const {dataGroups} = useRecoilValue(ScorecardConfigStateSelector('dataSelection')) ?? {}
+    const {dataGroups} = useRecoilValue(ScorecardConfigDirtyState('dataSelection')) ?? {}
     const periods = useRecoilValue(PeriodResolverState) ?? []
     const [keyword, setKeyword] = useRecoilState(ScorecardViewState('orgUnitSearchKeyword'))
 

@@ -3,14 +3,14 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import {useRecoilValue} from "recoil";
 import {PeriodResolverState} from "../../../../../../../core/state/period";
-import {ScorecardConfigStateSelector} from "../../../../../../../core/state/scorecard";
+import {ScorecardConfigDirtyState} from "../../../../../../../core/state/scorecard";
 import OrgUnitContainer from "./OrgUnitContainer";
 import DataContainer from "./TableDataContainer";
 
 export default function ParentOrgUnitRow({orgUnit}) {
     const {id} = orgUnit ?? {};
     const {dataGroups} =
-    useRecoilValue(ScorecardConfigStateSelector("dataSelection")) ?? {};
+    useRecoilValue(ScorecardConfigDirtyState("dataSelection")) ?? {};
     const periods =
         useRecoilValue(PeriodResolverState) ?? [];
 

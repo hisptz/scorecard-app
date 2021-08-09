@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React, {useEffect, useState} from 'react'
 import {scorecardDataEngine} from "../../../../../../../../core/state/scorecard";
-import {getLegend} from "../../../../../../../Admin/Components/ScoreCardManagement/Components/DataConfiguration/utils";
+import {getLegend} from "../../../../../ScoreCardManagement/Components/DataConfiguration/utils";
 import {LinkedDataCell, SingleDataCell} from "./Components/DataCells";
 import LoadingCell from "./Components/LoadingCell";
 

@@ -1,8 +1,7 @@
 import {Period} from "@iapps/period-utilities";
-import {cloneDeep, find, flattenDeep, get as _get, set as _set, zipObjectDeep} from "lodash";
+import {cloneDeep, get as _get, set as _set} from "lodash";
 import {atom, atomFamily, selector, selectorFamily} from "recoil";
 import getScorecard from "../../shared/services/getScorecard";
-import getScorecardCellData from "../../shared/services/getScorecardCellData";
 import getScorecardSummary from "../../shared/services/getScorecardSummary";
 import ScorecardAccessType from "../constants/scorecardAccessType";
 import OrgUnitSelection from "../models/orgUnitSelection";
@@ -11,7 +10,6 @@ import ScorecardAccess from "../models/scorecardAccess";
 import ScorecardDataEngine from "../models/scorecardData";
 import ScorecardOptions from "../models/scorecardOptions";
 import {EngineState} from "./engine";
-import {PeriodResolverState} from "./period";
 
 const defaultValue = {
     legendDefinitions: [
@@ -47,17 +45,20 @@ const ScorecardIdState = atom({
     key: 'scorecard-id',
 })
 
-const ScorecardSummaryState = selector({
-    key: 'scorecard-summary-selector',
-    get: async ({get}) => {
-        const engine = get(EngineState);
-        const {summary, error} = await getScorecardSummary(engine)
-        if (error) throw error;
-        return summary;
-    },
+const ScorecardSummaryState = atom({
+    key: 'scorecard-summary',
+    default: selector({
+        key: 'scorecard-summary-selector',
+        get: async ({get}) => {
+            const engine = get(EngineState);
+            const {summary, error} = await getScorecardSummary(engine)
+            if (error) throw error;
+            return summary;
+        },
+    })
 })
-
-const ScorecardForceUpdateState = atomFamily({
+//This is to force a data re-fetch when a scorecard is updated
+const ScorecardRequestId = atomFamily({
     key: 'scorecardForceUpdateState',
     default: 0
 })
@@ -68,6 +69,7 @@ const ScorecardConfState = atomFamily({
         key: 'active-scorecard-config',
         get: (scorecardId) => async ({get}) => {
             const engine = get(EngineState)
+            get(ScorecardRequestId(scorecardId))
             if (scorecardId) {
                 const {scorecard, error} = await getScorecard(scorecardId, engine)
                 if (error) throw error;
@@ -79,64 +81,26 @@ const ScorecardConfState = atomFamily({
 })
 
 
-const ScorecardDataState = selectorFamily({
-    key: 'scorecard-data-state',
-    get: (orgUnitId) => async ({get}) => {
-        const periods = get(PeriodResolverState)
-        const {dataGroups} = get(ScorecardConfigStateSelector('dataSelection'))
-        const dataSources = flattenDeep(flattenDeep(dataGroups.map(({dataHolders}) => dataHolders))?.map(({dataSources}) => dataSources))?.map(({id}) => id)
-        const {_data: analytics} = await getScorecardCellData({
-            orgUnit: orgUnitId,
-            periods: periods.map(({id}) => id),
-            dataSources
-        })
-        if (analytics) {
-            const rows = analytics?.rows;
-            return rows?.map((row) =>
-                zipObjectDeep(analytics?.headers
-                    ?.map(({name}) => name), row))
-        }
-    }
+const ScorecardConfigDirtyState = atomFamily({
+    key: 'scorecard-config-edit-state',
+    default: selectorFamily({
+        key: 'scorecard-state-default',
+        get: path => ({get}) => {
+            const scorecardId = get(ScorecardIdState)
+            return _get(get(ScorecardConfState(scorecardId)), path)
+        },
+    }),
 })
 
-const ScorecardDataStateSelector = selectorFamily({
-    key: 'scorecardDataStateSelectorFamily',
-    get: ({orgUnit, period, dataSource}) => ({get}) => {
-        if (dataSource !== 'undefined') {
-            const currentData = find(get(ScorecardDataState(orgUnit)), ({
-                                                                            dx,
-                                                                            pe,
-                                                                            ou
-                                                                        }) => {
-                return ou === orgUnit && dx === dataSource && pe === period
-            })
-            const previousData = find(get(ScorecardDataState(orgUnit)), ({
-                                                                             dx,
-                                                                             pe,
-                                                                             ou
-                                                                         }) => {
-                const previousPeriod = new Period().getById(period).lastPeriod;
-                return ou === orgUnit && dx === dataSource && pe === previousPeriod?.id
-            })
-
-            return {
-                current: _get(currentData, ['value']),
-                previous: _get(previousData, ['value'])
-            }
-        }
-        return null
-    }
-})
-
-const ScorecardConfigStateSelector = selectorFamily({
-    key: 'scorecard-state-selector',
-    get: path => ({get}) => {
-        const scorecardId = get(ScorecardIdState)
-        return _get(get(ScorecardConfState(scorecardId)), path)
+const ScorecardConfigDirtySelector = selectorFamily({
+    key: 'scorecard-dirty-state-selector',
+    get: ({key, path}) => ({get}) => {
+        return _get(get(ScorecardConfigDirtyState(key)), path)
     },
-    set: path => ({set, get}, newValue) => {
-        const scorecardId = get(ScorecardIdState)
-        set(ScorecardConfState(scorecardId), prevState => _set(cloneDeep(prevState), path, newValue))
+    set: ({key, path}) => ({get, set}, newValue) => {
+        const object = get(ScorecardConfigDirtyState(key))
+        const newObject = _set(cloneDeep(object), path, newValue)
+        set(ScorecardConfigDirtyState(key), newObject)
     }
 })
 
@@ -172,12 +136,11 @@ const ScorecardViewState = atomFamily({
 export default ScorecardConfState;
 export {
     ScorecardConfigEditState,
-    ScorecardConfigStateSelector,
+    ScorecardConfigDirtyState,
     ScorecardIdState,
     ScorecardSummaryState,
     ScorecardViewState,
-    ScorecardDataState,
-    ScorecardDataStateSelector,
-    ScorecardForceUpdateState,
+    ScorecardRequestId,
     scorecardDataEngine,
+    ScorecardConfigDirtySelector
 }

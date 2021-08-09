@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React, {useMemo} from 'react'
 import {generateRandomValues} from "../../../../../../../shared/utils/utils";
-import {getLegend} from "../../../../../../Admin/Components/ScoreCardManagement/Components/DataConfiguration/utils";
+import {getLegend} from "../../../../ScoreCardManagement/Components/DataConfiguration/utils";
 
 export default function HighlightedIndicator({highlightedIndicator}) {
     const {displayName, legends} = highlightedIndicator ?? {};
