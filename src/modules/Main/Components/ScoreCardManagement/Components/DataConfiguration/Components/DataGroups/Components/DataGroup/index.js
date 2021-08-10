@@ -14,7 +14,7 @@ import {cloneDeep, find, findIndex, flattenDeep, head, isEmpty, last,} from "lod
 import PropTypes from "prop-types";
 import React, {useCallback, useState} from "react";
 import {DragDropContext, Draggable, Droppable} from "react-beautiful-dnd";
-import {useRecoilState, useRecoilValue} from "recoil";
+import {useRecoilCallback, useRecoilState, useRecoilValue} from "recoil";
 import ScorecardIndicator from "../../../../../../../../../../core/models/scorecardIndicator";
 import ScorecardIndicatorGroup from "../../../../../../../../../../core/models/scorecardIndicatorGroup";
 import ScorecardIndicatorHolder from "../../../../../../../../../../core/models/scorecardIndicatorHolder";
@@ -197,9 +197,9 @@ export default function DataGroup({
         );
     };
 
-    const onDragEnd = (result) => {
+    const onDragEnd = useRecoilCallback(({set})=>(result) => {
         const {destination, source} = result || {};
-        setGroup((prevState) =>
+        set(ScorecardConfigDirtySelector({key: 'dataSelection', path}), (prevState) =>
             ScorecardIndicatorGroup.set(
                 prevState,
                 "dataHolders",
@@ -210,7 +210,7 @@ export default function DataGroup({
                 )
             )
         );
-        setScorecardEditorState((prevState) => {
+        set(ScorecardConfigEditState,(prevState) => {
             if (prevState.selectedDataHolderIndex === source?.index) {
                 return {
                     ...prevState,
@@ -219,7 +219,7 @@ export default function DataGroup({
             }
             return prevState;
         });
-    };
+    });
 
     const onDataSourceAdd = (addedDataSources) => {
         //Assigns each of the selected indicator to its own holder

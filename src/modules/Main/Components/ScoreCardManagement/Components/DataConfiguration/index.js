@@ -2,9 +2,9 @@ import i18n from '@dhis2/d2-i18n'
 import {Button, Checkbox} from "@dhis2/ui";
 import AddIcon from "@material-ui/icons/Add";
 import {isEmpty} from "lodash";
-import React, {useCallback} from "react";
+import React from "react";
 import {DragDropContext} from "react-beautiful-dnd";
-import {useRecoilState, useSetRecoilState} from "recoil";
+import {useRecoilCallback, useRecoilState} from "recoil";
 import DataSelection from "../../../../../../core/models/dataSelection";
 import {ScorecardConfigDirtyState, ScorecardConfigEditState,} from "../../../../../../core/state/scorecard";
 import {updateListFromDragAndDrop} from "../../../../../../shared/utils/dnd";
@@ -23,7 +23,6 @@ export default function DataConfigurationScorecardForm() {
     const [targetOnLevels, updateTargetOnLevels] = useRecoilState(
         ScorecardConfigDirtyState("targetOnLevels")
     );
-    const setScorecardEditState = useSetRecoilState(ScorecardConfigEditState);
 
     const {dataGroups: groups} = dataSelection ?? new DataSelection();
 
@@ -37,10 +36,10 @@ export default function DataConfigurationScorecardForm() {
         );
     };
 
-    const onDragEnd = useCallback(
-        (result) => {
+    const onDragEnd = useRecoilCallback(
+        ({set}) => (result) => {
             const {destination, source} = result;
-            updateDataSelection((prevState = []) =>
+            set(ScorecardConfigDirtyState("dataSelection"), (prevState = []) =>
                 DataSelection.set(prevState, "dataGroups", [
                     ...updateListFromDragAndDrop(
                         prevState?.dataGroups,
@@ -49,7 +48,7 @@ export default function DataConfigurationScorecardForm() {
                     ),
                 ])
             );
-            setScorecardEditState((prevState) => {
+            set(ScorecardConfigEditState, (prevState) => {
                 if (prevState.selectedGroupIndex === source?.index) {
                     return {
                         ...prevState,
@@ -71,14 +70,14 @@ export default function DataConfigurationScorecardForm() {
                 >
                     {isEmpty(groups) ? (
                         <div style={{margin: 'auto'}}>
-                                <Button
-                                    onClick={onGroupAdd}
-                                    icon={<AddIcon/>}
-                                    dataTest="scocecard-add-group-button"
-                                    primary
-                                >
-                                    {i18n.t('Add Group')}
-                                </Button>
+                            <Button
+                                onClick={onGroupAdd}
+                                icon={<AddIcon/>}
+                                dataTest="scocecard-add-group-button"
+                                primary
+                            >
+                                {i18n.t('Add Group')}
+                            </Button>
                         </div>
                     ) : (
                         <div className="column h-100">
