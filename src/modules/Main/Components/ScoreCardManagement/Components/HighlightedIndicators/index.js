@@ -46,10 +46,10 @@ export default function HighlightedIndicatorsScorecardForm() {
                             <Button onClick={onAddClick} primary icon={<AddIcon/>}>{i18n.t('Add')}</Button>
                         </div>
                         <div className='row'>
-                            <div className='column pt-32 w-75'>
+                            <div className='col-md-8 pt-32'>
                                 <HighlightedIndicatorsTable/>
                             </div>
-                            <div className='column w-25'>
+                            <div className='col-md-4'>
                                 <div className='pl-16 pt-32'>
                                     <HighlightedDataSourceConfigurationForm/>
                                 </div>

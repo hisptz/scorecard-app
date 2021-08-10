@@ -63,7 +63,6 @@ export default function ScoreCardManagement() {
     const {width, height} = useMediaQuery();
     const history = useHistory();
     const [activeStep, setActiveStep] = useState(steps[0]);
-    const formRef = useRef(HTMLFormElement);
     const Component = activeStep.component;
 
     const resetStates = useRecoilCallback(({reset}) => () => {
@@ -107,8 +106,12 @@ export default function ScoreCardManagement() {
             const errors = validateScorecard(updatedScorecard);
 
             if (!isEmpty(errors)) {
-                console.log(errors)
                 set(ScorecardConfigErrorState, errors)
+                const errorMessage = `Please fill in the required field(s)`
+                show({
+                    message: i18n.t(errorMessage),
+                    type: {info: true}
+                })
             }
 
             if (isEmpty(errors)) {
@@ -150,7 +153,6 @@ export default function ScoreCardManagement() {
     useEffect(() => {
         setScorecardIdState(scorecardId);
         return () => {
-            console.log('Cleaning')
             resetStates();
         };
     }, [scorecardId]);
@@ -189,14 +191,14 @@ export default function ScoreCardManagement() {
                         <div className="column center" style={{flex: 1}}>
                             <div
                                 className="container container-bordered background-white center"
-                                style={{width: width * 0.96, minHeight: height * 0.8}}
+                                style={{width: width * 0.96, minHeight: height * 0.78}}
                             >
                                 <div className="row" style={{height: "100%"}}>
                                     <div
                                         className="column p-16"
                                         style={{height: "100%", justifyContent: "space-between"}}
                                     >
-                                        {<Component formRef={formRef}/>}
+                                        {<Component />}
                                         <ButtonStrip end>
                                             <Button
                                                 disabled={!hasPreviousStep}

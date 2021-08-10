@@ -1,19 +1,19 @@
 import i18n from '@dhis2/d2-i18n'
 import {PeriodType} from "@iapps/period-utilities";
-import PropTypes from 'prop-types'
 import React from "react";
 import {DHIS2ValueTypes} from "../../../../../../../shared/Components/CustomForm/constants";
 import {FormFieldModel} from "../../../../../../../shared/Components/CustomForm/models";
 import GeneralFormField from "./GeneralFormField";
+import '../../../ScorecardManagement.module.css'
 //TODO: Styling using media queries instead
 
 
-export default function GeneralForm({formRef}) {
+export default function GeneralForm() {
     const periodTypes = new PeriodType().get();
 
     return (
-        <form ref={formRef} >
-            <div className="column">
+        <form>
+            <div className="col-12">
                 <GeneralFormField
                     field={
                         new FormFieldModel({
@@ -47,7 +47,7 @@ export default function GeneralForm({formRef}) {
                         })
                     }
                 />
-                <div className="w-25">
+                <div className="col-md-4">
                     <GeneralFormField
                         field={
                             new FormFieldModel({
@@ -77,7 +77,7 @@ export default function GeneralForm({formRef}) {
                         })
                     }
                 />
-                <div className="w-25">
+                <div className="col-sm-6 col-xl-4">
                     <GeneralFormField
                         field={
                             new FormFieldModel({
@@ -94,7 +94,7 @@ export default function GeneralForm({formRef}) {
                         }
                     />
                 </div>
-                <div className="w-25">
+                <div className="col-sm-6 col-xl-4">
                     <GeneralFormField
                         field={
                             new FormFieldModel({
@@ -116,7 +116,5 @@ export default function GeneralForm({formRef}) {
     );
 }
 
-GeneralForm.propTypes = {
-    formRef: PropTypes.instanceOf(HTMLFormElement)
-};
+GeneralForm.propTypes = {};
 

@@ -26,7 +26,8 @@ export default class Scorecard extends SavableDataModel {
             publicAccess: new ScorecardAccess(),
             userGroupAccesses: [],
             userAccesses: [],
-            user: {}
+            user: {},
+            targetOnLevels: false
         }
     }
 

@@ -30,23 +30,27 @@ export default function SelectedDataSourceConfigurationForm() {
     }
 
     return (
-        selectedDataHolder?.dataSources?.map((dataSource, index) => {
-            return (
-                <div key={dataSource.id} className='column w-50 data-source-form-container' style={{height: '100%'}}>
-                    <div className='container-bordered'>
-                        <div className='column'>
-                            <div className='p-16'>
-                                <DataSourceConfigurationForm
-                                    defaultValues={dataSource}
-                                    legendDefinitions={legendDefinitions}
-                                    onFormChange={onFormChange(index)}
-                                />
+        <div className='row-media' >
+            {
+                selectedDataHolder?.dataSources?.map((dataSource, index) => {
+                    return (
+                        <div key={dataSource.id} className='col-lg-6 col-md-6 data-source-form-container' style={{height: '100%'}}>
+                            <div className='container-bordered'>
+                                <div className='column'>
+                                    <div className='p-16'>
+                                        <DataSourceConfigurationForm
+                                            defaultValues={dataSource}
+                                            legendDefinitions={legendDefinitions}
+                                            onFormChange={onFormChange(index)}
+                                        />
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            )
-        }) || null
+                    )
+                }) || null
+            }
+        </div>
     )
 }
 
