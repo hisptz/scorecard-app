@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-08-06T12:05:28.309Z\n"
-"PO-Revision-Date: 2021-08-06T12:05:28.309Z\n"
+"POT-Creation-Date: 2021-08-10T09:51:21.753Z\n"
+"PO-Revision-Date: 2021-08-10T09:51:21.753Z\n"
 
 msgid "Welcome to Scorecard App!"
 msgstr "Welcome to Scorecard App!"
@@ -77,17 +77,35 @@ msgstr "Add Item"
 msgid "Add Data source"
 msgstr "Add Data source"
 
+msgid "Configure Data Sources"
+msgstr "Configure Data Sources"
+
+msgid "Add a data source group"
+msgstr "Add a data source group"
+
+msgid "Modify the group name"
+msgstr "Modify the group name"
+
+msgid "Add different data sources to a group"
+msgstr "Add different data sources to a group"
+
+msgid "Click on a data source to configure it"
+msgstr "Click on a data source to configure it"
+
+msgid "View the changes on the preview panel above"
+msgstr "View the changes on the preview panel above"
+
+msgid "Select a data source to configure"
+msgstr "Select a data source to configure"
+
+msgid "Add Group"
+msgstr "Add Group"
+
 msgid "Set Target on Levels"
 msgstr "Set Target on Levels"
 
 msgid "Groups"
 msgstr "Groups"
-
-msgid "Add a group to start"
-msgstr "Add a group to start"
-
-msgid "Add Group"
-msgstr "Add Group"
 
 msgid "Title"
 msgstr "Title"

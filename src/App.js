@@ -2,6 +2,7 @@ import {DataStoreProvider} from "@dhis2/app-service-datastore";
 import React, {Suspense} from "react";
 import {ErrorBoundary} from "react-error-boundary";
 import {RecoilRoot} from "recoil";
+import './media-queries.css'
 import "./App.css";
 import Router from "./modules/Router";
 import {FullPageLoader} from "./shared/Components/Loaders";

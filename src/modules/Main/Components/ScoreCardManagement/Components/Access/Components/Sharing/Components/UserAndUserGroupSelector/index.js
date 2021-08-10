@@ -36,7 +36,7 @@ UserAndUserGroupsMenu.propTypes = {
 };
 
 
-export default function UserAndUserGroupSelector({selected, onChange, selectedList=[]}) {
+export default function UserAndUserGroupSelector({selected, onChange, selectedList = []}) {
     const [value, setValue] = useState(selected?.displayName);
     const {data, loading, error, setKeyword} = useSearchUserAndUserGroup(value)
     const reference = useRef()

@@ -1,5 +1,5 @@
 import {Period} from "@iapps/period-utilities";
-import {cloneDeep, get as _get, set as _set} from "lodash";
+import {cloneDeep, get as _get, isEmpty, set as _set} from "lodash";
 import {atom, atomFamily, selector, selectorFamily} from "recoil";
 import getScorecard from "../../shared/services/getScorecard";
 import getScorecardSummary from "../../shared/services/getScorecardSummary";
@@ -43,6 +43,7 @@ const scorecardDataEngine = new ScorecardDataEngine()
 
 const ScorecardIdState = atom({
     key: 'scorecard-id',
+    default: null
 })
 
 const ScorecardSummaryState = atom({
@@ -87,7 +88,8 @@ const ScorecardConfigDirtyState = atomFamily({
         key: 'scorecard-state-default',
         get: path => ({get}) => {
             const scorecardId = get(ScorecardIdState)
-            return _get(get(ScorecardConfState(scorecardId)), path)
+            if (!isEmpty(scorecardId)) return _get(get(ScorecardConfState(scorecardId)), path)
+            return _get(new Scorecard(defaultValue), path)
         },
     }),
 })
@@ -98,11 +100,28 @@ const ScorecardConfigDirtySelector = selectorFamily({
         return _get(get(ScorecardConfigDirtyState(key)), path)
     },
     set: ({key, path}) => ({get, set}, newValue) => {
+
         const object = get(ScorecardConfigDirtyState(key))
         const newObject = _set(cloneDeep(object), path, newValue)
         set(ScorecardConfigDirtyState(key), newObject)
     }
 })
+
+const ScorecardConfigErrorState = atom({
+    key: 'scorecard-config-error-state',
+    default: {}
+})
+
+const ScorecardConfigErrorSelector = selectorFamily({
+    key: 'scorecard-config-error-selector',
+    get: (path) => ({get}) => {
+        return _get(get(ScorecardConfigErrorState), path)
+    },
+    set: (path) => ({set}, newValue) => {
+        set(ScorecardConfigErrorState, prevValue => _set(prevValue, path, newValue))
+    }
+})
+
 
 const ScorecardConfigEditState = atom({
     key: 'scorecard-edit-state',
@@ -142,5 +161,7 @@ export {
     ScorecardViewState,
     ScorecardRequestId,
     scorecardDataEngine,
-    ScorecardConfigDirtySelector
+    ScorecardConfigDirtySelector,
+    ScorecardConfigErrorSelector,
+    ScorecardConfigErrorState
 }

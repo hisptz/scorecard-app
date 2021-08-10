@@ -1,8 +1,8 @@
 import i18n from '@dhis2/d2-i18n'
-import {Button, Checkbox, colors} from "@dhis2/ui";
+import {Button, Checkbox} from "@dhis2/ui";
 import AddIcon from "@material-ui/icons/Add";
 import {isEmpty} from "lodash";
-import React, {useCallback, useEffect, useState} from "react";
+import React, {useCallback} from "react";
 import {DragDropContext} from "react-beautiful-dnd";
 import {useRecoilState, useSetRecoilState} from "recoil";
 import DataSelection from "../../../../../../core/models/dataSelection";
@@ -10,6 +10,7 @@ import {ScorecardConfigDirtyState, ScorecardConfigEditState,} from "../../../../
 import {updateListFromDragAndDrop} from "../../../../../../shared/utils/dnd";
 import DataGroups from "./Components/DataGroups";
 import DataSourceConfiguration from "./Components/DataGroups/Components/DataSourceConfiguration";
+import Instructions from "./Components/Instructions";
 import PreviewScorecardTable from "./Components/PreviewScorecardTable";
 import {generateNewGroupData} from "./utils";
 
@@ -62,52 +63,67 @@ export default function DataConfigurationScorecardForm() {
 
 
     return (
-        <div className="column">
-            <div className="row" style={{height: "100%"}}>
-                <div className="column p-16 w-25">
-                    <div
-                        className=" container-bordered"
-                        style={{minHeight: 500, height: "100%"}}
-                    >
-                        <div className="row space-between pr-16 pt-16">
-                            <p style={{margin: 0}} className="pl-16">
-                                {i18n.t('Set Target on Levels')}
-                            </p>
-                            <Checkbox
-                                checked={targetOnLevels}
-                                onChange={() => updateTargetOnLevels((prevState) => !prevState)}
-                            />
+        <div className="row" style={{height: "100%"}}>
+            <div className="col-md-4 col-sm-6 p-16 ">
+                <div
+                    className=" container-bordered column"
+                    style={{minHeight: "100%"}}
+                >
+                    {isEmpty(groups) ? (
+                        <div style={{margin: 'auto'}}>
+                                <Button
+                                    onClick={onGroupAdd}
+                                    icon={<AddIcon/>}
+                                    dataTest="scocecard-add-group-button"
+                                    primary
+                                >
+                                    {i18n.t('Add Group')}
+                                </Button>
                         </div>
-                        <h4 className="pl-16">{i18n.t('Groups')}</h4>
-                        {isEmpty(groups) ? (
-                            <div className="column center text-center">
-                                <p style={{color: colors.grey700}}>{i18n.t('Add a group to start')}</p>
+                    ) : (
+                        <div className="column h-100">
+                            <div className="row space-between pr-16 pt-16 ">
+                                <p style={{margin: 0}} className="pl-16">
+                                    {i18n.t('Set Target on Levels')}
+                                </p>
+                                <Checkbox
+                                    checked={targetOnLevels}
+                                    onChange={() => updateTargetOnLevels((prevState) => !prevState)}
+                                />
                             </div>
-                        ) : (
+                            <h4 className="pl-16">{i18n.t('Groups')}</h4>
                             <DragDropContext onDragEnd={onDragEnd}>
-                                <DataGroups />
+                                <DataGroups/>
                             </DragDropContext>
-                        )}
-                        <div className="p-8 column" style={{alignItems: "start"}}>
-                            <Button
-                                onClick={onGroupAdd}
-                                icon={<AddIcon/>}
-                                dataTest="scocecard-add-group-button"
-                            >
-                                {i18n.t('Add Group')}
-                            </Button>
+                            <div className="p-8 column" style={{alignItems: "start"}}>
+                                <Button
+                                    onClick={onGroupAdd}
+                                    icon={<AddIcon/>}
+                                    dataTest="scocecard-add-group-button"
+                                >
+                                    {i18n.t('Add Group')}
+                                </Button>
+                            </div>
                         </div>
+                    )}
+                </div>
+            </div>
+            <div className="col-md-8 p-16 h-100">
+                {!isEmpty(groups) &&
+                <div className="row pb-16">
+                    <div className="column">
+                        <PreviewScorecardTable/>
                     </div>
                 </div>
-                <div className="w-75 p-16">
-                    <div className="row pb-16">
-                        <div className="column">
-                            {!isEmpty(groups) && <PreviewScorecardTable/>}
-                        </div>
-                    </div>
-                    <div className="row flex-1">
-                        <DataSourceConfiguration/>
-                    </div>
+                }
+                <div className="column h-100">
+                    {
+                        isEmpty(groups) ?
+                            <div style={{margin: 'auto'}}>
+                                <Instructions/>
+                            </div> :
+                            <DataSourceConfiguration/>
+                    }
                 </div>
             </div>
         </div>

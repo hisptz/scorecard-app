@@ -1,7 +1,7 @@
 import React from 'react'
 import {useRecoilValue} from "recoil";
 import {ScorecardConfigEditState} from "../../../../../../../../../../core/state/scorecard";
-import Instructions from "../../../Instructions";
+import {DataSourceInstructions} from "../../../Instructions";
 import SelectedDataSourceConfigurationForm from "./Components/Form";
 
 export default function DataSourceConfiguration() {
@@ -10,8 +10,8 @@ export default function DataSourceConfiguration() {
     return (
         !isNaN(selectedDataHolderIndex) ?
             <SelectedDataSourceConfigurationForm/> :
-            <div style={{margin: 'auto'}}>
-                <Instructions/>
+            <div className='row center align-items-center' >
+                <DataSourceInstructions/>
             </div>
     )
 }
