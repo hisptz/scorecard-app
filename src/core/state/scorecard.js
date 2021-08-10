@@ -1,5 +1,5 @@
 import {Period} from "@iapps/period-utilities";
-import {cloneDeep, get as _get, set as _set} from "lodash";
+import {cloneDeep, get as _get, isEmpty, set as _set} from "lodash";
 import {atom, atomFamily, selector, selectorFamily} from "recoil";
 import getScorecard from "../../shared/services/getScorecard";
 import getScorecardSummary from "../../shared/services/getScorecardSummary";
@@ -43,6 +43,7 @@ const scorecardDataEngine = new ScorecardDataEngine()
 
 const ScorecardIdState = atom({
     key: 'scorecard-id',
+    default: null
 })
 
 const ScorecardSummaryState = atom({
@@ -87,7 +88,8 @@ const ScorecardConfigDirtyState = atomFamily({
         key: 'scorecard-state-default',
         get: path => ({get}) => {
             const scorecardId = get(ScorecardIdState)
-            return _get(get(ScorecardConfState(scorecardId)), path)
+            if (!isEmpty(scorecardId)) return _get(get(ScorecardConfState(scorecardId)), path)
+            return _get(new Scorecard(defaultValue), path)
         },
     }),
 })

@@ -5,7 +5,7 @@ import {Step, StepLabel, Stepper} from "@material-ui/core";
 import {findIndex, fromPairs} from "lodash";
 import React, {Suspense, useEffect, useMemo, useRef, useState} from "react";
 import {useHistory, useParams} from "react-router-dom";
-import {useRecoilCallback, useRecoilValue, useResetRecoilState, useSetRecoilState, waitForAll} from "recoil";
+import {useRecoilCallback, useRecoilValue, useSetRecoilState, waitForAll} from "recoil";
 import Scorecard from "../../../../core/models/scorecard";
 import ScorecardConfState, {
     ScorecardConfigDirtyState,
@@ -45,33 +45,12 @@ const steps = [
     },
 ];
 
-const keys = [
-    'dataSelection',
-    'description',
-    'highlightedIndicators',
-    'periodSelection',
-    'legendDefinitions',
-    'periodType',
-    'publicAccess',
-    'options',
-    'orgUnitSelection',
-    'title',
-    'subtitle',
-    'userGroupAccesses',
-    'userAccesses',
-    'user',
-    'id',
-    'additionalLabels',
-    'customHeader'
-]
+const keys = Object.keys(new Scorecard())
 
 export default function ScoreCardManagement() {
     const {id: scorecardId} = useParams();
     const user = useRecoilValue(UserState);
     const setScorecardIdState = useSetRecoilState(ScorecardIdState);
-    const resetScorecardEditState = useResetRecoilState(ScorecardConfigEditState);
-    const resetScorecardIdState = useResetRecoilState(ScorecardIdState);
-    const resetScorecardConfState = useResetRecoilState(ScorecardConfState(scorecardId))
     const {update} = useUpdateScorecard(scorecardId);
     const {add} = useAddScorecard();
     const {show} = useAlert(
@@ -85,8 +64,16 @@ export default function ScoreCardManagement() {
     const formRef = useRef(HTMLFormElement);
     const Component = activeStep.component;
 
+    const resetStates = useRecoilCallback(({reset}) => () => {
+        reset(ScorecardIdState)
+        reset(ScorecardConfState(scorecardId))
+        reset(ScorecardConfigEditState)
+        for (const key of keys) {
+            reset(ScorecardConfigDirtyState(key))
+        }
+    })
 
-    const saveData = async (updatedScorecard) => {
+    const createNewScorecard = async (updatedScorecard) => {
         await Scorecard.save(updatedScorecard, add, user);
         show({
             message: 'Scorecard added successfully',
@@ -104,37 +91,25 @@ export default function ScoreCardManagement() {
         history.goBack();
     }
 
-    const resetDirtyStates =  async (resetFunction) => {
-        for (const key in keys) {
-            await resetFunction(ScorecardConfigDirtyState(key))
-        }
-    }
-
-    const onSave = useRecoilCallback(({snapshot, reset}) => async () => {
+    const onSave = useRecoilCallback(({snapshot}) => async () => {
         setSaving(true)
         try {
-            const updatedScorecard = (snapshot.getLoadable(waitForAll(fromPairs(keys?.map(key => ([key, ScorecardConfigDirtyState(key)])))))).contents;
+            const updatedScorecard = (snapshot.getLoadable(
+                    waitForAll(
+                        fromPairs(keys?.map(key => ([key, ScorecardConfigDirtyState(key)])))
+                    )
+                )
+            ).contents;
             if (scorecardId) {
                 await updateData(updatedScorecard);
-                await resetDirtyStates(reset)
             } else {
-                await saveData(updatedScorecard)
-                await resetDirtyStates(reset)
+                await createNewScorecard(updatedScorecard)
             }
         } catch (e) {
             console.log(e)
         }
         setSaving(false)
     })
-
-    useEffect(() => {
-        setScorecardIdState(scorecardId);
-        return () => {
-            resetScorecardIdState();
-            resetScorecardEditState();
-            resetScorecardConfState()
-        };
-    }, [scorecardId]);
 
     const onNextStep = () => {
         if (!hasNextStep) {
@@ -157,6 +132,14 @@ export default function ScoreCardManagement() {
     const onCancel = () => {
         history.goBack();
     };
+
+    useEffect(() => {
+        setScorecardIdState(scorecardId);
+        return () => {
+            console.log('Cleaning')
+            resetStates();
+        };
+    }, [scorecardId]);
 
 
     const hasNextStep = useMemo(
