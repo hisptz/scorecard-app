@@ -16,6 +16,7 @@ export default class Scorecard extends SavableDataModel {
             subtitle: '',
             description: '',
             customHeader: '',
+            periodType: '',
             legendDefinitions: [],
             dataSelection: new DataSelection(),
             orgUnitSelection: new OrgUnitSelection(),

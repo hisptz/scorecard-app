@@ -100,11 +100,28 @@ const ScorecardConfigDirtySelector = selectorFamily({
         return _get(get(ScorecardConfigDirtyState(key)), path)
     },
     set: ({key, path}) => ({get, set}, newValue) => {
+
         const object = get(ScorecardConfigDirtyState(key))
         const newObject = _set(cloneDeep(object), path, newValue)
         set(ScorecardConfigDirtyState(key), newObject)
     }
 })
+
+const ScorecardConfigErrorState = atom({
+    key: 'scorecard-config-error-state',
+    default: {}
+})
+
+const ScorecardConfigErrorSelector = selectorFamily({
+    key: 'scorecard-config-error-selector',
+    get: (path) => ({get}) => {
+        return _get(get(ScorecardConfigErrorState), path)
+    },
+    set: (path) => ({set}, newValue) => {
+        set(ScorecardConfigErrorState, prevValue => _set(prevValue, path, newValue))
+    }
+})
+
 
 const ScorecardConfigEditState = atom({
     key: 'scorecard-edit-state',
@@ -144,5 +161,7 @@ export {
     ScorecardViewState,
     ScorecardRequestId,
     scorecardDataEngine,
-    ScorecardConfigDirtySelector
+    ScorecardConfigDirtySelector,
+    ScorecardConfigErrorSelector,
+    ScorecardConfigErrorState
 }

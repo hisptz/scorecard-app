@@ -2,7 +2,7 @@ import {useAlert} from "@dhis2/app-runtime";
 import i18n from "@dhis2/d2-i18n";
 import {Button, ButtonStrip} from "@dhis2/ui";
 import {Step, StepLabel, Stepper} from "@material-ui/core";
-import {findIndex, fromPairs} from "lodash";
+import {findIndex, fromPairs, isEmpty} from "lodash";
 import React, {Suspense, useEffect, useMemo, useRef, useState} from "react";
 import {useHistory, useParams} from "react-router-dom";
 import {useRecoilCallback, useRecoilValue, useSetRecoilState, waitForAll} from "recoil";
@@ -10,6 +10,7 @@ import Scorecard from "../../../../core/models/scorecard";
 import ScorecardConfState, {
     ScorecardConfigDirtyState,
     ScorecardConfigEditState,
+    ScorecardConfigErrorState,
     ScorecardIdState,
 } from "../../../../core/state/scorecard";
 import {UserState} from "../../../../core/state/user";
@@ -21,6 +22,7 @@ import DataConfigurationScorecardForm from "./Components/DataConfiguration";
 import GeneralScorecardForm from "./Components/General";
 import HighlightedIndicatorsScorecardForm from "./Components/HighlightedIndicators";
 import OptionsScorecardForm from "./Components/Options";
+import validateScorecard from "./services/validator";
 
 const steps = [
     {
@@ -68,6 +70,7 @@ export default function ScoreCardManagement() {
         reset(ScorecardIdState)
         reset(ScorecardConfState(scorecardId))
         reset(ScorecardConfigEditState)
+        reset(ScorecardConfigErrorState)
         for (const key of keys) {
             reset(ScorecardConfigDirtyState(key))
         }
@@ -91,7 +94,7 @@ export default function ScoreCardManagement() {
         history.goBack();
     }
 
-    const onSave = useRecoilCallback(({snapshot}) => async () => {
+    const onSave = useRecoilCallback(({snapshot, set}) => async () => {
         setSaving(true)
         try {
             const updatedScorecard = (snapshot.getLoadable(
@@ -100,10 +103,21 @@ export default function ScoreCardManagement() {
                     )
                 )
             ).contents;
-            if (scorecardId) {
-                await updateData(updatedScorecard);
-            } else {
-                await createNewScorecard(updatedScorecard)
+
+            const errors = validateScorecard(updatedScorecard);
+
+            if (!isEmpty(errors)) {
+                console.log(errors)
+                set(ScorecardConfigErrorState, errors)
+            }
+
+            if (isEmpty(errors)) {
+
+                if (scorecardId) {
+                    await updateData(updatedScorecard);
+                } else {
+                    await createNewScorecard(updatedScorecard)
+                }
             }
         } catch (e) {
             console.log(e)
