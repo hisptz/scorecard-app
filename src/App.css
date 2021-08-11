@@ -177,6 +177,7 @@ body {
     text-align: center;
 }
 
+
 .container-bordered {
     box-sizing: border-box;
     border-radius: 4px;
@@ -392,6 +393,10 @@ table{
     display: grid;
     grid-template-columns: repeat(4, 1fr);
 }
+.grid-2{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
 
 .selection-card{
     width: 100%;
@@ -462,4 +467,9 @@ td.jsx-1369417008::selection{
 
 .scorecard-org-unit-cell{
     background: #E8EDF2;
+}
+
+.large-modal{
+    width: 75vw !important;
+    height: 90vh !important;
 }

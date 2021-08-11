@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-08-10T09:51:21.753Z\n"
-"PO-Revision-Date: 2021-08-10T09:51:21.753Z\n"
+"POT-Creation-Date: 2021-08-11T09:33:32.433Z\n"
+"PO-Revision-Date: 2021-08-11T09:33:32.433Z\n"
 
 msgid "Welcome to Scorecard App!"
 msgstr "Welcome to Scorecard App!"
@@ -196,6 +196,30 @@ msgstr "Decreased from last period"
 
 msgid "There are no configured indicators for this scorecard"
 msgstr "There are no configured indicators for this scorecard"
+
+msgid "Column"
+msgstr "Column"
+
+msgid "Series"
+msgstr "Series"
+
+msgid "Row"
+msgstr "Row"
+
+msgid "Category"
+msgstr "Category"
+
+msgid "Filter"
+msgstr "Filter"
+
+msgid "Layout"
+msgstr "Layout"
+
+msgid "Organisation Unit(s)"
+msgstr "Organisation Unit(s)"
+
+msgid "Period(s)"
+msgstr "Period(s)"
 
 msgid "Name"
 msgstr "Name"
