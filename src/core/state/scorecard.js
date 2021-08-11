@@ -3,6 +3,7 @@ import {cloneDeep, get as _get, isEmpty, set as _set} from "lodash";
 import {atom, atomFamily, selector, selectorFamily} from "recoil";
 import getScorecard from "../../shared/services/getScorecard";
 import getScorecardSummary from "../../shared/services/getScorecardSummary";
+import {getHoldersFromGroups} from "../../shared/utils/utils";
 import ScorecardAccessType from "../constants/scorecardAccessType";
 import OrgUnitSelection from "../models/orgUnitSelection";
 import Scorecard from "../models/scorecard";
@@ -10,6 +11,7 @@ import ScorecardAccess from "../models/scorecardAccess";
 import ScorecardDataEngine from "../models/scorecardData";
 import ScorecardOptions from "../models/scorecardOptions";
 import {EngineState} from "./engine";
+import {PeriodResolverState} from "./period";
 
 const defaultValue = {
     legendDefinitions: [
@@ -151,6 +153,40 @@ const ScorecardViewState = atomFamily({
     })
 })
 
+const ScorecardTableOrientationState = atom({
+    key: 'scorecard-table-orientation-state',
+    default: 'orgUnitVsData'
+})
+
+const ScorecardTableConfigState = selector({
+    key: 'scorecard-table-details',
+    get: ({get}) => {
+        const {orgUnits} = get(ScorecardViewState('orgUnitSelection'));
+        const {periods} = get(PeriodResolverState)
+        const {dataGroups} = get(ScorecardViewState)
+        const dataHolders = getHoldersFromGroups(dataGroups)
+        const orientation = get(ScorecardTableOrientationState)
+
+        return {
+            rows: orgUnits,
+            columns: [
+                {
+                    values: dataGroups,
+                    displayNamePath: 'title'
+                },
+                {
+                    values: dataHolders,
+                    displayNamePath: 'displayName'
+                },
+                {
+                    values: periods,
+                    displayNamePath: 'displayName'
+                }
+            ]
+        }
+    }
+})
+
 
 export default ScorecardConfState;
 export {
@@ -163,5 +199,7 @@ export {
     scorecardDataEngine,
     ScorecardConfigDirtySelector,
     ScorecardConfigErrorSelector,
-    ScorecardConfigErrorState
+    ScorecardConfigErrorState,
+    ScorecardTableOrientationState,
+    ScorecardTableConfigState
 }

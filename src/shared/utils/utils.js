@@ -1,4 +1,4 @@
-import {capitalize, snakeCase} from "lodash";
+import {capitalize, flattenDeep, snakeCase} from "lodash";
 import ScorecardLegend from "../../core/models/scorecardLegend";
 
 
@@ -48,13 +48,23 @@ export function generateLegendDefaults(legendDefinition = [], weight) {
     return []
 }
 
-export function updatePager(pager, itemListLength){
+
+export function getHoldersFromGroups(dataGroups = []) {
+    return flattenDeep(dataGroups?.map(({dataHolders}) => dataHolders) ?? [])
+}
+
+export function getDataSourcesFromGroups(dataGroups) {
+    const dataHolders = getHoldersFromGroups(dataGroups)
+    return flattenDeep(dataHolders?.map(({dataSources}) => dataSources))
+}
+
+export function updatePager(pager, itemListLength) {
     const {page, pageSize} = pager;
 
     return {
         page,
         pageSize,
-        pageCount: Math.ceil(itemListLength/pageSize),
+        pageCount: Math.ceil(itemListLength / pageSize),
         total: itemListLength
     }
 }

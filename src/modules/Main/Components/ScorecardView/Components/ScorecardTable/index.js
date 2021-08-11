@@ -23,6 +23,7 @@ import TableLoader from "./Components/TableLoader";
 import { getTableWidth } from "./services/utils";
 
 export default function ScorecardTable({ orgUnits, nested }) {
+  const [tableOrientation, setTableOrientation] = useState('orgUnitVsData');
   const { width: screenWidth } = useMediaQuery();
   const { dataGroups } =
     useRecoilValue(ScorecardConfigDirtyState("dataSelection")) ?? {};
