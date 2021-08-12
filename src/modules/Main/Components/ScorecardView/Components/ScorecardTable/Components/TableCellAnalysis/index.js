@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import {Button, ButtonStrip, Modal, ModalActions, ModalContent, ModalTitle} from '@dhis2/ui'
+import {Button, Chip, Modal, ModalActions, ModalContent, ModalTitle} from '@dhis2/ui'
 import DescriptionIcon from '@material-ui/icons/Description';
 import ChartIcon from '@material-ui/icons/Equalizer';
 import TableChartIcon from '@material-ui/icons/TableChart';
@@ -63,14 +63,14 @@ export default function TableCellAnalysis({onClose, dataHolder}) {
                 <>
                     <SelectedView dimensions={dimensions}/>
                 </>
-                <ButtonStrip>
+                <div>
                     {
                         viewTypes?.map((type) => (
-                            <Button onClick={() => setViewType(type)} key={type?.name}
-                                    icon={type?.icon}>{type?.displayName}</Button>
+                            <Chip selected={type?.name === viewType?.name}  onClick={() => setViewType(type)} key={type?.name}
+                                    icon={type?.icon}>{type?.displayName}</Chip>
                         ))
                     }
-                </ButtonStrip>
+                </div>
             </ModalContent>
             <ModalActions>
                 <Button onClick={onClose}>Cancel</Button>

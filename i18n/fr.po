@@ -225,7 +225,7 @@ msgid "Period(s)"
 msgstr "Period(s)"
 
 msgid "Table"
-msgstr "Table"
+msgstr "Tableau"
 
 msgid "Chart"
 msgstr "Chart"
