@@ -1,6 +1,10 @@
 import {Period} from "@iapps/period-utilities";
 import {cloneDeep, get as _get, isEmpty, set as _set} from "lodash";
 import {atom, atomFamily, selector, selectorFamily} from "recoil";
+import {
+    getTableWidthWithDataGroups,
+    getTableWidthWithOrgUnit
+} from "../../modules/Main/Components/ScorecardView/Components/ScorecardTable/services/utils";
 import getScorecard from "../../shared/services/getScorecard";
 import getScorecardSummary from "../../shared/services/getScorecardSummary";
 import ScorecardAccessType from "../constants/scorecardAccessType";
@@ -10,6 +14,7 @@ import ScorecardAccess from "../models/scorecardAccess";
 import ScorecardDataEngine from "../models/scorecardData";
 import ScorecardOptions from "../models/scorecardOptions";
 import {EngineState} from "./engine";
+import {PeriodResolverState} from "./period";
 
 const defaultValue = {
     legendDefinitions: [
@@ -151,6 +156,39 @@ const ScorecardViewState = atomFamily({
     })
 })
 
+const ScorecardTableOrientationState = atom({
+    key: 'scorecard-table-orientation-state',
+    default: 'orgUnitsVsData'
+})
+
+const ScorecardTableConfigState = selector({
+    key: 'scorecard-table-details',
+    get: ({get}) => {
+        const orientation = get(ScorecardTableOrientationState)
+        const periods = get(PeriodResolverState)
+        const {dataGroups} = get(ScorecardViewState('dataSelection'))
+        const {orgUnits} = get(ScorecardViewState('orgUnitSelection'))
+
+
+        return orientation === 'orgUnitsVsData' ? {
+            rows: 'orgUnits',
+            columns: [
+                'groups',
+                'data',
+                'periods'
+            ],
+            tableWidth: getTableWidthWithDataGroups(periods, dataGroups)
+        } : {
+            rows: 'data',
+            columns: [
+                'orgUnits',
+                'periods'
+            ],
+            tableWidth: getTableWidthWithOrgUnit(periods, orgUnits)
+        }
+    }
+})
+
 
 export default ScorecardConfState;
 export {
@@ -163,5 +201,7 @@ export {
     scorecardDataEngine,
     ScorecardConfigDirtySelector,
     ScorecardConfigErrorSelector,
-    ScorecardConfigErrorState
+    ScorecardConfigErrorState,
+    ScorecardTableOrientationState,
+    ScorecardTableConfigState
 }

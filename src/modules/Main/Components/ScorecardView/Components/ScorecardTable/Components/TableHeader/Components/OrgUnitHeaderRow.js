@@ -1,18 +1,18 @@
-import i18n from '@dhis2/d2-i18n'
-import {DataTableCell, DataTableRow, InputField} from "@dhis2/ui";
-import {debounce} from 'lodash'
-import PropTypes from 'prop-types'
+import i18n from "@dhis2/d2-i18n";
+import {DataTableCell, DataTableRow, InputField, Tooltip} from "@dhis2/ui";
+import {debounce} from "lodash";
+import PropTypes from "prop-types";
 import React, {useEffect, useState} from "react";
 import {useRecoilState, useRecoilValue} from "recoil";
+import {DraggableItems} from "../../../../../../../../../core/constants/draggables";
 import {PeriodResolverState} from "../../../../../../../../../core/state/period";
-import {
-    ScorecardConfigDirtyState,
-    ScorecardTableOrientationState,
-    ScorecardViewState
-} from "../../../../../../../../../core/state/scorecard";
+import {ScorecardTableOrientationState, ScorecardViewState} from "../../../../../../../../../core/state/scorecard";
+import DraggableCell from "../../DraggableCell";
+import DroppableCell from "../../DroppableCell";
 
-export default function GroupsHeaderRow({nested}) {
-    const {dataGroups} = useRecoilValue(ScorecardConfigDirtyState('dataSelection')) ?? {}
+
+export default function OrgUnitHeaderRow({nested}) {
+    const {orgUnits} = useRecoilValue(ScorecardViewState('orgUnitSelection'))
     const periods = useRecoilValue(PeriodResolverState) ?? []
     const [keyword, setKeyword] = useRecoilState(ScorecardViewState('orgUnitSearchKeyword'))
     const orientation = useRecoilValue(ScorecardTableOrientationState)
@@ -35,10 +35,14 @@ export default function GroupsHeaderRow({nested}) {
                 }
             </DataTableCell>
             {
-                dataGroups?.map(({title, id, dataHolders}) => (
+                orgUnits?.map(({displayName, id}) => (
                     <DataTableCell fixed className='scorecard-table-header' align='center' bordered
-                                   colSpan={`${(dataHolders?.length ?? 1) * (periods?.length ?? 1)}`} key={id}>
-                        {title}
+                                   colSpan={`${(periods?.length ?? 1)}`} key={id}>
+                        <Tooltip content={i18n.t('Drag to row headers to change layout ')}>
+                        <DroppableCell accept={[DraggableItems.DATA_ROW]}>
+                            <DraggableCell label={displayName} type={DraggableItems.ORG_UNIT_COLUMN}/>
+                        </DroppableCell>
+                        </Tooltip>
                     </DataTableCell>
                 ))
             }
@@ -46,7 +50,6 @@ export default function GroupsHeaderRow({nested}) {
     )
 }
 
-GroupsHeaderRow.propTypes = {
+OrgUnitHeaderRow.propTypes = {
     nested: PropTypes.bool.isRequired
 };
-

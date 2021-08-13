@@ -177,7 +177,6 @@ body {
     text-align: center;
 }
 
-
 .container-bordered {
     box-sizing: border-box;
     border-radius: 4px;
@@ -472,4 +471,8 @@ td.jsx-1369417008::selection{
 .large-modal{
     width: 75vw !important;
     height: 90vh !important;
+}
+
+.p-0{
+    padding: 0 !important;
 }

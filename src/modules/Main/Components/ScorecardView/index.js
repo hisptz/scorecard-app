@@ -9,6 +9,7 @@ import ScorecardLegendsView from "./Components/ScorecardLegendsView";
 import ScorecardTable from "./Components/ScorecardTable";
 import ScorecardViewHeader from "./Components/ScorecardViewHeader";
 
+
 export default function ScorecardView() {
     const {id: scorecardId} = useParams();
     const setScorecardIdState = useSetRecoilState(ScorecardIdState);
@@ -30,6 +31,7 @@ export default function ScorecardView() {
                 <ScorecardHeader/>
                 <ScorecardLegendsView/>
                 <HighlightedIndicatorsView/>
+
                 <div className="column align-items-center pt-16 flex-1">
                     <Suspense fallback={<FullPageLoader/>}>
                         <ScorecardTable
