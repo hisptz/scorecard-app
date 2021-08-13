@@ -1,9 +1,12 @@
 import {Period} from "@iapps/period-utilities";
 import {cloneDeep, get as _get, isEmpty, set as _set} from "lodash";
 import {atom, atomFamily, selector, selectorFamily} from "recoil";
+import {
+    getTableWidthWithDataGroups,
+    getTableWidthWithOrgUnit
+} from "../../modules/Main/Components/ScorecardView/Components/ScorecardTable/services/utils";
 import getScorecard from "../../shared/services/getScorecard";
 import getScorecardSummary from "../../shared/services/getScorecardSummary";
-import {getHoldersFromGroups} from "../../shared/utils/utils";
 import ScorecardAccessType from "../constants/scorecardAccessType";
 import OrgUnitSelection from "../models/orgUnitSelection";
 import Scorecard from "../models/scorecard";
@@ -155,34 +158,33 @@ const ScorecardViewState = atomFamily({
 
 const ScorecardTableOrientationState = atom({
     key: 'scorecard-table-orientation-state',
-    default: 'orgUnitVsData'
+    default: 'orgUnitsVsData'
 })
 
 const ScorecardTableConfigState = selector({
     key: 'scorecard-table-details',
     get: ({get}) => {
-        const {orgUnits} = get(ScorecardViewState('orgUnitSelection'));
-        const {periods} = get(PeriodResolverState)
-        const {dataGroups} = get(ScorecardViewState)
-        const dataHolders = getHoldersFromGroups(dataGroups)
         const orientation = get(ScorecardTableOrientationState)
+        const periods = get(PeriodResolverState)
+        const {dataGroups} = get(ScorecardViewState('dataSelection'))
+        const {orgUnits} = get(ScorecardViewState('orgUnitSelection'))
 
-        return {
-            rows: orgUnits,
+
+        return orientation === 'orgUnitsVsData' ? {
+            rows: 'orgUnits',
             columns: [
-                {
-                    values: dataGroups,
-                    displayNamePath: 'title'
-                },
-                {
-                    values: dataHolders,
-                    displayNamePath: 'displayName'
-                },
-                {
-                    values: periods,
-                    displayNamePath: 'displayName'
-                }
-            ]
+                'groups',
+                'data',
+                'periods'
+            ],
+            tableWidth: getTableWidthWithDataGroups(periods, dataGroups)
+        } : {
+            rows: 'data',
+            columns: [
+                'orgUnits',
+                'periods'
+            ],
+            tableWidth: getTableWidthWithOrgUnit(periods, orgUnits)
         }
     }
 })

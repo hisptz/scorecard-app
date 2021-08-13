@@ -1,4 +1,4 @@
-import {capitalize, flattenDeep, snakeCase} from "lodash";
+import {capitalize, flattenDeep, snakeCase, head, last} from "lodash";
 import ScorecardLegend from "../../core/models/scorecardLegend";
 
 
@@ -56,6 +56,10 @@ export function getHoldersFromGroups(dataGroups = []) {
 export function getDataSourcesFromGroups(dataGroups) {
     const dataHolders = getHoldersFromGroups(dataGroups)
     return flattenDeep(dataHolders?.map(({dataSources}) => dataSources))
+}
+
+export function getDataSourcesDisplayName(dataSources){
+    return dataSources?.length > 1 ? `${head(dataSources)?.displayName} / ${last(dataSources)?.displayName}` : `${head(dataSources)?.displayName}`
 }
 
 export function updatePager(pager, itemListLength) {

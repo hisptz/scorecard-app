@@ -17,7 +17,7 @@ export default function PeriodHeaderRow() {
         <DataTableRow>
             <DataTableCell fixed left={"0"} width={"50px"}>&nbsp;</DataTableCell>
             {
-                orientation === 'orgUnitVsData' ? dataGroups?.map(({dataHolders}) => (dataHolders?.map(({id}) => (
+                orientation === 'orgUnitsVsData' ? dataGroups?.map(({dataHolders}) => (dataHolders?.map(({id}) => (
                     periods?.map(({name, id: periodId}) => (
                         <DataTableCell width={"200px"} fixed className='scorecard-table-cell' bordered align='center'
                                        key={`${id}-${periodId}`}>{name}</DataTableCell>))

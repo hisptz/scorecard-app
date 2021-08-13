@@ -1,7 +1,8 @@
+import {SingleSelectField, SingleSelectOption} from '@dhis2/ui'
 import React, {Suspense, useEffect} from "react";
 import {useParams} from "react-router-dom";
-import {useRecoilValue, useResetRecoilState, useSetRecoilState} from "recoil";
-import {ScorecardIdState, ScorecardViewState,} from "../../../../core/state/scorecard";
+import {useRecoilState, useRecoilValue, useResetRecoilState, useSetRecoilState} from "recoil";
+import {ScorecardIdState, ScorecardTableOrientationState, ScorecardViewState,} from "../../../../core/state/scorecard";
 import {FullPageLoader} from "../../../../shared/Components/Loaders";
 import HighlightedIndicatorsView from "./Components/HighlightedIndicatorsView";
 import ScorecardHeader from "./Components/ScorecardHeader";
@@ -9,7 +10,9 @@ import ScorecardLegendsView from "./Components/ScorecardLegendsView";
 import ScorecardTable from "./Components/ScorecardTable";
 import ScorecardViewHeader from "./Components/ScorecardViewHeader";
 
+
 export default function ScorecardView() {
+    const [orientation, setOrientation] = useRecoilState(ScorecardTableOrientationState)
     const {id: scorecardId} = useParams();
     const setScorecardIdState = useSetRecoilState(ScorecardIdState);
     const resetIdState = useResetRecoilState(ScorecardIdState);
@@ -30,6 +33,12 @@ export default function ScorecardView() {
                 <ScorecardHeader/>
                 <ScorecardLegendsView/>
                 <HighlightedIndicatorsView/>
+                <div>
+                    <SingleSelectField onChange={({selected})=>setOrientation(selected)} label='Orientation' selected={orientation}>
+                        <SingleSelectOption label={'OrgUnit Vs Data'} value={'orgUnitsVsData'} />
+                        <SingleSelectOption label={'Data Vs OrgUnit'} value={'dataVsOrgUnits'} />
+                    </SingleSelectField>
+                </div>
                 <div className="column align-items-center pt-16 flex-1">
                     <Suspense fallback={<FullPageLoader/>}>
                         <ScorecardTable

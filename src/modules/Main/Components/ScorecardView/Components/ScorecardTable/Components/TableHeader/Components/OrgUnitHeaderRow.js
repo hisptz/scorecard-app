@@ -1,18 +1,15 @@
-import i18n from '@dhis2/d2-i18n'
+import i18n from "@dhis2/d2-i18n";
 import {DataTableCell, DataTableRow, InputField} from "@dhis2/ui";
-import {debounce} from 'lodash'
-import PropTypes from 'prop-types'
+import {debounce} from "lodash";
+import PropTypes from "prop-types";
 import React, {useEffect, useState} from "react";
 import {useRecoilState, useRecoilValue} from "recoil";
 import {PeriodResolverState} from "../../../../../../../../../core/state/period";
-import {
-    ScorecardConfigDirtyState,
-    ScorecardTableOrientationState,
-    ScorecardViewState
-} from "../../../../../../../../../core/state/scorecard";
+import {ScorecardTableOrientationState, ScorecardViewState} from "../../../../../../../../../core/state/scorecard";
 
-export default function GroupsHeaderRow({nested}) {
-    const {dataGroups} = useRecoilValue(ScorecardConfigDirtyState('dataSelection')) ?? {}
+
+export default function OrgUnitHeaderRow({nested}) {
+    const {orgUnits} = useRecoilValue(ScorecardViewState('orgUnitSelection'))
     const periods = useRecoilValue(PeriodResolverState) ?? []
     const [keyword, setKeyword] = useRecoilState(ScorecardViewState('orgUnitSearchKeyword'))
     const orientation = useRecoilValue(ScorecardTableOrientationState)
@@ -35,10 +32,10 @@ export default function GroupsHeaderRow({nested}) {
                 }
             </DataTableCell>
             {
-                dataGroups?.map(({title, id, dataHolders}) => (
+                orgUnits?.map(({displayName, id}) => (
                     <DataTableCell fixed className='scorecard-table-header' align='center' bordered
-                                   colSpan={`${(dataHolders?.length ?? 1) * (periods?.length ?? 1)}`} key={id}>
-                        {title}
+                                   colSpan={`${(periods?.length ?? 1)}`} key={id}>
+                        {displayName}
                     </DataTableCell>
                 ))
             }
@@ -46,7 +43,6 @@ export default function GroupsHeaderRow({nested}) {
     )
 }
 
-GroupsHeaderRow.propTypes = {
+OrgUnitHeaderRow.propTypes = {
     nested: PropTypes.bool.isRequired
 };
-
