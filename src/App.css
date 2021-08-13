@@ -463,3 +463,7 @@ td.jsx-1369417008::selection{
 .scorecard-org-unit-cell{
     background: #E8EDF2;
 }
+
+.p-0{
+    padding: 0 !important;
+}

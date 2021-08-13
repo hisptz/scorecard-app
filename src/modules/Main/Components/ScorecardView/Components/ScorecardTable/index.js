@@ -3,6 +3,8 @@ import {DataTable, DataTableBody} from "@dhis2/ui";
 import {head, isEmpty} from "lodash";
 import PropTypes from "prop-types";
 import React, {Fragment, useEffect, useMemo, useState} from "react";
+import {DndProvider} from "react-dnd";
+import { HTML5Backend } from 'react-dnd-html5-backend'
 import {useRecoilValue, useResetRecoilState} from "recoil";
 import {PeriodResolverState} from "../../../../../../core/state/period";
 import {
@@ -129,40 +131,42 @@ export default function ScorecardTable({orgUnits, nested}) {
             {isEmpty(dataGroups) ? (
                 <EmptyDataGroups/>
             ) : (
-                <DataTable
-                    width={`${tableWidth}px`}
-                    scrollWidth={`${screenWidth}px`}
-                    layout="fixed"
-                >
-                    <TableHeader nested={nested}/>
-                    <DataTableBody>
-                        {loading ? (
-                            <TableLoader/>
-                        ) : searchLoading ? (
-                            <td>Searching...</td>
-                        ) : (
-                            tableOrientation === 'orgUnitsVsData' ? <Fragment>
-                                    {filteredOrgUnits?.map((orgUnit) => (
-                                        <ParentOrgUnitRow
-                                            key={`${orgUnit?.id}-row`}
-                                            orgUnit={orgUnit}
-                                        />
-                                    ))}
-                                    {childrenOrgUnits?.map((orgUnit) => (
-                                        <ChildOrgUnitRow
-                                            key={`${orgUnit?.id}-row`}
-                                            onExpand={setExpandedOrgUnit}
-                                            orgUnit={orgUnit}
-                                            expandedOrgUnit={expandedOrgUnit}
-                                        />
-                                    ))}
-                                </Fragment> :
-                                dataHolders?.map(({id, dataSources}) => (
-                                    <DataSourceRow dataSources={dataSources} key={`${id}-row`}/>
-                                ))
-                        )}
-                    </DataTableBody>
-                </DataTable>
+                <DndProvider backend={HTML5Backend}>
+                    <DataTable
+                        width={`${tableWidth}px`}
+                        scrollWidth={`${screenWidth}px`}
+                        layout="fixed"
+                    >
+                        <TableHeader nested={nested}/>
+                        <DataTableBody>
+                            {loading ? (
+                                <TableLoader/>
+                            ) : searchLoading ? (
+                                <td>Searching...</td>
+                            ) : (
+                                tableOrientation === 'orgUnitsVsData' ? <Fragment>
+                                        {filteredOrgUnits?.map((orgUnit) => (
+                                            <ParentOrgUnitRow
+                                                key={`${orgUnit?.id}-row`}
+                                                orgUnit={orgUnit}
+                                            />
+                                        ))}
+                                        {childrenOrgUnits?.map((orgUnit) => (
+                                            <ChildOrgUnitRow
+                                                key={`${orgUnit?.id}-row`}
+                                                onExpand={setExpandedOrgUnit}
+                                                orgUnit={orgUnit}
+                                                expandedOrgUnit={expandedOrgUnit}
+                                            />
+                                        ))}
+                                    </Fragment> :
+                                    dataHolders?.map(({id, dataSources}) => (
+                                        <DataSourceRow dataSources={dataSources} key={`${id}-row`}/>
+                                    ))
+                            )}
+                        </DataTableBody>
+                    </DataTable>
+                </DndProvider>
             )}
         </div>
     );

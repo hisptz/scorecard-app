@@ -31,7 +31,6 @@ export function LinkedDataCell({topData, bottomData, topColor, bottomColor}) {
     const {current: topCurrent, previous: topPrevious} = topData ?? {};
     const {current: bottomCurrent, previous: bottomPrevious} = bottomData ?? {};
     const {arrows} = useRecoilValue(ScorecardViewState('options')) ?? {}
-    console.log(arrows)
     const topIncreasing = useMemo(() => {
         if (arrows) {
             if (topCurrent > topPrevious) return 'increasing'
