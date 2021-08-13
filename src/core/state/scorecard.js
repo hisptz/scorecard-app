@@ -1,10 +1,11 @@
 import {Period} from "@iapps/period-utilities";
-import {cloneDeep, get as _get, isEmpty, set as _set} from "lodash";
+import {cloneDeep, get as _get, head, isEmpty, set as _set} from "lodash";
 import {atom, atomFamily, selector, selectorFamily} from "recoil";
 import {
     getTableWidthWithDataGroups,
     getTableWidthWithOrgUnit
 } from "../../modules/Main/Components/ScorecardView/Components/ScorecardTable/services/utils";
+import {searchOrganisationUnit} from "../../shared/hooks/useOrganisationUnits";
 import getScorecard from "../../shared/services/getScorecard";
 import getScorecardSummary from "../../shared/services/getScorecardSummary";
 import ScorecardAccessType from "../constants/scorecardAccessType";
@@ -14,6 +15,7 @@ import ScorecardAccess from "../models/scorecardAccess";
 import ScorecardDataEngine from "../models/scorecardData";
 import ScorecardOptions from "../models/scorecardOptions";
 import {EngineState} from "./engine";
+import {OrgUnitChildren} from "./orgUnit";
 import {PeriodResolverState} from "./period";
 
 const defaultValue = {
@@ -161,14 +163,13 @@ const ScorecardTableOrientationState = atom({
     default: 'orgUnitsVsData'
 })
 
-const ScorecardTableConfigState = selector({
+const ScorecardTableConfigState = selectorFamily({
     key: 'scorecard-table-details',
-    get: ({get}) => {
+    get: (orgUnits) => ({get}) => {
         const orientation = get(ScorecardTableOrientationState)
         const periods = get(PeriodResolverState)
         const {dataGroups} = get(ScorecardViewState('dataSelection'))
-        const {orgUnits} = get(ScorecardViewState('orgUnitSelection'))
-
+        const {filteredOrgUnits, childrenOrgUnits} = get(ScorecardOrgUnitState(orgUnits))
 
         return orientation === 'orgUnitsVsData' ? {
             rows: 'orgUnits',
@@ -184,7 +185,29 @@ const ScorecardTableConfigState = selector({
                 'orgUnits',
                 'periods'
             ],
-            tableWidth: getTableWidthWithOrgUnit(periods, orgUnits)
+            tableWidth: getTableWidthWithOrgUnit(periods, [...filteredOrgUnits, ...childrenOrgUnits])
+        }
+    }
+})
+
+const ScorecardOrgUnitState = selectorFamily({
+    key: 'selected-org-unit-state',
+    get: (orgUnits) => async ({get}) => {
+        const engine = get(EngineState)
+        const searchKeyword = get(ScorecardViewState("orgUnitSearchKeyword"))
+        let childrenOrgUnits = [];
+        if (orgUnits.length === 1) {
+            childrenOrgUnits = get(OrgUnitChildren(head(orgUnits)?.id))
+        }
+        let filteredOrgUnits = orgUnits;
+        if (!isEmpty(searchKeyword)) {
+            filteredOrgUnits = await searchOrganisationUnit(searchKeyword, engine)
+        }
+
+        return {
+            childrenOrgUnits,
+            filteredOrgUnits,
+            orgUnitsCount: (childrenOrgUnits.length + filteredOrgUnits.length)
         }
     }
 })
@@ -203,5 +226,6 @@ export {
     ScorecardConfigErrorSelector,
     ScorecardConfigErrorState,
     ScorecardTableOrientationState,
-    ScorecardTableConfigState
+    ScorecardTableConfigState,
+    ScorecardOrgUnitState
 }

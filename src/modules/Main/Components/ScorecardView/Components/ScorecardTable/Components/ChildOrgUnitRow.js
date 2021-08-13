@@ -1,7 +1,7 @@
 import i18n from "@dhis2/d2-i18n";
 import {DataTableCell, DataTableRow, Tooltip} from "@dhis2/ui";
 import PropTypes from 'prop-types'
-import React from "react";
+import React, {Suspense} from "react";
 import {useRecoilValue} from "recoil";
 import {DraggableItems} from "../../../../../../../core/constants/draggables";
 import {PeriodResolverState} from "../../../../../../../core/state/period";
@@ -29,10 +29,12 @@ export default function ChildOrgUnitRow({orgUnit, expandedOrgUnit, onExpand}) {
             }}
             expandableContent={
                 <div className="p-16">
-                    <ScorecardTable
-                        nested={true}
-                        orgUnits={[orgUnit]}
-                    />
+                   <Suspense fallback={<div>Loading...</div>}>
+                       <ScorecardTable
+                           nested={true}
+                           orgUnits={[orgUnit]}
+                       />
+                   </Suspense>
                 </div>
             }
             key={id}

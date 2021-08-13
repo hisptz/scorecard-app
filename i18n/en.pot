@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-08-13T12:04:14.518Z\n"
-"PO-Revision-Date: 2021-08-13T12:04:14.518Z\n"
+"POT-Creation-Date: 2021-08-13T13:42:15.565Z\n"
+"PO-Revision-Date: 2021-08-13T13:42:15.565Z\n"
 
 msgid "Welcome to Scorecard App!"
 msgstr "Welcome to Scorecard App!"
@@ -194,11 +194,14 @@ msgstr "Increased from last period"
 msgid "Decreased from last period"
 msgstr "Decreased from last period"
 
+msgid "Drag to column headers to change layout"
+msgstr "Drag to column headers to change layout"
+
 msgid "There are no configured indicators for this scorecard"
 msgstr "There are no configured indicators for this scorecard"
 
-msgid "Dictionary analysis"
-msgstr "Dictionary analysis"
+msgid "Drag to the column headers to change layout"
+msgstr "Drag to the column headers to change layout"
 
 msgid "Column"
 msgstr "Column"
@@ -233,14 +236,14 @@ msgstr "Chart"
 msgid "Dictionary"
 msgstr "Dictionary"
 
-msgid "Drop here to change layout"
-msgstr "Drop here to change layout"
-
 msgid "Search Organisation Unit"
 msgstr "Search Organisation Unit"
 
 msgid "Search Data"
 msgstr "Search Data"
+
+msgid "Drag to row headers to change layout "
+msgstr "Drag to row headers to change layout "
 
 msgid "Name"
 msgstr "Name"

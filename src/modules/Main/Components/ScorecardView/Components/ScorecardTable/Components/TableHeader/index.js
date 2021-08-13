@@ -25,15 +25,15 @@ function getHeaderRow(type) {
 }
 
 
-export default function TableHeader({nested}) {
-    const {columns} = useRecoilValue(ScorecardTableConfigState)
+export default function TableHeader({orgUnits, nested}) {
+    const {columns} = useRecoilValue(ScorecardTableConfigState(orgUnits))
     const headerRows = useMemo(() => columns?.map(getHeaderRow), [columns])
 
     return (
         <DataTableHead>
             {
                 headerRows?.map((Row, i) => (
-                    <Row nested={nested} key={`${columns[i]}-header-row`}/>
+                    <Row  orgUnits={orgUnits} nested={nested} key={`${columns[i]}-header-row`}/>
                 ))
             }
         </DataTableHead>
@@ -41,6 +41,7 @@ export default function TableHeader({nested}) {
 }
 
 TableHeader.propTypes = {
-    nested: PropTypes.bool.isRequired
+    nested: PropTypes.bool.isRequired,
+    orgUnits: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 

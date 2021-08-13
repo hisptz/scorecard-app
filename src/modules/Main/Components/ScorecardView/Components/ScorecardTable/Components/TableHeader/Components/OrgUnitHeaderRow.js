@@ -6,13 +6,17 @@ import React, {useEffect, useState} from "react";
 import {useRecoilState, useRecoilValue} from "recoil";
 import {DraggableItems} from "../../../../../../../../../core/constants/draggables";
 import {PeriodResolverState} from "../../../../../../../../../core/state/period";
-import {ScorecardTableOrientationState, ScorecardViewState} from "../../../../../../../../../core/state/scorecard";
+import {
+    ScorecardOrgUnitState,
+    ScorecardTableOrientationState,
+    ScorecardViewState
+} from "../../../../../../../../../core/state/scorecard";
 import DraggableCell from "../../DraggableCell";
 import DroppableCell from "../../DroppableCell";
 
 
-export default function OrgUnitHeaderRow({nested}) {
-    const {orgUnits} = useRecoilValue(ScorecardViewState('orgUnitSelection'))
+export default function OrgUnitHeaderRow({orgUnits, nested}) {
+    const {filteredOrgUnits, childrenOrgUnits} = useRecoilValue(ScorecardOrgUnitState(orgUnits))
     const periods = useRecoilValue(PeriodResolverState) ?? []
     const [keyword, setKeyword] = useRecoilState(ScorecardViewState('orgUnitSearchKeyword'))
     const orientation = useRecoilValue(ScorecardTableOrientationState)
@@ -35,7 +39,7 @@ export default function OrgUnitHeaderRow({nested}) {
                 }
             </DataTableCell>
             {
-                orgUnits?.map(({displayName, id}) => (
+                [...filteredOrgUnits, ...childrenOrgUnits]?.map(({displayName, id}) => (
                     <DataTableCell fixed className='scorecard-table-header' align='center' bordered
                                    colSpan={`${(periods?.length ?? 1)}`} key={id}>
                         <Tooltip content={i18n.t('Drag to row headers to change layout ')}>
@@ -51,5 +55,6 @@ export default function OrgUnitHeaderRow({nested}) {
 }
 
 OrgUnitHeaderRow.propTypes = {
-    nested: PropTypes.bool.isRequired
+    nested: PropTypes.bool.isRequired,
+    orgUnits: PropTypes.arrayOf(PropTypes.object).isRequired,
 };

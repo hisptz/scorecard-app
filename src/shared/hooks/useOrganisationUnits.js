@@ -5,6 +5,9 @@ import {useRecoilValueLoadable} from "recoil";
 import {OrgUnitChildren} from "../../core/state/orgUnit";
 
 
+
+
+
 export function useOrganisationUnitChildren(orgUnitId = '') {
     const [id, setId] = useState(orgUnitId);
     const {state, contents} = useRecoilValueLoadable(OrgUnitChildren(id))
@@ -43,6 +46,19 @@ const orgUnitSearchQuery = {
             ]
         })
     },
+}
+
+
+export async function searchOrganisationUnit(keyword, engine) {
+    if (!isEmpty(keyword)) {
+        const data = await engine.query(orgUnitSearchQuery);
+        if (!isEmpty(data)) {
+            const idResponse = data?.idQuery?.organisationUnits ?? [];
+            const nameResponse = data?.nameQuery?.organisationUnits ?? [];
+            return [...idResponse, ...nameResponse]
+        }
+    }
+    return []
 }
 
 export function useSearchOrganisationUnit() {

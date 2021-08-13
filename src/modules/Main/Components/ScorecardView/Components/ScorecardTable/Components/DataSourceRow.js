@@ -5,17 +5,18 @@ import React from 'react'
 import {useRecoilValue} from "recoil";
 import {DraggableItems} from "../../../../../../../core/constants/draggables";
 import {PeriodResolverState} from "../../../../../../../core/state/period";
-import {ScorecardConfigDirtyState} from "../../../../../../../core/state/scorecard";
+import {ScorecardOrgUnitState, ScorecardViewState} from "../../../../../../../core/state/scorecard";
 import {getDataSourcesDisplayName} from "../../../../../../../shared/utils/utils";
 import DraggableCell from "./DraggableCell";
 import DroppableCell from "./DroppableCell";
 import DataContainer from "./TableDataContainer";
 
-export default function DataSourceRow({dataSources}) {
-    const {orgUnits} =
-    useRecoilValue(ScorecardConfigDirtyState("orgUnitSelection")) ?? {};
+export default function DataSourceRow({orgUnits, dataSources}) {
+   const {filteredOrgUnits, childrenOrgUnits} = useRecoilValue(ScorecardOrgUnitState(orgUnits))
     const periods =
         useRecoilValue(PeriodResolverState) ?? [];
+
+
     return (
         <DataTableRow bordered>
             <DataTableCell fixed left={"0"} width={"50px"}>
@@ -27,7 +28,7 @@ export default function DataSourceRow({dataSources}) {
                 </DroppableCell>
             </DataTableCell>
             {
-                orgUnits?.map(({id}) => (
+                ([...filteredOrgUnits, ...childrenOrgUnits])?.map(({id}) => (
                     periods?.map(({id: periodId}) => (
                             <td
                                 className="data-cell"
@@ -48,5 +49,6 @@ export default function DataSourceRow({dataSources}) {
 }
 
 DataSourceRow.propTypes = {
-    dataSources: PropTypes.arrayOf(PropTypes.object).isRequired
+    dataSources: PropTypes.arrayOf(PropTypes.object).isRequired,
+    orgUnits: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
