@@ -6,7 +6,7 @@ import {ScorecardViewState} from "./scorecard";
 const PeriodResolverState = selector({
     key: 'period-resolver',
     get: ({get}) => {
-        const {periods} = get(ScorecardViewState('periodSelection'))
+        const {periods} = get(ScorecardViewState('periodSelection')) ?? {}
         if (!isEmpty(periods)) {
             const relativePeriods = filter(periods, ({id}) => {
                 const period = new Period().getById(id)

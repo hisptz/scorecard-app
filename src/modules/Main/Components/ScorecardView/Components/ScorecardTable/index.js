@@ -6,7 +6,7 @@ import React, { Fragment, useEffect, useMemo, useState } from "react";
 import { useRecoilValue, useResetRecoilState } from "recoil";
 import { PeriodResolverState } from "../../../../../../core/state/period";
 import {
-  ScorecardConfigStateSelector,
+  ScorecardConfigDirtyState,
   scorecardDataEngine,
   ScorecardViewState,
 } from "../../../../../../core/state/scorecard";
@@ -25,7 +25,7 @@ import { getTableWidth } from "./services/utils";
 export default function ScorecardTable({ orgUnits, nested }) {
   const { width: screenWidth } = useMediaQuery();
   const { dataGroups } =
-    useRecoilValue(ScorecardConfigStateSelector("dataSelection")) ?? {};
+    useRecoilValue(ScorecardConfigDirtyState("dataSelection")) ?? {};
   const periods = useRecoilValue(PeriodResolverState) ?? [];
   const { periodType } = useRecoilValue(ScorecardViewState("periodSelection"));
   const searchKeyword = useRecoilValue(
@@ -71,7 +71,7 @@ export default function ScorecardTable({ orgUnits, nested }) {
     return () => {
       setId(undefined);
     };
-  }, [filteredOrgUnits?.length]);
+  }, [filteredOrgUnits]);
 
   useEffect(() => {
     if (!isEmpty(searchKeyword)) {

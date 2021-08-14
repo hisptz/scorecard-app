@@ -1,8 +1,8 @@
 import React from "react";
 import {HashRouter, Redirect, Route, Switch} from 'react-router-dom'
 import useSetDataEngine from "../../core/hooks/useSetDataEngine";
-import ScoreCardManagement from "../Admin/Components/ScoreCardManagement";
 import Main from "../Main";
+import ScoreCardManagement from "../Main/Components/ScoreCardManagement";
 import ScorecardView from "../Main/Components/ScorecardView";
 import ExampleForms from "../test/Forms";
 

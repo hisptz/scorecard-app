@@ -16,11 +16,11 @@ export default function ScorecardListCard({scorecard}) {
     const {show} = useAlert(({message}) => message, ({type}) => ({...type, duration: 3000}))
 
     const onView = () => {
-        history.push(`/view/${id}`, {from: 'home'})
+        history.push(`/view/${id}`)
     }
 
     const onEdit = () => {
-        history.push(`/edit/${id}`, {from: 'home'})
+        history.push(`/edit/${id}`)
     }
 
     const onDelete = async () => {

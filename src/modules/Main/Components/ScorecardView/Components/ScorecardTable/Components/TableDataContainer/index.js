@@ -1,33 +1,31 @@
 import PropTypes from 'prop-types'
 import React, {useEffect, useState} from 'react'
 import {scorecardDataEngine} from "../../../../../../../../core/state/scorecard";
-import {getLegend} from "../../../../../../../Admin/Components/ScoreCardManagement/Components/DataConfiguration/utils";
+import {getLegend} from "../../../../../ScoreCardManagement/Components/DataConfiguration/utils";
+import TableCellAnalysis from "../TableCellAnalysis";
 import {LinkedDataCell, SingleDataCell} from "./Components/DataCells";
 import LoadingCell from "./Components/LoadingCell";
 
 export default function DataContainer({dataSources, orgUnitId, periodId}) {
-    const [loading, setLoading] = useState(false);
+    const [analysisOpen, setAnalysisOpen] = useState(false);
+    const [loading, setLoading] = useState();
     const [topData, setTopData] = useState();
     const [bottomData, setBottomData] = useState();
     const [top, bottom] = dataSources ?? [];
     const {color: topColor} = getLegend(topData?.current, top?.legends) ?? {};
     const {color: bottomColor} = getLegend(bottomData?.current, bottom?.legends) ?? {};
 
-
     const topKey = `${top.id}_${orgUnitId}_${periodId}`
     const bottomKey = `${bottom?.id}_${orgUnitId}_${periodId}`
 
     useEffect(() => {
-        const loadingSub = scorecardDataEngine.loading$.subscribe(setLoading)
-        return () => {
-            loadingSub.unsubscribe();
-        };
-    }, [orgUnitId, periodId, top, bottom]);
-
-    useEffect(() => {
+        setLoading(true)
         const topSub = scorecardDataEngine
             .get(topKey)
-            .subscribe(setTopData);
+            .subscribe((data) => {
+                setTopData(data)
+                setLoading(false)
+            });
         const bottomSub = scorecardDataEngine
             .get(bottomKey)
             .subscribe(setBottomData);
@@ -37,12 +35,28 @@ export default function DataContainer({dataSources, orgUnitId, periodId}) {
             bottomSub.unsubscribe();
         }
     }, [orgUnitId, periodId, top, bottom]);
+    return <>
+        <div onClick={() => {
+            setAnalysisOpen(true)
+        }
+        }>
+            {
+                loading ? <LoadingCell/> : dataSources?.length > 1 ? (
+                    <LinkedDataCell bottomData={bottomData} topData={topData} bottomColor={bottomColor}
+                                    topColor={topColor}/>
+                ) : (
+                    <SingleDataCell data={topData} color={topColor}/>
+                )
+            }
 
-    return loading ? <LoadingCell/> : dataSources?.length > 1 ? (
-        <LinkedDataCell bottomData={bottomData} topData={topData} bottomColor={bottomColor} topColor={topColor}/>
-    ) : (
-        <SingleDataCell data={topData} color={topColor}/>
-    );
+        </div>
+        {
+            analysisOpen &&
+            <TableCellAnalysis dataHolder={{dataSources}} onClose={() => {
+                setAnalysisOpen(false)
+            }}/>
+        }
+    </>
 }
 
 DataContainer.propTypes = {

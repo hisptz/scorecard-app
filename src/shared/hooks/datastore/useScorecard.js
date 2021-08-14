@@ -4,7 +4,7 @@ import {get, set} from "lodash";
 import {useEffect, useState} from "react";
 import {useSetRecoilState} from "recoil";
 import {DATASTORE_ENDPOINT, DATASTORE_SCORECARD_SUMMARY_INCLUDE_KEYS,} from "../../../core/constants/config";
-import ScorecardConfState from "../../../core/state/scorecard";
+import ScorecardConfState, {ScorecardRequestId} from "../../../core/state/scorecard";
 import {uid} from "../../utils/utils";
 import useScorecardsSummary from "./useScorecardsSummary";
 
@@ -69,6 +69,7 @@ export function useDeleteScorecard(id) {
 
 export function useUpdateScorecard(id) {
     const [executionError, setExecutionError] = useState();
+    const setScorecardConfig = useSetRecoilState(ScorecardRequestId(id))
     const [updateMutate, {loading, error: setError}] = useDataMutation(
         updateMutation,
         {variables: {id}}
@@ -80,6 +81,7 @@ export function useUpdateScorecard(id) {
             const scorecardSummary = generateScorecardSummary(data);
             await updateSingleScorecardSummary(id, scorecardSummary);
             await updateMutate({id, data});
+            setScorecardConfig(prevState => prevState + 1)
         } catch (e) {
             setExecutionError(e);
         }
@@ -108,6 +110,7 @@ export function useAddScorecard() {
             const scorecardSummary = generateScorecardSummary(updatedData);
             await addSingleScorecardSummary(scorecardSummary);
             await engine.mutate(generateCreateMutation(id), {variables: {data: updatedData}});
+
         } catch (e) {
             setExecutionError(e);
         }

@@ -1,4 +1,5 @@
 import {useDataMutation} from "@dhis2/app-runtime";
+import produce from "immer";
 import {cloneDeep, findIndex} from 'lodash'
 import {useState} from "react";
 import {useRecoilState} from "recoil";
@@ -38,19 +39,20 @@ export default function useScorecardsSummary() {
             await update({
                 data: updatedList
             })
-            setSummary(() => updatedList)
+            setSummary(updatedList)
         } catch (e) {
             setExecutionError(e)
         }
     }
     const removeSingleScorecardSummary = async (id) => {
         try {
-            const updatedList = cloneDeep(summary) ?? [];
-            updatedList.splice(findIndex(updatedList, ['id', id]), 1)
-            setSummary(() => updatedList)
+            const updatedList = produce(summary, (draft)=>{
+                draft.splice(findIndex(draft, ['id', id]), 1)
+            })
             await update({
                 data: updatedList
             })
+            setSummary(updatedList)
         } catch (e) {
             console.log(e)
             setExecutionError(e)
