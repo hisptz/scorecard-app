@@ -64,5 +64,3 @@ DataContainer.propTypes = {
     orgUnitId: PropTypes.string,
     periodId: PropTypes.string
 };
-
-
