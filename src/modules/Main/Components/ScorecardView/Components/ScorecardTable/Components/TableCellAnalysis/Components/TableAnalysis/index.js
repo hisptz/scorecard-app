@@ -10,16 +10,16 @@ import {
     DataTableColumnHeader,
 } from '@dhis2/ui'
 import { auto } from "async";
-import {flatten, flattenDepth ,uniq } from 'lodash';
+import {flatten, isEqual,uniqWith ,uniq } from 'lodash';
 import PropTypes from 'prop-types'
 import React, {useEffect,Suspense} from 'react'
-import {atom, useRecoilValue, useSetRecoilState} from "recoil";
+import {atom, selector, useRecoilValue, useSetRecoilState} from "recoil";
 import {PeriodResolverState} from "../../../../../../../../../../core/state/period";
 import useTableAnalysisData from "./hooks/useTableAnalysisData";
 
 
 const dataDefaults = {
-    column:['pe','ou'],
+    column:['dx'],
     rows:['ou'],
     filter:['dx','pe','ou']
 }
@@ -29,6 +29,14 @@ const columnAtom = atom({
     key:'columnAtomState',
     default:[]
 })
+// const spanSelector = selector({
+//     key:'tableSpanSelector',
+//     get:({get})=>{
+//    let columns = get(columnAtom);
+//    let rows = get(rowAtom);
+//    console.log("your rowsx columns lenght is "+ columns?.length*rows?.length)
+//     }
+// })
 const dataAtomAtom = atom({
     key:'dataState',
     default:undefined
@@ -85,6 +93,8 @@ const ColumnComponent = () =>{
   
     // const rowDataState = useRecoilValue(rowAtom);
     const columnDataState = useRecoilValue(columnAtom);
+    const defaultDataState = useRecoilValue(dataAtomAtom);
+
     // console.log("my data in rowAtom is")
     // console.log(rowDataState);
     console.log("my data in columnAtom is")
@@ -95,20 +105,26 @@ const ColumnComponent = () =>{
      <Suspense fallback={<div>Loading...</div>}>
      <FilterComponent />
      </Suspense>
-        <DataTableRow>
-             <DataTableColumnHeader>
-                 First name
-             </DataTableColumnHeader>
-             <DataTableColumnHeader>
-                 Last name
-             </DataTableColumnHeader>
-             <DataTableColumnHeader>
-                 Incident date
-             </DataTableColumnHeader>
-             <DataTableColumnHeader>
-                 Last updated
-             </DataTableColumnHeader>
-         </DataTableRow>
+       {
+           columnDataState?.map(cols =>{
+               return ( <DataTableRow key={Math.random + cols.keys}>
+                   {
+                       cols.map(dataColsValueId =>{
+                           return (
+                            <DataTableColumnHeader key={Math.random + dataColsValueId.random}>
+{
+    (defaultDataState['_data']['metaData']['names'][dataColsValueId])??""
+}                        </DataTableColumnHeader>
+                           );
+                       })
+                   }
+
+            </DataTableRow>
+            );
+           })
+       }
+         
+         
        </>
     );
 }
@@ -196,17 +212,15 @@ dataDefaults['filter']?.forEach((filterObject)=>{
     })
 })
 
+dataDefaults['column']?.forEach((columnObject)=>{
+    setdataColumn((columnsObjects)=> {
+        return uniqWith([...columnsObjects,[...data['_data']['metaData'][columnObject]]],isEqual);
+    })
+})
+
 //     setdataRow((rowsObjects)=> [...rowsObjects,...data['_data']['metaData'][rowObject]])
 // })
 
-
-
-dataDefaults['column']?.forEach((columnObject)=>{
-    setdataColumn((columnsObjects)=> {
-        console.log("data in columns prev are  "+ [flattenDepth(columnsObjects,1)])
-        return [data['_data']['metaData'][columnObject]];
-    })
-})
 
     // dataManipulatingFn(data);
     return (
