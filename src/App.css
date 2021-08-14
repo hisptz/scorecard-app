@@ -156,6 +156,23 @@ body {
     width: 25%;
 }
 
+
+.h-100 {
+    height: 100%;
+}
+
+.h-50 {
+    height: 50%;
+}
+
+.h-75 {
+    height: 75%;
+}
+
+.h-25 {
+    height: 25%;
+}
+
 .text-center {
     text-align: center;
 }
@@ -298,6 +315,11 @@ div.jsx-1730587817 {
     color: #4A5768;
 }
 
+.info-box-list > p {
+    margin-bottom: 16px;
+    color: #4A5768;
+}
+
 .layer-1 {
     z-index: 2;
 }
@@ -318,11 +340,11 @@ div.jsx-1730587817 {
 /*linked table cell*/
 
 td.data-cell{
-    min-width: 200px;
+    min-width: 100px;
     border-right: 1px solid rgb(232, 237, 242);
     max-height: 47px;
-    max-width: 201px;
-    width: 200px;
+    max-width: 101px;
+    width: 100px;
     height: 47px;
     font-size: 14px;
     background: rgb(255, 255, 255);
@@ -331,7 +353,6 @@ td.data-cell{
     margin: 0;
     padding: 0;
 }
-
 
 
 .linked-table-cell{
@@ -370,6 +391,10 @@ table{
 .grid{
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+}
+.grid-2{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
 }
 
 .selection-card{
@@ -441,4 +466,13 @@ td.jsx-1369417008::selection{
 
 .scorecard-org-unit-cell{
     background: #E8EDF2;
+}
+
+.large-modal{
+    width: 75vw !important;
+    height: 90vh !important;
+}
+
+.p-0{
+    padding: 0 !important;
 }

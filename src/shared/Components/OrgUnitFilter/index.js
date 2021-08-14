@@ -84,8 +84,8 @@ export default function OrgUnitFilter({value, onUpdate}) {
 
 
     return (
-        <Box minHeight='600px'>
-            <div style={{minHeight: 400}} className='container-bordered'>
+        <Box minHeight='400px'>
+            <div style={{minHeight: 400, maxHeight: 400, overflow: 'hidden',}} className='container-bordered'>
                 <div style={{background: colors.grey200}} className='row space-between p-16'>
                     <CheckboxField checked={userOrgUnit} onChange={onUserOrUnitChange}
                                    label={i18n.t('User organisation unit')}/>
@@ -97,7 +97,7 @@ export default function OrgUnitFilter({value, onUpdate}) {
                 {
                     error && <CenteredContent><p>{error?.message || error.toString()}</p></CenteredContent>
                 }
-                <div className='p-16' style={{overflow: 'auto', maxHeight: 400}}>
+                <div className='p-16' style={{maxHeight: 400, overflow: 'auto'}}>
                     {
                         roots &&
                         <OrganisationUnitTree
@@ -123,7 +123,8 @@ export default function OrgUnitFilter({value, onUpdate}) {
                 <div className='column'>
                     <SingleSelectField clearable loading={levelsAndGroupsLoading} error={levelsAndGroupsError}
                                        validationText={levelsAndGroupsError?.message}
-                                       onChange={onLevelSelect} selected={!isEmpty(levels) && selectedLevel}
+                                       onChange={onLevelSelect}
+                                       selected={(!isEmpty(levels) && selectedLevel) ? selectedLevel : ''}
                                        label={i18n.t('Select Level')}>
                         {
                             levels?.map(({displayName, id}) => (
@@ -134,7 +135,8 @@ export default function OrgUnitFilter({value, onUpdate}) {
                 <div className='column'>
                     <SingleSelectField clearable loading={levelsAndGroupsLoading} error={levelsAndGroupsError}
                                        validationText={levelsAndGroupsError?.message}
-                                       onChange={onGroupSelect} selected={!isEmpty(groups) && selectedGroup}
+                                       onChange={onGroupSelect}
+                                       selected={(!isEmpty(groups) && selectedGroup) ? selectedGroup : ''}
                                        label={i18n.t('Select Group')}>
                         {
                             groups?.map(({displayName, id}) => (

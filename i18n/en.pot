@@ -5,8 +5,17 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-07-28T07:49:24.286Z\n"
-"PO-Revision-Date: 2021-07-28T07:49:24.286Z\n"
+"POT-Creation-Date: 2021-08-13T13:42:15.565Z\n"
+"PO-Revision-Date: 2021-08-13T13:42:15.565Z\n"
+
+msgid "Welcome to Scorecard App!"
+msgstr "Welcome to Scorecard App!"
+
+msgid "Create a scorecard instantly, over tea break"
+msgstr "Create a scorecard instantly, over tea break"
+
+msgid "New Scorecard"
+msgstr "New Scorecard"
 
 msgid "Organisation Unit"
 msgstr "Organisation Unit"
@@ -68,17 +77,35 @@ msgstr "Add Item"
 msgid "Add Data source"
 msgstr "Add Data source"
 
+msgid "Configure Data Sources"
+msgstr "Configure Data Sources"
+
+msgid "Add a data source group"
+msgstr "Add a data source group"
+
+msgid "Modify the group name"
+msgstr "Modify the group name"
+
+msgid "Add different data sources to a group"
+msgstr "Add different data sources to a group"
+
+msgid "Click on a data source to configure it"
+msgstr "Click on a data source to configure it"
+
+msgid "View the changes on the preview panel above"
+msgstr "View the changes on the preview panel above"
+
+msgid "Select a data source to configure"
+msgstr "Select a data source to configure"
+
+msgid "Add Group"
+msgstr "Add Group"
+
 msgid "Set Target on Levels"
 msgstr "Set Target on Levels"
 
 msgid "Groups"
 msgstr "Groups"
-
-msgid "Add a group to start"
-msgstr "Add a group to start"
-
-msgid "Add Group"
-msgstr "Add Group"
 
 msgid "Title"
 msgstr "Title"
@@ -119,9 +146,6 @@ msgstr "Access"
 msgid "Options"
 msgstr "Options"
 
-msgid "Configuration saved Successfully"
-msgstr "Configuration saved Successfully"
-
 msgid "Previous"
 msgstr "Previous"
 
@@ -130,15 +154,6 @@ msgstr "Saving"
 
 msgid "Next"
 msgstr "Next"
-
-msgid "Welcome to Scorecard App!"
-msgstr "Welcome to Scorecard App!"
-
-msgid "Create a scorecard instantly, over tea break"
-msgstr "Create a scorecard instantly, over tea break"
-
-msgid "New Scorecard"
-msgstr "New Scorecard"
 
 msgid "Scorecard deleted successfully"
 msgstr "Scorecard deleted successfully"
@@ -179,8 +194,56 @@ msgstr "Increased from last period"
 msgid "Decreased from last period"
 msgstr "Decreased from last period"
 
+msgid "Drag to column headers to change layout"
+msgstr "Drag to column headers to change layout"
+
 msgid "There are no configured indicators for this scorecard"
 msgstr "There are no configured indicators for this scorecard"
+
+msgid "Drag to the column headers to change layout"
+msgstr "Drag to the column headers to change layout"
+
+msgid "Column"
+msgstr "Column"
+
+msgid "Series"
+msgstr "Series"
+
+msgid "Row"
+msgstr "Row"
+
+msgid "Category"
+msgstr "Category"
+
+msgid "Filter"
+msgstr "Filter"
+
+msgid "Layout"
+msgstr "Layout"
+
+msgid "Organisation Unit(s)"
+msgstr "Organisation Unit(s)"
+
+msgid "Period(s)"
+msgstr "Period(s)"
+
+msgid "Table"
+msgstr "Table"
+
+msgid "Chart"
+msgstr "Chart"
+
+msgid "Dictionary"
+msgstr "Dictionary"
+
+msgid "Search Organisation Unit"
+msgstr "Search Organisation Unit"
+
+msgid "Search Data"
+msgstr "Search Data"
+
+msgid "Drag to row headers to change layout "
+msgstr "Drag to row headers to change layout "
 
 msgid "Name"
 msgstr "Name"

@@ -1,19 +1,21 @@
-import {DataTableCell, DataTableRow} from "@dhis2/ui";
-import PropTypes from "prop-types";
-import React, {useEffect, useState} from "react";
+import i18n from "@dhis2/d2-i18n";
+import {DataTableCell, DataTableRow, Tooltip} from "@dhis2/ui";
+import PropTypes from 'prop-types'
+import React, {useEffect, useState} from 'react'
 import {useRecoilValue} from "recoil";
-import ScorecardDataEngine from "../../../../../../../core/models/scorecardData";
+import {DraggableItems} from "../../../../../../../core/constants/draggables";
 import {PeriodResolverState} from "../../../../../../../core/state/period";
-import {ScorecardConfigStateSelector, ScorecardViewSelector,} from "../../../../../../../core/state/scorecard";
+import {ScorecardConfigDirtyState} from "../../../../../../../core/state/scorecard";
+import DroppableCell from "./DroppableCell";
 import OrgUnitContainer from "./OrgUnitContainer";
 import DataContainer from "./TableDataContainer";
 
-export default function ParentOrgUnitRow({orgUnit, scorecardDataEngine}) {
+export default function ParentOrgUnitRow({orgUnit}) {
     const {emptyRows} = useRecoilValue(ScorecardViewSelector('options'))
     const [isEmpty, setIsEmpty] = useState(false);
     const {id} = orgUnit ?? {};
     const {dataGroups} =
-    useRecoilValue(ScorecardConfigStateSelector("dataSelection")) ?? {};
+    useRecoilValue(ScorecardConfigDirtyState("dataSelection")) ?? {};
     const periods = useRecoilValue(PeriodResolverState) ?? [];
 
     useEffect(() => {
@@ -27,7 +29,11 @@ export default function ParentOrgUnitRow({orgUnit, scorecardDataEngine}) {
         <DataTableRow key={id} bordered>
             <DataTableCell fixed left={"0"} width={"50px"}/>
             <DataTableCell fixed left={"50px"} className="scorecard-org-unit-cell">
-                <OrgUnitContainer orgUnit={orgUnit}/>
+                <Tooltip content={i18n.t('Drag to the column headers to change layout')} >
+                    <DroppableCell accept={[DraggableItems.DATA_COLUMN]}>
+                        <OrgUnitContainer orgUnit={orgUnit}/>
+                    </DroppableCell>
+                </Tooltip>
             </DataTableCell>
             {dataGroups?.map(({id: groupId, dataHolders}) =>
                 dataHolders?.map(({id: holderId, dataSources}) =>
@@ -41,7 +47,6 @@ export default function ParentOrgUnitRow({orgUnit, scorecardDataEngine}) {
                                 orgUnitId={id}
                                 dataSources={dataSources}
                                 periodId={periodId}
-                                scorecardDataEngine={scorecardDataEngine}
                             />
                         </td>
                     ))
@@ -53,5 +58,4 @@ export default function ParentOrgUnitRow({orgUnit, scorecardDataEngine}) {
 
 ParentOrgUnitRow.propTypes = {
     orgUnit: PropTypes.object.isRequired,
-    scorecardDataEngine: PropTypes.instanceOf(ScorecardDataEngine)
 };

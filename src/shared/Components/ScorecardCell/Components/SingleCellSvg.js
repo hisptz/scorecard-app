@@ -1,18 +1,20 @@
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, {useMemo} from 'react'
 import {DecreasingArrows, IncreasingArrows} from "./Arrows";
 
 export default function SingleCellSvg({color, value, status}) {
-    const width = 150;
+    const width = 100;
     const height = 47;
-    const fontSize = 14;
+    const fontSize = useMemo(() => value.length > 4 ? 12 : 14, [value]);
 
     return (
         <svg width={width} height={height} style={{display: 'block'}}>
             <polygon points={`0 0 0 ${height} ${width} ${height} ${width} 0`} style={{fill: color ?? '#FFFFFF'}}/>
-            {status && (status === 'increasing' ? <IncreasingArrows y={height - (fontSize*2)} x={(width/2 - (fontSize*2))}/> :
-                <DecreasingArrows y={height - fontSize} x={(width/2 - (fontSize*2))}/>)}
-            <text fontSize={fontSize} x={width/2 - fontSize} y={height - fontSize}>{value}</text>
+            {status && (status === 'increasing' ?
+                <IncreasingArrows fontSize={fontSize} y={height - (fontSize * 2)} x={(width / 2 - (fontSize * 2))}/> :
+                <DecreasingArrows fontSize={fontSize} y={height - fontSize} x={(width / 2 - (fontSize * 2))}/>)}
+            <text lengthAdjust="spacingAndGlyphs" fontSize={fontSize} x={width / 2 - fontSize}
+                  y={height - fontSize}>{value}</text>
         </svg>
     )
 }

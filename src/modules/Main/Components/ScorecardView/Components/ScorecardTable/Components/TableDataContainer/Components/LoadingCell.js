@@ -5,6 +5,6 @@ import Shimmer from "react-js-loading-shimmer";
 export default function LoadingCell() {
 
     return (
-        <Shimmer Sheight={47}  />
+        <Shimmer Sheight={"100%"}  />
     )
 }

@@ -19,11 +19,11 @@ export default function ScorecardGridCard({ scorecard }) {
   );
 
   const onView = () => {
-    history.push(`/view/${id}`, { from: "home" });
+    history.push(`/view/${id}`);
   };
 
   const onEdit = () => {
-    history.push(`/edit/${id}`, { from: "home" });
+    history.push(`/edit/${id}`);
   };
 
   const onDelete = async () => {

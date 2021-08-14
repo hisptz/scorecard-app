@@ -1,5 +1,5 @@
 {
-  "name": "scorecard",
+  "name": "hisptz-scorecard",
   "version": "1.0.0",
   "description": "Scorecard Application",
   "license": "BSD-3-Clause",
@@ -38,6 +38,7 @@
     "@iapps/period-utilities": "^1.0.0-beta.4",
     "@material-ui/core": "^4.11.4",
     "@material-ui/icons": "^4.11.2",
+    "async": "^3.2.0",
     "immer": "^9.0.5",
     "jodit-react": "^1.0.88",
     "lodash": "^4.17.21",
@@ -45,11 +46,13 @@
     "prop-types": "^15.7.2",
     "react-beautiful-dnd": "^13.1.0",
     "react-color": "^2.19.3",
+    "react-dnd": "^14.0.3",
+    "react-dnd-html5-backend": "^14.0.1",
     "react-error-boundary": "^3.1.3",
     "react-js-loading-shimmer": "^1.0.10",
     "react-jsx-parser": "^1.28.4",
     "react-router-dom": "^5.2.0",
-    "recoil": "^0.3.1",
+    "recoil": "^0.4.0",
     "rxjs": "^7.3.0"
   },
   "cypress-cucumber-preprocessor": {

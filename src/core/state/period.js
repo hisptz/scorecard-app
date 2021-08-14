@@ -1,12 +1,12 @@
 import {Period} from "@iapps/period-utilities";
 import {compact, differenceBy, filter, isArray, isEmpty, uniqBy} from 'lodash'
 import {selector} from 'recoil'
-import {ScorecardViewSelector} from "./scorecard";
+import {ScorecardViewState} from "./scorecard";
 
 const PeriodResolverState = selector({
     key: 'period-resolver',
     get: ({get}) => {
-        const {periods} = get(ScorecardViewSelector('periodSelection'))
+        const {periods} = get(ScorecardViewState('periodSelection')) ?? {}
         if (!isEmpty(periods)) {
             const relativePeriods = filter(periods, ({id}) => {
                 const period = new Period().getById(id)
