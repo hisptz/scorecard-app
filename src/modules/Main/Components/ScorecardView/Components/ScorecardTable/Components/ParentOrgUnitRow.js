@@ -5,13 +5,17 @@ import React, {useEffect, useState} from 'react'
 import {useRecoilValue} from "recoil";
 import {DraggableItems} from "../../../../../../../core/constants/draggables";
 import {PeriodResolverState} from "../../../../../../../core/state/period";
-import {ScorecardConfigDirtyState} from "../../../../../../../core/state/scorecard";
+import {
+    ScorecardConfigDirtyState,
+    scorecardDataEngine,
+    ScorecardViewState
+} from "../../../../../../../core/state/scorecard";
 import DroppableCell from "./DroppableCell";
 import OrgUnitContainer from "./OrgUnitContainer";
 import DataContainer from "./TableDataContainer";
 
 export default function ParentOrgUnitRow({orgUnit}) {
-    const {emptyRows} = useRecoilValue(ScorecardViewSelector('options'))
+    const {emptyRows} = useRecoilValue(ScorecardViewState('options'))
     const [isEmpty, setIsEmpty] = useState(false);
     const {id} = orgUnit ?? {};
     const {dataGroups} =
@@ -19,13 +23,13 @@ export default function ParentOrgUnitRow({orgUnit}) {
     const periods = useRecoilValue(PeriodResolverState) ?? [];
 
     useEffect(() => {
-        const rowStatusSub = scorecardDataEngine.isRowEmpty(orgUnit).subscribe(setIsEmpty)
+        const rowStatusSub = scorecardDataEngine.isRowEmpty(id).subscribe(setIsEmpty)
         return () => {
             rowStatusSub.unsubscribe()
         }
     }, [orgUnit])
 
-    return ( (emptyRows || !isEmpty) &&
+    return ((emptyRows || !isEmpty) &&
         <DataTableRow key={id} bordered>
             <DataTableCell fixed left={"0"} width={"50px"}/>
             <DataTableCell fixed left={"50px"} className="scorecard-org-unit-cell">

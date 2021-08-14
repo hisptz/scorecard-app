@@ -1,7 +1,7 @@
 import {Fn} from "@iapps/function-analytics";
 import {Period} from "@iapps/period-utilities";
 import mapLimit from "async/mapLimit";
-import {chunk, find, flatten, uniq, uniqBy, mapValues, isEmpty} from "lodash";
+import {chunk, find, flatten, head, isEmpty, last, pickBy, uniq, uniqBy} from "lodash";
 import {BehaviorSubject, of} from "rxjs";
 import {map} from "rxjs/operators";
 
@@ -98,15 +98,22 @@ export default class ScorecardDataEngine {
         }
     }
 
-    isRowEmpty(orgUnit){
-       return this._loading$.asObservable().pipe(filter(loading=>!loading), map(()=>{
-           const data = this._dataEntities;
-           const rows = flatten(Object.values(mapValues(data, (value, key)=>{
-               if(key.match(RegExp(orgUnit))) return value;
-           })))
-           console.log(rows)
-           return isEmpty(rows)
-       }))
+    isRowEmpty(orgUnitId = '') {
+        return this.dataEntities$.pipe(
+            map((dataEntities) => {
+                const orgUnitsData = pickBy(dataEntities, (val, key) => key.match(RegExp(orgUnitId)))
+                return isEmpty(orgUnitsData)
+            })
+        );
+    }
+
+    isDataSourcesRowEmpty(dataSources = []) {
+        return this.dataEntities$.pipe(
+            map((dataEntities) => {
+                const orgUnitsData = pickBy(dataEntities, (_, key) => key.match(RegExp(head(dataSources))) || key.match(RegExp(last(dataSources))))
+                return isEmpty(orgUnitsData)
+            })
+        );
     }
 
     get loading$() {
