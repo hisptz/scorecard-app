@@ -2,26 +2,21 @@ import i18n from '@dhis2/d2-i18n'
 import {DataTableCell, DataTableRow, InputField} from "@dhis2/ui";
 import {debounce} from 'lodash'
 import PropTypes from 'prop-types'
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {useRecoilState, useRecoilValue} from "recoil";
 import {PeriodResolverState} from "../../../../../../../../../core/state/period";
-import {
-    ScorecardConfigDirtyState,
-    ScorecardTableOrientationState,
-    ScorecardViewState
-} from "../../../../../../../../../core/state/scorecard";
+import {ScorecardConfigDirtyState, ScorecardViewState} from "../../../../../../../../../core/state/scorecard";
 
 export default function GroupsHeaderRow({nested}) {
     const {dataGroups} = useRecoilValue(ScorecardConfigDirtyState('dataSelection')) ?? {}
     const periods = useRecoilValue(PeriodResolverState) ?? []
-    const [keyword, setKeyword] = useRecoilState(ScorecardViewState('orgUnitSearchKeyword'))
-    const orientation = useRecoilValue(ScorecardTableOrientationState)
-    const [searchValue, setSearchValue] = useState(keyword);
+    const [orgUnitKeyword, setOrgUnitKeyword] = useRecoilState(ScorecardViewState('orgUnitSearchKeyword'))
+    const [searchValue, setSearchValue] = useState(orgUnitKeyword);
 
-    const onSearchChange = debounce(setKeyword)
+    const onOrgUnitSearch = useRef(debounce(setOrgUnitKeyword, 1000, {trailing: true, leading: false}))
 
     useEffect(() => {
-        onSearchChange(searchValue)
+        onOrgUnitSearch.current(searchValue)
     }, [searchValue])
 
     return (
@@ -31,7 +26,7 @@ export default function GroupsHeaderRow({nested}) {
                            className='scorecard-table-header scorecard-org-unit-cell' rowSpan={"3"}>
                 {
                     !nested && <InputField value={searchValue} onChange={({value}) => setSearchValue(value)}
-                                           placeholder={orientation === 'orgUnitVsData' ? i18n.t('Search Organisation Unit') : i18n.t('Search Data')}/>
+                                           placeholder={i18n.t('Search Organisation Unit')}/>
                 }
             </DataTableCell>
             {

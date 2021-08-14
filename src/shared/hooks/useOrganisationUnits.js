@@ -50,8 +50,9 @@ const orgUnitSearchQuery = {
 
 
 export async function searchOrganisationUnit(keyword, engine) {
+    console.log(keyword)
     if (!isEmpty(keyword)) {
-        const data = await engine.query(orgUnitSearchQuery);
+        const data = await engine.query(orgUnitSearchQuery, {variables: {keyword}});
         if (!isEmpty(data)) {
             const idResponse = data?.idQuery?.organisationUnits ?? [];
             const nameResponse = data?.nameQuery?.organisationUnits ?? [];
