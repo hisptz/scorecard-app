@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types'
-import React, {useMemo} from 'react'
+import React from 'react'
 import {DecreasingArrows, IncreasingArrows} from "./Arrows";
 
 export default function SingleCellSvg({color, value, status}) {
     const width = 100;
     const height = 47;
-    const fontSize = useMemo(() => value.length > 4 ? 12 : 14, [value]);
+    const fontSize = 12;
 
     return (
         <svg width={width} height={height} style={{display: 'block'}}>
