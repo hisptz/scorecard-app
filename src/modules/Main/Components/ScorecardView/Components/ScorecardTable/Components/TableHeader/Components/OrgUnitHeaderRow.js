@@ -27,6 +27,10 @@ export default function OrgUnitHeaderRow({orgUnits, nested}) {
         setSort(prevValue => ({...prevValue, data: direction}))
     }
 
+    const onDataSortClick = (direction) =>{
+        console.log(direction)
+    }
+
     return (
         <DataTableRow>
             <DataTableCell fixed left={"0"} width={"50px"}/>
@@ -40,14 +44,16 @@ export default function OrgUnitHeaderRow({orgUnits, nested}) {
             </DataTableColumnHeader>
             {
                 [...filteredOrgUnits, ...childrenOrgUnits]?.map(({displayName, id}) => (
-                    <DataTableCell fixed className='scorecard-table-header' align='center' bordered
+                    <DataTableColumnHeader name={`${id}`} sortDirection={'default'} onSortIconClick={onDataSortClick} fixed className='scorecard-table-header scorecard-table-cell' align='center' bordered
                                    colSpan={`${(periods?.length ?? 1)}`} key={id}>
-                        <Tooltip content={i18n.t('Drag to row headers to change layout ')}>
-                            <DroppableCell accept={[DraggableItems.DATA_ROW]}>
-                                <DraggableCell label={displayName} type={DraggableItems.ORG_UNIT_COLUMN}/>
-                            </DroppableCell>
-                        </Tooltip>
-                    </DataTableCell>
+                       <div style={{height: '100%' , width: '100%'}}>
+                           <Tooltip className='m-auto' content={i18n.t('Drag to row headers to change layout ')}>
+                               <DroppableCell accept={[DraggableItems.DATA_ROW]}>
+                                   <DraggableCell label={displayName} type={DraggableItems.ORG_UNIT_COLUMN}/>
+                               </DroppableCell>
+                           </Tooltip>
+                       </div>
+                    </DataTableColumnHeader>
                 ))
             }
         </DataTableRow>

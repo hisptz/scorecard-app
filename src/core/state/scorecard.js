@@ -130,7 +130,6 @@ const ScorecardConfigErrorSelector = selectorFamily({
     }
 })
 
-
 const ScorecardConfigEditState = atom({
     key: 'scorecard-edit-state',
     default: {}
@@ -164,6 +163,7 @@ const ScorecardViewState = atomFamily({
         }
     })
 })
+
 
 const ScorecardTableOrientationState = atom({
     key: 'scorecard-table-orientation-state',
