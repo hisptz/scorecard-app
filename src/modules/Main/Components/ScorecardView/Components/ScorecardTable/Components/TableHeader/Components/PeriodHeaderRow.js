@@ -1,13 +1,14 @@
 import {DataTableCell, DataTableColumnHeader, DataTableRow} from "@dhis2/ui";
 import PropTypes from 'prop-types'
 import React from "react";
-import {useRecoilValue} from "recoil";
+import {useRecoilState, useRecoilValue} from "recoil";
 import {Orientation} from "../../../../../../../../../core/constants/orientation";
 import {PeriodResolverState} from "../../../../../../../../../core/state/period";
 import {
     ScorecardConfigDirtyState,
     ScorecardOrgUnitState,
-    ScorecardTableOrientationState
+    ScorecardTableOrientationState,
+    ScorecardTableSortState
 } from "../../../../../../../../../core/state/scorecard";
 
 export default function PeriodHeaderRow({orgUnits}) {
@@ -15,9 +16,13 @@ export default function PeriodHeaderRow({orgUnits}) {
     const {filteredOrgUnits, childrenOrgUnits} = useRecoilValue(ScorecardOrgUnitState(orgUnits)) ?? {}
     const orientation = useRecoilValue(ScorecardTableOrientationState)
     const periods = useRecoilValue(PeriodResolverState) ?? []
+    const [{name:sortName, direction}, setDataSort] = useRecoilState(ScorecardTableSortState)
 
     const onSortClick = (direction) => {
-        console.log(direction)
+        setDataSort({
+            ...direction,
+            type: 'period'
+        })
     }
 
     return (
@@ -30,13 +35,14 @@ export default function PeriodHeaderRow({orgUnits}) {
                             fixed
                             top={"0"}
                             onSortIconClick={onSortClick}
-                            sortDirection='default'
+                            sortDirection={sortName === `${id}-${periodId}` ? direction : 'default'}
                             width={"100px"}
                             bordered
                             align='center'
                             key={`${id}-${periodId}`}
                             className='scorecard-table-cell'
                             name={`${id}-${periodId}`}
+
                         >
                             {name}
                         </DataTableColumnHeader>))
@@ -48,7 +54,7 @@ export default function PeriodHeaderRow({orgUnits}) {
                         fixed
                         top={"0"}
                         onSortIconClick={onSortClick}
-                        sortDirection='default'
+                        sortDirection={sortName === `${id}_${periodId}` ? direction : 'default'}
                         width={"100px"}
                         bordered
                         align='center'

@@ -164,6 +164,10 @@ const ScorecardViewState = atomFamily({
     })
 })
 
+const ScorecardTableSortState = atom({
+    key: 'scorecard-table-state',
+    default: {}
+})
 
 const ScorecardTableOrientationState = atom({
     key: 'scorecard-table-orientation-state',
@@ -203,8 +207,10 @@ const ScorecardOrgUnitState = selectorFamily({
         const engine = get(EngineState)
         const searchKeyword = get(ScorecardViewState("orgUnitSearchKeyword"))
         const {orgUnit: sort} = get(ScorecardViewState('tableSort'))
-        let childrenOrgUnits = [];
+        const dataSort = get(ScorecardTableSortState)
 
+
+        let childrenOrgUnits = [];
 
         if (orgUnits.length === 1) {
             childrenOrgUnits = get(OrgUnitChildren(head(orgUnits)?.id))
@@ -251,5 +257,6 @@ export {
     ScorecardConfigErrorState,
     ScorecardTableOrientationState,
     ScorecardTableConfigState,
-    ScorecardOrgUnitState
+    ScorecardOrgUnitState,
+    ScorecardTableSortState
 }
