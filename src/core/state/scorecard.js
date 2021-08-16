@@ -1,5 +1,5 @@
 import {Period} from "@iapps/period-utilities";
-import {cloneDeep, get as _get, head, isEmpty, set as _set} from "lodash";
+import {cloneDeep, get as _get, head, isEmpty, set as _set, sortBy} from "lodash";
 import {atom, atomFamily, selector, selectorFamily} from "recoil";
 import {
     getTableWidthWithDataGroups,
@@ -9,6 +9,7 @@ import {searchOrganisationUnit} from "../../shared/hooks/useOrganisationUnits";
 import getScorecard from "../../shared/services/getScorecard";
 import getScorecardSummary from "../../shared/services/getScorecardSummary";
 import ScorecardAccessType from "../constants/scorecardAccessType";
+import {TableSort} from "../constants/tableSort";
 import OrgUnitSelection from "../models/orgUnitSelection";
 import Scorecard from "../models/scorecard";
 import ScorecardAccess from "../models/scorecardAccess";
@@ -142,6 +143,12 @@ const ScorecardViewState = atomFamily({
         get: (key) => ({get}) => {
             const scorecardId = get(ScorecardIdState)
             const configState = get(ScorecardConfState(scorecardId))
+            if (key === 'tableSort') {
+                return {
+                    orgUnit: TableSort.DEFAULT,
+                    data: TableSort.DEFAULT
+                }
+            }
             if (key === 'periodSelection') {
                 const {periodType} = configState;
                 const currentPeriod = new Period()
@@ -195,19 +202,36 @@ const ScorecardOrgUnitState = selectorFamily({
     get: (orgUnits) => async ({get}) => {
         const engine = get(EngineState)
         const searchKeyword = get(ScorecardViewState("orgUnitSearchKeyword"))
+        const {orgUnit: sort} = get(ScorecardViewState('tableSort'))
         let childrenOrgUnits = [];
+
+
         if (orgUnits.length === 1) {
             childrenOrgUnits = get(OrgUnitChildren(head(orgUnits)?.id))
         }
+
+        if (sort === TableSort.ASC || sort === TableSort.DEFAULT) {
+            childrenOrgUnits = sortBy(childrenOrgUnits, 'displayName')
+        } else {
+            childrenOrgUnits = sortBy(childrenOrgUnits, 'displayName').reverse();
+        }
+
+
         let filteredOrgUnits = orgUnits;
         if (!isEmpty(searchKeyword)) {
-            filteredOrgUnits = await searchOrganisationUnit(searchKeyword, engine)
+            filteredOrgUnits = await searchOrganisationUnit(searchKeyword, engine);
+        }
+
+        if (sort === TableSort.ASC || sort === TableSort.DEFAULT) {
+            filteredOrgUnits = sortBy(filteredOrgUnits, 'displayName')
+        } else {
+            filteredOrgUnits = sortBy(filteredOrgUnits, 'displayName').reverse()
         }
 
         return {
             childrenOrgUnits,
             filteredOrgUnits,
-            orgUnitsCount: (childrenOrgUnits.length + filteredOrgUnits.length)
+            orgUnitsCount: (childrenOrgUnits?.length + filteredOrgUnits?.length)
         }
     }
 })

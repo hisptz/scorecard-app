@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import {DataTableCell, DataTableRow, InputField} from "@dhis2/ui";
+import {DataTableCell, DataTableColumnHeader, DataTableRow, InputField} from "@dhis2/ui";
 import {debounce} from 'lodash'
 import PropTypes from 'prop-types'
 import React, {useEffect, useRef, useState} from "react";
@@ -11,6 +11,7 @@ export default function GroupsHeaderRow({nested}) {
     const {dataGroups} = useRecoilValue(ScorecardConfigDirtyState('dataSelection')) ?? {}
     const periods = useRecoilValue(PeriodResolverState) ?? []
     const [orgUnitKeyword, setOrgUnitKeyword] = useRecoilState(ScorecardViewState('orgUnitSearchKeyword'))
+    const [sort, setSort] = useRecoilState(ScorecardViewState('tableSort'))
     const [searchValue, setSearchValue] = useState(orgUnitKeyword);
 
     const onOrgUnitSearch = useRef(debounce(setOrgUnitKeyword, 1000, {trailing: true, leading: false}))
@@ -19,16 +20,23 @@ export default function GroupsHeaderRow({nested}) {
         onOrgUnitSearch.current(searchValue)
     }, [searchValue])
 
+    const onSortIconClick = ({direction}) => {
+        setSort(prevValue => ({...prevValue, orgUnit: direction}))
+
+    }
+
     return (
         <DataTableRow>
             <DataTableCell fixed left={"0"} width={"50px"}/>
-            <DataTableCell align='center' fixed top={"0"} left={"50px"} width={"300px"} bordered
-                           className='scorecard-table-header scorecard-org-unit-cell' rowSpan={"3"}>
+            <DataTableColumnHeader name={'orgUnit'} onSortIconClick={onSortIconClick}
+                                   sortDirection={sort?.orgUnit} align='left' fixed top={"0"} left={"50px"}
+                                   width={"300px"} bordered
+                                   className='scorecard-table-header scorecard-org-unit-cell' rowSpan={"3"}>
                 {
                     !nested && <InputField value={searchValue} onChange={({value}) => setSearchValue(value)}
                                            placeholder={i18n.t('Search Organisation Unit')}/>
                 }
-            </DataTableCell>
+            </DataTableColumnHeader>
             {
                 dataGroups?.map(({title, id, dataHolders}) => (
                     <DataTableCell fixed className='scorecard-table-header' align='center' bordered

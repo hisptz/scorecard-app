@@ -1,8 +1,9 @@
 import {DataTableBody} from "@dhis2/ui";
-import {filter, flatten, isEmpty} from "lodash";
+import {filter, flatten, isEmpty, sortBy} from "lodash";
 import PropTypes from 'prop-types'
 import React, {Fragment, useEffect, useMemo, useState} from "react";
 import {useRecoilValue} from "recoil";
+import {TableSort} from "../../../../../../../core/constants/tableSort";
 import {PeriodResolverState} from "../../../../../../../core/state/period";
 import {
     scorecardDataEngine,
@@ -20,11 +21,13 @@ export default function ScorecardTableBody({orgUnits}) {
     const tableOrientation = useRecoilValue(ScorecardTableOrientationState)
     const {dataGroups} = useRecoilValue(ScorecardViewState("dataSelection")) ?? {};
     const dataSearchKeyword = useRecoilValue(ScorecardViewState('dataSearchKeyword'))
+    const {data: sort} = useRecoilValue(ScorecardViewState('tableSort'))
     const dataHolders = getHoldersFromGroups(dataGroups)
 
     const filteredDataHolders = useMemo(() => {
+        let filteredResult = dataHolders;
         if (!isEmpty(dataSearchKeyword)) {
-            return filter(dataHolders, (value) => {
+            filteredResult = filter(dataHolders, (value) => {
                 const searchIndex = flatten(value.dataSources?.map(({
                                                                         id,
                                                                         displayName
@@ -32,7 +35,16 @@ export default function ScorecardTableBody({orgUnits}) {
                 return searchIndex.toLowerCase().match(RegExp(dataSearchKeyword.toLowerCase()))
             })
         }
-        return dataHolders;
+
+
+        if (sort === TableSort.DEFAULT || sort === TableSort.ASC) {
+            filteredResult = sortBy(filteredResult, 'displayName');
+        } else {
+            filteredResult = sortBy(filteredResult, 'displayName').reverse();
+        }
+
+
+        return filteredResult;
     }, [dataHolders, dataSearchKeyword]);
 
     const periods = useRecoilValue(PeriodResolverState) ?? [];
