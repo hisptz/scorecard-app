@@ -136,6 +136,5 @@ export default function useDataSources(selectedDataSourceType, selectedGroup) {
         fetch();
     }, [selectedGroup, selectedDataSourceType])
 
-
     return {data, error, loading, nexPage, search}
 }

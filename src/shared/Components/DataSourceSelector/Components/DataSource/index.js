@@ -14,7 +14,7 @@ export default function DataSource({selectedDataSourceType, selectedGroup, onCha
         const loadedData = data || []
         const selectedData = selected || []
         return uniqBy([...loadedData, ...selectedData], 'id')
-    }, [data, selected]);
+    }, [data, selected, selectedGroup]);
 
     const onEndReached = () => {
         if (loading) return;
