@@ -38,7 +38,7 @@ export default function DataConfigurationScorecardForm() {
 
     const onDragEnd = useRecoilCallback(
         ({set}) => (result) => {
-            const {destination, source} = result;
+            const {destination, source} = result ?? {};
             set(ScorecardConfigDirtyState("dataSelection"), (prevState = []) =>
                 DataSelection.set(prevState, "dataGroups", [
                     ...updateListFromDragAndDrop(

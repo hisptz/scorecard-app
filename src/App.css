@@ -392,6 +392,10 @@ table{
     display: grid;
     grid-template-columns: repeat(4, 1fr);
 }
+.grid-2{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
 
 .selection-card{
     width: 100%;
@@ -462,4 +466,13 @@ td.jsx-1369417008::selection{
 
 .scorecard-org-unit-cell{
     background: #E8EDF2;
+}
+
+.large-modal{
+    width: 75vw !important;
+    height: 80vh !important;
+}
+
+.p-0{
+    padding: 0 !important;
 }
