@@ -1,3 +1,4 @@
+import {sortBy} from "lodash";
 import {useEffect, useState} from "react";
 import {useRecoilValue} from "recoil";
 import {PeriodResolverState} from "../../../../../../../core/state/period";
@@ -15,6 +16,9 @@ export default function useGetHighlightedIndicatorsData() {
     useEffect(() => {
         async function getData() {
             setLoading(true)
+            console.log(orgUnits)
+            const sortedOrgUnits = sortBy(orgUnits, 'level')
+
             const response = await getHighlightedIndicatorsData({
                 periods: periods?.map(({id}) => id),
                 dataSources: highlightedIndicators,
@@ -25,7 +29,7 @@ export default function useGetHighlightedIndicatorsData() {
         }
 
         getData();
-    }, [periods, orgUnits,])
+    }, [periods, orgUnits])
 
     return {
         loading

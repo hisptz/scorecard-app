@@ -26,8 +26,7 @@ export async function getHighlightedIndicatorsData({orgUnits, periods, highlight
         return await new Fn.Analytics()
             .setOrgUnit(orgUnits?.join(';'))
             .setPeriod(periods?.join(";"))
-            .setData(highlightedIndicators?.join(";"))
-            .get();
+            .setData(highlightedIndicators?.join(";")).get()
     } catch (e) {
         console.log(e)
     }
