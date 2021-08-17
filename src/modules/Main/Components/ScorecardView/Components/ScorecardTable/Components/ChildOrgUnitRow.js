@@ -41,11 +41,12 @@ export default function ChildOrgUnitRow({orgUnit, expandedOrgUnit, onExpand}) {
             {dataGroups?.map(({id: groupId, dataHolders}) =>
                 dataHolders?.map(({id: holderId, dataSources}) =>
                     periods?.map(({id: periodId}) => (
-                        <td
+                       <td
                             className="data-cell"
                             align="center"
                             key={`${groupId}-${holderId}-${periodId}`}
                         >
+                           
                             <DataContainer
                                 orgUnitId={id}
                                 dataSources={dataSources}
