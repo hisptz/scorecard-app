@@ -5,8 +5,17 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-08-15T14:23:18.187Z\n"
-"PO-Revision-Date: 2021-08-15T14:23:18.187Z\n"
+"POT-Creation-Date: 2021-08-17T08:30:45.408Z\n"
+"PO-Revision-Date: 2021-08-17T08:30:45.408Z\n"
+
+msgid "Data"
+msgstr "Data"
+
+msgid "Organisation Unit"
+msgstr "Organisation Unit"
+
+msgid "Period"
+msgstr "Period"
 
 msgid "Welcome to Scorecard App!"
 msgstr "Welcome to Scorecard App!"
@@ -16,9 +25,6 @@ msgstr "Create a scorecard instantly, over tea break"
 
 msgid "New Scorecard"
 msgstr "New Scorecard"
-
-msgid "Organisation Unit"
-msgstr "Organisation Unit"
 
 msgid "Select Access"
 msgstr "Select Access"
@@ -220,6 +226,9 @@ msgstr "Filter"
 
 msgid "Layout"
 msgstr "Layout"
+
+msgid "{{ dimension }}"
+msgstr "{{ dimension }}"
 
 msgid "Organisation Unit(s)"
 msgstr "Organisation Unit(s)"

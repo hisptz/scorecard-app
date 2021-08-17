@@ -5,11 +5,7 @@ import React, {useEffect, useState} from 'react'
 import {useRecoilValue} from "recoil";
 import {DraggableItems} from "../../../../../../../core/constants/draggables";
 import {PeriodResolverState} from "../../../../../../../core/state/period";
-import {
-    ScorecardConfigDirtyState,
-    scorecardDataEngine,
-    ScorecardViewState
-} from "../../../../../../../core/state/scorecard";
+import {scorecardDataEngine, ScorecardViewState} from "../../../../../../../core/state/scorecard";
 import DroppableCell from "./DroppableCell";
 import OrgUnitContainer from "./OrgUnitContainer";
 import DataContainer from "./TableDataContainer";
@@ -19,7 +15,7 @@ export default function ParentOrgUnitRow({orgUnit}) {
     const [isEmpty, setIsEmpty] = useState(false);
     const {id} = orgUnit ?? {};
     const {dataGroups} =
-    useRecoilValue(ScorecardConfigDirtyState("dataSelection")) ?? {};
+    useRecoilValue(ScorecardViewState("dataSelection")) ?? {};
     const periods = useRecoilValue(PeriodResolverState) ?? [];
 
     useEffect(() => {
@@ -33,7 +29,7 @@ export default function ParentOrgUnitRow({orgUnit}) {
         <DataTableRow key={id} bordered>
             <DataTableCell fixed left={"0"} width={"50px"}/>
             <DataTableCell fixed left={"50px"} className="scorecard-org-unit-cell">
-                <Tooltip content={i18n.t('Drag to the column headers to change layout')} >
+                <Tooltip content={i18n.t('Drag to the column headers to change layout')}>
                     <DroppableCell accept={[DraggableItems.DATA_COLUMN]}>
                         <OrgUnitContainer orgUnit={orgUnit}/>
                     </DroppableCell>
