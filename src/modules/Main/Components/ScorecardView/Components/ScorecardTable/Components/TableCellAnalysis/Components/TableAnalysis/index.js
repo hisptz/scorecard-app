@@ -1,16 +1,10 @@
-import PropTypes from 'prop-types'
 import React from 'react'
 
-export default function TableAnalysis({dimensions}){
-    const {row, column, filter} = dimensions ?? {}
+export default function TableAnalysis() {
 
-
-    return(
-        <div className='column align-items-center center' style={{minHeight: 500}}><h3>Table analysis</h3></div> // TODO: @danford
+    return (
+        <div className='column align-items-center center' style={{minHeight: 500}}>
+            <h3>Data is Here</h3></div> // TODO: @danford
     )
 
 }
-
-TableAnalysis.propTypes = {
-    dimensions: PropTypes.object.isRequired
-};

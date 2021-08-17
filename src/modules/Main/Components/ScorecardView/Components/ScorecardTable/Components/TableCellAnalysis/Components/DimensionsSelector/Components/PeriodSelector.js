@@ -1,10 +1,12 @@
 import i18n from "@dhis2/d2-i18n";
 import {Chip, colors, Field} from "@dhis2/ui";
-import PropTypes from 'prop-types'
 import React, {useState} from "react";
+import {useRecoilState} from "recoil";
 import PeriodSelectorModal from "../../../../../../../../../../../shared/Components/PeriodSelectorModal";
+import {PeriodState} from "../../../state/period";
 
-export default function PeriodSelector({periodSelection, onChange}) {
+export default function PeriodSelector() {
+    const [periodSelection, onChange] = useRecoilState(PeriodState)
     const {periods} = periodSelection ?? {};
     const [selectorOpen, setSelectorOpen] = useState(false);
     return (
@@ -33,7 +35,3 @@ export default function PeriodSelector({periodSelection, onChange}) {
     )
 }
 
-PeriodSelector.propTypes = {
-    periodSelection: PropTypes.object.isRequired,
-    onChange: PropTypes.func.isRequired
-};
