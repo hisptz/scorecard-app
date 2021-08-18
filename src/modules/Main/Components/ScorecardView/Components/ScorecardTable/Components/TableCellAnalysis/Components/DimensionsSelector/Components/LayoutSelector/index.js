@@ -1,11 +1,15 @@
 import i18n from "@dhis2/d2-i18n";
 import {Chip, colors, Field} from "@dhis2/ui";
-import PropTypes from 'prop-types'
+import {capitalize, isEmpty} from 'lodash'
 import React, {useState} from "react";
+import {useRecoilState} from "recoil";
+import {LAYOUTS} from "../../../../../../../../../../../../core/constants/layout";
+import {LayoutState} from "../../../../state/layout";
 import LayoutSelectorModal from "./Components/LayoutSelectorModal";
 
-export default function LayoutSelector({layoutSelection, onChange}) {
 
+export default function LayoutSelector() {
+    const [layoutSelection, onChange] = useRecoilState(LayoutState)
     const [selectorOpen, setSelectorOpen] = useState(false);
     return (
         <div style={{width: "30%"}}>
@@ -19,17 +23,23 @@ export default function LayoutSelector({layoutSelection, onChange}) {
                 }} onClick={() => {
                     setSelectorOpen(true)
                 }}>
-                    <Chip>Layout here</Chip>
+                    {
+                        Object.keys(layoutSelection)?.map(key => {
+                            const value = layoutSelection[key];
+                            return !isEmpty(value) && <Chip key={`${key}`}>
+                                <b>{`${i18n.t('{{ dimension }}', {dimension: capitalize(key)})}: `}</b>
+                                {value?.map(val => LAYOUTS[val]?.displayName).join(', ')}
+                            </Chip>
+                        })
+                    }
                 </div>
             </Field>
             {
-                selectorOpen && <LayoutSelectorModal initialValue={layoutSelection} onClose={()=>setSelectorOpen(false)} onSelect={onChange} />
+                selectorOpen &&
+                <LayoutSelectorModal initialValue={layoutSelection} onClose={() => setSelectorOpen(false)}
+                                     onSelect={onChange}/>
             }
         </div>
     )
 }
 
-LayoutSelector.propTypes = {
-    layoutSelection: PropTypes.object.isRequired,
-    onChange: PropTypes.func.isRequired
-};

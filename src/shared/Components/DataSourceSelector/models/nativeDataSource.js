@@ -16,7 +16,7 @@ export default class NativeDataSource extends DataSource {
         this.groupResource = groupResource;
         this.dimensionItemType = dimensionItemType;
         this.groupKey = groupKey;
-        this.filterType = filterType
+        this.filterType = filterType ?? 'eq'
 
         this.groupsQuery = {
             groups: {
@@ -42,7 +42,7 @@ export default class NativeDataSource extends DataSource {
                         'id'
                     ],
                     filter,
-                    order: 'displayName:asc'
+                    order: 'displayName:asc',
                 })
             }
         }
@@ -71,9 +71,7 @@ export default class NativeDataSource extends DataSource {
 
     async filter(engine, {page, selectedGroup, searchKeyword}) {
         const filter = [];
-        const filterType = this.filterType || 'eq'
         if (selectedGroup?.id) filter.push(`${this.groupKey}:eq:${selectedGroup.id}`)
-        if (this.resource === 'dataItems') filter.push(`dimensionItemType:${filterType}:${this.dimensionItemType}`)
         if (searchKeyword) filter.push(`displayName:ilike:${searchKeyword}`)
         return await this.getDataSources(engine, {page, filter})
     }
