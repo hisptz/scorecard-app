@@ -1,5 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import {DataTableCell, DataTableColumnHeader, DataTableRow, Tooltip} from "@dhis2/ui";
+import {head} from "lodash";
 import React from "react";
 import {useRecoilState, useRecoilValue} from "recoil";
 import {DraggableItems} from "../../../../../../../../../core/constants/draggables";
@@ -25,13 +26,13 @@ export default function HoldersHeaderRow() {
         <DataTableRow>
             <DataTableCell fixed left={"0"} width={"50px"}/>
             {
-                dataGroups?.map(({dataHolders, id: groupId}) => (dataHolders?.map(({id, dataSources}) => (
+                dataGroups?.map(({dataHolders}) => (dataHolders?.map(({id, dataSources}) => (
                     <DataTableColumnHeader onSortIconClick={onSortClick}
-                                           sortDirection={name === `${groupId}-${id}` ? direction : 'default'} className='p-0 scorecard-table-cell'
+                                           sortDirection={name === `${head(dataSources)?.id}` ? direction : 'default'} className='p-0 scorecard-table-cell'
                                            width={`${periods?.length * 100}px`} top={"0"} fixed
                                            colSpan={`${periods?.length}`} bordered
                                            align='center'
-                                           key={`${id}-column-header`} name={`${groupId}-${id}`}>
+                                           key={`${id}-column-header`} name={`${head(dataSources)?.id}`}>
                         <div style={{height: '100%', width: '100%'}}>
                             <Tooltip className='m-auto' content={i18n.t('Drag to row headers to change layout')}>
                                 <DroppableCell accept={[DraggableItems.ORG_UNIT_ROW]}>

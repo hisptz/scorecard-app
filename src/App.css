@@ -483,9 +483,14 @@ td.jsx-1369417008::selection {
 
 span.top.jsx-2694284040{
     height: 100% !important;
-    padding: 8px 0;
     text-align: center;
 }
+
+th.jsx-4210860585{
+    height: 100% !important;
+    padding: 8px !important;
+}
+
 .m-auto{
     margin: auto;
 }

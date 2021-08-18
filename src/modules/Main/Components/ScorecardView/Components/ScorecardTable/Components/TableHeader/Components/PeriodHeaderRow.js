@@ -1,4 +1,5 @@
 import {DataTableCell, DataTableColumnHeader, DataTableRow} from "@dhis2/ui";
+import {head} from "lodash";
 import PropTypes from 'prop-types'
 import React from "react";
 import {useRecoilState, useRecoilValue} from "recoil";
@@ -29,19 +30,19 @@ export default function PeriodHeaderRow({orgUnits}) {
         <DataTableRow>
             <DataTableCell fixed left={"0"} width={"50px"}/>
             {
-                orientation === Orientation.ORG_UNIT_VS_DATA ? dataGroups?.map(({dataHolders}) => (dataHolders?.map(({id}) => (
+                orientation === Orientation.ORG_UNIT_VS_DATA ? dataGroups?.map(({dataHolders}) => (dataHolders?.map(({id, dataSources}) => (
                     periods?.map(({name, id: periodId}) => (
                         <DataTableColumnHeader
                             fixed
                             top={"0"}
                             onSortIconClick={onSortClick}
-                            sortDirection={sortName === `${id}-${periodId}` ? direction : 'default'}
+                            sortDirection={sortName === `${head(dataSources)?.id}-${periodId}` ? direction : 'default'}
                             width={"100px"}
                             bordered
                             align='center'
                             key={`${id}-${periodId}`}
                             className='scorecard-table-cell'
-                            name={`${id}-${periodId}`}
+                            name={`${head(dataSources)?.id}-${periodId}`}
 
                         >
                             {name}
@@ -54,13 +55,13 @@ export default function PeriodHeaderRow({orgUnits}) {
                         fixed
                         top={"0"}
                         onSortIconClick={onSortClick}
-                        sortDirection={sortName === `${id}_${periodId}` ? direction : 'default'}
+                        sortDirection={sortName === `${id}-${periodId}` ? direction : 'default'}
                         width={"100px"}
                         bordered
                         align='center'
                         key={`${id}-${periodId}`}
                         className='scorecard-table-cell'
-                        name={`${id}_${periodId}`}
+                        name={`${id}-${periodId}`}
                     >
                         {name}
                     </DataTableColumnHeader>)
