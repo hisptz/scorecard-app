@@ -1,9 +1,25 @@
 import {Fn} from "@iapps/function-analytics";
 import {Period} from "@iapps/period-utilities";
 import mapLimit from "async/mapLimit";
-import {chunk, find, flatten, head, isEmpty, last, pickBy, uniq, uniqBy} from "lodash";
+import {
+    chunk,
+    find,
+    flatten,
+    forIn,
+    groupBy,
+    head,
+    isEmpty,
+    last,
+    pickBy,
+    reduce,
+    sortBy,
+    toPairs,
+    uniq,
+    uniqBy
+} from "lodash";
 import {BehaviorSubject, of} from "rxjs";
-import {map} from "rxjs/operators";
+import {map, take} from "rxjs/operators";
+import {TableSort} from "../constants/tableSort";
 
 export default class ScorecardDataEngine {
     _loading$ = new BehaviorSubject();
@@ -115,6 +131,101 @@ export default class ScorecardDataEngine {
             })
         );
     }
+
+
+    sortOrgUnitsByDataAndPeriod({dataSource, period, sortType}) {
+        return this.dataEntities$.pipe(take(1), map(dataEntities => {
+            if (sortType === TableSort.DEFAULT) {
+                return []
+            }
+            const requiredDataEntities = pickBy(dataEntities, (value, key) => {
+                const [dx, , pe] = key.split('_');
+                return dx === dataSource && pe === period
+            })
+            const sortedOrgUnits = sortBy(toPairs(requiredDataEntities), [(value) => last(value)?.current])
+
+            if (sortType === TableSort.DESC) {
+                return sortedOrgUnits.reverse().map(([key]) => key?.split('_')[1])
+            }
+            return sortedOrgUnits.map(([key]) => key?.split('_')[1])
+        }))
+    }
+
+
+    sortOrgUnitsByData({dataSource, periods = [], sortType}) {
+        return this.dataEntities$.pipe(take(1), map(dataEntities => {
+            if (sortType === TableSort.DEFAULT) {
+                return []
+            }
+            const requiredDataEntities = pickBy(dataEntities, (value, key) => {
+                const [dx, , pe] = key.split('_');
+                return dx === dataSource && periods.includes(pe)
+            })
+            const groupedValues = groupBy(toPairs(requiredDataEntities), (value) => (head(value)?.split('_'))[1])
+            const averageValues = {}
+
+            forIn(groupedValues, (value, key) => {
+                averageValues[key] = reduce(value, (acc, arr) => {
+                    return acc + (last(arr)?.current / periods?.length)
+                }, 0)
+            })
+
+            const sortedValues = sortBy(toPairs(averageValues), [(value) => last(value)])
+
+            if (sortType === TableSort.DESC) {
+                return sortedValues?.map(([ou]) => ou)?.reverse()
+            }
+            return sortedValues?.map(([ou]) => ou)
+        }))
+    }
+
+
+    sortDataSourceByOrgUnitAndPeriod({orgUnit, period, sortType}) {
+        return this.dataEntities$.pipe(take(1), map(dataEntities => {
+            if (sortType === TableSort.DEFAULT) {
+                return []
+            }
+            const requiredDataEntities = pickBy(dataEntities, (value, key) => {
+                const [,ou,pe] = key.split('_');
+                return ou === orgUnit && pe === period
+            })
+            const sortedOrgUnits = sortBy(toPairs(requiredDataEntities), [(value) => parseInt(last(value)?.current)])
+            console.log(sortedOrgUnits)
+            if (sortType === TableSort.DESC) {
+                return sortedOrgUnits.reverse().map(([key]) => key?.split('_')[0])
+            }
+            return sortedOrgUnits.map(([key]) => key?.split('_')[0])
+        }))
+    }
+
+    sortDataSourceByOrgUnit({periods, orgUnit, sortType}){
+        return this.dataEntities$.pipe(take(1), map(dataEntities => {
+            if (sortType === TableSort.DEFAULT) {
+                return []
+            }
+            const requiredDataEntities = pickBy(dataEntities, (value, key) => {
+                const [, ou, pe] = key.split('_');
+                return ou === orgUnit && periods.includes(pe)
+            })
+            const groupedValues = groupBy(toPairs(requiredDataEntities), (value) => (head(value)?.split('_'))[0])
+            const averageValues = {}
+
+            forIn(groupedValues, (value, key) => {
+                averageValues[key] = reduce(value, (acc, arr) => {
+                    return acc + (last(arr)?.current / periods?.length)
+                }, 0)
+            })
+
+            const sortedValues = sortBy(toPairs(averageValues), [(value) => last(value)])
+
+            if (sortType === TableSort.DESC) {
+                return sortedValues?.map(([ou]) => ou)?.reverse()
+            }
+            return sortedValues?.map(([ou]) => ou)
+        }))
+
+    }
+
 
     get loading$() {
         return this._loading$.asObservable();

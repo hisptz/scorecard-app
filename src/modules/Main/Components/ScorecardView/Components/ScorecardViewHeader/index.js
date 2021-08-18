@@ -23,13 +23,18 @@ export default function ScorecardViewHeader() {
     const [optionsOpen, setOptionsOpen] = useState(false);
 
     const onEdit = () => {
-        history.push(`/edit/${scorecardId}`, {from: 'view'})
+        history.push(`/edit/${scorecardId}`)
     }
 
     const onHome = () => {
         resetScorecardState();
         resetScorecardIdState();
         history.replace('/')
+    }
+
+    const onRefresh = () =>{
+        console.log(history.location.pathname)
+        window.location.reload(true)
     }
 
     return (
@@ -54,7 +59,7 @@ export default function ScorecardViewHeader() {
                     <div className='column align-items-end'>
                         <ButtonStrip className='pb-8'>
                             <Button onClick={onHome}>Home</Button>
-                            <Button>Refresh</Button>
+                            <Button onClick={onRefresh} >Refresh</Button>
                         </ButtonStrip>
                         <ButtonStrip>
                             <Button onClick={() => setOptionsOpen(true)}>Options</Button>

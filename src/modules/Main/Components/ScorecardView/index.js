@@ -1,7 +1,7 @@
 import React, {Suspense, useEffect} from "react";
 import {useParams} from "react-router-dom";
 import {useRecoilCallback, useRecoilValue, useSetRecoilState} from "recoil";
-import {ScorecardIdState, ScorecardViewState,} from "../../../../core/state/scorecard";
+import {ScorecardIdState, ScorecardTableOrientationState, ScorecardViewState,} from "../../../../core/state/scorecard";
 import {FullPageLoader} from "../../../../shared/Components/Loaders";
 import HighlightedIndicatorsView from "./Components/HighlightedIndicatorsView";
 import ScorecardHeader from "./Components/ScorecardHeader";
@@ -18,6 +18,7 @@ export default function ScorecardView() {
     const reset = useRecoilCallback(({reset}) => () => {
         reset(ScorecardViewState("orgUnitSelection"))
         reset(ScorecardIdState)
+        reset(ScorecardTableOrientationState)
     })
 
     useEffect(() => {
@@ -34,7 +35,6 @@ export default function ScorecardView() {
                 <ScorecardHeader/>
                 <ScorecardLegendsView/>
                 <HighlightedIndicatorsView/>
-
                 <div className="column align-items-center pt-16 flex-1">
                     <Suspense fallback={<FullPageLoader/>}>
                         <ScorecardTable

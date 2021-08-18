@@ -1,5 +1,5 @@
 import {Period} from "@iapps/period-utilities";
-import {cloneDeep, get as _get, head, isEmpty, set as _set, sortBy} from "lodash";
+import {cloneDeep, filter, flatten, get as _get, head, isEmpty, set as _set} from "lodash";
 import {atom, atomFamily, selector, selectorFamily} from "recoil";
 import {
     getTableWidthWithDataGroups,
@@ -8,6 +8,8 @@ import {
 import {searchOrganisationUnit} from "../../shared/hooks/useOrganisationUnits";
 import getScorecard from "../../shared/services/getScorecard";
 import getScorecardSummary from "../../shared/services/getScorecardSummary";
+import {getHoldersFromGroups} from "../../shared/utils/utils";
+import {Orientation} from "../constants/orientation";
 import ScorecardAccessType from "../constants/scorecardAccessType";
 import {TableSort} from "../constants/tableSort";
 import OrgUnitSelection from "../models/orgUnitSelection";
@@ -18,6 +20,12 @@ import ScorecardOptions from "../models/scorecardOptions";
 import {EngineState} from "./engine";
 import {OrgUnitChildren} from "./orgUnit";
 import {PeriodResolverState} from "./period";
+import {
+    sortDataSourcesBasedOnData,
+    sortDataSourcesBasedOnNames,
+    sortOrgUnitsBasedOnData,
+    sortOrgUnitsBasedOnNames
+} from "./utils";
 
 const defaultValue = {
     legendDefinitions: [
@@ -130,7 +138,6 @@ const ScorecardConfigErrorSelector = selectorFamily({
     }
 })
 
-
 const ScorecardConfigEditState = atom({
     key: 'scorecard-edit-state',
     default: {}
@@ -163,6 +170,11 @@ const ScorecardViewState = atomFamily({
             return configState[key];
         }
     })
+})
+
+const ScorecardTableSortState = atom({
+    key: 'scorecard-table-state',
+    default: {}
 })
 
 const ScorecardTableOrientationState = atom({
@@ -203,29 +215,59 @@ const ScorecardOrgUnitState = selectorFamily({
         const engine = get(EngineState)
         const searchKeyword = get(ScorecardViewState("orgUnitSearchKeyword"))
         const {orgUnit: sort} = get(ScorecardViewState('tableSort'))
-        let childrenOrgUnits = [];
+        const dataSort = get(ScorecardTableSortState)
+        const periods = get(PeriodResolverState)
+        const orientation = get(ScorecardTableOrientationState)
 
+        let orgUnitSort = []
+        if (dataSort) {
+            if (orientation === Orientation.ORG_UNIT_VS_DATA) {
+                if (dataSort.type === 'period') {
+                    const [dx, pe] = dataSort.name?.split('-');
+                    console.log('this?')
+                    scorecardDataEngine.sortOrgUnitsByDataAndPeriod({
+                        dataSource: dx,
+                        period: pe,
+                        sortType: dataSort?.direction
+                    }).subscribe((ouSort) => orgUnitSort = ouSort)
+                }
+                if (dataSort.type === 'data') {
+                    const dx = dataSort?.name;
+                    scorecardDataEngine.sortOrgUnitsByData({
+                        dataSource: dx,
+                        periods: periods?.map(({id}) => id),
+                        sortType: dataSort?.direction
+                    }).subscribe(ouSort => orgUnitSort = ouSort)
+                }
+            }
+        }
+
+        let childrenOrgUnits = [];
 
         if (orgUnits.length === 1) {
             childrenOrgUnits = get(OrgUnitChildren(head(orgUnits)?.id))
         }
 
-        if (sort === TableSort.ASC || sort === TableSort.DEFAULT) {
-            childrenOrgUnits = sortBy(childrenOrgUnits, 'displayName')
-        } else {
-            childrenOrgUnits = sortBy(childrenOrgUnits, 'displayName').reverse();
-        }
-
-
         let filteredOrgUnits = orgUnits;
+
+
         if (!isEmpty(searchKeyword)) {
             filteredOrgUnits = await searchOrganisationUnit(searchKeyword, engine);
         }
 
-        if (sort === TableSort.ASC || sort === TableSort.DEFAULT) {
-            filteredOrgUnits = sortBy(filteredOrgUnits, 'displayName')
+        if (!isEmpty(orgUnitSort)) {
+            const {parentOrgUnits, childOrgUnits} = sortOrgUnitsBasedOnData({
+                orgUnitSort,
+                childrenOrgUnits,
+                filteredOrgUnits
+            })
+            filteredOrgUnits = parentOrgUnits
+            childrenOrgUnits = childOrgUnits
+
         } else {
-            filteredOrgUnits = sortBy(filteredOrgUnits, 'displayName').reverse()
+            const {parentOrgUnits, childOrgUnits} = sortOrgUnitsBasedOnNames({sort, childrenOrgUnits, filteredOrgUnits})
+            filteredOrgUnits = parentOrgUnits
+            childrenOrgUnits = childOrgUnits
         }
 
         return {
@@ -233,6 +275,58 @@ const ScorecardOrgUnitState = selectorFamily({
             filteredOrgUnits,
             orgUnitsCount: (childrenOrgUnits?.length + filteredOrgUnits?.length)
         }
+    }
+})
+
+const ScorecardDataSourceState = selector({
+    key: 'data-source-state',
+    get: ({get}) => {
+        const {dataGroups} = get(ScorecardViewState("dataSelection")) ?? {};
+        const dataSearchKeyword = get(ScorecardViewState('dataSearchKeyword'))
+        const {data: sort} = get(ScorecardViewState('tableSort'))
+        const dataHolders = getHoldersFromGroups(dataGroups)
+        const dataSort = get(ScorecardTableSortState)
+        const periods = get(PeriodResolverState)
+        const orientation = get(ScorecardTableOrientationState)
+        let filteredResult = dataHolders;
+        if (!isEmpty(dataSearchKeyword)) {
+            filteredResult = filter(dataHolders, (value) => {
+                const searchIndex = flatten(value.dataSources?.map(({
+                                                                        id,
+                                                                        displayName
+                                                                    }) => (`${id}-${displayName}`))).join('_')
+                return searchIndex.toLowerCase().match(RegExp(dataSearchKeyword.toLowerCase()))
+            })
+        }
+        let dataSourceSort = []
+        if (!isEmpty(dataSort)) {
+            if (orientation === Orientation.DATA_VS_ORG_UNIT) {
+                if (dataSort.type === 'orgUnit') {
+                    scorecardDataEngine.sortDataSourceByOrgUnit({
+                        periods: periods?.map(({id}) => id),
+                        orgUnit: dataSort?.name,
+                        sortType: dataSort?.direction
+                    }).subscribe(dSort => dataSourceSort = dSort)
+                }
+                if (dataSort.type === 'period') {
+                    const [ou, pe] = dataSort.name.split('-')
+                    console.log({ou, pe})
+                    scorecardDataEngine.sortDataSourceByOrgUnitAndPeriod({
+                        period: pe,
+                        orgUnit: ou,
+                        sortType: dataSort?.direction
+                    }).subscribe(dSort => dataSourceSort = dSort)
+                }
+            }
+        }
+
+        if (!isEmpty(dataSourceSort)) {
+            filteredResult = sortDataSourcesBasedOnData({dataSort: dataSourceSort, dataSources: filteredResult})
+        } else {
+            filteredResult = sortDataSourcesBasedOnNames({sort, dataSources: filteredResult})
+        }
+
+        return filteredResult;
     }
 })
 
@@ -251,5 +345,7 @@ export {
     ScorecardConfigErrorState,
     ScorecardTableOrientationState,
     ScorecardTableConfigState,
-    ScorecardOrgUnitState
+    ScorecardOrgUnitState,
+    ScorecardTableSortState,
+    ScorecardDataSourceState
 }
