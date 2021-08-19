@@ -12,20 +12,24 @@ import {
 } from "../../../../../../../../../core/state/scorecard";
 import {getDataSourcesDisplayName} from "../../../../../../../../../shared/utils/utils";
 import DataContainer from "../../TableDataContainer";
+import AverageCell from "./AverageCell";
 import DraggableCell from "./DraggableCell";
 import DroppableCell from "./DroppableCell";
 
 export default function DataSourceRow({orgUnits, dataSources}) {
-    const {emptyRows} = useRecoilValue(ScorecardViewState('options'))
+    const {emptyRows, averageColumn} = useRecoilValue(ScorecardViewState('options'))
     const [isEmpty, setIsEmpty] = useState(false);
+    const [average, setAverage] = useState();
     const {filteredOrgUnits, childrenOrgUnits} = useRecoilValue(ScorecardOrgUnitState(orgUnits))
     const periods =
         useRecoilValue(PeriodResolverState) ?? [];
 
     useEffect(() => {
         const rowStatusSub = scorecardDataEngine.isDataSourcesRowEmpty(dataSources?.map(({id})=>id)).subscribe(setIsEmpty)
+        const rowAverageSub = scorecardDataEngine.getDataSourceAverage(dataSources?.map(({id})=>id)).subscribe(setAverage)
         return () => {
             rowStatusSub.unsubscribe()
+            rowAverageSub.unsubscribe();
         }
     }, [dataSources])
 
@@ -53,6 +57,11 @@ export default function DataSourceRow({orgUnits, dataSources}) {
                             </td>
                         )
                     )))
+            }
+            {
+                averageColumn &&
+                    <AverageCell value={average}/>
+
             }
         </DataTableRow>
     )

@@ -12,7 +12,7 @@ import DroppableCell from "./DroppableCell";
 import OrgUnitContainer from "./OrgUnitContainer";
 
 export default function ParentOrgUnitRow({orgUnit}) {
-    const {emptyRows, averageRow} = useRecoilValue(ScorecardViewState('options'))
+    const {emptyRows, averageColumn} = useRecoilValue(ScorecardViewState('options'))
     const [isEmpty, setIsEmpty] = useState(false);
     const [average, setAverage] = useState();
     const {id} = orgUnit ?? {};
@@ -57,10 +57,8 @@ export default function ParentOrgUnitRow({orgUnit}) {
                 )
             )}
             {
-                averageRow &&
-                <DataTableCell>
-                    <AverageCell value={average}/>
-                </DataTableCell>
+                averageColumn &&
+                    <AverageCell bold value={average}/>
             }
         </DataTableRow>
     );

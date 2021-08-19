@@ -16,6 +16,7 @@ import DroppableCell from "../../ScorecardTableBody/Components/DroppableCell";
 
 
 export default function OrgUnitHeaderRow({orgUnits, nested}) {
+    const {averageColumn} = useRecoilValue(ScorecardViewState('options'))
     const {filteredOrgUnits, childrenOrgUnits} = useRecoilValue(ScorecardOrgUnitState(orgUnits))
     const periods = useRecoilValue(PeriodResolverState) ?? []
     const [dataKeyword, setDataKeyword] = useRecoilState(ScorecardViewState('dataSearchKeyword'))
@@ -67,6 +68,12 @@ export default function OrgUnitHeaderRow({orgUnits, nested}) {
                         </div>
                     </DataTableColumnHeader>
                 ))
+            }
+            {
+                averageColumn &&
+                <DataTableCell fixed align='center' bordered className='scorecard-table-header' rowSpan={"2"}>
+                    {i18n.t('Average')}
+                </DataTableCell>
             }
         </DataTableRow>
     )

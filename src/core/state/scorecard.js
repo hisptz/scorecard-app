@@ -188,6 +188,7 @@ const ScorecardTableConfigState = selectorFamily({
         const orientation = get(ScorecardTableOrientationState)
         const periods = get(PeriodResolverState)
         const {dataGroups} = get(ScorecardViewState('dataSelection'))
+        const {averageColumn} = get(ScorecardViewState('options'))
         const {filteredOrgUnits, childrenOrgUnits} = get(ScorecardOrgUnitState(orgUnits))
 
         return orientation === 'orgUnitsVsData' ? {
@@ -197,14 +198,14 @@ const ScorecardTableConfigState = selectorFamily({
                 'data',
                 'periods'
             ],
-            tableWidth: getTableWidthWithDataGroups(periods, dataGroups)
+            tableWidth: getTableWidthWithDataGroups(periods, dataGroups, averageColumn)
         } : {
             rows: 'data',
             columns: [
                 'orgUnits',
                 'periods'
             ],
-            tableWidth: getTableWidthWithOrgUnit(periods, [...filteredOrgUnits, ...childrenOrgUnits])
+            tableWidth: getTableWidthWithOrgUnit(periods, [...filteredOrgUnits, ...childrenOrgUnits], averageColumn)
         }
     }
 })

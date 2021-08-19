@@ -238,6 +238,59 @@ export default class ScorecardDataEngine {
         );
     }
 
+    getDataSourceAverage(dataSources = []) {
+        return this.dataEntities$.pipe(
+            map((dataEntities) => {
+                const dataSourcesData = pickBy(dataEntities, (_, key) => key.match(RegExp(head(dataSources))) || key.match(RegExp(last(dataSources))))
+                const noOfDataSources = Object.keys(dataSourcesData).length;
+                return reduce(dataSourcesData, (result, value) => {
+                    return (result ?? 0) + (value.current / noOfDataSources)
+                }, 0);
+            })
+        );
+    }
+
+    getOrgUnitColumnAverage({period, orgUnit}) {
+        return this.dataEntities$.pipe(
+            map((dataEntities) => {
+                const orgUnitsData = pickBy(dataEntities, (val, key) => {
+                    const [, ou, pe] = key.split('_')
+                    return ou === orgUnit && pe === period
+                })
+                const noOfOrgUnits = Object.keys(orgUnitsData).length
+                return reduce(orgUnitsData, (result, value) => {
+                    return (result ?? 0) + (value.current / noOfOrgUnits)
+                }, 0);
+            })
+        );
+    }
+
+    getDataSourceColumnAverage({period, dataSources}) {
+        return this.dataEntities$.pipe(
+            map((dataEntities) => {
+                const dataSourcesData = pickBy(dataEntities, (val, key) => {
+                    const [dx, , pe] = key.split('_')
+                    return dataSources.includes(dx) && pe === period
+                })
+                const noOfDataSources = Object.keys(dataSourcesData).length
+                return reduce(dataSourcesData, (result, value) => {
+                    return (result ?? 0) + (value.current / noOfDataSources)
+                }, 0);
+            })
+        );
+    }
+
+    getOverallAverage() {
+        return this.dataEntities$.pipe(
+            map((dataEntities) => {
+                const noOfDataEntities = Object.keys(dataEntities).length
+                return reduce(dataEntities, (result, value) => {
+                    return (result ?? 0) + (value.current / noOfDataEntities)
+                }, 0);
+            })
+        );
+    }
+
     get loading$() {
         return this._loading$.asObservable();
     }

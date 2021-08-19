@@ -9,7 +9,7 @@ import {ScorecardViewState} from "../../../../../../../../../core/state/scorecar
 
 export default function GroupsHeaderRow({nested}) {
     const {dataGroups} = useRecoilValue(ScorecardViewState('dataSelection')) ?? {}
-    const {averageRow} = useRecoilValue(ScorecardViewState('options')) ?? {}
+    const {averageColumn} = useRecoilValue(ScorecardViewState('options')) ?? {}
     const periods = useRecoilValue(PeriodResolverState) ?? []
     const [orgUnitKeyword, setOrgUnitKeyword] = useRecoilState(ScorecardViewState('orgUnitSearchKeyword'))
     const [sort, setSort] = useRecoilState(ScorecardViewState('tableSort'))
@@ -50,7 +50,7 @@ export default function GroupsHeaderRow({nested}) {
                 ))
             }
             {
-                averageRow &&
+                averageColumn &&
                 <DataTableCell fixed align='center' bordered className='scorecard-table-header' rowSpan={"3"}>
                     {i18n.t('Average')}
                 </DataTableCell>
