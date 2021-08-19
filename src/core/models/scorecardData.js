@@ -186,7 +186,7 @@ export default class ScorecardDataEngine {
                 return []
             }
             const requiredDataEntities = pickBy(dataEntities, (value, key) => {
-                const [,ou,pe] = key.split('_');
+                const [, ou, pe] = key.split('_');
                 return ou === orgUnit && pe === period
             })
             const sortedOrgUnits = sortBy(toPairs(requiredDataEntities), [(value) => parseInt(last(value)?.current)])
@@ -198,7 +198,7 @@ export default class ScorecardDataEngine {
         }))
     }
 
-    sortDataSourceByOrgUnit({periods, orgUnit, sortType}){
+    sortDataSourceByOrgUnit({periods, orgUnit, sortType}) {
         return this.dataEntities$.pipe(take(1), map(dataEntities => {
             if (sortType === TableSort.DEFAULT) {
                 return []
@@ -226,6 +226,17 @@ export default class ScorecardDataEngine {
 
     }
 
+    getOrgUnitAverage(orgUnitId = '') {
+        return this.dataEntities$.pipe(
+            map((dataEntities) => {
+                const orgUnitsData = pickBy(dataEntities, (val, key) => key.match(RegExp(orgUnitId)))
+                const noOfOrgUnits = Object.keys(orgUnitsData).length
+                return reduce(orgUnitsData, (result, value) => {
+                    return (result ?? 0) + (value.current / noOfOrgUnits)
+                }, 0);
+            })
+        );
+    }
 
     get loading$() {
         return this._loading$.asObservable();

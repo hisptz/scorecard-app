@@ -3,17 +3,17 @@ import {isEmpty} from "lodash";
 import PropTypes from 'prop-types'
 import React, {Fragment, useEffect, useState} from "react";
 import {useRecoilValue} from "recoil";
-import {PeriodResolverState} from "../../../../../../../core/state/period";
+import {PeriodResolverState} from "../../../../../../../../core/state/period";
 import {
     scorecardDataEngine,
     ScorecardDataSourceState,
     ScorecardOrgUnitState,
     ScorecardTableOrientationState,
     ScorecardViewState
-} from "../../../../../../../core/state/scorecard";
-import ChildOrgUnitRow from "./ChildOrgUnitRow";
-import DataSourceRow from "./DataSourceRow";
-import ParentOrgUnitRow from "./ParentOrgUnitRow";
+} from "../../../../../../../../core/state/scorecard";
+import ChildOrgUnitRow from "./Components/ChildOrgUnitRow";
+import DataSourceRow from "./Components/DataSourceRow";
+import ParentOrgUnitRow from "./Components/ParentOrgUnitRow";
 
 export default function ScorecardTableBody({orgUnits}) {
     const [expandedOrgUnit, setExpandedOrgUnit] = useState();

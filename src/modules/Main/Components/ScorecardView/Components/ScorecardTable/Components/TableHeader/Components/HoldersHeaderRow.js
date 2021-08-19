@@ -7,8 +7,8 @@ import {DraggableItems} from "../../../../../../../../../core/constants/draggabl
 import {PeriodResolverState} from "../../../../../../../../../core/state/period";
 import {ScorecardTableSortState, ScorecardViewState} from "../../../../../../../../../core/state/scorecard";
 import {getDataSourcesDisplayName} from "../../../../../../../../../shared/utils/utils";
-import DraggableCell from "../../DraggableCell";
-import DroppableCell from "../../DroppableCell";
+import DraggableCell from "../../ScorecardTableBody/Components/DraggableCell";
+import DroppableCell from "../../ScorecardTableBody/Components/DroppableCell";
 
 export default function HoldersHeaderRow() {
     const {dataGroups} = useRecoilValue(ScorecardViewState('dataSelection')) ?? {}

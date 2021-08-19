@@ -3,17 +3,17 @@ import {head} from 'lodash'
 import PropTypes from 'prop-types'
 import React, {useEffect, useState} from 'react'
 import {useRecoilValue} from "recoil";
-import {DraggableItems} from "../../../../../../../core/constants/draggables";
-import {PeriodResolverState} from "../../../../../../../core/state/period";
+import {DraggableItems} from "../../../../../../../../../core/constants/draggables";
+import {PeriodResolverState} from "../../../../../../../../../core/state/period";
 import {
     scorecardDataEngine,
     ScorecardOrgUnitState,
     ScorecardViewState
-} from "../../../../../../../core/state/scorecard";
-import {getDataSourcesDisplayName} from "../../../../../../../shared/utils/utils";
+} from "../../../../../../../../../core/state/scorecard";
+import {getDataSourcesDisplayName} from "../../../../../../../../../shared/utils/utils";
+import DataContainer from "../../TableDataContainer";
 import DraggableCell from "./DraggableCell";
 import DroppableCell from "./DroppableCell";
-import DataContainer from "./TableDataContainer";
 
 export default function DataSourceRow({orgUnits, dataSources}) {
     const {emptyRows} = useRecoilValue(ScorecardViewState('options'))

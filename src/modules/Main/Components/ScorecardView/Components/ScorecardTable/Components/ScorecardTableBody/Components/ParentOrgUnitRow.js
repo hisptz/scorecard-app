@@ -3,16 +3,18 @@ import {DataTableCell, DataTableRow, Tooltip} from "@dhis2/ui";
 import PropTypes from 'prop-types'
 import React, {useEffect, useState} from 'react'
 import {useRecoilValue} from "recoil";
-import {DraggableItems} from "../../../../../../../core/constants/draggables";
-import {PeriodResolverState} from "../../../../../../../core/state/period";
-import {scorecardDataEngine, ScorecardViewState} from "../../../../../../../core/state/scorecard";
+import {DraggableItems} from "../../../../../../../../../core/constants/draggables";
+import {PeriodResolverState} from "../../../../../../../../../core/state/period";
+import {scorecardDataEngine, ScorecardViewState} from "../../../../../../../../../core/state/scorecard";
+import DataContainer from "../../TableDataContainer";
+import AverageCell from "./AverageCell";
 import DroppableCell from "./DroppableCell";
 import OrgUnitContainer from "./OrgUnitContainer";
-import DataContainer from "./TableDataContainer";
 
 export default function ParentOrgUnitRow({orgUnit}) {
-    const {emptyRows} = useRecoilValue(ScorecardViewState('options'))
+    const {emptyRows, averageRow} = useRecoilValue(ScorecardViewState('options'))
     const [isEmpty, setIsEmpty] = useState(false);
+    const [average, setAverage] = useState();
     const {id} = orgUnit ?? {};
     const {dataGroups} =
     useRecoilValue(ScorecardViewState("dataSelection")) ?? {};
@@ -20,8 +22,10 @@ export default function ParentOrgUnitRow({orgUnit}) {
 
     useEffect(() => {
         const rowStatusSub = scorecardDataEngine.isRowEmpty(id).subscribe(setIsEmpty)
+        const rowAverage = scorecardDataEngine.getOrgUnitAverage(id).subscribe(setAverage)
         return () => {
             rowStatusSub.unsubscribe()
+            rowAverage.unsubscribe()
         }
     }, [orgUnit])
 
@@ -52,6 +56,12 @@ export default function ParentOrgUnitRow({orgUnit}) {
                     ))
                 )
             )}
+            {
+                averageRow &&
+                <DataTableCell>
+                    <AverageCell value={average}/>
+                </DataTableCell>
+            }
         </DataTableRow>
     );
 }
