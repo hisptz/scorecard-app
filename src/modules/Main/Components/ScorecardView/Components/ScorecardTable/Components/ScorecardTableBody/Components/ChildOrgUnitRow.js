@@ -3,21 +3,23 @@ import {DataTableCell, DataTableRow, Tooltip} from "@dhis2/ui";
 import PropTypes from "prop-types";
 import React, {Suspense, useEffect, useState} from "react";
 import {useRecoilValue} from "recoil";
-import {DraggableItems} from "../../../../../../../core/constants/draggables";
-import {PeriodResolverState} from "../../../../../../../core/state/period";
+import {DraggableItems} from "../../../../../../../../../core/constants/draggables";
+import {PeriodResolverState} from "../../../../../../../../../core/state/period";
 import {
     ScorecardConfigDirtyState,
     scorecardDataEngine,
     ScorecardViewState,
-} from "../../../../../../../core/state/scorecard";
-import ScorecardTable from "../index";
+} from "../../../../../../../../../core/state/scorecard";
+import ScorecardTable from "../../../index";
+import DataContainer from "../../TableDataContainer";
+import AverageCell from "./AverageCell";
 import DroppableCell from "./DroppableCell";
 import OrgUnitContainer from "./OrgUnitContainer";
-import DataContainer from "./TableDataContainer";
 
 export default function ChildOrgUnitRow({orgUnit, expandedOrgUnit, onExpand}) {
-    const {emptyRows} = useRecoilValue(ScorecardViewState('options'))
+    const {emptyRows, averageColumn} = useRecoilValue(ScorecardViewState('options'))
     const [isEmpty, setIsEmpty] = useState(false);
+    const [average, setAverage] = useState();
     const {id} = orgUnit ?? {};
     const {dataGroups} =
     useRecoilValue(ScorecardConfigDirtyState("dataSelection")) ?? {};
@@ -28,8 +30,10 @@ export default function ChildOrgUnitRow({orgUnit, expandedOrgUnit, onExpand}) {
 
     useEffect(() => {
         const rowStatusSub = scorecardDataEngine.isRowEmpty(id).subscribe(setIsEmpty)
+        const rowAverage = scorecardDataEngine.getOrgUnitAverage(id).subscribe(setAverage)
         return () => {
             rowStatusSub.unsubscribe()
+            rowAverage.unsubscribe()
         }
     }, [orgUnit])
 
@@ -80,6 +84,10 @@ export default function ChildOrgUnitRow({orgUnit, expandedOrgUnit, onExpand}) {
                     ))
                 )
             )}
+            {
+                averageColumn &&
+                <AverageCell bold value={average}/>
+            }
         </DataTableRow>
     );
 }
