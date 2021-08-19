@@ -3,22 +3,26 @@ import {isEmpty} from "lodash";
 import PropTypes from 'prop-types'
 import React, {Fragment, useEffect, useState} from "react";
 import {useRecoilValue} from "recoil";
-import {PeriodResolverState} from "../../../../../../../core/state/period";
+import {Orientation} from "../../../../../../../../core/constants/orientation";
+import {PeriodResolverState} from "../../../../../../../../core/state/period";
 import {
     scorecardDataEngine,
     ScorecardDataSourceState,
     ScorecardOrgUnitState,
     ScorecardTableOrientationState,
     ScorecardViewState
-} from "../../../../../../../core/state/scorecard";
-import ChildOrgUnitRow from "./ChildOrgUnitRow";
-import DataSourceRow from "./DataSourceRow";
-import ParentOrgUnitRow from "./ParentOrgUnitRow";
+} from "../../../../../../../../core/state/scorecard";
+import AverageDataSourceRow from "./Components/AverageDataSourceRow";
+import AverageOrgUnitRow from "./Components/AverageOrgUnitRow";
+import ChildOrgUnitRow from "./Components/ChildOrgUnitRow";
+import DataSourceRow from "./Components/DataSourceRow";
+import ParentOrgUnitRow from "./Components/ParentOrgUnitRow";
 
 export default function ScorecardTableBody({orgUnits}) {
     const [expandedOrgUnit, setExpandedOrgUnit] = useState();
     const tableOrientation = useRecoilValue(ScorecardTableOrientationState)
     const {dataGroups} = useRecoilValue(ScorecardViewState("dataSelection")) ?? {};
+    const {averageRow} = useRecoilValue(ScorecardViewState("options")) ?? {};
     const filteredDataHolders = useRecoilValue(ScorecardDataSourceState)
 
     const periods = useRecoilValue(PeriodResolverState) ?? [];
@@ -44,10 +48,11 @@ export default function ScorecardTableBody({orgUnits}) {
         }
     }, [dataGroups, filteredOrgUnits, childrenOrgUnits, periodType]);
 
+
     return (
         <DataTableBody>
             {
-                tableOrientation === 'orgUnitsVsData' ?
+                tableOrientation === Orientation.ORG_UNIT_VS_DATA ?
                     <Fragment>
                         {filteredOrgUnits?.map((orgUnit) => (
                             <ParentOrgUnitRow
@@ -67,6 +72,14 @@ export default function ScorecardTableBody({orgUnits}) {
                     filteredDataHolders?.map(({id, dataSources}) => (
                         <DataSourceRow orgUnits={orgUnits} dataSources={dataSources} key={`${id}-row`}/>
                     ))
+            }
+            {
+                averageRow && (
+                    tableOrientation === Orientation.ORG_UNIT_VS_DATA ?
+                        <AverageDataSourceRow /> :
+                        <AverageOrgUnitRow orgUnits={orgUnits} />
+
+                )
             }
         </DataTableBody>
     )

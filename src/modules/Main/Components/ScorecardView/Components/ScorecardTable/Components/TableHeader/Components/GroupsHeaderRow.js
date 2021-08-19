@@ -5,10 +5,11 @@ import PropTypes from 'prop-types'
 import React, {useEffect, useRef, useState} from "react";
 import {useRecoilState, useRecoilValue} from "recoil";
 import {PeriodResolverState} from "../../../../../../../../../core/state/period";
-import {ScorecardConfigDirtyState, ScorecardViewState} from "../../../../../../../../../core/state/scorecard";
+import {ScorecardViewState} from "../../../../../../../../../core/state/scorecard";
 
 export default function GroupsHeaderRow({nested}) {
-    const {dataGroups} = useRecoilValue(ScorecardConfigDirtyState('dataSelection')) ?? {}
+    const {dataGroups} = useRecoilValue(ScorecardViewState('dataSelection')) ?? {}
+    const {averageColumn} = useRecoilValue(ScorecardViewState('options')) ?? {}
     const periods = useRecoilValue(PeriodResolverState) ?? []
     const [orgUnitKeyword, setOrgUnitKeyword] = useRecoilState(ScorecardViewState('orgUnitSearchKeyword'))
     const [sort, setSort] = useRecoilState(ScorecardViewState('tableSort'))
@@ -48,6 +49,13 @@ export default function GroupsHeaderRow({nested}) {
                     </DataTableCell>
                 ))
             }
+            {
+                averageColumn &&
+                <DataTableCell fixed align='center' bordered className='scorecard-table-header' rowSpan={"3"}>
+                    {i18n.t('Average')}
+                </DataTableCell>
+            }
+
         </DataTableRow>
     )
 }

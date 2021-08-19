@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-08-18T07:24:46.389Z\n"
-"PO-Revision-Date: 2021-08-18T07:24:46.389Z\n"
+"POT-Creation-Date: 2021-08-19T12:41:05.778Z\n"
+"PO-Revision-Date: 2021-08-19T12:41:05.778Z\n"
 
 msgid "Data"
 msgstr "Data"
@@ -200,6 +200,9 @@ msgstr "Increased from last period"
 msgid "Decreased from last period"
 msgstr "Decreased from last period"
 
+msgid "Average"
+msgstr "Average"
+
 msgid "Drag to column headers to change layout"
 msgstr "Drag to column headers to change layout"
 
@@ -316,9 +319,6 @@ msgstr "Average Column"
 
 msgid "Average Row"
 msgstr "Average Row"
-
-msgid "Average"
-msgstr "Average"
 
 msgid "All"
 msgstr "All"
