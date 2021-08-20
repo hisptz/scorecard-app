@@ -34,7 +34,7 @@ export default function ScorecardTable({orgUnits, nested}) {
                     layout="fixed"
                 >
                     <TableHeader orgUnits={orgUnits} nested={nested}/>
-                    <Suspense fallback={<TableLoader/>}>
+                    <Suspense fallback={<TableLoader orgUnits={orgUnits}/>}>
                         <ScorecardTableBody orgUnits={orgUnits}/>
                     </Suspense>
                 </DataTable>

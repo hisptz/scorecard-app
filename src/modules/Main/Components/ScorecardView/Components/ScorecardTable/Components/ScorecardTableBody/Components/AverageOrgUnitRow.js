@@ -16,12 +16,12 @@ export default function AverageOrgUnitRow({orgUnits}) {
         <DataTableRow bordered>
             <DataTableCell fixed left={"0"} width={"50px"}/>
             <DataTableCell fixed left={"50px"} className="scorecard-org-unit-cell">
-                {i18n.t('Average')}
+                <b>{i18n.t('Average')}</b>
             </DataTableCell>
             {
                 ([...filteredOrgUnits, ...childrenOrgUnits])?.map(({id}) => (
                     periods?.map(({id: periodId}) => (
-                        <AverageDataContainer key={`${id}-${periodId}-average`} period={periodId} orgUnit={id}/>
+                        <AverageDataContainer orgUnits={orgUnits} key={`${id}-${periodId}-average`} period={periodId} orgUnit={id}/>
                     ))
                 ))
             }

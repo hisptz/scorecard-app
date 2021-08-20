@@ -8,6 +8,7 @@ import {PeriodResolverState} from "../../../../../../../../../core/state/period"
 import {
     ScorecardConfigDirtyState,
     scorecardDataEngine,
+    ScorecardDataLoadingState,
     ScorecardViewState,
 } from "../../../../../../../../../core/state/scorecard";
 import ScorecardTable from "../../../index";
@@ -23,19 +24,24 @@ export default function ChildOrgUnitRow({orgUnit, expandedOrgUnit, onExpand}) {
     const {id} = orgUnit ?? {};
     const {dataGroups} =
     useRecoilValue(ScorecardConfigDirtyState("dataSelection")) ?? {};
-
+    const loading = useRecoilValue(ScorecardDataLoadingState)
     const periods =
         useRecoilValue(PeriodResolverState) ?? [];
 
 
-    useEffect(() => {
-        const rowStatusSub = scorecardDataEngine.isRowEmpty(id).subscribe(setIsEmpty)
-        const rowAverage = scorecardDataEngine.getOrgUnitAverage(id).subscribe(setAverage)
-        return () => {
-            rowStatusSub.unsubscribe()
-            rowAverage.unsubscribe()
+    function subscribeToAverage() {
+        if (loading !== undefined && !loading) {
+            const rowAverage = scorecardDataEngine.getOrgUnitAverage(id).subscribe(setAverage);
+            const rowStatusSub = scorecardDataEngine.isRowEmpty(id).subscribe(setIsEmpty)
+
+            return () => {
+                rowAverage.unsubscribe();
+                rowStatusSub.unsubscribe()
+            }
         }
-    }, [orgUnit])
+    }
+
+    useEffect(subscribeToAverage, [orgUnit, loading, id])
 
     return ((emptyRows || !isEmpty) &&
         <DataTableRow

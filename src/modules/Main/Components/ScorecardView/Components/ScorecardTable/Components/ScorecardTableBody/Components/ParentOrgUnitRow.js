@@ -5,7 +5,11 @@ import React, {useEffect, useState} from 'react'
 import {useRecoilValue} from "recoil";
 import {DraggableItems} from "../../../../../../../../../core/constants/draggables";
 import {PeriodResolverState} from "../../../../../../../../../core/state/period";
-import {scorecardDataEngine, ScorecardViewState} from "../../../../../../../../../core/state/scorecard";
+import {
+    scorecardDataEngine,
+    ScorecardDataLoadingState,
+    ScorecardViewState
+} from "../../../../../../../../../core/state/scorecard";
 import DataContainer from "../../TableDataContainer";
 import AverageCell from "./AverageCell";
 import DroppableCell from "./DroppableCell";
@@ -18,16 +22,23 @@ export default function ParentOrgUnitRow({orgUnit}) {
     const {id} = orgUnit ?? {};
     const {dataGroups} =
     useRecoilValue(ScorecardViewState("dataSelection")) ?? {};
+    const loading = useRecoilValue(ScorecardDataLoadingState)
     const periods = useRecoilValue(PeriodResolverState) ?? [];
 
-    useEffect(() => {
-        const rowStatusSub = scorecardDataEngine.isRowEmpty(id).subscribe(setIsEmpty)
-        const rowAverage = scorecardDataEngine.getOrgUnitAverage(id).subscribe(setAverage)
-        return () => {
-            rowStatusSub.unsubscribe()
-            rowAverage.unsubscribe()
+    function subscribeToAverage() {
+        if(loading !== undefined && !loading) {
+            const rowAverage = scorecardDataEngine.getOrgUnitAverage(id).subscribe(setAverage);
+            const rowStatusSub = scorecardDataEngine.isRowEmpty(id).subscribe(setIsEmpty)
+            return () => {
+                rowAverage.unsubscribe();
+                rowStatusSub.unsubscribe()
+            }
         }
-    }, [orgUnit])
+    }
+
+    console.log({isEmpty, loading})
+
+    useEffect(subscribeToAverage, [orgUnit, loading, id])
 
     return ((emptyRows || !isEmpty) &&
         <DataTableRow key={id} bordered>
@@ -58,7 +69,7 @@ export default function ParentOrgUnitRow({orgUnit}) {
             )}
             {
                 averageColumn &&
-                    <AverageCell bold value={average}/>
+                <AverageCell bold value={average}/>
             }
         </DataTableRow>
     );
