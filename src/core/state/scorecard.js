@@ -2,7 +2,8 @@ import {Period} from "@iapps/period-utilities";
 import {cloneDeep, filter, flatten, get as _get, head, isEmpty, set as _set} from "lodash";
 import {atom, atomFamily, selector, selectorFamily} from "recoil";
 import {
-    getColSpanDataGroups, getColSpanWithOrgUnit,
+    getColSpanDataGroups,
+    getColSpanWithOrgUnit,
     getTableWidthWithDataGroups,
     getTableWidthWithOrgUnit
 } from "../../modules/Main/Components/ScorecardView/Components/ScorecardTable/services/utils";
@@ -337,15 +338,23 @@ const ScorecardDataLoadingState = atom({
     key: 'data-loading-state',
     default: true,
     effects_UNSTABLE: [
-        ({trigger, setSelf, onSet}) => {
-
-            onSet(()=>setSelf(true))
-
+        ({trigger, setSelf}) => {
             if (trigger === 'get') {
                 setSelf(true)
                 const subscription = scorecardDataEngine.loading$.subscribe(setSelf)
                 return () => subscription.unsubscribe();
             }
+        }
+    ]
+})
+
+
+const ScorecardTableOverallAverage = atomFamily({
+    key: 'scorecard-table-overall-average',
+    default: null,
+    effects_UNSTABLE: (orgUnits) => [
+        ({setSelf}) => {
+            scorecardDataEngine.getOverallAverage(orgUnits).subscribe(setSelf)
         }
     ]
 })
@@ -368,5 +377,6 @@ export {
     ScorecardOrgUnitState,
     ScorecardTableSortState,
     ScorecardDataSourceState,
-    ScorecardDataLoadingState
+    ScorecardDataLoadingState,
+    ScorecardTableOverallAverage
 }

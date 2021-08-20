@@ -1,39 +1,17 @@
 import i18n from "@dhis2/d2-i18n";
 import {DataTableCell, DataTableRow} from '@dhis2/ui'
 import PropTypes from 'prop-types'
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import {useRecoilValue} from "recoil";
 import {PeriodResolverState} from "../../../../../../../../../core/state/period";
-import {
-    scorecardDataEngine,
-    ScorecardDataLoadingState,
-    ScorecardDataSourceState,
-    ScorecardOrgUnitState,
-    ScorecardViewState
-} from "../../../../../../../../../core/state/scorecard";
+import {ScorecardDataSourceState, ScorecardViewState} from "../../../../../../../../../core/state/scorecard";
 import AverageCell from "./AverageCell";
 import AverageDataContainer from "./AverageDataContainer";
 
-export default function AverageDataSourceRow({orgUnits}) {
-    const [average, setAverage] = useState();
+export default function AverageDataSourceRow({orgUnits, overallAverage}) {
     const periods = useRecoilValue(PeriodResolverState)
     const dataHolders = useRecoilValue(ScorecardDataSourceState)
     const {averageColumn} = useRecoilValue(ScorecardViewState('options'))
-    const loading = useRecoilValue(ScorecardDataLoadingState)
-    const {childrenOrgUnits, filteredOrgUnits} = useRecoilValue(ScorecardOrgUnitState(orgUnits))
-
-    function getAverage() {
-        if (averageColumn) {
-            if (!loading) {
-                const averageSub = scorecardDataEngine.getOverallAverage([...childrenOrgUnits, ...filteredOrgUnits]?.map(({id}) => id)).subscribe(setAverage)
-                return () => {
-                    averageSub.unsubscribe()
-                }
-            }
-        }
-    }
-
-    useEffect(getAverage, [averageColumn, loading]);
 
 
     return (
@@ -52,7 +30,7 @@ export default function AverageDataSourceRow({orgUnits}) {
             }
             {
                 averageColumn &&
-                <AverageCell bold value={average}/>
+                <AverageCell bold value={overallAverage}/>
             }
         </DataTableRow>
     )
@@ -60,5 +38,6 @@ export default function AverageDataSourceRow({orgUnits}) {
 }
 
 AverageDataSourceRow.propTypes = {
-    orgUnits: PropTypes.array.isRequired
+    orgUnits: PropTypes.array.isRequired,
+    overallAverage: PropTypes.number.isRequired
 };

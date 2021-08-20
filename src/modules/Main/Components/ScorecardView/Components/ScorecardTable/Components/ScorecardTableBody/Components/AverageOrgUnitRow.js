@@ -4,13 +4,16 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import {useRecoilValue} from "recoil";
 import {PeriodResolverState} from "../../../../../../../../../core/state/period";
-import {ScorecardOrgUnitState} from "../../../../../../../../../core/state/scorecard";
+import {ScorecardOrgUnitState, ScorecardViewState} from "../../../../../../../../../core/state/scorecard";
+import AverageCell from "./AverageCell";
 import AverageDataContainer from "./AverageDataContainer";
 
 
-export default function AverageOrgUnitRow({orgUnits}) {
+export default function AverageOrgUnitRow({orgUnits, overallAverage}) {
     const periods = useRecoilValue(PeriodResolverState)
     const {childrenOrgUnits, filteredOrgUnits} = useRecoilValue(ScorecardOrgUnitState(orgUnits))
+    const {averageColumn} = useRecoilValue(ScorecardViewState('options'))
+
 
     return (
         <DataTableRow bordered>
@@ -21,14 +24,19 @@ export default function AverageOrgUnitRow({orgUnits}) {
             {
                 ([...filteredOrgUnits, ...childrenOrgUnits])?.map(({id}) => (
                     periods?.map(({id: periodId}) => (
-                        <AverageDataContainer orgUnits={orgUnits} key={`${id}-${periodId}-average`} period={periodId} orgUnit={id}/>
+                        <AverageDataContainer orgUnits={orgUnits} key={`${id}-${periodId}-average`} period={periodId}
+                                              orgUnit={id}/>
                     ))
                 ))
-            }
+            }{
+            averageColumn &&
+            <AverageCell bold value={overallAverage}/>
+        }
         </DataTableRow>
     )
 }
 
 AverageOrgUnitRow.propTypes = {
-    orgUnits: PropTypes.array.isRequired
+    orgUnits: PropTypes.array.isRequired,
+    overallAverage: PropTypes.number.isRequired
 };

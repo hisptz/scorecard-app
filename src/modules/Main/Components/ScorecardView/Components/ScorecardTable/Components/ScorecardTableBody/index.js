@@ -7,6 +7,7 @@ import {Orientation} from "../../../../../../../../core/constants/orientation";
 import {PeriodResolverState} from "../../../../../../../../core/state/period";
 import {
     scorecardDataEngine,
+    ScorecardDataLoadingState,
     ScorecardDataSourceState,
     ScorecardOrgUnitState,
     ScorecardTableOrientationState,
@@ -24,11 +25,18 @@ export default function ScorecardTableBody({orgUnits}) {
     const {dataGroups} = useRecoilValue(ScorecardViewState("dataSelection")) ?? {};
     const {averageRow} = useRecoilValue(ScorecardViewState("options")) ?? {};
     const filteredDataHolders = useRecoilValue(ScorecardDataSourceState)
+    const loading = useRecoilValue(ScorecardDataLoadingState)
     const periods = useRecoilValue(PeriodResolverState) ?? [];
     const {periodType} = useRecoilValue(ScorecardViewState("periodSelection"));
-
     const {childrenOrgUnits, filteredOrgUnits} = useRecoilValue(ScorecardOrgUnitState(orgUnits))
 
+    const [overallAverage, setOverallAverage] = useState();
+
+    useEffect(() => {
+        if (loading !== undefined && !loading) {
+            scorecardDataEngine.getOverallAverage([...childrenOrgUnits, ...filteredOrgUnits]?.map(({id}) => id)).subscribe(setOverallAverage)
+        }
+    }, [childrenOrgUnits, filteredOrgUnits, loading])
 
     useEffect(() => {
         if (
@@ -59,6 +67,7 @@ export default function ScorecardTableBody({orgUnits}) {
                                     <ParentOrgUnitRow
                                         key={`${orgUnit?.id}-row`}
                                         orgUnit={orgUnit}
+                                        overallAverage={overallAverage}
                                     />
                                 ))}
                                 {childrenOrgUnits?.map((orgUnit) => (
@@ -67,18 +76,20 @@ export default function ScorecardTableBody({orgUnits}) {
                                         onExpand={setExpandedOrgUnit}
                                         orgUnit={orgUnit}
                                         expandedOrgUnit={expandedOrgUnit}
+                                        overallAverage={overallAverage}
                                     />
                                 ))}
                             </Fragment> :
                             filteredDataHolders?.map(({id, dataSources}) => (
-                                <DataSourceRow orgUnits={orgUnits} dataSources={dataSources} key={`${id}-row`}/>
+                                <DataSourceRow orgUnits={orgUnits} dataSources={dataSources} key={`${id}-row`}
+                                               overallAverage={overallAverage}/>
                             ))
                     }
                     {
                         averageRow && (
                             tableOrientation === Orientation.ORG_UNIT_VS_DATA ?
-                                <AverageDataSourceRow orgUnits={orgUnits} /> :
-                                <AverageOrgUnitRow orgUnits={orgUnits}/>
+                                <AverageDataSourceRow orgUnits={orgUnits} overallAverage={overallAverage}/> :
+                                <AverageOrgUnitRow orgUnits={orgUnits} overallAverage={overallAverage} />
 
                         )
                     }
