@@ -1,4 +1,4 @@
-import {compact, find, sortBy, uniqBy} from "lodash";
+import {compact, find, isEmpty, pullAllBy, reduce, sortBy, uniqBy} from "lodash";
 import {TableSort} from "../constants/tableSort";
 
 
@@ -59,4 +59,38 @@ export function sortDataSourcesBasedOnNames({sort, dataSources}) {
     }
 
     return filteredDataSources;
+}
+
+
+function translateAccess(access = '') {
+    const translatedAccess = {
+        read: false,
+        write: false,
+    }
+    if (access.includes('r')) translatedAccess.read = true;
+    if (access.includes('w')) translatedAccess.write = true;
+    return translatedAccess;
+}
+
+export function getUserAuthority(user, scorecardSummary) {
+    const {user: userId, userAccesses, userGroupAccesses} = scorecardSummary ?? {}
+
+    if (user?.id === userId) return translateAccess('rw-----')
+
+    const userAccess = find(userAccesses, ['id', user?.id])
+
+    if (userAccess) {
+        return translateAccess(userAccess.access)
+    }
+
+    const userGroups = pullAllBy(userGroupAccesses, user.userGroups, ['id'])
+
+    if (!isEmpty(userGroups)) {
+        const accesses = userGroups.map(({access}) => access)
+        const translatedAccesses = accesses.map(translateAccess)
+        return {
+            read: reduce(translatedAccesses, (acc, value) => acc && value.read, false),
+            write: reduce(translatedAccesses, (acc, value) => acc && value.write, false)
+        }
+    }
 }
