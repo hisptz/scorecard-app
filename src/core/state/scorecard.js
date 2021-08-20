@@ -2,6 +2,8 @@ import {Period} from "@iapps/period-utilities";
 import {cloneDeep, filter, flatten, get as _get, head, isEmpty, set as _set} from "lodash";
 import {atom, atomFamily, selector, selectorFamily} from "recoil";
 import {
+    getColSpanDataGroups,
+    getColSpanWithOrgUnit,
     getTableWidthWithDataGroups,
     getTableWidthWithOrgUnit
 } from "../../modules/Main/Components/ScorecardView/Components/ScorecardTable/services/utils";
@@ -96,7 +98,6 @@ const ScorecardConfState = atomFamily({
         }
     })
 })
-
 
 const ScorecardConfigDirtyState = atomFamily({
     key: 'scorecard-config-edit-state',
@@ -198,14 +199,16 @@ const ScorecardTableConfigState = selectorFamily({
                 'data',
                 'periods'
             ],
-            tableWidth: getTableWidthWithDataGroups(periods, dataGroups, averageColumn)
+            tableWidth: getTableWidthWithDataGroups(periods, dataGroups, averageColumn),
+            colSpan: getColSpanDataGroups(periods, dataGroups, averageColumn)
         } : {
             rows: 'data',
             columns: [
                 'orgUnits',
                 'periods'
             ],
-            tableWidth: getTableWidthWithOrgUnit(periods, [...filteredOrgUnits, ...childrenOrgUnits], averageColumn)
+            tableWidth: getTableWidthWithOrgUnit(periods, [...filteredOrgUnits, ...childrenOrgUnits], averageColumn),
+            colSpan: getColSpanWithOrgUnit(periods, [...filteredOrgUnits, ...childrenOrgUnits], averageColumn)
         }
     }
 })
@@ -331,6 +334,31 @@ const ScorecardDataSourceState = selector({
     }
 })
 
+const ScorecardDataLoadingState = atom({
+    key: 'data-loading-state',
+    default: true,
+    effects_UNSTABLE: [
+        ({trigger, setSelf}) => {
+            if (trigger === 'get') {
+                setSelf(true)
+                const subscription = scorecardDataEngine.loading$.subscribe(setSelf)
+                return () => subscription.unsubscribe();
+            }
+        }
+    ]
+})
+
+
+const ScorecardTableOverallAverage = atomFamily({
+    key: 'scorecard-table-overall-average',
+    default: null,
+    effects_UNSTABLE: (orgUnits) => [
+        ({setSelf}) => {
+            scorecardDataEngine.getOverallAverage(orgUnits).subscribe(setSelf)
+        }
+    ]
+})
+
 
 export default ScorecardConfState;
 export {
@@ -348,5 +376,7 @@ export {
     ScorecardTableConfigState,
     ScorecardOrgUnitState,
     ScorecardTableSortState,
-    ScorecardDataSourceState
+    ScorecardDataSourceState,
+    ScorecardDataLoadingState,
+    ScorecardTableOverallAverage
 }

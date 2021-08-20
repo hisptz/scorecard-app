@@ -27,6 +27,7 @@ export default class ScorecardDataEngine {
     _dataEntities$ = new BehaviorSubject(this._dataEntities);
     dataEntities$ = this._dataEntities$.asObservable();
 
+
     constructor() {
         if (!ScorecardDataEngine?.instance) {
             ScorecardDataEngine.instance = this;
@@ -98,14 +99,13 @@ export default class ScorecardDataEngine {
                     previous: previousPeriodRow?.value,
                 },
             };
-
             this._dataEntities$.next(this._dataEntities);
-            this._loading$.next(false);
         });
     }
 
     load() {
         if (this._canLoadData) {
+            this._loading$.next(true)
             this._getScorecardData({
                 selectedOrgUnits: this._selectedOrgUnits.map((orgUnit) => orgUnit?.id),
                 selectedPeriods: this._selectedPeriods.map((period) => period?.id),
@@ -131,7 +131,6 @@ export default class ScorecardDataEngine {
             })
         );
     }
-
 
     sortOrgUnitsByDataAndPeriod({dataSource, period, sortType}) {
         return this.dataEntities$.pipe(take(1), map(dataEntities => {
@@ -178,7 +177,6 @@ export default class ScorecardDataEngine {
             return sortedValues?.map(([ou]) => ou)
         }))
     }
-
 
     sortDataSourceByOrgUnitAndPeriod({orgUnit, period, sortType}) {
         return this.dataEntities$.pipe(take(1), map(dataEntities => {
@@ -265,12 +263,12 @@ export default class ScorecardDataEngine {
         );
     }
 
-    getDataSourceColumnAverage({period, dataSources}) {
+    getDataSourceColumnAverage({period, dataSources, orgUnits}) {
         return this.dataEntities$.pipe(
             map((dataEntities) => {
                 const dataSourcesData = pickBy(dataEntities, (val, key) => {
-                    const [dx, , pe] = key.split('_')
-                    return dataSources.includes(dx) && pe === period
+                    const [dx, ou, pe] = key.split('_')
+                    return dataSources.includes(dx) && pe === period && orgUnits?.includes(ou)
                 })
                 const noOfDataSources = Object.keys(dataSourcesData).length
                 return reduce(dataSourcesData, (result, value) => {
@@ -280,11 +278,15 @@ export default class ScorecardDataEngine {
         );
     }
 
-    getOverallAverage() {
+    getOverallAverage(orgUnits) {
         return this.dataEntities$.pipe(
             map((dataEntities) => {
-                const noOfDataEntities = Object.keys(dataEntities).length
-                return reduce(dataEntities, (result, value) => {
+                const selectedDataEntities = pickBy(dataEntities, (value, key) => {
+                    const [, ou,] = key.split('_')
+                    return orgUnits?.includes(ou)
+                })
+                const noOfDataEntities = Object.keys(selectedDataEntities).length
+                return reduce(selectedDataEntities, (result, value) => {
                     return (result ?? 0) + (value.current / noOfDataEntities)
                 }, 0);
             })
@@ -398,6 +400,8 @@ export default class ScorecardDataEngine {
                     });
             },
             (totalErr, totalRes) => {
+                console.log({totalErr, totalRes})
+                this._loading$.next(false)
             }
         );
     }
