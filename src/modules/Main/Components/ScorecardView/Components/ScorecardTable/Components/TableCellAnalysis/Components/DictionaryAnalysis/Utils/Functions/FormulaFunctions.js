@@ -171,8 +171,40 @@ export function getFinalWordFormula(formula,dataElementsArray,programIndicatorAr
         final = setCharAt(final, indexChar, "")
     }
 
+    if(dataSetReportingRatesArray?.length!==0){
+        //replace those caps
+        //has to be fixed later
+        final=final?.replace(/ACTUAL_REPORTS/g,"Actual_Reports")
+        final=final?.replace(/REPORTING_RATE_ON_TIME/g,"Reporting_on_Time")
+        final=final?.replace(/EXPECTED_REPORTS/g,"Expected_Reports")
+        final=final?.replace(/REPORTING_RATE/g,"Reporting_Rate")
+        final=final?.replace(/ACTUAL_REPORTS_ON_TIME/g,"Actual_Reports_on_Time")
+
+    }
+
+    final=final?.replace(/_/g," ")
+    final=final?.replace(/\./g,' ')
+    // final=lowerCaseAllWordsExceptFirstLetters(final)
+
+    // while (final?.search("_")>=0){
+    //     console.log("serching..")
+    //     let indexChar=final.search("_")
+    //     final = setCharAt(final, indexChar, " ")
+    // }
+    // while (final?.search(".")>=0){
+    //     console.log("ser")
+    //     let indexChar=final.search(".")
+    //     final = setCharAt(final, indexChar, " ")
+    // }
+
 
     return cleanBrackets(final)
+}
+
+export function lowerCaseAllWordsExceptFirstLetters(string) {
+    return string?.replace(/\S*/g, function (word) {
+        return word?.charAt(0) + word?.slice(1).toLowerCase();
+    });
 }
 
 export function getSummaryValueFromApi(engine, id){
@@ -232,6 +264,7 @@ function cleanBrackets(formula){
         arr=arr.split("}")
         //string = array.join("")
         arr=arr.join(" ")
+
         return arr
     }
     return formula

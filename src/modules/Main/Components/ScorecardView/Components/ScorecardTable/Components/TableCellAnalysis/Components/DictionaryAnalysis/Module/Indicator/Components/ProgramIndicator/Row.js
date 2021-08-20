@@ -3,7 +3,7 @@ import {useDataEngine, useDataQuery} from "@dhis2/app-runtime";
 import {
     getFinalWordFormula,
     getFormulaSources,
-    getSummaryValueFromApi
+    getSummaryValueFromApi, lowerCaseAllWordsExceptFirstLetters
 } from "../../../../Utils/Functions/FormulaFunctions";
 import {useEffect, useState} from "react";
 import {dataTypes} from "../../../../Utils/Models";
@@ -137,7 +137,7 @@ export default function Row(props){
             <DataTableCell bordered>
                 <ol>
                     {prog?.analyticsPeriodBoundaries.map((boundary)=>{
-                        return (<li key={boundary.id} >{boundary?.analyticsPeriodBoundaryType}</li>)
+                        return (<li key={boundary.id} >{lowerCaseAllWordsExceptFirstLetters((boundary?.analyticsPeriodBoundaryType)?.replace(/_/g," "))}</li>)
                     })}
                 </ol>
 
