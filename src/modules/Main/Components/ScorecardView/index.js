@@ -15,8 +15,7 @@ export default function ScorecardView() {
     const {id: scorecardId} = useParams();
     const setScorecardIdState = useSetRecoilState(ScorecardIdState);
     const {orgUnits} = useRecoilValue(ScorecardViewState("orgUnitSelection"));
-    const userAuthority = useRecoilValue(UserAuthorityOnScorecard(scorecardId))
-    const access = userAuthority.read
+    const {read: access} = useRecoilValue(UserAuthorityOnScorecard(scorecardId))
     const reset = useRecoilCallback(({reset}) => () => {
         reset(ScorecardViewState("orgUnitSelection"))
         reset(ScorecardIdState)
@@ -29,7 +28,7 @@ export default function ScorecardView() {
         };
     }, [scorecardId]);
     if (!access) {
-        return <AccessDeniedPage/>
+        return <AccessDeniedPage accessType={"view"}/>
     }
 
     return (
