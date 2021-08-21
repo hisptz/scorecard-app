@@ -22,7 +22,9 @@ import ScorecardOptions from "../models/scorecardOptions";
 import {EngineState} from "./engine";
 import {OrgUnitChildren} from "./orgUnit";
 import {PeriodResolverState} from "./period";
+import {UserState} from "./user";
 import {
+    getUserAuthority,
     sortDataSourcesBasedOnData,
     sortDataSourcesBasedOnNames,
     sortOrgUnitsBasedOnData,
@@ -70,9 +72,13 @@ const ScorecardSummaryState = atom({
         key: 'scorecard-summary-selector',
         get: async ({get}) => {
             const engine = get(EngineState);
+            const user = get(UserState)
             const {summary, error} = await getScorecardSummary(engine)
             if (error) throw error;
-            return summary;
+            return filter(summary, (scorecardSummary) => {
+                const {read} = getUserAuthority(user, scorecardSummary) ?? {}
+                return read;
+            })
         },
     })
 })

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-08-19T12:41:05.778Z\n"
-"PO-Revision-Date: 2021-08-19T12:41:05.778Z\n"
+"POT-Creation-Date: 2021-08-21T09:36:52.420Z\n"
+"PO-Revision-Date: 2021-08-21T09:36:52.420Z\n"
 
 msgid "Data"
 msgstr "Data"
@@ -161,14 +161,14 @@ msgstr "Saving"
 msgid "Next"
 msgstr "Next"
 
-msgid "Scorecard deleted successfully"
-msgstr "Scorecard deleted successfully"
-
 msgid "View"
 msgstr "View"
 
 msgid "Are you sure you want to delete scorecard "
 msgstr "Are you sure you want to delete scorecard "
+
+msgid "Scorecard deleted successfully"
+msgstr "Scorecard deleted successfully"
 
 msgid "Are you sure you want to delete scorecard"
 msgstr "Are you sure you want to delete scorecard"
@@ -190,6 +190,12 @@ msgstr "Add New Scorecard"
 
 msgid "Search"
 msgstr "Search"
+
+msgid "You do not have access to {{accessType}} this Scorecard"
+msgstr "You do not have access to {{accessType}} this Scorecard"
+
+msgid "Back to Home"
+msgstr "Back to Home"
 
 msgid "Legends"
 msgstr "Legends"

@@ -1,5 +1,9 @@
-import {useDataEngine} from "@dhis2/app-runtime";
-import {atom, selector} from "recoil";
+import {find} from 'lodash'
+import {atom, selector, selectorFamily} from "recoil";
+import {DefaultAuthority} from "../constants/scorecardAccessType";
+import {EngineState} from "./engine";
+import {ScorecardSummaryState} from "./scorecard";
+import {getUserAuthority} from "./utils";
 
 const userQuery = {
     user: {
@@ -19,9 +23,9 @@ export const UserState = atom({
     key: 'userState',
     default: selector({
         key: 'userStateSelector',
-        get: async () => {
+        get: async ({get}) => {
             try {
-                const engine = useDataEngine();
+                const engine = get(EngineState);
                 const {user} = await engine.query(userQuery)
                 if (user) return user
                 return null
@@ -30,4 +34,13 @@ export const UserState = atom({
             }
         }
     })
+})
+
+export const UserAuthorityOnScorecard = selectorFamily({
+    key: 'user-scorecard-authority',
+    get: (scorecardId) => ({get}) => {
+        const scorecardSummary = find(get(ScorecardSummaryState), ['id', scorecardId])
+        const user = get(UserState)
+        return getUserAuthority(user, scorecardSummary) ?? DefaultAuthority
+    }
 })

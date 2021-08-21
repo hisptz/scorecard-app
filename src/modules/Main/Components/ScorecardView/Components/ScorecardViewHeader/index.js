@@ -4,6 +4,7 @@ import {useHistory} from "react-router-dom";
 import {useRecoilState, useRecoilValue, useResetRecoilState} from "recoil";
 import {FilterComponentTypes} from "../../../../../../core/constants/selection";
 import ScorecardConfState, {ScorecardIdState, ScorecardViewState} from "../../../../../../core/state/scorecard";
+import {UserAuthorityOnScorecard} from "../../../../../../core/state/user";
 import OrgUnitSelectorModal from "../../../../../../shared/Components/OrgUnitSelectorModal";
 import PeriodSelectorModal from "../../../../../../shared/Components/PeriodSelectorModal";
 import ScorecardOptionsModal from "../../../../../../shared/Components/ScorecardOptionsModal";
@@ -17,13 +18,16 @@ export default function ScorecardViewHeader() {
     const [scorecardOptions, setScorecardOptions] = useRecoilState(ScorecardViewState('options'))
     const resetScorecardState = useResetRecoilState(ScorecardConfState(scorecardId))
     const resetScorecardIdState = useResetRecoilState(ScorecardIdState)
-
+    const userAuthority = useRecoilValue(UserAuthorityOnScorecard(scorecardId))
+    const writeAccess = userAuthority?.write;
     const [orgUnitSelectionOpen, setOrgUnitSelectionOpen] = useState(false);
     const [periodSelectionOpen, setPeriodSelectionOpen] = useState(false);
     const [optionsOpen, setOptionsOpen] = useState(false);
 
     const onEdit = () => {
-        history.push(`/edit/${scorecardId}`)
+        if (writeAccess) {
+            history.push(`/edit/${scorecardId}`)
+        }
     }
 
     const onHome = () => {
@@ -32,7 +36,7 @@ export default function ScorecardViewHeader() {
         history.replace('/')
     }
 
-    const onRefresh = () =>{
+    const onRefresh = () => {
         console.log(history.location.pathname)
         window.location.reload(true)
     }
@@ -59,11 +63,11 @@ export default function ScorecardViewHeader() {
                     <div className='column align-items-end'>
                         <ButtonStrip className='pb-8'>
                             <Button onClick={onHome}>Home</Button>
-                            <Button onClick={onRefresh} >Refresh</Button>
+                            <Button onClick={onRefresh}>Refresh</Button>
                         </ButtonStrip>
                         <ButtonStrip>
                             <Button onClick={() => setOptionsOpen(true)}>Options</Button>
-                            <Button onClick={onEdit}>Edit</Button>
+                            {writeAccess && <Button onClick={onEdit}>Edit</Button>}
                             <Button>Print</Button>
                             <Button>Help</Button>
                         </ButtonStrip>
