@@ -50,7 +50,7 @@ export default function TableCellAnalysis({onClose, dataHolder}) {
         reset(PeriodState)
         reset(LayoutState)
         reset(DataSourceState)
-    })
+    },[])
 
     useEffect(() => {
         setDataSources(dataSources)
@@ -69,12 +69,12 @@ export default function TableCellAnalysis({onClose, dataHolder}) {
             <ModalContent>
                 <DimensionsSelector/>
                 <div style={{
-                    maxHeight: '45vh' ,
+                    maxHeight: '40vh' ,
                     flex: 1,
                     overflow: 'auto',
                     margin: '16px 0'
                 }}>
-                    <div style={{height: 10000, width: '100%', background: 'black'}}  />
+                   
                     {
                         dataState.state === 'hasError' && <FullPageError error={dataState.contents}/>
                     }
