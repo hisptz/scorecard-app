@@ -1,4 +1,5 @@
-import {compact, find, isEmpty, pullAllBy, reduce, sortBy, uniqBy} from "lodash";
+import {compact, find, intersectionBy, isEmpty, reduce, sortBy, uniqBy} from "lodash";
+import {DefaultAuthority} from "../constants/scorecardAccessType";
 import {TableSort} from "../constants/tableSort";
 
 
@@ -74,23 +75,27 @@ function translateAccess(access = '') {
 
 export function getUserAuthority(user, scorecardSummary) {
     const {user: userId, userAccesses, userGroupAccesses} = scorecardSummary ?? {}
-
     if (user?.id === userId) return translateAccess('rw-----')
 
-    const userAccess = find(userAccesses, ['id', user?.id])
-
-    if (userAccess) {
-        return translateAccess(userAccess.access)
-    }
-
-    const userGroups = pullAllBy(userGroupAccesses, user.userGroups, ['id'])
-
-    if (!isEmpty(userGroups)) {
-        const accesses = userGroups.map(({access}) => access)
-        const translatedAccesses = accesses.map(translateAccess)
-        return {
-            read: reduce(translatedAccesses, (acc, value) => acc && value.read, false),
-            write: reduce(translatedAccesses, (acc, value) => acc && value.write, false)
+    if (!isEmpty(userAccesses)) {
+        const userAccess = find(userAccesses, ['id', user?.id])
+        if (userAccess) {
+            return translateAccess(userAccess.access)
         }
     }
+
+    if (!isEmpty(userGroupAccesses)) {
+        const userGroups = intersectionBy([...userGroupAccesses], [...user.userGroups], 'id')
+        if (!isEmpty(userGroups)) {
+            const accesses = userGroups.map(({access}) => access)
+            const translatedAccesses = accesses.map(translateAccess)
+
+            console.log({translatedAccesses})
+            return {
+                read: reduce(translatedAccesses, (acc, value) => acc || value.read, false),
+                write: reduce(translatedAccesses, (acc, value) => acc || value.write, false)
+            }
+        }
+    }
+    return DefaultAuthority;
 }

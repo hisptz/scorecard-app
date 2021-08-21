@@ -9,3 +9,8 @@ export const DefaultAuthority = {
     read: false,
     write: false
 }
+
+export const AccessTypes = {
+    USER: 'user',
+    USER_GROUP: 'userGroup'
+}
