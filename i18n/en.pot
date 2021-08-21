@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-08-21T09:36:52.420Z\n"
-"PO-Revision-Date: 2021-08-21T09:36:52.420Z\n"
+"POT-Creation-Date: 2021-08-21T10:53:32.947Z\n"
+"PO-Revision-Date: 2021-08-21T10:53:32.947Z\n"
 
 msgid "Data"
 msgstr "Data"
@@ -167,11 +167,11 @@ msgstr "View"
 msgid "Are you sure you want to delete scorecard "
 msgstr "Are you sure you want to delete scorecard "
 
-msgid "Scorecard deleted successfully"
-msgstr "Scorecard deleted successfully"
-
 msgid "Are you sure you want to delete scorecard"
 msgstr "Are you sure you want to delete scorecard"
+
+msgid "Scorecard deleted successfully"
+msgstr "Scorecard deleted successfully"
 
 msgid "Help"
 msgstr "Help"
@@ -265,6 +265,15 @@ msgstr "Search Data"
 
 msgid "Drag to row headers to change layout "
 msgstr "Drag to row headers to change layout "
+
+msgid "Home"
+msgstr "Home"
+
+msgid "Refresh"
+msgstr "Refresh"
+
+msgid "Download"
+msgstr "Download"
 
 msgid "Name"
 msgstr "Name"

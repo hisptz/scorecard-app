@@ -1,5 +1,6 @@
+import i18n from '@dhis2/d2-i18n'
 import {Button, ButtonStrip, Card} from '@dhis2/ui'
-import React, {useState} from 'react'
+import React, {useRef, useState} from 'react'
 import {useHistory} from "react-router-dom";
 import {useRecoilState, useRecoilValue, useResetRecoilState} from "recoil";
 import {FilterComponentTypes} from "../../../../../../core/constants/selection";
@@ -9,6 +10,8 @@ import OrgUnitSelectorModal from "../../../../../../shared/Components/OrgUnitSel
 import PeriodSelectorModal from "../../../../../../shared/Components/PeriodSelectorModal";
 import ScorecardOptionsModal from "../../../../../../shared/Components/ScorecardOptionsModal";
 import SelectionWrapper from "../../../../../../shared/Components/SelectionWrapper";
+import DownloadMenu from "../Download/Components/DownloadMenu";
+import useDownload from "./hooks/useDownload";
 
 export default function ScorecardViewHeader() {
     const history = useHistory();
@@ -23,6 +26,9 @@ export default function ScorecardViewHeader() {
     const [orgUnitSelectionOpen, setOrgUnitSelectionOpen] = useState(false);
     const [periodSelectionOpen, setPeriodSelectionOpen] = useState(false);
     const [optionsOpen, setOptionsOpen] = useState(false);
+    const [downloadOpen, setDownloadOpen] = useState(false);
+    const {download: onDownload} = useDownload();
+    const downloadRef = useRef()
 
     const onEdit = () => {
         if (writeAccess) {
@@ -62,14 +68,19 @@ export default function ScorecardViewHeader() {
                     </div>
                     <div className='column align-items-end'>
                         <ButtonStrip className='pb-8'>
-                            <Button onClick={onHome}>Home</Button>
-                            <Button onClick={onRefresh}>Refresh</Button>
+                            <Button onClick={onHome}>{i18n.t('Home')}</Button>
+                            <Button onClick={onRefresh}>{i18n.t('Refresh')}</Button>
                         </ButtonStrip>
                         <ButtonStrip>
-                            <Button onClick={() => setOptionsOpen(true)}>Options</Button>
+                            <Button onClick={() => setOptionsOpen(true)}>{i18n.t('Options')}</Button>
                             {writeAccess && <Button onClick={onEdit}>Edit</Button>}
-                            <Button>Print</Button>
-                            <Button>Help</Button>
+                            <Button onClick={() => setDownloadOpen(true)}>
+                                <div ref={downloadRef}>{i18n.t("Download")}</div>
+                            </Button>
+                            {downloadOpen &&
+                            <DownloadMenu reference={downloadRef} onClose={() => setDownloadOpen(false)}
+                                          onDownload={onDownload}/>}
+                            <Button>{i18n.t('Help')}</Button>
                         </ButtonStrip>
                     </div>
                     {
