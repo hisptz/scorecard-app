@@ -75,7 +75,7 @@ function translateAccess(access = '') {
 
 export function getUserAuthority(user, scorecardSummary) {
     const {user: userId, userAccesses, userGroupAccesses} = scorecardSummary ?? {}
-    if (user?.id === userId) return translateAccess('rw-----')
+    if (user?.id === userId) return {...(translateAccess('rw-----')), delete: true}
 
     if (!isEmpty(userAccesses)) {
         const userAccess = find(userAccesses, ['id', user?.id])
@@ -90,7 +90,6 @@ export function getUserAuthority(user, scorecardSummary) {
             const accesses = userGroups.map(({access}) => access)
             const translatedAccesses = accesses.map(translateAccess)
 
-            console.log({translatedAccesses})
             return {
                 read: reduce(translatedAccesses, (acc, value) => acc || value.read, false),
                 write: reduce(translatedAccesses, (acc, value) => acc || value.write, false)

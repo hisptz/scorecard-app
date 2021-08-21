@@ -7,7 +7,8 @@ export default class ScorecardAccessType {
 
 export const DefaultAuthority = {
     read: false,
-    write: false
+    write: false,
+    delete: false
 }
 
 export const AccessTypes = {

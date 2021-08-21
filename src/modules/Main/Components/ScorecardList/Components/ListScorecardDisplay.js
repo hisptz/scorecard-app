@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import React from "react";
-import ScorecardListCard from "./ScorecardListCard";
+import ScorecardListCard from "./Cards/ScorecardListCard";
 
 export default function ListScorecardDisplay({ scorecards }) {
   return (
