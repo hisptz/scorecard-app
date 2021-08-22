@@ -6,8 +6,7 @@ export  function getMergedTableColumns(
   tableDataColumns,
   dxGroupMembers
 ) {
-console.log("in columns are ");
-console.log(dxGroupMembers);
+
   const availableParent = {};
   const mergedTableColumnsArray = _.map(
     tableDataColumns,

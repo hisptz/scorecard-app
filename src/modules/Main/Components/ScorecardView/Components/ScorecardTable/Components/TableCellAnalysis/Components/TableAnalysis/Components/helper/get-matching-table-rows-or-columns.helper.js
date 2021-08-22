@@ -8,12 +8,12 @@ export  function getMatchingTableRowsOrColumns(
       tableDataRowOrColumn,
       (tableDataCell) => tableDataCell.dataRowIds
     ),
-    (tableDataCell) =>
-      _.some(
-        dxGroupMembers,
-        (dxGroupMember) =>
-          _.intersection(tableDataCell.dataRowIds, dxGroupMember).length ===
-          dxGroupMember.length
-      )
+    // (tableDataCell) =>
+    //   _.some(
+    //     dxGroupMembers,
+    //     (dxGroupMember) =>
+    //       _.intersection(tableDataCell.dataRowIds, dxGroupMember).length ===
+    //       dxGroupMember.length
+    //   )
   );
 }

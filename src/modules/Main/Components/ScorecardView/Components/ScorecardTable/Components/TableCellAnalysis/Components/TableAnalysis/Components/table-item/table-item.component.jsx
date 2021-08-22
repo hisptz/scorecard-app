@@ -72,7 +72,7 @@ export default function TableItemComponent() {
                       key={'table-row-item-cell' + tableCellPosition}
                       rowSpan={tableCell.rowSpan}
                     >
-                      !tableCell.isDataCell ? (
+                    {  !tableCell.isDataCell ? (
                       <span
                         className="table-item-cell-label"
                         key={'tableCellPosition' + tableCellPosition}
@@ -91,7 +91,7 @@ export default function TableItemComponent() {
                         >
                         </app-table-item-cell>
                       </div>
-                      );
+                      )};
                     </td>
                   )
                 })}
