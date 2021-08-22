@@ -39,7 +39,7 @@ export default function drawBnaTable(analyticsObject, tableConfiguration) {
   )
 
   return {
-    title: tableConfiguration.title,
+    title: tableConfiguration.title ,
     subtitle: getTableSubtitle(tableConfiguration, analyticsObject),
     headers,
     headerColSpan: getHeaderColSpan(headers),

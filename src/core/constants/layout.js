@@ -25,7 +25,7 @@ export const LAYOUTS = {
 
 
 export const DEFAULT_LAYOUT = {
-    column: ['dx', 'pe'],
-    row: ['ou'],
+    column: ['dx','ou'],
+    row: ['pe'],
     filter: []
 }

@@ -4,17 +4,16 @@ import { useRecoilValue } from 'recoil'
 import { DataState } from '../../../../state/data'
 import { LayoutState } from '../../../../state/layout'
 import drawBnaTable from '../helper/draw-analytics-table-helper'
+import TableItemCellComponent from '../table-item-cell/table-item-cell.component'
 
 export default function TableItemComponent() {
   const data = useRecoilValue(DataState)
   const layout = useRecoilValue(LayoutState)
   const [tableData, setTabledata] = useState()
 
-  useEffect(() => {
+  useEffect(() => { 
     setTabledata(drawBnaTable(data['_data'], layout))
-  }, [])
-  console.log('am in the table')
-  console.log(tableData)
+  }, [data, layout, tableData])
 
   return (
     <div className="table-item-container">
@@ -84,14 +83,13 @@ export default function TableItemComponent() {
                         className="table-item-cell-data"
                         key={'tableCellPosition' + tableCellPosition}
                       >
-                        <app-table-item-cell
-                        //  [dataRowIds]="tableCell.dataRowIds" [dataDimensions]="tableCell.dataDimensions"
-                        //   [dataSelections]="tableConfiguration.dataSelections" [analyticsObject]="analyticsObject"
-                        //   [legendSet]="tableConfiguration.legendSet"
-                        >
-                        </app-table-item-cell>
+                        <TableItemCellComponent  
+                        analyticsObject ={data['_data']}
+                        dataRowIds = {tableCell.dataRowIds}
+                        
+                        />
                       </div>
-                      )};
+                      )}
                     </td>
                   )
                 })}
