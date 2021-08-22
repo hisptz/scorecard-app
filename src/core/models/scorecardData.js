@@ -293,6 +293,17 @@ export default class ScorecardDataEngine {
         );
     }
 
+    getAllOrgUnitData(orgUnits) {
+        return this.dataEntities$.pipe(
+            map((dataEntities) => {
+                return pickBy(dataEntities, (value, key) => {
+                    const [, ou,] = key.split('_')
+                    return orgUnits?.includes(ou)
+                })
+            })
+        );
+    }
+
     get loading$() {
         return this._loading$.asObservable();
     }
