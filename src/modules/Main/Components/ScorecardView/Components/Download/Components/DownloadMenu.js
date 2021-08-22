@@ -1,3 +1,4 @@
+import i18n from '@dhis2/d2-i18n'
 import {FlyoutMenu, Layer, MenuItem, Popper} from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import React from 'react'
@@ -17,6 +18,16 @@ export default function DownloadMenu({reference, onClose, onDownload}) {
                                                                             key={`${type}-download-menu`}
                                                                             label={type}/>)
                     }
+                    <MenuItem label={'ALMA'}>
+                        <MenuItem label={`${i18n.t('Data')}(JSON)`} onClick={() => {
+                            onDownload('ALMAData')
+                            onClose()
+                        }}/>
+                        <MenuItem label={i18n.t('Metadata')} onClick={() => {
+                            onDownload('ALMAMeta')
+                            onClose()
+                        }}/>
+                    </MenuItem>
                 </FlyoutMenu>
             </Popper>
         </Layer>
