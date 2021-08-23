@@ -73,6 +73,8 @@ And(
 Given("an authorized department officer", () => {
   cy.visit("/");
 });
+
+
 When("opening a list where there are no available scorecards", () => {
   cy.intercept(
     "GET",

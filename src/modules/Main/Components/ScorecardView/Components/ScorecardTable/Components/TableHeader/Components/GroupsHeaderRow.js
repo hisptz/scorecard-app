@@ -1,35 +1,45 @@
-import {DataTableCell, DataTableRow, InputField} from "@dhis2/ui";
+import i18n from '@dhis2/d2-i18n'
+import {DataTableCell, DataTableColumnHeader, DataTableRow, InputField} from "@dhis2/ui";
 import {debounce} from 'lodash'
 import PropTypes from 'prop-types'
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {useRecoilState, useRecoilValue} from "recoil";
 import {PeriodResolverState} from "../../../../../../../../../core/state/period";
-import {ScorecardConfigStateSelector, ScorecardViewState} from "../../../../../../../../../core/state/scorecard";
+import {ScorecardViewState} from "../../../../../../../../../core/state/scorecard";
 
 export default function GroupsHeaderRow({nested}) {
-    const {dataGroups} = useRecoilValue(ScorecardConfigStateSelector('dataSelection')) ?? {}
+    const {dataGroups} = useRecoilValue(ScorecardViewState('dataSelection')) ?? {}
+    const {averageColumn} = useRecoilValue(ScorecardViewState('options')) ?? {}
     const periods = useRecoilValue(PeriodResolverState) ?? []
-    const [keyword, setKeyword] = useRecoilState(ScorecardViewState('orgUnitSearchKeyword'))
+    const [orgUnitKeyword, setOrgUnitKeyword] = useRecoilState(ScorecardViewState('orgUnitSearchKeyword'))
+    const [sort, setSort] = useRecoilState(ScorecardViewState('tableSort'))
+    const [searchValue, setSearchValue] = useState(orgUnitKeyword);
 
-    const [searchValue, setSearchValue] = useState(keyword);
-
-    const onSearchChange = debounce(setKeyword)
+    const onOrgUnitSearch = useRef(debounce(setOrgUnitKeyword, 1000, {trailing: true, leading: false}))
 
     useEffect(() => {
-        onSearchChange(searchValue)
+        onOrgUnitSearch.current(searchValue)
     }, [searchValue])
+
+    const onSortIconClick = ({direction}) => {
+        setSort(prevValue => ({...prevValue, orgUnit: direction}))
+    }
 
     return (
         <DataTableRow>
             <DataTableCell fixed left={"0"} width={"50px"}/>
-            <DataTableCell align='center' fixed top={"0"} left={"50px"} width={"300px"} bordered
-                           className='scorecard-table-header scorecard-org-unit-cell' rowSpan={"3"}>
-                <p> Organisation Unit</p>
+            <DataTableColumnHeader
+                large
+                name={'orgUnit'}
+                onSortIconClick={onSortIconClick}
+                sortDirection={sort?.orgUnit} align='left' fixed top={"0"} left={"50px"}
+                width={"300px"} bordered
+                className='scorecard-table-header scorecard-org-unit-cell' rowSpan={"3"}>
                 {
                     !nested && <InputField value={searchValue} onChange={({value}) => setSearchValue(value)}
-                                           placeholder='Search Organisation Unit'/>
+                                           placeholder={i18n.t('Search Organisation Unit')}/>
                 }
-            </DataTableCell>
+            </DataTableColumnHeader>
             {
                 dataGroups?.map(({title, id, dataHolders}) => (
                     <DataTableCell fixed className='scorecard-table-header' align='center' bordered
@@ -38,6 +48,13 @@ export default function GroupsHeaderRow({nested}) {
                     </DataTableCell>
                 ))
             }
+            {
+                averageColumn &&
+                <DataTableCell fixed align='center' bordered className='scorecard-table-header' rowSpan={"3"}>
+                    {i18n.t('Average')}
+                </DataTableCell>
+            }
+
         </DataTableRow>
     )
 }

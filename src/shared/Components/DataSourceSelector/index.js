@@ -4,7 +4,9 @@ import React, {useState} from 'react'
 import DataSource from "./Components/DataSource";
 import GroupSelector from "./Components/GroupSelector";
 import CustomFunctions from "./models/customFunctions";
+import DataElements from "./models/dataElements";
 import DataSets from "./models/dataSets";
+import EventDataItems from "./models/eventDataItems";
 import NativeDataSource from "./models/nativeDataSource";
 
 
@@ -19,32 +21,33 @@ const nativeDataSources = [
         type: 'indicator'
     },
     {
-        label: 'Data Elements',
-        resource: 'dataElements',
-        groupResource: 'dataElementGroups',
-        dimensionItemType: 'DATA_ELEMENT',
-        groupKey: 'dataElementGroups.id',
-        type: 'dataElement'
-    },
-    {
         label: 'Program Indicators',
-        resource: 'dataItems',
+        resource: 'programIndicators',
         dimensionItemType: 'PROGRAM_INDICATOR',
-        groupKey: 'programId',
+        groupKey: 'program.id',
         groupResource: 'programs',
         type: 'programIndicator'
     },
-    {
-        label: 'Event Data Items',
-        resource: 'dataItems',
-        dimensionItemType: '[PROGRAM_DATA_ELEMENT,PROGRAM_ATTRIBUTE]',
-        filterType: 'in',
-        groupKey: 'programId',
-        groupResource: 'programs',
-        type: 'programDataItem'
 
-    },
 ].map(source => new NativeDataSource(source))
+const dataElementConfig = new DataElements( {
+    label: 'Data Elements',
+    resource: 'dataElements',
+    groupResource: 'dataElementGroups',
+    dimensionItemType: 'DATA_ELEMENT',
+    groupKey: 'dataElementGroups.id',
+    type: 'dataElement'
+})
+const eventDataItemsConfig = new EventDataItems({
+    label: 'Event Data Items',
+    resource: 'dataItems',
+    dimensionItemType: '[PROGRAM_DATA_ELEMENT,PROGRAM_ATTRIBUTE]',
+    filterType: 'in',
+    groupKey: 'programId',
+    groupResource: 'programs',
+    type: 'programDataItem'
+
+})
 const dataSetConfig = new DataSets({label: 'Data Sets'})
 const customFunctionsConfig = new CustomFunctions({label: 'Custom Functions'})
 
@@ -76,6 +79,14 @@ export default function DataSourceSelector({onSubmit, disabled}) {
                             selected={selectedDataSourceType.label === source.label}
                             key={`chip-${source.label}`}>{source.label}</Chip>)
                     }
+                    <Chip onClick={() => onDataSourceTypeChange(dataElementConfig)}
+                          selected={selectedDataSourceType.label === dataElementConfig.label}>
+                        {dataElementConfig.label}
+                    </Chip>
+                    <Chip onClick={() => onDataSourceTypeChange(eventDataItemsConfig)}
+                          selected={selectedDataSourceType.label === eventDataItemsConfig.label}>
+                        {eventDataItemsConfig.label}
+                    </Chip>
                     <Chip onClick={() => onDataSourceTypeChange(dataSetConfig)}
                           selected={selectedDataSourceType.label === dataSetConfig.label}>
                         {dataSetConfig.label}

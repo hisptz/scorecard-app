@@ -45,10 +45,24 @@ const orgUnitSearchQuery = {
     },
 }
 
+
+export async function searchOrganisationUnit(keyword, engine) {
+    if (!isEmpty(keyword)) {
+        const data = await engine.query(orgUnitSearchQuery, {variables: {keyword}});
+        if (!isEmpty(data)) {
+            const idResponse = data?.idQuery?.organisationUnits ?? [];
+            const nameResponse = data?.nameQuery?.organisationUnits ?? [];
+            return [...idResponse, ...nameResponse]
+        }
+    }
+    return []
+}
+
 export function useSearchOrganisationUnit() {
     const [keyword, setKeyword] = useState();
     const {data, error, loading, refetch} = useDataQuery(orgUnitSearchQuery, {lazy: true})
     const updateKeyword = useRef(debounce(setKeyword, 1000, {trailing: true, leading: false}))
+
     const orgUnits = useMemo(() => {
         if (!isEmpty(data)) {
             const idResponse = data?.idQuery?.organisationUnits ?? [];
@@ -71,3 +85,5 @@ export function useSearchOrganisationUnit() {
         updateKeyword: updateKeyword.current
     }
 }
+
+
