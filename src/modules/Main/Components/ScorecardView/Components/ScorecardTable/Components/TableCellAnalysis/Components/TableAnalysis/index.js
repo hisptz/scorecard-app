@@ -1,7 +1,5 @@
 /* eslint-disable import/no-unresolved */
 import React from 'react'
-import {  useRecoilValue, } from 'recoil'
-import { DataState } from '../../state/data'
 import TableItemComponent from './Components/table-item/table-item.component';
 
 export default function TableAnalysis() {
@@ -10,7 +8,7 @@ export default function TableAnalysis() {
         className="column align-items-center center"
         style={{ minHeight: 500 }}
       >
-        <TableItemComponent width="50%" />
+        <TableItemComponent width="100%" />
       </div> // TODO: @danford
     )
   }

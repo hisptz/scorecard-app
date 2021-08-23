@@ -9,10 +9,10 @@ import { getTableRowsUpdatedWithColumnsMetadata } from './get-table-rows-updated
 import { getTableSubtitle } from './get-table-subtitle.helper'
 
 export default function drawBnaTable(analyticsObject, tableConfiguration) {
-  // what is the implication of this function
-  const dataSelectionGroupMembers = getDataSelectionGroupMembers(
-    tableConfiguration,
-  )
+
+  // const dataSelectionGroupMembers = getDataSelectionGroupMembers(
+  //   tableConfiguration,
+  // )
 
   // Get table rows
 
@@ -27,7 +27,6 @@ export default function drawBnaTable(analyticsObject, tableConfiguration) {
       getTableDimensionItemsArray(tableConfiguration.column, analyticsObject),
       'column',
     ),
-    // it used here
     // dataSelectionGroupMembers
   )
 
@@ -49,7 +48,6 @@ export default function drawBnaTable(analyticsObject, tableConfiguration) {
         tableRowsArray,
         tableColumnsArray,
       ),
-      // the same fx is used here too
       // dataSelectionGroupMembers
     ),
   }

@@ -27,6 +27,7 @@
   .table-item-cell-block {
     padding: 0;
     position: relative;
+    border: 1px solid #eeeeee;
   }
   
   .table-header-cell {

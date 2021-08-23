@@ -23,14 +23,14 @@ export default function TableItemComponent() {
         // #table [id]="tableConfiguration?.id"
       >
         <thead open>
-          <tr>
+       {tableData?.subtitle !== ' ' ? <tr>
             <th
               colSpan={tableData?.headerColSpan}
               className="table-header-cell"
             >
               <div className="table-header-item">{tableData?.subtitle}</div>
             </th>
-          </tr>
+          </tr> :<h1></h1>}  
 
           {tableData?.headers.map((tableHeaderRow, tableHeaderRowPosition) => {
             return (

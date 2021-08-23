@@ -69,10 +69,10 @@ export default function TableCellAnalysis({onClose, dataHolder}) {
             <ModalContent>
                 <DimensionsSelector/>
                 <div style={{
-                    maxHeight: '40vh' ,
+                    maxHeight: '70vh' ,
                     flex: 1,
                     overflow: 'auto',
-                    margin: '16px 0'
+                    margin: '0px 0'
                 }}>
                    
                     {
