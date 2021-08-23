@@ -1,33 +1,47 @@
 import i18n from '@dhis2/d2-i18n'
-import {DataTableCell, DataTableRow, Tooltip} from "@dhis2/ui";
+import {DataTableCell, DataTableColumnHeader, DataTableRow, Tooltip} from "@dhis2/ui";
+import {head} from "lodash";
 import React from "react";
-import {useRecoilValue} from "recoil";
+import {useRecoilState, useRecoilValue} from "recoil";
 import {DraggableItems} from "../../../../../../../../../core/constants/draggables";
 import {PeriodResolverState} from "../../../../../../../../../core/state/period";
-import {ScorecardConfigDirtyState} from "../../../../../../../../../core/state/scorecard";
+import {ScorecardTableSortState, ScorecardViewState} from "../../../../../../../../../core/state/scorecard";
 import {getDataSourcesDisplayName} from "../../../../../../../../../shared/utils/utils";
-import DraggableCell from "../../DraggableCell";
-import DroppableCell from "../../DroppableCell";
+import DraggableCell from "../../ScorecardTableBody/Components/DraggableCell";
+import DroppableCell from "../../ScorecardTableBody/Components/DroppableCell";
 
 export default function HoldersHeaderRow() {
-    const {dataGroups} = useRecoilValue(ScorecardConfigDirtyState('dataSelection')) ?? {}
+    const {dataGroups} = useRecoilValue(ScorecardViewState('dataSelection')) ?? {}
+    const [{name, direction}, setDataSort] = useRecoilState(ScorecardTableSortState)
     const periods = useRecoilValue(PeriodResolverState) ?? []
+
+    const onSortClick = (direction) => {
+        setDataSort({
+            ...direction,
+            type: 'data'
+        })
+    }
 
     return (
         <DataTableRow>
-            <DataTableCell fixed left={"0"} width={"50px"}>&nbsp;</DataTableCell>
+            <DataTableCell fixed left={"0"} width={"50px"}/>
             {
                 dataGroups?.map(({dataHolders}) => (dataHolders?.map(({id, dataSources}) => (
-                    <DataTableCell className='p-0' width={`${periods?.length * 100}px`} fixed colSpan={`${periods?.length}`} bordered
-                                   align='center'
-                                   key={id}>
-                        <Tooltip content={i18n.t('Drag to row headers to change layout ')}>
-                            <DroppableCell accept={[DraggableItems.ORG_UNIT_ROW]}>
-                                <DraggableCell label={getDataSourcesDisplayName(dataSources)}
-                                               type={DraggableItems.DATA_COLUMN}/>
-                            </DroppableCell>
-                        </Tooltip>
-                    </DataTableCell>))))
+                    <DataTableColumnHeader onSortIconClick={onSortClick}
+                                           sortDirection={name === `${head(dataSources)?.id}` ? direction : 'default'} className='p-0 scorecard-table-cell'
+                                           width={`${periods?.length * 100}px`} top={"0"} fixed
+                                           colSpan={`${periods?.length}`} bordered
+                                           align='center'
+                                           key={`${id}-column-header`} name={`${head(dataSources)?.id}`}>
+                        <div style={{height: '100%', width: '100%'}}>
+                            <Tooltip className='m-auto' content={i18n.t('Drag to row headers to change layout')}>
+                                <DroppableCell accept={[DraggableItems.ORG_UNIT_ROW]}>
+                                    <DraggableCell label={getDataSourcesDisplayName(dataSources)}
+                                                   type={DraggableItems.DATA_COLUMN}/>
+                                </DroppableCell>
+                            </Tooltip>
+                        </div>
+                    </DataTableColumnHeader>))))
             }
         </DataTableRow>
     )

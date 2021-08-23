@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-08-17T08:30:45.408Z\n"
-"PO-Revision-Date: 2021-08-17T08:30:45.408Z\n"
+"POT-Creation-Date: 2021-08-23T07:43:03.018Z\n"
+"PO-Revision-Date: 2021-08-23T07:43:03.031Z\n"
 
 msgid "Data"
 msgstr "Data"
@@ -161,9 +161,6 @@ msgstr "Saving"
 msgid "Next"
 msgstr "Next"
 
-msgid "Scorecard deleted successfully"
-msgstr "Scorecard deleted successfully"
-
 msgid "View"
 msgstr "View"
 
@@ -172,6 +169,9 @@ msgstr "Are you sure you want to delete scorecard "
 
 msgid "Are you sure you want to delete scorecard"
 msgstr "Are you sure you want to delete scorecard"
+
+msgid "Scorecard deleted successfully"
+msgstr "Scorecard deleted successfully"
 
 msgid "Help"
 msgstr "Help"
@@ -191,6 +191,15 @@ msgstr "Add New Scorecard"
 msgid "Search"
 msgstr "Search"
 
+msgid "You do not have access to {{accessType}} this Scorecard"
+msgstr "You do not have access to {{accessType}} this Scorecard"
+
+msgid "Back to Home"
+msgstr "Back to Home"
+
+msgid "Metadata"
+msgstr "Metadata"
+
 msgid "Legends"
 msgstr "Legends"
 
@@ -202,6 +211,9 @@ msgstr "Decreased from last period"
 
 msgid "Drag to column headers to change layout"
 msgstr "Drag to column headers to change layout"
+
+msgid "Average"
+msgstr "Average"
 
 msgid "There are no configured indicators for this scorecard"
 msgstr "There are no configured indicators for this scorecard"
@@ -248,11 +260,23 @@ msgstr "Dictionary"
 msgid "Search Organisation Unit"
 msgstr "Search Organisation Unit"
 
-msgid "Drag to row headers to change layout "
-msgstr "Drag to row headers to change layout "
+msgid "Drag to row headers to change layout"
+msgstr "Drag to row headers to change layout"
 
 msgid "Search Data"
 msgstr "Search Data"
+
+msgid "Drag to row headers to change layout "
+msgstr "Drag to row headers to change layout "
+
+msgid "Home"
+msgstr "Home"
+
+msgid "Refresh"
+msgstr "Refresh"
+
+msgid "Download"
+msgstr "Download"
 
 msgid "Name"
 msgstr "Name"
@@ -313,9 +337,6 @@ msgstr "Average Column"
 
 msgid "Average Row"
 msgstr "Average Row"
-
-msgid "Average"
-msgstr "Average"
 
 msgid "All"
 msgstr "All"

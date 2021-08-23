@@ -13,10 +13,11 @@ import ScorecardConfState, {
     ScorecardConfigErrorState,
     ScorecardIdState,
 } from "../../../../core/state/scorecard";
-import {UserState} from "../../../../core/state/user";
+import {UserAuthorityOnScorecard, UserState} from "../../../../core/state/user";
 import {FullPageLoader} from "../../../../shared/Components/Loaders";
 import {useAddScorecard, useUpdateScorecard,} from "../../../../shared/hooks/datastore/useScorecard";
 import useMediaQuery from "../../../../shared/hooks/useMediaQuery";
+import AccessDeniedPage from "../ScorecardView/Components/AccessDeniedPage";
 import AccessScorecardForm from "./Components/Access";
 import DataConfigurationScorecardForm from "./Components/DataConfiguration";
 import GeneralScorecardForm from "./Components/General";
@@ -52,6 +53,7 @@ const keys = Object.keys(new Scorecard())
 export default function ScoreCardManagement() {
     const {id: scorecardId} = useParams();
     const user = useRecoilValue(UserState);
+    const {write: writeAccess} = useRecoilValue(UserAuthorityOnScorecard(scorecardId))
     const setScorecardIdState = useSetRecoilState(ScorecardIdState);
     const {update} = useUpdateScorecard(scorecardId);
     const {add} = useAddScorecard();
@@ -166,6 +168,10 @@ export default function ScoreCardManagement() {
         () => findIndex(steps, ["label", activeStep.label]) > 0,
         [activeStep]
     );
+
+    if(!writeAccess){
+        return <AccessDeniedPage accessType={"edit"} />
+    }
 
     return (
         <Suspense fallback={<FullPageLoader/>}>

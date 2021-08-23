@@ -5,10 +5,11 @@ import PropTypes from 'prop-types'
 import React, {useEffect, useRef, useState} from "react";
 import {useRecoilState, useRecoilValue} from "recoil";
 import {PeriodResolverState} from "../../../../../../../../../core/state/period";
-import {ScorecardConfigDirtyState, ScorecardViewState} from "../../../../../../../../../core/state/scorecard";
+import {ScorecardViewState} from "../../../../../../../../../core/state/scorecard";
 
 export default function GroupsHeaderRow({nested}) {
-    const {dataGroups} = useRecoilValue(ScorecardConfigDirtyState('dataSelection')) ?? {}
+    const {dataGroups} = useRecoilValue(ScorecardViewState('dataSelection')) ?? {}
+    const {averageColumn} = useRecoilValue(ScorecardViewState('options')) ?? {}
     const periods = useRecoilValue(PeriodResolverState) ?? []
     const [orgUnitKeyword, setOrgUnitKeyword] = useRecoilState(ScorecardViewState('orgUnitSearchKeyword'))
     const [sort, setSort] = useRecoilState(ScorecardViewState('tableSort'))
@@ -28,10 +29,13 @@ export default function GroupsHeaderRow({nested}) {
     return (
         <DataTableRow>
             <DataTableCell fixed left={"0"} width={"50px"}/>
-            <DataTableColumnHeader name={'orgUnit'} onSortIconClick={onSortIconClick}
-                                   sortDirection={sort?.orgUnit} align='left' fixed top={"0"} left={"50px"}
-                                   width={"300px"} bordered
-                                   className='scorecard-table-header scorecard-org-unit-cell' rowSpan={"3"}>
+            <DataTableColumnHeader
+                large
+                name={'orgUnit'}
+                onSortIconClick={onSortIconClick}
+                sortDirection={sort?.orgUnit} align='left' fixed top={"0"} left={"50px"}
+                width={"300px"} bordered
+                className='scorecard-table-header scorecard-org-unit-cell' rowSpan={"3"}>
                 {
                     !nested && <InputField value={searchValue} onChange={({value}) => setSearchValue(value)}
                                            placeholder={i18n.t('Search Organisation Unit')}/>
@@ -45,6 +49,13 @@ export default function GroupsHeaderRow({nested}) {
                     </DataTableCell>
                 ))
             }
+            {
+                averageColumn &&
+                <DataTableCell fixed align='center' bordered className='scorecard-table-header' rowSpan={"3"}>
+                    {i18n.t('Average')}
+                </DataTableCell>
+            }
+
         </DataTableRow>
     )
 }

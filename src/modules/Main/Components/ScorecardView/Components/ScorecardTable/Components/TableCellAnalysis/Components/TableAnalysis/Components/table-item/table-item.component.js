@@ -13,9 +13,9 @@ export default function TableItemComponent() {
 
   useEffect(() => { 
     setTabledata(drawBnaTable(data['_data'], layout))
-  }, [data, layout, tableData])
+  }, [data, layout])
 
-  return (
+return (
     <div className="table-item-container">
       <table
         className="table table-bordered"

@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import React from "react";
-import ScorecardGridCard from "./ScorecardGridCard";
+import ScorecardGridCard from "./Cards/ScorecardGridCard";
 
 export default function GridScorecardDisplay({ scorecards }) {
   return (

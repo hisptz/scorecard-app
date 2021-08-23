@@ -4,7 +4,7 @@ import DescriptionIcon from '@material-ui/icons/Description';
 import ChartIcon from '@material-ui/icons/Equalizer';
 import TableChartIcon from '@material-ui/icons/TableChart';
 import PropTypes from 'prop-types'
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState,Suspense} from 'react'
 import {useRecoilCallback, useRecoilValueLoadable, useSetRecoilState} from "recoil";
 import FullPageError from "../../../../../../../../shared/Components/Errors/FullPageError";
 import {FullPageLoader} from "../../../../../../../../shared/Components/Loaders";
@@ -68,35 +68,39 @@ export default function TableCellAnalysis({onClose, dataHolder}) {
             </ModalTitle>
             <ModalContent>
                 <DimensionsSelector/>
-                <div style={{
-                    maxHeight: '70vh' ,
-                    flex: 1,
-                    overflow: 'auto',
-                    margin: '0px 0'
-                }}>
-                   
-                    {
-                        dataState.state === 'hasError' && <FullPageError error={dataState.contents}/>
-                    }
-                    {
-                        dataState.state === 'loading' && <FullPageLoader/>
-                    }
-                    {
-                        dataState.state === 'hasValue' && <SelectedView/>
-                    }
-                </div>
-                <div>
-                    {
-                        viewTypes?.map((type) => (
-                            <Chip selected={type?.name === viewType?.name} onClick={() => setViewType(type)}
-                                  key={type?.name}
-                                  icon={type?.icon}>{type?.displayName}</Chip>
-                        ))
-                    }
-                </div>
+                <Suspense fallback={<div>Loading...</div>}>
+                   <div style={{
+                       maxHeight: '45vh' ,
+                       flex: 1,
+                       overflow: 'auto',
+                       margin: '16px 0'
+                   }}>
+                       {
+                           dataState.state === 'hasError' && <FullPageError error={dataState.contents}/>
+                       }
+                       {
+                           dataState.state === 'loading' && <FullPageLoader/>
+                       }
+                       {
+                           dataState.state === 'hasValue' && <SelectedView/>
+                       }
+                   </div>
+               </Suspense>
+
             </ModalContent>
             <ModalActions>
-                <Button onClick={onClose}>Cancel</Button>
+                <div className='row space-between align-items-center'>
+                    <div>
+                        {
+                            viewTypes?.map((type) => (
+                                <Chip selected={type?.name === viewType?.name} onClick={() => setViewType(type)}
+                                      key={type?.name}
+                                      icon={type?.icon}>{type?.displayName}</Chip>
+                            ))
+                        }
+                    </div>
+                    <Button onClick={onClose}>Cancel</Button>
+                </div>
             </ModalActions>
         </Modal>
     )

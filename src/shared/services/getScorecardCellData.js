@@ -19,3 +19,15 @@ export default async function getScorecardCellData({orgUnit, periods, dataSource
         console.log(e)
     }
 }
+
+
+export async function getHighlightedIndicatorsData({orgUnits, periods, highlightedIndicators}) {
+    try {
+        return await new Fn.Analytics()
+            .setOrgUnit(orgUnits?.join(';'))
+            .setPeriod(periods?.join(";"))
+            .setData(highlightedIndicators?.join(";")).get()
+    } catch (e) {
+        console.log(e)
+    }
+}
