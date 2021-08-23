@@ -234,7 +234,6 @@ const ScorecardOrgUnitState = selectorFamily({
             if (orientation === Orientation.ORG_UNIT_VS_DATA) {
                 if (dataSort.type === 'period') {
                     const [dx, pe] = dataSort.name?.split('-');
-                    console.log('this?')
                     scorecardDataEngine.sortOrgUnitsByDataAndPeriod({
                         dataSource: dx,
                         period: pe,
@@ -320,7 +319,6 @@ const ScorecardDataSourceState = selector({
                 }
                 if (dataSort.type === 'period') {
                     const [ou, pe] = dataSort.name.split('-')
-                    console.log({ou, pe})
                     scorecardDataEngine.sortDataSourceByOrgUnitAndPeriod({
                         period: pe,
                         orgUnit: ou,
@@ -348,7 +346,11 @@ const ScorecardDataLoadingState = atom({
             if (trigger === 'get') {
                 setSelf(true)
                 const subscription = scorecardDataEngine.loading$.subscribe(setSelf)
-                return () => subscription.unsubscribe();
+                return () => {
+                    if (subscription) {
+                        subscription.unsubscribe();
+                    }
+                }
             }
         }
     ]
@@ -360,7 +362,12 @@ const ScorecardTableOverallAverage = atomFamily({
     default: null,
     effects_UNSTABLE: (orgUnits) => [
         ({setSelf}) => {
-            scorecardDataEngine.getOverallAverage(orgUnits).subscribe(setSelf)
+            const subscription = scorecardDataEngine.getOverallAverage(orgUnits).subscribe(setSelf)
+            return () => {
+                if (subscription) {
+                    subscription.unsubscribe()
+                }
+            }
         }
     ]
 })

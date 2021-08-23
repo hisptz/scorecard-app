@@ -1,8 +1,8 @@
 import i18n from '@dhis2/d2-i18n'
 import {Button, ButtonStrip, Card} from '@dhis2/ui'
-import React, {useRef, useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import {useHistory} from "react-router-dom";
-import {useRecoilState, useRecoilValue, useResetRecoilState} from "recoil";
+import {useRecoilCallback, useRecoilState, useRecoilValue} from "recoil";
 import {FilterComponentTypes} from "../../../../../../core/constants/selection";
 import ScorecardConfState, {ScorecardIdState, ScorecardViewState} from "../../../../../../core/state/scorecard";
 import {UserAuthorityOnScorecard} from "../../../../../../core/state/user";
@@ -19,8 +19,6 @@ export default function ScorecardViewHeader() {
     const [orgUnitSelection, setOrgUnitSelection] = useRecoilState(ScorecardViewState('orgUnitSelection'))
     const [periodSelection, setPeriodSelection] = useRecoilState(ScorecardViewState('periodSelection'))
     const [scorecardOptions, setScorecardOptions] = useRecoilState(ScorecardViewState('options'))
-    const resetScorecardState = useResetRecoilState(ScorecardConfState(scorecardId))
-    const resetScorecardIdState = useResetRecoilState(ScorecardIdState)
     const userAuthority = useRecoilValue(UserAuthorityOnScorecard(scorecardId))
     const writeAccess = userAuthority?.write;
     const [orgUnitSelectionOpen, setOrgUnitSelectionOpen] = useState(false);
@@ -30,6 +28,11 @@ export default function ScorecardViewHeader() {
     const {download: onDownload} = useDownload();
     const downloadRef = useRef()
 
+    const reset = useRecoilCallback(({reset}) => () => {
+        reset(ScorecardIdState)
+        reset(ScorecardConfState(scorecardId))
+    }, [scorecardId])
+
     const onEdit = () => {
         if (writeAccess) {
             history.push(`/edit/${scorecardId}`)
@@ -37,15 +40,20 @@ export default function ScorecardViewHeader() {
     }
 
     const onHome = () => {
-        resetScorecardState();
-        resetScorecardIdState();
         history.replace('/')
     }
 
+    useEffect(() => {
+        return () => {
+            reset()
+        };
+    }, []);
+
     const onRefresh = () => {
-        console.log(history.location.pathname)
         window.location.reload(true)
     }
+
+
 
     return (
         <div className="selection-card">

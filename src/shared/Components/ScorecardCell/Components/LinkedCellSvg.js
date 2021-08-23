@@ -18,6 +18,7 @@ export default function LinkedCellSvg({
     const topFontSize = 12;
     const bottomFontSize = 12;
     const padding = 6;
+    const arrowFontSize = 10;
 
     return (
         <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} style={{display: 'block'}}>
@@ -26,16 +27,16 @@ export default function LinkedCellSvg({
             <text lengthAdjust="spacingAndGlyphs" textLength={topValue?.length > 4 ? 28 : null} fontSize={topFontSize}
                   x={padding + fontSize} y={fontSize + padding}>{topValue}</text>
             {topStatus && (topStatus === 'increasing' ?
-                <IncreasingArrows fontSize={fontSize} y={padding} x={padding + fontSize / 2}/> :
-                <DecreasingArrows fontSize={fontSize} y={padding + fontSize} x={padding + fontSize / 2}/>)}
+                <IncreasingArrows fontSize={arrowFontSize} y={padding} x={padding + fontSize / 2}/> :
+                <DecreasingArrows fontSize={arrowFontSize} y={padding + fontSize} x={padding + fontSize / 2}/>)}
             <polygon points={`${width},0 ${width},${height} 0,${height}`}
                      style={{fill: bottomColor ?? '#FFFFFF', strokeWidth: 1, stroke: 'rgb(232, 237, 242)'}}/>
             <text lengthAdjust="spacingAndGlyphs" textLength={bottomValue?.length > 4 ? 28 : null}
                   fontSize={bottomFontSize} x={width / 2 + padding / 4} y={height - padding}>{bottomValue}</text>
             {bottomStatus && (bottomStatus === 'increasing' ?
-                <IncreasingArrows fontSize={fontSize} y={height - (fontSize + padding)}
+                <IncreasingArrows fontSize={arrowFontSize} y={height - (fontSize + padding)}
                                   x={width - (padding + fontSize / 2)}/> :
-                <DecreasingArrows fontSize={fontSize} y={height - padding} x={width - (padding + fontSize / 2)}/>)}
+                <DecreasingArrows fontSize={arrowFontSize} y={height - padding} x={width - (padding + fontSize / 2)}/>)}
         </svg>
     )
 }

@@ -26,9 +26,12 @@ export const UserState = atom({
         get: async ({get}) => {
             try {
                 const engine = get(EngineState);
-                const {user} = await engine.query(userQuery)
-                if (user) return user
-                return null
+                console.log(engine)
+                if (engine) {
+                    const {user} = await engine.query(userQuery)
+                    if (user) return user
+                    return null
+                }
             } catch (e) {
                 console.log(e)
             }

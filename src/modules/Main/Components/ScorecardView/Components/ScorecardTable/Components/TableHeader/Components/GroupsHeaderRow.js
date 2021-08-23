@@ -23,7 +23,6 @@ export default function GroupsHeaderRow({nested}) {
 
     const onSortIconClick = ({direction}) => {
         setSort(prevValue => ({...prevValue, orgUnit: direction}))
-
     }
 
     return (

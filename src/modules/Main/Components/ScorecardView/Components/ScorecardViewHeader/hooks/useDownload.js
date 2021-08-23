@@ -27,7 +27,7 @@ export default function useDownload() {
     function subscribe() {
         if (loading !== undefined && !loading) {
             const subscription = scorecardDataEngine.getAllOrgUnitData(allOrgUnits?.map(({id}) => id)).subscribe(setData);
-            return subscription.unsubscribe
+            return ()=>subscription.unsubscribe();
         }
     }
 

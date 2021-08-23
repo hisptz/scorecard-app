@@ -17,6 +17,7 @@ export default function ScorecardTable({orgUnits, nested}) {
 
     const reset = useRecoilCallback(({reset}) => () => {
         reset(ScorecardViewState("orgUnitSearchKeyword"))
+
     })
 
     useEffect(() => {
