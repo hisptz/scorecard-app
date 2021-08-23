@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import React, {Suspense, useEffect} from "react";
 import {DndProvider} from "react-dnd";
 import {HTML5Backend} from 'react-dnd-html5-backend'
-import {useRecoilValueLoadable, useResetRecoilState} from "recoil";
+import {useRecoilCallback, useRecoilValueLoadable} from "recoil";
 import {ScorecardTableConfigState, ScorecardViewState,} from "../../../../../../core/state/scorecard";
 import useMediaQuery from "../../../../../../shared/hooks/useMediaQuery";
 import ScorecardTableBody from "./Components/ScorecardTableBody";
@@ -14,13 +14,14 @@ export default function ScorecardTable({orgUnits, nested}) {
     const {width: screenWidth} = useMediaQuery();
     const tableConfig = useRecoilValueLoadable(ScorecardTableConfigState(orgUnits))
 
-    const resetKeyword = useResetRecoilState(
-        ScorecardViewState("orgUnitSearchKeyword")
-    );
+
+    const reset = useRecoilCallback(({reset}) => () => {
+        reset(ScorecardViewState("orgUnitSearchKeyword"))
+    })
 
     useEffect(() => {
         return () => {
-            resetKeyword();
+            reset();
         };
     }, []);
 
@@ -33,7 +34,7 @@ export default function ScorecardTable({orgUnits, nested}) {
                     layout="fixed"
                 >
                     <TableHeader orgUnits={orgUnits} nested={nested}/>
-                    <Suspense fallback={<TableLoader/>}>
+                    <Suspense fallback={<TableLoader orgUnits={orgUnits}/>}>
                         <ScorecardTableBody orgUnits={orgUnits}/>
                     </Suspense>
                 </DataTable>

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import React, {useRef} from 'react'
 import {useDrop} from "react-dnd";
 import {useSetRecoilState} from "recoil";
-import {ScorecardTableOrientationState} from "../../../../../../../core/state/scorecard";
+import {ScorecardTableOrientationState} from "../../../../../../../../../core/state/scorecard";
 
 export default function DroppableCell({accept, children}) {
     const setOrientation = useSetRecoilState(ScorecardTableOrientationState)

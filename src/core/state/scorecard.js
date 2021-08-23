@@ -1,13 +1,17 @@
 import {Period} from "@iapps/period-utilities";
-import {cloneDeep, get as _get, head, isEmpty, set as _set, sortBy} from "lodash";
+import {cloneDeep, filter, flatten, get as _get, head, isEmpty, set as _set} from "lodash";
 import {atom, atomFamily, selector, selectorFamily} from "recoil";
 import {
+    getColSpanDataGroups,
+    getColSpanWithOrgUnit,
     getTableWidthWithDataGroups,
     getTableWidthWithOrgUnit
 } from "../../modules/Main/Components/ScorecardView/Components/ScorecardTable/services/utils";
 import {searchOrganisationUnit} from "../../shared/hooks/useOrganisationUnits";
 import getScorecard from "../../shared/services/getScorecard";
 import getScorecardSummary from "../../shared/services/getScorecardSummary";
+import {getHoldersFromGroups} from "../../shared/utils/utils";
+import {Orientation} from "../constants/orientation";
 import ScorecardAccessType from "../constants/scorecardAccessType";
 import {TableSort} from "../constants/tableSort";
 import OrgUnitSelection from "../models/orgUnitSelection";
@@ -18,6 +22,14 @@ import ScorecardOptions from "../models/scorecardOptions";
 import {EngineState} from "./engine";
 import {OrgUnitChildren} from "./orgUnit";
 import {PeriodResolverState} from "./period";
+import {UserState} from "./user";
+import {
+    getUserAuthority,
+    sortDataSourcesBasedOnData,
+    sortDataSourcesBasedOnNames,
+    sortOrgUnitsBasedOnData,
+    sortOrgUnitsBasedOnNames
+} from "./utils";
 
 const defaultValue = {
     legendDefinitions: [
@@ -60,9 +72,13 @@ const ScorecardSummaryState = atom({
         key: 'scorecard-summary-selector',
         get: async ({get}) => {
             const engine = get(EngineState);
+            const user = get(UserState)
             const {summary, error} = await getScorecardSummary(engine)
             if (error) throw error;
-            return summary;
+            return filter(summary, (scorecardSummary) => {
+                const {read} = getUserAuthority(user, scorecardSummary) ?? {}
+                return read;
+            })
         },
     })
 })
@@ -88,7 +104,6 @@ const ScorecardConfState = atomFamily({
         }
     })
 })
-
 
 const ScorecardConfigDirtyState = atomFamily({
     key: 'scorecard-config-edit-state',
@@ -130,7 +145,6 @@ const ScorecardConfigErrorSelector = selectorFamily({
     }
 })
 
-
 const ScorecardConfigEditState = atom({
     key: 'scorecard-edit-state',
     default: {}
@@ -165,6 +179,11 @@ const ScorecardViewState = atomFamily({
     })
 })
 
+const ScorecardTableSortState = atom({
+    key: 'scorecard-table-state',
+    default: {}
+})
+
 const ScorecardTableOrientationState = atom({
     key: 'scorecard-table-orientation-state',
     default: 'orgUnitsVsData'
@@ -176,6 +195,7 @@ const ScorecardTableConfigState = selectorFamily({
         const orientation = get(ScorecardTableOrientationState)
         const periods = get(PeriodResolverState)
         const {dataGroups} = get(ScorecardViewState('dataSelection'))
+        const {averageColumn} = get(ScorecardViewState('options'))
         const {filteredOrgUnits, childrenOrgUnits} = get(ScorecardOrgUnitState(orgUnits))
 
         return orientation === 'orgUnitsVsData' ? {
@@ -185,14 +205,16 @@ const ScorecardTableConfigState = selectorFamily({
                 'data',
                 'periods'
             ],
-            tableWidth: getTableWidthWithDataGroups(periods, dataGroups)
+            tableWidth: getTableWidthWithDataGroups(periods, dataGroups, averageColumn),
+            colSpan: getColSpanDataGroups(periods, dataGroups, averageColumn)
         } : {
             rows: 'data',
             columns: [
                 'orgUnits',
                 'periods'
             ],
-            tableWidth: getTableWidthWithOrgUnit(periods, [...filteredOrgUnits, ...childrenOrgUnits])
+            tableWidth: getTableWidthWithOrgUnit(periods, [...filteredOrgUnits, ...childrenOrgUnits], averageColumn),
+            colSpan: getColSpanWithOrgUnit(periods, [...filteredOrgUnits, ...childrenOrgUnits], averageColumn)
         }
     }
 })
@@ -203,29 +225,59 @@ const ScorecardOrgUnitState = selectorFamily({
         const engine = get(EngineState)
         const searchKeyword = get(ScorecardViewState("orgUnitSearchKeyword"))
         const {orgUnit: sort} = get(ScorecardViewState('tableSort'))
-        let childrenOrgUnits = [];
+        const dataSort = get(ScorecardTableSortState)
+        const periods = get(PeriodResolverState)
+        const orientation = get(ScorecardTableOrientationState)
 
+        let orgUnitSort = []
+        if (dataSort) {
+            if (orientation === Orientation.ORG_UNIT_VS_DATA) {
+                if (dataSort.type === 'period') {
+                    const [dx, pe] = dataSort.name?.split('-');
+                    console.log('this?')
+                    scorecardDataEngine.sortOrgUnitsByDataAndPeriod({
+                        dataSource: dx,
+                        period: pe,
+                        sortType: dataSort?.direction
+                    }).subscribe((ouSort) => orgUnitSort = ouSort)
+                }
+                if (dataSort.type === 'data') {
+                    const dx = dataSort?.name;
+                    scorecardDataEngine.sortOrgUnitsByData({
+                        dataSource: dx,
+                        periods: periods?.map(({id}) => id),
+                        sortType: dataSort?.direction
+                    }).subscribe(ouSort => orgUnitSort = ouSort)
+                }
+            }
+        }
+
+        let childrenOrgUnits = [];
 
         if (orgUnits.length === 1) {
             childrenOrgUnits = get(OrgUnitChildren(head(orgUnits)?.id))
         }
 
-        if (sort === TableSort.ASC || sort === TableSort.DEFAULT) {
-            childrenOrgUnits = sortBy(childrenOrgUnits, 'displayName')
-        } else {
-            childrenOrgUnits = sortBy(childrenOrgUnits, 'displayName').reverse();
-        }
-
-
         let filteredOrgUnits = orgUnits;
+
+
         if (!isEmpty(searchKeyword)) {
             filteredOrgUnits = await searchOrganisationUnit(searchKeyword, engine);
         }
 
-        if (sort === TableSort.ASC || sort === TableSort.DEFAULT) {
-            filteredOrgUnits = sortBy(filteredOrgUnits, 'displayName')
+        if (!isEmpty(orgUnitSort)) {
+            const {parentOrgUnits, childOrgUnits} = sortOrgUnitsBasedOnData({
+                orgUnitSort,
+                childrenOrgUnits,
+                filteredOrgUnits
+            })
+            filteredOrgUnits = parentOrgUnits
+            childrenOrgUnits = childOrgUnits
+
         } else {
-            filteredOrgUnits = sortBy(filteredOrgUnits, 'displayName').reverse()
+            const {parentOrgUnits, childOrgUnits} = sortOrgUnitsBasedOnNames({sort, childrenOrgUnits, filteredOrgUnits})
+            filteredOrgUnits = parentOrgUnits
+            childrenOrgUnits = childOrgUnits
         }
 
         return {
@@ -234,6 +286,83 @@ const ScorecardOrgUnitState = selectorFamily({
             orgUnitsCount: (childrenOrgUnits?.length + filteredOrgUnits?.length)
         }
     }
+})
+
+const ScorecardDataSourceState = selector({
+    key: 'data-source-state',
+    get: ({get}) => {
+        const {dataGroups} = get(ScorecardViewState("dataSelection")) ?? {};
+        const dataSearchKeyword = get(ScorecardViewState('dataSearchKeyword'))
+        const {data: sort} = get(ScorecardViewState('tableSort'))
+        const dataHolders = getHoldersFromGroups(dataGroups)
+        const dataSort = get(ScorecardTableSortState)
+        const periods = get(PeriodResolverState)
+        const orientation = get(ScorecardTableOrientationState)
+        let filteredResult = dataHolders;
+        if (!isEmpty(dataSearchKeyword)) {
+            filteredResult = filter(dataHolders, (value) => {
+                const searchIndex = flatten(value.dataSources?.map(({
+                                                                        id,
+                                                                        displayName
+                                                                    }) => (`${id}-${displayName}`))).join('_')
+                return searchIndex.toLowerCase().match(RegExp(dataSearchKeyword.toLowerCase()))
+            })
+        }
+        let dataSourceSort = []
+        if (!isEmpty(dataSort)) {
+            if (orientation === Orientation.DATA_VS_ORG_UNIT) {
+                if (dataSort.type === 'orgUnit') {
+                    scorecardDataEngine.sortDataSourceByOrgUnit({
+                        periods: periods?.map(({id}) => id),
+                        orgUnit: dataSort?.name,
+                        sortType: dataSort?.direction
+                    }).subscribe(dSort => dataSourceSort = dSort)
+                }
+                if (dataSort.type === 'period') {
+                    const [ou, pe] = dataSort.name.split('-')
+                    console.log({ou, pe})
+                    scorecardDataEngine.sortDataSourceByOrgUnitAndPeriod({
+                        period: pe,
+                        orgUnit: ou,
+                        sortType: dataSort?.direction
+                    }).subscribe(dSort => dataSourceSort = dSort)
+                }
+            }
+        }
+
+        if (!isEmpty(dataSourceSort)) {
+            filteredResult = sortDataSourcesBasedOnData({dataSort: dataSourceSort, dataSources: filteredResult})
+        } else {
+            filteredResult = sortDataSourcesBasedOnNames({sort, dataSources: filteredResult})
+        }
+
+        return filteredResult;
+    }
+})
+
+const ScorecardDataLoadingState = atom({
+    key: 'data-loading-state',
+    default: true,
+    effects_UNSTABLE: [
+        ({trigger, setSelf}) => {
+            if (trigger === 'get') {
+                setSelf(true)
+                const subscription = scorecardDataEngine.loading$.subscribe(setSelf)
+                return () => subscription.unsubscribe();
+            }
+        }
+    ]
+})
+
+
+const ScorecardTableOverallAverage = atomFamily({
+    key: 'scorecard-table-overall-average',
+    default: null,
+    effects_UNSTABLE: (orgUnits) => [
+        ({setSelf}) => {
+            scorecardDataEngine.getOverallAverage(orgUnits).subscribe(setSelf)
+        }
+    ]
 })
 
 
@@ -251,5 +380,9 @@ export {
     ScorecardConfigErrorState,
     ScorecardTableOrientationState,
     ScorecardTableConfigState,
-    ScorecardOrgUnitState
+    ScorecardOrgUnitState,
+    ScorecardTableSortState,
+    ScorecardDataSourceState,
+    ScorecardDataLoadingState,
+    ScorecardTableOverallAverage
 }
