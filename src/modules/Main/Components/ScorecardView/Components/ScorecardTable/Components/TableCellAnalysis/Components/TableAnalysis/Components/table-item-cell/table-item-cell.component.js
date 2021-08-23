@@ -8,6 +8,8 @@ export default function TableItemCellComponent({
   analyticsObject,
   dataRowIds,
 }) {
+
+
   const [dataValue, setDataValue] = useState(0);
   useEffect(() => {
     setDataValue(findDataValuesFromAnalytics(analyticsObject, dataRowIds));

@@ -160,5 +160,4 @@ export function downloadCSV({periods, data, orgUnits, dataHolders, title}) {
 }
 
 export function downloadPDF() {
-    window.print()
 }

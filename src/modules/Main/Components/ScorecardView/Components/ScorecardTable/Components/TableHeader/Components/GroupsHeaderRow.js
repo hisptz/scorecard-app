@@ -33,10 +33,10 @@ export default function GroupsHeaderRow({nested}) {
                 name={'orgUnit'}
                 onSortIconClick={onSortIconClick}
                 sortDirection={sort?.orgUnit} align='left' fixed top={"0"} left={"50px"}
-                width={"300px"} bordered
-                className='scorecard-table-header scorecard-org-unit-cell' rowSpan={"3"}>
+                width={"200px"} bordered
+                className='scorecard-table-header scorecard-org-unit-cell' rowSpan={"3"} >
                 {
-                    !nested && <InputField value={searchValue} onChange={({value}) => setSearchValue(value)}
+                    !nested && <InputField className='print-hide'  value={searchValue} onChange={({value}) => setSearchValue(value)}
                                            placeholder={i18n.t('Search Organisation Unit')}/>
                 }
             </DataTableColumnHeader>

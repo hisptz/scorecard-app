@@ -1,5 +1,5 @@
 import {CenteredContent, CircularLoader, Layer, layers} from '@dhis2/ui'
-import React, {Suspense, useEffect} from "react";
+import React, {Suspense, useEffect, useRef} from "react";
 import {useParams} from "react-router-dom";
 import {useRecoilCallback, useRecoilValue, useSetRecoilState} from "recoil";
 import {
@@ -24,6 +24,8 @@ export default function ScorecardView() {
     const {orgUnits} = useRecoilValue(ScorecardViewState("orgUnitSelection"));
     const {read: access} = useRecoilValue(UserAuthorityOnScorecard(scorecardId))
     const loading = useRecoilValue(ScorecardDataLoadingState)
+    const downloadRef = useRef()
+
     const reset = useRecoilCallback(({reset}) => () => {
         reset(ScorecardViewState("orgUnitSelection"))
         reset(ScorecardIdState)
@@ -42,6 +44,8 @@ export default function ScorecardView() {
         return <AccessDeniedPage accessType={"view"}/>
     }
 
+    console.log(downloadRef)
+
     return (
         <Suspense fallback={<FullPageLoader/>}>
             {loading && <Layer level={layers.blocking} translucent>
@@ -49,8 +53,8 @@ export default function ScorecardView() {
                     <CircularLoader small/>
                 </CenteredContent>
             </Layer>}
-            <ScorecardViewHeader/>
-            <div className="column p-16" style={{height: "100%", width: "100%"}}>
+            <ScorecardViewHeader downloadAreaRef={downloadRef}/>
+            <div ref={downloadRef} className="column p-16" style={{height: "100%", width: "100%"}}>
                 <ScorecardHeader/>
                 <ScorecardLegendsView/>
                 <HighlightedIndicatorsView/>
@@ -58,8 +62,7 @@ export default function ScorecardView() {
                     <Suspense fallback={<FullPageLoader/>}>
                         <ScorecardTable
                             nested={false}
-                            orgUnits={orgUnits}
-                        />
+                            orgUnits={orgUnits} />
                     </Suspense>
                 </div>
             </div>

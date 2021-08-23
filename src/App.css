@@ -481,23 +481,25 @@ td.jsx-1369417008::selection {
     padding: 0 !important;
 }
 
-span.top.jsx-2694284040{
+span.top.jsx-2694284040 {
     height: 100% !important;
     text-align: center;
 }
 
-th.jsx-4210860585{
+th.jsx-4210860585 {
     height: 100% !important;
     padding: 8px !important;
 }
 
-.m-auto{
+.m-auto {
     margin: auto;
 }
 
 @media print {
-    .main-container{
-        width: 100%;
-        height: 100%;
+    .table-print {
+    }
+
+    .print-hide{
+        display: none;
     }
 }

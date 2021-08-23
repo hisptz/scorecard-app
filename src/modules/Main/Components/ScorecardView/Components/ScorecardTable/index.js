@@ -30,8 +30,9 @@ export default function ScorecardTable({orgUnits, nested}) {
         <div className="w-100 pb-32 flex-1">
             <DndProvider backend={HTML5Backend}>
                 <DataTable
+                    className='table-print'
                     width={`${tableConfig?.contents?.tableWidth ?? screenWidth}px`}
-                    scrollWidth={`${screenWidth}px`}
+                    scrollWidth={`${tableConfig?.contents?.tableWidth ?? screenWidth}px`}
                     layout="fixed"
                 >
                     <TableHeader orgUnits={orgUnits} nested={nested}/>
