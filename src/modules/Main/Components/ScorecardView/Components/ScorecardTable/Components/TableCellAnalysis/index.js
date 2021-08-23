@@ -50,14 +50,14 @@ export default function TableCellAnalysis({onClose, dataHolder}) {
         reset(PeriodState)
         reset(LayoutState)
         reset(DataSourceState)
-    })
+    },[])
 
     useEffect(() => {
         setDataSources(dataSources)
         return () => {
             resetStates()
         };
-    }, [dataSources]);
+    }, [dataSources, resetStates, setDataSources]);
 
     return (
         <Modal className='large-modal' position='middle' onClose={onClose} large>
