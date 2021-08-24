@@ -5,6 +5,7 @@ import useSetDataEngine from "../../core/hooks/useSetDataEngine";
 import {ScreenDimensionState} from "../../core/state/window";
 import {FullPageLoader} from "../../shared/Components/Loaders";
 import Main from "../Main";
+import Migration from "../Main/Components/Migration";
 import ScoreCardManagement from "../Main/Components/ScoreCardManagement";
 import ScorecardView from "../Main/Components/ScorecardView";
 import ExampleForms from "../test/Forms";
@@ -25,6 +26,10 @@ const pages = [
     {
         pathname: '/view/:id',
         component: ScorecardView
+    },
+    {
+        pathname: '/migrate',
+        component: Migration
     },
     {
         pathname: '/',

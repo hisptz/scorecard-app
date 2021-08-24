@@ -33,6 +33,7 @@ export default function ScorecardView() {
         reset(ScorecardDataLoadingState)
         scorecardDataEngine.reset()
     })
+
     useEffect(() => {
         setScorecardIdState(scorecardId);
         return () => {
@@ -43,8 +44,6 @@ export default function ScorecardView() {
     if (!access) {
         return <AccessDeniedPage accessType={"view"}/>
     }
-
-    console.log(downloadRef)
 
     return (
         <Suspense fallback={<FullPageLoader/>}>
@@ -62,7 +61,7 @@ export default function ScorecardView() {
                     <Suspense fallback={<FullPageLoader/>}>
                         <ScorecardTable
                             nested={false}
-                            orgUnits={orgUnits} />
+                            orgUnits={orgUnits}/>
                     </Suspense>
                 </div>
             </div>
