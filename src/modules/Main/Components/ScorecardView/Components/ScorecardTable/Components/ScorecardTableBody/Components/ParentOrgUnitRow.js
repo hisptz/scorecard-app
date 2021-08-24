@@ -42,7 +42,7 @@ export default function ParentOrgUnitRow({orgUnit, overallAverage}) {
     if (averageDisplayType === AverageDisplayType.ALL) {
         return ((emptyRows || !isEmpty) &&
             <DataTableRow key={id} bordered>
-                <DataTableCell fixed left={"0"} width={"50px"}/>
+                <DataTableCell className='jsx-1369417008' fixed left={"0"} width={"50px"}/>
                 <DataTableCell fixed left={"50px"} className="scorecard-org-unit-cell">
                     <Tooltip content={i18n.t('Drag to the column headers to change layout')}>
                         <DroppableCell accept={[DraggableItems.DATA_COLUMN]}>
@@ -77,7 +77,7 @@ export default function ParentOrgUnitRow({orgUnit, overallAverage}) {
     if (averageDisplayType === AverageDisplayType.BELOW_AVERAGE && overallAverage > average) {
         return ((emptyRows || !isEmpty) &&
             <DataTableRow key={id} bordered>
-                <DataTableCell fixed left={"0"} width={"50px"}/>
+                <DataTableCell className='jsx-1369417008' fixed left={"0"} width={"50px"}/>
                 <DataTableCell fixed left={"50px"} className="scorecard-org-unit-cell">
                     <Tooltip content={i18n.t('Drag to the column headers to change layout')}>
                         <DroppableCell accept={[DraggableItems.DATA_COLUMN]}>
@@ -112,7 +112,7 @@ export default function ParentOrgUnitRow({orgUnit, overallAverage}) {
     if (averageDisplayType === AverageDisplayType.ABOVE_AVERAGE && overallAverage <= average) {
         return ((emptyRows || !isEmpty) &&
             <DataTableRow key={id} bordered>
-                <DataTableCell fixed left={"0"} width={"50px"}/>
+                <DataTableCell className={'jsx-1369417008'} fixed left={"0"} width={"50px"}/>
                 <DataTableCell fixed left={"50px"} className="scorecard-org-unit-cell">
                     <Tooltip content={i18n.t('Drag to the column headers to change layout')}>
                         <DroppableCell accept={[DraggableItems.DATA_COLUMN]}>

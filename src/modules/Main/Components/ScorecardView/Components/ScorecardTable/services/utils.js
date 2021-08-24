@@ -1,5 +1,5 @@
 export function getTableWidthWithDataGroups(periods = [], dataGroups = [], averageColumn) {
-    return getColSpanDataGroups(periods, dataGroups, averageColumn) * 102 + 200;      //350 accounts for the static orgUnit and expand icon. 2px is for the border
+    return getColSpanDataGroups(periods, dataGroups, averageColumn) * 105 + 200;      //350 accounts for the static orgUnit and expand icon. 2px is for the border
 }
 
 export function getColSpanDataGroups(periods = [], dataGroups = [], averageColumn) {
@@ -9,7 +9,7 @@ export function getColSpanDataGroups(periods = [], dataGroups = [], averageColum
 }
 
 export function getTableWidthWithOrgUnit(periods, orgUnits, averageColumn) {
-    return getColSpanWithOrgUnit(periods, orgUnits, averageColumn) * 102 + 200;
+    return getColSpanWithOrgUnit(periods, orgUnits, averageColumn) * 105 + 200;
 }
 
 export function getColSpanWithOrgUnit(periods, orgUnits, averageColumn) {

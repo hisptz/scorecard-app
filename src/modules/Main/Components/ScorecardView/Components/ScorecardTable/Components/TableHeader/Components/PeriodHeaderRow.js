@@ -1,4 +1,4 @@
-import {DataTableCell, DataTableColumnHeader, DataTableRow} from "@dhis2/ui";
+import {DataTableColumnHeader, DataTableRow} from "@dhis2/ui";
 import {head} from "lodash";
 import PropTypes from 'prop-types'
 import React from "react";
@@ -17,7 +17,7 @@ export default function PeriodHeaderRow({orgUnits}) {
     const {filteredOrgUnits, childrenOrgUnits} = useRecoilValue(ScorecardOrgUnitState(orgUnits)) ?? {}
     const orientation = useRecoilValue(ScorecardTableOrientationState)
     const periods = useRecoilValue(PeriodResolverState) ?? []
-    const [{name:sortName, direction}, setDataSort] = useRecoilState(ScorecardTableSortState)
+    const [{name: sortName, direction}, setDataSort] = useRecoilState(ScorecardTableSortState)
 
     const onSortClick = (direction) => {
         setDataSort({
@@ -28,9 +28,11 @@ export default function PeriodHeaderRow({orgUnits}) {
 
     return (
         <DataTableRow>
-            <DataTableCell fixed left={"0"} width={"50px"}/>
             {
-                orientation === Orientation.ORG_UNIT_VS_DATA ? dataGroups?.map(({dataHolders}) => (dataHolders?.map(({id, dataSources}) => (
+                orientation === Orientation.ORG_UNIT_VS_DATA ? dataGroups?.map(({dataHolders}) => (dataHolders?.map(({
+                                                                                                                         id,
+                                                                                                                         dataSources
+                                                                                                                     }) => (
                     periods?.map(({name, id: periodId}) => (
                         <DataTableColumnHeader
                             fixed

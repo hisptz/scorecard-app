@@ -42,15 +42,16 @@ export default function OrgUnitHeaderRow({orgUnits, nested}) {
 
     return (
         <DataTableRow>
-            <DataTableCell fixed left={"0"} width={"50px"}/>
+            <DataTableCell className={'jsx-1369417008'} rowSpan={"2"} fixed left={"0"} width={"50px"}/>
             <DataTableColumnHeader onSortIconClick={onSortIconClick}
                                    sortDirection={sort?.data} align='center' fixed top={"0"} left={"50px"}
                                    width={"300px"} bordered
                                    className='scorecard-table-header scorecard-org-unit-cell' rowSpan={"2"}>
                 {
-                    !nested && <InputField value={searchValue} onChange={({value}) => setSearchValue(value)}
+                    !nested && <InputField className='print-hide' value={searchValue} onChange={({value}) => setSearchValue(value)}
                                            placeholder={i18n.t('Search Data')}/>
                 }
+                <h3 className='print-show hide'>{i18n.t('Data')}</h3>
             </DataTableColumnHeader>
             {
                 [...filteredOrgUnits, ...childrenOrgUnits]?.map(({displayName, id}) => (

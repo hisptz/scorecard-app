@@ -11,8 +11,7 @@ import {
     ScorecardOrgUnitState,
     ScorecardViewState
 } from "../../../../../../../core/state/scorecard";
-import ScorecardView from "../../../index";
-import {downloadALMAData, downloadALMAMeta, downloadCSV, downloadExcel, downloadPDF} from "../services/download";
+import {downloadALMAData, downloadALMAMeta, downloadCSV, downloadExcel} from "../services/download";
 
 
 export default function useDownload(downloadRef) {
@@ -25,8 +24,6 @@ export default function useDownload(downloadRef) {
     const loading = useRecoilValue(ScorecardDataLoadingState)
     const [data, setData] = useState();
     const {show} = useAlert(({message}) => message, ({type}) => ({...type, duration: 3000}))
-
-    console.log(downloadRef)
     const handlePDFDownload = useReactToPrint({
         content: () => downloadRef?.current,
     })
@@ -34,7 +31,7 @@ export default function useDownload(downloadRef) {
     function subscribe() {
         if (loading !== undefined && !loading) {
             const subscription = scorecardDataEngine.getAllOrgUnitData(allOrgUnits?.map(({id}) => id)).subscribe(setData);
-            return ()=>subscription.unsubscribe();
+            return () => subscription.unsubscribe();
         }
     }
 

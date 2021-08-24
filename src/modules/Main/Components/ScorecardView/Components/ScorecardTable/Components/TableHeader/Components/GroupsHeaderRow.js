@@ -27,7 +27,7 @@ export default function GroupsHeaderRow({nested}) {
 
     return (
         <DataTableRow>
-            <DataTableCell fixed left={"0"} width={"50px"}/>
+            <DataTableCell rowSpan={"3"} className={'jsx-1369417008'} fixed left={"0"} width={"50px"}/>
             <DataTableColumnHeader
                 large
                 name={'orgUnit'}
@@ -39,6 +39,7 @@ export default function GroupsHeaderRow({nested}) {
                     !nested && <InputField className='print-hide'  value={searchValue} onChange={({value}) => setSearchValue(value)}
                                            placeholder={i18n.t('Search Organisation Unit')}/>
                 }
+                <h4 className='print-show hide'>{i18n.t('Organisation Unit(s)')}</h4>
             </DataTableColumnHeader>
             {
                 dataGroups?.map(({title, id, dataHolders}) => (
