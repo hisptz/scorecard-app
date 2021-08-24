@@ -35,7 +35,7 @@ export default function DataSourceRow({orgUnits, dataSources, overallAverage}) {
     }, [dataSources])
 
     const Component = <DataTableRow bordered>
-        <DataTableCell fixed left={"0"} width={"50px"}/>
+        <DataTableCell className='jsx-1369417008' fixed left={"0"} width={"50px"}/>
         <DataTableCell fixed left={"50px"} className="scorecard-org-unit-cell">
             <DroppableCell accept={[DraggableItems.ORG_UNIT_COLUMN]}>
                 <DraggableCell label={getDataSourcesDisplayName(dataSources)} type={DraggableItems.DATA_ROW}/>

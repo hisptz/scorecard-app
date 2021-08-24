@@ -13,7 +13,7 @@ import SelectionWrapper from "../../../../../../shared/Components/SelectionWrapp
 import DownloadMenu from "../Download/Components/DownloadMenu";
 import useDownload from "./hooks/useDownload";
 
-export default function ScorecardViewHeader() {
+export default function ScorecardViewHeader({downloadAreaRef}) {
     const history = useHistory();
     const scorecardId = useRecoilValue(ScorecardIdState)
     const [orgUnitSelection, setOrgUnitSelection] = useRecoilState(ScorecardViewState('orgUnitSelection'))
@@ -25,9 +25,9 @@ export default function ScorecardViewHeader() {
     const [periodSelectionOpen, setPeriodSelectionOpen] = useState(false);
     const [optionsOpen, setOptionsOpen] = useState(false);
     const [downloadOpen, setDownloadOpen] = useState(false);
-    const {download: onDownload} = useDownload();
-    const downloadRef = useRef()
+    const {download: onDownload} = useDownload(downloadAreaRef);
 
+    const downloadRef = useRef()
     const reset = useRecoilCallback(({reset}) => () => {
         reset(ScorecardIdState)
         reset(ScorecardConfState(scorecardId))
@@ -52,7 +52,6 @@ export default function ScorecardViewHeader() {
     const onRefresh = () => {
         window.location.reload(true)
     }
-
 
 
     return (

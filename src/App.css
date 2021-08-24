@@ -470,6 +470,7 @@ td.jsx-1369417008::selection {
 .scorecard-org-unit-cell {
     background: #E8EDF2;
     padding-top: 24px;
+    min-width: 200px !important;
 }
 
 .large-modal {
@@ -481,23 +482,72 @@ td.jsx-1369417008::selection {
     padding: 0 !important;
 }
 
-span.top.jsx-2694284040{
+span.top.jsx-2694284040 {
     height: 100% !important;
     text-align: center;
 }
 
-th.jsx-4210860585{
+th.jsx-4210860585 {
     height: 100% !important;
     padding: 8px !important;
 }
 
-.m-auto{
+.m-auto {
     margin: auto;
 }
 
+.hide{
+    display: none;
+}
+
 @media print {
-    .main-container{
-        width: 100%;
-        height: 100%;
+
+    .print-area{
+        overflow: visible !important;
+    }
+    .table-print {
+        border: 1px solid #D5DDE5 !important;
+    }
+
+    .print-hide {
+        display: none;
+    }
+
+    .print-show{
+        display: block !important;
+    }
+
+    button.jsx-4183809227 {
+        display: none !important;;
+    }
+
+    td.jsx-1369417008 > svg {
+        display: none;
+    }
+
+    td.jsx-1369417008 {
+        background: white !important;
+        border-left: 1px solid #D5DDE5 !important;
+        border-bottom: 1px solid #D5DDE5 !important;
+        border-right: none !important;
+    }
+
+    th.fixed {
+        background: white !important;
+        font-weight: bold !important;
+        border-bottom: 1px solid #D5DDE5 !important;
+        border-right: 1px solid #D5DDE5 !important;
+        border-left: none;
+    }
+
+    .data-cell {
+        border: 1px solid #D5DDE5 !important;
+    }
+
+    th.jsx-1369417008 {
+        background: white !important;
+        border-left: 1px solid #D5DDE5 !important;
+        border-bottom: 1px solid #D5DDE5 !important;
+        border-right: none !important;
     }
 }

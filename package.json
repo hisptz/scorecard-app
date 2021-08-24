@@ -53,6 +53,8 @@
     "react-js-loading-shimmer": "^1.0.10",
     "react-jsx-parser": "^1.28.4",
     "react-router-dom": "^5.2.0",
+    "react-to-print": "^2.13.0",
+    "react-web-vitals": "^1.0.1",
     "recoil": "^0.4.0",
     "rxjs": "^7.3.0",
     "xlsx": "^0.17.1"
