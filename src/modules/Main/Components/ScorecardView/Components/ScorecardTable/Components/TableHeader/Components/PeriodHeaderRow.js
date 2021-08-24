@@ -6,14 +6,14 @@ import {useRecoilState, useRecoilValue} from "recoil";
 import {Orientation} from "../../../../../../../../../core/constants/orientation";
 import {PeriodResolverState} from "../../../../../../../../../core/state/period";
 import {
-    ScorecardConfigDirtyState,
     ScorecardOrgUnitState,
     ScorecardTableOrientationState,
-    ScorecardTableSortState
+    ScorecardTableSortState,
+    ScorecardViewState
 } from "../../../../../../../../../core/state/scorecard";
 
 export default function PeriodHeaderRow({orgUnits}) {
-    const {dataGroups} = useRecoilValue(ScorecardConfigDirtyState('dataSelection')) ?? {}
+    const {dataGroups} = useRecoilValue(ScorecardViewState('dataSelection')) ?? {}
     const {filteredOrgUnits, childrenOrgUnits} = useRecoilValue(ScorecardOrgUnitState(orgUnits)) ?? {}
     const orientation = useRecoilValue(ScorecardTableOrientationState)
     const periods = useRecoilValue(PeriodResolverState) ?? []

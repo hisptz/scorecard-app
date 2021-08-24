@@ -470,6 +470,7 @@ td.jsx-1369417008::selection {
 .scorecard-org-unit-cell {
     background: #E8EDF2;
     padding-top: 24px;
+    min-width: 200px !important;
 }
 
 .large-modal {
@@ -500,6 +501,10 @@ th.jsx-4210860585 {
 }
 
 @media print {
+
+    .print-area{
+        overflow: visible !important;
+    }
     .table-print {
         border: 1px solid #D5DDE5 !important;
     }

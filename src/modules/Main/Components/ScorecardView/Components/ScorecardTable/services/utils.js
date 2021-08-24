@@ -1,3 +1,5 @@
+import {ScorecardTableConstants} from "../../../../../../../core/constants/table";
+
 export function getTableWidthWithDataGroups(periods = [], dataGroups = [], averageColumn) {
     return getColSpanDataGroups(periods, dataGroups, averageColumn) * 105 + 200;      //350 accounts for the static orgUnit and expand icon. 2px is for the border
 }
@@ -16,4 +18,20 @@ export function getColSpanWithOrgUnit(periods, orgUnits, averageColumn) {
     const noOfPeriods = periods?.length || 1;
     const noOfOrgUnits = orgUnits.length || 1;
     return (noOfOrgUnits * noOfPeriods) + (averageColumn ? 1 : 0);
+}
+
+
+function getDataCellsWidth(screenWidth, colSpan) {
+    return ScorecardTableConstants.CELL_WIDTH * colSpan
+}
+
+export function getNameCellWidth(screenWidth, colSpan) {
+    const dataCellsWidth = getDataCellsWidth(screenWidth, colSpan)
+    const width = 100 - ((dataCellsWidth / screenWidth) * 100)
+
+    if (width > 10) {
+        return `${width}%`
+    } else {
+        return `${200}px`
+    }
 }

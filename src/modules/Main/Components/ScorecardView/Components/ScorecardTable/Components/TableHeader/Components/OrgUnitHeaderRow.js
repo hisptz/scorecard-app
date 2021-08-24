@@ -5,14 +5,15 @@ import PropTypes from "prop-types";
 import React, {useEffect, useRef, useState} from "react";
 import {useRecoilState, useRecoilValue} from "recoil";
 import {DraggableItems} from "../../../../../../../../../core/constants/draggables";
+import {ScorecardTableConstants} from "../../../../../../../../../core/constants/table";
 import {PeriodResolverState} from "../../../../../../../../../core/state/period";
 import {
-    ScorecardOrgUnitState,
+    ScorecardOrgUnitState, ScorecardTableConfigState,
     ScorecardTableSortState,
     ScorecardViewState
 } from "../../../../../../../../../core/state/scorecard";
-import DraggableCell from "../../ScorecardTableBody/Components/DraggableCell";
-import DroppableCell from "../../ScorecardTableBody/Components/DroppableCell";
+import DraggableCell from "../../TableBody/Components/DraggableCell";
+import DroppableCell from "../../TableBody/Components/DroppableCell";
 
 
 export default function OrgUnitHeaderRow({orgUnits, nested}) {
@@ -24,7 +25,7 @@ export default function OrgUnitHeaderRow({orgUnits, nested}) {
     const [sort, setSort] = useRecoilState(ScorecardViewState('tableSort'))
     const [{name, direction}, setDataSort] = useRecoilState(ScorecardTableSortState)
     const onDataSearch = useRef(debounce(setDataKeyword, 1000, {trailing: true, leading: false}))
-
+    const {nameColumnWidth} = useRecoilValue(ScorecardTableConfigState(orgUnits))
     useEffect(() => {
         onDataSearch.current(searchValue)
     }, [searchValue])
@@ -45,7 +46,7 @@ export default function OrgUnitHeaderRow({orgUnits, nested}) {
             <DataTableCell className={'jsx-1369417008'} rowSpan={"2"} fixed left={"0"} width={"50px"}/>
             <DataTableColumnHeader onSortIconClick={onSortIconClick}
                                    sortDirection={sort?.data} align='center' fixed top={"0"} left={"50px"}
-                                   width={"300px"} bordered
+                                   width={nameColumnWidth} bordered
                                    className='scorecard-table-header scorecard-org-unit-cell' rowSpan={"2"}>
                 {
                     !nested && <InputField className='print-hide' value={searchValue} onChange={({value}) => setSearchValue(value)}
@@ -59,6 +60,7 @@ export default function OrgUnitHeaderRow({orgUnits, nested}) {
                                            onSortIconClick={onDataSortClick}
                                            fixed className='scorecard-table-header scorecard-table-cell' align='center'
                                            bordered
+                                           width={`${periods?.length * ScorecardTableConstants.CELL_WIDTH}px`}
                                            colSpan={`${(periods?.length ?? 1)}`} key={id}>
                         <div style={{height: '100%', width: '100%'}}>
                             <Tooltip className='m-auto' content={i18n.t('Drag to row headers to change layout ')}>
@@ -72,7 +74,7 @@ export default function OrgUnitHeaderRow({orgUnits, nested}) {
             }
             {
                 averageColumn &&
-                <DataTableCell fixed align='center' bordered className='scorecard-table-header' rowSpan={"2"}>
+                <DataTableCell width={`${ScorecardTableConstants.CELL_WIDTH}px`}   fixed align='center' bordered className='scorecard-table-header' rowSpan={"2"}>
                     {i18n.t('Average')}
                 </DataTableCell>
             }

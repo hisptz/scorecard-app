@@ -4,6 +4,7 @@ import {atom, atomFamily, selector, selectorFamily} from "recoil";
 import {
     getColSpanDataGroups,
     getColSpanWithOrgUnit,
+    getNameCellWidth,
     getTableWidthWithDataGroups,
     getTableWidthWithOrgUnit
 } from "../../modules/Main/Components/ScorecardView/Components/ScorecardTable/services/utils";
@@ -30,6 +31,7 @@ import {
     sortOrgUnitsBasedOnData,
     sortOrgUnitsBasedOnNames
 } from "./utils";
+import {ScreenDimensionState} from "./window";
 
 const defaultValue = {
     legendDefinitions: [
@@ -197,6 +199,11 @@ const ScorecardTableConfigState = selectorFamily({
         const {dataGroups} = get(ScorecardViewState('dataSelection'))
         const {averageColumn} = get(ScorecardViewState('options'))
         const {filteredOrgUnits, childrenOrgUnits} = get(ScorecardOrgUnitState(orgUnits))
+        const {width: screenWidth} = get(ScreenDimensionState)
+        const dataColSpan = getColSpanDataGroups(periods, dataGroups, averageColumn)
+        const dataNameColumnWidth = getNameCellWidth(screenWidth, dataColSpan)
+        const orgUnitColSpan = getColSpanWithOrgUnit(periods, [...filteredOrgUnits, ...childrenOrgUnits], averageColumn)
+        const orgUnitNameColumnWidth = getNameCellWidth(screenWidth, orgUnitColSpan)
 
         return orientation === 'orgUnitsVsData' ? {
             rows: 'orgUnits',
@@ -206,7 +213,9 @@ const ScorecardTableConfigState = selectorFamily({
                 'periods'
             ],
             tableWidth: getTableWidthWithDataGroups(periods, dataGroups, averageColumn),
-            colSpan: getColSpanDataGroups(periods, dataGroups, averageColumn)
+            colSpan: dataColSpan,
+            nameColumnWidth: dataNameColumnWidth
+
         } : {
             rows: 'data',
             columns: [
@@ -214,7 +223,8 @@ const ScorecardTableConfigState = selectorFamily({
                 'periods'
             ],
             tableWidth: getTableWidthWithOrgUnit(periods, [...filteredOrgUnits, ...childrenOrgUnits], averageColumn),
-            colSpan: getColSpanWithOrgUnit(periods, [...filteredOrgUnits, ...childrenOrgUnits], averageColumn)
+            colSpan: orgUnitColSpan,
+            nameColumnWidth: orgUnitNameColumnWidth
         }
     }
 })
@@ -355,7 +365,6 @@ const ScorecardDataLoadingState = atom({
         }
     ]
 })
-
 
 const ScorecardTableOverallAverage = atomFamily({
     key: 'scorecard-table-overall-average',

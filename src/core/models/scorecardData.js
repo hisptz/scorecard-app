@@ -326,7 +326,7 @@ export default class ScorecardDataEngine {
     }
 
     reset() {
-        this._dataEntities = {}
+        //TODO: Implement reset function
     }
 
     _getScorecardData(selections) {
