@@ -1,0 +1,35 @@
+import * as _ from 'lodash';
+
+export function getChartAxisItems(
+    analyticsObject,
+    axisTypeArray,
+    isCategory
+){
+ let items = [];
+ const metadataNames =analyticsObject.metadata.names;
+ axisTypeArray.forEach((axisType, axisIndex) => {
+    const itemKeys = analyticsObject.metaData[axisType];
+    if (itemKeys) {
+      if (axisIndex > 0) {
+        const availableItems = _.assign([], items);
+        items = [];
+        itemKeys.forEach(itemKey => {
+          availableItems.forEach(item => {
+            items.push({
+              id: item.id + '_' + itemKey,
+              name: item.name + '_' + metadataNames[itemKey].trim()
+            });
+          });
+        });
+      } else {
+        items = _.map(itemKeys, itemKey => {
+          return {
+            id: itemKey,
+            name: metadataNames[itemKey].trim()
+          };
+        });
+      }
+    }
+  });
+  return items;
+}
