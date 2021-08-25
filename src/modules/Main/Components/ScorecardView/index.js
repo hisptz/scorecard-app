@@ -44,8 +44,6 @@ export default function ScorecardView() {
         return <AccessDeniedPage accessType={"view"}/>
     }
 
-    console.log(downloadRef)
-
     return (
         <Suspense fallback={<FullPageLoader/>}>
             {loading && <Layer level={layers.blocking} translucent>

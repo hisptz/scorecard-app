@@ -23,6 +23,7 @@ import ScorecardOptions from "../models/scorecardOptions";
 import {EngineState} from "./engine";
 import {OrgUnitChildren} from "./orgUnit";
 import {PeriodResolverState} from "./period";
+import {SystemSettingsState} from "./system";
 import {UserState} from "./user";
 import {
     getUserAuthority,
@@ -158,6 +159,7 @@ const ScorecardViewState = atomFamily({
         key: 'scorecardViewStateSelector',
         get: (key) => ({get}) => {
             const scorecardId = get(ScorecardIdState)
+            const {calendar} = get(SystemSettingsState)
             const configState = get(ScorecardConfState(scorecardId))
             if (key === 'tableSort') {
                 return {
@@ -167,7 +169,7 @@ const ScorecardViewState = atomFamily({
             }
             if (key === 'periodSelection') {
                 const {periodType} = configState;
-                const currentPeriod = new Period()
+                const currentPeriod = new Period().setCalendar(calendar)
                 if (periodType) {
                     currentPeriod.setType(periodType)
                 }
