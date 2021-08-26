@@ -7,8 +7,10 @@ import {OrgUnitState} from "../../../state/orgUnit";
 
 export default function OrgUnitSelector() {
     const [orgUnitSelection, onChange] = useRecoilState(OrgUnitState)
-    const {orgUnits} = orgUnitSelection;
+    const {orgUnits} = orgUnitSelection ?? {};
     const [selectorOpen, setSelectorOpen] = useState(false);
+
+
     return (
         <div className="pr-16" style={{width: "30%"}}>
             <Field label={i18n.t("Organisation Unit(s)")}>

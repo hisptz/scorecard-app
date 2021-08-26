@@ -39,110 +39,50 @@ export default function ParentOrgUnitRow({orgUnit, overallAverage}) {
 
     useEffect(subscribeToAverage, [orgUnit, loading, id])
 
+
+    const Component  = ((emptyRows || !isEmpty) &&
+        <DataTableRow key={id} bordered>
+            <DataTableCell className='jsx-1369417008' fixed left={"0"} width={"50px"}/>
+            <DataTableCell fixed left={"50px"} className="scorecard-org-unit-cell">
+                <Tooltip content={i18n.t('Drag to the column headers to change layout')}>
+                    <DroppableCell accept={[DraggableItems.DATA_COLUMN]}>
+                        <OrgUnitContainer orgUnit={orgUnit}/>
+                    </DroppableCell>
+                </Tooltip>
+            </DataTableCell>
+            {dataGroups?.map(({id: groupId, dataHolders}) =>
+                dataHolders?.map(({id: holderId, dataSources}) =>
+                    periods?.map((period) => (
+                        <td
+                            className="data-cell"
+                            align="center"
+                            key={`${groupId}-${holderId}-${period.id}`}
+                        >
+                            <DataContainer
+                                orgUnit={orgUnit}
+                                dataSources={dataSources}
+                                period={period}
+                            />
+                        </td>
+                    ))
+                )
+            )}
+            {
+                averageColumn &&
+                <AverageCell bold value={average}/>
+            }
+        </DataTableRow>
+    );
+
+
     if (averageDisplayType === AverageDisplayType.ALL) {
-        return ((emptyRows || !isEmpty) &&
-            <DataTableRow key={id} bordered>
-                <DataTableCell className='jsx-1369417008' fixed left={"0"} width={"50px"}/>
-                <DataTableCell fixed left={"50px"} className="scorecard-org-unit-cell">
-                    <Tooltip content={i18n.t('Drag to the column headers to change layout')}>
-                        <DroppableCell accept={[DraggableItems.DATA_COLUMN]}>
-                            <OrgUnitContainer orgUnit={orgUnit}/>
-                        </DroppableCell>
-                    </Tooltip>
-                </DataTableCell>
-                {dataGroups?.map(({id: groupId, dataHolders}) =>
-                    dataHolders?.map(({id: holderId, dataSources}) =>
-                        periods?.map(({id: periodId}) => (
-                            <td
-                                className="data-cell"
-                                align="center"
-                                key={`${groupId}-${holderId}-${periodId}`}
-                            >
-                                <DataContainer
-                                    orgUnitId={id}
-                                    dataSources={dataSources}
-                                    periodId={periodId}
-                                />
-                            </td>
-                        ))
-                    )
-                )}
-                {
-                    averageColumn &&
-                    <AverageCell bold value={average}/>
-                }
-            </DataTableRow>
-        );
+        return Component
     }
     if (averageDisplayType === AverageDisplayType.BELOW_AVERAGE && overallAverage > average) {
-        return ((emptyRows || !isEmpty) &&
-            <DataTableRow key={id} bordered>
-                <DataTableCell className='jsx-1369417008' fixed left={"0"} width={"50px"}/>
-                <DataTableCell fixed left={"50px"} className="scorecard-org-unit-cell">
-                    <Tooltip content={i18n.t('Drag to the column headers to change layout')}>
-                        <DroppableCell accept={[DraggableItems.DATA_COLUMN]}>
-                            <OrgUnitContainer orgUnit={orgUnit}/>
-                        </DroppableCell>
-                    </Tooltip>
-                </DataTableCell>
-                {dataGroups?.map(({id: groupId, dataHolders}) =>
-                    dataHolders?.map(({id: holderId, dataSources}) =>
-                        periods?.map(({id: periodId}) => (
-                            <td
-                                className="data-cell"
-                                align="center"
-                                key={`${groupId}-${holderId}-${periodId}`}
-                            >
-                                <DataContainer
-                                    orgUnitId={id}
-                                    dataSources={dataSources}
-                                    periodId={periodId}
-                                />
-                            </td>
-                        ))
-                    )
-                )}
-                {
-                    averageColumn &&
-                    <AverageCell bold value={average}/>
-                }
-            </DataTableRow>
-        );
+        return Component
     }
     if (averageDisplayType === AverageDisplayType.ABOVE_AVERAGE && overallAverage <= average) {
-        return ((emptyRows || !isEmpty) &&
-            <DataTableRow key={id} bordered>
-                <DataTableCell className={'jsx-1369417008'} fixed left={"0"} width={"50px"}/>
-                <DataTableCell fixed left={"50px"} className="scorecard-org-unit-cell">
-                    <Tooltip content={i18n.t('Drag to the column headers to change layout')}>
-                        <DroppableCell accept={[DraggableItems.DATA_COLUMN]}>
-                            <OrgUnitContainer orgUnit={orgUnit}/>
-                        </DroppableCell>
-                    </Tooltip>
-                </DataTableCell>
-                {dataGroups?.map(({id: groupId, dataHolders}) =>
-                    dataHolders?.map(({id: holderId, dataSources}) =>
-                        periods?.map(({id: periodId}) => (
-                            <td
-                                className="data-cell"
-                                align="center"
-                                key={`${groupId}-${holderId}-${periodId}`}
-                            >
-                                <DataContainer
-                                    orgUnitId={id}
-                                    dataSources={dataSources}
-                                    periodId={periodId}
-                                />
-                            </td>
-                        ))
-                    )
-                )}
-                {
-                    averageColumn &&
-                    <AverageCell bold value={average}/>
-                }
-            </DataTableRow>
-        );
+        return Component
     }
 
     return null

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-08-23T07:43:03.018Z\n"
-"PO-Revision-Date: 2021-08-23T07:43:03.031Z\n"
+"POT-Creation-Date: 2021-08-25T13:12:59.086Z\n"
+"PO-Revision-Date: 2021-08-25T13:12:59.086Z\n"
 
 msgid "Data"
 msgstr "Data"
@@ -16,6 +16,12 @@ msgstr "Organisation Unit"
 
 msgid "Period"
 msgstr "Period"
+
+msgid "Relative Periods"
+msgstr "Relative Periods"
+
+msgid "Fixed Periods"
+msgstr "Fixed Periods"
 
 msgid "Welcome to Scorecard App!"
 msgstr "Welcome to Scorecard App!"
@@ -316,6 +322,9 @@ msgstr "Select Level"
 
 msgid "Select Group"
 msgstr "Select Group"
+
+msgid "Year"
+msgstr "Year"
 
 msgid "Visibility"
 msgstr "Visibility"

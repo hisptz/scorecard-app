@@ -1,8 +1,7 @@
 import React, {Suspense} from "react";
 import {HashRouter, Redirect, Route, Switch} from 'react-router-dom'
 import {useRecoilValue} from "recoil";
-import useSetDataEngine from "../../core/hooks/useSetDataEngine";
-import {ScreenDimensionState} from "../../core/state/window";
+import {SystemSettingsState} from "../../core/state/system";
 import {FullPageLoader} from "../../shared/Components/Loaders";
 import Main from "../Main";
 import ScoreCardManagement from "../Main/Components/ScoreCardManagement";
@@ -33,8 +32,7 @@ const pages = [
 ]
 
 export default function Router() {
-    useSetDataEngine();
-    useRecoilValue(ScreenDimensionState)
+    useRecoilValue(SystemSettingsState)
     return (
         <HashRouter basename='/'>
             <Switch>

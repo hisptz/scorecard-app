@@ -17,7 +17,6 @@ export default function GroupsHeaderRow({nested, orgUnits}) {
     const [searchValue, setSearchValue] = useState(orgUnitKeyword);
     const {nameColumnWidth} = useRecoilValue(ScorecardTableConfigState(orgUnits))
     const onOrgUnitSearch = useRef(debounce(setOrgUnitKeyword, 1000, {trailing: true, leading: false}))
-    console.log(nameColumnWidth)
     useEffect(() => {
         onOrgUnitSearch.current(searchValue)
     }, [searchValue])
