@@ -1,7 +1,9 @@
 import {CenteredContent, CircularLoader, Layer, layers} from '@dhis2/ui'
+import {isEmpty} from 'lodash'
 import React, {Suspense, useEffect, useRef} from "react";
 import {useParams} from "react-router-dom";
 import {useRecoilCallback, useRecoilValue, useSetRecoilState} from "recoil";
+import {PeriodResolverState} from "../../../../core/state/period";
 import {
     scorecardDataEngine,
     ScorecardDataLoadingState,
@@ -12,11 +14,13 @@ import {
 import {UserAuthorityOnScorecard} from "../../../../core/state/user";
 import {FullPageLoader} from "../../../../shared/Components/Loaders";
 import AccessDeniedPage from "./Components/AccessDeniedPage";
+import EmptyOrgUnitsOrPeriod from "./Components/EmptyOrgUnitsOrPeriod";
 import HighlightedIndicatorsView from "./Components/HighlightedIndicatorsView";
 import ScorecardHeader from "./Components/ScorecardHeader";
 import ScorecardLegendsView from "./Components/ScorecardLegendsView";
 import ScorecardTable from "./Components/ScorecardTable";
 import ScorecardViewHeader from "./Components/ScorecardViewHeader";
+
 
 export default function ScorecardView() {
     const {id: scorecardId} = useParams();
@@ -25,6 +29,7 @@ export default function ScorecardView() {
     const {read: access} = useRecoilValue(UserAuthorityOnScorecard(scorecardId))
     const loading = useRecoilValue(ScorecardDataLoadingState)
     const downloadRef = useRef()
+    const periods = useRecoilValue(PeriodResolverState)
 
     const reset = useRecoilCallback(({reset}) => () => {
         reset(ScorecardViewState("orgUnitSelection"))
@@ -57,11 +62,13 @@ export default function ScorecardView() {
                 <ScorecardLegendsView/>
                 <HighlightedIndicatorsView/>
                 <div className="column align-items-center pt-16 flex-1">
-                    <Suspense fallback={<FullPageLoader/>}>
-                        <ScorecardTable
-                            nested={false}
-                            orgUnits={orgUnits} />
-                    </Suspense>
+                    {
+                        (!isEmpty(orgUnits) && !isEmpty(periods) ) ?  <Suspense fallback={<FullPageLoader/>}>
+                            <ScorecardTable
+                                nested={false}
+                                orgUnits={orgUnits}/>
+                        </Suspense>: <EmptyOrgUnitsOrPeriod/>
+                    }
                 </div>
             </div>
         </Suspense>

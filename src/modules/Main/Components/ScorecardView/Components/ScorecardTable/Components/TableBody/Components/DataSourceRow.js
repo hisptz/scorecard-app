@@ -42,17 +42,17 @@ export default function DataSourceRow({orgUnits, dataSources, overallAverage}) {
             </DroppableCell>
         </DataTableCell>
         {
-            ([...filteredOrgUnits, ...childrenOrgUnits])?.map(({id}) => (
-                periods?.map(({id: periodId}) => (
+            ([...filteredOrgUnits, ...childrenOrgUnits])?.map((orgUnit) => (
+                periods?.map((period) => (
                         <td
                             className="data-cell"
                             align="center"
-                            key={`${id}-${head(dataSources)?.id}-${periodId}`}
+                            key={`${orgUnit?.id}-${head(dataSources)?.id}-${period?.id}`}
                         >
                             <DataContainer
-                                orgUnitId={id}
+                                orgUnit={orgUnit}
                                 dataSources={dataSources}
-                                periodId={periodId}
+                                period={period}
                             />
                         </td>
                     )

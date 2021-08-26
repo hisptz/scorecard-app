@@ -28,7 +28,7 @@ export default function ChildOrgUnitRow({orgUnit, expandedOrgUnit, onExpand, ove
     const loading = useRecoilValue(ScorecardDataLoadingState)
     const periods =
         useRecoilValue(PeriodResolverState) ?? [];
-    
+
     function subscribe() {
         if (loading !== undefined && !loading) {
             const rowAverage = scorecardDataEngine.getOrgUnitAverage(id).subscribe(setAverage);
@@ -76,16 +76,17 @@ export default function ChildOrgUnitRow({orgUnit, expandedOrgUnit, onExpand, ove
                 </DataTableCell>
                 {dataGroups?.map(({id: groupId, dataHolders}) =>
                     dataHolders?.map(({id: holderId, dataSources}) =>
-                        periods?.map(({id: periodId}) => (
+                        periods?.map((period) => (
                             <td
                                 className="data-cell"
                                 align="center"
-                                key={`${groupId}-${holderId}-${periodId}`}
+                                key={`${groupId}-${holderId}-${period.id}`}
                             >
+
                                 <DataContainer
-                                    orgUnitId={id}
+                                    orgUnit={orgUnit}
                                     dataSources={dataSources}
-                                    periodId={periodId}
+                                    period={period}
                                 />
                             </td>
                         ))
