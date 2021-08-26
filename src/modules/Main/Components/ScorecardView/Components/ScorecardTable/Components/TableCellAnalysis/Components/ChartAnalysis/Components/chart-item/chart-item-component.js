@@ -1,8 +1,9 @@
-import React from 'react';
-import { atom, useRecoilValue, } from 'recoil';
+import {Highcharts} from 'highcharts';
+import React,{useEffect} from 'react';
+import { atom, useRecoilState, useRecoilValue, useSetRecoilState, } from 'recoil';
 import { CHART_TYPES } from '../../../../../../../../../../../../core/constants/chart-types.constant';
+import { getCharObject } from '../../helper/get-chart-object.helper';
 import './chart-item-component.css';
-
 
 const chartTypesAtom = atom({
   key:'chartTypes-atom',
@@ -13,9 +14,69 @@ const showOptionsAtom = atom({
   default:false
 })
 
+const chartUpdateAtom = atom({
+  key:'chart-update-atom',
+  default:{
+    id:'',
+    type:''
+  }
+})
+
+const currentChartTypeAtom = atom({
+  key:'current-chart-type',
+  default:''
+})
+
 export default function ChartItemComponent(){
   const chartTypes =  useRecoilValue(chartTypesAtom)
   const showOptions =  useRecoilValue(showOptionsAtom)
+  const setChartUpdate = useSetRecoilState(chartUpdateAtom);
+  const [currentChartType,setCurrentChartType] = useRecoilState(currentChartTypeAtom);
+  let chart = '' ;
+
+console.log(showOptions);
+
+useEffect(() => {
+  drawChart({},{})
+
+}, [])
+
+
+ 
+function drawChart(analyticsObject, chartConfiguration){
+  if (chartConfiguration && analyticsObject) {
+     const chartObject = getCharObject(
+       analyticsObject,
+       chartConfiguration
+     );
+
+     if (chartObject) {
+       setTimeout(() => {
+        chart = Highcharts.chart(chartObject)
+       }, 20);
+     }
+   }
+ } 
+
+
+
+
+
+  function updateChartType(chartType,event){
+   event.stopPropagation();
+   console.log("button on click");
+   setCurrentChartType(chartType);
+
+   drawChart({},{
+    //  ...this.chartConfiguration,
+    // type:chartType
+   })
+
+   setChartUpdate({
+     id:Math.random(),
+     type:chartType.toUpperCase
+   });
+  }
 
 
 return (
@@ -35,11 +96,9 @@ return <li
 key ={"chart-type"+chartTypePosition}
  >
   <button 
-//    (click)="updateChartType(chartType.type, $event)" 
+onClick={()=>updateChartType(chartType.type,event)}
    title={chartType.description}
-    // [ngClass]="currentChartType == chartType.type ? 'active-chart-type' : ''"
-    // [disabled]="currentChartType == chartType.type"
-    className='active-chart-type'
+    className={currentChartType == chartType.type ? 'active-chart-type' :''}
     >
     <img 
     src={chartType.icon} className="chart-option-icon" alt=""
