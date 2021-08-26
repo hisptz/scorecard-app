@@ -18,7 +18,6 @@ import {LayoutState} from "./state/layout";
 import {OrgUnitState} from "./state/orgUnit";
 import {PeriodState} from "./state/period";
 
-
 const viewTypes = [
     {
         displayName: i18n.t('Table'),
