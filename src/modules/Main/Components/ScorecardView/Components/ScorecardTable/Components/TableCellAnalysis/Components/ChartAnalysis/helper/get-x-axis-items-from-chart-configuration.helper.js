@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
 
-export function getXAxisItemsFromChartConfiguration(
+export  function getXAxisItemsFromChartConfiguration(
     chartConfiguration
 )
 {

@@ -11,6 +11,16 @@ export function getInitialChartObject(
     analyticsObject,
     chartConfiguration
 ){
+    // console.log("data in chart object helper")
+    // console.log({
+    //     chart:getChartAttributeOptions(chartConfiguration),
+    //     title: getChartTitleObject(chartConfiguration),
+    //     subtitle:getChartSubtitleObject(chartConfiguration,analyticsObject),
+    //     credits:getChartCreditsOption(),
+    //     colors: getChartColors(),
+    //     plotOptions: getPlotOptions(chartConfiguration),
+    //     tooltip:getTooltipOptions(chartConfiguration),
+    // });
 return {
     chart:getChartAttributeOptions(chartConfiguration),
     title: getChartTitleObject(chartConfiguration),

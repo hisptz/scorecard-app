@@ -9,9 +9,9 @@ export function getAllowedChartType(chartType) {
         newChartType = 'line';
         break;
       default:
-        const splitedChartType = chartType.split('_');
-        newChartType =
-          splitedChartType.length > 1 ? splitedChartType[1] : splitedChartType[0];
+        // const splitedChartType = chartType.split('_');
+        // newChartType =
+        //   splitedChartType.length > 1 ? splitedChartType[1] : splitedChartType[0];
         break;
     }
     return newChartType;

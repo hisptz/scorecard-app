@@ -2,8 +2,10 @@ import {Highcharts} from 'highcharts';
 import React,{useEffect} from 'react';
 import { atom, useRecoilState, useRecoilValue, useSetRecoilState, } from 'recoil';
 import { CHART_TYPES } from '../../../../../../../../../../../../core/constants/chart-types.constant';
+import { DataState } from '../../../../state/data';
 import { getCharObject } from '../../helper/get-chart-object.helper';
 import './chart-item-component.css';
+
 
 const chartTypesAtom = atom({
   key:'chartTypes-atom',
@@ -32,30 +34,31 @@ export default function ChartItemComponent(){
   const showOptions =  useRecoilValue(showOptionsAtom)
   const setChartUpdate = useSetRecoilState(chartUpdateAtom);
   const [currentChartType,setCurrentChartType] = useRecoilState(currentChartTypeAtom);
+  const data = useRecoilValue(DataState);
+  
+
   let chart = '' ;
+  console.log(showOptions);
 
-console.log(showOptions);
-
-useEffect(() => {
-  drawChart({},{})
-
-}, [])
+  useEffect(() => {
+     drawChart(data['_data'],{})
+}, [data])
 
 
  
 function drawChart(analyticsObject, chartConfiguration){
-  if (chartConfiguration && analyticsObject) {
-     const chartObject = getCharObject(
-       analyticsObject,
-       chartConfiguration
-     );
+  // if (chartConfiguration && analyticsObject) {
+  //    const chartObject = getCharObject(
+  //      analyticsObject,
+  //      chartConfiguration
+  //    );
 
-     if (chartObject) {
-       setTimeout(() => {
-        chart = Highcharts.chart(chartObject)
-       }, 20);
-     }
-   }
+  //    if (chartObject) {
+  //      setTimeout(() => {
+  //       chart = Highcharts.chart(chartObject)
+  //      }, 20);
+  //    }
+  //  }
  } 
 
 
@@ -67,7 +70,7 @@ function drawChart(analyticsObject, chartConfiguration){
    console.log("button on click");
    setCurrentChartType(chartType);
 
-   drawChart({},{
+   drawChart(data['_data'],{
     //  ...this.chartConfiguration,
     // type:chartType
    })

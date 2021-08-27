@@ -1,14 +1,14 @@
 import * as _ from 'lodash';
 
-export function getChartAxisItems(
+export  function getChartAxisItems(
     analyticsObject,
     axisTypeArray,
     isCategory
 ){
  let items = [];
- const metadataNames =analyticsObject.metadata.names;
- axisTypeArray.forEach((axisType, axisIndex) => {
-    const itemKeys = analyticsObject.metaData[axisType];
+ const metadataNames = analyticsObject.metaData.names ;
+ axisTypeArray?.forEach((axisType, axisIndex) => {
+    const itemKeys = analyticsObject.metaData[axisType] ?? [];
     if (itemKeys) {
       if (axisIndex > 0) {
         const availableItems = _.assign([], items);
