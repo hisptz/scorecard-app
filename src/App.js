@@ -4,24 +4,30 @@ import {ErrorBoundary} from "react-error-boundary";
 import {RecoilRoot} from "recoil";
 import './media-queries.css'
 import "./App.css";
+import useInitApp from "./core/hooks/useInitApp";
+import {EngineState} from "./core/state/engine";
+import {ScreenDimensionState} from "./core/state/window";
 import Router from "./modules/Router";
+import FullPageError from "./shared/Components/Errors/FullPageError";
 import {FullPageLoader} from "./shared/Components/Loaders";
 import "./locales";
-import FullPageError from "./shared/Components/Errors/FullPageError";
-import {Fn} from "@iapps/function-analytics";
-import {useConfig} from "@dhis2/app-runtime";
+import {getWindowDimensions} from "./shared/utils/utils";
+
 
 const MyApp = () => {
-    const {baseUrl, apiVersion} = useConfig()
-    Fn.init({
-        baseUrl: `${baseUrl}/api/${apiVersion}/`,
-    });
+    const {engine} = useInitApp()
+
+    function initializeState({set}) {
+        set(ScreenDimensionState, getWindowDimensions())
+        set(EngineState, engine)
+    }
+
     return (
         <DataStoreProvider
             namespace={"hisptz-scorecard"}
             loadingComponent={<FullPageLoader/>}
         >
-            <RecoilRoot>
+            <RecoilRoot initializeState={initializeState}>
                 <ErrorBoundary FallbackComponent={FullPageError}>
                     <Suspense fallback={<FullPageLoader/>}>
                         <div className="main-container">

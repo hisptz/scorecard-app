@@ -169,7 +169,7 @@ export default function ScoreCardManagement() {
         [activeStep]
     );
 
-    if(!writeAccess){
+    if(!writeAccess && scorecardId){
         return <AccessDeniedPage accessType={"edit"} />
     }
 

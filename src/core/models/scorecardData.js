@@ -33,6 +33,8 @@ export default class ScorecardDataEngine {
             ScorecardDataEngine.instance = this;
         }
         return ScorecardDataEngine.instance;
+
+
     }
 
     setPeriodType(periodType) {
@@ -150,7 +152,6 @@ export default class ScorecardDataEngine {
         }))
     }
 
-
     sortOrgUnitsByData({dataSource, periods = [], sortType}) {
         return this.dataEntities$.pipe(take(1), map(dataEntities => {
             if (sortType === TableSort.DEFAULT) {
@@ -188,7 +189,6 @@ export default class ScorecardDataEngine {
                 return ou === orgUnit && pe === period
             })
             const sortedOrgUnits = sortBy(toPairs(requiredDataEntities), [(value) => parseInt(last(value)?.current)])
-            console.log(sortedOrgUnits)
             if (sortType === TableSort.DESC) {
                 return sortedOrgUnits.reverse().map(([key]) => key?.split('_')[0])
             }
@@ -281,14 +281,16 @@ export default class ScorecardDataEngine {
     getOverallAverage(orgUnits) {
         return this.dataEntities$.pipe(
             map((dataEntities) => {
-                const selectedDataEntities = pickBy(dataEntities, (value, key) => {
-                    const [, ou,] = key.split('_')
-                    return orgUnits?.includes(ou)
-                })
-                const noOfDataEntities = Object.keys(selectedDataEntities).length
-                return reduce(selectedDataEntities, (result, value) => {
-                    return (result ?? 0) + (value.current / noOfDataEntities)
-                }, 0);
+                if (!isEmpty(dataEntities)) {
+                    const selectedDataEntities = pickBy(dataEntities, (value, key) => {
+                        const [, ou,] = key.split('_')
+                        return orgUnits?.includes(ou)
+                    })
+                    const noOfDataEntities = Object.keys(selectedDataEntities).length
+                    return reduce(selectedDataEntities, (result, value) => {
+                        return (result ?? 0) + (value.current / noOfDataEntities)
+                    }, 0);
+                }
             })
         );
     }
@@ -321,6 +323,10 @@ export default class ScorecardDataEngine {
             (this._selectedData.normalDataItems?.length > 0 ||
                 this._selectedData.customDataItems?.length > 0)
         );
+    }
+
+    reset() {
+        //TODO: Implement reset function
     }
 
     _getScorecardData(selections) {
@@ -411,7 +417,6 @@ export default class ScorecardDataEngine {
                     });
             },
             (totalErr, totalRes) => {
-                console.log({totalErr, totalRes})
                 this._loading$.next(false)
             }
         );

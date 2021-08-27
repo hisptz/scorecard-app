@@ -2,6 +2,14 @@ import {capitalize, flattenDeep, snakeCase, head, last} from "lodash";
 import ScorecardLegend from "../../core/models/scorecardLegend";
 
 
+export function getWindowDimensions() {
+    const {innerWidth: width, innerHeight: height} = window;
+    return {
+        width: width > 1366 ? width : 1366,
+        height: (height > 763 ? height : 763) - 48 //considering the appbar
+    };
+}
+
 export function getDataSourceShortName(name = '') {
     return snakeCase(name).split('_').map(s => capitalize(s)[0]).join('')
 

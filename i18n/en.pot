@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-08-23T07:43:03.018Z\n"
-"PO-Revision-Date: 2021-08-23T07:43:03.031Z\n"
+"POT-Creation-Date: 2021-08-26T07:30:27.366Z\n"
+"PO-Revision-Date: 2021-08-26T07:30:27.366Z\n"
 
 msgid "Data"
 msgstr "Data"
@@ -16,6 +16,12 @@ msgstr "Organisation Unit"
 
 msgid "Period"
 msgstr "Period"
+
+msgid "Relative Periods"
+msgstr "Relative Periods"
+
+msgid "Fixed Periods"
+msgstr "Fixed Periods"
 
 msgid "Welcome to Scorecard App!"
 msgstr "Welcome to Scorecard App!"
@@ -200,6 +206,9 @@ msgstr "Back to Home"
 msgid "Metadata"
 msgstr "Metadata"
 
+msgid "Select Organisation Units and Period to start"
+msgstr "Select Organisation Units and Period to start"
+
 msgid "Legends"
 msgstr "Legends"
 
@@ -209,11 +218,11 @@ msgstr "Increased from last period"
 msgid "Decreased from last period"
 msgstr "Decreased from last period"
 
-msgid "Drag to column headers to change layout"
-msgstr "Drag to column headers to change layout"
-
 msgid "Average"
 msgstr "Average"
+
+msgid "Drag to column headers to change layout"
+msgstr "Drag to column headers to change layout"
 
 msgid "There are no configured indicators for this scorecard"
 msgstr "There are no configured indicators for this scorecard"
@@ -316,6 +325,9 @@ msgstr "Select Level"
 
 msgid "Select Group"
 msgstr "Select Group"
+
+msgid "Year"
+msgstr "Year"
 
 msgid "Visibility"
 msgstr "Visibility"

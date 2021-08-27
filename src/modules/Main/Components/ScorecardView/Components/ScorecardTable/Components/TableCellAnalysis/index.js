@@ -4,8 +4,9 @@ import DescriptionIcon from '@material-ui/icons/Description';
 import ChartIcon from '@material-ui/icons/Equalizer';
 import TableChartIcon from '@material-ui/icons/TableChart';
 import PropTypes from 'prop-types'
-import React, {useEffect, useState,Suspense} from 'react'
+import React, {Suspense, useEffect, useState} from 'react'
 import {useRecoilCallback, useRecoilValueLoadable, useSetRecoilState} from "recoil";
+import OrgUnitSelection from "../../../../../../../../core/models/orgUnitSelection";
 import FullPageError from "../../../../../../../../shared/Components/Errors/FullPageError";
 import {FullPageLoader} from "../../../../../../../../shared/Components/Loaders";
 import ChartAnalysis from "./Components/ChartAnalysis";
@@ -38,26 +39,32 @@ const viewTypes = [
     },
 ]
 
-export default function TableCellAnalysis({onClose, dataHolder}) {
+export default function TableCellAnalysis({onClose, dataHolder, orgUnit, period}) {
     const dataState = useRecoilValueLoadable(DataState)
     const setDataSources = useSetRecoilState(DataSourceState)
     const [viewType, setViewType] = useState(viewTypes[0]);
     const dataSources = dataHolder?.dataSources;
     const SelectedView = viewType.component;
 
+    const setStates = useRecoilCallback(({set}) => () => {
+        set(DataSourceState, dataSources)
+        set(OrgUnitState, new OrgUnitSelection({orgUnits: [orgUnit]}))
+        set(PeriodState, {periods: [period]})
+    }, [dataSources, orgUnit, period])
+
     const resetStates = useRecoilCallback(({reset}) => () => {
         reset(OrgUnitState)
         reset(PeriodState)
         reset(LayoutState)
         reset(DataSourceState)
-    },[])
+    }, [])
 
     useEffect(() => {
-        setDataSources(dataSources)
+        setStates()
         return () => {
             resetStates()
         };
-    }, [dataSources, resetStates, setDataSources]);
+    }, [dataSources, resetStates, setDataSources, setStates]);
 
     return (
         <Modal className='large-modal' position='middle' onClose={onClose} large>
@@ -69,23 +76,23 @@ export default function TableCellAnalysis({onClose, dataHolder}) {
             <ModalContent>
                 <DimensionsSelector/>
                 <Suspense fallback={<div>Loading...</div>}>
-                   <div style={{
-                       maxHeight: '45vh' ,
-                       flex: 1,
-                       overflow: 'auto',
-                       margin: '16px 0'
-                   }}>
-                       {
-                           dataState.state === 'hasError' && <FullPageError error={dataState.contents}/>
-                       }
-                       {
-                           dataState.state === 'loading' && <FullPageLoader/>
-                       }
-                       {
-                           dataState.state === 'hasValue' && <SelectedView/>
-                       }
-                   </div>
-               </Suspense>
+                    <div style={{
+                        maxHeight: '45vh',
+                        flex: 1,
+                        overflow: 'auto',
+                        margin: '16px 0'
+                    }}>
+                        {
+                            dataState.state === 'hasError' && <FullPageError error={dataState.contents}/>
+                        }
+                        {
+                            dataState.state === 'loading' && <FullPageLoader/>
+                        }
+                        {
+                            dataState.state === 'hasValue' && <SelectedView/>
+                        }
+                    </div>
+                </Suspense>
 
             </ModalContent>
             <ModalActions>
@@ -109,5 +116,7 @@ export default function TableCellAnalysis({onClose, dataHolder}) {
 
 TableCellAnalysis.propTypes = {
     dataHolder: PropTypes.object.isRequired,
+    orgUnit: PropTypes.object.isRequired,
+    period: PropTypes.object.isRequired,
     onClose: PropTypes.func.isRequired
 };

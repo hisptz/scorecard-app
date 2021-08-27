@@ -6,25 +6,28 @@ import TableCellAnalysis from "../TableCellAnalysis";
 import {LinkedDataCell, SingleDataCell} from "./Components/DataCells";
 import LoadingCell from "./Components/LoadingCell";
 
-export default function DataContainer({dataSources, orgUnitId, periodId}) {
+
+export default function DataContainer({dataSources, orgUnit, period}) {
+    const {id: orgUnitId} = orgUnit ?? {}
+    const {id: periodId} = period ?? {}
+
     const [analysisOpen, setAnalysisOpen] = useState(false);
-    const [loading, setLoading] = useState();
     const [topData, setTopData] = useState();
     const [bottomData, setBottomData] = useState();
     const [top, bottom] = dataSources ?? [];
     const {color: topColor} = getLegend(topData?.current, top?.legends) ?? {};
     const {color: bottomColor} = getLegend(bottomData?.current, bottom?.legends) ?? {};
 
+    const loading = false
+
     const topKey = `${top.id}_${orgUnitId}_${periodId}`
     const bottomKey = `${bottom?.id}_${orgUnitId}_${periodId}`
 
     useEffect(() => {
-        setLoading(true)
         const topSub = scorecardDataEngine
             .get(topKey)
             .subscribe((data) => {
                 setTopData(data)
-                setLoading(false)
             });
         const bottomSub = scorecardDataEngine
             .get(bottomKey)
@@ -52,7 +55,7 @@ export default function DataContainer({dataSources, orgUnitId, periodId}) {
         </div>
         {
             analysisOpen &&
-            <TableCellAnalysis dataHolder={{dataSources}} onClose={() => {
+            <TableCellAnalysis orgUnit={orgUnit} period={period} dataHolder={{dataSources}} onClose={() => {
                 setAnalysisOpen(false)
             }}/>
         }
@@ -60,7 +63,7 @@ export default function DataContainer({dataSources, orgUnitId, periodId}) {
 }
 
 DataContainer.propTypes = {
-    dataSources: PropTypes.array,
-    orgUnitId: PropTypes.string,
-    periodId: PropTypes.string
+    dataSources: PropTypes.array.isRequired,
+    orgUnit: PropTypes.object.isRequired,
+    period: PropTypes.object.isRequired
 };

@@ -4,6 +4,7 @@ import {atom, atomFamily, selector, selectorFamily} from "recoil";
 import {
     getColSpanDataGroups,
     getColSpanWithOrgUnit,
+    getNameCellWidth,
     getTableWidthWithDataGroups,
     getTableWidthWithOrgUnit
 } from "../../modules/Main/Components/ScorecardView/Components/ScorecardTable/services/utils";
@@ -22,6 +23,7 @@ import ScorecardOptions from "../models/scorecardOptions";
 import {EngineState} from "./engine";
 import {OrgUnitChildren} from "./orgUnit";
 import {PeriodResolverState} from "./period";
+import {SystemSettingsState} from "./system";
 import {UserState} from "./user";
 import {
     getUserAuthority,
@@ -30,6 +32,7 @@ import {
     sortOrgUnitsBasedOnData,
     sortOrgUnitsBasedOnNames
 } from "./utils";
+import {ScreenDimensionState} from "./window";
 
 const defaultValue = {
     legendDefinitions: [
@@ -156,6 +159,7 @@ const ScorecardViewState = atomFamily({
         key: 'scorecardViewStateSelector',
         get: (key) => ({get}) => {
             const scorecardId = get(ScorecardIdState)
+            const {calendar} = get(SystemSettingsState)
             const configState = get(ScorecardConfState(scorecardId))
             if (key === 'tableSort') {
                 return {
@@ -165,7 +169,7 @@ const ScorecardViewState = atomFamily({
             }
             if (key === 'periodSelection') {
                 const {periodType} = configState;
-                const currentPeriod = new Period()
+                const currentPeriod = new Period().setCalendar(calendar)
                 if (periodType) {
                     currentPeriod.setType(periodType)
                 }
@@ -197,6 +201,11 @@ const ScorecardTableConfigState = selectorFamily({
         const {dataGroups} = get(ScorecardViewState('dataSelection'))
         const {averageColumn} = get(ScorecardViewState('options'))
         const {filteredOrgUnits, childrenOrgUnits} = get(ScorecardOrgUnitState(orgUnits))
+        const {width: screenWidth} = get(ScreenDimensionState)
+        const dataColSpan = getColSpanDataGroups(periods, dataGroups, averageColumn)
+        const dataNameColumnWidth = getNameCellWidth(screenWidth, dataColSpan)
+        const orgUnitColSpan = getColSpanWithOrgUnit(periods, [...filteredOrgUnits, ...childrenOrgUnits], averageColumn)
+        const orgUnitNameColumnWidth = getNameCellWidth(screenWidth, orgUnitColSpan)
 
         return orientation === 'orgUnitsVsData' ? {
             rows: 'orgUnits',
@@ -206,7 +215,9 @@ const ScorecardTableConfigState = selectorFamily({
                 'periods'
             ],
             tableWidth: getTableWidthWithDataGroups(periods, dataGroups, averageColumn),
-            colSpan: getColSpanDataGroups(periods, dataGroups, averageColumn)
+            colSpan: dataColSpan,
+            nameColumnWidth: dataNameColumnWidth
+
         } : {
             rows: 'data',
             columns: [
@@ -214,7 +225,8 @@ const ScorecardTableConfigState = selectorFamily({
                 'periods'
             ],
             tableWidth: getTableWidthWithOrgUnit(periods, [...filteredOrgUnits, ...childrenOrgUnits], averageColumn),
-            colSpan: getColSpanWithOrgUnit(periods, [...filteredOrgUnits, ...childrenOrgUnits], averageColumn)
+            colSpan: orgUnitColSpan,
+            nameColumnWidth: orgUnitNameColumnWidth
         }
     }
 })
@@ -234,7 +246,6 @@ const ScorecardOrgUnitState = selectorFamily({
             if (orientation === Orientation.ORG_UNIT_VS_DATA) {
                 if (dataSort.type === 'period') {
                     const [dx, pe] = dataSort.name?.split('-');
-                    console.log('this?')
                     scorecardDataEngine.sortOrgUnitsByDataAndPeriod({
                         dataSource: dx,
                         period: pe,
@@ -320,7 +331,6 @@ const ScorecardDataSourceState = selector({
                 }
                 if (dataSort.type === 'period') {
                     const [ou, pe] = dataSort.name.split('-')
-                    console.log({ou, pe})
                     scorecardDataEngine.sortDataSourceByOrgUnitAndPeriod({
                         period: pe,
                         orgUnit: ou,
@@ -348,19 +358,27 @@ const ScorecardDataLoadingState = atom({
             if (trigger === 'get') {
                 setSelf(true)
                 const subscription = scorecardDataEngine.loading$.subscribe(setSelf)
-                return () => subscription.unsubscribe();
+                return () => {
+                    if (subscription) {
+                        subscription.unsubscribe();
+                    }
+                }
             }
         }
     ]
 })
-
 
 const ScorecardTableOverallAverage = atomFamily({
     key: 'scorecard-table-overall-average',
     default: null,
     effects_UNSTABLE: (orgUnits) => [
         ({setSelf}) => {
-            scorecardDataEngine.getOverallAverage(orgUnits).subscribe(setSelf)
+            const subscription = scorecardDataEngine.getOverallAverage(orgUnits).subscribe(setSelf)
+            return () => {
+                if (subscription) {
+                    subscription.unsubscribe()
+                }
+            }
         }
     ]
 })

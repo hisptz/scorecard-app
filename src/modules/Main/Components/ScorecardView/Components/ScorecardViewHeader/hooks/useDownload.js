@@ -1,5 +1,6 @@
 import {useAlert} from "@dhis2/app-runtime";
 import {useEffect, useMemo, useState} from "react";
+import {useReactToPrint} from "react-to-print";
 import {useRecoilValue} from "recoil";
 import {DownloadTypes} from "../../../../../../../core/constants/download";
 import {PeriodResolverState} from "../../../../../../../core/state/period";
@@ -10,10 +11,10 @@ import {
     ScorecardOrgUnitState,
     ScorecardViewState
 } from "../../../../../../../core/state/scorecard";
-import {downloadALMAData, downloadALMAMeta, downloadCSV, downloadExcel, downloadPDF} from "../services/download";
+import {downloadALMAData, downloadALMAMeta, downloadCSV, downloadExcel} from "../services/download";
 
 
-export default function useDownload() {
+export default function useDownload(downloadRef) {
     const title = useRecoilValue(ScorecardViewState('title'))
     const {orgUnits} = useRecoilValue(ScorecardViewState('orgUnitSelection'))
     const {filteredOrgUnits, childrenOrgUnits} = useRecoilValue(ScorecardOrgUnitState(orgUnits))
@@ -23,11 +24,14 @@ export default function useDownload() {
     const loading = useRecoilValue(ScorecardDataLoadingState)
     const [data, setData] = useState();
     const {show} = useAlert(({message}) => message, ({type}) => ({...type, duration: 3000}))
+    const handlePDFDownload = useReactToPrint({
+        content: () => downloadRef?.current,
+    })
 
     function subscribe() {
         if (loading !== undefined && !loading) {
             const subscription = scorecardDataEngine.getAllOrgUnitData(allOrgUnits?.map(({id}) => id)).subscribe(setData);
-            return subscription.unsubscribe
+            return () => subscription.unsubscribe();
         }
     }
 
@@ -41,7 +45,7 @@ export default function useDownload() {
                 case DownloadTypes.CSV:
                     return downloadCSV({periods, data, orgUnits: allOrgUnits, dataHolders, title})
                 case DownloadTypes.PDF:
-                    return downloadPDF({periods, data, orgUnits: allOrgUnits, dataHolders, title})
+                    return handlePDFDownload()
                 case 'ALMAData':
                     return downloadALMAData({periods, data, orgUnits, dataHolders, title})
                 case 'ALMAMeta':

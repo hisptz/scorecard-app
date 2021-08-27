@@ -36,7 +36,7 @@ export default function AverageDataContainer({period, dataSources, orgUnit, orgU
         }
     }
 
-    useEffect(subscribe, [loading, dataSources, orgUnit, period])
+    useEffect(subscribe, [loading, dataSources, orgUnit, period, childrenOrgUnits, filteredOrgUnits])
 
     return (
         <AverageCell bold value={average}/>
