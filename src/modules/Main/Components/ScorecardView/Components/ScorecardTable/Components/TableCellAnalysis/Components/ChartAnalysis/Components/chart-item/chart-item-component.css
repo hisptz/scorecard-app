@@ -56,7 +56,6 @@
   .active-chart-type {
     background-color: #f1f1f1 !important;
     cursor: not-allowed !important;
-    height: 900px;
   }
   
   .chart-block {

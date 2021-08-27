@@ -1,17 +1,5 @@
 {
-  "todo": [
-    {
-      "assignedTo": {
-        "name": "Danford Kija"
-      },
-      "category": "Chart Analytics",
-      "creation_time": "2021-08-27T09:40:47.412Z",
-      "id": "6",
-      "prio": 1,
-      "references": [],
-      "title": "Download graphs"
-    }
-  ],
+  "todo": [],
   "in-progress": [
     {
       "assignedTo": {
@@ -27,17 +15,6 @@
       "prio": 1,
       "references": [],
       "title": "add events into graphs as shown"
-    },
-    {
-      "assignedTo": {
-        "name": "Danford Kija"
-      },
-      "category": "Chart Analytics",
-      "creation_time": "2021-08-26T14:42:44.074Z",
-      "id": "2",
-      "prio": 1,
-      "references": [],
-      "title": "ChartList component pass configurations"
     },
     {
       "assignedTo": {
@@ -78,6 +55,17 @@
         "name": "Danford Kija"
       },
       "category": "Chart Analytics",
+      "creation_time": "2021-08-27T09:40:47.412Z",
+      "id": "6",
+      "prio": 1,
+      "references": [],
+      "title": "Download graphs"
+    },
+    {
+      "assignedTo": {
+        "name": "Danford Kija"
+      },
+      "category": "Chart Analytics",
       "creation_time": "2021-08-27T03:37:58.639Z",
       "description": {
         "content": "1. inspect chart object as output in draw fx for HIGHCHART.chart(),check and know how to intergrate it into chart item\n",
@@ -87,6 +75,17 @@
       "prio": 1,
       "references": [],
       "title": "Inspect chart object in draw fx"
+    },
+    {
+      "assignedTo": {
+        "name": "Danford Kija"
+      },
+      "category": "Chart Analytics",
+      "creation_time": "2021-08-26T14:42:44.074Z",
+      "id": "2",
+      "prio": 1,
+      "references": [],
+      "title": "ChartList component pass configurations"
     }
   ]
 }

@@ -11,8 +11,7 @@ import { getSpiderWebChartObject } from './get-spider-web-chart-object.helper';
 
 export function getCharObject(incommingAnalyticObject,chartConfiguration){
 
-console.log("incomming AnalyticObject");
-console.log(incommingAnalyticObject);
+  
     const analyticsObject = getSanitizedanalyticsBasedOnConfiguration(
         incommingAnalyticObject,
         chartConfiguration,

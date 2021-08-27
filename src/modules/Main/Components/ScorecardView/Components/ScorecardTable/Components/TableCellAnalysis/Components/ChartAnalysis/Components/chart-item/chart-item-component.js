@@ -29,7 +29,7 @@ const chartUpdateAtom = atom({
 
 const currentChartTypeAtom = atom({
   key:'current-chart-type',
-  default:''
+  default:'bar'
 })
 
 export default function ChartItemComponent({chartHeight}){
@@ -44,7 +44,7 @@ export default function ChartItemComponent({chartHeight}){
 
   useEffect(() => {
      drawChart(data['_data'],{})
-}, [data])
+}, [data,currentChartType])
 
 
  
@@ -56,7 +56,7 @@ function drawChart(analyticsObject, chartConfiguration){
     //  );
   const  chartObject = {
       chart: {
-        type: 'column',
+        type: currentChartType,
         renderTo: 'atmospheric-composition'
       },
       title: {
@@ -122,7 +122,8 @@ function drawChart(analyticsObject, chartConfiguration){
   function updateChartType(chartType,event){
    event.stopPropagation();
    setCurrentChartType(chartType);
-
+console.log("update chart type");
+console.log(chartType);
    drawChart(data['_data'],{
     //  ...this.chartConfiguration,
     // type:chartType
@@ -135,10 +136,10 @@ function drawChart(analyticsObject, chartConfiguration){
   }
 
 return (
-    <div className="chart-item-container">
+    <div className="chart-item-container" style={{ width:'100%'}}>
   <div 
   id="renderId" className="chart-block" 
-  style={{height:"calc("+chartHeight+"px-20px"}}
+  style={{height:"calc("+chartHeight+"px-20px", width:'100%'}}
   ></div>
 
   <ul className="chart-type-list animated fadeInRight" 
@@ -153,7 +154,7 @@ key ={"chart-type"+chartTypePosition}
   <button 
 onClick={(e)=>updateChartType(chartType.type,e)}
    title={chartType.description}
-    className={currentChartType == chartType.type ? 'active-chart-type' :'active-chart-type'}
+    className={currentChartType == chartType.type ? 'active-chart-type' :''}
     >
     <img 
     src={chartType.icon} className="chart-option-icon" alt=""

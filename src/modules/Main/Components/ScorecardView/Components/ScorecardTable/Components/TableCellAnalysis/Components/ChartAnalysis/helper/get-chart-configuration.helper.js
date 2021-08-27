@@ -51,7 +51,6 @@ export function getChartConfiguration(
    baseLineLabel: visualizationSettings.baseLineLabel
      ? visualizationSettings.baseLineLabel
      : '',
-
     legendAlign: 'bottom',
     categoryRotation: 0,
     reverseLegend: false,
