@@ -5,6 +5,19 @@
         "name": "Danford Kija"
       },
       "category": "Chart Analytics",
+      "creation_time": "2021-08-27T09:40:47.412Z",
+      "id": "6",
+      "prio": 1,
+      "references": [],
+      "title": "Download graphs"
+    }
+  ],
+  "in-progress": [
+    {
+      "assignedTo": {
+        "name": "Danford Kija"
+      },
+      "category": "Chart Analytics",
       "creation_time": "2021-08-27T03:39:07.767Z",
       "description": {
         "content": "1. add respective events into each graph item in graph lists",
@@ -31,21 +44,6 @@
         "name": "Danford Kija"
       },
       "category": "Chart Analytics",
-      "creation_time": "2021-08-27T03:37:58.639Z",
-      "description": {
-        "content": "1. inspect chart object as output in draw fx for HIGHCHART.chart(),check and know how to intergrate it into chart item\n",
-        "mime": "text/markdown"
-      },
-      "id": "3",
-      "prio": 1,
-      "references": [],
-      "title": "Inspect chart object in draw fx"
-    },
-    {
-      "assignedTo": {
-        "name": "Danford Kija"
-      },
-      "category": "Chart Analytics",
       "creation_time": "2021-08-26T14:41:06.554Z",
       "description": {
         "content": "ref: \n/home/dhis2/PROJECTS/HISP/@WORK/bottleneck-analysis-app/src/app/dashboard/modules/ngx-dhis2-visualization/store/effects/visualization-object.effects.ts\n\n1. Understand how data are passed into visualization layer.\n2. Understand chartlayers and relation with visualisation layer.",
@@ -57,7 +55,6 @@
       "title": "Visualization Layer"
     }
   ],
-  "in-progress": [],
   "testing": [
     {
       "assignedTo": {
@@ -75,5 +72,21 @@
       "title": "Table Analytics"
     }
   ],
-  "done": []
+  "done": [
+    {
+      "assignedTo": {
+        "name": "Danford Kija"
+      },
+      "category": "Chart Analytics",
+      "creation_time": "2021-08-27T03:37:58.639Z",
+      "description": {
+        "content": "1. inspect chart object as output in draw fx for HIGHCHART.chart(),check and know how to intergrate it into chart item\n",
+        "mime": "text/markdown"
+      },
+      "id": "3",
+      "prio": 1,
+      "references": [],
+      "title": "Inspect chart object in draw fx"
+    }
+  ]
 }

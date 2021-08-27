@@ -13,55 +13,55 @@ import stackedColumn from '../../resources/icons/stacked-column.png';
 
 export const CHART_TYPES = [
 
-      {
-        type: 'column',
-        description: 'Column chart',
-        icon: column
-      },
-      {
-        type: 'line',
-        description: 'Line chart',
-        icon: "line"
-      },
-      {
-        type: 'dotted',
-        description: 'Dotted chart',
-        icon: dotted
-      },
-      {
-        type: 'bar',
-        description: 'Bar chart',
-        icon: bar
-      },
-      {
-        type: 'area',
-        description: 'Area chart',
-        icon: area
-      },
-      {
-        type: 'pie',
-        description: 'Pie chart',
-        icon: pie
-      },
-      {
-        type: 'stacked_column',
-        description: 'stacked column chart',
-        icon: stackedColumn
-      },
-      {
-        type: 'stacked_bar',
-        description: 'stacked bar chart',
-        icon: stackedBar
-      },
+      // {
+      //   type: 'column',
+      //   description: 'Column chart',
+      //   icon: column
+      // },
+      // {
+      //   type: 'line',
+      //   description: 'Line chart',
+      //   icon: "line"
+      // },
+      // {
+      //   type: 'dotted',
+      //   description: 'Dotted chart',
+      //   icon: dotted
+      // },
+      // {
+      //   type: 'bar',
+      //   description: 'Bar chart',
+      //   icon: bar
+      // },
+      // {
+      //   type: 'area',
+      //   description: 'Area chart',
+      //   icon: area
+      // },
+      // {
+      //   type: 'pie',
+      //   description: 'Pie chart',
+      //   icon: pie
+      // },
+      // {
+      //   type: 'stacked_column',
+      //   description: 'stacked column chart',
+      //   icon: stackedColumn
+      // },
+      // {
+      //   type: 'stacked_bar',
+      //   description: 'stacked bar chart',
+      //   icon: stackedBar
+      // },
       {
         type: 'solidgauge',
         description: 'Gauge chart',
         icon: gauge
       },
-      {
-        type: 'radar',
-        description: 'Radar chart',
-        icon: radar
-      },
+      // {
+      //   type: 'radar',
+      //   description: 'Radar chart',
+      //   icon: radar
+      // },
 
 ]
