@@ -37,11 +37,11 @@ export const CHART_TYPES = [
         description: 'Area chart',
         icon: area
       },
-      {
-        type: 'pie',
-        description: 'Pie chart',
-        icon: pie
-      },
+      // {
+      //   type: 'pie',
+      //   description: 'Pie chart',
+      //   icon: pie
+      // },
       // {
       //   type: 'stacked_column',
       //   description: 'stacked column chart',
@@ -52,11 +52,11 @@ export const CHART_TYPES = [
       //   description: 'stacked bar chart',
       //   icon: stackedBar
       // },
-      {
-        type: 'solidgauge',
-        description: 'Gauge chart',
-        icon: gauge
-      },
+      // {
+      //   type: 'solidgauge',
+      //   description: 'Gauge chart',
+      //   icon: gauge
+      // },
       // {
       //   type: 'radar',
       //   description: 'Radar chart',

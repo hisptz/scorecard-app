@@ -16,9 +16,8 @@ export function getCharObject(incommingAnalyticObject,chartConfiguration){
         incommingAnalyticObject,
         chartConfiguration,
     )
-    let chartObjects;
-
-    const chartObject = getInitialChartObject(
+   
+    let chartObject = getInitialChartObject(
         analyticsObject,
         chartConfiguration
     )
@@ -29,14 +28,14 @@ export function getCharObject(incommingAnalyticObject,chartConfiguration){
 
   switch (chartConfiguration.type) {
     case 'radar':
-      chartObjects =getSpiderWebChartObject(
+      chartObject =getSpiderWebChartObject(
         chartObject,
         analyticsObject,
         chartConfiguration
       );
       break;
     case 'solidgauge':
-      chartObjects = getSolidGaugeChartObject(
+      chartObject = getSolidGaugeChartObject(
         chartObject,
         analyticsObject,
         chartConfiguration
@@ -45,28 +44,32 @@ export function getCharObject(incommingAnalyticObject,chartConfiguration){
     case 'gauge':
               const newChartConfiguration  =  _.clone(chartConfiguration);
       newChartConfiguration.type = 'solidgauge';
-      chartObjects = getSolidGaugeChartObject(
+      chartObject = getSolidGaugeChartObject(
         chartObject,
         analyticsObject,
         newChartConfiguration
       );
       break;
     case 'pie':
-      chartObjects = getPieChartObject(
+      chartObject = getPieChartObject(
         chartObject,
         analyticsObject,
         chartConfiguration
       );
-      break;
-    case 'combined':
       break;
     default:
-      chartObjects = getOtherChartObject(
+      // chartObject = getOtherChartObject(
+      //   chartObject,
+      //   analyticsObject,
+      //   chartConfiguration
+      // );
+      
+      return getSanitizedChartObject(getOtherChartObject(
         chartObject,
         analyticsObject,
         chartConfiguration
-      );
-      break;
+      ), chartConfiguration);
+    
   }
-  return getSanitizedChartObject(chartObjects, chartConfiguration);
+  return getSanitizedChartObject(chartObject, chartConfiguration);
 }

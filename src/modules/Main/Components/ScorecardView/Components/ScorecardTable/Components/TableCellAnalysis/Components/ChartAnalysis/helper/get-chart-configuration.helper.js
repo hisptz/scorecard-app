@@ -10,10 +10,15 @@ export function getChartConfiguration(
     customChartType,
     dataSelections
 ){
-        const chartType = customChartType !== ''
-        ? customChartType.toLowerCase()
-        : visualizationSettings.chartType ? visualizationSettings.type.toLowerCase()
-        : 'column';
+  // getChartConfiguration(
+  //   layer.config || {},
+  //   layer.id,
+  //   layer.layout,
+  //   this.interventionName,
+  //   '',
+  //   layer.dataSelections
+  // )
+        const chartType = customChartType ;
     
  return {
      renderId: renderId,
@@ -71,16 +76,20 @@ export function getChartConfiguration(
     multiAxisTypes: visualizationSettings.hasOwnProperty('selectedChartTypes')
       ? visualizationSettings.selectedChartTypes
       : [],
-    xAxisType: visualizationLayout.rows
-      ? _.map(visualizationLayout.rows, (row) => row.dimension)
-      : ['dx'],
-    yAxisType:
-      visualizationLayout.columns && visualizationLayout.columns[0]
-        ? visualizationLayout.columns[0].dimension
-        : 'ou',
-    zAxisType: visualizationLayout.filters
-      ? _.map(visualizationLayout.filters, (filter) => filter.dimension)
-      : ['pe'],
+    xAxisType: visualizationLayout.row,
+      // ? ['dx']
+      //_.map(visualizationLayout.row, (row) => row.dimension)
+      // : ['dx'],
+    yAxisType:visualizationLayout.column,
+      // visualizationLayout.column && visualizationLayout.column[0]
+      //   ? 'ou'
+      //   // visualizationLayout.column[0].dimension
+      //   : 'ou',
+    zAxisType: visualizationLayout.filter,
+    //  visualizationLayout.filter
+    //   ? ['pe']
+    //   //_.map(visualizationLayout.filter, (filter) => filter.dimension)
+    //   : ['pe'],
     dataSelections,
     }
 
