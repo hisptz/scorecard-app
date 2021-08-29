@@ -6,6 +6,7 @@
     list-style-type: none;
     margin: 0;
     padding: 0;
+    margin-top: 3%;
     position: absolute;
     top: 30px;
     bottom: 0;
@@ -14,7 +15,7 @@
     height: 95%;
     border-style: none;
     background-color: transparent;
-    z-index: 500;
+    z-index: 200;
   }
   
   .chart-type-list > li > button {

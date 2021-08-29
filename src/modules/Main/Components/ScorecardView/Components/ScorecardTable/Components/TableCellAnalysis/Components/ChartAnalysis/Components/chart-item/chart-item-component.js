@@ -44,7 +44,6 @@ export default function ChartItemComponent({ chartHeight }) {
     useRecoilState(currentChartTypeAtom);
   const data = useRecoilValue(DataState);
   const layout = useRecoilValue(LayoutState);
-  const [chartConfigurationState, setchartConfigurationState] = useState({})
   let chart = "";
   console.log(showOptions);
 
@@ -60,72 +59,12 @@ console.log(layout);
     ));
   }, [data, currentChartType,layout]);
   
-  // console.log("chartconiguration");
-  // console.log(getChartConfiguration(
-  //   {},
-  //   Math.random(),
-  //   layout,
-  //   '',
-  //   currentChartType,
-  //   []
-  // ).renderId);
-
   function drawChart(analyticsObject, chartConfiguration) {
     if (chartConfiguration && analyticsObject) {
        const chartObject = getCharObject(
          analyticsObject,
          chartConfiguration
        );
-      // const chartObject = {
-      //   chart: {
-      //     type: currentChartType,
-      //     renderTo: "atmospheric-composition",
-      //   },
-      //   title: {
-      //     verticalAlign: "middle",
-      //     floating: true,
-      //     text: "Earth's Atmospheric Composition",
-      //     style: {
-      //       fontSize: "10px",
-      //       fontWeight: "bold",
-      //     },
-      //   },
-      //   plotOptions: {
-      //     pie: {
-      //       dataLabels: {
-      //         format: "{point.name}: {point.percentage:.1f} %",
-      //       },
-      //       innerSize: "70%",
-      //     },
-      //   },
-      //   series: [
-      //     {
-      //       name: "Gases",
-      //       data: [
-      //         {
-      //           name: "Argon",
-      //           y: 0.2,
-      //           color: "#3498db",
-      //         },
-      //         {
-      //           name: "Nitrogen",
-      //           y: 0.4,
-      //           color: "#9b59b6",
-      //         },
-      //         {
-      //           name: "Oxygen",
-      //           y: 0.3,
-      //           color: "#2ecc71",
-      //         },
-      //         {
-      //           name: "Trace Gases",
-      //           y: 0.1,
-      //           color: "#f1c40f",
-      //         },
-      //       ],
-      //     },
-      //   ],
-      // };
 
       if (chartObject) {
         setTimeout(() => {

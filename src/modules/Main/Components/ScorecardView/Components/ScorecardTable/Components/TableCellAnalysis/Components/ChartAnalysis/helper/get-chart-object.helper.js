@@ -1,7 +1,5 @@
 import * as _ from 'lodash';
 import { getInitialChartObject } from './get-initial-chart-object-helper';
-import { getOtherChartObject } from './get-other-chart-object.helper';
-import { getPieChartObject } from './get-pie-chart-object.helper';
 import { getSanitizedanalyticsBasedOnConfiguration } from './get-sanitized-analytics-based-on-chart-configuration.helper';
 import { getSanitizedChartObject } from './get-sanitized-chart-object.helper';
 import { getSolidGaugeChartObject } from './get-solid-gauge-chart-object.helper';
@@ -50,21 +48,8 @@ export function getCharObject(incommingAnalyticObject,chartConfiguration){
         newChartConfiguration
       );
       break;
-    case 'pie':
-      chartObject = getPieChartObject(
-        chartObject,
-        analyticsObject,
-        chartConfiguration
-      );
-      break;
     default:
-      // chartObject = getOtherChartObject(
-      //   chartObject,
-      //   analyticsObject,
-      //   chartConfiguration
-      // );
-      
-      return getSanitizedChartObject(getOtherChartObject(
+      return getSanitizedChartObject(getSpiderWebChartObject(
         chartObject,
         analyticsObject,
         chartConfiguration

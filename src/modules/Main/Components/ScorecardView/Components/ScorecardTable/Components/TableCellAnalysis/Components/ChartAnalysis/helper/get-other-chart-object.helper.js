@@ -15,8 +15,8 @@ export  function getOtherChartObject(
   chartConfiguration
 ) {
 
-  // console.log("chartconiguration");
-  // console.log(chartConfiguration.yAxisType);
+  console.log("chartconiguration");
+  console.log(chartConfiguration);
 
   const yAxisSeriesItems = getChartAxisItems(analyticsObject, [
     chartConfiguration.yAxisType,

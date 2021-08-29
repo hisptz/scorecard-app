@@ -23,8 +23,6 @@ export  function getChartAxisItems(
         });
       } else {
         items = _.map(itemKeys, itemKey => {
-          console.log("ChartAxisItems are")
-          console.log(metadataNames[itemKey].trim())
           return {
             id: itemKey,
             name: metadataNames[itemKey].trim()

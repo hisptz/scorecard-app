@@ -31,7 +31,7 @@ export function getChartExportingOptions(xAxisCategories){
       },
       buttons: {
         contextButton: {
-          enabled: false,
+          enabled: true,
         },
       },
     };

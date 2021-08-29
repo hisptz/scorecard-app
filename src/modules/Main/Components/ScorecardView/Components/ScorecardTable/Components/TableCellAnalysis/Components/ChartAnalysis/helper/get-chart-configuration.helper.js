@@ -10,14 +10,7 @@ export function getChartConfiguration(
     customChartType,
     dataSelections
 ){
-  // getChartConfiguration(
-  //   layer.config || {},
-  //   layer.id,
-  //   layer.layout,
-  //   this.interventionName,
-  //   '',
-  //   layer.dataSelections
-  // )
+
         const chartType = customChartType ;
     
  return {
@@ -77,19 +70,8 @@ export function getChartConfiguration(
       ? visualizationSettings.selectedChartTypes
       : [],
     xAxisType: visualizationLayout.row,
-      // ? ['dx']
-      //_.map(visualizationLayout.row, (row) => row.dimension)
-      // : ['dx'],
     yAxisType:visualizationLayout.column,
-      // visualizationLayout.column && visualizationLayout.column[0]
-      //   ? 'ou'
-      //   // visualizationLayout.column[0].dimension
-      //   : 'ou',
     zAxisType: visualizationLayout.filter,
-    //  visualizationLayout.filter
-    //   ? ['pe']
-    //   //_.map(visualizationLayout.filter, (filter) => filter.dimension)
-    //   : ['pe'],
     dataSelections,
     }
 
