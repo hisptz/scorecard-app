@@ -560,3 +560,6 @@ th.jsx-4210860585 {
         border-right: none !important;
     }
 }
+div.fixed.jsx-2944291715 {
+    z-index: 3000;
+}
