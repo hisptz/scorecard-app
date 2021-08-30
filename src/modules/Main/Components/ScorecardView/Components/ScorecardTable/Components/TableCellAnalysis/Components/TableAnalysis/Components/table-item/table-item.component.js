@@ -19,7 +19,6 @@ export default function TableItemComponent() {
         }
     }, [data, layout])
 
-    console.log(tableData)
 
     return (
         <div className="table-item-container">

@@ -3,6 +3,8 @@ import {Period} from "@iapps/period-utilities";
 import mapLimit from "async/mapLimit";
 import {
     chunk,
+    compact,
+    differenceBy,
     find,
     flatten,
     forIn,
@@ -26,7 +28,7 @@ export default class ScorecardDataEngine {
     _dataEntities = {};
     _dataEntities$ = new BehaviorSubject(this._dataEntities);
     dataEntities$ = this._dataEntities$.asObservable();
-
+    _previousPeriods = []
 
     constructor() {
         if (!ScorecardDataEngine?.instance) {
@@ -56,16 +58,18 @@ export default class ScorecardDataEngine {
             }),
             "id"
         );
-
         previousPeriods.forEach((previousPeriod) => {
             const currentPeriod = find(this._selectedPeriods, [
                 "id",
                 previousPeriod?.id,
             ]);
             if (!currentPeriod) {
-                this._selectedPeriods = [...this._selectedPeriods, previousPeriod];
+                this._selectedPeriods = compact([...this._selectedPeriods, previousPeriod]);
             }
         });
+        this._previousPeriods = compact(differenceBy(previousPeriods, periods, 'id')?.map((period) => {
+            return period?.id
+        })) ?? []
         return this;
     }
 
@@ -227,7 +231,10 @@ export default class ScorecardDataEngine {
     getOrgUnitAverage(orgUnitId = '') {
         return this.dataEntities$.pipe(
             map((dataEntities) => {
-                const orgUnitsData = pickBy(dataEntities, (val, key) => key.match(RegExp(orgUnitId)))
+                const orgUnitsData = pickBy(dataEntities, (val, key) => {
+                    const [, ou, pe] = key.split('_')
+                    return ou === orgUnitId && (!this._previousPeriods.includes(pe) && !!find(this._selectedPeriods, (period) => period?.id === pe))
+                })
                 const noOfOrgUnits = Object.keys(orgUnitsData).length
                 return reduce(orgUnitsData, (result, value) => {
                     return (result ?? 0) + (value.current / noOfOrgUnits)
@@ -239,7 +246,10 @@ export default class ScorecardDataEngine {
     getDataSourceAverage(dataSources = []) {
         return this.dataEntities$.pipe(
             map((dataEntities) => {
-                const dataSourcesData = pickBy(dataEntities, (_, key) => key.match(RegExp(head(dataSources))) || key.match(RegExp(last(dataSources))))
+                const dataSourcesData = pickBy(dataEntities, (_, key) => {
+                    const [dx, , pe] = key.split('_')
+                    return dataSources.includes(dx) && (!this._previousPeriods.includes(pe) && !!find(this._selectedPeriods, (period) => period?.id === pe))
+                })
                 const noOfDataSources = Object.keys(dataSourcesData).length;
                 return reduce(dataSourcesData, (result, value) => {
                     return (result ?? 0) + (value.current / noOfDataSources)
@@ -283,8 +293,8 @@ export default class ScorecardDataEngine {
             map((dataEntities) => {
                 if (!isEmpty(dataEntities)) {
                     const selectedDataEntities = pickBy(dataEntities, (value, key) => {
-                        const [, ou,] = key.split('_')
-                        return orgUnits?.includes(ou)
+                        const [, ou, pe] = key.split('_')
+                        return orgUnits?.includes(ou) && (!this._previousPeriods.includes(pe) && !!find(this._selectedPeriods, (period) => period?.id === pe))
                     })
                     const noOfDataEntities = Object.keys(selectedDataEntities).length
                     return reduce(selectedDataEntities, (result, value) => {
@@ -326,7 +336,9 @@ export default class ScorecardDataEngine {
     }
 
     reset() {
-        //TODO: Implement reset function
+        this._dataEntities = {}
+        this._dataEntities$.next(this._dataEntities)
+        this._loading$.next(false)
     }
 
     _getScorecardData(selections) {
