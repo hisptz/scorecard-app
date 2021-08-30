@@ -1,5 +1,6 @@
 import i18n from "@dhis2/d2-i18n";
-
+import PropTypes from "prop-types";
+import React from 'react';
 
 export default function DisplaySourceProgramIndicator(props){
 
@@ -20,4 +21,9 @@ export default function DisplaySourceProgramIndicator(props){
         </ul>
 
     </>
+}
+
+DisplaySourceProgramIndicator.PropTypes={
+    title:PropTypes.string.isRequired,
+    data:PropTypes.arrayOf(PropTypes.object).isRequired
 }

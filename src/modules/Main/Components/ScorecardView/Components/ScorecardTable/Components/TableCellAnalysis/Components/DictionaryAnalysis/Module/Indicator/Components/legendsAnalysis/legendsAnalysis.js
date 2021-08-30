@@ -1,9 +1,9 @@
 import { useDataQuery } from '@dhis2/app-runtime'
 import i18n from "@dhis2/d2-i18n";
 import { CircularLoader } from '@dhis2/ui'
+import PropTypes from 'prop-types'
 import { useEffect} from 'react'
 import Legend from './legend'
-
 const query =    {
   legendAnalysis:{
     resource:"indicators",
@@ -48,4 +48,10 @@ export default function LegendsAnalysis({id}){
          
       </div>
      )
+}
+
+
+
+LegendsAnalysis.PropTypes={
+    id:PropTypes.string.isRequired
 }

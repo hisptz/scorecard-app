@@ -8,16 +8,20 @@ export const dataTypes = {
     UNDEFINED: 'undefined'
 }
 
+export const dataElementDomainTypes={
+    TRACKER:"TRACKER",
+    AGGREGATE:"AGGREGATE",
+    UNDEFINED:'undefined'
+}
+
+
 export const dataSourceTypes = {
     INDICATOR: 'indicator',
     DATA_ELEMENT: 'dataElement'
 }
 
-//structure of dataElemet in store is
-// [
-//     {
-//         "id":"dfds3ds.fdaf",
-//         "val":"value from api",
-//         "exprPart":"num/den",
-//     }
-// ]
+export const accessTypes={
+    READ_WRITE:"rw------",
+    READ_ONLY:"r-------",
+    NO_ACCESS:"--------",
+}
