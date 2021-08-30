@@ -9,9 +9,8 @@ import {
 import { DataState } from "../../../../state/data";
 import "./chart-item-component.css";
 import { LayoutState } from "../../../../state/layout";
-import { chartTypesAtom,chartUpdateAtom,currentChartTypeAtom } from "../../atoms/chartAnalyticsChart";
-import { getChartConfiguration } from "../../helper/get-chart-configuration.helper";
 import { getCharObject } from "../../helper/get-chart-object.helper";
+import { chartTypesAtom,chartUpdateAtom,currentChartTypeAtom ,chartConfigurationSelector} from "../../state-helper/chartAnalyticsChart";
 
 
 
@@ -23,17 +22,13 @@ export default function ChartItemComponent({ chartHeight }) {
     useRecoilState(currentChartTypeAtom);
   const data = useRecoilValue(DataState);
   const layout = useRecoilValue(LayoutState);
+ const chartConfiguration = useRecoilValue(chartConfigurationSelector({layout,currentChartType}));
   let chart = "";
 
+ 
+
   useEffect(() => {
-    drawChart(data["_data"], getChartConfiguration(
-      {},
-      "render-id-unique",
-      layout,
-      '',
-      currentChartType,
-      []
-    ));
+    drawChart(data["_data"], chartConfiguration);
   }, [data, currentChartType,layout]);
   
   function drawChart(analyticsObject, chartConfiguration) {
@@ -55,14 +50,7 @@ export default function ChartItemComponent({ chartHeight }) {
     event.stopPropagation();
     setCurrentChartType(chartType);
     drawChart(data["_data"], {
-       ...getChartConfiguration(
-        {},
-        "render-id-unique",
-        layout,
-        '',
-        currentChartType,
-        []
-      ),
+       ...chartConfiguration,
       type:chartType
     });
 
