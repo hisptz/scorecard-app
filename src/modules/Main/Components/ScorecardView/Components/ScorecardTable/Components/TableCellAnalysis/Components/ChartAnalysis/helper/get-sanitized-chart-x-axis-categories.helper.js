@@ -16,7 +16,7 @@ export function getSanitizedChartXAxisCategories(
         seriesDataObjects,
         (seriesData) => {
           return _.map(seriesData, (data) => {
-            const idArray = data.id.split('_');
+            const idArray = data.name.split('_');
             const newCategoryArray = [];
             if (idArray) {
               const reversedIdArray = _.reverse(idArray);
@@ -26,7 +26,7 @@ export function getSanitizedChartXAxisCategories(
                     reversedXAxisItems[num] || [],
                     ['id', reversedIdArray[num]]
                   );
-
+                
                   newCategoryArray.push({
                     id: reversedIdArray[num],
                     name: parentCategoryItem
@@ -76,6 +76,8 @@ export function getSanitizedChartXAxisCategories(
       );
 
       if (seriesCategoryNamesArray) {
+       console.log("in test")
+       console.log(seriesCategoryNamesArray);
         const groupedCategoryNames = _.groupBy(
           seriesCategoryNamesArray[0],
           'name'
@@ -83,6 +85,7 @@ export function getSanitizedChartXAxisCategories(
         const categoryNameGroupKeys = _.map(
           seriesCategoryNamesArray[0],
           (category) => category.name
+          
         );
         const sanitizedCategoryNames = [];
         _.forEach(categoryNameGroupKeys, (key) => {
