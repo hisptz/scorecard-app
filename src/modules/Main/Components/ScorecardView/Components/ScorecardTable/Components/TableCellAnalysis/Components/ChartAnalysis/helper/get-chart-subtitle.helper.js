@@ -23,7 +23,7 @@ export function getChartSubtitleObject(
     align: 'left',
     style: {
       fontWeight: '600',
-      fontSize: '13px'
+      fontSize: '13px',
     }
   };
 }

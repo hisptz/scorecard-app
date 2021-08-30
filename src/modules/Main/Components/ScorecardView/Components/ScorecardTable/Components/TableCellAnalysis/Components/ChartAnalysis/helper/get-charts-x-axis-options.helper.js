@@ -23,7 +23,7 @@ export function getChartXAxisOptions(
     xAxisOptions = _.assign(
         {},
 {
-    categories: xAxisCategories,
+    categories: [...(xAxisCategories)?.map((xAxisCategory)=>xAxisCategory.name)],
     labels: {
       rotation: 0,
       useHTML: true,

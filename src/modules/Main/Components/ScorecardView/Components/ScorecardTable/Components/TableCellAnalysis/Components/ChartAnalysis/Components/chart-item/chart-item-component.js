@@ -1,57 +1,34 @@
 import Highcharts from "highcharts";
 import PropTypes from "prop-types";
-import React, { useEffect,useState } from "react";
+import React, { useEffect, } from "react";
 import {
-  atom,
   useRecoilState,
   useRecoilValue,
   useSetRecoilState,
 } from "recoil";
-import { CHART_TYPES } from "../../../../../../../../../../../../core/constants/chart-types.constant";
 import { DataState } from "../../../../state/data";
 import "./chart-item-component.css";
 import { LayoutState } from "../../../../state/layout";
+import { chartTypesAtom,chartUpdateAtom,currentChartTypeAtom } from "../../atoms/chartAnalyticsChart";
 import { getChartConfiguration } from "../../helper/get-chart-configuration.helper";
 import { getCharObject } from "../../helper/get-chart-object.helper";
 
-const chartTypesAtom = atom({
-  key: "chartTypes-atom",
-  default: CHART_TYPES,
-});
-const showOptionsAtom = atom({
-  key: "chart-option-key",
-  default: false,
-});
 
-const chartUpdateAtom = atom({
-  key: "chart-update-atom",
-  default: {
-    id: "",
-    type: "",
-  },
-});
 
-const currentChartTypeAtom = atom({
-  key: "current-chart-type",
-  default: "column",
-});
 
 export default function ChartItemComponent({ chartHeight }) {
   const chartTypes = useRecoilValue(chartTypesAtom);
-  const showOptions = useRecoilValue(showOptionsAtom);
   const setChartUpdate = useSetRecoilState(chartUpdateAtom);
   const [currentChartType, setCurrentChartType] =
     useRecoilState(currentChartTypeAtom);
   const data = useRecoilValue(DataState);
   const layout = useRecoilValue(LayoutState);
   let chart = "";
-  console.log(showOptions);
 
-console.log(layout);
   useEffect(() => {
     drawChart(data["_data"], getChartConfiguration(
       {},
-      32,
+      "render-id-unique",
       layout,
       '',
       currentChartType,
@@ -80,7 +57,7 @@ console.log(layout);
     drawChart(data["_data"], {
        ...getChartConfiguration(
         {},
-        Math.random(),
+        "render-id-unique",
         layout,
         '',
         currentChartType,
@@ -90,7 +67,7 @@ console.log(layout);
     });
 
     setChartUpdate({
-      id: 32,
+      id: "render-id-unique",
       type: chartType.toUpperCase,
     });
   }
@@ -105,8 +82,6 @@ console.log(layout);
 
       <ul
         className="chart-type-list animated fadeInRight"
-        //   [hidden]="!showOptions"
-        // hidden = {showOptions}
       >
         {chartTypes?.map((chartType, chartTypePosition) => {
           return (

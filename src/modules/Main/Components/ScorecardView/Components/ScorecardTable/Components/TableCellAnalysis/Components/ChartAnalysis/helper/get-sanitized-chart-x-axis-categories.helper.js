@@ -108,6 +108,5 @@ export function getSanitizedChartXAxisCategories(
       }
     }
   }
-
   return _.uniqBy(newCategories, 'name');
 }

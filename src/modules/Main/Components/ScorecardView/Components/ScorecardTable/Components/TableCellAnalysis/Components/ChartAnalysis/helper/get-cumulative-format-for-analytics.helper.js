@@ -47,6 +47,7 @@ yAxisType
               });
             });
           });
+         
       newAnalyticsObject.rows = _.assign([], newRows);
     }
     return newAnalyticsObject;
