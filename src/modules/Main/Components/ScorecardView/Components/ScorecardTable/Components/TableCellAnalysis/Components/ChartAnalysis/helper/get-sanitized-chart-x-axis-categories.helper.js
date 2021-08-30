@@ -76,8 +76,6 @@ export function getSanitizedChartXAxisCategories(
       );
 
       if (seriesCategoryNamesArray) {
-       console.log("in test")
-       console.log(seriesCategoryNamesArray);
         const groupedCategoryNames = _.groupBy(
           seriesCategoryNamesArray[0],
           'name'
