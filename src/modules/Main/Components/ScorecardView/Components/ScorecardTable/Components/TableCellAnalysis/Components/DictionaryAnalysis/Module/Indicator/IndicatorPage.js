@@ -49,6 +49,7 @@ export default function IndicatorPage({id}) {
 
         {/*<CompletenessDataSources />*/}
 
+
     </div>)
 }
 

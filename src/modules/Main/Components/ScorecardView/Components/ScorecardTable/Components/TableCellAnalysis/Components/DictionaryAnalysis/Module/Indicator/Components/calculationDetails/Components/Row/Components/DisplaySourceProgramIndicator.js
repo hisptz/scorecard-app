@@ -1,3 +1,4 @@
+import i18n from "@dhis2/d2-i18n";
 
 
 export default function DisplaySourceProgramIndicator(props){
@@ -13,7 +14,7 @@ export default function DisplaySourceProgramIndicator(props){
             {data.map((el)=>{
                 return<li  key={el.id}>
                     <h5>{el?.val}</h5>
-                    <p><b>source:</b> {el?.sources?.displayName}</p>
+                    <p><b>{i18n.t("source")}:</b> {el?.sources?.displayName}</p>
                 </li>
             })}
         </ul>

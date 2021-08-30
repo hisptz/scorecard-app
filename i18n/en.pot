@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-08-26T07:30:27.366Z\n"
-"PO-Revision-Date: 2021-08-26T07:30:27.366Z\n"
+"POT-Creation-Date: 2021-08-30T08:59:39.507Z\n"
+"PO-Revision-Date: 2021-08-30T08:59:39.507Z\n"
 
 msgid "Data"
 msgstr "Data"
@@ -229,6 +229,12 @@ msgstr "There are no configured indicators for this scorecard"
 
 msgid "Drag to the column headers to change layout"
 msgstr "Drag to the column headers to change layout"
+
+msgid "Indicator is captured from the following sources,"
+msgstr "Indicator is captured from the following sources,"
+
+msgid "Introduction"
+msgstr "Introduction"
 
 msgid "Column"
 msgstr "Column"

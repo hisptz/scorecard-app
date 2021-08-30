@@ -1,9 +1,8 @@
-import { useHistory } from "react-router-dom";
-import { useState } from "react";
-
-import classes from './indicatorGroupRow.module.css'
-
+import i18n from "@dhis2/d2-i18n";
 import {  DataTableRow,    DataTableCell,    DataTableColumnHeader,    Button,} from '@dhis2/ui'
+import React,{ useState } from "react";
+import { useHistory } from "react-router-dom";
+import classes from './indicatorGroupRow.module.css'
 
 export default function IndicatorGroupRow(props){
 
@@ -62,13 +61,15 @@ export default function IndicatorGroupRow(props){
                 {dispList(props?.indicators)}
                
             </ol>
-           {props.indicators.length>3 ?
+           {props?.indicators?.length>3 ?
             <Button name="Basic button" onClick={toogleIndicatorList} value="default">
-                {isListFull? 'show less':'show more'}
-             </Button>: null}
+                {/*{isListFull? {i18n.t('show less')}:{i18n.t("show more")} }*/}
+                {i18n.t(isListFull?"show less":"show more")}
+            </Button>: null}
         
         </DataTableCell>
     </DataTableRow>)
 }
+
 
 
