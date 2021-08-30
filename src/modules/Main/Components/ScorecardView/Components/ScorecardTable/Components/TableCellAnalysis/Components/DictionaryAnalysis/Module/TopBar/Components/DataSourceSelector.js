@@ -1,22 +1,21 @@
+import PropTypes from 'prop-types'
+import React from 'react'
 import {dataSourceTypes} from "../../../Utils/Models";
-import IndicatorPage from "../../Indicator/IndicatorPage";
 import DataElementPage from "../../DataElement/DataElementPage";
+import IndicatorPage from "../../Indicator/IndicatorPage";
 
+export default function DataSourceSelector({type, id}) {
 
-export default function DataSourceSelector(props){
-
-    const type=props.type
-    const id=props.id;
-
-    if(type===dataSourceTypes.INDICATOR){
-        return  <IndicatorPage id={id} />
+    if (type === dataSourceTypes.INDICATOR) {
+        return <IndicatorPage id={id}/>
     }
-    if(type===dataSourceTypes.DATA_ELEMENT){
-        return <DataElementPage  id={id} />
+    if (type === dataSourceTypes.DATA_ELEMENT) {
+        return <DataElementPage id={id}/>
     }
-
-
-    return <></>
-
-
+    return null
 }
+
+DataSourceSelector.propTypes = {
+    id: PropTypes.string.isRequired,
+    type: PropTypes.oneOf(Object.values(dataSourceTypes)).isRequired,
+};

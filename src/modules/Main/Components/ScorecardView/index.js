@@ -33,11 +33,15 @@ export default function ScorecardView() {
 
     const reset = useRecoilCallback(({reset}) => () => {
         reset(ScorecardViewState("orgUnitSelection"))
+        reset(ScorecardViewState("periodSelection"))
+        reset(ScorecardViewState("tableSort"))
+        reset(ScorecardViewState("options"))
         reset(ScorecardIdState)
         reset(ScorecardTableOrientationState)
         reset(ScorecardDataLoadingState)
         scorecardDataEngine.reset()
     })
+
     useEffect(() => {
         setScorecardIdState(scorecardId);
         return () => {
@@ -63,11 +67,11 @@ export default function ScorecardView() {
                 <HighlightedIndicatorsView/>
                 <div className="column align-items-center pt-16 flex-1">
                     {
-                        (!isEmpty(orgUnits) && !isEmpty(periods) ) ?  <Suspense fallback={<FullPageLoader/>}>
+                        (!isEmpty(orgUnits) && !isEmpty(periods)) ? <Suspense fallback={<FullPageLoader/>}>
                             <ScorecardTable
                                 nested={false}
                                 orgUnits={orgUnits}/>
-                        </Suspense>: <EmptyOrgUnitsOrPeriod/>
+                        </Suspense> : <EmptyOrgUnitsOrPeriod/>
                     }
                 </div>
             </div>

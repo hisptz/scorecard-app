@@ -16,7 +16,6 @@ export default function useGetHighlightedIndicatorsData() {
     useEffect(() => {
         async function getData() {
             setLoading(true)
-            console.log(orgUnits)
             const sortedOrgUnits = sortBy(orgUnits, 'level')
 
             const response = await getHighlightedIndicatorsData({
@@ -25,7 +24,6 @@ export default function useGetHighlightedIndicatorsData() {
                 orgUnits: orgUnits?.map(({id}) => id)
             })
             setLoading(false)
-            console.log(response)
         }
 
         getData();

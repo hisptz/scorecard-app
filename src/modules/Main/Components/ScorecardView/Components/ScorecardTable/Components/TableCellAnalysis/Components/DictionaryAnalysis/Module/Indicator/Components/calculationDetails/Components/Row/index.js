@@ -1,29 +1,27 @@
-import {CircularLoader, DataTableCell,} from '@dhis2/ui'
 import {useDataEngine, useDataQuery} from '@dhis2/app-runtime'
-import {useEffect, useState} from "react";
+import {CircularLoader, DataTableCell,} from '@dhis2/ui'
+import PropTypes from "prop-types";
+import React, {useEffect, useState} from "react";
 import {useSetRecoilState} from "recoil";
 import {  dataElementsStateDictionary,    dataSetReportingRatesStateDictionary,    programIndicatorStateDictionary} from "../../../../../../Store";
-import DisplaySource from "./Components/DisplaySourceDataElement";
 import {    getDetailedValueFromApi,    getFinalWordFormula,    getFormulaSources,    getSummaryValueFromApi} from "../../../../../../Utils/Functions/FormulaFunctions";
 import {dataTypes} from "../../../../../../Utils/Models";
 import CalculationDetails from "../../Index";
-import PropTypes from "prop-types";
-import DisplaySourceDataElement from "./Components/DisplaySourceDataElement";
-import DisplaySourceProgramIndicator from "./Components/DisplaySourceProgramIndicator";
-import DisplaySourceDataSet from "./Components/DisplaySourceDataSet";
 import classes from './Components/DataSourceCellStyle.module.css'
+import DisplaySource from "./Components/DisplaySourceDataElement";
+import DisplaySourceDataElement from "./Components/DisplaySourceDataElement";
+import DisplaySourceDataSet from "./Components/DisplaySourceDataSet";
+import DisplaySourceProgramIndicator from "./Components/DisplaySourceProgramIndicator";
 
 
-export default function CalculationDetailRow(props){
 
-    //props
-    const formula=props.formula
-    const loc=props.location
+
+export default function CalculationDetailRow({formula, location}){
 
     //variables
-    let wordDtEl=[]
-    let programInd=[]
-    let dataSetReportingRates=[]
+    const wordDtEl=[]
+    const programInd=[]
+    const dataSetReportingRates=[]
 
     //hooks
     const[dataElementsArray,setDataElementArray]=useState([])
@@ -34,70 +32,47 @@ export default function CalculationDetailRow(props){
     const updateProgramIndicatorHandler= useSetRecoilState(programIndicatorStateDictionary)
     const updateDataSetReportingRatesHandler= useSetRecoilState(dataSetReportingRatesStateDictionary)
 
-    useEffect(()=>{
-        let tempArr=getFormulaSources(formula,"#{")
-
-        if(tempArr.length){
-            getWordData(tempArr,0),()=>{}
-        }
-
-        },[])
-    useEffect(()=>{
-        let tempArr=getFormulaSources(formula,"I{")
-        if(tempArr.length){
-            getWordData(tempArr,1),()=>{}
-        }
-
-        },[])
-    useEffect(()=>{
-        let tempArr=getFormulaSources(formula,"R{")
-        if(tempArr.length){
-            getWordData(tempArr,2),()=>{}
-        }
-
-    },[])
-
     //functions
     async function getWordData(arr,type){ //arr for array of id of datas to get their values, type indicates the data type of data eg dataElement=0 program indicator=1, reporting rates=2
-        let allPromises=[];
+        const allPromises=[];
         let i=0
         for(i=0;i<arr.length;i++){
-            let proms=getDetailedValueFromApi(engine,arr[i],type)
+            const proms=getDetailedValueFromApi(engine,arr[i],type)
             allPromises.push(proms)
         }
         i=0
-       await Promise.all(allPromises).then(value => {
-           if(type===dataTypes.DATA_ELEMENT){
+        await Promise.all(allPromises).then(value => {
+            if(type===dataTypes.DATA_ELEMENT){
 
-               value.map((val)=>{ //We always return array just for uniformity
-                   if(val.length===2){ //array of two elements first element is dataElement second element of array is category option combo
-                       wordDtEl.push({id:arr[i],val:val[0].displayName+" "+val[1],location:loc,sources:val[0].dataSetElements})
-                   }if(val.length===1){   //this is array of one element for data element that are just pure no category options
+                value.map((val)=>{ //We always return array just for uniformity
+                    if(val.length===2){ //array of two elements first element is dataElement second element of array is category option combo
+                        wordDtEl.push({id:arr[i],val:val[0].displayName+" "+val[1],location:location,sources:val[0].dataSetElements})
+                    }if(val.length===1){   //this is array of one element for data element that are just pure no category options
 
-                       wordDtEl.push({id:arr[i],val:val[0].displayName,"location":loc,sources:val[0].dataSetElements})
-                   }
-                   ++i;
-               })
-           }
-           if(type===dataTypes.PROGRAM_INDICATOR){
-               value.map((val)=>{ //We always return array just for uniformity
-                   programInd.push({"id":arr[i],"val":val[0].displayName,"location":loc,sources:val[0].program})
-                   ++i;
-               })
-           }
-           if(type===dataTypes.DATASET_REPORTING_RATES){
-               value.map((val)=>{ //We always return array just for uniformity
-                   dataSetReportingRates.push({"id":arr[i],"val":val[0],"location":loc})
-                   ++i;
-               })
-           }
+                        wordDtEl.push({id:arr[i],val:val[0].displayName,"location":location,sources:val[0].dataSetElements})
+                    }
+                    ++i;
+                })
+            }
+            if(type===dataTypes.PROGRAM_INDICATOR){
+                value.map((val)=>{ //We always return array just for uniformity
+                    programInd.push({"id":arr[i],"val":val[0].displayName,"location":location,sources:val[0].program})
+                    ++i;
+                })
+            }
+            if(type===dataTypes.DATASET_REPORTING_RATES){
+                value.map((val)=>{ //We always return array just for uniformity
+                    dataSetReportingRates.push({"id":arr[i],"val":val[0],"location":location})
+                    ++i;
+                })
+            }
 
-           if(wordDtEl.length===arr.length){ //array is full so we reload to update UI
-               setDataElementArray(wordDtEl)
-               updateDataElementHandler( (prev)=>{
-                   return  prev.concat(wordDtEl)
-               } )
-           }
+            if(wordDtEl.length===arr.length){ //array is full so we reload to update UI
+                setDataElementArray(wordDtEl)
+                updateDataElementHandler( (prev)=>{
+                    return  prev.concat(wordDtEl)
+                } )
+            }
             if(programInd.length===arr.length){
                 setProgramIndicatorArray(programInd)
                 updateProgramIndicatorHandler((prev)=>{
@@ -112,6 +87,31 @@ export default function CalculationDetailRow(props){
             }
         })
     }
+
+    useEffect(()=>{
+        const tempArr=getFormulaSources(formula,"#{")
+
+        if(tempArr.length){
+            getWordData(tempArr,dataTypes.DATA_ELEMENT),()=>{}
+        }
+
+        },[])
+    useEffect(()=>{
+        const tempArr=getFormulaSources(formula,"I{")
+        if(tempArr.length){
+            getWordData(tempArr,dataTypes.PROGRAM_INDICATOR),()=>{}
+        }
+
+        },[])
+    useEffect(()=>{
+        const tempArr=getFormulaSources(formula,"R{")
+        if(tempArr.length){
+            getWordData(tempArr,dataTypes.DATASET_REPORTING_RATES),()=>{}
+        }
+
+    },[])
+
+
 
     return      <>
                 <DataTableCell  bordered width={"50%"}>
@@ -130,7 +130,7 @@ export default function CalculationDetailRow(props){
 }
 
 
-CalculationDetailRow.prototype={
+CalculationDetailRow.propTypes={
     formula:PropTypes.string.isRequired,
     location:PropTypes.string.isRequired
 }

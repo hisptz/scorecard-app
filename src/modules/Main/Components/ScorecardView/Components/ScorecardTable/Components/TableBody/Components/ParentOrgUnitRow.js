@@ -39,8 +39,7 @@ export default function ParentOrgUnitRow({orgUnit, overallAverage}) {
 
     useEffect(subscribeToAverage, [orgUnit, loading, id])
 
-
-    const Component  = ((emptyRows || !isEmpty) &&
+    const Component = ((emptyRows || !isEmpty) &&
         <DataTableRow key={id} bordered>
             <DataTableCell className='jsx-1369417008' fixed left={"0"} width={"50px"}/>
             <DataTableCell fixed left={"50px"} className="scorecard-org-unit-cell">

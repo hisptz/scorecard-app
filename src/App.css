@@ -9,6 +9,10 @@
     height: 100%;
 }
 
+div.jsx-4084082020{
+    z-index: 4000;
+}
+
 .popper {
     z-index: 9999;
 }
