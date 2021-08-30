@@ -21,7 +21,6 @@ const PeriodResolverState = selector({
             ]
             for (const period of relativePeriods) {
                 const periodInstance = new Period().setCalendar(calendar).getById(period?.id)
-                console.log(periodInstance)
                 const actualPeriods = isArray(periodInstance?.iso) ? periodInstance?.iso : [periodInstance?.iso];
                 allPeriods = allPeriods.concat(actualPeriods)
             }

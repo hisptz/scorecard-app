@@ -1,58 +1,60 @@
-import { useParams,useHistory } from 'react-router-dom'
-import CalculationDetails from './Components/calculationDetails/Index'
-
-import CompletenessDataSources from './Components/CompletenessDataSource/completenessDataSources'
-import DataElementSIndicator from './Components/dataElementsInIndicator/dataElementsIndicator'
-
-import DataSource from './Components/DataSource/dataSource'
-
-import IndicatorFacts from './Components/indicatorFacts/indicatorFacts'
-import Introduction from './Components/introduction/introduction'
-import LegendsAnalysis from './Components/legendsAnalysis/legendsAnalysis'
-import ProgramIndicatorIndicator from "./Components/ProgramIndicator";
-import DatasetsReportingRates from "./Components/DataSetReportingRate";
-import {useSetRecoilState} from "recoil";
+import PropTypes from 'prop-types'
+import React, {useEffect} from "react";
+import {useRecoilCallback} from "recoil";
 import {
     dataElementsStateDictionary,
     dataSetReportingRatesStateDictionary,
     programIndicatorStateDictionary
 } from "../../Store";
+import CalculationDetails from './Components/calculationDetails/Index'
+import DataElementSIndicator from './Components/dataElementsInIndicator/dataElementsIndicator'
+import DatasetsReportingRates from "./Components/DataSetReportingRate";
+import DataSource from './Components/DataSource/dataSource'
+import IndicatorFacts from './Components/indicatorFacts/indicatorFacts'
+import Introduction from './Components/introduction/introduction'
+import LegendsAnalysis from './Components/legendsAnalysis/legendsAnalysis'
+import ProgramIndicatorIndicator from "./Components/ProgramIndicator";
 
 
+export default function IndicatorPage({id}) {
 
-export default function IndicatorPage(props){
+    const reset = useRecoilCallback(({reset}) => () => {
+        reset(dataElementsStateDictionary)
+        reset(dataSetReportingRatesStateDictionary)
+        reset(programIndicatorStateDictionary)
+    })
 
-    // const { id } = useParams()
+    useEffect(() => {
+        return () => {
+            reset()
+        };
+    }, [id]);
 
-    const id=props.id
+    return (<div style={{display: "flex", flexDirection: "column"}}>
+        <Introduction id={id}/>
 
-    useSetRecoilState(dataElementsStateDictionary)([])
-    useSetRecoilState(programIndicatorStateDictionary)([])
-    useSetRecoilState(dataSetReportingRatesStateDictionary)([])
+        <DataSource id={id}/>
 
+        <IndicatorFacts id={id}/>
 
+        <LegendsAnalysis id={id}/>
 
-    return (<div style={{display:"flex",flexDirection:"column"}}>
-       <Introduction id={id} />
+        <CalculationDetails id={id}/>
 
-       <DataSource id={id} />
+        <DataElementSIndicator/>
 
-       <IndicatorFacts id={id} />
+        <ProgramIndicatorIndicator/>
 
-       <LegendsAnalysis id={id} />
-
-       <CalculationDetails id={id} />
-
-       <DataElementSIndicator />
-
-       <ProgramIndicatorIndicator    />
-
-        <DatasetsReportingRates />
+        <DatasetsReportingRates/>
 
         {/*<CompletenessDataSources />*/}
 
-       </div>)
+    </div>)
 }
 
+IndicatorPage.propTypes = {
+    id: PropTypes.string.isRequired
+};
 
- 
+
+
