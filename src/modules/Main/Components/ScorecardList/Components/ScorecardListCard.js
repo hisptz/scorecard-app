@@ -66,8 +66,17 @@ export default function ScorecardListCard({scorecard}) {
                     </ButtonStrip>
                     {
                         deleteConfirmOpen &&
-                        <DeleteConfirmation component={<p>{i18n.t('Are you sure you want to delete scorecard')}:<b>{title}</b></p>} onConfirm={onDelete}
-                                            onCancel={() => setDeleteConfirmOpen(false)}/>
+                        <DeleteConfirmation component={<p>{i18n.t('Are you sure you want to delete scorecard')}:<b>{title}</b></p>} 
+                        onConfirm={function(_,e){
+                            e.stopPropagation()
+                            onDelete()
+                          }}
+                          onCancel={function(_,e){
+                            e.stopPropagation()
+                            setDeleteConfirmOpen(false)
+                          } }
+                                            
+                                            />
                     }
                 </div>
             </div>

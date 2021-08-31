@@ -83,8 +83,14 @@ export default function ScorecardGridCard({ scorecard }) {
               <b>{title}</b>
             </p>
           }
-          onConfirm={onDelete}
-          onCancel={() => setDeleteConfirmOpen(false)}
+          onConfirm={function(_,e){
+            e.stopPropagation()
+            onDelete()
+          }}
+          onCancel={function(_,e){
+            e.stopPropagation()
+            setDeleteConfirmOpen(false)
+          } }
         />
       )}
     </div>
