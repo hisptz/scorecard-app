@@ -63,9 +63,7 @@ export const OrgUnitPathState = atomFamily({
         key: 'orgUnitPathSelector',
         get: (path = '') => async ({get}) => {
             const orgUnits = compact(path.split('/'))
-            const orgUnitNames = orgUnits.map((id) => {
-                return get(OrgUnits(id))?.displayName
-            })
+            const orgUnitNames = get(SelectedOrgUnits(orgUnits))?.map(({displayName}) => displayName)
             return orgUnitNames.join('/')
         }
     })
