@@ -1,5 +1,5 @@
 import {isEmpty} from 'lodash'
-import React, {Suspense, useEffect, useRef} from "react";
+import React, {Suspense, useEffect, useMemo, useRef} from "react";
 import {useParams} from "react-router-dom";
 import {useRecoilCallback, useRecoilValue, useSetRecoilState} from "recoil";
 import {PeriodResolverState} from "../../../../core/state/period";
@@ -24,6 +24,7 @@ export default function ScorecardView() {
     const {id: scorecardId} = useParams();
     const setScorecardIdState = useSetRecoilState(ScorecardIdState);
     const {orgUnits} = useRecoilValue(ScorecardViewState("orgUnitSelection"));
+    const orgUnitsIds = useMemo(() => orgUnits?.map(({id}) => id), [orgUnits])
     const {read: access} = useRecoilValue(UserAuthorityOnScorecard(scorecardId))
     const downloadRef = useRef()
     const periods = useRecoilValue(PeriodResolverState)
@@ -61,7 +62,7 @@ export default function ScorecardView() {
                         (!isEmpty(orgUnits) && !isEmpty(periods)) ? <Suspense fallback={<FullPageLoader/>}>
                             <ScorecardTable
                                 nested={false}
-                                orgUnits={orgUnits}/>
+                                orgUnits={orgUnitsIds}/>
                         </Suspense> : <EmptyOrgUnitsOrPeriod/>
                     }
                 </div>

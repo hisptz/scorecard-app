@@ -155,7 +155,10 @@ export default class ScorecardDataEngine {
                 const [dx, , pe] = key.split('_');
                 return dx === dataSource && pe === period
             })
-            const sortedOrgUnits = sortBy(toPairs(requiredDataEntities), [(value) => last(value)?.current])
+
+            console.log(requiredDataEntities)
+
+            const sortedOrgUnits = sortBy(toPairs(requiredDataEntities), [(value) => +last(value)?.current])
 
             if (sortType === TableSort.DESC) {
                 return sortedOrgUnits.reverse().map(([key]) => key?.split('_')[1])

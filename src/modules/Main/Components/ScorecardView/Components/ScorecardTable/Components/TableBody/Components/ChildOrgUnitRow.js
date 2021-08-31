@@ -10,6 +10,7 @@ import {PeriodResolverState} from "../../../../../../../../../core/state/period"
 import {ScorecardDataLoadingState, ScorecardViewState,} from "../../../../../../../../../core/state/scorecard";
 import ScorecardTable from "../../../index";
 import DataContainer from "../../TableDataContainer";
+import TableLoader from "../../TableLoader";
 import AverageCell from "./AverageCell";
 import DroppableCell from "./DroppableCell";
 import OrgUnitContainer from "./OrgUnitContainer";
@@ -52,10 +53,10 @@ export default function ChildOrgUnitRow({orgUnit, expandedOrgUnit, onExpand, ove
             }}
             expandableContent={
                 <div className="p-16">
-                    <Suspense fallback={<div>Loading...</div>}>
+                    <Suspense fallback={<TableLoader />}>
                         <ScorecardTable
                             nested={true}
-                            orgUnits={[orgUnit]}
+                            orgUnits={[id]}
                         />
                     </Suspense>
                 </div>

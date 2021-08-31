@@ -29,6 +29,21 @@ const orgUnitChildrenQuery = {
     }
 }
 
+const selectedOrgUnitsQuery = {
+    orgUnits: {
+        resource: 'organisationUnits',
+        params: ({ids}) => ({
+            fields: [
+                'id',
+                'displayName',
+                'path',
+                'level'
+            ],
+            filter: `id:in:[${[...ids]}]`
+        })
+    }
+}
+
 export const OrgUnits = selectorFamily({
     key: 'orgUnitSelector',
     get: (id) => async ({get}) => {
@@ -56,13 +71,27 @@ export const OrgUnitPathState = atomFamily({
     })
 })
 
-
 export const OrgUnitChildren = selectorFamily({
     key: 'orgUnitChildren',
-    get: (orgUnitId)=> async ({get})=>{
+    get: (orgUnitId) => async ({get}) => {
         const engine = get(EngineState)
-        const {orgUnit} = await engine.query(orgUnitChildrenQuery, {variables:{id: orgUnitId}})
+        const {orgUnit} = await engine.query(orgUnitChildrenQuery, {variables: {id: orgUnitId}})
 
         return orgUnit?.children ?? []
+    }
+})
+
+export const SelectedOrgUnits = selectorFamily({
+    key: 'selected-org-units-resolver',
+    get: (orgUnitsIds) => async ({get}) => {
+        try {
+            const engine = get(EngineState)
+            const {orgUnits} = await engine.query(selectedOrgUnitsQuery, {variables: {ids: orgUnitsIds ?? []}})
+            return orgUnits?.organisationUnits ?? [];
+
+        } catch (e) {
+            console.error(e)
+            return []
+        }
     }
 })

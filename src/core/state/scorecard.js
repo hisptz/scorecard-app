@@ -19,7 +19,7 @@ import ScorecardAccess from "../models/scorecardAccess";
 import ScorecardDataEngine from "../models/scorecardData";
 import ScorecardOptions from "../models/scorecardOptions";
 import {EngineState} from "./engine";
-import {OrgUnitChildren} from "./orgUnit";
+import {OrgUnitChildren, SelectedOrgUnits} from "./orgUnit";
 import {PeriodResolverState} from "./period";
 import {SystemSettingsState} from "./system";
 import {UserState} from "./user";
@@ -218,7 +218,7 @@ const ScorecardTableConfigState = selectorFamily({
                 'periods'
             ],
             tableWidth: getTableWidthWithOrgUnit(periods, [...filteredOrgUnits, ...childrenOrgUnits], averageColumn),
-            colSpan: orgUnitColSpan  + 2,
+            colSpan: orgUnitColSpan + 2,
             nameColumnWidth: orgUnitNameColumnWidth
         }
     }
@@ -230,10 +230,9 @@ const ScorecardOrgUnitState = atomFamily({
         key: 'selected-org-units-default',
         get: (orgUnits) => async ({get}) => {
             let childrenOrgUnits = [];
-            const filteredOrgUnits = orgUnits ?? [];
-
+            const filteredOrgUnits = get(SelectedOrgUnits(orgUnits));
             if (orgUnits.length === 1) {
-                childrenOrgUnits = get(OrgUnitChildren(head(orgUnits)?.id))
+                childrenOrgUnits = get(OrgUnitChildren(head(orgUnits)))
             }
 
             return {

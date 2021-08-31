@@ -17,11 +17,12 @@ import {downloadALMAData, downloadALMAMeta, downloadCSV, downloadExcel} from "..
 export default function useDownload(downloadRef) {
     const title = useRecoilValue(ScorecardViewState('title'))
     const {orgUnits} = useRecoilValue(ScorecardViewState('orgUnitSelection'))
-    const {filteredOrgUnits, childrenOrgUnits} = useRecoilValue(ScorecardOrgUnitState(orgUnits))
+    const orgUnitsIds = useMemo(() => orgUnits?.map(({id}) => id), [orgUnits])
+    const {filteredOrgUnits, childrenOrgUnits} = useRecoilValue(ScorecardOrgUnitState(orgUnitsIds))
     const dataHolders = useRecoilValue(ScorecardDataSourceState)
     const allOrgUnits = useMemo(() => [...filteredOrgUnits, ...childrenOrgUnits], [filteredOrgUnits, childrenOrgUnits]);
     const periods = useRecoilValue(PeriodResolverState)
-    const loading = useRecoilValue(ScorecardDataLoadingState(orgUnits))
+    const loading = useRecoilValue(ScorecardDataLoadingState(orgUnitsIds))
     const [data, setData] = useState();
     const {show} = useAlert(({message}) => message, ({type}) => ({...type, duration: 3000}))
     const handlePDFDownload = useReactToPrint({
