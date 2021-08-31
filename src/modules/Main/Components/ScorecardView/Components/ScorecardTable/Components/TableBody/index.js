@@ -4,9 +4,9 @@ import PropTypes from 'prop-types'
 import React, {Fragment, useEffect, useState} from "react";
 import {useRecoilValue} from "recoil";
 import {Orientation} from "../../../../../../../../core/constants/orientation";
+import ScorecardDataEngine from "../../../../../../../../core/models/scorecardData";
 import {PeriodResolverState} from "../../../../../../../../core/state/period";
 import {
-    scorecardDataEngine,
     ScorecardDataLoadingState,
     ScorecardDataSourceState,
     ScorecardOrgUnitState,
@@ -19,13 +19,13 @@ import ChildOrgUnitRow from "./Components/ChildOrgUnitRow";
 import DataSourceRow from "./Components/DataSourceRow";
 import ParentOrgUnitRow from "./Components/ParentOrgUnitRow";
 
-export default function ScorecardTableBody({orgUnits}) {
+export default function ScorecardTableBody({orgUnits, dataEngine}) {
     const [expandedOrgUnit, setExpandedOrgUnit] = useState();
     const tableOrientation = useRecoilValue(ScorecardTableOrientationState)
     const {dataGroups} = useRecoilValue(ScorecardViewState("dataSelection")) ?? {};
     const {averageRow} = useRecoilValue(ScorecardViewState("options")) ?? {};
     const filteredDataHolders = useRecoilValue(ScorecardDataSourceState)
-    const loading = useRecoilValue(ScorecardDataLoadingState)
+    const loading = useRecoilValue(ScorecardDataLoadingState(orgUnits))
     const periods = useRecoilValue(PeriodResolverState) ?? [];
     const {periodType} = useRecoilValue(ScorecardViewState("periodSelection"));
     const {childrenOrgUnits, filteredOrgUnits} = useRecoilValue(ScorecardOrgUnitState(orgUnits))
@@ -34,7 +34,7 @@ export default function ScorecardTableBody({orgUnits}) {
 
     useEffect(() => {
         if (loading !== undefined && !loading) {
-            scorecardDataEngine.getOverallAverage([...childrenOrgUnits, ...filteredOrgUnits]?.map(({id}) => id)).subscribe(setOverallAverage)
+            dataEngine.getOverallAverage([...childrenOrgUnits, ...filteredOrgUnits]?.map(({id}) => id)).subscribe(setOverallAverage)
         }
     }, [childrenOrgUnits, filteredOrgUnits, loading])
 
@@ -43,7 +43,7 @@ export default function ScorecardTableBody({orgUnits}) {
             (orgUnits.length === 1 && !isEmpty(childrenOrgUnits)) ||
             orgUnits.length > 1
         ) {
-            scorecardDataEngine
+            dataEngine
                 .setDataGroups(dataGroups)
                 .setPeriods(periods)
                 .setOrgUnits([
@@ -54,8 +54,6 @@ export default function ScorecardTableBody({orgUnits}) {
                 .load();
         }
     }, [dataGroups, filteredOrgUnits, childrenOrgUnits, periodType, periods]);
-
-
     return (
         <DataTableBody>
             {
@@ -65,31 +63,38 @@ export default function ScorecardTableBody({orgUnits}) {
                             <Fragment>
                                 {filteredOrgUnits?.map((orgUnit) => (
                                     <ParentOrgUnitRow
+                                        dataEngine={dataEngine}
                                         key={`${orgUnit?.id}-row`}
                                         orgUnit={orgUnit}
                                         overallAverage={overallAverage}
+                                        orgUnits={orgUnits}
                                     />
                                 ))}
                                 {childrenOrgUnits?.map((orgUnit) => (
                                     <ChildOrgUnitRow
+                                        dataEngine={dataEngine}
                                         key={`${orgUnit?.id}-row`}
                                         onExpand={setExpandedOrgUnit}
                                         orgUnit={orgUnit}
                                         expandedOrgUnit={expandedOrgUnit}
                                         overallAverage={overallAverage}
+                                        orgUnits={orgUnits}
                                     />
                                 ))}
                             </Fragment> :
                             filteredDataHolders?.map(({id, dataSources}) => (
-                                <DataSourceRow orgUnits={orgUnits} dataSources={dataSources} key={`${id}-row`}
+                                <DataSourceRow dataEngine={dataEngine} orgUnits={orgUnits} dataSources={dataSources}
+                                               key={`${id}-row`}
                                                overallAverage={overallAverage}/>
                             ))
                     }
                     {
                         averageRow && (
                             tableOrientation === Orientation.ORG_UNIT_VS_DATA ?
-                                <AverageDataSourceRow orgUnits={orgUnits} overallAverage={overallAverage}/> :
-                                <AverageOrgUnitRow orgUnits={orgUnits} overallAverage={overallAverage} />
+                                <AverageDataSourceRow dataEngine={dataEngine} orgUnits={orgUnits}
+                                                      overallAverage={overallAverage}/> :
+                                <AverageOrgUnitRow dataEngine={dataEngine} orgUnits={orgUnits}
+                                                   overallAverage={overallAverage}/>
 
                         )
                     }
@@ -101,6 +106,7 @@ export default function ScorecardTableBody({orgUnits}) {
 }
 
 ScorecardTableBody.propTypes = {
+    dataEngine: PropTypes.instanceOf(ScorecardDataEngine).isRequired,
     orgUnits: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 

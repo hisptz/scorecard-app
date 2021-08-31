@@ -1,12 +1,10 @@
-import {CenteredContent, CircularLoader, Layer, layers} from '@dhis2/ui'
 import {isEmpty} from 'lodash'
-import React, {Suspense, useEffect, useRef} from "react";
+import React, {Suspense, useEffect, useMemo, useRef} from "react";
 import {useParams} from "react-router-dom";
 import {useRecoilCallback, useRecoilValue, useSetRecoilState} from "recoil";
 import {PeriodResolverState} from "../../../../core/state/period";
 import {
-    scorecardDataEngine,
-    ScorecardDataLoadingState,
+    ScorecardDataSourceState,
     ScorecardIdState,
     ScorecardTableOrientationState,
     ScorecardViewState,
@@ -26,8 +24,8 @@ export default function ScorecardView() {
     const {id: scorecardId} = useParams();
     const setScorecardIdState = useSetRecoilState(ScorecardIdState);
     const {orgUnits} = useRecoilValue(ScorecardViewState("orgUnitSelection"));
+    const orgUnitsIds = useMemo(() => orgUnits?.map(({id}) => id), [orgUnits])
     const {read: access} = useRecoilValue(UserAuthorityOnScorecard(scorecardId))
-    const loading = useRecoilValue(ScorecardDataLoadingState)
     const downloadRef = useRef()
     const periods = useRecoilValue(PeriodResolverState)
 
@@ -38,8 +36,7 @@ export default function ScorecardView() {
         reset(ScorecardViewState("options"))
         reset(ScorecardIdState)
         reset(ScorecardTableOrientationState)
-        reset(ScorecardDataLoadingState)
-        scorecardDataEngine.reset()
+        reset(ScorecardDataSourceState)
     })
 
     useEffect(() => {
@@ -55,11 +52,6 @@ export default function ScorecardView() {
 
     return (
         <Suspense fallback={<FullPageLoader/>}>
-            {loading && <Layer level={layers.blocking} translucent>
-                <CenteredContent>
-                    <CircularLoader small/>
-                </CenteredContent>
-            </Layer>}
             <ScorecardViewHeader downloadAreaRef={downloadRef}/>
             <div ref={downloadRef} className="column p-16" style={{height: "100%", width: "100%"}}>
                 <ScorecardHeader/>
@@ -70,7 +62,7 @@ export default function ScorecardView() {
                         (!isEmpty(orgUnits) && !isEmpty(periods)) ? <Suspense fallback={<FullPageLoader/>}>
                             <ScorecardTable
                                 nested={false}
-                                orgUnits={orgUnits}/>
+                                orgUnits={orgUnitsIds}/>
                         </Suspense> : <EmptyOrgUnitsOrPeriod/>
                     }
                 </div>
