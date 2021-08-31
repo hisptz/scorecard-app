@@ -23,7 +23,6 @@ export default function ScorecardGridCard({ scorecard }) {
   };
 
   const onEdit = () => {
-    console.log("on edit")
     history.push(`/edit/${id}`, { from: "home" });
   };
 
@@ -56,6 +55,7 @@ export default function ScorecardGridCard({ scorecard }) {
     <div
       className="container-bordered p-32"
       style={{ margin: 16, textAlign: "center", background: "white" }}
+      onClick={onView}
     >
       <img alt="img" src={holderImage} style={{ height: 100, width: 200 }} />
       <h3>{title}</h3>
@@ -64,8 +64,14 @@ export default function ScorecardGridCard({ scorecard }) {
         <Button onClick={onView} primary>
           {i18n.t("View")}
         </Button>
-        <Button onClick={onEdit}>{i18n.t("Edit")}</Button>
-        <Button onClick={() => setDeleteConfirmOpen(true)} destructive>
+        <Button onClick={function(_,e){
+                          e.stopPropagation()
+                             onEdit()
+                        }}>{i18n.t("Edit")}</Button>
+        <Button onClick={function(_,e){
+                          e.stopPropagation()
+                          setDeleteConfirmOpen(true)
+                        }} destructive>
           {i18n.t("Delete")}
         </Button>
       </ButtonStrip>
