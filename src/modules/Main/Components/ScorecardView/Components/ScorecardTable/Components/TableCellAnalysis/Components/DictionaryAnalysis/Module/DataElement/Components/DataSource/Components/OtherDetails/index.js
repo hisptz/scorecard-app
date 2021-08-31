@@ -13,7 +13,9 @@ const query = {
             fields: [
                 'id', 'displayName'
             ],
-            filter: levels?.map(level => (`level:eq: ${level}`)) ?? []
+            filter: levels?.map(level => (`level:eq:${(level)}`)) ?? [],
+            rootJunction:"OR",
+
         })
     }
 }
