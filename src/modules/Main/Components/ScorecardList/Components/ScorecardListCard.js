@@ -41,9 +41,11 @@ export default function ScorecardListCard({scorecard}) {
     }
 
     return (
-        <div className='container-bordered p-32' style={{margin: 16, background: 'white'}}>
+        <div className='container-bordered p-32' style={{margin: 16, background: 'white'}} 
+        onClick={onView}
+        >
             <div className='row space-between align-items-center'>
-                <div className='row'>
+                <div className='row' >
                     <img alt='img' src={holderImage} style={{height: 100, width: 200, paddingRight: 32}}/>
                    <div className='column start'>
                        <h3>{title}</h3>
@@ -53,8 +55,14 @@ export default function ScorecardListCard({scorecard}) {
                 <div className='row end'>
                     <ButtonStrip middle>
                         <Button onClick={onView} primary>{i18n.t('View')}</Button>
-                        <Button onClick={onEdit}>{i18n.t('Edit')}</Button>
-                        <Button onClick={() => setDeleteConfirmOpen(true)} destructive>{i18n.t('Delete')}</Button>
+                        <Button onClick={function(_,e){
+                          e.stopPropagation()
+                             onEdit()
+                        }}>{i18n.t('Edit')}</Button>
+                        <Button onClick={function(_,e){
+                          e.stopPropagation()
+                          setDeleteConfirmOpen(true)
+                        }} destructive>{i18n.t('Delete')}</Button>
                     </ButtonStrip>
                     {
                         deleteConfirmOpen &&

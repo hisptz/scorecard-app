@@ -23,6 +23,7 @@ export default function ScorecardGridCard({ scorecard }) {
   };
 
   const onEdit = () => {
+    console.log("on edit")
     history.push(`/edit/${id}`, { from: "home" });
   };
 
