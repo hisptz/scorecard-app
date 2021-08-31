@@ -43,7 +43,7 @@ export default function IndicatorFacts({id}) {
 
 
     if (data?.indicatorGroups?.indicatorGroups) {
-        return <p>There are no indicator facts associated with this indicator</p>
+        return <p>{i18n.t(" There are no indicator facts associated with this indicator")}</p>
     }
 
     let count = 0

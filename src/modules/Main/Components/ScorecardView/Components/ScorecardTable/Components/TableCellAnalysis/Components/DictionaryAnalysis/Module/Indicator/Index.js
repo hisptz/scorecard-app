@@ -48,7 +48,6 @@ export default function Index({id}) {
 
         <DatasetsReportingRates/>
 
-        {/*<CompletenessDataSources />*/}
         <AccesibilityAndSharing id={id} resourceType={"indicators"} />
 
     </div>)

@@ -1,11 +1,11 @@
 export const dataTypes = {
-    DATA_ELEMENT: 'dataElement',
-    PROGRAM_INDICATOR: 'programIndicator',
-    DATASET_REPORTING_RATES: 'dataSet',
-    ATTRIBUTES: 'attribute',
-    CONSTANTS: 'constant',
-    VARIABLE: 'variable',
-    UNDEFINED: 'undefined'
+        DATA_ELEMENT: 'dataElement',
+        PROGRAM_INDICATOR: 'programIndicator',
+        DATASET_REPORTING_RATES: 'dataSet',
+        ATTRIBUTES: 'attribute',
+        CONSTANTS: 'constant',
+        VARIABLE: 'variable',
+        UNDEFINED: 'undefined'
 }
 
 export const dataElementDomainTypes={

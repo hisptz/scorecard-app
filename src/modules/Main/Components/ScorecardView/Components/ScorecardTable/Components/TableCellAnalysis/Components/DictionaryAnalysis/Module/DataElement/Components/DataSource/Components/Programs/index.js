@@ -1,8 +1,9 @@
 import {useDataQuery} from "@dhis2/app-runtime";
-import {useEffect} from 'react'
+import i18n from "@dhis2/d2-i18n";
 import PropTypes from "prop-types";
-import Loader from "../../../../../../Shared/Componets/Loaders/Loader";
+import React, {useEffect} from 'react'
 import Error from "../../../../../../Shared/Componets/Error/ErrorAPIResult";
+import Loader from "../../../../../../Shared/Componets/Loaders/Loader";
 
 const query = {
     programs: {
@@ -17,9 +18,6 @@ const query = {
         }))
     }
 }
-
-// https://dhis2.nnkogift.me/api/programStages.json?filter=programStageDataElements.dataElement.id:eq:qrur9Dvnyt5&fields=program[id,displayName]
-
 
 
 export default  function Programs({id}){
@@ -38,16 +36,16 @@ export default  function Programs({id}){
 
 
     return (<div>
-        <h3>Data sources </h3>
-        <p>
-            Data element is captured from following sources
+        <h3>{i18n.t("Data sources")}  </h3>
+        <p> {i18n.t("Data element is captured from following sources")}
+
 
         </p>
-        <h5>Programs</h5>
+        <h5>{i18n.t("Programs")} </h5>
 
         <ul>
         {data?.programs?.programStages?.map((dt)=>{
-            return <li key={dt?.program?.id}><b>{dt?.program?.displayName}</b> submitting records on every event(case or individual)</li>
+            return <li key={dt?.program?.id}><b>{dt?.program?.displayName}</b> {i18n.t("submitting records on every event(case or individual)")} </li>
         })}
         </ul>
 
@@ -59,8 +57,8 @@ export default  function Programs({id}){
 }
 
 
-//
-//
-// Programs.PropTypes={
-//     id:PropTypes.string.isRequired
-// }
+
+
+Programs.PropTypes={
+    id:PropTypes.string.isRequired
+}

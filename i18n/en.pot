@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-08-30T12:12:31.648Z\n"
-"PO-Revision-Date: 2021-08-30T12:12:31.648Z\n"
+"POT-Creation-Date: 2021-08-31T07:14:21.599Z\n"
+"PO-Revision-Date: 2021-08-31T07:14:21.599Z\n"
 
 msgid "Data"
 msgstr "Data"
@@ -260,6 +260,33 @@ msgstr "Data element is captured from following sources"
 msgid "submitting {{variables1}} after every {{variables2}} days "
 msgstr "submitting {{variables1}} after every {{variables2}} days "
 
+msgid "Color"
+msgstr "Color"
+
+msgid " Icon"
+msgstr " Icon"
+
+msgid "Option set"
+msgstr "Option set"
+
+msgid "Option set for Comments"
+msgstr "Option set for Comments"
+
+msgid "Aggregation Levels"
+msgstr "Aggregation Levels"
+
+msgid "No legends assigned"
+msgstr "No legends assigned"
+
+msgid "No organization unit level assigned"
+msgstr "No organization unit level assigned"
+
+msgid "Programs"
+msgstr "Programs"
+
+msgid "submitting records on every event(case or individual)"
+msgstr "submitting records on every event(case or individual)"
+
 msgid "Data element Facts"
 msgstr "Data element Facts"
 
@@ -418,6 +445,9 @@ msgstr "Categories"
 msgid "Datasets/ Programs"
 msgstr "Datasets/ Programs"
 
+msgid " There are no indicator facts associated with this indicator"
+msgstr " There are no indicator facts associated with this indicator"
+
 msgid "Indicator facts"
 msgstr "Indicator facts"
 
@@ -429,12 +459,6 @@ msgstr "Code"
 
 msgid "Indicators"
 msgstr "Indicators"
-
-msgid "show less"
-msgstr "show less"
-
-msgid "show more"
-msgstr "show more"
 
 msgid "is a"
 msgstr "is a"
@@ -456,9 +480,6 @@ msgstr "Upper"
 
 msgid "Lower"
 msgstr "Lower"
-
-msgid "Color"
-msgstr "Color"
 
 msgid "Legends for analysis"
 msgstr "Legends for analysis"

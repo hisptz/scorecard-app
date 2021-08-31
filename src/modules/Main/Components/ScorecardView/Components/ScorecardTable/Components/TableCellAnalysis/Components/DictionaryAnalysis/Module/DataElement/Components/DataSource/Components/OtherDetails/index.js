@@ -1,9 +1,10 @@
-import { TableHead, TableBody,  DataTable,    DataTableRow,    DataTableCell,    DataTableColumnHeader,} from '@dhis2/ui'
 import {useConfig, useDataQuery} from "@dhis2/app-runtime";
-import {dataTypes} from "../../../../../../Utils/Models";
-import Loader from "../../../../../../Shared/Componets/Loaders/Loader";
-import Error from "../../../../../../Shared/Componets/Error/ErrorAPIResult";
+import i18n from "@dhis2/d2-i18n";
+import { TableHead, TableBody,  DataTable,    DataTableRow,    DataTableCell,    DataTableColumnHeader,} from '@dhis2/ui'
 import React from "react";
+import Error from "../../../../../../Shared/Componets/Error/ErrorAPIResult";
+import Loader from "../../../../../../Shared/Componets/Loaders/Loader";
+import {dataTypes} from "../../../../../../Utils/Models";
 
 const query = {
     orgUnitLevels: {
@@ -37,33 +38,33 @@ export default function OtherDetailTable(props){
 
                     </DataTableColumnHeader>
                     <DataTableColumnHeader>
-                        Color
+                        {i18n.t("Color")}
                     </DataTableColumnHeader>
                     <DataTableColumnHeader>
-                        Icon
+                        {i18n.t(" Icon")}
                     </DataTableColumnHeader>
                     <DataTableColumnHeader>
-                        Option set
+                        {i18n.t("Option set")}
                     </DataTableColumnHeader>
                     <DataTableColumnHeader>
-                        Option set for Comments
+                        {i18n.t("Option set for Comments")}
                     </DataTableColumnHeader>
                     <DataTableColumnHeader>
-                        Legends
+                        {i18n.t("Legends")}
                     </DataTableColumnHeader>
                     <DataTableColumnHeader>
-                        Aggregation Levels
+                        {i18n.t("Aggregation Levels")}
                     </DataTableColumnHeader>
                 </DataTableRow>
             </TableHead>
             <TableBody>
                 <DataTableRow>
                     <DataTableCell bordered tag="th">
-                        Details
+                        {i18n.t("Details")}
                     </DataTableCell>
                     <DataTableCell bordered >
 
-                        {typeof(detail?.style?.color)===dataTypes.UNDEFINED?"no color":
+                        {typeof(detail?.style?.color)===dataTypes.UNDEFINED? i18n.t("no color") :
                             <div style={{
                                 background: detail?.style?.color,
                                 width:"inherit",
@@ -73,7 +74,7 @@ export default function OtherDetailTable(props){
 
                     </DataTableCell>
                     <DataTableCell bordered>
-                        {typeof detail?.style?.color===dataTypes.UNDEFINED?"no icon":
+                        {typeof detail?.style?.color===dataTypes.UNDEFINED? i18n.t("no icon"):
                             <img src={`${baseUrl}/api/icons/${detail?.style?.icon}/icon.svg`} alt={"icon"} />
                         }
 
@@ -82,22 +83,26 @@ export default function OtherDetailTable(props){
                         {JSON.stringify(detail?.optionSetValue)}
                     </DataTableCell>
                     <DataTableCell bordered>
-                        {typeof detail?.commentOptionSet?.displayName===dataTypes.UNDEFINED?"no commnets":detail?.commentOptionSet?.displayName}
+                        {typeof detail?.commentOptionSet?.displayName===dataTypes.UNDEFINED?i18n.t("no comments"):detail?.commentOptionSet?.displayName}
 
                     </DataTableCell>
                     <DataTableCell bordered>
-                        {detail?.legendSets?.length===0? 'no legends assigned':
-                            <ol>
-                                {detail?.legendSets?.map((legend)=>{
-                                    return <li key={legend.id}>{legend?.displayName}</li>
-                                })}
-                            </ol>
-                        }
+                        {detail?.legendSets?.length===0
+                        ? i18n.t("No legends assigned")
+                        :
+                        <ol>
+                            {detail?.legendSets?.map((legend)=>{
+                                return <li key={legend.id}>{legend?.displayName}</li>
+                            })}
+                        </ol>}
+
+                            
+
                     </DataTableCell>
                     <DataTableCell bordered>
                         {
                             loading ? <Loader text={""}/> : error ? <Error error={error}/> :
-                                data?.orgUnitLevels?.organisationUnitLevels?.length === 0 ? "No organization unit level assigned" :
+                                 data?.orgUnitLevels?.organisationUnitLevels?.length === 0 ?i18n.t("No organization unit level assigned" ) :
                                     <ol>
                                         {data?.orgUnitLevels?.organisationUnitLevels?.map((lev) => {
                                             return (

@@ -69,7 +69,6 @@ export default function CalculationDetails({id}) {
 
                     </DataTableCell>
                     <CalculationDetailRow formula={numDen.numerator} location="numerator"/>
-                    {/*<CalculationDetailRow formula={"#{RF4VFVGdFRO.jOkIbJVhECg}"} location="numerator" />*/}
 
                 </DataTableRow>
                 <DataTableRow>
