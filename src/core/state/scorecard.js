@@ -77,6 +77,7 @@ const ScorecardSummaryState = atom({
         },
     })
 })
+
 //This is to force a data re-fetch when a scorecard is updated
 const ScorecardRequestId = atomFamily({
     key: 'scorecardForceUpdateState',

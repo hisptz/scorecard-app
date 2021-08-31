@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import React, {useEffect, useState} from 'react'
 import {useRecoilValue} from "recoil";
 import ScorecardDataEngine from "../../../../../../../core/models/scorecardData";
-import {ScorecardTableConfigState} from "../../../../../../../core/state/scorecard";
+import {ScorecardDataLoadingState, ScorecardTableConfigState} from "../../../../../../../core/state/scorecard";
 import useMediaQuery from "../../../../../../../shared/hooks/useMediaQuery";
 
 export default function TableLoader() {
@@ -23,6 +23,7 @@ export default function TableLoader() {
 export function TableLinearLoader({dataEngine, orgUnits}) {
     const {width: screenWidth} = useMediaQuery();
     const {colSpan} = useRecoilValue(ScorecardTableConfigState(orgUnits))
+    const loading = useRecoilValue(ScorecardDataLoadingState(orgUnits))
     const [progress, setProgress] = useState(0);
 
     useEffect(() => {
@@ -33,12 +34,12 @@ export function TableLinearLoader({dataEngine, orgUnits}) {
     }, [orgUnits, dataEngine]);
 
     return (
-        (progress !== 100 && progress !== 0) &&
-        <DataTableRow>
-            <td colSpan={colSpan}>
-                <LinearLoader width={`${screenWidth}px`} amount={progress} margin={0}/>
-            </td>
-        </DataTableRow>
+        loading ?
+            <DataTableRow>
+                <td colSpan={colSpan}>
+                    <LinearLoader width={`${screenWidth}px`} amount={progress} margin={0}/>
+                </td>
+            </DataTableRow> : null
     )
 }
 

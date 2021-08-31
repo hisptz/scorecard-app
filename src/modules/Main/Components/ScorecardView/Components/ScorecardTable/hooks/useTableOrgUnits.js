@@ -1,7 +1,7 @@
 import {useDataEngine} from "@dhis2/app-runtime";
 import {isEmpty} from "lodash";
 import {useEffect, useState} from "react";
-import {useRecoilValue, useSetRecoilState} from "recoil";
+import {useRecoilCallback, useRecoilValue, useSetRecoilState} from "recoil";
 import {Orientation} from "../../../../../../../core/constants/orientation";
 import {PeriodResolverState} from "../../../../../../../core/state/period";
 import {
@@ -25,19 +25,25 @@ export default function useTableOrgUnits(dataEngine, orgUnits) {
     const orientation = useRecoilValue(ScorecardTableOrientationState)
     const [orgUnitSort, setOrgUnitSort] = useState([]);
 
+    const setDefaults = useRecoilCallback(({reset}) => () => {
+        reset(ScorecardOrgUnitState(orgUnits))
+    })
+
     useEffect(() => {
         async function search() {
-
             const searchedOrgUnits = await searchOrganisationUnit(searchKeyword, engine)
             setOrgUnits(prevOrgUnits => ({
                 ...prevOrgUnits,
-                filteredOrgUnits: searchedOrgUnits
+                filteredOrgUnits: searchedOrgUnits,
+                childrenOrgUnits: []
             }))
         }
 
         if (!isEmpty(searchKeyword)) {
             setLoading(true);
             search().then(() => setLoading(false)).catch(e => console.error(e))
+        } else {
+            setDefaults()
         }
     }, [searchKeyword]);
 
@@ -66,7 +72,6 @@ export default function useTableOrgUnits(dataEngine, orgUnits) {
         if (dataSort) {
             setDataSort()
         }
-
     }, [sort, dataSort, orientation, dataEngine, periods]);
 
     useEffect(() => {
@@ -98,7 +103,11 @@ export default function useTableOrgUnits(dataEngine, orgUnits) {
             }
         }
 
-        sortOrgUnits()
+        if (orgUnitSort || sort) {
+            sortOrgUnits()
+        } else {
+            setDefaults()
+        }
     }, [orgUnitSort, sort]);
 
     return {

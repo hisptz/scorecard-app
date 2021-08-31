@@ -112,6 +112,8 @@ export default class ScorecardDataEngine {
         if (this._canLoadData) {
             this._loading$.next(true)
             this._cancelled = false
+            this._progress = 0;
+            this._progress$.next(this._progress)
             this._getScorecardData({
                 selectedOrgUnits: this._selectedOrgUnits.map((orgUnit) => orgUnit?.id),
                 selectedPeriods: this._selectedPeriods.map((period) => period?.id),
