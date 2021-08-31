@@ -5,31 +5,28 @@ import React, {useEffect, useState} from 'react'
 import {useRecoilValue} from "recoil";
 import AverageDisplayType from "../../../../../../../../../core/constants/averageDisplayType";
 import {DraggableItems} from "../../../../../../../../../core/constants/draggables";
+import ScorecardDataEngine from "../../../../../../../../../core/models/scorecardData";
 import {PeriodResolverState} from "../../../../../../../../../core/state/period";
-import {
-    scorecardDataEngine,
-    ScorecardDataLoadingState,
-    ScorecardViewState
-} from "../../../../../../../../../core/state/scorecard";
+import {ScorecardDataLoadingState, ScorecardViewState} from "../../../../../../../../../core/state/scorecard";
 import DataContainer from "../../TableDataContainer";
 import AverageCell from "./AverageCell";
 import DroppableCell from "./DroppableCell";
 import OrgUnitContainer from "./OrgUnitContainer";
 
-export default function ParentOrgUnitRow({orgUnit, overallAverage}) {
+export default function ParentOrgUnitRow({orgUnit, overallAverage, dataEngine, orgUnits}) {
     const {emptyRows, averageColumn, averageDisplayType} = useRecoilValue(ScorecardViewState('options'))
     const [isEmpty, setIsEmpty] = useState(false);
     const [average, setAverage] = useState();
     const {id} = orgUnit ?? {};
     const {dataGroups} =
     useRecoilValue(ScorecardViewState("dataSelection")) ?? {};
-    const loading = useRecoilValue(ScorecardDataLoadingState)
+    const loading = useRecoilValue(ScorecardDataLoadingState(orgUnits))
     const periods = useRecoilValue(PeriodResolverState) ?? [];
 
     function subscribeToAverage() {
         if (loading !== undefined && !loading) {
-            const rowAverage = scorecardDataEngine.getOrgUnitAverage(id).subscribe(setAverage);
-            const rowStatusSub = scorecardDataEngine.isRowEmpty(id).subscribe(setIsEmpty)
+            const rowAverage = dataEngine.getOrgUnitAverage(id).subscribe(setAverage);
+            const rowStatusSub = dataEngine.isRowEmpty(id).subscribe(setIsEmpty)
             return () => {
                 rowAverage.unsubscribe();
                 rowStatusSub.unsubscribe()
@@ -58,6 +55,7 @@ export default function ParentOrgUnitRow({orgUnit, overallAverage}) {
                             key={`${groupId}-${holderId}-${period.id}`}
                         >
                             <DataContainer
+                                dataEngine={dataEngine}
                                 orgUnit={orgUnit}
                                 dataSources={dataSources}
                                 period={period}
@@ -88,6 +86,8 @@ export default function ParentOrgUnitRow({orgUnit, overallAverage}) {
 }
 
 ParentOrgUnitRow.propTypes = {
+    dataEngine: PropTypes.instanceOf(ScorecardDataEngine).isRequired,
     orgUnit: PropTypes.object.isRequired,
+    orgUnits: PropTypes.array.isRequired,
     overallAverage: PropTypes.number.isRequired
 };

@@ -24,6 +24,10 @@ import {map, take} from "rxjs/operators";
 import {TableSort} from "../constants/tableSort";
 
 export default class ScorecardDataEngine {
+    _cancelled = false;
+    _totalRequests = 0;
+    _progress = 0
+    _progress$ = new BehaviorSubject();
     _loading$ = new BehaviorSubject();
     _dataEntities = {};
     _dataEntities$ = new BehaviorSubject(this._dataEntities);
@@ -31,12 +35,7 @@ export default class ScorecardDataEngine {
     _previousPeriods = []
 
     constructor() {
-        if (!ScorecardDataEngine?.instance) {
-            ScorecardDataEngine.instance = this;
-        }
-        return ScorecardDataEngine.instance;
-
-
+        this._cancelled = false;
     }
 
     setPeriodType(periodType) {
@@ -112,12 +111,19 @@ export default class ScorecardDataEngine {
     load() {
         if (this._canLoadData) {
             this._loading$.next(true)
+            this._cancelled = false
             this._getScorecardData({
                 selectedOrgUnits: this._selectedOrgUnits.map((orgUnit) => orgUnit?.id),
                 selectedPeriods: this._selectedPeriods.map((period) => period?.id),
                 selectedData: this._selectedData,
             });
         }
+    }
+
+    getProgress() {
+        return this._progress$.pipe(map(progress => {
+            return Math.floor((progress / this._totalRequests) * 100)
+        }))
     }
 
     isRowEmpty(orgUnitId = '') {
@@ -339,6 +345,7 @@ export default class ScorecardDataEngine {
         this._dataEntities = {}
         this._dataEntities$.next(this._dataEntities)
         this._loading$.next(false)
+        this._cancelled = true
     }
 
     _getScorecardData(selections) {
@@ -359,41 +366,44 @@ export default class ScorecardDataEngine {
     }
 
     _getAnalyticsData(selections) {
-        let dx = [];
-        let ou = [];
-        let pe = [];
+        if (!this._cancelled) {
+            let dx = [];
+            let ou = [];
+            let pe = [];
 
-        (selections || []).forEach((selection) => {
-            const availableData =
-                this._dataEntities[`${selection.dx}_${selection.ou}_${selection.pe}`];
+            (selections || []).forEach((selection) => {
+                const availableData =
+                    this._dataEntities[`${selection.dx}_${selection.ou}_${selection.pe}`];
 
-            if (!availableData) {
-                dx = [...dx, selection.dx];
-                ou = [...ou, selection.ou];
-                pe = [...pe, selection.pe];
+                if (!availableData) {
+                    dx = [...dx, selection.dx];
+                    ou = [...ou, selection.ou];
+                    pe = [...pe, selection.pe];
+                }
+            });
+
+            dx = uniq(dx);
+            ou = uniq(ou);
+            pe = uniq(pe);
+
+            if (dx?.length === 0 && ou?.length === 0 && pe?.length === 0) {
+                return of(null).toPromise();
             }
-        });
 
-        dx = uniq(dx);
-        ou = uniq(ou);
-        pe = uniq(pe);
-
-        if (dx?.length === 0 && ou?.length === 0 && pe?.length === 0) {
-            return of(null).toPromise();
+            return new Fn.Analytics()
+                .setOrgUnit(ou?.join(";"))
+                .setPeriod(pe?.join(";"))
+                .setData(dx.join(";"))
+                .postProcess((analytics) => {
+                    this._updateDataEntities(analytics?.rows);
+                })
+                .get();
         }
-
-        return new Fn.Analytics()
-            .setOrgUnit(ou?.join(";"))
-            .setPeriod(pe?.join(";"))
-            .setData(dx.join(";"))
-            .postProcess((analytics) => {
-                this._updateDataEntities(analytics?.rows);
-            })
-            .get();
+        return of(null).toPromise();
     }
 
     _getNormalScorecardData(selections) {
-        const {selectedOrgUnits, selectedPeriods, selectedDataItems} = selections;
+        const {selectedOrgUnits, selectedPeriods, selectedDataItems} = selections ?? {};
 
         let selectionList = [];
 
@@ -416,12 +426,16 @@ export default class ScorecardDataEngine {
             });
         });
 
+        this._totalRequests = selectionList?.length;
+
         mapLimit(
             selectionList,
             10,
             (selection, callback) => {
                 this._getAnalyticsData(selection)
                     .then((result) => {
+                        this._progress = this._progress + 1;
+                        this._progress$.next(this._progress)
                         callback(null, result);
                     })
                     .catch((error) => {

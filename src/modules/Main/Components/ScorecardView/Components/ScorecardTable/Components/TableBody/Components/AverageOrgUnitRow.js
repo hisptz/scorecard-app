@@ -3,13 +3,14 @@ import {DataTableCell, DataTableRow} from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import React from 'react'
 import {useRecoilValue} from "recoil";
+import ScorecardDataEngine from "../../../../../../../../../core/models/scorecardData";
 import {PeriodResolverState} from "../../../../../../../../../core/state/period";
 import {ScorecardOrgUnitState, ScorecardViewState} from "../../../../../../../../../core/state/scorecard";
 import AverageCell from "./AverageCell";
 import AverageDataContainer from "./AverageDataContainer";
 
 
-export default function AverageOrgUnitRow({orgUnits, overallAverage}) {
+export default function AverageOrgUnitRow({orgUnits, overallAverage, dataEngine}) {
     const periods = useRecoilValue(PeriodResolverState)
     const {childrenOrgUnits, filteredOrgUnits} = useRecoilValue(ScorecardOrgUnitState(orgUnits))
     const {averageColumn} = useRecoilValue(ScorecardViewState('options'))
@@ -24,7 +25,7 @@ export default function AverageOrgUnitRow({orgUnits, overallAverage}) {
             {
                 ([...filteredOrgUnits, ...childrenOrgUnits])?.map(({id}) => (
                     periods?.map(({id: periodId}) => (
-                        <AverageDataContainer orgUnits={orgUnits} key={`${id}-${periodId}-average`} period={periodId}
+                        <AverageDataContainer dataEngine={dataEngine} orgUnits={orgUnits} key={`${id}-${periodId}-average`} period={periodId}
                                               orgUnit={id}/>
                     ))
                 ))
@@ -37,6 +38,7 @@ export default function AverageOrgUnitRow({orgUnits, overallAverage}) {
 }
 
 AverageOrgUnitRow.propTypes = {
+    dataEngine: PropTypes.instanceOf(ScorecardDataEngine).isRequired,
     orgUnits: PropTypes.array.isRequired,
     overallAverage: PropTypes.number.isRequired
 };

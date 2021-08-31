@@ -21,7 +21,7 @@ export default function useDownload(downloadRef) {
     const dataHolders = useRecoilValue(ScorecardDataSourceState)
     const allOrgUnits = useMemo(() => [...filteredOrgUnits, ...childrenOrgUnits], [filteredOrgUnits, childrenOrgUnits]);
     const periods = useRecoilValue(PeriodResolverState)
-    const loading = useRecoilValue(ScorecardDataLoadingState)
+    const loading = useRecoilValue(ScorecardDataLoadingState(orgUnits))
     const [data, setData] = useState();
     const {show} = useAlert(({message}) => message, ({type}) => ({...type, duration: 3000}))
     const handlePDFDownload = useReactToPrint({
