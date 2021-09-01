@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-07-28T07:49:24.286Z\n"
-"PO-Revision-Date: 2021-07-28T07:49:24.286Z\n"
+"POT-Creation-Date: 2021-09-01T10:33:29.094Z\n"
+"PO-Revision-Date: 2021-09-01T10:33:29.094Z\n"
 
 msgid "Organisation Unit"
 msgstr "Organisation Unit"
@@ -152,6 +152,9 @@ msgstr "Are you sure you want to delete scorecard "
 msgid "Are you sure you want to delete scorecard"
 msgstr "Are you sure you want to delete scorecard"
 
+msgid "Search"
+msgstr "Search"
+
 msgid "Help"
 msgstr "Help"
 
@@ -166,9 +169,6 @@ msgstr "grid"
 
 msgid "Add New Scorecard"
 msgstr "Add New Scorecard"
-
-msgid "Search"
-msgstr "Search"
 
 msgid "Legends"
 msgstr "Legends"

@@ -82,8 +82,19 @@ export default function ScorecardList() {
       {isEmpty(scorecards) ? (
         <EmptyScoreCardList />
       ) : (
-        <div className="column">
+        <div className="column" >
           <div className="row p-16">
+          <div className="row p-45 center" style={{paddingLeft:'35%'}} >
+            <div className="column w-30" >
+              <Input
+                value={keyword}
+                onChange={({ value }) => {
+                  setKeyword(value);
+                }}
+                placeholder={i18n.t("Search")}
+              />
+            </div>
+          </div>
             <div className="w-100">
               <ButtonStrip end>
                 <Button icon={<HelpIcon />}>{i18n.t("Help")}</Button>
@@ -113,17 +124,7 @@ export default function ScorecardList() {
               </ButtonStrip>
             </div>
           </div>
-          <div className="row p-16 center">
-            <div className="column w-50">
-              <Input
-                value={keyword}
-                onChange={({ value }) => {
-                  setKeyword(value);
-                }}
-                placeholder={i18n.t("Search")}
-              />
-            </div>
-          </div>
+         
           <PaginatedDisplay
             scorecards={filteredScorecards}
             pageSize={scorecardViewType === "grid" ? 8 : 5}
