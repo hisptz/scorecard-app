@@ -90,19 +90,19 @@
       "assignedTo": {
         "name": "Danford Kija"
       },
-      "creation_time": "2021-08-29T10:19:10.720Z",
-      "id": "8",
+      "creation_time": "2021-08-29T10:18:57.520Z",
+      "id": "7",
       "references": [],
-      "title": "Styling on the components"
+      "title": "remove object name on chart art rows for column ,bar and area graphs"
     },
     {
       "assignedTo": {
         "name": "Danford Kija"
       },
-      "creation_time": "2021-08-29T10:18:57.520Z",
-      "id": "7",
+      "creation_time": "2021-08-29T10:19:10.720Z",
+      "id": "8",
       "references": [],
-      "title": "remove object name on chart art rows for column ,bar and area graphs"
+      "title": "Styling on the components"
     }
   ]
 }
