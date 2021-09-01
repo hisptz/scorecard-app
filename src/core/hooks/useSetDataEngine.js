@@ -6,8 +6,8 @@ import {EngineState} from "../state/engine";
 export default function useSetDataEngine() {
     const setEngine = useSetRecoilState(EngineState)
     const engine = useDataEngine();
-    
+
     useEffect(() => {
         setEngine(engine)
-    }, [engine]);
+    }, []);
 }

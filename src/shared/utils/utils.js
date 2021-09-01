@@ -1,6 +1,14 @@
-import {capitalize, snakeCase} from "lodash";
+import {capitalize, flattenDeep, snakeCase, head, last} from "lodash";
 import ScorecardLegend from "../../core/models/scorecardLegend";
 
+
+export function getWindowDimensions() {
+    const {innerWidth: width, innerHeight: height} = window;
+    return {
+        width: width > 1366 ? width : 1366,
+        height: (height > 763 ? height : 763) - 48 //considering the appbar
+    };
+}
 
 export function getDataSourceShortName(name = '') {
     return snakeCase(name).split('_').map(s => capitalize(s)[0]).join('')
@@ -48,13 +56,27 @@ export function generateLegendDefaults(legendDefinition = [], weight) {
     return []
 }
 
-export function updatePager(pager, itemListLength){
+
+export function getHoldersFromGroups(dataGroups = []) {
+    return flattenDeep(dataGroups?.map(({dataHolders}) => dataHolders) ?? [])
+}
+
+export function getDataSourcesFromGroups(dataGroups) {
+    const dataHolders = getHoldersFromGroups(dataGroups)
+    return flattenDeep(dataHolders?.map(({dataSources}) => dataSources))
+}
+
+export function getDataSourcesDisplayName(dataSources){
+    return dataSources?.length > 1 ? `${head(dataSources)?.displayName} / ${last(dataSources)?.displayName}` : `${head(dataSources)?.displayName}`
+}
+
+export function updatePager(pager, itemListLength) {
     const {page, pageSize} = pager;
 
     return {
         page,
         pageSize,
-        pageCount: Math.ceil(itemListLength/pageSize),
+        pageCount: Math.ceil(itemListLength / pageSize),
         total: itemListLength
     }
 }

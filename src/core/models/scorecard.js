@@ -12,10 +12,11 @@ export default class Scorecard extends SavableDataModel {
         return {
             id: uid(),
             name: '',
-            title: 'Untitled',
+            title: '',
             subtitle: '',
             description: '',
             customHeader: '',
+            periodType: '',
             legendDefinitions: [],
             dataSelection: new DataSelection(),
             orgUnitSelection: new OrgUnitSelection(),
@@ -25,7 +26,9 @@ export default class Scorecard extends SavableDataModel {
             publicAccess: new ScorecardAccess(),
             userGroupAccesses: [],
             userAccesses: [],
-            user: {}
+            user: {},
+            targetOnLevels: false,
+            additionalLabels: []
         }
     }
 
