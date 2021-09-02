@@ -1,3 +1,4 @@
+import {colors} from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import React, {useMemo} from "react";
 import {useRecoilValue} from "recoil";
@@ -15,10 +16,10 @@ export function SingleDataCell({data, color}) {
             return null
         }
         return null;
-    }, [current, previous]);
-
+    }, [current, previous, arrows]);
     return (
-        <SingleCellSvg status={increasing} value={`${current ?? ''}`} color={color}/>
+        current ? <SingleCellSvg status={increasing} value={`${current ?? ''}`} color={color}/> :
+            <div style={{height: '100%', width: '100%', background: colors.grey100}}/>
     )
 }
 
@@ -32,31 +33,31 @@ export function LinkedDataCell({topData, bottomData, topColor, bottomColor}) {
     const {current: topCurrent, previous: topPrevious} = topData ?? {};
     const {current: bottomCurrent, previous: bottomPrevious} = bottomData ?? {};
     const {arrows} = useRecoilValue(ScorecardViewState('options')) ?? {}
-
     const topIncreasing = useMemo(() => {
         if (arrows) {
             if (topCurrent > topPrevious) return 'increasing'
             if (topCurrent < topPrevious) return 'decreasing'
         }
         return null;
-    }, [topCurrent, topPrevious]);
+    }, [topCurrent, topPrevious, arrows]);
     const bottomIncreasing = useMemo(() => {
         if (arrows) {
             if (bottomCurrent > bottomPrevious) return 'increasing'
             if (bottomCurrent < bottomPrevious) return 'decreasing'
         }
         return null
-    }, [bottomCurrent, bottomPrevious]);
+    }, [bottomCurrent, bottomPrevious, arrows]);
 
     return (
-        <LinkedCellSvg
-            topValue={topCurrent}
-            topColor={topColor}
-            bottomValue={bottomCurrent}
-            bottomColor={bottomColor}
-            topStatus={topIncreasing}
-            bottomStatus={bottomIncreasing}
-        />
+        (topCurrent || bottomCurrent) ?
+            <LinkedCellSvg
+                topValue={topCurrent}
+                topColor={topColor}
+                bottomValue={bottomCurrent}
+                bottomColor={bottomColor}
+                topStatus={topIncreasing}
+                bottomStatus={bottomIncreasing}
+            /> : <div style={{height: '100%', width: '100%', background: colors.grey100}}/>
     )
 }
 

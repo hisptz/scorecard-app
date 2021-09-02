@@ -13,5 +13,18 @@ export const DATASTORE_SCORECARD_SUMMARY_INCLUDE_KEYS = [
     {
         key: 'id',
         path: ['id']
+    },
+    {
+        key: 'user',
+        path: ['user', 'id']
+    },
+    {
+        key: 'userAccesses',
+        path: ['userAccesses']
+    },
+    {
+        key: 'userGroupAccesses',
+        path: ['userGroupAccesses']
     }
 ]
+

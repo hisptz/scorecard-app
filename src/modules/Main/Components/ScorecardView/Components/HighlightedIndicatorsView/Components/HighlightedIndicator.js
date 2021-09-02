@@ -1,11 +1,12 @@
 import PropTypes from 'prop-types'
-import React, {useMemo} from 'react'
-import {generateRandomValues} from "../../../../../../../shared/utils/utils";
-import {getLegend} from "../../../../../../Admin/Components/ScoreCardManagement/Components/DataConfiguration/utils";
+import React from 'react'
+import {useRecoilValue} from "recoil";
+import {SingleHighlightedIndicatorState} from "../../../../../../../core/state/highlightedIndicators";
+import {getLegend} from "../../../../ScoreCardManagement/Components/DataConfiguration/utils";
 
 export default function HighlightedIndicator({highlightedIndicator}) {
-    const {displayName, legends} = highlightedIndicator ?? {};
-    const value = useMemo(() => generateRandomValues(100), []);
+    const {displayName, legends, id} = highlightedIndicator ?? {};
+    const value = useRecoilValue(SingleHighlightedIndicatorState(id))
     const {color} = getLegend(value, legends) ?? {}
     return (
         <div style={{background: 'white', border: '1px solid rgb(232, 237, 242)', margin: 8}}>

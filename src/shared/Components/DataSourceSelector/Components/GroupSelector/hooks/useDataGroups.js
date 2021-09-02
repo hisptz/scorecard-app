@@ -31,7 +31,6 @@ export default function useDataGroups(initialSelectedDataType) {
                     setLoading(true)
                     try {
                         const response = await initialSelectedDataType.getGroups(engine)
-                        console.log(response)
                         if (response) {
                             setData(response)
                         }
