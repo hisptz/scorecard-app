@@ -5,7 +5,7 @@ import {ScorecardIdState, ScorecardViewState,} from "../../../../core/state/scor
 import {FullPageLoader} from "../../../../shared/Components/Loaders";
 import HighlightedIndicatorsView from "./Components/HighlightedIndicatorsView";
 import ScorecardHeader from "./Components/ScorecardHeader";
-import ScorecardLegendsView from "./Components/ScorecardLegendsView";
+const ScorecardLegendsView  = lazy(() => import('./Components/ScorecardLegendsView'));
 const ScorecardTable  = lazy(() => import('./Components/ScorecardTable'));
 import ScorecardViewHeader from "./Components/ScorecardViewHeader";
 
