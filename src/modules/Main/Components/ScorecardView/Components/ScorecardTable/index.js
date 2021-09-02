@@ -117,7 +117,6 @@ export default function ScorecardTable({ orgUnits, nested }) {
       }
     }
   }, [dataGroups, filteredOrgUnits, childrenOrgUnits, periodType]);
-
   return (
     <div className="w-100 pb-32 flex-1">
       {isEmpty(dataGroups) ? (

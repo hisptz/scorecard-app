@@ -1,4 +1,4 @@
-import React, {Suspense, useEffect} from "react";
+import React, {Suspense, useEffect,lazy} from "react";
 import {useParams} from "react-router-dom";
 import {useRecoilValue, useResetRecoilState, useSetRecoilState} from "recoil";
 import {ScorecardIdState, ScorecardViewState,} from "../../../../core/state/scorecard";
@@ -6,7 +6,7 @@ import {FullPageLoader} from "../../../../shared/Components/Loaders";
 import HighlightedIndicatorsView from "./Components/HighlightedIndicatorsView";
 import ScorecardHeader from "./Components/ScorecardHeader";
 import ScorecardLegendsView from "./Components/ScorecardLegendsView";
-import ScorecardTable from "./Components/ScorecardTable";
+const ScorecardTable  = lazy(() => import('./Components/ScorecardTable'));
 import ScorecardViewHeader from "./Components/ScorecardViewHeader";
 
 export default function ScorecardView() {
