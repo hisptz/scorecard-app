@@ -1,4 +1,4 @@
-import * as _ from 'lodash';
+import {map} from 'lodash';
 export function getChartSubtitleObject(
   chartConfiguration,
   analyticsObject){
@@ -7,8 +7,8 @@ export function getChartSubtitleObject(
     return null;
   }
   return {
-    text: _.map(chartConfiguration.zAxisType, (zAxis) =>
-      _.map(
+    text: map(chartConfiguration.zAxisType, (zAxis) =>
+      map(
         analyticsObject && analyticsObject.metaData
           ? analyticsObject.metaData[zAxis] || []
           : [],

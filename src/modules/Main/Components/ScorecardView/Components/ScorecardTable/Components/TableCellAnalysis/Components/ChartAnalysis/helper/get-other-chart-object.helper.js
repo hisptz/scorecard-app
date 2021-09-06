@@ -1,4 +1,4 @@
-import * as _ from 'lodash';
+import {filter ,map} from 'lodash';
 import { getChartAxisItems } from './get-chart-axis-items.helper';
 // import { getChartExportingOptions } from './get-chart-exporting-options.helper';
 import { getChartSeriesWithAxisOptions } from './get-chart-series-with-axis-options.helper';
@@ -44,8 +44,8 @@ export  function getOtherChartObject(
   /**
    * Update colors by considering if series has data
    */
-  const newColors  = _.filter(
-    _.map(seriesWithAxisOptions, (seriesObject) =>
+  const newColors  = filter(
+    map(seriesWithAxisOptions, (seriesObject) =>
       seriesObject.data[0] ? seriesObject.data[0].color : undefined
     ),
     (color) => color

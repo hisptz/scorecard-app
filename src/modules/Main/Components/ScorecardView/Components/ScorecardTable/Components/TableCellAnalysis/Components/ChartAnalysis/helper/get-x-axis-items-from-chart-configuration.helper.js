@@ -1,4 +1,4 @@
-import * as _ from 'lodash';
+import {find} from 'lodash';
 
 export  function getXAxisItemsFromChartConfiguration(
     chartConfiguration
@@ -7,7 +7,7 @@ export  function getXAxisItemsFromChartConfiguration(
 
     return (chartConfiguration ? chartConfiguration.xAxisType : []).map(
         (xAxisDimension) =>{
-            const dataSelection = _.find(
+            const dataSelection = find(
                 chartConfiguration  ? chartConfiguration.dataSelections : [],
                 [
                    'dimension',xAxisDimension === 'groups' ? 'dx' : xAxisDimension

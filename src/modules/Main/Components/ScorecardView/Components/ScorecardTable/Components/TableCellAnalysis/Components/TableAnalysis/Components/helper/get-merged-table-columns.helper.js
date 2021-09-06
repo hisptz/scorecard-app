@@ -1,5 +1,5 @@
 /* eslint-disable import/named */
-import _ from 'lodash';
+import {map,each,filter} from 'lodash';
 import { getMatchingTableRowsOrColumns } from './get-matching-table-rows-or-columns.helper';
 
 export  function getMergedTableColumns(
@@ -8,7 +8,7 @@ export  function getMergedTableColumns(
 ) {
 
   const availableParent = {};
-  const mergedTableColumnsArray = _.map(
+  const mergedTableColumnsArray = map(
     tableDataColumns,
     (tableDataRow) => {
       const matchingTableColumns = getMatchingTableRowsOrColumns(
@@ -17,9 +17,9 @@ export  function getMergedTableColumns(
       );
 
      
-      _.each(matchingTableColumns, (matchingTableColumn) => {
-        _.each(
-          _.filter(
+      each(matchingTableColumns, (matchingTableColumn) => {
+        each(
+          filter(
             matchingTableColumn.dataRowIds,
             dataRowId => dataRowId !== matchingTableColumn.id
           ),
@@ -39,8 +39,8 @@ export  function getMergedTableColumns(
     }
   );
 
-  return _.map(mergedTableColumnsArray, (mergedDataColumns) =>
-    _.map(mergedDataColumns, (mergedDataCell) => {
+  return map(mergedTableColumnsArray, (mergedDataColumns) =>
+    map(mergedDataColumns, (mergedDataCell) => {
       return {
         ...mergedDataCell,
         colSpan: availableParent[mergedDataCell.id]

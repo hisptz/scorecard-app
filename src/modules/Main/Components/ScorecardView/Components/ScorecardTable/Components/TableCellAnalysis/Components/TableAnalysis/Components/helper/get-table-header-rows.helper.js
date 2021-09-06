@@ -1,4 +1,4 @@
-import * as _ from 'lodash';
+import {each,map} from 'lodash';
 
 // eslint-disable-next-line max-params
 export   function getTableHeaderRows(
@@ -9,8 +9,8 @@ export   function getTableHeaderRows(
 ) {
   let tableHeaderRows = [];
 
-  _.each(tableColumnsArray, (tableColumn, tableColumnIndex) => {
-    const newTableColumn = _.map(
+  each(tableColumnsArray, (tableColumn, tableColumnIndex) => {
+    const newTableColumn = map(
       tableColumn,
       (tableColumnCell, tableColumnCellIndex) => {
         const columnDimension =
@@ -26,7 +26,7 @@ export   function getTableHeaderRows(
       tableHeaderRows = [
         ...tableHeaderRows,
         [
-          ..._.map(tableRow, (tableRowCell, tableRowCellIndex) => {
+          ... map(tableRow, (tableRowCell, tableRowCellIndex) => {
             const rowDimension = tableConfiguration.row[tableRowCellIndex];
             return {
               ...tableRowCell,

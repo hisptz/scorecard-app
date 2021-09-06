@@ -1,10 +1,10 @@
-import * as _ from 'lodash';
+import {assign} from 'lodash';
 export function getChartPaneOptions(chartType) {
   let paneOptions = {};
 
   switch (chartType) {
     case 'radar':
-      paneOptions = _.assign(
+      paneOptions = assign(
         {},
         {
           size: '80%'
@@ -12,7 +12,7 @@ export function getChartPaneOptions(chartType) {
       );
       break;
     default:
-      paneOptions = _.assign(
+      paneOptions = assign(
         {},
         {
           center: ['50%', '85%'],

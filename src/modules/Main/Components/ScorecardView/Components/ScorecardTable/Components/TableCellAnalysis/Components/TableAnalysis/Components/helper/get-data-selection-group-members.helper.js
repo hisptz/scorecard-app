@@ -1,18 +1,18 @@
-import * as _ from 'lodash';
+import {find,flatten,map}  from 'lodash';
 
 export  function getDataSelectionGroupMembers(
   tableConfiguration
 ) {
-  const dxDataSelection = _.find(tableConfiguration.dataSelections, [
+  const dxDataSelection = find(tableConfiguration.dataSelections, [
     'dimension',
     'dx'
   ]);
 
-  return _.flatten(
-    _.map(
+  return flatten(
+    map(
       dxDataSelection ? dxDataSelection.groups || [] : [],
       (dxGroup) => {
-        return _.map(dxGroup.members, (member) => [dxGroup.id, member.id]);
+        return map(dxGroup.members, (member) => [dxGroup.id, member.id]);
       }
     )
   );

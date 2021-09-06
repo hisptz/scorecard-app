@@ -1,5 +1,5 @@
 /* eslint-disable max-params */
-import * as _ from 'lodash';
+import {map,forEach,some} from 'lodash';
 
 export function getChartSeriesValue(
     analyticsRows,
@@ -11,10 +11,10 @@ export function getChartSeriesValue(
 ){
 let finalValue = 0;
 
-const seriesValues = _.map(analyticsRows, (row) => {
+const seriesValues = map(analyticsRows, (row) => {
     let seriesValue = 0;
     let xAxisRowId = '';
-    _.forEach(xAxisItemIndex.split('_'), (axisIndex) => {
+    forEach(xAxisItemIndex.split('_'), (axisIndex) => {
       xAxisRowId += xAxisRowId !== '' ? '_' : '';
       xAxisRowId += row[axisIndex];
     });
@@ -31,11 +31,11 @@ const seriesValues = _.map(analyticsRows, (row) => {
   
   if (seriesValues) {
     // Check if series values have non numeric content
-    if (_.some(seriesValues, (seriesValue) => isNaN(seriesValue))) {
+    if (some(seriesValues, (seriesValue) => isNaN(seriesValue))) {
       return '';
     }
     // TODO find best way to identify ratios
-    const isRatio = _.some(
+    const isRatio = some(
       seriesValues,
       (seriesValue) => seriesValue.toString().split('.')[1]
     );

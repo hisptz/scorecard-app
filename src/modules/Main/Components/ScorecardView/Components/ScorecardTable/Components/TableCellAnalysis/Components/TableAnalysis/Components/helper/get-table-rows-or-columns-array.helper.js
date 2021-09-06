@@ -1,4 +1,4 @@
-import * as _ from 'lodash';
+import {range,each,map,reduce,slice,join,flatten,last} from 'lodash';
 
 
 export  function getTableRowsOrColumnsArray(
@@ -6,10 +6,10 @@ export  function getTableRowsOrColumnsArray(
   dimension
 ) {
   let flatDataItemsArray = [];
-  _.each(_.range(dataItemsArray.length), (dataItemArrayIndex) => {
+  each(range(dataItemsArray.length), (dataItemArrayIndex) => {
     if (flatDataItemsArray.length === 0) {
       if (dimension === 'row') {
-        _.each(dataItemsArray[dataItemArrayIndex], (rowsItem) => {
+        each(dataItemsArray[dataItemArrayIndex], (rowsItem) => {
           flatDataItemsArray = [
             ...flatDataItemsArray,
             [{ ...rowsItem, column: 0, path: rowsItem.id }]
@@ -18,14 +18,14 @@ export  function getTableRowsOrColumnsArray(
       } else {
         flatDataItemsArray = [
           ...flatDataItemsArray,
-          _.map(dataItemsArray[dataItemArrayIndex], (dataItem) => {
+        map(dataItemsArray[dataItemArrayIndex], (dataItem) => {
             return {
               ...dataItem,
               path: dataItem.id,
               textCenter: true,
-              colSpan: _.reduce(
-                _.map(
-                  _.slice(dataItemsArray, dataItemArrayIndex + 1),
+              colSpan: reduce(
+                map(
+                  slice(dataItemsArray, dataItemArrayIndex + 1),
                   (slicedDataItemsArray) => slicedDataItemsArray.length
                 ),
                 (product, count) => product * count
@@ -36,23 +36,23 @@ export  function getTableRowsOrColumnsArray(
       }
     } else {
       let innerFlatDataItemsArray = [];
-      _.each(flatDataItemsArray, (flatDataItems) => {
-        const path = _.join(
-          _.map(flatDataItems, (dataItemObject) => dataItemObject.id),
+      each(flatDataItemsArray, (flatDataItems) => {
+        const path = join(
+          map(flatDataItems, (dataItemObject) => dataItemObject.id),
           '/'
         );
         if (dimension === 'row') {
-          _.each(
+          each(
             dataItemsArray[dataItemArrayIndex],
             (dataItem, dataItemIndex) => {
               if (dataItemIndex === 0) {
                 innerFlatDataItemsArray = [
                   ...innerFlatDataItemsArray,
                   [
-                    ..._.map(flatDataItems, (flatDataItem) => {
-                      const span = _.reduce(
-                        _.map(
-                          _.slice(
+                    ... map(flatDataItems, (flatDataItem) => {
+                      const span = reduce(
+                        map(
+                          slice(
                             dataItemsArray,
                             flatDataItem.column + 1,
                             dataItemArrayIndex + 1
@@ -92,16 +92,16 @@ export  function getTableRowsOrColumnsArray(
       });
 
       if (dimension === 'column') {
-        const flatDataItems = _.last(flatDataItemsArray);
+        const flatDataItems = last(flatDataItemsArray);
 
         innerFlatDataItemsArray = [
           ...flatDataItemsArray,
-          _.flatten(
-            _.map(
-              _.range(flatDataItems.length),
+          flatten(
+            map(
+              range(flatDataItems.length),
               (flatDataItemCount) => {
                 const previousPath = flatDataItems[flatDataItemCount].path;
-                return _.map(
+                return map(
                   dataItemsArray[dataItemArrayIndex],
                   (dataItem) => {
                     const path = `${previousPath}/${dataItem.id}`;
@@ -111,9 +111,9 @@ export  function getTableRowsOrColumnsArray(
                       path,
                       dataRowIds: path.split('/'),
                       textCenter: true,
-                      colSpan: _.reduce(
-                        _.map(
-                          _.slice(dataItemsArray, dataItemArrayIndex + 1),
+                      colSpan: reduce(
+                        map(
+                          slice(dataItemsArray, dataItemArrayIndex + 1),
                           (slicedDataItemsArray) =>
                             slicedDataItemsArray.length
                         ),

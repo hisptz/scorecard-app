@@ -1,4 +1,4 @@
-import * as _ from   'lodash';
+import {assign} from   'lodash';
 
 
 export function getChartXAxisOptions(
@@ -10,7 +10,7 @@ export function getChartXAxisOptions(
  switch (chartConfiguration.type)
  {
      case 'radar':
-         xAxisOptions = _.assign(
+         xAxisOptions = assign(
              {},
              {
                  categories:xAxisCategories,
@@ -20,7 +20,7 @@ export function getChartXAxisOptions(
          );
     break;
     default:
-    xAxisOptions = _.assign(
+    xAxisOptions = assign(
         {},
 {
     categories: [...(xAxisCategories)?.map((xAxisCategory)=>xAxisCategory.name)],

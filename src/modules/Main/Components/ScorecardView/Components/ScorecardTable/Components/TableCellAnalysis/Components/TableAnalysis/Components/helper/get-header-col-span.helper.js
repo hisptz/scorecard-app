@@ -1,7 +1,7 @@
-import * as _ from 'lodash';
+import {last,filter} from 'lodash';
 export  function getHeaderColSpan(tableRowHeaders) {
-  const lastHeaders = _.last(tableRowHeaders);
-  const secondLastHeader = _.filter(
+  const lastHeaders = last(tableRowHeaders);
+  const secondLastHeader = filter(
     tableRowHeaders[tableRowHeaders.length - 2] || [],
     (tableRowHeader) => !tableRowHeader.colSpan
   );

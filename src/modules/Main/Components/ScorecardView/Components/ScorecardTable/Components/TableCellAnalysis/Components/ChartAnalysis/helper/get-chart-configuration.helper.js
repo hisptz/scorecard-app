@@ -1,6 +1,5 @@
 /* eslint-disable no-prototype-builtins */
 /* eslint-disable max-params */
-import * as _ from 'lodash';
 
 export function getChartConfiguration(
     visualizationSettings,

@@ -1,14 +1,14 @@
-import * as _ from 'lodash';
+import {find,reduce,map} from 'lodash';
 export function getDrilldownParentDataFromChildrenSeries(
   drilldownSeries,
   parentId
 ) {
   let parentData = 0;
-  const correspondingSeriesObject = _.find(drilldownSeries, ['id', parentId]);
+  const correspondingSeriesObject = find(drilldownSeries, ['id', parentId]);
 
   if (correspondingSeriesObject) {
-    parentData = _.reduce(
-      _.map(correspondingSeriesObject.data, data => data.y),
+    parentData = reduce(
+      map(correspondingSeriesObject.data, data => data.y),
       (sum, n) => {
         const newNumber = !isNaN(n) ? parseInt(n, 10) : 0;
         return parseInt(sum, 10) + newNumber;

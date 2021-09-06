@@ -1,5 +1,5 @@
 /* eslint-disable max-params */;
-import * as _ from 'lodash';
+import {findIndex,find,map} from 'lodash';
 import { getChartSeriesDataLabelsOptions } from './get-chart-series-data-label-options.helper';
 import { getChartSeriesValue } from './get-chart-series-value.helper';
 
@@ -15,28 +15,28 @@ const data = [];
   /**
    * Get index to locate data for y axis
    */
-   const yAxisItemIndex = _.findIndex(
+   const yAxisItemIndex = findIndex(
     analyticsObject.headers,
-    _.find(analyticsObject.headers, ['name', chartConfiguration.yAxisType])
+    find(analyticsObject.headers, ['name', chartConfiguration.yAxisType])
   );
 
      /**
    * Get index for value attribute to get the data
    */
-  const dataIndex = _.findIndex(
+  const dataIndex = findIndex(
     analyticsObject.headers,
-    _.find(analyticsObject.headers, ['name', 'value'])
+    find(analyticsObject.headers, ['name', 'value'])
   );
 
     /**
    * Get index to locate data for x axis
    */
-     const xAxisItemIndex = _.map(
+     const xAxisItemIndex = map(
         chartConfiguration.xAxisType,
         (xAxisType) => {
-          return _.findIndex(
+          return findIndex(
             analyticsObject.headers,
-            _.find(analyticsObject.headers, ['name', xAxisType])
+            find(analyticsObject.headers, ['name', xAxisType])
           );
         }
       ).join('_');

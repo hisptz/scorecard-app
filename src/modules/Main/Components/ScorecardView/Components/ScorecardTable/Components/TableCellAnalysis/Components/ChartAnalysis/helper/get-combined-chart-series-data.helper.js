@@ -1,16 +1,16 @@
-import * as _ from 'lodash';
+import {find,findIndex} from 'lodash';
 export function getCombinedChartSeriesData(seriesData) {
   let combinedSeriesData = [];
   seriesData.forEach(seriesDataArray => {
     seriesDataArray.forEach(seriesDataObject => {
-      const availableSeriesData = _.find(combinedSeriesData, [
+      const availableSeriesData = find(combinedSeriesData, [
         'id',
         seriesDataObject.id
       ]);
       if (!availableSeriesData) {
         combinedSeriesData = [...combinedSeriesData, seriesDataObject];
       } else {
-        const seriesDataIndex = _.findIndex(
+        const seriesDataIndex = findIndex(
           combinedSeriesData,
           availableSeriesData
         );

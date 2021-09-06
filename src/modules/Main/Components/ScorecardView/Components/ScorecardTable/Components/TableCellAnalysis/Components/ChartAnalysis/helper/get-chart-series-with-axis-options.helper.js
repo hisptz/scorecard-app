@@ -1,13 +1,13 @@
-import * as _ from 'lodash';
+import {map,clone,find} from 'lodash';
 import { getAllowedChartType } from './get-allowed-chart-types.helper';
 
 export function getChartSeriesWithAxisOptions(
   series,
   multiAxisOptions
 ) {
-  return _.map(series, (seriesObject) => {
-    const newSeriesObject = _.clone(seriesObject);
-    const availableAxisOption = _.find(multiAxisOptions, [
+  return map(series, (seriesObject) => {
+    const newSeriesObject = clone(seriesObject);
+    const availableAxisOption = find(multiAxisOptions, [
       'id',
       newSeriesObject.id
     ]);
@@ -30,8 +30,8 @@ export function getChartSeriesWithAxisOptions(
       /**
        *Also apply colors on chart
        */
-      newSeriesObject.data = _.map(newSeriesObject.data, dataObject => {
-        const newDataObject = _.clone(dataObject);
+      newSeriesObject.data = map(newSeriesObject.data, dataObject => {
+        const newDataObject = clone(dataObject);
         if (availableAxisOption.color !== '') {
           newDataObject.color = availableAxisOption.color;
         }

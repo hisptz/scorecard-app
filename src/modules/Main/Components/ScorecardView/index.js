@@ -1,5 +1,5 @@
 import {isEmpty} from 'lodash'
-import React, {Suspense, useEffect, useMemo, useRef} from "react";
+import React, {Suspense, useEffect, useMemo, useRef, lazy} from "react";
 import {useParams} from "react-router-dom";
 import {useRecoilCallback, useRecoilValue, useSetRecoilState} from "recoil";
 import {PeriodResolverState} from "../../../../core/state/period";
@@ -15,8 +15,8 @@ import AccessDeniedPage from "./Components/AccessDeniedPage";
 import EmptyOrgUnitsOrPeriod from "./Components/EmptyOrgUnitsOrPeriod";
 import HighlightedIndicatorsView from "./Components/HighlightedIndicatorsView";
 import ScorecardHeader from "./Components/ScorecardHeader";
-import ScorecardLegendsView from "./Components/ScorecardLegendsView";
-import ScorecardTable from "./Components/ScorecardTable";
+const ScorecardLegendsView  = lazy(() => import('./Components/ScorecardLegendsView'));
+const ScorecardTable  = lazy(() => import('./Components/ScorecardTable'));
 import ScorecardViewHeader from "./Components/ScorecardViewHeader";
 
 
