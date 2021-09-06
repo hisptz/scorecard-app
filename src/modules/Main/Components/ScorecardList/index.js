@@ -92,7 +92,7 @@ export default function ScorecardList() {
               />
             </div>
           </div>
-            <divclassName="w-100">
+            <div className="w-100">
                             <ButtonStrip end>
                                 <Button icon={<HelpIcon/>}>{i18n.t("Help")}</Button>
                                 <Tooltip
