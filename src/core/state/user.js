@@ -43,6 +43,6 @@ export const UserAuthorityOnScorecard = selectorFamily({
     get: (scorecardId) => ({get}) => {
         const scorecardSummary = find(get(ScorecardSummaryState), ['id', scorecardId])
         const user = get(UserState)
-        return getUserAuthority(user, scorecardSummary) ?? DefaultAuthority
+        return getUserAuthority(user, scorecardSummary) ?? DefaultAuthority //TODO: Include public access
     }
 })

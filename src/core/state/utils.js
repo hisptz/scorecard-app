@@ -75,6 +75,8 @@ function translateAccess(access = '') {
 
 export function getUserAuthority(user, scorecardSummary) {
     const {user: userId, userAccesses, userGroupAccesses} = scorecardSummary ?? {}
+
+
     if (user?.id === userId) return {...(translateAccess('rw-----')), delete: true}
 
     if (!isEmpty(userAccesses)) {

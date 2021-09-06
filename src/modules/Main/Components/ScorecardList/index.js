@@ -85,7 +85,7 @@ export default function ScorecardList() {
                             <ButtonStrip end>
                                 <Button icon={<HelpIcon/>}>{i18n.t("Help")}</Button>
                                 <Tooltip
-                                    content={i18n.t("Change to {{viewType}} view", {
+                                    content={i18n.t("Switch to {{viewType}} view", {
                                         viewType:
                                             scorecardViewType === "grid"
                                                 ? i18n.t("list")

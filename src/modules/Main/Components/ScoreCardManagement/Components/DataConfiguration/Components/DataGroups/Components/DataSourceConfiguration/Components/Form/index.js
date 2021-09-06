@@ -9,6 +9,7 @@ import {
 } from "../../../../../../../../../../../../core/state/scorecard";
 import DataSourceConfigurationForm
     from "../../../../../../../../../../../../shared/Components/CustomForm/components/DataSourceConfigurationForm";
+import {generateLegendDefaults} from "../../../../../../../../../../../../shared/utils/utils";
 
 export default function SelectedDataSourceConfigurationForm() {
     const scorecardEditState = useRecoilValue(ScorecardConfigEditState);
@@ -24,6 +25,12 @@ export default function SelectedDataSourceConfigurationForm() {
     const onFormChange = (index) => ({values, dirty}) => {
         if (dirty) {
             const updatedList = cloneDeep(selectedDataHolder?.dataSources)
+            const prevValue = updatedList[index]
+
+           if( prevValue.weight !==  values.weight){
+               values.legends = generateLegendDefaults(legendDefinitions, values.weight)
+           }
+
             set(updatedList, [index], values)
             updateSelectedDataHolder(prevState => ScorecardIndicator.set(prevState, 'dataSources', updatedList))
         }

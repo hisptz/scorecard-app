@@ -29,6 +29,7 @@ export default function ScorecardView() {
     const downloadRef = useRef()
     const periods = useRecoilValue(PeriodResolverState)
 
+
     const reset = useRecoilCallback(({reset}) => () => {
         reset(ScorecardViewState("orgUnitSelection"))
         reset(ScorecardViewState("periodSelection"))
