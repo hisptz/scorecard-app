@@ -9,7 +9,7 @@ Given("authorized department officer", () => {
 When("opening a list of available scorecards", () => {
   cy.get('[data-test=scorecard-thumbnail-view]').
   should((scoreboard)=>{
-    expect(scoreboard).to.have.length > 1 
+    expect(scoreboard).to.have.length.greaterThan(0)
   })
 });
 And("I search in the list by name", () => {
@@ -21,8 +21,7 @@ Then(
     cy
     .get('[data-test=scorecard-thumbnail-view]').
     should((scoreboard)=>{
-      // expect(scoreboard).to.have.length(1)
-    })
+      expect(scoreboard).to.have.length(1)    })
    
   }
 );
@@ -37,7 +36,7 @@ When("opening a list of available scorecards", () => {
   cy
   .get('[data-test=scorecard-thumbnail-view]').
   should((scoreboard)=>{
-    expect(scoreboard).to.have.length.greaterThan(1)
+    expect(scoreboard).to.have.length.greaterThan(0)
   })
 });
 /**
@@ -52,7 +51,7 @@ Then(
     cy
     .get('[data-test=scorecard-thumbnail-view]').
     should((scoreboard)=>{
-      expect(scoreboard).to.have.length.greaterThan(1)
+      expect(scoreboard).to.have.length(1)
     })
   }
 );
