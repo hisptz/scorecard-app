@@ -5,19 +5,17 @@ import React, {Suspense, useEffect, useState} from "react";
 import {useRecoilValue} from "recoil";
 import AverageDisplayType from "../../../../../../../../../core/constants/averageDisplayType";
 import {DraggableItems} from "../../../../../../../../../core/constants/draggables";
+import ScorecardDataEngine from "../../../../../../../../../core/models/scorecardData";
 import {PeriodResolverState} from "../../../../../../../../../core/state/period";
-import {
-    scorecardDataEngine,
-    ScorecardDataLoadingState,
-    ScorecardViewState,
-} from "../../../../../../../../../core/state/scorecard";
+import {ScorecardDataLoadingState, ScorecardViewState,} from "../../../../../../../../../core/state/scorecard";
 import ScorecardTable from "../../../index";
 import DataContainer from "../../TableDataContainer";
+import TableLoader from "../../TableLoader";
 import AverageCell from "./AverageCell";
 import DroppableCell from "./DroppableCell";
 import OrgUnitContainer from "./OrgUnitContainer";
 
-export default function ChildOrgUnitRow({orgUnit, expandedOrgUnit, onExpand, overallAverage}) {
+export default function ChildOrgUnitRow({orgUnit, expandedOrgUnit, onExpand, overallAverage, dataEngine, orgUnits}) {
     const {emptyRows, averageColumn, averageDisplayType} = useRecoilValue(ScorecardViewState('options'))
 
     const [isEmpty, setIsEmpty] = useState(false);
@@ -25,14 +23,14 @@ export default function ChildOrgUnitRow({orgUnit, expandedOrgUnit, onExpand, ove
     const {id} = orgUnit ?? {};
     const {dataGroups} =
     useRecoilValue(ScorecardViewState("dataSelection")) ?? {};
-    const loading = useRecoilValue(ScorecardDataLoadingState)
+    const loading = useRecoilValue(ScorecardDataLoadingState(orgUnits))
     const periods =
         useRecoilValue(PeriodResolverState) ?? [];
 
     function subscribe() {
         if (loading !== undefined && !loading) {
-            const rowAverage = scorecardDataEngine.getOrgUnitAverage(id).subscribe(setAverage);
-            const rowStatusSub = scorecardDataEngine.isRowEmpty(id).subscribe(setIsEmpty)
+            const rowAverage = dataEngine.getOrgUnitAverage(id).subscribe(setAverage);
+            const rowStatusSub = dataEngine.isRowEmpty(id).subscribe(setIsEmpty)
 
             return () => {
                 rowAverage.unsubscribe();
@@ -41,7 +39,7 @@ export default function ChildOrgUnitRow({orgUnit, expandedOrgUnit, onExpand, ove
         }
     }
 
-    useEffect(subscribe, [orgUnit, loading, id])
+    useEffect(subscribe, [orgUnit, loading, id, dataEngine])
 
     const Component = ((emptyRows || !isEmpty) &&
         <DataTableRow
@@ -55,10 +53,10 @@ export default function ChildOrgUnitRow({orgUnit, expandedOrgUnit, onExpand, ove
             }}
             expandableContent={
                 <div className="p-16">
-                    <Suspense fallback={<div>Loading...</div>}>
+                    <Suspense fallback={<TableLoader />}>
                         <ScorecardTable
                             nested={true}
-                            orgUnits={[orgUnit]}
+                            orgUnits={[id]}
                         />
                     </Suspense>
                 </div>
@@ -83,6 +81,7 @@ export default function ChildOrgUnitRow({orgUnit, expandedOrgUnit, onExpand, ove
                         >
 
                             <DataContainer
+                                dataEngine={dataEngine}
                                 orgUnit={orgUnit}
                                 dataSources={dataSources}
                                 period={period}
@@ -112,7 +111,9 @@ export default function ChildOrgUnitRow({orgUnit, expandedOrgUnit, onExpand, ove
 }
 
 ChildOrgUnitRow.propTypes = {
+    dataEngine: PropTypes.instanceOf(ScorecardDataEngine).isRequired,
     orgUnit: PropTypes.object.isRequired,
+    orgUnits: PropTypes.array.isRequired,
     overallAverage: PropTypes.number.isRequired,
     onExpand: PropTypes.func.isRequired,
     expandedOrgUnit: PropTypes.string,
