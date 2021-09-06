@@ -34,6 +34,7 @@ export default function DataConfigurationScorecardForm() {
                 generateNewGroupData(groups),
             ])
         );
+
     };
 
     const onDragEnd = useRecoilCallback(

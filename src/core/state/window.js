@@ -2,7 +2,6 @@ import {atom} from "recoil";
 import {getWindowDimensions} from "../../shared/utils/utils";
 
 
-
 const ScreenDimensionState = atom({
     key: 'screen-dimensions',
     default: {},

@@ -1,4 +1,4 @@
-import {compact} from 'lodash'
+import {compact,sortBy} from 'lodash'
 import {selectorFamily} from "recoil";
 import {EngineState} from "./engine";
 const {atomFamily} = require("recoil");
@@ -63,7 +63,7 @@ export const OrgUnitPathState = atomFamily({
         key: 'orgUnitPathSelector',
         get: (path = '') => async ({get}) => {
             const orgUnits = compact(path.split('/'))
-            const orgUnitNames = get(SelectedOrgUnits(orgUnits))?.map(({displayName}) => displayName)
+            const orgUnitNames = sortBy(get(SelectedOrgUnits(orgUnits)), 'level')?.map(({displayName}) => displayName)
             return orgUnitNames.join('/')
         }
     })
