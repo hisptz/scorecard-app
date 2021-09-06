@@ -17,7 +17,6 @@ export default function GroupsHeaderRow({nested, orgUnits}) {
     const [searchValue, setSearchValue] = useState(orgUnitKeyword);
     const {nameColumnWidth} = useRecoilValue(ScorecardTableConfigState(orgUnits))
     const onOrgUnitSearch = useRef(debounce(setOrgUnitKeyword, 1000, {trailing: true, leading: false}))
-    console.log(nameColumnWidth)
     useEffect(() => {
         onOrgUnitSearch.current(searchValue)
     }, [searchValue])
@@ -40,7 +39,7 @@ export default function GroupsHeaderRow({nested, orgUnits}) {
                 className='scorecard-table-header scorecard-org-unit-cell ' rowSpan={"3"}>
                 {
                     !nested &&
-                    <InputField className='print-hide' value={searchValue} onChange={({value}) => setSearchValue(value)}
+                    <InputField className='print-hide w-100' value={searchValue} onChange={({value}) => setSearchValue(value)}
                                 placeholder={i18n.t('Search Organisation Unit')}/>
                 }
                 <h4 className='print-show hide'>{i18n.t('Organisation Unit(s)')}</h4>

@@ -18,9 +18,7 @@ export default function TableItemComponent() {
             setTabledata(drawBnaTable(data['_data'], layout))
         }
     }, [data, layout])
-
-    console.log(tableData)
-
+  
     return (
         <div className="table-item-container">
             <table

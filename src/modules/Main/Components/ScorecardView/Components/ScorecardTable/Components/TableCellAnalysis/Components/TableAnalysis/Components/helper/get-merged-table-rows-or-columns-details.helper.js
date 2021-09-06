@@ -1,4 +1,4 @@
-import * as _ from 'lodash';
+import {map,filter} from 'lodash';
 import { getFilteredTableRows } from './get-filtered-table-rows.helper';
 
 export  function getMergedTableRowsOrColumnsDetails(
@@ -6,11 +6,11 @@ export  function getMergedTableRowsOrColumnsDetails(
   dxGroupMembers
 ) {
   const availableParent = {};
-  const mergedDataRowsOrColumnsArray = _.map(
+  const mergedDataRowsOrColumnsArray = map(
     getFilteredTableRows(tableDataRowsOrColumns, dxGroupMembers),
     (filteredDataRow) =>
-      _.filter(
-        _.map(filteredDataRow, (filterDataCell) => {
+      filter(
+        map(filteredDataRow, (filterDataCell) => {
           if (!availableParent[filterDataCell.id]) {
             if (filterDataCell.id) {
               availableParent[filterDataCell.id] = 1;

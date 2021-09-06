@@ -1,11 +1,11 @@
-import * as _ from 'lodash';
+import  {map} from 'lodash';
 export   function getTableDimensionItemsArray(
   dimensionItems,
   analyticsObject
 ) {
-  return _.map(dimensionItems, (dimensionItem) => {
+  return map(dimensionItems, (dimensionItem) => {
     const metadataIds = analyticsObject.metaData[dimensionItem];
-    return _.map(metadataIds || [], (metadataId) => {
+    return map(metadataIds || [], (metadataId) => {
       const metadataName =
         analyticsObject &&
         analyticsObject.metaData &&

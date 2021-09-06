@@ -3,6 +3,8 @@ import {Period} from "@iapps/period-utilities";
 import mapLimit from "async/mapLimit";
 import {
     chunk,
+    compact,
+    differenceBy,
     find,
     flatten,
     forIn,
@@ -22,19 +24,18 @@ import {map, take} from "rxjs/operators";
 import {TableSort} from "../constants/tableSort";
 
 export default class ScorecardDataEngine {
+    _cancelled = false;
+    _totalRequests = 0;
+    _progress = 0
+    _progress$ = new BehaviorSubject();
     _loading$ = new BehaviorSubject();
     _dataEntities = {};
     _dataEntities$ = new BehaviorSubject(this._dataEntities);
     dataEntities$ = this._dataEntities$.asObservable();
-
+    _previousPeriods = []
 
     constructor() {
-        if (!ScorecardDataEngine?.instance) {
-            ScorecardDataEngine.instance = this;
-        }
-        return ScorecardDataEngine.instance;
-
-
+        this._cancelled = false;
     }
 
     setPeriodType(periodType) {
@@ -56,16 +57,18 @@ export default class ScorecardDataEngine {
             }),
             "id"
         );
-
         previousPeriods.forEach((previousPeriod) => {
             const currentPeriod = find(this._selectedPeriods, [
                 "id",
                 previousPeriod?.id,
             ]);
             if (!currentPeriod) {
-                this._selectedPeriods = [...this._selectedPeriods, previousPeriod];
+                this._selectedPeriods = compact([...this._selectedPeriods, previousPeriod]);
             }
         });
+        this._previousPeriods = compact(differenceBy(previousPeriods, periods, 'id')?.map((period) => {
+            return period?.id
+        })) ?? []
         return this;
     }
 
@@ -108,12 +111,21 @@ export default class ScorecardDataEngine {
     load() {
         if (this._canLoadData) {
             this._loading$.next(true)
+            this._cancelled = false
+            this._progress = 0;
+            this._progress$.next(this._progress)
             this._getScorecardData({
                 selectedOrgUnits: this._selectedOrgUnits.map((orgUnit) => orgUnit?.id),
                 selectedPeriods: this._selectedPeriods.map((period) => period?.id),
                 selectedData: this._selectedData,
             });
         }
+    }
+
+    getProgress() {
+        return this._progress$.pipe(map(progress => {
+            return Math.floor((progress / this._totalRequests) * 100)
+        }))
     }
 
     isRowEmpty(orgUnitId = '') {
@@ -143,7 +155,10 @@ export default class ScorecardDataEngine {
                 const [dx, , pe] = key.split('_');
                 return dx === dataSource && pe === period
             })
-            const sortedOrgUnits = sortBy(toPairs(requiredDataEntities), [(value) => last(value)?.current])
+
+            console.log(requiredDataEntities)
+
+            const sortedOrgUnits = sortBy(toPairs(requiredDataEntities), [(value) => +last(value)?.current])
 
             if (sortType === TableSort.DESC) {
                 return sortedOrgUnits.reverse().map(([key]) => key?.split('_')[1])
@@ -227,7 +242,10 @@ export default class ScorecardDataEngine {
     getOrgUnitAverage(orgUnitId = '') {
         return this.dataEntities$.pipe(
             map((dataEntities) => {
-                const orgUnitsData = pickBy(dataEntities, (val, key) => key.match(RegExp(orgUnitId)))
+                const orgUnitsData = pickBy(dataEntities, (val, key) => {
+                    const [, ou, pe] = key.split('_')
+                    return ou === orgUnitId && (!this._previousPeriods.includes(pe) && !!find(this._selectedPeriods, (period) => period?.id === pe))
+                })
                 const noOfOrgUnits = Object.keys(orgUnitsData).length
                 return reduce(orgUnitsData, (result, value) => {
                     return (result ?? 0) + (value.current / noOfOrgUnits)
@@ -239,7 +257,10 @@ export default class ScorecardDataEngine {
     getDataSourceAverage(dataSources = []) {
         return this.dataEntities$.pipe(
             map((dataEntities) => {
-                const dataSourcesData = pickBy(dataEntities, (_, key) => key.match(RegExp(head(dataSources))) || key.match(RegExp(last(dataSources))))
+                const dataSourcesData = pickBy(dataEntities, (_, key) => {
+                    const [dx, , pe] = key.split('_')
+                    return dataSources.includes(dx) && (!this._previousPeriods.includes(pe) && !!find(this._selectedPeriods, (period) => period?.id === pe))
+                })
                 const noOfDataSources = Object.keys(dataSourcesData).length;
                 return reduce(dataSourcesData, (result, value) => {
                     return (result ?? 0) + (value.current / noOfDataSources)
@@ -283,8 +304,8 @@ export default class ScorecardDataEngine {
             map((dataEntities) => {
                 if (!isEmpty(dataEntities)) {
                     const selectedDataEntities = pickBy(dataEntities, (value, key) => {
-                        const [, ou,] = key.split('_')
-                        return orgUnits?.includes(ou)
+                        const [, ou, pe] = key.split('_')
+                        return orgUnits?.includes(ou) && (!this._previousPeriods.includes(pe) && !!find(this._selectedPeriods, (period) => period?.id === pe))
                     })
                     const noOfDataEntities = Object.keys(selectedDataEntities).length
                     return reduce(selectedDataEntities, (result, value) => {
@@ -326,7 +347,10 @@ export default class ScorecardDataEngine {
     }
 
     reset() {
-        //TODO: Implement reset function
+        this._dataEntities = {}
+        this._dataEntities$.next(this._dataEntities)
+        this._loading$.next(false)
+        this._cancelled = true
     }
 
     _getScorecardData(selections) {
@@ -347,41 +371,44 @@ export default class ScorecardDataEngine {
     }
 
     _getAnalyticsData(selections) {
-        let dx = [];
-        let ou = [];
-        let pe = [];
+        if (!this._cancelled) {
+            let dx = [];
+            let ou = [];
+            let pe = [];
 
-        (selections || []).forEach((selection) => {
-            const availableData =
-                this._dataEntities[`${selection.dx}_${selection.ou}_${selection.pe}`];
+            (selections || []).forEach((selection) => {
+                const availableData =
+                    this._dataEntities[`${selection.dx}_${selection.ou}_${selection.pe}`];
 
-            if (!availableData) {
-                dx = [...dx, selection.dx];
-                ou = [...ou, selection.ou];
-                pe = [...pe, selection.pe];
+                if (!availableData) {
+                    dx = [...dx, selection.dx];
+                    ou = [...ou, selection.ou];
+                    pe = [...pe, selection.pe];
+                }
+            });
+
+            dx = uniq(dx);
+            ou = uniq(ou);
+            pe = uniq(pe);
+
+            if (dx?.length === 0 && ou?.length === 0 && pe?.length === 0) {
+                return of(null).toPromise();
             }
-        });
 
-        dx = uniq(dx);
-        ou = uniq(ou);
-        pe = uniq(pe);
-
-        if (dx?.length === 0 && ou?.length === 0 && pe?.length === 0) {
-            return of(null).toPromise();
+            return new Fn.Analytics()
+                .setOrgUnit(ou?.join(";"))
+                .setPeriod(pe?.join(";"))
+                .setData(dx.join(";"))
+                .postProcess((analytics) => {
+                    this._updateDataEntities(analytics?.rows);
+                })
+                .get();
         }
-
-        return new Fn.Analytics()
-            .setOrgUnit(ou?.join(";"))
-            .setPeriod(pe?.join(";"))
-            .setData(dx.join(";"))
-            .postProcess((analytics) => {
-                this._updateDataEntities(analytics?.rows);
-            })
-            .get();
+        return of(null).toPromise();
     }
 
     _getNormalScorecardData(selections) {
-        const {selectedOrgUnits, selectedPeriods, selectedDataItems} = selections;
+        const {selectedOrgUnits, selectedPeriods, selectedDataItems} = selections ?? {};
 
         let selectionList = [];
 
@@ -404,12 +431,16 @@ export default class ScorecardDataEngine {
             });
         });
 
+        this._totalRequests = selectionList?.length;
+
         mapLimit(
             selectionList,
             10,
             (selection, callback) => {
                 this._getAnalyticsData(selection)
                     .then((result) => {
+                        this._progress = this._progress + 1;
+                        this._progress$.next(this._progress)
                         callback(null, result);
                     })
                     .catch((error) => {

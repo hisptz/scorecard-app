@@ -1,19 +1,18 @@
-import {DataTableCell, DataTableRow, CircularLoader} from '@dhis2/ui'
+import {CircularLoader, DataTableCell, DataTableRow, LinearLoader} from '@dhis2/ui'
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import {useRecoilValue} from "recoil";
-import {ScorecardTableConfigState} from "../../../../../../../core/state/scorecard";
+import ScorecardDataEngine from "../../../../../../../core/models/scorecardData";
+import {ScorecardDataLoadingState, ScorecardTableConfigState} from "../../../../../../../core/state/scorecard";
 import useMediaQuery from "../../../../../../../shared/hooks/useMediaQuery";
 
-export default function TableLoader({orgUnits}) {
+export default function TableLoader() {
     const {width: screenWidth} = useMediaQuery();
-    const {colSpan} = useRecoilValue(ScorecardTableConfigState(orgUnits))
-
     return (
         <DataTableRow>
-            <DataTableCell  width={`${screenWidth}px`} align='center' colSpan={colSpan} >
-                <div className='row center align-items-center' style={{height: 400 , width: '100%'}}>
-                    <CircularLoader small />
+            <DataTableCell width={`${screenWidth}px`} align='center'>
+                <div className='row center align-items-center' style={{height: 400, width: '100%'}}>
+                    <CircularLoader small/>
                 </div>
             </DataTableCell>
         </DataTableRow>
@@ -21,6 +20,31 @@ export default function TableLoader({orgUnits}) {
 }
 
 
-TableLoader.propTypes = {
+export function TableLinearLoader({dataEngine, orgUnits}) {
+    const {width: screenWidth} = useMediaQuery();
+    const {colSpan} = useRecoilValue(ScorecardTableConfigState(orgUnits))
+    const loading = useRecoilValue(ScorecardDataLoadingState(orgUnits))
+    const [progress, setProgress] = useState(0);
+
+    useEffect(() => {
+        const subscription = dataEngine.getProgress().subscribe(setProgress)
+        return () => {
+            subscription.unsubscribe()
+        };
+    }, [orgUnits, dataEngine]);
+
+    return (
+        loading ?
+            <DataTableRow>
+                <td colSpan={colSpan}>
+                    <LinearLoader width={`${screenWidth}px`} amount={progress} margin={0}/>
+                </td>
+            </DataTableRow> : null
+    )
+}
+
+
+TableLinearLoader.propTypes = {
+    dataEngine: PropTypes.instanceOf(ScorecardDataEngine).isRequired,
     orgUnits: PropTypes.array.isRequired
 };

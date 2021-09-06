@@ -1,21 +1,26 @@
 
-import { CircularLoader } from '@dhis2/ui'
 import { useDataQuery } from '@dhis2/app-runtime'
-import { useEffect} from 'react'
-import Introduction from "../introduction/introduction";
 import PropTypes from "prop-types";
+import React, { useEffect} from 'react'
+import Error from "../../../../Shared/Componets/Error/ErrorAPIResult";
+import Loader from "../../../../Shared/Componets/Loaders/Loader";
+import {dataElementDomainTypes} from "../../../../Utils/Models";
+import DataSets from "./Components/DataSets";
 import OtherDetailTable from "./Components/OtherDetails";
+import Programs from "./Components/Programs";
 
 const query = {
     sources:{
       resource:"dataElements",
-        //   id: "Uvn6LCg7dVU",
           id: ({id})=>id,
         params:{
-          fields:["id","displayName","dataSetElements[dataSet[id,displayName,periodType,timelyDays]]"]
+          fields:["domainType","style","optionSetValue","commentOptionSet[displayName]","legendSets[id,displayName]","aggregationLevels"]
         }
     } 
   }
+
+
+
 
 export default  function DataSource({id}){
 
@@ -25,42 +30,26 @@ export default  function DataSource({id}){
         useEffect(()=>{refetch({id})},[id])
 
 
-        // if(loading){
-       //    return <CircularLoader />
-       // }
-       //
-       // if(error){
-       //    return <p> {error} </p>
-       // }
-       //
+        if(loading){
+            return  <Loader text={""} />
+        }if(error){
+            return <Error error={error} />
+        }
 
-        return (<div>
-           <h3>Data sources </h3>
-           <p>
-               Data element is captured from following sources
-               {/*{{routineDataSource(if-applicable)}} and {{eventBased_i.e._case_or_individual(if-applicable)}}*/}
-               {/*with */}
+    return (
+        <>
+        { (data?.sources?.domainType===dataElementDomainTypes.AGGREGATE && data!==dataElementDomainTypes.UNDEFINED)?  <DataSets id={id} /> : <Programs id={id} />}
 
+            <div>
+                <OtherDetailTable  other={data?.sources}/>
+            </div>
 
-           </p>
-            <h5>Datasets</h5>
-               
-            {/*<ul>*/}
-            {/*{data.sources.dataSets.map((dataSet)=>{*/}
-            {/*    return <li key={dataSet.id}><b>{dataSet.displayName}</b> submitting {dataSet.periodType} after every {dataSet.timelyDays} days</li>*/}
-            {/*})}*/}
-            {/*</ul>*/}
-            
-            <h5>Programs</h5>
-
-            <OtherDetailTable />
-        </div>)
+        </>
+    )
 
     }
 
 
-
-
-DataSource.prototype={
+DataSource.PropTypes={
     id:PropTypes.string.isRequired
 }

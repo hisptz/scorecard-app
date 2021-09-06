@@ -1,25 +1,27 @@
+export const dataTypes = {
+        DATA_ELEMENT: 'dataElement',
+        PROGRAM_INDICATOR: 'programIndicator',
+        DATASET_REPORTING_RATES: 'dataSet',
+        ATTRIBUTES: 'attribute',
+        CONSTANTS: 'constant',
+        VARIABLE: 'variable',
+        UNDEFINED: 'undefined'
+}
 
-
-export const dataTypes={
-    DATA_ELEMENT:0,
-    PROGRAM_INDICATOR:1,
-    DATASET_REPORTING_RATES:2,
-    ATTRIBUTES:3,
-    CONSTANTS:4,
-    VARIABLE:5,
+export const dataElementDomainTypes={
+    TRACKER:"TRACKER",
+    AGGREGATE:"AGGREGATE",
     UNDEFINED:'undefined'
 }
 
-export const dataSourceTypes={
-    INDICATOR: 0,
-    DATA_ELEMENT: 1
+
+export const dataSourceTypes = {
+    INDICATOR: 'indicator',
+    DATA_ELEMENT: 'dataElement'
 }
 
-//structure of dataElemet in store is
-// [
-//     {
-//         "id":"dfds3ds.fdaf",
-//         "val":"value from api",
-//         "exprPart":"num/den",
-//     }
-// ]
+export const accessTypes={
+    READ_WRITE:"rw------",
+    READ_ONLY:"r-------",
+    NO_ACCESS:"--------",
+}

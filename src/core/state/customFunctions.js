@@ -19,7 +19,6 @@ export const CustomFunctionsKeysState = atom({
                 if (keys) return keys;
                 return []
             } catch (e) {
-                console.log(e)
                 return []
             }
         }

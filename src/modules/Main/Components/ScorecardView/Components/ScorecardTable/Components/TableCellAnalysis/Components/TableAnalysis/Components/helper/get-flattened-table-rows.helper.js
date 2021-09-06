@@ -1,21 +1,21 @@
-import * as _ from 'lodash';
+import {map,first,uniq,flatten,uniqBy,find,filter} from 'lodash';
 export  function getFlattenedTableRows(tableDataRows) {
   let firstDataColumns = [];
-  return _.map(tableDataRows, (tableRows) => {
-    firstDataColumns = [...firstDataColumns, _.first(tableRows)];
-    const dataPaths = _.uniq(
-      _.flatten(
-        _.map(tableRows, (tableCell) =>
+  return map(tableDataRows, (tableRows) => {
+    firstDataColumns = [...firstDataColumns, first(tableRows)];
+    const dataPaths = uniq(
+      flatten(
+        map(tableRows, (tableCell) =>
           tableCell.path ? tableCell.path.split('/') : []
         )
       )
     );
 
-    return _.uniqBy(
+    return uniqBy(
       [
-        ..._.filter(
-          _.map(dataPaths, (dataPath) =>
-            _.find(firstDataColumns, ['id', dataPath])
+        ... filter(
+          map(dataPaths, (dataPath) =>
+            find(firstDataColumns, ['id', dataPath])
           ),
           dataCell => dataCell
         ),

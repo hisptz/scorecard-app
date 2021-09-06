@@ -80,7 +80,7 @@ export default function ScoreCardManagement() {
     const createNewScorecard = async (updatedScorecard) => {
         await Scorecard.save(updatedScorecard, add, user);
         show({
-            message: 'Scorecard added successfully',
+            message: i18n.t('Scorecard added successfully'),
             type: {success: true}
         })
         history.goBack();
@@ -89,7 +89,7 @@ export default function ScoreCardManagement() {
     const updateData = async (updatedScorecard) => {
         await Scorecard.update(updatedScorecard, update);
         show({
-            message: 'Scorecard updated successfully',
+            message: i18n.t('Scorecard updated successfully'),
             type: {success: true}
         })
         history.goBack();

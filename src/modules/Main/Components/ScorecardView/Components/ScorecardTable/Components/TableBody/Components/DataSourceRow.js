@@ -5,19 +5,16 @@ import React, {useEffect, useState} from 'react'
 import {useRecoilValue} from "recoil";
 import AverageDisplayType from "../../../../../../../../../core/constants/averageDisplayType";
 import {DraggableItems} from "../../../../../../../../../core/constants/draggables";
+import ScorecardDataEngine from "../../../../../../../../../core/models/scorecardData";
 import {PeriodResolverState} from "../../../../../../../../../core/state/period";
-import {
-    scorecardDataEngine,
-    ScorecardOrgUnitState,
-    ScorecardViewState
-} from "../../../../../../../../../core/state/scorecard";
+import {ScorecardOrgUnitState, ScorecardViewState} from "../../../../../../../../../core/state/scorecard";
 import {getDataSourcesDisplayName} from "../../../../../../../../../shared/utils/utils";
 import DataContainer from "../../TableDataContainer";
 import AverageCell from "./AverageCell";
 import DraggableCell from "./DraggableCell";
 import DroppableCell from "./DroppableCell";
 
-export default function DataSourceRow({orgUnits, dataSources, overallAverage}) {
+export default function DataSourceRow({orgUnits, dataSources, overallAverage, dataEngine}) {
     const {emptyRows, averageColumn, averageDisplayType} = useRecoilValue(ScorecardViewState('options'))
     const [isEmpty, setIsEmpty] = useState(false);
     const [average, setAverage] = useState();
@@ -26,10 +23,10 @@ export default function DataSourceRow({orgUnits, dataSources, overallAverage}) {
         useRecoilValue(PeriodResolverState) ?? [];
 
     useEffect(() => {
-        const rowStatusSub = scorecardDataEngine.isDataSourcesRowEmpty(dataSources?.map(({id}) => id)).subscribe(setIsEmpty)
-        const rowAverageSub = scorecardDataEngine.getDataSourceAverage(dataSources?.map(({id}) => id)).subscribe(setAverage)
+        const rowStatusSub = dataEngine.isDataSourcesRowEmpty(dataSources?.map(({id}) => id)).subscribe(setIsEmpty)
+        const rowAverageSub = dataEngine.getDataSourceAverage(dataSources?.map(({id}) => id)).subscribe(setAverage)
         return () => {
-            rowStatusSub.unsubscribe()
+            rowStatusSub.unsubscribe();
             rowAverageSub.unsubscribe();
         }
     }, [dataSources])
@@ -42,17 +39,18 @@ export default function DataSourceRow({orgUnits, dataSources, overallAverage}) {
             </DroppableCell>
         </DataTableCell>
         {
-            ([...filteredOrgUnits, ...childrenOrgUnits])?.map(({id}) => (
-                periods?.map(({id: periodId}) => (
+            ([...filteredOrgUnits, ...childrenOrgUnits])?.map((orgUnit) => (
+                periods?.map((period) => (
                         <td
                             className="data-cell"
                             align="center"
-                            key={`${id}-${head(dataSources)?.id}-${periodId}`}
+                            key={`${orgUnit?.id}-${head(dataSources)?.id}-${period?.id}`}
                         >
                             <DataContainer
-                                orgUnitId={id}
+                                dataEngine={dataEngine}
+                                orgUnit={orgUnit}
                                 dataSources={dataSources}
-                                periodId={periodId}
+                                period={period}
                             />
                         </td>
                     )
@@ -85,6 +83,7 @@ export default function DataSourceRow({orgUnits, dataSources, overallAverage}) {
 }
 
 DataSourceRow.propTypes = {
+    dataEngine: PropTypes.instanceOf(ScorecardDataEngine).isRequired,
     dataSources: PropTypes.arrayOf(PropTypes.object).isRequired,
     orgUnits: PropTypes.arrayOf(PropTypes.object).isRequired,
     overallAverage: PropTypes.number.isRequired

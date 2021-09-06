@@ -1,4 +1,3 @@
-import { VisualizationLayer } from '../../../models';
 import { getTableConfiguration } from './get-table-configuration.helper';
 
 export default function getTableLayers(

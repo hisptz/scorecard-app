@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-08-23T07:43:03.018Z\n"
-"PO-Revision-Date: 2021-08-23T07:43:03.031Z\n"
+"POT-Creation-Date: 2021-09-06T07:42:53.922Z\n"
+"PO-Revision-Date: 2021-09-06T07:42:53.922Z\n"
 
 msgid "Data"
 msgstr "Data"
@@ -16,6 +16,12 @@ msgstr "Organisation Unit"
 
 msgid "Period"
 msgstr "Period"
+
+msgid "Relative Periods"
+msgstr "Relative Periods"
+
+msgid "Fixed Periods"
+msgstr "Fixed Periods"
 
 msgid "Welcome to Scorecard App!"
 msgstr "Welcome to Scorecard App!"
@@ -161,6 +167,9 @@ msgstr "Saving"
 msgid "Next"
 msgstr "Next"
 
+msgid "Scorecard deleted successfully"
+msgstr "Scorecard deleted successfully"
+
 msgid "View"
 msgstr "View"
 
@@ -170,8 +179,8 @@ msgstr "Are you sure you want to delete scorecard "
 msgid "Are you sure you want to delete scorecard"
 msgstr "Are you sure you want to delete scorecard"
 
-msgid "Scorecard deleted successfully"
-msgstr "Scorecard deleted successfully"
+msgid "Search"
+msgstr "Search"
 
 msgid "Help"
 msgstr "Help"
@@ -188,9 +197,6 @@ msgstr "grid"
 msgid "Add New Scorecard"
 msgstr "Add New Scorecard"
 
-msgid "Search"
-msgstr "Search"
-
 msgid "You do not have access to {{accessType}} this Scorecard"
 msgstr "You do not have access to {{accessType}} this Scorecard"
 
@@ -199,6 +205,9 @@ msgstr "Back to Home"
 
 msgid "Metadata"
 msgstr "Metadata"
+
+msgid "Select Organisation Units and Period to start"
+msgstr "Select Organisation Units and Period to start"
 
 msgid "Legends"
 msgstr "Legends"
@@ -209,17 +218,232 @@ msgstr "Increased from last period"
 msgid "Decreased from last period"
 msgstr "Decreased from last period"
 
-msgid "Drag to column headers to change layout"
-msgstr "Drag to column headers to change layout"
-
 msgid "Average"
 msgstr "Average"
+
+msgid "Drag to column headers to change layout"
+msgstr "Drag to column headers to change layout"
 
 msgid "There are no configured indicators for this scorecard"
 msgstr "There are no configured indicators for this scorecard"
 
 msgid "Drag to the column headers to change layout"
 msgstr "Drag to the column headers to change layout"
+
+msgid "Data sources"
+msgstr "Data sources"
+
+msgid "Data element is captured from following sources"
+msgstr "Data element is captured from following sources"
+
+msgid "Datasets"
+msgstr "Datasets"
+
+msgid "submitting {{variables1}} after every {{variables2}} days "
+msgstr "submitting {{variables1}} after every {{variables2}} days "
+
+msgid "Color"
+msgstr "Color"
+
+msgid " Icon"
+msgstr " Icon"
+
+msgid "Option set"
+msgstr "Option set"
+
+msgid "Option set for Comments"
+msgstr "Option set for Comments"
+
+msgid "Aggregation Levels"
+msgstr "Aggregation Levels"
+
+msgid "Details"
+msgstr "Details"
+
+msgid "no color"
+msgstr "no color"
+
+msgid "no icon"
+msgstr "no icon"
+
+msgid "no comments"
+msgstr "no comments"
+
+msgid "No legends assigned"
+msgstr "No legends assigned"
+
+msgid "No organization unit level assigned"
+msgstr "No organization unit level assigned"
+
+msgid "Programs"
+msgstr "Programs"
+
+msgid "submitting records on every event(case or individual)"
+msgstr "submitting records on every event(case or individual)"
+
+msgid "Introduction"
+msgstr "Introduction"
+
+msgid "can be described as {{variables}}."
+msgstr "can be described as {{variables}}."
+
+msgid ""
+"It’s labelled in short as {{variables1}} and has a code of {{variables2}}. "
+"In data entry form, it’s named “{{variables3}}”"
+msgstr ""
+"It’s labelled in short as {{variables1}} and has a code of {{variables2}}. "
+"In data entry form, it’s named “{{variables3}}”"
+
+msgid "Datasets (Reporting rates) in indicator"
+msgstr "Datasets (Reporting rates) in indicator"
+
+msgid "There were no Datasets (Reporting rates) in the Indicator Calculations"
+msgstr "There were no Datasets (Reporting rates) in the Indicator Calculations"
+
+msgid "Dataset"
+msgstr "Dataset"
+
+msgid "Timely Submission"
+msgstr "Timely Submission"
+
+msgid "Expiry days"
+msgstr "Expiry days"
+
+msgid "Period type"
+msgstr "Period type"
+
+msgid "Assigned orgunits"
+msgstr "Assigned orgunits"
+
+msgid "Data elements"
+msgstr "Data elements"
+
+msgid "Data sources (Datasets/Programs)"
+msgstr "Data sources (Datasets/Programs)"
+
+msgid "Indicator is captured from the following sources,"
+msgstr "Indicator is captured from the following sources,"
+
+msgid "submitting {{variables1}} after every {{variables2}} days"
+msgstr "submitting {{variables1}} after every {{variables2}} days"
+
+msgid "Program Indicators in indicator"
+msgstr "Program Indicators in indicator"
+
+msgid "There were no Program Indicators in the Indicator Calculations"
+msgstr "There were no Program Indicators in the Indicator Calculations"
+
+msgid "Program Indicator"
+msgstr "Program Indicator"
+
+msgid "Expression part"
+msgstr "Expression part"
+
+msgid "Filter"
+msgstr "Filter"
+
+msgid "Aggregation type"
+msgstr "Aggregation type"
+
+msgid "Analytics type"
+msgstr "Analytics type"
+
+msgid "Period boundaries"
+msgstr "Period boundaries"
+
+msgid "source"
+msgstr "source"
+
+msgid "Calculation details"
+msgstr "Calculation details"
+
+msgid ""
+"Below are expression computing numerator and denominator, and related "
+"sources"
+msgstr ""
+"Below are expression computing numerator and denominator, and related "
+"sources"
+
+msgid "Expression"
+msgstr "Expression"
+
+msgid "Formula"
+msgstr "Formula"
+
+msgid "Sources"
+msgstr "Sources"
+
+msgid "Numerator"
+msgstr "Numerator"
+
+msgid "Denominator"
+msgstr "Denominator"
+
+msgid "Data elements in indicator"
+msgstr "Data elements in indicator"
+
+msgid "There were no Data Elements in the Indicator Calculations"
+msgstr "There were no Data Elements in the Indicator Calculations"
+
+msgid "Data Element"
+msgstr "Data Element"
+
+msgid "Expression part (Numerator/ Denominator)"
+msgstr "Expression part (Numerator/ Denominator)"
+
+msgid "Value Type"
+msgstr "Value Type"
+
+msgid "Zero Significance"
+msgstr "Zero Significance"
+
+msgid "Categories"
+msgstr "Categories"
+
+msgid "Datasets/ Programs"
+msgstr "Datasets/ Programs"
+
+msgid " There are no indicator facts associated with this indicator"
+msgstr " There are no indicator facts associated with this indicator"
+
+msgid "Indicator facts"
+msgstr "Indicator facts"
+
+msgid "Belongs to the following groups of indicators"
+msgstr "Belongs to the following groups of indicators"
+
+msgid "Name"
+msgstr "Name"
+
+msgid "Code"
+msgstr "Code"
+
+msgid "Indicators"
+msgstr "Indicators"
+
+msgid "is a"
+msgstr "is a"
+
+msgid "indicator, measured by"
+msgstr "indicator, measured by"
+
+msgid "to"
+msgstr "to"
+
+msgid "Its described as {{variable}}"
+msgstr "Its described as {{variable}}"
+
+msgid "Class"
+msgstr "Class"
+
+msgid "Upper"
+msgstr "Upper"
+
+msgid "Lower"
+msgstr "Lower"
+
+msgid "Legends for analysis"
+msgstr "Legends for analysis"
 
 msgid "Column"
 msgstr "Column"
@@ -232,9 +456,6 @@ msgstr "Row"
 
 msgid "Category"
 msgstr "Category"
-
-msgid "Filter"
-msgstr "Filter"
 
 msgid "Layout"
 msgstr "Layout"
@@ -278,9 +499,6 @@ msgstr "Refresh"
 msgid "Download"
 msgstr "Download"
 
-msgid "Name"
-msgstr "Name"
-
 msgid "Label"
 msgstr "Label"
 
@@ -316,6 +534,9 @@ msgstr "Select Level"
 
 msgid "Select Group"
 msgstr "Select Group"
+
+msgid "Year"
+msgstr "Year"
 
 msgid "Visibility"
 msgstr "Visibility"
