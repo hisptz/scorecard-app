@@ -48,21 +48,21 @@ export default function Introduction({id}) {
 
             <p>
                 <b>{indicatorDetails?.name} </b>
-                is a
+                {i18n.t("is a")}
                 <b> {indicatorDetails?.indicatorType?.displayName} </b>
-                indicator, measured by
+                {i18n.t("indicator, measured by")}
                 <b> {indicatorDetails?.numeratorDescription} </b>
-                to <b> {indicatorDetails?.denominatorDescription} </b>
+                {i18n.t("to")}<b> {indicatorDetails?.denominatorDescription} </b>
             </p>
 
 
             <p>
 
-                Its described as {indicatorDetails?.displayDescription}
+                {i18n.t("Its described as {{variable}}",{variable:indicatorDetails?.displayDescription})}
             </p>
 
             <p>
-                <span><i onClick={() => onClickIdentified(indicatorDetails?.id)}> Identified by: <span
+                <span><i onClick={() => onClickIdentified(indicatorDetails?.id)}>{i18n.t("Identified by:")} <span
                     className={classes.identifylink}> {indicatorDetails?.id} </span> </i></span>
             </p>
 

@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import React, {useEffect} from "react";
 import {useRecoilCallback} from "recoil";
+import AccesibilityAndSharing from "../../Shared/Componets/AccesibilityAndSharing";
 import {
     dataElementsStateDictionary,
     dataSetReportingRatesStateDictionary,
@@ -16,7 +17,7 @@ import LegendsAnalysis from './Components/legendsAnalysis/legendsAnalysis'
 import ProgramIndicatorIndicator from "./Components/ProgramIndicator";
 
 
-export default function IndicatorPage({id}) {
+export default function Index({id}) {
 
     const reset = useRecoilCallback(({reset}) => () => {
         reset(dataElementsStateDictionary)
@@ -47,12 +48,12 @@ export default function IndicatorPage({id}) {
 
         <DatasetsReportingRates/>
 
-        {/*<CompletenessDataSources />*/}
+        <AccesibilityAndSharing id={id} resourceType={"indicators"} />
 
     </div>)
 }
 
-IndicatorPage.propTypes = {
+Index.propTypes = {
     id: PropTypes.string.isRequired
 };
 

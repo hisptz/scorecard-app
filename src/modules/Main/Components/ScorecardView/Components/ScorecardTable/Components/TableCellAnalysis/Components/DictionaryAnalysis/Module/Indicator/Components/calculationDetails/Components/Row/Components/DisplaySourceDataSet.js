@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+import React from 'react';
 
 
 export default function DisplaySourceDataSet(props){
@@ -16,3 +18,8 @@ export default function DisplaySourceDataSet(props){
 
 
     </>}
+
+DisplaySourceDataSet.PropTypes={
+    title:PropTypes.string.isRequired,
+    data:PropTypes.arrayOf(PropTypes.object).isRequired
+}

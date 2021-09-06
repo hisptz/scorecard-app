@@ -1,4 +1,5 @@
 
+import i18n from "@dhis2/d2-i18n";
 import {
     DataTable,
     DataTableToolbar,
@@ -11,6 +12,7 @@ import {
     DataTableCell,
     DataTableColumnHeader,
 } from '@dhis2/ui'
+import React from 'react'
 import {useRecoilValue} from "recoil";
 import {dataSetReportingRatesStateDictionary} from "../../../../Store";
 import Row from "./Row";
@@ -23,42 +25,42 @@ export default function DatasetsReportingRates(){
     if(dataSetReportingRates.length===0){
         return (
             <div>
-                <h3> Datasets (Reporting rates) in indicator</h3>
-                <p>There were no Datasets (Reporting rates) in the Indicator Calculations</p>
+                <h3> {i18n.t("Datasets (Reporting rates) in indicator")} </h3>
+                <p>{i18n.t("There were no Datasets (Reporting rates) in the Indicator Calculations")} </p>
             </div>
         )
     }
 
     let i=0
     return <div>
-        <h3>Datasets (Reporting rates) in indicator</h3>
-        <p>The following is the summary of the datasets (reporting rates) used in calculations:</p>
+        <h3>{i18n.t("Datasets (Reporting rates) in indicator")} </h3>
+        <p>{i18n.t("The following is the summary of the datasets (reporting rates) used in calculations:")} </p>
         <DataTable>
             <TableHead>
                 <DataTableRow>
                     <DataTableColumnHeader bordered>
-                        Dataset
+                        {i18n.t("Dataset")}
                     </DataTableColumnHeader>
                     <DataTableColumnHeader bordered>
-                        Description
+                        {i18n.t("Description")}
                     </DataTableColumnHeader>
                     <DataTableColumnHeader>
-                        Timely Submission
+                        {i18n.t("Timely Submission")}
                     </DataTableColumnHeader>
                     <DataTableColumnHeader>
-                        Expiry days
+                        {i18n.t("Expiry days")}
                     </DataTableColumnHeader>
                     <DataTableColumnHeader>
-                        Period type
+                        {i18n.t("Period type")}
                     </DataTableColumnHeader>
                     <DataTableColumnHeader>
-                        Assigned orgunits
+                        {i18n.t("Assigned orgunits")}
                     </DataTableColumnHeader>
                     <DataTableColumnHeader>
-                        Data elements
+                        {i18n.t("Data elements")}
                     </DataTableColumnHeader>
                     <DataTableColumnHeader>
-                        Legends
+                        {i18n.t("Legends")}
                     </DataTableColumnHeader>
                 </DataTableRow>
             </TableHead>

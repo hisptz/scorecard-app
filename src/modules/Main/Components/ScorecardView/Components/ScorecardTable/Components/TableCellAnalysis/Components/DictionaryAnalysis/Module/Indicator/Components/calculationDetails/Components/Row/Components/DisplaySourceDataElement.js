@@ -1,5 +1,5 @@
-import CalculationDetails from "../../../Index";
 import PropTypes from "prop-types";
+import React from 'react'
 
 
 export default function DisplaySourceDataElement (props){
@@ -29,6 +29,7 @@ export default function DisplaySourceDataElement (props){
 }
 
 
-DisplaySourceDataElement.prototype={
-    id:PropTypes.string.isRequired
+DisplaySourceDataElement.PropTypes={
+    title:PropTypes.string.isRequired,
+    data:PropTypes.arrayOf(PropTypes.object).isRequired
 }
