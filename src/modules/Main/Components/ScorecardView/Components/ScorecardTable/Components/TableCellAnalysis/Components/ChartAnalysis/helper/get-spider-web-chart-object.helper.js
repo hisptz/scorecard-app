@@ -1,4 +1,4 @@
-import * as _ from 'lodash';
+import {clone,assign} from 'lodash';
 import { getChartAxisItems } from './get-chart-axis-items.helper';
 import { getChartPaneOptions } from './get-chart-pane-options.helper';
 import { getChartSeries } from './get-chart-series.helper';
@@ -14,7 +14,7 @@ export function getSpiderWebChartObject(
     chartConfiguration
 ){
     //getChartAxisItems
-    const newChartObject = _.clone(initialChartObject);
+    const newChartObject = clone(initialChartObject);
     const yAxisSeriesItems = getChartAxisItems(
         analyticsObject,
         chartConfiguration.yAxisType
@@ -23,7 +23,7 @@ export function getSpiderWebChartObject(
      /**
    * Get pane attribute
    */
-    newChartObject.pane = _.assign(
+    newChartObject.pane = assign(
         {},
         getChartPaneOptions(chartConfiguration.type)
     );
@@ -31,7 +31,7 @@ export function getSpiderWebChartObject(
    /**
    * Get y axis options
    */
-  newChartObject.yAxis = _.assign([], getChartYAxisOptions(chartConfiguration));
+  newChartObject.yAxis = assign([], getChartYAxisOptions(chartConfiguration));
  
     /**
    * Sort the corresponding series
@@ -52,7 +52,7 @@ export function getSpiderWebChartObject(
        * 
       */
       
-      newChartObject.series = _.assign([],sortedSeries);
+      newChartObject.series = assign([],sortedSeries);
 
 
       const xAxisItems = getXAxisItemsFromChartConfiguration(chartConfiguration);

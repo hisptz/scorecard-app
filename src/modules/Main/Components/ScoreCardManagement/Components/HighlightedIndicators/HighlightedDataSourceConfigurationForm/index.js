@@ -29,7 +29,7 @@ export default function HighlightedDataSourceConfigurationForm() {
             {
                 selectedHighlightedIndicator &&
                 <DataSourceConfigurationForm defaultValues={selectedHighlightedIndicator}
-                                             legendDefinitions={legendDefinitions} onFormChange={onChange}/>
+                                          legendDefinitions={legendDefinitions} onFormChange={onChange}/>
             }
         </div> : null
     )

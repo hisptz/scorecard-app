@@ -1,4 +1,4 @@
-import * as _ from 'lodash';
+import {map} from 'lodash';
 import { getDrilldownParentDataFromChildrenSeries } from './get-drilldown-parent-data-from-children-chart-series.helper';
 
 export function getDrilldownedChartSeries(
@@ -16,7 +16,7 @@ export function getDrilldownedChartSeries(
       ? 'Organisation unit'
       : 'Categories';
 
-  const seriesData = _.map(yAxisItems, yAxisObject => {
+  const seriesData = map(yAxisItems, yAxisObject => {
     return {
       name: yAxisObject.name,
       drilldown: yAxisObject.id,

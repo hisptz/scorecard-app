@@ -1,4 +1,4 @@
-import * as _ from 'lodash';
+import {map,last} from 'lodash';
 
 
 export  function getTableRowsUpdatedWithColumnsMetadata(
@@ -6,11 +6,11 @@ export  function getTableRowsUpdatedWithColumnsMetadata(
   tableRowsArray,
   tableColumnsArray
 ) {
-  return _.map(tableRowsArray, (tableRow) => {
+  return map(tableRowsArray, (tableRow) => {
     return [
       ...tableRow,
-      ..._.map(_.last(tableColumnsArray), (tableDataCell) => {
-        const lastTableRow = _.last(tableRow);
+      ...map(last(tableColumnsArray), (tableDataCell) => {
+        const lastTableRow = last(tableRow);
         const rowPaths =
           lastTableRow && lastTableRow.path ? lastTableRow.path.split('/') : [];
         const columnPaths =

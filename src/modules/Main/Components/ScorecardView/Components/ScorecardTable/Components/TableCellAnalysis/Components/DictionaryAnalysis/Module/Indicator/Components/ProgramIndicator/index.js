@@ -1,7 +1,9 @@
+import i18n from "@dhis2/d2-i18n";
 import {    DataTable,    TableHead,    TableBody,    DataTableRow,    DataTableColumnHeader} from '@dhis2/ui'
-import Row from "./Row";
 import {useRecoilValue} from "recoil";
 import {programIndicatorStateDictionary} from "../../../../Store";
+import Row from "./Row";
+
 
 export default function ProgramIndicatorIndicator(){
 
@@ -11,8 +13,8 @@ export default function ProgramIndicatorIndicator(){
     if(programIndicators.length===0){
         return (
             <div>
-                <h3> Program Indicators in indicator </h3>
-                <p>There were no Program Indicators in the Indicator Calculations</p>
+                <h3>{i18n.t("Program Indicators in indicator")}  </h3>
+                <p>{i18n.t("There were no Program Indicators in the Indicator Calculations")} </p>
             </div>
         )
     }
@@ -22,35 +24,35 @@ export default function ProgramIndicatorIndicator(){
     let i=0
 
     return (<div>
-        <h3> Program Indicators in indicator </h3>
-        <p> The following is the summary of the program indicators used in calculations:</p>
+        <h3>{i18n.t("Program Indicators in indicator")}  </h3>
+        <p>{i18n.t("The following is the summary of the program indicators used in calculations:")} </p>
 
         <DataTable>
             <TableHead>
                 <DataTableRow>
                     <DataTableColumnHeader bordered>
-                        Program Indicator
+                        {i18n.t("Program Indicator")}
                     </DataTableColumnHeader>
                     <DataTableColumnHeader bordered>
-                        Expression part
+                        {i18n.t("Expression part")}
                     </DataTableColumnHeader>
                     <DataTableColumnHeader>
-                        Filter
+                        {i18n.t("Filter")}
                     </DataTableColumnHeader>
                     <DataTableColumnHeader>
-                        Aggregation type
+                        {i18n.t("Aggregation type")}
                     </DataTableColumnHeader>
                     <DataTableColumnHeader>
-                        Analytics type
+                        {i18n.t("Analytics type")}
                     </DataTableColumnHeader>
                     <DataTableColumnHeader>
-                        Period boundaries
+                        {i18n.t("Period boundaries")}
                     </DataTableColumnHeader>
                     <DataTableColumnHeader>
-                        Legends
+                        {i18n.t("Legends")}
                     </DataTableColumnHeader>
                     <DataTableColumnHeader>
-                        Groups
+                        {i18n.t("Groups")}
                     </DataTableColumnHeader>
 
                 </DataTableRow>

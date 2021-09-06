@@ -1,4 +1,4 @@
-import * as _ from 'lodash';
+import {assign,map} from 'lodash';
 
 export  function getChartAxisItems(
     analyticsObject,
@@ -11,7 +11,7 @@ export  function getChartAxisItems(
     const itemKeys = analyticsObject.metaData[axisType] ?? [];
     if (itemKeys) {
       if (axisIndex > 0) {
-        const availableItems = _.assign([], items);
+        const availableItems = assign([], items);
         items = [];
         itemKeys.forEach(itemKey => {
           availableItems.forEach(item => {
@@ -22,7 +22,7 @@ export  function getChartAxisItems(
           });
         });
       } else {
-        items = _.map(itemKeys, itemKey => {
+        items = map(itemKeys, itemKey => {
           return {
             id: itemKey,
             name: metadataNames[itemKey].trim()

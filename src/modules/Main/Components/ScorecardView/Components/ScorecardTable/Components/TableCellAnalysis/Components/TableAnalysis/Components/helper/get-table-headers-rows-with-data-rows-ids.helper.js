@@ -1,10 +1,10 @@
-import * as _ from 'lodash';
+import {map,} from 'lodash';
 
 export default  function getTableHeaderRowsWithDataRowIds(
   tableHeaderRowsArray
 ) {
-  return _.map(tableHeaderRowsArray, (tableHeaderRows) =>
-    _.map(tableHeaderRows, (tableHeaderRow) => {
+  return map(tableHeaderRowsArray, (tableHeaderRows) =>
+    map(tableHeaderRows, (tableHeaderRow) => {
       if (!tableHeaderRow) {
         return null;
       }

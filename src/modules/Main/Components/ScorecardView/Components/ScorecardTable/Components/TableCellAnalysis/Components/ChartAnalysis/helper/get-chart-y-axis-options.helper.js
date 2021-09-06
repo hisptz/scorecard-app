@@ -1,4 +1,4 @@
-import * as _ from 'lodash';
+import {assign,map} from 'lodash';
 
 export function getChartYAxisOptions(chartConfiguration)
 {
@@ -6,7 +6,7 @@ export function getChartYAxisOptions(chartConfiguration)
     let newYAxes = [];
 
     if(yAxes.length == 0){
-        newYAxes = _.assign(
+        newYAxes = assign(
             [],
             [
                 {
@@ -24,7 +24,7 @@ export function getChartYAxisOptions(chartConfiguration)
               ]
         )
     }else {
-        newYAxes = _.map(yAxes, (yAxis) => {
+        newYAxes = map(yAxes, (yAxis) => {
             return {
               min: chartConfiguration.rangeAxisMinValue,
               max: chartConfiguration.rangeAxisMaxValue,
@@ -39,7 +39,7 @@ export function getChartYAxisOptions(chartConfiguration)
 
 
 
-  return _.map(newYAxes, (yAxis) => {
+  return map(newYAxes, (yAxis) => {
     /**
      * Get more options depending on chart type
      */

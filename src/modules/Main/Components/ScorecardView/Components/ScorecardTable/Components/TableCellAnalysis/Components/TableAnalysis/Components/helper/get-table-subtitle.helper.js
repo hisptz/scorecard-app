@@ -1,11 +1,11 @@
-import * as _ from 'lodash';
+import  {map} from 'lodash';
 
 export  function getTableSubtitle(
   tableConfiguration,
   analyticsObject
 ) {
-  return _.map(tableConfiguration.filter, (filter) =>
-    _.map(
+  return map(tableConfiguration.filter, (filter) =>
+    map(
       analyticsObject && analyticsObject.metaData
         ? analyticsObject.metaData[filter] || []
         : [],

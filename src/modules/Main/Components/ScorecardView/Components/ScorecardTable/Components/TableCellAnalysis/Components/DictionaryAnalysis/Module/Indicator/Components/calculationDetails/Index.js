@@ -1,4 +1,5 @@
 import {useDataQuery} from '@dhis2/app-runtime'
+import i18n from "@dhis2/d2-i18n";
 import {
     CircularLoader,
     DataTable,
@@ -42,20 +43,21 @@ export default function CalculationDetails({id}) {
 
 
     return (<div>
-        <h3> Calculation details</h3>
-        <p> Below are expression computing numerator and denominator, and related sources </p>
+        <h3> {i18n.t("Calculation details")}</h3>
+        <p> {i18n.t("Below are expression computing numerator and denominator, and related sources")} </p>
 
         <DataTable>
             <TableHead>
                 <DataTableRow>
                     <DataTableColumnHeader bordered>
-                        Expression
+                        {i18n.t("Expression")}
                     </DataTableColumnHeader>
                     <DataTableColumnHeader bordered>
-                        Formula
+                        {i18n.t("Formula")}
                     </DataTableColumnHeader>
                     <DataTableColumnHeader bordered>
-                        Sources
+                        {i18n.t("Sources")}
+
                     </DataTableColumnHeader>
 
                 </DataTableRow>
@@ -63,15 +65,16 @@ export default function CalculationDetails({id}) {
             <TableBody>
                 <DataTableRow>
                     <DataTableCell bordered>
-                        Numerator
+                        {i18n.t("Numerator")}
+
                     </DataTableCell>
                     <CalculationDetailRow formula={numDen.numerator} location="numerator"/>
-                    {/*<CalculationDetailRow formula={"#{RF4VFVGdFRO.jOkIbJVhECg}"} location="numerator" />*/}
 
                 </DataTableRow>
                 <DataTableRow>
                     <DataTableCell bordered>
-                        Denominator
+                        {i18n.t("Denominator")}
+
                     </DataTableCell>
 
                     <CalculationDetailRow formula={numDen.denominator} location="denominator"/>

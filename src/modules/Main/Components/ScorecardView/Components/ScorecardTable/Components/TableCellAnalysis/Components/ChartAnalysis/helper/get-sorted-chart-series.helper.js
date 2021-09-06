@@ -1,4 +1,4 @@
-import * as _ from 'lodash';
+import {map,sortBy,reverse,find} from 'lodash';
 import { getCombinedChartSeriesData } from './get-combined-chart-series-data.helper';
 
 
@@ -11,23 +11,23 @@ export function getSortedChartSeries(series,sortOrder){
    */
   const combinedSeriesData = [
     ...getCombinedChartSeriesData(
-      _.map(series, seriesObject => seriesObject.data)
+      map(series, seriesObject => seriesObject.data)
     )
   ];
 
 
   if (sortOrder === 1) {
-    seriesCategories = _.map(
-      _.reverse(_.sortBy(combinedSeriesData, ['y'])),
+    seriesCategories = map(
+      reverse(sortBy(combinedSeriesData, ['y'])),
       seriesData => seriesData.id
     );
-    newSeries = _.map(newSeries, seriesObject => {
+    newSeries = map(newSeries, seriesObject => {
       const newSeriesObject = { ...seriesObject };
 
       if (seriesCategories.length > 0) {
         newSeriesObject.data = [
-          ..._.map(seriesCategories, seriesCategory =>
-            _.find(seriesObject.data, ['id', seriesCategory])
+          ...map(seriesCategories, seriesCategory =>
+            find(seriesObject.data, ['id', seriesCategory])
           )
         ];
       }
@@ -35,17 +35,17 @@ export function getSortedChartSeries(series,sortOrder){
       return newSeriesObject;
     });
   } else if (sortOrder === -1) {
-    seriesCategories = _.map(
-      _.sortBy(combinedSeriesData, ['y']),
+    seriesCategories = map(
+      sortBy(combinedSeriesData, ['y']),
       seriesData => seriesData.id
     );
-    newSeries = _.map(series, seriesObject => {
+    newSeries = map(series, seriesObject => {
       const newSeriesObject = { ...seriesObject };
 
       if (seriesCategories.length > 0) {
         newSeriesObject.data = [
-          ..._.map(seriesCategories, seriesCategory =>
-            _.find(seriesObject.data, ['id', seriesCategory])
+          ...map(seriesCategories, seriesCategory =>
+            find(seriesObject.data, ['id', seriesCategory])
           )
         ];
       }

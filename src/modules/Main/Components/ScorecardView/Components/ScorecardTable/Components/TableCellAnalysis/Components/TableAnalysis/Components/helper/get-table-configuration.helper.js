@@ -1,5 +1,5 @@
 /* eslint-disable no-prototype-builtins */
-import * as _ from 'lodash';
+import {random,map,sortBy} from 'lodash';
 
 // eslint-disable-next-line max-params
 export  function getTableConfiguration(
@@ -10,7 +10,7 @@ export  function getTableConfiguration(
   interventionName
 ){
   return {
-    id: `${favoriteObject ? favoriteObject.id : _.random(1000, 1000)}_table`,
+    id: `${favoriteObject ? favoriteObject.id : random(1000, 1000)}_table`,
     title: getTableTitle(favoriteObject, interventionName),
     subtitle: favoriteObject.hasOwnProperty('subtitle')
       ? favoriteObject.subtitle
@@ -38,20 +38,20 @@ export  function getTableConfiguration(
       : true,
     displayList: checkForEventDataType(favoriteObject, type),
     rows: visualizationLayout.rows
-      ? _.map(
-          _.sortBy(visualizationLayout.rows, 'shouldComeFirst'),
+      ? map(
+          sortBy(visualizationLayout.rows, 'shouldComeFirst'),
           (row) => row.dimension
         )
       : ['pe'],
     columns: visualizationLayout.columns
-      ? _.map(
-          _.sortBy(visualizationLayout.columns, 'shouldComeFirst'),
+      ? map(
+          sortBy(visualizationLayout.columns, 'shouldComeFirst'),
           (column) => column.dimension
         )
       : ['dx'],
     filters: visualizationLayout.filters
-      ? _.map(
-          _.sortBy(visualizationLayout.filters, 'shouldComeFirst'),
+      ? map(
+          sortBy(visualizationLayout.filters, 'shouldComeFirst'),
           (filter) => filter.dimension
         )
       : ['ou'],

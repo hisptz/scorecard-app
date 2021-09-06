@@ -37,7 +37,7 @@ export default function DataSource({id}) {
 
     return (<div>
 
-        <h3>Data sources (Datasets/Programs)</h3>
+        <h3>{i18n.t("Data sources (Datasets/Programs)")}</h3>
         <p>
             {i18n.t('Indicator is captured from the following sources,')}
         </p>
@@ -45,8 +45,7 @@ export default function DataSource({id}) {
 
         <ul>
             {data?.sources?.dataSets.map((dataSet) => {
-                return <li key={dataSet?.id}><b>{dataSet?.displayName}</b> submitting {dataSet?.periodType} after
-                    every {dataSet?.timelyDays} days</li>
+                return <li key={dataSet?.id}><b>{dataSet?.displayName}</b> {i18n.t("submitting {{variables1}} after every {{variables2}} days",{variables1:dataSet?.periodType,variables2:dataSet?.timelyDays})}</li>
             })}
         </ul>
 

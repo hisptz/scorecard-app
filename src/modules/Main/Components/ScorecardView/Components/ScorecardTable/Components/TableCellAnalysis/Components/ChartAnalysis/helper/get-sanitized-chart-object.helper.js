@@ -1,28 +1,28 @@
-import * as _ from 'lodash';
+import {flatten,filter,map,each,intersection,find,some} from 'lodash';
 import { getChartExportingOptions } from './get-chart-exporting-options.helper';
 export function getSanitizedChartObject(
   chartObject,
   chartConfiguration
 ) {
-  const dataSelectionGroups = _.flatten(
-    _.filter(
-      _.map(chartConfiguration.dataSelections || [], (dataSelection) => {
+  const dataSelectionGroups = flatten(
+    filter(
+      map(chartConfiguration.dataSelections || [], (dataSelection) => {
         return dataSelection.groups;
       }),
       group => group
     )
   );
 
-  const dataSelectionGroupMembers = _.flatten(
-    _.map(dataSelectionGroups, group => {
-      return _.map(group.members, (member) => `${member.id}_${group.id}`);
+  const dataSelectionGroupMembers = flatten(
+    map(dataSelectionGroups, group => {
+      return map(group.members, (member) => `${member.id}_${group.id}`);
     })
   );
 
   // Remove non numeric series data and their categories
-  const dataIndexesArrayToRemove = _.map(chartObject.series, seriesObject => {
-    return _.filter(
-      _.map(seriesObject.data, (dataItem, dataIndex) =>
+  const dataIndexesArrayToRemove = map(chartObject.series, seriesObject => {
+    return filter(
+      map(seriesObject.data, (dataItem, dataIndex) =>
         dataItem.y === '' ||
         (dataSelectionGroupMembers.length > 0 &&
           dataSelectionGroupMembers.indexOf(dataItem.id) === -1)
@@ -34,19 +34,19 @@ export function getSanitizedChartObject(
   });
 
   let newDataIndexes = [];
-  _.each(dataIndexesArrayToRemove, (dataIndexes) => {
+  each(dataIndexesArrayToRemove, (dataIndexes) => {
     newDataIndexes = newDataIndexes.length === 0 ? dataIndexes : newDataIndexes;
-    newDataIndexes = _.intersection(newDataIndexes, dataIndexes);
+    newDataIndexes = intersection(newDataIndexes, dataIndexes);
   });
 
-  const newSeries = _.map(chartObject.series, (seriesObject) => {
+  const newSeries = map(chartObject.series, (seriesObject) => {
     return {
       ...seriesObject,
-      data: _.filter(
-        _.map(seriesObject.data, (dataItem) => {
+      data: filter(
+        map(seriesObject.data, (dataItem) => {
           const splitedDataItemId = dataItem.id.split('_');
 
-          const associatedGroup = _.find(dataSelectionGroups, [
+          const associatedGroup = find(dataSelectionGroups, [
             'id',
             splitedDataItemId[1]
           ]);
@@ -59,7 +59,7 @@ export function getSanitizedChartObject(
           }
 
           return associatedGroup &&
-            _.some(
+            some(
               associatedGroup.members,
               (member) => member.id === splitedDataItemId[0]
             ) &&
@@ -74,13 +74,13 @@ export function getSanitizedChartObject(
   });
 
   let categoryCount = 0;
-  const newCategories = _.map(chartObject.xAxis.categories, (category) => {
+  const newCategories = map(chartObject.xAxis.categories, (category) => {
     if (!category.categories) {
       return category;
     }
     const newCategory = {
       ...category,
-      categories: _.filter(
+      categories: filter(
         category.categories,
         (innerCategory, innerCategoryIndex) =>
           newDataIndexes.indexOf(innerCategoryIndex + categoryCount) === -1

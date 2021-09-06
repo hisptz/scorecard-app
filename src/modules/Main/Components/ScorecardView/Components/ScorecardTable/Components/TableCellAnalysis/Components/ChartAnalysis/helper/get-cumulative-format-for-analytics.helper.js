@@ -1,4 +1,4 @@
-import * as _ from 'lodash';
+import {reverse,findIndex,find,clone,assign} from 'lodash';
 
 export function getCumulativeFormatForAnalytics(
 analyticsObject,
@@ -6,27 +6,27 @@ xAxisType,
 yAxisType
 ){
  
-    const newAnalyticsObject = _.clone(analyticsObject)
+    const newAnalyticsObject = clone(analyticsObject)
 
     if(analyticsObject)
     {
         const yAxisDimensionArray = analyticsObject.metadata[yAxisType];
         const xAxisDimensionArray = [
-            ..._.reverse([...analyticsObject.metadata[xAxisType]])
+            ... reverse([...analyticsObject.metadata[xAxisType]])
         ];
 
-        const yAxisDimensionIndex = _.findIndex(
+        const yAxisDimensionIndex = findIndex(
             analyticsObject.headers,
-            _.find(analyticsObject.headers, ['name', yAxisType])
+            find(analyticsObject.headers, ['name', yAxisType])
           );
-          const xAxisDimensionIndex = _.findIndex(
+          const xAxisDimensionIndex = findIndex(
             analyticsObject.headers,
-            _.find(analyticsObject.headers, ['name', xAxisType])
+            find(analyticsObject.headers, ['name', xAxisType])
           );
 
-          const dataValueIndex = _.findIndex(
+          const dataValueIndex = findIndex(
             analyticsObject.headers,
-            _.find(analyticsObject.headers, ['name', 'value'])
+            find(analyticsObject.headers, ['name', 'value'])
           );
 
           const newRows = [];
@@ -40,7 +40,7 @@ yAxisType
                   row[xAxisDimensionIndex] === xAxisDimensionValue
                 ) {
                   initialValue += parseInt(row[dataValueIndex], 10);
-                  const newRow = _.clone(row);
+                  const newRow = clone(row);
                   newRow[dataValueIndex] = initialValue;
                   newRows.push(newRow);
                 }
@@ -48,7 +48,7 @@ yAxisType
             });
           });
          
-      newAnalyticsObject.rows = _.assign([], newRows);
+      newAnalyticsObject.rows = assign([], newRows);
     }
     return newAnalyticsObject;
 

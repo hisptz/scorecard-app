@@ -1,4 +1,4 @@
-import * as _ from 'lodash';
+import {clone,assign} from 'lodash';
 import { getChartAxisItems } from './get-chart-axis-items.helper';
 import { getChartSeries } from './get-chart-series.helper';
 import { getDrilldownedChartSeries } from './get-drilldowned-chart-series.helper';
@@ -8,7 +8,7 @@ export function getPieChartObject(
   analyticsObject,
   chartConfiguration
 ) {
-  const newChartObject = _.clone(initialChartObject);
+  const newChartObject = clone(initialChartObject);
   const yAxisSeriesItems= getChartAxisItems(
     analyticsObject,
     chartConfiguration.yAxisType
@@ -59,7 +59,7 @@ export function getPieChartObject(
     /**
      * Get series
      */
-    newChartObject.series = _.assign([], sanitizedSeries);
+    newChartObject.series = assign([], sanitizedSeries);
   }
 
   return newChartObject;

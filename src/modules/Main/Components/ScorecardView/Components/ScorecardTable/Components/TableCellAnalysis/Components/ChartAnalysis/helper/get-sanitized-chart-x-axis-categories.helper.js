@@ -1,28 +1,28 @@
-import * as _ from 'lodash';
+import {reverse,map,times,find,findIndex,assign,groupBy,forEach,filter,uniqBy} from 'lodash';
 export function getSanitizedChartXAxisCategories(
   series,
   xAxisItems
 ) {
-  const reversedXAxisItems = _.reverse(xAxisItems || []);
+  const reversedXAxisItems = reverse(xAxisItems || []);
   let newCategories = [];
   if (series) {
-    const seriesDataObjects = _.map(
+    const seriesDataObjects = map(
       series,
       (seriesObject) => seriesObject.data
     );
 
     if (seriesDataObjects) {
-      const seriesCategoryNamesArray = _.map(
+      const seriesCategoryNamesArray = map(
         seriesDataObjects,
         (seriesData) => {
-          return _.map(seriesData, (data) => {
+          return map(seriesData, (data) => {
             const idArray = data.name.split('_');
             const newCategoryArray = [];
             if (idArray) {
-              const reversedIdArray = _.reverse(idArray);
-              _.times(idArray.length, (num) => {
+              const reversedIdArray = reverse(idArray);
+              times(idArray.length, (num) => {
                 if (num === 0) {
-                  const parentCategoryItem = _.find(
+                  const parentCategoryItem = find(
                     reversedXAxisItems[num] || [],
                     ['id', reversedIdArray[num]]
                   );
@@ -34,20 +34,20 @@ export function getSanitizedChartXAxisCategories(
                       : reversedIdArray[num],
                   });
                 } else {
-                  const parentCategory = _.find(newCategoryArray, [
+                  const parentCategory = find(newCategoryArray, [
                     'id',
                     reversedIdArray[num - 1],
                   ]);
 
                   if (parentCategory) {
-                    const parentCategoryIndex = _.findIndex(
+                    const parentCategoryIndex = findIndex(
                       newCategoryArray,
                       parentCategory
                     );
                     let newChildrenCategories = parentCategory.categories
                       ? parentCategory.categories
                       : [];
-                    const childrenCategoryItem = _.find(
+                    const childrenCategoryItem = find(
                       reversedXAxisItems[num] || [],
                       ['id', reversedIdArray[num]]
                     );
@@ -60,7 +60,7 @@ export function getSanitizedChartXAxisCategories(
                         : reversedIdArray[num],
                     ];
 
-                    parentCategory.categories = _.assign(
+                    parentCategory.categories = assign(
                       [],
                       newChildrenCategories
                     );
@@ -76,19 +76,19 @@ export function getSanitizedChartXAxisCategories(
       );
 
       if (seriesCategoryNamesArray) {
-        const groupedCategoryNames = _.groupBy(
+        const groupedCategoryNames = groupBy(
           seriesCategoryNamesArray[0],
           'name'
         );
-        const categoryNameGroupKeys = _.map(
+        const categoryNameGroupKeys = map(
           seriesCategoryNamesArray[0],
           (category) => category.name
           
         );
         const sanitizedCategoryNames = [];
-        _.forEach(categoryNameGroupKeys, (key) => {
-          const categories = _.filter(
-            _.map(groupedCategoryNames[key], (categoryObject) => {
+        forEach(categoryNameGroupKeys, (key) => {
+          const categories = filter(
+            map(groupedCategoryNames[key], (categoryObject) => {
               return categoryObject.categories
                 ? categoryObject.categories[0]
                 : null;
@@ -105,9 +105,9 @@ export function getSanitizedChartXAxisCategories(
           }
         });
 
-        newCategories = _.assign([], sanitizedCategoryNames);
+        newCategories = assign([], sanitizedCategoryNames);
       }
     }
   }
-  return _.uniqBy(newCategories, 'name');
+  return uniqBy(newCategories, 'name');
 }

@@ -1,4 +1,4 @@
-import * as _ from 'lodash';
+import {clone,assign} from 'lodash';
 import { getChartAxisItems } from './get-chart-axis-items.helper';
 import { getChartPaneOptions } from './get-chart-pane-options.helper';
 import { getChartSeries } from './get-chart-series.helper';
@@ -11,7 +11,7 @@ export function getSolidGaugeChartObject(
   chartConfiguration
 ) {
   // todo make gauge chart more understanble in analyisis
-  const newChartObject = _.clone(initialChartObject);
+  const newChartObject = clone(initialChartObject);
   const yAxisSeriesItems = getChartAxisItems(
     analyticsObject,
     chartConfiguration.yAxisType
@@ -25,7 +25,7 @@ export function getSolidGaugeChartObject(
   /**
    * Get y axis options
    */
-  newChartObject.yAxis = _.assign([], getChartYAxisOptions(chartConfiguration));
+  newChartObject.yAxis = assign([], getChartYAxisOptions(chartConfiguration));
 
   /**
    * Sort the corresponding series

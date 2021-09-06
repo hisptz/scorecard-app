@@ -1,4 +1,5 @@
-import * as _ from 'lodash';
+/* eslint-disable no-case-declarations */
+import {clone} from 'lodash';
 import { getInitialChartObject } from './get-initial-chart-object-helper';
 import { getSanitizedanalyticsBasedOnConfiguration } from './get-sanitized-analytics-based-on-chart-configuration.helper';
 import { getSanitizedChartObject } from './get-sanitized-chart-object.helper';
@@ -40,7 +41,7 @@ export function getCharObject(incommingAnalyticObject,chartConfiguration){
       );
       break;
     case 'gauge':
-              const newChartConfiguration  =  _.clone(chartConfiguration);
+              const newChartConfiguration  =  clone(chartConfiguration);
       newChartConfiguration.type = 'solidgauge';
       chartObject = getSolidGaugeChartObject(
         chartObject,
