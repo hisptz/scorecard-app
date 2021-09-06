@@ -7,8 +7,8 @@
   "scripts": {
     "build": "d2-app-scripts build",
     "start": "d2-app-scripts start",
-    "e2e-interactive": "d2-app-scripts test",
-    "test": "cypress open",
+    "test": "d2-app-scripts test",
+    "cy:open": "cypress open",
     "e2e": "cypress run",
     "cy:component": "yarn cypress open-ct",
     "deploy": "d2-app-scripts deploy"
