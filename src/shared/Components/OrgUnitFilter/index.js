@@ -102,6 +102,7 @@ export default function OrgUnitFilter({value, onUpdate}) {
                         roots &&
                         <OrganisationUnitTree
                             selected={selectedOrgUnits?.map(({path}) => path)}
+                            initiallyExpanded={selectedOrgUnits?.map(({path}) => path)}
                             roots={roots?.map(({id}) => id)}
                             onChange={(orgUnit) => {
                                 if (isOrgUnitSelected(orgUnit)) {

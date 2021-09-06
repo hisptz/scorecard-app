@@ -243,7 +243,6 @@ export default function DataGroup({
         );
     };
 
-
     useEffect(() => {
         setScorecardEditorState((prevState) => ({
             ...prevState,
@@ -251,7 +250,6 @@ export default function DataGroup({
             selectedGroupIndex: index,
         }));
     }, [expanded]);
-
 
     const onExpand = (event, newExpanded) => {
         handleAccordionChange(id)(event, newExpanded);
