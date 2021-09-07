@@ -20,3 +20,4 @@ function validateRequiredFields(scorecard, requiredFieldsPath = []) {
 export default function validateScorecard(scorecard) {
     return validateRequiredFields(scorecard, REQUIRED_FIELDS) ?? {}
 }
+

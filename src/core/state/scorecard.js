@@ -8,7 +8,7 @@ import {
     getTableWidthWithDataGroups,
     getTableWidthWithOrgUnit,
 } from "../../modules/Main/Components/ScorecardView/Components/ScorecardTable/services/utils";
-import getScorecard from "../../shared/services/getScorecard";
+import getScorecard, {getOrgUnitSelection} from "../../shared/services/getScorecard";
 import getScorecardSummary from "../../shared/services/getScorecardSummary";
 import {getHoldersFromGroups} from "../../shared/utils/utils";
 import ScorecardAccessType from "../constants/scorecardAccessType";
@@ -69,7 +69,9 @@ const ScorecardSummaryState = atom({
             const engine = get(EngineState);
             const user = get(UserState);
             const {summary, error} = await getScorecardSummary(engine);
-            if (error) {throw error;}
+            if (error) {
+                throw error;
+            }
             return filter(summary, (scorecardSummary) => {
                 const {read} = getUserAuthority(user, scorecardSummary) ?? {};
                 return read;
@@ -94,8 +96,11 @@ const ScorecardConfState = atomFamily({
                     get(ScorecardRequestId(scorecardId));
                     if (scorecardId) {
                         const {scorecard, error} = await getScorecard(scorecardId, engine);
-                        if (error) {throw error;}
-                        return scorecard;
+                        if (error) {
+                            throw error;
+                        }
+                        const orgUnitSelection = await getOrgUnitSelection(scorecard, engine)
+                        return {...scorecard, orgUnitSelection};
                     }
                     return new Scorecard(defaultValue);
                 },
@@ -110,8 +115,9 @@ const ScorecardConfigDirtyState = atomFamily({
             (path) =>
                 ({get}) => {
                     const scorecardId = get(ScorecardIdState);
-                    if (!isEmpty(scorecardId))
-                        {return _get(get(ScorecardConfState(scorecardId)), path);}
+                    if (!isEmpty(scorecardId)) {
+                        return _get(get(ScorecardConfState(scorecardId)), path);
+                    }
                     return _get(new Scorecard(defaultValue), path);
                 },
     }),

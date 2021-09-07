@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-09-06T07:42:53.922Z\n"
-"PO-Revision-Date: 2021-09-06T07:42:53.922Z\n"
+"POT-Creation-Date: 2021-09-07T06:30:29.837Z\n"
+"PO-Revision-Date: 2021-09-07T06:30:29.837Z\n"
 
 msgid "Data"
 msgstr "Data"
@@ -62,6 +62,9 @@ msgstr "Can Read"
 msgid "Can Read and Write"
 msgstr "Can Read and Write"
 
+msgid "Click to configure, drag to rearrange"
+msgstr "Click to configure, drag to rearrange"
+
 msgid "Click to {{linkAction}}"
 msgstr "Click to {{linkAction}}"
 
@@ -70,6 +73,15 @@ msgstr "unlink"
 
 msgid "link"
 msgstr "link"
+
+msgid "Click to {{action}}, drag to rearrange"
+msgstr "Click to {{action}}, drag to rearrange"
+
+msgid "collapse"
+msgstr "collapse"
+
+msgid "expand"
+msgstr "expand"
 
 msgid "Save"
 msgstr "Save"
@@ -158,6 +170,12 @@ msgstr "Access"
 msgid "Options"
 msgstr "Options"
 
+msgid "Scorecard added successfully"
+msgstr "Scorecard added successfully"
+
+msgid "Scorecard updated successfully"
+msgstr "Scorecard updated successfully"
+
 msgid "Previous"
 msgstr "Previous"
 
@@ -185,8 +203,8 @@ msgstr "Search"
 msgid "Help"
 msgstr "Help"
 
-msgid "Change to {{viewType}} view"
-msgstr "Change to {{viewType}} view"
+msgid "Switch to {{viewType}} view"
+msgstr "Switch to {{viewType}} view"
 
 msgid "list"
 msgstr "list"
@@ -196,6 +214,12 @@ msgstr "grid"
 
 msgid "Add New Scorecard"
 msgstr "Add New Scorecard"
+
+msgid "Migrating scorecards"
+msgstr "Migrating scorecards"
+
+msgid "of"
+msgstr "of"
 
 msgid "You do not have access to {{accessType}} this Scorecard"
 msgstr "You do not have access to {{accessType}} this Scorecard"
@@ -229,6 +253,27 @@ msgstr "There are no configured indicators for this scorecard"
 
 msgid "Drag to the column headers to change layout"
 msgstr "Drag to the column headers to change layout"
+
+msgid "Analytics Details"
+msgstr "Analytics Details"
+
+msgid "Uses"
+msgstr "Uses"
+
+msgid "aggregation type through period and hierarchy"
+msgstr "aggregation type through period and hierarchy"
+
+msgid "data sources"
+msgstr "data sources"
+
+msgid "Category Combo is"
+msgstr "Category Combo is"
+
+msgid "which has cross-tabulation between "
+msgstr "which has cross-tabulation between "
+
+msgid "with following details"
+msgstr "with following details"
 
 msgid "Data sources"
 msgstr "Data sources"
@@ -280,6 +325,48 @@ msgstr "Programs"
 
 msgid "submitting records on every event(case or individual)"
 msgstr "submitting records on every event(case or individual)"
+
+msgid "Data element Facts"
+msgstr "Data element Facts"
+
+msgid "Accepts only"
+msgstr "Accepts only"
+
+msgid "to enforce validation"
+msgstr "to enforce validation"
+
+msgid "Has"
+msgstr "Has"
+
+msgid "related validation rules"
+msgstr "related validation rules"
+
+msgid "Part of numerators of"
+msgstr "Part of numerators of"
+
+msgid "indicators"
+msgstr "indicators"
+
+msgid "Part of denominators of"
+msgstr "Part of denominators of"
+
+msgid "Related Indicators"
+msgstr "Related Indicators"
+
+msgid "This Data Element is not related to any indicator"
+msgstr "This Data Element is not related to any indicator"
+
+msgid "Name"
+msgstr "Name"
+
+msgid "Numerator"
+msgstr "Numerator"
+
+msgid "Denominator"
+msgstr "Denominator"
+
+msgid "Type"
+msgstr "Type"
 
 msgid "Introduction"
 msgstr "Introduction"
@@ -373,12 +460,6 @@ msgstr "Formula"
 msgid "Sources"
 msgstr "Sources"
 
-msgid "Numerator"
-msgstr "Numerator"
-
-msgid "Denominator"
-msgstr "Denominator"
-
 msgid "Data elements in indicator"
 msgstr "Data elements in indicator"
 
@@ -412,9 +493,6 @@ msgstr "Indicator facts"
 msgid "Belongs to the following groups of indicators"
 msgstr "Belongs to the following groups of indicators"
 
-msgid "Name"
-msgstr "Name"
-
 msgid "Code"
 msgstr "Code"
 
@@ -444,6 +522,39 @@ msgstr "Lower"
 
 msgid "Legends for analysis"
 msgstr "Legends for analysis"
+
+msgid "Accesibility & Sharing Settings"
+msgstr "Accesibility & Sharing Settings"
+
+msgid "This"
+msgstr "This"
+
+msgid "was first created on"
+msgstr "was first created on"
+
+msgid "by"
+msgstr "by"
+
+msgid "and last updated on"
+msgstr "and last updated on"
+
+msgid "User Access"
+msgstr "User Access"
+
+msgid "can"
+msgstr "can"
+
+msgid "User Group Access"
+msgstr "User Group Access"
+
+msgid "read and write"
+msgstr "read and write"
+
+msgid "read only"
+msgstr "read only"
+
+msgid "none"
+msgstr "none"
 
 msgid "Column"
 msgstr "Column"

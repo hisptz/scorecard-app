@@ -23,6 +23,7 @@ import DataConfigurationScorecardForm from "./Components/DataConfiguration";
 import GeneralScorecardForm from "./Components/General";
 import HighlightedIndicatorsScorecardForm from "./Components/HighlightedIndicators";
 import OptionsScorecardForm from "./Components/Options";
+import sanitizeScorecard from "./services/sanitizers";
 import validateScorecard from "./services/validator";
 
 const steps = [
@@ -87,6 +88,7 @@ export default function ScoreCardManagement() {
     }
 
     const updateData = async (updatedScorecard) => {
+
         await Scorecard.update(updatedScorecard, update);
         show({
             message: i18n.t('Scorecard updated successfully'),
@@ -107,6 +109,8 @@ export default function ScoreCardManagement() {
 
             const errors = validateScorecard(updatedScorecard);
 
+            const sanitizedScorecard = sanitizeScorecard(updatedScorecard)
+            console.log(sanitizedScorecard)
             if (!isEmpty(errors)) {
                 set(ScorecardConfigErrorState, errors)
                 const errorMessage = `Please fill in the required field(s)`
@@ -119,9 +123,9 @@ export default function ScoreCardManagement() {
             if (isEmpty(errors)) {
 
                 if (scorecardId) {
-                    await updateData(updatedScorecard);
+                    await updateData(sanitizedScorecard);
                 } else {
-                    await createNewScorecard(updatedScorecard)
+                    await createNewScorecard(sanitizedScorecard)
                 }
             }
         } catch (e) {
