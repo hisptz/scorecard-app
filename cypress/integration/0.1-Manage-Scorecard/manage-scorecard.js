@@ -107,5 +107,7 @@ And(
 );
 Then(
   "the changes on the legend values should be reflected in the scorecard",
-  () => {}
+  () => {
+    
+  }
 );

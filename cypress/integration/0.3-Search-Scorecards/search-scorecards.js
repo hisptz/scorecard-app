@@ -18,11 +18,11 @@ And("I search in the list by name", () => {
 Then(
   "I should be presented scorecard results matching search criterias",
   () => {
+    cy.get('h3').should('have.text','Test Scorecard')
     cy
     .get('[data-test=scorecard-thumbnail-view]').
     should((scoreboard)=>{
       expect(scoreboard).to.have.length(1)    })
-   
   }
 );
 
@@ -48,10 +48,6 @@ And("search in the list by a certain tag or category", () => {
 Then(
   "I should be presented scorecard results matching search criterias",
   () => {
-    cy
-    .get('[data-test=scorecard-thumbnail-view]').
-    should((scoreboard)=>{
-      expect(scoreboard).to.have.length(1)
-    })
+    cy.get('h3').should('have.text','Test Scorecard')
   }
 );
