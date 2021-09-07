@@ -2,7 +2,7 @@
  * Scenario: Accessing Scorecard List
  */
 
-
+/// <reference types ="cypress" />
 
 When("opening a list of available scorecards", () => {
   cy.intercept(
