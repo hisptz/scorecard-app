@@ -1,11 +1,19 @@
 import {useDataEngine} from "@dhis2/app-runtime";
 import {queue} from 'async'
-import {differenceBy, forIn, fromPairs, isEmpty} from "lodash";
+import {differenceBy, filter, forIn, fromPairs, isEmpty, uniqBy} from "lodash";
 import {useEffect, useState} from "react";
-import {DATASTORE_OLD_SCORECARD_ENDPOINT} from "../../../../../core/constants/config";
-import {useAddScorecard} from "../../../../../shared/hooks/datastore/useScorecard";
-import useScorecardsSummary from "../../../../../shared/hooks/datastore/useScorecardsSummary";
+import {useRecoilState, useResetRecoilState} from "recoil";
+import {
+    DATASTORE_ENDPOINT,
+    DATASTORE_OLD_SCORECARD_ENDPOINT,
+    DATASTORE_SCORECARD_SUMMARY_KEY
+} from "../../../../../core/constants/config";
+import {ScorecardSummaryState} from "../../../../../core/state/scorecard";
+import {UserState} from "../../../../../core/state/user";
+import {getUserAuthority} from "../../../../../core/state/utils";
+import getScorecardSummary from "../../../../../shared/services/getScorecardSummary";
 import {migrateScorecard} from "../../../../../shared/utils/migrate";
+import {generateCreateMutation, generateScorecardSummary} from "../../../../../shared/utils/scorecard";
 
 const oldScorecardsQuery = {
     scorecardKeys: {
@@ -38,18 +46,29 @@ async function getOldScorecards(engine) {
 }
 
 
-const uploadNewScorecard = async ({scorecard, add}) => {
+const uploadNewScorecard = async ({scorecard, engine}) => {
     const newScorecard = migrateScorecard(scorecard)
-    return await add(newScorecard)
+    return await engine.mutate(generateCreateMutation(newScorecard?.id), {variables: {data: newScorecard}})
+}
+
+
+const summaryMutation = {
+    type: 'update',
+    resource: DATASTORE_ENDPOINT,
+    id: DATASTORE_SCORECARD_SUMMARY_KEY,
+    data: ({data}) => data,
+}
+
+const uploadSummary = async (engine, summary) => {
+    return await engine.mutate(summaryMutation, {variables: {data: summary}})
 }
 
 const q = queue(uploadNewScorecard)
 
 export default function useMigrateScorecard(onComplete) {
-    const {add} = useAddScorecard()
     const [error, setError] = useState();
     const [loading, setLoading] = useState(false);
-    const {summary} = useScorecardsSummary()
+    const resetSummary = useResetRecoilState(ScorecardSummaryState)
     const [progress, setProgress] = useState(0);
     const [count, setCount] = useState(0);
     const engine = useDataEngine()
@@ -58,6 +77,8 @@ export default function useMigrateScorecard(onComplete) {
         async function migrate() {
             setLoading(true)
             try {
+                const {summary, error} = await getScorecardSummary(engine)
+                if(error) {throw error}
                 const oldScorecards = await getOldScorecards(engine)
                 setLoading(false)
                 if (!isEmpty(oldScorecards)) {
@@ -67,10 +88,22 @@ export default function useMigrateScorecard(onComplete) {
                         return
                     }
                     setCount(unMigratedScorecards.length)
-                    q.push(unMigratedScorecards?.map(scorecard => ({scorecard, add})), () => {
+                    q.push(unMigratedScorecards?.map(scorecard => ({scorecard, engine})), () => {
                         setProgress(prevState => prevState + 1)
                     })
-                    q.drain(onComplete)
+                    q.drain(async () => {
+                        const newSummary = unMigratedScorecards?.map(oldScorecard => {
+                            const newScorecard = migrateScorecard(oldScorecard)
+                            return generateScorecardSummary(newScorecard)
+                        })
+                        if (!isEmpty(newSummary)) {
+                            const allSummary = uniqBy([...summary, ...newSummary], 'id')
+                            await uploadSummary(engine, allSummary).then(onComplete)
+                            resetSummary()
+                        } else {
+                            onComplete()
+                        }
+                    })
                 }
             } catch (e) {
                 setError(e)
