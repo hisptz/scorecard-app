@@ -1,4 +1,6 @@
+import {isEmpty} from "lodash";
 import {DATASTORE_ENDPOINT} from "../../core/constants/config";
+import OrgUnitSelection from "../../core/models/orgUnitSelection";
 
 
 const query = {
@@ -18,4 +20,31 @@ export default async function getScorecard(id = '', engine) {
         }
     }
     return {error: 'not found'}
+}
+
+
+const orgUnitQuery = {
+    orgUnits: {
+        resource: 'organisationUnits',
+        params: ({orgUnits}) => ({
+            filter: [
+                `id:in:[${orgUnits?.join(',')}]`
+            ],
+            fields: [
+                'path',
+                'displayName',
+                'level',
+                'id'
+            ]
+        })
+    }
+}
+
+export async function getOrgUnitSelection({orgUnitSelection}, engine) {
+    const {orgUnits: orgUnitsIds} = orgUnitSelection ?? {}
+    if (isEmpty(orgUnitsIds)) {
+        return new OrgUnitSelection()
+    }
+    const {orgUnits: resolvedOrgUnits} = await engine.query(orgUnitQuery, {variables: {orgUnits: orgUnitsIds?.map(({id}) => id)}})
+    return new OrgUnitSelection({...orgUnitSelection, orgUnits: resolvedOrgUnits?.organisationUnits})
 }
