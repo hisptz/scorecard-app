@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-09-06T10:41:56.164Z\n"
-"PO-Revision-Date: 2021-09-06T10:41:56.164Z\n"
+"POT-Creation-Date: 2021-09-07T06:30:29.837Z\n"
+"PO-Revision-Date: 2021-09-07T06:30:29.837Z\n"
 
 msgid "Data"
 msgstr "Data"
@@ -214,6 +214,12 @@ msgstr "grid"
 
 msgid "Add New Scorecard"
 msgstr "Add New Scorecard"
+
+msgid "Migrating scorecards"
+msgstr "Migrating scorecards"
+
+msgid "of"
+msgstr "of"
 
 msgid "You do not have access to {{accessType}} this Scorecard"
 msgstr "You do not have access to {{accessType}} this Scorecard"

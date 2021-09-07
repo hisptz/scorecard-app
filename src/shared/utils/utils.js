@@ -67,7 +67,7 @@ export function getDataSourcesFromGroups(dataGroups) {
 }
 
 export function getDataSourcesDisplayName(dataSources){
-    return dataSources?.length > 1 ? `${head(dataSources)?.displayName} / ${last(dataSources)?.displayName}` : `${head(dataSources)?.displayName}`
+    return dataSources?.length > 1 ? `${head(dataSources)?.label} / ${last(dataSources)?.label}` : `${head(dataSources)?.label}`
 }
 
 export function updatePager(pager, itemListLength) {
