@@ -1,13 +1,17 @@
 import {useDataEngine} from "@dhis2/app-runtime";
 import {queue} from 'async'
-import {differenceBy, forIn, fromPairs, isEmpty, uniqBy} from "lodash";
+import {differenceBy, filter, forIn, fromPairs, isEmpty, uniqBy} from "lodash";
 import {useEffect, useState} from "react";
+import {useRecoilState, useResetRecoilState} from "recoil";
 import {
     DATASTORE_ENDPOINT,
     DATASTORE_OLD_SCORECARD_ENDPOINT,
     DATASTORE_SCORECARD_SUMMARY_KEY
 } from "../../../../../core/constants/config";
-import useScorecardsSummary from "../../../../../shared/hooks/datastore/useScorecardsSummary";
+import {ScorecardSummaryState} from "../../../../../core/state/scorecard";
+import {UserState} from "../../../../../core/state/user";
+import {getUserAuthority} from "../../../../../core/state/utils";
+import getScorecardSummary from "../../../../../shared/services/getScorecardSummary";
 import {migrateScorecard} from "../../../../../shared/utils/migrate";
 import {generateCreateMutation, generateScorecardSummary} from "../../../../../shared/utils/scorecard";
 
@@ -42,11 +46,9 @@ async function getOldScorecards(engine) {
 }
 
 
-const uploadNewScorecard = async ({scorecard, engine}, callback) => {
+const uploadNewScorecard = async ({scorecard, engine}) => {
     const newScorecard = migrateScorecard(scorecard)
-    const summary = generateScorecardSummary(newScorecard)
-    await engine.mutate(generateCreateMutation(newScorecard?.id), {variables: {data: newScorecard}})
-    callback(summary)
+    return await engine.mutate(generateCreateMutation(newScorecard?.id), {variables: {data: newScorecard}})
 }
 
 
@@ -57,8 +59,7 @@ const summaryMutation = {
     data: ({data}) => data,
 }
 
-const uploadSummary = async (engine, oldSummary, newSummary) => {
-    const summary = uniqBy([...oldSummary, newSummary], 'id')
+const uploadSummary = async (engine, summary) => {
     return await engine.mutate(summaryMutation, {variables: {data: summary}})
 }
 
@@ -67,9 +68,8 @@ const q = queue(uploadNewScorecard)
 export default function useMigrateScorecard(onComplete) {
     const [error, setError] = useState();
     const [loading, setLoading] = useState(false);
-    const {summary} = useScorecardsSummary()
+    const resetSummary = useResetRecoilState(ScorecardSummaryState)
     const [progress, setProgress] = useState(0);
-    const [summaries, setSummaries] = useState([]);
     const [count, setCount] = useState(0);
     const engine = useDataEngine()
 
@@ -77,6 +77,8 @@ export default function useMigrateScorecard(onComplete) {
         async function migrate() {
             setLoading(true)
             try {
+                const {summary, error} = await getScorecardSummary(engine)
+                if(error) {throw error}
                 const oldScorecards = await getOldScorecards(engine)
                 setLoading(false)
                 if (!isEmpty(oldScorecards)) {
@@ -86,16 +88,21 @@ export default function useMigrateScorecard(onComplete) {
                         return
                     }
                     setCount(unMigratedScorecards.length)
-                    q.push(unMigratedScorecards?.map(scorecard => ({scorecard, engine})), (_, scorecardSummary) => {
-                        console.log({scorecardSummary})
-                        setSummaries(prevState => ([...prevState, scorecardSummary]))
+                    q.push(unMigratedScorecards?.map(scorecard => ({scorecard, engine})), () => {
                         setProgress(prevState => prevState + 1)
                     })
                     q.drain(async () => {
-                        if (!isEmpty(summaries)) {
-                            await uploadSummary(engine, summary, summaries)
+                        const newSummary = unMigratedScorecards?.map(oldScorecard => {
+                            const newScorecard = migrateScorecard(oldScorecard)
+                            return generateScorecardSummary(newScorecard)
+                        })
+                        if (!isEmpty(newSummary)) {
+                            const allSummary = uniqBy([...summary, ...newSummary], 'id')
+                            await uploadSummary(engine, allSummary).then(onComplete)
+                            resetSummary()
+                        } else {
+                            onComplete()
                         }
-                        onComplete()
                     })
                 }
             } catch (e) {
