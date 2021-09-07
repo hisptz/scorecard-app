@@ -3,9 +3,6 @@
  */
 /// <reference types ="cypress" />
 
-Given("authorized department officer", () => {
-  cy.visit("/");
-});
 When("opening a list of available scorecards", () => {
   cy.get('[data-test=scorecard-thumbnail-view]').
   should((scoreboard)=>{
@@ -29,9 +26,7 @@ Then(
 // /**
 //  * Scenario: Searching scorecards by categories/tag
 //  */
-Given("authorized department officer", () => {
-  cy.visit("/");
-});
+
 When("opening a list of available scorecards", () => {
   cy
   .get('[data-test=scorecard-thumbnail-view]').

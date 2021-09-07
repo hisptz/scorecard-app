@@ -2,9 +2,7 @@
  * Scenario: Accessing Scorecard List
  */
 
-Given("authorized department officer", () => {
-  cy.visit("/");
-});
+
 
 When("opening a list of available scorecards", () => {
   cy.intercept(
@@ -30,9 +28,6 @@ Then(
 /**
  * Scenario: Accessing many scorecards
  */
-Given("authorized department officer", () => {
-  cy.visit("/");
-});
 When("opening a list of many scorecards", () => {
   cy.intercept(
     "GET",
@@ -96,9 +91,7 @@ Then("I should be presented with a message {string}", (content) => {
 /**
  * Scenario: Listing Scorecards on card view
  */
-Given("authorized department officer", () => {
-  cy.visit("/");
-});
+
 When("opening a list of available scorecards", () => {
   cy.intercept(
     "GET",
@@ -136,9 +129,7 @@ Then(
 /**
  * Scenario: Listing Scorecards on thumbnail view
  */
-Given("authorized department officer", () => {
-  cy.visit("/");
-});
+
 When("opening a list of available scorecards", () => {});
 And("choose to view scorecards in thumbnail orientation", () => {
   cy.intercept(
