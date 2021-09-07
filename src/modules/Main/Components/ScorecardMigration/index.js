@@ -22,8 +22,7 @@ export default function ScorecardMigration({onMigrationComplete}) {
     if (loading) {
         return (
             <div className='column center align-items-center h-100 w-100'>
-                <CircularLoader small />
-                <h4>{i18n.t('Checking for old scorecard configuration')}</h4>
+                <CircularLoader />
             </div>
         )
     }
