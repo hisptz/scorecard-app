@@ -1,4 +1,4 @@
-import {capitalize, flattenDeep, snakeCase, head, last} from "lodash";
+import {capitalize, flattenDeep, head, last, snakeCase} from "lodash";
 import ScorecardLegend from "../../core/models/scorecardLegend";
 
 
@@ -34,7 +34,7 @@ export function generateRandomValues(max) {
     return Math.floor(Math.random() * maxNo)
 }
 
-export function generateLegendDefaults(legendDefinition = [], weight) {
+export function generateLegendDefaults(legendDefinition = [], weight, highIsGood) {
     if (legendDefinition) {
         const actualWeight = weight ?? 100; //sets 100 as the default weight
         const range = actualWeight / legendDefinition?.length
@@ -51,7 +51,7 @@ export function generateLegendDefaults(legendDefinition = [], weight) {
             }))
             legendDefinitionIterator--
         }
-        return values.reverse();
+        return highIsGood ? values.reverse() : values;
     }
     return []
 }
@@ -66,7 +66,7 @@ export function getDataSourcesFromGroups(dataGroups) {
     return flattenDeep(dataHolders?.map(({dataSources}) => dataSources))
 }
 
-export function getDataSourcesDisplayName(dataSources){
+export function getDataSourcesDisplayName(dataSources) {
     return dataSources?.length > 1 ? `${head(dataSources)?.label} / ${last(dataSources)?.label}` : `${head(dataSources)?.label}`
 }
 

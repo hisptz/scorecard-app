@@ -1,10 +1,12 @@
 import i18n from '@dhis2/d2-i18n'
 import {Divider, ReactFinalForm} from "@dhis2/ui";
+import {filter} from 'lodash'
 import PropTypes from 'prop-types'
 import React from "react";
 import {DHIS2ValueTypes} from "../../constants";
 import {FormFieldModel} from "../../models";
 import CustomField from "../CustomField";
+
 const {Form, FormSpy} = ReactFinalForm
 
 export default function DataSourceConfigurationForm({defaultValues, onFormChange, legendDefinitions}) {

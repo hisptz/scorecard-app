@@ -10,9 +10,9 @@ import EditIcon from "@material-ui/icons/Edit";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import LinkIcon from "@material-ui/icons/Link";
 import UnlinkIcon from "@material-ui/icons/LinkOff";
-import {cloneDeep, find, findIndex, flattenDeep, head, isEmpty, last,} from "lodash";
+import {cloneDeep, filter, find, findIndex, flattenDeep, head, isEmpty, last,} from "lodash";
 import PropTypes from "prop-types";
-import React, {useCallback, useEffect, useState} from "react";
+import React, {useCallback, useEffect, useMemo, useState} from "react";
 import {DragDropContext, Draggable, Droppable} from "react-beautiful-dnd";
 import {useRecoilCallback, useRecoilState, useRecoilValue} from "recoil";
 import ScorecardIndicator from "../../../../../../../../../../core/models/scorecardIndicator";
@@ -156,6 +156,7 @@ export default function DataGroup({
     const legendDefinitions = useRecoilValue(
         ScorecardConfigDirtyState("legendDefinitions")
     );
+    const filteredLegendDefinitions = useMemo(() => filter(legendDefinitions, ({isDefault}) => (!isDefault)), [legendDefinitions]);
     const path = ["dataGroups", index];
     const [group, setGroup] = useRecoilState(ScorecardConfigDirtySelector({key: 'dataSelection', path}));
     const {title, id, dataHolders} = group ?? new ScorecardIndicatorGroup();
@@ -232,7 +233,7 @@ export default function DataGroup({
                         new ScorecardIndicator({
                             ...dataSource,
                             label: dataSource.displayName,
-                            legends: generateLegendDefaults(legendDefinitions, 100),
+                            legends: generateLegendDefaults(filteredLegendDefinitions, 100, true),
                         }),
                     ],
                 })

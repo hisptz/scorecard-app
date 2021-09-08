@@ -1,3 +1,4 @@
+import i18n from '@dhis2/d2-i18n'
 import {Period} from "@iapps/period-utilities";
 import {cloneDeep, filter, get as _get, head, isEmpty, set as _set,} from "lodash";
 import {atom, atomFamily, selector, selectorFamily} from "recoil";
@@ -29,16 +30,26 @@ import {ScreenDimensionState} from "./window";
 const defaultValue = {
     legendDefinitions: [
         {
-            color: "#417505",
-            name: "Target Reached",
+            color: "#D3D3D3",
+            name: i18n.t("N/A"),
+            isDefault: true,
         },
         {
-            color: "#f8e71c",
-            name: "Average",
+            color: "#FFFFFF",
+            name: i18n.t("No Data"),
+            isDefault: true
         },
         {
-            color: "#d0021b",
-            name: "Poor Performance",
+            color: "#008000",
+            name: i18n.t("Target Reached/ On Track"),
+        },
+        {
+            color: "#FFFF00",
+            name: i18n.t("Progress, but more effort required"),
+        },
+        {
+            color: "#FF0000",
+            name: i18n.t("Not on track"),
         },
     ],
     scorecardOptions: new ScorecardOptions(),

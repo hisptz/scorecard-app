@@ -32,7 +32,6 @@ export default function MultipleFieldsField({
                 setFields(fields)
             }
         }
-
         setInitialFields();
     }, []);
 
@@ -77,10 +76,12 @@ export default function MultipleFieldsField({
                                 <CustomInput onChange={(v) => onFieldValueChange(index, v)}
                                              valueType={field.valueType} input={input}/>
                             </div>
-                            <div className='column w-25'><Button disabled={index === 0 && fields.length === 1}
-                                                                 icon={<DeleteIcon/>}
-                                                                 onClick={() => onDeleteField(field, index)}
-                            >Delete</Button></div>
+                            <div className='column w-25'>{
+                               !value?.[index]?.isDefault &&  <Button disabled={index === 0 && fields.length === 1}
+                                                                   icon={<DeleteIcon/>}
+                                                                   onClick={() => onDeleteField(field, index)}
+                               >Delete</Button>
+                            }</div>
                         </div>
                     }) : multipleFields?.map((field, index) => {
                         const input = {
