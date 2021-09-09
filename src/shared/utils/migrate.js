@@ -46,7 +46,7 @@ function getScorecardLegendDefinitions(oldScorecardLegendDefinitions) {
       ? {
           color: legendDefinition.color,
           name: legendDefinition.definition,
-          default: legendDefinition.default,
+          isDefault: legendDefinition.default,
         }
       : {
           color: legendDefinition.color,

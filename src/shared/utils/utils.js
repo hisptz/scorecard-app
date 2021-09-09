@@ -1,6 +1,5 @@
-import {capitalize, flattenDeep, head, last, snakeCase} from "lodash";
+import {capitalize, find, flattenDeep, head, last, snakeCase} from "lodash";
 import ScorecardLegend from "../../core/models/scorecardLegend";
-
 
 export function getWindowDimensions() {
     const {innerWidth: width, innerHeight: height} = window;
@@ -80,3 +79,30 @@ export function updatePager(pager, itemListLength) {
         total: itemListLength
     }
 }
+
+export function getLegend(value, legends = [], {max = 100, defaultLegends = []}) {
+    const allLegends = [...legends, ...defaultLegends]
+    value = +value
+    //TODO: find rules to implement No data and N/A
+
+    // if (value === undefined || value === null) {
+    //     return find(allLegends, ({name}) => name.toLowerCase().match(RegExp('No Data'.toLowerCase())))
+    // }
+    //
+    // if (isNaN(value)) {
+    //     return find(allLegends, ({name}) => name.toLowerCase().match(RegExp('N/A'.toLowerCase())))
+    // }
+
+    return find(allLegends, (legend) => {
+        if (legend) {
+            const {startValue, endValue} = legend;
+            if (+endValue === max) {
+                return +startValue <= Math.round(value) && +endValue >= Math.round(value)
+            }
+            return +startValue <= Math.round(value) && +endValue > Math.round(value)
+        }
+        return false;
+    });
+
+}
+

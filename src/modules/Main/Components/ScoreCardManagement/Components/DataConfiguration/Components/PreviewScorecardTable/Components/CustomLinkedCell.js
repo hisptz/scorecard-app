@@ -1,17 +1,25 @@
 import PropTypes from 'prop-types'
 import React, {useMemo} from "react";
 import LinkedCellSvg from "../../../../../../../../../shared/Components/ScorecardCell/Components/LinkedCellSvg";
-import {generateRandomValues} from "../../../../../../../../../shared/utils/utils";
-import {getLegend} from "../../../utils";
+import {generateRandomValues, getLegend} from "../../../../../../../../../shared/utils/utils";
 
 export default function CustomLinkedCell({top, bottom}) {
-    const {legends: topLegends, showColors: showTopColors, displayArrows: topDisplayArrows} = top ?? {};
-    const {legends: bottomLegends, showColors: showBottomColors, displayArrows: bottomDisplayArrows} = bottom ?? {};
+    const {
+        legends: topLegends,
+        showColors: showTopColors,
+        displayArrows: topDisplayArrows,
+        weight: topWeight
+    } = top ?? {};
+    const {
+        legends: bottomLegends,
+        showColors: showBottomColors,
+        displayArrows: bottomDisplayArrows,
+        weight: bottomWeight
+    } = bottom ?? {};
     const topValue = useMemo(generateRandomValues, []);
     const bottomValue = useMemo(generateRandomValues, []);
-    const {color: topColor} = getLegend(topValue, topLegends) ?? {}
-    const {color: bottomColor} = getLegend(bottomValue, bottomLegends) ?? {}
-
+    const {color: topColor} = getLegend(topValue, topLegends, {max: topWeight}) ?? {}
+    const {color: bottomColor} = getLegend(bottomValue, bottomLegends, {max: bottomWeight}) ?? {}
 
     return (
         <td className='data-cell'>

@@ -1,8 +1,7 @@
 import PropTypes from "prop-types";
 import React, {useMemo} from "react";
 import SingleCellSvg from "../../../../../../../../../shared/Components/ScorecardCell/Components/SingleCellSvg";
-import {generateRandomValues} from "../../../../../../../../../shared/utils/utils";
-import {getLegend} from "../../../utils";
+import {generateRandomValues, getLegend} from "../../../../../../../../../shared/utils/utils";
 import CustomLinkedCell from "./CustomLinkedCell";
 
 export default function PreviewCustomCell({config}) {
