@@ -6,3 +6,6 @@ Given("authorized department officer", () => {
 Given("authorized programme coordinator", () => {
     cy.visit("/");
 });
+Given("authorized data officer", () => {
+    cy.visit("/");
+});

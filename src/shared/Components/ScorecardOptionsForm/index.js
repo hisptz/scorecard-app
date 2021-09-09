@@ -19,7 +19,7 @@ export default function ScorecardOptionsForm({options, onChange}) {
                         <CheckboxField checked={options?.itemNumber} onChange={onChange('itemNumber')}
                                        value='itemNumber' label={i18n.t('Item Number')}/>
                         <CheckboxField checked={options?.emptyRows} onChange={onChange('emptyRows')}
-                                       value='emptyRows' label={i18n.t('Empty Rows')}/>
+                                  dataTest={'empty-row-option-score-card-modal'}     value='emptyRows' label={i18n.t('Empty Rows')}/>
                         <CheckboxField checked={options?.showHierarchy} onChange={onChange('showHierarchy')}
                                        value='showHierarchy'
                                        label={i18n.t('Show Hierarchy')}/>

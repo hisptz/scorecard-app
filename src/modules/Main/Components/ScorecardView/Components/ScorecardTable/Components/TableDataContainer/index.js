@@ -39,7 +39,9 @@ export default function DataContainer({dataSources, orgUnit, period, dataEngine}
         }
     }, [orgUnitId, periodId, top, bottom]);
     return <>
-        <div onClick={() => {
+        <div 
+       
+        onClick={() => {
             setAnalysisOpen(true)
         }
         }>
@@ -48,7 +50,7 @@ export default function DataContainer({dataSources, orgUnit, period, dataEngine}
                     <LinkedDataCell bottomData={bottomData} topData={topData} bottomColor={bottomColor}
                                     topColor={topColor}/>
                 ) : (
-                    <SingleDataCell data={topData} color={topColor}/>
+                    <SingleDataCell  data={topData} color={topColor}/>
                 )
             }
 

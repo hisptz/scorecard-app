@@ -52,3 +52,14 @@ Then('a table of indicators against selected lower level locations should be dis
   cy.get('.jsx-2878665499 > .p-16').should('be.visible')
 })
 
+/**
+ *   Visualize Scorecards without empty rows
+ */
+ And('deselecting view of the emptpy rows',()=>{
+  cy.get(':nth-child(2) > :nth-child(1) > [data-test=dhis2-uicore-button]').click();
+  cy.get('[data-test=empty-row-option-score-card-modal-content] > [data-test=dhis2-uicore-checkbox] > input.jsx-2289862737').uncheck().should('not.be.checked')
+  cy.get('[data-test=update-button-on-options]').click()
+})
+Then('a table of indicators against locations should be displayed without empty rows',()=>{
+  cy.get('#test-cell-selector').should('not.be.empty')
+})

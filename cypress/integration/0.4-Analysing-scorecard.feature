@@ -19,7 +19,7 @@ Then a table of indicators against selected lower level locations should be disp
 Scenario: Visualize Scorecards without empty rows
 Given authorized data officer
 When opening a list of available scorecards
-And selecting to view on of the scorecards
+And selecting to view one of the scorecards
 And deselecting view of the emptpy rows
 Then a table of indicators against locations should be displayed without empty rows
 
