@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-09-07T06:30:29.837Z\n"
-"PO-Revision-Date: 2021-09-07T06:30:29.837Z\n"
+"POT-Creation-Date: 2021-09-09T06:40:58.934Z\n"
+"PO-Revision-Date: 2021-09-09T06:40:58.934Z\n"
 
 msgid "Data"
 msgstr "Data"
@@ -22,6 +22,21 @@ msgstr "Relative Periods"
 
 msgid "Fixed Periods"
 msgstr "Fixed Periods"
+
+msgid "Target Reached/ On Track"
+msgstr "Target Reached/ On Track"
+
+msgid "Progress, but more effort required"
+msgstr "Progress, but more effort required"
+
+msgid "Not on track"
+msgstr "Not on track"
+
+msgid "N/A"
+msgstr "N/A"
+
+msgid "No Data"
+msgstr "No Data"
 
 msgid "Welcome to Scorecard App!"
 msgstr "Welcome to Scorecard App!"
@@ -693,3 +708,6 @@ msgstr "Selected period"
 
 msgid "Selected organisation unit"
 msgstr "Selected organisation unit"
+
+msgid "No data"
+msgstr "No data"

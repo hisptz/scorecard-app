@@ -1,3 +1,4 @@
+import i18n from '@dhis2/d2-i18n'
 import {Period} from "@iapps/period-utilities";
 import {cloneDeep, filter, get as _get, head, isEmpty, set as _set,} from "lodash";
 import {atom, atomFamily, selector, selectorFamily} from "recoil";
@@ -29,17 +30,27 @@ import {ScreenDimensionState} from "./window";
 const defaultValue = {
     legendDefinitions: [
         {
-            color: "#417505",
-            name: "Target Reached",
+            color: "#008000",
+            name: i18n.t("Target Reached/ On Track"),
         },
         {
-            color: "#f8e71c",
-            name: "Average",
+            color: "#FFFF00",
+            name: i18n.t("Progress, but more effort required"),
         },
         {
-            color: "#d0021b",
-            name: "Poor Performance",
+            color: "#FF0000",
+            name: i18n.t("Not on track"),
         },
+        {
+            color: "#D3D3D3",
+            name: i18n.t("N/A"),
+            isDefault: true,
+        },
+        {
+            color: "#FFFFFF",
+            name: i18n.t("No Data"),
+            isDefault: true,
+        }
     ],
     scorecardOptions: new ScorecardOptions(),
     publicAccess: new ScorecardAccess({
@@ -208,6 +219,16 @@ const ScorecardViewState = atomFamily({
     }),
 });
 
+const ScorecardLegendDefinitionSelector = selectorFamily({
+    get: (isDefault) => ({get}) => {
+        const legendDefinitions = get(ScorecardViewState('legendDefinitions'))
+        if (isDefault) {
+            return filter(legendDefinitions, ({isDefault}) => isDefault)
+        }
+        return filter(legendDefinitions, ({isDefault}) => !isDefault)
+    }
+})
+
 const ScorecardTableSortState = atom({
     key: "scorecard-table-state",
     default: {},
@@ -326,4 +347,5 @@ export {
     ScorecardTableSortState,
     ScorecardDataSourceState,
     ScorecardDataLoadingState,
+    ScorecardLegendDefinitionSelector
 }
