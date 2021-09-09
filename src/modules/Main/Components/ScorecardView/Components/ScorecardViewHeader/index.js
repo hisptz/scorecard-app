@@ -1,9 +1,11 @@
 import i18n from '@dhis2/d2-i18n'
 import {Button, ButtonStrip, Card} from '@dhis2/ui'
-import React, {useEffect, useRef, useState} from 'react'
+import {find, isEmpty} from "lodash";
+import React, {useEffect, useMemo, useRef, useState} from 'react'
 import {useHistory} from "react-router-dom";
 import {useRecoilCallback, useRecoilState, useRecoilValue} from "recoil";
 import {FilterComponentTypes} from "../../../../../../core/constants/selection";
+import {OrgUnitGroups, OrgUnitLevels} from "../../../../../../core/state/orgUnit";
 import ScorecardConfState, {ScorecardIdState, ScorecardViewState} from "../../../../../../core/state/scorecard";
 import {UserAuthorityOnScorecard} from "../../../../../../core/state/user";
 import OrgUnitSelectorModal from "../../../../../../shared/Components/OrgUnitSelectorModal";
@@ -16,6 +18,8 @@ import useDownload from "./hooks/useDownload";
 export default function ScorecardViewHeader({downloadAreaRef}) {
     const history = useHistory();
     const scorecardId = useRecoilValue(ScorecardIdState)
+    const orgUnitLevels = useRecoilValue(OrgUnitLevels)
+    const orgUnitGroups = useRecoilValue(OrgUnitGroups)
     const [orgUnitSelection, setOrgUnitSelection] = useRecoilState(ScorecardViewState('orgUnitSelection'))
     const [periodSelection, setPeriodSelection] = useRecoilState(ScorecardViewState('periodSelection'))
     const [scorecardOptions, setScorecardOptions] = useRecoilState(ScorecardViewState('options'))
@@ -53,6 +57,35 @@ export default function ScorecardViewHeader({downloadAreaRef}) {
         window.location.reload(true)
     }
 
+    const orgUnitSelectionDisplay = useMemo(() => {
+        const {orgUnits,
+            level,
+            group,
+            userOrgUnit,
+            userSubUnit,
+            userSubX2Unit} = orgUnitSelection;
+
+        const display = [...orgUnits]
+
+        if(level){
+            display.push({
+                name: `Levels: ${[level]?.map(level=>{
+                    console.log({orgUnitLevels, level})
+                    const levelObject = find(orgUnitLevels, ['id', level]) ?? {}
+                    return levelObject.displayName
+                })}`
+            })
+        }
+        if(group){
+            display.push({
+                name: `Groups: ${[group]?.map(group=>(find(orgUnitGroups, ['id', group])).displayName)}`
+            })
+        }
+
+        return display
+
+    }, [orgUnitSelection]);
+
 
     return (
         <div className="selection-card">
@@ -60,7 +93,7 @@ export default function ScorecardViewHeader({downloadAreaRef}) {
                 <div className='row space-between align-items-center pl-16 pr-16'>
                     <div className='row'>
                         <SelectionWrapper
-                            selectedItems={orgUnitSelection?.orgUnits}
+                            selectedItems={orgUnitSelectionDisplay}
                             name={'Organisation Unit'}
                             onClick={() => {
                                 setOrgUnitSelectionOpen(true)

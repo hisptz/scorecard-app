@@ -13,7 +13,8 @@ const userQuery = {
                 'id',
                 'displayName',
                 'userGroups',
-                'authorities'
+                'authorities',
+                'organisationUnits[id,level]'
             ]
         }
     }
@@ -28,7 +29,7 @@ export const UserState = atom({
                 const engine = get(EngineState);
                 if (engine) {
                     const {user} = await engine.query(userQuery)
-                    if (user) return user
+                    if (user) {return user}
                     return null
                 }
             } catch (e) {

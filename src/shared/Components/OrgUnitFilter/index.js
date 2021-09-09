@@ -11,7 +11,7 @@ import {
 } from '@dhis2/ui';
 import {cloneDeep, find, isEmpty, remove} from 'lodash'
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, {useMemo} from 'react'
 import useOrgUnitLevelsAndGroups from "./hooks/getLevelsAndGroups";
 import useOrgUnitsRoot from "./hooks/useOrgUnitsRoot";
 
@@ -65,23 +65,33 @@ export default function OrgUnitFilter({value, onUpdate}) {
     const onUserOrUnitChange = ({checked}) => {
         onUpdate({
             ...value,
-            userOrgUnit: checked
+            userOrgUnit: checked,
+            orgUnits: [],
+            level: undefined,
+            group: undefined
         })
     }
     const onUserSubUnitsChange = ({checked}) => {
         onUpdate({
             ...value,
-            userSubUnit: checked
+            userSubUnit: checked,
+            orgUnits: [],
+            level: undefined,
+            group: undefined
         })
     }
 
     const onUserSubX2Units = ({checked}) => {
         onUpdate({
             ...value,
-            userSubX2Unit: checked
+            userSubX2Unit: checked,
+            orgUnits: [],
+            level: undefined,
+            group: undefined
         })
     }
 
+    const disableSelections = useMemo(() => userOrgUnit || userSubX2Unit || userSubUnit, [userOrgUnit, userSubUnit, userSubX2Unit]);
 
     return (
         <Box minHeight='400px'>
@@ -100,20 +110,23 @@ export default function OrgUnitFilter({value, onUpdate}) {
                 <div className='p-16' style={{maxHeight: 400, overflow: 'auto'}}>
                     {
                         roots &&
-                        <OrganisationUnitTree
-                            selected={selectedOrgUnits?.map(({path}) => path)}
-                            initiallyExpanded={selectedOrgUnits?.map(({path}) => path)}
-                            roots={roots?.map(({id}) => id)}
-                            onChange={(orgUnit) => {
-                                if (isOrgUnitSelected(orgUnit)) {
-                                    onDeselectOrgUnit(orgUnit)
-                                } else {
-                                    onSelectOrgUnit(orgUnit)
+                        <div style={disableSelections ? {opacity: .3, cursor: 'not-allowed'} : {}}>
+                            <OrganisationUnitTree
+                                disableSelection={disableSelections}
+                                selected={selectedOrgUnits?.map(({path}) => path)}
+                                initiallyExpanded={selectedOrgUnits?.map(({path}) => path)}
+                                roots={roots?.map(({id}) => id)}
+                                onChange={(orgUnit) => {
+                                    if (isOrgUnitSelected(orgUnit)) {
+                                        onDeselectOrgUnit(orgUnit)
+                                    } else {
+                                        onSelectOrgUnit(orgUnit)
+                                    }
                                 }
-                            }
-                            }
-                            singleSelection
-                        />
+                                }
+                                singleSelection
+                            />
+                        </div>
                     }
                     {
                         (loading && !error) && (<CenteredContent><CircularLoader small/></CenteredContent>)
@@ -122,7 +135,8 @@ export default function OrgUnitFilter({value, onUpdate}) {
             </div>
             <div className='row pt-32 w-75'>
                 <div className='column'>
-                    <SingleSelectField clearable loading={levelsAndGroupsLoading} error={levelsAndGroupsError}
+                    <SingleSelectField disabled={disableSelections} clearable loading={levelsAndGroupsLoading}
+                                       error={levelsAndGroupsError}
                                        validationText={levelsAndGroupsError?.message}
                                        onChange={onLevelSelect}
                                        selected={(!isEmpty(levels) && selectedLevel) ? selectedLevel : ''}
@@ -134,7 +148,8 @@ export default function OrgUnitFilter({value, onUpdate}) {
                     </SingleSelectField>
                 </div>
                 <div className='column'>
-                    <SingleSelectField clearable loading={levelsAndGroupsLoading} error={levelsAndGroupsError}
+                    <SingleSelectField disabled={disableSelections} clearable loading={levelsAndGroupsLoading}
+                                       error={levelsAndGroupsError}
                                        validationText={levelsAndGroupsError?.message}
                                        onChange={onGroupSelect}
                                        selected={(!isEmpty(groups) && selectedGroup) ? selectedGroup : ''}
