@@ -140,7 +140,7 @@ export default function OrgUnitFilter({value, onUpdate}) {
                                  onChange={onLevelSelect}
                                  selected={selectedLevels}
                                  clearText={i18n.t('Clear')}
-                                 label={i18n.t('Select Level')}>
+                                 label={i18n.t('Select Level(s)')}>
                         {
                             levels?.map(({displayName, id}) => (
                                 <MultiSelectOption label={displayName} value={id} key={id}/>))
@@ -154,7 +154,7 @@ export default function OrgUnitFilter({value, onUpdate}) {
                                  onChange={onGroupSelect}
                                  selected={selectedGroups}
                                  clearText={i18n.t('Clear')}
-                                 label={i18n.t('Select Group')}>
+                                 label={i18n.t('Select Group(s)')}>
                         {
                             groups?.map(({displayName, id}) => (
                                 <MultiSelectOption label={displayName} value={id} key={id}/>))
