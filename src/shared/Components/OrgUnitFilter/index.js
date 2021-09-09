@@ -5,9 +5,9 @@ import {
     CheckboxField,
     CircularLoader,
     colors,
-    OrganisationUnitTree,
-    SingleSelectField,
-    SingleSelectOption
+    MultiSelectField,
+    MultiSelectOption,
+    OrganisationUnitTree
 } from '@dhis2/ui';
 import {cloneDeep, find, isEmpty, remove} from 'lodash'
 import PropTypes from 'prop-types'
@@ -20,8 +20,8 @@ export default function OrgUnitFilter({value, onUpdate}) {
     const {roots, error, loading} = useOrgUnitsRoot();
     const {
         orgUnits: selectedOrgUnits = [],
-        level: selectedLevel,
-        group: selectedGroup,
+        levels: selectedLevels,
+        groups: selectedGroups,
         userOrgUnit,
         userSubUnit,
         userSubX2Unit
@@ -47,18 +47,17 @@ export default function OrgUnitFilter({value, onUpdate}) {
             orgUnits: updateValue
         })
     }
-
     const onLevelSelect = ({selected}) => {
         onUpdate({
             ...value,
-            level: selected
+            levels: selected
         })
     }
 
     const onGroupSelect = ({selected}) => {
         onUpdate({
             ...value,
-            group: selected
+            groups: selected
         })
     }
 
@@ -67,8 +66,8 @@ export default function OrgUnitFilter({value, onUpdate}) {
             ...value,
             userOrgUnit: checked,
             orgUnits: [],
-            level: undefined,
-            group: undefined
+            levels: [],
+            groups: []
         })
     }
     const onUserSubUnitsChange = ({checked}) => {
@@ -76,8 +75,8 @@ export default function OrgUnitFilter({value, onUpdate}) {
             ...value,
             userSubUnit: checked,
             orgUnits: [],
-            level: undefined,
-            group: undefined
+            levels: [],
+            groups: []
         })
     }
 
@@ -86,8 +85,8 @@ export default function OrgUnitFilter({value, onUpdate}) {
             ...value,
             userSubX2Unit: checked,
             orgUnits: [],
-            level: undefined,
-            group: undefined
+            levels: [],
+            groups: []
         })
     }
 
@@ -135,30 +134,32 @@ export default function OrgUnitFilter({value, onUpdate}) {
             </div>
             <div className='row pt-32 w-75'>
                 <div className='column'>
-                    <SingleSelectField disabled={disableSelections} clearable loading={levelsAndGroupsLoading}
-                                       error={levelsAndGroupsError}
-                                       validationText={levelsAndGroupsError?.message}
-                                       onChange={onLevelSelect}
-                                       selected={(!isEmpty(levels) && selectedLevel) ? selectedLevel : ''}
-                                       label={i18n.t('Select Level')}>
+                    <MultiSelectField disabled={disableSelections} clearable loading={levelsAndGroupsLoading}
+                                 error={levelsAndGroupsError}
+                                 validationText={levelsAndGroupsError?.message}
+                                 onChange={onLevelSelect}
+                                 selected={selectedLevels}
+                                 clearText={i18n.t('Clear')}
+                                 label={i18n.t('Select Level')}>
                         {
                             levels?.map(({displayName, id}) => (
-                                <SingleSelectOption label={displayName} value={id} key={id}/>))
+                                <MultiSelectOption label={displayName} value={id} key={id}/>))
                         }
-                    </SingleSelectField>
+                    </MultiSelectField>
                 </div>
                 <div className='column'>
-                    <SingleSelectField disabled={disableSelections} clearable loading={levelsAndGroupsLoading}
-                                       error={levelsAndGroupsError}
-                                       validationText={levelsAndGroupsError?.message}
-                                       onChange={onGroupSelect}
-                                       selected={(!isEmpty(groups) && selectedGroup) ? selectedGroup : ''}
-                                       label={i18n.t('Select Group')}>
+                    <MultiSelectField disabled={disableSelections} clearable loading={levelsAndGroupsLoading}
+                                 error={levelsAndGroupsError}
+                                 validationText={levelsAndGroupsError?.message}
+                                 onChange={onGroupSelect}
+                                 selected={selectedGroups}
+                                 clearText={i18n.t('Clear')}
+                                 label={i18n.t('Select Group')}>
                         {
                             groups?.map(({displayName, id}) => (
-                                <SingleSelectOption label={displayName} value={id} key={id}/>))
+                                <MultiSelectOption label={displayName} value={id} key={id}/>))
                         }
-                    </SingleSelectField>
+                    </MultiSelectField>
                 </div>
             </div>
         </Box>
