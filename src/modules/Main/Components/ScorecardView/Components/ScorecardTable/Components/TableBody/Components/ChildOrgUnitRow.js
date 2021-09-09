@@ -40,9 +40,10 @@ export default function ChildOrgUnitRow({orgUnit, expandedOrgUnit, onExpand, ove
     }
 
     useEffect(subscribe, [orgUnit, loading, id, dataEngine])
-
     const Component = ((emptyRows || !isEmpty) &&
         <DataTableRow
+        dataTest={'orgUnit-children-table-column-cell'}
+
             expanded={id === expandedOrgUnit}
             onExpandToggle={() => {
                 if (id === expandedOrgUnit) {
@@ -64,7 +65,7 @@ export default function ChildOrgUnitRow({orgUnit, expandedOrgUnit, onExpand, ove
             key={id}
             bordered
         >
-            <DataTableCell fixed left={"50px"}>
+            <DataTableCell  dataTest={'orgUnit-parent-table-column-cell'} fixed left={"50px"}>
                 <Tooltip content={i18n.t('Drag to column headers to change layout')}>
                     <DroppableCell accept={[DraggableItems.DATA_COLUMN]}>
                         <OrgUnitContainer orgUnit={orgUnit}/>

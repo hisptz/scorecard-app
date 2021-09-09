@@ -62,7 +62,7 @@ export default function OrgUnitHeaderRow({orgUnits, nested}) {
                                            bordered
                                            width={`${periods?.length * ScorecardTableConstants.CELL_WIDTH}px`}
                                            colSpan={`${(periods?.length ?? 1)}`} key={id}>
-                        <div style={{height: '100%', width: '100%'}}>
+                        <div style={{height: '100%', width: '100%'}} >
                             <Tooltip className='m-auto' content={i18n.t('Drag to row headers to change layout ')}>
                                 <DroppableCell accept={[DraggableItems.DATA_ROW]}>
                                     <DraggableCell label={displayName} type={DraggableItems.ORG_UNIT_COLUMN}/>
@@ -70,11 +70,11 @@ export default function OrgUnitHeaderRow({orgUnits, nested}) {
                             </Tooltip>
                         </div>
                     </DataTableColumnHeader>
-                ))
+                )) 
             }
             {
                 averageColumn &&
-                <DataTableCell width={`${ScorecardTableConstants.CELL_WIDTH}px`}   fixed align='center' bordered className='scorecard-table-header' rowSpan={"2"}>
+                <DataTableCell width={`${ScorecardTableConstants.CELL_WIDTH}px`}  fixed align='center' bordered className='scorecard-table-header' rowSpan={"2"}>
                     {i18n.t('Average')}
                 </DataTableCell>
             }

@@ -4,18 +4,7 @@
 
 /// <reference types ="cypress" />
 
-When("opening a list of available scorecards", () => {
-  cy.intercept(
-    "GET",
-    Cypress.env("dhis2BaseUrl") +
-      "/api/36/dataStore/hisptz-scorecard/savedObjects",
-    { fixture: "" }
-  );
 
-  cy.intercept("GET", "/api/36/dataStore/hisptz-scorecard/scorecard-summary", {
-    fixture: "scorecard-summary.json",
-  });
-});
 
 Then(
   "I should be presented with a list of already configured scorecards",
@@ -92,18 +81,6 @@ Then("I should be presented with a message {string}", (content) => {
  * Scenario: Listing Scorecards on card view
  */
 
-When("opening a list of available scorecards", () => {
-  cy.intercept(
-    "GET",
-    Cypress.env("dhis2BaseUrl") +
-      "/api/36/dataStore/hisptz-scorecard/savedObjects",
-    { fixture: "" }
-  );
-
-  cy.intercept("GET", "/api/36/dataStore/hisptz-scorecard/scorecard-summary", {
-    fixture: "scorecard-summary.json",
-  });
-});
 And("choose to view scorecards in card orientation", () => {
   cy.intercept(
     "GET",
@@ -130,7 +107,6 @@ Then(
  * Scenario: Listing Scorecards on thumbnail view
  */
 
-When("opening a list of available scorecards", () => {});
 And("choose to view scorecards in thumbnail orientation", () => {
   cy.intercept(
     "GET",

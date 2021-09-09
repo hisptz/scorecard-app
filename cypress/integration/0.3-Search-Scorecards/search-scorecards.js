@@ -3,12 +3,6 @@
  */
 /// <reference types ="cypress" />
 
-When("opening a list of available scorecards", () => {
-  cy.get('[data-test=scorecard-thumbnail-view]').
-  should((scoreboard)=>{
-    expect(scoreboard).to.have.length.greaterThan(0)
-  })
-});
 And("I search in the list by name", () => {
   cy.get('input.jsx-3353877153').type('Test Scorecard{enter}');
 });
@@ -27,13 +21,7 @@ Then(
 //  * Scenario: Searching scorecards by categories/tag
 //  */
 
-When("opening a list of available scorecards", () => {
-  cy
-  .get('[data-test=scorecard-thumbnail-view]').
-  should((scoreboard)=>{
-    expect(scoreboard).to.have.length.greaterThan(0)
-  })
-});
+
 /**
  * To be implemented search by tag or category specifics
  */

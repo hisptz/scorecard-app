@@ -42,10 +42,11 @@ export default function ScorecardTable({orgUnits, nested}) {
                         <DataTable
                             className='table-print'
                             layout="fixed"
-                            width={screenWidth}
+                          
                             scrollWidth={tableWidth ?? screenWidth}
                         >
-                            <TableHeader orgUnits={orgUnits} nested={nested}/>
+                            <TableHeader   width={screenWidth}
+                             orgUnits={orgUnits} nested={nested}/>
                             <TableLinearLoader orgUnits={orgUnits} dataEngine={dataEngine}/>
                             <Suspense fallback={<TableLoader orgUnits={orgUnits}/>}>
                                 <ScorecardTableBody dataEngine={dataEngine} orgUnits={orgUnits}/>
