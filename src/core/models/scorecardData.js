@@ -156,8 +156,6 @@ export default class ScorecardDataEngine {
                 return dx === dataSource && pe === period
             })
 
-            console.log(requiredDataEntities)
-
             const sortedOrgUnits = sortBy(toPairs(requiredDataEntities), [(value) => +last(value)?.current])
 
             if (sortType === TableSort.DESC) {
@@ -456,7 +454,7 @@ export default class ScorecardDataEngine {
     _getCustomScorecardData(selections) {
         const {selectedOrgUnits, selectedPeriods, selectedDataItems} = selections;
         if (selectedDataItems?.length === 0)
-            return new Promise((resolve) => resolve(null));
+            {return new Promise((resolve) => resolve(null));}
 
         // TODO Add implementation when there is custom indicator
         new Promise((resolve) => resolve(null)).then(() => {
