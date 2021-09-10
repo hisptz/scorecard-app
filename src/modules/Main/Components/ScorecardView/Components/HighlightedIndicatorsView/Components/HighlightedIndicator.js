@@ -1,3 +1,4 @@
+import { props } from 'bluebird';
 import PropTypes from 'prop-types'
 import React from 'react'
 import {useRecoilValue} from "recoil";
@@ -10,7 +11,7 @@ export default function HighlightedIndicator({highlightedIndicator}) {
     const {color} = getLegend(value, legends) ?? {}
     return (
         <div style={{background: 'white', border: '1px solid rgb(232, 237, 242)', margin: 8}}>
-            <div className='row flex-1 space-between align-items-center'>
+            <div id={"test-highlighted-indicator"} className='row flex-1 space-between align-items-center'>
                 <p style={{margin: 0, padding: '0 8px', fontSize: 14}}>{displayName}</p>
                 <div style={{
                     width: 60,

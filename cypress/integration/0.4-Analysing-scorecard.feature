@@ -25,7 +25,7 @@ Then a table of indicators against locations should be displayed without empty r
 
 @focus
 Scenario: visualize Scorecards with Hierarchy
-Given authorized data Officer
+Given authorized data officer
 When opening a list of available scorecards
 And selecting to view one of the scorecards
 And selecting to view hierarchy
@@ -56,7 +56,7 @@ And selecting to view highlighted indicators
 Then a table of indicators against locations with an highlighted indicators should be displayed
 
 
-@focus
+@focus 
 Scenario: Visualize Scorecard with Title
 Given authorized data officer
 When opening a list of available scorecards
@@ -82,7 +82,6 @@ And selecting to view legend
 Then legend should be displayed
 
 @focus
-
 Scenario: Visualize 5 Best Location Based on Selected Indicator
 Given authorized data officer
 When opening a list of available scorecards

@@ -14,7 +14,7 @@ export default function SingleCellSvg({color, value, status, bold}) {
             {status && (status === 'increasing' ?
                 <IncreasingArrows fontSize={arrowFontSize} y={height - (arrowFontSize * 2)} x={(width / 2 - (fontSize * 2))}/> :
                 <DecreasingArrows fontSize={arrowFontSize} y={height - fontSize} x={(width / 2 - (fontSize * 2))}/>)}
-            <text style={{fontWeight: bold && 'bold'}} lengthAdjust="spacingAndGlyphs" fontSize={fontSize}
+            <text id={'test-average-column'} style={{fontWeight: bold && 'bold'}} lengthAdjust="spacingAndGlyphs" fontSize={fontSize}
                   x={width / 2 - fontSize}
                   y={height - fontSize}>{value}</text>
         </svg>
