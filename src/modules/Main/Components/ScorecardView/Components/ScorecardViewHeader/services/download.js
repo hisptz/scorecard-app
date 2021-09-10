@@ -9,10 +9,10 @@ function generateExcelJSON({periods = [], data = {}, orgUnits = [], dataSources 
     return orgUnits?.map(({displayName: orgUnitName, id: orgUnitId}) => {
         const object = {'Organisation Unit': orgUnitName}
         for (const dataSource of dataSources) {
-            const {id: dataSourceId, displayName: dataSourceName} = dataSource ?? {}
+            const {id: dataSourceId, displayName: dataSourceName, label: dataSourceLabel} = dataSource ?? {}
             for (const period of periods) {
                 const {id: periodId, name: periodName} = period ?? {}
-                object[`${dataSourceName}-${periodName}`] = data[`${dataSourceId}_${orgUnitId}_${periodId}`]?.current
+                object[`${dataSourceName ?? dataSourceLabel}-${periodName}`] = data[`${dataSourceId}_${orgUnitId}_${periodId}`]?.current
             }
         }
         return object;

@@ -3,9 +3,9 @@ import {useEffect, useMemo, useState} from "react";
 import {useReactToPrint} from "react-to-print";
 import {useRecoilValue} from "recoil";
 import {DownloadTypes} from "../../../../../../../core/constants/download";
+import {InitialOrgUnits} from "../../../../../../../core/state/orgUnit";
 import {PeriodResolverState} from "../../../../../../../core/state/period";
 import {
-    scorecardDataEngine,
     ScorecardDataLoadingState,
     ScorecardDataSourceState,
     ScorecardOrgUnitState,
@@ -14,9 +14,9 @@ import {
 import {downloadALMAData, downloadALMAMeta, downloadCSV, downloadExcel} from "../services/download";
 
 
-export default function useDownload(downloadRef) {
+export default function useDownload(downloadRef, dataEngine) {
     const title = useRecoilValue(ScorecardViewState('title'))
-    const {orgUnits} = useRecoilValue(ScorecardViewState('orgUnitSelection'))
+    const {orgUnits} = useRecoilValue(InitialOrgUnits)
     const orgUnitsIds = useMemo(() => orgUnits?.map(({id}) => id), [orgUnits])
     const {filteredOrgUnits, childrenOrgUnits} = useRecoilValue(ScorecardOrgUnitState(orgUnitsIds))
     const dataHolders = useRecoilValue(ScorecardDataSourceState)
@@ -31,7 +31,7 @@ export default function useDownload(downloadRef) {
 
     function subscribe() {
         if (loading !== undefined && !loading) {
-            const subscription = scorecardDataEngine.getAllOrgUnitData(allOrgUnits?.map(({id}) => id)).subscribe(setData);
+            const subscription = dataEngine.getAllOrgUnitData(allOrgUnits?.map(({id}) => id)).subscribe(setData);
             return () => subscription.unsubscribe();
         }
     }

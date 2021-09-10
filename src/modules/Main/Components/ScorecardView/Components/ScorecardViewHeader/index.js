@@ -1,9 +1,11 @@
 import i18n from '@dhis2/d2-i18n'
 import {Button, ButtonStrip, Card} from '@dhis2/ui'
+import PropTypes from 'prop-types'
 import React, {useEffect, useMemo, useRef, useState} from 'react'
 import {useHistory} from "react-router-dom";
 import {useRecoilCallback, useRecoilState, useRecoilValue} from "recoil";
 import {FilterComponentTypes} from "../../../../../../core/constants/selection";
+import ScorecardDataEngine from "../../../../../../core/models/scorecardData";
 import {OrgUnitGroups, OrgUnitLevels} from "../../../../../../core/state/orgUnit";
 import ScorecardConfState, {ScorecardIdState, ScorecardViewState} from "../../../../../../core/state/scorecard";
 import {UserAuthorityOnScorecard} from "../../../../../../core/state/user";
@@ -15,7 +17,8 @@ import getSelectedOrgUnitSelectionDisplay from "../../../../../../shared/utils/o
 import DownloadMenu from "../Download/Components/DownloadMenu";
 import useDownload from "./hooks/useDownload";
 
-export default function ScorecardViewHeader({downloadAreaRef}) {
+
+export default function ScorecardViewHeader({downloadAreaRef, dataEngine}) {
     const history = useHistory();
     const scorecardId = useRecoilValue(ScorecardIdState)
     const orgUnitLevels = useRecoilValue(OrgUnitLevels)
@@ -29,7 +32,7 @@ export default function ScorecardViewHeader({downloadAreaRef}) {
     const [periodSelectionOpen, setPeriodSelectionOpen] = useState(false);
     const [optionsOpen, setOptionsOpen] = useState(false);
     const [downloadOpen, setDownloadOpen] = useState(false);
-    const {download: onDownload} = useDownload(downloadAreaRef);
+    const {download: onDownload} = useDownload(downloadAreaRef, dataEngine);
 
     const downloadRef = useRef()
     const reset = useRecoilCallback(({reset}) => () => {
@@ -117,3 +120,9 @@ export default function ScorecardViewHeader({downloadAreaRef}) {
         </div>
     )
 }
+
+ScorecardViewHeader.propTypes = {
+    dataEngine: PropTypes.instanceOf(ScorecardDataEngine).isRequired,
+    downloadAreaRef: PropTypes.any.isRequired
+};
+
