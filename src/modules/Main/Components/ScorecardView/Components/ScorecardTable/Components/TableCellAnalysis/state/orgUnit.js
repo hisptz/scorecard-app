@@ -1,5 +1,9 @@
+import {head, isEmpty, uniqBy} from "lodash";
 import {atom, selector} from "recoil";
-import {ScorecardViewState} from "../../../../../../../../../core/state/scorecard";
+import {EngineState} from "../../../../../../../../../core/state/engine";
+import {PeriodResolverState} from "../../../../../../../../../core/state/period";
+import {ScorecardDataSourceState, ScorecardViewState} from "../../../../../../../../../core/state/scorecard";
+import {UserState} from "../../../../../../../../../core/state/user";
 
 
 const OrgUnitState = atom({
@@ -10,6 +14,90 @@ const OrgUnitState = atom({
             return get(ScorecardViewState('orgUnitSelection'))
         }
     })
+})
+
+const userSubUnitsQuery = {
+    ou: {
+        resource: 'analytics',
+        params: ({pe, dx, ou}) => ({
+            dimension: [
+                `ou:${ou}`,
+                `pe:${pe}`,
+                `dx:${dx}`
+            ],
+            skipData: true
+        })
+    }
+}
+
+export const InitialOrgUnits = selector({
+    key: 'cell-analysis-initial-org-units-resolver',
+    get: async ({get}) => {
+        const {
+            orgUnits,
+            levels,
+            groups,
+            userOrgUnit,
+            userSubUnit,
+            userSubX2Unit
+        } = get(OrgUnitState)
+        const periods = get(PeriodResolverState) ?? []
+        const dataHolders = get(ScorecardDataSourceState) ?? []
+        const {organisationUnits} = get(UserState)
+        const engine = get(EngineState)
+
+        let resolvedOrgUnits = orgUnits
+
+        if (!isEmpty(dataHolders) && !isEmpty(periods)) {
+            if (userSubX2Unit) {
+                const {ou} = await engine.query(userSubUnitsQuery, {
+                    variables: {
+                        pe: head(periods)?.id,
+                        dx: head(head(dataHolders)?.dataSources)?.id,
+                        ou: 'USER_ORGUNIT_GRANDCHILDREN'
+                    }
+                })
+                resolvedOrgUnits = [...resolvedOrgUnits, ...ou?.metaData?.dimensions?.ou?.map(ou => ({id: ou}))]
+            }
+            if (userSubUnit) {
+                const {ou} = await engine.query(userSubUnitsQuery, {
+                    variables: {
+                        pe: head(periods)?.id,
+                        dx: head(head(dataHolders)?.dataSources)?.id,
+                        ou: 'USER_ORGUNIT_CHILDREN'
+                    }
+                })
+                resolvedOrgUnits = [...resolvedOrgUnits, ...ou?.metaData?.dimensions?.ou?.map(ou => ({id: ou}))]
+            }
+            if (userOrgUnit) {
+                resolvedOrgUnits = [...resolvedOrgUnits, ...organisationUnits]
+            }
+
+            if (!isEmpty(levels)) {
+                const {ou} = await engine.query(userSubUnitsQuery, {
+                    variables: {
+                        pe: head(periods)?.id,
+                        dx: head(head(dataHolders)?.dataSources)?.id,
+                        ou: levels?.map(level => `LEVEL-${level}`)?.join(';')
+                    }
+                })
+                resolvedOrgUnits = [...resolvedOrgUnits, ...ou?.metaData?.dimensions?.ou?.map(ou => ({id: ou}))]
+            }
+
+            if (!isEmpty(groups)) {
+                const {ou} = await engine.query(userSubUnitsQuery, {
+                    variables: {
+                        pe: head(periods)?.id,
+                        dx: head(head(dataHolders)?.dataSources)?.id,
+                        ou: groups?.map(group => `OU_GROUP-${group}`)?.join(';')
+                    }
+                })
+                resolvedOrgUnits = [...resolvedOrgUnits, ...ou?.metaData?.dimensions?.ou?.map(ou => ({id: ou}))]
+            }
+        }
+
+        return {orgUnits: uniqBy(resolvedOrgUnits, 'id')}
+    }
 })
 
 export {
