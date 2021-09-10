@@ -1,4 +1,3 @@
-import {isEmpty} from "lodash";
 import {DATASTORE_ENDPOINT} from "../../core/constants/config";
 import OrgUnitSelection from "../../core/models/orgUnitSelection";
 
@@ -42,9 +41,6 @@ const orgUnitQuery = {
 
 export async function getOrgUnitSelection({orgUnitSelection}, engine) {
     const {orgUnits: orgUnitsIds} = orgUnitSelection ?? {}
-    if (isEmpty(orgUnitsIds)) {
-        return new OrgUnitSelection()
-    }
-    const {orgUnits: resolvedOrgUnits} = await engine.query(orgUnitQuery, {variables: {orgUnits: orgUnitsIds?.map(({id}) => id)}})
+    const {orgUnits: resolvedOrgUnits} = await engine.query(orgUnitQuery, {variables: {orgUnits: orgUnitsIds?.map(({id}) => id) ?? []}})
     return new OrgUnitSelection({...orgUnitSelection, orgUnits: resolvedOrgUnits?.organisationUnits})
 }

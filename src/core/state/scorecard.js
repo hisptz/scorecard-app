@@ -214,6 +214,7 @@ const ScorecardViewState = atomFamily({
                             }
                         }
                     }
+                    if(key === 'orgUnitSelection') {console.log(configState?.orgUnitSelection)}
                     return configState[key];
                 },
     }),
@@ -304,7 +305,6 @@ const ScorecardOrgUnitState = atomFamily({
             if (orgUnits.length === 1) {
                 childrenOrgUnits = get(OrgUnitChildren(head(orgUnits)))
             }
-
             return {
                 childrenOrgUnits,
                 filteredOrgUnits,

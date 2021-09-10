@@ -9,7 +9,7 @@ export default class ScorecardOption extends DataModel {
             legend: true,
             title: true,
             itemNumber: true,
-            emptyRows: false,
+            emptyRows: true,
             showHierarchy: false,
             averageColumn: false,
             averageRow: false,

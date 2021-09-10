@@ -2,6 +2,7 @@ import {isEmpty} from 'lodash'
 import React, {Suspense, useEffect, useMemo, useRef, lazy} from "react";
 import {useParams} from "react-router-dom";
 import {useRecoilCallback, useRecoilValue, useSetRecoilState} from "recoil";
+import {InitialOrgUnits} from "../../../../core/state/orgUnit";
 import {PeriodResolverState} from "../../../../core/state/period";
 import {
     ScorecardDataSourceState,
@@ -23,7 +24,7 @@ import ScorecardViewHeader from "./Components/ScorecardViewHeader";
 export default function ScorecardView() {
     const {id: scorecardId} = useParams();
     const setScorecardIdState = useSetRecoilState(ScorecardIdState);
-    const {orgUnits} = useRecoilValue(ScorecardViewState("orgUnitSelection"));
+    const {orgUnits} = useRecoilValue(InitialOrgUnits);
     const orgUnitsIds = useMemo(() => orgUnits?.map(({id}) => id), [orgUnits])
     const {read: access} = useRecoilValue(UserAuthorityOnScorecard(scorecardId))
     const downloadRef = useRef()
@@ -31,7 +32,6 @@ export default function ScorecardView() {
 
 
     const reset = useRecoilCallback(({reset}) => () => {
-        reset(ScorecardViewState("orgUnitSelection"))
         reset(ScorecardViewState("periodSelection"))
         reset(ScorecardViewState("tableSort"))
         reset(ScorecardViewState("options"))
