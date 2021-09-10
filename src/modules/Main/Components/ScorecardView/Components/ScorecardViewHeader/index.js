@@ -1,6 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
 import {Button, ButtonStrip, Card} from '@dhis2/ui'
-import {find, isEmpty} from "lodash";
 import React, {useEffect, useMemo, useRef, useState} from 'react'
 import {useHistory} from "react-router-dom";
 import {useRecoilCallback, useRecoilState, useRecoilValue} from "recoil";
@@ -12,6 +11,7 @@ import OrgUnitSelectorModal from "../../../../../../shared/Components/OrgUnitSel
 import PeriodSelectorModal from "../../../../../../shared/Components/PeriodSelectorModal";
 import ScorecardOptionsModal from "../../../../../../shared/Components/ScorecardOptionsModal";
 import SelectionWrapper from "../../../../../../shared/Components/SelectionWrapper";
+import getSelectedOrgUnitSelectionDisplay from "../../../../../../shared/utils/orgUnit";
 import DownloadMenu from "../Download/Components/DownloadMenu";
 import useDownload from "./hooks/useDownload";
 
@@ -57,53 +57,10 @@ export default function ScorecardViewHeader({downloadAreaRef}) {
         window.location.reload(true)
     }
 
-    const orgUnitSelectionDisplay = useMemo(() => {
-        const {
-            orgUnits,
-            levels,
-            groups,
-            userOrgUnit,
-            userSubUnit,
-            userSubX2Unit
-        } = orgUnitSelection;
-
-        const display = [...orgUnits]
-
-        if (userOrgUnit) {
-            display.push({
-                name: i18n.t('User Organisation Unit')
-            })
-        }
-
-        if (userSubUnit) {
-            display.push({
-                name: i18n.t('User Sub-units')
-            })
-        }
-
-        if (userSubX2Unit) {
-            display.push({
-                name: i18n.t('User Sub-x2-units')
-            })
-        }
-
-        if (!isEmpty(levels)) {
-            display.push({
-                name: `Levels: ${levels?.map(level => {
-                    const levelObject = find(orgUnitLevels, ['id', level]) ?? {}
-                    return levelObject.displayName
-                })}`
-            })
-        }
-        if (!isEmpty(groups)) {
-            display.push({
-                name: `Groups: ${groups?.map(group => (find(orgUnitGroups, ['id', group])).displayName)}`
-            })
-        }
-
-        return display
-
-    }, [orgUnitSelection]);
+    const orgUnitSelectionDisplay = useMemo(() => getSelectedOrgUnitSelectionDisplay(orgUnitSelection, {
+        orgUnitGroups,
+        orgUnitLevels
+    }), [orgUnitGroups, orgUnitLevels, orgUnitSelection]);
 
 
     return (

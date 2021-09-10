@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-09-10T06:57:52.934Z\n"
-"PO-Revision-Date: 2021-09-10T06:57:52.934Z\n"
+"POT-Creation-Date: 2021-09-10T08:49:55.482Z\n"
+"PO-Revision-Date: 2021-09-10T08:49:55.482Z\n"
 
 msgid "Data"
 msgstr "Data"
@@ -586,15 +586,6 @@ msgstr "Category"
 msgid "Layout"
 msgstr "Layout"
 
-msgid "{{ dimension }}"
-msgstr "{{ dimension }}"
-
-msgid "Organisation Unit(s)"
-msgstr "Organisation Unit(s)"
-
-msgid "Period(s)"
-msgstr "Period(s)"
-
 msgid "Table"
 msgstr "Table"
 
@@ -606,6 +597,9 @@ msgstr "Dictionary"
 
 msgid "Search Organisation Unit"
 msgstr "Search Organisation Unit"
+
+msgid "Organisation Unit(s)"
+msgstr "Organisation Unit(s)"
 
 msgid "Drag to row headers to change layout"
 msgstr "Drag to row headers to change layout"

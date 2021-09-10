@@ -147,8 +147,6 @@ const userSubUnitsQuery = {
 export const InitialOrgUnits = selector({
     key: 'initial-org-units-resolver',
     get: async ({get}) => {
-
-
         const {
             orgUnits,
             levels,

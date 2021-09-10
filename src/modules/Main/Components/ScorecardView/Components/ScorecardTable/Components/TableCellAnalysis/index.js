@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import {Button, Chip, Modal, ModalActions, ModalContent, ModalTitle} from '@dhis2/ui'
+import {Button, Chip, Modal, ModalActions, ModalContent} from '@dhis2/ui'
 import DescriptionIcon from '@material-ui/icons/Description';
 import ChartIcon from '@material-ui/icons/Equalizer';
 import TableChartIcon from '@material-ui/icons/TableChart';
@@ -8,15 +8,17 @@ import React, {Suspense, useEffect, useState} from 'react'
 import {useRecoilCallback, useRecoilValueLoadable, useSetRecoilState} from "recoil";
 import OrgUnitSelection from "../../../../../../../../core/models/orgUnitSelection";
 import FullPageError from "../../../../../../../../shared/Components/Errors/FullPageError";
-import {FullPageLoader} from "../../../../../../../../shared/Components/Loaders";
+import ModalLoader from "../../../../../../../../shared/Components/Loaders/ModalLoader";
+import {getDataSourcesDisplayName} from "../../../../../../../../shared/utils/utils";
 import ChartAnalysis from "./Components/ChartAnalysis";
-import DictionaryAnalysis from "./Components/DictionaryAnalysis";
-import DimensionsSelector from "./Components/DimensionsSelector";
-import TableAnalysis from "./Components/TableAnalysis";
 import {DataSourceState, DataState} from "./state/data";
 import {LayoutState} from "./state/layout";
 import {OrgUnitState} from "./state/orgUnit";
 import {PeriodState} from "./state/period";
+
+const DictionaryAnalysis = React.lazy(() => import("./Components/DictionaryAnalysis"));
+const DimensionsSelector = React.lazy(() => import("./Components/DimensionsSelector"));
+const TableAnalysis = React.lazy(() => import("./Components/TableAnalysis"));
 
 const viewTypes = [
     {
@@ -41,7 +43,6 @@ const viewTypes = [
 
 export default function TableCellAnalysis({onClose, dataHolder, orgUnit, period}) {
     const dataState = useRecoilValueLoadable(DataState)
-    const setDataSources = useSetRecoilState(DataSourceState)
     const [viewType, setViewType] = useState(viewTypes[0]);
     const dataSources = dataHolder?.dataSources;
     const SelectedView = viewType.component;
@@ -64,36 +65,32 @@ export default function TableCellAnalysis({onClose, dataHolder, orgUnit, period}
         return () => {
             resetStates()
         };
-    }, [dataSources, resetStates, setDataSources, setStates]);
+    }, [dataSources, orgUnit, period]);
 
     return (
         <Modal className='large-modal' position='middle' onClose={onClose} large>
-            <ModalTitle>
-                {
-                    dataSources?.length > 1 ? `${dataSources[0]?.displayName} / ${dataSources[1]?.displayName}` : `${dataSources[0]?.displayName}`
-                }
-            </ModalTitle>
             <ModalContent>
-                <DimensionsSelector/>
-                <Suspense fallback={<div>Loading...</div>}>
-                    <div style={{
-                        maxHeight: '45vh',
-                        flex: 1,
-                        overflow: 'auto',
-                        margin: '16px 0'
-                    }}>
-                        {
-                            dataState.state === 'hasError' && <FullPageError error={dataState.contents}/>
-                        }
-                        {
-                            dataState.state === 'loading' && <FullPageLoader/>
-                        }
-                        {
-                            dataState.state === 'hasValue' && <SelectedView/>
-                        }
-                    </div>
-                </Suspense>
-
+                <div className='h-100 w-100 column'>
+                    <DimensionsSelector/>
+                    <h3 className='pt-8'>{getDataSourcesDisplayName(dataSources)}</h3>
+                    <Suspense fallback={<ModalLoader/>}>
+                        <div style={{
+                            flex: 1,
+                            overflow: 'auto',
+                            margin: '16px 0',
+                        }}>
+                            {
+                                dataState.state === 'hasError' && <FullPageError error={dataState.contents}/>
+                            }
+                            {
+                                dataState.state === 'loading' && <ModalLoader/>
+                            }
+                            {
+                                dataState.state === 'hasValue' && <SelectedView/>
+                            }
+                        </div>
+                    </Suspense>
+                </div>
             </ModalContent>
             <ModalActions>
                 <div className='row space-between align-items-center'>

@@ -9,7 +9,7 @@ export default function TopBar({dataSources, onTabChange, selectedTab}) {
         {
             dataSources?.map((dataSource) => (
                 <Tab selected={selectedTab?.id === dataSource?.id} onClick={() => onTabChange(dataSource)}
-                     key={`${dataSource?.id}-tab`}>{dataSource?.displayName}</Tab>
+                     key={`${dataSource?.id}-tab`}>{dataSource?.label ?? dataSource?.displayName}</Tab>
             ))
         }
 
