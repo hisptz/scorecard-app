@@ -58,27 +58,46 @@ export default function ScorecardViewHeader({downloadAreaRef}) {
     }
 
     const orgUnitSelectionDisplay = useMemo(() => {
-        const {orgUnits,
+        const {
+            orgUnits,
             levels,
             groups,
             userOrgUnit,
             userSubUnit,
-            userSubX2Unit} = orgUnitSelection;
+            userSubX2Unit
+        } = orgUnitSelection;
 
         const display = [...orgUnits]
 
-        if(!isEmpty(levels)){
+        if (userOrgUnit) {
             display.push({
-                name: `Levels: ${levels?.map(level=>{
-                    console.log({orgUnitLevels, level})
+                name: i18n.t('User Organisation Unit')
+            })
+        }
+
+        if (userSubUnit) {
+            display.push({
+                name: i18n.t('User Sub-units')
+            })
+        }
+
+        if (userSubX2Unit) {
+            display.push({
+                name: i18n.t('User Sub-x2-units')
+            })
+        }
+
+        if (!isEmpty(levels)) {
+            display.push({
+                name: `Levels: ${levels?.map(level => {
                     const levelObject = find(orgUnitLevels, ['id', level]) ?? {}
                     return levelObject.displayName
                 })}`
             })
         }
-        if(!isEmpty(groups)){
+        if (!isEmpty(groups)) {
             display.push({
-                name: `Groups: ${groups?.map(group=>(find(orgUnitGroups, ['id', group])).displayName)}`
+                name: `Groups: ${groups?.map(group => (find(orgUnitGroups, ['id', group])).displayName)}`
             })
         }
 
