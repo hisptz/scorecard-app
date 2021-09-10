@@ -110,7 +110,6 @@ export default function ScoreCardManagement() {
             const errors = validateScorecard(updatedScorecard);
 
             const sanitizedScorecard = sanitizeScorecard(updatedScorecard)
-            console.log(sanitizedScorecard)
             if (!isEmpty(errors)) {
                 set(ScorecardConfigErrorState, errors)
                 const errorMessage = `Please fill in the required field(s)`

@@ -215,9 +215,6 @@ const ScorecardViewState = atomFamily({
                             }
                         }
                     }
-                    if (key === 'orgUnitSelection') {
-                        console.log(configState?.orgUnitSelection)
-                    }
                     return configState[key];
                 },
     }),
