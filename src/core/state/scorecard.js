@@ -12,6 +12,7 @@ import {
 import getScorecard, {getOrgUnitSelection} from "../../shared/services/getScorecard";
 import getScorecardSummary from "../../shared/services/getScorecardSummary";
 import {getHoldersFromGroups} from "../../shared/utils/utils";
+import {Orientation} from "../constants/orientation";
 import ScorecardAccessType from "../constants/scorecardAccessType";
 import {TableSort} from "../constants/tableSort";
 import OrgUnitSelection from "../models/orgUnitSelection";
@@ -214,7 +215,9 @@ const ScorecardViewState = atomFamily({
                             }
                         }
                     }
-                    if(key === 'orgUnitSelection') {console.log(configState?.orgUnitSelection)}
+                    if (key === 'orgUnitSelection') {
+                        console.log(configState?.orgUnitSelection)
+                    }
                     return configState[key];
                 },
     }),
@@ -235,10 +238,21 @@ const ScorecardTableSortState = atom({
     default: {},
 });
 
-const ScorecardTableOrientationState = atom({
-    key: "scorecard-table-orientation-state",
-    default: "orgUnitsVsData",
-});
+const ScorecardTableOrientationState = selector({
+    key: 'scorecard-table-orientation-default',
+    get: ({get}) => {
+        const {showDataInRows} = get(ScorecardViewState('options')) ?? {}
+        if (showDataInRows) {
+            return Orientation.DATA_VS_ORG_UNIT
+        }
+        return Orientation.ORG_UNIT_VS_DATA
+    },
+    set: ({set}, newValue) => {
+        set(ScorecardViewState('options'), prevValue => {
+            return _set(cloneDeep(prevValue), 'showDataInRows', (newValue === Orientation.DATA_VS_ORG_UNIT))
+        })
+    }
+})
 
 const ScorecardTableConfigState = selectorFamily({
     key: "scorecard-table-details",

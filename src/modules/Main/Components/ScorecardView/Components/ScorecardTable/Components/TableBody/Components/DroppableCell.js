@@ -1,9 +1,10 @@
-import {colors, Tooltip} from '@dhis2/ui'
+import {colors} from '@dhis2/ui'
 import {debounce} from 'lodash'
 import PropTypes from 'prop-types'
 import React, {useRef} from 'react'
 import {useDrop} from "react-dnd";
 import {useSetRecoilState} from "recoil";
+import {Orientation} from "../../../../../../../../../core/constants/orientation";
 import {ScorecardTableOrientationState} from "../../../../../../../../../core/state/scorecard";
 
 export default function DroppableCell({accept, children}) {
@@ -14,7 +15,9 @@ export default function DroppableCell({accept, children}) {
     const [{canDrop}, dropRef] = useDrop({
         accept,
         drop: () => {
-            onDrop.current(prevState => prevState === 'orgUnitsVsData' ? 'dataVsOrgUnits' : 'orgUnitsVsData')
+            onDrop.current(prevState => {
+               return  prevState === Orientation.ORG_UNIT_VS_DATA ? Orientation.DATA_VS_ORG_UNIT : Orientation.ORG_UNIT_VS_DATA
+            })
             return undefined;
         },
         collect: monitor => ({
@@ -30,7 +33,7 @@ export default function DroppableCell({accept, children}) {
             style={{
                 border: canDrop && `2px dashed ${colors.grey700}`,
                 background: canDrop && `${colors.grey100}`,
-                height: '100%',
+                height: canDrop ? 47 : '100%',
                 width: '100%'
             }}
         >

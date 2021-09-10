@@ -29,7 +29,6 @@ export default function ScorecardTableBody({orgUnits, dataEngine}) {
     const periods = useRecoilValue(PeriodResolverState) ?? [];
     const {periodType} = useRecoilValue(ScorecardViewState("periodSelection"));
     const {childrenOrgUnits, filteredOrgUnits} = useRecoilValue(ScorecardOrgUnitState(orgUnits))
-
     const [overallAverage, setOverallAverage] = useState();
 
     useEffect(() => {
