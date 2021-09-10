@@ -157,57 +157,59 @@ export const InitialOrgUnits = selector({
             userSubUnit,
             userSubX2Unit
         } = get(ScorecardViewState("orgUnitSelection"))
-        const periods = get(PeriodResolverState)
-        const dataHolders = get(ScorecardDataSourceState)
+        const periods = get(PeriodResolverState) ?? []
+        const dataHolders = get(ScorecardDataSourceState) ?? []
         const {organisationUnits} = get(UserState)
         const engine = get(EngineState)
 
         let resolvedOrgUnits = orgUnits
 
-        if (userSubX2Unit) {
-            const {ou} = await engine.query(userSubUnitsQuery, {
-                variables: {
-                    pe: head(periods)?.id,
-                    dx: head(head(dataHolders)?.dataSources)?.id,
-                    ou: 'USER_ORGUNIT_GRANDCHILDREN'
-                }
-            })
-            resolvedOrgUnits = [...resolvedOrgUnits, ...ou?.metaData?.dimensions?.ou?.map(ou => ({id: ou}))]
-        }
-        if (userSubUnit) {
-            const {ou} = await engine.query(userSubUnitsQuery, {
-                variables: {
-                    pe: head(periods)?.id,
-                    dx: head(head(dataHolders)?.dataSources)?.id,
-                    ou: 'USER_ORGUNIT_CHILDREN'
-                }
-            })
-            resolvedOrgUnits = [...resolvedOrgUnits, ...ou?.metaData?.dimensions?.ou?.map(ou => ({id: ou}))]
-        }
-        if (userOrgUnit) {
-            resolvedOrgUnits = [...resolvedOrgUnits, ...organisationUnits]
-        }
+        if (!isEmpty(dataHolders) && !isEmpty(periods)) {
+            if (userSubX2Unit) {
+                const {ou} = await engine.query(userSubUnitsQuery, {
+                    variables: {
+                        pe: head(periods)?.id,
+                        dx: head(head(dataHolders)?.dataSources)?.id,
+                        ou: 'USER_ORGUNIT_GRANDCHILDREN'
+                    }
+                })
+                resolvedOrgUnits = [...resolvedOrgUnits, ...ou?.metaData?.dimensions?.ou?.map(ou => ({id: ou}))]
+            }
+            if (userSubUnit) {
+                const {ou} = await engine.query(userSubUnitsQuery, {
+                    variables: {
+                        pe: head(periods)?.id,
+                        dx: head(head(dataHolders)?.dataSources)?.id,
+                        ou: 'USER_ORGUNIT_CHILDREN'
+                    }
+                })
+                resolvedOrgUnits = [...resolvedOrgUnits, ...ou?.metaData?.dimensions?.ou?.map(ou => ({id: ou}))]
+            }
+            if (userOrgUnit) {
+                resolvedOrgUnits = [...resolvedOrgUnits, ...organisationUnits]
+            }
 
-        if (!isEmpty(levels)) {
-            const {ou} = await engine.query(userSubUnitsQuery, {
-                variables: {
-                    pe: head(periods)?.id,
-                    dx: head(head(dataHolders)?.dataSources)?.id,
-                    ou: levels?.map(level => `LEVEL-${level}`)?.join(';')
-                }
-            })
-            resolvedOrgUnits = [...resolvedOrgUnits, ...ou?.metaData?.dimensions?.ou?.map(ou => ({id: ou}))]
-        }
+            if (!isEmpty(levels)) {
+                const {ou} = await engine.query(userSubUnitsQuery, {
+                    variables: {
+                        pe: head(periods)?.id,
+                        dx: head(head(dataHolders)?.dataSources)?.id,
+                        ou: levels?.map(level => `LEVEL-${level}`)?.join(';')
+                    }
+                })
+                resolvedOrgUnits = [...resolvedOrgUnits, ...ou?.metaData?.dimensions?.ou?.map(ou => ({id: ou}))]
+            }
 
-        if (!isEmpty(groups)) {
-            const {ou} = await engine.query(userSubUnitsQuery, {
-                variables: {
-                    pe: head(periods)?.id,
-                    dx: head(head(dataHolders)?.dataSources)?.id,
-                    ou: groups?.map(group => `OU_GROUP-${group}`)?.join(';')
-                }
-            })
-            resolvedOrgUnits = [...resolvedOrgUnits, ...ou?.metaData?.dimensions?.ou?.map(ou => ({id: ou}))]
+            if (!isEmpty(groups)) {
+                const {ou} = await engine.query(userSubUnitsQuery, {
+                    variables: {
+                        pe: head(periods)?.id,
+                        dx: head(head(dataHolders)?.dataSources)?.id,
+                        ou: groups?.map(group => `OU_GROUP-${group}`)?.join(';')
+                    }
+                })
+                resolvedOrgUnits = [...resolvedOrgUnits, ...ou?.metaData?.dimensions?.ou?.map(ou => ({id: ou}))]
+            }
         }
 
         return {orgUnits: uniqBy(resolvedOrgUnits, 'id')}
