@@ -9,3 +9,10 @@ Given("authorized programme coordinator", () => {
 Given("authorized data officer", () => {
     cy.visit("/");
 });
+
+Given("authorized Regional Manager", () => {
+    cy.visit("/");
+});
+Given("authorized M&E Officer", () => {
+    cy.visit("/");
+});

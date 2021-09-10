@@ -29,7 +29,8 @@
 //     })
 //   });
   When('opening a list of available scorecards',()=>{
-cy.get("[data-test='scorecard-card-view']").should("be.visible");
+    cy.get('[data-test=scorecard-thumbnail-view]').should("be.visible");
+  
   });
   
 

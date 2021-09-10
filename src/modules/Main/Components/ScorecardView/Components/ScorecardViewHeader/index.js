@@ -81,7 +81,7 @@ export default function ScorecardViewHeader({downloadAreaRef}) {
                         <ButtonStrip>
                             <Button onClick={() => setOptionsOpen(true)}>{i18n.t('Options')}</Button>
                             {writeAccess && <Button onClick={onEdit}>Edit</Button>}
-                            <Button onClick={() => setDownloadOpen(true)}>
+                            <Button dataTest={"test-download-pdf"} onClick={() => setDownloadOpen(true)}>
                                 <div ref={downloadRef}>{i18n.t("Download")}</div>
                             </Button>
                             {downloadOpen &&

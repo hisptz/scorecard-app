@@ -17,7 +17,7 @@ Given authorized Regional Manager
 When opening a list of available scorecards
 And selecting to view one of the scorecards
 And downloading the excel of the  visualization
-Then a PDF document of the scorecard visualization should automatically download to my computer
+Then a Excel document of the scorecard visualization should automatically download to my computer
 
 @focus
 Scenario: : Download Excel of Raw Data
@@ -30,9 +30,17 @@ Then an excel file with the scorecard raw data should automatically download
 
 
 @focus
-Scenario: : Download JSON of Raw Data
+Scenario: : Download DataJson of Raw Data
 Given authorized M&E Officer
 When opening a list of available scorecards
 And selecting to view one of the scorecards
-And downloading the raw scorecard details in Excel format
-Then an excel file with the scorecard raw data should automatically download
+And downloading the raw scorecard details in DataJson format
+Then an DataJson file with the scorecard raw data should automatically download
+
+@focus
+Scenario: : Download Metadata of Raw Data
+Given authorized M&E Officer
+When opening a list of available scorecards
+And selecting to view one of the scorecards
+And downloading the raw scorecard details in Metadata format
+Then an Metadata file with the scorecard raw data should automatically download
