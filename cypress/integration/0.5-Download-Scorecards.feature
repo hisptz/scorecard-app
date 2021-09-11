@@ -44,3 +44,16 @@ When opening a list of available scorecards
 And selecting to view one of the scorecards
 And downloading the raw scorecard details in Metadata format
 Then an Metadata file with the scorecard raw data should automatically download
+
+# TODO
+
+@focus
+Scenario: Download scorecard with filtered greater than 100 values
+Given authorized Data Manager
+When opening a list of available scorecards
+And selecting to view one of the scorecards
+And filtering values greater than 100
+And downloading the filtered values
+Then an excel file with indicators whose values are greater than 100 should automatically download
+
+
