@@ -14,7 +14,7 @@ const userQuery = {
                 'displayName',
                 'userGroups',
                 'authorities',
-                'organisationUnits[id,level]'
+                'organisationUnits[id,level,displayName]'
             ]
         }
     }

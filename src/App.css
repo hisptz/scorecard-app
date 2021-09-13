@@ -8,7 +8,7 @@
     min-width: 1240px;
 }
 
-div.jsx-4084082020{
+div.jsx-4084082020 {
     z-index: 4000;
 }
 
@@ -159,10 +159,12 @@ body {
 .w-25 {
     width: 25%;
 }
-.w-60{
+
+.w-60 {
     width: 60%;
 }
-.w-40{
+
+.w-40 {
     width: 40%;
 }
 
@@ -504,15 +506,24 @@ th.jsx-4210860585 {
     margin: auto;
 }
 
-.hide{
+.hide {
     display: none;
+}
+
+.no-wrap {
+    white-space: nowrap;
+}
+
+.min-width-200{
+    min-width: 200px;
 }
 
 @media print {
 
-    .print-area{
+    .print-area {
         overflow: visible !important;
     }
+
     .table-print {
         border: 1px solid #D5DDE5 !important;
     }
@@ -521,7 +532,7 @@ th.jsx-4210860585 {
         display: none;
     }
 
-    .print-show{
+    .print-show {
         display: block !important;
     }
 

@@ -12,7 +12,7 @@ export default function PreviewCustomCell({config}) {
     const legend = getLegend(value, legends, {max: weight})
 
     return hasLinked ? <CustomLinkedCell bottom={bottom} top={top}/> :
-        <td className='data-cell' align='center'
+        <td width={"100px"} className='data-cell' align='center'
             key={`${id}-data`} id={id}><SingleCellSvg status={displayArrows && 'decreasing'}
                                                       color={showColors ? legend?.color:undefined} value={value}/></td>
 }
