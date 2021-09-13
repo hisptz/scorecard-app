@@ -6,7 +6,7 @@
 
 
   /**
- *   Visualising Indicator perfomance on lower levels
+ *   Scenario: Visualising Indicator perfomance on lower levels
  */
    And('selecting a lower level locations',()=>{
     cy.get(':nth-child(2) > [data-test=dhis2-uicore-tabledatacel] > svg > path').click({force:true})
@@ -17,7 +17,7 @@
   })
   
   /**
-   *   Visualize Scorecards without empty rows
+   *  Scenario:  Visualize Scorecards without empty rows
    */
    And('deselecting view of the emptpy rows',()=>{
     cy.get(':nth-child(2) > :nth-child(1) > [data-test=dhis2-uicore-button]').click();
@@ -30,7 +30,7 @@
   
   
   /**
-   * visualize Scorecards with Hierarchy
+   *  Scenario: visualize Scorecards with Hierarchy
    */
    And('selecting to view hierarchy',()=>{
     cy.get(':nth-child(2) > :nth-child(1) > [data-test=dhis2-uicore-button]').click();
@@ -44,7 +44,7 @@
   })
   
   /**
-   * Visualize Scorecard with Average Column
+   *  Scenario: Visualize Scorecard with Average Column
    * 
    */
   And("selecting to view average column",()=>{
@@ -60,7 +60,7 @@
   })
   
   /**
-   * Visualize Scorecard with Average Row
+   *  Scenario: Visualize Scorecard with Average Row
    */
   
   And("selecting to view average row",()=>{
@@ -76,7 +76,7 @@
   
   
   /**
-   * Visualize Scorecard with Highlighted Indicators
+   *   Scenario: Visualize Scorecard with Highlighted Indicators
    */
   And("selecting to view highlighted indicators",()=>{
     cy.get(':nth-child(2) > :nth-child(1) > [data-test=dhis2-uicore-button]').click();
@@ -92,7 +92,7 @@
   })
   
   /**
-   *  Visualize Scorecard with Title
+   *   Scenario: Visualize Scorecard with Title
    */
   And("selecting to view scorecard title",()=>{
     cy.get(':nth-child(2) > :nth-child(1) > [data-test=dhis2-uicore-button]').click();
@@ -104,7 +104,7 @@
   })
   
   /**
-   * Visualize Scorecard with Item numbers
+   *   Scenario: Visualize Scorecard with Item numbers
    */
   And("selecting to view item with numbers",()=>{
     cy.get(':nth-child(2) > :nth-child(1) > [data-test=dhis2-uicore-button]').click();
@@ -116,3 +116,67 @@
     cy.get('[data-test=orgUnit-parent-table-column-cell]').should('be.visible').and('not.be.empty')
     cy.get('[data-test=indicator-table-header-cell]').should('be.visible').and('not.be.empty')
   })
+
+  
+/**
+   *   Scenario: Visualize Indicators for Selected Period
+   * 
+   */
+  And('selecting different periods',()=>{
+
+cy.get("[data-test=test-selected-period]").click()
+cy.get('[data-test=dhis2-uicore-select-input]').click()
+cy.get('[data-test=period-dimension-relative-period-filter-option-DAILY]').click()
+cy.get('[data-test=period-dimension-transfer-actions-addall]').click()
+cy.get('[data-test=dhis2-uicore-modalactions] > [data-test=dhis2-uicore-buttonstrip] > :nth-child(2) > [data-test=dhis2-uicore-button]').click(
+)
+  })
+  Then('a table of indicators and respective selected periods againsts location is displayed',()=>{
+ cy.get('[data-test=orgUnit-parent-table-column-cell]').should('be.visible').and('not.be.empty')
+ cy.get('[data-test=indicator-table-header-cell]').should('be.visible').and('not.be.empty')
+ cy.get('[data-test=test-period-table-scorecard]').should('be.visible').and('not.be.empty')
+  })
+
+  /**
+   *   Scenario: Visualize scorecard in chart
+   * 
+   */
+  And('selecting a specific indicator value',()=>{
+
+    cy.get(':nth-child(1) > :nth-child(3) > div > svg > [points="0,0 0,47 100, 0"]').should('be.visible').click()
+  
+  })
+  And('selecting to view chart',()=>{
+    cy.get('[data-test=dhis2-uicore-modalactions] > .row > div > :nth-child(2)').click()
+  })
+  Then('chart of selected indicator for selected location and period should be displayed',()=>{
+    cy.get('#renderId').should('be.visible')
+  })
+
+    /**
+   *   Scenario: View Selected Indicator's Metadata
+   * 
+   */
+
+ And('selecting an indicator',()=>{
+    cy.get(':nth-child(1) > :nth-child(3) > div > svg > [points="0,0 0,47 100, 0"]').should('be.visible').click()
+  })
+  And('selecting to view indicator details',()=>{
+    cy.get('[data-test=dhis2-uicore-modalactions] > .row > div > :nth-child(3)').click()
+  })
+  Then('indicator details including metadata details,numerator,denominator and description',()=>{
+    cy.get('#test-indicator-details').should('be.visible')
+    // cy.get('[data-test=test-numerator-metadata]').should('be.visible')
+  })
+
+
+    /**
+   *   Scenario:  Visualize Scorecard by Facility Type
+   * 
+   */
+And('filtering the locations by facility Type',()=>{
+
+})
+Then('a table of indicators against location for the selected location type should be displayed',()=>{
+
+})

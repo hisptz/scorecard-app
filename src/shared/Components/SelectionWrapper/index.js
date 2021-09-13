@@ -15,7 +15,7 @@ export default function SelectionWrapper({
 
 
     return (
-        <div onClick={onClick}>
+        <div  onClick={onClick}>
             <Box
                 className='selection-box'
                 {...props}

@@ -67,6 +67,7 @@ export default function ScorecardViewHeader({downloadAreaRef}) {
                             }} type={FilterComponentTypes.ORG_UNIT}/>
                         <SelectionWrapper
                             selectedItems={periodSelection?.periods}
+                            dataTest={'test-selected-period'}
                             name='Period'
                             onClick={() => {
                                 setPeriodSelectionOpen(true)

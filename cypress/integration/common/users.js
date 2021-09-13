@@ -16,3 +16,6 @@ Given("authorized Regional Manager", () => {
 Given("authorized M&E Officer", () => {
     cy.visit("/");
 });
+Given(" authorized Data Manager", () => {
+    cy.visit("/");
+});
