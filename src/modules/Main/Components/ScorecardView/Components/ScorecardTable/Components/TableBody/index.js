@@ -60,8 +60,9 @@ export default function ScorecardTableBody({orgUnits, dataEngine}) {
                     {
                         tableOrientation === Orientation.ORG_UNIT_VS_DATA ?
                             <Fragment>
-                                {filteredOrgUnits?.map((orgUnit) => (
+                                {filteredOrgUnits?.map((orgUnit, index) => (
                                     <ParentOrgUnitRow
+                                        index={index}
                                         dataEngine={dataEngine}
                                         key={`${orgUnit?.id}-row`}
                                         orgUnit={orgUnit}
@@ -69,8 +70,9 @@ export default function ScorecardTableBody({orgUnits, dataEngine}) {
                                         orgUnits={orgUnits}
                                     />
                                 ))}
-                                {childrenOrgUnits?.map((orgUnit) => (
+                                {childrenOrgUnits?.map((orgUnit, index) => (
                                     <ChildOrgUnitRow
+                                        index={index}
                                         dataEngine={dataEngine}
                                         key={`${orgUnit?.id}-row`}
                                         onExpand={setExpandedOrgUnit}
@@ -81,9 +83,10 @@ export default function ScorecardTableBody({orgUnits, dataEngine}) {
                                     />
                                 ))}
                             </Fragment> :
-                            filteredDataHolders?.map(({id, dataSources}) => (
-                                <DataSourceRow dataEngine={dataEngine} orgUnits={orgUnits} dataSources={dataSources}
-                                               key={`${id}-row`}
+                            filteredDataHolders?.map(({id, dataSources}, index) => (
+                                <DataSourceRow index={index} dataEngine={dataEngine} orgUnits={orgUnits}
+                                               dataSources={dataSources}
+                                               key={`${id}-row` }
                                                overallAverage={overallAverage}/>
                             ))
                     }
