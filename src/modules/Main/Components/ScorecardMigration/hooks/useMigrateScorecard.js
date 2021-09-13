@@ -1,16 +1,14 @@
 import {useDataEngine} from "@dhis2/app-runtime";
 import {queue} from 'async'
-import {differenceBy, filter, forIn, fromPairs, isEmpty, uniqBy} from "lodash";
+import {differenceBy, forIn, fromPairs, isEmpty, uniqBy} from "lodash";
 import {useEffect, useState} from "react";
-import {useRecoilState, useResetRecoilState} from "recoil";
+import {useResetRecoilState} from "recoil";
 import {
     DATASTORE_ENDPOINT,
     DATASTORE_OLD_SCORECARD_ENDPOINT,
     DATASTORE_SCORECARD_SUMMARY_KEY
 } from "../../../../../core/constants/config";
 import {ScorecardSummaryState} from "../../../../../core/state/scorecard";
-import {UserState} from "../../../../../core/state/user";
-import {getUserAuthority} from "../../../../../core/state/utils";
 import getScorecardSummary from "../../../../../shared/services/getScorecardSummary";
 import {migrateScorecard} from "../../../../../shared/utils/migrate";
 import {generateCreateMutation, generateScorecardSummary} from "../../../../../shared/utils/scorecard";
@@ -78,7 +76,9 @@ export default function useMigrateScorecard(onComplete) {
             setLoading(true)
             try {
                 const {summary, error} = await getScorecardSummary(engine)
-                if(error) {throw error}
+                if (error) {
+                    throw error
+                }
                 const oldScorecards = await getOldScorecards(engine)
                 setLoading(false)
                 if (!isEmpty(oldScorecards)) {
@@ -106,6 +106,8 @@ export default function useMigrateScorecard(onComplete) {
                     })
                 }
             } catch (e) {
+                if(e?.details?.httpStatusCode === 404)
+                    {onComplete()}
                 setError(e)
             }
         }
