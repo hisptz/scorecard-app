@@ -3,7 +3,7 @@ import i18n from "@dhis2/d2-i18n";
 import {Button, ButtonStrip} from "@dhis2/ui";
 import {Step, StepLabel, Stepper} from "@material-ui/core";
 import {findIndex, fromPairs, isEmpty} from "lodash";
-import React, {Suspense, useEffect, useMemo, useRef, useState} from "react";
+import React, {Suspense, useEffect, useMemo, useState} from "react";
 import {useHistory, useParams} from "react-router-dom";
 import {useRecoilCallback, useRecoilValue, useSetRecoilState, waitForAll} from "recoil";
 import Scorecard from "../../../../core/models/scorecard";
@@ -14,6 +14,7 @@ import ScorecardConfState, {
     ScorecardIdState,
 } from "../../../../core/state/scorecard";
 import {UserAuthorityOnScorecard, UserState} from "../../../../core/state/user";
+import {ShouldValidate} from "../../../../core/state/validators";
 import {FullPageLoader} from "../../../../shared/Components/Loaders";
 import {useAddScorecard, useUpdateScorecard,} from "../../../../shared/hooks/datastore/useScorecard";
 import useMediaQuery from "../../../../shared/hooks/useMediaQuery";
@@ -23,6 +24,7 @@ import DataConfigurationScorecardForm from "./Components/DataConfiguration";
 import GeneralScorecardForm from "./Components/General";
 import HighlightedIndicatorsScorecardForm from "./Components/HighlightedIndicators";
 import OptionsScorecardForm from "./Components/Options";
+import sanitizeScorecard from "./services/sanitizers";
 import validateScorecard from "./services/validator";
 
 const steps = [
@@ -72,6 +74,7 @@ export default function ScoreCardManagement() {
         reset(ScorecardConfState(scorecardId))
         reset(ScorecardConfigEditState)
         reset(ScorecardConfigErrorState)
+        reset(ShouldValidate)
         for (const key of keys) {
             reset(ScorecardConfigDirtyState(key))
         }
@@ -80,16 +83,17 @@ export default function ScoreCardManagement() {
     const createNewScorecard = async (updatedScorecard) => {
         await Scorecard.save(updatedScorecard, add, user);
         show({
-            message: 'Scorecard added successfully',
+            message: i18n.t('Scorecard added successfully'),
             type: {success: true}
         })
         history.goBack();
     }
 
     const updateData = async (updatedScorecard) => {
+
         await Scorecard.update(updatedScorecard, update);
         show({
-            message: 'Scorecard updated successfully',
+            message: i18n.t('Scorecard updated successfully'),
             type: {success: true}
         })
         history.goBack();
@@ -98,6 +102,7 @@ export default function ScoreCardManagement() {
     const onSave = useRecoilCallback(({snapshot, set}) => async () => {
         setSaving(true)
         try {
+            set(ShouldValidate, true)
             const updatedScorecard = (snapshot.getLoadable(
                     waitForAll(
                         fromPairs(keys?.map(key => ([key, ScorecardConfigDirtyState(key)])))
@@ -107,21 +112,20 @@ export default function ScoreCardManagement() {
 
             const errors = validateScorecard(updatedScorecard);
 
+            const sanitizedScorecard = sanitizeScorecard(updatedScorecard)
             if (!isEmpty(errors)) {
-                set(ScorecardConfigErrorState, errors)
                 const errorMessage = `Please fill in the required field(s)`
                 show({
                     message: i18n.t(errorMessage),
                     type: {info: true}
                 })
             }
-
             if (isEmpty(errors)) {
 
                 if (scorecardId) {
-                    await updateData(updatedScorecard);
+                    await updateData(sanitizedScorecard);
                 } else {
-                    await createNewScorecard(updatedScorecard)
+                    await createNewScorecard(sanitizedScorecard)
                 }
             }
         } catch (e) {
@@ -169,8 +173,8 @@ export default function ScoreCardManagement() {
         [activeStep]
     );
 
-    if(!writeAccess && scorecardId){
-        return <AccessDeniedPage accessType={"edit"} />
+    if (!writeAccess && scorecardId) {
+        return <AccessDeniedPage accessType={"edit"}/>
     }
 
     return (
@@ -204,7 +208,7 @@ export default function ScoreCardManagement() {
                                         className="column p-16"
                                         style={{height: "100%", justifyContent: "space-between"}}
                                     >
-                                        {<Component />}
+                                        {<Component/>}
                                         <ButtonStrip end>
                                             <Button
                                                 disabled={!hasPreviousStep}

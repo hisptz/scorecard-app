@@ -27,4 +27,5 @@ export const DATASTORE_SCORECARD_SUMMARY_INCLUDE_KEYS = [
         path: ['userGroupAccesses']
     }
 ]
+export const DATASTORE_OLD_SCORECARD_ENDPOINT='dataStore/scorecards'
 

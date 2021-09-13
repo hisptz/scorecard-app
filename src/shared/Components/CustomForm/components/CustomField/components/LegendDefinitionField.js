@@ -61,7 +61,7 @@ export default function LegendDefinitionField({name, label, value, onChange}) {
         <Field name={name} label={label} value={value}  >
             <div id={name} className={classes['legend-definition-container']}>
                 <div id={`color-selector-btn-${name}`} onClick={e => setReference(e.currentTarget)}
-                     style={{background: color, borderColor: color}} className={classes['legend-color']}>
+                     style={{background: color, borderColor: '#D5DDE5'}} className={classes['legend-color']}>
                     {color}
                 </div>
                 <div className={classes['legend-input']}>

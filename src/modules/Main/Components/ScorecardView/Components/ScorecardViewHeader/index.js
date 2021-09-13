@@ -1,21 +1,28 @@
 import i18n from '@dhis2/d2-i18n'
 import {Button, ButtonStrip, Card} from '@dhis2/ui'
-import React, {useEffect, useRef, useState} from 'react'
+import PropTypes from 'prop-types'
+import React, {useEffect, useMemo, useRef, useState} from 'react'
 import {useHistory} from "react-router-dom";
 import {useRecoilCallback, useRecoilState, useRecoilValue} from "recoil";
 import {FilterComponentTypes} from "../../../../../../core/constants/selection";
+import ScorecardDataEngine from "../../../../../../core/models/scorecardData";
+import {OrgUnitGroups, OrgUnitLevels} from "../../../../../../core/state/orgUnit";
 import ScorecardConfState, {ScorecardIdState, ScorecardViewState} from "../../../../../../core/state/scorecard";
 import {UserAuthorityOnScorecard} from "../../../../../../core/state/user";
 import OrgUnitSelectorModal from "../../../../../../shared/Components/OrgUnitSelectorModal";
 import PeriodSelectorModal from "../../../../../../shared/Components/PeriodSelectorModal";
 import ScorecardOptionsModal from "../../../../../../shared/Components/ScorecardOptionsModal";
 import SelectionWrapper from "../../../../../../shared/Components/SelectionWrapper";
+import getSelectedOrgUnitSelectionDisplay from "../../../../../../shared/utils/orgUnit";
 import DownloadMenu from "../Download/Components/DownloadMenu";
 import useDownload from "./hooks/useDownload";
 
-export default function ScorecardViewHeader({downloadAreaRef}) {
+
+export default function ScorecardViewHeader({downloadAreaRef, dataEngine}) {
     const history = useHistory();
     const scorecardId = useRecoilValue(ScorecardIdState)
+    const orgUnitLevels = useRecoilValue(OrgUnitLevels)
+    const orgUnitGroups = useRecoilValue(OrgUnitGroups)
     const [orgUnitSelection, setOrgUnitSelection] = useRecoilState(ScorecardViewState('orgUnitSelection'))
     const [periodSelection, setPeriodSelection] = useRecoilState(ScorecardViewState('periodSelection'))
     const [scorecardOptions, setScorecardOptions] = useRecoilState(ScorecardViewState('options'))
@@ -25,7 +32,7 @@ export default function ScorecardViewHeader({downloadAreaRef}) {
     const [periodSelectionOpen, setPeriodSelectionOpen] = useState(false);
     const [optionsOpen, setOptionsOpen] = useState(false);
     const [downloadOpen, setDownloadOpen] = useState(false);
-    const {download: onDownload} = useDownload(downloadAreaRef);
+    const {download: onDownload} = useDownload(downloadAreaRef, dataEngine);
 
     const downloadRef = useRef()
     const reset = useRecoilCallback(({reset}) => () => {
@@ -53,6 +60,11 @@ export default function ScorecardViewHeader({downloadAreaRef}) {
         window.location.reload(true)
     }
 
+    const orgUnitSelectionDisplay = useMemo(() => getSelectedOrgUnitSelectionDisplay(orgUnitSelection, {
+        orgUnitGroups,
+        orgUnitLevels
+    }), [orgUnitGroups, orgUnitLevels, orgUnitSelection]);
+
 
     return (
         <div className="selection-card">
@@ -60,7 +72,7 @@ export default function ScorecardViewHeader({downloadAreaRef}) {
                 <div className='row space-between align-items-center pl-16 pr-16'>
                     <div className='row'>
                         <SelectionWrapper
-                            selectedItems={orgUnitSelection?.orgUnits}
+                            selectedItems={orgUnitSelectionDisplay}
                             name={'Organisation Unit'}
                             onClick={() => {
                                 setOrgUnitSelectionOpen(true)
@@ -108,3 +120,9 @@ export default function ScorecardViewHeader({downloadAreaRef}) {
         </div>
     )
 }
+
+ScorecardViewHeader.propTypes = {
+    dataEngine: PropTypes.instanceOf(ScorecardDataEngine).isRequired,
+    downloadAreaRef: PropTypes.any.isRequired
+};
+

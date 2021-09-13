@@ -1,20 +1,14 @@
 import {useDataEngine, useDataMutation, useDataQuery,} from "@dhis2/app-runtime";
 import produce from "immer";
-import {get, set} from "lodash";
+import {set} from "lodash";
 import {useEffect, useState} from "react";
 import {useSetRecoilState} from "recoil";
-import {DATASTORE_ENDPOINT, DATASTORE_SCORECARD_SUMMARY_INCLUDE_KEYS,} from "../../../core/constants/config";
+import {DATASTORE_ENDPOINT,} from "../../../core/constants/config";
 import ScorecardConfState, {ScorecardRequestId} from "../../../core/state/scorecard";
+import {generateCreateMutation, generateScorecardSummary} from "../../utils/scorecard";
 import {uid} from "../../utils/utils";
 import useScorecardsSummary from "./useScorecardsSummary";
 
-function generateScorecardSummary(data) {
-    const summary = {};
-    for (const detail of DATASTORE_SCORECARD_SUMMARY_INCLUDE_KEYS) {
-        summary[detail.key] = get(data, detail.path);
-    }
-    return summary;
-}
 
 const query = {
     scorecard: {
@@ -36,11 +30,6 @@ const deleteMutation = {
     id: ({id}) => id,
 };
 
-const generateCreateMutation = (id) => ({
-    type: "create",
-    resource: `${DATASTORE_ENDPOINT}/${id}`,
-    data: ({data}) => data,
-});
 
 export function useDeleteScorecard(id) {
     const [executionError, setExecutionError] = useState();
@@ -103,7 +92,7 @@ export function useAddScorecard() {
     const add = async (data) => {
         try {
             setLoading(true);
-            const id = uid();
+            const id = data?.id ?? uid();
             const updatedData = produce(data, draft => {
                 set(draft, "id", id);
             })

@@ -13,7 +13,8 @@ const userQuery = {
                 'id',
                 'displayName',
                 'userGroups',
-                'authorities'
+                'authorities',
+                'organisationUnits[id,level,displayName]'
             ]
         }
     }
@@ -28,7 +29,7 @@ export const UserState = atom({
                 const engine = get(EngineState);
                 if (engine) {
                     const {user} = await engine.query(userQuery)
-                    if (user) return user
+                    if (user) {return user}
                     return null
                 }
             } catch (e) {
@@ -43,6 +44,6 @@ export const UserAuthorityOnScorecard = selectorFamily({
     get: (scorecardId) => ({get}) => {
         const scorecardSummary = find(get(ScorecardSummaryState), ['id', scorecardId])
         const user = get(UserState)
-        return getUserAuthority(user, scorecardSummary) ?? DefaultAuthority
+        return getUserAuthority(user, scorecardSummary) ?? DefaultAuthority //TODO: Include public access
     }
 })

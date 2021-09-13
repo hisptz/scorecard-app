@@ -1,16 +1,16 @@
 import {Fn} from "@iapps/function-analytics";
 import {isEmpty} from 'lodash'
 import {atom, selector} from "recoil";
-import {OrgUnitState} from "./orgUnit";
+import {InitialOrgUnits} from "./orgUnit";
 import {ResolvedPeriodState} from "./period";
 
 const DataState = selector({
     key: 'cell-analysis-data',
     get: async ({get}) => {
-        const {orgUnits} = get(OrgUnitState)
+        const {orgUnits} = get(InitialOrgUnits)
         const periods = get(ResolvedPeriodState)
         const dataSources = get(DataSourceState)
-        if(!isEmpty(orgUnits) && !isEmpty(periods) && !isEmpty(dataSources)) {
+        if (!isEmpty(orgUnits) && !isEmpty(periods) && !isEmpty(dataSources)) {
             return await new Fn.Analytics()
                 .setOrgUnit(orgUnits?.map(({id}) => id)?.join(';'))
                 .setPeriod(periods?.map(({id}) => id)?.join(';'))
