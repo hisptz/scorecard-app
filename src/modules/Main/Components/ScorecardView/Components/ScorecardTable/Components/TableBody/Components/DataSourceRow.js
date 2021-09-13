@@ -14,8 +14,8 @@ import AverageCell from "./AverageCell";
 import DraggableCell from "./DraggableCell";
 import DroppableCell from "./DroppableCell";
 
-export default function DataSourceRow({orgUnits, dataSources, overallAverage, dataEngine}) {
-    const {emptyRows, averageColumn, averageDisplayType} = useRecoilValue(ScorecardViewState('options'))
+export default function DataSourceRow({orgUnits, dataSources, overallAverage, dataEngine, index}) {
+    const {emptyRows, averageColumn, averageDisplayType, itemNumber} = useRecoilValue(ScorecardViewState('options'))
     const [isEmpty, setIsEmpty] = useState(false);
     const [average, setAverage] = useState();
     const {filteredOrgUnits, childrenOrgUnits} = useRecoilValue(ScorecardOrgUnitState(orgUnits))
@@ -33,7 +33,10 @@ export default function DataSourceRow({orgUnits, dataSources, overallAverage, da
 
     const Component = <DataTableRow bordered>
         <DataTableCell className='jsx-1369417008' fixed left={"0"} width={"50px"}/>
-        <DataTableCell fixed left={"50px"} className="scorecard-org-unit-cell">
+        {
+            itemNumber && <DataTableCell fixed left={"50px"} width={"50px"} >{index + 1}</DataTableCell>
+        }
+        <DataTableCell fixed left={itemNumber ? "100px" : "50px"} className="scorecard-org-unit-cell">
             <DroppableCell accept={[DraggableItems.ORG_UNIT_COLUMN]}>
                 <DraggableCell label={getDataSourcesDisplayName(dataSources)} type={DraggableItems.DATA_ROW}/>
             </DroppableCell>
@@ -85,6 +88,7 @@ export default function DataSourceRow({orgUnits, dataSources, overallAverage, da
 DataSourceRow.propTypes = {
     dataEngine: PropTypes.instanceOf(ScorecardDataEngine).isRequired,
     dataSources: PropTypes.arrayOf(PropTypes.object).isRequired,
+    index: PropTypes.number.isRequired,
     orgUnits: PropTypes.arrayOf(PropTypes.object).isRequired,
     overallAverage: PropTypes.number.isRequired
 };

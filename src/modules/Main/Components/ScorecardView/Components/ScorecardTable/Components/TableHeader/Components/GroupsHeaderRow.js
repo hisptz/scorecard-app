@@ -10,7 +10,7 @@ import {ScorecardTableConfigState, ScorecardViewState} from "../../../../../../.
 
 export default function GroupsHeaderRow({nested, orgUnits}) {
     const {dataGroups} = useRecoilValue(ScorecardViewState('dataSelection')) ?? {}
-    const {averageColumn} = useRecoilValue(ScorecardViewState('options')) ?? {}
+    const {averageColumn, itemNumber} = useRecoilValue(ScorecardViewState('options')) ?? {}
     const periods = useRecoilValue(PeriodResolverState) ?? []
     const [orgUnitKeyword, setOrgUnitKeyword] = useRecoilState(ScorecardViewState('orgUnitSearchKeyword'))
     const [sort, setSort] = useRecoilState(ScorecardViewState('tableSort'))
@@ -28,18 +28,23 @@ export default function GroupsHeaderRow({nested, orgUnits}) {
 
     return (
         <DataTableRow>
-            <DataTableCell rowSpan={"3"} className={'jsx-1369417008'} fixed left={"0"} width={"50px"}/>
+            {
+                itemNumber && <DataTableCell rowSpan={"3"} fixed left={"0"} width={"50px"}/>
+            }
+            <DataTableCell rowSpan={"3"} className={'jsx-1369417008'} fixed left={itemNumber ? "50px" : "0"}
+                           width={"50px"}/>
             <DataTableColumnHeader
                 large
                 name={'orgUnit'}
                 onSortIconClick={onSortIconClick}
-                sortDirection={sort?.orgUnit} align='left' fixed top={"0"} left={"50px"}
+                sortDirection={sort?.orgUnit} align='left' fixed top={"0"} left={itemNumber ? "100px" : "50px"}
                 bordered
                 width={nameColumnWidth}
                 className='scorecard-table-header scorecard-org-unit-cell ' rowSpan={"3"}>
                 {
                     !nested &&
-                    <InputField className='print-hide w-100' value={searchValue} onChange={({value}) => setSearchValue(value)}
+                    <InputField className='print-hide w-100' value={searchValue}
+                                onChange={({value}) => setSearchValue(value)}
                                 placeholder={i18n.t('Search Organisation Unit')}/>
                 }
                 <h4 className='print-show hide'>{i18n.t('Organisation Unit(s)')}</h4>

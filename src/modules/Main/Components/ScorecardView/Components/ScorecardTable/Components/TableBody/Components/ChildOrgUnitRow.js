@@ -15,8 +15,8 @@ import AverageCell from "./AverageCell";
 import DroppableCell from "./DroppableCell";
 import OrgUnitContainer from "./OrgUnitContainer";
 
-export default function ChildOrgUnitRow({orgUnit, expandedOrgUnit, onExpand, overallAverage, dataEngine, orgUnits}) {
-    const {emptyRows, averageColumn, averageDisplayType} = useRecoilValue(ScorecardViewState('options'))
+export default function ChildOrgUnitRow({orgUnit, expandedOrgUnit, onExpand, overallAverage, dataEngine, orgUnits, index}) {
+    const {emptyRows, averageColumn, averageDisplayType, itemNumber} = useRecoilValue(ScorecardViewState('options'))
 
     const [isEmpty, setIsEmpty] = useState(false);
     const [average, setAverage] = useState();
@@ -64,6 +64,9 @@ export default function ChildOrgUnitRow({orgUnit, expandedOrgUnit, onExpand, ove
             key={id}
             bordered
         >
+            {
+                itemNumber && <DataTableCell width={"50px"} fixed left={"0"}>{index + 2}</DataTableCell>
+            }
             <DataTableCell fixed left={"50px"}>
                 <Tooltip content={i18n.t('Drag to column headers to change layout')}>
                     <DroppableCell accept={[DraggableItems.DATA_COLUMN]}>
@@ -112,6 +115,7 @@ export default function ChildOrgUnitRow({orgUnit, expandedOrgUnit, onExpand, ove
 
 ChildOrgUnitRow.propTypes = {
     dataEngine: PropTypes.instanceOf(ScorecardDataEngine).isRequired,
+    index: PropTypes.number.isRequired,
     orgUnit: PropTypes.object.isRequired,
     orgUnits: PropTypes.array.isRequired,
     overallAverage: PropTypes.number.isRequired,
