@@ -2,6 +2,7 @@ import i18n from '@dhis2/d2-i18n'
 import {Period} from "@iapps/period-utilities";
 import {cloneDeep, filter, get as _get, head, isEmpty, set as _set,} from "lodash";
 import {atom, atomFamily, selector, selectorFamily} from "recoil";
+import {validateGroups} from "../../modules/Main/Components/ScoreCardManagement/services/validator";
 import {
     getColSpanDataGroups,
     getColSpanWithOrgUnit,
@@ -358,5 +359,5 @@ export {
     ScorecardTableSortState,
     ScorecardDataSourceState,
     ScorecardDataLoadingState,
-    ScorecardLegendDefinitionSelector
-}
+    ScorecardLegendDefinitionSelector,
+    }

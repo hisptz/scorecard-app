@@ -109,6 +109,7 @@ export default function DataConfigurationScorecardForm() {
                 </div>
             </div>
             <div className="col-md-8 p-16 h-100">
+
                 {!isEmpty(groups) &&
                 <div className="row pb-16">
                     <div className="column">

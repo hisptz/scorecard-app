@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-09-10T08:49:55.482Z\n"
-"PO-Revision-Date: 2021-09-10T08:49:55.482Z\n"
+"POT-Creation-Date: 2021-09-13T10:16:24.769Z\n"
+"PO-Revision-Date: 2021-09-13T10:16:24.769Z\n"
 
 msgid "Data"
 msgstr "Data"
@@ -37,6 +37,9 @@ msgstr "N/A"
 
 msgid "No Data"
 msgstr "No Data"
+
+msgid "This field is required"
+msgstr "This field is required"
 
 msgid "Welcome to Scorecard App!"
 msgstr "Welcome to Scorecard App!"
@@ -191,6 +194,9 @@ msgstr "Scorecard added successfully"
 msgid "Scorecard updated successfully"
 msgstr "Scorecard updated successfully"
 
+msgid "Please fill in the required field(s)"
+msgstr "Please fill in the required field(s)"
+
 msgid "Previous"
 msgstr "Previous"
 
@@ -199,6 +205,9 @@ msgstr "Saving"
 
 msgid "Next"
 msgstr "Next"
+
+msgid "This group does not have any configured data sources"
+msgstr "This group does not have any configured data sources"
 
 msgid "Scorecard deleted successfully"
 msgstr "Scorecard deleted successfully"
@@ -586,6 +595,15 @@ msgstr "Category"
 msgid "Layout"
 msgstr "Layout"
 
+msgid "Organisation Unit(s)"
+msgstr "Organisation Unit(s)"
+
+msgid "Period(s)"
+msgstr "Period(s)"
+
+msgid "{{number}} Selected"
+msgstr "{{number}} Selected"
+
 msgid "Table"
 msgstr "Table"
 
@@ -598,9 +616,6 @@ msgstr "Dictionary"
 msgid "Search Organisation Unit"
 msgstr "Search Organisation Unit"
 
-msgid "Organisation Unit(s)"
-msgstr "Organisation Unit(s)"
-
 msgid "Drag to row headers to change layout"
 msgstr "Drag to row headers to change layout"
 
@@ -609,15 +624,6 @@ msgstr "Search Data"
 
 msgid "Drag to row headers to change layout "
 msgstr "Drag to row headers to change layout "
-
-msgid "User Organisation Unit"
-msgstr "User Organisation Unit"
-
-msgid "User Sub-units"
-msgstr "User Sub-units"
-
-msgid "User Sub-x2-units"
-msgstr "User Sub-x2-units"
 
 msgid "Home"
 msgstr "Home"
@@ -717,3 +723,12 @@ msgstr "Selected organisation unit"
 
 msgid "and {{number}} more"
 msgstr "and {{number}} more"
+
+msgid "User Organisation Unit"
+msgstr "User Organisation Unit"
+
+msgid "User Sub-units"
+msgstr "User Sub-units"
+
+msgid "User Sub-x2-units"
+msgstr "User Sub-x2-units"
