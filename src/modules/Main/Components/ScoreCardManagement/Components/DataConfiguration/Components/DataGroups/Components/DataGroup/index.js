@@ -12,7 +12,7 @@ import LinkIcon from "@material-ui/icons/Link";
 import UnlinkIcon from "@material-ui/icons/LinkOff";
 import {cloneDeep, filter, find, findIndex, flattenDeep, head, isEmpty, last,} from "lodash";
 import PropTypes from "prop-types";
-import React, {useCallback, useEffect, useMemo, useState} from "react";
+import React, {useCallback, useEffect, useMemo, useRef, useState} from "react";
 import {DragDropContext, Draggable, Droppable} from "react-beautiful-dnd";
 import {useRecoilCallback, useRecoilState, useRecoilValue} from "recoil";
 import ScorecardIndicator from "../../../../../../../../../../core/models/scorecardIndicator";
@@ -22,7 +22,10 @@ import {
     ScorecardConfigDirtySelector,
     ScorecardConfigDirtyState,
     ScorecardConfigEditState,
+    ScorecardConfigErrorSelector,
 } from "../../../../../../../../../../core/state/scorecard";
+import {DataGroupErrorState} from "../../../../../../../../../../core/state/validators";
+import ErrorIcon from "../../../../../../../../../../shared/icons/ErrorIcon";
 import {updateListFromDragAndDrop} from "../../../../../../../../../../shared/utils/dnd";
 import {generateLegendDefaults} from "../../../../../../../../../../shared/utils/utils";
 import DataSourceHolder from "../DataSourceHolder";
@@ -160,9 +163,12 @@ export default function DataGroup({
     const path = ["dataGroups", index];
     const [group, setGroup] = useRecoilState(ScorecardConfigDirtySelector({key: 'dataSelection', path}));
     const {title, id, dataHolders} = group ?? new ScorecardIndicatorGroup();
+    const errors = useRecoilValue(DataGroupErrorState(id))
     const [openAdd, setOpenAdd] = useState(false);
     const [titleEditOpen, setTitleEditOpen] = useState(false);
     const [titleEditValue, setTitleEditValue] = useState(title);
+
+    const summaryRef = useRef()
 
     const onLink = (indexOfMergedHolder, indexOfTheDeletedHolder) => {
         const dataSourceToLink = head(
@@ -314,6 +320,7 @@ export default function DataGroup({
                     <Tooltip
                         content={i18n.t('Click to {{action}}, drag to rearrange', {action: expanded === id ? i18n.t('collapse') : i18n.t('expand')})}>
                         <AccordionSummary
+                            innerRef={summaryRef}
                             onClick={(event) => event.stopPropagation()}
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
@@ -354,16 +361,22 @@ export default function DataGroup({
                             ) : (
                                 <div className="row space-between align-items-center">
                                     <div className="row align-items-center accordion-title-container">
-                                        <p
-                                            onDoubleClick={(event) => {
-                                                event.stopPropagation();
-                                                setTitleEditOpen(true);
-                                            }}
-                                            onClick={(event) => event.stopPropagation()}
-                                            className="accordion-title"
-                                        >
-                                            {title}
-                                        </p>
+                                        <div className='column'>
+                                            <p
+                                                onDoubleClick={(event) => {
+                                                    event.stopPropagation();
+                                                    setTitleEditOpen(true);
+                                                }}
+                                                onClick={(event) => event.stopPropagation()}
+                                                className="accordion-title"
+                                            >
+                                                {title}
+                                            </p>
+                                            {
+                                                errors &&
+                                                <p style={{fontSize: 12, margin: 4, color: '#f44336'}}>{errors}</p>
+                                            }
+                                        </div>
                                         <IconButton
                                             onClick={(event) => {
                                                 event.stopPropagation();
@@ -375,17 +388,26 @@ export default function DataGroup({
                                             <EditIcon/>
                                         </IconButton>
                                     </div>
-                                    <Button
-                                        onClick={(_, event) => {
-                                            event.stopPropagation();
-                                            if (onDelete) {
-                                                onDelete(id);
+                                    <div className>
+                                        <div className='row align-items-center'>
+                                            <Button
+                                                onClick={(_, event) => {
+                                                    event.stopPropagation();
+                                                    if (onDelete) {
+                                                        onDelete(id);
+                                                    }
+                                                }}
+                                                icon={<DeleteIcon/>}
+                                            >
+                                                {i18n.t('Delete')}
+                                            </Button>
+                                            {
+                                                errors && <div style={{paddingLeft: 16}}>
+                                                    <ErrorIcon color={'#f44336'} size={24}/>
+                                                </div>
                                             }
-                                        }}
-                                        icon={<DeleteIcon/>}
-                                    >
-                                        {i18n.t('Delete')}
-                                    </Button>
+                                        </div>
+                                    </div>
                                 </div>
                             )}
                         </AccordionSummary>

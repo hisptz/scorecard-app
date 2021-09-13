@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-09-10T13:27:01.272Z\n"
-"PO-Revision-Date: 2021-09-10T13:27:01.272Z\n"
+"POT-Creation-Date: 2021-09-13T10:16:24.769Z\n"
+"PO-Revision-Date: 2021-09-13T10:16:24.769Z\n"
 
 msgid "Data"
 msgstr "Data"
@@ -37,6 +37,9 @@ msgstr "N/A"
 
 msgid "No Data"
 msgstr "No Data"
+
+msgid "This field is required"
+msgstr "This field is required"
 
 msgid "Welcome to Scorecard App!"
 msgstr "Welcome to Scorecard App!"
@@ -191,6 +194,9 @@ msgstr "Scorecard added successfully"
 msgid "Scorecard updated successfully"
 msgstr "Scorecard updated successfully"
 
+msgid "Please fill in the required field(s)"
+msgstr "Please fill in the required field(s)"
+
 msgid "Previous"
 msgstr "Previous"
 
@@ -199,6 +205,9 @@ msgstr "Saving"
 
 msgid "Next"
 msgstr "Next"
+
+msgid "This group does not have any configured data sources"
+msgstr "This group does not have any configured data sources"
 
 msgid "Scorecard deleted successfully"
 msgstr "Scorecard deleted successfully"
