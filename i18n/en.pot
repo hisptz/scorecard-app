@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-09-17T13:17:53.912Z\n"
-"PO-Revision-Date: 2021-09-17T13:17:53.912Z\n"
+"POT-Creation-Date: 2021-09-20T10:04:55.666Z\n"
+"PO-Revision-Date: 2021-09-20T10:04:55.666Z\n"
 
 msgid "Next"
 msgstr "Next"
@@ -89,6 +89,9 @@ msgstr ""
 msgid "You can configure different data sources on this area"
 msgstr "You can configure different data sources on this area"
 
+msgid "Click Here to add a group"
+msgstr "Click Here to add a group"
+
 msgid "This is the preview area. It shows how your scorecard will look like."
 msgstr "This is the preview area. It shows how your scorecard will look like."
 
@@ -98,9 +101,6 @@ msgid ""
 msgstr ""
 "Check this box to set legend configuration according to organisation unit "
 "levels"
-
-msgid "Click Here to add a group"
-msgstr "Click Here to add a group"
 
 msgid "Double click or click on the edit button to edit the group name"
 msgstr "Double click or click on the edit button to edit the group name"

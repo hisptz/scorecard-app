@@ -51,6 +51,23 @@ export const DATA_CONFIGURATION_HELP_STEPS = [
         intro: i18n.t("You can configure different data sources on this area")
     },
     {
+        element: ".scorecard-add-group-button",
+        intro: i18n.t("Click Here to add a group")
+    },
+]
+
+export const DATA_CONFIGURATION_WITH_DATA_HELP_STEPS = [
+    {
+        intro: <div>
+            <h3>{i18n.t("Data Configuration")}</h3>
+            {i18n.t("On this page, you can configure different data sources (indicators, dataElements, e.t.c) for the scorecard. You can also preview the scorecard table.")}
+        </div>
+    },
+    {
+        element: ".groups-configuration-area",
+        intro: i18n.t("You can configure different data sources on this area")
+    },
+    {
         element: ".preview-table-area",
         intro: i18n.t("This is the preview area. It shows how your scorecard will look like.")
     },
@@ -103,3 +120,6 @@ export const DATA_CONFIGURATION_HELP_STEPS = [
         intro: i18n.t("Edit indicator label here. This label will displayed on the scorecard table header")
     },
 ]
+
+
+

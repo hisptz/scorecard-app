@@ -15,15 +15,7 @@ import AverageCell from "./AverageCell";
 import DroppableCell from "./DroppableCell";
 import OrgUnitContainer from "./OrgUnitContainer";
 
-export default function ChildOrgUnitRow({
-                                            orgUnit,
-                                            expandedOrgUnit,
-                                            onExpand,
-                                            overallAverage,
-                                            dataEngine,
-                                            orgUnits,
-                                            index
-                                        }) {
+export default function ChildOrgUnitRow({orgUnit, expandedOrgUnit, onExpand, overallAverage, dataEngine, orgUnits, index}) {
     const {emptyRows, averageColumn, averageDisplayType, itemNumber} = useRecoilValue(ScorecardViewState('options'))
 
     const [isEmpty, setIsEmpty] = useState(false);
@@ -73,6 +65,9 @@ export default function ChildOrgUnitRow({
             key={id}
             bordered
         >
+            {
+                itemNumber && <DataTableCell width={"50px"} fixed left={"0"}>{index + 2}</DataTableCell>
+            }
             <DataTableCell  dataTest={'orgUnit-parent-table-column-cell'} fixed left={"50px"}>
                 <Tooltip content={i18n.t('Drag to column headers to change layout')}>
                     <DroppableCell accept={[DraggableItems.DATA_COLUMN]}>
