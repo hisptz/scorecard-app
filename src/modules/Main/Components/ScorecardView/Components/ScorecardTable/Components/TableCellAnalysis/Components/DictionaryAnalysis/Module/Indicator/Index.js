@@ -1,11 +1,6 @@
 import PropTypes from 'prop-types'
-import React, {useEffect} from "react";
-import {useRecoilCallback} from "recoil";
-import {
-    dataElementsStateDictionary,
-    dataSetReportingRatesStateDictionary,
-    programIndicatorStateDictionary
-} from "../../Store";
+import React from "react";
+import AccessibilityAndSharing from "../../Shared/Componets/AccesibilityAndSharing";
 import CalculationDetails from './Components/calculationDetails/Index'
 import DataElementSIndicator from './Components/dataElementsInIndicator/dataElementsIndicator'
 import DatasetsReportingRates from "./Components/DataSetReportingRate";
@@ -18,17 +13,7 @@ import ProgramIndicatorIndicator from "./Components/ProgramIndicator";
 
 export default function Index({id}) {
 
-    const reset = useRecoilCallback(({reset}) => () => {
-        reset(dataElementsStateDictionary)
-        reset(dataSetReportingRatesStateDictionary)
-        reset(programIndicatorStateDictionary)
-    })
 
-    useEffect(() => {
-        return () => {
-            reset()
-        };
-    }, [id]);
 
     return (<div style={{display: "flex", flexDirection: "column"}}>
         <Introduction id={id}/>
@@ -47,7 +32,7 @@ export default function Index({id}) {
 
         <DatasetsReportingRates/>
 
-        {/*<AccesibilityAndSharing id={id} resourceType={"indicators"} />*/}
+        <AccessibilityAndSharing id={id} resourceType={"indicators"} />
 
     </div>)
 }

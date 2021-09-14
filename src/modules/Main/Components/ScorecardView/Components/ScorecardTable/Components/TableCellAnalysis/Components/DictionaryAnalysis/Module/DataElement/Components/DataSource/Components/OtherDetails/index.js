@@ -20,7 +20,6 @@ const query = {
     }
 }
 
-
 export default function OtherDetailTable(props){
 
     const {baseUrl}=useConfig()
@@ -90,21 +89,21 @@ export default function OtherDetailTable(props){
                     </DataTableCell>
                     <DataTableCell bordered>
                         {detail?.legendSets?.length===0
-                        ? i18n.t("No legends assigned")
-                        :
-                        <ol>
-                            {detail?.legendSets?.map((legend)=>{
-                                return <li key={legend.id}>{legend?.displayName}</li>
-                            })}
-                        </ol>}
+                            ? i18n.t("No legends assigned")
+                            :
+                            <ol>
+                                {detail?.legendSets?.map((legend)=>{
+                                    return <li key={legend.id}>{legend?.displayName}</li>
+                                })}
+                            </ol>}
 
-                            
+
 
                     </DataTableCell>
                     <DataTableCell bordered>
                         {
                             loading ? <Loader text={""}/> : error ? <Error error={error}/> :
-                                 data?.orgUnitLevels?.organisationUnitLevels?.length === 0 ?i18n.t("No organization unit level assigned" ) :
+                                data?.orgUnitLevels?.organisationUnitLevels?.length === 0 ?i18n.t("No organization unit level assigned" ) :
                                     <ol>
                                         {data?.orgUnitLevels?.organisationUnitLevels?.map((lev) => {
                                             return (

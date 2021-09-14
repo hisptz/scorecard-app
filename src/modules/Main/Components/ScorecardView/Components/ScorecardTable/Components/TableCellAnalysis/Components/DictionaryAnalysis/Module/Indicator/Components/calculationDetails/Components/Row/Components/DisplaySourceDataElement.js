@@ -9,12 +9,11 @@ export default function DisplaySourceDataElement (props){
 
      return <>
 
-         <h5>{title}</h5>
 
          <ul>
              {data.map((el)=>{
                  return <li key={el.id}>
-                     <h6>{el.val}</h6>
+                     {el.val}
                      <ol>
                          {el.sources.map((src)=>{
                             return <li key={src.dataSet.id}>{src.dataSet.displayName}</li>

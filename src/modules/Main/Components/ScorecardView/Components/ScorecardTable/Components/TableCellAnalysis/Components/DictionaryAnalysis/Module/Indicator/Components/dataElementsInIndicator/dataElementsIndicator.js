@@ -20,7 +20,7 @@ export default function DataElementSIndicator() {
 
     const dataElements = useRecoilValue(dataElementsStateDictionary)
 
-    if(dataElements.length===0){
+    if(dataElements?.length===0){
         return (
             <div>
                 <h3> {i18n.t("Data elements in indicator")}  </h3>
