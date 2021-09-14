@@ -1,43 +1,45 @@
 import {find, has} from "lodash";
 
 export function migrateScorecard(oldScorecard) {
-    return {
-        id: oldScorecard?.id,
-        name: oldScorecard?.header?.title,
-        title: oldScorecard?.header?.title,
-        subtitle: oldScorecard?.header?.sub_title,
-        description: oldScorecard?.header?.description,
-        user: {id: oldScorecard?.user?.id},
-        periodType: oldScorecard?.periodType,
-        customHeader: oldScorecard?.header?.template?.content,
-        publicAccess: getScorecardPublicAccess(oldScorecard?.user_groups),
-        userAccesses: [],
-        userGroupAccesses: getScorecardUserGroupAccesses(oldScorecard?.user_groups),
-        targetOnLevels: false,
-        periodSelection: getScorecardPeriodSelection(oldScorecard.selected_periods),
-        orgUnitSelection: getScorecardOrgUnitSelection(
-            oldScorecard.orgunit_settings
-        ),
-        dataSelection: getScorecardDataSelection(oldScorecard.data_settings),
-        additionalLabels: oldScorecard.additional_labels,
-        legendDefinitions: getScorecardLegendDefinitions(
-            oldScorecard?.legendset_definitions
-        ),
-        options: {
-            title: true,
-            legend: oldScorecard?.header?.show_legend_definition,
-            emptyRows: oldScorecard?.empty_rows,
-            averageRow: oldScorecard?.show_average_in_row,
-            itemNumber: true,
-            averageColumn: oldScorecard?.show_average_in_column,
-            showHierarchy: oldScorecard?.show_hierarchy,
-            averageDisplayType: oldScorecard?.average_selection?.toUpperCase(),
-            highlightedIndicators: oldScorecard?.highlighted_indicators?.display,
-        },
-        highlightedIndicators: (
-            oldScorecard?.highlighted_indicators?.definitions || []
-        ).map(getScorecardDataSource),
-    };
+    if(oldScorecard){
+        return {
+            id: oldScorecard?.id,
+            name: oldScorecard?.header?.title,
+            title: oldScorecard?.header?.title,
+            subtitle: oldScorecard?.header?.sub_title,
+            description: oldScorecard?.header?.description,
+            user: {id: oldScorecard?.user?.id},
+            periodType: oldScorecard?.periodType,
+            customHeader: oldScorecard?.header?.template?.content,
+            publicAccess: getScorecardPublicAccess(oldScorecard?.user_groups),
+            userAccesses: [],
+            userGroupAccesses: getScorecardUserGroupAccesses(oldScorecard?.user_groups),
+            targetOnLevels: false,
+            periodSelection: getScorecardPeriodSelection(oldScorecard.selected_periods),
+            orgUnitSelection: getScorecardOrgUnitSelection(
+                oldScorecard.orgunit_settings
+            ),
+            dataSelection: getScorecardDataSelection(oldScorecard.data_settings),
+            additionalLabels: oldScorecard.additional_labels,
+            legendDefinitions: getScorecardLegendDefinitions(
+                oldScorecard?.legendset_definitions
+            ),
+            options: {
+                title: true,
+                legend: oldScorecard?.header?.show_legend_definition,
+                emptyRows: oldScorecard?.empty_rows,
+                averageRow: oldScorecard?.show_average_in_row,
+                itemNumber: true,
+                averageColumn: oldScorecard?.show_average_in_column,
+                showHierarchy: oldScorecard?.show_hierarchy,
+                averageDisplayType: oldScorecard?.average_selection?.toUpperCase(),
+                highlightedIndicators: oldScorecard?.highlighted_indicators?.display,
+            },
+            highlightedIndicators: (
+                oldScorecard?.highlighted_indicators?.definitions || []
+            ).map(getScorecardDataSource),
+        };
+    }
 }
 
 function getScorecardLegendDefinitions(oldScorecardLegendDefinitions) {
@@ -140,10 +142,10 @@ function getScorecardPublicAccess(oldScorecardUserGroups) {
 }
 
 function getScorecardUserGroupAccesses(oldScorecardUserGroups) {
-    const userGroupsOnly = oldScorecardUserGroups.filter(
+    const userGroupsOnly = oldScorecardUserGroups?.filter(
         (userGroup) => userGroup.id !== "all"
     );
-    return userGroupsOnly.map((userGroup) => {
+    return userGroupsOnly?.map((userGroup) => {
         return {
             id: userGroup?.id,
             type: "userGroup",

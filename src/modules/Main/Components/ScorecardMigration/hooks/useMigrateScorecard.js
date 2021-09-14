@@ -1,6 +1,6 @@
 import {useDataEngine} from "@dhis2/app-runtime";
 import {queue} from 'async'
-import {differenceBy, forIn, fromPairs, isEmpty, uniqBy} from "lodash";
+import {compact, differenceBy, forIn, fromPairs, isEmpty, uniqBy} from "lodash";
 import {useEffect, useState} from "react";
 import {useResetRecoilState} from "recoil";
 import {
@@ -46,7 +46,9 @@ async function getOldScorecards(engine) {
 
 const uploadNewScorecard = async ({scorecard, engine}) => {
     const newScorecard = migrateScorecard(scorecard)
-    return await engine.mutate(generateCreateMutation(newScorecard?.id), {variables: {data: newScorecard}})
+    if (newScorecard) {
+        return await engine.mutate(generateCreateMutation(newScorecard?.id), {variables: {data: newScorecard}})
+    }
 }
 
 
@@ -96,18 +98,21 @@ export default function useMigrateScorecard(onComplete) {
                             const newScorecard = migrateScorecard(oldScorecard)
                             return generateScorecardSummary(newScorecard)
                         })
-                        if (!isEmpty(newSummary)) {
+                        if (!isEmpty(compact(newSummary))) {
                             const allSummary = uniqBy([...summary, ...newSummary], 'id')
-                            await uploadSummary(engine, allSummary).then(onComplete)
-                            resetSummary()
+                            await uploadSummary(engine, allSummary).then(() => {
+                                resetSummary()
+                                onComplete()
+                            })
                         } else {
                             onComplete()
                         }
                     })
                 }
             } catch (e) {
-                if(e?.details?.httpStatusCode === 404)
-                    {onComplete()}
+                if (e?.details?.httpStatusCode === 404) {
+                    onComplete()
+                }
                 setError(e)
             }
         }
