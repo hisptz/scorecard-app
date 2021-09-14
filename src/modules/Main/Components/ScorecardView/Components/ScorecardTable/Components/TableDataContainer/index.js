@@ -1,7 +1,9 @@
 import PropTypes from 'prop-types'
 import React, {useEffect, useState} from 'react'
+import {useRecoilValue} from "recoil";
 import ScorecardDataEngine from "../../../../../../../../core/models/scorecardData";
-import {getLegend} from "../../../../../ScoreCardManagement/Components/DataConfiguration/utils";
+import {ScorecardLegendDefinitionSelector} from "../../../../../../../../core/state/scorecard";
+import {getLegend} from "../../../../../../../../shared/utils/utils";
 import TableCellAnalysis from "../TableCellAnalysis";
 import {LinkedDataCell, SingleDataCell} from "./Components/DataCells";
 import LoadingCell from "./Components/LoadingCell";
@@ -10,13 +12,13 @@ import LoadingCell from "./Components/LoadingCell";
 export default function DataContainer({dataSources, orgUnit, period, dataEngine}) {
     const {id: orgUnitId} = orgUnit ?? {}
     const {id: periodId} = period ?? {}
-
+    const defaultLegendDefinitions = useRecoilValue(ScorecardLegendDefinitionSelector(true))
     const [analysisOpen, setAnalysisOpen] = useState(false);
     const [topData, setTopData] = useState();
     const [bottomData, setBottomData] = useState();
     const [top, bottom] = dataSources ?? [];
-    const {color: topColor} = getLegend(topData?.current, top?.legends) ?? {};
-    const {color: bottomColor} = getLegend(bottomData?.current, bottom?.legends) ?? {};
+    const {color: topColor} = getLegend(topData?.current, top?.legends, {max: top?.weight, defaultLegends: defaultLegendDefinitions}) ?? {};
+    const {color: bottomColor} = getLegend(bottomData?.current, bottom?.legends, {max: bottom?.weight,  defaultLegends: defaultLegendDefinitions}) ?? {};
 
     const loading = false
 

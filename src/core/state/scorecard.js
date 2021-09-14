@@ -1,6 +1,8 @@
+import i18n from '@dhis2/d2-i18n'
 import {Period} from "@iapps/period-utilities";
 import {cloneDeep, filter, get as _get, head, isEmpty, set as _set,} from "lodash";
 import {atom, atomFamily, selector, selectorFamily} from "recoil";
+import {validateGroups} from "../../modules/Main/Components/ScoreCardManagement/services/validator";
 import {
     getColSpanDataGroups,
     getColSpanWithOrgUnit,
@@ -8,9 +10,10 @@ import {
     getTableWidthWithDataGroups,
     getTableWidthWithOrgUnit,
 } from "../../modules/Main/Components/ScorecardView/Components/ScorecardTable/services/utils";
-import getScorecard from "../../shared/services/getScorecard";
+import getScorecard, {getOrgUnitSelection} from "../../shared/services/getScorecard";
 import getScorecardSummary from "../../shared/services/getScorecardSummary";
 import {getHoldersFromGroups} from "../../shared/utils/utils";
+import {Orientation} from "../constants/orientation";
 import ScorecardAccessType from "../constants/scorecardAccessType";
 import {TableSort} from "../constants/tableSort";
 import OrgUnitSelection from "../models/orgUnitSelection";
@@ -29,17 +32,27 @@ import {ScreenDimensionState} from "./window";
 const defaultValue = {
     legendDefinitions: [
         {
-            color: "#417505",
-            name: "Target Reached",
+            color: "#008000",
+            name: i18n.t("Target Reached/ On Track"),
         },
         {
-            color: "#f8e71c",
-            name: "Average",
+            color: "#FFFF00",
+            name: i18n.t("Progress, but more effort required"),
         },
         {
-            color: "#d0021b",
-            name: "Poor Performance",
+            color: "#FF0000",
+            name: i18n.t("Not on track"),
         },
+        {
+            color: "#D3D3D3",
+            name: i18n.t("N/A"),
+            isDefault: true,
+        },
+        {
+            color: "#FFFFFF",
+            name: i18n.t("No Data"),
+            isDefault: true,
+        }
     ],
     scorecardOptions: new ScorecardOptions(),
     publicAccess: new ScorecardAccess({
@@ -69,7 +82,9 @@ const ScorecardSummaryState = atom({
             const engine = get(EngineState);
             const user = get(UserState);
             const {summary, error} = await getScorecardSummary(engine);
-            if (error) {throw error;}
+            if (error) {
+                throw error;
+            }
             return filter(summary, (scorecardSummary) => {
                 const {read} = getUserAuthority(user, scorecardSummary) ?? {};
                 return read;
@@ -94,8 +109,11 @@ const ScorecardConfState = atomFamily({
                     get(ScorecardRequestId(scorecardId));
                     if (scorecardId) {
                         const {scorecard, error} = await getScorecard(scorecardId, engine);
-                        if (error) {throw error;}
-                        return scorecard;
+                        if (error) {
+                            throw error;
+                        }
+                        const orgUnitSelection = await getOrgUnitSelection(scorecard, engine)
+                        return {...scorecard, orgUnitSelection};
                     }
                     return new Scorecard(defaultValue);
                 },
@@ -110,8 +128,9 @@ const ScorecardConfigDirtyState = atomFamily({
             (path) =>
                 ({get}) => {
                     const scorecardId = get(ScorecardIdState);
-                    if (!isEmpty(scorecardId))
-                        {return _get(get(ScorecardConfState(scorecardId)), path);}
+                    if (!isEmpty(scorecardId)) {
+                        return _get(get(ScorecardConfState(scorecardId)), path);
+                    }
                     return _get(new Scorecard(defaultValue), path);
                 },
     }),
@@ -202,15 +221,36 @@ const ScorecardViewState = atomFamily({
     }),
 });
 
+const ScorecardLegendDefinitionSelector = selectorFamily({
+    get: (isDefault) => ({get}) => {
+        const legendDefinitions = get(ScorecardViewState('legendDefinitions'))
+        if (isDefault) {
+            return filter(legendDefinitions, ({isDefault}) => isDefault)
+        }
+        return filter(legendDefinitions, ({isDefault}) => !isDefault)
+    }
+})
+
 const ScorecardTableSortState = atom({
     key: "scorecard-table-state",
     default: {},
 });
 
-const ScorecardTableOrientationState = atom({
-    key: "scorecard-table-orientation-state",
-    default: "orgUnitsVsData",
-});
+const ScorecardTableOrientationState = selector({
+    key: 'scorecard-table-orientation-default',
+    get: ({get}) => {
+        const {showDataInRows} = get(ScorecardViewState('options')) ?? {}
+        if (showDataInRows) {
+            return Orientation.DATA_VS_ORG_UNIT
+        }
+        return Orientation.ORG_UNIT_VS_DATA
+    },
+    set: ({set}, newValue) => {
+        set(ScorecardViewState('options'), prevValue => {
+            return _set(cloneDeep(prevValue), 'showDataInRows', (newValue === Orientation.DATA_VS_ORG_UNIT))
+        })
+    }
+})
 
 const ScorecardTableConfigState = selectorFamily({
     key: "scorecard-table-details",
@@ -277,7 +317,6 @@ const ScorecardOrgUnitState = atomFamily({
             if (orgUnits.length === 1) {
                 childrenOrgUnits = get(OrgUnitChildren(head(orgUnits)))
             }
-
             return {
                 childrenOrgUnits,
                 filteredOrgUnits,
@@ -320,4 +359,5 @@ export {
     ScorecardTableSortState,
     ScorecardDataSourceState,
     ScorecardDataLoadingState,
-}
+    ScorecardLegendDefinitionSelector,
+    }

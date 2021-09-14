@@ -38,7 +38,6 @@ export default function useTableOrgUnits(dataEngine, orgUnits) {
                 childrenOrgUnits: []
             }))
         }
-
         if (!isEmpty(searchKeyword)) {
             setLoading(true);
             search().then(() => setLoading(false)).catch(e => console.error(e))

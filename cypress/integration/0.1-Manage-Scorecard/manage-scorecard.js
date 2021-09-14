@@ -111,3 +111,6 @@ Then(
 
   }
 );
+When(/^editing scorecard legends$/, function () {
+
+});

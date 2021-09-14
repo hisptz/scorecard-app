@@ -156,8 +156,6 @@ export default class ScorecardDataEngine {
                 return dx === dataSource && pe === period
             })
 
-            console.log(requiredDataEntities)
-
             const sortedOrgUnits = sortBy(toPairs(requiredDataEntities), [(value) => +last(value)?.current])
 
             if (sortType === TableSort.DESC) {
@@ -257,14 +255,19 @@ export default class ScorecardDataEngine {
     getDataSourceAverage(dataSources = []) {
         return this.dataEntities$.pipe(
             map((dataEntities) => {
-                const dataSourcesData = pickBy(dataEntities, (_, key) => {
-                    const [dx, , pe] = key.split('_')
-                    return dataSources.includes(dx) && (!this._previousPeriods.includes(pe) && !!find(this._selectedPeriods, (period) => period?.id === pe))
-                })
-                const noOfDataSources = Object.keys(dataSourcesData).length;
-                return reduce(dataSourcesData, (result, value) => {
-                    return (result ?? 0) + (value.current / noOfDataSources)
-                }, 0);
+                const data = {}
+                for (const dataSource of dataSources) {
+                    const dataSourcesData = pickBy(dataEntities, (_, key) => {
+                        const [dx, ou, pe] = key.split('_')
+                        return dataSource === dx && (!this._previousPeriods.includes(pe) && !!find(this._selectedPeriods, (period) => period?.id === pe)) && this._selectedOrgUnits?.map((orgUnit) => orgUnit?.id).includes(ou)
+                    })
+                    const noOfDataSources = Object.keys(dataSourcesData).length;
+                    data[dataSource] = reduce(dataSourcesData, (result, value) => {
+                        return (result ?? 0) + (value.current / noOfDataSources)
+                    }, 0);
+                }
+
+                return data
             })
         );
     }
@@ -285,16 +288,22 @@ export default class ScorecardDataEngine {
     }
 
     getDataSourceColumnAverage({period, dataSources, orgUnits}) {
+
         return this.dataEntities$.pipe(
             map((dataEntities) => {
-                const dataSourcesData = pickBy(dataEntities, (val, key) => {
-                    const [dx, ou, pe] = key.split('_')
-                    return dataSources.includes(dx) && pe === period && orgUnits?.includes(ou)
-                })
-                const noOfDataSources = Object.keys(dataSourcesData).length
-                return reduce(dataSourcesData, (result, value) => {
-                    return (result ?? 0) + (value.current / noOfDataSources)
-                }, 0);
+                const data = {}
+
+                for (const dataSource of dataSources) {
+                    const dataSourcesData = pickBy(dataEntities, (val, key) => {
+                        const [dx, ou, pe] = key.split('_')
+                        return dataSource === dx && pe === period && orgUnits?.includes(ou)
+                    })
+                    const noOfDataSources = Object.keys(dataSourcesData).length
+                    data[dataSource] = reduce(dataSourcesData, (result, value) => {
+                        return (result ?? 0) + (value.current / noOfDataSources)
+                    }, 0);
+                }
+                return data
             })
         );
     }
@@ -455,8 +464,9 @@ export default class ScorecardDataEngine {
 
     _getCustomScorecardData(selections) {
         const {selectedOrgUnits, selectedPeriods, selectedDataItems} = selections;
-        if (selectedDataItems?.length === 0)
+        if (selectedDataItems?.length === 0) {
             return new Promise((resolve) => resolve(null));
+        }
 
         // TODO Add implementation when there is custom indicator
         new Promise((resolve) => resolve(null)).then(() => {

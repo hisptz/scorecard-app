@@ -1,19 +1,11 @@
-import React from 'react'
+import React, {useState} from 'react'
 import ScorecardList from "./Components/ScorecardList";
+import ScorecardMigration from "./Components/ScorecardMigration";
 
-
-
-/*
-* TODO: Highlighted Indicator data fetch
-* TODO: Table Sort
-* TODO: Download in Excel, PDF
-*
-*
-*   */
 
 export default function Main() {
-
+    const [migrationComplete, setMigrationComplete] = useState(false);
     return (
-        <ScorecardList/>
+        migrationComplete ?  <ScorecardList/> : <ScorecardMigration onMigrationComplete={setMigrationComplete}/>
     )
 }

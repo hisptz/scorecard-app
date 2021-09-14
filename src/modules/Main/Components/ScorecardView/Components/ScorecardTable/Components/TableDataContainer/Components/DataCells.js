@@ -11,15 +11,15 @@ export function SingleDataCell({data, color}) {
     const {current, previous} = data ?? {};
     const increasing = useMemo(() => {
         if (arrows) {
-            if (current > previous) return 'increasing'
-            if (current < previous) return 'decreasing'
+            if (current > previous) {return 'increasing'}
+            if (current < previous) {return 'decreasing'}
             return null
         }
         return null;
     }, [current, previous, arrows]);
     return (
         current ? <SingleCellSvg status={increasing} value={`${current ?? ''}`} color={color}/> :
-            <div style={{height: '100%', width: '100%', background: colors.grey100}}/>
+            <div style={{height: 47, width: '100%', background: color}}/>
     )
 }
 
@@ -35,15 +35,15 @@ export function LinkedDataCell({topData, bottomData, topColor, bottomColor}) {
     const {arrows} = useRecoilValue(ScorecardViewState('options')) ?? {}
     const topIncreasing = useMemo(() => {
         if (arrows) {
-            if (topCurrent > topPrevious) return 'increasing'
-            if (topCurrent < topPrevious) return 'decreasing'
+            if (topCurrent > topPrevious) {return 'increasing'}
+            if (topCurrent < topPrevious) {return 'decreasing'}
         }
         return null;
     }, [topCurrent, topPrevious, arrows]);
     const bottomIncreasing = useMemo(() => {
         if (arrows) {
-            if (bottomCurrent > bottomPrevious) return 'increasing'
-            if (bottomCurrent < bottomPrevious) return 'decreasing'
+            if (bottomCurrent > bottomPrevious) {return 'increasing'}
+            if (bottomCurrent < bottomPrevious) {return 'decreasing'}
         }
         return null
     }, [bottomCurrent, bottomPrevious, arrows]);

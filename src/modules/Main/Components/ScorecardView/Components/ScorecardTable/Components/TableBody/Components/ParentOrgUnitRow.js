@@ -13,8 +13,8 @@ import AverageCell from "./AverageCell";
 import DroppableCell from "./DroppableCell";
 import OrgUnitContainer from "./OrgUnitContainer";
 
-export default function ParentOrgUnitRow({orgUnit, overallAverage, dataEngine, orgUnits}) {
-    const {emptyRows, averageColumn, averageDisplayType} = useRecoilValue(ScorecardViewState('options'))
+export default function ParentOrgUnitRow({orgUnit, overallAverage, dataEngine, orgUnits, index}) {
+    const {emptyRows, averageColumn, averageDisplayType, itemNumber} = useRecoilValue(ScorecardViewState('options'))
     const [isEmpty, setIsEmpty] = useState(false);
     const [average, setAverage] = useState();
     const {id} = orgUnit ?? {};
@@ -87,6 +87,7 @@ export default function ParentOrgUnitRow({orgUnit, overallAverage, dataEngine, o
 
 ParentOrgUnitRow.propTypes = {
     dataEngine: PropTypes.instanceOf(ScorecardDataEngine).isRequired,
+    index: PropTypes.number.isRequired,
     orgUnit: PropTypes.object.isRequired,
     orgUnits: PropTypes.array.isRequired,
     overallAverage: PropTypes.number.isRequired

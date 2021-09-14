@@ -1,13 +1,14 @@
 import PropTypes from "prop-types";
 import React, {useMemo} from "react";
 import {useRecoilState, useRecoilValue} from "recoil";
-import {ScorecardConfigDirtyState, ScorecardConfigErrorSelector} from "../../../../../../../core/state/scorecard";
+import {ScorecardConfigDirtyState} from "../../../../../../../core/state/scorecard";
+import {FieldErrorState} from "../../../../../../../core/state/validators";
 import {CustomInput} from "../../../../../../../shared/Components/CustomForm/components/CustomField";
 import {FormFieldModel} from "../../../../../../../shared/Components/CustomForm/models";
 
 export default function GeneralFormField({field, dataTest}) {
     const [value, setValue] = useRecoilState(ScorecardConfigDirtyState(field.id));
-    const error = useRecoilValue(ScorecardConfigErrorSelector(field.id))
+    const error = useRecoilValue(FieldErrorState({id: field.id, validations: {mandatory: field?.mandatory}}))
     const onChange = (newValue) => {
         setValue(newValue);
     };

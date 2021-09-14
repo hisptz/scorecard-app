@@ -10,9 +10,9 @@ import EditIcon from "@material-ui/icons/Edit";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import LinkIcon from "@material-ui/icons/Link";
 import UnlinkIcon from "@material-ui/icons/LinkOff";
-import {cloneDeep, find, findIndex, flattenDeep, head, isEmpty, last,} from "lodash";
+import {cloneDeep, filter, find, findIndex, flattenDeep, head, isEmpty, last,} from "lodash";
 import PropTypes from "prop-types";
-import React, {useCallback, useState} from "react";
+import React, {useCallback, useEffect, useMemo, useRef, useState} from "react";
 import {DragDropContext, Draggable, Droppable} from "react-beautiful-dnd";
 import {useRecoilCallback, useRecoilState, useRecoilValue} from "recoil";
 import ScorecardIndicator from "../../../../../../../../../../core/models/scorecardIndicator";
@@ -22,7 +22,10 @@ import {
     ScorecardConfigDirtySelector,
     ScorecardConfigDirtyState,
     ScorecardConfigEditState,
+    ScorecardConfigErrorSelector,
 } from "../../../../../../../../../../core/state/scorecard";
+import {DataGroupErrorState} from "../../../../../../../../../../core/state/validators";
+import ErrorIcon from "../../../../../../../../../../shared/icons/ErrorIcon";
 import {updateListFromDragAndDrop} from "../../../../../../../../../../shared/utils/dnd";
 import {generateLegendDefaults} from "../../../../../../../../../../shared/utils/utils";
 import DataSourceHolder from "../DataSourceHolder";
@@ -106,14 +109,16 @@ function LinkingContainer({
             <div className="row align-items-center">
                 <div className="column">
                     {chunk?.map((source) => (
-                        <DataSourceHolder
-                            onUnlink={onUnlinkClick}
-                            dataHolder={source}
-                            onDelete={onDataSourceDelete}
-                            key={source.id}
-                            id={source.id}
-                            index={getIndex(source.id)}
-                        />
+                        <Tooltip content={i18n.t('Click to configure, drag to rearrange')} key={source.id}>
+                            <DataSourceHolder
+                                onUnlink={onUnlinkClick}
+                                dataHolder={source}
+                                onDelete={onDataSourceDelete}
+                                key={source.id}
+                                id={source.id}
+                                index={getIndex(source.id)}
+                            />
+                        </Tooltip>
                     ))}
                 </div>
                 <div className="link-button-container">
@@ -154,12 +159,16 @@ export default function DataGroup({
     const legendDefinitions = useRecoilValue(
         ScorecardConfigDirtyState("legendDefinitions")
     );
+    const filteredLegendDefinitions = useMemo(() => filter(legendDefinitions, ({isDefault}) => (!isDefault)), [legendDefinitions]);
     const path = ["dataGroups", index];
     const [group, setGroup] = useRecoilState(ScorecardConfigDirtySelector({key: 'dataSelection', path}));
     const {title, id, dataHolders} = group ?? new ScorecardIndicatorGroup();
+    const errors = useRecoilValue(DataGroupErrorState(id))
     const [openAdd, setOpenAdd] = useState(false);
     const [titleEditOpen, setTitleEditOpen] = useState(false);
     const [titleEditValue, setTitleEditValue] = useState(title);
+
+    const summaryRef = useRef()
 
     const onLink = (indexOfMergedHolder, indexOfTheDeletedHolder) => {
         const dataSourceToLink = head(
@@ -197,7 +206,7 @@ export default function DataGroup({
         );
     };
 
-    const onDragEnd = useRecoilCallback(({set})=>(result) => {
+    const onDragEnd = useRecoilCallback(({set}) => (result) => {
         const {destination, source} = result || {};
         set(ScorecardConfigDirtySelector({key: 'dataSelection', path}), (prevState) =>
             ScorecardIndicatorGroup.set(
@@ -210,7 +219,7 @@ export default function DataGroup({
                 )
             )
         );
-        set(ScorecardConfigEditState,(prevState) => {
+        set(ScorecardConfigEditState, (prevState) => {
             if (prevState.selectedDataHolderIndex === source?.index) {
                 return {
                     ...prevState,
@@ -230,7 +239,7 @@ export default function DataGroup({
                         new ScorecardIndicator({
                             ...dataSource,
                             label: dataSource.displayName,
-                            legends: generateLegendDefaults(legendDefinitions, 100),
+                            legends: generateLegendDefaults(filteredLegendDefinitions, 100, true),
                         }),
                     ],
                 })
@@ -241,14 +250,15 @@ export default function DataGroup({
         );
     };
 
+    useEffect(() => {
+        setScorecardEditorState((prevState) => ({
+            ...prevState,
+            selectedDataHolderIndex: undefined,
+            selectedGroupIndex: index,
+        }));
+    }, [expanded]);
+
     const onExpand = (event, newExpanded) => {
-        if (newExpanded) {
-            setScorecardEditorState((prevState) => ({
-                ...prevState,
-                selectedDataHolderIndex: undefined,
-                selectedGroupIndex: index,
-            }));
-        }
         handleAccordionChange(id)(event, newExpanded);
     };
 
@@ -307,82 +317,101 @@ export default function DataGroup({
                     expanded={expanded === id}
                     onChange={onExpand}
                 >
-                    <AccordionSummary
-                        onClick={(event) => event.stopPropagation()}
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        expandIcon={<ExpandMoreIcon data-test="scorecard-group-expand"/>}
-                        aria-controls={`${id}d-content`}
-                        id={`${id}d--header`}
-                        data-test="scorecard-group-item"
-                    >
-                        {titleEditOpen ? (
-                            <div className="row space-between w-100">
-                                <div
-                                    onClick={(event) => event.stopPropagation()}
-                                    className="column"
-                                >
-                                    <Input
-                                        initialFocus
-                                        value={titleEditValue}
-                                        onChange={({value}) => setTitleEditValue(value)}
-                                    />
-                                </div>
-                                <div className="column ">
-                                    <ButtonStrip end>
-                                        <Button onClick={onTitleEditSubmit} primary>
-                                            {i18n.t('Save')}
-                                        </Button>
-                                        <Button
-                                            onClick={(_, event) => {
-                                                event.stopPropagation();
-                                                setTitleEditOpen(false);
-                                                setTitleEditValue(title);
-                                            }}
-                                        >
-                                            {i18n.t('Cancel')}
-                                        </Button>
-                                    </ButtonStrip>
-                                </div>
-                            </div>
-                        ) : (
-                            <div className="row space-between align-items-center">
-                                <div className="row align-items-center accordion-title-container">
-                                    <p
-                                        onDoubleClick={(event) => {
-                                            event.stopPropagation();
-                                            setTitleEditOpen(true);
-                                        }}
+                    <Tooltip
+                        content={i18n.t('Click to {{action}}, drag to rearrange', {action: expanded === id ? i18n.t('collapse') : i18n.t('expand')})}>
+                        <AccordionSummary
+                            innerRef={summaryRef}
+                            onClick={(event) => event.stopPropagation()}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            expandIcon={<ExpandMoreIcon data-test="scorecard-group-expand"/>}
+                            aria-controls={`${id}d-content`}
+                            id={`${id}d--header`}
+                            data-test="scorecard-group-item"
+                        >
+                            {titleEditOpen ? (
+                                <div className="row space-between w-100">
+                                    <div
                                         onClick={(event) => event.stopPropagation()}
-                                        className="accordion-title"
+                                        className="column"
                                     >
-                                        {title}
-                                    </p>
-                                    <IconButton
-                                        onClick={(event) => {
-                                            event.stopPropagation();
-                                            setTitleEditOpen(true);
-                                        }}
-                                        size="small"
-                                        className="accordion-title-edit"
-                                    >
-                                        <EditIcon/>
-                                    </IconButton>
+                                        <Input
+                                            initialFocus
+                                            value={titleEditValue}
+                                            onChange={({value}) => setTitleEditValue(value)}
+                                        />
+                                    </div>
+                                    <div className="column ">
+                                        <ButtonStrip end>
+                                            <Button onClick={onTitleEditSubmit} primary>
+                                                {i18n.t('Save')}
+                                            </Button>
+                                            <Button
+                                                onClick={(_, event) => {
+                                                    event.stopPropagation();
+                                                    setTitleEditOpen(false);
+                                                    setTitleEditValue(title);
+                                                }}
+                                            >
+                                                {i18n.t('Cancel')}
+                                            </Button>
+                                        </ButtonStrip>
+                                    </div>
                                 </div>
-                                <Button
-                                    onClick={(_, event) => {
-                                        event.stopPropagation();
-                                        if (onDelete) {
-                                            onDelete(id);
-                                        }
-                                    }}
-                                    icon={<DeleteIcon/>}
-                                >
-                                    {i18n.t('Delete')}
-                                </Button>
-                            </div>
-                        )}
-                    </AccordionSummary>
+                            ) : (
+                                <div className="row space-between align-items-center">
+                                    <div className="row align-items-center accordion-title-container">
+                                        <div className='column'>
+                                            <p
+                                                onDoubleClick={(event) => {
+                                                    event.stopPropagation();
+                                                    setTitleEditOpen(true);
+                                                }}
+                                                onClick={(event) => event.stopPropagation()}
+                                                className="accordion-title"
+                                            >
+                                                {title}
+                                            </p>
+                                            {
+                                                errors &&
+                                                <p style={{fontSize: 12, margin: 4, color: '#f44336'}}>{errors}</p>
+                                            }
+                                        </div>
+                                        <IconButton
+                                            onClick={(event) => {
+                                                event.stopPropagation();
+                                                setTitleEditOpen(true);
+                                            }}
+                                            size="small"
+                                            className="accordion-title-edit"
+                                        >
+                                            <EditIcon/>
+                                        </IconButton>
+                                    </div>
+                                    <div className>
+                                        <div className='row align-items-center'>
+                                            <Button
+                                                onClick={(_, event) => {
+                                                    event.stopPropagation();
+                                                    if (onDelete) {
+                                                        onDelete(id);
+                                                    }
+                                                }}
+                                                icon={<DeleteIcon/>}
+                                            >
+                                                {i18n.t('Delete')}
+                                            </Button>
+                                            {
+                                                errors && <div style={{paddingLeft: 16}}>
+                                                    <ErrorIcon color={'#f44336'} size={24}/>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+                        </AccordionSummary>
+                    </Tooltip>
                     <AccordionDetails>
                         <div className="column">
                             {isEmpty(dataHolders) ? (

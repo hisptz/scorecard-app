@@ -4,8 +4,8 @@ export default class OrgUnitSelection extends DataModel {
 
     get defaults() {
         return {
-            level: '',
-            group: '',
+            levels: [],
+            groups: [],
             orgUnits: [],
             userSubX2Unit: false,
             userSubUnit: false,

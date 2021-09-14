@@ -8,7 +8,8 @@ import {DraggableItems} from "../../../../../../../../../core/constants/draggabl
 import {ScorecardTableConstants} from "../../../../../../../../../core/constants/table";
 import {PeriodResolverState} from "../../../../../../../../../core/state/period";
 import {
-    ScorecardOrgUnitState, ScorecardTableConfigState,
+    ScorecardOrgUnitState,
+    ScorecardTableConfigState,
     ScorecardTableSortState,
     ScorecardViewState
 } from "../../../../../../../../../core/state/scorecard";
@@ -17,7 +18,7 @@ import DroppableCell from "../../TableBody/Components/DroppableCell";
 
 
 export default function OrgUnitHeaderRow({orgUnits, nested}) {
-    const {averageColumn} = useRecoilValue(ScorecardViewState('options'))
+    const {averageColumn, itemNumber} = useRecoilValue(ScorecardViewState('options'))
     const {filteredOrgUnits, childrenOrgUnits} = useRecoilValue(ScorecardOrgUnitState(orgUnits))
     const periods = useRecoilValue(PeriodResolverState) ?? []
     const [dataKeyword, setDataKeyword] = useRecoilState(ScorecardViewState('dataSearchKeyword'))
@@ -44,12 +45,17 @@ export default function OrgUnitHeaderRow({orgUnits, nested}) {
     return (
         <DataTableRow>
             <DataTableCell className={'jsx-1369417008'} rowSpan={"2"} fixed left={"0"} width={"50px"}/>
+            {
+                itemNumber && <DataTableCell rowSpan={"2"} fixed left={"50px"} width={"50px"}/>
+            }
             <DataTableColumnHeader onSortIconClick={onSortIconClick}
-                                   sortDirection={sort?.data} align='center' fixed top={"0"} left={"50px"}
+                                   sortDirection={sort?.data} align='center' fixed top={"0"}
+                                   left={itemNumber ? "100px" : "50px"}
                                    width={nameColumnWidth} bordered
                                    className='scorecard-table-header scorecard-org-unit-cell' rowSpan={"2"}>
                 {
-                    !nested && <InputField className='print-hide w-100' value={searchValue} onChange={({value}) => setSearchValue(value)}
+                    !nested && <InputField className='print-hide w-100' value={searchValue}
+                                           onChange={({value}) => setSearchValue(value)}
                                            placeholder={i18n.t('Search Data')}/>
                 }
                 <h3 className='print-show hide'>{i18n.t('Data')}</h3>
@@ -74,7 +80,8 @@ export default function OrgUnitHeaderRow({orgUnits, nested}) {
             }
             {
                 averageColumn &&
-                <DataTableCell width={`${ScorecardTableConstants.CELL_WIDTH}px`}  fixed align='center' bordered className='scorecard-table-header' rowSpan={"2"}>
+                <DataTableCell width={`${ScorecardTableConstants.CELL_WIDTH}px`} fixed align='center' bordered
+                               className='scorecard-table-header' rowSpan={"2"}>
                     {i18n.t('Average')}
                 </DataTableCell>
             }

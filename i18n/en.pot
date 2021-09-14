@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-09-06T09:30:00.309Z\n"
-"PO-Revision-Date: 2021-09-06T09:30:00.309Z\n"
+"POT-Creation-Date: 2021-09-13T14:09:29.676Z\n"
+"PO-Revision-Date: 2021-09-13T14:09:29.676Z\n"
 
 msgid "Data"
 msgstr "Data"
@@ -22,6 +22,24 @@ msgstr "Relative Periods"
 
 msgid "Fixed Periods"
 msgstr "Fixed Periods"
+
+msgid "Target Reached/ On Track"
+msgstr "Target Reached/ On Track"
+
+msgid "Progress, but more effort required"
+msgstr "Progress, but more effort required"
+
+msgid "Not on track"
+msgstr "Not on track"
+
+msgid "N/A"
+msgstr "N/A"
+
+msgid "No Data"
+msgstr "No Data"
+
+msgid "This field is required"
+msgstr "This field is required"
 
 msgid "Welcome to Scorecard App!"
 msgstr "Welcome to Scorecard App!"
@@ -62,6 +80,9 @@ msgstr "Can Read"
 msgid "Can Read and Write"
 msgstr "Can Read and Write"
 
+msgid "Click to configure, drag to rearrange"
+msgstr "Click to configure, drag to rearrange"
+
 msgid "Click to {{linkAction}}"
 msgstr "Click to {{linkAction}}"
 
@@ -70,6 +91,15 @@ msgstr "unlink"
 
 msgid "link"
 msgstr "link"
+
+msgid "Click to {{action}}, drag to rearrange"
+msgstr "Click to {{action}}, drag to rearrange"
+
+msgid "collapse"
+msgstr "collapse"
+
+msgid "expand"
+msgstr "expand"
 
 msgid "Save"
 msgstr "Save"
@@ -158,6 +188,12 @@ msgstr "Access"
 msgid "Options"
 msgstr "Options"
 
+msgid "Scorecard added successfully"
+msgstr "Scorecard added successfully"
+
+msgid "Scorecard updated successfully"
+msgstr "Scorecard updated successfully"
+
 msgid "Previous"
 msgstr "Previous"
 
@@ -166,6 +202,9 @@ msgstr "Saving"
 
 msgid "Next"
 msgstr "Next"
+
+msgid "This group does not have any configured data sources"
+msgstr "This group does not have any configured data sources"
 
 msgid "Scorecard deleted successfully"
 msgstr "Scorecard deleted successfully"
@@ -185,8 +224,8 @@ msgstr "Search"
 msgid "Help"
 msgstr "Help"
 
-msgid "Change to {{viewType}} view"
-msgstr "Change to {{viewType}} view"
+msgid "Switch to {{viewType}} view"
+msgstr "Switch to {{viewType}} view"
 
 msgid "list"
 msgstr "list"
@@ -196,6 +235,12 @@ msgstr "grid"
 
 msgid "Add New Scorecard"
 msgstr "Add New Scorecard"
+
+msgid "Migrating scorecards"
+msgstr "Migrating scorecards"
+
+msgid "of"
+msgstr "of"
 
 msgid "You do not have access to {{accessType}} this Scorecard"
 msgstr "You do not have access to {{accessType}} this Scorecard"
@@ -547,14 +592,14 @@ msgstr "Category"
 msgid "Layout"
 msgstr "Layout"
 
-msgid "{{ dimension }}"
-msgstr "{{ dimension }}"
-
 msgid "Organisation Unit(s)"
 msgstr "Organisation Unit(s)"
 
 msgid "Period(s)"
 msgstr "Period(s)"
+
+msgid "{{number}} Selected"
+msgstr "{{number}} Selected"
 
 msgid "Table"
 msgstr "Table"
@@ -616,11 +661,14 @@ msgstr "User sub-units"
 msgid "User sub-x2-units"
 msgstr "User sub-x2-units"
 
-msgid "Select Level"
-msgstr "Select Level"
+msgid "Clear"
+msgstr "Clear"
 
-msgid "Select Group"
-msgstr "Select Group"
+msgid "Select Level(s)"
+msgstr "Select Level(s)"
+
+msgid "Select Group(s)"
+msgstr "Select Group(s)"
 
 msgid "Year"
 msgstr "Year"
@@ -669,3 +717,15 @@ msgstr "Selected period"
 
 msgid "Selected organisation unit"
 msgstr "Selected organisation unit"
+
+msgid "and {{number}} more"
+msgstr "and {{number}} more"
+
+msgid "User Organisation Unit"
+msgstr "User Organisation Unit"
+
+msgid "User Sub-units"
+msgstr "User Sub-units"
+
+msgid "User Sub-x2-units"
+msgstr "User Sub-x2-units"

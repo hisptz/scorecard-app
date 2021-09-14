@@ -28,9 +28,8 @@ function getDataCellsWidth(screenWidth, colSpan) {
 export function getNameCellWidth(screenWidth, colSpan) {
     const dataCellsWidth = getDataCellsWidth(screenWidth, colSpan)
     const width = 100 - ((dataCellsWidth / screenWidth) * 100)
-
     if (width > 10) {
-        return `${width}%`
+        return `${Math.abs(width)}%`
     } else {
         return `${200}px`
     }

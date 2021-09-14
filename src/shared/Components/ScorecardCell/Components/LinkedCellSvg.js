@@ -4,6 +4,7 @@ import {DecreasingArrows, IncreasingArrows} from "./Arrows";
 
 
 export default function LinkedCellSvg({
+                                          bold,
                                           topValue,
                                           bottomValue,
                                           topColor,
@@ -44,6 +45,7 @@ export default function LinkedCellSvg({
 LinkedCellSvg.propTypes = {
     bottomValue: PropTypes.any.isRequired,
     topValue: PropTypes.any.isRequired,
+    bold: PropTypes.bool,
     bottomColor: PropTypes.string,
     bottomStatus: PropTypes.oneOf(['increasing', 'decreasing']),
     topColor: PropTypes.string,

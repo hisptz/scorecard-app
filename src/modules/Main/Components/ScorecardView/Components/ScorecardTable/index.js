@@ -16,8 +16,8 @@ import TableHeader from "./Components/TableHeader";
 import TableLoader, {TableLinearLoader} from "./Components/TableLoader";
 import useTableConfig from "./hooks/useTableConfig";
 
-export default function ScorecardTable({orgUnits, nested}) {
-    const dataEngine = useMemo(() => new ScorecardDataEngine(), []);
+export default function ScorecardTable({orgUnits, nested, initialDataEngine}) {
+    const dataEngine = useMemo(() => initialDataEngine ?? new ScorecardDataEngine(), []);
     const {loading} = useTableConfig(dataEngine, orgUnits)
 
     const {width: screenWidth} = useRecoilValue(ScreenDimensionState);
@@ -61,4 +61,5 @@ export default function ScorecardTable({orgUnits, nested}) {
 ScorecardTable.propTypes = {
     nested: PropTypes.bool.isRequired,
     orgUnits: PropTypes.arrayOf(PropTypes.object).isRequired,
+    initialDataEngine: PropTypes.instanceOf(ScorecardDataEngine)
 };
