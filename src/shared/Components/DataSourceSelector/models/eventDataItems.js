@@ -29,11 +29,12 @@ export default class EventDataItems extends NativeDataSource {
             },
             dataElements: {
                 resource: 'programDataElements',
-                params: ({id, page}) => ({
+                params: ({id, page, filter}) => ({
                     program: id,
                     page,
                     filter: [
-                        `valueType:eq:NUMBER`
+                        `valueType:eq:NUMBER`,
+                        ...filter
                     ],
                     fields: [
                         'dataElement[id,displayName]',
@@ -45,18 +46,22 @@ export default class EventDataItems extends NativeDataSource {
         }
     }
 
-    async getDataSources(engine, {page, filter}) {
-        if (!isEmpty(filter)) {
+    async getDataSources(engine, {page, programId, searchKeyword}) {
+        if (!isEmpty(programId)) {
             const response = await engine?.query(this.dataSourcesQuery, {
                 variables: {
                     page,
-                    id: filter
+                    id: programId,
+                    filter: searchKeyword ? [
+                        `displayName:ilike:${searchKeyword}`
+                    ] : []
                 }
             })
-            const trackedEntityAttributes = response?.sources?.programTrackedEntityAttributes?.map(({trackedEntityAttribute}) => trackedEntityAttribute)
+            const trackedEntityAttributes = _filter(response?.sources?.programTrackedEntityAttributes?.map(({trackedEntityAttribute}) => trackedEntityAttribute), ['valueType', 'NUMBER'])
+            const filteredTrackedEntityAttributes = searchKeyword ? _filter(trackedEntityAttributes, (({displayName}) => displayName.toLowerCase().match(RegExp(searchKeyword.toLowerCase())))) : trackedEntityAttributes
             const dataElements = response?.dataElements?.programDataElements?.map(({dataElement}) => dataElement);
             return {
-                data: [..._filter(trackedEntityAttributes, ['valueType', 'NUMBER']), ...dataElements],
+                data: [...filteredTrackedEntityAttributes, ...dataElements],
                 pager: response?.dataElements?.pager
 
             }
@@ -67,7 +72,7 @@ export default class EventDataItems extends NativeDataSource {
         }
     }
 
-    async filter(engine, {page, selectedGroup}) {
-        return this.getDataSources(engine, {page, filter: selectedGroup?.id})
+    async filter(engine, {page, selectedGroup, searchKeyword}) {
+        return this.getDataSources(engine, {page, programId: selectedGroup?.id, searchKeyword})
     }
 }
