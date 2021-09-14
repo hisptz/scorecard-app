@@ -13,19 +13,24 @@ import AverageDataContainer from "./AverageDataContainer";
 export default function AverageOrgUnitRow({orgUnits, overallAverage, dataEngine}) {
     const periods = useRecoilValue(PeriodResolverState)
     const {childrenOrgUnits, filteredOrgUnits} = useRecoilValue(ScorecardOrgUnitState(orgUnits))
-    const {averageColumn} = useRecoilValue(ScorecardViewState('options'))
+    const {averageColumn, itemNumber} = useRecoilValue(ScorecardViewState('options'))
 
 
     return (
         <DataTableRow bordered>
             <DataTableCell className={'jsx-1369417008'} fixed left={"0"} width={"50px"}/>
-            <DataTableCell fixed left={"50px"} className="scorecard-org-unit-cell">
+            {
+                itemNumber && <DataTableCell className={'jsx-1369417008'} fixed left={"50px"} width={"50px"}/>
+
+            }
+            <DataTableCell fixed left={itemNumber ? "100px" : "50px"} className="scorecard-org-unit-cell">
                 <b>{i18n.t('Average')}</b>
             </DataTableCell>
             {
                 ([...filteredOrgUnits, ...childrenOrgUnits])?.map(({id}) => (
                     periods?.map(({id: periodId}) => (
-                        <AverageDataContainer dataEngine={dataEngine} orgUnits={orgUnits} key={`${id}-${periodId}-average`} period={periodId}
+                        <AverageDataContainer dataEngine={dataEngine} orgUnits={orgUnits}
+                                              key={`${id}-${periodId}-average`} period={periodId}
                                               orgUnit={id}/>
                     ))
                 ))

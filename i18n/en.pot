@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-09-13T10:16:24.769Z\n"
-"PO-Revision-Date: 2021-09-13T10:16:24.769Z\n"
+"POT-Creation-Date: 2021-09-14T06:32:18.349Z\n"
+"PO-Revision-Date: 2021-09-14T06:32:18.349Z\n"
 
 msgid "Data"
 msgstr "Data"
@@ -193,9 +193,6 @@ msgstr "Scorecard added successfully"
 
 msgid "Scorecard updated successfully"
 msgstr "Scorecard updated successfully"
-
-msgid "Please fill in the required field(s)"
-msgstr "Please fill in the required field(s)"
 
 msgid "Previous"
 msgstr "Previous"
