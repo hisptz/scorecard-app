@@ -1,4 +1,5 @@
 import {Chip} from '@dhis2/ui'
+import {debounce} from "lodash";
 import PropTypes from 'prop-types'
 import React, {useState} from 'react'
 import DataSource from "./Components/DataSource";
@@ -8,6 +9,7 @@ import DataElements from "./models/dataElements";
 import DataSets from "./models/dataSets";
 import EventDataItems from "./models/eventDataItems";
 import NativeDataSource from "./models/nativeDataSource";
+
 
 
 //TODO: Store in datastore
@@ -38,16 +40,7 @@ const dataElementConfig = new DataElements( {
     groupKey: 'dataElementGroups.id',
     type: 'dataElement'
 })
-const eventDataItemsConfig = new EventDataItems({
-    label: 'Event Data Items',
-    resource: 'dataItems',
-    dimensionItemType: '[PROGRAM_DATA_ELEMENT,PROGRAM_ATTRIBUTE]',
-    filterType: 'in',
-    groupKey: 'programId',
-    groupResource: 'programs',
-    type: 'programDataItem'
-
-})
+const eventDataItemsConfig = new EventDataItems()
 const dataSetConfig = new DataSets({label: 'Data Sets'})
 const customFunctionsConfig = new CustomFunctions({label: 'Custom Functions'})
 
