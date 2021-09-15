@@ -2,7 +2,6 @@ import i18n from '@dhis2/d2-i18n'
 import {Period} from "@iapps/period-utilities";
 import {cloneDeep, filter, get as _get, head, isEmpty, set as _set,} from "lodash";
 import {atom, atomFamily, selector, selectorFamily} from "recoil";
-import {validateGroups} from "../../modules/Main/Components/ScoreCardManagement/services/validator";
 import {
     getColSpanDataGroups,
     getColSpanWithOrgUnit,
@@ -47,11 +46,13 @@ const defaultValue = {
             color: "#D3D3D3",
             name: i18n.t("N/A"),
             isDefault: true,
+            id: 'N/A'
         },
         {
             color: "#FFFFFF",
             name: i18n.t("No Data"),
             isDefault: true,
+            id: 'No Data'
         }
     ],
     scorecardOptions: new ScorecardOptions(),
@@ -360,4 +361,4 @@ export {
     ScorecardDataSourceState,
     ScorecardDataLoadingState,
     ScorecardLegendDefinitionSelector,
-    }
+}
