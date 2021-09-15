@@ -3,7 +3,7 @@ import React, {useEffect, useState} from 'react'
 import {useRecoilValue} from "recoil";
 import ScorecardDataEngine from "../../../../../../../../core/models/scorecardData";
 import {OrgUnitLevels} from "../../../../../../../../core/state/orgUnit";
-import {ScorecardLegendDefinitionSelector} from "../../../../../../../../core/state/scorecard";
+import {ScorecardLegendDefinitionSelector, ScorecardViewState} from "../../../../../../../../core/state/scorecard";
 import {getLegend} from "../../../../../../../../shared/utils/utils";
 import TableCellAnalysis from "../TableCellAnalysis";
 import {LinkedDataCell, SingleDataCell} from "./Components/DataCells";
@@ -12,6 +12,7 @@ import LoadingCell from "./Components/LoadingCell";
 
 export default function DataContainer({dataSources, orgUnit, period, dataEngine}) {
     const orgUnitLevels = useRecoilValue(OrgUnitLevels)
+    const legendDefinitions = useRecoilValue(ScorecardViewState('legendDefinitions'))
     const {id: orgUnitId, level: dataOrgUnitLevel} = orgUnit ?? {}
     const {id: periodId} = period ?? {}
     const defaultLegendDefinitions = useRecoilValue(ScorecardLegendDefinitionSelector(true))
@@ -23,13 +24,15 @@ export default function DataContainer({dataSources, orgUnit, period, dataEngine}
         max: top?.weight,
         defaultLegends: defaultLegendDefinitions,
         dataOrgUnitLevel,
-        orgUnitLevels
+        orgUnitLevels,
+        legendDefinitions
     }) ?? {};
     const {color: bottomColor} = getLegend(bottomData?.current, bottom?.legends, {
         max: bottom?.weight,
         defaultLegends: defaultLegendDefinitions,
         dataOrgUnitLevel,
-        orgUnitLevels
+        orgUnitLevels,
+        legendDefinitions
     }) ?? {};
 
     const loading = false

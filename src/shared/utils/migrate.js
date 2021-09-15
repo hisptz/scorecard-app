@@ -1,7 +1,8 @@
 import {find, has} from "lodash";
+import {uid} from "./utils";
 
 export function migrateScorecard(oldScorecard) {
-    if(oldScorecard){
+    if (oldScorecard) {
         return {
             id: oldScorecard?.id,
             name: oldScorecard?.header?.title,
@@ -47,11 +48,13 @@ function getScorecardLegendDefinitions(oldScorecardLegendDefinitions) {
         const hasDefaultProps = has(legendDefinition, "default");
         return hasDefaultProps
             ? {
+                id: legendDefinition.definition,
                 color: legendDefinition.color,
                 name: legendDefinition.definition,
                 isDefault: legendDefinition.default,
             }
             : {
+                id: legendDefinition.color,
                 color: legendDefinition.color,
                 name: legendDefinition.definition,
             };
@@ -98,19 +101,19 @@ function getScorecardDataHolder(dataHolders, holderId) {
 function getScorecardDataSource(indicator) {
     return {
         id: indicator.id,
+        name: indicator.title,
         type: "indicator",
         label: indicator.title,
         weight: indicator.weight,
         legends: indicator.legendset.map((legendSet) => {
             return {
-                id: "",
-                name: "",
-                color: legendSet.color,
-                endValue: legendSet.max,
-                startValue: legendSet.min,
+                id: uid(),
+                legendDefinitionId: legendSet?.color,
+                endValue: legendSet?.max,
+                startValue: legendSet?.min,
             };
         }),
-        highIsGood: indicator.high_is_good,
+        highIsGood: indicator?.high_is_good,
         showColors: indicator?.legend_display,
         effectiveGap: indicator?.arrow_settings?.effective_gap || 5,
         displayArrows: indicator?.arrow_settings?.display,

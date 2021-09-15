@@ -54,7 +54,7 @@ export default function LevelTargetsField({
                                 {
                                     multipleFields?.map((field, index) => {
                                         const input = {
-                                            name: field.name,
+                                            name: field?.name,
                                             onChange: (value) => onFieldChange(index, value, id),
                                             value: value?.[id]?.[index]
                                         }

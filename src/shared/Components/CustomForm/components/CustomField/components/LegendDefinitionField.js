@@ -2,6 +2,7 @@ import {Field, Input, Popover} from '@dhis2/ui'
 import PropTypes from 'prop-types';
 import React, {useState} from 'react';
 import {SketchPicker} from "react-color";
+import {uid} from "../../../../../utils/utils";
 import classes from '../CustomField.module.css'
 
 
@@ -34,7 +35,7 @@ ColorPickerPopper.propTypes = {
 
 
 export default function LegendDefinitionField({name, label, value, onChange}) {
-    const {color, name: legendName} = value || {};
+    const {color, name: legendName, id} = value ?? {};
     const [reference, setReference] = useState(undefined);
 
     const onColorChange = (color) => {
@@ -42,6 +43,7 @@ export default function LegendDefinitionField({name, label, value, onChange}) {
             name,
             value: {
                 ...value,
+                id: id ?? uid(),
                 color
             }
         })
@@ -52,13 +54,14 @@ export default function LegendDefinitionField({name, label, value, onChange}) {
             name,
             value: {
                 ...value,
+                id: id ?? uid(),
                 name: newName.value
             }
         })
     }
 
     return (
-        <Field name={name} label={label} value={value}  >
+        <Field name={name} label={label} value={value}>
             <div id={name} className={classes['legend-definition-container']}>
                 <div id={`color-selector-btn-${name}`} onClick={e => setReference(e.currentTarget)}
                      style={{background: color, borderColor: '#D5DDE5'}} className={classes['legend-color']}>

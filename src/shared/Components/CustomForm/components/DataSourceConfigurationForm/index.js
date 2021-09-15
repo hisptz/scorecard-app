@@ -88,7 +88,7 @@ export default function DataSourceConfigurationForm({defaultValues, onFormChange
                                                 formName: i18n.t('Legends'),
                                                 valueType: targetOnLevels ? DHIS2ValueTypes.LEVEL_LEGEND_MIN_MAX.name : DHIS2ValueTypes.NORMAL_LEGEND_MIN_MAX.name,
                                                 multipleFields: legendDefinitions?.map(legend => (new FormFieldModel({
-                                                    id: legend.name,
+                                                    id: legend.id,
                                                     mandatory: false,
                                                     name: legend.name,
                                                     legendDefinition: legend,
