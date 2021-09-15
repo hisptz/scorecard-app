@@ -12,11 +12,12 @@ import DataGroups from "./Components/DataGroups";
 import DataSourceConfiguration from "./Components/DataGroups/Components/DataSourceConfiguration";
 import Instructions from "./Components/Instructions";
 import PreviewScorecardTable from "./Components/PreviewScorecardTable";
+import useSetDefaults from "./hooks/useSetDefaults";
 import {generateNewGroupData} from "./utils";
 
-// TODO: Implement linking by dnd
 
 export default function DataConfigurationScorecardForm() {
+    useSetDefaults()
     const [dataSelection, updateDataSelection] = useRecoilState(
         ScorecardConfigDirtyState("dataSelection")
     );

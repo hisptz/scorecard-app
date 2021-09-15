@@ -1,8 +1,9 @@
 import i18n from '@dhis2/d2-i18n'
 import {Divider, ReactFinalForm} from "@dhis2/ui";
-import {filter} from 'lodash'
 import PropTypes from 'prop-types'
 import React from "react";
+import {useRecoilValue} from "recoil";
+import {ScorecardConfigDirtyState} from "../../../../../core/state/scorecard";
 import {DHIS2ValueTypes} from "../../constants";
 import {FormFieldModel} from "../../models";
 import CustomField from "../CustomField";
@@ -10,6 +11,8 @@ import CustomField from "../CustomField";
 const {Form, FormSpy} = ReactFinalForm
 
 export default function DataSourceConfigurationForm({defaultValues, onFormChange, legendDefinitions}) {
+    const targetOnLevels = useRecoilValue(ScorecardConfigDirtyState('targetOnLevels'))
+
     return (
         <div className='container p-16'>
             <Form onSubmit={console.log} initialValues={defaultValues}>
@@ -78,21 +81,23 @@ export default function DataSourceConfigurationForm({defaultValues, onFormChange
                                     <Divider/>
                                     <div className='row'>
                                         <div className='column w-100'>
+
                                             <CustomField field={new FormFieldModel({
                                                 id: 'legends',
                                                 name: 'legends',
                                                 formName: i18n.t('Legends'),
-                                                valueType: DHIS2ValueTypes.MULTIPLE_FIELDS.name,
+                                                valueType: targetOnLevels ? DHIS2ValueTypes.LEVEL_LEGEND_MIN_MAX.name : DHIS2ValueTypes.NORMAL_LEGEND_MIN_MAX.name,
                                                 multipleFields: legendDefinitions?.map(legend => (new FormFieldModel({
                                                     id: legend.name,
                                                     mandatory: false,
                                                     name: legend.name,
                                                     legendDefinition: legend,
                                                     valueType: DHIS2ValueTypes.LEGEND_MIN_MAX.name
-                                                })))
+                                                }))),
+                                                weight: 100,
+                                                highIsGood: true
                                             })}
                                             />
-
                                         </div>
                                     </div>
                                 </div>
