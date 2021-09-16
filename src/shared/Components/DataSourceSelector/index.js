@@ -11,8 +11,6 @@ import EventDataItems from "./models/eventDataItems";
 import NativeDataSource from "./models/nativeDataSource";
 
 
-
-//TODO: Store in datastore
 const nativeDataSources = [
     {
         label: 'Indicators',
