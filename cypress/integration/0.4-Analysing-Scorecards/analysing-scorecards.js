@@ -241,3 +241,35 @@ Then('a table of indicators against location for the selected location type shou
   cy.wait(6000)
   cy.get(':nth-child(1) > [data-test=orgUnit-parent-table-column-cell] > [data-test=dhis2-uicore-tooltip-reference] > .align-items-center > .column').should('be.visible')
 })
+
+    /**
+   *   Scenario:  Visualize scorecard for locations below average performance
+   */
+  And('selecting to view locations below average',()=>{
+    cy.wait(6000)
+    cy.get(':nth-child(2) > :nth-child(1) > [data-test=dhis2-uicore-button]').click();
+    cy.get(':nth-child(2) > input.jsx-1176042981').check().should('be.checked')
+    cy.get('[data-test=update-button-on-options]').click()
+  })
+  Then('a table of locations whose values for the selected indicator are below average should be displayed',()=>{
+    cy.wait(6000)
+    cy.get('[data-test=orgUnit-parent-table-column-cell]').should('be.visible').and('not.be.empty')
+    cy.get('[data-test=indicator-table-header-cell]').should('be.visible').and('not.be.empty')
+    cy.get("#test-average-column").should('be.visible').and('not.be.empty')
+  })
+
+    /**
+   *   Scenario:  Visualize scorecard for locations above average performance
+   */
+  And('selecting to view locations above  average',()=>{
+    cy.wait(6000)
+    cy.get(':nth-child(2) > :nth-child(1) > [data-test=dhis2-uicore-button]').click();
+    cy.get(':nth-child(3) > input.jsx-1176042981').check().should('be.checked')
+    cy.get('[data-test=update-button-on-options]').click()
+  })
+  Then('a table of locations whose values for the selected indicator are above average should be displayed',()=>{
+    cy.wait(6000)
+    cy.get('[data-test=orgUnit-parent-table-column-cell]').should('be.visible').and('not.be.empty')
+    cy.get('[data-test=indicator-table-header-cell]').should('be.visible').and('not.be.empty')
+    cy.get("#test-average-column").should('be.visible').and('not.be.empty')
+  })

@@ -108,8 +108,7 @@ And selecting an indicator column
 And selecting to view  league table
 Then a league table with ranking based on the selected indicator should be displayed
 
-# TODO
-#  here next week
+
 @focus
 Scenario: Visualize Indicators for Selected Period
 Given authorized Regional Manager
@@ -207,7 +206,6 @@ Scenario: Visualize scorecard for locations below average performance
 Given authorized Data Manager
 When opening a list of available scorecards
 And selecting to view one of the scorecards
-And selecting an indicator
 And selecting to view locations below average
 Then a table of locations whose values for the selected indicator are below average should be displayed
 
@@ -218,4 +216,10 @@ When opening a list of available scorecards
 And selecting to view one of the scorecards
 And filtering values greater than 100
 Then a list of all locations with indicators whose values are greater than 100 displayed
-
+@focus 
+Scenario: Visualize scorecard for locations above average performance
+Given authorized Data Manager
+ When opening a list of available scorecards
+And selecting to view one of the scorecards
+And selecting to view locations above  average
+Then a table of locations whose values for the selected indicator are above average should be displayed
