@@ -33,6 +33,8 @@ export default function GeneralForm() {
                             mandatory: false,
                             formName: i18n.t('Subtitle'),
                             valueType: DHIS2ValueTypes.TEXT.name,
+                            maxLength: "100",
+                            placeholder: i18n.t("Maximum 100 Characters")
                         })
                     }
                 />
