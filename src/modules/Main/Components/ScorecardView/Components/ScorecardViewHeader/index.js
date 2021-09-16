@@ -74,6 +74,7 @@ export default function ScorecardViewHeader({downloadAreaRef, dataEngine}) {
                         <SelectionWrapper
                             selectedItems={orgUnitSelectionDisplay}
                             name={'Organisation Unit'}
+                            dataTest={'test-selected-organization-unit'}
                             onClick={() => {
                                 setOrgUnitSelectionOpen(true)
                             }} type={FilterComponentTypes.ORG_UNIT}/>
@@ -93,7 +94,7 @@ export default function ScorecardViewHeader({downloadAreaRef, dataEngine}) {
                         </ButtonStrip>
                         <ButtonStrip>
                             <Button onClick={() => setOptionsOpen(true)}>{i18n.t('Options')}</Button>
-                            {writeAccess && <Button onClick={onEdit}>Edit</Button>}
+                            {writeAccess && <Button dataTest={"test-edit-scorecard"}  onClick={onEdit}>Edit</Button>}
                             <Button dataTest={"test-download-pdf"} onClick={() => setDownloadOpen(true)}>
                                 <div ref={downloadRef}>{i18n.t("Download")}</div>
                             </Button>

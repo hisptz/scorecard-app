@@ -87,6 +87,7 @@ export default function DataConfigurationScorecardForm() {
                                     {i18n.t('Set Target on Levels')}
                                 </p>
                                 <Checkbox
+                                 dataTest={'set-target-selection'}
                                     checked={targetOnLevels}
                                     onChange={() => updateTargetOnLevels((prevState) => !prevState)}
                                 />

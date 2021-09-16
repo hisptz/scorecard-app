@@ -13,7 +13,7 @@ Given authorized programme coordinator
 When opening a list of available scorecards
 And  selecting to view one of the scorecards
 And selecting a lower level locations
-Then a table of indicators against selected lower level locations should be displayed
+# Then a table of indicators against selected lower level locations should be displayed
 
 @focus
 Scenario: Visualize Scorecards without empty rows
@@ -153,6 +153,7 @@ When opening a list of available scorecards
 And selecting to view one of the scorecards
 And filtering the locations by facility ownership
 Then a table of indicators against location for the selected location ownership type should be displayed
+
 
 @focus
 Scenario: Set targets for district level

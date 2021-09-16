@@ -12,6 +12,7 @@
     cy.get(':nth-child(2) > [data-test=dhis2-uicore-tabledatacel] > svg > path').click({force:true})
   });
   Then('a table of indicators against selected lower level locations should be displayed',()=>{
+    cy.wait(6000)
     cy.get('.p-16 > .w-100 > [data-test=dhis2-uicore-datatable-scrollbox] > [data-test=dhis2-uicore-datatable] > [data-test=dhis2-uicore-tablehead] > :nth-child(2) > :nth-child(1) > .container > .jsx-3463223249 > :nth-child(1) > [data-test=dhis2-uicore-tooltip-reference] > .align-items-center > .column').should('be.visible')
     cy.get('.jsx-2878665499 > .p-16').should('be.visible')
   })
@@ -39,6 +40,7 @@
   })
   
   Then('table of indicators against locations with hierarchy should be displayed',()=>{
+    cy.wait(6000)
     cy.get('[data-test=orgUnit-parent-table-column-cell]').should('be.visible').and('not.be.empty')
     cy.get('[data-test=indicator-table-header-cell]').should('be.visible').and('not.be.empty')
   })
@@ -53,6 +55,7 @@
     cy.get('[data-test=update-button-on-options]').click()
   })
   Then('a table of indicators against locations with an average column should be displayed',()=>{
+    cy.wait(6000)
     cy.get('[data-test=orgUnit-parent-table-column-cell]').should('be.visible').and('not.be.empty')
     cy.get('[data-test=indicator-table-header-cell]').should('be.visible').and('not.be.empty')
     cy.get("#test-average-column").should('be.visible').and('not.be.empty')
@@ -69,6 +72,7 @@
     cy.get('[data-test=update-button-on-options]').click()
   })
   Then("a table of indicators against locations with an average row should be displayed",()=>{
+    cy.wait(6000)
     cy.get('[data-test=orgUnit-parent-table-column-cell]').should('be.visible').and('not.be.empty')
     cy.get('[data-test=indicator-table-header-cell]').should('be.visible').and('not.be.empty')
     cy.get("#test-average-column").should('be.visible').and('not.be.empty')
@@ -84,7 +88,7 @@
     cy.get('[data-test=update-button-on-options]').click();
   })
   Then("a table of indicators against locations with an highlighted indicators should be displayed",()=>{
-  
+    cy.wait(6000)
     cy.get('[data-test=orgUnit-parent-table-column-cell]').should('be.visible').and('not.be.empty')
     cy.get('[data-test=indicator-table-header-cell]').should('be.visible').and('not.be.empty')
     cy.get("#test-highlighted-indicator").eq(0).should('be.visible').and('not.be.empty')
@@ -112,7 +116,7 @@
     cy.get('[data-test=update-button-on-options]').click();
   })
   Then("a table of indicators against location with numbers should be displayed",()=>{
-  
+    cy.wait(6000)
     cy.get('[data-test=orgUnit-parent-table-column-cell]').should('be.visible').and('not.be.empty')
     cy.get('[data-test=indicator-table-header-cell]').should('be.visible').and('not.be.empty')
   })
@@ -132,6 +136,7 @@ cy.get('[data-test=dhis2-uicore-modalactions] > [data-test=dhis2-uicore-buttonst
 )
   })
   Then('a table of indicators and respective selected periods againsts location is displayed',()=>{
+    cy.wait(6000)
  cy.get('[data-test=orgUnit-parent-table-column-cell]').should('be.visible').and('not.be.empty')
  cy.get('[data-test=indicator-table-header-cell]').should('be.visible').and('not.be.empty')
  cy.get('[data-test=test-period-table-scorecard]').should('be.visible').and('not.be.empty')
@@ -175,8 +180,64 @@ cy.get('[data-test=dhis2-uicore-modalactions] > [data-test=dhis2-uicore-buttonst
    * 
    */
 And('filtering the locations by facility Type',()=>{
+  cy.wait(6000)
+  cy.get('[data-test=test-selected-organization-unit]').click()
+  cy.get('[data-test=select-facility-group').click()
+  cy.get('[data-value="tDZVQ1WtwpA"] > [data-test=dhis2-uicore-checkbox]').click()
+  cy.get('[data-test=update-on-select-org-unit]').click({force:true})
 
 })
 Then('a table of indicators against location for the selected location type should be displayed',()=>{
+  cy.wait(6000)
+  cy.get('[data-test=orgUnit-parent-table-column-cell]').should('be.visible').and('not.be.empty')
+  cy.get('[data-test=indicator-table-header-cell]').should('be.visible').and('not.be.empty')
+})
 
+ /**
+   *   Scenario:   Visualize Scorecard by Facility Ownership
+   * 
+   */
+  And('filtering the locations by facility ownership',()=>{
+    cy.get('input.jsx-3353877153').type('hospital{enter}')
+  })
+  Then('a table of indicators against location for the selected location ownership type should be displayed',()=>{
+    cy.wait(6000)
+    cy.get('[data-test=orgUnit-parent-table-column-cell]').should('be.visible').and('not.be.empty')
+    cy.get('[data-test=indicator-table-header-cell]').should('be.visible').and('not.be.empty')
+  })
+
+   /**
+   *   Scenario:   Set targets for district level
+   * 
+   */
+  When('creating or editing scorecard',()=>{
+    cy.get(':nth-child(1) > .space-between > .end > [data-test=dhis2-uicore-buttonstrip] > :nth-child(2) > [data-test=dhis2-uicore-button]').click()
+    cy.get(':nth-child(3) > .MuiStepLabel-root > .MuiStepLabel-labelContainer > .MuiTypography-root').click()
+  })
+  And('setting indicator targets for district level',()=>{
+    cy.get('input.jsx-2289862737').check().should('be.checked')
+  })
+  Then('the target set should be saved and changes reflected on the scorecard visualization',()=>{
+   
+  })
+
+   /**
+   *   Scenario:  Visualize Scorecard with National Targets
+   */
+
+     /**
+   *   Scenario: Visualize Scorecard with District Targets
+   */
+  
+
+    /**
+   *   Scenario: Visualize Filtered Scorecard with The Parent Location at the Top Row
+   */
+  And('sorting based on different Indicators',()=>{
+    cy.wait(6000)
+    cy.get(':nth-child(2) > :nth-child(1) > .container > .jsx-3463223249 > [data-test=dhis2-uicore-tableheadercellaction] > .default > g.jsx-3044873695 > .top').click()
+  })
+ Then('the parent location should always be the first row',()=>{
+  cy.wait(6000)
+  cy.get(':nth-child(1) > [data-test=orgUnit-parent-table-column-cell] > [data-test=dhis2-uicore-tooltip-reference] > .align-items-center > .column').should('be.visible')
 })

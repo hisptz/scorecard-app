@@ -576,3 +576,8 @@ th.jsx-4210860585 {
     border: 1px solid #A0ADBA;
     padding: 8px;
 }
+
+thead th.fixed.jsx-4210860585 {
+    position: sticky;
+    z-index: 0;
+}

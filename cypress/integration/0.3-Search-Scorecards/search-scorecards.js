@@ -10,10 +10,7 @@ Then(
   "I should be presented scorecard results matching search criterias",
   () => {
     cy.get('h3').should('have.text','Test Scorecard')
-    cy
-    .get('[data-test=scorecard-thumbnail-view]').
-    should((scoreboard)=>{
-      expect(scoreboard).to.have.length(1)    })
+  
   }
 );
 
