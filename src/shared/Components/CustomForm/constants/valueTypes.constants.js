@@ -1,5 +1,3 @@
-
-
 const DHIS2ValueTypes = {
     INTEGER: {
         name: 'INTEGER',
@@ -33,11 +31,19 @@ const DHIS2ValueTypes = {
         name: 'RICH_TEXT',
         formName: 'richText'
     },
-    LEGEND_MIN_MAX:{
+    LEGEND_MIN_MAX: {
         name: 'LEGEND_MIN_MAX',
         formName: 'legendMinMax'
     },
-    MULTIPLE_FIELDS:{
+    NORMAL_LEGEND_MIN_MAX: {
+        name: 'NORMAL_LEGEND_MIN_MAX',
+        formName: 'normalLegendMinMax'
+    },
+    LEVEL_LEGEND_MIN_MAX: {
+        name: 'LEVEL_LEGEND_MIN_MAX',
+        formName: 'levelLegendMinMax'
+    },
+    MULTIPLE_FIELDS: {
         name: 'MULTIPLE_FIELDS',
         formName: 'multipleFields'
     }

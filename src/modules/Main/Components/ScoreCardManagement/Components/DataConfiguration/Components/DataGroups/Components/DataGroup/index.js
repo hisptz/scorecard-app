@@ -10,7 +10,7 @@ import EditIcon from "@material-ui/icons/Edit";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import LinkIcon from "@material-ui/icons/Link";
 import UnlinkIcon from "@material-ui/icons/LinkOff";
-import {cloneDeep, filter, find, findIndex, flattenDeep, head, isEmpty, last,} from "lodash";
+import {cloneDeep, filter, find, findIndex, flattenDeep, fromPairs, head, isEmpty, last,} from "lodash";
 import PropTypes from "prop-types";
 import React, {useCallback, useEffect, useMemo, useRef, useState} from "react";
 import {DragDropContext, Draggable, Droppable} from "react-beautiful-dnd";
@@ -18,11 +18,11 @@ import {useRecoilCallback, useRecoilState, useRecoilValue} from "recoil";
 import ScorecardIndicator from "../../../../../../../../../../core/models/scorecardIndicator";
 import ScorecardIndicatorGroup from "../../../../../../../../../../core/models/scorecardIndicatorGroup";
 import ScorecardIndicatorHolder from "../../../../../../../../../../core/models/scorecardIndicatorHolder";
+import {OrgUnitLevels} from "../../../../../../../../../../core/state/orgUnit";
 import {
     ScorecardConfigDirtySelector,
     ScorecardConfigDirtyState,
     ScorecardConfigEditState,
-    ScorecardConfigErrorSelector,
 } from "../../../../../../../../../../core/state/scorecard";
 import {DataGroupErrorState} from "../../../../../../../../../../core/state/validators";
 import ErrorIcon from "../../../../../../../../../../shared/icons/ErrorIcon";
@@ -162,6 +162,8 @@ export default function DataGroup({
     const filteredLegendDefinitions = useMemo(() => filter(legendDefinitions, ({isDefault}) => (!isDefault)), [legendDefinitions]);
     const path = ["dataGroups", index];
     const [group, setGroup] = useRecoilState(ScorecardConfigDirtySelector({key: 'dataSelection', path}));
+    const orgUnitLevels = useRecoilValue(OrgUnitLevels)
+    const targetOnLevels = useRecoilValue(ScorecardConfigDirtyState('targetOnLevels'))
     const {title, id, dataHolders} = group ?? new ScorecardIndicatorGroup();
     const errors = useRecoilValue(DataGroupErrorState(id))
     const [openAdd, setOpenAdd] = useState(false);
@@ -239,7 +241,7 @@ export default function DataGroup({
                         new ScorecardIndicator({
                             ...dataSource,
                             label: dataSource.displayName,
-                            legends: generateLegendDefaults(filteredLegendDefinitions, 100, true),
+                            legends: targetOnLevels ? fromPairs([...orgUnitLevels?.map(({id}) => [id, generateLegendDefaults(filteredLegendDefinitions, 100, true)])]) : generateLegendDefaults(filteredLegendDefinitions, 100, true),
                         }),
                     ],
                 })
@@ -256,7 +258,7 @@ export default function DataGroup({
             selectedDataHolderIndex: undefined,
             selectedGroupIndex: index,
         }));
-    }, [expanded]);
+    }, [expanded, index]);
 
     const onExpand = (event, newExpanded) => {
         handleAccordionChange(id)(event, newExpanded);
