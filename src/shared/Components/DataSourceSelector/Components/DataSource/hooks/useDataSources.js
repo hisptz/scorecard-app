@@ -1,82 +1,45 @@
 import {useDataEngine} from "@dhis2/app-runtime";
-import {filter, flattenDeep} from 'lodash'
-import {useEffect, useMemo, useState} from "react";
-import {useRecoilValueLoadable} from "recoil";
-import {CustomFunctionsState} from "../../../../../../core/state/customFunctions";
+import {useCallback, useEffect, useState} from "react";
 
 
 export default function useDataSources(selectedDataSourceType, selectedGroup) {
-    const customFunctions = useRecoilValueLoadable(CustomFunctionsState)
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState();
     const [data, setData] = useState([]);
-    const [error, setError] = useState(customFunctions.state === 'hasError' ? customFunctions.contents : undefined);
-    const [loading, setLoading] = useState(customFunctions.state === 'loading');
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState();
     const engine = useDataEngine();
 
-    const functionRules = useMemo(() => {
-        if (selectedDataSourceType.type === 'customFunction') {
-            if (customFunctions.state === 'hasValue') {
-                if (selectedGroup) {
-                    return selectedGroup?.rules?.map((rule) => ({...rule, displayName: rule.name})) ?? []
-                }
-                return flattenDeep(Object.values(customFunctions?.contents)?.map(({rules}) => rules))?.map((rule) => ({
-                    ...rule,
-                    displayName: rule.name
-                }))
+    const fetchData = useCallback(
+        async (currentPage, searchKeyword) => {
+            if (searchKeyword || selectedGroup) {
+                return await selectedDataSourceType.filter(engine, {page: currentPage, searchKeyword, selectedGroup})
             }
-        }
-        return []
-    }, [customFunctions.state, selectedGroup, selectedDataSourceType]);
+            return await selectedDataSourceType.getDataSources(engine, {page: currentPage})
+        },
+        [engine, selectedDataSourceType, selectedGroup],
+    );
 
-    useEffect(() => {
-        setLoading(customFunctions.state === 'loading')
-        if (customFunctions.state === 'hasError') {
-            setError(customFunctions.contents)
-        }
-    }, [customFunctions.state]);
-
-    const searchRules = (keyword) => {
-        return filter(functionRules, (rule) => {
-            const indexString = `${rule.name}-${rule.description}-${rule.id}`.toLowerCase()
-            return indexString.match(new RegExp(keyword.toLowerCase()))
-        })
-    }
-
-    const search = async (keyword) => {
+    const search = useCallback(async (keyword) => {
         setLoading(true);
-        if (selectedDataSourceType?.type === 'customFunction') {
-            try {
-                setPage(1);
-                setTotalPages(undefined)
-                setData([])
-                setData(searchRules(keyword))
-                setTotalPages(1)
-                setError(undefined)
-            } catch (e) {
-                setError(e)
-                setLoading(false)
-            }
-        } else {
-            try {
-                setPage(1);
-                setTotalPages(undefined)
-                setData([])
-                const response = await fetchData(1, keyword);
-                setData([...response?.data])
-                setTotalPages(response.pager.pageCount)
-                setError(undefined)
-            } catch (e) {
-                setError(e)
-                setLoading(false)
-            }
+        try {
+            setPage(1);
+            setTotalPages(undefined)
+            setData([])
+            const response = await fetchData(1, keyword);
+            setData([...response?.data])
+            setTotalPages(response.pager.pageCount)
+            setError(undefined)
+        } catch (e) {
+            setError(e)
+            setLoading(false)
         }
         setLoading(false)
-    }
+    }, [fetchData])
 
-    const nexPage = async () => {
-        if (totalPages && page < totalPages) {
-            if (selectedDataSourceType?.type !== 'customFunction') {
+    const nexPage = useCallback(
+        async () => {
+            if (totalPages && page < totalPages) {
                 try {
                     setLoading(true)
                     setPage(prevPage => prevPage + 1)
@@ -89,52 +52,32 @@ export default function useDataSources(selectedDataSourceType, selectedGroup) {
                     setError(e)
                 }
             }
-        }
-    }
-
-    async function fetchData(currentPage, searchKeyword) {
-        if (searchKeyword || selectedGroup) {
-            return await selectedDataSourceType.filter(engine, {page: currentPage, searchKeyword, selectedGroup})
-        }
-        return await selectedDataSourceType.getDataSources(engine, {page: currentPage})
-    }
+        },
+        [data, fetchData, page, totalPages],
+    );
 
     useEffect(() => {
         async function fetch() {
             if (selectedDataSourceType) {
                 setLoading(true)
-                if (selectedDataSourceType?.type === 'customFunction') {
-                    try {
-                        setPage(1);
-                        setTotalPages(undefined)
-                        setData([])
-                        setData(functionRules)
-                        setTotalPages(1)
-                        setError(undefined)
-                    } catch (e) {
-                        setLoading(false)
-                        setError(e)
-                    }
-                } else {
-                    try {
-                        setPage(1);
-                        setTotalPages(undefined)
-                        setData([])
-                        const response = await fetchData(1);
-                        setData(response?.data)
-                        setTotalPages(response?.pager.pageCount)
-                        setError(undefined)
-                    } catch (e) {
-                        setLoading(false)
-                        setError(e)
-                    }
+                try {
+                    setPage(1);
+                    setTotalPages(undefined)
+                    setData([])
+                    const response = await fetchData(1);
+                    setData(response?.data)
+                    setTotalPages(response?.pager.pageCount)
+                    setError(undefined)
+                } catch (e) {
+                    setLoading(false)
+                    setError(e)
                 }
                 setLoading(false)
             }
         }
 
         fetch();
-    }, [selectedGroup, selectedDataSourceType])
+    }, [selectedGroup, selectedDataSourceType, fetchData])
 
     return {data, error, loading, nexPage, search}
 }

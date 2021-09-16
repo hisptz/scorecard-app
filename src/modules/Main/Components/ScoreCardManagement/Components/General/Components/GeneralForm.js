@@ -5,8 +5,6 @@ import {DHIS2ValueTypes} from "../../../../../../../shared/Components/CustomForm
 import {FormFieldModel} from "../../../../../../../shared/Components/CustomForm/models";
 import GeneralFormField from "./GeneralFormField";
 import '../../../ScorecardManagement.module.css'
-//TODO: Styling using media queries instead
-
 
 export default function GeneralForm() {
     const periodTypes = new PeriodType().get();

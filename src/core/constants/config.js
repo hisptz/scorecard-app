@@ -29,4 +29,5 @@ export const DATASTORE_SCORECARD_SUMMARY_INCLUDE_KEYS = [
     }
 ]
 export const DATASTORE_OLD_SCORECARD_ENDPOINT='dataStore/scorecards'
+export const DATASTORE_FUNCTIONS_ENDPOINT='dataStore/functions'
 
