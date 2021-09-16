@@ -1,7 +1,7 @@
 import {mount, mountHook} from '@cypress/react'
 import {Button} from '@dhis2/ui'
 import React, {useRef} from 'react'
-import CustomForm from "./index";
+import CustomForm from "../../../src/shared/Components/CustomForm";
 
 
 

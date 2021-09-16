@@ -550,7 +550,6 @@ th.jsx-4210860585 {
         border-bottom: 1px solid #D5DDE5 !important;
         border-right: none !important;
     }
-
     th.fixed {
         background: white !important;
         font-weight: bold !important;
@@ -558,16 +557,8 @@ th.jsx-4210860585 {
         border-right: 1px solid #D5DDE5 !important;
         border-left: none;
     }
-
     .data-cell {
         border: 1px solid #D5DDE5 !important;
-    }
-
-    th.jsx-1369417008 {
-        background: white !important;
-        border-left: 1px solid #D5DDE5 !important;
-        border-bottom: 1px solid #D5DDE5 !important;
-        border-right: none !important;
     }
 }
 

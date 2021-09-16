@@ -5,8 +5,6 @@ import {DHIS2ValueTypes} from "../../../../../../../shared/Components/CustomForm
 import {FormFieldModel} from "../../../../../../../shared/Components/CustomForm/models";
 import GeneralFormField from "./GeneralFormField";
 import '../../../ScorecardManagement.module.css'
-//TODO: Styling using media queries instead
-
 
 export default function GeneralForm() {
     const periodTypes = new PeriodType().get();
@@ -33,6 +31,8 @@ export default function GeneralForm() {
                             mandatory: false,
                             formName: i18n.t('Subtitle'),
                             valueType: DHIS2ValueTypes.TEXT.name,
+                            maxLength: "100",
+                            placeholder: i18n.t("Maximum 100 Characters")
                         })
                     }
                 />

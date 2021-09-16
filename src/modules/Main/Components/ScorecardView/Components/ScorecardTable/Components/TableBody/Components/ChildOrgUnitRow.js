@@ -15,7 +15,15 @@ import AverageCell from "./AverageCell";
 import DroppableCell from "./DroppableCell";
 import OrgUnitContainer from "./OrgUnitContainer";
 
-export default function ChildOrgUnitRow({orgUnit, expandedOrgUnit, onExpand, overallAverage, dataEngine, orgUnits, index}) {
+export default function ChildOrgUnitRow({
+                                            orgUnit,
+                                            expandedOrgUnit,
+                                            onExpand,
+                                            overallAverage,
+                                            dataEngine,
+                                            orgUnits,
+                                            index
+                                        }) {
     const {emptyRows, averageColumn, averageDisplayType, itemNumber} = useRecoilValue(ScorecardViewState('options'))
 
     const [isEmpty, setIsEmpty] = useState(false);
@@ -54,7 +62,7 @@ export default function ChildOrgUnitRow({orgUnit, expandedOrgUnit, onExpand, ove
             }}
             expandableContent={
                 <div className="p-16">
-                    <Suspense fallback={<TableLoader />}>
+                    <Suspense fallback={<TableLoader/>}>
                         <ScorecardTable
                             nested={true}
                             orgUnits={[id]}
