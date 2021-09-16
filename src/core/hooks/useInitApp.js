@@ -1,8 +1,9 @@
 import {useConfig, useDataEngine} from "@dhis2/app-runtime";
 import {Fn} from "@iapps/function-analytics";
 import {useWebVitals} from "react-web-vitals";
-import {useRecoilValue} from "recoil";
-import {SystemSettingsState} from "../state/system";
+import {getWindowDimensions} from "../../shared/utils/utils";
+import {EngineState} from "../state/engine";
+import {ScreenDimensionState} from "../state/window";
 
 
 export default function useInitApp() {
@@ -12,7 +13,13 @@ export default function useInitApp() {
         baseUrl: `${baseUrl}/api/${apiVersion}/`,
     });
     const engine = useDataEngine();
+
+    function initializeState({set}) {
+        set(ScreenDimensionState, getWindowDimensions())
+        set(EngineState, engine)
+    }
+
     return {
-        engine,
+        initializeState
     }
 }

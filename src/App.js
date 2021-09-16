@@ -4,27 +4,20 @@ import {ErrorBoundary} from "react-error-boundary";
 import {RecoilRoot} from "recoil";
 import './media-queries.css'
 import "./App.css";
+import {DATASTORE_NAMESPACE} from "./core/constants/config";
 import useInitApp from "./core/hooks/useInitApp";
-import {EngineState} from "./core/state/engine";
-import {ScreenDimensionState} from "./core/state/window";
 import Router from "./modules/Router";
 import FullPageError from "./shared/Components/Errors/FullPageError";
 import {FullPageLoader} from "./shared/Components/Loaders";
 import "./locales";
-import {getWindowDimensions} from "./shared/utils/utils";
 
 
 const MyApp = () => {
-    const {engine} = useInitApp()
-
-    function initializeState({set}) {
-        set(ScreenDimensionState, getWindowDimensions())
-        set(EngineState, engine)
-    }
+    const {initializeState} = useInitApp()
 
     return (
         <DataStoreProvider
-            namespace={"hisptz-scorecard"}
+            namespace={DATASTORE_NAMESPACE}
             loadingComponent={<FullPageLoader/>}
         >
             <RecoilRoot initializeState={initializeState}>

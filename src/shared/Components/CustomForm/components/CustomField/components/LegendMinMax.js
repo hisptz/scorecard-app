@@ -4,9 +4,9 @@ import React, {useMemo} from 'react'
 import ScorecardLegend from "../../../../../../core/models/scorecardLegend";
 
 
-export default function LegendMinMax({name, value, onChange, legendDefinition,}) {
-    const {color, name: legendName} = legendDefinition || {};
-    const legend = useMemo(() => new ScorecardLegend({name: legendName, color}), [name])
+export default function LegendMinMax({name, value, onChange, legendDefinition}) {
+    const {id, color, name: legendName} = legendDefinition || {};
+    const legend = useMemo(() => new ScorecardLegend({legendDefinitionId: id}), [id])
 
 
     return (

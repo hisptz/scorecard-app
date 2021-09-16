@@ -1,4 +1,4 @@
-import {capitalize, find, flattenDeep, head, last, snakeCase} from "lodash";
+import {capitalize, find, flattenDeep, head, isEmpty, last, snakeCase} from "lodash";
 import ScorecardLegend from "../../core/models/scorecardLegend";
 
 export function getWindowDimensions() {
@@ -33,20 +33,18 @@ export function generateRandomValues(max) {
     return Math.floor(Math.random() * maxNo)
 }
 
-export function generateLegendDefaults(legendDefinition = [], weight, highIsGood) {
-    if (legendDefinition) {
+export function generateLegendDefaults(legendDefinitions = [], weight, highIsGood = true) {
+    if (!isEmpty(legendDefinitions)) {
         const actualWeight = weight ?? 100; //sets 100 as the default weight
-        const range = actualWeight / legendDefinition?.length
+        const range = actualWeight / legendDefinitions?.length
         const values = []
-        let legendDefinitionIterator = legendDefinition.length - 1;
+        let legendDefinitionIterator = legendDefinitions.length - 1;
         for (let i = 0; i < actualWeight; i += range) {
-            const {id, color, name} = legendDefinition[legendDefinitionIterator];
+            const {id} = legendDefinitions[legendDefinitionIterator];
             values.push(new ScorecardLegend({
                 startValue: `${Math.floor(i)}`,
                 endValue: `${Math.floor(i + range)}`,
-                id,
-                color,
-                name
+                legendDefinitionId: id
             }))
             legendDefinitionIterator--
         }
@@ -80,20 +78,13 @@ export function updatePager(pager, itemListLength) {
     }
 }
 
-export function getLegend(value, legends = [], {max = 100, defaultLegends = []}) {
-    const allLegends = [...legends, ...defaultLegends]
-    value = +value
-    //TODO: find rules to implement No data and N/A
 
-    // if (value === undefined || value === null) {
-    //     return find(allLegends, ({name}) => name.toLowerCase().match(RegExp('No Data'.toLowerCase())))
-    // }
-    //
-    // if (isNaN(value)) {
-    //     return find(allLegends, ({name}) => name.toLowerCase().match(RegExp('N/A'.toLowerCase())))
-    // }
+function getOrgUnitLevelId(orgUnitLevels, dataOrgUnitLevel) {
+    return (find(orgUnitLevels, ['level', dataOrgUnitLevel]))?.id
+}
 
-    return find(allLegends, (legend) => {
+function findLegend(legends, value, {max, legendDefinitions}) {
+    const {legendDefinitionId} = find(legends, (legend) => {
         if (legend) {
             const {startValue, endValue} = legend;
             if (+endValue === max) {
@@ -102,7 +93,29 @@ export function getLegend(value, legends = [], {max = 100, defaultLegends = []})
             return +startValue <= Math.round(value) && +endValue > Math.round(value)
         }
         return false;
-    });
+    }) ?? {};
+    return find(legendDefinitions, ['id', legendDefinitionId])
+}
 
+export function getLegend(value, legends, {
+    max = 100,
+    defaultLegends = [],
+    orgUnitLevels = [],
+    dataOrgUnitLevel,
+    legendDefinitions
+}) {
+
+    if (Array.isArray(legends)) {
+        const allLegends = [...legends, ...defaultLegends]
+        value = +value
+        return findLegend(allLegends, value, {max, legendDefinitions})
+    }
+    if (typeof (legends) === 'object') {
+        const orgUnitLevelId = getOrgUnitLevelId(orgUnitLevels, dataOrgUnitLevel)
+        if (orgUnitLevelId) {
+            const orgUnitLegends = legends[orgUnitLevelId];
+            return findLegend(orgUnitLegends, value, {max, legendDefinitions})
+        }
+    }
 }
 

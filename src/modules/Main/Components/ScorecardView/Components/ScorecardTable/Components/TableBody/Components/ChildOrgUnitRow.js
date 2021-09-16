@@ -15,7 +15,15 @@ import AverageCell from "./AverageCell";
 import DroppableCell from "./DroppableCell";
 import OrgUnitContainer from "./OrgUnitContainer";
 
-export default function ChildOrgUnitRow({orgUnit, expandedOrgUnit, onExpand, overallAverage, dataEngine, orgUnits, index}) {
+export default function ChildOrgUnitRow({
+                                            orgUnit,
+                                            expandedOrgUnit,
+                                            onExpand,
+                                            overallAverage,
+                                            dataEngine,
+                                            orgUnits,
+                                            index
+                                        }) {
     const {emptyRows, averageColumn, averageDisplayType, itemNumber} = useRecoilValue(ScorecardViewState('options'))
 
     const [isEmpty, setIsEmpty] = useState(false);
@@ -53,7 +61,7 @@ export default function ChildOrgUnitRow({orgUnit, expandedOrgUnit, onExpand, ove
             }}
             expandableContent={
                 <div className="p-16">
-                    <Suspense fallback={<TableLoader />}>
+                    <Suspense fallback={<TableLoader/>}>
                         <ScorecardTable
                             nested={true}
                             orgUnits={[id]}
@@ -65,9 +73,9 @@ export default function ChildOrgUnitRow({orgUnit, expandedOrgUnit, onExpand, ove
             bordered
         >
             {
-                itemNumber && <DataTableCell width={"50px"} fixed left={"0"}>{index + 2}</DataTableCell>
+                itemNumber && <DataTableCell width={"50px"} fixed left={"50px"}>{index + 2}</DataTableCell>
             }
-            <DataTableCell fixed left={"50px"}>
+            <DataTableCell fixed left={itemNumber ? "100px" : "50px"}>
                 <Tooltip content={i18n.t('Drag to column headers to change layout')}>
                     <DroppableCell accept={[DraggableItems.DATA_COLUMN]}>
                         <OrgUnitContainer orgUnit={orgUnit}/>

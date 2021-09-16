@@ -1,5 +1,5 @@
-import {debounce} from "lodash";
-import React from 'react'
+import {debounce, filter} from "lodash";
+import React, {useMemo} from 'react'
 import {useRecoilState, useRecoilValue} from "recoil";
 import {
     ScorecardConfigEditState,
@@ -13,6 +13,8 @@ export default function HighlightedDataSourceConfigurationForm() {
     const {selectedHighlightedIndicatorIndex} = useRecoilValue(ScorecardConfigEditState)
     const [selectedHighlightedIndicator, setSelectedHighlightedIndicator] = useRecoilState(ScorecardConfigDirtySelector({path: [selectedHighlightedIndicatorIndex], key: 'highlightedIndicators'}))
     const legendDefinitions = useRecoilValue(ScorecardConfigDirtyState('legendDefinitions'))
+    const filteredLegendDefinitions = useMemo(() => filter(legendDefinitions, ({isDefault}) => (!isDefault)), [legendDefinitions]);
+
 
     const onChange = debounce(({values, dirty}) => {
         if (dirty) {
@@ -29,7 +31,7 @@ export default function HighlightedDataSourceConfigurationForm() {
             {
                 selectedHighlightedIndicator &&
                 <DataSourceConfigurationForm defaultValues={selectedHighlightedIndicator}
-                                          legendDefinitions={legendDefinitions} onFormChange={onChange}/>
+                                          legendDefinitions={filteredLegendDefinitions} onFormChange={onChange}/>
             }
         </div> : null
     )

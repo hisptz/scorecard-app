@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import {DataTable, DataTableBody, DataTableCell, DataTableHead, DataTableRow, DataTableColumnHeader} from '@dhis2/ui'
+import {DataTable, DataTableBody, DataTableCell, DataTableHead, DataTableRow} from '@dhis2/ui'
 import {head} from 'lodash'
 import React, {useMemo} from 'react'
 import {useRecoilValue} from "recoil";
@@ -30,7 +30,8 @@ export default function PreviewScorecardTable() {
                     <DataTableRow>
                         {
                             dataGroups?.map(group => (
-                                <th width={`${group.dataHolders?.length*100}px`} key={group.id} colSpan={group.dataHolders?.length || 1}>
+                                <th width={`${group.dataHolders?.length * 100}px`} key={group.id}
+                                    colSpan={group.dataHolders?.length || 1}>
                                     <table style={{borderSpacing: 0, height: '100%'}}>
                                         <tr>
                                             {
@@ -55,7 +56,8 @@ export default function PreviewScorecardTable() {
                         </DataTableCell>
                         {
                             dataGroups?.map(group => (
-                                <td className='no-wrap' width={`${group.dataHolders?.length*100}px`} style={{height: 47}} key={group.id} colSpan={group.dataHolders?.length || 1}>
+                                <td className='no-wrap' width={`${group.dataHolders?.length * 100}px`}
+                                    style={{height: 47}} key={group.id} colSpan={group.dataHolders?.length || 1}>
                                     <table style={{borders: 'none', borderSpacing: 0}}>
                                         <DataTableRow>
                                             {

@@ -1,6 +1,7 @@
 import {findIndex, get as _get, isEmpty} from 'lodash'
 import {atom, selector, selectorFamily} from "recoil";
 import {getHighlightedIndicatorsData} from "../../shared/services/getScorecardCellData";
+import {InitialOrgUnits} from "./orgUnit";
 import {PeriodResolverState} from "./period";
 import {ScorecardViewState} from "./scorecard";
 
@@ -9,7 +10,7 @@ const HighlightedIndicatorsState = atom({
     default: selector({
         key: 'highlighted-indicators-selector',
         get: async ({get}) => {
-            const {orgUnits} = get(ScorecardViewState('orgUnitSelection'))
+            const {orgUnits} = get(InitialOrgUnits)
             const periods = get(PeriodResolverState)
             const highlightedIndicators = get(ScorecardViewState('highlightedIndicators'))
 
