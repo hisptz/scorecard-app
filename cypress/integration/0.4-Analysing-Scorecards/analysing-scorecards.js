@@ -211,11 +211,14 @@ Then('a table of indicators against location for the selected location type shou
    * 
    */
   When('creating or editing scorecard',()=>{
+    cy.wait(6000)
     cy.get(':nth-child(1) > .space-between > .end > [data-test=dhis2-uicore-buttonstrip] > :nth-child(2) > [data-test=dhis2-uicore-button]').click()
     cy.get(':nth-child(3) > .MuiStepLabel-root > .MuiStepLabel-labelContainer > .MuiTypography-root').click()
   })
   And('setting indicator targets for district level',()=>{
-    cy.get('input.jsx-2289862737').check().should('be.checked')
+    cy.get('input.jsx-2289862737').check({force:true}).should('be.checked')
+    cy.get('[data-test=scocecard-add-group-button]').click()
+    cy.get('[data-test=scorecard-indicator-add"]').click()
   })
   Then('the target set should be saved and changes reflected on the scorecard visualization',()=>{
    
@@ -273,3 +276,4 @@ Then('a table of indicators against location for the selected location type shou
     cy.get('[data-test=indicator-table-header-cell]').should('be.visible').and('not.be.empty')
     cy.get("#test-average-column").should('be.visible').and('not.be.empty')
   })
+
