@@ -42,7 +42,7 @@ export default function ParentOrgUnitRow({orgUnit, overallAverage, dataEngine, o
             {
                 itemNumber && <DataTableCell width={"50px"} fixed left={"50px"}>{index + 1}</DataTableCell>
             }
-            <DataTableCell fixed left={itemNumber ? "100px" : "50px"} className="scorecard-org-unit-cell">
+            <DataTableCell fixed left={itemNumber ? "100px" : "50px"} className="scorecard-org-unit-cell parent-org-unit-cell">
                 <Tooltip content={i18n.t('Drag to the column headers to change layout')}>
                     <DroppableCell accept={[DraggableItems.DATA_COLUMN]}>
                         <OrgUnitContainer orgUnit={orgUnit}/>

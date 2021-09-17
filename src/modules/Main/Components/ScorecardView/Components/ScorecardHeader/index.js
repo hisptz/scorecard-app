@@ -10,7 +10,7 @@ export default function ScorecardHeader() {
     const title = useRecoilValue(ScorecardConfigDirtyState('title'))
     const subtitle = useRecoilValue(ScorecardConfigDirtyState('subtitle'))
     return (
-        showTitle ? <div>
+        showTitle ? <div id={"scorecard-header"}>
             {
                 customHeader ? <JsxParser
                     autoCloseVoidElements

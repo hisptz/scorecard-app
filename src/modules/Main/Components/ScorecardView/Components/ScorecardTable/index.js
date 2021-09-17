@@ -35,7 +35,7 @@ export default function ScorecardTable({orgUnits, nested, initialDataEngine}) {
     }, []);
 
     return (
-        <div className="w-100 pb-32 flex-1 print-area">
+        <div className="w-100 pb-32 flex-1 print-area scorecard-table">
             {
                 loading ? <TableLoader/> :
                     <DndProvider backend={HTML5Backend}>

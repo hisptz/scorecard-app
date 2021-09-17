@@ -10,6 +10,8 @@ import Router from "./modules/Router";
 import FullPageError from "./shared/Components/Errors/FullPageError";
 import {FullPageLoader} from "./shared/Components/Loaders";
 import "./locales";
+import 'intro.js/introjs.css';
+// import "./intro-dhis2.css"
 
 
 const MyApp = () => {
