@@ -18,7 +18,7 @@ export const dataSourceTypes={
     PROGRAM_INDICATOR:"programIndicator",
     DATA_ELEMENT_GROUP:"dataElementGroup",
     INDICATOR_GROUP:"indicatorGroup",
-    FUNCTION:"function",
+    FUNCTION:"customFunction",
     DATASET:"dataSet"
 }
 

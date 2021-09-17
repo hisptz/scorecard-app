@@ -12,10 +12,12 @@ import {
     indicatorGroupProgramDataElements,
     indicatorGroupPrograms
 } from "../../../Store/IndicatorGroup";
+import {isPureDataElement} from "../../../Utils/Functions/FormulaFunctions";
 import {dataSourceTypes} from "../../../Utils/Models";
 import DataElementPage from "../../DataElement";
 import DataElementGroupPage from "../../DataElementGroup";
 import FunctionPage from "../../Function";
+import FunctionPage2 from "../../Function/index2";
 import Index from "../../Indicator/Index";
 import IndicatorGroupPage from "../../IndicatorGroup";
 import ProgramIndicatorPage from "../../ProgramIndicator";
@@ -61,7 +63,8 @@ export default function DataSourceSelector({type, id}) {
         return <IndicatorGroupPage id={id} />
     }
     if(type===dataSourceTypes.FUNCTION){
-        return  <FunctionPage  ruleObj={id} functionObj={type} />
+
+        return  <FunctionPage2 id={id}  />
     }
     return null
 }
