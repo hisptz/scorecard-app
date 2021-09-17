@@ -52,7 +52,7 @@ export default function DataSourceHolder({dataHolder, id, index, onDelete}) {
                                 {
                                     dataSources?.map((dataGroup, index) => {
                                         return (
-                                            <div key={dataGroup.id} style={{margin: '4px 0'}}>
+                                            <div className="data-holder" key={dataGroup.id} style={{margin: '4px 0'}}>
                                                 <DataSource hasLinked={hasLinked} dataSource={dataGroup}
                                                             key={dataGroup.id} onDelete={onDataSourceDelete}
                                                             index={index}/>

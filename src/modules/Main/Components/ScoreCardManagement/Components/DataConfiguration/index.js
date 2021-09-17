@@ -16,6 +16,7 @@ import {generateNewGroupData} from "./utils";
 
 
 export default function DataConfigurationScorecardForm() {
+
     const [dataSelection, updateDataSelection] = useRecoilState(
         ScorecardConfigDirtyState("dataSelection")
     );
@@ -62,7 +63,7 @@ export default function DataConfigurationScorecardForm() {
 
     return (
         <div className="row" style={{height: "100%"}}>
-            <div className="col-md-4 col-sm-6 p-16 ">
+            <div className="col-md-4 col-sm-6 p-16 groups-configuration-area">
                 <div
                     className=" container-bordered column"
                     style={{minHeight: "100%"}}
@@ -72,6 +73,7 @@ export default function DataConfigurationScorecardForm() {
                             <Button
                                 onClick={onGroupAdd}
                                 icon={<AddIcon/>}
+                                className="scorecard-add-group-button"
                                 dataTest="scocecard-add-group-button"
                                 primary
                             >
@@ -80,7 +82,7 @@ export default function DataConfigurationScorecardForm() {
                         </div>
                     ) : (
                         <div className="column h-100">
-                            <div className="row space-between pr-16 pt-16 ">
+                            <div className="row space-between pr-16 pt-16 target-on-level-selector ">
                                 <p style={{margin: 0}} className="pl-16">
                                     {i18n.t('Set Target on Levels')}
                                 </p>
@@ -98,6 +100,7 @@ export default function DataConfigurationScorecardForm() {
                                     onClick={onGroupAdd}
                                     icon={<AddIcon/>}
                                     dataTest="scocecard-add-group-button"
+                                    className="scorecard-add-group-button"
                                 >
                                     {i18n.t('Add Group')}
                                 </Button>
@@ -110,7 +113,7 @@ export default function DataConfigurationScorecardForm() {
 
                 {!isEmpty(groups) &&
                 <div className="row pb-16">
-                    <div className="column">
+                    <div className="column preview-table-area">
                         <PreviewScorecardTable/>
                     </div>
                 </div>

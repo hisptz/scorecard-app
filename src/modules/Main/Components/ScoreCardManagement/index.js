@@ -2,11 +2,16 @@ import {useAlert} from "@dhis2/app-runtime";
 import i18n from "@dhis2/d2-i18n";
 import {Button, ButtonStrip} from "@dhis2/ui";
 import {Step, StepLabel, Stepper} from "@material-ui/core";
+import HelpIcon from "@material-ui/icons/Help";
+import {Steps} from "intro.js-react";
 import {findIndex, fromPairs, isEmpty} from "lodash";
 import React, {Suspense, useEffect, useMemo, useState} from "react";
 import {useHistory, useParams} from "react-router-dom";
-import {useRecoilCallback, useRecoilValue, useSetRecoilState, waitForAll} from "recoil";
+import {useRecoilCallback, useRecoilState, useRecoilValue, useSetRecoilState, waitForAll} from "recoil";
+import {STEP_OPTIONS} from "../../../../core/constants/help/options";
+import {DATA_CONFIGURATION_HELP_STEPS, GENERAL_HELP_STEPS} from "../../../../core/constants/help/scorecardManagement";
 import Scorecard from "../../../../core/models/scorecard";
+import HelpState from "../../../../core/state/help";
 import ScorecardConfState, {
     ScorecardConfigDirtyState,
     ScorecardConfigEditState,
@@ -53,6 +58,8 @@ const steps = [
 const keys = Object.keys(new Scorecard())
 
 export default function ScoreCardManagement() {
+    const [helpEnabled, setHelpEnabled] = useRecoilState(HelpState)
+    const [helpSteps, setHelpSteps] = useState();
     const {id: scorecardId} = useParams();
     const user = useRecoilValue(UserState);
     const {write: writeAccess} = useRecoilValue(UserAuthorityOnScorecard(scorecardId))
@@ -111,7 +118,6 @@ export default function ScoreCardManagement() {
             ).contents;
 
             const errors = validateScorecard(updatedScorecard);
-            console.log(JSON.stringify(updatedScorecard))
             const sanitizedScorecard = sanitizeScorecard(updatedScorecard)
             if (!isEmpty(errors)) {
                 const errorMessage = `Please fill in the required field(s)`
@@ -177,10 +183,33 @@ export default function ScoreCardManagement() {
         return <AccessDeniedPage accessType={"edit"}/>
     }
 
+
     return (
         <Suspense fallback={<FullPageLoader/>}>
+            <Steps
+                onBeforeChange={(nextStepIndex) => {
+                    helpSteps.updateStepElement(nextStepIndex)
+                    if (nextStepIndex === GENERAL_HELP_STEPS.length) {
+                        onNextStep()
+                    }
+                }}
+                onAfterChange={(index, element) => {
+                    if (!element) {
+                        helpSteps.introJs.nextStep()
+                    }
+                }}
+                enabled={helpEnabled}
+                options={STEP_OPTIONS}
+                steps={[...GENERAL_HELP_STEPS, ...DATA_CONFIGURATION_HELP_STEPS]}
+                initialStep={0}
+                onExit={() => setHelpEnabled(false)}
+                ref={steps => setHelpSteps(steps)}
+            />
             <div className="container">
                 <div className="column">
+                    <div className='row end align-items-center p-8'>
+                        <Button icon={<HelpIcon/>} onClick={() => setHelpEnabled(true)}>{i18n.t("Help")}</Button>
+                    </div>
                     <div>
                         <Stepper>
                             {steps?.map((step) => (
@@ -208,7 +237,7 @@ export default function ScoreCardManagement() {
                                         className="column p-16"
                                         style={{height: "100%", justifyContent: "space-between"}}
                                     >
-                                        {<Component/>}
+                                        {<Component onNextStep={onNextStep} onPreviousStep={onPreviousStep}/>}
                                         <ButtonStrip end>
                                             <Button
                                                 disabled={!hasPreviousStep}
@@ -220,6 +249,7 @@ export default function ScoreCardManagement() {
                                                 primary
                                                 disabled={saving}
                                                 onClick={onNextStep}
+                                                className="settings-next-button"
                                                 dataTest="scorecard-admin-next-button"
                                             >
                                                 {!hasNextStep

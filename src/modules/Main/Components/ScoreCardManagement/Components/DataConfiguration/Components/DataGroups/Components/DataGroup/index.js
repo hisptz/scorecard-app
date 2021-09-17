@@ -326,7 +326,7 @@ export default function DataGroup({
                             onClick={(event) => event.stopPropagation()}
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
-                            expandIcon={<ExpandMoreIcon data-test="scorecard-group-expand"/>}
+                            expandIcon={<ExpandMoreIcon className="expand-group-icon" data-test="scorecard-group-expand"/>}
                             aria-controls={`${id}d-content`}
                             id={`${id}d--header`}
                             data-test="scorecard-group-item"
@@ -362,15 +362,15 @@ export default function DataGroup({
                                 </div>
                             ) : (
                                 <div className="row space-between align-items-center">
-                                    <div className="row align-items-center accordion-title-container">
-                                        <div className='column'>
+                                    <div className="row  align-items-center accordion-title-container">
+                                        <div className='column w-auto'>
                                             <p
                                                 onDoubleClick={(event) => {
                                                     event.stopPropagation();
                                                     setTitleEditOpen(true);
                                                 }}
                                                 onClick={(event) => event.stopPropagation()}
-                                                className="accordion-title"
+                                                className="accordion-title group-name-area"
                                             >
                                                 {title}
                                             </p>
@@ -393,6 +393,7 @@ export default function DataGroup({
                                     <div className>
                                         <div className='row align-items-center'>
                                             <Button
+                                                className="delete-group-icon"
                                                 onClick={(_, event) => {
                                                     event.stopPropagation();
                                                     if (onDelete) {
@@ -415,7 +416,7 @@ export default function DataGroup({
                         </AccordionSummary>
                     </Tooltip>
                     <AccordionDetails>
-                        <div className="column">
+                        <div className="column data-holders-area">
                             {isEmpty(dataHolders) ? (
                                 <div
                                     className="column w-100 text-center center"
@@ -428,7 +429,7 @@ export default function DataGroup({
                                     <Droppable droppableId={id}>
                                         {(provided) => (
                                             <div
-                                                className="w-100"
+                                                className="w-100 "
                                                 {...provided.droppableProps}
                                                 ref={provided.innerRef}
                                             >
@@ -451,6 +452,7 @@ export default function DataGroup({
                             )}
                             <div>
                                 <Button
+                                    className="scorecard-indicator-add"
                                     dataTest={"scorecard-indicator-add"}
                                     onClick={() => setOpenAdd(true)}
                                     icon={<AddIcon/>}
