@@ -13,7 +13,7 @@ export default function PaginatedDisplay({pageSize = 8, scorecards = [], listCom
     }
 
     return (
-        <div className='p-16'>
+        <div className='p-16 scorecard-list'>
             <Component scorecards={chunks[page]}/>
             {
                 chunks.length > 1 &&

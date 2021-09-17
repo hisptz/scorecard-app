@@ -6,10 +6,13 @@ import AddIcon from "@material-ui/icons/Add";
 import HelpIcon from "@material-ui/icons/Help";
 import ListViewIcon from "@material-ui/icons/Reorder";
 import GridViewIcon from "@material-ui/icons/ViewModule";
+import {Steps} from "intro.js-react";
 import {debounce, isEmpty} from "lodash";
 import React, {Suspense, useEffect, useRef, useState} from "react";
 import {useHistory} from "react-router-dom";
-import {useRecoilValue, useResetRecoilState} from "recoil";
+import {useRecoilState, useRecoilValue, useResetRecoilState} from "recoil";
+import {SCORECARD_LIST_HELP_STEPS} from "../../../../core/constants/help/scorecardList";
+import HelpState from "../../../../core/state/help";
 import {ScorecardIdState, ScorecardSummaryState,} from "../../../../core/state/scorecard";
 import {FullPageLoader} from "../../../../shared/Components/Loaders";
 import EmptyScoreCardList from "../EmptyScoreCardList";
@@ -19,6 +22,7 @@ import PaginatedDisplay from "./Components/PaginatedDisplay";
 
 export default function ScorecardList() {
     const resetScorecardIdState = useResetRecoilState(ScorecardIdState);
+    const [helpEnabled, setHelpEnabled] = useRecoilState(HelpState)
     const history = useHistory();
     const [scorecardViewType, {set}] = useSetting("scorecardViewType");
     const scorecards = useRecoilValue(ScorecardSummaryState);
@@ -28,6 +32,7 @@ export default function ScorecardList() {
         ({message}) => message,
         ({type}) => ({...type, duration: 3000})
     );
+
 
     const onViewChange = () => {
         try {
@@ -74,27 +79,39 @@ export default function ScorecardList() {
         history.push("/add", {from: "home"});
     };
 
+    const onHelp = () => {
+        setHelpEnabled(true)
+    }
+
+    const onHelpExit = () => {
+        setHelpEnabled(false)
+    }
+
     return (
         <Suspense fallback={<FullPageLoader/>}>
+            <Steps options={{
+                disableInteraction: false
+            }} enabled={helpEnabled} steps={SCORECARD_LIST_HELP_STEPS} onExit={onHelpExit} initialStep={0}/>
             {isEmpty(scorecards) ? (
                 <EmptyScoreCardList/>
             ) : (
                 <div className="column">
                     <div className="row p-16">
-                        <div className="row p-45 center" style={{paddingLeft:'35%'}} >
-            <div className="column w-30" >
-              <Input
-                value={keyword}
-                onChange={({ value }) => {
-                  setKeyword(value);
-                }}
-                placeholder={i18n.t("Search")}
-              />
-            </div>
-          </div>
-            <div className="w-100">
+                        <div className="row p-45 center" style={{paddingLeft: '35%'}}>
+                            <div className="column w-30">
+                                <Input
+                                    className="search-input"
+                                    value={keyword}
+                                    onChange={({value}) => {
+                                        setKeyword(value);
+                                    }}
+                                    placeholder={i18n.t("Search")}
+                                />
+                            </div>
+                        </div>
+                        <div className="w-100">
                             <ButtonStrip end>
-                                <Button icon={<HelpIcon/>}>{i18n.t("Help")}</Button>
+                                <Button onClick={onHelp} icon={<HelpIcon/>}>{i18n.t("Help")}</Button>
                                 <Tooltip
                                     content={i18n.t("Switch to {{viewType}} view", {
                                         viewType:
@@ -105,6 +122,7 @@ export default function ScorecardList() {
                                 >
                                     <Button
                                         onClick={onViewChange}
+                                        className="change-view-button"
                                         dataTest="scorecard-view-orientation"
                                         icon={
                                             scorecardViewType === "grid" ? (
@@ -115,7 +133,7 @@ export default function ScorecardList() {
                                         }
                                     />
                                 </Tooltip>
-                                <Button onClick={onAddClick} primary icon={<AddIcon/>}>
+                                <Button className="add-scorecard-button" onClick={onAddClick} primary icon={<AddIcon/>}>
                                     {i18n.t("Add New Scorecard")}
                                 </Button>
                             </ButtonStrip>

@@ -5,8 +5,62 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-09-16T07:49:09.260Z\n"
-"PO-Revision-Date: 2021-09-16T07:49:09.260Z\n"
+"POT-Creation-Date: 2021-09-17T06:48:29.984Z\n"
+"PO-Revision-Date: 2021-09-17T06:48:29.984Z\n"
+
+msgid "Welcome to the most interactive scorecard ever!"
+msgstr "Welcome to the most interactive scorecard ever!"
+
+msgid "Search here for scorecards by name, id, or description"
+msgstr "Search here for scorecards by name, id, or description"
+
+msgid "Click here to change the scorecard list view"
+msgstr "Click here to change the scorecard list view"
+
+msgid "Click here to add a new scorecard"
+msgstr "Click here to add a new scorecard"
+
+msgid ""
+"Click on View or anywhere on the scorecard to view, click on Edit to edit "
+"and click on Delete to delete the scorecard"
+msgstr ""
+"Click on View or anywhere on the scorecard to view, click on Edit to edit "
+"and click on Delete to delete the scorecard"
+
+msgid "This is the default view for your scorecard"
+msgstr "This is the default view for your scorecard"
+
+msgid "Click here to select different organisation units"
+msgstr "Click here to select different organisation units"
+
+msgid "Click here to select different periods"
+msgstr "Click here to select different periods"
+
+msgid "Click here to return to scorecard list"
+msgstr "Click here to return to scorecard list"
+
+msgid ""
+"Click here to refresh the scorecard page. This will reset organisation "
+"units, periods, and options to default values"
+msgstr ""
+"Click here to refresh the scorecard page. This will reset organisation "
+"units, periods, and options to default values"
+
+msgid ""
+"Click here to customize the scorecard look. Add numbering, enable average "
+"rows and columns, hide or show arrows and many more"
+msgstr ""
+"Click here to customize the scorecard look. Add numbering, enable average "
+"rows and columns, hide or show arrows and many more"
+
+msgid "Click here to edit scorecard configuration"
+msgstr "Click here to edit scorecard configuration"
+
+msgid "Click here to download the scorecard in Excel, PDF, CSV, and JSON formats"
+msgstr "Click here to download the scorecard in Excel, PDF, CSV, and JSON formats"
+
+msgid "Here is the scorecard!"
+msgstr "Here is the scorecard!"
 
 msgid "Data"
 msgstr "Data"
