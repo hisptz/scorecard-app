@@ -46,11 +46,17 @@ export default function DataSourceSelector({type, id}) {
     }, [id]);
 
 
+    console.log(type)
+    console.log(id)
+
 
     if(type===dataSourceTypes.INDICATOR){
         return  <Index id={id} />
     }
     if(type===dataSourceTypes.DATA_ELEMENT){
+        return <DataElementPage id={id} />
+    }
+    if(type===dataSourceTypes.PROGRAM_DATA_ELEMENT){
         return <DataElementPage id={id} />
     }
     if(type===dataSourceTypes.PROGRAM_INDICATOR){

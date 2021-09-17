@@ -6,8 +6,6 @@ import IdentifiedBy from "../../../../Shared/Componets/IdentifiedBy/Index";
 
 export default function Introduction({ruleObj,functionObj}){
 
-    console.log(ruleObj)
-    console.log(functionObj)
 
     return <div>
        <h3>{i18n.t("Introduction")} </h3>
