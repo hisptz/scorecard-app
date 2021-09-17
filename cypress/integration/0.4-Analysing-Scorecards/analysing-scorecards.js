@@ -218,7 +218,12 @@ Then('a table of indicators against location for the selected location type shou
   And('setting indicator targets for district level',()=>{
     cy.get('input.jsx-2289862737').check({force:true}).should('be.checked')
     cy.get('[data-test=scocecard-add-group-button]').click()
-    cy.get('[data-test=scorecard-indicator-add"]').click()
+    cy.get('[data-test=scorecard-indicator-add]').click({multiple:true,force:true})
+    cy.get(':nth-child(3) > [data-test=dhis2-uicore-centeredcontent] > .jsx-498096601 > [data-test=dhis2-uicore-modal] > [data-test=dhis2-uicore-card] > [data-test=dhis2-uicore-modalcontent] > :nth-child(1) > :nth-child(1) > .container-bordered > .column > .pt-16 > [data-test=dhis2-uicore-field] > [data-test=dhis2-uicore-field-content] > [data-test=dhis2-uicore-transfer] > [data-test=dhis2-uicore-transfer-actions] > [data-test=dhis2-uicore-transfer-actions-addall]').click()
+    cy.get(':nth-child(3) > [data-test=dhis2-uicore-centeredcontent] > .jsx-498096601 > [data-test=dhis2-uicore-modal] > [data-test=dhis2-uicore-card] > [data-test=dhis2-uicore-modalactions] > [data-test=dhis2-uicore-buttonstrip] > :nth-child(2) > [data-test=scorecard-data-source-add]').click()
+    cy.get(':nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > [data-rbd-draggable-context-id="2"] > :nth-child(1) > .column > [style="margin: 4px 0px;"] > :nth-child(1) > .container-bordered > .space-between > .row').click({force:true})
+    cy.get('[data-test=dhis2-uicore-modalactions] > [data-test=dhis2-uicore-buttonstrip] > :nth-child(1) > [data-test=dhis2-uicore-button]').click()
+
   })
   Then('the target set should be saved and changes reflected on the scorecard visualization',()=>{
    

@@ -311,7 +311,7 @@ export default function DataGroup({
     return (
         <Draggable index={index} draggableId={id}>
             {(provided) => (
-                <AccordionAd
+                <Accordion
                     innerRef={provided.innerRef}
                     onDoubleClick={(event) => event.stopPropagation()}
                     expandIcon={<ExpandMoreIcon/>}
