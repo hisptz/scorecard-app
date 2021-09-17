@@ -4,10 +4,12 @@ import { CircularLoader } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import { useEffect} from 'react'
 import Legend from './legend'
+import Error from "../../../../Shared/Componets/Error/ErrorAPIResult";
+import Loader from "../../../../Shared/Componets/Loaders/Loader";
+import React from 'react'
 const query =    {
   legendAnalysis:{
     resource:"indicators",
-    // "id": "ulgL07PF8rq",
     id: ({id})=>id,
       params:{
         fields:["id","displayName","legendSets[id,displayName,legends[id,displayName,startValue,endValue,color]]"]
@@ -21,13 +23,13 @@ export default function LegendsAnalysis({id}){
 
     useEffect(()=>{refetch({id})},[id])
 
-    if(loading){
-        return <CircularLoader />
-     }
- 
-     if(error){
-        return <p> {error} </p> 
-     }  
+
+    if (loading) {
+        return <Loader/>
+    }
+    if (error) {
+        return <Error error={error} />
+    }
    
      if(data?.legendAnalysis?.legendSets?.length===0){
        return <><p>There are no legends associated with these indicator</p></> //no legends sets

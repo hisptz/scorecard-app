@@ -12,6 +12,8 @@ import {
 import PropTypes from "prop-types";
 import React, {useEffect} from 'react'
 import CalculationDetailRow from './Components/Row'
+import Loader from "../../../../Shared/Componets/Loaders/Loader";
+import Error from "../../../../Shared/Componets/Error/ErrorAPIResult";
 
 const query = {
     calculation: {
@@ -32,13 +34,11 @@ export default function CalculationDetails({id}) {
     }, [id])
 
     if (loading) {
-        return <CircularLoader/>
+        return <Loader/>
     }
-
     if (error) {
-        return <p> {error} </p>
+        return <Error error={error} />
     }
-
     const numDen = data.calculation
 
 

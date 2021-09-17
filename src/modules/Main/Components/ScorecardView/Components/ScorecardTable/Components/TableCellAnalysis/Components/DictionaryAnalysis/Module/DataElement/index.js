@@ -19,9 +19,7 @@ export default function DataElementPage(props){
             <Facts  id={id}  />
             <AnalyticsDetails id={id}/>
 
-
             <RelatedIndicator id={id} resourceType={"Data Element"}  />
-
 
             <AccessibilityAndSharing id={id} resourceType={"dataElements"} />
 

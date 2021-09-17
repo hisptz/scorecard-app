@@ -58,15 +58,11 @@ export default function Legend(props){
                                 <DataTableCell bordered>
                                     {legend?.startValue}
                                 </DataTableCell>
-                                <DataTableCell bordered >
-                                    <div style={{
-                                        background: legend?.color,
-                                        width:"inherit",
-                                        height:50
-                                    }}>
+                                <td bordered style={{
+                                    background: legend?.color,
+                                }} >
 
-                                    </div>
-                                </DataTableCell>
+                                </td>
                             </DataTableRow>
 
                         })}

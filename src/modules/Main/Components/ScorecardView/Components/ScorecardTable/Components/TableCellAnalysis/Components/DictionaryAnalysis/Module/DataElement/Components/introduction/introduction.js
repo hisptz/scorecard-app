@@ -4,6 +4,9 @@ import i18n from "@dhis2/d2-i18n";
 import { CircularLoader } from '@dhis2/ui'
 import PropTypes from "prop-types";
 import {useEffect} from 'react'
+import Loader from "../../../../Shared/Componets/Loaders/Loader";
+import Error from "../../../../Shared/Componets/Error/ErrorAPIResult";
+import React from 'react'
 
 const query = {
     dataElements:{
@@ -25,12 +28,13 @@ export default function Introduction({id}){
 
     useEffect(()=>{refetch({id})},[id])
 
-    if(loading){
-        return <CircularLoader />
+    if (loading) {
+        return <Loader/>
     }
 
-    if(error){
-        return <p> {error} </p>
+    if (error) {
+        return <Error error={error} />
+
     }
 
 
@@ -40,6 +44,7 @@ export default function Introduction({id}){
 
     return ( <div>
 
+            <h2>{res?.displayName}</h2>
         <h3> {i18n.t("Introduction")} </h3>
 
             <p>

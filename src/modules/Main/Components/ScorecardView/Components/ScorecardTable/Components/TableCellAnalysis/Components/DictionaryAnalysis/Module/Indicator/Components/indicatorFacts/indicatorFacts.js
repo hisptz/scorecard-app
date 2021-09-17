@@ -14,6 +14,8 @@ import {
 import PropTypes from "prop-types";
 import React, {useEffect} from 'react'
 import IndicatorGroupRow from './indicatorGroupRow'
+import Error from "../../../../Shared/Componets/Error/ErrorAPIResult";
+import Loader from "../../../../Shared/Componets/Loaders/Loader";
 
 const query = {
     indicatorGroups: {
@@ -33,14 +35,14 @@ export default function IndicatorFacts({id}) {
         refetch({id})
     }, [id])
 
+
     if (loading) {
-        return <CircularLoader/>
+        return <Loader/>
     }
-
     if (error) {
-        return <p> {error} </p>
-    }
+        return <Error error={error} />
 
+    }
 
     if (data?.indicatorGroups?.indicatorGroups) {
         return <p>{i18n.t(" There are no indicator facts associated with this indicator")}</p>

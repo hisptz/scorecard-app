@@ -46,9 +46,6 @@ export default function DataSourceSelector({type, id}) {
     }, [id]);
 
 
-    console.log(type)
-    console.log(id)
-
 
     if(type===dataSourceTypes.INDICATOR){
         return  <Index id={id} />
