@@ -14,7 +14,6 @@ import Instructions from "./Components/Instructions";
 import PreviewScorecardTable from "./Components/PreviewScorecardTable";
 import {generateNewGroupData} from "./utils";
 
-// TODO: Implement linking by dnd
 
 export default function DataConfigurationScorecardForm() {
     const [dataSelection, updateDataSelection] = useRecoilState(
@@ -25,7 +24,6 @@ export default function DataConfigurationScorecardForm() {
     );
 
     const {dataGroups: groups} = dataSelection ?? new DataSelection();
-
 
     const onGroupAdd = () => {
         updateDataSelection((prevState = []) =>

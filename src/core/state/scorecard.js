@@ -2,7 +2,6 @@ import i18n from '@dhis2/d2-i18n'
 import {Period} from "@iapps/period-utilities";
 import {cloneDeep, filter, get as _get, head, isEmpty, set as _set,} from "lodash";
 import {atom, atomFamily, selector, selectorFamily} from "recoil";
-import {validateGroups} from "../../modules/Main/Components/ScoreCardManagement/services/validator";
 import {
     getColSpanDataGroups,
     getColSpanWithOrgUnit,
@@ -12,7 +11,7 @@ import {
 } from "../../modules/Main/Components/ScorecardView/Components/ScorecardTable/services/utils";
 import getScorecard, {getOrgUnitSelection} from "../../shared/services/getScorecard";
 import getScorecardSummary from "../../shared/services/getScorecardSummary";
-import {getHoldersFromGroups} from "../../shared/utils/utils";
+import {getHoldersFromGroups, uid} from "../../shared/utils/utils";
 import {Orientation} from "../constants/orientation";
 import ScorecardAccessType from "../constants/scorecardAccessType";
 import {TableSort} from "../constants/tableSort";
@@ -31,15 +30,17 @@ import {ScreenDimensionState} from "./window";
 
 const defaultValue = {
     legendDefinitions: [
-        {
+        {   id: uid(),
             color: "#008000",
             name: i18n.t("Target Reached/ On Track"),
         },
         {
+            id: uid(),
             color: "#FFFF00",
             name: i18n.t("Progress, but more effort required"),
         },
         {
+            id: uid(),
             color: "#FF0000",
             name: i18n.t("Not on track"),
         },
@@ -47,11 +48,13 @@ const defaultValue = {
             color: "#D3D3D3",
             name: i18n.t("N/A"),
             isDefault: true,
+            id: 'N/A'
         },
         {
             color: "#FFFFFF",
             name: i18n.t("No Data"),
             isDefault: true,
+            id: 'No Data'
         }
     ],
     scorecardOptions: new ScorecardOptions(),
@@ -360,4 +363,4 @@ export {
     ScorecardDataSourceState,
     ScorecardDataLoadingState,
     ScorecardLegendDefinitionSelector,
-    }
+}

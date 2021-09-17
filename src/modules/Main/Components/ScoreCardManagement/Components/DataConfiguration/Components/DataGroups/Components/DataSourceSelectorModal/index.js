@@ -21,6 +21,8 @@ export default function DataSourceSelectorModal({
 }) {
   const [selectedItems, setSelectedItems] = useState([]);
 
+    console.log(selectedItems)
+
   return (
     <Modal onClose={onClose} position={"middle"} large hide={!open}>
       <ModalTitle>{i18n.t("Add Data source")}</ModalTitle>

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-09-14T06:32:18.349Z\n"
-"PO-Revision-Date: 2021-09-14T06:32:18.349Z\n"
+"POT-Creation-Date: 2021-09-16T07:49:09.260Z\n"
+"PO-Revision-Date: 2021-09-16T07:49:09.260Z\n"
 
 msgid "Data"
 msgstr "Data"
@@ -154,6 +154,9 @@ msgstr "Title"
 
 msgid "Subtitle"
 msgstr "Subtitle"
+
+msgid "Maximum 100 Characters"
+msgstr "Maximum 100 Characters"
 
 msgid "Description"
 msgstr "Description"

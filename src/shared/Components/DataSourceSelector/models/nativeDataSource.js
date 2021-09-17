@@ -71,8 +71,8 @@ export default class NativeDataSource extends DataSource {
 
     async filter(engine, {page, selectedGroup, searchKeyword}) {
         const filter = [];
-        if (selectedGroup?.id) filter.push(`${this.groupKey}:eq:${selectedGroup.id}`)
-        if (searchKeyword) filter.push(`displayName:ilike:${searchKeyword}`)
+        if (selectedGroup?.id) {filter.push(`${this.groupKey}:eq:${selectedGroup.id}`)}
+        if (searchKeyword) {filter.push(`displayName:ilike:${searchKeyword}`)}
         return await this.getDataSources(engine, {page, filter})
     }
 
