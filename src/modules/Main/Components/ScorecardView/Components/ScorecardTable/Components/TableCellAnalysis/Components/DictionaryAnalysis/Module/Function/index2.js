@@ -29,7 +29,7 @@ export default function FunctionPage2({id}){
 
 
 
-     return  <FunctionPage ruleObj={ruleObj} functionObj={data[0]} />
+     return  <FunctionPage ruleObj={ruleObj[0]} functionObj={data[0]} />
 }
 
 

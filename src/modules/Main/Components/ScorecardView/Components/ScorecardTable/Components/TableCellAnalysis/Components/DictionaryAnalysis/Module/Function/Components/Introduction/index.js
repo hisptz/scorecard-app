@@ -1,12 +1,13 @@
-import React from 'react'
 import i18n from '@dhis2/d2-i18n'
-import IdentifiedBy from "../../../../Shared/Componets/IdentifiedBy/Index";
-
 import {PropTypes} from "prop-types";
+import React from 'react'
+import IdentifiedBy from "../../../../Shared/Componets/IdentifiedBy/Index";
 
 
 export default function Introduction({ruleObj,functionObj}){
 
+    console.log(ruleObj)
+    console.log(functionObj)
 
     return <div>
        <h3>{i18n.t("Introduction")} </h3>

@@ -1,8 +1,6 @@
 
-import React from 'react'
+import {useDataEngine} from "@dhis2/app-runtime";
 import i18n from "@dhis2/d2-i18n";
-
-
 import {
     DataTable,
     DataTableToolbar,
@@ -14,20 +12,19 @@ import {
     DataTableRow,
     DataTableColumnHeader,
 } from '@dhis2/ui'
-import {displayType, getAllId} from "../../../../Utils/Functions/FunctionDictionary";
-import {useDataEngine} from "@dhis2/app-runtime";
-import {useGetIdDetails} from "../../../../Utils/Hooks/FunctionDictionary";
-import Loader from "../../../../Shared/Componets/Loaders/Loader";
+import React from 'react'
 import Error from "../../../../Shared/Componets/Error/ErrorAPIResult";
-
+import Loader from "../../../../Shared/Componets/Loaders/Loader";
+import {displayType, getAllId} from "../../../../Utils/Functions/FunctionDictionary";
 import {dateTimeDisplay} from "../../../../Utils/Functions/Shared";
+import {useGetIdDetails} from "../../../../Utils/Hooks/FunctionDictionary";
 
 
 export default function DataSource({json}){
 
 
-    let jsonToUse=JSON.stringify(json)?.replace(/\s/g,'')
-    let arrayIdToUse=getAllId(jsonToUse)
+    const jsonToUse=JSON.stringify(json)?.replace(/\s/g,'')
+    const arrayIdToUse=getAllId(jsonToUse)
 
     const engine=useDataEngine()
 
@@ -38,6 +35,10 @@ export default function DataSource({json}){
         return  <Loader text={""} />
     }if(error){
         return <Error error={error} />
+    }
+
+    if (data?.idDetails?.length===0){
+        return <></>
     }
 
     return <div>
@@ -94,7 +95,7 @@ export default function DataSource({json}){
                             {displayType(e?.href)}
                         </DataTableCell  >
                         <DataTableCell bordered>
-                            <i> <a style={{textDecoration:"none"}} href={e?.href +".json"} target={"_blank"} >{e?.href +".json"}</a> </i>
+                            <i> <a style={{textDecoration:"none"}} href={e?.href +".json"} target={"_blank"} rel="noreferrer" >{e?.href +".json"}</a> </i>
 
                         </DataTableCell  >
                         <DataTableCell bordered>
