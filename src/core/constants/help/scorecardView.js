@@ -1,4 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
+import React from 'react'
 
 export const SCORECARD_VIEW_HELP_STEPS = [
     {
@@ -34,6 +35,34 @@ export const SCORECARD_VIEW_HELP_STEPS = [
     },
     {
         element: '.scorecard-table',
-        intro: i18n.t("Here is the scorecard!")
-    }
+        intro: <div>
+            <h3>{i18n.t("Here is the scorecard!")}</h3>
+            {i18n.t("Here you can: ")}
+            <ul>
+                <li>{i18n.t("Sort table based on organisation unit names or values")}</li>
+                <li>{i18n.t("Search organisation units")}</li>
+                <li>{i18n.t("Change the table layout")}</li>
+            </ul>
+        </div>
+    },
+    {
+        element: '.org-unit-search',
+        intro: i18n.t("Search here for a specific organisation unit")
+    },
+    {
+        element: '.holder-header-cell:nth-child(1)',
+        intro: i18n.t("Click on the arrows to sort the table based on the selected indicator")
+    },
+    {
+        element: ".period-header:nth-child(1)",
+        intro: i18n.t("You can also sort by specific period")
+    },
+    {
+        element: "th.parent-org-unit-cell",
+        intro: i18n.t("To change the table layout, click, hold, and drag this cell to the table headers")
+    },
+    {
+        element: ".data-cell",
+        intro: i18n.t("Click on a data cell to see further analysis")
+    },
 ]

@@ -11,6 +11,7 @@ import {debounce, isEmpty} from "lodash";
 import React, {Suspense, useEffect, useRef, useState} from "react";
 import {useHistory} from "react-router-dom";
 import {useRecoilState, useRecoilValue, useResetRecoilState} from "recoil";
+import {STEP_OPTIONS} from "../../../../core/constants/help/options";
 import {SCORECARD_LIST_HELP_STEPS} from "../../../../core/constants/help/scorecardList";
 import HelpState from "../../../../core/state/help";
 import {ScorecardIdState, ScorecardSummaryState,} from "../../../../core/state/scorecard";
@@ -89,9 +90,7 @@ export default function ScorecardList() {
 
     return (
         <Suspense fallback={<FullPageLoader/>}>
-            <Steps options={{
-                disableInteraction: false
-            }} enabled={helpEnabled} steps={SCORECARD_LIST_HELP_STEPS} onExit={onHelpExit} initialStep={0}/>
+            <Steps options={STEP_OPTIONS} enabled={helpEnabled} steps={SCORECARD_LIST_HELP_STEPS} onExit={onHelpExit} initialStep={0}/>
             {isEmpty(scorecards) ? (
                 <EmptyScoreCardList/>
             ) : (

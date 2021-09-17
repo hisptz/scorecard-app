@@ -54,7 +54,7 @@ export default function OrgUnitHeaderRow({orgUnits, nested}) {
                                    width={nameColumnWidth} bordered
                                    className='scorecard-table-header scorecard-org-unit-cell' rowSpan={"2"}>
                 {
-                    !nested && <InputField className='print-hide w-100' value={searchValue}
+                    !nested && <InputField className='print-hide w-100 data-search' value={searchValue}
                                            onChange={({value}) => setSearchValue(value)}
                                            placeholder={i18n.t('Search Data')}/>
                 }

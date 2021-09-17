@@ -43,7 +43,7 @@ export default function GroupsHeaderRow({nested, orgUnits}) {
                 className='scorecard-table-header scorecard-org-unit-cell ' rowSpan={"3"}>
                 {
                     !nested &&
-                    <InputField className='print-hide w-100' value={searchValue}
+                    <InputField className='print-hide w-100 org-unit-search' value={searchValue}
                                 onChange={({value}) => setSearchValue(value)}
                                 placeholder={i18n.t('Search Organisation Unit')}/>
                 }

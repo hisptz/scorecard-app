@@ -43,7 +43,7 @@ export default function PeriodHeaderRow({orgUnits}) {
                             bordered
                             align='center'
                             key={`${id}-${periodId}`}
-                            className='scorecard-table-cell'
+                            className='scorecard-table-cell period-header'
                             name={`${head(dataSources)?.id}-${periodId}`}
 
                         >
@@ -62,7 +62,7 @@ export default function PeriodHeaderRow({orgUnits}) {
                         bordered
                         align='center'
                         key={`${id}-${periodId}`}
-                        className='scorecard-table-cell'
+                        className='scorecard-table-cell period-header'
                         name={`${id}-${periodId}`}
                     >
                         {name}
