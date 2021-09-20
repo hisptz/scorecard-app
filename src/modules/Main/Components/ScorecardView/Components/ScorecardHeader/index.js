@@ -20,7 +20,7 @@ export default function ScorecardHeader() {
                         subtitle
                     }} jsx={customHeader}
                 /> : <div className='column center align-items-center'>
-                    <h1 style={{margin: 8}}>{title}</h1>
+                    <h1 style={{margin: 8}} id={'data-test-score-card-title'}>{title}</h1>
                     <h3 style={{color: colors.grey600, margin: 0}}>{subtitle}</h3>
                 </div>
             }

@@ -20,7 +20,7 @@ export default function OrgUnitSelectorModal({onClose, onSelect, initialValue}) 
             <ModalActions>
                 <ButtonStrip>
                     <Button onClick={onClose}>Cancel</Button>
-                    <Button primary onClick={onUpdateClick}>Update</Button>
+                    <Button  primary onClick={onUpdateClick} dataTest={'update-on-select-org-unit'}>Update</Button>
                 </ButtonStrip>
             </ModalActions>
         </Modal>

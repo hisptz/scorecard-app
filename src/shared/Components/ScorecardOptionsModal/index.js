@@ -30,7 +30,7 @@ export default function ScorecardOptionsModal({onSelect, onClose, initialValues}
             <ModalActions>
                 <ButtonStrip>
                     <Button onClick={onClose}>Cancel</Button>
-                    <Button primary onClick={onUpdateClick}>Update</Button>
+                    <Button dataTest={"update-button-on-options"} primary onClick={onUpdateClick}>Update</Button>
                 </ButtonStrip>
             </ModalActions>
         </Modal>

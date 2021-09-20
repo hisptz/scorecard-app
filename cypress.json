@@ -1,23 +1,28 @@
 {
-  "baseUrl": "http://localhost:3000",
-  "testFiles": "**/*.{feature,js}",
-  "chromeWebSecurity": false,
-  "reporter": "cypress-multi-reporters",
-  "video": true,
-  "experimentalStudio": true,
-  "viewportWidth": 1366,
-  "viewportHeight": 768,
-  "defaultCommandTimeout": 4000,
-  "projectId": "9ps7gr",
-  "component": {
-    "baseUrl": "http://localhost:8080",
-    "testFiles": "**/*.test.{js,ts,jsx,tsx}",
-    "componentFolder": "src",
+    "baseUrl": "http://localhost:3000",
+    "testFiles": "**/*.feature",
+    "chromeWebSecurity": false,
+    "reporter": "cypress-multi-reporters",
+    "video": true,
+    "experimentalStudio": true,
+    "viewportWidth": 1366,
+    "viewportHeight": 768,
+    "defaultCommandTimeout": 4000,
+    "watchForFileChanges": true,
+    "projectId": "9ps7gr",
+    "component": {
+        "baseUrl": "https://dhis2.nnkogift.me",
+        "testFiles": "**/*.test.{js,ts,jsx,tsx}",
+        "componentFolder": "src",
+        "env": {
+            "dhis2Username": "admin",
+            "dhis2Password": "district",
+            "dhis2BaseUrl": "https://dhis2.nnkogift.me",
+            "dhis2DatatestPrefix": "dhis2-scorecard"
+        }
+    },
     "env": {
-      "dhis2Username": "admin",
-      "dhis2Password": "district",
-      "dhis2BaseUrl": "http://localhost:8080",
-      "dhis2DatatestPrefix": "dhis2-scorecard"
+        "dhis2DataTestPrefix": "dhis2-hisptzscorecard",
+        "networkMode": "live"
     }
-  }
 }
