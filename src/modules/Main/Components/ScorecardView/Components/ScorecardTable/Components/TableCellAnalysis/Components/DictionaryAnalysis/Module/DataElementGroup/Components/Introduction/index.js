@@ -1,9 +1,10 @@
 import {useDataQuery} from "@dhis2/app-runtime";
+import i18n from "@dhis2/d2-i18n";
+import PropTypes from "prop-types";
 import React, {useEffect} from "react";
-import Loader from "../../../../Shared/Componets/Loaders/Loader";
 import Error from "../../../../Shared/Componets/Error/ErrorAPIResult";
 import IdentifiedBy from "../../../../Shared/Componets/IdentifiedBy/Index";
-import i18n from "@dhis2/d2-i18n";
+import Loader from "../../../../Shared/Componets/Loaders/Loader";
 
 
 const query = {
@@ -24,14 +25,14 @@ export default function Introduction({id}){
 
     useEffect(()=>{refetch({id})},[id])
 
+    const res=data?.dataElementGroups
+
     if(loading){
         return  <Loader text={""} />
     }if(error){
         return <Error error={error} />
     }
 
-
-    let res=data?.dataElementGroups
 
     return <div>
         <h3>{i18n.t("Introduction")} </h3>
@@ -46,3 +47,6 @@ export default function Introduction({id}){
     </div>
 }
 
+Introduction.propTypes = {
+    id: PropTypes.string.isRequired
+};

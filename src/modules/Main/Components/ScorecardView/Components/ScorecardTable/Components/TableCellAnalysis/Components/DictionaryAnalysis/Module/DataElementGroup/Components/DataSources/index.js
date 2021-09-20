@@ -1,13 +1,13 @@
 import {useDataQuery} from "@dhis2/app-runtime";
-import {useEffect} from "react";
-import Loader from "../../../../Shared/Componets/Loaders/Loader";
+import i18n from '@dhis2/d2-i18n'
+import {filter} from 'lodash'
+import PropTypes, {string} from "prop-types";
+import React, {useEffect, useMemo} from "react";
 import Error from "../../../../Shared/Componets/Error/ErrorAPIResult";
-import React from 'react'
-import _ from 'lodash'
+import Loader from "../../../../Shared/Componets/Loaders/Loader";
 import {dataElementDomainTypes} from "../../../../Utils/Models";
 import DataSets from "./DataSets";
 import Programs from "./Programs";
-import i18n from '@dhis2/d2-i18n'
 
 
 const query = {
@@ -27,6 +27,8 @@ export default function DataSources({id}){
 
     useEffect(()=>{refetch({id})},[id])
 
+    const tracker= useMemo(() => filter(data?.sources?.dataElements,(el)=>{return el?.domainType===dataElementDomainTypes.TRACKER}), [data]);
+    const aggregate = useMemo(()=> filter(data?.sources?.dataElements,(el)=>{return el?.domainType===dataElementDomainTypes.AGGREGATE}),[data])
 
     if(loading){
         return  <Loader text={""} />
@@ -34,8 +36,6 @@ export default function DataSources({id}){
         return <Error error={error} />
     }
 
-    let traker= _.filter(data?.sources?.dataElements,(el)=>{return el?.domainType===dataElementDomainTypes.TRACKER})
-    let aggregate=_.filter(data?.sources?.dataElements,(el)=>{return el?.domainType===dataElementDomainTypes.AGGREGATE})
 
     return <div>
         <h3>{i18n.t("Data sources (Datasets/Programs)")} </h3>
@@ -49,10 +49,10 @@ export default function DataSources({id}){
 
             }
 
-            {traker?.length>0?<h4>{i18n.t("For Tracker Data Elements:")} </h4>:""}
-            {traker?.length>0?
-                traker.map((el)=>{
-                    return <Programs id={el?.id} name={el?.displayName} />
+            {tracker?.length>0?<h4>{i18n.t("For Tracker Data Elements:")} </h4>:""}
+            {tracker?.length>0?
+                tracker.map((el)=>{
+                    return <Programs key={el?.id} id={el?.id} name={el?.displayName} />
                 }):""
             }
 
@@ -60,3 +60,7 @@ export default function DataSources({id}){
 
     </div>
 }
+
+DataSources.propTypes = {
+    id:string.isRequired
+};

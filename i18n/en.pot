@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-09-17T07:06:39.697Z\n"
-"PO-Revision-Date: 2021-09-17T07:06:39.697Z\n"
+"POT-Creation-Date: 2021-09-17T18:13:04.317Z\n"
+"PO-Revision-Date: 2021-09-17T18:13:04.317Z\n"
 
 msgid "Data"
 msgstr "Data"
@@ -334,9 +334,6 @@ msgstr "no color"
 
 msgid "no icon"
 msgstr "no icon"
-
-msgid "no comments"
-msgstr "no comments"
 
 msgid "No legends assigned"
 msgstr "No legends assigned"

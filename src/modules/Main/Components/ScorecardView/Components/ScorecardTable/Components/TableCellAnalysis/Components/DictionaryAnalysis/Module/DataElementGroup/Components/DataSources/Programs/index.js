@@ -2,10 +2,10 @@ import {useDataQuery} from "@dhis2/app-runtime";
 import i18n from "@dhis2/d2-i18n";
 import PropTypes from "prop-types";
 import React, {useEffect} from 'react'
-import Loader from "../../../../../Shared/Componets/Loaders/Loader";
-import Error from "../../../../../Shared/Componets/Error/ErrorAPIResult";
-import {programDataElementCountState} from "../../../../../Store";
 import {useSetRecoilState} from "recoil";
+import Error from "../../../../../Shared/Componets/Error/ErrorAPIResult";
+import Loader from "../../../../../Shared/Componets/Loaders/Loader";
+import {programDataElementCountState} from "../../../../../Store";
 
 
 const query = {
@@ -32,15 +32,17 @@ export default  function Programs({id,name}){
 
     useEffect(()=>{refetch({id})},[id])
 
+    useEffect(() => {
+        return () => {
+            updateCount((prev)=>{return prev+data?.programs?.programStages?.length})
+        };
+    }, [data]);
+
     if(loading){
         return  <Loader text={""} />
     }if(error){
         return <Error error={error} />
     }
-
-    //updating count its used in the facts component
-    updateCount((prev)=>{return prev+data?.programs?.programStages?.length})
-
 
     return (<div>
         {name}
@@ -50,10 +52,11 @@ export default  function Programs({id,name}){
             })}
         </ul>
 
-
-
-
     </div>)
 
 }
 
+Programs.propTypes = {
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+};
