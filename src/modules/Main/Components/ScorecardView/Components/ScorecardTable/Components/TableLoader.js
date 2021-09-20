@@ -36,7 +36,7 @@ export function TableLinearLoader({dataEngine, orgUnits}) {
     return (
         loading ?
             <DataTableRow>
-                <td colSpan={colSpan}>
+                <td  colSpan={colSpan}>
                     <LinearLoader width={`${screenWidth}px`} amount={progress} margin={0}/>
                 </td>
             </DataTableRow> : null

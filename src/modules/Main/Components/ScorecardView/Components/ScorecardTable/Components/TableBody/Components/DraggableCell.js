@@ -12,7 +12,7 @@ export default function DraggableCell({label,type,style, ...props}) {
         })
     }))
     return (
-        <div {...props} className='column center' style={{
+        <div {...props}  className='column center' style={{
             background: isDragging && colors?.grey400,
             cursor: 'move',
             opacity: isDragging ? 0.5 : 1,

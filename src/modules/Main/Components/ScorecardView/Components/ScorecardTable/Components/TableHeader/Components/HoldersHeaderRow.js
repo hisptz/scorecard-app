@@ -30,6 +30,7 @@ export default function HoldersHeaderRow() {
                     <DataTableColumnHeader onSortIconClick={onSortClick}
                                            sortDirection={name === `${head(dataSources)?.id}` ? direction : 'default'}
                                            className='p-0 scorecard-table-cell holder-header-cell'
+                                           dataTest={'indicator-table-header-cell'}
                                            width={`${periods?.length * ScorecardTableConstants.CELL_WIDTH}px`} top={"0"}
                                            fixed
                                            colSpan={`${periods?.length}`} bordered

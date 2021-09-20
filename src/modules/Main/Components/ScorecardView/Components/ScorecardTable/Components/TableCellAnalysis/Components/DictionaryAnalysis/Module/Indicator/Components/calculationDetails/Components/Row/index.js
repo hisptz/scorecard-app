@@ -16,7 +16,7 @@ import DisplaySourceProgramIndicator from "./Components/DisplaySourceProgramIndi
 
 
 
-export default function CalculationDetailRow({formula, location}){
+export default function CalculationDetailRow({formula, location,...props}){
 
     //variables
     const wordDtEl=[]

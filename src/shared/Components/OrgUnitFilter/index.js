@@ -147,17 +147,18 @@ export default function OrgUnitFilter({value, onUpdate}) {
                         }
                     </MultiSelectField>
                 </div>
-                <div className='column'>
+                <div className='column' >
                     <MultiSelectField disabled={disableSelections} clearable loading={levelsAndGroupsLoading}
                                  error={levelsAndGroupsError}
                                  validationText={levelsAndGroupsError?.message}
                                  onChange={onGroupSelect}
                                  selected={selectedGroups}
+                                 dataTest={'select-facility-group'}
                                  clearText={i18n.t('Clear')}
                                  label={i18n.t('Select Group(s)')}>
                         {
                             groups?.map(({displayName, id}) => (
-                                <MultiSelectOption label={displayName} value={id} key={id}/>))
+                                <MultiSelectOption   label={displayName} value={id} key={id}/>))
                         }
                     </MultiSelectField>
                 </div>

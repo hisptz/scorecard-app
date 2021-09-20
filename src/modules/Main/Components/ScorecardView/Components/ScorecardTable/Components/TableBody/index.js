@@ -68,6 +68,7 @@ export default function ScorecardTableBody({orgUnits, dataEngine}) {
                                         orgUnit={orgUnit}
                                         overallAverage={overallAverage}
                                         orgUnits={orgUnits}
+
                                     />
                                 ))}
                                 {childrenOrgUnits?.map((orgUnit, index) => (
@@ -75,6 +76,7 @@ export default function ScorecardTableBody({orgUnits, dataEngine}) {
                                         index={index}
                                         dataEngine={dataEngine}
                                         key={`${orgUnit?.id}-row`}
+
                                         onExpand={setExpandedOrgUnit}
                                         orgUnit={orgUnit}
                                         expandedOrgUnit={expandedOrgUnit}

@@ -35,6 +35,7 @@ export default function PeriodHeaderRow({orgUnits}) {
                                                                                                                      }) => (
                     periods?.map(({name, id: periodId}) => (
                         <DataTableColumnHeader
+                        dataTest={'test-period-table-scorecard'}
                             fixed
                             top={"0"}
                             onSortIconClick={onSortClick}
@@ -54,6 +55,7 @@ export default function PeriodHeaderRow({orgUnits}) {
                                                                                                      id: periodId
                                                                                                  }) => (
                     <DataTableColumnHeader
+                    dataTest={'test-period-table-scorecard'}
                         fixed
                         top={"0"}
                         onSortIconClick={onSortClick}
