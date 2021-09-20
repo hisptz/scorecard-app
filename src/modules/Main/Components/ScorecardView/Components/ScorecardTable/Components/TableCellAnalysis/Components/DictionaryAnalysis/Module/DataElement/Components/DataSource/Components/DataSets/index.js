@@ -52,9 +52,6 @@ export default  function DataSets({id}){
 
 }
 
-
-
-//
-// DataSets.propTypes={
-//     id:PropTypes.string.isRequired
-// }
+DataSets.propTypes={
+    id:PropTypes.string.isRequired
+}
