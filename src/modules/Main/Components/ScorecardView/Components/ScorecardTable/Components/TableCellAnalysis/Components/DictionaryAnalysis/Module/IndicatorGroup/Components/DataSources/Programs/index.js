@@ -1,13 +1,13 @@
 import {useDataEngine, useDataQuery} from "@dhis2/app-runtime";
 import i18n from "@dhis2/d2-i18n";
+import _ from "lodash";
 import PropTypes from "prop-types";
 import React, {useEffect} from 'react'
-import Loader from "../../../../../Shared/Componets/Loaders/Loader";
-import Error from "../../../../../Shared/Componets/Error/ErrorAPIResult";
 import {useSetRecoilState} from "recoil";
-import {useGetIndicatorProgramSource} from "../../../../../Utils/Hooks/DataSource";
-import _ from "lodash";
+import Error from "../../../../../Shared/Componets/Error/ErrorAPIResult";
+import Loader from "../../../../../Shared/Componets/Loaders/Loader";
 import {indicatorGroupProgramDataElements, indicatorGroupPrograms} from "../../../../../Store/IndicatorGroup";
+import {useGetIndicatorProgramSource} from "../../../../../Utils/Hooks/DataSource";
 
 
 export default  function Programs({sources}){
@@ -18,6 +18,18 @@ export default  function Programs({sources}){
     const updateProgramDataElements=useSetRecoilState(indicatorGroupProgramDataElements)
 
     const {loading, error, data}=useGetIndicatorProgramSource(sources,engine)
+    let res=[]
+    let allProgram=[];
+    useEffect(() => {
+        updateProgramDataElements((prev)=>{return _.concat(prev,sources?.prgDtEl)})
+
+       res =_.concat([],data?.attr??[],data?.prgInd??[],data?.prgDtEl??[])
+         allProgram=_.uniqWith(res,_.isEqual)
+
+        //updating count its used in the facts component
+        updatePrograms((prev)=>{return _.concat(prev,allProgram)})
+
+    }, [data]);
 
 
     if(loading){
@@ -25,15 +37,6 @@ export default  function Programs({sources}){
     }if(error){
         return <Error error={error} />
     }
-
-    updateProgramDataElements((prev)=>{return _.concat(prev,sources?.prgDtEl)})
-
-
-    const res=_.concat([],data?.attr??[],data?.prgInd??[],data?.prgDtEl??[])
-    const allProgram=_.uniqWith(res,_.isEqual)
-
-    //updating count its used in the facts component
-    updatePrograms((prev)=>{return _.concat(prev,allProgram)})
 
     if(res?.length>0){
         return (<div>

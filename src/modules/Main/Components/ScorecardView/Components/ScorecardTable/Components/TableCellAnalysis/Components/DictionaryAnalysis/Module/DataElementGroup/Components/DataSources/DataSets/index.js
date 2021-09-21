@@ -18,11 +18,24 @@ export default  function DataSets({aggregate}){
 
     const engine=useDataEngine()
 
-    let onlyIds=aggregate.map((el)=>{
+    let onlyIds=aggregate?.map((el)=>{
         return el?.id
     })
 
     const {loading,error,data}=useGetDataSet(onlyIds,engine)
+
+    const res=data?.dataSets;
+    useEffect(() => {
+        let totalCount=0
+        res?.map((e)=>{
+            totalCount+=e?.length
+        })
+        updateCount(totalCount)
+        return () => {
+
+        };
+    }, [data]);
+
 
     if(loading){
         return  <Loader text={""} />
@@ -30,14 +43,6 @@ export default  function DataSets({aggregate}){
         return <Error error={error} />
     }
 
-    const res=data?.dataSets;
-
-    //update count its used in the facts components
-    let totalCount=0
-    res?.map((e)=>{
-        totalCount+=e?.length
-    })
-    updateCount(totalCount)
 
     return (<div>
         <ul>
@@ -59,5 +64,5 @@ export default  function DataSets({aggregate}){
 }
 
 DataSets.propTypes={
-    id:PropTypes.string.isRequired
+    aggregate:PropTypes.array.isRequired
 }

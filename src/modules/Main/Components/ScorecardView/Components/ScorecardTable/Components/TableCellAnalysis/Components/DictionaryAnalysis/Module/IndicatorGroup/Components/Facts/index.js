@@ -50,7 +50,6 @@ export default function Facts({id}){
     dataElements=_.uniqWith(dataElements,_.isEqual)
 
 
-
     programDtEl=programDtEl.map((e)=>{
         return {id:e.split(".")[1]??""}
     })
@@ -58,8 +57,7 @@ export default function Facts({id}){
         return {id:e}
     })
 
-    const allDataElements=_.concat([],programDtEl,dataElements)
-
+    const allDataElements= [...programDtEl, ...dataElements]
 
 
     return <div>

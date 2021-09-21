@@ -1,7 +1,12 @@
-
-import {dataSourceTypes} from "../Models";
-import {isPureDataElement} from "./FormulaFunctions";
+// const query={
+//
+//     functions:{
+//         resource: 'dataStore/functions',
+//         id: ({id})=>id,
+//     }
+// }
 import {getDataSourceType} from "./FormulaTopBar";
+import {dataSourceTypes} from "../Models";
 
 const query= {
     identifiableObjects: {
@@ -17,29 +22,36 @@ const query2={
 
     functions:{
         resource: 'dataStore/functions',
-        id: ({id})=>id,
+
+    }
+}
+
+const query3={
+
+    functionDetails:{
+        resource: 'dataStore/functions',
+        id: ({id}) => id,
     }
 }
 
 
+//
 export async function getFunctionDetails(engine,arr){
-    const allPromises = arr?.map((id) => {
-        return new Promise((resolve) => {
-            resolve(getDetailsFunction(engine, id))
+    let allPromises = arr?.map((id) => {
+        return new Promise((resolve, reject) => {
+            resolve(getDetailsFunctionFromApi(engine, id))
         })
     })
     return await Promise.all(allPromises).then(value => {
-        return value.map((val) => {
+        return value.map((val, index) => {
             return val
         })
     })
 }
 
-async function getDetailsFunction(engine, id){
-
-    const data=await engine.query(query2,{variables:{id}})
-    return data?.functions
-
+async function getDetailsFunctionFromApi(engine,id){
+    const data=await engine.query(query3,{variables:{id}})
+    return data?.functionDetails
 }
 
 async function getDetails(engine,id){
@@ -47,9 +59,14 @@ async function getDetails(engine,id){
     return data?.identifiableObjects
 }
 
+export async function getAllFunctions(engine){
+    const data=await engine.query(query2)
+    return data?.functions
+}
+
 
 export async function getIdDetails(engine,arr){
-    const allPromises = arr?.map((id) => {
+    let allPromises = arr?.map((id) => {
         return new Promise((resolve, reject) => {
             resolve(getDetails(engine, id))
         })
@@ -65,30 +82,30 @@ export async function getIdDetails(engine,arr){
 
 
 function findUid(str){ //find something that starts as an UId
-    const re=/[a-zA-Z]/g
-    const pos=str?.search(re)
+    let re=/[a-zA-Z]/g
+    let pos=str?.search(re)
     return pos
 }
 function isValidUId(testStr){
-    const res =testStr.search("^[A-Za-z0-9]+$")  //using search method is faster
+    let res =testStr.search("^[A-Za-z0-9]+$")  //using search method is faster
     return res>=0 //if it finds anything that is not listed in the regex it returns -1
 }
 
 export function getAllId(json){
-    const allId=[]
+    let allId=[]
     let str=json
     let pos=findUid(str?.toString())
 
     while(pos >=0 ){
         str=str.substring(pos)
-        const testStr=str.substring(0,11)
+        let testStr=str.substring(0,11)
 
         if( isValidUId(testStr) ){
             allId.push(testStr)
             str=str.substring(11)
         }
         else {
-            const failInd=str.search(/[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/) //helps to reduce string length much faster
+            let failInd=str.search(/[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/) //helps to reduce string length much faster
 
             str=str.substring(failInd)
         }

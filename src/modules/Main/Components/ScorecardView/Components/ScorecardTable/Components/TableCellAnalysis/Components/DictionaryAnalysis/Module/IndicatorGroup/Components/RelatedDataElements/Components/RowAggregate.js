@@ -24,7 +24,7 @@ const query = {
 
 export default  function RowAggregate({id,location}){
 
-    const datElement=id
+
 
     let data;
     if(isPureDataElement(id)){

@@ -1,3 +1,4 @@
+import i18n from '@dhis2/d2-i18n'
 import {
     DataTable,
     DataTableToolbar,
@@ -10,7 +11,6 @@ import {
     DataTableCell,
     DataTableColumnHeader,
 } from '@dhis2/ui'
-import i18n from '@dhis2/d2-i18n'
 
 
 export default function Legend(props){
@@ -55,15 +55,12 @@ export default function Legend(props){
                                         <DataTableCell bordered>
                                             {legend?.startValue}
                                         </DataTableCell>
-                                        <DataTableCell bordered >
-                                            <div style={{
-                                                background: legend?.color,
-                                                width:"inherit",
-                                                height:50
-                                            }}>
+                                        <td bordered  style={{
+                                            background: legend?.color,
 
-                                            </div>
-                                        </DataTableCell>
+                                        }} >
+
+                                        </td>
                                     </DataTableRow>
 
                         })}

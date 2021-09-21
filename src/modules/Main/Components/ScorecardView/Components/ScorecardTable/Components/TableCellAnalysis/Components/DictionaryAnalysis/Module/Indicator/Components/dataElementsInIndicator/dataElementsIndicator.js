@@ -63,7 +63,7 @@ export default function DataElementSIndicator() {
                 </DataTableRow>
             </TableHead>
             <TableBody>
-                {dataElements.map((dtEle) => {
+                {dataElements?.map((dtEle) => {
                     i++
                     return <Row key={i} datEl={dtEle}/>
                 })}

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-09-17T18:13:04.317Z\n"
-"PO-Revision-Date: 2021-09-17T18:13:04.317Z\n"
+"POT-Creation-Date: 2021-09-21T09:44:04.585Z\n"
+"PO-Revision-Date: 2021-09-21T09:44:04.585Z\n"
 
 msgid "Data"
 msgstr "Data"
@@ -766,6 +766,9 @@ msgstr "show more"
 
 msgid "There are no legends associated with these Program Indicator"
 msgstr "There are no legends associated with these Program Indicator"
+
+msgid "Accessibility & Sharing Settings"
+msgstr "Accessibility & Sharing Settings"
 
 msgid "This"
 msgstr "This"

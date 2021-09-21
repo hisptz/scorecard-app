@@ -31,16 +31,11 @@ export default function Introduction({id}){
     if (loading) {
         return <Loader/>
     }
-
     if (error) {
         return <Error error={error} />
-
     }
 
-
-
     const res=data?.dataElements
-
 
     return ( <div>
 

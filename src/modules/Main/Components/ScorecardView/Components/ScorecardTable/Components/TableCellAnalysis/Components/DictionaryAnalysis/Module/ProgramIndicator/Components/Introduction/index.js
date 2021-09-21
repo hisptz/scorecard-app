@@ -1,12 +1,12 @@
 
-import PropTypes from "prop-types";
 import {useDataQuery} from "@dhis2/app-runtime";
-import React, {useEffect} from 'react'
+import i18n from '@dhis2/d2-i18n'
 import { CircularLoader } from '@dhis2/ui'
-import Loader from "../../../../Shared/Componets/Loaders/Loader";
+import PropTypes from "prop-types";
+import React, {useEffect} from 'react'
 import Error from "../../../../Shared/Componets/Error/ErrorAPIResult";
 import IdentifiedBy from "../../../../Shared/Componets/IdentifiedBy/Index";
-import i18n from '@dhis2/d2-i18n'
+import Loader from "../../../../Shared/Componets/Loaders/Loader";
 
 const query = {
     programIndicators:{
@@ -33,10 +33,12 @@ export default function Introduction({id}){
 
 
 
-    let res=data?.programIndicators
+    const res=data?.programIndicators
 
 
     return ( <div>
+
+            <h2>{res?.displayName}</h2>
 
         <h3>{i18n.t("Introduction")} </h3>
 

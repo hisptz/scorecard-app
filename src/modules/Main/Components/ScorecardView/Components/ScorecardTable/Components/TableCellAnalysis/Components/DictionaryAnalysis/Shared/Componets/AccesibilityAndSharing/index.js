@@ -8,8 +8,6 @@ import Error from "../Error/ErrorAPIResult";
 import Loader from "../Loaders/Loader";
 import {dateTimeDisplay} from "../../../Utils/Functions/Shared";
 
-
-
 const query={
     sources: {
         resource: "",
@@ -61,7 +59,7 @@ export default function AccessibilityAndSharing(props){
 
 
     return(<div>
-        <h3>{i18n.t("Accesibility & Sharing Settings")}  </h3>
+        <h3>{i18n.t("Accessibility & Sharing Settings")}  </h3>
         <p> {i18n.t("This")}
 
             { displayDataType(resourceType) } {i18n.t("was first created on")}   <i> { dateTimeDisplay(result?.created)}</i> {i18n.t("by")}   <b>{result?.user?.displayName} </b> {i18n.t("and last updated on")}   <i>{ dateTimeDisplay(result?.lastUpdated)}</i> {i18n.t("by")}   <b>{result?.lastUpdatedBy?.displayName}</b> .

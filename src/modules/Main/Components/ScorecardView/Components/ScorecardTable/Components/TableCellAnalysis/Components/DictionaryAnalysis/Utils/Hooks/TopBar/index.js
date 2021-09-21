@@ -2,7 +2,7 @@ import {useState,useEffect} from "react";
 import {dataSourceTypes} from "../../Models";
 import {isEmpty} from "lodash";
 
-const query={
+const dataElementsSearch={
     matches:{
         resource: 'dataElements',
         params: ({keyword}) => ({
@@ -10,13 +10,13 @@ const query={
                 'id','displayName',"href"
             ],
             pageSize:10,
-            filter:[`id:like:${keyword}`,`displayName:like:${keyword}`],
+            filter:[`id:ilike:${keyword}`,`displayName:ilike:${keyword}`],
             rootJunction:"OR"
         })
     },
 }
 
-const query2={
+const indicatorSearch={
     matches:{
         resource: 'indicators',
         params: ({keyword}) => ({
@@ -24,13 +24,13 @@ const query2={
                 'id','displayName',"href"
             ],
             pageSize:10,
-            filter:[`id:like:${keyword}`,`displayName:like:${keyword}`],
+            filter:[`id:ilike:${keyword}`,`displayName:ilike:${keyword}`],
             rootJunction:"OR"
         })
     },
 }
 
-const query3={
+const programIndicatorSearch={
     matches:{
         resource: 'programIndicators',
         params: ({keyword}) => ({
@@ -38,13 +38,13 @@ const query3={
                 'id','displayName',"href"
             ],
             pageSize:10,
-            filter:[`id:like:${keyword}`,`displayName:like:${keyword}`],
+            filter:[`id:ilike:${keyword}`,`displayName:ilike:${keyword}`],
             rootJunction:"OR"
         })
     },
 }
 
-const query4={
+const dataElementGroupsSearch={
     matches:{
         resource: 'dataElementGroups',
         params: ({keyword}) => ({
@@ -52,13 +52,13 @@ const query4={
                 'id','displayName',"href"
             ],
             pageSize:10,
-            filter:[`id:like:${keyword}`,`displayName:like:${keyword}`],
+            filter:[`id:ilike:${keyword}`,`displayName:ilike:${keyword}`],
             rootJunction:"OR"
         })
     },
 }
 
-const query5={
+const indicatorGroupsSearch={
     matches:{
         resource: 'indicatorGroups',
         params: ({keyword}) => ({
@@ -66,12 +66,11 @@ const query5={
                 'id','displayName',"href"
             ],
             pageSize:10,
-            filter:[`id:like:${keyword}`,`displayName:like:${keyword}`],
+            filter:[`id:ilike:${keyword}`,`displayName:ilike:${keyword}`],
             rootJunction:"OR"
         })
     },
 }
-
 
 
 export function useGetSearchResult(keyword,type,engine){
@@ -86,7 +85,6 @@ export function useGetSearchResult(keyword,type,engine){
             if(keyword!==""){
                 return await getResult(keyword, engine, type);
             }
-
         }
         fetch().then((res)=>{
             setLoading(false)
@@ -96,7 +94,6 @@ export function useGetSearchResult(keyword,type,engine){
             setLoading(false)
             setError(error)
         })
-
 
     },[keyword,type])
     return{
@@ -111,23 +108,23 @@ export function useGetSearchResult(keyword,type,engine){
  async function getResult(keyword, engine, type) {
 
      if (type === dataSourceTypes.DATA_ELEMENT) {
-         const data = await engine.query(query, {variables: {keyword}})
+         const data = await engine.query(dataElementsSearch, {variables: {keyword}})
          return data.matches.dataElements
      }
      if(type===dataSourceTypes.INDICATOR){
-         const data = await engine.query(query2, {variables: {keyword}})
+         const data = await engine.query(indicatorSearch, {variables: {keyword}})
          return data.matches.indicators
      }
      if (type===dataSourceTypes.PROGRAM_INDICATOR){
-         const data = await engine.query(query3, {variables: {keyword}})
+         const data = await engine.query(programIndicatorSearch, {variables: {keyword}})
          return data.matches.programIndicators
      }
      if(type===dataSourceTypes.DATA_ELEMENT_GROUP){
-         const data = await engine.query(query4, {variables: {keyword}})
+         const data = await engine.query(dataElementGroupsSearch, {variables: {keyword}})
          return data.matches.dataElementGroups
      }
      if(type===dataSourceTypes.INDICATOR_GROUP){
-         const data = await engine.query(query5, {variables: {keyword}})
+         const data = await engine.query(indicatorGroupsSearch, {variables: {keyword}})
          return data.matches.indicatorGroups
      }
      // if(type===dataSourceTypes.FUNCTION){

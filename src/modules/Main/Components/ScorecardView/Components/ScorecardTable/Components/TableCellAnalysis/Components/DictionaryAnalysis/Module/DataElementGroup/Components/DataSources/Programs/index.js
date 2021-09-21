@@ -2,16 +2,16 @@ import {useDataQuery} from "@dhis2/app-runtime";
 import i18n from "@dhis2/d2-i18n";
 import PropTypes from "prop-types";
 import React, {useEffect} from 'react'
-import {useSetRecoilState} from "recoil";
-import Error from "../../../../../Shared/Componets/Error/ErrorAPIResult";
 import Loader from "../../../../../Shared/Componets/Loaders/Loader";
+import Error from "../../../../../Shared/Componets/Error/ErrorAPIResult";
 import {programDataElementCountState} from "../../../../../Store";
+import {useSetRecoilState} from "recoil";
 
 
 const query = {
     programs: {
         resource: 'programStages',
-        params: (({dataElementId})=>({
+        params: (({dataElementId}) => ({
             fields: [
                 'program[id,displayName]'
             ],
@@ -23,34 +23,42 @@ const query = {
 }
 
 
-export default  function Programs({id,name}){
-    const dataElementId=id
+export default function Programs({id, name}) {
+    const dataElementId = id
 
-    const updateCount=useSetRecoilState(programDataElementCountState)
+    const updateCount = useSetRecoilState(programDataElementCountState)
 
-    const {loading, error, data,refetch}  = useDataQuery(query, {variables: {dataElementId}})
-
-    useEffect(()=>{refetch({id})},[id])
+    const {loading, error, data, refetch} = useDataQuery(query, {variables: {dataElementId}})
 
     useEffect(() => {
-        return () => {
-            updateCount((prev)=>{return prev+data?.programs?.programStages?.length})
-        };
+        refetch({id})
+    }, [id])
+
+    useEffect(() => {
+        updateCount((prev) => {
+            return prev + data?.programs?.programStages?.length
+        })
+
     }, [data]);
 
-    if(loading){
-        return  <Loader text={""} />
-    }if(error){
-        return <Error error={error} />
+
+    if (loading) {
+        return <Loader text={""}/>
+    }
+    if (error) {
+        return <Error error={error}/>
     }
 
     return (<div>
         {name}
         <ul>
-            {data?.programs?.programStages?.map((dt)=>{
-                return <li key={dt?.program?.id}><b>{dt?.program?.displayName}</b> {i18n.t("submitting records on every event(case or individual)")} </li>
+            {data?.programs?.programStages?.map((dt) => {
+                return <li key={dt?.program?.id}>
+                    <b>{dt?.program?.displayName}</b> {i18n.t("submitting records on every event(case or individual)")}
+                </li>
             })}
         </ul>
+
 
     </div>)
 
@@ -58,5 +66,7 @@ export default  function Programs({id,name}){
 
 Programs.propTypes = {
     id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
+    name:PropTypes.string.isRequired,
 };
+
+

@@ -1,8 +1,8 @@
-import {useEffect,useState} from "react";
+import React, {useEffect,useState} from "react";
+import {getDataSetsArray, getNumDenMatch} from "../Functions/DataElementGroupSetFunctions";
 import { getFormulaSources, getWordDataForAll} from "../Functions/FormulaFunctions";
 import {dataTypes, dataTypesInitials} from "../Models";
-import React from "react";
-import {getDataSetsArray, getNumDenMatch} from "../Functions/DataElementGroupSetFunctions";
+
 
 
 export function useGetData(formula,engine,loc){
@@ -11,22 +11,22 @@ export function useGetData(formula,engine,loc){
     const [data,setData]=useState()
 
     useEffect(()=>{
-       let tempArr =getFormulaSources(formula,dataTypesInitials.DATA_ELEMENT)
-        let tempArr2=getFormulaSources(formula,dataTypesInitials.PROGRAM_INDICATOR)
-        let tempArr3=getFormulaSources(formula,dataTypesInitials.DATASET_REPORTING_RATES)
-        let tempArr4=getFormulaSources(formula,dataTypesInitials.ATTRIBUTES)
-        let tempArr5=getFormulaSources(formula,dataTypesInitials.CONSTANTS)
+       let arrDtEle =getFormulaSources(formula,dataTypesInitials.DATA_ELEMENT)
+        let arrProgInd=getFormulaSources(formula,dataTypesInitials.PROGRAM_INDICATOR)
+        let arrDtSetRep=getFormulaSources(formula,dataTypesInitials.DATASET_REPORTING_RATES)
+        let arrAttr=getFormulaSources(formula,dataTypesInitials.ATTRIBUTES)
+        let arrConst=getFormulaSources(formula,dataTypesInitials.CONSTANTS)
 
         async function fetch(){
-            tempArr= await getWordDataForAll(engine,tempArr,loc)
-            tempArr2=await getWordDataForAll(engine,tempArr2,loc)
-            tempArr3=await getWordDataForAll(engine,tempArr3,loc)
-            tempArr4=await getWordDataForAll(engine,tempArr4,loc)
-            tempArr5=await getWordDataForAll(engine,tempArr5,loc)
+            arrDtEle= await getWordDataForAll(engine,arrDtEle,loc)
+            arrProgInd=await getWordDataForAll(engine,arrProgInd,loc)
+            arrDtSetRep=await getWordDataForAll(engine,arrDtSetRep,loc)
+            arrAttr=await getWordDataForAll(engine,arrAttr,loc)
+            arrConst=await getWordDataForAll(engine,arrConst,loc)
 
         }
         fetch().then(() =>  {
-            let result={dataElements:tempArr,programIndicators:tempArr2,dataSetReportingRates:tempArr3,attributes:tempArr4,constants:tempArr5}
+            const result={dataElements:arrDtEle,programIndicators:arrProgInd,dataSetReportingRates:arrDtSetRep,attributes:arrAttr,constants:arrConst}
 
             setData(result)
             // setData((prevState => {return prevState.concat(result) }))
@@ -58,7 +58,7 @@ export function useGetDataSet(array,engine){
         }
         fetch().then(() =>  {
 
-            let result={dataSets:tempArr}
+            const result={dataSets:tempArr}
 
             setData(result)
             setLoading(false)
@@ -92,7 +92,7 @@ export function useGetNumDenMatch(array,engine){
         }
         fetch().then(() =>  {
 
-            let result={matches:tempArr}
+            const result={matches:tempArr}
             setData(result)
             setLoading(false)
         }).catch((error)=>{

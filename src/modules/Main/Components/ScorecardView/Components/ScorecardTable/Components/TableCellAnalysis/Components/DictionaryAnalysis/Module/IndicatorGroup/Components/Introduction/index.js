@@ -24,16 +24,16 @@ export default function Introduction({id}){
 
     useEffect(()=>{refetch({id})},[id])
 
+    let res=data?.dataElementGroups
+
     if(loading){
         return  <Loader text={""} />
     }if(error){
         return <Error error={error} />
     }
 
-
-    let res=data?.dataElementGroups
-
     return <div>
+        <h2>{res?.displayName}</h2>
         <h3>{i18n.t("Introduction")} </h3>
         <p> {i18n.t("Indicator Group name is  {{variables1}}.",
             {variables1:res?.displayName})}

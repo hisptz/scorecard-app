@@ -1,18 +1,22 @@
 import {useEffect, useState} from "react";
-import {getFunctionDetails, getIdDetails} from "../../Functions/FunctionDictionary";
+
+import {getAllFunctions, getFunctionDetails, getIdDetails} from "../../Functions/FunctionDictionary";
 
 
-export function useGetFunctionsDetails(array,engine){
+export function useGetFunctionsDetails(engine,array){
 
     const [loading,setLoading]=useState(true)
     const [error,setError]=useState(false)
     const [data,setData]=useState()
 
     useEffect(()=>{
+
         async function fetch(){
             return  await getFunctionDetails(engine,array)
         }
+
         fetch().then((val) =>  {
+
             setData(val)
             setLoading(false)
         }).catch((error)=>{
@@ -40,7 +44,7 @@ export function useGetIdDetails(array,engine){
 
         }
         fetch().then(() =>  {
-            const result={idDetails:tmp}
+            let result={idDetails:tmp}
             setData(result)
             setLoading(false)
         }).catch((error)=>{
@@ -48,6 +52,33 @@ export function useGetIdDetails(array,engine){
             setError(error)
         })
     },[JSON.stringify(array)])
+
+    return{
+        loading,
+        error,
+        data
+    }
+}
+
+
+export function useGetAllFunctionsId(engine){
+    const [loading,setLoading]=useState(true)
+    const [error,setError]=useState(false)
+    const [data,setData]=useState()
+
+    useEffect(()=>{
+        async function fetch(){
+            return getAllFunctions(engine);
+        }
+        fetch().then((value => {
+            setLoading(false)
+            setData(value)
+        })).catch((error)=>{
+            setLoading(false)
+            setError(error)
+        })
+    },[])
+
 
     return{
         loading,
