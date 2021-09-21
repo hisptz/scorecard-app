@@ -45,7 +45,7 @@ export default function DataSourceConfigurationForm({defaultValues, onFormChange
                                         valueType: DHIS2ValueTypes.NUMBER.name
                                     })}/>
                                     <div className='row space-between'>
-                                        <div className='column pr-16'>
+                                        <div className='column pr-16 effective-gap-settings'>
                                             <CustomField field={new FormFieldModel({
                                                 id: 'effectiveGap',
                                                 formName: i18n.t('Effective Gap'),
@@ -54,7 +54,7 @@ export default function DataSourceConfigurationForm({defaultValues, onFormChange
                                                 valueType: DHIS2ValueTypes.NUMBER.name
                                             })}/>
                                         </div>
-                                        <div className='column pl-16'>
+                                        <div className='column pl-16 indicator-options-settings-area'>
                                             <CustomField field={new FormFieldModel({
                                                 id: 'displayArrows',
                                                 formName: i18n.t('Display Arrows'),
@@ -80,8 +80,7 @@ export default function DataSourceConfigurationForm({defaultValues, onFormChange
                                     </div>
                                     <Divider/>
                                     <div className='row'>
-                                        <div className='column w-100'>
-
+                                        <div className='column w-100 legend-settings-area'>
                                             <CustomField field={new FormFieldModel({
                                                 id: 'legends',
                                                 name: 'legends',

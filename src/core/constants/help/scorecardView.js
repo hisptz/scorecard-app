@@ -66,3 +66,4 @@ export const SCORECARD_VIEW_HELP_STEPS = [
         intro: i18n.t("Click on a data cell to see further analysis")
     },
 ]
+

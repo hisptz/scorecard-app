@@ -11,7 +11,7 @@ import {useRecoilCallback, useRecoilState, useRecoilValue, useSetRecoilState, wa
 import {STEP_OPTIONS} from "../../../../core/constants/help/options";
 import {DATA_CONFIGURATION_HELP_STEPS, GENERAL_HELP_STEPS} from "../../../../core/constants/help/scorecardManagement";
 import Scorecard from "../../../../core/models/scorecard";
-import HelpState from "../../../../core/state/help";
+import HelpState, {HelpIndex, HelpSteps} from "../../../../core/state/help";
 import ScorecardConfState, {
     ScorecardConfigDirtyState,
     ScorecardConfigEditState,
@@ -36,22 +36,27 @@ const steps = [
     {
         label: i18n.t("General"),
         component: GeneralScorecardForm,
+        helpSteps: GENERAL_HELP_STEPS
     },
     {
         label: i18n.t("Data Configuration"),
         component: DataConfigurationScorecardForm,
+        helpSteps: DATA_CONFIGURATION_HELP_STEPS
     },
     {
         label: i18n.t("Highlighted Indicators"),
         component: HighlightedIndicatorsScorecardForm,
+        helpSteps: []
     },
     {
         label: i18n.t("Access"),
         component: AccessScorecardForm,
+        helpSteps: []
     },
     {
         label: i18n.t("Options"),
         component: OptionsScorecardForm,
+        helpSteps: []
     },
 ];
 
@@ -59,7 +64,8 @@ const keys = Object.keys(new Scorecard())
 
 export default function ScoreCardManagement() {
     const [helpEnabled, setHelpEnabled] = useRecoilState(HelpState)
-    const [helpSteps, setHelpSteps] = useState();
+    const helpSteps = useRecoilValue(HelpSteps)
+    const [helpStepIndex, setHelpStepIndex] = useRecoilState(HelpIndex)
     const {id: scorecardId} = useParams();
     const user = useRecoilValue(UserState);
     const {write: writeAccess} = useRecoilValue(UserAuthorityOnScorecard(scorecardId))
@@ -148,6 +154,7 @@ export default function ScoreCardManagement() {
         const index = findIndex(steps, ["label", activeStep.label]);
         if (index !== steps.length - 1) {
             setActiveStep(steps[index + 1]);
+            setHelpStepIndex(0)
         }
     };
 
@@ -155,6 +162,7 @@ export default function ScoreCardManagement() {
         const index = findIndex(steps, ["label", activeStep.label]);
         if (index !== 0) {
             setActiveStep(steps[index - 1]);
+            setHelpStepIndex(0)
         }
     };
 
@@ -179,6 +187,7 @@ export default function ScoreCardManagement() {
         [activeStep]
     );
 
+
     if (!writeAccess && scorecardId) {
         return <AccessDeniedPage accessType={"edit"}/>
     }
@@ -186,29 +195,24 @@ export default function ScoreCardManagement() {
 
     return (
         <Suspense fallback={<FullPageLoader/>}>
-            <Steps
-                onBeforeChange={(nextStepIndex) => {
-                    helpSteps.updateStepElement(nextStepIndex)
-                    if (nextStepIndex === GENERAL_HELP_STEPS.length) {
-                        onNextStep()
-                    }
-                }}
-                onAfterChange={(index, element) => {
-                    if (!element) {
-                        helpSteps.introJs.nextStep()
-                    }
-                }}
-                enabled={helpEnabled}
-                options={STEP_OPTIONS}
-                steps={[...GENERAL_HELP_STEPS, ...DATA_CONFIGURATION_HELP_STEPS]}
-                initialStep={0}
-                onExit={() => setHelpEnabled(false)}
-                ref={steps => setHelpSteps(steps)}
-            />
             <div className="container">
+                <Steps
+                    enabled={helpEnabled}
+                    options={STEP_OPTIONS}
+                    steps={helpSteps}
+                    initialStep={helpStepIndex}
+                    onBeforeChange={(newStepIndex) => {
+                        setHelpStepIndex(newStepIndex)
+                    }}
+                    onExit={() => {
+                    }}
+                />
                 <div className="column">
                     <div className='row end align-items-center p-8'>
-                        <Button icon={<HelpIcon/>} onClick={() => setHelpEnabled(true)}>{i18n.t("Help")}</Button>
+                        <Button icon={<HelpIcon/>} onClick={() => {
+                            setHelpStepIndex(0)
+                            setHelpEnabled(true)
+                        }}>{i18n.t("Help")}</Button>
                     </div>
                     <div>
                         <Stepper>

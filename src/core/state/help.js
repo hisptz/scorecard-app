@@ -6,9 +6,17 @@ const HelpState = atom({
     default: false
 })
 
-const HelpStepsState = atom({
-    key: "help-steps-state",
+const HelpSteps = atom({
+    key: "intro-js-state",
+    default: []
+})
+
+const HelpIndex = atom({
+    key: 'current-step-index',
+    default: 0
 })
 
 
 export default HelpState;
+
+export {HelpSteps, HelpIndex}

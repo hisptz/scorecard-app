@@ -18,7 +18,8 @@ export default function OptionsScorecardForm() {
     }
 
 
-    return (
-        <ScorecardOptionsForm options={scorecardOptions} onChange={onChange} onAverageChange={onAverageChange}/>
+    return (<div>
+            <ScorecardOptionsForm options={scorecardOptions} onChange={onChange} onAverageChange={onAverageChange}/>
+        </div>
     )
 }
