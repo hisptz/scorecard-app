@@ -3,15 +3,18 @@ import {CheckboxField, Radio} from "@dhis2/ui";
 import PropTypes from 'prop-types'
 import React from "react";
 import AverageDisplayType from "../../../core/constants/averageDisplayType";
+import {OPTIONS_HELP_STEPS} from "../../../core/constants/help/scorecardManagement";
+import Help from "../../../modules/Main/Components/ScoreCardManagement/Components/Help";
 
 export default function ScorecardOptionsForm({options, onChange}) {
 
     return (
         <div className='container p-16'>
+            <Help helpSteps={OPTIONS_HELP_STEPS}/>
             <div className='row'>
-                <div className='column'>
+                <div className='column '>
                     <h3>{i18n.t('Visibility')}</h3>
-                    <div className='column'>
+                    <div className='column visibility-options'>
                         <CheckboxField checked={options?.legend} onChange={onChange('legend')} value='legend'
                                        label={i18n.t('Legend')}/>
                         <CheckboxField checked={options?.title} onChange={onChange('title')} value='title'
@@ -19,7 +22,8 @@ export default function ScorecardOptionsForm({options, onChange}) {
                         <CheckboxField checked={options?.itemNumber} onChange={onChange('itemNumber')}
                                        value='itemNumber' label={i18n.t('Item Number')}/>
                         <CheckboxField checked={options?.emptyRows} onChange={onChange('emptyRows')}
-                                  dataTest={'empty-row-option-score-card-modal'}     value='emptyRows' label={i18n.t('Empty Rows')}/>
+                                       dataTest={'empty-row-option-score-card-modal'} value='emptyRows'
+                                       label={i18n.t('Empty Rows')}/>
                         <CheckboxField checked={options?.showHierarchy} onChange={onChange('showHierarchy')}
                                        value='showHierarchy'
                                        label={i18n.t('Show Hierarchy')}/>
@@ -33,7 +37,7 @@ export default function ScorecardOptionsForm({options, onChange}) {
                                        value='averageRow' label={i18n.t('Highlighted Indicators')}/>
                     </div>
                     <h3>{i18n.t('Average')}</h3>
-                    <div className='column'>
+                    <div className='column average-options'>
                         <Radio onChange={() => onChange('averageDisplayType')(AverageDisplayType.ALL)}
                                checked={options?.averageDisplayType === AverageDisplayType.ALL}
                                value={AverageDisplayType.ALL} label={i18n.t('All')}/>
@@ -45,9 +49,9 @@ export default function ScorecardOptionsForm({options, onChange}) {
                                value={AverageDisplayType.ABOVE_AVERAGE} label={i18n.t('Above Average')}/>
                     </div>
                     <h3>{i18n.t('Options')}</h3>
-                    <div className='column'>
-                        <CheckboxField checked={options?.score} onChange={onChange('score')} value='score'
-                                       label={i18n.t('Score')}/>
+                    <div className='column other-options'>
+                        {/*<CheckboxField checked={options?.score} onChange={onChange('score')} value='score'*/}
+                        {/*               label={i18n.t('Score')}/>*/}
                         <CheckboxField checked={options?.arrows} onChange={onChange('arrows')} value='arrows'
                                        label={i18n.t('Arrows')}/>
                         <CheckboxField checked={options?.showDataInRows} onChange={onChange('showDataInRows')}

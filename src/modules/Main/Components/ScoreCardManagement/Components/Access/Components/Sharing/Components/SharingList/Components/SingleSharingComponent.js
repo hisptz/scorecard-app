@@ -8,6 +8,7 @@ import React, {useState} from 'react'
 import ScorecardAccess from "../../../../../../../../../../../core/models/scorecardAccess";
 import {getAccessIcon, getAccessName} from "../../../utils";
 import SharingMenu from "./SharingMenu";
+
 export default function SingleSharingComponent({access, onDelete, onAccessChange}) {
     const { access: selectedAccess, type, displayName} = access;
     const [ref, setRef] = useState()
@@ -29,8 +30,9 @@ export default function SingleSharingComponent({access, onDelete, onAccessChange
                         <p style={{color: colors.grey700, fontSize: 14, margin: 0}}>{getAccessName(selectedAccess)}</p>
                     </div>
                     <div className='column align-items-end'>
-                        <ButtonStrip>
-                            <Button onClick={(_, e) => setRef(e.currentTarget)} icon={<EditIcon/>}>{i18n.t('Edit')}</Button>
+                        <ButtonStrip className='edit-delete-access'>
+                            <Button onClick={(_, e) => setRef(e.currentTarget)}
+                                    icon={<EditIcon/>}>{i18n.t('Edit')}</Button>
                             {
                                 Boolean(onDelete) &&
                                 <Button

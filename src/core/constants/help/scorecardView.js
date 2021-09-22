@@ -3,7 +3,12 @@ import React from 'react'
 
 export const SCORECARD_VIEW_HELP_STEPS = [
     {
-        intro: i18n.t("This is the default view for your scorecard")
+        intro: <div>
+            <h3>{i18n.t("Scorecard View")}</h3>
+            <p>
+                {i18n.t("This is the default view for your scorecard")}
+            </p>
+        </div>
     },
     {
         element: '#org-unit-selector',
@@ -65,4 +70,9 @@ export const SCORECARD_VIEW_HELP_STEPS = [
         element: ".data-cell",
         intro: i18n.t("Click on a data cell to see further analysis")
     },
+    {
+        element: '.child-org-unit-row > td',
+        intro: i18n.t("Click on the arrow to view a scorecard of this organisation unit's lower level")
+    }
 ]
+

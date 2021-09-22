@@ -1,7 +1,7 @@
 import {useAlert} from "@dhis2/app-runtime";
 import {useSetting} from "@dhis2/app-service-datastore";
 import i18n from "@dhis2/d2-i18n";
-import {Button, ButtonStrip, Input, Tooltip} from "@dhis2/ui";
+import {Button, ButtonStrip, DropdownButton, Input, Tooltip} from "@dhis2/ui";
 import AddIcon from "@material-ui/icons/Add";
 import HelpIcon from "@material-ui/icons/Help";
 import ListViewIcon from "@material-ui/icons/Reorder";
@@ -18,6 +18,7 @@ import {ScorecardIdState, ScorecardSummaryState,} from "../../../../core/state/s
 import {FullPageLoader} from "../../../../shared/Components/Loaders";
 import EmptyScoreCardList from "../EmptyScoreCardList";
 import GridScorecardDisplay from "./Components/GridScorecardDisplay";
+import HelpMenu from "./Components/HelpMenu";
 import ListScorecardDisplay from "./Components/ListScorecardDisplay";
 import PaginatedDisplay from "./Components/PaginatedDisplay";
 
@@ -80,17 +81,14 @@ export default function ScorecardList() {
         history.push("/add", {from: "home"});
     };
 
-    const onHelp = () => {
-        setHelpEnabled(true)
-    }
-
     const onHelpExit = () => {
         setHelpEnabled(false)
     }
 
     return (
         <Suspense fallback={<FullPageLoader/>}>
-            <Steps options={STEP_OPTIONS} enabled={helpEnabled} steps={SCORECARD_LIST_HELP_STEPS} onExit={onHelpExit} initialStep={0}/>
+            <Steps options={STEP_OPTIONS} enabled={helpEnabled} steps={SCORECARD_LIST_HELP_STEPS} onExit={onHelpExit}
+                   initialStep={0}/>
             {isEmpty(scorecards) ? (
                 <EmptyScoreCardList/>
             ) : (
@@ -110,7 +108,8 @@ export default function ScorecardList() {
                         </div>
                         <div className="w-100">
                             <ButtonStrip end>
-                                <Button onClick={onHelp} icon={<HelpIcon/>}>{i18n.t("Help")}</Button>
+                                <DropdownButton type="button" component={<HelpMenu/>}
+                                                icon={<HelpIcon/>}>{i18n.t("Help")}</DropdownButton>
                                 <Tooltip
                                     content={i18n.t("Switch to {{viewType}} view", {
                                         viewType:

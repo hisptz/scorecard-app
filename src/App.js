@@ -1,4 +1,5 @@
 import {DataStoreProvider} from "@dhis2/app-service-datastore";
+import {CssReset} from '@dhis2/ui'
 import React, {Suspense} from "react";
 import {ErrorBoundary} from "react-error-boundary";
 import {RecoilRoot} from "recoil";
@@ -11,10 +12,11 @@ import FullPageError from "./shared/Components/Errors/FullPageError";
 import {FullPageLoader} from "./shared/Components/Loaders";
 import "./locales";
 import 'intro.js/introjs.css';
-// import "./intro-dhis2.css"
+import "./intro-dhis2.css"
 
 
 const MyApp = () => {
+
     const {initializeState} = useInitApp()
 
     return (
@@ -22,6 +24,7 @@ const MyApp = () => {
             namespace={DATASTORE_NAMESPACE}
             loadingComponent={<FullPageLoader/>}
         >
+            <CssReset/>
             <RecoilRoot initializeState={initializeState}>
                 <ErrorBoundary FallbackComponent={FullPageError}>
                     <Suspense fallback={<FullPageLoader/>}>

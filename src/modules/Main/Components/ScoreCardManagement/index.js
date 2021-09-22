@@ -2,11 +2,16 @@ import {useAlert} from "@dhis2/app-runtime";
 import i18n from "@dhis2/d2-i18n";
 import {Button, ButtonStrip} from "@dhis2/ui";
 import {Step, StepLabel, Stepper} from "@material-ui/core";
+import HelpIcon from "@material-ui/icons/Help";
+import {Steps} from "intro.js-react";
 import {findIndex, fromPairs, isEmpty} from "lodash";
 import React, {Suspense, useEffect, useMemo, useState} from "react";
 import {useHistory, useParams} from "react-router-dom";
-import {useRecoilCallback, useRecoilValue, useSetRecoilState, waitForAll} from "recoil";
+import {useRecoilCallback, useRecoilState, useRecoilValue, useSetRecoilState, waitForAll} from "recoil";
+import {STEP_OPTIONS} from "../../../../core/constants/help/options";
+import {DATA_CONFIGURATION_HELP_STEPS, GENERAL_HELP_STEPS} from "../../../../core/constants/help/scorecardManagement";
 import Scorecard from "../../../../core/models/scorecard";
+import HelpState, {HelpIndex, HelpSteps} from "../../../../core/state/help";
 import ScorecardConfState, {
     ScorecardConfigDirtyState,
     ScorecardConfigEditState,
@@ -31,28 +36,36 @@ const steps = [
     {
         label: i18n.t("General"),
         component: GeneralScorecardForm,
+        helpSteps: GENERAL_HELP_STEPS
     },
     {
         label: i18n.t("Data Configuration"),
         component: DataConfigurationScorecardForm,
+        helpSteps: DATA_CONFIGURATION_HELP_STEPS
     },
     {
         label: i18n.t("Highlighted Indicators"),
         component: HighlightedIndicatorsScorecardForm,
+        helpSteps: []
     },
     {
         label: i18n.t("Access"),
         component: AccessScorecardForm,
+        helpSteps: []
     },
     {
         label: i18n.t("Options"),
         component: OptionsScorecardForm,
+        helpSteps: []
     },
 ];
 
 const keys = Object.keys(new Scorecard())
 
 export default function ScoreCardManagement() {
+    const [helpEnabled, setHelpEnabled] = useRecoilState(HelpState)
+    const helpSteps = useRecoilValue(HelpSteps)
+    const [helpStepIndex, setHelpStepIndex] = useRecoilState(HelpIndex)
     const {id: scorecardId} = useParams();
     const user = useRecoilValue(UserState);
     const {write: writeAccess} = useRecoilValue(UserAuthorityOnScorecard(scorecardId))
@@ -111,7 +124,6 @@ export default function ScoreCardManagement() {
             ).contents;
 
             const errors = validateScorecard(updatedScorecard);
-            console.log(JSON.stringify(updatedScorecard))
             const sanitizedScorecard = sanitizeScorecard(updatedScorecard)
             if (!isEmpty(errors)) {
                 const errorMessage = `Please fill in the required field(s)`
@@ -141,10 +153,10 @@ export default function ScoreCardManagement() {
         }
         const index = findIndex(steps, ["label", activeStep.label]);
 
-        
+
         if (index !== steps.length - 1) {
             setActiveStep(steps[index + 1]);
-
+            setHelpStepIndex(0)
         }
     };
 
@@ -153,7 +165,7 @@ export default function ScoreCardManagement() {
 
         if (index !== 0) {
             setActiveStep(steps[index - 1]);
-
+            setHelpStepIndex(0)
         }
     };
 
@@ -186,9 +198,22 @@ export default function ScoreCardManagement() {
         return <AccessDeniedPage accessType={"edit"}/>
     }
 
+
     return (
         <Suspense fallback={<FullPageLoader/>}>
             <div className="container">
+                <Steps
+                    enabled={helpEnabled}
+                    options={STEP_OPTIONS}
+                    steps={helpSteps}
+                    initialStep={helpStepIndex}
+                    onBeforeChange={(newStepIndex) => {
+                        setHelpStepIndex(newStepIndex)
+                    }}
+                    onExit={() => {
+                        setHelpEnabled(false)
+                    }}
+                />
                 <div className="column">
                     <div>
                         <Stepper>
@@ -212,12 +237,20 @@ export default function ScoreCardManagement() {
                                 className="container container-bordered background-white center"
                                 style={{width: width * 0.96, minHeight: height * 0.78}}
                             >
-                                <div className="row" style={{height: "100%"}}>
+                                <div className="row" style={{height: "100%",}}>
                                     <div
                                         className="column p-16"
                                         style={{height: "100%", justifyContent: "space-between"}}
                                     >
-                                        {<Component/>}
+                                        <div className='row end align-items-center'>
+                                            <Button icon={<HelpIcon/>} onClick={() => {
+                                                setHelpStepIndex(0)
+                                                setHelpEnabled(true)
+                                            }}>{i18n.t("Help")}</Button>
+                                        </div>
+                                        <div style={{minHeight: height * 0.65}}>
+                                            {<Component onNextStep={onNextStep} onPreviousStep={onPreviousStep}/>}
+                                        </div>
                                         <ButtonStrip start>
                                             <Button
                                                 disabled={!hasPreviousStep}
@@ -229,6 +262,7 @@ export default function ScoreCardManagement() {
                                                 primary
                                                 disabled={saving}
                                                 onClick={onNextStep}
+                                                className="settings-next-button"
                                                 dataTest="scorecard-admin-next-button"
                                             >
                                                 {!hasNextStep
@@ -243,7 +277,7 @@ export default function ScoreCardManagement() {
                             </div>
                         </div>
                     </div>
-                    <div className="row center p-32">
+                    <div className="row center p-16">
                         <ButtonStrip center>
                             <Button disabled={saving} onClick={onSave} >
                                 {saving ? `${i18n.t("Saving")}...` : i18n.t("Save and exit")}

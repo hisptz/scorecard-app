@@ -11,7 +11,7 @@ export default function Sharing() {
             <div>
                 <p style={{fontSize: 18}}>{i18n.t('Shared With')}</p>
             </div>
-            <div>
+            <div className='sharing-list'>
                 <SharingList/>
             </div>
             <div className='pt-32'>

@@ -8,10 +8,14 @@ export default function DataSourceConfiguration() {
     const {selectedDataHolderIndex} = useRecoilValue(ScorecardConfigEditState)
 
     return (
-        !isNaN(selectedDataHolderIndex) ?
-            <SelectedDataSourceConfigurationForm/> :
-            <div className='row center align-items-center' >
-                <DataSourceInstructions/>
-            </div>
+        <div>
+
+            {!isNaN(selectedDataHolderIndex) ?
+                <SelectedDataSourceConfigurationForm/> :
+                <div className='row center align-items-center'>
+                    <DataSourceInstructions/>
+                </div>
+            }
+        </div>
     )
 }

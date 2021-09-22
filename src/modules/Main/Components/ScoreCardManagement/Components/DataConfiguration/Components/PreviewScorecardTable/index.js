@@ -14,7 +14,6 @@ export default function PreviewScorecardTable() {
     return (
         <div className='column' style={{width: '100%', overflowX: 'auto'}}>
             <DataTable bordered width={"100%"}>
-
                 <DataTableHead>
                     <DataTableRow>
                         <DataTableCell fixed align='center' className='table-header scorecard-table-header' bordered

@@ -1,17 +1,22 @@
 import {debounce, filter} from "lodash";
 import React, {useMemo} from 'react'
 import {useRecoilState, useRecoilValue} from "recoil";
+import {INDICATOR_CONFIGURATION_STEPS} from "../../../../../../../core/constants/help/scorecardManagement";
 import {
-    ScorecardConfigEditState,
+    ScorecardConfigDirtySelector,
     ScorecardConfigDirtyState,
-    ScorecardConfigDirtySelector
+    ScorecardConfigEditState
 } from "../../../../../../../core/state/scorecard";
 import DataSourceConfigurationForm
     from "../../../../../../../shared/Components/CustomForm/components/DataSourceConfigurationForm";
+import Help from "../../Help";
 
 export default function HighlightedDataSourceConfigurationForm() {
     const {selectedHighlightedIndicatorIndex} = useRecoilValue(ScorecardConfigEditState)
-    const [selectedHighlightedIndicator, setSelectedHighlightedIndicator] = useRecoilState(ScorecardConfigDirtySelector({path: [selectedHighlightedIndicatorIndex], key: 'highlightedIndicators'}))
+    const [selectedHighlightedIndicator, setSelectedHighlightedIndicator] = useRecoilState(ScorecardConfigDirtySelector({
+        path: [selectedHighlightedIndicatorIndex],
+        key: 'highlightedIndicators'
+    }))
     const legendDefinitions = useRecoilValue(ScorecardConfigDirtyState('legendDefinitions'))
     const filteredLegendDefinitions = useMemo(() => filter(legendDefinitions, ({isDefault}) => (!isDefault)), [legendDefinitions]);
 
@@ -28,11 +33,12 @@ export default function HighlightedDataSourceConfigurationForm() {
     return (
         !isNaN(selectedHighlightedIndicatorIndex) ?
             <div className='container-bordered'>
-            {
-                selectedHighlightedIndicator &&
-                <DataSourceConfigurationForm defaultValues={selectedHighlightedIndicator}
-                                          legendDefinitions={filteredLegendDefinitions} onFormChange={onChange}/>
-            }
-        </div> : null
+                <Help helpSteps={INDICATOR_CONFIGURATION_STEPS}/>
+                {
+                    selectedHighlightedIndicator &&
+                    <DataSourceConfigurationForm defaultValues={selectedHighlightedIndicator}
+                                                 legendDefinitions={filteredLegendDefinitions} onFormChange={onChange}/>
+                }
+            </div> : null
     )
 }

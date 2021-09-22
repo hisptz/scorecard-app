@@ -15,7 +15,9 @@ export default function OrgUnit() {
     return (
         <div className='column'>
             <div className='pt-16 pb-16'><h3>{i18n.t('Organisation Unit')}</h3></div>
-            <OrgUnitFilter onUpdate={onSetOrgUnit} value={organisationUnit}/>
+            <div className='access-org-unit-filter'>
+                <OrgUnitFilter onUpdate={onSetOrgUnit} value={organisationUnit}/>
+            </div>
         </div>
     )
 }

@@ -10,9 +10,11 @@ import {
 } from '@dhis2/ui'
 import DeleteIcon from "@material-ui/icons/Delete";
 import {cloneDeep, get, isEmpty, remove} from 'lodash'
-import React from 'react'
+import React, {Fragment} from 'react'
 import {useRecoilState} from "recoil";
-import {ScorecardConfigEditState, ScorecardConfigDirtyState} from "../../../../../../../core/state/scorecard";
+import {HIGHLIGHTED_TABLE_HELP_STEPS} from "../../../../../../../core/constants/help/scorecardManagement";
+import {ScorecardConfigDirtyState, ScorecardConfigEditState} from "../../../../../../../core/state/scorecard";
+import Help from "../../Help";
 
 const columns = [
     {
@@ -44,7 +46,9 @@ export default function HighlightedIndicatorsTable() {
     }
 
     return (!isEmpty(highlightedIndicators) ?
-            <DataTable>
+            <Fragment>
+                <Help helpSteps={HIGHLIGHTED_TABLE_HELP_STEPS}/>
+                <DataTable>
                 <DataTableHead>
                     <DataTableRow>
                         {
@@ -70,7 +74,7 @@ export default function HighlightedIndicatorsTable() {
                             </DataTableRow>))
                     }
                 </TableBody>
-            </DataTable> : null
+            </DataTable></Fragment> : null
     )
 }
 
