@@ -67,7 +67,6 @@ export default function ScoreCardManagement() {
     const {width, height} = useMediaQuery();
     const history = useHistory();
     const [activeStep, setActiveStep] = useState(steps[0]);
-    const [currentStepIndex,setCurrentStepIndex]=useState(0);
     const Component = activeStep.component;
 
     const resetStates = useRecoilCallback(({reset}) => () => {
@@ -151,7 +150,7 @@ export default function ScoreCardManagement() {
 
     const onPreviousStep = () => {
         const index = findIndex(steps, ["label", activeStep.label]);
-        setCurrentStepIndex(index)
+
         if (index !== 0) {
             setActiveStep(steps[index - 1]);
 
@@ -182,10 +181,7 @@ export default function ScoreCardManagement() {
     const currentIndex= useMemo(() => findIndex(steps, ["label", activeStep.label]) ,
         [activeStep]
     );
-    console.log(currentIndex)
-    // console.log(currentStepIndex)
-    console.log(activeStep)
-    
+
     if (!writeAccess && scorecardId) {
         return <AccessDeniedPage accessType={"edit"}/>
     }

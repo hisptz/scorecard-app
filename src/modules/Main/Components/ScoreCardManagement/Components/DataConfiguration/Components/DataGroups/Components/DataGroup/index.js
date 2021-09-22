@@ -383,7 +383,7 @@ export default function DataGroup({
                                             onClick={(event) => {
                                                 event.stopPropagation();
                                                 setTitleEditOpen(true);
-                                            }}
+                                           }}
                                             size="small"
                                             className="accordion-title-edit"
                                         >
