@@ -63,7 +63,7 @@ export default function AddSharingAccess() {
                 </SingleSelectField>
             </div>
             <div className='column' style={{width: '20%'}}>
-                <Button className="add-access-button" onClick={onAdd} primary icon={<AddIcon/>}>{i18n.t('Add')}</Button>
+                <Button className="add-access-button" onClick={onAdd} icon={<AddIcon/>}>{i18n.t('Add')}</Button>
             </div>
         </div>
     )

@@ -16,6 +16,7 @@ import {FullPageLoader} from "../../../../shared/Components/Loaders";
 import AccessDeniedPage from "./Components/AccessDeniedPage";
 import EmptyOrgUnitsOrPeriod from "./Components/EmptyOrgUnitsOrPeriod";
 import HighlightedIndicatorsView from "./Components/HighlightedIndicatorsView";
+import ScorecardActions from "./Components/ScorecardActions";
 import ScorecardHeader from "./Components/ScorecardHeader";
 import ScorecardViewHeader from "./Components/ScorecardViewHeader";
 
@@ -55,22 +56,25 @@ export default function ScorecardView() {
 
     return (
         <Suspense fallback={<FullPageLoader/>}>
-            <ScorecardViewHeader />
-            <div ref={downloadRef} className="column p-16" style={{height: "100%", width: "100%"}}>
-                <ScorecardHeader dataEngine={initialDataEngine} downloadAreaRef={downloadRef} />
-                <ScorecardLegendsView/>
-                <HighlightedIndicatorsView/>
-                <div className="column align-items-center pt-16 flex-1">
-                    {
-                        (!isEmpty(orgUnits) && !isEmpty(periods)) ? <Suspense fallback={<FullPageLoader/>}>
-                            <ScorecardTable
-                                initialDataEngine={initialDataEngine}
-                                nested={false}
-                                orgUnits={orgUnitsIds}/>
-                        </Suspense> : <EmptyOrgUnitsOrPeriod/>
-                    }
+            <ScorecardViewHeader/>
+            <Suspense fallback={<FullPageLoader/>}>
+                <div ref={downloadRef} className="column p-16" style={{height: "100%", width: "100%"}}>
+                    <ScorecardActions dataEngine={initialDataEngine} downloadAreaRef={downloadRef}/>
+                    <ScorecardHeader/>
+                    <ScorecardLegendsView/>
+                    <HighlightedIndicatorsView/>
+                    <div className="column align-items-center pt-16 flex-1">
+                        {
+                            (!isEmpty(orgUnits) && !isEmpty(periods)) ? <Suspense fallback={<FullPageLoader/>}>
+                                <ScorecardTable
+                                    initialDataEngine={initialDataEngine}
+                                    nested={false}
+                                    orgUnits={orgUnitsIds}/>
+                            </Suspense> : <EmptyOrgUnitsOrPeriod/>
+                        }
+                    </div>
                 </div>
-            </div>
+            </Suspense>
         </Suspense>
     );
 }

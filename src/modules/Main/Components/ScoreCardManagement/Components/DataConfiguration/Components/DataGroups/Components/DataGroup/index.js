@@ -345,7 +345,7 @@ export default function DataGroup({
                                     </div>
                                     <div className="column ">
                                         <ButtonStrip end>
-                                            <Button onClick={onTitleEditSubmit} primary>
+                                            <Button onClick={onTitleEditSubmit}>
                                                 {i18n.t('Save')}
                                             </Button>
                                             <Button
