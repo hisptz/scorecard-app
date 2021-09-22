@@ -42,8 +42,8 @@ export default function ChildOrgUnitRow({orgUnit, expandedOrgUnit, onExpand, ove
     useEffect(subscribe, [orgUnit, loading, id, dataEngine])
     const Component = ((emptyRows || !isEmpty) &&
         <DataTableRow
-        dataTest={'orgUnit-children-table-column-cell'}
-
+            dataTest={'orgUnit-children-table-column-cell'}
+            className="child-org-unit-row"
             expanded={id === expandedOrgUnit}
             onExpandToggle={() => {
                 if (id === expandedOrgUnit) {

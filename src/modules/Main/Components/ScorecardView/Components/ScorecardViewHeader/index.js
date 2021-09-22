@@ -76,7 +76,8 @@ export default function ScorecardViewHeader({downloadAreaRef, dataEngine}) {
 
     return (
         <div className="selection-card">
-            <Steps options={STEP_OPTIONS} steps={SCORECARD_VIEW_HELP_STEPS} enabled={helpEnabled} initialStep={0} onExit={onHelpExit}/>
+            <Steps options={STEP_OPTIONS} steps={SCORECARD_VIEW_HELP_STEPS} enabled={helpEnabled} initialStep={0}
+                   onExit={onHelpExit}/>
             <Card>
                 <div className='row space-between align-items-center pl-16 pr-16'>
                     <div className='row'>
