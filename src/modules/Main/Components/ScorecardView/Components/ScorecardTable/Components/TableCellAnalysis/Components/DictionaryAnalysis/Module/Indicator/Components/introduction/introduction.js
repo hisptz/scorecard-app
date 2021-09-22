@@ -42,24 +42,28 @@ export default function Introduction({id}) {
 
     return (<div>
 
-            <h2>{indicatorDetails?.name} </h2>
+            <h2 id={'test-indicator-details'} >{indicatorDetails?.name} </h2>
 
             <h3>{i18n.t('Introduction')}</h3>
 
             <p>
-                <b>{indicatorDetails?.name} </b>
+                <b id={'test-indicator-details'}>{indicatorDetails?.name} </b>
                 {i18n.t("is a")}
                 <b> {indicatorDetails?.indicatorType?.displayName} </b>
                 {i18n.t("indicator, measured by")}
-                <b> {indicatorDetails?.numeratorDescription} </b>
-                {i18n.t("to")}<b> {indicatorDetails?.denominatorDescription} </b>
+                <b id={'test-indicator-details'}> {indicatorDetails?.numeratorDescription} </b>
+                {i18n.t("to")}<b id={'test-indicator-details'}> {indicatorDetails?.denominatorDescription} </b>
             </p>
 
-            <p>
+            <p id={'test-indicator-details'}>
+
                 {i18n.t("Its described as {{variable}}",{variable:indicatorDetails?.displayDescription})}
             </p>
 
-            <IdentifiedBy id={indicatorDetails?.id} href={indicatorDetails?.href} />
+            <p>
+                <span><i onClick={() => onClickIdentified(indicatorDetails?.id)}>{i18n.t("Identified by:")} <span
+               id={'test-indicator-details'}     className={classes.identifylink}> {indicatorDetails?.id} </span> </i></span>
+            </p>
 
         </div>
     )

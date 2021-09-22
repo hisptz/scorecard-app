@@ -1,11 +1,15 @@
 import i18n from '@dhis2/d2-i18n'
 import {Button, ButtonStrip, Card} from '@dhis2/ui'
+import {Steps} from "intro.js-react";
 import PropTypes from 'prop-types'
 import React, {useEffect, useMemo, useRef, useState} from 'react'
 import {useHistory} from "react-router-dom";
 import {useRecoilCallback, useRecoilState, useRecoilValue} from "recoil";
+import {STEP_OPTIONS} from "../../../../../../core/constants/help/options";
+import {SCORECARD_VIEW_HELP_STEPS} from "../../../../../../core/constants/help/scorecardView";
 import {FilterComponentTypes} from "../../../../../../core/constants/selection";
 import ScorecardDataEngine from "../../../../../../core/models/scorecardData";
+import HelpState from "../../../../../../core/state/help";
 import {OrgUnitGroups, OrgUnitLevels} from "../../../../../../core/state/orgUnit";
 import ScorecardConfState, {ScorecardIdState, ScorecardViewState} from "../../../../../../core/state/scorecard";
 import {UserAuthorityOnScorecard} from "../../../../../../core/state/user";
@@ -19,6 +23,7 @@ import useDownload from "./hooks/useDownload";
 
 
 export default function ScorecardViewHeader({downloadAreaRef, dataEngine}) {
+    const [helpEnabled, setHelpEnabled] = useRecoilState(HelpState)
     const history = useHistory();
     const scorecardId = useRecoilValue(ScorecardIdState)
     const orgUnitLevels = useRecoilValue(OrgUnitLevels)
@@ -65,20 +70,28 @@ export default function ScorecardViewHeader({downloadAreaRef, dataEngine}) {
         orgUnitLevels
     }), [orgUnitGroups, orgUnitLevels, orgUnitSelection]);
 
+    const onHelpExit = () => {
+        setHelpEnabled(false)
+    }
 
     return (
         <div className="selection-card">
+            <Steps options={STEP_OPTIONS} steps={SCORECARD_VIEW_HELP_STEPS} enabled={helpEnabled} initialStep={0} onExit={onHelpExit}/>
             <Card>
                 <div className='row space-between align-items-center pl-16 pr-16'>
                     <div className='row'>
                         <SelectionWrapper
+                            id={"org-unit-selector"}
                             selectedItems={orgUnitSelectionDisplay}
                             name={'Organisation Unit'}
+                            dataTest={'test-selected-organization-unit'}
                             onClick={() => {
                                 setOrgUnitSelectionOpen(true)
                             }} type={FilterComponentTypes.ORG_UNIT}/>
                         <SelectionWrapper
+                            id={"period-selector"}
                             selectedItems={periodSelection?.periods}
+                            dataTest={'test-selected-period'}
                             name='Period'
                             onClick={() => {
                                 setPeriodSelectionOpen(true)
@@ -87,19 +100,19 @@ export default function ScorecardViewHeader({downloadAreaRef, dataEngine}) {
                     </div>
                     <div className='column align-items-end'>
                         <ButtonStrip className='pb-8'>
-                            <Button onClick={onHome}>{i18n.t('Home')}</Button>
-                            <Button onClick={onRefresh}>{i18n.t('Refresh')}</Button>
+                            <Button className="home-button" onClick={onHome}>{i18n.t('Home')}</Button>
+                            <Button className="refresh-button" onClick={onRefresh}>{i18n.t('Refresh')}</Button>
                         </ButtonStrip>
                         <ButtonStrip>
-                            <Button onClick={() => setOptionsOpen(true)}>{i18n.t('Options')}</Button>
-                            {writeAccess && <Button onClick={onEdit}>Edit</Button>}
-                            <Button onClick={() => setDownloadOpen(true)}>
+                            <Button className="option-button" onClick={() => setOptionsOpen(true)}>{i18n.t('Options')}</Button>
+                            {writeAccess && <Button dataTest={"test-edit-scorecard"} className="scorecard-view-edit-button" onClick={onEdit}>{i18n.t("Edit")}</Button>}
+                            <Button className="download-button" onClick={() => setDownloadOpen(true)}>
                                 <div ref={downloadRef}>{i18n.t("Download")}</div>
                             </Button>
                             {downloadOpen &&
                             <DownloadMenu reference={downloadRef} onClose={() => setDownloadOpen(false)}
                                           onDownload={onDownload}/>}
-                            <Button>{i18n.t('Help')}</Button>
+                            <Button onClick={() => setHelpEnabled(true)}>{i18n.t('Help')}</Button>
                         </ButtonStrip>
                     </div>
                     {

@@ -12,6 +12,7 @@ export default function SelectionWrapper({
                                              type,
                                              onClick,
                                              selectedItems = [],
+    id,
                                              ...props
                                          }) {
 
@@ -21,7 +22,7 @@ export default function SelectionWrapper({
 
 
     return (
-        <div onClick={onClick}>
+        <div id={id} onClick={onClick}>
             <Tooltip content={<div>
                 {
                     selectedItems?.map(({name, displayName, id}) => (
@@ -71,5 +72,6 @@ SelectionWrapper.propTypes = {
     name: PropTypes.string.isRequired,
     type: PropTypes.oneOf([FilterComponentTypes.PERIOD, FilterComponentTypes.ORG_UNIT]).isRequired,
     onClick: PropTypes.func.isRequired,
+    id: PropTypes.string,
     selectedItems: PropTypes.array,
 };

@@ -19,7 +19,7 @@ import DisplaySourceProgramDataElementOrAttribute from "./Components/DisplaySour
 
 
 
-export default function CalculationDetailRow({formula, location}){
+export default function CalculationDetailRow({formula, location,...props}){
 
     //hooks
     const engine = useDataEngine()

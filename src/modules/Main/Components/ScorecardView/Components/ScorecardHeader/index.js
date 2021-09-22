@@ -10,7 +10,7 @@ export default function ScorecardHeader() {
     const title = useRecoilValue(ScorecardConfigDirtyState('title'))
     const subtitle = useRecoilValue(ScorecardConfigDirtyState('subtitle'))
     return (
-        showTitle ? <div>
+        showTitle ? <div id={"scorecard-header"}>
             {
                 customHeader ? <JsxParser
                     autoCloseVoidElements
@@ -20,7 +20,7 @@ export default function ScorecardHeader() {
                         subtitle
                     }} jsx={customHeader}
                 /> : <div className='column center align-items-center'>
-                    <h1 style={{margin: 8}}>{title}</h1>
+                    <h1 style={{margin: 8}} id={'data-test-score-card-title'}>{title}</h1>
                     <h3 style={{color: colors.grey600, margin: 0}}>{subtitle}</h3>
                 </div>
             }

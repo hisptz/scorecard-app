@@ -68,7 +68,7 @@ export default function CalculationDetails({id}) {
                         {i18n.t("Numerator")}
 
                     </DataTableCell>
-                    <CalculationDetailRow formula={numDen.numerator} location="numerator"/>
+                    <CalculationDetailRow dataTest = {"test-numerator-metadata"} formula={numDen.numerator} location="numerator"/>
 
                 </DataTableRow>
                 <DataTableRow>

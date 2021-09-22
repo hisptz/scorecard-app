@@ -35,6 +35,7 @@ export default function PeriodHeaderRow({orgUnits}) {
                                                                                                                      }) => (
                     periods?.map(({name, id: periodId}) => (
                         <DataTableColumnHeader
+                        dataTest={'test-period-table-scorecard'}
                             fixed
                             top={"0"}
                             onSortIconClick={onSortClick}
@@ -43,7 +44,7 @@ export default function PeriodHeaderRow({orgUnits}) {
                             bordered
                             align='center'
                             key={`${id}-${periodId}`}
-                            className='scorecard-table-cell'
+                            className='scorecard-table-cell period-header'
                             name={`${head(dataSources)?.id}-${periodId}`}
 
                         >
@@ -54,6 +55,7 @@ export default function PeriodHeaderRow({orgUnits}) {
                                                                                                      id: periodId
                                                                                                  }) => (
                     <DataTableColumnHeader
+                    dataTest={'test-period-table-scorecard'}
                         fixed
                         top={"0"}
                         onSortIconClick={onSortClick}
@@ -62,7 +64,7 @@ export default function PeriodHeaderRow({orgUnits}) {
                         bordered
                         align='center'
                         key={`${id}-${periodId}`}
-                        className='scorecard-table-cell'
+                        className='scorecard-table-cell period-header'
                         name={`${id}-${periodId}`}
                     >
                         {name}

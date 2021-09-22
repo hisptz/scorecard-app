@@ -54,7 +54,7 @@ export default function OrgUnitHeaderRow({orgUnits, nested}) {
                                    width={nameColumnWidth} bordered
                                    className='scorecard-table-header scorecard-org-unit-cell' rowSpan={"2"}>
                 {
-                    !nested && <InputField className='print-hide w-100' value={searchValue}
+                    !nested && <InputField className='print-hide w-100 data-search' value={searchValue}
                                            onChange={({value}) => setSearchValue(value)}
                                            placeholder={i18n.t('Search Data')}/>
                 }
@@ -68,7 +68,7 @@ export default function OrgUnitHeaderRow({orgUnits, nested}) {
                                            bordered
                                            width={`${periods?.length * ScorecardTableConstants.CELL_WIDTH}px`}
                                            colSpan={`${(periods?.length ?? 1)}`} key={id}>
-                        <div style={{height: '100%', width: '100%'}}>
+                        <div style={{height: '100%', width: '100%'}} >
                             <Tooltip className='m-auto' content={i18n.t('Drag to row headers to change layout ')}>
                                 <DroppableCell accept={[DraggableItems.DATA_ROW]}>
                                     <DraggableCell label={displayName} type={DraggableItems.ORG_UNIT_COLUMN}/>
@@ -76,7 +76,7 @@ export default function OrgUnitHeaderRow({orgUnits, nested}) {
                             </Tooltip>
                         </div>
                     </DataTableColumnHeader>
-                ))
+                )) 
             }
             {
                 averageColumn &&

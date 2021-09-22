@@ -8,22 +8,22 @@ export default function DownloadMenu({reference, onClose, onDownload}) {
 
     return (
         <Layer onClick={onClose}>
-            <Popper reference={reference} placement="bottom-start">
+            <Popper  reference={reference} placement="bottom-start">
                 <FlyoutMenu>
                     {
-                        Object.values(DownloadTypes)?.map(type => <MenuItem onClick={() => {
+                        Object.values(DownloadTypes)?.map(type => <MenuItem dataTest={'data-test=popup-download-menu-list'} onClick={() => {
                             onDownload(type)
                             onClose()
                         }}
                                                                             key={`${type}-download-menu`}
                                                                             label={type}/>)
                     }
-                    <MenuItem label={'ALMA'}>
-                        <MenuItem label={`${i18n.t('Data')}(JSON)`} onClick={() => {
+                    <MenuItem dataTest={'test-alma-data'} label={'ALMA'}>
+                        <MenuItem dataTest={'test-alma-data-json'} label={`${i18n.t('Data')}(JSON)`} onClick={() => {
                             onDownload('ALMAData')
                             onClose()
                         }}/>
-                        <MenuItem label={i18n.t('Metadata')} onClick={() => {
+                        <MenuItem  dataTest={'test-alma-meta-data'} label={i18n.t('Metadata')} onClick={() => {
                             onDownload('ALMAMeta')
                             onClose()
                         }}/>

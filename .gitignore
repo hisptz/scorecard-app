@@ -8,3 +8,4 @@ logs
 cypress.env.json
 yarn.lock
 *.log
+.vscode

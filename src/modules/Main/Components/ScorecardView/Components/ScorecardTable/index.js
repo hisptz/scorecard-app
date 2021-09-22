@@ -35,17 +35,18 @@ export default function ScorecardTable({orgUnits, nested, initialDataEngine}) {
     }, []);
 
     return (
-        <div className="w-100 pb-32 flex-1 print-area">
+        <div className="w-100 pb-32 flex-1 print-area scorecard-table">
             {
                 loading ? <TableLoader/> :
                     <DndProvider backend={HTML5Backend}>
                         <DataTable
                             className='table-print'
                             layout="fixed"
-                            width={screenWidth}
+                          
                             scrollWidth={tableWidth ?? screenWidth}
                         >
-                            <TableHeader orgUnits={orgUnits} nested={nested}/>
+                            <TableHeader   width={screenWidth}
+                             orgUnits={orgUnits} nested={nested}/>
                             <TableLinearLoader orgUnits={orgUnits} dataEngine={dataEngine}/>
                             <Suspense fallback={<TableLoader orgUnits={orgUnits}/>}>
                                 <ScorecardTableBody dataEngine={dataEngine} orgUnits={orgUnits}/>
