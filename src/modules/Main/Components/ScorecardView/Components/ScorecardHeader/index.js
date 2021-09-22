@@ -1,5 +1,5 @@
 import i18n from "@dhis2/d2-i18n";
-import {Button, ButtonStrip, colors} from '@dhis2/ui'
+import {Button, ButtonStrip, colors,DropdownButton} from '@dhis2/ui'
 import PropTypes from "prop-types";
 import React, {useRef, useState} from 'react'
 import JsxParser from 'react-jsx-parser'
@@ -61,9 +61,9 @@ export default function ScorecardHeader({downloadAreaRef, dataEngine}) {
                 <ButtonStrip>
                     <Button className="option-button" onClick={() => setOptionsOpen(true)}>{i18n.t('Options')}</Button>
                     {writeAccess && <Button dataTest={"test-edit-scorecard"} className="scorecard-view-edit-button" onClick={onEdit}>{i18n.t("Edit")}</Button>}
-                    <Button className="download-button" onClick={() => setDownloadOpen(true)}>
+                    <DropdownButton className="download-button"  onClick={() => setDownloadOpen(true)}>
                         <div ref={downloadRef}>{i18n.t("Download")}</div>
-                    </Button>
+                    </DropdownButton>
                     {downloadOpen &&
                     <DownloadMenu reference={downloadRef} onClose={() => setDownloadOpen(false)}
                                   onDownload={onDownload}/>}
