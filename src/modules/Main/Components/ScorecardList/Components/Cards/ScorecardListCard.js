@@ -54,7 +54,7 @@ export default function ScorecardListCard({scorecard}) {
                 </div>
                 <div className='row end'>
                     <ButtonStrip middle>
-                        <Button onClick={onView} primary>{i18n.t('View')}</Button>
+                        <Button onClick={onView} >{i18n.t('View')}</Button>
                         <Button onClick={function(_,e){
                           e.stopPropagation()
                              onEdit()
@@ -62,7 +62,7 @@ export default function ScorecardListCard({scorecard}) {
                         <Button onClick={function(_,e){
                           e.stopPropagation()
                           setDeleteConfirmOpen(true)
-                        }} destructive>{i18n.t('Delete')}</Button>
+                        }} >{i18n.t('Delete')}</Button>
                     </ButtonStrip>
                     {
                         deleteConfirmOpen &&
