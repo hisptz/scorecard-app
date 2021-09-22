@@ -26,7 +26,7 @@ export default function SingleSharingComponent({access, onDelete, onAccessChange
                 <div className='row space-between align-items-center'>
                     <div className='column'>
                         <p style={{margin: 2, fontSize: 16}}>{displayName}</p>
-                        <p style={{color: colors.grey600, fontSize: 14, margin: 0}}>{getAccessName(selectedAccess)}</p>
+                        <p style={{color: colors.grey700, fontSize: 14, margin: 0}}>{getAccessName(selectedAccess)}</p>
                     </div>
                     <div className='column align-items-end'>
                         <ButtonStrip>
