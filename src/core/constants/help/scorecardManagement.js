@@ -71,6 +71,13 @@ export const NO_GROUPS_HELP_STEPS = [
 
 export const GROUPS_CONFIG_HELP_STEPS = [
     {
+        element: ".groups-configuration-area",
+        intro: <div>
+            <p>{i18n.t("You can configure different data sources on this area.")}</p>
+            <p>{i18n.t("Indicators are configured and displayed in groups")}</p>
+        </div>
+    },
+    {
         element: ".group-name-area",
         intro: i18n.t("Double click or click on the edit button to edit the group name")
     },

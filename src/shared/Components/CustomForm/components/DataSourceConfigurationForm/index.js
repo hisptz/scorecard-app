@@ -14,7 +14,7 @@ export default function DataSourceConfigurationForm({defaultValues, onFormChange
     const targetOnLevels = useRecoilValue(ScorecardConfigDirtyState('targetOnLevels'))
 
     return (
-        <div className='container p-16'>
+        <div className='container p-16 data-source-form-container'>
             <Form onSubmit={console.log} initialValues={defaultValues}>
                 {
                     ({handleSubmit}) => (

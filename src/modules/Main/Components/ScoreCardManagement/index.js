@@ -205,15 +205,10 @@ export default function ScoreCardManagement() {
                         setHelpStepIndex(newStepIndex)
                     }}
                     onExit={() => {
+                        setHelpEnabled(false)
                     }}
                 />
                 <div className="column">
-                    <div className='row end align-items-center p-8'>
-                        <Button icon={<HelpIcon/>} onClick={() => {
-                            setHelpStepIndex(0)
-                            setHelpEnabled(true)
-                        }}>{i18n.t("Help")}</Button>
-                    </div>
                     <div>
                         <Stepper>
                             {steps?.map((step) => (
@@ -236,12 +231,20 @@ export default function ScoreCardManagement() {
                                 className="container container-bordered background-white center"
                                 style={{width: width * 0.96, minHeight: height * 0.78}}
                             >
-                                <div className="row" style={{height: "100%"}}>
+                                <div className="row" style={{height: "100%",}}>
                                     <div
                                         className="column p-16"
                                         style={{height: "100%", justifyContent: "space-between"}}
                                     >
-                                        {<Component onNextStep={onNextStep} onPreviousStep={onPreviousStep}/>}
+                                        <div className='row end align-items-center'>
+                                            <Button icon={<HelpIcon/>} onClick={() => {
+                                                setHelpStepIndex(0)
+                                                setHelpEnabled(true)
+                                            }}>{i18n.t("Help")}</Button>
+                                        </div>
+                                        <div style={{minHeight: height * 0.65}}>
+                                            {<Component onNextStep={onNextStep} onPreviousStep={onPreviousStep}/>}
+                                        </div>
                                         <ButtonStrip end>
                                             <Button
                                                 disabled={!hasPreviousStep}
@@ -268,7 +271,7 @@ export default function ScoreCardManagement() {
                             </div>
                         </div>
                     </div>
-                    <div className="row center p-32">
+                    <div className="row center p-16">
                         <ButtonStrip center>
                             <Button onClick={onCancel}>{i18n.t("Cancel")}</Button>
                             <Button disabled={saving} onClick={onSave} primary>

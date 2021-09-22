@@ -3,10 +3,8 @@ import {DataTable, DataTableBody, DataTableCell, DataTableHead, DataTableRow} fr
 import {head} from 'lodash'
 import React, {useMemo} from 'react'
 import {useRecoilValue} from "recoil";
-import {PREVIEW_TABLE_HELP_STEPS} from "../../../../../../../../core/constants/help/scorecardManagement";
 import {ScorecardConfigDirtyState} from "../../../../../../../../core/state/scorecard";
 import {UserState} from "../../../../../../../../core/state/user";
-import Help from "../../../Help";
 import PreviewCustomCell from "./Components/PreviewCustomCell";
 
 export default function PreviewScorecardTable() {
@@ -15,7 +13,6 @@ export default function PreviewScorecardTable() {
     const columns = useMemo(() => [...dataGroups], [dataGroups]);
     return (
         <div className='column' style={{width: '100%', overflowX: 'auto'}}>
-            <Help helpSteps={PREVIEW_TABLE_HELP_STEPS}/>
             <DataTable bordered width={"100%"}>
                 <DataTableHead>
                     <DataTableRow>

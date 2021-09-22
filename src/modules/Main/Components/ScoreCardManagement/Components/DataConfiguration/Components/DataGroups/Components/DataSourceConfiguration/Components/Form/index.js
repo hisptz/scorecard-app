@@ -47,7 +47,7 @@ export default function SelectedDataSourceConfigurationForm() {
             {
                 selectedDataHolder?.dataSources?.map((dataSource, index) => {
                     return (
-                        <div key={dataSource.id} className='col-lg-6 col-md-6 data-source-form-container'
+                        <div key={dataSource.id} className='col-lg-6 col-md-6'
                              style={{height: '100%'}}>
                             <div className='container-bordered'>
                                 <div className='column'>

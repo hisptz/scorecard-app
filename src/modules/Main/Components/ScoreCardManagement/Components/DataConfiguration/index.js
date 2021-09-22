@@ -1,7 +1,6 @@
 import {isEmpty} from "lodash";
 import React from "react";
 import {useRecoilState} from "recoil";
-import {INTRODUCTION_HELP_STEPS} from "../../../../../../core/constants/help/scorecardManagement";
 import DataSelection from "../../../../../../core/models/dataSelection";
 import {ScorecardConfigDirtyState,} from "../../../../../../core/state/scorecard";
 import Help from "../Help";
@@ -10,17 +9,15 @@ import EmptyDataGroups from "./Components/EmptyDataGroups";
 import Instructions from "./Components/Instructions";
 import PreviewScorecardTable from "./Components/PreviewScorecardTable";
 import DataGroupArea from "./DataGroupArea";
+import useHelp from "./hooks/useHelp";
 import {generateNewGroupData} from "./utils";
 
-
 export default function DataConfigurationScorecardForm() {
-
     const [dataSelection, updateDataSelection] = useRecoilState(
         ScorecardConfigDirtyState("dataSelection")
     );
-
     const {dataGroups: groups} = dataSelection ?? new DataSelection();
-
+    const helpSteps = useHelp(groups)
     const onGroupAdd = () => {
         updateDataSelection((prevState = []) =>
             DataSelection.set(prevState, "dataGroups", [
@@ -33,7 +30,7 @@ export default function DataConfigurationScorecardForm() {
 
     return (
         <div className="row" style={{height: "100%"}}>
-            <Help helpSteps={INTRODUCTION_HELP_STEPS}/>
+            <Help helpSteps={helpSteps}/>
             <div className="col-md-4 col-sm-6 p-16 groups-configuration-area">
                 <div
                     className=" container-bordered column"
