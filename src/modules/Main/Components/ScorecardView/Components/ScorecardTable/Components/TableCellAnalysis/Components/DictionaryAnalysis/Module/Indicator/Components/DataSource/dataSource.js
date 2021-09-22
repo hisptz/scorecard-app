@@ -3,6 +3,8 @@ import i18n from '@dhis2/d2-i18n'
 import {CircularLoader} from '@dhis2/ui'
 import PropTypes from "prop-types";
 import React, {useEffect} from 'react'
+import Loader from "../../../../Shared/Componets/Loaders/Loader";
+import Error from "../../../../Shared/Componets/Error/ErrorAPIResult";
 const query = {
     sources: {
         resource: "indicators",
@@ -14,8 +16,6 @@ const query = {
 }
 
 export default function DataSource({id}) {
-
-
     const {loading, error, data, refetch} = useDataQuery(query, {variables: {id}})
 
     useEffect(() => {
@@ -24,13 +24,12 @@ export default function DataSource({id}) {
 
 
     if (loading) {
-        return <CircularLoader/>
+        return <Loader/>
     }
-
     if (error) {
-        return <p> {error} </p>
-    }
+        return <Error error={error} />
 
+    }
     if (data?.sources?.dataSets.length === 0) {
         return <div/>
     }

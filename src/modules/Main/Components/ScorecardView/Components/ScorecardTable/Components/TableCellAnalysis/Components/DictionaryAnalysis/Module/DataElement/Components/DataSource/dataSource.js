@@ -24,11 +24,9 @@ const query = {
 
 export default  function DataSource({id}){
 
-
         const {loading, error, data,refetch}  = useDataQuery(query, {variables: {id}})
 
         useEffect(()=>{refetch({id})},[id])
-
 
         if(loading){
             return  <Loader text={""} />
@@ -41,7 +39,7 @@ export default  function DataSource({id}){
         { (data?.sources?.domainType===dataElementDomainTypes.AGGREGATE && data!==dataElementDomainTypes.UNDEFINED)?  <DataSets id={id} /> : <Programs id={id} />}
 
             <div>
-                <OtherDetailTable  other={data?.sources}/>
+                <OtherDetailTable other={data?.sources}/>
             </div>
 
         </>

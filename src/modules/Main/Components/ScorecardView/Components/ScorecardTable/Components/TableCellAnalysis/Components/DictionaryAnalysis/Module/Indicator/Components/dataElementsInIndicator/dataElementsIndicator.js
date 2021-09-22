@@ -14,13 +14,14 @@ import {useContext} from "react";
 import {selector, useRecoilValue} from "recoil";
 import {dataElementsStateDictionary} from "../../../../Store";
 import Row from './row'
+import React from 'react'
 
 
 export default function DataElementSIndicator() {
 
     const dataElements = useRecoilValue(dataElementsStateDictionary)
 
-    if(dataElements.length===0){
+    if(dataElements?.length===0){
         return (
             <div>
                 <h3> {i18n.t("Data elements in indicator")}  </h3>
@@ -62,7 +63,7 @@ export default function DataElementSIndicator() {
                 </DataTableRow>
             </TableHead>
             <TableBody>
-                {dataElements.map((dtEle) => {
+                {dataElements?.map((dtEle) => {
                     i++
                     return <Row key={i} datEl={dtEle}/>
                 })}

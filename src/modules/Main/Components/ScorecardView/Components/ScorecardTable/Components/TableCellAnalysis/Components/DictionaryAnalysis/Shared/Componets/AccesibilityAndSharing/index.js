@@ -6,7 +6,7 @@ import React, {useEffect} from 'react'
 import {displayAccessPermission} from "../../../Utils/Functions/DataElementDictionaryFunctions";
 import Error from "../Error/ErrorAPIResult";
 import Loader from "../Loaders/Loader";
-
+import {dateTimeDisplay} from "../../../Utils/Functions/Shared";
 
 const query={
     sources: {
@@ -26,6 +26,9 @@ function displayDataType(resourceType){
         if(resourceType==="indicators"){
             return " Indicator "
         }
+        if(resourceType==="dataStore/functions"){
+            return " Function "
+        }
     }
 }
 
@@ -33,7 +36,7 @@ function accessAndSharingQuery(resourceType) {
     query.sources.resource=resourceType
 }
 
-export default function AccesibilityAndSharing(props){
+export default function AccessibilityAndSharing(props){
     const id=props.id
     const resourceType=props.resourceType
 
@@ -48,18 +51,18 @@ export default function AccesibilityAndSharing(props){
     const result=data?.sources
 
 
-        if(loading){
-            return  <Loader text={""} />
-        }if(error){
-            return <Error error={error} />
-        }
+    if(loading){
+        return  <Loader text={""} />
+    }if(error){
+        return <Error error={error} />
+    }
 
 
     return(<div>
-        <h3>{i18n.t("Accesibility & Sharing Settings")}  </h3>
+        <h3>{i18n.t("Accessibility & Sharing Settings")}  </h3>
         <p> {i18n.t("This")}
 
-            { displayDataType(resourceType) } {i18n.t("was first created on")}   <i> {new Date(result?.created).toLocaleString("en-GB")}</i> {i18n.t("by")}   <b>{result?.user?.displayName} </b> {i18n.t("and last updated on")}   <i>{new Date(result?.lastUpdated).toLocaleString("en-GB")}</i> {i18n.t("by")}   <b>{result?.lastUpdatedBy?.displayName}</b> .
+            { displayDataType(resourceType) } {i18n.t("was first created on")}   <i> { dateTimeDisplay(result?.created)}</i> {i18n.t("by")}   <b>{result?.user?.displayName} </b> {i18n.t("and last updated on")}   <i>{ dateTimeDisplay(result?.lastUpdated)}</i> {i18n.t("by")}   <b>{result?.lastUpdatedBy?.displayName}</b> .
 
         </p>
         <p>
@@ -120,7 +123,7 @@ export default function AccesibilityAndSharing(props){
     </div>)
 }
 
-AccesibilityAndSharing.propTypes = {
+AccessibilityAndSharing.propTypes = {
     id: PropTypes.string.isRequired,
     resourceType:PropTypes.string.isRequired,
 };

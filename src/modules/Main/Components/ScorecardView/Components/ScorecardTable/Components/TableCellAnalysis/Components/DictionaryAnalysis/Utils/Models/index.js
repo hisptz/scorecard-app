@@ -1,11 +1,26 @@
-export const dataTypes = {
-        DATA_ELEMENT: 'dataElement',
-        PROGRAM_INDICATOR: 'programIndicator',
-        DATASET_REPORTING_RATES: 'dataSet',
-        ATTRIBUTES: 'attribute',
-        CONSTANTS: 'constant',
-        VARIABLE: 'variable',
-        UNDEFINED: 'undefined'
+
+
+export const dataTypes={
+    DATA_ELEMENT: 'dataElement',
+    PROGRAM_INDICATOR: 'programIndicator',
+    PROGRAM_DATA_ELEMENT: 'programDataElement',
+    DATASET_REPORTING_RATES: 'dataSet',
+    ATTRIBUTES: 'attribute',
+    CONSTANTS: 'constant',
+    VARIABLE: 'variable',
+    ORG_UNIT_COUNT: 'orgUnitCount',
+    UNDEFINED: 'undefined'
+}
+
+export const dataSourceTypes={
+    INDICATOR: "indicator",
+    DATA_ELEMENT: "dataElement",
+    PROGRAM_INDICATOR:"programIndicator",
+    DATA_ELEMENT_GROUP:"dataElementGroup",
+    INDICATOR_GROUP:"indicatorGroup",
+    FUNCTION:"customFunction",
+    DATASET:"dataSet",
+    PROGRAM_DATA_ELEMENT:"programDataItem"
 }
 
 export const dataElementDomainTypes={
@@ -14,14 +29,21 @@ export const dataElementDomainTypes={
     UNDEFINED:'undefined'
 }
 
-
-export const dataSourceTypes = {
-    INDICATOR: 'indicator',
-    DATA_ELEMENT: 'dataElement'
+export const analyticsTypes={
+    EVENT:"EVENT",
+    ENROLLMENT:"ENROLLMENT"
 }
 
-export const accessTypes={
-    READ_WRITE:"rw------",
-    READ_ONLY:"r-------",
-    NO_ACCESS:"--------",
+
+export const dataTypesInitials={
+    DATA_ELEMENT:"#{",
+    PROGRAM_DATA_ELEMENT:"D{",
+    PROGRAM_INDICATOR:"I{",
+    DATASET_REPORTING_RATES:"R{",
+    ATTRIBUTES:"A{",
+    CONSTANTS:"C{",
+    VARIABLE:"V{",
+    ORG_UNIT_COUNT:"OUG{"
+
+
 }

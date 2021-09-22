@@ -21,7 +21,6 @@ const query = {
 
 export default  function DataSets({id}){
 
-
     const {loading, error, data,refetch}  = useDataQuery(query, {variables: {id}})
 
     useEffect(()=>{refetch({id})},[id])
@@ -37,10 +36,9 @@ export default  function DataSets({id}){
         <h3>{i18n.t("Data sources")}  </h3>
         <p>{i18n.t("Data element is captured from following sources")}
 
-
         </p>
 
-        <h5>{i18n.t("Datasets")}</h5>
+        <h5>{i18n.t("Datasets")} </h5>
         <ul>
             { data?.sources?.dataSetElements?.map((dt)=>{
 
@@ -54,9 +52,6 @@ export default  function DataSets({id}){
 
 }
 
-
-
-//
-// DataSets.propTypes={
-//     id:PropTypes.string.isRequired
-// }
+DataSets.propTypes={
+    id:PropTypes.string.isRequired
+}

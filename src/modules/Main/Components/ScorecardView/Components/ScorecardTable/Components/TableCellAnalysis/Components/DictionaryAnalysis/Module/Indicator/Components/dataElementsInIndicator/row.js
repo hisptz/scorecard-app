@@ -25,7 +25,7 @@ export default  function Row(props){
     const datElement=props.datEl
 
     function isPureDataElement(str){
-        if(str.indexOf(".")==-1){ //didnt find
+        if(str?.indexOf(".")==-1){ //didnt find
             return true
         }else{
             return false;
@@ -98,7 +98,7 @@ export default  function Row(props){
 
 
 
-// Row.prototype={
+// RowAggregate.prototype={
 //     datEl:PropTypes.
 //
 // }

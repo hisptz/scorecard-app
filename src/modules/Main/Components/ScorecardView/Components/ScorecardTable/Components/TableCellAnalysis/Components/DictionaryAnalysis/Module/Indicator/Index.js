@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import React, {useEffect} from "react";
 import {useRecoilCallback} from "recoil";
+import AccessibilityAndSharing from "../../Shared/Componets/AccesibilityAndSharing";
 import {
     dataElementsStateDictionary,
     dataSetReportingRatesStateDictionary,
@@ -47,7 +48,7 @@ export default function Index({id}) {
 
         <DatasetsReportingRates/>
 
-        {/*<AccesibilityAndSharing id={id} resourceType={"indicators"} />*/}
+        <AccessibilityAndSharing id={id} resourceType={"indicators"} />
 
     </div>)
 }

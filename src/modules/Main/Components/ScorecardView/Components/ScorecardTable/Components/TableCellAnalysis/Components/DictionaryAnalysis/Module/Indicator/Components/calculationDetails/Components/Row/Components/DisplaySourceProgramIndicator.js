@@ -10,12 +10,11 @@ export default function DisplaySourceProgramIndicator(props){
 
     return <>
 
-        <h4>{title}</h4>
+
         <ul>
             {data.map((el)=>{
                 return<li  key={el.id}>
-                    <h5>{el?.val}</h5>
-                    <p><b>{i18n.t("source")}:</b> {el?.sources?.displayName}</p>
+                    <b>{el?.val} </b> {i18n.t("source:")} {el?.sources?.displayName}
                 </li>
             })}
         </ul>
