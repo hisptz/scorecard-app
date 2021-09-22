@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-09-22T09:33:39.926Z\n"
-"PO-Revision-Date: 2021-09-22T09:33:39.926Z\n"
+"POT-Creation-Date: 2021-09-22T12:40:12.947Z\n"
+"PO-Revision-Date: 2021-09-22T12:40:12.947Z\n"
 
 msgid "Next"
 msgstr "Next"
@@ -332,6 +332,9 @@ msgstr ""
 "Changes the table layout, the indicators are shown in rows and "
 "orgaunisation units in columns"
 
+msgid "Scorecard View"
+msgstr "Scorecard View"
+
 msgid "This is the default view for your scorecard"
 msgstr "This is the default view for your scorecard"
 
@@ -395,6 +398,13 @@ msgstr ""
 msgid "Click on a data cell to see further analysis"
 msgstr "Click on a data cell to see further analysis"
 
+msgid ""
+"Click on the arrow to view a scorecard of this organisation unit's lower "
+"level"
+msgstr ""
+"Click on the arrow to view a scorecard of this organisation unit's lower "
+"level"
+
 msgid "Data"
 msgstr "Data"
 
@@ -446,8 +456,8 @@ msgstr "Add"
 msgid "Edit"
 msgstr "Edit"
 
-msgid "Remove"
-msgstr "Remove"
+msgid "Delete"
+msgstr "Delete"
 
 msgid "Sharing"
 msgstr "Sharing"
@@ -493,9 +503,6 @@ msgstr "Save"
 
 msgid "Cancel"
 msgstr "Cancel"
-
-msgid "Delete"
-msgstr "Delete"
 
 msgid "Add a data source"
 msgstr "Add a data source"
@@ -575,8 +582,17 @@ msgstr "Scorecard added successfully"
 msgid "Scorecard updated successfully"
 msgstr "Scorecard updated successfully"
 
+msgid "Help"
+msgstr "Help"
+
 msgid "Saving"
 msgstr "Saving"
+
+msgid "Save and exit"
+msgstr "Save and exit"
+
+msgid "Exit without saving"
+msgstr "Exit without saving"
 
 msgid "This group does not have any configured data sources"
 msgstr "This group does not have any configured data sources"
@@ -601,9 +617,6 @@ msgstr "Documentation"
 
 msgid "Search"
 msgstr "Search"
-
-msgid "Help"
-msgstr "Help"
 
 msgid "Switch to {{viewType}} view"
 msgstr "Switch to {{viewType}} view"
@@ -634,6 +647,12 @@ msgstr "Metadata"
 
 msgid "Select Organisation Units and Period to start"
 msgstr "Select Organisation Units and Period to start"
+
+msgid "Download"
+msgstr "Download"
+
+msgid "Refresh"
+msgstr "Refresh"
 
 msgid "Legends"
 msgstr "Legends"
@@ -832,9 +851,6 @@ msgstr "Appearances"
 
 msgid "Suggesting Factor"
 msgstr "Suggesting Factor"
-
-msgid "Documentation"
-msgstr "Documentation"
 
 msgid "Data Sources"
 msgstr "Data Sources"
@@ -1228,14 +1244,8 @@ msgstr "Search Data"
 msgid "Drag to row headers to change layout "
 msgstr "Drag to row headers to change layout "
 
-msgid "Home"
-msgstr "Home"
-
-msgid "Refresh"
-msgstr "Refresh"
-
-msgid "Download"
-msgstr "Download"
+msgid "Back to all scorecards"
+msgstr "Back to all scorecards"
 
 msgid "Label"
 msgstr "Label"
