@@ -55,9 +55,9 @@ export default function ScorecardView() {
 
     return (
         <Suspense fallback={<FullPageLoader/>}>
-            <ScorecardViewHeader dataEngine={initialDataEngine} downloadAreaRef={downloadRef}/>
+            <ScorecardViewHeader />
             <div ref={downloadRef} className="column p-16" style={{height: "100%", width: "100%"}}>
-                <ScorecardHeader/>
+                <ScorecardHeader dataEngine={initialDataEngine} downloadAreaRef={downloadRef} />
                 <ScorecardLegendsView/>
                 <HighlightedIndicatorsView/>
                 <div className="column align-items-center pt-16 flex-1">

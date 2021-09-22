@@ -73,9 +73,10 @@ export default function DataConfigurationScorecardForm() {
                                 onClick={onGroupAdd}
                                 icon={<AddIcon/>}
                                 dataTest="scocecard-add-group-button"
-                                primary
+
                             >
-                                {i18n.t('Add Group')}
+                                {i18n.t('' +
+                                    'Add Group')}
                             </Button>
                         </div>
                     ) : (

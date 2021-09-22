@@ -1,28 +1,22 @@
 import i18n from '@dhis2/d2-i18n'
 import {Button, ButtonStrip, Card} from '@dhis2/ui'
 import {Steps} from "intro.js-react";
-import PropTypes from 'prop-types'
-import React, {useEffect, useMemo, useRef, useState} from 'react'
+import React, {useEffect, useMemo, useState} from 'react'
 import {useHistory} from "react-router-dom";
 import {useRecoilCallback, useRecoilState, useRecoilValue} from "recoil";
 import {STEP_OPTIONS} from "../../../../../../core/constants/help/options";
 import {SCORECARD_VIEW_HELP_STEPS} from "../../../../../../core/constants/help/scorecardView";
 import {FilterComponentTypes} from "../../../../../../core/constants/selection";
-import ScorecardDataEngine from "../../../../../../core/models/scorecardData";
 import HelpState from "../../../../../../core/state/help";
 import {OrgUnitGroups, OrgUnitLevels} from "../../../../../../core/state/orgUnit";
 import ScorecardConfState, {ScorecardIdState, ScorecardViewState} from "../../../../../../core/state/scorecard";
-import {UserAuthorityOnScorecard} from "../../../../../../core/state/user";
 import OrgUnitSelectorModal from "../../../../../../shared/Components/OrgUnitSelectorModal";
 import PeriodSelectorModal from "../../../../../../shared/Components/PeriodSelectorModal";
-import ScorecardOptionsModal from "../../../../../../shared/Components/ScorecardOptionsModal";
 import SelectionWrapper from "../../../../../../shared/Components/SelectionWrapper";
 import getSelectedOrgUnitSelectionDisplay from "../../../../../../shared/utils/orgUnit";
-import DownloadMenu from "../Download/Components/DownloadMenu";
-import useDownload from "./hooks/useDownload";
 
 
-export default function ScorecardViewHeader({downloadAreaRef, dataEngine}) {
+export default function ScorecardViewHeader() {
     const [helpEnabled, setHelpEnabled] = useRecoilState(HelpState)
     const history = useHistory();
     const scorecardId = useRecoilValue(ScorecardIdState)
@@ -30,26 +24,16 @@ export default function ScorecardViewHeader({downloadAreaRef, dataEngine}) {
     const orgUnitGroups = useRecoilValue(OrgUnitGroups)
     const [orgUnitSelection, setOrgUnitSelection] = useRecoilState(ScorecardViewState('orgUnitSelection'))
     const [periodSelection, setPeriodSelection] = useRecoilState(ScorecardViewState('periodSelection'))
-    const [scorecardOptions, setScorecardOptions] = useRecoilState(ScorecardViewState('options'))
-    const userAuthority = useRecoilValue(UserAuthorityOnScorecard(scorecardId))
-    const writeAccess = userAuthority?.write;
+
     const [orgUnitSelectionOpen, setOrgUnitSelectionOpen] = useState(false);
     const [periodSelectionOpen, setPeriodSelectionOpen] = useState(false);
-    const [optionsOpen, setOptionsOpen] = useState(false);
-    const [downloadOpen, setDownloadOpen] = useState(false);
-    const {download: onDownload} = useDownload(downloadAreaRef, dataEngine);
 
-    const downloadRef = useRef()
+
     const reset = useRecoilCallback(({reset}) => () => {
         reset(ScorecardIdState)
         reset(ScorecardConfState(scorecardId))
     }, [scorecardId])
 
-    const onEdit = () => {
-        if (writeAccess) {
-            history.push(`/edit/${scorecardId}`)
-        }
-    }
 
     const onHome = () => {
         history.replace('/')
@@ -61,9 +45,6 @@ export default function ScorecardViewHeader({downloadAreaRef, dataEngine}) {
         };
     }, []);
 
-    const onRefresh = () => {
-        window.location.reload(true)
-    }
 
     const orgUnitSelectionDisplay = useMemo(() => getSelectedOrgUnitSelectionDisplay(orgUnitSelection, {
         orgUnitGroups,
@@ -76,7 +57,8 @@ export default function ScorecardViewHeader({downloadAreaRef, dataEngine}) {
 
     return (
         <div className="selection-card">
-            <Steps options={STEP_OPTIONS} steps={SCORECARD_VIEW_HELP_STEPS} enabled={helpEnabled} initialStep={0} onExit={onHelpExit}/>
+            <Steps options={STEP_OPTIONS} steps={SCORECARD_VIEW_HELP_STEPS} enabled={helpEnabled} initialStep={0}
+                   onExit={onHelpExit}/>
             <Card>
                 <div className='row space-between align-items-center pl-16 pr-16'>
                     <div className='row'>
@@ -100,20 +82,11 @@ export default function ScorecardViewHeader({downloadAreaRef, dataEngine}) {
                     </div>
                     <div className='column align-items-end'>
                         <ButtonStrip className='pb-8'>
-                            <Button className="home-button" onClick={onHome}>{i18n.t('Home')}</Button>
-                            <Button className="refresh-button" onClick={onRefresh}>{i18n.t('Refresh')}</Button>
-                        </ButtonStrip>
-                        <ButtonStrip>
-                            <Button className="option-button" onClick={() => setOptionsOpen(true)}>{i18n.t('Options')}</Button>
-                            {writeAccess && <Button dataTest={"test-edit-scorecard"} className="scorecard-view-edit-button" onClick={onEdit}>{i18n.t("Edit")}</Button>}
-                            <Button className="download-button" onClick={() => setDownloadOpen(true)}>
-                                <div ref={downloadRef}>{i18n.t("Download")}</div>
-                            </Button>
-                            {downloadOpen &&
-                            <DownloadMenu reference={downloadRef} onClose={() => setDownloadOpen(false)}
-                                          onDownload={onDownload}/>}
+                            <Button className="home-button" onClick={onHome}>{i18n.t('Back to all scorecards')}</Button>
                             <Button onClick={() => setHelpEnabled(true)}>{i18n.t('Help')}</Button>
+
                         </ButtonStrip>
+
                     </div>
                     {
                         orgUnitSelectionOpen && <OrgUnitSelectorModal initialValue={orgUnitSelection}
@@ -123,10 +96,6 @@ export default function ScorecardViewHeader({downloadAreaRef, dataEngine}) {
                     periodSelectionOpen &&
                     <PeriodSelectorModal initialValue={periodSelection} onClose={() => setPeriodSelectionOpen(false)}
                                          onSelect={setPeriodSelection}/>
-                }{
-                    optionsOpen &&
-                    <ScorecardOptionsModal onClose={() => setOptionsOpen(false)} initialValues={scorecardOptions}
-                                           onSelect={setScorecardOptions}/>
                 }
                 </div>
             </Card>
@@ -134,8 +103,4 @@ export default function ScorecardViewHeader({downloadAreaRef, dataEngine}) {
     )
 }
 
-ScorecardViewHeader.propTypes = {
-    dataEngine: PropTypes.instanceOf(ScorecardDataEngine).isRequired,
-    downloadAreaRef: PropTypes.any.isRequired
-};
 

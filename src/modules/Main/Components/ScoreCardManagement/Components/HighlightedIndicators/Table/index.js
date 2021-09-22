@@ -8,7 +8,7 @@ import {
     DataTableRow,
     TableBody
 } from '@dhis2/ui'
-import DeleteIcon from "@material-ui/icons/Close";
+import DeleteIcon from "@material-ui/icons/Delete";
 import {cloneDeep, get, isEmpty, remove} from 'lodash'
 import React from 'react'
 import {useRecoilState} from "recoil";
@@ -64,8 +64,8 @@ export default function HighlightedIndicatorsTable() {
                                                                              key={`${data?.id}-${path}`}>{get(data, path)}</DataTableCell>))
                                 }
                                 <DataTableCell align='center'>
-                                    <Button destructive onClick={() => onRemove(data?.id)}
-                                            icon={<DeleteIcon/>}>{i18n.t('Remove')}</Button>
+                                    <Button  onClick={() => onRemove(data?.id)}
+                                            icon={<DeleteIcon/>}>{i18n.t('Delete')}</Button>
                                 </DataTableCell>
                             </DataTableRow>))
                     }

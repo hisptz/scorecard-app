@@ -61,7 +61,7 @@ export default function ScorecardGridCard({ scorecard }) {
       <h3>{title}</h3>
       <p style={{ color: colors.grey600 }}>{description}</p>
       <ButtonStrip middle>
-        <Button onClick={onView} primary>
+        <Button onClick={onView} >
           {i18n.t("View")}
         </Button>
         <Button onClick={function(_,e){
@@ -71,7 +71,7 @@ export default function ScorecardGridCard({ scorecard }) {
         <Button onClick={function(_,e){
                           e.stopPropagation()
                           setDeleteConfirmOpen(true)
-                        }} destructive>
+                        }} >
           {i18n.t("Delete")}
         </Button>
       </ButtonStrip>

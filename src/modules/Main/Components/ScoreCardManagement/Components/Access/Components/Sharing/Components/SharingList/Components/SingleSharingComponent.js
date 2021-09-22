@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import {Button, ButtonStrip, colors, MenuItem} from '@dhis2/ui'
-import DeleteIcon from '@material-ui/icons/Close';
+import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import {cloneDeep, set} from 'lodash'
 import PropTypes from 'prop-types'
@@ -26,16 +26,20 @@ export default function SingleSharingComponent({access, onDelete, onAccessChange
                 <div className='row space-between align-items-center'>
                     <div className='column'>
                         <p style={{margin: 2, fontSize: 16}}>{displayName}</p>
-                        <p style={{color: colors.grey500, fontSize: 14, margin: 0}}>{getAccessName(selectedAccess)}</p>
+                        <p style={{color: colors.grey700, fontSize: 14, margin: 0}}>{getAccessName(selectedAccess)}</p>
                     </div>
                     <div className='column align-items-end'>
                         <ButtonStrip>
                             <Button onClick={(_, e) => setRef(e.currentTarget)} icon={<EditIcon/>}>{i18n.t('Edit')}</Button>
                             {
                                 Boolean(onDelete) &&
-                                <Button onClick={() => {
-                                    onDelete(access)
-                                }} destructive icon={<DeleteIcon/>}>{i18n.t('Remove')}</Button>
+                                <Button
+                                        onClick={() => {
+                                            onDelete(access)
+                                        }} icon={<DeleteIcon/>}>
+                                    {i18n.t('Delete')}
+                                </Button>
+
                             }
                         </ButtonStrip>
                     </div>

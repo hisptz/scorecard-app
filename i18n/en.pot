@@ -5,9 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-
-"POT-Creation-Date: 2021-09-21T09:44:04.585Z\n"
-"PO-Revision-Date: 2021-09-21T09:44:04.585Z\n"
+"POT-Creation-Date: 2021-09-22T08:05:26.765Z\n"
+"PO-Revision-Date: 2021-09-22T08:05:26.765Z\n"
 
 msgid "Next"
 msgstr "Next"
@@ -390,9 +389,6 @@ msgstr "Scorecard added successfully"
 msgid "Scorecard updated successfully"
 msgstr "Scorecard updated successfully"
 
-msgid "Help"
-msgstr "Help"
-
 msgid "Saving"
 msgstr "Saving"
 
@@ -413,6 +409,9 @@ msgstr "Are you sure you want to delete scorecard"
 
 msgid "Search"
 msgstr "Search"
+
+msgid "Help"
+msgstr "Help"
 
 msgid "Switch to {{viewType}} view"
 msgstr "Switch to {{viewType}} view"

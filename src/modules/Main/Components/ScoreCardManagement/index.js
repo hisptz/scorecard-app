@@ -140,15 +140,20 @@ export default function ScoreCardManagement() {
             return;
         }
         const index = findIndex(steps, ["label", activeStep.label]);
+
+        
         if (index !== steps.length - 1) {
             setActiveStep(steps[index + 1]);
+
         }
     };
 
     const onPreviousStep = () => {
         const index = findIndex(steps, ["label", activeStep.label]);
+
         if (index !== 0) {
             setActiveStep(steps[index - 1]);
+
         }
     };
 
@@ -170,6 +175,10 @@ export default function ScoreCardManagement() {
     );
     const hasPreviousStep = useMemo(
         () => findIndex(steps, ["label", activeStep.label]) > 0,
+        [activeStep]
+    );
+
+    const currentIndex= useMemo(() => findIndex(steps, ["label", activeStep.label]) ,
         [activeStep]
     );
 
@@ -209,12 +218,12 @@ export default function ScoreCardManagement() {
                                         style={{height: "100%", justifyContent: "space-between"}}
                                     >
                                         {<Component/>}
-                                        <ButtonStrip end>
+                                        <ButtonStrip start>
                                             <Button
                                                 disabled={!hasPreviousStep}
                                                 onClick={onPreviousStep}
                                             >
-                                                {i18n.t("Previous")}
+                                                {i18n.t(`Previous: ${steps[currentIndex-1]?.label??""}`) }
                                             </Button>
                                             <Button
                                                 primary
@@ -226,7 +235,7 @@ export default function ScoreCardManagement() {
                                                     ? saving
                                                         ? `${i18n.t("Saving")}...`
                                                         : i18n.t("Save")
-                                                    : i18n.t("Next")}
+                                                    : i18n.t(`Next: ${steps[currentIndex+1]?.label}`) }
                                             </Button>
                                         </ButtonStrip>
                                     </div>
@@ -236,10 +245,11 @@ export default function ScoreCardManagement() {
                     </div>
                     <div className="row center p-32">
                         <ButtonStrip center>
-                            <Button onClick={onCancel}>{i18n.t("Cancel")}</Button>
-                            <Button disabled={saving} onClick={onSave} primary>
-                                {saving ? `${i18n.t("Saving")}...` : i18n.t("Save")}
+                            <Button disabled={saving} onClick={onSave} >
+                                {saving ? `${i18n.t("Saving")}...` : i18n.t("Save and exit")}
                             </Button>
+                            <Button onClick={onCancel}>{i18n.t("Exit without saving")}</Button>
+
                         </ButtonStrip>
                     </div>
                 </div>

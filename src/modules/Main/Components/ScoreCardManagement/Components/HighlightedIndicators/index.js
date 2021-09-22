@@ -43,7 +43,7 @@ export default function HighlightedIndicatorsScorecardForm() {
                 !isEmpty(highlightedIndicators) ?
                     <Fragment>
                         <div className='row '>
-                            <Button onClick={onAddClick} primary icon={<AddIcon/>}>{i18n.t('Add')}</Button>
+                            <Button onClick={onAddClick}  icon={<AddIcon/>}>{i18n.t('Add')}</Button>
                         </div>
                         <div className='row'>
                             <div className='col-md-8 pt-32'>
@@ -57,7 +57,7 @@ export default function HighlightedIndicatorsScorecardForm() {
                         </div>
                     </Fragment> :
                     <div className='row align-items-center center flex-1'>
-                        <Button onClick={onAddClick} primary icon={<AddIcon/>}>{i18n.t('Add Highlighted Indicator')}</Button>
+                        <Button onClick={onAddClick}  icon={<AddIcon/>}>{i18n.t('Add Highlighted Indicator')}</Button>
                     </div>
             }
             {
