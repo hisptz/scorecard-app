@@ -7,6 +7,7 @@ export const STEP_OPTIONS = {
     doneLabel: i18n.t("Done"),
     hideNext: false,
     hidePrev: true,
-    showProgress: true,
-    disableInteraction: false
+    showProgress: false,
+    disableInteraction: false,
+    tooltipClass: 'custom-tooltip'
 }
