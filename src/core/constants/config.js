@@ -29,5 +29,6 @@ export const DATASTORE_SCORECARD_SUMMARY_INCLUDE_KEYS = [
     }
 ]
 export const DATASTORE_OLD_SCORECARD_ENDPOINT='dataStore/scorecards'
-export const DATASTORE_FUNCTIONS_ENDPOINT='dataStore/functions'
+export const DATASTORE_FUNCTIONS_ENDPOINT = 'dataStore/functions'
+export const SCORECARD_DOCUMENTATION_URL = 'https://docs.dhis2.org/en/use/optional-apps/interactive-scorecard-app/app-version-01/scorecard-and-demo.html'
 

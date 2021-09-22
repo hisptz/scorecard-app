@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-09-21T10:19:58.438Z\n"
-"PO-Revision-Date: 2021-09-21T10:19:58.438Z\n"
+"POT-Creation-Date: 2021-09-22T09:33:39.926Z\n"
+"PO-Revision-Date: 2021-09-22T09:33:39.926Z\n"
 
 msgid "Next"
 msgstr "Next"
@@ -26,18 +26,18 @@ msgstr "Welcome to the most interactive scorecard ever!"
 msgid "Search here for scorecards by name, id, or description"
 msgstr "Search here for scorecards by name, id, or description"
 
-msgid "Click here to change the scorecard list view"
-msgstr "Click here to change the scorecard list view"
+msgid "Click here to change the scorecards view to either list or grid"
+msgstr "Click here to change the scorecards view to either list or grid"
 
 msgid "Click here to add a new scorecard"
 msgstr "Click here to add a new scorecard"
 
 msgid ""
 "Click on View or anywhere on the scorecard to view, click on Edit to edit "
-"and click on Delete to delete the scorecard"
+"configurations and click on Delete to delete the scorecard"
 msgstr ""
 "Click on View or anywhere on the scorecard to view, click on Edit to edit "
-"and click on Delete to delete the scorecard"
+"configurations and click on Delete to delete the scorecard"
 
 msgid "Scorecard Management"
 msgstr "Scorecard Management"
@@ -595,6 +595,12 @@ msgstr "Are you sure you want to delete scorecard "
 
 msgid "Are you sure you want to delete scorecard"
 msgstr "Are you sure you want to delete scorecard"
+
+msgid "Start a guided tour"
+msgstr "Start a guided tour"
+
+msgid "Documentation"
+msgstr "Documentation"
 
 msgid "Search"
 msgstr "Search"
