@@ -5,8 +5,6 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 export default function EmptySearchList({keyword}) {
-
-
     return (
         <div className="h-100 w-100">
             <CenteredContent>
@@ -14,7 +12,7 @@ export default function EmptySearchList({keyword}) {
                     <SearchIcon style={{color: colors.grey700, fontSize: 64}}/>
                     <h2 style={{color: colors.grey700, margin: 8}}>{i18n.t("No Results Found")}</h2>
                     <p style={{
-                        color: colors.grey600,
+                        color: colors.grey700,
                         margin: 4
                     }}>{i18n.t(`Could not find scorecards matching the keyword `)}<b>{`'${keyword}'`}</b></p>
                 </div>

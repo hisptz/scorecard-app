@@ -41,17 +41,9 @@ export default function ScorecardList() {
         try {
             if (scorecardViewType === "grid") {
                 set("list");
-                show({
-                    message: "View changed successfully",
-                    type: {success: true},
-                });
                 return;
             }
             set("grid");
-            show({
-                message: "View changed successfully",
-                type: {success: true},
-            });
         } catch (e) {
             show({
                 message: e.message ?? e.toString(),
