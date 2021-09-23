@@ -12,7 +12,6 @@ export default function EmptyDataGroups({onGroupAdd}) {
                 icon={<AddIcon/>}
                 className="scorecard-add-group-button"
                 dataTest="scocecard-add-group-button"
-                primary
             >
                 {i18n.t('Add Group')}
             </Button>

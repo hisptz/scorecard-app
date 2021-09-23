@@ -17,6 +17,7 @@ import HelpState from "../../../../core/state/help";
 import {ScorecardIdState, ScorecardSummaryState,} from "../../../../core/state/scorecard";
 import {FullPageLoader} from "../../../../shared/Components/Loaders";
 import EmptyScoreCardList from "../EmptyScoreCardList";
+import EmptySearchList from "./Components/EmptySearchList";
 import GridScorecardDisplay from "./Components/GridScorecardDisplay";
 import HelpMenu from "./Components/HelpMenu";
 import ListScorecardDisplay from "./Components/ListScorecardDisplay";
@@ -40,17 +41,9 @@ export default function ScorecardList() {
         try {
             if (scorecardViewType === "grid") {
                 set("list");
-                show({
-                    message: "View changed successfully",
-                    type: {success: true},
-                });
                 return;
             }
             set("grid");
-            show({
-                message: "View changed successfully",
-                type: {success: true},
-            });
         } catch (e) {
             show({
                 message: e.message ?? e.toString(),
@@ -92,7 +85,7 @@ export default function ScorecardList() {
             {isEmpty(scorecards) ? (
                 <EmptyScoreCardList/>
             ) : (
-                <div className="column">
+                <div className="column h-100">
                     <div className="row p-16">
                         <div className="row p-45 center" style={{paddingLeft: '35%'}}>
                             <div className="column w-30">
@@ -137,16 +130,21 @@ export default function ScorecardList() {
                             </ButtonStrip>
                         </div>
                     </div>
-
-                    <PaginatedDisplay
-                        scorecards={filteredScorecards}
-                        pageSize={scorecardViewType === "grid" ? 8 : 5}
-                        listComponent={
-                            scorecardViewType === "grid"
-                                ? GridScorecardDisplay
-                                : ListScorecardDisplay
-                        }
-                    />
+                    {
+                        isEmpty(filteredScorecards) ?
+                            <div className="flex-1">
+                                <EmptySearchList keyword={keyword}/>
+                            </div> :
+                            <PaginatedDisplay
+                                scorecards={filteredScorecards}
+                                pageSize={scorecardViewType === "grid" ? 8 : 5}
+                                listComponent={
+                                    scorecardViewType === "grid"
+                                        ? GridScorecardDisplay
+                                        : ListScorecardDisplay
+                                }
+                            />
+                    }
                 </div>
             )}
         </Suspense>

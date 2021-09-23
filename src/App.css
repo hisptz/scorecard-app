@@ -289,11 +289,6 @@ div.jsx-1730587817 {
     border-radius: 4px;
 }
 
-.data-source.close-icon {
-    width: 32px;
-    height: 32px;
-}
-
 .data-source.avatar {
     width: 32px;
     height: 32px;
@@ -569,7 +564,7 @@ th.jsx-4210860585 {
 }
 
 
-.warning-popover{
+.warning-popover {
     border: 1px solid #A0ADBA;
     padding: 8px;
 }
@@ -578,3 +573,18 @@ thead th.fixed.jsx-4210860585 {
     position: sticky;
     z-index: 0;
 }
+
+.scorecard-list-card-title {
+    font-weight: 500;
+    margin: 8px;
+    font-size: 18px;
+    color: rgba(0, 0, 0, 0.87);
+}
+
+.scorecard-list-card-description {
+    margin: 8px;
+    font-size: 16px;
+    line-height: 2;
+    text-align: justify;
+}
+
