@@ -30,7 +30,8 @@ import {ScreenDimensionState} from "./window";
 
 const defaultValue = {
     legendDefinitions: [
-        {   id: uid(),
+        {
+            id: uid(),
             color: "#008000",
             name: i18n.t("Target Reached/ On Track"),
         },
