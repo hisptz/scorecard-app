@@ -10,7 +10,7 @@ export default function EmptySearchList({keyword}) {
             <CenteredContent>
                 <div className="column center align-items-center">
                     <SearchIcon style={{color: colors.grey700, fontSize: 64}}/>
-                    <h2 style={{color: colors.grey700, margin: 8}}>{i18n.t("No Results Found")}</h2>
+                    <h2 style={{color: colors.grey700, margin: 8}}>{i18n.t("No scorecards found")}</h2>
                     <p style={{
                         color: colors.grey700,
                         margin: 4

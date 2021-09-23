@@ -4,12 +4,15 @@ import {Button, ButtonStrip, colors} from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import React, {useState} from 'react'
 import {useHistory} from "react-router-dom";
+import holderImage from "../../../../../../resources/images/img.png";
 import DeleteConfirmation from "../../../../../../shared/Components/DeleteConfirmation";
 import {useDeleteScorecard} from "../../../../../../shared/hooks/datastore/useScorecard";
+import {truncateDescription} from "../../../../../../shared/utils/utils";
 
 export default function ScorecardListCard({scorecard}) {
     const {title, description, id} = scorecard
     const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
+    const [showFullDescription, setShowFullDescription] = useState(false);
     const history = useHistory()
     const {remove} = useDeleteScorecard(id)
     const {show} = useAlert(({message}) => message, ({type}) => ({...type, duration: 3000}))
@@ -44,10 +47,25 @@ export default function ScorecardListCard({scorecard}) {
              onClick={onView}
         >
             <div className='row space-between align-items-center'>
-                <div className='row'>
+                <div className='row align-items-center'>
+                    <div>
+                        <img alt="img" src={holderImage} style={{height: 100, width: 200}}/>
+                    </div>
                     <div className='column start'>
                         <h4 className='scorecard-list-card-title'>{title}</h4>
-                        <p className="scorecard-list-card-description" style={{color: colors.grey700}}>{description}</p>
+                        <p className="scorecard-list-card-description"
+                           style={{color: colors.grey700}}>
+                            {
+                                description?.length > 100 ?
+                                    <div onClick={(event) => {
+                                        event.stopPropagation()
+                                        setShowFullDescription(prevState => !prevState)
+                                    }} className='row space-between align-content-end'>
+                                        {showFullDescription ? description : truncateDescription(description)}
+                                    </div> :
+                                    description
+                            }
+                        </p>
                     </div>
                 </div>
                 <div className='row end'>

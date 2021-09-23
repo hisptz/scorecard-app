@@ -4,12 +4,15 @@ import {Button, ButtonStrip, colors} from "@dhis2/ui";
 import PropTypes from "prop-types";
 import React, {useEffect, useState} from "react";
 import {useHistory} from "react-router-dom";
+import holderImage from "../../../../../../resources/images/img.png";
 import DeleteConfirmation from "../../../../../../shared/Components/DeleteConfirmation";
 import {useDeleteScorecard} from "../../../../../../shared/hooks/datastore/useScorecard";
+import {truncateDescription} from "../../../../../../shared/utils/utils";
 
 export default function ScorecardGridCard({scorecard}) {
     const {title, description, id} = scorecard;
     const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
+    const [showFullDescription, setShowFullDescription] = useState(false);
     const history = useHistory();
     const {remove, error: deleteError} = useDeleteScorecard(id);
     const {show} = useAlert(
@@ -57,20 +60,36 @@ export default function ScorecardGridCard({scorecard}) {
             onClick={onView}
         >
             <div className="column space-between h-100">
+                <div className='text-center p-8'>
+                    <img alt="img" src={holderImage} style={{height: 100, width: 200}}/>
+                </div>
                 <div className="flex-1">
                     <h4 className='scorecard-list-card-title'>{title}</h4>
-                    <p className="scorecard-list-card-description" style={{color: colors.grey700}}>{description}</p>
+                    <p className="scorecard-list-card-description"
+                       style={{color: colors.grey700}}>
+                        {
+                            description?.length > 100 ?
+                                <div onClick={(event) => {
+                                    event.stopPropagation()
+                                    setShowFullDescription(prevState => !prevState)
+                                }} className='row space-between align-content-end'>
+                                    {showFullDescription ? description : truncateDescription(description)}
+                                </div> :
+                                description
+                        }
+                    </p>
+
                 </div>
                 <div style={{margin: '0 8px'}}>
                     <ButtonStrip start>
                         <Button onClick={onView}>
                             {i18n.t("View")}
                         </Button>
-                        <Button onClick={function (_, e) {
+                        <Button onClick={(_, e) => {
                             e.stopPropagation()
                             onEdit()
                         }}>{i18n.t("Edit")}</Button>
-                        <Button onClick={function (_, e) {
+                        <Button onClick={(_, e) => {
                             e.stopPropagation()
                             setDeleteConfirmOpen(true)
                         }}>

@@ -1,4 +1,4 @@
-import {capitalize, find, flattenDeep, head, isEmpty, last, snakeCase} from "lodash";
+import {capitalize, find, flattenDeep, head, isEmpty, last, snakeCase, truncate} from "lodash";
 import ScorecardLegend from "../../core/models/scorecardLegend";
 
 export function getWindowDimensions() {
@@ -27,7 +27,6 @@ export function uid() {
     return uid;
 }
 
-
 export function generateRandomValues(max) {
     const maxNo = max || 100
     return Math.floor(Math.random() * maxNo)
@@ -53,7 +52,6 @@ export function generateLegendDefaults(legendDefinitions = [], weight, highIsGoo
     return []
 }
 
-
 export function getHoldersFromGroups(dataGroups = []) {
     return flattenDeep(dataGroups?.map(({dataHolders}) => dataHolders) ?? [])
 }
@@ -78,6 +76,9 @@ export function updatePager(pager, itemListLength) {
     }
 }
 
+export function truncateDescription(description = '', maxLength = 100) {
+    return truncate(description, {length: maxLength})
+}
 
 function getOrgUnitLevelId(orgUnitLevels, dataOrgUnitLevel) {
     return (find(orgUnitLevels, ['level', dataOrgUnitLevel]))?.id
@@ -96,6 +97,7 @@ function findLegend(legends, value, {max, legendDefinitions}) {
     }) ?? {};
     return find(legendDefinitions, ['id', legendDefinitionId])
 }
+
 
 export function getLegend(value, legends, {
     max = 100,
