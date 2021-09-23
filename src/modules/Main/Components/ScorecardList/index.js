@@ -56,8 +56,8 @@ export default function ScorecardList() {
 
     const onSearch = useRef(debounce((keyword) => {
         setFilteredScorecards(() => {
-            return scorecards.filter(({id, title, description}) => {
-                const index = `${id}${title}${description}`.toLowerCase();
+            return scorecards.filter(({id, title, description, additionalLabels}) => {
+                const index = `${id} ${title} ${description} ${additionalLabels?.join(' ')}`.toLowerCase();
                 return index.match(new RegExp(keyword.toLowerCase()));
             });
         });
