@@ -68,21 +68,27 @@ function translateAccess(access = '') {
         read: false,
         write: false,
     }
-    if (access.includes('r')) translatedAccess.read = true;
-    if (access.includes('w')) translatedAccess.write = true;
+    if (access.includes('r')) {
+        translatedAccess.read = true;
+    }
+    if (access.includes('w')) {
+        translatedAccess.write = true;
+    }
     return translatedAccess;
 }
 
 export function getUserAuthority(user, scorecardSummary) {
-    const {user: userId, userAccesses, userGroupAccesses} = scorecardSummary ?? {}
+    const {user: userId, userAccesses, userGroupAccesses, publicAccess} = scorecardSummary ?? {}
+    console.log(publicAccess)
 
-
-    if (user?.id === userId) return {...(translateAccess('rw-----')), delete: true}
+    if (user?.id === userId) {
+        return {...(translateAccess('rw-----')), delete: true}
+    }
 
     if (!isEmpty(userAccesses)) {
         const userAccess = find(userAccesses, ['id', user?.id])
         if (userAccess) {
-            return translateAccess(userAccess.access)
+            return translateAccess(userAccess?.access)
         }
     }
 
@@ -97,6 +103,10 @@ export function getUserAuthority(user, scorecardSummary) {
                 write: reduce(translatedAccesses, (acc, value) => acc || value.write, false)
             }
         }
+    }
+
+    if (publicAccess) {
+        return translateAccess(publicAccess?.access)
     }
     return DefaultAuthority;
 }
