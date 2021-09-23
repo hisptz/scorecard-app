@@ -16,6 +16,7 @@ import {downloadALMAData, downloadALMAMeta, downloadCSV, downloadExcel} from "..
 
 export default function useDownload(downloadRef, dataEngine) {
     const title = useRecoilValue(ScorecardViewState('title'))
+    const legendDefinitions = useRecoilValue(ScorecardViewState('legendDefinitions'))
     const {orgUnits} = useRecoilValue(InitialOrgUnits)
     const orgUnitsIds = useMemo(() => orgUnits?.map(({id}) => id), [orgUnits])
     const {filteredOrgUnits, childrenOrgUnits} = useRecoilValue(ScorecardOrgUnitState(orgUnitsIds))
@@ -48,7 +49,7 @@ export default function useDownload(downloadRef, dataEngine) {
                 case DownloadTypes.PDF:
                     return handlePDFDownload()
                 case 'ALMAData':
-                    return downloadALMAData({periods, data, orgUnits, dataHolders, title})
+                    return downloadALMAData({periods, data, orgUnits, dataHolders, title, legendDefinitions})
                 case 'ALMAMeta':
                     return downloadALMAMeta({orgUnits: allOrgUnits, dataHolders, title})
                 default:

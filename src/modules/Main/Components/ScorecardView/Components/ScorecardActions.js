@@ -2,8 +2,10 @@ import i18n from "@dhis2/d2-i18n";
 import {Button, ButtonStrip, DropdownButton} from "@dhis2/ui";
 import PropTypes from "prop-types";
 import React, {useState} from "react";
-import {useRecoilCallback, useRecoilState, useRecoilValue} from "recoil";
+import {useHistory} from "react-router-dom";
+import {useRecoilCallback, useRecoilState, useRecoilValue, useSetRecoilState} from "recoil";
 import ScorecardDataEngine from "../../../../../core/models/scorecardData";
+import RouterState from "../../../../../core/state/router";
 import ScorecardConfState, {
     ScorecardIdState,
     ScorecardRequestId,
@@ -16,12 +18,14 @@ import useDownload from "./ScorecardViewHeader/hooks/useDownload";
 
 
 export default function ScorecardActions({downloadAreaRef, dataEngine}) {
+    const setRoute = useSetRecoilState(RouterState)
     const [scorecardOptions, setScorecardOptions] = useRecoilState(ScorecardViewState('options'))
     const [optionsOpen, setOptionsOpen] = useState(false);
     const {download: onDownload} = useDownload(downloadAreaRef, dataEngine);
     const scorecardId = useRecoilValue(ScorecardIdState)
     const userAuthority = useRecoilValue(UserAuthorityOnScorecard(scorecardId))
     const writeAccess = userAuthority?.write;
+    const history = useHistory()
 
     const onRefresh = useRecoilCallback(({reset, set}) => () => {
         reset(ScorecardConfState(scorecardId))
@@ -31,13 +35,13 @@ export default function ScorecardActions({downloadAreaRef, dataEngine}) {
 
     const onEdit = () => {
         if (writeAccess) {
+            setRoute(prevRoute => ({...prevRoute, previous: `/view/${scorecardId}`}))
             history.push(`/edit/${scorecardId}`)
         }
     }
 
-
     return (
-        <div className='row end'>
+        <div className='row end print-hide'>
             <div className='column align-items-end'>
                 <ButtonStrip>
                     <Button className="option-button" onClick={() => setOptionsOpen(true)}>{i18n.t('Options')}</Button>

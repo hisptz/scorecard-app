@@ -58,7 +58,7 @@ export function useDeleteScorecard(id) {
 
 export function useUpdateScorecard(id) {
     const [executionError, setExecutionError] = useState();
-    const setScorecardConfig = useSetRecoilState(ScorecardRequestId(id))
+    const setScorecardRequestId = useSetRecoilState(ScorecardRequestId(id))
     const [updateMutate, {loading, error: setError}] = useDataMutation(
         updateMutation,
         {variables: {id}}
@@ -70,7 +70,7 @@ export function useUpdateScorecard(id) {
             const scorecardSummary = generateScorecardSummary(data);
             await updateSingleScorecardSummary(id, scorecardSummary);
             await updateMutate({id, data});
-            setScorecardConfig(prevState => prevState + 1)
+            setScorecardRequestId(prevState => prevState + 1)
         } catch (e) {
             setExecutionError(e);
         }

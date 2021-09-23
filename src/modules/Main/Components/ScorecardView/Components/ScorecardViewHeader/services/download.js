@@ -1,6 +1,6 @@
 import i18n from "@dhis2/d2-i18n";
 import {saveAs} from 'file-saver'
-import {flatten, forIn, set} from "lodash";
+import {find, flatten, forIn, set} from "lodash";
 import {utils as xlsx, writeFile} from "xlsx";
 import {ALMA_HEADERS} from "../../../../../../../core/constants/alma";
 
@@ -42,8 +42,7 @@ export function downloadExcel({periods, data, orgUnits, dataHolders, title}) {
 }
 
 
-export function getALMAMetadata({orgUnits, dataSources, periods}) {
-
+export function getALMAMetadata({orgUnits, dataSources, periods, legendDefinitions}) {
 
     function getMetadataDimensions(orgUnits, dataSources, periods) {
         return {
@@ -54,6 +53,27 @@ export function getALMAMetadata({orgUnits, dataSources, periods}) {
         }
     }
 
+    function getAllLegends(legends) {
+        if (Array.isArray(legends)) {
+            return legends?.map(({startValue, endValue, legendDefinitionId}) => ({
+                min: startValue,
+                max: endValue,
+                color: (find(legendDefinitions, ['id', legendDefinitionId]))?.color
+            }))
+        } else {
+            const modifiedLegends = {}
+
+            forIn(legends, (value, key) => {
+                modifiedLegends[key] = value?.map(({startValue, endValue, legendDefinitionId}) => ({
+                    min: startValue,
+                    max: endValue,
+                    color: (find(legendDefinitions, ['id', legendDefinitionId]))?.color
+                }))
+            })
+            return modifiedLegends
+        }
+    }
+
     function getMetadataItems(orgUnits, dataSources) {
         const items = {}
 
@@ -61,7 +81,7 @@ export function getALMAMetadata({orgUnits, dataSources, periods}) {
             const {displayName, id, legends} = dataSource ?? {}
             set(items, [id], {
                 name: displayName,
-                legendSet: legends?.map(({startValue, endValue, color}) => ({min: startValue, max: endValue, color}))
+                legendSet: getAllLegends(legends)
             })
         }
 
@@ -98,7 +118,7 @@ function getALMAData(data) {
     return rows;
 }
 
-export function downloadALMAData({periods, data, orgUnits, dataHolders, title}) {
+export function downloadALMAData({periods, data, orgUnits, dataHolders, title, legendDefinitions}) {
     try {
         const json = JSON.stringify({
             dataValues: [
@@ -107,7 +127,8 @@ export function downloadALMAData({periods, data, orgUnits, dataHolders, title}) 
                     metaData: getALMAMetadata({
                         orgUnits,
                         dataSources: flatten(dataHolders?.map(({dataSources}) => dataSources)),
-                        periods
+                        periods,
+                        legendDefinitions
                     }),
                     rows: getALMAData(data)
                 }

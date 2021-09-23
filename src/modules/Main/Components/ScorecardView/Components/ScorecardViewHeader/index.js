@@ -61,7 +61,7 @@ export default function ScorecardViewHeader() {
                    onExit={onHelpExit}/>
             <Card>
                 <div className='row space-between align-items-center pl-16 pr-16'>
-                    <div className='row'>
+                    <div className='row align-items-center'>
                         <SelectionWrapper
                             id={"org-unit-selector"}
                             selectedItems={orgUnitSelectionDisplay}

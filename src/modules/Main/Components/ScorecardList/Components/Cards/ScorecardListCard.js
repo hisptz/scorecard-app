@@ -4,12 +4,15 @@ import {Button, ButtonStrip, colors} from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import React, {useState} from 'react'
 import {useHistory} from "react-router-dom";
+import {useSetRecoilState} from "recoil";
+import RouterState from "../../../../../../core/state/router";
 import holderImage from "../../../../../../resources/images/img.png";
 import DeleteConfirmation from "../../../../../../shared/Components/DeleteConfirmation";
 import {useDeleteScorecard} from "../../../../../../shared/hooks/datastore/useScorecard";
 import {truncateDescription} from "../../../../../../shared/utils/utils";
 
 export default function ScorecardListCard({scorecard}) {
+    const setRoute = useSetRecoilState(RouterState)
     const {title, description, id} = scorecard
     const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
     const [showFullDescription, setShowFullDescription] = useState(false);
@@ -18,12 +21,14 @@ export default function ScorecardListCard({scorecard}) {
     const {show} = useAlert(({message}) => message, ({type}) => ({...type, duration: 3000}))
 
     const onView = () => {
-        history.push(`/view/${id}`, {from: 'home'})
-    }
+        setRoute(prevRoute => ({...prevRoute, previous: `/`}))
+        history.push(`/view/${id}`);
+    };
 
     const onEdit = () => {
-        history.push(`/edit/${id}`, {from: 'home'})
-    }
+        setRoute(prevRoute => ({...prevRoute, previous: `/`}))
+        history.push(`/edit/${id}`);
+    };
 
     const onDelete = async () => {
         try {

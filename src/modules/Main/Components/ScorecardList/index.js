@@ -10,10 +10,11 @@ import {Steps} from "intro.js-react";
 import {debounce, isEmpty} from "lodash";
 import React, {Suspense, useEffect, useRef, useState} from "react";
 import {useHistory} from "react-router-dom";
-import {useRecoilState, useRecoilValue, useResetRecoilState} from "recoil";
+import {useRecoilState, useRecoilValue, useResetRecoilState, useSetRecoilState} from "recoil";
 import {STEP_OPTIONS} from "../../../../core/constants/help/options";
 import {SCORECARD_LIST_HELP_STEPS} from "../../../../core/constants/help/scorecardList";
 import HelpState from "../../../../core/state/help";
+import RouterState from "../../../../core/state/router";
 import {ScorecardIdState, ScorecardSummaryState,} from "../../../../core/state/scorecard";
 import {FullPageLoader} from "../../../../shared/Components/Loaders";
 import EmptyScoreCardList from "../EmptyScoreCardList";
@@ -25,6 +26,7 @@ import PaginatedDisplay from "./Components/PaginatedDisplay";
 
 export default function ScorecardList() {
     const resetScorecardIdState = useResetRecoilState(ScorecardIdState);
+    const setRoute = useSetRecoilState(RouterState)
     const [helpEnabled, setHelpEnabled] = useRecoilState(HelpState)
     const history = useHistory();
     const [scorecardViewType, {set}] = useSetting("scorecardViewType");
@@ -71,7 +73,8 @@ export default function ScorecardList() {
 
     const onAddClick = () => {
         resetScorecardIdState();
-        history.push("/add", {from: "home"});
+        setRoute(prevRoute => ({...prevRoute, previous: `/`}))
+        history.push("/add");
     };
 
     const onHelpExit = () => {

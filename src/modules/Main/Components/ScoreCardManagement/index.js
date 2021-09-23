@@ -12,6 +12,7 @@ import {STEP_OPTIONS} from "../../../../core/constants/help/options";
 import {DATA_CONFIGURATION_HELP_STEPS, GENERAL_HELP_STEPS} from "../../../../core/constants/help/scorecardManagement";
 import Scorecard from "../../../../core/models/scorecard";
 import HelpState, {HelpIndex, HelpSteps} from "../../../../core/state/help";
+import RouterState from "../../../../core/state/router";
 import ScorecardConfState, {
     ScorecardConfigDirtyState,
     ScorecardConfigEditState,
@@ -63,6 +64,7 @@ const steps = [
 const keys = Object.keys(new Scorecard())
 
 export default function ScoreCardManagement() {
+    const [route, setRoute] = useRecoilState(RouterState)
     const [helpEnabled, setHelpEnabled] = useRecoilState(HelpState)
     const helpSteps = useRecoilValue(HelpSteps)
     const [helpStepIndex, setHelpStepIndex] = useRecoilState(HelpIndex)
@@ -82,9 +84,7 @@ export default function ScoreCardManagement() {
     const [activeStep, setActiveStep] = useState(steps[0]);
     const Component = activeStep.component;
 
-    const resetStates = useRecoilCallback(({reset}) => () => {
-        reset(ScorecardIdState)
-        reset(ScorecardConfState(scorecardId))
+    const resetEditStates = useRecoilCallback(({reset}) => () => {
         reset(ScorecardConfigEditState)
         reset(ScorecardConfigErrorState)
         reset(ShouldValidate)
@@ -92,6 +92,18 @@ export default function ScoreCardManagement() {
             reset(ScorecardConfigDirtyState(key))
         }
     })
+    const resetScorecardStates = useRecoilCallback(({reset}) => () => {
+        reset(ScorecardConfState(scorecardId))
+        reset(ScorecardIdState)
+        for (const key of keys) {
+            reset(ScorecardConfigDirtyState(key))
+        }
+    })
+
+    const onNavigate = () => {
+        setRoute(prevRoute => ({...prevRoute, previous: `/edit/${scorecardId}`}))
+        history.replace(route?.previous);
+    }
 
     const createNewScorecard = async (updatedScorecard) => {
         await Scorecard.save(updatedScorecard, add, user);
@@ -99,17 +111,16 @@ export default function ScoreCardManagement() {
             message: i18n.t('Scorecard added successfully'),
             type: {success: true}
         })
-        history.goBack();
+        onNavigate()
     }
 
     const updateData = async (updatedScorecard) => {
-
         await Scorecard.update(updatedScorecard, update);
         show({
             message: i18n.t('Scorecard updated successfully'),
             type: {success: true}
         })
-        history.goBack();
+        onNavigate()
     }
 
     const onSave = useRecoilCallback(({snapshot, set}) => async () => {
@@ -152,8 +163,6 @@ export default function ScoreCardManagement() {
             return;
         }
         const index = findIndex(steps, ["label", activeStep.label]);
-
-
         if (index !== steps.length - 1) {
             setActiveStep(steps[index + 1]);
             setHelpStepIndex(0)
@@ -170,15 +179,18 @@ export default function ScoreCardManagement() {
     };
 
     const onCancel = () => {
-        history.goBack();
+        onNavigate()
     };
 
     useEffect(() => {
         setScorecardIdState(scorecardId);
         return () => {
-            resetStates();
+            resetEditStates();
+            if (route?.previous === '/') {
+                resetScorecardStates()
+            }
         };
-    }, [scorecardId]);
+    }, [scorecardId, route]);
 
 
     const hasNextStep = useMemo(
@@ -190,7 +202,7 @@ export default function ScoreCardManagement() {
         [activeStep]
     );
 
-    const currentIndex= useMemo(() => findIndex(steps, ["label", activeStep.label]) ,
+    const currentIndex = useMemo(() => findIndex(steps, ["label", activeStep.label]),
         [activeStep]
     );
 
@@ -256,7 +268,7 @@ export default function ScoreCardManagement() {
                                                 disabled={!hasPreviousStep}
                                                 onClick={onPreviousStep}
                                             >
-                                                {i18n.t(`Previous: ${steps[currentIndex-1]?.label??""}`) }
+                                                {i18n.t(`Previous: ${steps[currentIndex - 1]?.label ?? ""}`)}
                                             </Button>
                                             <Button
                                                 primary
@@ -269,7 +281,7 @@ export default function ScoreCardManagement() {
                                                     ? saving
                                                         ? `${i18n.t("Saving")}...`
                                                         : i18n.t("Save")
-                                                    : i18n.t(`Next: ${steps[currentIndex+1]?.label}`) }
+                                                    : i18n.t(`Next: ${steps[currentIndex + 1]?.label}`)}
                                             </Button>
                                         </ButtonStrip>
                                     </div>
@@ -279,7 +291,7 @@ export default function ScoreCardManagement() {
                     </div>
                     <div className="row center p-16">
                         <ButtonStrip center>
-                            <Button disabled={saving} onClick={onSave} >
+                            <Button disabled={saving} onClick={onSave}>
                                 {saving ? `${i18n.t("Saving")}...` : i18n.t("Save and exit")}
                             </Button>
                             <Button onClick={onCancel}>{i18n.t("Exit without saving")}</Button>
