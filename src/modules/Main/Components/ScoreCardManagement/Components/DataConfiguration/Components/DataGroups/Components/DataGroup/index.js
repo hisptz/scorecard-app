@@ -1,18 +1,10 @@
 import i18n from '@dhis2/d2-i18n'
-import {Button, ButtonStrip, colors, Input, Tooltip} from "@dhis2/ui";
-import {IconButton, withStyles} from "@material-ui/core";
-import MuiAccordion from "@material-ui/core/Accordion";
-import MuiAccordionDetails from "@material-ui/core/AccordionDetails";
-import MuiAccordionSummary from "@material-ui/core/AccordionSummary";
+import {Button, colors, Tooltip} from "@dhis2/ui";
 import AddIcon from "@material-ui/icons/Add";
-import DeleteIcon from "@material-ui/icons/Delete";
-import EditIcon from "@material-ui/icons/Edit";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import LinkIcon from "@material-ui/icons/Link";
-import UnlinkIcon from "@material-ui/icons/LinkOff";
 import {cloneDeep, filter, find, findIndex, flattenDeep, fromPairs, head, isEmpty, last,} from "lodash";
 import PropTypes from "prop-types";
-import React, {useCallback, useEffect, useMemo, useRef, useState} from "react";
+import React, {useEffect, useMemo, useRef, useState} from "react";
 import {DragDropContext, Draggable, Droppable} from "react-beautiful-dnd";
 import {useRecoilCallback, useRecoilState, useRecoilValue} from "recoil";
 import ScorecardIndicator from "../../../../../../../../../../core/models/scorecardIndicator";
@@ -25,128 +17,15 @@ import {
     ScorecardConfigEditState,
 } from "../../../../../../../../../../core/state/scorecard";
 import {DataGroupErrorState} from "../../../../../../../../../../core/state/validators";
-import ErrorIcon from "../../../../../../../../../../shared/icons/ErrorIcon";
 import {updateListFromDragAndDrop} from "../../../../../../../../../../shared/utils/dnd";
-import {generateLegendDefaults} from "../../../../../../../../../../shared/utils/utils";
-import DataSourceHolder from "../DataSourceHolder";
+import {generateLegendDefaults, uid} from "../../../../../../../../../../shared/utils/utils";
 import DataSourceSelectorModal from "../DataSourceSelectorModal";
+import {Accordion, AccordionDetails, AccordionSummary} from "./Components/Accordions";
+import EditTitle from "./Components/EditTitle";
+import GroupTitle from "./Components/GroupTitle";
+import LinkingContainer from "./Components/LinkingContainer";
 import {customChunk} from "./utils";
 
-
-const Accordion = withStyles({
-    root: {
-        border: "1px solid rgba(0, 0, 0, .125)",
-        boxShadow: "none",
-        "&:not(:last-child)": {
-            borderBottom: 0,
-        },
-        "&:before": {
-            display: "none",
-        },
-        "&$expanded": {
-            margin: "auto",
-        },
-    },
-    expanded: {},
-})(MuiAccordion);
-
-const AccordionSummary = withStyles({
-    root: {
-        background: "#F8F9FA",
-        borderBottom: "1px solid rgba(0, 0, 0, .125)",
-        marginBottom: -1,
-        minHeight: 56,
-        "&$expanded": {
-            minHeight: 56,
-        },
-    },
-    content: {
-        "&$expanded": {
-            margin: "12px 0",
-        },
-    },
-    expanded: {},
-})(MuiAccordionSummary);
-
-const AccordionDetails = withStyles((theme) => ({
-    root: {
-        padding: theme.spacing(2),
-    },
-}))(MuiAccordionDetails);
-
-function LinkingContainer({
-                              chunk,
-                              onDataSourceDelete,
-                              onLink,
-                              onUnlink,
-                              dataHolders,
-                          }) {
-    const linkable = chunk.length > 1;
-    const hasLink = head(chunk)?.dataSources?.length > 1;
-
-    const getIndex = useCallback(
-        (id) => {
-            return findIndex(dataHolders, ["id", id]);
-        },
-        [chunk]
-    );
-    const onLinkClick = () => {
-        const indexOfMergedHolder = getIndex(head(chunk)?.id);
-        const indexOfDeletedHolder = getIndex(last(chunk)?.id);
-        onLink(indexOfMergedHolder, indexOfDeletedHolder);
-    };
-
-    const onUnlinkClick = () => {
-        onUnlink(head(chunk).id);
-    };
-
-    const onIconClick = () => {
-        hasLink ? onUnlinkClick() : onLinkClick();
-    };
-
-    return (
-        <div className="linking-container">
-            <div className="row align-items-center">
-                <div className="column">
-                    {chunk?.map((source) => (
-                        <Tooltip content={i18n.t('Click to configure, drag to rearrange')} key={source.id}>
-                            <DataSourceHolder
-                                onUnlink={onUnlinkClick}
-                                dataHolder={source}
-                                onDelete={onDataSourceDelete}
-                                key={source.id}
-                                id={source.id}
-                                index={getIndex(source.id)}
-                            />
-                        </Tooltip>
-                    ))}
-                </div>
-                <div className="link-button-container">
-                    <Tooltip
-                        content={i18n.t('Click to {{linkAction}}', {linkAction: hasLink ? i18n.t('unlink') : i18n.t('link')})}>
-                        <IconButton onClick={onIconClick} disabled={!linkable && !hasLink}>
-                            {(linkable || hasLink) &&
-                            (hasLink ? (
-                                <UnlinkIcon className="link-button"/>
-                            ) : (
-                                <LinkIcon className="link-button"/>
-                            ))}
-                        </IconButton>
-                    </Tooltip>
-                </div>
-            </div>
-        </div>
-    );
-}
-
-LinkingContainer.propTypes = {
-    chunk: PropTypes.array.isRequired,
-    dataHolders: PropTypes.arrayOf(PropTypes.instanceOf(ScorecardIndicatorHolder))
-        .isRequired,
-    onDataSourceDelete: PropTypes.func.isRequired,
-    onLink: PropTypes.func.isRequired,
-    onUnlink: PropTypes.func.isRequired,
-};
 
 export default function DataGroup({
                                       handleAccordionChange,
@@ -237,6 +116,7 @@ export default function DataGroup({
         const newDataSources = addedDataSources.map(
             (dataSource) =>
                 new ScorecardIndicatorHolder({
+                    id: uid(),
                     dataSources: [
                         new ScorecardIndicator({
                             ...dataSource,
@@ -308,6 +188,8 @@ export default function DataGroup({
         dataHolders.map(({dataSources}) => dataSources)
     ).map(({id}) => id);
 
+    console.log({dataHolderChunks})
+
     return (
         <Draggable index={index} draggableId={id}>
             {(provided) => (
@@ -326,92 +208,19 @@ export default function DataGroup({
                             onClick={(event) => event.stopPropagation()}
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
-                            expandIcon={<ExpandMoreIcon className="expand-group-icon" data-test="scorecard-group-expand"/>}
+                            expandIcon={<ExpandMoreIcon className="expand-group-icon"
+                                                        data-test="scorecard-group-expand"/>}
                             aria-controls={`${id}d-content`}
                             id={`${id}d--header`}
                             data-test="scorecard-group-item"
                         >
                             {titleEditOpen ? (
-                                <div className="row space-between w-100">
-                                    <div
-                                        onClick={(event) => event.stopPropagation()}
-                                        className="column"
-                                    >
-                                        <Input
-                                            initialFocus
-                                            value={titleEditValue}
-                                            onChange={({value}) => setTitleEditValue(value)}
-                                        />
-                                    </div>
-                                    <div className="column ">
-                                        <ButtonStrip end>
-                                            <Button onClick={onTitleEditSubmit}>
-                                                {i18n.t('Save')}
-                                            </Button>
-                                            <Button
-                                                onClick={(_, event) => {
-                                                    event.stopPropagation();
-                                                    setTitleEditOpen(false);
-                                                    setTitleEditValue(title);
-                                                }}
-                                            >
-                                                {i18n.t('Cancel')}
-                                            </Button>
-                                        </ButtonStrip>
-                                    </div>
-                                </div>
+                                <EditTitle onTitleEditSubmit={onTitleEditSubmit} titleEditValue={titleEditValue}
+                                           onClose={setTitleEditOpen} title={title}
+                                           setTitleEditValue={setTitleEditValue}/>
                             ) : (
-                                <div className="row space-between align-items-center">
-                                    <div className="row  align-items-center accordion-title-container">
-                                        <div className='column w-auto'>
-                                            <p
-                                                onDoubleClick={(event) => {
-                                                    event.stopPropagation();
-                                                    setTitleEditOpen(true);
-                                                }}
-                                                onClick={(event) => event.stopPropagation()}
-                                                className="accordion-title group-name-area"
-                                            >
-                                                {title}
-                                            </p>
-                                            {
-                                                errors &&
-                                                <p style={{fontSize: 12, margin: 4, color: '#f44336'}}>{errors}</p>
-                                            }
-                                        </div>
-                                        <IconButton
-                                            onClick={(event) => {
-                                                event.stopPropagation();
-                                                setTitleEditOpen(true);
-                                           }}
-                                            size="small"
-                                            className="accordion-title-edit"
-                                        >
-                                            <EditIcon/>
-                                        </IconButton>
-                                    </div>
-                                    <div className>
-                                        <div className='row align-items-center'>
-                                            <Button
-                                                className="delete-group-icon"
-                                                onClick={(_, event) => {
-                                                    event.stopPropagation();
-                                                    if (onDelete) {
-                                                        onDelete(id);
-                                                    }
-                                                }}
-                                                icon={<DeleteIcon/>}
-                                            >
-                                                {i18n.t('Delete')}
-                                            </Button>
-                                            {
-                                                errors && <div style={{paddingLeft: 16}}>
-                                                    <ErrorIcon color={'#f44336'} size={24}/>
-                                                </div>
-                                            }
-                                        </div>
-                                    </div>
-                                </div>
+                                <GroupTitle title={title} onDelete={onDelete} setTitleEditOpen={setTitleEditOpen}
+                                            id={id}/>
                             )}
                         </AccordionSummary>
                     </Tooltip>
@@ -426,7 +235,7 @@ export default function DataGroup({
                                 </div>
                             ) : (
                                 <DragDropContext onDragEnd={onDragEnd}>
-                                    <Droppable droppableId={id}>
+                                    <Droppable droppableId={`${id}`}>
                                         {(provided) => (
                                             <div
                                                 className="w-100 "
@@ -453,7 +262,7 @@ export default function DataGroup({
                             <div>
                                 <Button
                                     className="scorecard-indicator-add"
-                                    dataTest={"scorecard-indicator-add"}
+                                    dataTest="scorecard-indicator-add"
                                     onClick={() => setOpenAdd(true)}
                                     icon={<AddIcon/>}
                                 >

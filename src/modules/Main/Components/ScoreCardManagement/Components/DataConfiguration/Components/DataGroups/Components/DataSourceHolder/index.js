@@ -18,7 +18,6 @@ export default function DataSourceHolder({dataHolder, id, index, onDelete}) {
 
     const selected = scorecardEditState.selectedDataHolderIndex === index;
     const hasLinked = dataSources?.length > 1;
-
     const onDataSourceDelete = (indicatorIndex) => {
         if (hasLinked) {
             const updatedDataSources = [...dataSources]
@@ -29,7 +28,7 @@ export default function DataSourceHolder({dataHolder, id, index, onDelete}) {
         onDelete(index)
     }
     return (
-        <Draggable draggableId={id} index={index}>
+        <Draggable draggableId={`${id}`} index={index}>
             {
                 provided => (
                     <div  {...provided.draggableProps}
