@@ -44,7 +44,7 @@ export default function OrgUnitHeaderRow({orgUnits, nested}) {
 
     return (
         <DataTableRow>
-            <DataTableCell className={'jsx-1369417008'} rowSpan={"2"} fixed left={"0"} width={"50px"}/>
+            <DataTableCell className={'extra-table-cell'} rowSpan={"2"} fixed left={"0"} width={"50px"}/>
             {
                 itemNumber && <DataTableCell rowSpan={"2"} fixed left={"50px"} width={"50px"}/>
             }
@@ -68,7 +68,7 @@ export default function OrgUnitHeaderRow({orgUnits, nested}) {
                                            bordered
                                            width={`${periods?.length * ScorecardTableConstants.CELL_WIDTH}px`}
                                            colSpan={`${(periods?.length ?? 1)}`} key={id}>
-                        <div style={{height: '100%', width: '100%'}} >
+                        <div style={{height: '100%', width: '100%'}}>
                             <Tooltip className='m-auto' content={i18n.t('Drag to row headers to change layout ')}>
                                 <DroppableCell accept={[DraggableItems.DATA_ROW]}>
                                     <DraggableCell label={displayName} type={DraggableItems.ORG_UNIT_COLUMN}/>
@@ -76,7 +76,7 @@ export default function OrgUnitHeaderRow({orgUnits, nested}) {
                             </Tooltip>
                         </div>
                     </DataTableColumnHeader>
-                )) 
+                ))
             }
             {
                 averageColumn &&

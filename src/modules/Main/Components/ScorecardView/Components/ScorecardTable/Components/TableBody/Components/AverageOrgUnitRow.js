@@ -18,9 +18,9 @@ export default function AverageOrgUnitRow({orgUnits, overallAverage, dataEngine}
 
     return (
         <DataTableRow bordered>
-            <DataTableCell className={'jsx-1369417008'} fixed left={"0"} width={"50px"}/>
+            <DataTableCell fixed left={"0"} width={"50px"}/>
             {
-                itemNumber && <DataTableCell className={'jsx-1369417008'} fixed left={"50px"} width={"50px"}/>
+                itemNumber && <DataTableCell fixed left={"50px"} width={"50px"}/>
 
             }
             <DataTableCell fixed left={itemNumber ? "100px" : "50px"} className="scorecard-org-unit-cell">
