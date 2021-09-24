@@ -16,13 +16,13 @@ export default function AccessDeniedPage({accessType}) {
         <div className='column center align-items-center w-100 h-100'>
             <CenteredContent>
                 <div className='column align-items-center'>
-                    <ErrorIcon style={{color: colors.grey400, fontSize: '5vw'}} fontSize='large'/>
+                    <ErrorIcon style={{color: colors.grey700, fontSize: 64}} fontSize='large'/>
                     <p style={{
                         color: colors.grey700,
                         fontWeight: 'bold',
                         fontSize: '1vw'
                     }}>{i18n.t("You do not have access to {{accessType}} this Scorecard", {accessType})}</p>
-                    <Button primary onClick={onHomeClick}>{i18n.t('Back to Home')}</Button>
+                    <Button primary onClick={onHomeClick}>{i18n.t('Back to scorecard list')}</Button>
                 </div>
             </CenteredContent>
         </div>
