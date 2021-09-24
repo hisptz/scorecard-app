@@ -3,6 +3,7 @@ import {isEmpty} from "lodash";
 import {useEffect, useState} from "react";
 import {useRecoilCallback, useRecoilValue, useSetRecoilState} from "recoil";
 import {Orientation} from "../../../../../../../core/constants/orientation";
+import {TableSort} from "../../../../../../../core/constants/tableSort";
 import {PeriodResolverState} from "../../../../../../../core/state/period";
 import {
     ScorecardOrgUnitState,
@@ -23,7 +24,7 @@ export default function useTableOrgUnits(dataEngine, orgUnits) {
     const dataSort = useRecoilValue(ScorecardTableSortState)
     const periods = useRecoilValue(PeriodResolverState)
     const orientation = useRecoilValue(ScorecardTableOrientationState)
-    const [orgUnitSort, setOrgUnitSort] = useState([]);
+    const [orgUnitSort, setOrgUnitSort] = useState();
 
     const setDefaults = useRecoilCallback(({reset}) => () => {
         reset(ScorecardOrgUnitState(orgUnits))
@@ -38,6 +39,7 @@ export default function useTableOrgUnits(dataEngine, orgUnits) {
                 childrenOrgUnits: []
             }))
         }
+
         if (!isEmpty(searchKeyword)) {
             setLoading(true);
             search().then(() => setLoading(false)).catch(e => console.error(e))
@@ -102,10 +104,12 @@ export default function useTableOrgUnits(dataEngine, orgUnits) {
             }
         }
 
-        if (orgUnitSort || sort) {
-            sortOrgUnits()
-        } else {
+        if (isEmpty(orgUnitSort) && sort === TableSort.DEFAULT) {
             setDefaults()
+            return
+        }
+        if (!isEmpty(orgUnitSort) || sort) {
+            sortOrgUnits()
         }
     }, [orgUnitSort, sort]);
 
