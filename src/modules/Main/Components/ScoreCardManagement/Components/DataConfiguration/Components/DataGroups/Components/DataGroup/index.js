@@ -209,10 +209,10 @@ export default function DataGroup({
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
                             expandIcon={<ExpandMoreIcon className="expand-group-icon"
-                                                        data-test="scorecard-group-expand"/>}
+                                                        dataTest="scorecard-group-expand"/>}
                             aria-controls={`${id}d-content`}
                             id={`${id}d--header`}
-                            data-test="scorecard-group-item"
+                            dataTest="scorecard-group-item"
                         >
                             {titleEditOpen ? (
                                 <EditTitle onTitleEditSubmit={onTitleEditSubmit} titleEditValue={titleEditValue}
@@ -262,7 +262,7 @@ export default function DataGroup({
                             <div>
                                 <Button
                                     className="scorecard-indicator-add"
-                                    dataTest="scorecard-indicator-add"
+                                    dataTest='scorecard-indicator-add'
                                     onClick={() => setOpenAdd(true)}
                                     icon={<AddIcon/>}
                                 >

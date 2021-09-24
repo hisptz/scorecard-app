@@ -55,6 +55,7 @@ export default function ScorecardListCard({scorecard, grid}) {
 
     return (grid ? <div
                 className="container-bordered p-16 "
+                data-test="scorecard-thumbnail-view"
                 style={{margin: 16, background: "white"}}
                 onClick={onView}
             >
@@ -116,7 +117,8 @@ export default function ScorecardListCard({scorecard, grid}) {
                     )}
                 </div>
             </div> :
-            <div className='container-bordered p-32' style={{margin: 16, background: 'white'}}
+            <div dataTest="scorecard-thumbnail-view"
+                 className='container-bordered p-32' style={{margin: 16, background: 'white'}}
                  onClick={onView}
             >
                 <div className='row space-between align-items-center'>
