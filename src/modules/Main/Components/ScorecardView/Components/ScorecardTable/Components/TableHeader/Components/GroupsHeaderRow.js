@@ -34,9 +34,8 @@ export default function GroupsHeaderRow({nested, orgUnits}) {
                 itemNumber && <DataTableCell rowSpan={"3"} fixed left={"50px"} width={"50px"}/>
             }
             <DataTableColumnHeader
-                large
-                name={'orgUnit'}
                 align='center'
+                name={'orgUnit'}
                 onSortIconClick={onSortIconClick}
                 sortDirection={sort?.orgUnit} fixed top={"0"} left={itemNumber ? "100px" : "50px"}
                 bordered
@@ -52,7 +51,7 @@ export default function GroupsHeaderRow({nested, orgUnits}) {
             </DataTableColumnHeader>
             {
                 dataGroups?.map(({title, id, dataHolders}) => (
-                    <DataTableCell fixed className='scorecard-table-header' align='center' bordered
+                    <DataTableCell fixed className='scorecard-table-header header' align='center' bordered
                                    width={`${((dataHolders?.length ?? 1) * (periods?.length ?? 1)) * ScorecardTableConstants.CELL_WIDTH}px`}
                                    top={"0"}
                                    colSpan={`${(dataHolders?.length ?? 1) * (periods?.length ?? 1)}`} key={id}>
@@ -64,7 +63,7 @@ export default function GroupsHeaderRow({nested, orgUnits}) {
                 averageColumn &&
                 <DataTableCell
                     width={`${ScorecardTableConstants.CELL_WIDTH}px`} fixed align='center' bordered
-                    className='scorecard-table-header' rowSpan={"3"}>
+                    className='scorecard-table-header header' rowSpan={"3"}>
                     {i18n.t('Average')}
                 </DataTableCell>
             }

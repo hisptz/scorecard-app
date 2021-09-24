@@ -52,7 +52,7 @@ export default function OrgUnitHeaderRow({orgUnits, nested}) {
                                    sortDirection={sort?.data} align='center' fixed top={"0"}
                                    left={itemNumber ? "100px" : "50px"}
                                    width={nameColumnWidth} bordered
-                                   className='scorecard-table-header scorecard-org-unit-cell' rowSpan={"2"}>
+                                   className='scorecard-table-header scorecard-org-unit-cell header' rowSpan={"2"}>
                 {
                     !nested && <InputField className='print-hide w-100 data-search' value={searchValue}
                                            onChange={({value}) => setSearchValue(value)}
@@ -64,7 +64,8 @@ export default function OrgUnitHeaderRow({orgUnits, nested}) {
                 [...filteredOrgUnits, ...childrenOrgUnits]?.map(({displayName, id}) => (
                     <DataTableColumnHeader name={`${id}`} sortDirection={name === id ? direction : 'default'}
                                            onSortIconClick={onDataSortClick}
-                                           fixed className='scorecard-table-header scorecard-table-cell' align='center'
+                                           fixed className='scorecard-table-header scorecard-table-cell header'
+                                           align='center'
                                            bordered
                                            width={`${periods?.length * ScorecardTableConstants.CELL_WIDTH}px`}
                                            colSpan={`${(periods?.length ?? 1)}`} key={id}>
