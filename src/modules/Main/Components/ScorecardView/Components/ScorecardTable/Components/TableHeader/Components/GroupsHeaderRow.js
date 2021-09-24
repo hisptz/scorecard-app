@@ -36,6 +36,7 @@ export default function GroupsHeaderRow({nested, orgUnits}) {
             <DataTableColumnHeader
                 large
                 name={'orgUnit'}
+                align='center'
                 onSortIconClick={onSortIconClick}
                 sortDirection={sort?.orgUnit} fixed top={"0"} left={itemNumber ? "100px" : "50px"}
                 bordered
