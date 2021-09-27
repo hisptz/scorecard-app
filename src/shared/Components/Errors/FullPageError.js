@@ -3,6 +3,7 @@ import {Button, ButtonStrip, CenteredContent, colors, Modal, ModalActions, Modal
 import ErrorIcon from '@material-ui/icons/Error'
 import PropTypes from 'prop-types'
 import React, {useState} from "react";
+import {useHistory} from "react-router-dom";
 
 
 function ErrorDialog({error, onClose}) {
@@ -13,7 +14,7 @@ function ErrorDialog({error, onClose}) {
             <ModalContent>
                 <div style={{background: colors.grey050, padding: 24, border: `1px solid ${colors.grey300}`}}>
                     <code style={{fontSize: 14,}}>
-                        {details}
+                        {JSON.stringify(details)}
                     </code>
                 </div>
             </ModalContent>
@@ -32,6 +33,7 @@ ErrorDialog.propTypes = {
 
 export default function FullPageError({error, resetErrorBoundary}) {
     const [errorDialogShow, setErrorDialogShow] = useState(false);
+    const history = useHistory()
 
     const onRefresh = () => {
         if (resetErrorBoundary) {
@@ -41,17 +43,30 @@ export default function FullPageError({error, resetErrorBoundary}) {
         }
     }
 
+    const onGoToHome = () => {
+        if (history) {
+            history?.replace('/')
+        } else {
+            onRefresh()
+        }
+    }
+
+
     return (
         <div className='column center ' style={{height: '100%', textAlign: 'center'}}>
             <CenteredContent>
                 <div className='column align-items-center'>
                     <ErrorIcon style={{color: colors.grey700, fontSize: 64}} fontSize='large'/>
-                    <h2 style={{color: colors.grey700, margin: 8}}>{i18n.t("Something Went Wrong")}</h2>
+                    <h2 style={{color: colors.grey700, margin: 8}}>{error?.title ?? i18n.t("Something Went Wrong")}</h2>
                     <p style={{color: colors.grey700}}>{typeof (error) === 'string' ? error : error?.message}</p>
                     <ButtonStrip center>
-                        <Button onClick={onRefresh}>{i18n.t("Refresh")}</Button>
                         {
-                            typeof (error) === 'object' &&
+                            error?.details?.httpStatusCode === 404 ?
+                                <Button primary onClick={onGoToHome}>{i18n.t("Back to scorecard list")}</Button> :
+                                <Button onClick={onRefresh}>{i18n.t("Refresh")}</Button>
+                        }
+                        {
+                            error?.details &&
                             <Button onClick={() => setErrorDialogShow(true)}>{i18n.t("View error logs")}</Button>
 
                         }

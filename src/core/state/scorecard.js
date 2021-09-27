@@ -10,7 +10,7 @@ import {
     getTableWidthWithOrgUnit,
 } from "../../modules/Main/Components/ScorecardView/Components/ScorecardTable/services/utils";
 import getScorecard, {getOrgUnitSelection} from "../../shared/services/getScorecard";
-import getScorecardSummary from "../../shared/services/getScorecardSummary";
+import getScorecardSummary, {restoreScorecardSummary} from "../../shared/services/getScorecardSummary";
 import {getHoldersFromGroups, uid} from "../../shared/utils/utils";
 import {Orientation} from "../constants/orientation";
 import ScorecardAccessType from "../constants/scorecardAccessType";
@@ -18,7 +18,6 @@ import {TableSort} from "../constants/tableSort";
 import OrgUnitSelection from "../models/orgUnitSelection";
 import Scorecard from "../models/scorecard";
 import ScorecardAccess from "../models/scorecardAccess";
-import ScorecardDataEngine from "../models/scorecardData";
 import ScorecardOptions from "../models/scorecardOptions";
 import {EngineState} from "./engine";
 import {OrgUnitChildren, SelectedOrgUnits} from "./orgUnit";
@@ -71,7 +70,6 @@ const defaultValue = {
     highlightedIndicators: [],
 };
 
-const scorecardDataEngine = new ScorecardDataEngine();
 
 const ScorecardIdState = atom({
     key: "scorecard-id",
@@ -85,6 +83,7 @@ const ScorecardSummaryState = atom({
         get: async ({get}) => {
             const engine = get(EngineState);
             const user = get(UserState);
+            await restoreScorecardSummary(engine)
             const {summary, error} = await getScorecardSummary(engine);
             if (error) {
                 throw error;
@@ -114,6 +113,13 @@ const ScorecardConfState = atomFamily({
                     if (scorecardId) {
                         const {scorecard, error} = await getScorecard(scorecardId, engine);
                         if (error) {
+                            if (error?.details?.httpStatusCode === 404) {
+                                throw {
+                                    ...error,
+                                    title: i18n.t("Scorecard Not Found"),
+                                    message: i18n.t(`Scorecard with id ${scorecardId} could not be found.`)
+                                }
+                            }
                             throw error;
                         }
                         const orgUnitSelection = await getOrgUnitSelection(scorecard, engine)
@@ -353,7 +359,6 @@ export {
     ScorecardSummaryState,
     ScorecardViewState,
     ScorecardRequestId,
-    scorecardDataEngine,
     ScorecardConfigDirtySelector,
     ScorecardConfigErrorSelector,
     ScorecardConfigErrorState,

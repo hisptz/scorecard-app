@@ -18,7 +18,7 @@ export default function AverageDataSourceRow({orgUnits, overallAverage, dataEngi
         <DataTableRow bordered>
             <DataTableCell fixed left={"0"} width={"50px"}/>
             {
-                itemNumber && <DataTableCell className={'jsx-1369417008'} fixed left={"50px"} width={"50px"}/>
+                itemNumber && <DataTableCell className={'extra-table-cell'} fixed left={"50px"} width={"50px"}/>
             }
             <DataTableCell fixed left={itemNumber ? "100px" : "50px"} className="scorecard-org-unit-cell">
                 <b>{i18n.t('Average')}</b>

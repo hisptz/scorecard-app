@@ -1,4 +1,4 @@
-import {remove, set, last} from 'lodash'
+import {last, remove, set} from 'lodash'
 import React, {useEffect} from 'react'
 import {Droppable} from "react-beautiful-dnd";
 import {useRecoilState, useResetRecoilState} from "recoil";
@@ -36,7 +36,7 @@ export default function DataGroups() {
     }
 
     return (
-        <Droppable droppableId={'id'}>
+        <Droppable droppableId={'group-area'}>
             {
                 provided => (
                     <div {...provided.droppableProps} ref={provided.innerRef}>

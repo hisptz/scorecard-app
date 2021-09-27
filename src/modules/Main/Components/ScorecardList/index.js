@@ -127,7 +127,8 @@ export default function ScorecardList() {
                                         }
                                     />
                                 </Tooltip>
-                                <Button className="add-scorecard-button" onClick={onAddClick} primary icon={<AddIcon/>}>
+                                <Button dataTest="new-scorecard-button" className="add-scorecard-button"
+                                        onClick={onAddClick} primary icon={<AddIcon/>}>
                                     {i18n.t("Add New Scorecard")}
                                 </Button>
                             </ButtonStrip>

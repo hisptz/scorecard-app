@@ -55,6 +55,7 @@ export default function ScorecardListCard({scorecard, grid}) {
 
     return (grid ? <div
                 className="container-bordered p-16 "
+                data-test="scorecard-thumbnail-view"
                 style={{margin: 16, background: "white"}}
                 onClick={onView}
             >
@@ -62,7 +63,7 @@ export default function ScorecardListCard({scorecard, grid}) {
                     <div className='text-center p-8'>
                         <img alt="img" src={holderImage} style={{height: 100, width: 200}}/>
                     </div>
-                    <div className="flex-1">
+                    <div className="flex-1 column align-items-center">
                         <h4 className='scorecard-list-card-title'>{title}</h4>
                         <p className="scorecard-list-card-description"
                            style={{color: colors.grey700}}>
@@ -80,7 +81,7 @@ export default function ScorecardListCard({scorecard, grid}) {
 
                     </div>
                     <div style={{margin: '0 8px'}}>
-                        <ButtonStrip start>
+                        <ButtonStrip middle>
                             <Button onClick={onView}>{i18n.t('View')}</Button>
                             {
                                 write && <Button onClick={function (_, e) {
@@ -116,7 +117,8 @@ export default function ScorecardListCard({scorecard, grid}) {
                     )}
                 </div>
             </div> :
-            <div className='container-bordered p-32' style={{margin: 16, background: 'white'}}
+            <div dataTest="scorecard-thumbnail-view"
+                 className='container-bordered p-32' style={{margin: 16, background: 'white'}}
                  onClick={onView}
             >
                 <div className='row space-between align-items-center'>

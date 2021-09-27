@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-09-23T08:08:38.223Z\n"
-"PO-Revision-Date: 2021-09-23T08:08:38.223Z\n"
+"POT-Creation-Date: 2021-09-24T10:16:34.357Z\n"
+"PO-Revision-Date: 2021-09-24T10:16:34.357Z\n"
 
 msgid "Next"
 msgstr "Next"
@@ -435,6 +435,9 @@ msgstr "N/A"
 msgid "No Data"
 msgstr "No Data"
 
+msgid "Scorecard Not Found"
+msgstr "Scorecard Not Found"
+
 msgid "This field is required"
 msgstr "This field is required"
 
@@ -477,6 +480,12 @@ msgstr "Can Read"
 msgid "Can Read and Write"
 msgstr "Can Read and Write"
 
+msgid "Save"
+msgstr "Save"
+
+msgid "Cancel"
+msgstr "Cancel"
+
 msgid "Click to configure, drag to rearrange"
 msgstr "Click to configure, drag to rearrange"
 
@@ -497,12 +506,6 @@ msgstr "collapse"
 
 msgid "expand"
 msgstr "expand"
-
-msgid "Save"
-msgstr "Save"
-
-msgid "Cancel"
-msgstr "Cancel"
 
 msgid "Add a data source"
 msgstr "Add a data source"
@@ -645,8 +648,8 @@ msgstr "of"
 msgid "You do not have access to {{accessType}} this Scorecard"
 msgstr "You do not have access to {{accessType}} this Scorecard"
 
-msgid "Back to Home"
-msgstr "Back to Home"
+msgid "Back to scorecard list"
+msgstr "Back to scorecard list"
 
 msgid "Metadata"
 msgstr "Metadata"

@@ -3,15 +3,15 @@
 
 
 
-  When('opening a list of available scorecards',()=>{
+When('opening a list of available scorecards', () => {
     cy.intercept("GET", "/api/35/dataStore/hisptz-scorecard/scorecard-summary", {
-      fixture: "scorecards.json",
+        fixture: "scorecards.json",
     }).as('scorecards');
-    cy.wait('@scorecards').then((scorcards)=>{
-      cy.get('[data-test=scorecard-thumbnail-view]').should("be.visible");
+    cy.wait('@scorecards').then((scorcards) => {
+        cy.get('[data-test=scorecard-thumbnail-view]').should("be.visible");
     })
-  });
-  
+});
+
 
 Then('a table of indicators against locations should displayed',()=>{
   cy.get('[data-test=orgUnit-parent-table-column-cell]').should('be.visible')

@@ -291,7 +291,7 @@ export default function ScoreCardManagement() {
                     </div>
                     <div className="row center p-16">
                         <ButtonStrip center>
-                            <Button disabled={saving} onClick={onSave}>
+                            <Button dataTest="scorecard-save-button" disabled={saving} onClick={onSave}>
                                 {saving ? `${i18n.t("Saving")}...` : i18n.t("Save and exit")}
                             </Button>
                             <Button onClick={onCancel}>{i18n.t("Exit without saving")}</Button>

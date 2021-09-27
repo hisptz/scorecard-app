@@ -66,7 +66,7 @@ body {
     justify-content: space-between;
 }
 
-.space-around{
+.space-around {
     justify-content: space-around;
 }
 
@@ -171,9 +171,11 @@ body {
 .w-40 {
     width: 40%;
 }
-.w-auto{
+
+.w-auto {
     width: auto;
 }
+
 .h-100 {
     height: 100%;
 }
@@ -410,7 +412,7 @@ table {
 
 .selection-card {
     width: 100%;
-    z-index: 2;
+    z-index: 4;
 }
 
 .selection-box {
@@ -453,6 +455,16 @@ table {
 .scorecard-table-header {
     font-weight: bold !important;
     font-size: 16px;
+    margin: auto;
+}
+
+.header > span.container > span.top {
+    padding: 8px;
+    height: max-content;
+}
+
+.header > span.container {
+    height: auto;
 }
 
 .scorecard-table-cell {
@@ -460,8 +472,7 @@ table {
 
 }
 
-
-td.jsx-1369417008 {
+.child-org-unit-row td:first-child {
     max-width: 40px !important;
     background: rgb(243, 245, 247);
     position: sticky;
@@ -470,11 +481,11 @@ td.jsx-1369417008 {
     z-index: 1;
 }
 
-td.jsx-1369417008:hover {
+.child-org-unit-row td:first-child:hover {
     background: rgb(232, 237, 242)
 }
 
-td.jsx-1369417008::selection {
+.child-org-unit-row td:first-child::selection {
     background: rgb(232, 237, 242)
 }
 
@@ -493,15 +504,6 @@ td.jsx-1369417008::selection {
     padding: 0 !important;
 }
 
-span.top.jsx-2694284040 {
-    height: 100% !important;
-    text-align: center;
-}
-
-th.jsx-4210860585 {
-    height: 100% !important;
-    padding: 8px !important;
-}
 
 .m-auto {
     margin: auto;
@@ -515,8 +517,12 @@ th.jsx-4210860585 {
     white-space: nowrap;
 }
 
-.min-width-200{
+.min-width-200 {
     min-width: 200px;
+}
+
+td.extra-table-cell > svg {
+    left: 0;
 }
 
 @media print {
@@ -537,20 +543,19 @@ th.jsx-4210860585 {
         display: block !important;
     }
 
-    button.jsx-4183809227 {
-        display: none !important;;
-    }
 
-    td.jsx-1369417008 > svg {
+    .child-org-unit-row td:first-child > svg {
         display: none;
+        color: black;
     }
 
-    td.jsx-1369417008 {
+    .child-org-unit-row td:first-child {
         background: white !important;
         border-left: 1px solid #D5DDE5 !important;
         border-bottom: 1px solid #D5DDE5 !important;
         border-right: none !important;
     }
+
     th.fixed {
         background: white !important;
         font-weight: bold !important;
@@ -558,6 +563,7 @@ th.jsx-4210860585 {
         border-right: 1px solid #D5DDE5 !important;
         border-left: none;
     }
+
     .data-cell {
         border: 1px solid #D5DDE5 !important;
     }
@@ -569,14 +575,10 @@ th.jsx-4210860585 {
     padding: 8px;
 }
 
-thead th.fixed.jsx-4210860585 {
-    position: sticky;
-    z-index: 0;
-}
 
 .scorecard-list-card-title {
     font-weight: 500;
-    margin: 8px;
+    margin: 4px;
     font-size: 18px;
     color: rgba(0, 0, 0, 0.87);
 }

@@ -26,21 +26,21 @@ export default function GroupsHeaderRow({nested, orgUnits}) {
         setSort(prevValue => ({...prevValue, orgUnit: direction}))
     }
 
+
     return (
         <DataTableRow>
+            <DataTableCell rowSpan={"3"} fixed left={"0"} width={"50px"}/>
             {
-                itemNumber && <DataTableCell rowSpan={"3"} fixed left={"0"} width={"50px"}/>
+                itemNumber && <DataTableCell rowSpan={"3"} fixed left={"50px"} width={"50px"}/>
             }
-            <DataTableCell rowSpan={"3"} className={'jsx-1369417008'} fixed left={itemNumber ? "50px" : "0"}
-                           width={"50px"}/>
             <DataTableColumnHeader
-                large
+                align='center'
                 name={'orgUnit'}
                 onSortIconClick={onSortIconClick}
-                sortDirection={sort?.orgUnit} align='left' fixed top={"0"} left={itemNumber ? "100px" : "50px"}
+                sortDirection={sort?.orgUnit} fixed top={"0"} left={itemNumber ? "100px" : "50px"}
                 bordered
                 width={nameColumnWidth}
-                className='scorecard-table-header scorecard-org-unit-cell ' rowSpan={"3"}>
+                className='scorecard-table-header scorecard-org-unit-cell' rowSpan={"3"}>
                 {
                     !nested &&
                     <InputField className='print-hide w-100 org-unit-search' value={searchValue}
@@ -51,8 +51,9 @@ export default function GroupsHeaderRow({nested, orgUnits}) {
             </DataTableColumnHeader>
             {
                 dataGroups?.map(({title, id, dataHolders}) => (
-                    <DataTableCell fixed className='scorecard-table-header' align='center' bordered
+                    <DataTableCell fixed className='scorecard-table-header header' align='center' bordered
                                    width={`${((dataHolders?.length ?? 1) * (periods?.length ?? 1)) * ScorecardTableConstants.CELL_WIDTH}px`}
+                                   top={"0"}
                                    colSpan={`${(dataHolders?.length ?? 1) * (periods?.length ?? 1)}`} key={id}>
                         {title}
                     </DataTableCell>
@@ -60,12 +61,12 @@ export default function GroupsHeaderRow({nested, orgUnits}) {
             }
             {
                 averageColumn &&
-                <DataTableCell width={`${ScorecardTableConstants.CELL_WIDTH}px`} fixed align='center' bordered
-                               className='scorecard-table-header' rowSpan={"3"}>
+                <DataTableCell
+                    width={`${ScorecardTableConstants.CELL_WIDTH}px`} fixed align='center' bordered
+                    className='scorecard-table-header header' rowSpan={"3"}>
                     {i18n.t('Average')}
                 </DataTableCell>
             }
-
         </DataTableRow>
     )
 }

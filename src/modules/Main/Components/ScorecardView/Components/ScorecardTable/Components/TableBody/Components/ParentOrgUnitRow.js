@@ -38,9 +38,9 @@ export default function ParentOrgUnitRow({orgUnit, overallAverage, dataEngine, o
 
     const Component = ((emptyRows || !isEmpty) &&
         <DataTableRow key={id} bordered>
-            <DataTableCell className='jsx-1369417008' fixed left={"0"} width={"50px"}/>
+            <DataTableCell fixed left={"0"} width={"50px"}/>
             {
-                itemNumber && <DataTableCell width={"50px"} fixed left={"px"}>{index + 1}</DataTableCell>
+                itemNumber && <DataTableCell width={"50px"} fixed left={"50px"}>{index + 1}</DataTableCell>
             }
             <DataTableCell  dataTest={'orgUnit-parent-table-column-cell'} fixed left={itemNumber ? "100px" : "50px"} className="scorecard-org-unit-cell parent-org-unit-cell">
                 <Tooltip content={i18n.t('Drag to the column headers to change layout')}>

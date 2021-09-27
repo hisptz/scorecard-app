@@ -66,9 +66,9 @@ export default function ChildOrgUnitRow({orgUnit, expandedOrgUnit, onExpand, ove
             bordered
         >
             {
-                itemNumber && <DataTableCell width={"50px"} fixed left={"0"}>{index + 2}</DataTableCell>
+                itemNumber && <DataTableCell width={"50px"} fixed left={"50px"}>{index + 2}</DataTableCell>
             }
-            <DataTableCell  dataTest={'orgUnit-parent-table-column-cell'} fixed left={"50px"}>
+            <DataTableCell dataTest={'orgUnit-parent-table-column-cell'} fixed left={itemNumber ? "100px" : "50px"}>
                 <Tooltip content={i18n.t('Drag to column headers to change layout')}>
                     <DroppableCell accept={[DraggableItems.DATA_COLUMN]}>
                         <OrgUnitContainer orgUnit={orgUnit}/>

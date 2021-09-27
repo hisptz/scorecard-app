@@ -4,6 +4,8 @@ import {TableSort} from "../constants/tableSort";
 
 
 export function sortOrgUnitsBasedOnData({orgUnitSort, filteredOrgUnits, childrenOrgUnits}) {
+
+
     const parentTemp = [];
     const childrenTemp = [];
     for (const ou of orgUnitSort) {
@@ -11,8 +13,8 @@ export function sortOrgUnitsBasedOnData({orgUnitSort, filteredOrgUnits, children
         childrenTemp.push(find(childrenOrgUnits, ['id', ou]))
     }
     return {
-        parentOrgUnits: compact(parentTemp),
-        childOrgUnits: compact(childrenTemp)
+        parentOrgUnits: uniqBy(compact([...parentTemp, ...filteredOrgUnits]), 'id'),
+        childOrgUnits: uniqBy(compact([...childrenTemp, ...childrenOrgUnits]), 'id')
     }
 }
 
@@ -79,8 +81,6 @@ function translateAccess(access = '') {
 
 export function getUserAuthority(user, scorecardSummary) {
     const {user: userId, userAccesses, userGroupAccesses, publicAccess} = scorecardSummary ?? {}
-    console.log(publicAccess)
-
     if (user?.id === userId) {
         return {...(translateAccess('rw-----')), delete: true}
     }
