@@ -1,11 +1,3 @@
-
-
-
-
-export default function SingleScorecardCell(){
-
-
-    return <div>
-
-    </div>
+export default function SingleScorecardCell() {
+  return <div></div>;
 }

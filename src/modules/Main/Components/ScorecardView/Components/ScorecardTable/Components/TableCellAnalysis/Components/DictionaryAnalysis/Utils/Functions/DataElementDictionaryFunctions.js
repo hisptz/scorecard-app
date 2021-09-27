@@ -1,20 +1,11 @@
-
-
-export function displayAccessPermission(access){
-
-    if(access?.search("w")>=0){
-        return "read and write"
-    }else{
-        if(access?.search("r")>=0){
-            return "read only"
-        }else{
-            return "none"
-        }
-
+export function displayAccessPermission(access) {
+  if (access?.search("w") >= 0) {
+    return "read and write";
+  } else {
+    if (access?.search("r") >= 0) {
+      return "read only";
+    } else {
+      return "none";
     }
-
-
-
-
-
+  }
 }

@@ -1,13 +1,14 @@
-import {assign} from 'lodash';
+import {assign} from "lodash";
+
 export function getChartPaneOptions(chartType) {
   let paneOptions = {};
 
   switch (chartType) {
-    case 'radar':
+    case "radar":
       paneOptions = assign(
         {},
         {
-          size: '80%'
+          size: "80%",
         }
       );
       break;
@@ -15,16 +16,16 @@ export function getChartPaneOptions(chartType) {
       paneOptions = assign(
         {},
         {
-          center: ['50%', '85%'],
-          size: '140%',
+          center: ["50%", "85%"],
+          size: "140%",
           startAngle: -90,
           endAngle: 90,
           background: {
-            backgroundColor: '#EEE',
-            innerRadius: '60%',
-            outerRadius: '100%',
-            shape: 'arc'
-          }
+            backgroundColor: "#EEE",
+            innerRadius: "60%",
+            outerRadius: "100%",
+            shape: "arc",
+          },
         }
       );
       break;

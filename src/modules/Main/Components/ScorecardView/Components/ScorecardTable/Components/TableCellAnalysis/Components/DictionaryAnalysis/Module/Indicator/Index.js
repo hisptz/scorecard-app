@@ -1,61 +1,57 @@
-import PropTypes from 'prop-types'
-import React, {useEffect} from "react";
-import {useRecoilCallback} from "recoil";
+import PropTypes from "prop-types";
+import React, { useEffect } from "react";
+import { useRecoilCallback } from "recoil";
 import AccessibilityAndSharing from "../../Shared/Componets/AccesibilityAndSharing";
 import {
-    dataElementsStateDictionary,
-    dataSetReportingRatesStateDictionary,
-    programIndicatorStateDictionary
+  dataElementsStateDictionary,
+  dataSetReportingRatesStateDictionary,
+  programIndicatorStateDictionary,
 } from "../../Store";
-import CalculationDetails from './Components/calculationDetails/Index'
-import DataElementSIndicator from './Components/dataElementsInIndicator/dataElementsIndicator'
+import CalculationDetails from "./Components/calculationDetails/Index";
+import DataElementSIndicator from "./Components/dataElementsInIndicator/dataElementsIndicator";
 import DatasetsReportingRates from "./Components/DataSetReportingRate";
-import DataSource from './Components/DataSource/dataSource'
-import IndicatorFacts from './Components/indicatorFacts/indicatorFacts'
-import Introduction from './Components/introduction/introduction'
-import LegendsAnalysis from './Components/legendsAnalysis/legendsAnalysis'
+import DataSource from "./Components/DataSource/dataSource";
+import IndicatorFacts from "./Components/indicatorFacts/indicatorFacts";
+import Introduction from "./Components/introduction/introduction";
+import LegendsAnalysis from "./Components/legendsAnalysis/legendsAnalysis";
 import ProgramIndicatorIndicator from "./Components/ProgramIndicator";
 
+export default function Index({ id }) {
+  const reset = useRecoilCallback(({ reset }) => () => {
+    reset(dataElementsStateDictionary);
+    reset(dataSetReportingRatesStateDictionary);
+    reset(programIndicatorStateDictionary);
+  });
 
-export default function Index({id}) {
+  useEffect(() => {
+    return () => {
+      reset();
+    };
+  }, [id]);
 
-    const reset = useRecoilCallback(({reset}) => () => {
-        reset(dataElementsStateDictionary)
-        reset(dataSetReportingRatesStateDictionary)
-        reset(programIndicatorStateDictionary)
-    })
+  return (
+    <div style={{ display: "flex", flexDirection: "column" }}>
+      <Introduction id={id} />
 
-    useEffect(() => {
-        return () => {
-            reset()
-        };
-    }, [id]);
+      <DataSource id={id} />
 
-    return (<div style={{display: "flex", flexDirection: "column"}}>
-        <Introduction id={id}/>
+      <IndicatorFacts id={id} />
 
-        <DataSource id={id}/>
+      <LegendsAnalysis id={id} />
 
-        <IndicatorFacts id={id}/>
+      <CalculationDetails id={id} />
 
-        <LegendsAnalysis id={id}/>
+      <DataElementSIndicator />
 
-        <CalculationDetails id={id}/>
+      <ProgramIndicatorIndicator />
 
-        <DataElementSIndicator/>
+      <DatasetsReportingRates />
 
-        <ProgramIndicatorIndicator/>
-
-        <DatasetsReportingRates/>
-
-        <AccessibilityAndSharing id={id} resourceType={"indicators"} />
-
-    </div>)
+      <AccessibilityAndSharing id={id} resourceType={"indicators"} />
+    </div>
+  );
 }
 
 Index.propTypes = {
-    id: PropTypes.string.isRequired
+  id: PropTypes.string.isRequired,
 };
-
-
-

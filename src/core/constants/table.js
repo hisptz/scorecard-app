@@ -1,3 +1,3 @@
 export const ScorecardTableConstants = {
-    CELL_WIDTH: 102
-}
+  CELL_WIDTH: 102,
+};

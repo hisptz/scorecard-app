@@ -1,15 +1,16 @@
-import {clone,assign} from 'lodash';
-import { getChartAxisItems } from './get-chart-axis-items.helper';
-import { getChartSeries } from './get-chart-series.helper';
-import { getDrilldownedChartSeries } from './get-drilldowned-chart-series.helper';
-import { getSortedChartSeries } from './get-sorted-chart-series.helper';
+import {assign, clone} from "lodash";
+import {getChartAxisItems} from "./get-chart-axis-items.helper";
+import {getChartSeries} from "./get-chart-series.helper";
+import {getDrilldownedChartSeries} from "./get-drilldowned-chart-series.helper";
+import {getSortedChartSeries} from "./get-sorted-chart-series.helper";
+
 export function getPieChartObject(
   initialChartObject,
   analyticsObject,
   chartConfiguration
 ) {
   const newChartObject = clone(initialChartObject);
-  const yAxisSeriesItems= getChartAxisItems(
+  const yAxisSeriesItems = getChartAxisItems(
     analyticsObject,
     chartConfiguration.yAxisType
   );
@@ -27,8 +28,8 @@ export function getPieChartObject(
     chartConfiguration.sortOrder
   );
 
-  const sanitizedSeries = sortedSeries.map(series => {
-    series.data = series.data.map(dataObject => {
+  const sanitizedSeries = sortedSeries.map((series) => {
+    series.data = series.data.map((dataObject) => {
       if (dataObject.y === null) {
         dataObject.y = 0;
       }
@@ -53,7 +54,7 @@ export function getPieChartObject(
      * @type {{series: any}}
      */
     newChartObject.drilldown = {
-      series: sanitizedSeries
+      series: sanitizedSeries,
     };
   } else {
     /**

@@ -1,8 +1,6 @@
-import {map} from 'lodash';
-export function getChartSubtitleObject(
-  chartConfiguration,
-  analyticsObject){
+import {map} from "lodash";
 
+export function getChartSubtitleObject(chartConfiguration, analyticsObject) {
   if (chartConfiguration.hideSubtitle) {
     return null;
   }
@@ -18,12 +16,12 @@ export function getChartSubtitleObject(
           analyticsObject.metaData.names
             ? analyticsObject.metaData.names[itemId] || []
             : []
-      ).join(', ')
-    ).join(' - '),
-    align: 'left',
+      ).join(", ")
+    ).join(" - "),
+    align: "left",
     style: {
-      fontWeight: '600',
-      fontSize: '13px',
-    }
+      fontWeight: "600",
+      fontSize: "13px",
+    },
   };
 }

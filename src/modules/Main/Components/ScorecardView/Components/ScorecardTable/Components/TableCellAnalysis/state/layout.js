@@ -1,13 +1,9 @@
-import {atom} from "recoil";
-import {DEFAULT_LAYOUT} from "../../../../../../../../../core/constants/layout";
-
+import { atom } from "recoil";
+import { DEFAULT_LAYOUT } from "../../../../../../../../../core/constants/layout";
 
 const LayoutState = atom({
-    key: 'cell-analysis-layout',
-    default: DEFAULT_LAYOUT
-})
+  key: "cell-analysis-layout",
+  default: DEFAULT_LAYOUT,
+});
 
-
-export {
-    LayoutState
-}
+export { LayoutState };

@@ -1,27 +1,25 @@
-
-
 Given("authorized department officer", () => {
-    cy.visit("/");
+  cy.visit("/");
 });
 Given("authorized programme coordinator", () => {
-    cy.visit("/");
+  cy.visit("/");
 });
 Given("authorized data officer", () => {
-    cy.visit("/");
+  cy.visit("/");
 });
 
 Given("authorized Regional Manager", () => {
-    cy.visit("/");
+  cy.visit("/");
 });
 Given("authorized M&E Officer", () => {
-    cy.visit("/");
+  cy.visit("/");
 });
 Given("authorized Data Manager", () => {
-    cy.visit("/");
+  cy.visit("/");
 });
 Given("user with privilege access at district level", () => {
-    cy.visit("/");
+  cy.visit("/");
 });
-Given('authorized officer',()=>{
-    cy.visit("/");
-})
+Given("authorized officer", () => {
+  cy.visit("/");
+});

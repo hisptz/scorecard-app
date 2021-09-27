@@ -1,4 +1,4 @@
-import { getTableConfiguration } from './get-table-configuration.helper';
+import {getTableConfiguration} from "./get-table-configuration.helper";
 
 export default function getTableLayers(
   visualizationLayers,

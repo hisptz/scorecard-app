@@ -1,49 +1,44 @@
-/* eslint-disable max-params */;
-import {findIndex,find,map} from 'lodash';
-import { getChartSeriesDataLabelsOptions } from './get-chart-series-data-label-options.helper';
-import { getChartSeriesValue } from './get-chart-series-value.helper';
+/* eslint-disable max-params */
+import {find, findIndex, map} from "lodash";
+import {getChartSeriesDataLabelsOptions} from "./get-chart-series-data-label-options.helper";
+import {getChartSeriesValue} from "./get-chart-series-value.helper";
 
 export function getChartSeriesData(
-    analyticsObject,
-    chartConfiguration,
-    yAxisItemId,
-    xAxisItems
-){
-
-const data = [];
+  analyticsObject,
+  chartConfiguration,
+  yAxisItemId,
+  xAxisItems
+) {
+  const data = [];
 
   /**
    * Get index to locate data for y axis
    */
-   const yAxisItemIndex = findIndex(
+  const yAxisItemIndex = findIndex(
     analyticsObject.headers,
-    find(analyticsObject.headers, ['name', chartConfiguration.yAxisType])
+    find(analyticsObject.headers, ["name", chartConfiguration.yAxisType])
   );
 
-     /**
+  /**
    * Get index for value attribute to get the data
    */
   const dataIndex = findIndex(
     analyticsObject.headers,
-    find(analyticsObject.headers, ['name', 'value'])
+    find(analyticsObject.headers, ["name", "value"])
   );
 
-    /**
+  /**
    * Get index to locate data for x axis
    */
-     const xAxisItemIndex = map(
-        chartConfiguration.xAxisType,
-        (xAxisType) => {
-          return findIndex(
-            analyticsObject.headers,
-            find(analyticsObject.headers, ['name', xAxisType])
-          );
-        }
-      ).join('_');
-
+  const xAxisItemIndex = map(chartConfiguration.xAxisType, (xAxisType) => {
+    return findIndex(
+      analyticsObject.headers,
+      find(analyticsObject.headers, ["name", xAxisType])
+    );
+  }).join("_");
 
   if (xAxisItems) {
-    xAxisItems.forEach(xAxisItem => {
+    xAxisItems.forEach((xAxisItem) => {
       /**
        * Get the required data depending on xAxis and yAxis
        */
@@ -61,9 +56,9 @@ const data = [];
         id: xAxisItem.id,
         name: xAxisItem.name,
         dataLabels: getChartSeriesDataLabelsOptions(chartConfiguration),
-        y: seriesValue
+        y: seriesValue,
       });
     });
-}
-return data;
+  }
+  return data;
 }

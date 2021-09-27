@@ -1,9 +1,1 @@
-
-
-
-
-export default function CustomTableCell({}){
-
-
-
-}
+export default function CustomTableCell({}) {}

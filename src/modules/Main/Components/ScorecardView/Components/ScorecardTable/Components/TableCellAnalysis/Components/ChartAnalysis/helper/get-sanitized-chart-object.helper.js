@@ -1,29 +1,27 @@
-import {flatten,filter,map,each,intersection,find,some} from 'lodash';
-import { getChartExportingOptions } from './get-chart-exporting-options.helper';
-export function getSanitizedChartObject(
-  chartObject,
-  chartConfiguration
-) {
+import {each, filter, find, flatten, intersection, map, some} from "lodash";
+import {getChartExportingOptions} from "./get-chart-exporting-options.helper";
+
+export function getSanitizedChartObject(chartObject, chartConfiguration) {
   const dataSelectionGroups = flatten(
     filter(
       map(chartConfiguration.dataSelections || [], (dataSelection) => {
         return dataSelection.groups;
       }),
-      group => group
+      (group) => group
     )
   );
 
   const dataSelectionGroupMembers = flatten(
-    map(dataSelectionGroups, group => {
+    map(dataSelectionGroups, (group) => {
       return map(group.members, (member) => `${member.id}_${group.id}`);
     })
   );
 
   // Remove non numeric series data and their categories
-  const dataIndexesArrayToRemove = map(chartObject.series, seriesObject => {
+  const dataIndexesArrayToRemove = map(chartObject.series, (seriesObject) => {
     return filter(
       map(seriesObject.data, (dataItem, dataIndex) =>
-        dataItem.y === '' ||
+        dataItem.y === "" ||
         (dataSelectionGroupMembers.length > 0 &&
           dataSelectionGroupMembers.indexOf(dataItem.id) === -1)
           ? dataIndex
@@ -44,18 +42,18 @@ export function getSanitizedChartObject(
       ...seriesObject,
       data: filter(
         map(seriesObject.data, (dataItem) => {
-          const splitedDataItemId = dataItem.id.split('_');
+          const splitedDataItemId = dataItem.id.split("_");
 
           const associatedGroup = find(dataSelectionGroups, [
-            'id',
-            splitedDataItemId[1]
+            "id",
+            splitedDataItemId[1],
           ]);
 
           // TODO: Need to find a way to generically handle color assignment from click event
-          const clickedChart = (window['clickedCharts'] || {})[dataItem.id];
+          const clickedChart = (window["clickedCharts"] || {})[dataItem.id];
 
           if (clickedChart) {
-            return { ...dataItem, color: '#f00' };
+            return { ...dataItem, color: "#f00" };
           }
 
           return associatedGroup &&
@@ -67,9 +65,8 @@ export function getSanitizedChartObject(
             ? { ...dataItem, color: associatedGroup.color }
             : dataItem;
         }),
-        (dataItem, dataIndex) =>
-          newDataIndexes.indexOf(dataIndex) === -1
-      )
+        (dataItem, dataIndex) => newDataIndexes.indexOf(dataIndex) === -1
+      ),
     };
   });
 
@@ -84,7 +81,7 @@ export function getSanitizedChartObject(
         category.categories,
         (innerCategory, innerCategoryIndex) =>
           newDataIndexes.indexOf(innerCategoryIndex + categoryCount) === -1
-      )
+      ),
     };
 
     categoryCount += category.categories ? category.categories.length : 0;
@@ -95,6 +92,6 @@ export function getSanitizedChartObject(
     ...chartObject,
     series: newSeries,
     xAxis: { ...chartObject.xAxis, categories: newCategories },
-    exporting: getChartExportingOptions(newCategories)
+    exporting: getChartExportingOptions(newCategories),
   };
 }

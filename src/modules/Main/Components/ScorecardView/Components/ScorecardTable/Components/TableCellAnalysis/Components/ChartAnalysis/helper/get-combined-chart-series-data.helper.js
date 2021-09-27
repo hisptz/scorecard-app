@@ -1,11 +1,12 @@
-import {find,findIndex} from 'lodash';
+import {find, findIndex} from "lodash";
+
 export function getCombinedChartSeriesData(seriesData) {
   let combinedSeriesData = [];
-  seriesData.forEach(seriesDataArray => {
-    seriesDataArray.forEach(seriesDataObject => {
+  seriesData.forEach((seriesDataArray) => {
+    seriesDataArray.forEach((seriesDataObject) => {
       const availableSeriesData = find(combinedSeriesData, [
-        'id',
-        seriesDataObject.id
+        "id",
+        seriesDataObject.id,
       ]);
       if (!availableSeriesData) {
         combinedSeriesData = [...combinedSeriesData, seriesDataObject];
@@ -19,7 +20,7 @@ export function getCombinedChartSeriesData(seriesData) {
         combinedSeriesData = [
           ...combinedSeriesData.slice(0, seriesDataIndex),
           newSeriesObject,
-          ...combinedSeriesData.slice(seriesDataIndex + 1)
+          ...combinedSeriesData.slice(seriesDataIndex + 1),
         ];
       }
     });

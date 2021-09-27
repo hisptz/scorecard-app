@@ -1,19 +1,17 @@
 import Highcharts from "highcharts";
 import PropTypes from "prop-types";
-import React, { useEffect, } from "react";
-import {
-  useRecoilState,
-  useRecoilValue,
-  useSetRecoilState,
-} from "recoil";
-import { DataState } from "../../../../state/data";
+import React, {useEffect} from "react";
+import {useRecoilState, useRecoilValue, useSetRecoilState} from "recoil";
+import {DataState} from "../../../../state/data";
 import "./chart-item-component.css";
-import { LayoutState } from "../../../../state/layout";
-import { getCharObject } from "../../helper/get-chart-object.helper";
-import { chartTypesAtom,chartUpdateAtom,currentChartTypeAtom ,chartConfigurationSelector} from "../../state-helper/chartAnalyticsChart";
-
-
-
+import {LayoutState} from "../../../../state/layout";
+import {getCharObject} from "../../helper/get-chart-object.helper";
+import {
+    chartConfigurationSelector,
+    chartTypesAtom,
+    chartUpdateAtom,
+    currentChartTypeAtom,
+} from "../../state-helper/chartAnalyticsChart";
 
 export default function ChartItemComponent({ chartHeight }) {
   const chartTypes = useRecoilValue(chartTypesAtom);
@@ -22,21 +20,18 @@ export default function ChartItemComponent({ chartHeight }) {
     useRecoilState(currentChartTypeAtom);
   const data = useRecoilValue(DataState);
   const layout = useRecoilValue(LayoutState);
- const chartConfiguration = useRecoilValue(chartConfigurationSelector({layout,currentChartType}));
+  const chartConfiguration = useRecoilValue(
+    chartConfigurationSelector({ layout, currentChartType })
+  );
   let chart = "";
-
- 
 
   useEffect(() => {
     drawChart(data["_data"], chartConfiguration);
-  }, [data, currentChartType,layout]);
-  
+  }, [data, currentChartType, layout]);
+
   function drawChart(analyticsObject, chartConfiguration) {
     if (chartConfiguration && analyticsObject) {
-       const chartObject = getCharObject(
-         analyticsObject,
-         chartConfiguration
-       );
+      const chartObject = getCharObject(analyticsObject, chartConfiguration);
 
       if (chartObject) {
         setTimeout(() => {
@@ -50,8 +45,8 @@ export default function ChartItemComponent({ chartHeight }) {
     event.stopPropagation();
     setCurrentChartType(chartType);
     drawChart(data["_data"], {
-       ...chartConfiguration,
-      type:chartType
+      ...chartConfiguration,
+      type: chartType,
     });
 
     setChartUpdate({
@@ -68,9 +63,7 @@ export default function ChartItemComponent({ chartHeight }) {
         style={{ height: "calc(" + chartHeight + "px-20px", width: "100%" }}
       ></div>
 
-      <ul
-        className="chart-type-list animated fadeInRight"
-      >
+      <ul className="chart-type-list animated fadeInRight">
         {chartTypes?.map((chartType, chartTypePosition) => {
           return (
             <li key={"chart-type" + chartTypePosition}>

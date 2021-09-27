@@ -1,24 +1,20 @@
-import {range,each,map,reduce,slice,join,flatten,last} from 'lodash';
+import { range, each, map, reduce, slice, join, flatten, last } from "lodash";
 
-
-export  function getTableRowsOrColumnsArray(
-  dataItemsArray,
-  dimension
-) {
+export function getTableRowsOrColumnsArray(dataItemsArray, dimension) {
   let flatDataItemsArray = [];
   each(range(dataItemsArray.length), (dataItemArrayIndex) => {
     if (flatDataItemsArray.length === 0) {
-      if (dimension === 'row') {
+      if (dimension === "row") {
         each(dataItemsArray[dataItemArrayIndex], (rowsItem) => {
           flatDataItemsArray = [
             ...flatDataItemsArray,
-            [{ ...rowsItem, column: 0, path: rowsItem.id }]
+            [{ ...rowsItem, column: 0, path: rowsItem.id }],
           ];
         });
       } else {
         flatDataItemsArray = [
           ...flatDataItemsArray,
-        map(dataItemsArray[dataItemArrayIndex], (dataItem) => {
+          map(dataItemsArray[dataItemArrayIndex], (dataItem) => {
             return {
               ...dataItem,
               path: dataItem.id,
@@ -29,9 +25,9 @@ export  function getTableRowsOrColumnsArray(
                   (slicedDataItemsArray) => slicedDataItemsArray.length
                 ),
                 (product, count) => product * count
-              )
+              ),
             };
-          })
+          }),
         ];
       }
     } else {
@@ -39,9 +35,9 @@ export  function getTableRowsOrColumnsArray(
       each(flatDataItemsArray, (flatDataItems) => {
         const path = join(
           map(flatDataItems, (dataItemObject) => dataItemObject.id),
-          '/'
+          "/"
         );
-        if (dimension === 'row') {
+        if (dimension === "row") {
           each(
             dataItemsArray[dataItemArrayIndex],
             (dataItem, dataItemIndex) => {
@@ -49,7 +45,7 @@ export  function getTableRowsOrColumnsArray(
                 innerFlatDataItemsArray = [
                   ...innerFlatDataItemsArray,
                   [
-                    ... map(flatDataItems, (flatDataItem) => {
+                    ...map(flatDataItems, (flatDataItem) => {
                       const span = reduce(
                         map(
                           slice(
@@ -64,15 +60,15 @@ export  function getTableRowsOrColumnsArray(
                       return {
                         ...flatDataItem,
                         path: flatDataItem.path ? flatDataItem.path : path,
-                        [dimension === 'row' ? 'rowSpan' : 'colSpan']: span
+                        [dimension === "row" ? "rowSpan" : "colSpan"]: span,
                       };
                     }),
                     {
                       ...dataItem,
                       path: `${path}/${dataItem.id}`,
-                      column: dataItemArrayIndex
-                    }
-                  ]
+                      column: dataItemArrayIndex,
+                    },
+                  ],
                 ];
               } else {
                 innerFlatDataItemsArray = [
@@ -81,9 +77,9 @@ export  function getTableRowsOrColumnsArray(
                     {
                       ...dataItem,
                       path: `${path}/${dataItem.id}`,
-                      column: dataItemArrayIndex
-                    }
-                  ]
+                      column: dataItemArrayIndex,
+                    },
+                  ],
                 ];
               }
             }
@@ -91,40 +87,33 @@ export  function getTableRowsOrColumnsArray(
         }
       });
 
-      if (dimension === 'column') {
+      if (dimension === "column") {
         const flatDataItems = last(flatDataItemsArray);
 
         innerFlatDataItemsArray = [
           ...flatDataItemsArray,
           flatten(
-            map(
-              range(flatDataItems.length),
-              (flatDataItemCount) => {
-                const previousPath = flatDataItems[flatDataItemCount].path;
-                return map(
-                  dataItemsArray[dataItemArrayIndex],
-                  (dataItem) => {
-                    const path = `${previousPath}/${dataItem.id}`;
+            map(range(flatDataItems.length), (flatDataItemCount) => {
+              const previousPath = flatDataItems[flatDataItemCount].path;
+              return map(dataItemsArray[dataItemArrayIndex], (dataItem) => {
+                const path = `${previousPath}/${dataItem.id}`;
 
-                    return {
-                      ...dataItem,
-                      path,
-                      dataRowIds: path.split('/'),
-                      textCenter: true,
-                      colSpan: reduce(
-                        map(
-                          slice(dataItemsArray, dataItemArrayIndex + 1),
-                          (slicedDataItemsArray) =>
-                            slicedDataItemsArray.length
-                        ),
-                        (product, count) => product * count
-                      )
-                    };
-                  }
-                );
-              }
-            )
-          )
+                return {
+                  ...dataItem,
+                  path,
+                  dataRowIds: path.split("/"),
+                  textCenter: true,
+                  colSpan: reduce(
+                    map(
+                      slice(dataItemsArray, dataItemArrayIndex + 1),
+                      (slicedDataItemsArray) => slicedDataItemsArray.length
+                    ),
+                    (product, count) => product * count
+                  ),
+                };
+              });
+            })
+          ),
         ];
       }
       flatDataItemsArray = innerFlatDataItemsArray;

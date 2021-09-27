@@ -1,8 +1,1 @@
-
-
-
-export const REQUIRED_FIELDS = [
-    'title',
-    'description',
-    'periodType',
-]
+export const REQUIRED_FIELDS = ["title", "description", "periodType"];

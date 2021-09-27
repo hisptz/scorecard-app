@@ -21,7 +21,7 @@ export default function DataSourceSelectorModal({
 }) {
   const [selectedItems, setSelectedItems] = useState([]);
 
-    console.log(selectedItems)
+  console.log(selectedItems);
 
   return (
     <Modal onClose={onClose} position={"middle"} large hide={!open}>

@@ -1,22 +1,20 @@
-import {atom} from "recoil";
-
+import { atom } from "recoil";
 
 const HelpState = atom({
-    key: 'help-state',
-    default: false
-})
+  key: "help-state",
+  default: false,
+});
 
 const HelpSteps = atom({
-    key: "intro-js-state",
-    default: []
-})
+  key: "intro-js-state",
+  default: [],
+});
 
 const HelpIndex = atom({
-    key: 'current-step-index',
-    default: 0
-})
-
+  key: "current-step-index",
+  default: 0,
+});
 
 export default HelpState;
 
-export {HelpSteps, HelpIndex}
+export { HelpSteps, HelpIndex };

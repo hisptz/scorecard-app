@@ -11,7 +11,11 @@
     "cy:open": "cypress open",
     "e2e": "cypress run",
     "cy:component": "yarn cypress open-ct",
-    "deploy": "d2-app-scripts deploy"
+    "deploy": "d2-app-scripts deploy",
+    "lint": "yarn d2-style check",
+    "lint:staged": "yarn lint --staged",
+    "format": "yarn d2-style apply",
+    "format:staged": "yarn format --staged"
   },
   "devDependencies": {
     "@cypress/react": "^5.9.1",

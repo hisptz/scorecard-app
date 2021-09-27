@@ -1,37 +1,42 @@
-import {colors} from '@dhis2/ui'
-import React from 'react'
-import JsxParser from 'react-jsx-parser'
-import {useRecoilValue} from "recoil";
-import {ScorecardConfigDirtyState, ScorecardViewState} from "../../../../../../core/state/scorecard";
-
+import { colors } from "@dhis2/ui";
+import React from "react";
+import JsxParser from "react-jsx-parser";
+import { useRecoilValue } from "recoil";
+import {
+  ScorecardConfigDirtyState,
+  ScorecardViewState,
+} from "../../../../../../core/state/scorecard";
 
 export default function ScorecardHeader() {
-    const {title: showTitle} = useRecoilValue(ScorecardViewState('options'))
-    const customHeader = useRecoilValue(ScorecardConfigDirtyState('customHeader'))
-    const title = useRecoilValue(ScorecardConfigDirtyState('title'))
-    const subtitle = useRecoilValue(ScorecardConfigDirtyState('subtitle'))
+  const { title: showTitle } = useRecoilValue(ScorecardViewState("options"));
+  const customHeader = useRecoilValue(
+    ScorecardConfigDirtyState("customHeader")
+  );
+  const title = useRecoilValue(ScorecardConfigDirtyState("title"));
+  const subtitle = useRecoilValue(ScorecardConfigDirtyState("subtitle"));
 
-    return (
-        showTitle ? <div className='row space-between' id={"scorecard-header"}>
-            <div className='row'>
-                {
-                    customHeader ? <JsxParser
-                        autoCloseVoidElements
-                        onError={console.log}
-                        bindings={{
-                            title,
-                            subtitle
-                        }} jsx={customHeader}
-                    /> : <div className='column center align-items-center'>
-                        <h1 style={{margin: 8}} id={'data-test-score-card-title'}>{title}</h1>
-                        <h3 style={{color: colors.grey600, margin: 0}}>{subtitle}</h3>
-                    </div>
-                }
-
-            </div>
-        </div> : null
-    )
+  return showTitle ? (
+    <div className="row space-between" id={"scorecard-header"}>
+      <div className="row">
+        {customHeader ? (
+          <JsxParser
+            autoCloseVoidElements
+            onError={console.log}
+            bindings={{
+              title,
+              subtitle,
+            }}
+            jsx={customHeader}
+          />
+        ) : (
+          <div className="column center align-items-center">
+            <h1 style={{ margin: 8 }} id={"data-test-score-card-title"}>
+              {title}
+            </h1>
+            <h3 style={{ color: colors.grey600, margin: 0 }}>{subtitle}</h3>
+          </div>
+        )}
+      </div>
+    </div>
+  ) : null;
 }
-
-
-

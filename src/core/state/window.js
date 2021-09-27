@@ -1,23 +1,20 @@
-import {atom} from "recoil";
-import {getWindowDimensions} from "../../shared/utils/utils";
-
+import { atom } from "recoil";
+import { getWindowDimensions } from "../../shared/utils/utils";
 
 const ScreenDimensionState = atom({
-    key: 'screen-dimensions',
-    default: {},
-    effects_UNSTABLE: [
-        ({setSelf}) => {
-            function handleResize() {
-                setSelf(getWindowDimensions());
-            }
+  key: "screen-dimensions",
+  default: {},
+  effects_UNSTABLE: [
+    ({ setSelf }) => {
+      function handleResize() {
+        setSelf(getWindowDimensions());
+      }
 
-            window.addEventListener('resize', handleResize);
+      window.addEventListener("resize", handleResize);
 
-            return () => window.removeEventListener('resize', handleResize);
-        }
-    ]
-})
+      return () => window.removeEventListener("resize", handleResize);
+    },
+  ],
+});
 
-export {
-    ScreenDimensionState
-}
+export { ScreenDimensionState };

@@ -1,54 +1,57 @@
-import React, {useEffect} from "react";
-
+import { useDataQuery } from "@dhis2/app-runtime";
 import i18n from "@dhis2/d2-i18n";
-import RelatedIndicatorTable from "../../../../Shared/Componets/RelatedIndicatorTable";
-import {useDataQuery} from "@dhis2/app-runtime";
-import Loader from "../../../../Shared/Componets/Loaders/Loader";
+import React, { useEffect } from "react";
 import Error from "../../../../Shared/Componets/Error/ErrorAPIResult";
+import Loader from "../../../../Shared/Componets/Loaders/Loader";
+import RelatedIndicatorTable from "../../../../Shared/Componets/RelatedIndicatorTable";
 
 const query = {
-    sources:{
-        resource:"dataElementGroups",
-        id: ({id})=>id,
-        params:{
-            fields:["dataElements[id,displayName]"]
-        }
-    }
-}
+  sources: {
+    resource: "dataElementGroups",
+    id: ({ id }) => id,
+    params: {
+      fields: ["dataElements[id,displayName]"],
+    },
+  },
+};
 
+export default function RelatedIndicator({ id }) {
+  const { loading, error, data, refetch } = useDataQuery(query, {
+    variables: { id },
+  });
 
-export default function RelatedIndicator({id}){
+  useEffect(() => {
+    refetch({ id });
+  }, [id]);
 
-    const {loading, error, data,refetch}  = useDataQuery(query, {variables: {id}})
+  if (loading) {
+    return <Loader text={""} />;
+  }
+  if (error) {
+    return <Error error={error} />;
+  }
 
-    useEffect(()=>{refetch({id})},[id])
+  return (
+    <div>
+      <h3>{i18n.t("Related Indicators")} </h3>
+      <p>
+        {i18n.t(
+          "The following is the summary of indicators using the data elements in this group"
+        )}
+      </p>
 
-
-    if(loading){
-        return  <Loader text={""} />
-    }if(error){
-        return <Error error={error} />
-    }
-
-
-    return <div>
-        <h3>{i18n.t("Related Indicators")} </h3>
-        <p>{i18n.t("The following is the summary of indicators using the data elements in this group") }
-        </p>
-
-        <ul>
-            {data?.sources?.dataElements?.map((e)=>{
-                return <li key={e?.id}>
-                    <div>
-                       <b> {e?.displayName} </b>
-                        <RelatedIndicatorTable id={e?.id} />
-                    </div>
-
-                </li>
-            })}
-
-        </ul>
-
+      <ul>
+        {data?.sources?.dataElements?.map((e) => {
+          return (
+            <li key={e?.id}>
+              <div>
+                <b> {e?.displayName} </b>
+                <RelatedIndicatorTable id={e?.id} />
+              </div>
+            </li>
+          );
+        })}
+      </ul>
     </div>
-
+  );
 }

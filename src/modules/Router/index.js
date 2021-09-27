@@ -1,58 +1,61 @@
-import React, {Suspense} from "react";
-import {ErrorBoundary} from "react-error-boundary";
-import {HashRouter, Redirect, Route, Switch} from 'react-router-dom'
-import {useRecoilValue} from "recoil";
-import {SystemSettingsState} from "../../core/state/system";
+import React, { Suspense } from "react";
+import { ErrorBoundary } from "react-error-boundary";
+import { HashRouter, Redirect, Route, Switch } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import { SystemSettingsState } from "../../core/state/system";
 import FullPageError from "../../shared/Components/Errors/FullPageError";
-import {FullPageLoader} from "../../shared/Components/Loaders";
+import { FullPageLoader } from "../../shared/Components/Loaders";
 
-const Main = React.lazy(() => import("../Main"))
-const ScorecardManagement = React.lazy(() => import("../Main/Components/ScoreCardManagement"))
-const ScorecardView = React.lazy(() => import("../Main/Components/ScorecardView"))
-
+const Main = React.lazy(() => import("../Main"));
+const ScorecardManagement = React.lazy(() =>
+  import("../Main/Components/ScoreCardManagement")
+);
+const ScorecardView = React.lazy(() =>
+  import("../Main/Components/ScorecardView")
+);
 
 const pages = [
-    {
-        pathname: '/edit/:id',
-        component: ScorecardManagement
-    },
-    {
-        pathname: '/add',
-        component: ScorecardManagement
-    },
-    {
-        pathname: '/view/:id',
-        component: ScorecardView
-    },
-    {
-        pathname: '/',
-        component: Main
-    }
-]
+  {
+    pathname: "/edit/:id",
+    component: ScorecardManagement,
+  },
+  {
+    pathname: "/add",
+    component: ScorecardManagement,
+  },
+  {
+    pathname: "/view/:id",
+    component: ScorecardView,
+  },
+  {
+    pathname: "/",
+    component: Main,
+  },
+];
 
 export default function Router() {
-    useRecoilValue(SystemSettingsState)
-    return (
-        <HashRouter basename='/'>
-            <ErrorBoundary FallbackComponent={FullPageError}>
-                <Suspense fallback={<FullPageLoader/>}>
-                    <Switch>
-                        {
-                            pages.map(({pathname, component}) => {
-                                const Component = component;
-                                return <Route key={pathname} path={pathname}>
-                                    <ErrorBoundary FallbackComponent={FullPageError}>
-                                        <Component/>
-                                    </ErrorBoundary>
-                                </Route>
-                            })
-                        }
-                        <Route path='/*'>
-                            <Redirect to={'/'}/>
-                        </Route>
-                    </Switch>
-                </Suspense>
-            </ErrorBoundary>
-        </HashRouter>
-    )
+  useRecoilValue(SystemSettingsState);
+  return (
+    <HashRouter basename="/">
+      <ErrorBoundary FallbackComponent={FullPageError}>
+        <Suspense fallback={<FullPageLoader />}>
+          <Switch>
+            {pages.map(({ pathname, component }) => {
+              const Component = component;
+              return (
+                <Route key={pathname} path={pathname}>
+                  <ErrorBoundary FallbackComponent={FullPageError}>
+                    <Component />
+                  </ErrorBoundary>
+                </Route>
+              );
+            })}
+            <Route path="/*">
+              <Redirect to={"/"} />
+            </Route>
+          </Switch>
+        </Suspense>
+      </ErrorBoundary>
+    </HashRouter>
+  );
 }

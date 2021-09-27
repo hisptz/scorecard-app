@@ -1,9 +1,6 @@
-import  {map} from 'lodash';
+import { map } from "lodash";
 
-export  function getTableSubtitle(
-  tableConfiguration,
-  analyticsObject
-) {
+export function getTableSubtitle(tableConfiguration, analyticsObject) {
   return map(tableConfiguration.filter, (filter) =>
     map(
       analyticsObject && analyticsObject.metaData
@@ -15,6 +12,6 @@ export  function getTableSubtitle(
         analyticsObject.metaData.names
           ? analyticsObject.metaData.names[itemId] || []
           : []
-    ).join(', ')
-  ).join(' - ');
+    ).join(", ")
+  ).join(" - ");
 }

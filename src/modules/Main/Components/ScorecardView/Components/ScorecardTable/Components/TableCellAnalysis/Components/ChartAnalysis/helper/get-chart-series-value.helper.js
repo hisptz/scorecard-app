@@ -1,21 +1,21 @@
 /* eslint-disable max-params */
-import {map,forEach,some} from 'lodash';
+import {forEach, map, some} from "lodash";
 
 export function getChartSeriesValue(
-    analyticsRows,
-    yAxisItemIndex,
-    yAxisItemId,
-    xAxisItemIndex,
-    xAxisItemId,
-    dataIndex
-){
-let finalValue = 0;
+  analyticsRows,
+  yAxisItemIndex,
+  yAxisItemId,
+  xAxisItemIndex,
+  xAxisItemId,
+  dataIndex
+) {
+  let finalValue = 0;
 
-const seriesValues = map(analyticsRows, (row) => {
+  const seriesValues = map(analyticsRows, (row) => {
     let seriesValue = 0;
-    let xAxisRowId = '';
-    forEach(xAxisItemIndex.split('_'), (axisIndex) => {
-      xAxisRowId += xAxisRowId !== '' ? '_' : '';
+    let xAxisRowId = "";
+    forEach(xAxisItemIndex.split("_"), (axisIndex) => {
+      xAxisRowId += xAxisRowId !== "" ? "_" : "";
       xAxisRowId += row[axisIndex];
     });
 
@@ -28,16 +28,16 @@ const seriesValues = map(analyticsRows, (row) => {
     }
     return seriesValue;
   }).filter((value) => value !== 0);
-  
+
   if (seriesValues) {
     // Check if series values have non numeric content
     if (some(seriesValues, (seriesValue) => isNaN(seriesValue))) {
-      return '';
+      return "";
     }
     // TODO find best way to identify ratios
     const isRatio = some(
       seriesValues,
-      (seriesValue) => seriesValue.toString().split('.')[1]
+      (seriesValue) => seriesValue.toString().split(".")[1]
     );
 
     const valueSum =
@@ -53,5 +53,5 @@ const seriesValues = map(analyticsRows, (row) => {
       finalValue = valueSum;
     }
   }
-  return finalValue !==0 ? finalValue :null;
+  return finalValue !== 0 ? finalValue : null;
 }

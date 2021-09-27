@@ -1,55 +1,52 @@
-import {reverse,findIndex,find,clone,assign} from 'lodash';
+import {assign, clone, find, findIndex, reverse} from "lodash";
 
 export function getCumulativeFormatForAnalytics(
-analyticsObject,
-xAxisType,
-yAxisType
-){
- 
-    const newAnalyticsObject = clone(analyticsObject)
+  analyticsObject,
+  xAxisType,
+  yAxisType
+) {
+  const newAnalyticsObject = clone(analyticsObject);
 
-    if(analyticsObject)
-    {
-        const yAxisDimensionArray = analyticsObject.metadata[yAxisType];
-        const xAxisDimensionArray = [
-            ... reverse([...analyticsObject.metadata[xAxisType]])
-        ];
+  if (analyticsObject) {
+    const yAxisDimensionArray = analyticsObject.metadata[yAxisType];
+    const xAxisDimensionArray = [
+      ...reverse([...analyticsObject.metadata[xAxisType]]),
+    ];
 
-        const yAxisDimensionIndex = findIndex(
-            analyticsObject.headers,
-            find(analyticsObject.headers, ['name', yAxisType])
-          );
-          const xAxisDimensionIndex = findIndex(
-            analyticsObject.headers,
-            find(analyticsObject.headers, ['name', xAxisType])
-          );
+    const yAxisDimensionIndex = findIndex(
+      analyticsObject.headers,
+      find(analyticsObject.headers, ["name", yAxisType])
+    );
+    const xAxisDimensionIndex = findIndex(
+      analyticsObject.headers,
+      find(analyticsObject.headers, ["name", xAxisType])
+    );
 
-          const dataValueIndex = findIndex(
-            analyticsObject.headers,
-            find(analyticsObject.headers, ['name', 'value'])
-          );
+    const dataValueIndex = findIndex(
+      analyticsObject.headers,
+      find(analyticsObject.headers, ["name", "value"])
+    );
 
-          const newRows = [];
+    const newRows = [];
 
-          yAxisDimensionArray.forEach(yAxisDimensionValue => {
-            let initialValue = 0;
-            xAxisDimensionArray.forEach(xAxisDimensionValue => {
-              analyticsObject.rows.forEach(row => {
-                if (
-                  row[yAxisDimensionIndex] === yAxisDimensionValue &&
-                  row[xAxisDimensionIndex] === xAxisDimensionValue
-                ) {
-                  initialValue += parseInt(row[dataValueIndex], 10);
-                  const newRow = clone(row);
-                  newRow[dataValueIndex] = initialValue;
-                  newRows.push(newRow);
-                }
-              });
-            });
-          });
-         
-      newAnalyticsObject.rows = assign([], newRows);
-    }
-    return newAnalyticsObject;
+    yAxisDimensionArray.forEach((yAxisDimensionValue) => {
+      let initialValue = 0;
+      xAxisDimensionArray.forEach((xAxisDimensionValue) => {
+        analyticsObject.rows.forEach((row) => {
+          if (
+            row[yAxisDimensionIndex] === yAxisDimensionValue &&
+            row[xAxisDimensionIndex] === xAxisDimensionValue
+          ) {
+            initialValue += parseInt(row[dataValueIndex], 10);
+            const newRow = clone(row);
+            newRow[dataValueIndex] = initialValue;
+            newRows.push(newRow);
+          }
+        });
+      });
+    });
 
+    newAnalyticsObject.rows = assign([], newRows);
+  }
+  return newAnalyticsObject;
 }

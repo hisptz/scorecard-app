@@ -1,6 +1,4 @@
-
-
 export const CalendarTypes = {
-    ETHIOPIAN: 'ethiopian',
-    GREGORIAN: 'gregorian'
-}
+  ETHIOPIAN: "ethiopian",
+  GREGORIAN: "gregorian",
+};

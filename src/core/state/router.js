@@ -1,11 +1,10 @@
-import {atom} from "recoil";
-
+import { atom } from "recoil";
 
 const RouterState = atom({
-    key: 'router-state',
-    default: {
-        previous: '/'
-    }
-})
+  key: "router-state",
+  default: {
+    previous: "/",
+  },
+});
 
-export default RouterState
+export default RouterState;

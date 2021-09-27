@@ -1,38 +1,35 @@
-import {map,clone,find} from 'lodash';
-import { getAllowedChartType } from './get-allowed-chart-types.helper';
+import {clone, find, map} from "lodash";
+import {getAllowedChartType} from "./get-allowed-chart-types.helper";
 
-export function getChartSeriesWithAxisOptions(
-  series,
-  multiAxisOptions
-) {
+export function getChartSeriesWithAxisOptions(series, multiAxisOptions) {
   return map(series, (seriesObject) => {
     const newSeriesObject = clone(seriesObject);
     const availableAxisOption = find(multiAxisOptions, [
-      'id',
-      newSeriesObject.id
+      "id",
+      newSeriesObject.id,
     ]);
     if (availableAxisOption) {
-      newSeriesObject.yAxis = availableAxisOption.axis === 'left' ? 0 : 1;
+      newSeriesObject.yAxis = availableAxisOption.axis === "left" ? 0 : 1;
       newSeriesObject.type =
-        availableAxisOption.type !== ''
+        availableAxisOption.type !== ""
           ? getAllowedChartType(availableAxisOption.type)
           : seriesObject.type;
 
-      if (availableAxisOption.type === 'dotted') {
+      if (availableAxisOption.type === "dotted") {
         newSeriesObject.lineWidth = 0;
         newSeriesObject.states = {
           hover: {
-            enabled: false
-          }
+            enabled: false,
+          },
         };
       }
 
       /**
        *Also apply colors on chart
        */
-      newSeriesObject.data = map(newSeriesObject.data, dataObject => {
+      newSeriesObject.data = map(newSeriesObject.data, (dataObject) => {
         const newDataObject = clone(dataObject);
-        if (availableAxisOption.color !== '') {
+        if (availableAxisOption.color !== "") {
           newDataObject.color = availableAxisOption.color;
         }
         return newDataObject;

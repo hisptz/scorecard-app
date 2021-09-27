@@ -1,6 +1,5 @@
-
-export function getChartCreditsOption(){
-    return {
-        enabled: false
-    }
+export function getChartCreditsOption() {
+  return {
+    enabled: false,
+  };
 }

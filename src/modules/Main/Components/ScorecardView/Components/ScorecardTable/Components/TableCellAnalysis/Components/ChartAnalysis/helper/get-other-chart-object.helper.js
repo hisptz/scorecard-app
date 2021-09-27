@@ -1,21 +1,19 @@
-import {filter ,map} from 'lodash';
-import { getChartAxisItems } from './get-chart-axis-items.helper';
+import {filter, map} from "lodash";
+import {getChartAxisItems} from "./get-chart-axis-items.helper";
 // import { getChartExportingOptions } from './get-chart-exporting-options.helper';
-import { getChartSeriesWithAxisOptions } from './get-chart-series-with-axis-options.helper';
-import { getChartSeries } from './get-chart-series.helper';
-import { getChartYAxisOptions } from './get-chart-y-axis-options.helper';
-import { getChartXAxisOptions } from './get-charts-x-axis-options.helper';
-import { getSanitizedChartXAxisCategories } from './get-sanitized-chart-x-axis-categories.helper';
-import { getSortedChartSeries } from './get-sorted-chart-series.helper';
-import { getXAxisItemsFromChartConfiguration } from './get-x-axis-items-from-chart-configuration.helper';
+import {getChartSeriesWithAxisOptions} from "./get-chart-series-with-axis-options.helper";
+import {getChartSeries} from "./get-chart-series.helper";
+import {getChartYAxisOptions} from "./get-chart-y-axis-options.helper";
+import {getChartXAxisOptions} from "./get-charts-x-axis-options.helper";
+import {getSanitizedChartXAxisCategories} from "./get-sanitized-chart-x-axis-categories.helper";
+import {getSortedChartSeries} from "./get-sorted-chart-series.helper";
+import {getXAxisItemsFromChartConfiguration} from "./get-x-axis-items-from-chart-configuration.helper";
 
-export  function getOtherChartObject(
+export function getOtherChartObject(
   initialChartObject,
   analyticsObject,
   chartConfiguration
 ) {
-;
-
   const yAxisSeriesItems = getChartAxisItems(analyticsObject, [
     chartConfiguration.yAxisType,
   ]);
@@ -44,7 +42,7 @@ export  function getOtherChartObject(
   /**
    * Update colors by considering if series has data
    */
-  const newColors  = filter(
+  const newColors = filter(
     map(seriesWithAxisOptions, (seriesObject) =>
       seriesObject.data[0] ? seriesObject.data[0].color : undefined
     ),

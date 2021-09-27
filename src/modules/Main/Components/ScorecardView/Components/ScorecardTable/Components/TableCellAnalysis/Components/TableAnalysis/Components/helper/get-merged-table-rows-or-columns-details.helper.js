@@ -1,7 +1,7 @@
-import {map,filter} from 'lodash';
-import { getFilteredTableRows } from './get-filtered-table-rows.helper';
+import {filter, map} from "lodash";
+import {getFilteredTableRows} from "./get-filtered-table-rows.helper";
 
-export  function getMergedTableRowsOrColumnsDetails(
+export function getMergedTableRowsOrColumnsDetails(
   tableDataRowsOrColumns,
   dxGroupMembers
 ) {
@@ -22,7 +22,7 @@ export  function getMergedTableRowsOrColumnsDetails(
             availableParent[filterDataCell.id] + 1;
           return null;
         }),
-        dataCell => dataCell
+        (dataCell) => dataCell
       )
   );
 

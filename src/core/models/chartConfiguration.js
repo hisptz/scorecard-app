@@ -1,19 +1,10 @@
-
 export default class ChartConfiguration {
-constructor(){}
+  constructor() {}
 
-get default(){
-    return {
-        
-    };
+  get default() {
+    return {};
+  }
 }
-
-}
-
-
-
-
-
 
 //  ChartConfiguration {
 //     renderId: string;

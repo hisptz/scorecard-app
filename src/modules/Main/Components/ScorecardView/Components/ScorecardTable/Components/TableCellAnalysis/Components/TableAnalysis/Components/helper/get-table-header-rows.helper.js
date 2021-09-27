@@ -1,7 +1,7 @@
-import {each,map} from 'lodash';
+import {each, map} from "lodash";
 
 // eslint-disable-next-line max-params
-export   function getTableHeaderRows(
+export function getTableHeaderRows(
   tableRow,
   tableColumnsArray,
   analyticsObject,
@@ -13,12 +13,11 @@ export   function getTableHeaderRows(
     const newTableColumn = map(
       tableColumn,
       (tableColumnCell, tableColumnCellIndex) => {
-        const columnDimension =
-          tableConfiguration.column[tableColumnCellIndex];
+        const columnDimension = tableConfiguration.column[tableColumnCellIndex];
         return {
           ...tableColumnCell,
           dimension: columnDimension,
-          name: tableColumnCell.name
+          name: tableColumnCell.name,
         };
       }
     );
@@ -26,17 +25,17 @@ export   function getTableHeaderRows(
       tableHeaderRows = [
         ...tableHeaderRows,
         [
-          ... map(tableRow, (tableRowCell, tableRowCellIndex) => {
+          ...map(tableRow, (tableRowCell, tableRowCellIndex) => {
             const rowDimension = tableConfiguration.row[tableRowCellIndex];
             return {
               ...tableRowCell,
               dimension: rowDimension,
               name: analyticsObject.metaData.names[rowDimension],
-              rowSpan: tableColumnsArray.length
+              rowSpan: tableColumnsArray.length,
             };
           }),
-          ...newTableColumn
-        ]
+          ...newTableColumn,
+        ],
       ];
     } else {
       tableHeaderRows = [...tableHeaderRows, newTableColumn];

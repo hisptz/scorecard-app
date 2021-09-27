@@ -37,9 +37,9 @@ interface PeriodSelection {
 
 // Predefined values for averageDisplayType
 enum AverageDisplayType {
-  ALL = 'ALL',
-  BELOW_AVERAGE = 'BELOW_AVERAGE',
-  ABOVE_AVERAGE = 'ABOVE_AVERAGE',
+  ALL = "ALL",
+  BELOW_AVERAGE = "BELOW_AVERAGE",
+  ABOVE_AVERAGE = "ABOVE_AVERAGE",
 }
 
 interface ScorecardOptions {
@@ -79,6 +79,5 @@ interface ScorecardIndicator {}
 
 interface ScorecardAccess {
   id: string;
-  access: 'rw----';
+  access: "rw----";
 }
-

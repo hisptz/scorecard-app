@@ -15,111 +15,124 @@ import AverageCell from "./AverageCell";
 import DroppableCell from "./DroppableCell";
 import OrgUnitContainer from "./OrgUnitContainer";
 
-export default function ChildOrgUnitRow({orgUnit, expandedOrgUnit, onExpand, overallAverage, dataEngine, orgUnits, index}) {
-    const {emptyRows, averageColumn, averageDisplayType, itemNumber} = useRecoilValue(ScorecardViewState('options'))
+export default function ChildOrgUnitRow({
+  orgUnit,
+  expandedOrgUnit,
+  onExpand,
+  overallAverage,
+  dataEngine,
+  orgUnits,
+  index,
+}) {
+  const { emptyRows, averageColumn, averageDisplayType, itemNumber } =
+    useRecoilValue(ScorecardViewState("options"));
 
-    const [isEmpty, setIsEmpty] = useState(false);
-    const [average, setAverage] = useState();
-    const {id} = orgUnit ?? {};
-    const {dataGroups} =
+  const [isEmpty, setIsEmpty] = useState(false);
+  const [average, setAverage] = useState();
+  const { id } = orgUnit ?? {};
+  const { dataGroups } =
     useRecoilValue(ScorecardViewState("dataSelection")) ?? {};
-    const loading = useRecoilValue(ScorecardDataLoadingState(orgUnits))
-    const periods =
-        useRecoilValue(PeriodResolverState) ?? [];
+  const loading = useRecoilValue(ScorecardDataLoadingState(orgUnits));
+  const periods = useRecoilValue(PeriodResolverState) ?? [];
 
-    function subscribe() {
-        if (loading !== undefined && !loading) {
-            const rowAverage = dataEngine.getOrgUnitAverage(id).subscribe(setAverage);
-            const rowStatusSub = dataEngine.isRowEmpty(id).subscribe(setIsEmpty)
+  function subscribe() {
+    if (loading !== undefined && !loading) {
+      const rowAverage = dataEngine.getOrgUnitAverage(id).subscribe(setAverage);
+      const rowStatusSub = dataEngine.isRowEmpty(id).subscribe(setIsEmpty);
 
-            return () => {
-                rowAverage.unsubscribe();
-                rowStatusSub.unsubscribe()
-            }
+      return () => {
+        rowAverage.unsubscribe();
+        rowStatusSub.unsubscribe();
+      };
+    }
+  }
+
+  useEffect(subscribe, [orgUnit, loading, id, dataEngine]);
+  const Component = (emptyRows || !isEmpty) && (
+    <DataTableRow
+      dataTest={"orgUnit-children-table-column-cell"}
+      className="child-org-unit-row"
+      expanded={id === expandedOrgUnit}
+      onExpandToggle={() => {
+        if (id === expandedOrgUnit) {
+          onExpand(undefined);
+        } else {
+          onExpand(id);
         }
-    }
+      }}
+      expandableContent={
+        <div className="p-16">
+          <Suspense fallback={<TableLoader />}>
+            <ScorecardTable nested={true} orgUnits={[id]} />
+          </Suspense>
+        </div>
+      }
+      key={id}
+      bordered
+    >
+      {itemNumber && (
+        <DataTableCell width={"50px"} fixed left={"50px"}>
+          {index + 2}
+        </DataTableCell>
+      )}
+      <DataTableCell
+        dataTest={"orgUnit-parent-table-column-cell"}
+        fixed
+        left={itemNumber ? "100px" : "50px"}
+      >
+        <Tooltip content={i18n.t("Drag to column headers to change layout")}>
+          <DroppableCell accept={[DraggableItems.DATA_COLUMN]}>
+            <OrgUnitContainer orgUnit={orgUnit} />
+          </DroppableCell>
+        </Tooltip>
+      </DataTableCell>
+      {dataGroups?.map(({ id: groupId, dataHolders }) =>
+        dataHolders?.map(({ id: holderId, dataSources }) =>
+          periods?.map((period) => (
+            <td
+              className="data-cell"
+              align="center"
+              key={`${groupId}-${holderId}-${period.id}`}
+            >
+              <DataContainer
+                dataEngine={dataEngine}
+                orgUnit={orgUnit}
+                dataSources={dataSources}
+                period={period}
+              />
+            </td>
+          ))
+        )
+      )}
+      {averageColumn && <AverageCell bold value={average} />}
+    </DataTableRow>
+  );
 
-    useEffect(subscribe, [orgUnit, loading, id, dataEngine])
-    const Component = ((emptyRows || !isEmpty) &&
-        <DataTableRow
-            dataTest={'orgUnit-children-table-column-cell'}
-            className="child-org-unit-row"
-            expanded={id === expandedOrgUnit}
-            onExpandToggle={() => {
-                if (id === expandedOrgUnit) {
-                    onExpand(undefined);
-                } else {
-                    onExpand(id);
-                }
-            }}
-            expandableContent={
-                <div className="p-16">
-                    <Suspense fallback={<TableLoader/>}>
-                        <ScorecardTable
-                            nested={true}
-                            orgUnits={[id]}
-                        />
-                    </Suspense>
-                </div>
-            }
-            key={id}
-            bordered
-        >
-            {
-                itemNumber && <DataTableCell width={"50px"} fixed left={"50px"}>{index + 2}</DataTableCell>
-            }
-            <DataTableCell dataTest={'orgUnit-parent-table-column-cell'} fixed left={itemNumber ? "100px" : "50px"}>
-                <Tooltip content={i18n.t('Drag to column headers to change layout')}>
-                    <DroppableCell accept={[DraggableItems.DATA_COLUMN]}>
-                        <OrgUnitContainer orgUnit={orgUnit}/>
-                    </DroppableCell>
-                </Tooltip>
-            </DataTableCell>
-            {dataGroups?.map(({id: groupId, dataHolders}) =>
-                dataHolders?.map(({id: holderId, dataSources}) =>
-                    periods?.map((period) => (
-                        <td
-                            className="data-cell"
-                            align="center"
-                            key={`${groupId}-${holderId}-${period.id}`}
-                        >
+  if (averageDisplayType === AverageDisplayType.ALL) {
+    return Component;
+  }
+  if (
+    averageDisplayType === AverageDisplayType.BELOW_AVERAGE &&
+    overallAverage > average
+  ) {
+    return Component;
+  }
+  if (
+    averageDisplayType === AverageDisplayType.ABOVE_AVERAGE &&
+    overallAverage <= average
+  ) {
+    return Component;
+  }
 
-                            <DataContainer
-                                dataEngine={dataEngine}
-                                orgUnit={orgUnit}
-                                dataSources={dataSources}
-                                period={period}
-                            />
-                        </td>
-                    ))
-                )
-            )}
-            {
-                averageColumn &&
-                <AverageCell bold value={average}/>
-            }
-        </DataTableRow>
-    );
-
-    if (averageDisplayType === AverageDisplayType.ALL) {
-        return Component
-    }
-    if (averageDisplayType === AverageDisplayType.BELOW_AVERAGE && overallAverage > average) {
-        return Component
-    }
-    if (averageDisplayType === AverageDisplayType.ABOVE_AVERAGE && overallAverage <= average) {
-        return Component
-    }
-
-    return null
+  return null;
 }
 
 ChildOrgUnitRow.propTypes = {
-    dataEngine: PropTypes.instanceOf(ScorecardDataEngine).isRequired,
-    index: PropTypes.number.isRequired,
-    orgUnit: PropTypes.object.isRequired,
-    orgUnits: PropTypes.array.isRequired,
-    overallAverage: PropTypes.number.isRequired,
-    onExpand: PropTypes.func.isRequired,
-    expandedOrgUnit: PropTypes.string,
+  dataEngine: PropTypes.instanceOf(ScorecardDataEngine).isRequired,
+  index: PropTypes.number.isRequired,
+  orgUnit: PropTypes.object.isRequired,
+  orgUnits: PropTypes.array.isRequired,
+  overallAverage: PropTypes.number.isRequired,
+  onExpand: PropTypes.func.isRequired,
+  expandedOrgUnit: PropTypes.string,
 };
