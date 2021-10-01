@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useState } from "react";
 import ScorecardList from "./Components/ScorecardList";
-
+import ScorecardMigration from "./Components/ScorecardMigration";
 
 export default function Main() {
-
-    return (
-        <ScorecardList/>
-    )
+  const [migrationComplete, setMigrationComplete] = useState(false);
+  return migrationComplete ? (
+    <ScorecardList />
+  ) : (
+    <ScorecardMigration onMigrationComplete={setMigrationComplete} />
+  );
 }

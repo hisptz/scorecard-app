@@ -3,10 +3,13 @@
     flex-direction: column;
     align-items: center;
     font-size: 1rem;
-    min-height: 715px;
-    min-width: 1362px; /* considering the scrollbar */
     overflow: auto;
     height: 100%;
+    min-width: 1240px;
+}
+
+div.jsx-4084082020 {
+    z-index: 4000;
 }
 
 .popper {
@@ -38,7 +41,8 @@ body {
     flex-direction: row;
     width: 100%;
 }
-.wrap{
+
+.wrap {
     flex-wrap: wrap;
 }
 
@@ -60,6 +64,10 @@ body {
 
 .space-between {
     justify-content: space-between;
+}
+
+.space-around {
+    justify-content: space-around;
 }
 
 .end {
@@ -156,6 +164,34 @@ body {
     width: 25%;
 }
 
+.w-60 {
+    width: 60%;
+}
+
+.w-40 {
+    width: 40%;
+}
+
+.w-auto {
+    width: auto;
+}
+
+.h-100 {
+    height: 100%;
+}
+
+.h-50 {
+    height: 50%;
+}
+
+.h-75 {
+    height: 75%;
+}
+
+.h-25 {
+    height: 25%;
+}
+
 .text-center {
     text-align: center;
 }
@@ -167,8 +203,8 @@ body {
 }
 
 *::-webkit-scrollbar {
-    width: 0.3em;
-    height: 0.3em;
+    width: 0.5em;
+    height: 0.5em;
 }
 
 *::-webkit-scrollbar-track {
@@ -176,7 +212,7 @@ body {
 }
 
 *::-webkit-scrollbar-thumb {
-    background-color: #D5DDE5;
+    background-color: #A0ADBA;
     outline: 0.5px solid #E8EDF2;
 }
 
@@ -255,11 +291,6 @@ div.jsx-1730587817 {
     border-radius: 4px;
 }
 
-.data-source.close-icon {
-    width: 32px;
-    height: 32px;
-}
-
 .data-source.avatar {
     width: 32px;
     height: 32px;
@@ -298,11 +329,16 @@ div.jsx-1730587817 {
     color: #4A5768;
 }
 
+.info-box-list > p {
+    margin-bottom: 16px;
+    color: #4A5768;
+}
+
 .layer-1 {
     z-index: 2;
 }
 
-.link-button-container{
+.link-button-container {
     width: 56px;
 }
 
@@ -317,12 +353,12 @@ div.jsx-1730587817 {
 
 /*linked table cell*/
 
-td.data-cell{
-    min-width: 200px;
+td.data-cell {
+    min-width: 100px;
     border-right: 1px solid rgb(232, 237, 242);
     max-height: 47px;
-    max-width: 201px;
-    width: 200px;
+    max-width: 101px;
+    width: 100px;
     height: 47px;
     font-size: 14px;
     background: rgb(255, 255, 255);
@@ -333,68 +369,71 @@ td.data-cell{
 }
 
 
-
-.linked-table-cell{
+.linked-table-cell {
     margin: 0;
     max-width: 200px;
     max-height: 47px;
 }
+
 .bottom {
     position: relative;
     right: 32px;
     bottom: 8px;
 }
 
-.top {
-    position: relative;
-    left: 32px;
-    top: 8px
-}
 
-table{
+table {
     table-layout: fixed;
     width: 100%;
 }
 
-.data-source-form-container:first-child{
+.data-source-form-container:first-child {
     padding-right: 16px;
 }
-.data-source-form-container:last-child{
+
+.data-source-form-container:last-child {
     padding-left: 16px;
 }
 
-.scorecard-list-container{
+.scorecard-list-container {
     width: 100%;
     height: 100%;
 }
-.grid{
+
+.grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
 }
 
-.selection-card{
-    width: 100%;
-    height: 150px;
+.grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
 }
 
-.selection-box{
+.selection-card {
+    width: 100%;
+    z-index: 4;
+}
+
+.selection-box {
     cursor: pointer;
-    margin: 16px;
+    margin: 8px;
     display: flex;
     flex-direction: column;
     background: #E8EDF2;
-    height: 6em;
+    height: 5em;
     width: 25em;
     justify-content: center;
     border-radius: 8px;
 }
-.selection-box-header{
+
+.selection-box-header {
     margin-top: 16px;
     margin-left: 16px;
     margin-bottom: 0;
 }
 
-.selection-text-box{
+.selection-text-box {
     margin: auto 16px;
     border-left: 4px solid #28468B;
     align-items: center;
@@ -405,40 +444,153 @@ table{
     overflow-x: auto;
     overflow-y: hidden;
 }
-.selection-text-box>p{
+
+.selection-text-box > p {
     padding-left: 16px;
     font-size: 16px;
     color: #4A5768;
     overflow-x: auto;
 }
 
-.scorecard-table-header{
+.scorecard-table-header {
     font-weight: bold !important;
     font-size: 16px;
+    margin: auto;
 }
 
-.scorecard-table-cell{
+span.jsx-2694284040 {
+    height: auto !important;
+}
+
+.header > span.container > span.top {
+    padding: 8px;
+    height: max-content;
+}
+
+.header > span.container {
+    height: auto;
+}
+
+.scorecard-table-cell {
+    border-right: 1px solid rgb(232, 237, 242);
 
 }
-/*.scorecard-org-unit-cell{*/
-/*    min-width: 300px ;*/
-/*}*/
 
-td.jsx-1369417008{
+.child-org-unit-row td:first-child {
     max-width: 40px !important;
-    background:  rgb(243, 245, 247);
+    background: rgb(243, 245, 247);
     position: sticky;
     left: 0;
     top: auto;
     z-index: 1;
 }
-td.jsx-1369417008:hover{
-    background: rgb(232, 237, 242)
-}
-td.jsx-1369417008::selection{
+
+.child-org-unit-row td:first-child:hover {
     background: rgb(232, 237, 242)
 }
 
-.scorecard-org-unit-cell{
-    background: #E8EDF2;
+.child-org-unit-row td:first-child::selection {
+    background: rgb(232, 237, 242)
 }
+
+.scorecard-org-unit-cell {
+    background: #E8EDF2;
+    padding-top: 24px;
+    min-width: 200px !important;
+}
+
+.large-modal {
+    width: 75vw !important;
+    height: 80vh !important;
+}
+
+.p-0 {
+    padding: 0 !important;
+}
+
+
+.m-auto {
+    margin: auto;
+}
+
+.hide {
+    display: none;
+}
+
+.no-wrap {
+    white-space: nowrap;
+}
+
+.min-width-200 {
+    min-width: 200px;
+}
+
+td.extra-table-cell > svg {
+    left: 0;
+}
+
+@media print {
+
+    .print-area {
+        overflow: visible !important;
+    }
+
+    .table-print {
+        border: 1px solid #D5DDE5 !important;
+    }
+
+    .print-hide {
+        display: none;
+    }
+
+    .print-show {
+        display: block !important;
+    }
+
+
+    .child-org-unit-row td:first-child > svg {
+        display: none;
+        color: black;
+    }
+
+    .child-org-unit-row td:first-child {
+        background: white !important;
+        border-left: 1px solid #D5DDE5 !important;
+        border-bottom: 1px solid #D5DDE5 !important;
+        border-right: none !important;
+    }
+
+    th.fixed {
+        background: white !important;
+        font-weight: bold !important;
+        border-bottom: 1px solid #D5DDE5 !important;
+        border-right: 1px solid #D5DDE5 !important;
+        border-left: none;
+    }
+
+    .data-cell {
+        border: 1px solid #D5DDE5 !important;
+    }
+}
+
+
+.warning-popover {
+    border: 1px solid #A0ADBA;
+    padding: 8px;
+}
+
+
+.scorecard-list-card-title {
+    font-weight: 500;
+    margin: 4px;
+    font-size: 18px;
+    color: rgba(0, 0, 0, 0.87);
+}
+
+.scorecard-list-card-description {
+    margin: 8px;
+    font-size: 16px;
+    line-height: 2;
+    text-align: justify;
+}
+

@@ -33,7 +33,9 @@ And("configuring indicator groups details", () => {
   cy.get("[data-test='scorecard-group-expand']").first().click();
 });
 And("configuring indicator data details", () => {
-  cy.get("[data-test='scorecard-indicator-add']").first().click();
+  cy.get("[data-test='scorecard-indicator-add']")
+    .first()
+    .click({ force: true });
   cy.get("[data-test='dhis2-uicore-transferoption']").first().dblclick();
   cy.get("[data-test='scorecard-data-source-add']").click();
 });
@@ -109,3 +111,4 @@ Then(
   "the changes on the legend values should be reflected in the scorecard",
   () => {}
 );
+When(/^editing scorecard legends$/, function () {});

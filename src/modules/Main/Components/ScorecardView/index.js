@@ -1,44 +1,94 @@
-import React, {Suspense, useEffect} from "react";
-import {useParams} from "react-router-dom";
-import {useRecoilValue, useResetRecoilState, useSetRecoilState} from "recoil";
-import {ScorecardIdState, ScorecardViewState,} from "../../../../core/state/scorecard";
-import {FullPageLoader} from "../../../../shared/Components/Loaders";
+import { isEmpty } from "lodash";
+import React, { lazy, Suspense, useEffect, useMemo, useRef } from "react";
+import { useParams } from "react-router-dom";
+import { useRecoilCallback, useRecoilValue, useSetRecoilState } from "recoil";
+import ScorecardDataEngine from "../../../../core/models/scorecardData";
+import { InitialOrgUnits } from "../../../../core/state/orgUnit";
+import { PeriodResolverState } from "../../../../core/state/period";
+import {
+  ScorecardDataSourceState,
+  ScorecardIdState,
+  ScorecardTableOrientationState,
+  ScorecardViewState,
+} from "../../../../core/state/scorecard";
+import { UserAuthorityOnScorecard } from "../../../../core/state/user";
+import { FullPageLoader } from "../../../../shared/Components/Loaders";
+import AccessDeniedPage from "./Components/AccessDeniedPage";
+import EmptyOrgUnitsOrPeriod from "./Components/EmptyOrgUnitsOrPeriod";
 import HighlightedIndicatorsView from "./Components/HighlightedIndicatorsView";
+import ScorecardActions from "./Components/ScorecardActions";
 import ScorecardHeader from "./Components/ScorecardHeader";
-import ScorecardLegendsView from "./Components/ScorecardLegendsView";
-import ScorecardTable from "./Components/ScorecardTable";
 import ScorecardViewHeader from "./Components/ScorecardViewHeader";
 
-export default function ScorecardView() {
-    const {id: scorecardId} = useParams();
-    const setScorecardIdState = useSetRecoilState(ScorecardIdState);
-    const resetIdState = useResetRecoilState(ScorecardIdState);
-    const {orgUnits} = useRecoilValue(ScorecardViewState("orgUnitSelection"));
-    const resetOrgUnitSelection = useResetRecoilState(ScorecardViewState("orgUnitSelection"))
-    useEffect(() => {
-        setScorecardIdState(scorecardId);
-        return () => {
-            resetIdState();
-            resetOrgUnitSelection()
-        };
-    }, [scorecardId]);
+const ScorecardLegendsView = lazy(() =>
+  import("./Components/ScorecardLegendsView")
+);
+const ScorecardTable = lazy(() => import("./Components/ScorecardTable"));
 
-    return (
-        <Suspense fallback={<FullPageLoader/>}>
-            <ScorecardViewHeader/>
-            <div className="column p-16" style={{height: "100%", width: "100%"}}>
-                <ScorecardHeader/>
-                <ScorecardLegendsView/>
-                <HighlightedIndicatorsView/>
-                <div className="column align-items-center pt-16 flex-1">
-                    <Suspense fallback={<FullPageLoader/>}>
-                        <ScorecardTable
-                            nested={false}
-                            orgUnits={orgUnits}
-                        />
-                    </Suspense>
-                </div>
-            </div>
-        </Suspense>
-    );
+export default function ScorecardView() {
+  const { id: scorecardId } = useParams();
+  const setScorecardIdState = useSetRecoilState(ScorecardIdState);
+  const { orgUnits } = useRecoilValue(InitialOrgUnits);
+  const orgUnitsIds = useMemo(() => orgUnits?.map(({ id }) => id), [orgUnits]);
+  const { read: access } = useRecoilValue(
+    UserAuthorityOnScorecard(scorecardId)
+  );
+  const downloadRef = useRef();
+  const periods = useRecoilValue(PeriodResolverState);
+
+  const initialDataEngine = useMemo(() => new ScorecardDataEngine(), []);
+
+  const reset = useRecoilCallback(({ reset }) => () => {
+    reset(ScorecardViewState("periodSelection"));
+    reset(ScorecardViewState("tableSort"));
+    reset(ScorecardViewState("options"));
+    reset(ScorecardIdState);
+    reset(ScorecardTableOrientationState);
+    reset(ScorecardDataSourceState);
+  });
+
+  useEffect(() => {
+    setScorecardIdState(scorecardId);
+    return () => {
+      reset();
+    };
+  }, []);
+
+  if (!access) {
+    return <AccessDeniedPage accessType={"view"} />;
+  }
+
+  return (
+    <Suspense fallback={<FullPageLoader />}>
+      <ScorecardViewHeader />
+      <Suspense fallback={<FullPageLoader />}>
+        <div
+          ref={downloadRef}
+          className="column p-16"
+          style={{ height: "100%", width: "100%", overflow: "auto" }}
+        >
+          <ScorecardActions
+            dataEngine={initialDataEngine}
+            downloadAreaRef={downloadRef}
+          />
+          <ScorecardHeader />
+          <ScorecardLegendsView />
+          <HighlightedIndicatorsView />
+          <div className="column align-items-center pt-16 flex-1">
+            {!isEmpty(orgUnits) && !isEmpty(periods) ? (
+              <Suspense fallback={<FullPageLoader />}>
+                <ScorecardTable
+                  initialDataEngine={initialDataEngine}
+                  nested={false}
+                  orgUnits={orgUnitsIds}
+                />
+              </Suspense>
+            ) : (
+              <EmptyOrgUnitsOrPeriod />
+            )}
+          </div>
+        </div>
+      </Suspense>
+    </Suspense>
+  );
 }

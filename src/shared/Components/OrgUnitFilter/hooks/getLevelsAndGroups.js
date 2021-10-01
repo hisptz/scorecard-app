@@ -1,24 +1,11 @@
-import {useDataQuery} from "@dhis2/app-runtime";
-
-
-const query = {
-    levels: {
-        resource: 'organisationUnitLevels',
-        params: {
-            fields: ['displayName', 'id', 'level', 'name'],
-            order: 'name:asc'
-        }
-    },
-    groups: {
-        resource: 'organisationUnitGroups',
-        params: {
-            fields: ['displayName', 'id', 'name'],
-            order: 'name:asc'
-        }
-    },
-}
+import { useRecoilValue } from "recoil";
+import { OrgUnitGroups, OrgUnitLevels } from "../../../../core/state/orgUnit";
 
 export default function useOrgUnitLevelsAndGroups() {
-    const {data, loading, error} = useDataQuery(query)
-    return {loading, levels: data?.levels?.organisationUnitLevels, groups: data?.groups?.organisationUnitGroups, error}
+  const levels = useRecoilValue(OrgUnitLevels);
+  const groups = useRecoilValue(OrgUnitGroups);
+  return {
+    levels,
+    groups,
+  };
 }

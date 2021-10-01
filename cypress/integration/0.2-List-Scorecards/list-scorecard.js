@@ -2,55 +2,45 @@
  * Scenario: Accessing Scorecard List
  */
 
-Given("authorized department officer", () => {
-  cy.visit("/");
-});
+/// <reference types ="cypress" />
 
-When("opening a list of available scorecards", () => {
-  cy.intercept(
-    "GET",
-    Cypress.env("dhis2BaseUrl") +
-      "/api/36/dataStore/hisptz-scorecard/savedObjects",
-    { fixture: "" }
-  );
-
-  cy.intercept("GET", "/api/36/dataStore/hisptz-scorecard/scorecard-summary", {
-    fixture: "scorecard-summary.json",
-  });
-});
+const apiVersion = Cypress.env("apiVersion");
 
 Then(
   "I should be presented with a list of already configured scorecards",
   () => {
-    cy.contains("Test Scorecard 1").should("be.visible");
-    cy.contains("Test Scorecard 2").should("be.visible");
+    cy.contains("Test Scorecard ").should("be.visible");
+    cy.contains("Short Scorecard").should("be.visible");
   }
 );
 
 /**
  * Scenario: Accessing many scorecards
  */
-Given("authorized department officer", () => {
-  cy.visit("/");
-});
 When("opening a list of many scorecards", () => {
   cy.intercept(
     "GET",
     Cypress.env("dhis2BaseUrl") +
-      "/api/36/dataStore/hisptz-scorecard/savedObjects",
+      "/api/35/dataStore/hisptz-scorecard/savedObjects",
     { fixture: "" }
   );
 
   cy.intercept(
     "GET",
     Cypress.env("dhis2BaseUrl") +
-      "/api/36/userDataStore/hisptz-scorecard/settings",
-    { fixture: "" }
+      "/api/" +
+      apiVersion +
+      "/userDataStore/hisptz-scorecard/settings",
+    { fixture: "user-datastore.json" }
   );
 
-  cy.intercept("GET", "/api/36/dataStore/hisptz-scorecard/scorecard-summary", {
-    fixture: "many-scorecard-summary.json",
-  });
+  cy.intercept(
+    "GET",
+    "/api/" + apiVersion + "/dataStore/hisptz-scorecard/scorecard-summary",
+    {
+      fixture: "many-scorecard-summary.json",
+    }
+  );
 });
 Then("I should be presented with a chunked list of scorecards", () => {
   cy.get(".main-container").scrollTo("bottom");
@@ -73,17 +63,23 @@ And(
 Given("an authorized department officer", () => {
   cy.visit("/");
 });
+
 When("opening a list where there are no available scorecards", () => {
   cy.intercept(
     "GET",
     Cypress.env("dhis2BaseUrl") +
-      "/api/36/dataStore/hisptz-scorecard/savedObjects",
+      "/api/35/dataStore/hisptz-scorecard/savedObjects",
     { fixture: "" }
   );
 
-  cy.intercept("GET", "/api/36/dataStore/hisptz-scorecard/scorecard-summary", {
-    fixture: "",
-  });
+  cy.intercept(
+    "GET",
+    Cypress.env("dhis2BaseUrl") +
+      "/api/35/dataStore/hisptz-scorecard/scorecard-summary",
+    {
+      fixture: "",
+    }
+  );
 });
 Then("I should be presented with a message {string}", (content) => {
   cy.get('[data-test="welcome-scorcard-title"]')
@@ -94,32 +90,18 @@ Then("I should be presented with a message {string}", (content) => {
 /**
  * Scenario: Listing Scorecards on card view
  */
-Given("authorized department officer", () => {
-  cy.visit("/");
-});
-When("opening a list of available scorecards", () => {
-  cy.intercept(
-    "GET",
-    Cypress.env("dhis2BaseUrl") +
-      "/api/36/dataStore/hisptz-scorecard/savedObjects",
-    { fixture: "" }
-  );
 
-  cy.intercept("GET", "/api/36/dataStore/hisptz-scorecard/scorecard-summary", {
-    fixture: "scorecard-summary.json",
-  });
-});
 And("choose to view scorecards in card orientation", () => {
   cy.intercept(
     "GET",
     Cypress.env("dhis2BaseUrl") +
-      "/api/36/userDataStore/hisptz-scorecard/settings",
+      "/api/35/userDataStore/hisptz-scorecard/settings",
     { fixture: "" }
   );
   cy.intercept(
     "PUT",
     Cypress.env("dhis2BaseUrl") +
-      "/api/36/userDataStore/hisptz-scorecard/settings?encrypt=false",
+      "/api/35/userDataStore/hisptz-scorecard/settings?encrypt=false",
     { fixture: "card-view-settings.json" }
   );
   cy.get("[data-test='scorecard-view-orientation']").click();
@@ -134,21 +116,18 @@ Then(
 /**
  * Scenario: Listing Scorecards on thumbnail view
  */
-Given("authorized department officer", () => {
-  cy.visit("/");
-});
-When("opening a list of available scorecards", () => {});
+
 And("choose to view scorecards in thumbnail orientation", () => {
   cy.intercept(
     "GET",
     Cypress.env("dhis2BaseUrl") +
-      "/api/36/userDataStore/hisptz-scorecard/settings",
+      "/api/35/userDataStore/hisptz-scorecard/settings",
     { fixture: "card-view-settings.json" }
   );
   cy.intercept(
     "PUT",
     Cypress.env("dhis2BaseUrl") +
-      "/api/36/userDataStore/hisptz-scorecard/settings?encrypt=false",
+      "/api/35/userDataStore/hisptz-scorecard/settings?encrypt=false",
     { fixture: "thumbnail-view-settings.json" }
   );
   cy.get("[data-test='scorecard-view-orientation']").click();

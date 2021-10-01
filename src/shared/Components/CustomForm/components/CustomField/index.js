@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 import React, { useMemo } from "react";
 import { DHIS2ValueTypes } from "../../constants";
 import { FormFieldModel } from "../../models";
+import LevelTargetsField from "../DataSourceConfigurationForm/Components/LevelTargetsField";
+import TargetsField from "../DataSourceConfigurationForm/Components/TargetsField";
 import CustomCheckboxField from "./components/CustomCheckboxField";
 import CustomSingleSelect from "./components/CustomSingleSelect";
 import LegendDefinitionField from "./components/LegendDefinitionField";
@@ -42,11 +44,15 @@ export function CustomInput({ input, valueType, optionSet, ...props }) {
           return LegendMinMax;
         case DHIS2ValueTypes.MULTIPLE_FIELDS.name:
           return MultipleFieldsField;
+        case DHIS2ValueTypes.LEVEL_LEGEND_MIN_MAX.name:
+          return LevelTargetsField;
+        case DHIS2ValueTypes.NORMAL_LEGEND_MIN_MAX.name:
+          return TargetsField;
         default:
           return InputField;
       }
     }
-  }, [type]);
+  }, [optionSet, valueType]);
 
   const onChange = input.onChange;
 

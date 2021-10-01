@@ -1,12 +1,3 @@
-
-
-
-
-
-export default function AppInitializer({children}){
-
-
-    return (
-        children
-    )
+export default function AppInitializer({ children }) {
+  return children;
 }

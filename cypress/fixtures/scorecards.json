@@ -1,0 +1,34 @@
+[
+  {
+    "title": "Test Scorecard",
+    "description": "Test Scorecard ",
+    "id": "sBlHV1OenBc",
+    "user": "xE7jOejl9FI",
+    "userAccesses": [],
+    "userGroupAccesses": []
+  },
+  {
+    "id": "XXsXNPWjDx0",
+    "user": "xE7jOejl9FI",
+    "title": "Really Long Scorecard",
+    "description": "Really Long Scorecard",
+    "userAccesses": [],
+    "userGroupAccesses": []
+  },
+  {
+    "id": "QOjhOmbNQPN",
+    "user": "xE7jOejl9FI",
+    "title": "Short Scorecard",
+    "description": "Really short scorecard",
+    "userAccesses": [],
+    "userGroupAccesses": []
+  },
+  {
+    "title": "Target On Levels Scorecard",
+    "description": "Scorecard to test target on levels functionalities",
+    "id": "U4nJdXE5QFN",
+    "user": "xE7jOejl9FI",
+    "userAccesses": [],
+    "userGroupAccesses": []
+  }
+]

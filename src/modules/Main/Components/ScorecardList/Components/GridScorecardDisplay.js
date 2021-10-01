@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import React from "react";
-import ScorecardGridCard from "./ScorecardGridCard";
+import ScorecardListCard from "./Cards/ScorecardListCard";
 
 export default function GridScorecardDisplay({ scorecards }) {
   return (
@@ -9,7 +9,7 @@ export default function GridScorecardDisplay({ scorecards }) {
       className="scorecard-list-container grid p-32"
     >
       {scorecards?.map((scorecard) => (
-        <ScorecardGridCard key={scorecard.id} scorecard={scorecard} />
+        <ScorecardListCard grid key={scorecard.id} scorecard={scorecard} />
       ))}
     </div>
   );

@@ -1,25 +1,32 @@
 /**
  * Scenario: Searching scorecards by name
  */
-Given("authorized department officer", () => {
-  cy.visit("/");
+/// <reference types ="cypress" />
+
+And("I search in the list by name", () => {
+  cy.get("input.jsx-3353877153").type("Test Scorecard{enter}");
 });
-When("opening a list of available scorecards", () => {});
-And("I search in the list by name", () => {});
 Then(
   "I should be presented scorecard results matching search criterias",
-  () => {}
+  () => {
+    cy.get("h3").should("have.text", "Test Scorecard");
+  }
 );
 
+// /**
+//  * Scenario: Searching scorecards by categories/tag
+//  */
+
 /**
- * Scenario: Searching scorecards by categories/tag
+ * To be implemented search by tag or category specifics
  */
-Given("authorized department officer", () => {
-  cy.visit("/");
+And("search in the list by a certain tag or category", () => {
+  cy.get("input.jsx-3353877153").type("Test Scorecard{enter}");
+  cy.get(".space-between > :nth-child(1) > .column").click();
 });
-When("opening a list of available scorecards", () => {});
-And("search in the list by a certain tag or category", () => {});
 Then(
   "I should be presented scorecard results matching search criterias",
-  () => {}
+  () => {
+    cy.get("h3").should("have.text", "Test Scorecard");
+  }
 );
