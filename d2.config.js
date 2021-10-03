@@ -1,7 +1,7 @@
 const config = {
   type: "app",
   name: "hisptz-scorecard",
-  title: "Scorecard",
+  title: "Interactive Scorecard",
   entryPoints: {
     app: "./src/App",
   },
