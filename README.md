@@ -1,47 +1,126 @@
-# Scorecard
 
-This project was bootstrapped with [DHIS2 Application Platform](https://github.com/dhis2/app-platform).
+# SCORECARD
 
-## Available Scripts
+[![action-tracker-standalone](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/simple/demzvf/develop&style=flat&logo=cypress)](https://dashboard.cypress.io/projects/demzvf/runs)
+[![dhis2: tests](https://github.com/hisptz/action-tracker-standalone/actions/workflows/tests.yml/badge.svg?branch=develop)](https://github.com/hisptz/action-tracker-standalone/actions/workflows/tests.yml)
 
-In the project directory, you can run:
+1.  [Introduction](#Introduction)
 
-### `yarn start`
+2.  [Admin Guide](#Admin)
+	
+3.  [Developer Guide](#Developer)
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+    3.1. [Installations](#DevInstallation)
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
 
-### `yarn test`
 
-Launches the test runner and runs all available tests found in `/src`.<br />
+## 1. <a name='Introduction'></a>Introduction
 
-See the section about [running tests](https://platform.dhis2.nu/#/scripts/test) for more information.
+The scorecard app is a performance monitoring tool that allows users to track the comparative performance of indicators over time and against different organization units and/or levels. With easy to use colour coded outputs, the scorecard is meant to allow users to make data-driven decisions using the performance outlined on via the scorecard app’s outputs.
+The Scorecard is an application developed to operate and installed in DHIS 2 instance taking advantage of existing indicators for configurations to track. The Scorecard app must be installed in the DHIS 2 system by the user with administrative privilege and configure data entry and report based on in-country needs. Once installed, any user who has access to that particular instance of DHIS 2 will be able to create scorecards, view existing scorecards or edit scorecards developed by other users provided that they have shared that scorecard (privilege to read and write) with the logged-on user.
 
-### `yarn build`
+## 2. <a name='Admin'></a>Admin Guide
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### <a name='Installations'></a>Installations
 
-The build is minified and the filenames include the hashes.<br />
-A deployable `.zip` file can be found in `build/bundle`!
+Download the latest version of the App via 
 
-See the section about [building](https://platform.dhis2.nu/#/scripts/build) for more information.
+```
+https://github.com/hisptz/scorecard-app/releases
+```
+Go to your DHIS2 instance with the organisation units already in place,then install the downloaded app via App Management
 
-### `yarn deploy`
+## 3. <a name='Developer'></a>Developer Guide
 
-Deploys the built app in the `build` folder to a running DHIS2 instance.<br />
-This command will prompt you to enter a server URL as well as the username and password of a DHIS2 user with the App Management authority.<br/>
-You must run `yarn build` before running `yarn deploy`.<br />
+### 3.1. <a name='DevInstallation'></a>Installations
 
-See the section about [deploying](https://platform.dhis2.nu/#/scripts/deploy) for more information.
+#### 3.1.1.The DHIS2 CLI installation guide for Linux operating systems.
 
-## Learn More
+##### 3.1.1.1.Yarn installation:
+```bash
+$ curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+$ echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sourcechh::s.list.d/yarn.list
 
-You can learn more about the platform in the [DHIS2 Application Platform Documentation](https://platform.dhis2.nu/).
+$ sudo apt update && sudo apt install yarn
 
-You can learn more about the runtime in the [DHIS2 Application Runtime Documentation](https://runtime.dhis2.nu/).
+# If you are using nvm you can avoid the node installation by running
+$ sudo apt update && sudo apt install --no-install-recommends yarn
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+# To verify yarn installation, run
+$ yarn --version
+```
+
+##### 3.1.1.2.d2-cli installation:
+```bash
+$ yarn global add @dhis2/cli
+
+# To verify d2 is installed
+$ d2 --help
+```
+##### NOTE: If the &nbsp;<strong>"d2: command not found"</strong>&nbsp; then run the below commands:
+```bash
+# Check path to yarn packages
+$ yarn global bin
+
+# Add yarn installed packages to path
+# Example: export PATH=$PATH:/home/dhis/.yarn/bin 
+$ export PATH=$PATH:<path_to_yarn_packages>
+
+# Check if yarn is installed
+ $ d2 --help
+```
+#### 3.1.2.The DHIS2 CLI installation guide for MacOS.
+
+##### 3.1.2.1.Installing d2-app-scripts
+```bash
+$ yarn global add @dhis2/cli-app-scripts
+
+# To verify d2-app-scripts is installed
+$ d2 --help
+
+# Add yarn installed packages to path
+$ export PATH=$PATH:<path_to_yarn_packages>
+
+```
+
+##### 3.1.2.2.Bootstrapping
+To create a new template application (or upgrade and existing React app), use the d2-app-scripts init command. 
+
+```bash
+$ d2-app-scripts init app-name
+$ cd app-name
+
+#To start app
+$ yarn start
+```
+
+##### 3.1.2.3.Proxying to remote server
+Local server should whitelist 
+localhost:4200 in system settings
+<br>
+<br>
+Chrome
+```bash
+As of mid-July 2020, the Chrome (and Chromium) stable release channel has started to disable cross-site cookies by default. Mozilla Firefox has pushed this change to their beta channel and will likely release it to the stable channel soon.
+
+# To enable proxying to remote server developer needs to edit SameSite Cookie Attribute when debugging app or developing app
+
+1. Open chrome browser
+2. Paste chrome://flags/#same-site-by-default-cookies in address bar
+3. Set SameSite Flag to disabled
+```
+
+Mozilla
+<br>
+```bash
+Firefox stable channel does not yet enforce this cookie policy, so for the moment everything should continue to work. Currently there doesn’t appear to be an easy way to disable the policy in Firefox Beta.
+```
+
+Safari
+```bash
+To disable SameSite Cookie in Safari:
+1. Open Safari 
+2. Go to Preferences
+3. Navigate to privacy
+4. Uncheck “Prevent cross-site tracking” option
+```
