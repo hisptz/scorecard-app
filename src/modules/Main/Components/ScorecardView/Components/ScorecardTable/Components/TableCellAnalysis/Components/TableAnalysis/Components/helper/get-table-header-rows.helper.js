@@ -1,4 +1,4 @@
-import {each, map} from "lodash";
+import { each, map } from "lodash";
 
 // eslint-disable-next-line max-params
 export function getTableHeaderRows(

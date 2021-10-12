@@ -2,8 +2,8 @@ const injectDevServer = require("@cypress/react/plugins/react-scripts");
 const {
   networkShim,
   chromeAllowXSiteCookies,
-  cucumberPreprocessor
-} = require('@dhis2/cypress-plugins');
+  cucumberPreprocessor,
+} = require("@dhis2/cypress-plugins");
 
 /**
  * @type {Cypress.PluginConfig}

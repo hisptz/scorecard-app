@@ -5,8 +5,8 @@
 //         id: ({id})=>id,
 //     }
 // }
-import {dataSourceTypes} from "../Models";
-import {getDataSourceType} from "./FormulaTopBar";
+import { dataSourceTypes } from "../Models";
+import { getDataSourceType } from "./FormulaTopBar";
 
 const query = {
   identifiableObjects: {

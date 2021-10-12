@@ -1,6 +1,6 @@
-import {atom, selector} from "recoil";
+import { atom, selector } from "recoil";
 import getCustomFunctions from "../../shared/services/getCustomFunctions";
-import {EngineState} from "./engine";
+import { EngineState } from "./engine";
 
 const customFunctionsKeysQuery = {
   keys: {

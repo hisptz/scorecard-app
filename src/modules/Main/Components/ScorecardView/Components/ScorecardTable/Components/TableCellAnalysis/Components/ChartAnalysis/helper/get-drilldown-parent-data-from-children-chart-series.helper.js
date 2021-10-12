@@ -1,4 +1,4 @@
-import {find, map, reduce} from "lodash";
+import { find, map, reduce } from "lodash";
 
 export function getDrilldownParentDataFromChildrenSeries(
   drilldownSeries,

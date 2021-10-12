@@ -1,5 +1,12 @@
 import i18n from "@dhis2/d2-i18n";
-import {DataTable, DataTableCell, DataTableColumnHeader, DataTableRow, TableBody, TableHead,} from "@dhis2/ui";
+import {
+  DataTable,
+  DataTableCell,
+  DataTableColumnHeader,
+  DataTableRow,
+  TableBody,
+  TableHead,
+} from "@dhis2/ui";
 import PropTypes from "prop-types";
 import React from "react";
 import DisplayFormula from "../../../../../Shared/Componets/DisplayFormula/Index";

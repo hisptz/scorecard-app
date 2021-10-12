@@ -1,9 +1,18 @@
 import i18n from "@dhis2/d2-i18n";
-import {Button, ButtonStrip, CenteredContent, colors, Modal, ModalActions, ModalContent, ModalTitle,} from "@dhis2/ui";
+import {
+  Button,
+  ButtonStrip,
+  CenteredContent,
+  colors,
+  Modal,
+  ModalActions,
+  ModalContent,
+  ModalTitle,
+} from "@dhis2/ui";
 import ErrorIcon from "@material-ui/icons/Error";
 import PropTypes from "prop-types";
-import React, {useState} from "react";
-import {useHistory} from "react-router-dom";
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 function ErrorDialog({ error, onClose }) {
   const { details } = error ?? {};

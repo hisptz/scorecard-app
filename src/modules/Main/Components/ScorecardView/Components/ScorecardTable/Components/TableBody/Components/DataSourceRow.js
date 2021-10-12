@@ -1,14 +1,17 @@
-import {DataTableCell, DataTableRow} from "@dhis2/ui";
-import {head} from "lodash";
+import { DataTableCell, DataTableRow } from "@dhis2/ui";
+import { head } from "lodash";
 import PropTypes from "prop-types";
-import React, {useEffect, useState} from "react";
-import {useRecoilValue} from "recoil";
+import React, { useEffect, useState } from "react";
+import { useRecoilValue } from "recoil";
 import AverageDisplayType from "../../../../../../../../../core/constants/averageDisplayType";
-import {DraggableItems} from "../../../../../../../../../core/constants/draggables";
+import { DraggableItems } from "../../../../../../../../../core/constants/draggables";
 import ScorecardDataEngine from "../../../../../../../../../core/models/scorecardData";
-import {PeriodResolverState} from "../../../../../../../../../core/state/period";
-import {ScorecardOrgUnitState, ScorecardViewState,} from "../../../../../../../../../core/state/scorecard";
-import {getDataSourcesDisplayName} from "../../../../../../../../../shared/utils/utils";
+import { PeriodResolverState } from "../../../../../../../../../core/state/period";
+import {
+  ScorecardOrgUnitState,
+  ScorecardViewState,
+} from "../../../../../../../../../core/state/scorecard";
+import { getDataSourcesDisplayName } from "../../../../../../../../../shared/utils/utils";
 import DataContainer from "../../TableDataContainer";
 import AverageCell from "./AverageCell";
 import DraggableCell from "./DraggableCell";

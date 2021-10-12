@@ -1,6 +1,9 @@
 import _ from "lodash";
-import {dataSourceTypes} from "../Models";
-import {getValueDataSourcePromise, isPureDataElement,} from "./FormulaFunctions";
+import { dataSourceTypes } from "../Models";
+import {
+  getValueDataSourcePromise,
+  isPureDataElement,
+} from "./FormulaFunctions";
 
 export default function IdentifiableObjectDataSource(engine, arrId) {
   //returns array of promises

@@ -1,10 +1,10 @@
 /* eslint-disable no-case-declarations */
-import {clone} from "lodash";
-import {getInitialChartObject} from "./get-initial-chart-object-helper";
-import {getSanitizedanalyticsBasedOnConfiguration} from "./get-sanitized-analytics-based-on-chart-configuration.helper";
-import {getSanitizedChartObject} from "./get-sanitized-chart-object.helper";
-import {getSolidGaugeChartObject} from "./get-solid-gauge-chart-object.helper";
-import {getSpiderWebChartObject} from "./get-spider-web-chart-object.helper";
+import { clone } from "lodash";
+import { getInitialChartObject } from "./get-initial-chart-object-helper";
+import { getSanitizedanalyticsBasedOnConfiguration } from "./get-sanitized-analytics-based-on-chart-configuration.helper";
+import { getSanitizedChartObject } from "./get-sanitized-chart-object.helper";
+import { getSolidGaugeChartObject } from "./get-solid-gauge-chart-object.helper";
+import { getSpiderWebChartObject } from "./get-spider-web-chart-object.helper";
 
 export function getCharObject(incommingAnalyticObject, chartConfiguration) {
   const analyticsObject = getSanitizedanalyticsBasedOnConfiguration(

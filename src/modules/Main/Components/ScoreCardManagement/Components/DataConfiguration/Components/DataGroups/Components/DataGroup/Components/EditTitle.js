@@ -1,5 +1,5 @@
 import i18n from "@dhis2/d2-i18n";
-import {Button, ButtonStrip, Input} from "@dhis2/ui";
+import { Button, ButtonStrip, Input } from "@dhis2/ui";
 import PropTypes from "prop-types";
 import React from "react";
 

@@ -1,8 +1,8 @@
 import i18n from "@dhis2/d2-i18n";
-import {PeriodType} from "@iapps/period-utilities";
+import { PeriodType } from "@iapps/period-utilities";
 import React from "react";
-import {DHIS2ValueTypes} from "../../../../../../../shared/Components/CustomForm/constants";
-import {FormFieldModel} from "../../../../../../../shared/Components/CustomForm/models";
+import { DHIS2ValueTypes } from "../../../../../../../shared/Components/CustomForm/constants";
+import { FormFieldModel } from "../../../../../../../shared/Components/CustomForm/models";
 import GeneralFormField from "./GeneralFormField";
 import "../../../ScorecardManagement.module.css";
 

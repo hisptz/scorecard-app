@@ -47,9 +47,7 @@ Then("scorecard should be saved and be available in the list", () => {
  * Scenario: Assign Indicators to groups
  */
 Given("authorized user at national level", () => {});
-And("creating data groups", () => {
-
-});
+And("creating data groups", () => {});
 And("selecting to view available indicators", () => {});
 And("selecting an indicator group", () => {});
 And("adding an indicator to a data group", () => {});
@@ -88,14 +86,13 @@ Then(
  * Scenario: Sharing Scorecard to user groups
  */
 Given("authorized coordinator", () => {
-  cy.visit('/')
+  cy.visit("/");
 });
-When(/^Creating\/updating scorecard$/, () => {
-
-});
-And(/^selecting to share with a specific user group and saving the changes$/, function () {
-
-});
+When(/^Creating\/updating scorecard$/, () => {});
+And(
+  /^selecting to share with a specific user group and saving the changes$/,
+  function () {}
+);
 Then(
   "the users in the specific user group should be able to access the scorecard",
   () => {}

@@ -1,5 +1,5 @@
-import {filter, map} from "lodash";
-import {getFilteredTableRows} from "./get-filtered-table-rows.helper";
+import { filter, map } from "lodash";
+import { getFilteredTableRows } from "./get-filtered-table-rows.helper";
 
 export function getMergedTableRowsOrColumnsDetails(
   tableDataRowsOrColumns,

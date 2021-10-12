@@ -1,22 +1,22 @@
 import PropTypes from "prop-types";
-import React, {useEffect} from "react";
-import {useRecoilCallback} from "recoil";
+import React, { useEffect } from "react";
+import { useRecoilCallback } from "recoil";
 import {
-    dataElementsStateDictionary,
-    dataSetDataElementCountState,
-    dataSetReportingRatesStateDictionary,
-    programDataElementCountState,
-    programIndicatorStateDictionary,
+  dataElementsStateDictionary,
+  dataSetDataElementCountState,
+  dataSetReportingRatesStateDictionary,
+  programDataElementCountState,
+  programIndicatorStateDictionary,
 } from "../../../Store";
 import {
-    indicatorGroupAggregateDataElements,
-    indicatorGroupDataSets,
-    indicatorGroupDenominatorDataElements,
-    indicatorGroupNumeratorDataElements,
-    indicatorGroupProgramDataElements,
-    indicatorGroupPrograms,
+  indicatorGroupAggregateDataElements,
+  indicatorGroupDataSets,
+  indicatorGroupDenominatorDataElements,
+  indicatorGroupNumeratorDataElements,
+  indicatorGroupProgramDataElements,
+  indicatorGroupPrograms,
 } from "../../../Store/IndicatorGroup";
-import {dataSourceTypes} from "../../../Utils/Models";
+import { dataSourceTypes } from "../../../Utils/Models";
 import DataElementPage from "../../DataElement";
 import DataElementGroupPage from "../../DataElementGroup";
 import FunctionPage2 from "../../Function/index2";

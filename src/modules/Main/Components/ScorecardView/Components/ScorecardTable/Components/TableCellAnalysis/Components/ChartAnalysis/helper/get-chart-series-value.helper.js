@@ -1,5 +1,5 @@
 /* eslint-disable max-params */
-import {forEach, map, some} from "lodash";
+import { forEach, map, some } from "lodash";
 
 export function getChartSeriesValue(
   analyticsRows,

@@ -1,6 +1,6 @@
 /* eslint-disable import/named */
-import {map} from "lodash";
-import {getMergedTableRowsOrColumnsDetails} from "./get-merged-table-rows-or-columns-details.helper";
+import { map } from "lodash";
+import { getMergedTableRowsOrColumnsDetails } from "./get-merged-table-rows-or-columns-details.helper";
 
 export function getMergedTableRows(tableDataRows, dxGroupMembers) {
   const { availableParent, mergedDataRowsOrColumnsArray } =

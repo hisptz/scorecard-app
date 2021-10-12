@@ -1,4 +1,4 @@
-import {getAllowedChartType} from "./get-allowed-chart-types.helper";
+import { getAllowedChartType } from "./get-allowed-chart-types.helper";
 
 export function getTooltipOptions(chartConfiguration) {
   const tooltipChartType = getAllowedChartType(chartConfiguration.type);

@@ -1,4 +1,4 @@
-import {assign, clone, find, findIndex, reverse} from "lodash";
+import { assign, clone, find, findIndex, reverse } from "lodash";
 
 export function getCumulativeFormatForAnalytics(
   analyticsObject,

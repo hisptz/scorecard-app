@@ -1,5 +1,5 @@
 import i18n from "@dhis2/d2-i18n";
-import {colors} from "@dhis2/ui";
+import { colors } from "@dhis2/ui";
 import React from "react";
 
 export default function EmptyOrgUnitsOrPeriod() {

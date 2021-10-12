@@ -1,11 +1,9 @@
 /// <reference types ="cypress" />
 
-
 const apiVersion = Cypress.env("apiVersion");
 
-
 When("opening a list of available scorecards", () => {
-  cy.get("[data-test=\"scorecard-thumbnail-view\"]").should("be.visible");
+  cy.get('[data-test="scorecard-thumbnail-view"]').should("be.visible");
 });
 
 Then("a table of indicators against locations should displayed", () => {

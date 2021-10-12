@@ -1,4 +1,4 @@
-import {find, findIndex} from "lodash";
+import { find, findIndex } from "lodash";
 
 export function getCombinedChartSeriesData(seriesData) {
   let combinedSeriesData = [];

@@ -1,8 +1,14 @@
 import i18n from "@dhis2/d2-i18n";
-import {DataTable, DataTableColumnHeader, DataTableRow, TableBody, TableHead,} from "@dhis2/ui";
+import {
+  DataTable,
+  DataTableColumnHeader,
+  DataTableRow,
+  TableBody,
+  TableHead,
+} from "@dhis2/ui";
 import React from "react";
-import {useRecoilValue} from "recoil";
-import {dataElementsStateDictionary} from "../../../../Store";
+import { useRecoilValue } from "recoil";
+import { dataElementsStateDictionary } from "../../../../Store";
 import Row from "./row";
 
 export default function DataElementSIndicator() {

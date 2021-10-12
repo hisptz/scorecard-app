@@ -1,12 +1,12 @@
-import {assign, clone} from "lodash";
-import {getChartAxisItems} from "./get-chart-axis-items.helper";
-import {getChartPaneOptions} from "./get-chart-pane-options.helper";
-import {getChartSeries} from "./get-chart-series.helper";
-import {getChartYAxisOptions} from "./get-chart-y-axis-options.helper";
-import {getChartXAxisOptions} from "./get-charts-x-axis-options.helper";
-import {getSanitizedChartXAxisCategories} from "./get-sanitized-chart-x-axis-categories.helper";
-import {getSortedChartSeries} from "./get-sorted-chart-series.helper";
-import {getXAxisItemsFromChartConfiguration} from "./get-x-axis-items-from-chart-configuration.helper";
+import { assign, clone } from "lodash";
+import { getChartAxisItems } from "./get-chart-axis-items.helper";
+import { getChartPaneOptions } from "./get-chart-pane-options.helper";
+import { getChartSeries } from "./get-chart-series.helper";
+import { getChartYAxisOptions } from "./get-chart-y-axis-options.helper";
+import { getChartXAxisOptions } from "./get-charts-x-axis-options.helper";
+import { getSanitizedChartXAxisCategories } from "./get-sanitized-chart-x-axis-categories.helper";
+import { getSortedChartSeries } from "./get-sorted-chart-series.helper";
+import { getXAxisItemsFromChartConfiguration } from "./get-x-axis-items-from-chart-configuration.helper";
 
 export function getSpiderWebChartObject(
   initialChartObject,

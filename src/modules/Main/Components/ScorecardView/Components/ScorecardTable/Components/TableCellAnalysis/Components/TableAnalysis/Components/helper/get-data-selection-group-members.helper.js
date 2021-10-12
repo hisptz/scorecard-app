@@ -1,4 +1,4 @@
-import {find, flatten, map} from "lodash";
+import { find, flatten, map } from "lodash";
 
 export function getDataSelectionGroupMembers(tableConfiguration) {
   const dxDataSelection = find(tableConfiguration.dataSelections, [

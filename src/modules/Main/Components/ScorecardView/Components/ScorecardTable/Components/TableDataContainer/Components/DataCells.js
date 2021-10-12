@@ -1,8 +1,8 @@
-import {colors} from "@dhis2/ui";
+import { colors } from "@dhis2/ui";
 import PropTypes from "prop-types";
-import React, {useMemo} from "react";
-import {useRecoilValue} from "recoil";
-import {ScorecardViewState} from "../../../../../../../../../core/state/scorecard";
+import React, { useMemo } from "react";
+import { useRecoilValue } from "recoil";
+import { ScorecardViewState } from "../../../../../../../../../core/state/scorecard";
 import LinkedCellSvg from "../../../../../../../../../shared/Components/ScorecardCell/Components/LinkedCellSvg";
 import SingleCellSvg from "../../../../../../../../../shared/Components/ScorecardCell/Components/SingleCellSvg";
 

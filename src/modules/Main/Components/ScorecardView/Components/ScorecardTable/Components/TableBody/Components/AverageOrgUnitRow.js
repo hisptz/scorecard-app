@@ -1,11 +1,14 @@
 import i18n from "@dhis2/d2-i18n";
-import {DataTableCell, DataTableRow} from "@dhis2/ui";
+import { DataTableCell, DataTableRow } from "@dhis2/ui";
 import PropTypes from "prop-types";
 import React from "react";
-import {useRecoilValue} from "recoil";
+import { useRecoilValue } from "recoil";
 import ScorecardDataEngine from "../../../../../../../../../core/models/scorecardData";
-import {PeriodResolverState} from "../../../../../../../../../core/state/period";
-import {ScorecardOrgUnitState, ScorecardViewState,} from "../../../../../../../../../core/state/scorecard";
+import { PeriodResolverState } from "../../../../../../../../../core/state/period";
+import {
+  ScorecardOrgUnitState,
+  ScorecardViewState,
+} from "../../../../../../../../../core/state/scorecard";
 import AverageCell from "./AverageCell";
 import AverageDataContainer from "./AverageDataContainer";
 

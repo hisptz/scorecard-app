@@ -1,4 +1,4 @@
-import {map} from "lodash";
+import { map } from "lodash";
 
 export default function getTableHeaderRowsWithDataRowIds(tableHeaderRowsArray) {
   return map(tableHeaderRowsArray, (tableHeaderRows) =>

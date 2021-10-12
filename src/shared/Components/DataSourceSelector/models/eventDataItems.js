@@ -1,4 +1,4 @@
-import {filter as _filter, isEmpty} from "lodash";
+import { filter as _filter, isEmpty } from "lodash";
 import NativeDataSource from "./nativeDataSource";
 
 export default class EventDataItems extends NativeDataSource {

@@ -1,4 +1,4 @@
-import {assign} from "lodash";
+import { assign } from "lodash";
 
 export function getChartXAxisOptions(xAxisCategories, chartConfiguration) {
   let xAxisOptions = {};

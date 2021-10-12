@@ -1,7 +1,7 @@
-import {colors} from "@dhis2/ui";
+import { colors } from "@dhis2/ui";
 import PropTypes from "prop-types";
 import React from "react";
-import {Droppable} from "react-beautiful-dnd";
+import { Droppable } from "react-beautiful-dnd";
 
 export default function DroppableArea({ children, type }) {
   return (

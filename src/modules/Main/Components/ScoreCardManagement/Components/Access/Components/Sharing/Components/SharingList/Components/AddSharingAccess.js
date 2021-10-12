@@ -1,12 +1,12 @@
 import i18n from "@dhis2/d2-i18n";
-import {Button, SingleSelectField, SingleSelectOption} from "@dhis2/ui";
+import { Button, SingleSelectField, SingleSelectOption } from "@dhis2/ui";
 import AddIcon from "@material-ui/icons/Add";
-import React, {useState} from "react";
-import {useRecoilState} from "recoil";
+import React, { useState } from "react";
+import { useRecoilState } from "recoil";
 import ScorecardAccess from "../../../../../../../../../../../core/models/scorecardAccess";
-import {ScorecardConfigDirtyState} from "../../../../../../../../../../../core/state/scorecard";
-import {ACCESS_TYPES} from "../../../../../../../../../../../shared/constants/sharing";
-import {getAccessName} from "../../../utils";
+import { ScorecardConfigDirtyState } from "../../../../../../../../../../../core/state/scorecard";
+import { ACCESS_TYPES } from "../../../../../../../../../../../shared/constants/sharing";
+import { getAccessName } from "../../../utils";
 import UserAndUserGroupSelector from "../../UserAndUserGroupSelector";
 
 export default function AddSharingAccess() {

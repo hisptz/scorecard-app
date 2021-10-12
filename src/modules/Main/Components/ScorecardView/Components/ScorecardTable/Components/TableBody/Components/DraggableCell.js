@@ -1,8 +1,8 @@
-import {colors} from "@dhis2/ui";
+import { colors } from "@dhis2/ui";
 import PropTypes from "prop-types";
 import React from "react";
-import {useDrag} from "react-dnd";
-import {DraggableItems} from "../../../../../../../../../core/constants/draggables";
+import { useDrag } from "react-dnd";
+import { DraggableItems } from "../../../../../../../../../core/constants/draggables";
 
 export default function DraggableCell({ label, type, style, ...props }) {
   const [{ isDragging }, dragRef] = useDrag(() => ({

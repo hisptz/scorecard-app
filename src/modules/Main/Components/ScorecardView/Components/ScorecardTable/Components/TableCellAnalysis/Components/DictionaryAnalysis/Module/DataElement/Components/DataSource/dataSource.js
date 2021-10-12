@@ -1,9 +1,9 @@
-import {useDataQuery} from "@dhis2/app-runtime";
+import { useDataQuery } from "@dhis2/app-runtime";
 import PropTypes from "prop-types";
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import Error from "../../../../Shared/Componets/Error/ErrorAPIResult";
 import Loader from "../../../../Shared/Componets/Loaders/Loader";
-import {dataElementDomainTypes} from "../../../../Utils/Models";
+import { dataElementDomainTypes } from "../../../../Utils/Models";
 import DataSets from "./Components/DataSets";
 import OtherDetailTable from "./Components/OtherDetails";
 import Programs from "./Components/Programs";

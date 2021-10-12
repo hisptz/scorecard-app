@@ -1,5 +1,5 @@
-import {filter as _filter, flattenDeep, fromPairs, isEmpty} from "lodash";
-import {DATASTORE_FUNCTIONS_ENDPOINT} from "../../../../core/constants/config";
+import { filter as _filter, flattenDeep, fromPairs, isEmpty } from "lodash";
+import { DATASTORE_FUNCTIONS_ENDPOINT } from "../../../../core/constants/config";
 import DataSource from "./dataSource";
 
 const keysQuery = {

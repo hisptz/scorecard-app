@@ -1,4 +1,4 @@
-import {getCumulativeFormatForAnalytics} from "./get-cumulative-format-for-analytics.helper";
+import { getCumulativeFormatForAnalytics } from "./get-cumulative-format-for-analytics.helper";
 
 export function getSanitizedanalyticsBasedOnConfiguration(
   analyticsObject,

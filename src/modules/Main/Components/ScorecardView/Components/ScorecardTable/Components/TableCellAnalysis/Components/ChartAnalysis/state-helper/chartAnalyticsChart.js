@@ -1,7 +1,7 @@
 /* eslint-disable import/no-unresolved */
-import {atom, selectorFamily} from "recoil";
-import {CHART_TYPES} from "../../../../../../../../../../../core/constants/chart-types.constant";
-import {getChartConfiguration} from "../helper/get-chart-configuration.helper";
+import { atom, selectorFamily } from "recoil";
+import { CHART_TYPES } from "../../../../../../../../../../../core/constants/chart-types.constant";
+import { getChartConfiguration } from "../helper/get-chart-configuration.helper";
 
 export const chartTypesAtom = atom({
   key: "chartTypes-atom",

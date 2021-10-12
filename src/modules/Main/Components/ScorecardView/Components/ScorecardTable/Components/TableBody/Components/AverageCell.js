@@ -1,4 +1,4 @@
-import {head, last, round} from "lodash";
+import { head, last, round } from "lodash";
 import PropTypes from "prop-types";
 import React from "react";
 import LinkedCellSvg from "../../../../../../../../../shared/Components/ScorecardCell/Components/LinkedCellSvg";

@@ -1,4 +1,4 @@
-import {filter, find, intersection, map} from "lodash";
+import { filter, find, intersection, map } from "lodash";
 
 export function findDataValuesFromAnalytics(analyticsObject, dataRowIds) {
   const analyticsHeaders = analyticsObject ? analyticsObject.headers || [] : [];
