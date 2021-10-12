@@ -1,6 +1,6 @@
-# SCORECARD
-
-[![action-tracker-standalone](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/simple/9ps7gr/develop&style=flat&logo=cypress)](https://dashboard.cypress.io/projects/demzvf/runs)
+# INTERACTIVE SCORECARD
+[![scorecard-app](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/count/9ps7gr/develop&style=flat&logo=cypress)](https://dashboard.cypress.io/projects/9ps7gr/runs)
+[![scorecard-app](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/simple/9ps7gr/develop&style=flat&logo=cypress)](https://dashboard.cypress.io/projects/9ps7gr/runs)
 [![dhis2: tests](https://github.com/hisptz/action-tracker-standalone/actions/workflows/tests.yml/badge.svg?branch=develop)](https://github.com/hisptz/action-tracker-standalone/actions/workflows/tests.yml)
 
 1.  [Introduction](#Introduction)
