@@ -18,6 +18,7 @@ Feature: Manage Scorecard
     Scenario: Assign Indicators to groups
         Given authorized user at national level
         When opening scorecard form
+        And configuring indicator groups details
         And creating data groups
         And selecting to view available indicators
         And selecting an indicator group
@@ -36,6 +37,7 @@ Feature: Manage Scorecard
     Scenario: Pair Indicators
         Given authorized user at national level
         When opening scorecard form
+        And configuring indicator groups details
         And selecting indicators
         And selecting an indicator group
         And selecting an indicator
