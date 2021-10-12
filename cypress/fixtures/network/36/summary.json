@@ -1,0 +1,16 @@
+{
+    "count": 734,
+    "totalResponseSize": 955145,
+    "duplicates": 615,
+    "nonDeterministicResponses": 86,
+    "apiVersion": "36",
+    "fixtureFiles": [
+        "static_resources.json",
+        "manage_scorecard.json",
+        "list_scorecards.json",
+        "search_scorecards.json",
+        "display_indicators.json",
+        "download_feature.json",
+        "search_indicator.json"
+    ]
+}
