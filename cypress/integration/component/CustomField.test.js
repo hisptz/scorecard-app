@@ -1,7 +1,7 @@
 import {mount} from "@cypress/react";
 import {ReactFinalForm} from "@dhis2/ui";
 import React from "react";
-import CustomField from "./index";
+import CustomField from "../../../src/shared/Components/CustomForm/components/CustomField";
 
 const { Form } = ReactFinalForm;
 

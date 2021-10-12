@@ -2,17 +2,17 @@
  * Scenario: Create Scorecard
  */
 Given("authorized user at national level", () => {
-  cy.loadDataSourceFixture();
-  cy.intercept(
-    "GET",
-    Cypress.env("dhis2BaseUrl") +
-      "/api/36/dataStore/Scorecard_App_HISPTZ/savedObjects",
-    { fixture: "" }
-  );
-
-  cy.intercept("GET", "/api/36/dataStore/hisptz-scorecard/scorecard-summary", {
-    fixture: "",
-  });
+  // cy.loadDataSourceFixture();
+  // cy.intercept(
+  //   "GET",
+  //   Cypress.env("dhis2BaseUrl") +
+  //     "/api/36/dataStore/Scorecard_App_HISPTZ/savedObjects",
+  //   { fixture: "" }
+  // );
+  //
+  // cy.intercept("GET", "/api/36/dataStore/hisptz-scorecard/scorecard-summary", {
+  //   fixture: "",
+  // });
 
   cy.visit("/");
 });
@@ -30,7 +30,6 @@ And("configuring indicator groups details", () => {
   cy.get(".main-container").scrollTo("bottom");
   cy.get("[data-test='scorecard-admin-next-button']").click();
   cy.get("[data-test='scocecard-add-group-button']").click();
-  cy.get("[data-test='scorecard-group-expand']").first().click();
 });
 And("configuring indicator data details", () => {
   cy.get("[data-test='scorecard-indicator-add']")
@@ -48,8 +47,9 @@ Then("scorecard should be saved and be available in the list", () => {
  * Scenario: Assign Indicators to groups
  */
 Given("authorized user at national level", () => {});
-When("opening scorecard form", () => {});
-And("creating data groups", () => {});
+And("creating data groups", () => {
+
+});
 And("selecting to view available indicators", () => {});
 And("selecting an indicator group", () => {});
 And("adding an indicator to a data group", () => {});
@@ -87,12 +87,15 @@ Then(
 /**
  * Scenario: Sharing Scorecard to user groups
  */
-Given("authorized coordinator", () => {});
-When("Creating/updating scorecard", () => {});
-And(
-  "selecting to share with a specific user group and saving changes",
-  () => {}
-);
+Given("authorized coordinator", () => {
+  cy.visit('/')
+});
+When(/^Creating\/updating scorecard$/, () => {
+
+});
+And(/^selecting to share with a specific user group and saving the changes$/, function () {
+
+});
 Then(
   "the users in the specific user group should be able to access the scorecard",
   () => {}
