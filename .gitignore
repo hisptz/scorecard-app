@@ -6,7 +6,6 @@ build
 .env
 logs
 cypress.env.json
-yarn.lock
 *.log
 i18n
 .vscode
