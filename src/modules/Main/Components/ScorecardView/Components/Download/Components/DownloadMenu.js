@@ -18,7 +18,7 @@ export default function DownloadMenu({ onClose, onDownload }) {
           label={type}
         />
       ))}
-      <MenuItem dataTest={"test-alma-data"} label={"ALMA"}>
+      <MenuItem dataTest={"ALMA-download-menu"} label={"ALMA"}>
         <MenuItem
           dataTest={"test-alma-data-json"}
           label={`${i18n.t("Data")}(JSON)`}
