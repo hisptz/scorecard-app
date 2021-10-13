@@ -11783,10 +11783,10 @@ jest@26.6.0:
     import-local "^3.0.2"
     jest-cli "^26.6.0"
 
-jodit-react@^1.0.88:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/jodit-react/-/jodit-react-1.1.1.tgz#62cf86641cc1ddd9c0e3eedb06d436d2ef8954bd"
-  integrity sha512-Lr4THBOL/07oTJVXglMHY1xfiVys7PBGQl9eeVAcr6Ivaq2mGRfVPT1CaBsTBJUPJ2cTjXjzqU2B40d1VzSIlA==
+jodit-react@^1.1.4:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/jodit-react/-/jodit-react-1.1.4.tgz#e3d77c99cd4f4f2a33494519a551289c6cc6ddfe"
+  integrity sha512-PwEOkjEZloscpza+Rd7gGvQrXEvO2sOPOshdSTrTWh9jaQ0ZVgK693YSBfv2x6Cuw+FwRlf89jdixgsU7b8CbQ==
   dependencies:
     jodit "^3.7.1"
 
@@ -18521,10 +18521,8 @@ watchpack@^1.7.4:
   resolved "https://registry.yarnpkg.com/watchpack/-/watchpack-1.7.5.tgz#1267e6c55e0b9b5be44c2023aed5437a2c26c453"
   integrity sha512-9P3MWk6SrKjHsGkLT2KHXdQ/9SNkyoJbabxnKOoJepsvJjJG8uYTR3yTPxPQvNDI3w4Nz1xnE0TLHK4RIVe/MQ==
   dependencies:
-    chokidar "^3.4.1"
     graceful-fs "^4.1.2"
     neo-async "^2.5.0"
-    watchpack-chokidar2 "^2.0.1"
   optionalDependencies:
     chokidar "^3.4.1"
     watchpack-chokidar2 "^2.0.1"
