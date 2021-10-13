@@ -1,19 +1,16 @@
-import { colors } from "@dhis2/ui";
+import {colors} from "@dhis2/ui";
 import React from "react";
 import JsxParser from "react-jsx-parser";
-import { useRecoilValue } from "recoil";
-import {
-  ScorecardConfigDirtyState,
-  ScorecardViewState,
-} from "../../../../../../core/state/scorecard";
+import {useRecoilValue} from "recoil";
+import {ScorecardViewState,} from "../../../../../../core/state/scorecard";
 
 export default function ScorecardHeader() {
   const { title: showTitle } = useRecoilValue(ScorecardViewState("options"));
   const customHeader = useRecoilValue(
-    ScorecardConfigDirtyState("customHeader")
+      ScorecardViewState("customHeader")
   );
-  const title = useRecoilValue(ScorecardConfigDirtyState("title"));
-  const subtitle = useRecoilValue(ScorecardConfigDirtyState("subtitle"));
+  const title = useRecoilValue(ScorecardViewState("title"));
+  const subtitle = useRecoilValue(ScorecardViewState("subtitle"));
 
   return showTitle ? (
     <div className="row space-between" id={"scorecard-header"}>

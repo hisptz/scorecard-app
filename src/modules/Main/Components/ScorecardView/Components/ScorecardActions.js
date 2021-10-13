@@ -54,13 +54,14 @@ export default function ScorecardActions({ downloadAreaRef, dataEngine }) {
         <ButtonStrip>
           <Button
             className="option-button"
+            dataTest={"scorecard-option-button"}
             onClick={() => setOptionsOpen(true)}
           >
             {i18n.t("Options")}
           </Button>
           {writeAccess && (
             <Button
-              dataTest={"test-edit-scorecard"}
+              dataTest={"edit-scorecard-button"}
               className="scorecard-view-edit-button"
               onClick={onEdit}
             >

@@ -18,7 +18,7 @@ export default function ScorecardLegendsView() {
     ScorecardConfigDirtyState("legendDefinitions")
   );
   return showLegends && !isEmpty(legends) ? (
-    <div className="column">
+    <div data-test={"legends"} className="column">
       <div>
         <h3>{i18n.t("Legends")}</h3>
       </div>

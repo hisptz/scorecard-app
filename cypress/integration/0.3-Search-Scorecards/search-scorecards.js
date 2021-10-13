@@ -9,7 +9,7 @@ And("I search in the list by name", () => {
 Then(
   "I should be presented scorecard results matching search criterias",
   () => {
-    cy.get(".scorecard-list-card-title").should("have.text", "Test Scorecard");
+    cy.get(".scorecard-list-card-title").should("contain.text", "Test Scorecard");
   }
 );
 

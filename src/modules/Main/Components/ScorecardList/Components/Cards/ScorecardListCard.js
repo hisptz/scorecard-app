@@ -100,6 +100,7 @@ export default function ScorecardListCard({ scorecard, grid }) {
             <Button onClick={onView}>{i18n.t("View")}</Button>
             {write && (
               <Button
+                  dataTest={"edit-scorecard-button"}
                 onClick={function (_, e) {
                   e.stopPropagation();
                   onEdit();
@@ -185,6 +186,7 @@ export default function ScorecardListCard({ scorecard, grid }) {
             <Button onClick={onView}>{i18n.t("View")}</Button>
             {write && (
               <Button
+                  dataTest={"edit-scorecard-button"}
                 onClick={function (_, e) {
                   e.stopPropagation();
                   onEdit();
