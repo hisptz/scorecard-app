@@ -6,8 +6,8 @@ import path from "path";
  */
 
 And("downloading the PDF of the visualization", () => {
-  cy.get("[data-test=test-download-pdf]").should("be.visible").click();
-  cy.get(":nth-child(2) > a.jsx-665727467 > .jsx-665727467").click();
+  cy.get("[data-test=download-button]").should("be.visible").click();
+  cy.get("[data-test=PDF-download-menu]").click();
 });
 Then(
   "a PDF document of the scorecard visualization should automatically download to my computer",

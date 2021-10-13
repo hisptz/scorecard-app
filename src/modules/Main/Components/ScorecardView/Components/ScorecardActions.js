@@ -73,6 +73,7 @@ export default function ScorecardActions({ downloadAreaRef, dataEngine }) {
               <DownloadMenu onClose={() => {}} onDownload={onDownload} />
             }
             className="download-button"
+            dataTest={"download-button"}
           >
             {i18n.t("Download")}
           </DropdownButton>
