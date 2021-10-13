@@ -1,6 +1,6 @@
 import i18n from "@dhis2/d2-i18n";
-import {CenteredContent, colors} from "@dhis2/ui";
-import {SearchOutlined as SearchIcon} from "@material-ui/icons";
+import { CenteredContent, colors } from "@dhis2/ui";
+import { SearchOutlined as SearchIcon } from "@material-ui/icons";
 import PropTypes from "prop-types";
 import React from "react";
 

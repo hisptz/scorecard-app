@@ -1,11 +1,11 @@
-import {colors} from "@dhis2/ui";
-import {debounce} from "lodash";
+import { colors } from "@dhis2/ui";
+import { debounce } from "lodash";
 import PropTypes from "prop-types";
-import React, {useRef} from "react";
-import {useDrop} from "react-dnd";
-import {useSetRecoilState} from "recoil";
-import {Orientation} from "../../../../../../../../../core/constants/orientation";
-import {ScorecardTableOrientationState} from "../../../../../../../../../core/state/scorecard";
+import React, { useRef } from "react";
+import { useDrop } from "react-dnd";
+import { useSetRecoilState } from "recoil";
+import { Orientation } from "../../../../../../../../../core/constants/orientation";
+import { ScorecardTableOrientationState } from "../../../../../../../../../core/state/scorecard";
 
 export default function DroppableCell({ accept, children }) {
   const setOrientation = useSetRecoilState(ScorecardTableOrientationState);

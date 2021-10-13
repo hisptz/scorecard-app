@@ -1,5 +1,5 @@
-import {find, map, reverse, sortBy} from "lodash";
-import {getCombinedChartSeriesData} from "./get-combined-chart-series-data.helper";
+import { find, map, reverse, sortBy } from "lodash";
+import { getCombinedChartSeriesData } from "./get-combined-chart-series-data.helper";
 
 export function getSortedChartSeries(series, sortOrder) {
   let newSeries = [...series];

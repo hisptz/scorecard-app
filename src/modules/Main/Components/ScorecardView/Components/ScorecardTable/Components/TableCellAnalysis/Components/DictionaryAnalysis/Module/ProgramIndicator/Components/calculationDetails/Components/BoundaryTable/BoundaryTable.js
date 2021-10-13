@@ -1,4 +1,10 @@
-import {DataTable, DataTableColumnHeader, DataTableRow, TableBody, TableHead,} from "@dhis2/ui";
+import {
+  DataTable,
+  DataTableColumnHeader,
+  DataTableRow,
+  TableBody,
+  TableHead,
+} from "@dhis2/ui";
 import React from "react";
 import Row from "./Components/Row";
 

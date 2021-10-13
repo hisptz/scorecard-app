@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import React from "react";
-import {CalendarTypes} from "../../../../core/constants/calendar";
+import { CalendarTypes } from "../../../../core/constants/calendar";
 import CalendarSpecificPeriodDimension from "./CalendarSpecificPeriodDimension";
 
 export default function EthiopianPeriodDimension({

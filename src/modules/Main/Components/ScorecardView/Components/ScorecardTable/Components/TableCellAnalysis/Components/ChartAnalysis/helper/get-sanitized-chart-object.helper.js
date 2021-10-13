@@ -1,5 +1,5 @@
-import {each, filter, find, flatten, intersection, map, some} from "lodash";
-import {getChartExportingOptions} from "./get-chart-exporting-options.helper";
+import { each, filter, find, flatten, intersection, map, some } from "lodash";
+import { getChartExportingOptions } from "./get-chart-exporting-options.helper";
 
 export function getSanitizedChartObject(chartObject, chartConfiguration) {
   const dataSelectionGroups = flatten(

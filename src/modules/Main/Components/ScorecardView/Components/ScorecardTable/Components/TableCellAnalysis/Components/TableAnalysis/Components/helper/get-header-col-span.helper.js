@@ -1,4 +1,4 @@
-import {filter, last} from "lodash";
+import { filter, last } from "lodash";
 
 export function getHeaderColSpan(tableRowHeaders) {
   const lastHeaders = last(tableRowHeaders);

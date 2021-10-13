@@ -1,8 +1,8 @@
+import { useAlert } from "@dhis2/app-runtime";
 import i18n from "@dhis2/d2-i18n";
 import { CircularLoader, LinearLoader } from "@dhis2/ui";
 import PropTypes from "prop-types";
-import React from "react";
-import FullPageError from "../../../../shared/Components/Errors/FullPageError";
+import React, { useEffect } from "react";
 import useMigrateScorecard from "./hooks/useMigrateScorecard";
 
 export default function ScorecardMigration({ onMigrationComplete }) {
@@ -10,11 +10,18 @@ export default function ScorecardMigration({ onMigrationComplete }) {
     onMigrationComplete(true);
   };
 
+  const { show } = useAlert(
+    ({ message }) => message,
+    ({ type }) => ({ ...type, duration: 3000 })
+  );
   const { loading, error, progress, count } = useMigrateScorecard(onComplete);
 
-  if (error) {
-    return <FullPageError error={error} />;
-  }
+  useEffect(() => {
+    show({
+      message: i18n.t("Error Migrating Scorecards: " + (error?.message ?? "")),
+      type: { info: true },
+    });
+  }, [error, show]);
 
   if (loading) {
     return (

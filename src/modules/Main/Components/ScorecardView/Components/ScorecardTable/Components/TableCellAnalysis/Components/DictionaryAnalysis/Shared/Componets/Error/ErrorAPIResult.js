@@ -1,4 +1,4 @@
-import {CenteredContent, colors} from "@dhis2/ui";
+import { CenteredContent, colors } from "@dhis2/ui";
 import ErrorIcon from "@material-ui/icons/Error";
 import PropTypes from "prop-types";
 import React from "react";

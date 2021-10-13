@@ -1,13 +1,16 @@
 import i18n from "@dhis2/d2-i18n";
-import {Button, Checkbox} from "@dhis2/ui";
+import { Button, Checkbox } from "@dhis2/ui";
 import AddIcon from "@material-ui/icons/Add";
 import PropTypes from "prop-types";
 import React from "react";
-import {DragDropContext} from "react-beautiful-dnd";
-import {useRecoilCallback, useRecoilState} from "recoil";
+import { DragDropContext } from "react-beautiful-dnd";
+import { useRecoilCallback, useRecoilState } from "recoil";
 import DataSelection from "../../../../../../core/models/dataSelection";
-import {ScorecardConfigDirtyState, ScorecardConfigEditState,} from "../../../../../../core/state/scorecard";
-import {updateListFromDragAndDrop} from "../../../../../../shared/utils/dnd";
+import {
+  ScorecardConfigDirtyState,
+  ScorecardConfigEditState,
+} from "../../../../../../core/state/scorecard";
+import { updateListFromDragAndDrop } from "../../../../../../shared/utils/dnd";
 import DataGroups from "./Components/DataGroups";
 
 export default function DataGroupArea({ onGroupAdd }) {

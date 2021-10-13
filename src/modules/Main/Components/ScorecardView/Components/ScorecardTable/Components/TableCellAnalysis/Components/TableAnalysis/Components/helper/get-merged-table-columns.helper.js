@@ -1,6 +1,6 @@
 /* eslint-disable import/named */
-import {each, filter, map} from "lodash";
-import {getMatchingTableRowsOrColumns} from "./get-matching-table-rows-or-columns.helper";
+import { each, filter, map } from "lodash";
+import { getMatchingTableRowsOrColumns } from "./get-matching-table-rows-or-columns.helper";
 
 export function getMergedTableColumns(tableDataColumns, dxGroupMembers) {
   const availableParent = {};

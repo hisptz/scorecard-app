@@ -24,7 +24,7 @@ export const LAYOUTS = {
 };
 
 export const DEFAULT_LAYOUT = {
-  column: ["ou"],
-  row: ["pe", "dx"],
-  filter: [],
+  column: ["dx"],
+  row: ["pe"],
+  filter: ["ou"],
 };

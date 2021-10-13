@@ -1,6 +1,6 @@
-import {mount, mountHook} from "@cypress/react";
-import {Button} from "@dhis2/ui";
-import React, {useRef} from "react";
+import { mount, mountHook } from "@cypress/react";
+import { Button } from "@dhis2/ui";
+import React, { useRef } from "react";
 import CustomForm from "../../../src/shared/Components/CustomForm";
 
 // eslint-disable-next-line react/prop-types

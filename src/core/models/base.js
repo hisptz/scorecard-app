@@ -1,5 +1,5 @@
 import produce from "immer";
-import {cloneDeep, defaultsDeep} from "lodash";
+import { cloneDeep, defaultsDeep } from "lodash";
 
 export default class DataModel {
   constructor(attributes = {}) {

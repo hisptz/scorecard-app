@@ -1,4 +1,4 @@
-import {dataTypes, dataTypesInitials} from "../Models";
+import { dataTypes, dataTypesInitials } from "../Models";
 
 const identifiableQuery1 = {
   identifiableObjects: {

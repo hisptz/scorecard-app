@@ -1,5 +1,5 @@
-import {filter as _filter, flattenDeep} from "lodash";
-import {updatePager} from "../../../utils/utils";
+import { filter as _filter, flattenDeep } from "lodash";
+import { updatePager } from "../../../utils/utils";
 import DataSource from "./dataSource";
 
 export default class DataSets extends DataSource {

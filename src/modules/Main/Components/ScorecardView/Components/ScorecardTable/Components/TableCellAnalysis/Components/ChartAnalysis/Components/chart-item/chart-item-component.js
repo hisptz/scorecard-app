@@ -1,16 +1,16 @@
 import Highcharts from "highcharts";
 import PropTypes from "prop-types";
-import React, {useEffect} from "react";
-import {useRecoilState, useRecoilValue, useSetRecoilState} from "recoil";
-import {DataState} from "../../../../state/data";
+import React, { useEffect } from "react";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { DataState } from "../../../../state/data";
 import "./chart-item-component.css";
-import {LayoutState} from "../../../../state/layout";
-import {getCharObject} from "../../helper/get-chart-object.helper";
+import { LayoutState } from "../../../../state/layout";
+import { getCharObject } from "../../helper/get-chart-object.helper";
 import {
-    chartConfigurationSelector,
-    chartTypesAtom,
-    chartUpdateAtom,
-    currentChartTypeAtom,
+  chartConfigurationSelector,
+  chartTypesAtom,
+  chartUpdateAtom,
+  currentChartTypeAtom,
 } from "../../state-helper/chartAnalyticsChart";
 
 export default function ChartItemComponent({ chartHeight }) {

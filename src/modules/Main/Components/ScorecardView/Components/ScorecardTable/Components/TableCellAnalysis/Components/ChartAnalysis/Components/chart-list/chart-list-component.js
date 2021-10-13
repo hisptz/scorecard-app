@@ -1,4 +1,4 @@
-import React, {Suspense} from "react";
+import React, { Suspense } from "react";
 import ChartItemComponent from "../chart-item/chart-item-component";
 //React.lazy(() => import('../chart-item/chart-item-component'));
 import "./chart-list-component.css";

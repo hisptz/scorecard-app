@@ -1,4 +1,4 @@
-import {CenteredContent, CircularLoader, colors} from "@dhis2/ui";
+import { CenteredContent, CircularLoader, colors } from "@dhis2/ui";
 import PropTypes from "prop-types";
 import React from "react";
 

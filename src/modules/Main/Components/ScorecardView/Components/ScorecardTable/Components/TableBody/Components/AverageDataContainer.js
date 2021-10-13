@@ -1,9 +1,12 @@
-import {isEmpty} from "lodash";
+import { isEmpty } from "lodash";
 import PropTypes from "prop-types";
-import React, {useEffect, useState} from "react";
-import {useRecoilValue} from "recoil";
+import React, { useEffect, useState } from "react";
+import { useRecoilValue } from "recoil";
 import ScorecardDataEngine from "../../../../../../../../../core/models/scorecardData";
-import {ScorecardDataLoadingState, ScorecardOrgUnitState,} from "../../../../../../../../../core/state/scorecard";
+import {
+  ScorecardDataLoadingState,
+  ScorecardOrgUnitState,
+} from "../../../../../../../../../core/state/scorecard";
 import AverageCell from "./AverageCell";
 
 export default function AverageDataContainer({

@@ -1,6 +1,6 @@
 /* eslint-disable max-params */
-import {getAllowedChartType} from "./get-allowed-chart-types.helper";
-import {getChartSeriesData} from "./get-chart-series-data.helper";
+import { getAllowedChartType } from "./get-allowed-chart-types.helper";
+import { getChartSeriesData } from "./get-chart-series-data.helper";
 
 export function getChartSeries(
   analyticsObject,

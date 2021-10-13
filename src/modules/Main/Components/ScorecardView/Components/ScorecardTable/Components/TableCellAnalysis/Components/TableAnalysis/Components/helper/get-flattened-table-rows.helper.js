@@ -1,4 +1,4 @@
-import {filter, find, first, flatten, map, uniq, uniqBy} from "lodash";
+import { filter, find, first, flatten, map, uniq, uniqBy } from "lodash";
 
 export function getFlattenedTableRows(tableDataRows) {
   let firstDataColumns = [];

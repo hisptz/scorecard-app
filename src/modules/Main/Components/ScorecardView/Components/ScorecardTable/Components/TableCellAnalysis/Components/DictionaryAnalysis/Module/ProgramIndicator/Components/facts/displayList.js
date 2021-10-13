@@ -1,8 +1,8 @@
 import i18n from "@dhis2/d2-i18n";
-import {Button} from "@dhis2/ui";
+import { Button } from "@dhis2/ui";
 import PropTypes from "prop-types";
-import React, {useState} from "react";
-import {useHistory} from "react-router-dom";
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import classes from "./indicatorGroupRow.module.css";
 
 export default function DisplayList({ list }) {

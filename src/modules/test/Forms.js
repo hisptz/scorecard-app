@@ -1,9 +1,9 @@
-import {Button} from "@dhis2/ui";
-import {map} from "lodash";
-import React, {useRef} from "react";
+import { Button } from "@dhis2/ui";
+import { map } from "lodash";
+import React, { useRef } from "react";
 import CustomForm from "../../shared/Components/CustomForm";
-import {DHIS2ValueTypes} from "../../shared/Components/CustomForm/constants";
-import {FormFieldModel} from "../../shared/Components/CustomForm/models";
+import { DHIS2ValueTypes } from "../../shared/Components/CustomForm/constants";
+import { FormFieldModel } from "../../shared/Components/CustomForm/models";
 
 export default function ExampleForms() {
   const fields = [

@@ -1,4 +1,4 @@
-import {CheckboxField} from "@dhis2/ui";
+import { CheckboxField } from "@dhis2/ui";
 import PropTypes from "prop-types";
 import React from "react";
 

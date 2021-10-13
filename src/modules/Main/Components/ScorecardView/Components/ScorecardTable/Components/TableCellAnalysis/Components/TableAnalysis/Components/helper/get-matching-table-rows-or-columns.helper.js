@@ -1,4 +1,4 @@
-import {filter} from "lodash";
+import { filter } from "lodash";
 
 export function getMatchingTableRowsOrColumns(tableDataRowOrColumn) {
   return filter(

@@ -1,5 +1,5 @@
-import {map} from "lodash";
-import {getDrilldownParentDataFromChildrenSeries} from "./get-drilldown-parent-data-from-children-chart-series.helper";
+import { map } from "lodash";
+import { getDrilldownParentDataFromChildrenSeries } from "./get-drilldown-parent-data-from-children-chart-series.helper";
 
 export function getDrilldownedChartSeries(
   drilldownSeries,

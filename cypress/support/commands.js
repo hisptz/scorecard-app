@@ -23,33 +23,55 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+const apiVersion = Cypress.env("apiVersion");
 
 Cypress.Commands.add("loadDataSourceFixture", () => {
   cy.intercept(
     "GET",
     Cypress.env("dhis2BaseUrl") +
-      "/api/36/indicatorGroups?fields=displayName,id,indicators%5BdisplayName%2Cid%5D",
+      "/api/" +
+      apiVersion +
+      "/indicatorGroups?fields=displayName,id,indicators%5BdisplayName%2Cid%5D",
     { fixture: "indicatorGroups.json" }
   );
   cy.intercept(
     "GET",
     Cypress.env("dhis2BaseUrl") +
-      "/api/36/indicators?page=1&totalPages=true&fields=displayName,id&order=displayName%3Aasc",
+      "/api/" +
+      apiVersion +
+      "/indicators?page=1&totalPages=true&fields=displayName,id&order=displayName%3Aasc",
     { fixture: "indicators.json" }
   );
   cy.intercept(
     "GET",
-    Cypress.env("dhis2BaseUrl") + "/api/36/dataStore/functions",
+    Cypress.env("dhis2BaseUrl") + "/api/" + apiVersion + "/dataStore/functions",
     { fixture: "functions-ids.json" }
   );
   cy.intercept(
     "GET",
-    Cypress.env("dhis2BaseUrl") + "/api/36/dataStore/functions/EnJxSWxLipz",
+    Cypress.env("dhis2BaseUrl") +
+      "/api/" +
+      apiVersion +
+      "/dataStore/functions/EnJxSWxLipz",
     { fixture: "function-EnJxSWxLipz.json" }
   );
   cy.intercept(
     "GET",
-    Cypress.env("dhis2BaseUrl") + "/api/36/dataStore/functions/OAMFDfrgbSe",
+    Cypress.env("dhis2BaseUrl") +
+      "/api/" +
+      apiVersion +
+      "/dataStore/functions/OAMFDfrgbSe",
     { fixture: "function-OAMFDfrgbSe.json" }
+  );
+});
+
+Cypress.Commands.add("interceptMigration", () => {
+  cy.intercept(
+    "GET",
+    Cypress.env("dhis2BaseUrl") +
+      "/api/" +
+      apiVersion +
+      "/dataStore/scorecards",
+    { fixture: "" }
   );
 });

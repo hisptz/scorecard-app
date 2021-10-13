@@ -142,7 +142,7 @@ export default function ScorecardListCard({ scorecard, grid }) {
     </div>
   ) : (
     <div
-      dataTest="scorecard-thumbnail-view"
+      data-test="scorecard-thumbnail-view"
       className="container-bordered p-32"
       style={{ margin: 16, background: "white" }}
       onClick={onView}

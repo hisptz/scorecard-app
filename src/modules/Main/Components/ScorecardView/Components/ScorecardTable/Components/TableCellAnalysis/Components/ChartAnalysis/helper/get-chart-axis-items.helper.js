@@ -1,4 +1,4 @@
-import {assign, map} from "lodash";
+import { assign, map } from "lodash";
 
 export function getChartAxisItems(analyticsObject, axisTypeArray, isCategory) {
   let items = [];

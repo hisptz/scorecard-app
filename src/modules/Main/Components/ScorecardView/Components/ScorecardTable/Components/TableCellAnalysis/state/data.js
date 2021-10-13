@@ -1,8 +1,8 @@
-import {Fn} from "@iapps/function-analytics";
-import {isEmpty} from "lodash";
-import {atom, selector} from "recoil";
-import {InitialOrgUnits} from "./orgUnit";
-import {ResolvedPeriodState} from "./period";
+import { Fn } from "@iapps/function-analytics";
+import { isEmpty } from "lodash";
+import { atom, selector } from "recoil";
+import { InitialOrgUnits } from "./orgUnit";
+import { ResolvedPeriodState } from "./period";
 
 const DataState = selector({
   key: "cell-analysis-data",

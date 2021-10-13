@@ -1,7 +1,10 @@
 import PropTypes from "prop-types";
-import React, {useMemo} from "react";
+import React, { useMemo } from "react";
 import LinkedCellSvg from "../../../../../../../../../shared/Components/ScorecardCell/Components/LinkedCellSvg";
-import {generateRandomValues, getLegend,} from "../../../../../../../../../shared/utils/utils";
+import {
+  generateRandomValues,
+  getLegend,
+} from "../../../../../../../../../shared/utils/utils";
 
 export default function CustomLinkedCell({ top, bottom }) {
   const {

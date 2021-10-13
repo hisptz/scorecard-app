@@ -1,4 +1,4 @@
-import {atom} from "recoil";
+import { atom } from "recoil";
 
 export const EngineState = atom({
   key: "engineState",

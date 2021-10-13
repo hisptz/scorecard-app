@@ -1,9 +1,9 @@
-import {assign, clone} from "lodash";
-import {getChartAxisItems} from "./get-chart-axis-items.helper";
-import {getChartPaneOptions} from "./get-chart-pane-options.helper";
-import {getChartSeries} from "./get-chart-series.helper";
-import {getChartYAxisOptions} from "./get-chart-y-axis-options.helper";
-import {getSortedChartSeries} from "./get-sorted-chart-series.helper";
+import { assign, clone } from "lodash";
+import { getChartAxisItems } from "./get-chart-axis-items.helper";
+import { getChartPaneOptions } from "./get-chart-pane-options.helper";
+import { getChartSeries } from "./get-chart-series.helper";
+import { getChartYAxisOptions } from "./get-chart-y-axis-options.helper";
+import { getSortedChartSeries } from "./get-sorted-chart-series.helper";
 
 export function getSolidGaugeChartObject(
   initialChartObject,

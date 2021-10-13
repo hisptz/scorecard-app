@@ -1,4 +1,4 @@
-import {getAllowedChartType} from "./get-allowed-chart-types.helper";
+import { getAllowedChartType } from "./get-allowed-chart-types.helper";
 
 export function getPlotOptions(chartConfiguration) {
   const plotOptionChartType = getAllowedChartType(chartConfiguration.type);

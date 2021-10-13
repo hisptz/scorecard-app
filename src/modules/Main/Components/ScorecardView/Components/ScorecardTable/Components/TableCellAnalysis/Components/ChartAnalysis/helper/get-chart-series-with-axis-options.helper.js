@@ -1,5 +1,5 @@
-import {clone, find, map} from "lodash";
-import {getAllowedChartType} from "./get-allowed-chart-types.helper";
+import { clone, find, map } from "lodash";
+import { getAllowedChartType } from "./get-allowed-chart-types.helper";
 
 export function getChartSeriesWithAxisOptions(series, multiAxisOptions) {
   return map(series, (seriesObject) => {

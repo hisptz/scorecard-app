@@ -1,5 +1,5 @@
 /* eslint-disable no-prototype-builtins */
-import {map, random, sortBy} from "lodash";
+import { map, random, sortBy } from "lodash";
 
 // eslint-disable-next-line max-params
 export function getTableConfiguration(

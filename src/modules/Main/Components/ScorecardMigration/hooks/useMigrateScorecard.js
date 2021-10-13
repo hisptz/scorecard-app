@@ -130,12 +130,20 @@ export default function useMigrateScorecard(onComplete) {
               onComplete();
             }
           });
+        } else {
+          onComplete();
         }
       } catch (e) {
         if (e?.details?.httpStatusCode === 404) {
           onComplete();
+          return;
+        }
+        if (e?.details?.httpStatusCode === 403) {
+          onComplete();
+          return;
         }
         setError(e);
+        onComplete();
       }
     }
 

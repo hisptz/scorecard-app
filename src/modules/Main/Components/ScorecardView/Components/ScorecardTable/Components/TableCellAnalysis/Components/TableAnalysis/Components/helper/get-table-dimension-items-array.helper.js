@@ -1,4 +1,4 @@
-import {map} from "lodash";
+import { map } from "lodash";
 
 export function getTableDimensionItemsArray(dimensionItems, analyticsObject) {
   return map(dimensionItems, (dimensionItem) => {

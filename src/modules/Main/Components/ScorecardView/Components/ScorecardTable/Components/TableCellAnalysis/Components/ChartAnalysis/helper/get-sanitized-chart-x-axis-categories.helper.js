@@ -1,4 +1,15 @@
-import {assign, filter, find, findIndex, forEach, groupBy, map, reverse, times, uniqBy,} from "lodash";
+import {
+  assign,
+  filter,
+  find,
+  findIndex,
+  forEach,
+  groupBy,
+  map,
+  reverse,
+  times,
+  uniqBy,
+} from "lodash";
 
 export function getSanitizedChartXAxisCategories(series, xAxisItems) {
   const reversedXAxisItems = reverse(xAxisItems || []);

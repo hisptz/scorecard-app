@@ -1,9 +1,9 @@
 import i18n from "@dhis2/d2-i18n";
-import {Button, CenteredContent, colors} from "@dhis2/ui";
+import { Button, CenteredContent, colors } from "@dhis2/ui";
 import ErrorIcon from "@material-ui/icons/Warning";
 import PropTypes from "prop-types";
 import React from "react";
-import {useHistory} from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 export default function AccessDeniedPage({ accessType }) {
   const history = useHistory();
