@@ -72,7 +72,7 @@
     "react-to-print": "^2.13.0",
     "react-web-vitals": "^1.0.1",
     "recoil": "^0.4.1",
-    "rxjs": "^7.3.0",
+    "rxjs": "^7.4.0",
     "xlsx": "^0.17.1"
   },
   "cypress-cucumber-preprocessor": {
