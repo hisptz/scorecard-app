@@ -67,6 +67,7 @@ export default function DataContainer({
   return (
     <>
       <div
+          data-test={"data-cell"}
         onClick={() => {
           setAnalysisOpen(true);
         }}
