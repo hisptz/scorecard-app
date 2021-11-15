@@ -35,7 +35,6 @@ export default function ScorecardOptionsForm({ options, onChange }) {
             <CheckboxField
               checked={options?.emptyRows}
               onChange={onChange("emptyRows")}
-              dataTest={"empty-row-option-score-card-modal"}
               value="emptyRows"
               label={i18n.t("Empty Rows")}
             />
@@ -60,7 +59,7 @@ export default function ScorecardOptionsForm({ options, onChange }) {
             <CheckboxField
               checked={options?.highlightedIndicators}
               onChange={onChange("highlightedIndicators")}
-              value="averageRow"
+              value="highlightedIndicators"
               label={i18n.t("Highlighted Indicators")}
             />
           </div>

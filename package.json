@@ -24,7 +24,7 @@
     "cy:stub": "concurrently 'yarn cy:start' 'yarn cy:run --env networkMode=stub' --kill-others --success first"
   },
   "devDependencies": {
-    "@cypress/react": "^5.9.1",
+    "@cypress/react": "^5.10.3",
     "@cypress/webpack-dev-server": "^1.7.0",
     "@dhis2/cli-app-scripts": "^7.3.0",
     "@dhis2/cli-style": "^9.2.0",
@@ -35,7 +35,7 @@
     "concurrently": "^6.3.0",
     "cucumber": "^7.0.0-rc.0",
     "cypress": "8.6.0",
-    "cypress-cucumber-preprocessor": "^4.1.2",
+    "cypress-cucumber-preprocessor": "^4.3.0",
     "cypress-multi-reporters": "^1.5.0",
     "cz-conventional-changelog": "3.3.0",
     "eslint-plugin-cypress": "^2.11.3",
@@ -44,7 +44,7 @@
     "wait-on": "^6.0.0"
   },
   "dependencies": {
-    "@dhis2/analytics": "^20.0.2",
+    "@dhis2/analytics": "^20.7.0",
     "@dhis2/app-runtime": "^2.8.0",
     "@dhis2/app-service-datastore": "^1.0.0-alpha.2",
     "@dhis2/ui": "^6.8.0",
@@ -54,11 +54,11 @@
     "@material-ui/icons": "^4.11.2",
     "async": "^3.2.0",
     "file-saver": "^2.0.5",
-    "highcharts": "^9.2.2",
+    "highcharts": "^9.3.1",
     "immer": "^9.0.5",
     "intro.js": "^4.2.2",
     "intro.js-react": "^0.5.0",
-    "jodit-react": "^1.0.88",
+    "jodit-react": "^1.1.12",
     "lodash": "^4.17.21",
     "luxon": "^2.0.2",
     "react-beautiful-dnd": "^13.1.0",
@@ -69,11 +69,11 @@
     "react-js-loading-shimmer": "^1.0.10",
     "react-jsx-parser": "^1.28.4",
     "react-router-dom": "^5.2.0",
-    "react-to-print": "^2.13.0",
+    "react-to-print": "^2.14.0",
     "react-web-vitals": "^1.0.1",
-    "recoil": "^0.4.1",
-    "rxjs": "^7.3.0",
-    "xlsx": "^0.17.1"
+    "recoil": "^0.5.2",
+    "rxjs": "^7.4.0",
+    "xlsx": "^0.17.4"
   },
   "cypress-cucumber-preprocessor": {
     "nonGlobalStepDefinitions": true

@@ -6,10 +6,10 @@ import { DownloadTypes } from "../../../../../../../core/constants/download";
 
 export default function DownloadMenu({ onClose, onDownload }) {
   return (
-    <FlyoutMenu>
+    <FlyoutMenu dataTest={"download-menu"}>
       {Object.values(DownloadTypes)?.map((type) => (
         <MenuItem
-          dataTest={"data-test=popup-download-menu-list"}
+          dataTest={`${type}-download-menu`}
           onClick={() => {
             onDownload(type);
             onClose();
@@ -18,7 +18,7 @@ export default function DownloadMenu({ onClose, onDownload }) {
           label={type}
         />
       ))}
-      <MenuItem dataTest={"test-alma-data"} label={"ALMA"}>
+      <MenuItem dataTest={"ALMA-download-menu"} label={"ALMA"}>
         <MenuItem
           dataTest={"test-alma-data-json"}
           label={`${i18n.t("Data")}(JSON)`}
