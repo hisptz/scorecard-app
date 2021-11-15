@@ -6,11 +6,12 @@
 
 const apiVersion = Cypress.env("apiVersion");
 
+const scorecardName = 'Old Scorecard Test'
+
 Then(
     "I should be presented with a list of already configured scorecards",
     () => {
-        cy.contains("Test Scorecard").should("be.visible");
-        cy.contains("Short Scorecard").should("be.visible");
+        cy.contains(scorecardName).should("be.visible");
     }
 );
 
@@ -52,9 +53,7 @@ And(
 /**
  * Scenario: Accessing scorecard empty list
  */
-Given("an authorized department officer", () => {
-    cy.visit("/");
-});
+
 
 When("opening a list where there are no available scorecards", () => {
     // cy.interceptMigration();

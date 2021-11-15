@@ -62,6 +62,7 @@ export default function GroupsHeaderRow({ nested, orgUnits }) {
       >
         {!nested && (
           <InputField
+              dataTest={"org-unit-search"}
             className="print-hide w-100 org-unit-search"
             value={searchValue}
             onChange={({ value }) => setSearchValue(value)}
