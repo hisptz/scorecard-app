@@ -9,3 +9,6 @@ cypress.env.json
 *.log
 i18n
 .vscode
+cypress/videos
+cypress/screenshots
+cypress/downloads

@@ -99,7 +99,7 @@ export function useAddScorecard() {
   const add = async (data) => {
     try {
       setLoading(true);
-      const id = data?.id ?? uid();
+      const id = uid();
       const updatedData = produce(data, (draft) => {
         set(draft, "id", id);
       });

@@ -7,7 +7,7 @@
   "experimentalStudio": true,
   "viewportWidth": 1366,
   "viewportHeight": 768,
-  "defaultCommandTimeout": 10000,
+  "defaultCommandTimeout": 20000,
   "watchForFileChanges": true,
   "projectId": "9ps7gr",
   "component": {
@@ -24,7 +24,8 @@
   "env": {
     "dhis2DataTestPrefix": "dhis2-hisptzscorecard",
     "networkMode": "live",
-    "dhis2ApiVersion": "36"
+    "dhis2ApiVersion": "36",
+    "apiVersion": "36"
   },
   "experimentalInteractiveRunEvents": true,
   "waitForAnimations": true
