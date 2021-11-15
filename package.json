@@ -73,7 +73,7 @@
     "react-web-vitals": "^1.0.1",
     "recoil": "^0.5.2",
     "rxjs": "^7.4.0",
-    "xlsx": "^0.17.1"
+    "xlsx": "^0.17.4"
   },
   "cypress-cucumber-preprocessor": {
     "nonGlobalStepDefinitions": true
