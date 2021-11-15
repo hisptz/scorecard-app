@@ -3160,10 +3160,10 @@
     update-notifier "^3.0.0"
     yargs "^13.1.0"
 
-"@dhis2/cli-style@^9.2.0":
-  version "9.3.1"
-  resolved "https://registry.yarnpkg.com/@dhis2/cli-style/-/cli-style-9.3.1.tgz#30088d7b87fb6c97dcbd32279a9f7bd25470ff6e"
-  integrity sha512-Ne0zF2g5CbtgVSBL5W0TXxRKVeAVp3ivyDpnJwIYLyxYxi9MfW6leBQakegd0i+uALg+jSCAFKU9ekLqeIwJyg==
+"@dhis2/cli-style@^10.1.1":
+  version "10.1.1"
+  resolved "https://registry.yarnpkg.com/@dhis2/cli-style/-/cli-style-10.1.1.tgz#45d340d09073262246d6683aab2eb9d69ddfe669"
+  integrity sha512-VSoXXrdUYy9hM8BllwJlVnO7XX4nhHs3c6h6tBDkvRL8vc1GYdR1oIrLFPmOfSLdSjByGmjrHoa5D+RM2MnrNg==
   dependencies:
     "@commitlint/cli" "^12.1.4"
     "@commitlint/config-conventional" "^13.1.0"
@@ -3180,7 +3180,7 @@
     husky "^7.0.2"
     micromatch "^4.0.4"
     perfy "^1.1.5"
-    prettier "^2.3.1"
+    prettier "^2.4.1"
     semver "^7.3.5"
     yargs "^16.2.0"
 
@@ -15709,7 +15709,7 @@ prepend-http@^2.0.0:
   resolved "https://registry.yarnpkg.com/prepend-http/-/prepend-http-2.0.0.tgz#e92434bfa5ea8c19f41cdfd401d741a3c819d897"
   integrity sha1-6SQ0v6XqjBn0HN/UAddBo8gZ2Jc=
 
-prettier@^2.3.1:
+prettier@^2.4.1:
   version "2.4.1"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.4.1.tgz#671e11c89c14a4cfc876ce564106c4a6726c9f5c"
   integrity sha512-9fbDAXSBcc6Bs1mZrDYb3XKzDLm4EXXL9sC1LqKP5rZkT6KRr/rf9amVUcODVXgguK/isJz0d0hP72WeaKWsvA==
