@@ -19,7 +19,7 @@ function checkOption(name) {
     cy.get("[data-test=update-button-on-options]").click();
 }
 
-function selectRadioOption(name){
+function selectRadioOption(name) {
     cy.get(
         `input[value=${name}]`
     )
@@ -199,14 +199,10 @@ Then(
  */
 And("selecting different periods", () => {
     cy.get("[data-test=test-selected-period]").click();
+    cy.get('[data-test=fixed-tab]').click()
     cy.get("[data-test=dhis2-uicore-select-input]").click();
-    cy.get(
-        "[data-test=period-dimension-relative-period-filter-option-DAILY]"
-    ).click();
     cy.get("[data-test=period-dimension-transfer-actions-addall]").click();
-    cy.get(
-        "[data-test=dhis2-uicore-modalactions] > [data-test=dhis2-uicore-buttonstrip] > :nth-child(2) > [data-test=dhis2-uicore-button]"
-    ).click();
+    cy.get("[data-test=modal-update-button]").click();
 });
 Then(
     "a table of indicators and respective selected periods againsts location is displayed",
@@ -390,7 +386,7 @@ Then(
  *   Scenario:  Visualize scorecard for locations above average performance
  */
 And("selecting to view locations above  average", () => {
-   openOptionsModal()
+    openOptionsModal()
     selectRadioOption("ABOVE_AVERAGE")
 });
 Then(

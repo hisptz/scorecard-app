@@ -11,9 +11,9 @@ import {
   ScorecardViewState,
 } from "../../../../../../../../../core/state/scorecard";
 import { getDataSourcesDisplayName } from "../../../../../../../../../shared/utils/utils";
+import classes from '../../../scorecardTable.module.css'
 import DraggableCell from "../../TableBody/Components/DraggableCell";
 import DroppableCell from "../../TableBody/Components/DroppableCell";
-
 export default function HoldersHeaderRow() {
   const { dataGroups } =
     useRecoilValue(ScorecardViewState("dataSelection")) ?? {};
@@ -38,7 +38,7 @@ export default function HoldersHeaderRow() {
             sortDirection={
               name === `${head(dataSources)?.id}` ? direction : "default"
             }
-            className="p-0 scorecard-table-cell holder-header-cell header"
+            className={classes['holder-header-cell']}
             dataTest={"indicator-table-header-cell"}
             width={`${periods?.length * ScorecardTableConstants.CELL_WIDTH}px`}
             top={"0"}
