@@ -17,7 +17,7 @@
     "env": {
       "dhis2Username": "admin",
       "dhis2Password": "district",
-      "dhis2BaseUrl": "https://dhis2.nnkogift.me",
+      "dhis2BaseUrl": "https://hisptz.com/unicefapps",
       "dhis2DatatestPrefix": "dhis2-scorecard"
     }
   },
