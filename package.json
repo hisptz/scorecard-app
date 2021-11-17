@@ -34,7 +34,7 @@
     "@dhis2/d2-i18n": "^1.1.0",
     "concurrently": "^6.3.0",
     "cucumber": "^7.0.0-rc.0",
-    "cypress": "8.6.0",
+    "cypress": "9.0.0",
     "cypress-cucumber-preprocessor": "^4.3.0",
     "cypress-multi-reporters": "^1.5.0",
     "cz-conventional-changelog": "3.3.0",
