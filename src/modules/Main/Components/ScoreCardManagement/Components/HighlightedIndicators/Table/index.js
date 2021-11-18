@@ -54,15 +54,15 @@ export default function HighlightedIndicatorsTable() {
   return !isEmpty(highlightedIndicators) ? (
     <Fragment>
       <Help helpSteps={HIGHLIGHTED_TABLE_HELP_STEPS} />
-      <DataTable>
+      <DataTable fixed scrollHeight={"75vh"}>
         <DataTableHead>
           <DataTableRow>
             {columns?.map(({ label, path }) => (
-              <DataTableColumnHeader key={`${path}-column`}>
+              <DataTableColumnHeader fixed top={"0"} key={`${path}-column`}>
                 {label}
               </DataTableColumnHeader>
             ))}
-            <DataTableColumnHeader />
+            <DataTableColumnHeader fixed top={"0"} />
           </DataTableRow>
         </DataTableHead>
         <TableBody>
