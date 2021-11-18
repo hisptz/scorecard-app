@@ -25,8 +25,6 @@ import IndicatorGroupPage from "../../IndicatorGroup";
 import ProgramIndicatorPage from "../../ProgramIndicator";
 
 export default function DataSourceSelector({ type, id }) {
-  console.log(id);
-  console.log(type);
 
   const reset = useRecoilCallback(({ reset }) => () => {
     reset(dataElementsStateDictionary);

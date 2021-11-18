@@ -227,7 +227,6 @@ export default function DataGroup({
     dataHolders.map(({ dataSources }) => dataSources)
   ).map(({ id }) => id);
 
-  console.log({ dataHolderChunks });
 
   return (
     <Draggable index={index} draggableId={id}>
