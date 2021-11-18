@@ -23,7 +23,7 @@ export default function ScorecardTable({
 }) {
   const dataEngine = useMemo(
     () => initialDataEngine ?? new ScorecardDataEngine(),
-    []
+    [initialDataEngine]
   );
   const { loading } = useTableConfig(dataEngine, orgUnits);
 
