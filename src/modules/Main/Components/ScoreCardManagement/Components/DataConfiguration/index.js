@@ -28,12 +28,12 @@ export default function DataConfigurationScorecardForm() {
   };
 
   return (
-    <div className="row" style={{ height: "100%" }}>
+    <div className="row" style={{ height: "100%"}}>
       <Help helpSteps={helpSteps} />
       <div className="col-md-4 col-sm-6 p-16 groups-configuration-area">
         <div
           className=" container-bordered column"
-          style={{ minHeight: "100%" }}
+          style={{ minHeight: "100%",  }}
         >
           {isEmpty(groups) ? (
             <EmptyDataGroups onGroupAdd={onGroupAdd} />

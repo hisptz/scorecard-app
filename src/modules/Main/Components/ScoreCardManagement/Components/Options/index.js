@@ -26,7 +26,7 @@ export default function OptionsScorecardForm() {
   };
 
   return (
-    <div>
+    <div style={{ height: '100%'}}>
       <ScorecardOptionsForm
         options={scorecardOptions}
         onChange={onChange}

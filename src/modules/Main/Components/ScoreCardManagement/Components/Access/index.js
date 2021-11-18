@@ -6,7 +6,7 @@ import Sharing from "./Components/Sharing";
 
 export default function AccessScorecardForm() {
   return (
-    <div className="container p-16">
+    <div style={{ minHeight: '70vh', height: '100%'}} className="container p-16">
       <Help helpSteps={ACCESS_HELP_STEPS} />
       <div className="row">
         <div className="column">

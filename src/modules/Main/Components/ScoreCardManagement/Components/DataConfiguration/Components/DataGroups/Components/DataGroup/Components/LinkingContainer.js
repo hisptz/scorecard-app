@@ -19,7 +19,6 @@ export default function LinkingContainer({
   const linkable = chunk.length > 1;
   const hasLink = head(chunk)?.dataSources?.length > 1;
 
-  console.log({ chunk });
 
   const getIndex = useCallback(
     (id) => {
