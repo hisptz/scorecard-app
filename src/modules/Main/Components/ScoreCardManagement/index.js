@@ -82,7 +82,7 @@ export default function ScoreCardManagement() {
         ({type}) => ({...type, duration: 3000})
     );
     const [saving, setSaving] = useState(false);
-    const {width, height} = useMediaQuery();
+    const {height} = useMediaQuery();
     const history = useHistory();
     const [activeStep, setActiveStep] = useState(steps[0]);
     const Component = activeStep.component;
@@ -270,10 +270,12 @@ export default function ScoreCardManagement() {
                                         </div>
                                         <div style={{height: '100%', padding: 16}}>
                                             {
-                                                <Component
-                                                    onNextStep={onNextStep}
-                                                    onPreviousStep={onPreviousStep}
-                                                />
+                                                <Suspense fallback={<FullPageLoader/>}>
+                                                    <Component
+                                                        onNextStep={onNextStep}
+                                                        onPreviousStep={onPreviousStep}
+                                                    />
+                                                </Suspense>
                                             }
                                         </div>
                                         <ButtonStrip start>
