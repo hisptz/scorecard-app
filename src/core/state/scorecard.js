@@ -15,7 +15,7 @@ import {
   getNameCellWidth,
   getTableWidthWithDataGroups,
   getTableWidthWithOrgUnit,
-} from "../../modules/Main/Components/ScorecardView/Components/ScorecardTable/services/utils";
+} from "../../modules/Main/Components/ScorecardView/Components/ScorecardTable/utils";
 import getScorecard, {
   getOrgUnitSelection,
 } from "../../shared/services/getScorecard";

@@ -44,3 +44,16 @@ export function getNameCellWidth(screenWidth, colSpan) {
     return `${200}px`;
   }
 }
+
+export function getIncreasingStatus(current, previous, effectiveGap) {
+  if (Math.abs((current - previous)) >= effectiveGap) {
+    if (current > previous) {
+      return "increasing";
+    }
+    if (current < previous) {
+      return "decreasing";
+    }
+  }
+  return null;
+}
+

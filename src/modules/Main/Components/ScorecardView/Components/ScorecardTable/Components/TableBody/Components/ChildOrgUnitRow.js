@@ -12,12 +12,12 @@ import {
   ScorecardViewState,
 } from "../../../../../../../../../core/state/scorecard";
 import ScorecardTable from "../../../index";
+import classes from '../../../scorecardTable.module.css'
 import DataContainer from "../../TableDataContainer";
 import TableLoader from "../../TableLoader";
 import AverageCell from "./AverageCell";
 import DroppableCell from "./DroppableCell";
 import OrgUnitContainer from "./OrgUnitContainer";
-
 export default function ChildOrgUnitRow({
   orgUnit,
   expandedOrgUnit,
@@ -54,7 +54,7 @@ export default function ChildOrgUnitRow({
   const Component = (emptyRows || !isEmpty) && (
     <DataTableRow
       dataTest={"orgUnit-children-table-column-cell"}
-      className="child-org-unit-row"
+      className={classes["child-table-row"]}
       expanded={id === expandedOrgUnit}
       onExpandToggle={() => {
         if (id === expandedOrgUnit) {
@@ -66,7 +66,7 @@ export default function ChildOrgUnitRow({
       expandableContent={
         <div className="p-16">
           <Suspense fallback={<TableLoader />}>
-            <ScorecardTable nested={true} orgUnits={[id]} />
+            <ScorecardTable nested orgUnits={[id]} />
           </Suspense>
         </div>
       }

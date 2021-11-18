@@ -540,13 +540,12 @@ td.extra-table-cell > svg {
     }
 
     .print-hide {
-        display: none;
+        display: none !important;
     }
 
     .print-show {
         display: block !important;
     }
-
 
     .child-org-unit-row td:first-child > svg {
         display: none;

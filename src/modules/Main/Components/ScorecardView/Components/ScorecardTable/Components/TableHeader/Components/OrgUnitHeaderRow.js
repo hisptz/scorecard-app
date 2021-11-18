@@ -19,9 +19,9 @@ import {
   ScorecardTableSortState,
   ScorecardViewState,
 } from "../../../../../../../../../core/state/scorecard";
+import classes from '../../../scorecardTable.module.css'
 import DraggableCell from "../../TableBody/Components/DraggableCell";
 import DroppableCell from "../../TableBody/Components/DroppableCell";
-
 export default function OrgUnitHeaderRow({ orgUnits, nested }) {
   const { averageColumn, itemNumber } = useRecoilValue(
     ScorecardViewState("options")
@@ -62,7 +62,6 @@ export default function OrgUnitHeaderRow({ orgUnits, nested }) {
   return (
     <DataTableRow>
       <DataTableCell
-        className={"extra-table-cell"}
         rowSpan={"2"}
         fixed
         left={"0"}
@@ -80,7 +79,7 @@ export default function OrgUnitHeaderRow({ orgUnits, nested }) {
         left={itemNumber ? "100px" : "50px"}
         width={nameColumnWidth}
         bordered
-        className="scorecard-table-header scorecard-org-unit-cell header"
+        className={classes['org-unit-header-cell']}
         rowSpan={"2"}
       >
         {!nested && (
@@ -100,7 +99,7 @@ export default function OrgUnitHeaderRow({ orgUnits, nested }) {
             sortDirection={name === id ? direction : "default"}
             onSortIconClick={onDataSortClick}
             fixed
-            className="scorecard-table-header scorecard-table-cell header"
+            className={classes['data-header-cell']}
             align="center"
             bordered
             width={`${periods?.length * ScorecardTableConstants.CELL_WIDTH}px`}
@@ -129,7 +128,7 @@ export default function OrgUnitHeaderRow({ orgUnits, nested }) {
           fixed
           align="center"
           bordered
-          className="scorecard-table-header"
+          className={classes['data-header-cell']}
           rowSpan={"2"}
         >
           {i18n.t("Average")}

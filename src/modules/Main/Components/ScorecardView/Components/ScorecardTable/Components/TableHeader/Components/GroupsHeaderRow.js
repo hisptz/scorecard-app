@@ -15,6 +15,7 @@ import {
   ScorecardTableConfigState,
   ScorecardViewState,
 } from "../../../../../../../../../core/state/scorecard";
+import classes from '../../../scorecardTable.module.css'
 
 export default function GroupsHeaderRow({ nested, orgUnits }) {
   const { dataGroups } =
@@ -57,7 +58,8 @@ export default function GroupsHeaderRow({ nested, orgUnits }) {
         left={itemNumber ? "100px" : "50px"}
         bordered
         width={nameColumnWidth}
-        className="scorecard-table-header scorecard-org-unit-cell"
+        className={classes['org-unit-header-cell']}
+
         rowSpan={"3"}
       >
         {!nested && (
