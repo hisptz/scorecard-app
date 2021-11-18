@@ -44,7 +44,7 @@
     "wait-on": "^6.0.0"
   },
   "dependencies": {
-    "@dhis2/app-runtime": "^3.2.4",
+    "@dhis2/app-runtime": "^3.2.5",
     "@dhis2/app-service-datastore": "^1.0.0-alpha.2",
     "@dhis2/ui": "^7.7.1",
     "@hisptz/react-ui": "^1.0.4",
