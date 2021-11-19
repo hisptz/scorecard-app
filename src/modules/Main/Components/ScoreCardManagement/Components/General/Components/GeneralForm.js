@@ -5,6 +5,7 @@ import { DHIS2ValueTypes } from "../../../../../../../shared/Components/CustomFo
 import { FormFieldModel } from "../../../../../../../shared/Components/CustomForm/models";
 import GeneralFormField from "./GeneralFormField";
 import "../../../ScorecardManagement.module.css";
+import PeriodSelector from "./PeriodSelector";
 
 export default function GeneralForm() {
   const periodTypes = new PeriodType().get();
@@ -51,25 +52,30 @@ export default function GeneralForm() {
             }
           />
         </div>
-        <div className="col-md-4 period-type-settings">
-          <GeneralFormField
-            field={
-              new FormFieldModel({
-                id: "periodType",
-                name: "periodType",
-                mandatory: true,
-                formName: i18n.t("Period Type"),
-                valueType: DHIS2ValueTypes.TEXT.name,
-                optionSet: {
-                  options: periodTypes?.map(({ name, id }) => ({
-                    name,
-                    code: id,
-                  })),
-                },
-              })
-            }
-          />
-        </div>
+       <div className="row align-items-center" style={{gap: 24}}>
+         <div className="col-md-4 period-type-settings">
+           <GeneralFormField
+               field={
+                 new FormFieldModel({
+                   id: "periodType",
+                   name: "periodType",
+                   mandatory: true,
+                   formName: i18n.t("Period Type"),
+                   valueType: DHIS2ValueTypes.TEXT.name,
+                   optionSet: {
+                     options: periodTypes?.map(({ name, id }) => ({
+                       name,
+                       code: id,
+                     })),
+                   },
+                 })
+               }
+           />
+         </div>
+         <div className="flex-1 period-settings">
+           <PeriodSelector />
+         </div>
+       </div>
         <div className="custom-header-settings">
           <GeneralFormField
             field={

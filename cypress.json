@@ -11,13 +11,10 @@
   "watchForFileChanges": true,
   "projectId": "9ps7gr",
   "component": {
-    "baseUrl": "https://dhis2.nnkogift.me",
+    "baseUrl": "http://localhost:8080",
     "testFiles": "**/*.test.{js,ts,jsx,tsx}",
     "componentFolder": "src",
     "env": {
-      "dhis2Username": "admin",
-      "dhis2Password": "district",
-      "dhis2BaseUrl": "https://hisptz.com/unicefapps",
       "dhis2DatatestPrefix": "dhis2-scorecard"
     }
   },
