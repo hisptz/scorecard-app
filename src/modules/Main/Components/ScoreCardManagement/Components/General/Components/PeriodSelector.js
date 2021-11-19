@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import {Button, InputField} from "@dhis2/ui";
+import {Button, InputField, Tooltip} from "@dhis2/ui";
 import {PeriodSelectorModal} from "@hisptz/react-ui";
 import {Period} from "@iapps/period-utilities";
 import {filter, isEmpty} from 'lodash'
@@ -22,13 +22,15 @@ export default function PeriodSelector() {
 
     return <div style={{display: "flex", gap: 16, alignItems: "end", width: '100%'}}>
         <div className="w-50">
-            <InputField
-                fullWidth
-                name={"period"}
-                label={"Period"}
-                value={periodSelection?.periods?.map(({name}) => name).join(", ")}
-                disabled
-            />
+            <Tooltip content={<div>{periodSelection?.periods?.map(({name}) => name).join(",\n")}</div>}>
+                <InputField
+                    fullWidth
+                    name={"period"}
+                    label={"Period"}
+                    value={periodSelection?.periods?.map(({name}) => name).join(", ")}
+                    disabled
+                />
+            </Tooltip>
         </div>
         {
             !periodSelectorHide && <PeriodSelectorModal
