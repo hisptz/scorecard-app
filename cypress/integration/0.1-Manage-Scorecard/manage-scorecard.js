@@ -11,6 +11,9 @@ And("providing general scorecard details", () => {
     cy.get("textarea[name='description']").type("Scorecard Description");
     cy.get("[data-test='dhis2-uiwidgets-singleselectfield-content']").click();
     cy.get("[data-test='dhis2-uicore-singleselectoption']").first().click();
+    cy.get("[data-test='config-open-period-selector-button']").click();
+    cy.get(`[data-test="dhis2-uicore-transfer-sourceoptions"]`).dblclick();
+    cy.get(`[data-test="modal-update-button"]`).click();
 });
 And("configuring indicator groups details", () => {
     cy.get(".main-container").scrollTo("bottom");

@@ -44,7 +44,7 @@ export default function PeriodSelector() {
                 }}
             />
         }
-        <Button
+        <Button dataTest="config-open-period-selector-button"
             onClick={() => setPeriodSelectorHide(false)}>{!isEmpty(periodSelection.periods) ? i18n.t("Change Periods") : i18n.t("Select Periods")}</Button>
     </div>
 }
