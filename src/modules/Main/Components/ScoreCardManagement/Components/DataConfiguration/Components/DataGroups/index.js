@@ -23,7 +23,7 @@ export default function DataGroups() {
 
   useEffect(() => {
     setExpanded(last(groups)?.id);
-  }, [groups.length]);
+  }, [groups, groups.length]);
 
   const onDeleteGroup = (id) => {
     const updatedGroupList = [...groups];

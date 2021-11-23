@@ -35,7 +35,7 @@ export default function DataConfigurationScorecardForm() {
             <div className="col-md-4 col-sm-6 p-16 groups-configuration-area">
                 <div
                     className=" container-bordered column"
-                    style={{minHeight: "100%",}}
+                    style={{minHeight: "100%", height: '100%'}}
                 >
                     <Suspense fallback={<ContainerLoader />}>
                         {isEmpty(groups) ? (

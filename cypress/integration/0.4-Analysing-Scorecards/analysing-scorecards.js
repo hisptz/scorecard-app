@@ -201,7 +201,8 @@ And("selecting different periods", () => {
     cy.get("[data-test=test-selected-period]").click();
     cy.get('[data-test=fixed-tab]').click()
     cy.get("[data-test=dhis2-uicore-select-input]").click();
-    cy.get("[data-test=period-dimension-transfer-actions-addall]").click();
+    cy.get('[data-test=Quarterly-type]').click()
+    cy.get('[data-test=dhis2-uicore-transfer-actions-addall]').click();
     cy.get("[data-test=modal-update-button]").click();
 });
 Then(
@@ -269,7 +270,7 @@ And("filtering the locations by facility Type", () => {
     cy.get(
         '[data-value="tDZVQ1WtwpA"] > [data-test=dhis2-uicore-checkbox]'
     ).click();
-    cy.get("[data-test=update-on-select-org-unit]").click({force: true});
+    cy.get('[data-test=modal-update-button]').click({force: true});
 });
 Then(
     "a table of indicators against location for the selected location type should be displayed",
@@ -309,7 +310,7 @@ Then(
 When("creating or editing scorecard", () => {
     cy.get(
         "[data-test=edit-scorecard-button]"
-    ).click();
+    ).first().click();
     cy.get(
         ":nth-child(3) > .MuiStepLabel-root > .MuiStepLabel-labelContainer > .MuiTypography-root"
     ).click();
@@ -330,9 +331,7 @@ And("setting indicator targets for district level", () => {
     cy.get(
         ':nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > [data-rbd-draggable-context-id="2"] > :nth-child(1) > .column > [style="margin: 4px 0px;"] > :nth-child(1) > .container-bordered > .space-between > .row'
     ).click({force: true});
-    cy.get(
-        "[data-test=dhis2-uicore-modalactions] > [data-test=dhis2-uicore-buttonstrip] > :nth-child(1) > [data-test=dhis2-uicore-button]"
-    ).click();
+    cy.get('[data-test=scorecard-data-source-add]').click()
 });
 Then(
     "the target set should be saved and changes reflected on the scorecard visualization",

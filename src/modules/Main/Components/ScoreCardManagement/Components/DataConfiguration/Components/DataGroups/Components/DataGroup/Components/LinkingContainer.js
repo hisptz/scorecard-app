@@ -24,7 +24,7 @@ export default function LinkingContainer({
     (id) => {
       return findIndex(dataHolders, ["id", id]);
     },
-    [chunk, dataHolders]
+    [dataHolders]
   );
   const onLinkClick = () => {
     const indexOfMergedHolder = getIndex(head(chunk)?.id);
