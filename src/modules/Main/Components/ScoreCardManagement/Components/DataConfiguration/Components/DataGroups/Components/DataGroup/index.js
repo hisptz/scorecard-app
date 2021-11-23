@@ -4,7 +4,7 @@ import AddIcon from "@material-ui/icons/Add";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import {cloneDeep, filter, find, findIndex, flattenDeep, fromPairs, head, isEmpty, last,} from "lodash";
 import PropTypes from "prop-types";
-import React, {useMemo, useRef, useState} from "react";
+import React, {useEffect, useMemo, useRef, useState} from "react";
 import {DragDropContext, Draggable, Droppable} from "react-beautiful-dnd";
 import {useRecoilCallback, useRecoilState, useRecoilValue} from "recoil";
 import ScorecardIndicator from "../../../../../../../../../../core/models/scorecardIndicator";
@@ -152,14 +152,21 @@ export default function DataGroup({
         );
     };
 
+    useEffect(() => {
+       if(expanded === id){
+           setScorecardEditorState((prevState) => {
+               return {
+                   ...prevState,
+                   selectedDataHolderIndex: undefined,
+                   selectedGroupIndex: index,
+               }
+           });
+       }
+    }, [expanded]);
+    //Only want to run this effect when the expanded state changes, DO NOT ADD TO EFFECT DEPENDENCIES!
 
     const onExpand = (event, newExpanded) => {
         handleAccordionChange(id)(event, newExpanded);
-        setScorecardEditorState((prevState) => ({
-            ...prevState,
-            selectedDataHolderIndex: undefined,
-            selectedGroupIndex: index,
-        }));
     };
 
     const onDataSourceDelete = (deletedDataSourceIndex) => {
