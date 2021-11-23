@@ -3,12 +3,13 @@ import {PeriodSelectorModal} from '@hisptz/react-ui'
 import PeriodIcon from "@material-ui/icons/AccessTime";
 import React, {useState} from "react";
 import {useRecoilState, useRecoilValue} from "recoil";
+import {UNSUPPORTED_PERIOD_TYPES} from "../../../../../../../../../../../core/constants/period";
 import {SystemSettingsState} from "../../../../../../../../../../../core/state/system";
 import {PeriodState} from "../../../state/period";
 import SelectionWrapper from "./SelectionWrapper";
 
 export default function PeriodSelector() {
-    const [periodSelection, onChange] = useRecoilState(PeriodState);
+    const [periodSelection, setPeriodSelection] = useRecoilState(PeriodState);
     const {periods} = periodSelection ?? {};
     const [selectorOpen, setSelectorOpen] = useState(false);
     const {calendar} = useRecoilValue(SystemSettingsState) ?? {};
@@ -22,7 +23,13 @@ export default function PeriodSelector() {
             />
             {
                 selectorOpen && <PeriodSelectorModal selectedPeriods={periods} calendar={calendar} hide={!selectorOpen}
-                                                     onClose={() => setSelectorOpen(false)} onUpdate={onChange}/>
+                                                     onClose={() => setSelectorOpen(false)}
+                                                     excludedPeriodTypes={UNSUPPORTED_PERIOD_TYPES}
+                                                     onUpdate={(selectedPeriods) => {
+                                                         setPeriodSelection({periods: selectedPeriods})
+                                                         setSelectorOpen(false)
+                                                     }}
+                />
             }
         </div>
     );

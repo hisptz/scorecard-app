@@ -34,7 +34,10 @@ export default function OrgUnitSelector() {
             {
                 selectorOpen && <OrgUnitSelectorModal
                     onClose={() => setSelectorOpen(false)}
-                    onSelect={onChange}
+                    onSelect={(selection) => {
+                        setSelectorOpen(false);
+                        onChange(selection);
+                    }}
                     initialValue={orgUnitSelection}
                     hide={!selectorOpen} onUpdate={onChange}/>
             }

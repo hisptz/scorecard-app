@@ -7,6 +7,7 @@ import {useHistory} from "react-router-dom";
 import {useRecoilCallback, useRecoilState, useRecoilValue} from "recoil";
 import {STEP_OPTIONS} from "../../../../../../core/constants/help/options";
 import {SCORECARD_VIEW_HELP_STEPS} from "../../../../../../core/constants/help/scorecardView";
+import {UNSUPPORTED_PERIOD_TYPES} from "../../../../../../core/constants/period";
 import {FilterComponentTypes} from "../../../../../../core/constants/selection";
 import HelpState from "../../../../../../core/state/help";
 import {OrgUnitGroups, OrgUnitLevels,} from "../../../../../../core/state/orgUnit";
@@ -123,6 +124,7 @@ export default function ScorecardViewHeader() {
                     }
                     {
                         periodSelectionOpen && <PeriodSelectorModal
+                            excludedPeriodTypes={UNSUPPORTED_PERIOD_TYPES}
                             calendar={calendar}
                             selectedPeriods={periodSelection.periods}
                             hide={!periodSelectionOpen}
