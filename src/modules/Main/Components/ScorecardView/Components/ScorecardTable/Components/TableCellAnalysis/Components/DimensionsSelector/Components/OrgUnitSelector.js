@@ -33,13 +33,16 @@ export default function OrgUnitSelector() {
             />
             {
                 selectorOpen && <OrgUnitSelectorModal
+                    showGroups
+                    showLevels
+                    showUserOptions
                     onClose={() => setSelectorOpen(false)}
-                    onSelect={(selection) => {
-                        setSelectorOpen(false);
-                        onChange(selection);
-                    }}
                     initialValue={orgUnitSelection}
-                    hide={!selectorOpen} onUpdate={onChange}/>
+                    hide={!selectorOpen} onUpdate={(selection) => {
+                    setSelectorOpen(false);
+                    onChange(selection);
+                }
+                }/>
             }
         </div>
     );
