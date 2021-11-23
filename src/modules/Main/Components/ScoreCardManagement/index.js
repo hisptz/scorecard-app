@@ -270,7 +270,7 @@ export default function ScoreCardManagement() {
                                         </div>
                                         <div style={{height: '100%', padding: 16}}>
                                             {
-                                                <Suspense fallback={<FullPageLoader/>}>
+                                                <Suspense fallback={<FullPageLoader small/>}>
                                                     <Component
                                                         onNextStep={onNextStep}
                                                         onPreviousStep={onPreviousStep}

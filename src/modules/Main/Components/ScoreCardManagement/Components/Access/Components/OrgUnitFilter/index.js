@@ -18,12 +18,12 @@ export default function OrgUnit() {
     };
 
     return (
-        <div className="column">
+        <div className="column h-100">
             <div className="pt-16 pb-16">
                 <h3>{i18n.t("Organisation Unit")}</h3>
             </div>
-            <div className="access-org-unit-filter">
-                <Suspense fallback={<ContainerLoader/>}>
+            <div style={{minHeight: 400}} className="access-org-unit-filter h-100">
+                <Suspense fallback={<ContainerLoader height={400}/>}>
                     <OrgUnitSelector showGroups showLevels showUserOptions onUpdate={onSetOrgUnit}
                                      value={organisationUnit}/>
                 </Suspense>
