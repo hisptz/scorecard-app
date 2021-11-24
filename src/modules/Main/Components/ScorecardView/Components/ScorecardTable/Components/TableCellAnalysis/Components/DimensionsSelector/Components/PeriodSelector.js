@@ -22,7 +22,7 @@ export default function PeriodSelector() {
                 selectedItems={periods}
             />
             {
-                selectorOpen && <PeriodSelectorModal selectedPeriods={periods} calendar={calendar} hide={!selectorOpen}
+                selectorOpen && <PeriodSelectorModal  selectedPeriods={periods} calendar={calendar} hide={!selectorOpen}
                                                      onClose={() => setSelectorOpen(false)}
                                                      excludedPeriodTypes={UNSUPPORTED_PERIOD_TYPES}
                                                      onUpdate={(selectedPeriods) => {

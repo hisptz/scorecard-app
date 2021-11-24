@@ -14,8 +14,6 @@ export default function OrgUnitSelector() {
     const orgUnitGroups = useRecoilValue(OrgUnitGroups);
     const [selectorOpen, setSelectorOpen] = useState(false);
 
-    console.log(orgUnitSelection)
-
     const orgUnitSelectionDisplay = useMemo(
         () =>
             getSelectedOrgUnitSelectionDisplay(orgUnitSelection, {
