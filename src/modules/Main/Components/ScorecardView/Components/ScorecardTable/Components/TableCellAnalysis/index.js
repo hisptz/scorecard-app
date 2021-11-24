@@ -125,7 +125,7 @@ export default function TableCellAnalysis({
               </Chip>
             ))}
           </div>
-          <Button onClick={onClose}>Cancel</Button>
+          <Button onClick={onClose}>{i18n.t('Cancel')}</Button>
         </div>
       </ModalActions>
     </Modal>
