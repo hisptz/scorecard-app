@@ -14,6 +14,8 @@ export default function OrgUnitSelector() {
     const orgUnitGroups = useRecoilValue(OrgUnitGroups);
     const [selectorOpen, setSelectorOpen] = useState(false);
 
+    console.log(orgUnitSelection)
+
     const orgUnitSelectionDisplay = useMemo(
         () =>
             getSelectedOrgUnitSelectionDisplay(orgUnitSelection, {
@@ -37,7 +39,7 @@ export default function OrgUnitSelector() {
                     showLevels
                     showUserOptions
                     onClose={() => setSelectorOpen(false)}
-                    initialValue={orgUnitSelection}
+                    value={orgUnitSelection}
                     hide={!selectorOpen} onUpdate={(selection) => {
                     setSelectorOpen(false);
                     onChange(selection);
