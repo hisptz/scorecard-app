@@ -14557,14 +14557,15 @@ react-js-loading-shimmer@^1.0.10:
   resolved "https://registry.yarnpkg.com/react-js-loading-shimmer/-/react-js-loading-shimmer-1.0.10.tgz#2ed325ddf2c3128a603a7a760dc7986c2432cedc"
   integrity sha512-zEUUR06JOv7Ys9K8LgY+6FqQvzsUJ8kZCrEDZn1yhE1AzNnt5DA53GfHKToRJP3dq93+ls4y9ARJC8P4F7Xtww==
 
-react-jsx-parser@^1.28.4:
-  version "1.28.4"
-  resolved "https://registry.yarnpkg.com/react-jsx-parser/-/react-jsx-parser-1.28.4.tgz#778f9679f6df56832b89f6296d309d6a73da15a9"
-  integrity sha512-+KxeXClIuthzWW5M85QqRfAcPjXU5gkaeTVKTOWcTOgRa4hu/rPQJGDOI7OJ/5m3CtmfOZkgcepkJ5AwH67VjA==
+react-jsx-parser@^1.29.0:
+  version "1.29.0"
+  resolved "https://registry.yarnpkg.com/react-jsx-parser/-/react-jsx-parser-1.29.0.tgz#12f9d42675bfaa50f818259c5304478ec8bb80f1"
+  integrity sha512-u0svZd0UsPffRrIK0sTbox54jhEbTmg6ED9ob5FQahp1DeOpd2Rq+KiSTIFNYkZUL+WZi4Ntia/Oj5T4lDJafQ==
   dependencies:
     "@types/jsdom" "^16.2.6"
     acorn "^8.0.5"
     acorn-jsx "^5.3.1"
+    browserslist "^4.14.5"
     core-js "^3.8.3"
   optionalDependencies:
     "@types/react" "^17.0.1"
