@@ -14699,10 +14699,10 @@ react-scripts@^4.0.3:
   optionalDependencies:
     fsevents "^2.1.3"
 
-react-to-print@^2.14.0:
-  version "2.14.0"
-  resolved "https://registry.yarnpkg.com/react-to-print/-/react-to-print-2.14.0.tgz#376d83391928221e45f4fdf1f7fd02891fc3042d"
-  integrity sha512-R5EbtQY6tqch+Vwoo7hlZ5cZ5Ew81SYessW1Nyb9Uq5njWolwYWyJUh5X7AtGNhVWD6y4ZfyTN+1iW1tR5a84w==
+react-to-print@^2.14.2:
+  version "2.14.2"
+  resolved "https://registry.yarnpkg.com/react-to-print/-/react-to-print-2.14.2.tgz#99aa1da0b1d0221397c0d380ca96cb34848932c9"
+  integrity sha512-pIfIvuEGBDs8xXtf+0hfjbTUDH1eum18jJX6haZly1nSeIgm+xoMvrY6HPrIIS98TfwUg+RSbW+842reh/+jig==
   dependencies:
     prop-types "^15.7.2"
 
