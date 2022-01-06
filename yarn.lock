@@ -11246,10 +11246,10 @@ jju@~1.4.0:
   resolved "https://registry.yarnpkg.com/jju/-/jju-1.4.0.tgz#a3abe2718af241a2b2904f84a625970f389ae32a"
   integrity sha1-o6vicYryQaKykE+EpiWXDzia4yo=
 
-jodit-react@^1.1.10, jodit-react@^1.1.12:
-  version "1.1.12"
-  resolved "https://registry.yarnpkg.com/jodit-react/-/jodit-react-1.1.12.tgz#c0e06cbe05aea5310659cb85b82d030f5c41d3af"
-  integrity sha512-/9uIRPCt46wuqjHwuJR0oNZAFnhzhlmA0bRkhOhE0ei41lzoivVlbENy86Zgq70iv7umXL6Z2A9T1Dh0ODdGyw==
+jodit-react@^1.1.10, jodit-react@^1.1.17:
+  version "1.1.17"
+  resolved "https://registry.yarnpkg.com/jodit-react/-/jodit-react-1.1.17.tgz#6b1374f8415a32a965f306de393cc0837d80adf2"
+  integrity sha512-U1cU9432PgFgu8ih9AgCioyd+BwLKQ8cOq4YTY3hIkiVgVFBUjwSNCiO9em9Pf5cDeURZVtfJmpd5tCNVx0gsA==
   dependencies:
     jodit "^3.9.4"
 
