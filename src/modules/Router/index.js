@@ -35,6 +35,8 @@ const pages = [
 
 export default function Router() {
   useRecoilValue(SystemSettingsState);
+
+
   return (
     <HashRouter basename="/">
       <ErrorBoundary FallbackComponent={FullPageError}>
