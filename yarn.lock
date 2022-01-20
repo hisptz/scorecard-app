@@ -11223,10 +11223,10 @@ jju@~1.4.0:
   resolved "https://registry.yarnpkg.com/jju/-/jju-1.4.0.tgz#a3abe2718af241a2b2904f84a625970f389ae32a"
   integrity sha1-o6vicYryQaKykE+EpiWXDzia4yo=
 
-jodit-react@^1.1.10, jodit-react@^1.1.12:
-  version "1.1.17"
-  resolved "https://registry.yarnpkg.com/jodit-react/-/jodit-react-1.1.17.tgz#6b1374f8415a32a965f306de393cc0837d80adf2"
-  integrity sha512-U1cU9432PgFgu8ih9AgCioyd+BwLKQ8cOq4YTY3hIkiVgVFBUjwSNCiO9em9Pf5cDeURZVtfJmpd5tCNVx0gsA==
+jodit-react@^1.1.10, jodit-react@^1.1.18:
+  version "1.1.18"
+  resolved "https://registry.yarnpkg.com/jodit-react/-/jodit-react-1.1.18.tgz#8985c59718d06f50200723191108657b6ef88bbf"
+  integrity sha512-tSp8v5GgLAbqcaoK1wj2T081ii6qNUzmS2863SK5cT5aqXHD+RqQrKMMqCwODEoRry+7nESNPhLdoF1vO3qbiA==
   dependencies:
     jodit "^3.9.4"
 
@@ -17566,10 +17566,8 @@ watchpack@^1.7.4:
   resolved "https://registry.yarnpkg.com/watchpack/-/watchpack-1.7.5.tgz#1267e6c55e0b9b5be44c2023aed5437a2c26c453"
   integrity sha512-9P3MWk6SrKjHsGkLT2KHXdQ/9SNkyoJbabxnKOoJepsvJjJG8uYTR3yTPxPQvNDI3w4Nz1xnE0TLHK4RIVe/MQ==
   dependencies:
-    chokidar "^3.4.1"
     graceful-fs "^4.1.2"
     neo-async "^2.5.0"
-    watchpack-chokidar2 "^2.0.1"
   optionalDependencies:
     chokidar "^3.4.1"
     watchpack-chokidar2 "^2.0.1"
