@@ -1,21 +1,21 @@
 import {useAlert} from "@dhis2/app-runtime";
 import i18n from "@dhis2/d2-i18n";
 import {CircularLoader, LinearLoader} from "@dhis2/ui";
-import PropTypes from "prop-types";
 import React, {useEffect} from "react";
+import {useHistory} from "react-router-dom";
 import useMigrateScorecard from "./hooks/useMigrateScorecard";
 
-export default function ScorecardMigration({onMigrationComplete}) {
+export default function ScorecardMigration() {
+    const history = useHistory();
     const onComplete = () => {
-        onMigrationComplete(true);
+        history.replace("/");
     };
 
     const {show} = useAlert(
         ({message}) => message,
         ({type}) => ({...type, duration: 3000})
     );
-    const {loading, error, progress, count} = useMigrateScorecard(onComplete);
-
+    const {error, progress, count, migrationStarted} = useMigrateScorecard(onComplete);
     useEffect(() => {
         if (error) {
             show({
@@ -25,10 +25,11 @@ export default function ScorecardMigration({onMigrationComplete}) {
         }
     }, [error, show]);
 
-    if (loading) {
+    if (!migrationStarted) {
         return (
             <div className="column center align-items-center h-100 w-100">
-                <CircularLoader/>
+                <CircularLoader small/>
+                <h4>{i18n.t("Preparing migration...")}</h4>
             </div>
         );
     }
@@ -43,6 +44,3 @@ export default function ScorecardMigration({onMigrationComplete}) {
     );
 }
 
-ScorecardMigration.propTypes = {
-    onMigrationComplete: PropTypes.func.isRequired,
-};

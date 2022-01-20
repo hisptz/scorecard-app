@@ -75,18 +75,28 @@ const ScorecardIdState = atom({
     default: null,
 });
 
+
+const AllScorecardsSummaryState = selector({
+    key: "all-scorecard-summary-state",
+    get: async ({get}) => {
+        const engine = get(EngineState);
+        await restoreScorecardSummary(engine);
+        const {summary, error} = await getScorecardSummary(engine);
+        if (error) {
+            throw error;
+        }
+        return summary;
+    }
+})
+
+
 const ScorecardSummaryState = atom({
     key: "scorecard-summary",
     default: selector({
         key: "scorecard-summary-selector",
         get: async ({get}) => {
-            const engine = get(EngineState);
+            const summary = get(AllScorecardsSummaryState);
             const user = get(UserState);
-            await restoreScorecardSummary(engine);
-            const {summary, error} = await getScorecardSummary(engine);
-            if (error) {
-                throw error;
-            }
             return filter(summary, (scorecardSummary) => {
                 const {read} = getUserAuthority(user, scorecardSummary) ?? {};
                 return read;
@@ -381,4 +391,5 @@ export {
     ScorecardDataSourceState,
     ScorecardDataLoadingState,
     ScorecardLegendDefinitionSelector,
+    AllScorecardsSummaryState
 };

@@ -1,159 +1,86 @@
-import { useDataEngine } from "@dhis2/app-runtime";
-import { queue } from "async";
+import {useDataEngine} from "@dhis2/app-runtime";
+import {useSetting} from "@dhis2/app-service-datastore";
+import {compact, filter, isEmpty, map, uniqBy} from "lodash";
+import {useCallback, useEffect, useState} from "react";
+import {useRecoilRefresher_UNSTABLE, useRecoilValue} from "recoil";
+import {DATA_MIGRATION_CHECK} from "../../../../../core/constants/migration";
+import {AllScorecardsSummaryState} from "../../../../../core/state/scorecard";
+import {migrateScorecard} from "../../../../../shared/utils/migrate";
+import {generateScorecardSummary} from "../../../../../shared/utils/scorecard";
 import {
-  compact,
-  differenceBy,
-  forIn,
-  fromPairs,
-  isEmpty,
-  uniqBy,
-} from "lodash";
-import { useEffect, useState } from "react";
-import { useResetRecoilState } from "recoil";
-import {
-  DATASTORE_ENDPOINT,
-  DATASTORE_OLD_SCORECARD_ENDPOINT,
-  DATASTORE_SCORECARD_SUMMARY_KEY,
-} from "../../../../../core/constants/config";
-import { ScorecardSummaryState } from "../../../../../core/state/scorecard";
-import getScorecardSummary from "../../../../../shared/services/getScorecardSummary";
-import { migrateScorecard } from "../../../../../shared/utils/migrate";
-import {
-  generateCreateMutation,
-  generateScorecardSummary,
-} from "../../../../../shared/utils/scorecard";
+    getOldScorecardKeys,
+    getOldScorecards,
+    getScorecardKeys,
+    uploadNewScorecard,
+    uploadSummary
+} from "../services/migrate";
+import useQueue from "./useQueue";
 
-const oldScorecardsQuery = {
-  scorecardKeys: {
-    resource: DATASTORE_OLD_SCORECARD_ENDPOINT,
-  },
-};
-
-const generateOldScorecardQueries = (ids = []) => {
-  return fromPairs(
-    ids?.map((id) => [
-      id,
-      {
-        resource: DATASTORE_OLD_SCORECARD_ENDPOINT,
-        id,
-      },
-    ])
-  );
-};
-
-async function getOldScorecards(engine) {
-  const keys = await engine.query(oldScorecardsQuery);
-
-  if (isEmpty(keys?.scorecardKeys)) {
-    return [];
-  }
-  const oldScorecardsObject = await engine.query(
-    generateOldScorecardQueries(keys?.scorecardKeys)
-  );
-  const oldScorecardsList = [];
-  forIn(oldScorecardsObject, (value, key) => {
-    oldScorecardsList.push({ ...value, id: key });
-  });
-
-  return oldScorecardsList;
-}
-
-const uploadNewScorecard = async ({ scorecard, engine }) => {
-  const newScorecard = migrateScorecard(scorecard);
-  if (newScorecard) {
-    return await engine.mutate(generateCreateMutation(newScorecard?.id), {
-      variables: { data: newScorecard },
-    });
-  }
-};
-
-const summaryMutation = {
-  type: "update",
-  resource: DATASTORE_ENDPOINT,
-  id: DATASTORE_SCORECARD_SUMMARY_KEY,
-  data: ({ data }) => data,
-};
-
-const uploadSummary = async (engine, summary) => {
-  return await engine.mutate(summaryMutation, { variables: { data: summary } });
-};
-
-const q = queue(uploadNewScorecard);
 
 export default function useMigrateScorecard(onComplete) {
-  const [error, setError] = useState();
-  const [loading, setLoading] = useState(false);
-  const resetSummary = useResetRecoilState(ScorecardSummaryState);
-  const [progress, setProgress] = useState(0);
-  const [count, setCount] = useState(0);
-  const engine = useDataEngine();
+    const [error, setError] = useState();
+    const allSummary = useRecoilValue(AllScorecardsSummaryState)
+    const resetSummary = useRecoilRefresher_UNSTABLE(AllScorecardsSummaryState);
+    const [summaries, setSummaries] = useState();
+    const engine = useDataEngine();
+    const [, { set: setSkipMigration }] = useSetting(DATA_MIGRATION_CHECK, { global: true });
 
-  useEffect(() => {
-    async function migrate() {
-      setLoading(true);
-      try {
-        const { summary, error } = await getScorecardSummary(engine);
-        if (error) {
-          throw error;
-        }
-        const oldScorecards = await getOldScorecards(engine);
-        setLoading(false);
-        if (!isEmpty(oldScorecards)) {
-          const unMigratedScorecards = differenceBy(
-            oldScorecards,
-            summary,
-            "id"
-          );
-          if (isEmpty(unMigratedScorecards)) {
-            onComplete();
-            return;
-          }
-          setCount(unMigratedScorecards.length);
-          q.push(
-            unMigratedScorecards?.map((scorecard) => ({ scorecard, engine })),
-            () => {
-              setProgress((prevState) => prevState + 1);
-            }
-          );
-          q.drain(async () => {
-            const newSummary = unMigratedScorecards?.map((oldScorecard) => {
-              const newScorecard = migrateScorecard(oldScorecard);
-              return generateScorecardSummary(newScorecard);
+
+    const migrate = useCallback(
+        async (scorecard) => {
+            await uploadNewScorecard({newScorecard: scorecard, engine})
+        },
+        [engine],
+    );
+
+    const onMigrationComplete = useCallback(async () => {
+        await uploadSummary(engine, uniqBy([...allSummary, ...summaries], 'id'))
+        resetSummary();
+        setSkipMigration(true);
+        onComplete()
+    }, [allSummary, engine, onComplete, resetSummary, setSkipMigration, summaries])
+
+    const {add, progress, length, started} = useQueue({
+        drain: onMigrationComplete,
+        task: migrate
+    })
+
+
+    const onMigrationInitiated = useCallback(async () => {
+        try {
+            const scorecardKeys = await getScorecardKeys(engine);
+            const oldScorecardKeys = await getOldScorecardKeys(engine);
+            const filteredKeys = filter(oldScorecardKeys, (key) => {
+                return !scorecardKeys.includes(key);
             });
-            if (!isEmpty(compact(newSummary))) {
-              const allSummary = uniqBy([...summary, ...newSummary], "id");
-              await uploadSummary(engine, allSummary).then(() => {
-                resetSummary();
-                onComplete();
-              });
+            if (filteredKeys && !isEmpty(filteredKeys)) {
+                const oldScorecards = compact(await getOldScorecards(engine, filteredKeys));
+                const newScorecards = compact(map(oldScorecards, migrateScorecard));
+                const newScorecardsSummaries = compact(map(newScorecards, generateScorecardSummary))
+                setSummaries(newScorecardsSummaries);
+                for (const scorecard of newScorecards) {
+                    add(scorecard)
+                }
             } else {
-              onComplete();
+                onComplete();
+                setSkipMigration(true)
             }
-          });
-        } else {
-          onComplete();
+        } catch (e) {
+            setError(e);
+            onComplete()
         }
-      } catch (e) {
-        if (e?.details?.httpStatusCode === 404) {
-          onComplete();
-          return;
-        }
-        if (e?.details?.httpStatusCode === 403) {
-          onComplete();
-          return;
-        }
-        setError(e);
-        onComplete();
-      }
-    }
 
-    migrate();
-  }, []);
+    }, [add, engine, onComplete])
 
-  return {
-    progress,
-    count,
-    loading,
-    error,
-  };
+
+    useEffect(() => {
+        onMigrationInitiated();
+    }, []);
+
+    return {
+        progress,
+        count: progress + length,
+        error,
+        migrationStarted: started
+    };
 }
