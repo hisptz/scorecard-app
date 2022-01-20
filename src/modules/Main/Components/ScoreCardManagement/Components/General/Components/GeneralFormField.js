@@ -26,7 +26,7 @@ export default function GeneralFormField({ field, dataTest }) {
       error: !!error,
       validationText: error ?? "",
     }),
-    [value, field, error]
+    [value, onChange, field?.formName, field?.mandatory, error]
   );
 
   return (

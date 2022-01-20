@@ -133,7 +133,7 @@ export default function ScoreCardManagement() {
         setSaving(true);
         try {
             set(ShouldValidate, true);
-            const updatedScorecard = snapshot.getLoadable(
+            const updatedScorecard =  await snapshot.getLoadable(
                 waitForAll(
                     fromPairs(keys?.map((key) => [key, ScorecardConfigDirtyState(key)]))
                 )
