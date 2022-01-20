@@ -1,12 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import ScorecardList from "./Components/ScorecardList";
-import ScorecardMigration from "./Components/ScorecardMigration";
+import {useAutoMigration} from "./hooks/autoMigration";
 
 export default function Main() {
-  const [migrationComplete, setMigrationComplete] = useState(false);
-  return migrationComplete ? (
-    <ScorecardList />
-  ) : (
-    <ScorecardMigration onMigrationComplete={setMigrationComplete} />
-  );
+    useAutoMigration();
+    return (
+        <ScorecardList/>
+    )
 }
