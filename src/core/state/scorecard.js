@@ -30,6 +30,18 @@ import {ScreenDimensionState} from "./window";
 const defaultValue = {
     legendDefinitions: [
         {
+            color: "#D3D3D3",
+            name: i18n.t("N/A"),
+            isDefault: true,
+            id: "N/A",
+        },
+        {
+            color: "#FFFFFF",
+            name: i18n.t("No Data"),
+            isDefault: true,
+            id: "No Data",
+        },
+        {
             id: uid(),
             color: "#008000",
             name: i18n.t("Target Reached/ On Track"),
@@ -43,18 +55,6 @@ const defaultValue = {
             id: uid(),
             color: "#FF0000",
             name: i18n.t("Not on track"),
-        },
-        {
-            color: "#D3D3D3",
-            name: i18n.t("N/A"),
-            isDefault: true,
-            id: "N/A",
-        },
-        {
-            color: "#FFFFFF",
-            name: i18n.t("No Data"),
-            isDefault: true,
-            id: "No Data",
         },
     ],
     scorecardOptions: new ScorecardOptions(),
@@ -147,7 +147,7 @@ const ScorecardConfigDirtyState = atomFamily({
         key: "scorecard-state-default",
         get:
             (path) =>
-                ({get}) => {
+                async ({get}) => {
                     const scorecardId = get(ScorecardIdState);
                     if (!isEmpty(scorecardId)) {
                         return _get(get(ScorecardConfState(scorecardId)), path);

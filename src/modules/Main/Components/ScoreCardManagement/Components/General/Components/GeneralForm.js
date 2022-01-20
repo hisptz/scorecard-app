@@ -5,6 +5,7 @@ import { DHIS2ValueTypes } from "../../../../../../../shared/Components/CustomFo
 import { FormFieldModel } from "../../../../../../../shared/Components/CustomForm/models";
 import GeneralFormField from "./GeneralFormField";
 import "../../../ScorecardManagement.module.css";
+import LegendDefinitionFormField from "./LegendDefinitionFormField";
 import PeriodSelector from "./PeriodSelector";
 
 export default function GeneralForm() {
@@ -90,7 +91,7 @@ export default function GeneralForm() {
           />
         </div>
         <div className="col-sm-6 col-xl-4 legend-definitions-settings">
-          <GeneralFormField
+          <LegendDefinitionFormField
             field={
               new FormFieldModel({
                 id: "legendDefinitions",
