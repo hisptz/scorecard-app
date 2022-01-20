@@ -1,5 +1,4 @@
 import { Fn } from "@iapps/function-analytics";
-import { Period } from "@iapps/period-utilities";
 import mapLimit from "async/mapLimit";
 import {
   chunk,
@@ -19,6 +18,7 @@ import {
   uniq,
   uniqBy,
 } from "lodash";
+import { Period } from "period-utilities";
 import { BehaviorSubject, of } from "rxjs";
 import { map, take } from "rxjs/operators";
 import { TableSort } from "../constants/tableSort";
@@ -51,7 +51,7 @@ export default class ScorecardDataEngine {
     let previousPeriods = [];
     this._selectedPeriods = uniqBy(
       (periods || []).map((period) => {
-        const currentPeriod = new Period().getById(period?.id);
+        const currentPeriod = new Period().setPreferences({ allowFuturePeriods: true }).getById(period?.id);
         previousPeriods = [...previousPeriods, currentPeriod?.lastPeriod];
         return currentPeriod || period;
       }),
@@ -96,13 +96,13 @@ export default class ScorecardDataEngine {
         row?.pe?.id,
       ])?.lastPeriod;
 
+
       const previousPeriodRow = rows.find(
         (previousRow) =>
           previousRow?.dx?.id === row?.dx?.id &&
           previousRow?.ou?.id === row?.ou?.id &&
           previousRow?.pe?.id === previousPeriod?.id
       );
-
       this._dataEntities = {
         ...(this._dataEntities || {}),
         [dataEntityId]: {
@@ -559,7 +559,7 @@ export default class ScorecardDataEngine {
     }
 
     try {
-      const periods = new Period()?.setType(periodType)?.get()?.list();
+      const periods = new Period()?.setPreferences({ allowFuturePeriods: true }).setType(periodType)?.get()?.list();
       const currentPeriod = periods ? periods[0] : null;
       return [
         currentPeriod,

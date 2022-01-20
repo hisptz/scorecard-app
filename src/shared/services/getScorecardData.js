@@ -1,6 +1,6 @@
 import { Fn } from "@iapps/function-analytics";
-import { Period } from "@iapps/period-utilities";
 import { flatten } from "lodash";
+import { Period } from "period-utilities";
 
 export default async function getScorecardData(scorecard) {
   const selectedOrgUnits = _getSelectedOrgUnits(scorecard.orgUnitSelection);
@@ -72,7 +72,7 @@ function _getCustomScorecardData(selections) {
 // TODO Derive selected period from period selection if supplied
 function _getSelectedPeriods(periodSelection, periodType) {
   try {
-    const periods = new Period()?.setType(periodType)?.get()?.list();
+    const periods = new Period().setPreferences({ allowFuturePeriods: true })?.setType(periodType)?.get()?.list();
     const currentPeriod = periods ? periods[0] : null;
     return {
       currentPeriods: currentPeriod ? [currentPeriod.id] : [],

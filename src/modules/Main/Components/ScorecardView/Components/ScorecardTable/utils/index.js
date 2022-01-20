@@ -46,11 +46,13 @@ export function getNameCellWidth(screenWidth, colSpan) {
 }
 
 export function getIncreasingStatus(current, previous, effectiveGap) {
-  if (Math.abs((current - previous)) >= effectiveGap) {
-    if (current > previous) {
+  const parsedCurrentValue = parseFloat(current);
+  const parsedPreviousValue = parseFloat(previous);
+  if (Math.abs((parsedCurrentValue - parsedPreviousValue)) >= parseInt(effectiveGap)) {
+    if (parsedCurrentValue > parsedPreviousValue) {
       return "increasing";
     }
-    if (current < previous) {
+    if (parsedCurrentValue < parsedPreviousValue) {
       return "decreasing";
     }
   }

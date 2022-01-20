@@ -1,5 +1,5 @@
 import i18n from "@dhis2/d2-i18n";
-import { PeriodType } from "@iapps/period-utilities";
+import { PeriodType } from "period-utilities";
 import React from "react";
 import { DHIS2ValueTypes } from "../../../../../../../shared/Components/CustomForm/constants";
 import { FormFieldModel } from "../../../../../../../shared/Components/CustomForm/models";

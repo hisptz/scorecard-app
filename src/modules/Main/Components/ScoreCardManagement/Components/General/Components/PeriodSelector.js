@@ -1,8 +1,8 @@
 import i18n from '@dhis2/d2-i18n'
 import {Button, InputField, Tooltip} from "@dhis2/ui";
 import {PeriodSelectorModal} from "@hisptz/react-ui";
-import {Period} from "@iapps/period-utilities";
 import {filter, isEmpty} from 'lodash'
+import {Period} from "period-utilities";
 import React, {useMemo, useState} from "react";
 import {useRecoilState, useRecoilValue} from "recoil";
 import {ScorecardConfigDirtyState} from "../../../../../../../core/state/scorecard";

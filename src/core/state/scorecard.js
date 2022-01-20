@@ -1,6 +1,6 @@
 import i18n from "@dhis2/d2-i18n";
-import {Period} from "@iapps/period-utilities";
 import {cloneDeep, filter, get as _get, head, isEmpty, set as _set,} from "lodash";
+import {Period} from "period-utilities";
 import {atom, atomFamily, selector, selectorFamily} from "recoil";
 import {
     getColSpanDataGroups,
@@ -220,7 +220,7 @@ const ScorecardViewState = atomFamily({
                             const {periodType} = configState;
                             const currentPeriod = new Period()
                                 .setCalendar(calendar)
-                                .setPreferences({allowFuturePeriods: 2});
+                                .setPreferences({ allowFuturePeriods: true });
                             if (periodType) {
                                 currentPeriod.setType(periodType);
 
