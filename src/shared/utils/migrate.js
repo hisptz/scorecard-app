@@ -1,4 +1,4 @@
-import { find, has } from "lodash";
+import {find, has, isEmpty} from "lodash";
 import { uid } from "./utils";
 
 export function migrateScorecard(oldScorecard) {
@@ -19,7 +19,8 @@ export function migrateScorecard(oldScorecard) {
       ),
       targetOnLevels: false,
       periodSelection: getScorecardPeriodSelection(
-        oldScorecard.selected_periods
+        oldScorecard.selected_periods,
+        oldScorecard.periodType
       ),
       orgUnitSelection: getScorecardOrgUnitSelection(
         oldScorecard.orgunit_settings
@@ -65,8 +66,11 @@ function getScorecardLegendDefinitions(oldScorecardLegendDefinitions) {
   });
 }
 
-function getScorecardPeriodSelection(oldScorecardPeriodSelections) {
-  return {};
+function getScorecardPeriodSelection(oldScorecardPeriodSelections, periodType) {
+  return {
+    periods: oldScorecardPeriodSelections.map(period=> ({id: period.id, name: period.name})),
+    type: periodType
+  };
 }
 
 function getScorecardDataSelection(oldScorecardDataSelections) {
@@ -126,15 +130,15 @@ function getScorecardDataSource(indicator) {
 
 function getScorecardOrgUnitSelection(oldScorecardOrgUnitSelections) {
   return {
-    groups: oldScorecardOrgUnitSelections.selected_groups || [],
-    levels: oldScorecardOrgUnitSelections.selected_levels || [],
-    orgUnits: oldScorecardOrgUnitSelections.selected_orgunits.map(
+    groups: oldScorecardOrgUnitSelections?.selected_groups?.map(group=> group?.id) || [],
+    levels: oldScorecardOrgUnitSelections?.selected_levels?.map(level=>level?.id) || [],
+    orgUnits: oldScorecardOrgUnitSelections?.selected_orgunits?.map(
       (selectedOrgUnit) => ({ id: selectedOrgUnit.id })
     ),
 
-    userOrgUnit: false,
-    userSubUnit: false,
-    userSubX2Unit: false,
+    userOrgUnit: Boolean(find(oldScorecardOrgUnitSelections?.selected_user_orgunit, ["id", "USER_ORGUNIT"])),
+    userSubUnit: Boolean(find(oldScorecardOrgUnitSelections?.selected_user_orgunit, ["id", "USER_ORGUNIT_CHILDREN"])),
+    userSubX2Unit: Boolean(find(oldScorecardOrgUnitSelections?.selected_user_orgunit, ["id", "USER_ORGUNIT_GRANDCHILDREN"])),
   };
 }
 

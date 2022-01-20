@@ -38,7 +38,7 @@ export default function useMigrateScorecard(onComplete) {
         resetSummary();
         setSkipMigration(true);
         onComplete()
-    }, [allSummary, engine, onComplete, resetSummary, summaries])
+    }, [allSummary, engine, onComplete, resetSummary, setSkipMigration, summaries])
 
     const {add, progress, length, started} = useQueue({
         drain: onMigrationComplete,
