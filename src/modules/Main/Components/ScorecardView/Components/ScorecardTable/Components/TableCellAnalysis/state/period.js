@@ -26,12 +26,12 @@ const ResolvedPeriodState = selector({
     const { periods } = get(PeriodState) ?? {};
     if (!isEmpty(periods)) {
       const relativePeriods = filter(periods, ({ id }) => {
-        const period = new Period().getById(id);
+        const period = new Period().setPreferences({ allowFuturePeriods: true }).getById(id);
         return period?.type?.match(RegExp("Relative"));
       });
       let allPeriods = [...differenceBy(periods, relativePeriods, "id")];
       for (const period of relativePeriods) {
-        const periodInstance = new Period().getById(period?.id);
+        const periodInstance = new Period().setPreferences({ allowFuturePeriods: true }).getById(period?.id);
         const actualPeriods = isArray(periodInstance?.iso)
           ? periodInstance?.iso
           : [periodInstance?.iso];

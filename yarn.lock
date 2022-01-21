@@ -3470,6 +3470,11 @@
   resolved "https://registry.yarnpkg.com/@iapps/period-utilities/-/period-utilities-1.0.0-beta.4.tgz#4af12e734996f569173aa2fe6ea09171e92db049"
   integrity sha512-FZgsL87wB4HHxv8aZ9DX2+EyQd8O9B3vzaRODJah/upEwmsSyeErU6/6zE+gD4tMSIpVurV2QYZDleceQ9VD/Q==
 
+"@iapps/period-utilities@^1.0.0-beta.5":
+  version "1.0.0-beta.5"
+  resolved "https://registry.yarnpkg.com/@iapps/period-utilities/-/period-utilities-1.0.0-beta.5.tgz#e5c4a97f191f8b781b777b558a62d2f0d53b684b"
+  integrity sha512-ErZyAyIx7Z1V+YrPGwfP8hx/qPi1Waxtk4Bv78L63wQ8GBET0aH6WohMhSJwjEl9Np3+Uz1s47Hb3r6Q3xsHPg==
+
 "@icons/material@^0.2.4":
   version "0.2.4"
   resolved "https://registry.yarnpkg.com/@icons/material/-/material-0.2.4.tgz#e90c9f71768b3736e76d7dd6783fc6c2afa88bc8"

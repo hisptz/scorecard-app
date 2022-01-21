@@ -9,7 +9,7 @@ export default async function getScorecardCellData({
 }) {
   try {
     const previousPeriods = periods?.map((id) => {
-      const period = new Period().getById(id);
+      const period = new Period().setPreferences({ allowFuturePeriods: true }).getById(id);
       return period?.lastPeriod?.id;
     });
     const allPeriods = uniq([...periods, ...previousPeriods]);

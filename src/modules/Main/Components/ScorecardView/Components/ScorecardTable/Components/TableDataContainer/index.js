@@ -61,6 +61,8 @@ export default function DataContainer({
             bottomSub.unsubscribe();
         };
     }, [orgUnitId, periodId, top, bottom]);
+
+
     return (
         <>
             <div

@@ -1,6 +1,6 @@
 {
   "name": "hisptz-scorecard",
-  "version": "2.5.0",
+  "version": "2.5.0-test",
   "description": "Interactive Scorecard Application",
   "license": "BSD-3-Clause",
   "private": true,
@@ -42,9 +42,9 @@
     "eslint-plugin-cypress": "^2.11.3",
     "prop-types": "^15.7.2",
     "react": "16.14.0",
+    "react-error-overlay": "6.0.10",
     "react-scripts": "^5.0.0",
-    "wait-on": "^6.0.0",
-    "react-error-overlay": "6.0.10"
+    "wait-on": "^6.0.0"
   },
   "dependencies": {
     "@dhis2/app-runtime": "^3.2.5",
@@ -52,7 +52,7 @@
     "@dhis2/ui": "^7.7.4",
     "@hisptz/react-ui": "^1.0.4",
     "@iapps/function-analytics": "^1.0.0-beta.23",
-    "@iapps/period-utilities": "^1.0.0-beta.4",
+    "@iapps/period-utilities": "^1.0.0-beta.5",
     "@material-ui/core": "^4.11.4",
     "@material-ui/icons": "^4.11.2",
     "async": "^3.2.0",

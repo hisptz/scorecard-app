@@ -21,7 +21,7 @@ export default function CalendarSpecificPeriodDimension({
   onSelect,
   selectedPeriods,
 }) {
-  const periodInstance = new Period().setCalendar(calendar);
+  const periodInstance = new Period().setPreferences({ allowFuturePeriods: true }).setCalendar(calendar);
   const [selectedPeriodCategory, setSelectedPeriodCategory] = useState(
     head(Object.values(PeriodCategories))
   );
@@ -46,14 +46,14 @@ export default function CalendarSpecificPeriodDimension({
 
   const periods = useMemo(() => {
     if (selectedPeriodCategory.key === PeriodCategories.RELATIVE.key) {
-      return new Period()
+      return new Period().setPreferences({ allowFuturePeriods: true })
         .setCalendar(calendar)
         .setYear(year)
         .setType(selectedRelativePeriodType)
         .get()
         .list();
     }
-    return new Period()
+    return new Period().setPreferences({ allowFuturePeriods: true })
       .setCalendar(calendar)
       .setYear(year)
       .setType(selectedFixedPeriodType)

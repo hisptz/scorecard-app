@@ -220,7 +220,7 @@ const ScorecardViewState = atomFamily({
                             const {periodType} = configState;
                             const currentPeriod = new Period()
                                 .setCalendar(calendar)
-                                .setPreferences({allowFuturePeriods: 2});
+                                .setPreferences({ allowFuturePeriods: true });
                             if (periodType) {
                                 currentPeriod.setType(periodType);
 
