@@ -206,9 +206,9 @@ export function downloadALMAMeta({ orgUnits, dataHolders, title }) {
         )
       ),
     });
-      const blob = new Blob([json], { type: "application/json" });
+    const blob = new Blob([json], { type: "application/json" });
 
-      saveAs(blob, `${title}-metadata.json`);
+    saveAs(blob, `${title}-metadata.json`);
   } catch (e) {
     return e;
   }
