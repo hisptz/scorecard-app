@@ -1,6 +1,6 @@
 import { Fn } from "@iapps/function-analytics";
+import { Period } from "@iapps/period-utilities";
 import { uniq } from "lodash";
-import { Period } from "period-utilities";
 
 export default async function getScorecardCellData({
   orgUnit,

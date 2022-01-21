@@ -1,6 +1,6 @@
 {
   "name": "hisptz-scorecard",
-  "version": "2.5.0",
+  "version": "2.5.0-test",
   "description": "Interactive Scorecard Application",
   "license": "BSD-3-Clause",
   "private": true,
@@ -52,6 +52,7 @@
     "@dhis2/ui": "^7.7.4",
     "@hisptz/react-ui": "^1.0.4",
     "@iapps/function-analytics": "^1.0.0-beta.23",
+    "@iapps/period-utilities": "^1.0.0-beta.5",
     "@material-ui/core": "^4.11.4",
     "@material-ui/icons": "^4.11.2",
     "async": "^3.2.0",
@@ -63,7 +64,6 @@
     "jodit-react": "^1.1.12",
     "lodash": "^4.17.21",
     "luxon": "^2.0.2",
-    "period-utilities": "file:../dhis2-period/dist",
     "react-beautiful-dnd": "^13.1.0",
     "react-color": "^2.19.3",
     "react-dnd": "^14.0.3",

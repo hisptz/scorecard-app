@@ -1,5 +1,5 @@
+import {Period} from "@iapps/period-utilities";
 import {compact, differenceBy, filter, isArray, isEmpty, uniqBy,} from "lodash";
-import {Period} from "period-utilities";
 import {selector} from "recoil";
 import {ScorecardViewState} from "./scorecard";
 import {SystemSettingsState} from "./system";

@@ -1,4 +1,5 @@
 import { Fn } from "@iapps/function-analytics";
+import { Period } from "@iapps/period-utilities";
 import mapLimit from "async/mapLimit";
 import {
   chunk,
@@ -18,7 +19,6 @@ import {
   uniq,
   uniqBy,
 } from "lodash";
-import { Period } from "period-utilities";
 import { BehaviorSubject, of } from "rxjs";
 import { map, take } from "rxjs/operators";
 import { TableSort } from "../constants/tableSort";

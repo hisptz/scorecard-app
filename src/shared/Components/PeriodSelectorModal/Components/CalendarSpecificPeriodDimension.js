@@ -8,9 +8,9 @@ import {
   TabBar,
   Transfer,
 } from "@dhis2/ui";
+import { Period } from "@iapps/period-utilities";
 import PeriodIcon from "@material-ui/icons/AccessTime";
 import { filter, head } from "lodash";
-import { Period } from "period-utilities";
 import PropTypes from "prop-types";
 import React, { useMemo, useState } from "react";
 import { CalendarTypes } from "../../../../core/constants/calendar";

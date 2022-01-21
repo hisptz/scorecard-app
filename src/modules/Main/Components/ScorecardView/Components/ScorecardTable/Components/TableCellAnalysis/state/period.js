@@ -1,3 +1,4 @@
+import { Period } from "@iapps/period-utilities";
 import {
   compact,
   differenceBy,
@@ -6,7 +7,6 @@ import {
   isEmpty,
   uniqBy,
 } from "lodash";
-import { Period } from "period-utilities";
 import { atom, selector } from "recoil";
 import { ScorecardViewState } from "../../../../../../../../../core/state/scorecard";
 
