@@ -43,21 +43,29 @@ export const uploadNewScorecard = async ({newScorecard, engine}) => {
 
 
 export async function getOldScorecardKeys(engine) {
-    const {keys} = await engine.query({
-        keys: {
-            resource: DATASTORE_OLD_SCORECARD_ENDPOINT,
-        }
-    }) ?? {};
-    return keys;
+    try {
+        const {keys} = await engine.query({
+            keys: {
+                resource: DATASTORE_OLD_SCORECARD_ENDPOINT,
+            }
+        }) ?? {};
+        return keys;
+    } catch (e) {
+        return [];
+    }
 }
 
 export async function getScorecardKeys(engine) {
-    const {keys} = await engine.query({
-        keys: {
-            resource: DATASTORE_ENDPOINT,
-        }
-    }) ?? {};
-    return filter(keys, (key) => !(key.includes(DATASTORE_SCORECARD_SUMMARY_KEY) || key.includes("settings") || key.includes("savedObjects")));
+    try {
+        const {keys} = await engine.query({
+            keys: {
+                resource: DATASTORE_ENDPOINT,
+            }
+        }) ?? {};
+        return filter(keys, (key) => !(key.includes(DATASTORE_SCORECARD_SUMMARY_KEY) || key.includes("settings") || key.includes("savedObjects")));
+    } catch (e) {
+        return [];
+    }
 }
 
 const summaryMutation = {

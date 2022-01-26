@@ -67,10 +67,12 @@ export default function useMigrateScorecard(onComplete) {
             }
         } catch (e) {
             setError(e);
-            onComplete()
+            setSkipMigration(true);
+            onComplete();
+
         }
 
-    }, [add, engine, onComplete])
+    }, [add, engine, onComplete, setSkipMigration])
 
 
     useEffect(() => {
