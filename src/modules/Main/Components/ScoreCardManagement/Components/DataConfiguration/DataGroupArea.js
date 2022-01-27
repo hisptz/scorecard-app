@@ -4,6 +4,7 @@ import AddIcon from "@material-ui/icons/Add";
 import PropTypes from "prop-types";
 import React from "react";
 import {DragDropContext} from "react-beautiful-dnd";
+import {useFormContext} from "react-hook-form";
 import {useRecoilCallback, useRecoilState} from "recoil";
 import DataSelection from "../../../../../../core/models/dataSelection";
 import {ScorecardConfigDirtyState, ScorecardConfigEditState,} from "../../../../../../core/state/scorecard";
@@ -11,6 +12,8 @@ import {updateListFromDragAndDrop} from "../../../../../../shared/utils/dnd";
 import DataGroups from "./Components/DataGroups";
 
 export default function DataGroupArea({onGroupAdd}) {
+    const {setValue, watch} = useFormContext();
+    const dataSelection = watch("dataSelection");
     const [targetOnLevels, updateTargetOnLevels] = useRecoilState(
         ScorecardConfigDirtyState("targetOnLevels")
     );
@@ -19,15 +22,13 @@ export default function DataGroupArea({onGroupAdd}) {
         ({set}) =>
             (result) => {
                 const {destination, source} = result ?? {};
-                set(ScorecardConfigDirtyState("dataSelection"), (prevState = []) =>
-                    DataSelection.set(prevState, "dataGroups", [
-                        ...updateListFromDragAndDrop(
-                            prevState?.dataGroups,
-                            source?.index,
-                            destination?.index
-                        ),
-                    ])
-                );
+                setValue("dataSelection", DataSelection.set(dataSelection, "dataGroups", [
+                    ...updateListFromDragAndDrop(
+                        dataSelection?.dataGroups,
+                        source?.index,
+                        destination?.index
+                    ),
+                ]))
                 set(ScorecardConfigEditState, (prevState) => {
                     if (prevState.selectedGroupIndex === source?.index) {
                         return {
@@ -38,7 +39,7 @@ export default function DataGroupArea({onGroupAdd}) {
                     return prevState;
                 });
             },
-        []
+        [dataSelection, setValue]
     );
 
     return (

@@ -1,8 +1,7 @@
 import {isEmpty} from "lodash";
-import React, {Suspense} from "react";
-import {useRecoilState} from "recoil";
+import React, {Suspense, useCallback} from "react";
+import {useFormContext} from "react-hook-form";
 import DataSelection from "../../../../../../core/models/dataSelection";
-import {ScorecardConfigDirtyState} from "../../../../../../core/state/scorecard";
 import ContainerLoader from "../../../../../../shared/Components/Loaders/ContainerLoader";
 import Help from "../Help";
 import DataSourceConfiguration from "./Components/DataGroups/Components/DataSourceConfiguration";
@@ -14,20 +13,24 @@ import useHelp from "./hooks/useHelp";
 import {generateNewGroupData} from "./utils";
 
 export default function DataConfigurationScorecardForm() {
-    const [dataSelection, updateDataSelection] = useRecoilState(
-        ScorecardConfigDirtyState("dataSelection")
-    );
+
+    const {setValue, watch, register} = useFormContext();
+    register("dataSelection")
+    const dataSelection = watch("dataSelection");
+
+    const updateDataSelection = useCallback((updatedDataSelection) => {
+        setValue("dataSelection", updatedDataSelection);
+    }, [setValue])
+
     const {dataGroups: groups} = dataSelection ?? new DataSelection();
     const helpSteps = useHelp(groups);
 
-    const onGroupAdd = () => {
-        updateDataSelection((prevState = []) =>
-            DataSelection.set(prevState, "dataGroups", [
-                ...prevState?.dataGroups,
-                generateNewGroupData(groups),
-            ])
-        );
-    };
+    const onGroupAdd = useCallback(() => {
+        updateDataSelection(DataSelection.set(dataSelection, "dataGroups", [
+            ...(dataSelection?.dataGroups ?? []),
+            generateNewGroupData(groups),
+        ]));
+    }, [dataSelection, groups, updateDataSelection]);
 
     return (
         <div className="row" style={{height: "100%"}}>
@@ -37,7 +40,7 @@ export default function DataConfigurationScorecardForm() {
                     className=" container-bordered column"
                     style={{minHeight: "100%", height: '100%'}}
                 >
-                    <Suspense fallback={<ContainerLoader />}>
+                    <Suspense fallback={<ContainerLoader/>}>
                         {isEmpty(groups) ? (
                             <EmptyDataGroups onGroupAdd={onGroupAdd}/>
                         ) : (
