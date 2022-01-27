@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-01-20T12:06:52.779Z\n"
-"PO-Revision-Date: 2022-01-20T12:06:52.779Z\n"
+"POT-Creation-Date: 2022-01-27T09:28:41.550Z\n"
+"PO-Revision-Date: 2022-01-27T09:28:41.550Z\n"
 
 msgid "Next"
 msgstr "Next"
@@ -546,17 +546,20 @@ msgstr "Set Target on Levels"
 msgid "Groups"
 msgstr "Groups"
 
+msgid "Title is required"
+msgstr "Title is required"
+
 msgid "Subtitle"
 msgstr "Subtitle"
-
-msgid "Maximum 100 Characters"
-msgstr "Maximum 100 Characters"
 
 msgid "Description"
 msgstr "Description"
 
 msgid "Period Type"
 msgstr "Period Type"
+
+msgid "Period type is required"
+msgstr "Period type is required"
 
 msgid "Custom Header"
 msgstr "Custom Header"
@@ -566,13 +569,6 @@ msgstr "Legend Definitions"
 
 msgid "Additional Labels"
 msgstr "Additional Labels"
-
-msgid ""
-"Changing the number of legend definitions will reset the legend values in "
-"all configured indicators. Are you sure you want to continue?"
-msgstr ""
-"Changing the number of legend definitions will reset the legend values in "
-"all configured indicators. Are you sure you want to continue?"
 
 msgid "Change Periods"
 msgstr "Change Periods"
