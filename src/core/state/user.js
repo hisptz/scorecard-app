@@ -35,7 +35,7 @@ export const UserState = atom({
           return null;
         }
       } catch (e) {
-        console.log(e);
+        console.error(e);
       }
     },
   }),

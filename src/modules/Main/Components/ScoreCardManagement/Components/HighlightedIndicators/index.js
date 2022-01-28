@@ -2,24 +2,30 @@ import i18n from "@dhis2/d2-i18n";
 import {Button} from "@dhis2/ui";
 import AddIcon from "@material-ui/icons/Add";
 import {isEmpty} from "lodash";
-import React, {Fragment, useState} from "react";
-import {useRecoilState, useRecoilValue, useSetRecoilState} from "recoil";
+import React, {Fragment, useCallback, useState} from "react";
+import {useFormContext} from "react-hook-form";
+import {useSetRecoilState} from "recoil";
 import {HIGHLIGHTED_INDICATOR_HELP_STEPS} from "../../../../../../core/constants/help/scorecardManagement";
 import ScorecardIndicator from "../../../../../../core/models/scorecardIndicator";
-import {ScorecardConfigDirtyState, ScorecardConfigEditState,} from "../../../../../../core/state/scorecard";
+import {ScorecardConfigEditState,} from "../../../../../../core/state/scorecard";
 import {generateLegendDefaults} from "../../../../../../shared/utils/utils";
 import DataSourceSelectorModal from "../DataConfiguration/Components/DataGroups/Components/DataSourceSelectorModal";
+import {getNonDefaultLegendDefinitions} from "../General/utils/utils";
 import Help from "../Help";
 import HighlightedDataSourceConfigurationForm from "./HighlightedDataSourceConfigurationForm";
 import HighlightedIndicatorsTable from "./Table";
 
 export default function HighlightedIndicatorsScorecardForm() {
-    const [highlightedIndicators, setHighlightedIndicators] = useRecoilState(
-        ScorecardConfigDirtyState("highlightedIndicators")
-    );
-    const legendDefinitions = useRecoilValue(
-        ScorecardConfigDirtyState("legendDefinitions")
-    );
+    const {watch, setValue, register} = useFormContext();
+    register("highlightedIndicators");
+    const highlightedIndicators = watch("highlightedIndicators");
+
+    const setHighlightedIndicators = useCallback((highlightedIndicators) => {
+        setValue("highlightedIndicators", highlightedIndicators);
+    }, [setValue]);
+
+    const legendDefinitions = getNonDefaultLegendDefinitions(watch("legendDefinitions"));
+
     const setScorecardEditorState = useSetRecoilState(ScorecardConfigEditState);
     const [addOpen, setAddOpen] = useState(false);
 
@@ -27,8 +33,8 @@ export default function HighlightedIndicatorsScorecardForm() {
         setAddOpen(true);
     };
 
-    const onAdd = (dataSources) => {
-        const legendDefaults = generateLegendDefaults(legendDefinitions, 100);
+    const onAdd = useCallback((dataSources) => {
+        const legendDefaults = generateLegendDefaults(legendDefinitions, 100, true);
         const newDataSources = dataSources?.map(
             (source) =>
                 new ScorecardIndicator({
@@ -37,9 +43,9 @@ export default function HighlightedIndicatorsScorecardForm() {
                     legends: legendDefaults,
                 })
         );
-        setHighlightedIndicators((prevState) => [
-            ...(prevState || []),
-            ...(newDataSources || []),
+        setHighlightedIndicators([
+            ...(highlightedIndicators ?? []),
+            ...(newDataSources ?? []),
         ]);
         if (!isEmpty(dataSources)) {
             setScorecardEditorState((prevState) => ({
@@ -47,7 +53,7 @@ export default function HighlightedIndicatorsScorecardForm() {
                 selectedHighlightedIndicatorIndex: 0,
             }));
         }
-    };
+    }, [highlightedIndicators, legendDefinitions, setHighlightedIndicators, setScorecardEditorState]);
 
     return (
         <div className="column" style={{height: "100%"}}>
@@ -55,7 +61,7 @@ export default function HighlightedIndicatorsScorecardForm() {
             <h3>{i18n.t("Highlighted Indicators")}</h3>
             {!isEmpty(highlightedIndicators) ? (
                 <Fragment>
-                    <div className="row ">
+                    <div className="rowlabel ">
                         <Button
                             className="add-highlighted-indicator-button"
                             onClick={onAddClick}
@@ -76,7 +82,7 @@ export default function HighlightedIndicatorsScorecardForm() {
                     </div>
                 </Fragment>
             ) : (
-                <div  className="row align-items-center center flex-1">
+                <div className="row align-items-center center flex-1">
                     <Button
                         className="add-highlighted-indicator-button"
                         onClick={onAddClick}

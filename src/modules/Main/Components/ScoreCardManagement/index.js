@@ -164,7 +164,7 @@ export default function ScoreCardManagement() {
                 }
             }
         } catch (e) {
-            console.log(e);
+            console.error(e);
         }
         setSaving(false);
     });

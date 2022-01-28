@@ -19,7 +19,7 @@ export default async function getScorecardCellData({
       .setData(dataSources.join(";"))
       .get();
   } catch (e) {
-    console.log(e);
+    console.error(e);
   }
 }
 
@@ -35,6 +35,6 @@ export async function getHighlightedIndicatorsData({
       .setData(highlightedIndicators?.join(";"))
       .get();
   } catch (e) {
-    console.log(e);
+    console.error(e);
   }
 }

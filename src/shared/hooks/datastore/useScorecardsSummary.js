@@ -68,7 +68,7 @@ export default function useScorecardsSummary() {
         });
         setSummary(updatedList);
       } catch (e) {
-        console.log(e);
+        console.error(e);
         setExecutionError(e);
       }
     },
