@@ -69,6 +69,13 @@ export function generateLegendDefaults(
   return [];
 }
 
+
+export function reverseLegends(legends){
+
+}
+
+
+
 export function getHoldersFromGroups(dataGroups = []) {
   return flattenDeep(dataGroups?.map(({ dataHolders }) => dataHolders) ?? []);
 }

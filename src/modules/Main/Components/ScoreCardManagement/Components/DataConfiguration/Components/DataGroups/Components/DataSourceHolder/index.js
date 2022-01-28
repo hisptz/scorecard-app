@@ -10,6 +10,9 @@ import {
 } from "../../../../../../../../../../core/state/scorecard";
 import DataSource from "../DataSource";
 
+
+
+
 export default function DataSourceHolder({ dataHolder, id, index, onDelete }) {
   const { dataSources } = dataHolder ?? new ScorecardIndicatorHolder();
   const [scorecardEditState, setScorecardEditState] = useRecoilState(
