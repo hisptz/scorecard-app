@@ -22,7 +22,7 @@ export default function useTableAnalysisData({
         setData(response);
       } catch (e) {
         setError(e);
-        console.log(e);
+        console.error(e);
       }
       setLoading(false);
     }

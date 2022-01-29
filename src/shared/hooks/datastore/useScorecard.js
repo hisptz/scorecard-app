@@ -51,7 +51,7 @@ export function useDeleteScorecard(id) {
       await removeMutate({ id });
       await removeSingleScorecardSummary(id);
     } catch (e) {
-      console.log(e);
+      console.error(e);
       setExecutionError(e);
     }
   };

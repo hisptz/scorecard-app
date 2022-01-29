@@ -54,7 +54,7 @@ export default function LayoutSelector({ layout, onLayoutChange }) {
         }
       }
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
   };
 

@@ -1,19 +1,25 @@
 import i18n from "@dhis2/d2-i18n";
 import {OrgUnitSelector} from '@hisptz/react-ui'
-import React, {Suspense} from "react";
-import {useRecoilState} from "recoil";
+import React, {Suspense, useCallback} from "react";
+import {useFormContext} from "react-hook-form";
 import OrgUnitSelection from "../../../../../../../../core/models/orgUnitSelection";
-import {ScorecardConfigDirtyState} from "../../../../../../../../core/state/scorecard";
 import ContainerLoader from "../../../../../../../../shared/Components/Loaders/ContainerLoader";
 
 export default function OrgUnit() {
-    const [organisationUnit, setOrganisationUnit] = useRecoilState(
-        ScorecardConfigDirtyState("orgUnitSelection")
+    const {setValue, watch, register} = useFormContext();
+    register("orgUnitSelection");
+    const organisationUnit = watch("orgUnitSelection");
+
+    const setOrganisationUnit = useCallback(
+        (updatedOrgUnitSelection) => {
+            setValue("orgUnitSelection", updatedOrgUnitSelection)
+        },
+        [setValue],
     );
 
     const onSetOrgUnit = (values) => {
-        setOrganisationUnit((prevState) =>
-            OrgUnitSelection.setObject(prevState, values)
+        setOrganisationUnit(
+            OrgUnitSelection.setObject(organisationUnit, values)
         );
     };
 

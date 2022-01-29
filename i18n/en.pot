@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-01-20T12:06:52.779Z\n"
-"PO-Revision-Date: 2022-01-20T12:06:52.779Z\n"
+"POT-Creation-Date: 2022-01-29T09:18:33.657Z\n"
+"PO-Revision-Date: 2022-01-29T09:18:33.657Z\n"
 
 msgid "Next"
 msgstr "Next"
@@ -546,11 +546,11 @@ msgstr "Set Target on Levels"
 msgid "Groups"
 msgstr "Groups"
 
+msgid "Title is required"
+msgstr "Title is required"
+
 msgid "Subtitle"
 msgstr "Subtitle"
-
-msgid "Maximum 100 Characters"
-msgstr "Maximum 100 Characters"
 
 msgid "Description"
 msgstr "Description"
@@ -564,8 +564,11 @@ msgstr "Custom Header"
 msgid "Legend Definitions"
 msgstr "Legend Definitions"
 
-msgid "Additional Labels"
-msgstr "Additional Labels"
+msgid "Additional Labels(Tags)"
+msgstr "Additional Labels(Tags)"
+
+msgid "Confirm Reset Legends"
+msgstr "Confirm Reset Legends"
 
 msgid ""
 "Changing the number of legend definitions will reset the legend values in "
@@ -573,6 +576,9 @@ msgid ""
 msgstr ""
 "Changing the number of legend definitions will reset the legend values in "
 "all configured indicators. Are you sure you want to continue?"
+
+msgid "Reset"
+msgstr "Reset"
 
 msgid "Change Periods"
 msgstr "Change Periods"
@@ -583,6 +589,12 @@ msgstr "Select Periods"
 msgid "Add Highlighted Indicator"
 msgstr "Add Highlighted Indicator"
 
+msgid "Scorecard added successfully"
+msgstr "Scorecard added successfully"
+
+msgid "Scorecard updated successfully"
+msgstr "Scorecard updated successfully"
+
 msgid "General"
 msgstr "General"
 
@@ -591,12 +603,6 @@ msgstr "Access"
 
 msgid "Options"
 msgstr "Options"
-
-msgid "Scorecard added successfully"
-msgstr "Scorecard added successfully"
-
-msgid "Scorecard updated successfully"
-msgstr "Scorecard updated successfully"
 
 msgid "Help"
 msgstr "Help"

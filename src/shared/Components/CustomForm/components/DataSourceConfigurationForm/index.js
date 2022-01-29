@@ -1,156 +1,99 @@
 import i18n from "@dhis2/d2-i18n";
-import { Divider, ReactFinalForm } from "@dhis2/ui";
+import {Divider} from "@dhis2/ui";
+import {RHFCustomInput} from "@hisptz/react-ui";
 import PropTypes from "prop-types";
-import React from "react";
-import { useRecoilValue } from "recoil";
-import { ScorecardConfigDirtyState } from "../../../../../core/state/scorecard";
-import { DHIS2ValueTypes } from "../../constants";
-import { FormFieldModel } from "../../models";
-import CustomField from "../CustomField";
+import React, {useEffect} from "react";
+import {useFormContext} from "react-hook-form";
+import {
+    getNonDefaultLegendDefinitions
+} from "../../../../../modules/Main/Components/ScoreCardManagement/Components/General/utils/utils";
+import {DHIS2ValueTypes} from "../../constants";
+import {FormFieldModel} from "../../models";
+import TargetsField from "./Components/TargetsField";
 
-const { Form, FormSpy } = ReactFinalForm;
+export default function DataSourceConfigurationForm({path}) {
+    const {watch, getValues, setValue} = useFormContext();
+    const legendDefinitions = getNonDefaultLegendDefinitions(watch("legendDefinitions"))
 
-export default function DataSourceConfigurationForm({
-  defaultValues,
-  onFormChange,
-  legendDefinitions,
-}) {
-  const targetOnLevels = useRecoilValue(
-    ScorecardConfigDirtyState("targetOnLevels")
-  );
+    useEffect(() => {
+       if(path){
+           setValue(path, getValues(path))
+       }
+    }, [path]);
 
-  return (
-    <div className="container p-16 data-source-form-container">
-      <Form onSubmit={console.log} initialValues={defaultValues}>
-        {({ handleSubmit }) => (
-          <div>
-            <form onSubmit={handleSubmit}>
-              <FormSpy onChange={onFormChange} />
-              <div className="column">
-                <CustomField
-                  field={
-                    new FormFieldModel({
-                      id: "displayName",
-                      formName: i18n.t("Name"),
-                      mandatory: true,
-                      name: "displayName",
-                      disabled: true,
-                      valueType: DHIS2ValueTypes.TEXT.name,
-                    })
-                  }
+
+    return (
+        <div className="container p-16 data-source-form-container">
+            <div className="column">
+                <RHFCustomInput
+                    disabled
+                    mandatory
+                    valueType={DHIS2ValueTypes.TEXT.name}
+                    label={i18n.t("Name")}
+                    name={`${path}.displayName`}
                 />
-                <CustomField
-                  field={
-                    new FormFieldModel({
-                      id: "label",
-                      formName: i18n.t("Label"),
-                      mandatory: true,
-                      name: "label",
-                      valueType: DHIS2ValueTypes.TEXT.name,
-                    })
-                  }
+                <RHFCustomInput
+                    mandatory
+                    valueType={DHIS2ValueTypes.TEXT.name}
+                    label={i18n.t("Label")}
+                    name={`${path}.label`}
                 />
-                <CustomField
-                  field={
-                    new FormFieldModel({
-                      id: "weight",
-                      formName: i18n.t("Weight"),
-                      mandatory: false,
-                      name: "weight",
-                      valueType: DHIS2ValueTypes.NUMBER.name,
-                    })
-                  }
+                <RHFCustomInput
+                    valueType={DHIS2ValueTypes.NUMBER.name}
+                    label={i18n.t("Weight")}
+                    name={`${path}.weight`}
                 />
                 <div className="row space-between">
-                  <div className="column pr-16 effective-gap-settings">
-                    <CustomField
-                      field={
-                        new FormFieldModel({
-                          id: "effectiveGap",
-                          formName: i18n.t("Effective Gap"),
-                          mandatory: false,
-                          name: "effectiveGap",
-                          valueType: DHIS2ValueTypes.NUMBER.name,
-                        })
-                      }
-                    />
-                  </div>
-                  <div className="column pl-16 indicator-options-settings-area">
-                    <CustomField
-                      field={
-                        new FormFieldModel({
-                          id: "displayArrows",
-                          formName: i18n.t("Display Arrows"),
-                          mandatory: false,
-                          name: "displayArrows",
-                          valueType: DHIS2ValueTypes.TRUE_ONLY.name,
-                        })
-                      }
-                    />
-                    <CustomField
-                      field={
-                        new FormFieldModel({
-                          id: "highIsGood",
-                          formName: i18n.t("High is Good"),
-                          mandatory: false,
-                          name: "highIsGood",
-                          valueType: DHIS2ValueTypes.TRUE_ONLY.name,
-                        })
-                      }
-                    />
-                    <CustomField
-                      field={
-                        new FormFieldModel({
-                          id: "showColors",
-                          formName: i18n.t("Show Colors"),
-                          mandatory: false,
-                          name: "showColors",
-                          valueType: DHIS2ValueTypes.TRUE_ONLY.name,
-                        })
-                      }
-                    />
-                  </div>
+                    <div className="column pr-16 effective-gap-settings">
+                        <RHFCustomInput
+                            valueType={DHIS2ValueTypes.NUMBER.name}
+                            label={i18n.t("Effective Gap")}
+                            name={`${path}.effectiveGap`}
+                        />
+                    </div>
+                    <div className="column pl-16 indicator-options-settings-area">
+                        <RHFCustomInput
+                            valueType={DHIS2ValueTypes.TRUE_ONLY.name}
+                            label={i18n.t("Display Arrows")}
+                            name={`${path}.displayArrows`}
+                        />
+                        <RHFCustomInput
+                            valueType={DHIS2ValueTypes.TRUE_ONLY.name}
+                            label={i18n.t("High is Good")}
+                            name={`${path}.highIsGood`}
+                        />
+                        <RHFCustomInput
+                            valueType={DHIS2ValueTypes.TRUE_ONLY.name}
+                            label={i18n.t("Show Colors")}
+                            name={`${path}.showColors`}
+                        />
+                    </div>
                 </div>
-                <Divider />
+                <Divider/>
                 <div className="row">
-                  <div className="column w-100 legend-settings-area">
-                    <CustomField
-                      field={
-                        new FormFieldModel({
-                          id: "legends",
-                          name: "legends",
-                          formName: i18n.t("Legends"),
-                          valueType: targetOnLevels
-                            ? DHIS2ValueTypes.LEVEL_LEGEND_MIN_MAX.name
-                            : DHIS2ValueTypes.NORMAL_LEGEND_MIN_MAX.name,
-                          multipleFields: legendDefinitions?.map(
-                            (legend) =>
-                              new FormFieldModel({
-                                id: legend.id,
-                                mandatory: false,
-                                name: legend.name,
-                                legendDefinition: legend,
-                                valueType: DHIS2ValueTypes.LEGEND_MIN_MAX.name,
-                              })
-                          ),
-                          weight: 100,
-                          highIsGood: true,
-                        })
-                      }
-                    />
-                  </div>
+                    <div className="column w-100 legend-settings-area">
+                        <TargetsField
+                            name={`${path}.legends`}
+                            multipleFields={
+                                legendDefinitions?.map(
+                                    (legend) =>
+                                        new FormFieldModel({
+                                            id: legend.id,
+                                            mandatory: false,
+                                            name: legend.name,
+                                            legendDefinition: legend,
+                                            valueType: DHIS2ValueTypes.LEGEND_MIN_MAX.name,
+                                        })
+                                )
+                            }
+                        />
+                    </div>
                 </div>
-              </div>
-            </form>
-          </div>
-        )}
-      </Form>
-    </div>
-  );
+            </div>
+        </div>
+    );
 }
 
 DataSourceConfigurationForm.propTypes = {
-  defaultValues: PropTypes.object.isRequired,
-  legendDefinitions: PropTypes.array.isRequired,
-  onFormChange: PropTypes.func.isRequired,
+    path: PropTypes.string.isRequired,
 };

@@ -1,55 +1,55 @@
 import i18n from '@dhis2/d2-i18n'
+import {RHFCustomInput, useConfirmDialog} from "@hisptz/react-ui";
+import {cloneDeep} from "lodash";
 import PropTypes from "prop-types";
-import React, {useCallback} from "react";
-import {useRecoilState, useRecoilValue} from "recoil";
-import {ScorecardConfigDirtySelector, ScorecardConfigDirtyState} from "../../../../../../../core/state/scorecard";
-import {FieldErrorState} from "../../../../../../../core/state/validators";
-import {CustomInput} from "../../../../../../../shared/Components/CustomForm/components/CustomField";
-import {FormFieldModel} from "../../../../../../../shared/Components/CustomForm/models";
+import React, {useEffect, useState} from "react";
+import {useFormContext} from "react-hook-form";
 import {resetLegends} from "../utils/utils";
 
-export default function LegendDefinitionFormField({field, dataTest}) {
-    const [value, setValue] = useRecoilState(ScorecardConfigDirtyState(field.id));
-    const [, setGroups] = useRecoilState(ScorecardConfigDirtySelector({key: "dataSelection", path: ["dataGroups"]}));
-    const error = useRecoilValue(
-        FieldErrorState({
-            id: field.id,
-            validations: {mandatory: field?.mandatory},
-        })
-    );
-    const onChange = useCallback(
-        (newValue) => {
-            if (value.length !== newValue.length) {
-                if (window.confirm(i18n.t("Changing the number of legend definitions will reset the legend values in all configured indicators. Are you sure you want to continue?"))) {
-                    resetLegends(setGroups, newValue);
-                }
+
+export default function LegendDefinitionFormField({dataTest}) {
+    const {watch, getValues, setValue, resetField} = useFormContext();
+    const [defaultValue, setDefaultValue] = useState(getValues("legendDefinitions"));
+    const groups = getValues("dataSelection.dataGroups");
+    const {confirm} = useConfirmDialog();
+    const legendDefinitions = watch("legendDefinitions");
+
+    useEffect(() => {
+        function reset() {
+            if (defaultValue?.length !== legendDefinitions?.length && (groups && groups?.length > 0)) {
+                confirm({
+                    title: i18n.t("Confirm Reset Legends"),
+                    message: i18n.t("Changing the number of legend definitions will reset the legend values in all configured indicators. Are you sure you want to continue?"),
+                    onConfirm: () => {
+                        resetLegends(setValue, legendDefinitions)
+                    },
+                    confirmButtonText: i18n.t("Reset"),
+                    confirmButtonColor: "primary",
+                    onCancel: () => {
+                       resetField("legendDefinitions");
+                    }
+                })
+            } else {
+                setDefaultValue(cloneDeep(legendDefinitions))
             }
-            setValue(newValue);
-        },
-        [setValue, setGroups, value]
-    );
-    const input = {
-        value,
-        onChange,
-        label: field?.formName,
-        required: field?.mandatory,
-        error: !!error,
-        validationText: error ?? "",
-    }
+        }
+
+        reset();
+    }, [confirm, legendDefinitions, setValue])
 
     return (
-        <CustomInput
+        <RHFCustomInput
+            valueType={"MULTIPLE_FIELDS"}
+            name="legendDefinitions"
+            label={i18n.t("Legend Definitions")}
+            multipleField={{valueType: "LEGEND_DEFINITION"}}
             dataTest={dataTest}
-            valueType={field.valueType}
-            input={input}
-            {...field}
+            addable
+            deletable
         />
     );
-
-
 }
 
 LegendDefinitionFormField.propTypes = {
-    field: PropTypes.instanceOf(FormFieldModel).isRequired,
     dataTest: PropTypes.string,
 };
