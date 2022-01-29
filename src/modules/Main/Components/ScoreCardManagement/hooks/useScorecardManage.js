@@ -32,7 +32,9 @@ export default function useScorecardManage() {
     const [saving, setSaving] = useState(false);
 
     const form = useForm({
-        defaultValues: {...scorecardConf}
+        shouldFocusError: true,
+        defaultValues: {...scorecardConf},
+        reValidateMode: "onChange"
     });
     const resetEditStates = useRecoilCallback(({reset}) => () => {
         reset(ScorecardConfigEditState);

@@ -19,7 +19,7 @@ export default function DataSourceConfigurationForm({path}) {
        if(path){
            setValue(path, getValues(path))
        }
-    }, [path]);
+    }, [getValues, path, setValue]);
 
 
     return (
@@ -37,6 +37,9 @@ export default function DataSourceConfigurationForm({path}) {
                     valueType={DHIS2ValueTypes.TEXT.name}
                     label={i18n.t("Label")}
                     name={`${path}.label`}
+                    validations={{
+                        required: i18n.t("Label is required")
+                    }}
                 />
                 <RHFCustomInput
                     valueType={DHIS2ValueTypes.NUMBER.name}

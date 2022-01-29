@@ -1,16 +1,14 @@
 import i18n from "@dhis2/d2-i18n";
-import {PeriodType} from "@iapps/period-utilities";
+import {RHFCustomInput} from "@hisptz/react-ui";
 import React from "react";
 import {DHIS2ValueTypes} from "../../../../../../../shared/Components/CustomForm/constants";
 import "../../../ScorecardManagement.module.css";
 import LegendDefinitionFormField from "./LegendDefinitionFormField";
 import PeriodSelector from "./PeriodSelector";
-import {RHFCustomInput} from "@hisptz/react-ui";
 import PeriodTypeSelector from "./PeriodTypeSelector";
 
 
 export default function GeneralForm() {
-    const periodTypes = new PeriodType().get();
     return (
         <div className="col-12">
             <div className="col-12 general-settings">
@@ -18,7 +16,7 @@ export default function GeneralForm() {
                     valueType={DHIS2ValueTypes.TEXT.name}
                     name="title"
                     label={i18n.t("Title")}
-                    mandatory={true}
+                    mandatory
                     validations={{
                         required: i18n.t("Title is required")
                     }}
@@ -75,7 +73,7 @@ export default function GeneralForm() {
                     deletable
                     name="additionalLabels"
                     valueType={DHIS2ValueTypes.MULTIPLE_FIELDS.name}
-                    label={i18n.t("Additional Labels(Tags)")}
+                    label={i18n.t("Additional Labels (Tags)")}
                     multipleField={{
                         name: "label",
                         valueType: DHIS2ValueTypes.TEXT.name
