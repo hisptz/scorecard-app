@@ -1,15 +1,15 @@
 import {useAlert} from "@dhis2/app-runtime";
 import i18n from "@dhis2/d2-i18n";
 import {Button, ButtonStrip} from "@dhis2/ui";
-import { DevTool } from "@hookform/devtools";
+import {DevTool} from "@hookform/devtools";
 import {Step, StepLabel, Stepper} from "@material-ui/core";
 import HelpIcon from "@material-ui/icons/Help";
 import {Steps} from "intro.js-react";
-import {findIndex, fromPairs, isEmpty} from "lodash";
+import {findIndex} from "lodash";
 import React, {Suspense, useEffect, useMemo, useState} from "react";
 import {FormProvider, useForm} from "react-hook-form";
 import {useHistory, useParams} from "react-router-dom";
-import {useRecoilCallback, useRecoilState, useRecoilValue, useSetRecoilState, waitForAll,} from "recoil";
+import {useRecoilCallback, useRecoilState, useRecoilValue, useSetRecoilState,} from "recoil";
 import {STEP_OPTIONS} from "../../../../core/constants/help/options";
 import {DATA_CONFIGURATION_HELP_STEPS, GENERAL_HELP_STEPS,} from "../../../../core/constants/help/scorecardManagement";
 import Scorecard from "../../../../core/models/scorecard";
@@ -33,8 +33,6 @@ import GeneralScorecardForm from "./Components/General";
 import HighlightedIndicatorsScorecardForm from "./Components/HighlightedIndicators";
 import OptionsScorecardForm from "./Components/Options";
 import classes from './ScorecardManagement.module.css'
-import sanitizeScorecard from "./services/sanitizers";
-import validateScorecard from "./services/validator";
 
 
 const steps = [
@@ -137,31 +135,13 @@ export default function ScoreCardManagement() {
         onNavigate();
     };
 
-    const onSave = useRecoilCallback(({snapshot, set}) => async () => {
+    const onSave = useRecoilCallback(() => async (updatedScorecard) => {
         setSaving(true);
         try {
-            set(ShouldValidate, true);
-            const updatedScorecard = await snapshot.getLoadable(
-                waitForAll(
-                    fromPairs(keys?.map((key) => [key, ScorecardConfigDirtyState(key)]))
-                )
-            ).contents;
-
-            const errors = validateScorecard(updatedScorecard);
-            const sanitizedScorecard = sanitizeScorecard(updatedScorecard);
-            if (!isEmpty(errors)) {
-                const errorMessage = `Please fill in the required field(s)`;
-                show({
-                    message: i18n.t(errorMessage),
-                    type: {info: true},
-                });
-            }
-            if (isEmpty(errors)) {
-                if (scorecardId) {
-                    await updateData(sanitizedScorecard);
-                } else {
-                    await createNewScorecard(sanitizedScorecard);
-                }
+            if (scorecardId) {
+                await updateData(updatedScorecard);
+            } else {
+                await createNewScorecard(updatedScorecard);
             }
         } catch (e) {
             console.error(e);
@@ -202,7 +182,7 @@ export default function ScoreCardManagement() {
                 resetScorecardStates();
             }
         };
-    }, [scorecardId, route]);
+    }, [scorecardId, route, setScorecardIdState]);
 
     const hasNextStep = useMemo(
         () => findIndex(steps, ["label", activeStep.label]) !== steps.length - 1,
@@ -321,7 +301,7 @@ export default function ScoreCardManagement() {
                                 <Button
                                     dataTest="scorecard-save-button"
                                     disabled={saving}
-                                    onClick={onSave}
+                                    onClick={form.handleSubmit(onSave)}
                                 >
                                     {saving ? `${i18n.t("Saving")}...` : i18n.t("Save and exit")}
                                 </Button>

@@ -3,13 +3,17 @@ import {Button, InputField, Tooltip} from "@dhis2/ui";
 import {PeriodSelectorModal} from "@hisptz/react-ui";
 import {Period} from "@iapps/period-utilities";
 import {filter, isEmpty} from 'lodash'
-import React, {useMemo, useState} from "react";
-import {useRecoilState, useRecoilValue} from "recoil";
-import {ScorecardConfigDirtyState} from "../../../../../../../core/state/scorecard";
+import React, {useCallback, useMemo, useState} from "react";
+import {useFormContext} from "react-hook-form";
 
 export default function PeriodSelector() {
-    const selectedPeriodType = useRecoilValue(ScorecardConfigDirtyState("periodType"));
-    const [periodSelection, setPeriodSelection] = useRecoilState(ScorecardConfigDirtyState("periodSelection"));
+    const {watch, setValue} = useFormContext();
+    const selectedPeriodType = watch("periodType");
+
+    const periodSelection = watch("periodSelection");
+
+    const setPeriodSelection = useCallback((updatedPeriodSelection) => setValue("periodSelection", updatedPeriodSelection), [setValue]);
+
     const [periodSelectorHide, setPeriodSelectorHide] = useState(true);
 
     const periodsTypesToExclude = useMemo(() => {
@@ -45,6 +49,6 @@ export default function PeriodSelector() {
             />
         }
         <Button dataTest="config-open-period-selector-button"
-            onClick={() => setPeriodSelectorHide(false)}>{!isEmpty(periodSelection.periods) ? i18n.t("Change Periods") : i18n.t("Select Periods")}</Button>
+                onClick={() => setPeriodSelectorHide(false)}>{!isEmpty(periodSelection.periods) ? i18n.t("Change Periods") : i18n.t("Select Periods")}</Button>
     </div>
 }

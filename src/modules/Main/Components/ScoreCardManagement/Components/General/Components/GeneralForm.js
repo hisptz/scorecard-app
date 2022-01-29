@@ -24,7 +24,7 @@ export default function GeneralForm() {
                 />
                 <RHFCustomInput
                     valueType={DHIS2ValueTypes.TEXT.name}
-                    name="title"
+                    name="subtitle"
                     label={i18n.t("Subtitle")}
                     max="120"
                 />
