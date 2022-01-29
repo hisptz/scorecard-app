@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-01-29T09:18:33.657Z\n"
-"PO-Revision-Date: 2022-01-29T09:18:33.657Z\n"
+"POT-Creation-Date: 2022-01-29T14:17:50.124Z\n"
+"PO-Revision-Date: 2022-01-29T14:17:50.124Z\n"
 
 msgid "Next"
 msgstr "Next"
@@ -450,6 +450,9 @@ msgstr "Create a scorecard instantly, over tea break"
 msgid "New Scorecard"
 msgstr "New Scorecard"
 
+msgid "Please select at least one organisation unit"
+msgstr "Please select at least one organisation unit"
+
 msgid "Select Access"
 msgstr "Select Access"
 
@@ -546,6 +549,9 @@ msgstr "Set Target on Levels"
 msgid "Groups"
 msgstr "Groups"
 
+msgid "Please select at least one data source for this group"
+msgstr "Please select at least one data source for this group"
+
 msgid "Title is required"
 msgstr "Title is required"
 
@@ -564,8 +570,8 @@ msgstr "Custom Header"
 msgid "Legend Definitions"
 msgstr "Legend Definitions"
 
-msgid "Additional Labels(Tags)"
-msgstr "Additional Labels(Tags)"
+msgid "Additional Labels (Tags)"
+msgstr "Additional Labels (Tags)"
 
 msgid "Confirm Reset Legends"
 msgstr "Confirm Reset Legends"
@@ -586,6 +592,9 @@ msgstr "Change Periods"
 msgid "Select Periods"
 msgstr "Select Periods"
 
+msgid "Period type is required"
+msgstr "Period type is required"
+
 msgid "Add Highlighted Indicator"
 msgstr "Add Highlighted Indicator"
 
@@ -603,6 +612,9 @@ msgstr "Access"
 
 msgid "Options"
 msgstr "Options"
+
+msgid "Please fill in all required fields"
+msgstr "Please fill in all required fields"
 
 msgid "Help"
 msgstr "Help"
@@ -1280,6 +1292,9 @@ msgstr "Back to all scorecards"
 
 msgid "Label"
 msgstr "Label"
+
+msgid "Label is required"
+msgstr "Label is required"
 
 msgid "Weight"
 msgstr "Weight"
