@@ -12,7 +12,7 @@ import {FormFieldModel} from "../../models";
 import TargetsField from "./Components/TargetsField";
 
 export default function DataSourceConfigurationForm({path}) {
-    const {watch, getValues, setValue} = useFormContext();
+    const {watch, getValues, setValue, formState} = useFormContext();
     const legendDefinitions = getNonDefaultLegendDefinitions(watch("legendDefinitions"))
 
     useEffect(() => {
