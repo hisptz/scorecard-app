@@ -21,7 +21,6 @@ export default function DataSourceConfigurationForm({path}) {
        }
     }, [getValues, path, setValue]);
 
-
     return (
         <div className="container p-16 data-source-form-container">
             <div className="column">
