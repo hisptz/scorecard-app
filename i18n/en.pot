@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-01-29T07:29:20.072Z\n"
-"PO-Revision-Date: 2022-01-29T07:29:20.072Z\n"
+"POT-Creation-Date: 2022-01-29T09:18:33.657Z\n"
+"PO-Revision-Date: 2022-01-29T09:18:33.657Z\n"
 
 msgid "Next"
 msgstr "Next"
@@ -589,6 +589,12 @@ msgstr "Select Periods"
 msgid "Add Highlighted Indicator"
 msgstr "Add Highlighted Indicator"
 
+msgid "Scorecard added successfully"
+msgstr "Scorecard added successfully"
+
+msgid "Scorecard updated successfully"
+msgstr "Scorecard updated successfully"
+
 msgid "General"
 msgstr "General"
 
@@ -597,12 +603,6 @@ msgstr "Access"
 
 msgid "Options"
 msgstr "Options"
-
-msgid "Scorecard added successfully"
-msgstr "Scorecard added successfully"
-
-msgid "Scorecard updated successfully"
-msgstr "Scorecard updated successfully"
 
 msgid "Help"
 msgstr "Help"

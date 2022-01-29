@@ -1,202 +1,47 @@
-import {useAlert} from "@dhis2/app-runtime";
 import i18n from "@dhis2/d2-i18n";
 import {Button, ButtonStrip} from "@dhis2/ui";
 import {DevTool} from "@hookform/devtools";
 import {Step, StepLabel, Stepper} from "@material-ui/core";
 import HelpIcon from "@material-ui/icons/Help";
 import {Steps} from "intro.js-react";
-import {findIndex} from "lodash";
-import React, {Suspense, useEffect, useMemo, useState} from "react";
-import {FormProvider, useForm} from "react-hook-form";
-import {useHistory, useParams} from "react-router-dom";
-import {useRecoilCallback, useRecoilState, useRecoilValue, useSetRecoilState,} from "recoil";
+import React, {Suspense} from "react";
+import {FormProvider} from "react-hook-form";
+import {useParams} from "react-router-dom";
+import {useRecoilState, useRecoilValue,} from "recoil";
 import {STEP_OPTIONS} from "../../../../core/constants/help/options";
-import {DATA_CONFIGURATION_HELP_STEPS, GENERAL_HELP_STEPS,} from "../../../../core/constants/help/scorecardManagement";
-import Scorecard from "../../../../core/models/scorecard";
-import HelpState, {HelpIndex, HelpSteps} from "../../../../core/state/help";
-import RouterState from "../../../../core/state/router";
-import ScorecardConfState, {
-    ScorecardConfigDirtyState,
-    ScorecardConfigEditState,
-    ScorecardConfigErrorState,
-    ScorecardIdState,
-} from "../../../../core/state/scorecard";
-import {UserAuthorityOnScorecard, UserState,} from "../../../../core/state/user";
-import {ShouldValidate} from "../../../../core/state/validators";
+import HelpState, {HelpSteps} from "../../../../core/state/help";
+import {UserAuthorityOnScorecard,} from "../../../../core/state/user";
 import {FullPageLoader} from "../../../../shared/Components/Loaders";
-import {useAddScorecard, useUpdateScorecard,} from "../../../../shared/hooks/datastore/useScorecard";
 import useMediaQuery from "../../../../shared/hooks/useMediaQuery";
 import AccessDeniedPage from "../ScorecardView/Components/AccessDeniedPage";
-import AccessScorecardForm from "./Components/Access";
-import DataConfigurationScorecardForm from "./Components/DataConfiguration";
-import GeneralScorecardForm from "./Components/General";
-import HighlightedIndicatorsScorecardForm from "./Components/HighlightedIndicators";
-import OptionsScorecardForm from "./Components/Options";
+import useScorecardManage from "./hooks/useScorecardManage";
+import useScorecardManagerNavigate from "./hooks/useScorecardManagerNavigate";
 import classes from './ScorecardManagement.module.css'
 
 
-const steps = [
-    {
-        label: i18n.t("General"),
-        component: GeneralScorecardForm,
-        helpSteps: GENERAL_HELP_STEPS,
-    },
-    {
-        label: i18n.t("Data Configuration"),
-        component: DataConfigurationScorecardForm,
-        helpSteps: DATA_CONFIGURATION_HELP_STEPS,
-    },
-    {
-        label: i18n.t("Highlighted Indicators"),
-        component: HighlightedIndicatorsScorecardForm,
-        helpSteps: [],
-    },
-    {
-        label: i18n.t("Access"),
-        component: AccessScorecardForm,
-        helpSteps: [],
-    },
-    {
-        label: i18n.t("Options"),
-        component: OptionsScorecardForm,
-        helpSteps: [],
-    },
-];
-
-const keys = Object.keys(new Scorecard());
-
 export default function ScoreCardManagement() {
-    const [route, setRoute] = useRecoilState(RouterState);
     const [helpEnabled, setHelpEnabled] = useRecoilState(HelpState);
     const helpSteps = useRecoilValue(HelpSteps);
-    const [helpStepIndex, setHelpStepIndex] = useRecoilState(HelpIndex);
     const {id: scorecardId} = useParams();
-    const user = useRecoilValue(UserState);
     const {write: writeAccess} = useRecoilValue(
         UserAuthorityOnScorecard(scorecardId)
     );
-    const setScorecardIdState = useSetRecoilState(ScorecardIdState);
-    const scorecardConf = useRecoilValue(ScorecardConfState(scorecardId))
-    const {update} = useUpdateScorecard(scorecardId);
-    const {add} = useAddScorecard();
-    const {show} = useAlert(
-        ({message}) => message,
-        ({type}) => ({...type, duration: 3000})
-    );
-    const [saving, setSaving] = useState(false);
     const {height} = useMediaQuery();
-    const history = useHistory();
-    const [activeStep, setActiveStep] = useState(steps[0]);
-    const Component = activeStep.component;
-
-    const form = useForm({
-        defaultValues: {...scorecardConf}
-    });
-
-    const resetEditStates = useRecoilCallback(({reset}) => () => {
-        reset(ScorecardConfigEditState);
-        reset(ScorecardConfigErrorState);
-        reset(ShouldValidate);
-        for (const key of keys) {
-            reset(ScorecardConfigDirtyState(key));
-        }
-    });
-    const resetScorecardStates = useRecoilCallback(({reset}) => () => {
-        reset(ScorecardConfState(scorecardId));
-        reset(ScorecardIdState);
-        for (const key of keys) {
-            reset(ScorecardConfigDirtyState(key));
-        }
-    });
-
-    const onNavigate = () => {
-        setRoute((prevRoute) => ({
-            ...prevRoute,
-            previous: `/edit/${scorecardId}`,
-        }));
-        history.replace(route?.previous);
-    };
-
-    const createNewScorecard = async (updatedScorecard) => {
-        await Scorecard.save(updatedScorecard, add, user);
-        show({
-            message: i18n.t("Scorecard added successfully"),
-            type: {success: true},
-        });
-        onNavigate();
-    };
-
-    const updateData = async (updatedScorecard) => {
-        await Scorecard.update(updatedScorecard, update);
-        show({
-            message: i18n.t("Scorecard updated successfully"),
-            type: {success: true},
-        });
-        onNavigate();
-    };
-
-    const onSave = useRecoilCallback(() => async (updatedScorecard) => {
-        setSaving(true);
-        try {
-            if (scorecardId) {
-                await updateData(updatedScorecard);
-            } else {
-                await createNewScorecard(updatedScorecard);
-            }
-        } catch (e) {
-            console.error(e);
-        }
-        setSaving(false);
-    });
-
-    const onNextStep = () => {
-        if (!hasNextStep) {
-            form.handleSubmit(onSave);
-            return;
-        }
-        const index = findIndex(steps, ["label", activeStep.label]);
-        if (index !== steps.length - 1) {
-            setActiveStep(steps[index + 1]);
-            setHelpStepIndex(0);
-        }
-    };
-
-    const onPreviousStep = () => {
-        const index = findIndex(steps, ["label", activeStep.label]);
-
-        if (index !== 0) {
-            setActiveStep(steps[index - 1]);
-            setHelpStepIndex(0);
-        }
-    };
-
-    const onCancel = () => {
-        onNavigate();
-    };
-
-    useEffect(() => {
-        setScorecardIdState(scorecardId);
-        return () => {
-            resetEditStates();
-            if (route?.previous === "/") {
-                resetScorecardStates();
-            }
-        };
-    }, [scorecardId, route, setScorecardIdState]);
-
-    const hasNextStep = useMemo(
-        () => findIndex(steps, ["label", activeStep.label]) !== steps.length - 1,
-        [activeStep]
-    );
-    const hasPreviousStep = useMemo(
-        () => findIndex(steps, ["label", activeStep.label]) > 0,
-        [activeStep]
-    );
-
-    const currentIndex = useMemo(
-        () => findIndex(steps, ["label", activeStep.label]),
-        [activeStep]
-    );
+    const {form, onSave, saving, onNavigate} = useScorecardManage();
+    const {
+        Component,
+        activeStep,
+        helpStepIndex,
+        onCancel,
+        onNextStep,
+        onPreviousStep,
+        setHelpStepIndex,
+        steps,
+        setActiveStep,
+        currentIndex,
+        hasPreviousStep,
+        hasNextStep,
+    } = useScorecardManagerNavigate({form, onSave, onNavigate});
 
     if (!writeAccess && scorecardId) {
         return <AccessDeniedPage accessType={"edit"}/>;
