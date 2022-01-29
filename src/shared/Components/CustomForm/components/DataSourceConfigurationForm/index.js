@@ -12,7 +12,7 @@ import {FormFieldModel} from "../../models";
 import TargetsField from "./Components/TargetsField";
 
 export default function DataSourceConfigurationForm({path}) {
-    const {watch, getValues, setValue} = useFormContext();
+    const {watch, getValues, setValue, formState} = useFormContext();
     const legendDefinitions = getNonDefaultLegendDefinitions(watch("legendDefinitions"))
 
     useEffect(() => {
@@ -20,7 +20,6 @@ export default function DataSourceConfigurationForm({path}) {
            setValue(path, getValues(path))
        }
     }, [getValues, path, setValue]);
-
 
     return (
         <div className="container p-16 data-source-form-container">

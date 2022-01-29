@@ -29,7 +29,7 @@ const columns = [
 ];
 
 export default function HighlightedIndicatorsTable() {
-    const {watch, setValue} = useFormContext();
+    const {watch, setValue, trigger} = useFormContext();
 
     const highlightedIndicators = watch("highlightedIndicators");
 
@@ -41,11 +41,13 @@ export default function HighlightedIndicatorsTable() {
         ScorecardConfigEditState
     );
 
-    const onRowClick = (index) => {
-        setScorecardEditorState((prevState) => ({
-            ...prevState,
-            selectedHighlightedIndicatorIndex: index,
-        }));
+    const onRowClick = async (index) => {
+        if (await trigger()) {
+            setScorecardEditorState((prevState) => ({
+                ...prevState,
+                selectedHighlightedIndicatorIndex: index,
+            }));
+        }
     };
 
     const onRemove = useCallback((id) => {
