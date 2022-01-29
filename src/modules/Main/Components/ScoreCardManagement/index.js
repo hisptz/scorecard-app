@@ -37,10 +37,10 @@ export default function ScoreCardManagement() {
         onPreviousStep,
         setHelpStepIndex,
         steps,
-        setActiveStep,
         currentIndex,
         hasPreviousStep,
         hasNextStep,
+        onStepChange
     } = useScorecardManagerNavigate({form, onSave, onNavigate});
 
     if (!writeAccess && scorecardId) {
@@ -73,8 +73,8 @@ export default function ScoreCardManagement() {
                                             step === activeStep ? {background: "#00695c"} : undefined
                                         }
                                         active={step === activeStep}
-                                        onClick={() => setActiveStep(step)}
-                                        key={`${step.label}-step`}
+                                        onClick={() => onStepChange(step)}
+                                        key={`${step.id}-step`}
                                     >
                                         <StepLabel>{step.label}</StepLabel>
                                     </Step>

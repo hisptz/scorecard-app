@@ -10,7 +10,7 @@ import ErrorIcon from "../../../../../../../../../../../shared/icons/ErrorIcon";
 export default function GroupTitle({
   setTitleEditOpen,
   title,
-  errors,
+  error,
   onDelete,
   id,
 }) {
@@ -28,9 +28,9 @@ export default function GroupTitle({
           >
             {title}
           </p>
-          {errors && (
+          {error && (
             <p style={{ fontSize: 12, margin: 4, color: "#f44336" }}>
-              {errors}
+              {error?.message}
             </p>
           )}
         </div>
@@ -59,7 +59,7 @@ export default function GroupTitle({
           >
             {i18n.t("Delete")}
           </Button>
-          {errors && (
+          {error && (
             <div style={{ paddingLeft: 16 }}>
               <ErrorIcon color={"#f44336"} size={24} />
             </div>
@@ -75,5 +75,5 @@ GroupTitle.propTypes = {
   title: PropTypes.string.isRequired,
   setTitleEditOpen: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
-  errors: PropTypes.any,
+  error: PropTypes.any,
 };

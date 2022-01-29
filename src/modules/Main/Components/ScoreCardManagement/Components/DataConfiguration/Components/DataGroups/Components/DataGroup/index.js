@@ -28,7 +28,8 @@ export default function DataGroup({
         onDataSourceAdd,
         onTitleEditSubmit,
         titleEditValue,
-        titleEditOpen, setTitleEditOpen, setTitleEditValue, group
+        titleEditOpen, setTitleEditOpen, setTitleEditValue, group,
+        error
     } = useDataGroupManage({index, expanded})
 
     const {
@@ -92,6 +93,7 @@ export default function DataGroup({
                                     onDelete={onDelete}
                                     setTitleEditOpen={setTitleEditOpen}
                                     id={id}
+                                    error={error}
                                 />
                             )}
                         </AccordionSummary>
