@@ -6,6 +6,7 @@ import "../../../ScorecardManagement.module.css";
 import LegendDefinitionFormField from "./LegendDefinitionFormField";
 import PeriodSelector from "./PeriodSelector";
 import {RHFCustomInput} from "@hisptz/react-ui";
+import PeriodTypeSelector from "./PeriodTypeSelector";
 
 
 export default function GeneralForm() {
@@ -38,19 +39,9 @@ export default function GeneralForm() {
             </div>
             <div className="row align-items-center" style={{gap: 24}}>
                 <div className="col-md-4 period-type-settings">
-                    <RHFCustomInput
+                    <PeriodTypeSelector
                         label={i18n.t("Period Type")}
-                        optionSet={{
-                            options: periodTypes?.map(({name, id}) => ({
-                                name,
-                                code: id,
-                            })),
-                        }}
                         name="periodType"
-                        valueType={DHIS2ValueTypes.TEXT.name}
-                        validations={{
-                            required: i18n.t("Period type is required")
-                        }}
                     />
                 </div>
                 <div className="flex-1 period-settings">

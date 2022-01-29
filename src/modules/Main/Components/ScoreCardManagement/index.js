@@ -151,7 +151,7 @@ export default function ScoreCardManagement() {
 
     const onNextStep = () => {
         if (!hasNextStep) {
-            onSave();
+            form.handleSubmit(onSave);
             return;
         }
         const index = findIndex(steps, ["label", activeStep.label]);

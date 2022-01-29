@@ -1,0 +1,11 @@
+.select-header {
+    background: #A0ADBA;
+    color: #FFFFFF !important;
+    font-weight: bold;
+}
+
+.select-header:hover {
+    background: #A0ADBA !important;
+    color: #FFFFFF !important;
+    font-weight: bold !important;
+}

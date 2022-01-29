@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-01-28T05:59:00.637Z\n"
-"PO-Revision-Date: 2022-01-28T05:59:00.637Z\n"
+"POT-Creation-Date: 2022-01-29T07:29:20.072Z\n"
+"PO-Revision-Date: 2022-01-29T07:29:20.072Z\n"
 
 msgid "Next"
 msgstr "Next"
@@ -557,9 +557,6 @@ msgstr "Description"
 
 msgid "Period Type"
 msgstr "Period Type"
-
-msgid "Period type is required"
-msgstr "Period type is required"
 
 msgid "Custom Header"
 msgstr "Custom Header"

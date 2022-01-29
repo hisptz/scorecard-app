@@ -18,11 +18,14 @@ export default function PeriodSelector() {
 
     const periodsTypesToExclude = useMemo(() => {
         if (selectedPeriodType) {
+            if (selectedPeriodType !== periodSelection.type) {
+                setValue("periodSelection", {periods: [], type: selectedPeriodType});
+            }
             const periodTypes = new Period().get()?._periodType?._periodTypes;
             return filter(periodTypes, (periodType) => periodType.id !== selectedPeriodType)?.map(({id}) => id);
         }
         return [];
-    }, [selectedPeriodType]);
+    }, [selectedPeriodType, setValue]);
 
     return <div style={{display: "flex", gap: 16, alignItems: "end", width: '100%'}}>
         <div className="w-50">
