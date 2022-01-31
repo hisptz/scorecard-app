@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-01-29T14:17:50.124Z\n"
-"PO-Revision-Date: 2022-01-29T14:17:50.124Z\n"
+"POT-Creation-Date: 2022-01-31T08:23:26.212Z\n"
+"PO-Revision-Date: 2022-01-31T08:23:26.212Z\n"
 
 msgid "Next"
 msgstr "Next"
@@ -519,6 +519,9 @@ msgstr "Add Item"
 msgid "Add Data source"
 msgstr "Add Data source"
 
+msgid "Please select at least one data source for this group"
+msgstr "Please select at least one data source for this group"
+
 msgid "Add Group"
 msgstr "Add Group"
 
@@ -548,9 +551,6 @@ msgstr "Set Target on Levels"
 
 msgid "Groups"
 msgstr "Groups"
-
-msgid "Please select at least one data source for this group"
-msgstr "Please select at least one data source for this group"
 
 msgid "Title is required"
 msgstr "Title is required"
@@ -598,20 +598,11 @@ msgstr "Period type is required"
 msgid "Add Highlighted Indicator"
 msgstr "Add Highlighted Indicator"
 
-msgid "Scorecard added successfully"
-msgstr "Scorecard added successfully"
-
 msgid "Scorecard updated successfully"
 msgstr "Scorecard updated successfully"
 
-msgid "General"
-msgstr "General"
-
-msgid "Access"
-msgstr "Access"
-
-msgid "Options"
-msgstr "Options"
+msgid "Scorecard added successfully"
+msgstr "Scorecard added successfully"
 
 msgid "Please fill in all required fields"
 msgstr "Please fill in all required fields"
@@ -625,11 +616,23 @@ msgstr "Saving"
 msgid "Save and exit"
 msgstr "Save and exit"
 
+msgid "Save and continue"
+msgstr "Save and continue"
+
 msgid "Exit without saving"
 msgstr "Exit without saving"
 
 msgid "This group does not have any configured data sources"
 msgstr "This group does not have any configured data sources"
+
+msgid "General"
+msgstr "General"
+
+msgid "Access"
+msgstr "Access"
+
+msgid "Options"
+msgstr "Options"
 
 msgid "Scorecard deleted successfully"
 msgstr "Scorecard deleted successfully"

@@ -1,58 +1,28 @@
 import {useAlert} from "@dhis2/app-runtime";
 import i18n from "@dhis2/d2-i18n";
 import {findIndex} from "lodash";
-import {useCallback, useMemo, useState} from "react";
-import {useRecoilState} from "recoil";
-import {
-    DATA_CONFIGURATION_HELP_STEPS,
-    GENERAL_HELP_STEPS
-} from "../../../../../core/constants/help/scorecardManagement";
+import {useCallback, useEffect, useMemo} from "react";
+import {useRecoilState, useRecoilValue, useResetRecoilState} from "recoil";
 import {HelpIndex} from "../../../../../core/state/help";
-import AccessScorecardForm from "../Components/Access";
-import DataConfigurationScorecardForm from "../Components/DataConfiguration";
-import GeneralScorecardForm from "../Components/General";
-import HighlightedIndicatorsScorecardForm from "../Components/HighlightedIndicators";
-import OptionsScorecardForm from "../Components/Options";
+import {IsNewScorecardState} from "../../../../../core/state/scorecard";
 import {getValidationPageFields} from "../services/validator";
-
-const steps = [
-    {
-        label: i18n.t("General"),
-        component: GeneralScorecardForm,
-        helpSteps: GENERAL_HELP_STEPS,
-        id: "general"
-    },
-    {
-        label: i18n.t("Data Configuration"),
-        component: DataConfigurationScorecardForm,
-        helpSteps: DATA_CONFIGURATION_HELP_STEPS,
-        id: "dataConfiguration"
-    },
-    {
-        label: i18n.t("Highlighted Indicators"),
-        component: HighlightedIndicatorsScorecardForm,
-        helpSteps: [],
-        id: "highlightedIndicators"
-    },
-    {
-        label: i18n.t("Access"),
-        component: AccessScorecardForm,
-        helpSteps: [],
-        id: "access"
-    },
-    {
-        label: i18n.t("Options"),
-        component: OptionsScorecardForm,
-        helpSteps: [],
-        id: "options"
-    },
-];
+import {ActiveStepState, steps} from "../state/pages";
 
 export default function useScorecardManagerNavigate({form, onSave, onNavigate}) {
     const [helpStepIndex, setHelpStepIndex] = useRecoilState(HelpIndex);
-    const [activeStep, setActiveStep] = useState(steps[0]);
+    const [activeStep, setActiveStep] = useRecoilState(ActiveStepState);
+    const isNew = useRecoilValue(IsNewScorecardState);
+    const resetNewState = useResetRecoilState(IsNewScorecardState);
     const Component = activeStep.component;
     const {show} = useAlert(({message}) => message, ({type}) => ({...type, duration: 3000}))
+
+    useEffect(() => {
+        console.log({isNew});
+        if (isNew) {
+            setActiveStep(steps[isNew.nextStepIndex]);
+            return resetNewState;
+        }
+    }, [isNew, resetNewState, setActiveStep]);
 
     const hasNextStep = useMemo(
         () => findIndex(steps, ["id", activeStep.id]) !== steps.length - 1,

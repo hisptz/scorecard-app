@@ -110,6 +110,11 @@ const ScorecardRequestId = atomFamily({
     default: 0,
 });
 
+const IsNewScorecardState = atom({
+    key: "isNewScorecard",
+    default: undefined,
+});
+
 const ScorecardConfState = atomFamily({
     key: "scorecard-config",
     default: selectorFamily({
@@ -220,7 +225,7 @@ const ScorecardViewState = atomFamily({
                             const {periodType} = configState;
                             const currentPeriod = new Period()
                                 .setCalendar(calendar)
-                                .setPreferences({ allowFuturePeriods: true });
+                                .setPreferences({allowFuturePeriods: true});
                             if (periodType) {
                                 currentPeriod.setType(periodType);
 
@@ -391,5 +396,6 @@ export {
     ScorecardDataSourceState,
     ScorecardDataLoadingState,
     ScorecardLegendDefinitionSelector,
-    AllScorecardsSummaryState
+    AllScorecardsSummaryState,
+    IsNewScorecardState,
 };
