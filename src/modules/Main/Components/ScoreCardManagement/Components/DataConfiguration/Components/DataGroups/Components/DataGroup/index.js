@@ -4,7 +4,7 @@ import AddIcon from "@material-ui/icons/Add";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import {isEmpty,} from "lodash";
 import PropTypes from "prop-types";
-import React, {useRef, useState} from "react";
+import React, {forwardRef, useRef, useState} from "react";
 import {DragDropContext, Draggable, Droppable} from "react-beautiful-dnd";
 import ScorecardIndicatorGroup from "../../../../../../../../../../core/models/scorecardIndicatorGroup";
 import useDataGroupLayout from "../../../../hooks/useDataGroupLayout";
@@ -16,12 +16,13 @@ import EditTitle from "./Components/EditTitle";
 import GroupTitle from "./Components/GroupTitle";
 import LinkingContainer from "./Components/LinkingContainer";
 
-export default function DataGroup({
-                                      handleAccordionChange,
-                                      expanded,
-                                      index,
-                                      onDelete,
-                                  }) {
+function DataGroup({
+                       handleAccordionChange,
+                       expanded,
+                       index,
+                       onDelete,
+    error,
+                   }, ref) {
 
     const {
         onDataSourceDelete,
@@ -29,7 +30,6 @@ export default function DataGroup({
         onTitleEditSubmit,
         titleEditValue,
         titleEditOpen, setTitleEditOpen, setTitleEditValue, group,
-        error
     } = useDataGroupManage({index, expanded})
 
     const {
@@ -49,7 +49,7 @@ export default function DataGroup({
     const summaryRef = useRef();
 
     return (
-        <Draggable index={index} draggableId={id}>
+        <Draggable ref={ref} index={index} draggableId={id}>
             {(provided) => (
                 <Accordion
                     innerRef={provided.innerRef}
@@ -161,8 +161,11 @@ export default function DataGroup({
     );
 }
 
+export default forwardRef(DataGroup)
+
 DataGroup.propTypes = {
     index: PropTypes.number.isRequired,
+    error: PropTypes.object,
     expanded: PropTypes.string,
     handleAccordionChange: PropTypes.func,
     onDelete: PropTypes.func,

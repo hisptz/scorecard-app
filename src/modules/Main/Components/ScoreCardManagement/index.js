@@ -27,7 +27,7 @@ export default function ScoreCardManagement() {
         UserAuthorityOnScorecard(scorecardId)
     );
     const {height} = useMediaQuery();
-    const {form, onSave, saving, onNavigate} = useScorecardManage();
+    const {form, onSave, saving, onNavigate, onSaveAndContinue, savingAndContinue} = useScorecardManage();
     const {
         Component,
         activeStep,
@@ -150,6 +150,16 @@ export default function ScoreCardManagement() {
                                 >
                                     {saving ? `${i18n.t("Saving")}...` : i18n.t("Save and exit")}
                                 </Button>
+                                {
+                                    hasNextStep && <Button
+                                        loading={savingAndContinue}
+                                        dataTest="scorecard-save-and-continue-button"
+                                        disabled={savingAndContinue}
+                                        onClick={form.handleSubmit(onSaveAndContinue)}
+                                    >
+                                        {savingAndContinue ? `${i18n.t("Saving")}...` : i18n.t("Save and continue")}
+                                    </Button>
+                                }
                                 <Button onClick={onCancel}>
                                     {i18n.t("Exit without saving")}
                                 </Button>

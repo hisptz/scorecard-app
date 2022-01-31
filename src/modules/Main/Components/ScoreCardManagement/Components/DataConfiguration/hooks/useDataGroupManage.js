@@ -1,7 +1,6 @@
-import i18n from '@dhis2/d2-i18n'
-import {cloneDeep, filter, fromPairs, get, isEmpty} from "lodash";
+import {cloneDeep, filter, fromPairs, isEmpty} from "lodash";
 import {useCallback, useEffect, useMemo, useState} from "react";
-import {useFormContext, useFormState} from "react-hook-form";
+import {useFormContext} from "react-hook-form";
 import {useRecoilState, useRecoilValue} from "recoil";
 import ScorecardIndicator from "../../../../../../../core/models/scorecardIndicator";
 import ScorecardIndicatorGroup from "../../../../../../../core/models/scorecardIndicatorGroup";
@@ -12,8 +11,7 @@ import {generateLegendDefaults, uid} from "../../../../../../../shared/utils/uti
 
 
 export default function useDataGroupManage({index, expanded}) {
-    const {watch, setValue, register,} = useFormContext();
-    const {errors} = useFormState()
+    const {watch, setValue} = useFormContext();
     const orgUnitLevels = useRecoilValue(OrgUnitLevels);
     const targetOnLevels = useRecoilValue(
         ScorecardConfigDirtyState("targetOnLevels")
@@ -22,19 +20,19 @@ export default function useDataGroupManage({index, expanded}) {
         ScorecardConfigEditState
     );
     const path = useMemo(() => ["dataSelection", "dataGroups", index].join("."), [index]);
-    register(path, {
-        validate: {
-            isNotEmpty: (value) => !isEmpty(value?.dataHolders) || i18n.t("Please select at least one data source for this group")
-        }
-    })
 
     const group = watch(path);
     const setGroup = useCallback(
         (updatedGroup) => {
-            setValue(path, updatedGroup);
+            try {
+                setValue(path, updatedGroup);
+            } catch (e) {
+                console.log("is this the culprit?", e);
+            }
         },
         [path, setValue],
     );
+
 
     const legendDefinitions = watch("legendDefinitions");
     const filteredLegendDefinitions = useMemo(
@@ -46,8 +44,6 @@ export default function useDataGroupManage({index, expanded}) {
 
     const [titleEditOpen, setTitleEditOpen] = useState(false);
     const [titleEditValue, setTitleEditValue] = useState(title);
-
-    const error = get(errors, path);
 
     const onDataSourceAdd = (addedDataSources) => {
         //Assigns each of the selected indicator to its own holder
@@ -143,6 +139,5 @@ export default function useDataGroupManage({index, expanded}) {
         setTitleEditValue,
         setTitleEditOpen,
         group,
-        error
     }
 }

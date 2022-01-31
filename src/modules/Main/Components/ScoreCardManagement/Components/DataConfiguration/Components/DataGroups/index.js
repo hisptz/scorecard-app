@@ -1,7 +1,8 @@
-import {last, remove, set} from "lodash";
+import i18n from "@dhis2/d2-i18n";
+import {isEmpty, last, remove, set} from "lodash";
 import React, {useCallback, useEffect, useState} from "react";
 import {Droppable} from "react-beautiful-dnd";
-import {useFormContext} from "react-hook-form";
+import {useFormContext, Controller} from "react-hook-form";
 import {useResetRecoilState} from "recoil";
 import DataSelection from "../../../../../../../../core/models/dataSelection";
 import {ScorecardConfigEditState,} from "../../../../../../../../core/state/scorecard";
@@ -49,14 +50,26 @@ export default function DataGroups() {
                 <div {...provided.droppableProps} ref={provided.innerRef}>
                     <div>
                         {groups?.map((group, index) => (
-                            <DataGroup
-                                onGroupUpdate={onGroupUpdate}
-                                onDelete={onDeleteGroup}
-                                index={index}
+                            <Controller
                                 key={group.id}
-                                group={group}
-                                expanded={expanded}
-                                handleAccordionChange={handleAccordionChange}
+                                rules={{
+                                    validate: {
+                                        isNotEmpty: (value) => !isEmpty(value?.dataHolders) || i18n.t("Please select at least one data source for this group")
+                                    }
+                                }}
+                                name={`dataSelection.dataGroups.${index}`}
+                                render={({field, fieldState}) => (
+                                    <DataGroup
+                                        {...field}
+                                        error={fieldState.error}
+                                        onGroupUpdate={onGroupUpdate}
+                                        onDelete={onDeleteGroup}
+                                        index={index}
+                                        group={group}
+                                        expanded={expanded}
+                                        handleAccordionChange={handleAccordionChange}
+                                    />
+                                )}
                             />
                         ))}
                         {provided.placeholder}
