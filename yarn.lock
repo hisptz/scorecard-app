@@ -7898,6 +7898,15 @@ dnd-core@14.0.1:
     "@react-dnd/invariant" "^2.0.0"
     redux "^4.1.1"
 
+dnd-core@15.0.0:
+  version "15.0.0"
+  resolved "https://registry.yarnpkg.com/dnd-core/-/dnd-core-15.0.0.tgz#385c83c99a79dad3fe6dcdb593354103d76b00a1"
+  integrity sha512-LbnfPLoW7LnaqOIeUShLd1FYc4iVdHjaLxu21kHUrL7UI+Uh6KtdVZKhPVzLB10TVE+y/m70pAJeDpEUDZ2VtA==
+  dependencies:
+    "@react-dnd/asap" "^4.0.0"
+    "@react-dnd/invariant" "^2.0.0"
+    redux "^4.1.1"
+
 dns-equal@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/dns-equal/-/dns-equal-1.0.0.tgz#b39e7f1da6eb0a75ba9c17324b34753c47e0654d"
@@ -15943,12 +15952,12 @@ react-dev-utils@^12.0.0:
     strip-ansi "^6.0.1"
     text-table "^0.2.0"
 
-react-dnd-html5-backend@^14.0.1:
-  version "14.0.2"
-  resolved "https://registry.yarnpkg.com/react-dnd-html5-backend/-/react-dnd-html5-backend-14.0.2.tgz#25019388f6abdeeda3a6fea835dff155abb2085c"
-  integrity sha512-QgN6rYrOm4UUj6tIvN8ovImu6uP48xBXF2rzVsp6tvj6d5XQ7OjHI4SJ/ZgGobOneRAU3WCX4f8DGCYx0tuhlw==
+react-dnd-html5-backend@^15.0.0:
+  version "15.0.0"
+  resolved "https://registry.yarnpkg.com/react-dnd-html5-backend/-/react-dnd-html5-backend-15.0.0.tgz#e2ce16de60b9e598e4f002a2a72778d0d7d8dfff"
+  integrity sha512-MgjTpMK/CCtnR3gH3DGnKlWyx10iy2zdriazZhBV53Gkhy8yTccvTftZB+CABT2Q0RL+l7GcfEAOcCA3cQfuYg==
   dependencies:
-    dnd-core "14.0.1"
+    dnd-core "15.0.0"
 
 react-dnd@^14.0.3:
   version "14.0.4"
