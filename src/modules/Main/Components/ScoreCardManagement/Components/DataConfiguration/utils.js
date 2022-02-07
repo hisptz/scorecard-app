@@ -1,3 +1,4 @@
+/* eslint-disable no-unsafe-optional-chaining */
 import { fromPairs, set } from "lodash";
 import ScorecardIndicatorGroup from "../../../../../../core/models/scorecardIndicatorGroup";
 import { generateLegendDefaults } from "../../../../../../shared/utils/utils";
