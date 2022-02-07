@@ -1,5 +1,4 @@
 import i18n from "@dhis2/d2-i18n";
-import { use } from "chai";
 import {isEmpty, last, remove, set} from "lodash";
 import React, {useCallback, useEffect, useState} from "react";
 import {Droppable} from "react-beautiful-dnd";
