@@ -87,7 +87,7 @@ export default function DataSourceRow({
           </td>
         ))
       )}
-      {averageColumn && <AverageCell bold value={average} />}
+      {averageColumn && <AverageCell  dataSources={dataSources} bold value={average} />}
     </DataTableRow>
   );
 
