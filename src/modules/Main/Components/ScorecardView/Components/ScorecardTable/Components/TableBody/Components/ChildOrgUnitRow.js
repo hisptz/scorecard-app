@@ -107,7 +107,7 @@ export default function ChildOrgUnitRow({
           ))
         )
       )}
-      {averageColumn && <AverageCell bold value={average} />}
+      {averageColumn && <AverageCell  bold value={average} />}
     </DataTableRow>
   );
 

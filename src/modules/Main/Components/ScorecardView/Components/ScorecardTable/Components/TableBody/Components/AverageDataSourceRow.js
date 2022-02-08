@@ -47,7 +47,7 @@ export default function AverageDataSourceRow({
             dataEngine={dataEngine}
             orgUnits={orgUnits}
             key={`${holderId}-${id}-average-cell`}
-            dataSources={dataSources?.map(({ id }) => id)}
+            dataSources={dataSources}
             period={id}
           />
         ))
