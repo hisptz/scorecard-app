@@ -1,4 +1,4 @@
-import { compact, head, isEmpty, sortBy, uniqBy } from "lodash";
+import {compact, head, isEmpty, reduce, sortBy, uniqBy} from "lodash";
 import { atom, selector, selectorFamily } from "recoil";
 import { EngineState } from "./engine";
 import { PeriodResolverState } from "./period";
@@ -123,6 +123,15 @@ export const OrgUnitChildren = selectorFamily({
       return orgUnit?.children ?? [];
     },
 });
+
+export const LowestOrgUnitLevel = selector({
+  key: "last-org-unit-level",
+  get: ({ get }) => {
+    const orgUnitLevels = get(OrgUnitLevels);
+    return reduce(orgUnitLevels, (acc, level) => (level.level > acc.level ? level : acc));
+  },
+});
+
 
 const userSubUnitsQuery = {
   ou: {
