@@ -6,9 +6,10 @@ import {
   IconVisualizationColumnStacked24,
   IconVisualizationLine24,
 } from "@dhis2/ui";
+import { Period } from "@iapps/period-utilities";
 import PropTypes from "prop-types";
 import React, { useEffect, useState, useRef } from "react";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState,useResetRecoilState } from "recoil";
 import ScorecardDataEngine from "../../../../../../../../core/models/scorecardData";
 import { OrgUnitLevels } from "../../../../../../../../core/state/orgUnit";
 import {
@@ -17,6 +18,7 @@ import {
 } from "../../../../../../../../core/state/scorecard";
 import { getLegend } from "../../../../../../../../shared/utils/utils";
 import TableCellAnalysis from "../TableCellAnalysis";
+import {cellPeriodOptionSelector,cellPeriodOptionAtom} from "../TableCellAnalysis/state/period";
 import { LinkedDataCell, SingleDataCell } from "./Components/DataCells";
 import LoadingCell from "./Components/LoadingCell";
 export default function DataContainer({
@@ -40,7 +42,8 @@ export default function DataContainer({
   const ref = useRef(null);
   const [stateActionRef, setStateActionRef] = useState(null);
   const [showSubMenu, setShowSubMenu] = React.useState(true)
-
+ const resetPeriodsOptionSelection = useResetRecoilState(cellPeriodOptionAtom);
+ const setPeriodOptionValueStates = useSetRecoilState(cellPeriodOptionSelector);
   const [top, bottom] = dataSources ?? [];
   const { color: topColor } =
     getLegend(topData?.current, top?.legends, {
@@ -73,6 +76,7 @@ export default function DataContainer({
     return () => {
       topSub.unsubscribe();
       bottomSub.unsubscribe();
+      resetPeriodsOptionSelection()
     };
   }, [orgUnitId, periodId, top, bottom]);
 
@@ -143,6 +147,7 @@ export default function DataContainer({
               <MenuItem
                 onClick={() => {
                   setStateActionRef(undefined);
+                  setPeriodOptionValueStates([ new Period().setPreferences({ allowFuturePeriods: true }).getById("LAST_3_MONTHS")])
                   setAnalysisOpen(true);
                 }}
                 label={i18n.t("Last 3 Month")}
@@ -151,6 +156,7 @@ export default function DataContainer({
               <MenuItem
                 onClick={() => {
                   setStateActionRef(undefined);
+                  setPeriodOptionValueStates([ new Period().setPreferences({ allowFuturePeriods: true }).getById("LAST_6_MONTHS")])
                   setAnalysisOpen(true);
                 }}
                 label={i18n.t("Last 6 Month")}
@@ -159,6 +165,7 @@ export default function DataContainer({
               <MenuItem
                 onClick={() => {
                   setStateActionRef(undefined);
+                  setPeriodOptionValueStates([ new Period().setPreferences({ allowFuturePeriods: true }).getById("LAST_12_MONTHS")])
                   setAnalysisOpen(true);
                 }}
                 label={i18n.t("Last 12 Month")}
@@ -167,17 +174,19 @@ export default function DataContainer({
                 <MenuItem
                 onClick={() => {
                   setStateActionRef(undefined);
+                  setPeriodOptionValueStates([ new Period().setPreferences({ allowFuturePeriods: true }).getById("LAST_4_QUARTERS")])
                   setAnalysisOpen(true);
                 }}
-                label={i18n.t("Last 4 Month")}
+                label={i18n.t("Last 4 Quarter")}
                 icon={<IconVisualizationColumnStacked24 />}
               />
                 <MenuItem
                 onClick={() => {
                   setStateActionRef(undefined);
+                  setPeriodOptionValueStates([ new Period().setPreferences({ allowFuturePeriods: true }).getById("LAST_5_YEARS")])
                   setAnalysisOpen(true);
                 }}
-                label={i18n.t("Last 5 Month")}
+                label={i18n.t("Last 5 Years")}
                 icon={<IconVisualizationColumnStacked24 />}
               />
             </MenuItem>
