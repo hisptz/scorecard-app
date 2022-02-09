@@ -1,5 +1,7 @@
+import i18n from "@dhis2/d2-i18n";
+import {Menu, MenuItem, Popover, IconVisualizationColumnStacked24, IconVisualizationLine24 } from "@dhis2/ui";
 import PropTypes from "prop-types";
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState , useRef} from "react";
 import {useRecoilValue} from "recoil";
 import ScorecardDataEngine from "../../../../../../../../core/models/scorecardData";
 import {OrgUnitLevels} from "../../../../../../../../core/state/orgUnit";
@@ -8,7 +10,6 @@ import {getLegend} from "../../../../../../../../shared/utils/utils";
 import TableCellAnalysis from "../TableCellAnalysis";
 import {LinkedDataCell, SingleDataCell} from "./Components/DataCells";
 import LoadingCell from "./Components/LoadingCell";
-
 export default function DataContainer({
                                           dataSources,
                                           orgUnit,
@@ -27,6 +28,8 @@ export default function DataContainer({
     const [analysisOpen, setAnalysisOpen] = useState(false);
     const [topData, setTopData] = useState();
     const [bottomData, setBottomData] = useState();
+    const ref = useRef(null);
+    const [stateActionRef, setStateActionRef] = useState(null);
     const [top, bottom] = dataSources ?? [];
     const {color: topColor} =
     getLegend(topData?.current, top?.legends, {
@@ -70,6 +73,11 @@ export default function DataContainer({
                 onClick={() => {
                     setAnalysisOpen(true);
                 }}
+                onContextMenu={(e) => {
+                    e.preventDefault();
+                    setStateActionRef(e.target);
+                }}
+                ref={ref}
             >
                 {loading ? (
                     <LoadingCell/>
@@ -96,6 +104,27 @@ export default function DataContainer({
                     }}
                 />
             )}
+                {stateActionRef && (
+        <Popover onClickOutside={() => setStateActionRef(undefined)} placement="bottom-start" reference={stateActionRef}>
+          <Menu>
+          <MenuItem
+                onClick={() => {
+                  setStateActionRef(undefined);
+                  setAnalysisOpen(true);
+                }}
+                label={i18n.t("Further Analysis")}
+                icon={<IconVisualizationColumnStacked24 />}
+              />
+            <MenuItem
+                onClick={() => {
+                  setStateActionRef(undefined);
+                }}
+                label={i18n.t("Trend Analysis ")}
+                icon={<IconVisualizationLine24 />}
+              />
+          </Menu>
+        </Popover>
+      )}
         </>
     );
 }
