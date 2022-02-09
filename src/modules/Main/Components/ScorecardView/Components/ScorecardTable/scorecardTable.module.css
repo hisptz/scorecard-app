@@ -57,6 +57,12 @@
     justify-content: center;
 }
 
+.child-table-row .parent-table-row {
+    page-break-inside: avoid;
+    page-break-after: auto;
+}
+
+
 .child-table-row td:first-child {
     padding: 8px;
     max-width: 40px !important;
@@ -72,6 +78,19 @@
 }
 
 @media print {
+    .print-visible {
+        overflow: visible !important;
+    }
+
+    @page {
+        margin: 3rem 2rem;
+    }
+
+    @page:first {
+        margin-top: 0;
+    }
+
+
     .child-table-row td:first-child {
         background: white !important;
         border-left: 1px solid #D5DDE5 !important;

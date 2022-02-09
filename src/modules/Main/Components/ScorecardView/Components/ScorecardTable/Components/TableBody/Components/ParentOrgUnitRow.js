@@ -11,6 +11,7 @@ import {
   ScorecardDataLoadingState,
   ScorecardViewState,
 } from "../../../../../../../../../core/state/scorecard";
+import classes from "../../../scorecardTable.module.css";
 import DataContainer from "../../TableDataContainer";
 import AverageCell from "./AverageCell";
 import DroppableCell from "./DroppableCell";
@@ -47,7 +48,7 @@ export default function ParentOrgUnitRow({
   useEffect(subscribeToAverage, [orgUnit, loading, id]);
 
   const Component = (emptyRows || !isEmpty) && (
-    <DataTableRow key={id} bordered>
+    <DataTableRow className={classes["parent-table-row"]} key={id} bordered>
       <DataTableCell fixed left={"0"} width={"50px"} />
       {itemNumber && (
         <DataTableCell width={"50px"} fixed left={"50px"}>
