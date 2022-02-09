@@ -36,6 +36,7 @@ export default function ScorecardView() {
         return [];
     }, [orgUnitState.state, orgUnitState.contents]);
     const {read: access} = useRecoilValue(
+
         UserAuthorityOnScorecard(scorecardId)
     );
     const downloadRef = useRef();
@@ -69,8 +70,8 @@ export default function ScorecardView() {
             <Suspense fallback={<FullPageLoader/>}>
                 <div
                     ref={downloadRef}
-                    className="column p-16"
-                    style={{height: "100%", width: "100%", overflow: "auto"}}
+                    className="column p-16  print-visible"
+                    style={{height: "100%", width: "100%", overflow: "visible"}}
                 >
                     <ScorecardActions
                         dataEngine={initialDataEngine}

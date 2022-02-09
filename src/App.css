@@ -494,6 +494,7 @@ span.jsx-2694284040 {
 }
 
 .scorecard-org-unit-cell {
+
     background: #E8EDF2;
     padding-top: 24px;
     min-width: 200px !important;
@@ -537,6 +538,7 @@ td.extra-table-cell > svg {
 
     .table-print {
         border: 1px solid #D5DDE5 !important;
+        page-break-inside: auto;
     }
 
     .print-hide {
@@ -569,6 +571,28 @@ td.extra-table-cell > svg {
 
     .data-cell {
         border: 1px solid #D5DDE5 !important;
+    }
+
+
+    *::-webkit-scrollbar {
+        display: none;
+    }
+
+    *::-webkit-scrollbar-track {
+        display: none;
+    }
+
+    *::-webkit-scrollbar-thumb {
+        display: none;
+    }
+
+    body {
+        background: #FFFFFF;
+    }
+
+    .page-break {
+        display: block;
+        page-break-before: auto;
     }
 }
 

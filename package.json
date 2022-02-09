@@ -35,7 +35,7 @@
     "@dhis2/d2-i18n": "^1.1.0",
     "@hookform/devtools": "^4.0.2",
     "concurrently": "^6.3.0",
-    "cucumber": "^7.0.0-rc.0",
+    "cucumber": "If scorecard height cannot fit in one page, it should extend to the next page^7.0.0-rc.0",
     "cypress": "8.7.0",
     "cypress-cucumber-preprocessor": "^4.3.0",
     "cypress-multi-reporters": "^1.5.0",
