@@ -8,7 +8,7 @@ import React, { Suspense, useEffect, useState } from "react";
 import {
   useRecoilCallback,
   useRecoilValueLoadable,
-  useSetRecoilState,
+  useResetRecoilState,
 } from "recoil";
 import OrgUnitSelection from "../../../../../../../../core/models/orgUnitSelection";
 import FullPageError from "../../../../../../../../shared/Components/Errors/FullPageError";
@@ -18,8 +18,7 @@ import ChartAnalysis from "./Components/ChartAnalysis";
 import { DataSourceState, DataState } from "./state/data";
 import { LayoutState } from "./state/layout";
 import { OrgUnitState } from "./state/orgUnit";
-import { PeriodState } from "./state/period";
-
+import { PeriodState, cellPeriodOptionAtom } from "./state/period";
 const DictionaryAnalysis = React.lazy(() =>
   import("./Components/DictionaryAnalysis")
 );
@@ -59,6 +58,7 @@ export default function TableCellAnalysis({
   const [viewType, setViewType] = useState(viewTypes[0]);
   const dataSources = dataHolder?.dataSources;
   const SelectedView = viewType.component;
+  const resetPeriodOptionsCell = useResetRecoilState(cellPeriodOptionAtom);
 
   const setStates = useRecoilCallback(
     ({ set }) =>
@@ -85,6 +85,8 @@ export default function TableCellAnalysis({
     setStates();
     return () => {
       resetStates();
+      resetPeriodOptionsCell()
+    
     };
   }, [dataSources, orgUnit, period]);
 

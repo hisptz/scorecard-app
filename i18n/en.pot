@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-02-07T15:03:36.897Z\n"
-"PO-Revision-Date: 2022-02-07T15:03:36.897Z\n"
+"POT-Creation-Date: 2022-02-09T07:30:39.208Z\n"
+"PO-Revision-Date: 2022-02-09T07:30:39.208Z\n"
 
 msgid "Next"
 msgstr "Next"
@@ -1291,6 +1291,12 @@ msgstr "Chart"
 
 msgid "Dictionary"
 msgstr "Dictionary"
+
+msgid "Further Analysis"
+msgstr "Further Analysis"
+
+msgid "Trend Analysis "
+msgstr "Trend Analysis "
 
 msgid "Search Organisation Unit"
 msgstr "Search Organisation Unit"
