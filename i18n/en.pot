@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-02-10T09:33:17.126Z\n"
-"PO-Revision-Date: 2022-02-10T09:33:17.126Z\n"
+"POT-Creation-Date: 2022-02-10T13:31:40.769Z\n"
+"PO-Revision-Date: 2022-02-10T13:31:40.769Z\n"
 
 msgid "Next"
 msgstr "Next"
@@ -530,20 +530,35 @@ msgstr "Add a data source"
 msgid "Add Item"
 msgstr "Add Item"
 
+msgid "Organisation Unit Specific Targets"
+msgstr "Organisation Unit Specific Targets"
+
+msgid "Organisation Unit(s)"
+msgstr "Organisation Unit(s)"
+
+msgid "Change"
+msgstr "Change"
+
+msgid "Other Periods"
+msgstr "Other Periods"
+
+msgid "Update"
+msgstr "Update"
+
 msgid "Period Specific Targets"
 msgstr "Period Specific Targets"
 
 msgid "Change Period"
 msgstr "Change Period"
 
-msgid "Update"
-msgstr "Update"
-
 msgid "Organisation unit(s)"
 msgstr "Organisation unit(s)"
 
 msgid "Organisation unit levels"
 msgstr "Organisation unit levels"
+
+msgid "Legends"
+msgstr "Legends"
 
 msgid "Set Specific Targets"
 msgstr "Set Specific Targets"
@@ -734,9 +749,6 @@ msgstr "Download"
 
 msgid "Refresh"
 msgstr "Refresh"
-
-msgid "Legends"
-msgstr "Legends"
 
 msgid "Increased from last period"
 msgstr "Increased from last period"
@@ -1294,9 +1306,6 @@ msgstr "Category"
 
 msgid "Layout"
 msgstr "Layout"
-
-msgid "Organisation Unit(s)"
-msgstr "Organisation Unit(s)"
 
 msgid "Period(s)"
 msgstr "Period(s)"

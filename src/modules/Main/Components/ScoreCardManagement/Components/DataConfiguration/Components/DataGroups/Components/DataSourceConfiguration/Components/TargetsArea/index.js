@@ -11,9 +11,20 @@ import {DHIS2ValueTypes} from "../../../../../../../../../../../../shared/Compon
 import {FormFieldModel} from "../../../../../../../../../../../../shared/Components/CustomForm/models";
 import {generateLegendDefaults, uid} from "../../../../../../../../../../../../shared/utils/utils";
 import {getNonDefaultLegendDefinitions} from "../../../../../../../General/utils/utils";
+import OrgUnitLevelSpecificTargets from "../OrgUnitLevelSpecificTargetsModal";
 import OrgUnitSpecificTargetsModal from "../OrgUnitSpecificTargetsModal";
 import PeriodSpecificTargetsModal from "../PeriodSpecificTargetsModal";
 import SpecificTargetView from "./components/SpecificTargetView";
+
+function getSelectedType(specificTargets, specificTargetSet) {
+    if (!isEmpty(specificTargets) && specificTargetSet) {
+        return head(specificTargets)?.type;
+    }
+    if (specificTargetSet) {
+        return "orgUnitLevel";
+    }
+    return null;
+}
 
 export default function TargetsArea({path}) {
     const {watch, setValue} = useFormContext();
@@ -25,7 +36,7 @@ export default function TargetsArea({path}) {
     const weight = watch(`${path}.weight`);
     const highIsGood = watch(`${path}.highIsGood`);
 
-    const [selectedType, setSelectedType] = useState(head(specificTargets)?.type);
+    const [selectedType, setSelectedType] = useState(getSelectedType(specificTargets, areSpecificTargetsSet));
 
 
     useEffect(() => {
@@ -45,7 +56,15 @@ export default function TargetsArea({path}) {
             areSpecificTargetsSet ? <div className="column gap-16">
                     <SingleSelectField label={i18n.t("Specific target type")} selected={selectedType}
                                        onChange={({selected}) => {
+                                           if (selected === "orgUnitLevel") {
+                                               setSelectedType(selected);
+                                               setValue(`${path}.legends`, [])
+                                               setValue(`${path}.specificTargets`, [])
+                                               return;
+                                           }
                                            setSelectedType(selected);
+                                           setValue(`${path}.legends`, generateLegendDefaults(legendDefinitions, weight, highIsGood))
+
                                            setValue(`${path}.specificTargets`, [{
                                                id: uid(),
                                                type: selected,
@@ -59,7 +78,7 @@ export default function TargetsArea({path}) {
                     </SingleSelectField>
                     <div className="column gap-8">
                         {
-                            specificTargets?.map(target => (
+                            selectedType !== "orgUnitLevel" && specificTargets?.map(target => (
                                 <SpecificTargetView
                                     defaultLegends={defaultLegends}
                                     onDelete={() => {
@@ -98,6 +117,9 @@ export default function TargetsArea({path}) {
                                     setValue(`${path}.specificTargets`, [target]);
                                 }}
                             /> : null
+                    }
+                    {
+                        selectedType === "orgUnitLevel" && <OrgUnitLevelSpecificTargets path={path}/>
                     }
                 </div> :
                 <div className="row">

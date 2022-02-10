@@ -33,10 +33,10 @@ export default function LevelTargetsField({
       !Array.isArray(initialValue)
         ? initialValue
         : fromPairs([
-            ...orgUnitLevels?.map(({ id }) => [
+            ...(orgUnitLevels?.map(({ id }) => [
               id,
               generateLegendDefaults(multipleFields, weight, highIsGood),
-            ]),
+            ])) ?? [],
           ]),
     [highIsGood, initialValue, multipleFields, orgUnitLevels, weight]
   );
