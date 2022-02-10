@@ -89,16 +89,6 @@ export default function DataGroupArea({onGroupAdd}) {
 
     return (
         <div className="column h-100">
-            <div className="row space-between pr-16 pt-16 target-on-level-selector ">
-                <p style={{margin: 0}} className="pl-16">
-                    {i18n.t("Set Specific Targets For All Data Sources")}
-                </p>
-                <Checkbox
-                    dataTest={"set-target-selection"}
-                    checked={targetOnLevels}
-                    onChange={() => updateTargetOnLevels((prevState) => !prevState)}
-                />
-            </div>
             <div style={{
                 padding: "3%"
             }}>
