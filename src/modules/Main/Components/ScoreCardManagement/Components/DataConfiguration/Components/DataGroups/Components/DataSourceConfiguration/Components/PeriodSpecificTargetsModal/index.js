@@ -9,7 +9,7 @@ import {useFormContext} from "react-hook-form";
 import {getNonDefaultLegendDefinitions} from "../../../../../../../General/utils/utils";
 import LegendsField from "../TargetsArea/components/LegendsField";
 
-export default function PeriodSpecificTargetsModal({open, onClose, onUpdate, specificTarget}) {
+export default function PeriodSpecificTargetsModal({open, onClose, onUpdate, specificTarget, defaultLegends, onChangeDefaultLegends}) {
     const {watch} = useFormContext();
     const [target, setTarget] = useState(specificTarget);
     const legendDefinitions = getNonDefaultLegendDefinitions(watch("legendDefinitions"));
@@ -32,14 +32,14 @@ export default function PeriodSpecificTargetsModal({open, onClose, onUpdate, spe
             <ModalContent>
                 <div className="column w-100 gap-16">
                     <div className=" align-items-end row gap-8 w-100">
-                        <div className="column">
+                        <div className="column flex-1">
                             <InputField fullWidth label={i18n.t("Period")} disabled value={target?.items?.map(item => {
                                 if (item) {
                                     return new Period().getById(item)?.name
                                 }
                             })?.join(", ")}/>
                         </div>
-                        <div>
+                        <div className="w-25">
                             <Button onClick={() => setPeriodSelectorOpen(true)}>{i18n.t("Change Period")}</Button>
                         </div>
                     </div>
@@ -78,6 +78,16 @@ export default function PeriodSpecificTargetsModal({open, onClose, onUpdate, spe
                                         }
                                     });
                                 }}
+                            />
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="column w-100 legend-settings-area">
+                            <p>{i18n.t("Other Periods")}</p>
+                            <LegendsField
+                                legendDefinitions={legendDefinitions}
+                                value={defaultLegends}
+                                onChange={onChangeDefaultLegends}
                             />
                         </div>
                     </div>

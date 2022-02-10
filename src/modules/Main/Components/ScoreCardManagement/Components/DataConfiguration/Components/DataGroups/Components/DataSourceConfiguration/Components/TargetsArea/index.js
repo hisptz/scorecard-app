@@ -2,6 +2,7 @@ import i18n from "@dhis2/d2-i18n";
 import {SingleSelectField, SingleSelectOption} from '@dhis2/ui'
 import {RHFCustomInput} from "@hisptz/react-ui";
 import {isEmpty} from "lodash";
+import PropTypes from 'prop-types'
 import React, {useEffect, useState} from "react";
 import {useFormContext} from "react-hook-form";
 import TargetsField
@@ -13,13 +14,15 @@ import {getNonDefaultLegendDefinitions} from "../../../../../../../General/utils
 import PeriodSpecificTargetsModal from "../PeriodSpecificTargetsModal";
 import SpecificTargetView from "./components/SpecificTargetView";
 
-
 export default function TargetsArea({path}) {
-    const {watch, setValue, getValues} = useFormContext();
+    const {watch, setValue} = useFormContext();
     const legendDefinitions = getNonDefaultLegendDefinitions(watch("legendDefinitions"));
     const [openConfigDialog, setOpenConfigDialog] = useState(false);
     const areSpecificTargetsSet = watch(`${path}.specificTargetsSet`);
     const specificTargets = watch(`${path}.specificTargets`)
+    const defaultLegends = watch(`${path}.legends`);
+    const weight = watch(`${path}.weight`);
+    const highIsGood = watch(`${path}.highIsGood`);
 
     const [selectedType, setSelectedType] = useState();
 
@@ -46,7 +49,7 @@ export default function TargetsArea({path}) {
                                                id: uid(),
                                                type: selected,
                                                items: [],
-                                               legends: generateLegendDefaults(legendDefinitions, getValues(`${path}.weight`, getValues(`${path}.highIsGood`)))
+                                               legends: generateLegendDefaults(legendDefinitions, weight, highIsGood)
                                            }]);
                                        }}>
                         <SingleSelectOption value="period" label={i18n.t("Period")}/>
@@ -56,20 +59,25 @@ export default function TargetsArea({path}) {
                     <div className="column gap-8">
                         {
                             specificTargets?.map(target => (
-                                <SpecificTargetView legendDefinitions={legendDefinitions}
-                                                    onUpdate={() => setOpenConfigDialog(true)} key={`${target.id}-view`}
-                                                    specificTarget={target}/>
+                                <SpecificTargetView
+                                    onDelete={() => {
+                                        setValue(`${path}.specificTargets`, []);
+
+                                    }} legendDefinitions={legendDefinitions}
+                                    onUpdate={() => setOpenConfigDialog(true)} key={`${target.id}-view`}
+                                    specificTarget={target}/>
                             ))
                         }
                     </div>
                     {
                         selectedType === "period" && openConfigDialog && !isEmpty(specificTargets) ?
                             <PeriodSpecificTargetsModal
+                                defaultLegends={defaultLegends}
+                                onChangeDefaultLegends={(legends) => setValue(`${path}.legends`, legends)}
                                 specificTarget={specificTargets[0]}
                                 onClose={() => setOpenConfigDialog(false)}
                                 open={openConfigDialog}
                                 onUpdate={(target) => {
-                                    console.log(target)
                                     setOpenConfigDialog(false);
                                     setValue(`${path}.specificTargets`, [target]);
                                 }}
@@ -98,3 +106,8 @@ export default function TargetsArea({path}) {
         }
     </div>
 }
+
+TargetsArea.propTypes = {
+    path: PropTypes.string.isRequired,
+};
+

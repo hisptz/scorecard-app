@@ -1,12 +1,11 @@
 import i18n from '@dhis2/d2-i18n'
-import {Button, Tag, colors} from '@dhis2/ui'
+import {Button, colors, Tag} from '@dhis2/ui'
 import {Period} from "@iapps/period-utilities";
 import {find} from "lodash";
 import PropTypes from 'prop-types'
 import React from 'react'
 
 function LegendsView({legends, legendDefinitions}) {
-
     return <div className="row gap-16 space-evenly">
         {legends?.map((legend, index) => {
             const {legendDefinitionId, startValue, endValue} = legend ?? {};
@@ -50,8 +49,8 @@ function getItemDisplayName(type, item) {
 }
 
 
-export default function SpecificTargetView({specificTarget, legendDefinitions, onUpdate}) {
-    const { legends, type, items } = specificTarget ?? {};
+export default function SpecificTargetView({specificTarget, legendDefinitions, onUpdate, onDelete}) {
+    const {legends, type, items} = specificTarget ?? {};
 
     return (
         <div style={{
@@ -72,8 +71,9 @@ export default function SpecificTargetView({specificTarget, legendDefinitions, o
             <div>
                 <LegendsView legends={legends} legendDefinitions={legendDefinitions}/>
             </div>
-            <div className="row justify-content-end">
+            <div className="row gap-8 justify-content-end">
                 <Button onClick={onUpdate}>Update</Button>
+                <Button onClick={onDelete}>Delete</Button>
             </div>
         </div>
     )
@@ -81,5 +81,8 @@ export default function SpecificTargetView({specificTarget, legendDefinitions, o
 
 
 SpecificTargetView.propTypes = {
-    specificTarget: PropTypes.object
+    legendDefinitions: PropTypes.array,
+    specificTarget: PropTypes.object,
+    onDelete: PropTypes.func,
+    onUpdate: PropTypes.func,
 };
