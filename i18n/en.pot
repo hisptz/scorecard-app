@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-02-10T06:35:47.990Z\n"
-"PO-Revision-Date: 2022-02-10T06:35:47.990Z\n"
+"POT-Creation-Date: 2022-02-09T07:30:39.208Z\n"
+"PO-Revision-Date: 2022-02-09T07:30:39.208Z\n"
 
 msgid "Next"
 msgstr "Next"
@@ -530,27 +530,6 @@ msgstr "Add a data source"
 msgid "Add Item"
 msgstr "Add Item"
 
-msgid "Period Specific Targets"
-msgstr "Period Specific Targets"
-
-msgid "Change Period"
-msgstr "Change Period"
-
-msgid "Other Periods"
-msgstr "Other Periods"
-
-msgid "Update"
-msgstr "Update"
-
-msgid "Set Specific Targets"
-msgstr "Set Specific Targets"
-
-msgid "Specific target type"
-msgstr "Specific target type"
-
-msgid "Organisation Unit Level"
-msgstr "Organisation Unit Level"
-
 msgid "Add Data source"
 msgstr "Add Data source"
 
@@ -580,6 +559,9 @@ msgstr "View the changes on the preview panel above"
 
 msgid "Select a data source to configure"
 msgstr "Select a data source to configure"
+
+msgid "Set Target on Levels"
+msgstr "Set Target on Levels"
 
 msgid "Groups"
 msgstr "Groups"
@@ -1309,6 +1291,12 @@ msgstr "Chart"
 
 msgid "Dictionary"
 msgstr "Dictionary"
+
+msgid "Further Analysis"
+msgstr "Further Analysis"
+
+msgid "Trend Analysis "
+msgstr "Trend Analysis "
 
 msgid "Search Organisation Unit"
 msgstr "Search Organisation Unit"
