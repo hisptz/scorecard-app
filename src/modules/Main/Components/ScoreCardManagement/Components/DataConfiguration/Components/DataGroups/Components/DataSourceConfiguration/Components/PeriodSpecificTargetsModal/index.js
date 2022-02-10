@@ -1,33 +1,30 @@
 import i18n from '@dhis2/d2-i18n'
-import {Button, ButtonStrip, Field, InputField, Modal, ModalActions, ModalContent, ModalTitle} from '@dhis2/ui'
+import {Button, ButtonStrip, InputField, Modal, ModalActions, ModalContent, ModalTitle} from '@dhis2/ui'
 import {PeriodSelectorModal} from "@hisptz/react-ui";
-import {compact} from "lodash";
+import {Period} from "@iapps/period-utilities";
+import {compact, isEmpty} from "lodash";
 import PropTypes from 'prop-types'
 import React, {useCallback, useState} from 'react'
 import {useFormContext} from "react-hook-form";
-import TargetsField
-    from "../../../../../../../../../../../../shared/Components/CustomForm/components/DataSourceConfigurationForm/Components/TargetsField";
-import {DHIS2ValueTypes} from "../../../../../../../../../../../../shared/Components/CustomForm/constants";
-import {FormFieldModel} from "../../../../../../../../../../../../shared/Components/CustomForm/models";
 import {getNonDefaultLegendDefinitions} from "../../../../../../../General/utils/utils";
+import LegendsField from "../TargetsArea/components/LegendsField";
 
-export default function PeriodSpecificTargetsModal({open, onClose, onUpdate, path}) {
-    const {watch, setValue} = useFormContext();
+export default function PeriodSpecificTargetsModal({open, onClose, onUpdate, specificTarget}) {
+    const {watch} = useFormContext();
+    const [target, setTarget] = useState(specificTarget);
     const legendDefinitions = getNonDefaultLegendDefinitions(watch("legendDefinitions"));
-    const [periodSelectorOpen, setPeriodSelectorOpen] = useState(true)
-    const [period, setPeriod] = useState();
+    const [periodSelectorOpen, setPeriodSelectorOpen] = useState(isEmpty(target.items))
 
 
     const onUpdateClick = useCallback(
         () => {
-            setValue(`${path}.items`, [period]);
-            setValue(`${path}.type`, "period");
-            onUpdate();
+            onUpdate({
+                ...target,
+            });
             onClose();
         },
-        [onClose, onUpdate, path, period, setValue],
+        [onClose, onUpdate, target],
     );
-
 
     return (
         <Modal onClose={onClose} hide={!open} position="middle">
@@ -36,7 +33,11 @@ export default function PeriodSpecificTargetsModal({open, onClose, onUpdate, pat
                 <div className="column w-100 gap-16">
                     <div className=" align-items-end row gap-8 w-100">
                         <div className="column">
-                            <InputField fullWidth label={i18n.t("Period")} disabled value={period?.name}/>
+                            <InputField fullWidth label={i18n.t("Period")} disabled value={target?.items?.map(item => {
+                                if (item) {
+                                    return new Period().getById(item)?.name
+                                }
+                            })?.join(", ")}/>
                         </div>
                         <div>
                             <Button onClick={() => setPeriodSelectorOpen(true)}>{i18n.t("Change Period")}</Button>
@@ -45,56 +46,41 @@ export default function PeriodSpecificTargetsModal({open, onClose, onUpdate, pat
                     {
                         periodSelectorOpen &&
                         <PeriodSelectorModal
+                            excludeRelativePeriods
                             singleSelection
-                            selectedPeriods={compact([period])}
+                            selectedPeriods={compact([...(target.items?.map(item => {
+                                if (item) {
+                                    return new Period().getById(item)
+                                }
+                            }) ?? [])])}
                             onClose={() => setPeriodSelectorOpen(false)} hide={!periodSelectorOpen}
                             onUpdate={(periods) => {
-                                setPeriod(periods[0])
+                                setTarget(prevState => {
+                                    return {
+                                        ...prevState,
+                                        items: [periods[0]?.id]
+                                    }
+                                });
                                 setPeriodSelectorOpen(false)
                             }}
                         />
                     }
                     <div className="row">
                         <div className="column w-100 legend-settings-area">
-                            <TargetsField
-                                name={`${path}.legends`}
-                                multipleFields={
-                                    legendDefinitions?.map(
-                                        (legend) =>
-                                            new FormFieldModel({
-                                                id: legend.id,
-                                                mandatory: false,
-                                                name: legend.name,
-                                                legendDefinition: legend,
-                                                valueType: DHIS2ValueTypes.LEGEND_MIN_MAX.name,
-                                            })
-                                    )
-                                }
+                            <LegendsField
+                                legendDefinitions={legendDefinitions}
+                                value={target.legends}
+                                onChange={(legends) => {
+                                    setTarget(prevState => {
+                                        return {
+                                            ...prevState,
+                                            legends
+                                        }
+                                    });
+                                }}
                             />
                         </div>
                     </div>
-                    <Field label={i18n.t("Other Periods")}>
-                        <div className="row">
-                            <div className="column w-100 legend-settings-area">
-                                <TargetsField
-                                    name={`${path}.legends`}
-                                    multipleFields={
-                                        legendDefinitions?.map(
-                                            (legend) =>
-                                                new FormFieldModel({
-                                                    id: legend.id,
-                                                    mandatory: false,
-                                                    name: legend.name,
-                                                    legendDefinition: legend,
-                                                    valueType: DHIS2ValueTypes.LEGEND_MIN_MAX.name,
-                                                })
-                                        )
-                                    }
-                                />
-                            </div>
-                        </div>
-
-                    </Field>
                 </div>
             </ModalContent>
             <ModalActions>
@@ -109,8 +95,8 @@ export default function PeriodSpecificTargetsModal({open, onClose, onUpdate, pat
 
 
 PeriodSpecificTargetsModal.propTypes = {
+    specificTarget: PropTypes.object.isRequired,
     open: PropTypes.bool,
-    path: PropTypes.string,
     onClose: PropTypes.func,
     onUpdate: PropTypes.func,
 };
