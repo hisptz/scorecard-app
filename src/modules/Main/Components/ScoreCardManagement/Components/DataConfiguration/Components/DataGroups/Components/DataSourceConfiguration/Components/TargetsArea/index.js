@@ -1,7 +1,7 @@
 import i18n from "@dhis2/d2-i18n";
 import {SingleSelectField, SingleSelectOption} from '@dhis2/ui'
 import {RHFCustomInput} from "@hisptz/react-ui";
-import {isEmpty} from "lodash";
+import {head, isEmpty} from "lodash";
 import PropTypes from 'prop-types'
 import React, {useEffect, useState} from "react";
 import {useFormContext} from "react-hook-form";
@@ -11,6 +11,7 @@ import {DHIS2ValueTypes} from "../../../../../../../../../../../../shared/Compon
 import {FormFieldModel} from "../../../../../../../../../../../../shared/Components/CustomForm/models";
 import {generateLegendDefaults, uid} from "../../../../../../../../../../../../shared/utils/utils";
 import {getNonDefaultLegendDefinitions} from "../../../../../../../General/utils/utils";
+import OrgUnitSpecificTargetsModal from "../OrgUnitSpecificTargetsModal";
 import PeriodSpecificTargetsModal from "../PeriodSpecificTargetsModal";
 import SpecificTargetView from "./components/SpecificTargetView";
 
@@ -24,7 +25,7 @@ export default function TargetsArea({path}) {
     const weight = watch(`${path}.weight`);
     const highIsGood = watch(`${path}.highIsGood`);
 
-    const [selectedType, setSelectedType] = useState();
+    const [selectedType, setSelectedType] = useState(head(specificTargets)?.type);
 
 
     useEffect(() => {
@@ -60,6 +61,7 @@ export default function TargetsArea({path}) {
                         {
                             specificTargets?.map(target => (
                                 <SpecificTargetView
+                                    defaultLegends={defaultLegends}
                                     onDelete={() => {
                                         setValue(`${path}.specificTargets`, []);
 
@@ -72,6 +74,20 @@ export default function TargetsArea({path}) {
                     {
                         selectedType === "period" && openConfigDialog && !isEmpty(specificTargets) ?
                             <PeriodSpecificTargetsModal
+                                defaultLegends={defaultLegends}
+                                onChangeDefaultLegends={(legends) => setValue(`${path}.legends`, legends)}
+                                specificTarget={specificTargets[0]}
+                                onClose={() => setOpenConfigDialog(false)}
+                                open={openConfigDialog}
+                                onUpdate={(target) => {
+                                    setOpenConfigDialog(false);
+                                    setValue(`${path}.specificTargets`, [target]);
+                                }}
+                            /> : null
+                    }
+                    {
+                        selectedType === "orgUnit" && openConfigDialog && !isEmpty(specificTargets) ?
+                            <OrgUnitSpecificTargetsModal
                                 defaultLegends={defaultLegends}
                                 onChangeDefaultLegends={(legends) => setValue(`${path}.legends`, legends)}
                                 specificTarget={specificTargets[0]}

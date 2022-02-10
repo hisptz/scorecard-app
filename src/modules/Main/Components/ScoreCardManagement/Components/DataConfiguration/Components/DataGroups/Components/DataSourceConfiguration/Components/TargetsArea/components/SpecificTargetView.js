@@ -42,14 +42,14 @@ function getItemDisplayName(type, item) {
         case "period":
             return new Period()?.getById(item)?.name;
         case "orgUnit":
-            return item.name;
+            return item;
         case "orgUnitLevel":
             return item.name;
     }
 }
 
 
-export default function SpecificTargetView({specificTarget, legendDefinitions, onUpdate, onDelete}) {
+export default function SpecificTargetView({specificTarget, legendDefinitions, onUpdate, onDelete, defaultLegends}) {
     const {legends, type, items} = specificTarget ?? {};
 
     return (
@@ -57,19 +57,26 @@ export default function SpecificTargetView({specificTarget, legendDefinitions, o
             border: `1px solid ${colors.grey500}`,
             borderRadius: 4,
             padding: 8
-        }} className="column gap-8 ">
-            <div className="row gap-16 align-items-center">
+        }} className="column gap-8 flex-wrap">
+            <div className="column gap-8 flex-wrap">
                 <b>{getTypeLabel(type)}</b>
-                {
-                    items?.map(item => (
-                        <Tag key={`${item}-tag`}>
-                            {getItemDisplayName(type, item)}
-                        </Tag>
-                    ))
-                }
+                <div className="row gap-8 flex-wrap">
+                    {
+                        items?.map(item => {
+                            return <Tag key={`${item}-tag`}>
+                                {getItemDisplayName(type, item)}
+                            </Tag>
+                        })
+                    }
+                </div>
             </div>
             <div>
+                <p>{i18n.t("Legends")}</p>
                 <LegendsView legends={legends} legendDefinitions={legendDefinitions}/>
+            </div>
+            <div>
+                <p>{i18n.t(`Other ${getTypeLabel(type)}`)}</p>
+                <LegendsView legends={defaultLegends} legendDefinitions={legendDefinitions}/>
             </div>
             <div className="row gap-8 justify-content-end">
                 <Button onClick={onUpdate}>Update</Button>
@@ -81,6 +88,7 @@ export default function SpecificTargetView({specificTarget, legendDefinitions, o
 
 
 SpecificTargetView.propTypes = {
+    defaultLegends: PropTypes.array,
     legendDefinitions: PropTypes.array,
     specificTarget: PropTypes.object,
     onDelete: PropTypes.func,
