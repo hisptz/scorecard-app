@@ -1,5 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import {colors} from '@dhis2/ui'
+import {Period} from "@iapps/period-utilities";
 import {find} from "lodash";
 import PropTypes from 'prop-types'
 import React from 'react'
@@ -84,7 +85,30 @@ export function OrgUnitSpecificTargetView({dataSourceLabel, specificTarget}) {
     )
 }
 
+export function PeriodSpecificTargetView({dataSourceLabel, specificTarget}) {
+    const {items, legends} = specificTarget ?? {};
+    return (
+        <div style={{maxWidth: 350, border: `1px solid ${colors.grey600}`, borderRadius: 4}}
+             className="column gap-16 p-16">
+            <div className="column gap-16">
+                <div>
+                    <b>{i18n.t("Period")}: </b> {items?.map(pe => new Period().getById(pe)?.name)?.join(", ")}
+                </div>
+                <div>
+                    <b>{i18n.t("Data Source")}: </b>{dataSourceLabel}
+                </div>
+            </div>
+            <LegendsView legends={legends}/>
+        </div>
+    )
+}
+
 OrgUnitSpecificTargetView.propTypes = {
+    dataSourceLabel: PropTypes.string,
+    specificTarget: PropTypes.object
+};
+
+PeriodSpecificTargetView.propTypes = {
     dataSourceLabel: PropTypes.string,
     specificTarget: PropTypes.object
 };

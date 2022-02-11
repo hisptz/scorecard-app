@@ -6,7 +6,7 @@ import React, {Suspense, useMemo} from "react";
 import {useRecoilValue} from "recoil";
 import {ScorecardViewState} from "../../../../../../core/state/scorecard";
 import {getDataSourcesFromGroups} from "../../../../../../shared/utils/utils";
-import {OrgUnitSpecificTargetView} from "./components/SpecificTargetView";
+import {OrgUnitSpecificTargetView, PeriodSpecificTargetView} from "./components/SpecificTargetView";
 
 function SpecificTargetsLibrary() {
     const {dataGroups} = useRecoilValue(ScorecardViewState("dataSelection"))
@@ -22,6 +22,16 @@ function SpecificTargetsLibrary() {
                 <div>
                     {
                         specificTargetsDataSourcesByType.orgUnit.map(dataSource => <OrgUnitSpecificTargetView
+                            key={`${dataSource.id}-orgUnit-specific-target`}
+                            specificTarget={head(dataSource.specificTargets)} dataSourceLabel={dataSource.label}/>)
+                    }
+                </div>
+            </div>
+            <div>
+                <h3>{i18n.t("Period Specific targets")}</h3>
+                <div>
+                    {
+                        specificTargetsDataSourcesByType.period.map(dataSource => <PeriodSpecificTargetView
                             key={`${dataSource.id}-orgUnit-specific-target`}
                             specificTarget={head(dataSource.specificTargets)} dataSourceLabel={dataSource.label}/>)
                     }
