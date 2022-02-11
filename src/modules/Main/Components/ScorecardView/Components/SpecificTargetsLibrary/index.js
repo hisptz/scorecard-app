@@ -6,20 +6,26 @@ import React, {Suspense, useMemo} from "react";
 import {useRecoilValue} from "recoil";
 import {ScorecardViewState} from "../../../../../../core/state/scorecard";
 import {getDataSourcesFromGroups} from "../../../../../../shared/utils/utils";
-import {OrgUnitSpecificTargetView, PeriodSpecificTargetView} from "./components/SpecificTargetView";
-
+import {
+    OrgUnitLevelSpecificTargetView,
+    OrgUnitSpecificTargetView,
+    PeriodSpecificTargetView
+} from "./components/SpecificTargetView";
+import classes from "./SpecificTargetsLibrary.module.css"
 function SpecificTargetsLibrary() {
     const {dataGroups} = useRecoilValue(ScorecardViewState("dataSelection"))
     const dataSources = useMemo(() => getDataSourcesFromGroups(dataGroups), [dataGroups])
     const specificTargetsDataSourcesByType = useMemo(() => {
-        const dataSourcesWithSpecificTargets = filter(dataSources, ds => !isEmpty(ds.specificTargets))
-        return groupBy(dataSourcesWithSpecificTargets, ds => head(ds.specificTargets).type)
+        const dataSourcesWithSpecificTargets = filter(dataSources, ds => ds.specificTargetsSet)
+        const data = groupBy(filter(dataSourcesWithSpecificTargets, ds => !isEmpty(ds.specificTargets)), ds => head(ds.specificTargets)?.type)
+        data["orgUnitLevel"] = dataSourcesWithSpecificTargets.filter(ds => isEmpty(ds.specificTargets))
+        return data;
     }, [dataSources])
     return (
         <div className="column gap-16">
             <div>
                 <h3>{i18n.t("Organisation Units Specific targets")}</h3>
-                <div>
+                <div className="gap-16">
                     {
                         specificTargetsDataSourcesByType.orgUnit.map(dataSource => <OrgUnitSpecificTargetView
                             key={`${dataSource.id}-orgUnit-specific-target`}
@@ -29,11 +35,21 @@ function SpecificTargetsLibrary() {
             </div>
             <div>
                 <h3>{i18n.t("Period Specific targets")}</h3>
-                <div>
+                <div className="row gap-16">
                     {
                         specificTargetsDataSourcesByType.period.map(dataSource => <PeriodSpecificTargetView
                             key={`${dataSource.id}-orgUnit-specific-target`}
                             specificTarget={head(dataSource.specificTargets)} dataSourceLabel={dataSource.label}/>)
+                    }
+                </div>
+            </div>
+            <div>
+                <h3>{i18n.t("Organisation unit level targets")}</h3>
+                <div className="column gap-16">
+                    {
+                        specificTargetsDataSourcesByType.orgUnitLevel.map(dataSource => <OrgUnitLevelSpecificTargetView
+                            key={`${dataSource.id}-orgUnit-specific-target`}
+                            legends={dataSource.legends} dataSourceLabel={dataSource.label}/>)
                     }
                 </div>
             </div>
@@ -45,7 +61,7 @@ function SpecificTargetsLibrary() {
 export default function SpecificTargetsLibraryModal({open, onClose}) {
 
     return (
-        <Modal large position="middle" hide={!open} onClose={onClose}>
+        <Modal className={classes["specific-targets-lib"]} large position="middle" hide={!open} onClose={onClose}>
             <ModalTitle>Specific Targets Library</ModalTitle>
             <ModalContent>
                 <Suspense fallback={<div>Loading...</div>}>

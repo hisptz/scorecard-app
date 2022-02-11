@@ -5,7 +5,7 @@ import {find} from "lodash";
 import PropTypes from 'prop-types'
 import React from 'react'
 import {useRecoilValue} from "recoil";
-import {SelectedOrgUnits} from "../../../../../../../../core/state/orgUnit";
+import {OrgUnitLevels, SelectedOrgUnits} from "../../../../../../../../core/state/orgUnit";
 import {ScorecardViewState} from "../../../../../../../../core/state/scorecard";
 
 function LegendsView({legends}) {
@@ -103,6 +103,36 @@ export function PeriodSpecificTargetView({dataSourceLabel, specificTarget}) {
     )
 }
 
+
+export function OrgUnitLevelSpecificTargetView({dataSourceLabel, legends}) {
+    const levels = useRecoilValue(OrgUnitLevels)
+    return (
+        <div className="row gap-16">
+            {
+                levels?.map(level => (
+                    <div key={`${level.id}- specific-level-view`}
+                         style={{maxWidth: 350, border: `1px solid ${colors.grey600}`, borderRadius: 4}}
+                         className="column gap-16 p-16">
+                        <div className="column gap-16">
+                            <div>
+                                <b>{i18n.t("Period")}: </b> {level.displayName ?? level.name}
+                            </div>
+                            <div>
+                                <b>{i18n.t("Data Source")}: </b>{dataSourceLabel}
+                            </div>
+                        </div>
+                        <LegendsView legends={legends[level.id]}/>
+                    </div>
+                ))
+            }
+        </div>
+    )
+}
+
+OrgUnitLevelSpecificTargetView.propTypes = {
+    dataSourceLabel: PropTypes.string,
+    legends: PropTypes.object
+};
 OrgUnitSpecificTargetView.propTypes = {
     dataSourceLabel: PropTypes.string,
     specificTarget: PropTypes.object
