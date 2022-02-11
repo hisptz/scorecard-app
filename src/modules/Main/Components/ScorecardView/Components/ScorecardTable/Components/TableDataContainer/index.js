@@ -150,7 +150,7 @@ export default function DataContainer({
                   setPeriodOptionValueStates([ new Period().setPreferences({ allowFuturePeriods: true }).getById("LAST_3_MONTHS")])
                   setAnalysisOpen(true);
                 }}
-                label={i18n.t("Last 3 Month")}
+                label={i18n.t("Last 3 Months")}
                 icon={<IconVisualizationColumnStacked24 />}
               />
               <MenuItem
@@ -159,7 +159,7 @@ export default function DataContainer({
                   setPeriodOptionValueStates([ new Period().setPreferences({ allowFuturePeriods: true }).getById("LAST_6_MONTHS")])
                   setAnalysisOpen(true);
                 }}
-                label={i18n.t("Last 6 Month")}
+                label={i18n.t("Last 6 Months")}
                 icon={<IconVisualizationColumnStacked24 />}
               />
               <MenuItem
@@ -168,7 +168,7 @@ export default function DataContainer({
                   setPeriodOptionValueStates([ new Period().setPreferences({ allowFuturePeriods: true }).getById("LAST_12_MONTHS")])
                   setAnalysisOpen(true);
                 }}
-                label={i18n.t("Last 12 Month")}
+                label={i18n.t("Last 12 Months")}
                 icon={<IconVisualizationColumnStacked24 />}
               />
                 <MenuItem
@@ -177,7 +177,7 @@ export default function DataContainer({
                   setPeriodOptionValueStates([ new Period().setPreferences({ allowFuturePeriods: true }).getById("LAST_4_QUARTERS")])
                   setAnalysisOpen(true);
                 }}
-                label={i18n.t("Last 4 Quarter")}
+                label={i18n.t("Last 4 Quarters")}
                 icon={<IconVisualizationColumnStacked24 />}
               />
                 <MenuItem

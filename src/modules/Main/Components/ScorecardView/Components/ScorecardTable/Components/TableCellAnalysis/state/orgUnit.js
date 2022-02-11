@@ -43,7 +43,8 @@ export const InitialOrgUnits = selector({
     const dataHolders = get(ScorecardDataSourceState) ?? [];
     const { organisationUnits } = get(UserState);
     const engine = get(EngineState);
-
+console.log("user org unit ",orgUnits, "levels ",levels)
+console.log("comfirm user org ",userOrgUnit)
     let resolvedOrgUnits = orgUnits;
 
     if (!isEmpty(dataHolders) && !isEmpty(periods)) {

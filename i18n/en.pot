@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-02-09T07:30:39.208Z\n"
-"PO-Revision-Date: 2022-02-09T07:30:39.208Z\n"
+"POT-Creation-Date: 2022-02-09T12:23:24.840Z\n"
+"PO-Revision-Date: 2022-02-09T12:23:24.840Z\n"
 
 msgid "Next"
 msgstr "Next"
@@ -1297,6 +1297,21 @@ msgstr "Further Analysis"
 
 msgid "Trend Analysis "
 msgstr "Trend Analysis "
+
+msgid "Last 3 Month"
+msgstr "Last 3 Month"
+
+msgid "Last 6 Month"
+msgstr "Last 6 Month"
+
+msgid "Last 12 Month"
+msgstr "Last 12 Month"
+
+msgid "Last 4 Quarter"
+msgstr "Last 4 Quarter"
+
+msgid "Last 5 Years"
+msgstr "Last 5 Years"
 
 msgid "Search Organisation Unit"
 msgstr "Search Organisation Unit"
