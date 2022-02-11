@@ -1,4 +1,4 @@
-import {capitalize, find, flattenDeep, head, isEmpty, last, snakeCase, truncate,} from "lodash";
+import {capitalize, find, flattenDeep, head, isEmpty, last, reduce, snakeCase, truncate,} from "lodash";
 import ScorecardLegend from "../../core/models/scorecardLegend";
 
 export function getWindowDimensions() {
@@ -65,6 +65,12 @@ export function reverseLegends(legends) {
 
 }
 
+export function specificTargetsSet(dataSources) {
+
+    return reduce(dataSources, (isSet, dataSource) => {
+        return isSet || dataSource.specificTargetsSet;
+    }, false)
+}
 
 export function getHoldersFromGroups(dataGroups = []) {
     return flattenDeep(dataGroups?.map(({dataHolders}) => dataHolders) ?? []);

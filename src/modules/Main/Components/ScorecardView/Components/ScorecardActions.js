@@ -1,5 +1,6 @@
 import i18n from "@dhis2/d2-i18n";
 import {Button, ButtonStrip, DropdownButton} from "@dhis2/ui";
+import {some} from "lodash";
 import PropTypes from "prop-types";
 import React, {useState} from "react";
 import {useHistory} from "react-router-dom";
@@ -9,6 +10,7 @@ import RouterState from "../../../../../core/state/router";
 import {ScorecardIdState, ScorecardRequestId, ScorecardViewState,} from "../../../../../core/state/scorecard";
 import {UserAuthorityOnScorecard} from "../../../../../core/state/user";
 import ScorecardOptionsModal from "../../../../../shared/Components/ScorecardOptionsModal";
+import {getDataSourcesFromGroups} from "../../../../../shared/utils/utils";
 import DownloadMenu from "./Download/Components/DownloadMenu";
 import useDownload from "./ScorecardViewHeader/hooks/useDownload";
 import SpecificTargetsLibraryModal from "./SpecificTargetsLibrary";
@@ -25,6 +27,11 @@ export default function ScorecardActions({downloadAreaRef, dataEngine}) {
     const userAuthority = useRecoilValue(UserAuthorityOnScorecard(scorecardId));
     const writeAccess = userAuthority?.write;
     const history = useHistory();
+
+    const {dataGroups} = useRecoilValue(ScorecardViewState("dataSelection"));
+    const dataSources = getDataSourcesFromGroups(dataGroups);
+    const isSpecificTargetsSet = some(dataSources, "specificTargetsSet");
+
 
     const onRefresh = useRecoilCallback(({reset, set}) => () => {
         set(ScorecardRequestId(scorecardId), prevValue => prevValue + 1)
@@ -45,9 +52,11 @@ export default function ScorecardActions({downloadAreaRef, dataEngine}) {
         <div className="row end print-hide">
             <div className="column align-items-end">
                 <ButtonStrip>
-                    <Button onClick={() => setSpecificTargetsLibraryOpen(true)}>
-                        {i18n.t("Specific Targets Library")}
-                    </Button>
+                    {
+                        isSpecificTargetsSet && <Button onClick={() => setSpecificTargetsLibraryOpen(true)}>
+                            {i18n.t("Specific Targets Library")}
+                        </Button>
+                    }
                     <Button
                         className="option-button"
                         dataTest={"scorecard-option-button"}
