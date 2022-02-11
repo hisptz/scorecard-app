@@ -11,12 +11,14 @@ import {UserAuthorityOnScorecard} from "../../../../../core/state/user";
 import ScorecardOptionsModal from "../../../../../shared/Components/ScorecardOptionsModal";
 import DownloadMenu from "./Download/Components/DownloadMenu";
 import useDownload from "./ScorecardViewHeader/hooks/useDownload";
+import SpecificTargetsLibraryModal from "./SpecificTargetsLibrary";
 
 export default function ScorecardActions({downloadAreaRef, dataEngine}) {
     const setRoute = useSetRecoilState(RouterState);
     const [scorecardOptions, setScorecardOptions] = useRecoilState(
         ScorecardViewState("options")
     );
+    const [specificTargetsLibraryOpen, setSpecificTargetsLibraryOpen] = useState(false);
     const [optionsOpen, setOptionsOpen] = useState(false);
     const {download: onDownload} = useDownload(downloadAreaRef, dataEngine);
     const scorecardId = useRecoilValue(ScorecardIdState);
@@ -43,6 +45,9 @@ export default function ScorecardActions({downloadAreaRef, dataEngine}) {
         <div className="row end print-hide">
             <div className="column align-items-end">
                 <ButtonStrip>
+                    <Button onClick={() => setSpecificTargetsLibraryOpen(true)}>
+                        {i18n.t("Specific Targets Library")}
+                    </Button>
                     <Button
                         className="option-button"
                         dataTest={"scorecard-option-button"}
@@ -75,6 +80,12 @@ export default function ScorecardActions({downloadAreaRef, dataEngine}) {
                     </Button>
                 </ButtonStrip>
             </div>
+
+            {
+                specificTargetsLibraryOpen &&
+                <SpecificTargetsLibraryModal onClose={() => setSpecificTargetsLibraryOpen(false)}
+                                             open={specificTargetsLibraryOpen}/>
+            }
 
             {optionsOpen && (
                 <ScorecardOptionsModal

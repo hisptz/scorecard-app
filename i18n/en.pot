@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-02-10T13:31:40.769Z\n"
-"PO-Revision-Date: 2022-02-10T13:31:40.769Z\n"
+"POT-Creation-Date: 2022-02-11T09:48:27.015Z\n"
+"PO-Revision-Date: 2022-02-11T09:48:27.015Z\n"
 
 msgid "Next"
 msgstr "Next"
@@ -530,14 +530,14 @@ msgstr "Add a data source"
 msgid "Add Item"
 msgstr "Add Item"
 
-msgid "Organisation Unit Specific Targets"
-msgstr "Organisation Unit Specific Targets"
-
 msgid "Organisation Unit(s)"
 msgstr "Organisation Unit(s)"
 
 msgid "Change"
 msgstr "Change"
+
+msgid "Organisation Unit Specific Targets"
+msgstr "Organisation Unit Specific Targets"
 
 msgid "Other Periods"
 msgstr "Other Periods"
@@ -559,6 +559,9 @@ msgstr "Organisation unit levels"
 
 msgid "Legends"
 msgstr "Legends"
+
+msgid "Other Organisation Units"
+msgstr "Other Organisation Units"
 
 msgid "Set Specific Targets"
 msgstr "Set Specific Targets"
@@ -1357,6 +1360,12 @@ msgstr "Drag to row headers to change layout "
 
 msgid "Back to all scorecards"
 msgstr "Back to all scorecards"
+
+msgid "Min"
+msgstr "Min"
+
+msgid "Max"
+msgstr "Max"
 
 msgid "Label"
 msgstr "Label"
