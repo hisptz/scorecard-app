@@ -3,7 +3,7 @@ import {SingleSelectField, SingleSelectOption} from '@dhis2/ui'
 import {RHFCustomInput} from "@hisptz/react-ui";
 import {head, isEmpty} from "lodash";
 import PropTypes from 'prop-types'
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, Suspense} from "react";
 import {useFormContext} from "react-hook-form";
 import TargetsField
     from "../../../../../../../../../../../../shared/Components/CustomForm/components/DataSourceConfigurationForm/Components/TargetsField";
@@ -14,7 +14,7 @@ import {getNonDefaultLegendDefinitions} from "../../../../../../../General/utils
 import OrgUnitLevelSpecificTargets from "../OrgUnitLevelSpecificTargetsModal";
 import OrgUnitSpecificTargetsModal from "../OrgUnitSpecificTargetsModal";
 import PeriodSpecificTargetsModal from "../PeriodSpecificTargetsModal";
-import SpecificTargetView from "./components/SpecificTargetView";
+import {OrgUnitSpecificTargetView, PeriodSpecificTargetView} from "./components/SpecificTargetView";
 
 function getSelectedType(specificTargets, specificTargetSet) {
     if (!isEmpty(specificTargets) && specificTargetSet) {
@@ -77,18 +77,31 @@ export default function TargetsArea({path}) {
                         <SingleSelectOption value="orgUnitLevel" label={i18n.t("Organisation Unit Level")}/>
                     </SingleSelectField>
                     <div className="column gap-8">
-                        {
-                            selectedType !== "orgUnitLevel" && specificTargets?.map(target => (
-                                <SpecificTargetView
-                                    defaultLegends={defaultLegends}
-                                    onDelete={() => {
-                                        setValue(`${path}.specificTargets`, []);
+                        <Suspense fallback={<div>Loading...</div>}>
+                            {
+                                selectedType !== "orgUnitLevel" && specificTargets?.map(target => (
+                                    selectedType === "period" ?
+                                        <PeriodSpecificTargetView
+                                            defaultLegends={defaultLegends}
+                                            onDelete={() => {
+                                                setValue(`${path}.specificTargets`, []);
 
-                                    }} legendDefinitions={legendDefinitions}
-                                    onUpdate={() => setOpenConfigDialog(true)} key={`${target.id}-view`}
-                                    specificTarget={target}/>
-                            ))
-                        }
+                                            }} legendDefinitions={legendDefinitions}
+                                            onUpdate={() => setOpenConfigDialog(true)} key={`${target.id}-view`}
+                                            specificTarget={target}
+                                        /> :
+                                        <OrgUnitSpecificTargetView
+                                            defaultLegends={defaultLegends}
+                                            onDelete={() => {
+                                                setValue(`${path}.specificTargets`, []);
+
+                                            }} legendDefinitions={legendDefinitions}
+                                            onUpdate={() => setOpenConfigDialog(true)} key={`${target.id}-view`}
+                                            specificTarget={target}
+                                        />
+                                ))
+                            }
+                        </Suspense>
                     </div>
                     {
                         selectedType === "period" && openConfigDialog && !isEmpty(specificTargets) ?

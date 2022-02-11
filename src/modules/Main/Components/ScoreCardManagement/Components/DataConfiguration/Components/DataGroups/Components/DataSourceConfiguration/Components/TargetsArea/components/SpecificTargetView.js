@@ -4,6 +4,8 @@ import {Period} from "@iapps/period-utilities";
 import {find} from "lodash";
 import PropTypes from 'prop-types'
 import React from 'react'
+import {useRecoilValue} from "recoil";
+import {SelectedOrgUnits} from "../../../../../../../../../../../../../core/state/orgUnit";
 
 function LegendsView({legends, legendDefinitions}) {
     return <div className="row gap-16 space-evenly">
@@ -49,7 +51,44 @@ function getItemDisplayName(type, item) {
 }
 
 
-export default function SpecificTargetView({specificTarget, legendDefinitions, onUpdate, onDelete, defaultLegends}) {
+export function OrgUnitSpecificTargetView({specificTarget, legendDefinitions, onUpdate, onDelete, defaultLegends}) {
+    const {legends, items} = specificTarget ?? {};
+    const orgUnits = useRecoilValue(SelectedOrgUnits(items))
+
+    return (
+        <div style={{
+            border: `1px solid ${colors.grey500}`,
+            borderRadius: 4,
+            padding: 8
+        }} className="column gap-8 flex-wrap">
+            <div className="column gap-8 flex-wrap">
+                <b>{i18n.t("Organisation Unit(s)")}</b>
+                <div className="row gap-8 flex-wrap">
+                    {
+                        orgUnits?.map(item => {
+                            return <Tag key={`${item}-tag`}>
+                                {item.displayName}
+                            </Tag>
+                        })
+                    }
+                </div>
+            </div>
+            <div>
+                <p>{i18n.t("Legends")}</p>
+                <LegendsView legends={legends} legendDefinitions={legendDefinitions}/>
+            </div>
+            <div>
+                <p>{i18n.t(`Other Organisation Units`)}</p>
+                <LegendsView legends={defaultLegends} legendDefinitions={legendDefinitions}/>
+            </div>
+            <div className="row gap-8 justify-content-end">
+                <Button onClick={onUpdate}>{i18n.t("Update")}</Button>
+            </div>
+        </div>
+    )
+}
+
+export function PeriodSpecificTargetView({specificTarget, legendDefinitions, onUpdate, onDelete, defaultLegends}) {
     const {legends, type, items} = specificTarget ?? {};
 
     return (
@@ -87,7 +126,15 @@ export default function SpecificTargetView({specificTarget, legendDefinitions, o
 }
 
 
-SpecificTargetView.propTypes = {
+OrgUnitSpecificTargetView.propTypes = {
+    defaultLegends: PropTypes.array,
+    legendDefinitions: PropTypes.array,
+    specificTarget: PropTypes.object,
+    onDelete: PropTypes.func,
+    onUpdate: PropTypes.func,
+};
+
+PeriodSpecificTargetView.propTypes = {
     defaultLegends: PropTypes.array,
     legendDefinitions: PropTypes.array,
     specificTarget: PropTypes.object,
