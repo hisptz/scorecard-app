@@ -92,7 +92,7 @@ export function PeriodSpecificTargetView({dataSourceLabel, specificTarget}) {
              className="column gap-16 p-16">
             <div className="column gap-16">
                 <div>
-                    <b>{i18n.t("Period")}: </b> {items?.map(pe => new Period().getById(pe)?.name)?.join(", ")}
+                    <b>{i18n.t("Period")}: </b> {items?.map(pe => new Period().setPreferences({ allowFuturePeriods: true}).getById(pe)?.name)?.join(", ")}
                 </div>
                 <div>
                     <b>{i18n.t("Data Source")}: </b>{dataSourceLabel}

@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import {Button, Modal, ModalActions, ModalContent, ModalTitle} from '@dhis2/ui'
+import {Button, CircularLoader, Modal, ModalActions, ModalContent, ModalTitle} from '@dhis2/ui'
 import {filter, groupBy, head, isEmpty} from "lodash";
 import PropTypes from 'prop-types'
 import React, {Suspense, useMemo} from "react";
@@ -12,6 +12,7 @@ import {
     PeriodSpecificTargetView
 } from "./components/SpecificTargetView";
 import classes from "./SpecificTargetsLibrary.module.css"
+
 function SpecificTargetsLibrary() {
     const {dataGroups} = useRecoilValue(ScorecardViewState("dataSelection"))
     const dataSources = useMemo(() => getDataSourcesFromGroups(dataGroups), [dataGroups])
@@ -25,7 +26,7 @@ function SpecificTargetsLibrary() {
         <div className="column gap-16">
             <div>
                 <h3>{i18n.t("Organisation Units Specific targets")}</h3>
-                <div className="gap-16">
+                <div className="row gap-16">
                     {
                         specificTargetsDataSourcesByType.orgUnit.map(dataSource => <OrgUnitSpecificTargetView
                             key={`${dataSource.id}-orgUnit-specific-target`}
@@ -61,10 +62,11 @@ function SpecificTargetsLibrary() {
 export default function SpecificTargetsLibraryModal({open, onClose}) {
 
     return (
-        <Modal className={classes["specific-targets-lib"]} large position="middle" hide={!open} onClose={onClose}>
+        <Modal onClose={onClose} className={classes["specific-targets-lib"]} large position="middle" hide={!open}>
             <ModalTitle>Specific Targets Library</ModalTitle>
             <ModalContent>
-                <Suspense fallback={<div>Loading...</div>}>
+                <Suspense fallback={<div className="column align-items-center justify-content-center"
+                                         style={{height: "60vh", width: "100%",}}><CircularLoader small/></div>}>
                     <SpecificTargetsLibrary/>
                 </Suspense>
             </ModalContent>

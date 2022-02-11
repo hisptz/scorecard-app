@@ -42,7 +42,7 @@ function getTypeLabel(type) {
 function getItemDisplayName(type, item) {
     switch (type) {
         case "period":
-            return new Period()?.getById(item)?.name;
+            return new Period().setPreferences({ allowFuturePeriods: true}).getById(item)?.name;
         case "orgUnit":
             return item;
         case "orgUnitLevel":
@@ -118,8 +118,7 @@ export function PeriodSpecificTargetView({specificTarget, legendDefinitions, onU
                 <LegendsView legends={defaultLegends} legendDefinitions={legendDefinitions}/>
             </div>
             <div className="row gap-8 justify-content-end">
-                <Button onClick={onUpdate}>Update</Button>
-                <Button onClick={onDelete}>Delete</Button>
+                <Button onClick={onUpdate}>{i18n.t("Update")}</Button>
             </div>
         </div>
     )

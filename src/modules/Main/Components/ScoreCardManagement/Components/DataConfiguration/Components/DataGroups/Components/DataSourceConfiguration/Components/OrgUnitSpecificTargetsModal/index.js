@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import {Button, ButtonStrip, InputField, Modal, ModalActions, ModalContent, ModalTitle} from '@dhis2/ui'
+import {Button, ButtonStrip, CircularLoader, InputField, Modal, ModalActions, ModalContent, ModalTitle} from '@dhis2/ui'
 import {OrgUnitSelectorModal} from "@hisptz/react-ui";
 import {isEmpty} from "lodash";
 import PropTypes from 'prop-types'
@@ -9,7 +9,6 @@ import {useRecoilValue} from "recoil";
 import {SelectedOrgUnits} from "../../../../../../../../../../../../core/state/orgUnit";
 import {getNonDefaultLegendDefinitions} from "../../../../../../../General/utils/utils";
 import LegendsField from "../TargetsArea/components/LegendsField";
-
 
 function OrgUnitSelector({target, setTarget}) {
     const [periodSelectorOpen, setPeriodSelectorOpen] = useState(isEmpty(target.items))
@@ -83,7 +82,8 @@ export default function OrgUnitSpecificTargetsModal({
         <Modal onClose={onClose} hide={!open} position="middle">
             <ModalTitle>{i18n.t("Organisation Unit Specific Targets")}</ModalTitle>
             <ModalContent>
-                <Suspense fallback={<div>Loading...</div>}>
+                <Suspense fallback={<div className="column align-items-center justify-content-center"
+                                         style={{height: 100, width: "100%",}}><CircularLoader small/></div>}>
                     <div className="column w-100 gap-16">
                         <OrgUnitSelector target={target} setTarget={setTarget}/>
                         <div className="row">

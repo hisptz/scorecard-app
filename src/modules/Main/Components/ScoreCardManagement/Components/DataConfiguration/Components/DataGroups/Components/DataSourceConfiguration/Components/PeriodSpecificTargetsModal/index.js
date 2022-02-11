@@ -35,7 +35,7 @@ export default function PeriodSpecificTargetsModal({open, onClose, onUpdate, spe
                         <div className="column flex-1">
                             <InputField fullWidth label={i18n.t("Period")} disabled value={target?.items?.map(item => {
                                 if (item) {
-                                    return new Period().getById(item)?.name
+                                    return new Period().setPreferences({ allowFuturePeriods: true}).getById(item)?.name
                                 }
                             })?.join(", ")}/>
                         </div>
@@ -50,7 +50,7 @@ export default function PeriodSpecificTargetsModal({open, onClose, onUpdate, spe
                             singleSelection
                             selectedPeriods={compact([...(target.items?.map(item => {
                                 if (item) {
-                                    return new Period().getById(item)
+                                    return new Period().setPreferences({ allowFuturePeriods: true}).getById(item)
                                 }
                             }) ?? [])])}
                             onClose={() => setPeriodSelectorOpen(false)} hide={!periodSelectorOpen}

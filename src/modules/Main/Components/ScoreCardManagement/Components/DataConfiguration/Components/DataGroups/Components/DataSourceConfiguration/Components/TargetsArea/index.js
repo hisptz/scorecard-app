@@ -1,5 +1,5 @@
 import i18n from "@dhis2/d2-i18n";
-import {SingleSelectField, SingleSelectOption} from '@dhis2/ui'
+import {CircularLoader, SingleSelectField, SingleSelectOption} from '@dhis2/ui'
 import {RHFCustomInput} from "@hisptz/react-ui";
 import {head, isEmpty} from "lodash";
 import PropTypes from 'prop-types'
@@ -77,7 +77,7 @@ export default function TargetsArea({path}) {
                         <SingleSelectOption value="orgUnitLevel" label={i18n.t("Organisation Unit Level")}/>
                     </SingleSelectField>
                     <div className="column gap-8">
-                        <Suspense fallback={<div>Loading...</div>}>
+                        <Suspense fallback={ <div className="column align-items-center justify-content-center" style={{ height: 100, width: "100%",}}><CircularLoader small/></div> }>
                             {
                                 selectedType !== "orgUnitLevel" && specificTargets?.map(target => (
                                     selectedType === "period" ?
