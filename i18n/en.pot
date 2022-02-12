@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-02-09T12:23:24.840Z\n"
-"PO-Revision-Date: 2022-02-09T12:23:24.840Z\n"
+"POT-Creation-Date: 2022-02-11T18:26:37.303Z\n"
+"PO-Revision-Date: 2022-02-11T18:26:37.303Z\n"
 
 msgid "Next"
 msgstr "Next"
@@ -1295,20 +1295,23 @@ msgstr "Dictionary"
 msgid "Further Analysis"
 msgstr "Further Analysis"
 
+msgid "OrgUnit Analysis "
+msgstr "OrgUnit Analysis "
+
 msgid "Trend Analysis "
 msgstr "Trend Analysis "
 
-msgid "Last 3 Month"
-msgstr "Last 3 Month"
+msgid "Last 3 Months"
+msgstr "Last 3 Months"
 
-msgid "Last 6 Month"
-msgstr "Last 6 Month"
+msgid "Last 6 Months"
+msgstr "Last 6 Months"
 
-msgid "Last 12 Month"
-msgstr "Last 12 Month"
+msgid "Last 12 Months"
+msgstr "Last 12 Months"
 
-msgid "Last 4 Quarter"
-msgstr "Last 4 Quarter"
+msgid "Last 4 Quarters"
+msgstr "Last 4 Quarters"
 
 msgid "Last 5 Years"
 msgstr "Last 5 Years"

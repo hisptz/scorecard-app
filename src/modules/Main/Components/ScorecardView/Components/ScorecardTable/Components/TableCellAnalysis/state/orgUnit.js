@@ -28,6 +28,21 @@ const userSubUnitsQuery = {
   },
 };
 
+const orgUnitOptionOnCell = atom({
+  key:"orgUnitOptionCell",
+  default:false
+});
+
+const orgUnitSelectorOptionOnCell = selector({
+  key:"orgUnitOptionCellSelector",
+  get:({get})=>{
+ return get(orgUnitOptionOnCell)
+  },
+  set:({set},value)=>{
+     set(orgUnitOptionOnCell,value);
+  }
+});
+
 export const InitialOrgUnits = selector({
   key: "cell-analysis-initial-org-units-resolver",
   get: async ({ get }) => {
@@ -43,8 +58,6 @@ export const InitialOrgUnits = selector({
     const dataHolders = get(ScorecardDataSourceState) ?? [];
     const { organisationUnits } = get(UserState);
     const engine = get(EngineState);
-console.log("user org unit ",orgUnits, "levels ",levels)
-console.log("comfirm user org ",userOrgUnit)
     let resolvedOrgUnits = orgUnits;
 
     if (!isEmpty(dataHolders) && !isEmpty(periods)) {
@@ -111,4 +124,4 @@ console.log("comfirm user org ",userOrgUnit)
   },
 });
 
-export { OrgUnitState };
+export { OrgUnitState,orgUnitOptionOnCell,orgUnitSelectorOptionOnCell };
