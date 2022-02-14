@@ -3,22 +3,27 @@ import { Button, Chip, Modal, ModalActions, ModalContent } from "@dhis2/ui";
 import DescriptionIcon from "@material-ui/icons/Description";
 import ChartIcon from "@material-ui/icons/Equalizer";
 import TableChartIcon from "@material-ui/icons/TableChart";
+import { clone, find } from "lodash";
 import PropTypes from "prop-types";
 import React, { Suspense, useEffect, useState } from "react";
 import {
   useRecoilCallback,
   useRecoilValueLoadable,
   useResetRecoilState,
+  useRecoilValue,
+  useSetRecoilState
 } from "recoil";
 import OrgUnitSelection from "../../../../../../../../core/models/orgUnitSelection";
+import {OrgUnitLevels,} from "../../../../../../../../core/state/orgUnit";
 import FullPageError from "../../../../../../../../shared/Components/Errors/FullPageError";
 import ModalLoader from "../../../../../../../../shared/Components/Loaders/ModalLoader";
 import { getDataSourcesDisplayName } from "../../../../../../../../shared/utils/utils";
 import ChartAnalysis from "./Components/ChartAnalysis";
 import { DataSourceState, DataState } from "./state/data";
 import { LayoutState } from "./state/layout";
-import { OrgUnitState } from "./state/orgUnit";
+import { OrgUnitState ,orgUnitSelectorOptionOnCell} from "./state/orgUnit";
 import { PeriodState, cellPeriodOptionAtom } from "./state/period";
+
 const DictionaryAnalysis = React.lazy(() =>
   import("./Components/DictionaryAnalysis")
 );
@@ -55,16 +60,18 @@ export default function TableCellAnalysis({
   period,
 }) {
   const dataState = useRecoilValueLoadable(DataState);
+  const orgUnitLevels = useRecoilValue(OrgUnitLevels);
+  const  orgunitOptionValue = useRecoilValue(orgUnitSelectorOptionOnCell);
   const [viewType, setViewType] = useState(viewTypes[0]);
   const dataSources = dataHolder?.dataSources;
   const SelectedView = viewType.component;
   const resetPeriodOptionsCell = useResetRecoilState(cellPeriodOptionAtom);
-
+  const resetOrgunitOptionCell = useSetRecoilState(orgUnitSelectorOptionOnCell)
   const setStates = useRecoilCallback(
     ({ set }) =>
       () => {
         set(DataSourceState, dataSources);
-        set(OrgUnitState, new OrgUnitSelection({ orgUnits: [orgUnit] }));
+        set(OrgUnitState, orgUnitupdateSelctor());
         set(PeriodState, { periods: [period] });
       },
     [dataSources, orgUnit, period]
@@ -78,14 +85,43 @@ export default function TableCellAnalysis({
         reset(LayoutState);
         reset(DataSourceState);
       },
+
     []
   );
+  function orgUnitupdateSelctor(){
+    const orgUnitSelection = new OrgUnitSelection({ orgUnits: [orgUnit] })
+    if(orgunitOptionValue){
+      const newOrgUnitSelection = clone(orgUnitSelection);
+      const currentUserLevel =  orgUnitSelection['orgUnits'][0]['level'];
+    
+      if(currentUserLevel > 1){
+      const orgUnitCurrentUserBelowLevels = find(orgUnitLevels, function (level) {
+     return level.level === (currentUserLevel - 1)
+          });
+        newOrgUnitSelection['levels'] = [orgUnitCurrentUserBelowLevels.id];
+      }else{
+        const orgUnitCurrentUserBelowLevels = find(orgUnitLevels, function (level) {
+           return  level['level'] === currentUserLevel
+                  });
+    
+        newOrgUnitSelection['levels'] = [orgUnitCurrentUserBelowLevels.id];
+      }
+    return newOrgUnitSelection;
+    }
+    else {
+
+return orgUnitSelection;
+    }
+
+}
+
 
   useEffect(() => {
     setStates();
     return () => {
       resetStates();
       resetPeriodOptionsCell()
+      resetOrgunitOptionCell(true)
     
     };
   }, [dataSources, orgUnit, period]);
