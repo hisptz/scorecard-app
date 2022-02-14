@@ -1,3 +1,4 @@
+import i18n from '@dhis2/d2-i18n'
 import {isEmpty} from "lodash";
 import React, {lazy, Suspense, useEffect, useMemo, useRef} from "react";
 import {useParams} from "react-router-dom";
@@ -19,6 +20,7 @@ import HighlightedIndicatorsView from "./Components/HighlightedIndicatorsView";
 import ScorecardActions from "./Components/ScorecardActions";
 import ScorecardHeader from "./Components/ScorecardHeader";
 import ScorecardViewHeader from "./Components/ScorecardViewHeader";
+import {SpecificTargetsLibrary} from "./Components/SpecificTargetsLibrary";
 
 const ScorecardLegendsView = lazy(() =>
     import("./Components/ScorecardLegendsView")
@@ -36,7 +38,6 @@ export default function ScorecardView() {
         return [];
     }, [orgUnitState.state, orgUnitState.contents]);
     const {read: access} = useRecoilValue(
-
         UserAuthorityOnScorecard(scorecardId)
     );
     const downloadRef = useRef();
@@ -92,6 +93,11 @@ export default function ScorecardView() {
                         ) : (
                             <EmptyOrgUnitsOrPeriod/>
                         )}
+                        <div className="hide print-show always-page-break">
+                            <div className="always-page-break"/>
+                            <h1>{i18n.t("Specific Targets Legends")}</h1>
+                            <SpecificTargetsLibrary/>
+                        </div>
                     </div>
                 </div>
             </Suspense>

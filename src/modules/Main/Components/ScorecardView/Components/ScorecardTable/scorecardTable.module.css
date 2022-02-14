@@ -82,15 +82,6 @@
         overflow: visible !important;
     }
 
-    @page {
-        margin: 3rem 2rem;
-    }
-
-    @page:first {
-        margin-top: 0;
-    }
-
-
     .child-table-row td:first-child {
         background: white !important;
         border-left: 1px solid #D5DDE5 !important;

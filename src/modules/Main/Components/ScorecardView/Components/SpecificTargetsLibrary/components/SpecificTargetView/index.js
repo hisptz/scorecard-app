@@ -92,7 +92,7 @@ export function PeriodSpecificTargetView({dataSourceLabel, specificTarget}) {
              className="column gap-16 p-16">
             <div className="column gap-16">
                 <div>
-                    <b>{i18n.t("Period")}: </b> {items?.map(pe => new Period().setPreferences({ allowFuturePeriods: true}).getById(pe)?.name)?.join(", ")}
+                    <b>{i18n.t("Period")}: </b> {items?.map(pe => new Period().setPreferences({allowFuturePeriods: true}).getById(pe)?.name)?.join(", ")}
                 </div>
                 <div>
                     <b>{i18n.t("Data Source")}: </b>{dataSourceLabel}
@@ -107,25 +107,31 @@ export function PeriodSpecificTargetView({dataSourceLabel, specificTarget}) {
 export function OrgUnitLevelSpecificTargetView({dataSourceLabel, legends}) {
     const levels = useRecoilValue(OrgUnitLevels)
     return (
-        <div className="row gap-16">
-            {
-                levels?.map(level => (
-                    <div key={`${level.id}- specific-level-view`}
-                         style={{maxWidth: 350, border: `1px solid ${colors.grey600}`, borderRadius: 4}}
-                         className="column gap-16 p-16">
-                        <div className="column gap-16">
-                            <div>
-                                <b>{i18n.t("Organisation Unit Level")}: </b> {level.displayName ?? level.name}
+        <>
+            <div className="row gap-16 page-break-avoid">
+                {
+                    levels?.map(level => (
+                        <>
+                            <div key={`${level.id}- specific-level-view`}
+                                 style={{maxWidth: 350, border: `1px solid ${colors.grey600}`, borderRadius: 4}}
+                                 className="column gap-16 p-16">
+                                <div className="column gap-16">
+                                    <div>
+                                        <b>{i18n.t("Organisation Unit Level")}: </b> {level.displayName ?? level.name}
+                                    </div>
+                                    <div>
+                                        <b>{i18n.t("Data Source")}: </b>{dataSourceLabel}
+                                    </div>
+                                </div>
+                                <LegendsView legends={legends[level.id]}/>
                             </div>
-                            <div>
-                                <b>{i18n.t("Data Source")}: </b>{dataSourceLabel}
-                            </div>
-                        </div>
-                        <LegendsView legends={legends[level.id]}/>
-                    </div>
-                ))
-            }
-        </div>
+                            <div className="page-break"/>
+                        </>
+                    ))
+                }
+            </div>
+            <div className="page-break"/>
+        </>
     )
 }
 
