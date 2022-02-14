@@ -9,7 +9,7 @@ import SingleCellSvg from "../../../../../../../../../shared/Components/Scorecar
 import {getLegend} from "../../../../../../../../../shared/utils/utils";
 
 
-function SingleAverageCell({dataSources, values, bold}) {
+function SingleAverageCell({dataSources, values, bold, period, orgUnit}) {
 
     const [dataSource] = dataSources ?? [];
     const defaultLegendDefinitions = useRecoilValue(
@@ -28,9 +28,10 @@ function SingleAverageCell({dataSources, values, bold}) {
         dataOrgUnitLevel: {},
         orgUnitLevels,
         legendDefinitions,
+        specificTargets: dataSource?.specificTargets,
+        period,
+        orgUnit
     }) ?? {};
-    console.log(values)
-
     if (head(values) === undefined) {
         return null;
     }
@@ -42,7 +43,7 @@ function SingleAverageCell({dataSources, values, bold}) {
     />
 }
 
-function LinkedAverageCell({dataSources, values, bold}) {
+function LinkedAverageCell({dataSources, values, bold, period, orgUnit}) {
     const defaultLegendDefinitions = useRecoilValue(
         ScorecardLegendDefinitionSelector(true)
     );
@@ -59,6 +60,9 @@ function LinkedAverageCell({dataSources, values, bold}) {
         dataOrgUnitLevel: {},
         orgUnitLevels,
         legendDefinitions,
+        orgUnit,
+        period,
+        specificTargets: topDataSource?.specificTargets
     }) ?? {};
 
     const {color: bottomCellColor} =
@@ -68,6 +72,9 @@ function LinkedAverageCell({dataSources, values, bold}) {
         dataOrgUnitLevel: {},
         orgUnitLevels,
         legendDefinitions,
+        orgUnit,
+        period,
+        specificTargets: bottomDataSource?.specificTargets,
     }) ?? {};
 
     return (
@@ -87,22 +94,26 @@ SingleAverageCell.propTypes = {
     values: PropTypes.arrayOf(PropTypes.any).isRequired,
     bold: PropTypes.bool,
     dataSources: PropTypes.arrayOf(PropTypes.any),
+    orgUnit: PropTypes.string,
+    period: PropTypes.string,
 };
 LinkedAverageCell.propTypes = {
     values: PropTypes.arrayOf(PropTypes.any).isRequired,
     bold: PropTypes.bool,
     dataSources: PropTypes.arrayOf(PropTypes.any),
+    orgUnit: PropTypes.string,
+    period: PropTypes.string,
 };
 
 
-function ComplexAverageCell({value, bold, dataSources}) {
+function ComplexAverageCell({value, bold, dataSources, period, orgUnit}) {
     const values = Object.values(value);
     return (
         <td className="data-cell" align="center">
             {values.length > 1 ? (
-                <LinkedAverageCell bold={bold} dataSources={dataSources} values={values}/>
+                <LinkedAverageCell period={period} orgUnit bold={bold} dataSources={dataSources} values={values}/>
             ) : (
-                <SingleAverageCell bold={bold} dataSources={dataSources} values={values}/>
+                <SingleAverageCell period={period} orgUnit={orgUnit} bold={bold} dataSources={dataSources} values={values}/>
             )}
         </td>
     );
@@ -112,10 +123,12 @@ ComplexAverageCell.propTypes = {
     value: PropTypes.any.isRequired,
     bold: PropTypes.bool,
     dataSources: PropTypes.arrayOf(PropTypes.any),
+    orgUnit: PropTypes.string,
+    period: PropTypes.string,
 };
 
 
-export default function AverageCell({value, bold, dataSources}) {
+export default function AverageCell({value, bold, dataSources, orgUnit, period}) {
     if (value === undefined) {
         return null;
     }
@@ -128,11 +141,13 @@ export default function AverageCell({value, bold, dataSources}) {
         );
     }
 
-    return <ComplexAverageCell value={value} bold={bold} dataSources={dataSources}/>
+    return <ComplexAverageCell orgUnit={orgUnit} period={period}  value={value} bold={bold} dataSources={dataSources}/>
 }
 
 AverageCell.propTypes = {
     value: PropTypes.any.isRequired,
     bold: PropTypes.bool,
     dataSources: PropTypes.arrayOf(PropTypes.any),
+    orgUnit: PropTypes.string,
+    period: PropTypes.string,
 };

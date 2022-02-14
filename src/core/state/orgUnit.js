@@ -76,7 +76,7 @@ export const OrgUnitGroups = atom({
   }),
 });
 
-export const OrgUnits = selectorFamily({
+export const OrgUnit = selectorFamily({
   key: "orgUnitSelector",
   get:
     (id) =>
@@ -92,6 +92,7 @@ export const OrgUnits = selectorFamily({
       }
     },
 });
+
 
 export const OrgUnitPathState = atomFamily({
   key: "orgUnitPath",
@@ -224,6 +225,8 @@ export const InitialOrgUnits = selector({
     return { orgUnits: uniqBy(resolvedOrgUnits, "id") };
   },
 });
+
+
 
 export const SelectedOrgUnits = selectorFamily({
   key: "selected-org-units-resolver",

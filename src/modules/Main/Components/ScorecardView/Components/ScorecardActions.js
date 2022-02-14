@@ -24,6 +24,7 @@ export default function ScorecardActions({downloadAreaRef, dataEngine}) {
     const writeAccess = userAuthority?.write;
     const history = useHistory();
 
+
     const onRefresh = useRecoilCallback(({reset, set}) => () => {
         set(ScorecardRequestId(scorecardId), prevValue => prevValue + 1)
         reset(ScorecardViewState(scorecardId))
@@ -43,6 +44,7 @@ export default function ScorecardActions({downloadAreaRef, dataEngine}) {
         <div className="row end print-hide">
             <div className="column align-items-end">
                 <ButtonStrip>
+
                     <Button
                         className="option-button"
                         dataTest={"scorecard-option-button"}
@@ -75,6 +77,7 @@ export default function ScorecardActions({downloadAreaRef, dataEngine}) {
                     </Button>
                 </ButtonStrip>
             </div>
+
 
             {optionsOpen && (
                 <ScorecardOptionsModal

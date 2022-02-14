@@ -4,21 +4,17 @@ import {RHFCustomInput} from "@hisptz/react-ui";
 import PropTypes from "prop-types";
 import React, {useEffect} from "react";
 import {useFormContext} from "react-hook-form";
-import {
-    getNonDefaultLegendDefinitions
-} from "../../../../../modules/Main/Components/ScoreCardManagement/Components/General/utils/utils";
+import TargetsArea
+    from "../../../../../modules/Main/Components/ScoreCardManagement/Components/DataConfiguration/Components/DataGroups/Components/DataSourceConfiguration/Components/TargetsArea";
 import {DHIS2ValueTypes} from "../../constants";
-import {FormFieldModel} from "../../models";
-import TargetsField from "./Components/TargetsField";
 
 export default function DataSourceConfigurationForm({path}) {
-    const {watch, getValues, setValue} = useFormContext();
-    const legendDefinitions = getNonDefaultLegendDefinitions(watch("legendDefinitions"))
+    const {getValues, setValue} = useFormContext();
 
     useEffect(() => {
-       if(path){
-           setValue(path, getValues(path))
-       }
+        if (path) {
+            setValue(path, getValues(path))
+        }
     }, [getValues, path, setValue]);
 
     return (
@@ -72,25 +68,7 @@ export default function DataSourceConfigurationForm({path}) {
                     </div>
                 </div>
                 <Divider/>
-                <div className="row">
-                    <div className="column w-100 legend-settings-area">
-                        <TargetsField
-                            name={`${path}.legends`}
-                            multipleFields={
-                                legendDefinitions?.map(
-                                    (legend) =>
-                                        new FormFieldModel({
-                                            id: legend.id,
-                                            mandatory: false,
-                                            name: legend.name,
-                                            legendDefinition: legend,
-                                            valueType: DHIS2ValueTypes.LEGEND_MIN_MAX.name,
-                                        })
-                                )
-                            }
-                        />
-                    </div>
-                </div>
+                <TargetsArea path={path}/>
             </div>
         </div>
     );

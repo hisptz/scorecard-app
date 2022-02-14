@@ -56,7 +56,7 @@ export default function AverageDataContainer({
         filteredOrgUnits,
     ]);
 
-    return <AverageCell dataSources={dataSources} bold value={average}/>;
+    return <AverageCell dataSources={dataSources} bold value={average} period={period} />;
 }
 
 AverageDataContainer.propTypes = {

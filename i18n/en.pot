@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-02-11T18:26:37.303Z\n"
-"PO-Revision-Date: 2022-02-11T18:26:37.303Z\n"
+"POT-Creation-Date: 2022-02-14T09:06:25.081Z\n"
+"PO-Revision-Date: 2022-02-14T09:06:25.081Z\n"
 
 msgid "Next"
 msgstr "Next"
@@ -530,6 +530,48 @@ msgstr "Add a data source"
 msgid "Add Item"
 msgstr "Add Item"
 
+msgid "Organisation Unit(s)"
+msgstr "Organisation Unit(s)"
+
+msgid "Change"
+msgstr "Change"
+
+msgid "Organisation Unit Specific Targets"
+msgstr "Organisation Unit Specific Targets"
+
+msgid "Other Periods"
+msgstr "Other Periods"
+
+msgid "Update"
+msgstr "Update"
+
+msgid "Period Specific Targets"
+msgstr "Period Specific Targets"
+
+msgid "Change Period"
+msgstr "Change Period"
+
+msgid "Organisation unit(s)"
+msgstr "Organisation unit(s)"
+
+msgid "Organisation unit levels"
+msgstr "Organisation unit levels"
+
+msgid "Legends"
+msgstr "Legends"
+
+msgid "Other Organisation Units"
+msgstr "Other Organisation Units"
+
+msgid "Set Specific Targets"
+msgstr "Set Specific Targets"
+
+msgid "Specific target type"
+msgstr "Specific target type"
+
+msgid "Organisation Unit Level"
+msgstr "Organisation Unit Level"
+
 msgid "Add Data source"
 msgstr "Add Data source"
 
@@ -559,9 +601,6 @@ msgstr "View the changes on the preview panel above"
 
 msgid "Select a data source to configure"
 msgstr "Select a data source to configure"
-
-msgid "Set Target on Levels"
-msgstr "Set Target on Levels"
 
 msgid "Groups"
 msgstr "Groups"
@@ -714,14 +753,14 @@ msgstr "Download"
 msgid "Refresh"
 msgstr "Refresh"
 
-msgid "Legends"
-msgstr "Legends"
-
 msgid "Increased from last period"
 msgstr "Increased from last period"
 
 msgid "Decreased from last period"
 msgstr "Decreased from last period"
+
+msgid "Specific Targets Library"
+msgstr "Specific Targets Library"
 
 msgid "Average"
 msgstr "Average"
@@ -1274,9 +1313,6 @@ msgstr "Category"
 msgid "Layout"
 msgstr "Layout"
 
-msgid "Organisation Unit(s)"
-msgstr "Organisation Unit(s)"
-
 msgid "Period(s)"
 msgstr "Period(s)"
 
@@ -1330,6 +1366,27 @@ msgstr "Drag to row headers to change layout "
 
 msgid "Back to all scorecards"
 msgstr "Back to all scorecards"
+
+msgid "Min"
+msgstr "Min"
+
+msgid "Max"
+msgstr "Max"
+
+msgid "Data Source"
+msgstr "Data Source"
+
+msgid "Organisation Units Specific targets"
+msgstr "Organisation Units Specific targets"
+
+msgid "Period Specific targets"
+msgstr "Period Specific targets"
+
+msgid "Organisation unit level targets"
+msgstr "Organisation unit level targets"
+
+msgid "Specific Targets Legends"
+msgstr "Specific Targets Legends"
 
 msgid "Label"
 msgstr "Label"
