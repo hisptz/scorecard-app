@@ -45,7 +45,7 @@ export default function FurtherAnalysisMenu({
                             setStateActionRef(undefined);
                             setAnalysisOpen(true);
                         }}
-                        label={i18n.t("OrgUnit Analysis")}
+                        label={i18n.t("Lower Organisation Unit Levels")}
                         icon={<IconDimensionOrgUnit16/>}
                     />
                     <MenuItem
