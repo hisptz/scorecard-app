@@ -96,6 +96,14 @@ export default function TableCellAnalysis({
 
                 }
 
+                if (orgUnitOptionValue) {
+                    set(LayoutState, {
+                        column: ["dx"],
+                        row: ["ou"],
+                        filter: ["pe"]
+                    })
+                }
+
                 set(DataSourceState, dataSources);
                 set(OrgUnitState, orgUnitUpdateSelector());
                 set(PeriodState, {periods: [period]});
