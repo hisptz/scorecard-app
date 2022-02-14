@@ -1,6 +1,15 @@
 import i18n from "@dhis2/d2-i18n";
 import {IconVisualizationColumnStacked24, IconVisualizationLine24, Menu, MenuItem, Popover,} from "@dhis2/ui";
 import {Period} from "@iapps/period-utilities";
+import {
+  Menu,
+  MenuItem,
+  Popover,
+  IconVisualizationColumnStacked24,
+  IconVisualizationLine24,
+  IconDimensionOrgUnit16,
+} from "@dhis2/ui";
+import { Period } from "@iapps/period-utilities";
 import PropTypes from "prop-types";
 import React, {useEffect, useRef, useState} from "react";
 import {useRecoilValue, useResetRecoilState, useSetRecoilState} from "recoil";
@@ -9,6 +18,7 @@ import {OrgUnitLevels} from "../../../../../../../../core/state/orgUnit";
 import {ScorecardViewState,} from "../../../../../../../../core/state/scorecard";
 import {getLegend} from "../../../../../../../../shared/utils/utils";
 import TableCellAnalysis from "../TableCellAnalysis";
+import {orgUnitSelectorOptionOnCell,orgUnitOptionOnCell} from "../TableCellAnalysis/state/orgUnit";
 import {cellPeriodOptionAtom, cellPeriodOptionSelector} from "../TableCellAnalysis/state/period";
 import {LinkedDataCell, SingleDataCell} from "./Components/DataCells";
 import LoadingCell from "./Components/LoadingCell";
@@ -30,9 +40,12 @@ export default function DataContainer({
     const [bottomData, setBottomData] = useState();
     const ref = useRef(null);
     const [stateActionRef, setStateActionRef] = useState(null);
-    const [showSubMenu, setShowSubMenu] = React.useState(true)
+    const [showSubMenu, setShowSubMenu] = useState(true)
     const resetPeriodsOptionSelection = useResetRecoilState(cellPeriodOptionAtom);
+ const resetOrgUnitOptionSelection = useResetRecoilState(orgUnitOptionOnCell);
     const setPeriodOptionValueStates = useSetRecoilState(cellPeriodOptionSelector);
+ const setOrgUnitOptionValueStates = useSetRecoilState(orgUnitSelectorOptionOnCell);
+
     const [top, bottom] = dataSources ?? [];
     const {color: topColor} =
     getLegend(topData?.current, top?.legends, {
@@ -65,13 +78,14 @@ export default function DataContainer({
             setTopData(data);
         });
         const bottomSub = dataEngine.get(bottomKey).subscribe(setBottomData);
-        //Cleanup
+
         return () => {
             topSub.unsubscribe();
             bottomSub.unsubscribe();
-            resetPeriodsOptionSelection()
+            resetPeriodsOptionSelection();
+      resetOrgUnitOptionSelection()
         };
-    }, [orgUnitId, periodId, top, bottom]);
+    }, [orgUnitId, periodId, top, bottom,]);
 
     return (
         <>
@@ -116,7 +130,7 @@ export default function DataContainer({
                     onClickOutside={() => setStateActionRef(undefined)}
                     placement="bottom-start"
                     reference={stateActionRef}
-                >
+                >https://github.com/nnkogift/hisp_teaser
                     <Menu>
                         <MenuItem
                             onClick={() => {
@@ -128,11 +142,19 @@ export default function DataContainer({
                         />
                         <MenuItem
                             onClick={() => {
-                                setStateActionRef(undefined);
+                            setOrgUnitOptionValueStates(true);
+            setStateActionRef(undefined);
+            setAnalysisOpen(true);
+          }}
+          label={i18n.t("OrgUnit Analysis ")}
+          icon={<IconDimensionOrgUnit16 />}
+        />
+          <MenuItem
+          onClick={() => {    setStateActionRef(undefined);
                             }}
                             showSubMenu={showSubMenu}
                             toggleSubMenu={() => {
-                                return setShowSubMenu(!showSubMenu)
+                                setShowSubMenu(!showSubMenu);
                             }}
                             label={i18n.t("Trend Analysis ")}
                             icon={<IconVisualizationLine24/>}
@@ -143,7 +165,7 @@ export default function DataContainer({
                                     setPeriodOptionValueStates([new Period().setPreferences({allowFuturePeriods: true}).getById("LAST_3_MONTHS")])
                                     setAnalysisOpen(true);
                                 }}
-                                label={i18n.t("Last 3 Month")}
+                                label={i18n.t("Last 3 Months")}
                                 icon={<IconVisualizationColumnStacked24/>}
                             />
                             <MenuItem
@@ -152,7 +174,7 @@ export default function DataContainer({
                                     setPeriodOptionValueStates([new Period().setPreferences({allowFuturePeriods: true}).getById("LAST_6_MONTHS")])
                                     setAnalysisOpen(true);
                                 }}
-                                label={i18n.t("Last 6 Month")}
+                                label={i18n.t("Last 6 Months")}
                                 icon={<IconVisualizationColumnStacked24/>}
                             />
                             <MenuItem
@@ -161,7 +183,7 @@ export default function DataContainer({
                                     setPeriodOptionValueStates([new Period().setPreferences({allowFuturePeriods: true}).getById("LAST_12_MONTHS")])
                                     setAnalysisOpen(true);
                                 }}
-                                label={i18n.t("Last 12 Month")}
+                                label={i18n.t("Last 12 Months")}
                                 icon={<IconVisualizationColumnStacked24/>}
                             />
                             <MenuItem
@@ -170,7 +192,7 @@ export default function DataContainer({
                                     setPeriodOptionValueStates([new Period().setPreferences({allowFuturePeriods: true}).getById("LAST_4_QUARTERS")])
                                     setAnalysisOpen(true);
                                 }}
-                                label={i18n.t("Last 4 Quarter")}
+                                label={i18n.t("Last 4 Quarters")}
                                 icon={<IconVisualizationColumnStacked24/>}
                             />
                             <MenuItem

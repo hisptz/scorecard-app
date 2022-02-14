@@ -1,4 +1,4 @@
-import {find, has, isEmpty} from "lodash";
+import {find, has } from "lodash";
 import { uid } from "./utils";
 
 export function migrateScorecard(oldScorecard) {
