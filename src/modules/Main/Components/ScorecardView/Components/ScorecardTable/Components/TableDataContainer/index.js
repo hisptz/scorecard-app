@@ -1,6 +1,4 @@
 import i18n from "@dhis2/d2-i18n";
-import {IconVisualizationColumnStacked24, IconVisualizationLine24, Menu, MenuItem, Popover,} from "@dhis2/ui";
-import {Period} from "@iapps/period-utilities";
 import {
   Menu,
   MenuItem,
@@ -130,7 +128,7 @@ export default function DataContainer({
                     onClickOutside={() => setStateActionRef(undefined)}
                     placement="bottom-start"
                     reference={stateActionRef}
-                >https://github.com/nnkogift/hisp_teaser
+                >
                     <Menu>
                         <MenuItem
                             onClick={() => {
