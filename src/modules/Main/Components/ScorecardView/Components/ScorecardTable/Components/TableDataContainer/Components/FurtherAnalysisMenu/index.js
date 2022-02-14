@@ -8,20 +8,15 @@ import {
     Popover
 } from "@dhis2/ui";
 import {Period} from "@iapps/period-utilities";
+import PropTypes from 'prop-types'
 import React, {useState} from "react";
 import {useSetRecoilState} from "recoil";
-import TableCellAnalysis from "../../../TableCellAnalysis";
 import {orgUnitSelectorOptionOnCell} from "../../../TableCellAnalysis/state/orgUnit";
 import {cellPeriodOptionSelector} from "../../../TableCellAnalysis/state/period";
-import PropTypes from 'prop-types'
 
 export default function FurtherAnalysisMenu({
-                                                orgUnit,
-                                                period,
-                                                dataSources,
                                                 stateActionRef,
                                                 setStateActionRef,
-                                                analysisOpen,
                                                 setAnalysisOpen
                                             }) {
     const [showSubMenu, setShowSubMenu] = useState(false)
@@ -54,9 +49,6 @@ export default function FurtherAnalysisMenu({
                         icon={<IconDimensionOrgUnit16/>}
                     />
                     <MenuItem
-                        onClick={() => {
-                            setStateActionRef(undefined);
-                        }}
                         showSubMenu={showSubMenu}
                         toggleSubMenu={() => {
                             setShowSubMenu(prevState => !prevState);
@@ -113,25 +105,11 @@ export default function FurtherAnalysisMenu({
 
                 </Menu>
             </Popover>
-            {analysisOpen && (
-                <TableCellAnalysis
-                    orgUnit={orgUnit}
-                    period={period}
-                    dataHolder={{dataSources}}
-                    onClose={() => {
-                        setAnalysisOpen(false);
-                    }}
-                />
-            )}
         </>
     )
 }
 
 FurtherAnalysisMenu.propTypes = {
-    dataSources: PropTypes.array.isRequired,
-    orgUnit: PropTypes.object.isRequired,
-    period: PropTypes.object.isRequired,
-    analysisOpen: PropTypes.bool,
     setAnalysisOpen: PropTypes.func,
     setStateActionRef: PropTypes.func,
     stateActionRef: PropTypes.object,

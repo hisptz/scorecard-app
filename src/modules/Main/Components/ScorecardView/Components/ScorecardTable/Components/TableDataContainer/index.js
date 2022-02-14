@@ -5,6 +5,7 @@ import ScorecardDataEngine from "../../../../../../../../core/models/scorecardDa
 import {OrgUnitLevels} from "../../../../../../../../core/state/orgUnit";
 import {ScorecardViewState,} from "../../../../../../../../core/state/scorecard";
 import {getLegend} from "../../../../../../../../shared/utils/utils";
+import TableCellAnalysis from "../TableCellAnalysis";
 import {orgUnitOptionOnCell} from "../TableCellAnalysis/state/orgUnit";
 import {cellPeriodOptionAtom} from "../TableCellAnalysis/state/period";
 import {LinkedDataCell, SingleDataCell} from "./Components/DataCells";
@@ -101,7 +102,16 @@ export default function DataContainer({
                     <SingleDataCell indicator={top} data={topData} color={topColor}/>
                 )}
             </div>
-
+            {analysisOpen && (
+                <TableCellAnalysis
+                    orgUnit={orgUnit}
+                    period={period}
+                    dataHolder={{dataSources}}
+                    onClose={() => {
+                        setAnalysisOpen(false);
+                    }}
+                />
+            )}
             {stateActionRef && (
                 <FurtherAnalysisMenu orgUnit={orgUnit} period={period} dataSources={dataSources}
                                      analysisOpen={analysisOpen} setAnalysisOpen={setAnalysisOpen}
