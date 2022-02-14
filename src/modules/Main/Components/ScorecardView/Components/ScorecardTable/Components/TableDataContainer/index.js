@@ -1,24 +1,15 @@
-import i18n from "@dhis2/d2-i18n";
-import {
-  Menu,
-  MenuItem,
-  Popover,
-  IconVisualizationColumnStacked24,
-  IconVisualizationLine24,
-  IconDimensionOrgUnit16,
-} from "@dhis2/ui";
-import { Period } from "@iapps/period-utilities";
 import PropTypes from "prop-types";
 import React, {useEffect, useRef, useState} from "react";
-import {useRecoilValue, useResetRecoilState, useSetRecoilState} from "recoil";
+import {useRecoilValue, useResetRecoilState} from "recoil";
 import ScorecardDataEngine from "../../../../../../../../core/models/scorecardData";
 import {OrgUnitLevels} from "../../../../../../../../core/state/orgUnit";
 import {ScorecardViewState,} from "../../../../../../../../core/state/scorecard";
 import {getLegend} from "../../../../../../../../shared/utils/utils";
 import TableCellAnalysis from "../TableCellAnalysis";
-import {orgUnitSelectorOptionOnCell,orgUnitOptionOnCell} from "../TableCellAnalysis/state/orgUnit";
-import {cellPeriodOptionAtom, cellPeriodOptionSelector} from "../TableCellAnalysis/state/period";
+import {orgUnitOptionOnCell} from "../TableCellAnalysis/state/orgUnit";
+import {cellPeriodOptionAtom} from "../TableCellAnalysis/state/period";
 import {LinkedDataCell, SingleDataCell} from "./Components/DataCells";
+import FurtherAnalysisMenu from "./Components/FurtherAnalysisMenu";
 import LoadingCell from "./Components/LoadingCell";
 
 export default function DataContainer({
@@ -38,11 +29,9 @@ export default function DataContainer({
     const [bottomData, setBottomData] = useState();
     const ref = useRef(null);
     const [stateActionRef, setStateActionRef] = useState(null);
-    const [showSubMenu, setShowSubMenu] = useState(true)
     const resetPeriodsOptionSelection = useResetRecoilState(cellPeriodOptionAtom);
- const resetOrgUnitOptionSelection = useResetRecoilState(orgUnitOptionOnCell);
-    const setPeriodOptionValueStates = useSetRecoilState(cellPeriodOptionSelector);
- const setOrgUnitOptionValueStates = useSetRecoilState(orgUnitSelectorOptionOnCell);
+    const resetOrgUnitOptionSelection = useResetRecoilState(orgUnitOptionOnCell);
+
 
     const [top, bottom] = dataSources ?? [];
     const {color: topColor} =
@@ -81,7 +70,7 @@ export default function DataContainer({
             topSub.unsubscribe();
             bottomSub.unsubscribe();
             resetPeriodsOptionSelection();
-      resetOrgUnitOptionSelection()
+            resetOrgUnitOptionSelection()
         };
     }, [orgUnitId, periodId, top, bottom,]);
 
@@ -124,88 +113,9 @@ export default function DataContainer({
                 />
             )}
             {stateActionRef && (
-                <Popover
-                    onClickOutside={() => setStateActionRef(undefined)}
-                    placement="bottom-start"
-                    reference={stateActionRef}
-                >
-                    <Menu>
-                        <MenuItem
-                            onClick={() => {
-                                setStateActionRef(undefined);
-                                setAnalysisOpen(true);
-                            }}
-                            label={i18n.t("Further Analysis")}
-                            icon={<IconVisualizationColumnStacked24/>}
-                        />
-                        <MenuItem
-                            onClick={() => {
-                            setOrgUnitOptionValueStates(true);
-            setStateActionRef(undefined);
-            setAnalysisOpen(true);
-          }}
-          label={i18n.t("OrgUnit Analysis ")}
-          icon={<IconDimensionOrgUnit16 />}
-        />
-          <MenuItem
-          onClick={() => {    setStateActionRef(undefined);
-                            }}
-                            showSubMenu={showSubMenu}
-                            toggleSubMenu={() => {
-                                setShowSubMenu(!showSubMenu);
-                            }}
-                            label={i18n.t("Trend Analysis ")}
-                            icon={<IconVisualizationLine24/>}
-                        >
-                            <MenuItem
-                                onClick={() => {
-                                    setStateActionRef(undefined);
-                                    setPeriodOptionValueStates([new Period().setPreferences({allowFuturePeriods: true}).getById("LAST_3_MONTHS")])
-                                    setAnalysisOpen(true);
-                                }}
-                                label={i18n.t("Last 3 Months")}
-                                icon={<IconVisualizationColumnStacked24/>}
-                            />
-                            <MenuItem
-                                onClick={() => {
-                                    setStateActionRef(undefined);
-                                    setPeriodOptionValueStates([new Period().setPreferences({allowFuturePeriods: true}).getById("LAST_6_MONTHS")])
-                                    setAnalysisOpen(true);
-                                }}
-                                label={i18n.t("Last 6 Months")}
-                                icon={<IconVisualizationColumnStacked24/>}
-                            />
-                            <MenuItem
-                                onClick={() => {
-                                    setStateActionRef(undefined);
-                                    setPeriodOptionValueStates([new Period().setPreferences({allowFuturePeriods: true}).getById("LAST_12_MONTHS")])
-                                    setAnalysisOpen(true);
-                                }}
-                                label={i18n.t("Last 12 Months")}
-                                icon={<IconVisualizationColumnStacked24/>}
-                            />
-                            <MenuItem
-                                onClick={() => {
-                                    setStateActionRef(undefined);
-                                    setPeriodOptionValueStates([new Period().setPreferences({allowFuturePeriods: true}).getById("LAST_4_QUARTERS")])
-                                    setAnalysisOpen(true);
-                                }}
-                                label={i18n.t("Last 4 Quarters")}
-                                icon={<IconVisualizationColumnStacked24/>}
-                            />
-                            <MenuItem
-                                onClick={() => {
-                                    setStateActionRef(undefined);
-                                    setPeriodOptionValueStates([new Period().setPreferences({allowFuturePeriods: true}).getById("LAST_5_YEARS")])
-                                    setAnalysisOpen(true);
-                                }}
-                                label={i18n.t("Last 5 Years")}
-                                icon={<IconVisualizationColumnStacked24/>}
-                            />
-                        </MenuItem>
-
-                    </Menu>
-                </Popover>
+                <FurtherAnalysisMenu orgUnit={orgUnit} period={period} dataSources={dataSources}
+                                     analysisOpen={analysisOpen} setAnalysisOpen={setAnalysisOpen}
+                                     stateActionRef={stateActionRef} setStateActionRef={setStateActionRef}/>
             )}
         </>
     );

@@ -77,8 +77,6 @@ export default function ScorecardActions({downloadAreaRef, dataEngine}) {
                     </Button>
                 </ButtonStrip>
             </div>
-
-
             {optionsOpen && (
                 <ScorecardOptionsModal
                     onClose={() => setOptionsOpen(false)}
