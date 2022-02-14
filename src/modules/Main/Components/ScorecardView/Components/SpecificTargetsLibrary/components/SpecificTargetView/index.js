@@ -115,7 +115,7 @@ export function OrgUnitLevelSpecificTargetView({dataSourceLabel, legends}) {
                          className="column gap-16 p-16">
                         <div className="column gap-16">
                             <div>
-                                <b>{i18n.t("Period")}: </b> {level.displayName ?? level.name}
+                                <b>{i18n.t("Organisation Unit Level")}: </b> {level.displayName ?? level.name}
                             </div>
                             <div>
                                 <b>{i18n.t("Data Source")}: </b>{dataSourceLabel}
