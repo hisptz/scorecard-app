@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-02-11T13:26:06.225Z\n"
-"PO-Revision-Date: 2022-02-11T13:26:06.225Z\n"
+"POT-Creation-Date: 2022-02-14T08:57:44.066Z\n"
+"PO-Revision-Date: 2022-02-14T08:57:44.066Z\n"
 
 msgid "Next"
 msgstr "Next"
@@ -747,9 +747,6 @@ msgstr "Metadata"
 msgid "Select Organisation Units and Period to start"
 msgstr "Select Organisation Units and Period to start"
 
-msgid "Specific Targets Library"
-msgstr "Specific Targets Library"
-
 msgid "Download"
 msgstr "Download"
 
@@ -761,6 +758,9 @@ msgstr "Increased from last period"
 
 msgid "Decreased from last period"
 msgstr "Decreased from last period"
+
+msgid "Specific Targets Library"
+msgstr "Specific Targets Library"
 
 msgid "Average"
 msgstr "Average"
@@ -1381,6 +1381,9 @@ msgstr "Period Specific targets"
 
 msgid "Organisation unit level targets"
 msgstr "Organisation unit level targets"
+
+msgid "Specific Targets Legends"
+msgstr "Specific Targets Legends"
 
 msgid "Label"
 msgstr "Label"
