@@ -16,7 +16,6 @@ import "./locales";
 import "intro.js/introjs.css";
 import "./intro-dhis2.css";
 
-window.process = {};
 const MyApp = () => {
     const {initializeState} = useInitApp();
 
