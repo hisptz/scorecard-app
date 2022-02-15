@@ -93,7 +93,6 @@ export const OrgUnit = selectorFamily({
     },
 });
 
-
 export const OrgUnitPathState = atomFamily({
   key: "orgUnitPath",
   default: selectorFamily({
@@ -225,8 +224,6 @@ export const InitialOrgUnits = selector({
     return { orgUnits: uniqBy(resolvedOrgUnits, "id") };
   },
 });
-
-
 
 export const SelectedOrgUnits = selectorFamily({
   key: "selected-org-units-resolver",
