@@ -129,9 +129,6 @@ export const OrgUnitChildren = selectorFamily({
                     const {analytics} = await engine.query(orgUnitChildrenQuery, {
                         variables: {id: orgUnitId, level: parentOrgUnit.level + 1},
                     });
-
-                    const orgUnits = getOrgUnitsFromAnalytics(analytics);
-                    console.log(orgUnits)
                     return getOrgUnitsFromAnalytics(analytics) ?? [];
                 }
             },

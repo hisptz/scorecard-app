@@ -19,6 +19,7 @@ import OrgUnitSelection from "../models/orgUnitSelection";
 import Scorecard from "../models/scorecard";
 import ScorecardAccess from "../models/scorecardAccess";
 import ScorecardOptions from "../models/scorecardOptions";
+import {isOrgUnitId} from "../services/orgUnit";
 import {EngineState} from "./engine";
 import {OrgUnitChildren, SelectedOrgUnits} from "./orgUnit";
 import {PeriodResolverState} from "./period";
@@ -351,11 +352,11 @@ const ScorecardOrgUnitState = atomFamily({
                 async ({get}) => {
                     let childrenOrgUnits = [];
                     const filteredOrgUnits = get(SelectedOrgUnits(orgUnits));
-                    console.log(orgUnits)
                     if (orgUnits.length === 1) {
-                        childrenOrgUnits = get(OrgUnitChildren(head(orgUnits)));
+                        if(isOrgUnitId(head(orgUnits))){
+                            childrenOrgUnits = get(OrgUnitChildren(head(orgUnits)));
+                        }
                     }
-                    console.log({ childrenOrgUnits, filteredOrgUnits })
                     return {
                         childrenOrgUnits,
                         filteredOrgUnits,

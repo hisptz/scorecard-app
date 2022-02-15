@@ -65,7 +65,6 @@ export default function Row(props) {
       const arr = datEle.id.split(".");
       data = getData(arr[0]).dataElementInIndicator;
     }
-    // console.log(data)
     return (
       <>
         <DataTableCell bordered>

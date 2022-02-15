@@ -27,7 +27,7 @@ export default function useDataGroupManage({index, expanded}) {
             try {
                 setValue(path, updatedGroup);
             } catch (e) {
-                console.log("is this the culprit?", e);
+                console.error(e);
             }
         },
         [path, setValue],

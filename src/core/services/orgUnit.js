@@ -9,3 +9,8 @@ export function getOrgUnitsFromAnalytics(analytics) {
         hierarchy: ouNameHierarchy?.[ou].replace("/", "")
     }));
 }
+
+
+export function isOrgUnitId(id) {
+    return !id.match(/(LEVEL-)|(USER_)|(OU_GROUP-)\w+/)
+}

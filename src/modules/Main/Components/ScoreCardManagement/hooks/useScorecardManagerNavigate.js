@@ -17,7 +17,6 @@ export default function useScorecardManagerNavigate({form, onSave, onNavigate}) 
     const {show} = useAlert(({message}) => message, ({type}) => ({...type, duration: 3000}))
 
     useEffect(() => {
-        console.log({isNew});
         if (isNew) {
             setActiveStep(steps[isNew.nextStepIndex]);
             return resetNewState;
