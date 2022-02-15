@@ -7,6 +7,7 @@ import ScorecardDataEngine from "../../../../core/models/scorecardData";
 import {InitialOrgUnits} from "../../../../core/state/orgUnit";
 import {PeriodResolverState} from "../../../../core/state/period";
 import {
+    IsSpecificTargetsSet,
     ScorecardDataSourceState,
     ScorecardIdState,
     ScorecardTableOrientationState,
@@ -42,6 +43,8 @@ export default function ScorecardView() {
     );
     const downloadRef = useRef();
     const periods = useRecoilValue(PeriodResolverState);
+    const isSpecificTargetsSet = useRecoilValue(IsSpecificTargetsSet)
+
 
     const initialDataEngine = useMemo(() => new ScorecardDataEngine(), []);
 
@@ -93,11 +96,13 @@ export default function ScorecardView() {
                         ) : (
                             <EmptyOrgUnitsOrPeriod/>
                         )}
-                        <div className="hide print-show always-page-break">
-                            <div className="always-page-break"/>
-                            <h1>{i18n.t("Specific Targets Legends")}</h1>
-                            <SpecificTargetsLibrary/>
-                        </div>
+                        {
+                            isSpecificTargetsSet && <div className="hide print-show always-page-break">
+                                <div className="always-page-break"/>
+                                <h1>{i18n.t("Specific Targets Legends")}</h1>
+                                <SpecificTargetsLibrary/>
+                            </div>
+                        }
                     </div>
                 </div>
             </Suspense>

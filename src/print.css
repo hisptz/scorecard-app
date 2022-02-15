@@ -75,10 +75,6 @@
         overflow: visible !important;
     }
 
-    * {
-        position: relative !important;
-    }
-
 
     .child-table-row td:first-child {
         background: white !important;

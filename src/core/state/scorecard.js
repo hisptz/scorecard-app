@@ -1,6 +1,6 @@
 import i18n from "@dhis2/d2-i18n";
 import {Period} from "@iapps/period-utilities";
-import {cloneDeep, filter, get as _get, head, isEmpty, set as _set,} from "lodash";
+import {cloneDeep, filter, get as _get, head, isEmpty, set as _set, some,} from "lodash";
 import {atom, atomFamily, selector, selectorFamily} from "recoil";
 import {
     getColSpanDataGroups,
@@ -11,7 +11,7 @@ import {
 } from "../../modules/Main/Components/ScorecardView/Components/ScorecardTable/utils";
 import getScorecard, {getOrgUnitSelection,} from "../../shared/services/getScorecard";
 import getScorecardSummary, {restoreScorecardSummary,} from "../../shared/services/getScorecardSummary";
-import {getHoldersFromGroups, uid} from "../../shared/utils/utils";
+import {getDataSourcesFromGroups, getHoldersFromGroups, uid} from "../../shared/utils/utils";
 import {Orientation} from "../constants/orientation";
 import ScorecardAccessType from "../constants/scorecardAccessType";
 import {TableSort} from "../constants/tableSort";
@@ -378,6 +378,16 @@ const ScorecardDataLoadingState = atomFamily({
     key: "data-loading-state",
 });
 
+const IsSpecificTargetsSet = selector({
+    key: "is-specific-targets-set",
+    get: ({get}) => {
+        const {dataGroups} = get(ScorecardViewState("dataSelection"));
+        const dataSources = getDataSourcesFromGroups(dataGroups);
+        return some(dataSources, "specificTargetsSet");
+
+    }
+})
+
 export default ScorecardConfState;
 export {
     ScorecardConfigEditState,
@@ -398,4 +408,5 @@ export {
     ScorecardLegendDefinitionSelector,
     AllScorecardsSummaryState,
     IsNewScorecardState,
+    IsSpecificTargetsSet
 };

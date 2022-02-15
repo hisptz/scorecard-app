@@ -1,11 +1,14 @@
 import i18n from "@dhis2/d2-i18n";
 import {Button} from "@dhis2/ui";
-import {isEmpty, some} from "lodash";
+import {isEmpty} from "lodash";
 import React, {useState} from "react";
 import {useRecoilValue} from "recoil";
-import {ScorecardConfigDirtyState, ScorecardViewState,} from "../../../../../../core/state/scorecard";
+import {
+    IsSpecificTargetsSet,
+    ScorecardConfigDirtyState,
+    ScorecardViewState,
+} from "../../../../../../core/state/scorecard";
 import {DecreasingArrows, IncreasingArrows,} from "../../../../../../shared/Components/ScorecardCell/Components/Arrows";
-import {getDataSourcesFromGroups} from "../../../../../../shared/utils/utils";
 import SpecificTargetsLibraryModal from "../SpecificTargetsLibrary";
 import LegendView from "./Components/LegendView";
 
@@ -14,11 +17,8 @@ export default function ScorecardLegendsView() {
     const legends = useRecoilValue(
         ScorecardConfigDirtyState("legendDefinitions")
     );
-
-    const {dataGroups} = useRecoilValue(ScorecardViewState("dataSelection"));
-    const dataSources = getDataSourcesFromGroups(dataGroups);
+    const isSpecificTargetsSet = useRecoilValue(IsSpecificTargetsSet)
     const [specificTargetsLibraryOpen, setSpecificTargetsLibraryOpen] = useState(false);
-    const isSpecificTargetsSet = some(dataSources, "specificTargetsSet");
 
 
     return showLegends && !isEmpty(legends) ? (
