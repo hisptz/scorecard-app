@@ -351,9 +351,11 @@ const ScorecardOrgUnitState = atomFamily({
                 async ({get}) => {
                     let childrenOrgUnits = [];
                     const filteredOrgUnits = get(SelectedOrgUnits(orgUnits));
+                    console.log(orgUnits)
                     if (orgUnits.length === 1) {
                         childrenOrgUnits = get(OrgUnitChildren(head(orgUnits)));
                     }
+                    console.log({ childrenOrgUnits, filteredOrgUnits })
                     return {
                         childrenOrgUnits,
                         filteredOrgUnits,
