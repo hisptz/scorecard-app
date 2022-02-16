@@ -42,13 +42,13 @@ export default function ScorecardTable({
   }, []);
 
   return (
-    <div className="w-100 pb-32 flex-1 print-area scorecard-table">
+    <div className="w-100 pb-32 flex-1 print-area scorecard-table overflow-hidden">
       {loading ? (
         <TableLoader />
       ) : (
         <DndProvider backend={HTML5Backend}>
           <DataTable
-            className="table-print"
+            className="table-print "
             layout="fixed"
             scrollWidth={tableWidth ?? screenWidth}
           >
