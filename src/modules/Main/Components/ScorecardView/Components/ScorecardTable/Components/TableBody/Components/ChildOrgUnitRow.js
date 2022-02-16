@@ -75,7 +75,7 @@ export default function ChildOrgUnitRow({
     >
       {itemNumber && (
         <DataTableCell width={"50px"} fixed left={"50px"}>
-          {index + 2}
+          {index + 1}
         </DataTableCell>
       )}
       <DataTableCell
