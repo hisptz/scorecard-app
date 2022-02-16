@@ -136,9 +136,9 @@ export default function TableCellAnalysis({
     }, [dataSources, orgUnit, period]);
 
     return (
-        <Modal className="large-modal" position="middle" onClose={onClose} large>
+        <Modal className="large-modal h-100" position="middle" onClose={onClose} large>
             <ModalContent>
-                <div className="h-100 w-100 column">
+                <div style={{ overflow: "hidden", height: "72vh" }} className="h-100 w-100 column flex-1 ">
                     <DimensionsSelector/>
                     <h3 className="pt-8">{getDataSourcesDisplayName(dataSources)}</h3>
                     <Suspense fallback={<ModalLoader/>}>
@@ -147,6 +147,7 @@ export default function TableCellAnalysis({
                                 flex: 1,
                                 overflow: "auto",
                                 margin: "16px 0",
+                                height: "100%"
                             }}
                         >
                             {dataState.state === "hasError" && (
