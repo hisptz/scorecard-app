@@ -126,7 +126,6 @@ export default function useScorecardManage() {
                     set(draft, "id", id);
                 });
                 await createNewScorecard(updatedData);
-                console.log({activeStepIndex});
                 setIsNew({nextStepIndex: activeStepIndex + 1});
                 history.replace(`edit/${id}`);
             }

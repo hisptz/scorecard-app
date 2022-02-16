@@ -30,7 +30,6 @@ export default function useScorecardsSummary() {
                     set(ScorecardSummaryState, () => updatedList);
                 } catch (e) {
                     // setExecutionError(e);
-                    console.log("error occuring here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1")
                     console.error(e);
                 }
             },
