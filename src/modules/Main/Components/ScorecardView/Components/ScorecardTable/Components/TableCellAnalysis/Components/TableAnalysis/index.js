@@ -5,7 +5,7 @@ import TableItemComponent from "./Components/table-item/table-item.component";
 export default function TableAnalysis() {
   return (
     <div
-      className="column align-items-center center"
+      className="column align-items-center"
       style={{ minHeight: 500 }}
     >
       <TableItemComponent width="100%" />
