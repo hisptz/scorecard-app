@@ -27,7 +27,7 @@
   "devDependencies": {
     "@cypress/react": "^5.10.3",
     "@cypress/webpack-dev-server": "^1.7.0",
-    "@dhis2/cli-app-scripts": "^8.3.0",
+    "@dhis2/cli-app-scripts": "^8.3.2",
     "@dhis2/cli-style": "^10.1.1",
     "@dhis2/cli-utils-cypress": "^9.0.1",
     "@dhis2/cypress-commands": "^9.0.1",
@@ -44,7 +44,6 @@
     "prop-types": "^15.7.2",
     "react": "16.14.0",
     "react-error-overlay": "6.0.10",
-    "react-scripts": "^5.0.0",
     "wait-on": "^6.0.0"
   },
   "dependencies": {
@@ -76,7 +75,7 @@
     "react-router-dom": "^5.2.0",
     "react-to-print": "^2.14.0",
     "react-web-vitals": "^1.0.1",
-    "recoil": "^0.5.2",
+    "recoil": "^0.6.1",
     "rxjs": "^7.4.0",
     "xlsx": "^0.17.4"
   },
@@ -88,7 +87,5 @@
       "path": "./node_modules/cz-conventional-changelog"
     }
   },
-  "resolutions": {
-    "react-error-overlay": "6.0.10"
-  }
+  "resolutions": { "react-error-overlay": "6.0.9" }
 }
