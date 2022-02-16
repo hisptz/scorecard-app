@@ -21,6 +21,12 @@ import ChildOrgUnitRow from "./Components/ChildOrgUnitRow";
 import DataSourceRow from "./Components/DataSourceRow";
 import ParentOrgUnitRow from "./Components/ParentOrgUnitRow";
 
+
+function childrenAlreadyDisplayed(orgUnit, childrenOrgUnit) {
+    console.log({orgUnit, childrenOrgUnit});
+    return childrenOrgUnit.some(childOrgUnit => childOrgUnit.level === orgUnit.level + 1);
+}
+
 export default function ScorecardTableBody({orgUnits, dataEngine}) {
     const [expandedOrgUnit, setExpandedOrgUnit] = useState();
     const {calendar} = useRecoilValue(SystemSettingsState);
@@ -70,14 +76,26 @@ export default function ScorecardTableBody({orgUnits, dataEngine}) {
                             {filteredOrgUnits?.map((orgUnit, index) => (
                                 <>
                                     <div className="page-break"/>
-                                    <ParentOrgUnitRow
-                                        index={index}
-                                        dataEngine={dataEngine}
-                                        key={`${orgUnit?.id}-row`}
-                                        orgUnit={orgUnit}
-                                        overallAverage={overallAverage}
-                                        orgUnits={orgUnits}
-                                    />
+                                    {
+                                        (orgUnit.level === lowestOrgUnitLevel.level || childrenAlreadyDisplayed(orgUnit, childrenOrgUnits)) ?
+                                            <ParentOrgUnitRow
+                                                index={index}
+                                                dataEngine={dataEngine}
+                                                key={`${orgUnit?.id}-row`}
+                                                orgUnit={orgUnit}
+                                                overallAverage={overallAverage}
+                                                orgUnits={orgUnits}
+                                            /> : <ChildOrgUnitRow
+                                                index={index}
+                                                dataEngine={dataEngine}
+                                                key={`${orgUnit?.id}-row`}
+                                                onExpand={setExpandedOrgUnit}
+                                                orgUnit={orgUnit}
+                                                expandedOrgUnit={expandedOrgUnit}
+                                                overallAverage={overallAverage}
+                                                orgUnits={orgUnits}
+                                            />
+                                    }
                                 </>
                             ))}
                             {childrenOrgUnits?.map((orgUnit, index) => {
@@ -102,7 +120,7 @@ export default function ScorecardTableBody({orgUnits, dataEngine}) {
                                     <>
                                         <div className="page-break"/>
                                         <ChildOrgUnitRow
-                                            index={index}
+                                            index={index + 1}
                                             dataEngine={dataEngine}
                                             key={`${orgUnit?.id}-row`}
                                             onExpand={setExpandedOrgUnit}
