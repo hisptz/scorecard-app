@@ -3,7 +3,7 @@ import {Button, Chip, Modal, ModalActions, ModalContent} from "@dhis2/ui";
 import DescriptionIcon from "@material-ui/icons/Description";
 import ChartIcon from "@material-ui/icons/Equalizer";
 import TableChartIcon from "@material-ui/icons/TableChart";
-import {clone, find, get} from "lodash";
+import {cloneDeep, find, get} from "lodash";
 import PropTypes from "prop-types";
 import React, {Suspense, useEffect, useState} from "react";
 import {
@@ -77,7 +77,7 @@ export default function TableCellAnalysis({
                 function orgUnitUpdateSelector() {
                     const orgUnitSelection = new OrgUnitSelection({orgUnits: [orgUnit]})
                     if (orgUnitOptionValue) {
-                        const newOrgUnitSelection = clone(orgUnitSelection);
+                        const newOrgUnitSelection = cloneDeep(orgUnitSelection);
                         const currentOrgUnitLevel = get(orgUnitSelection, ['orgUnits', 0, 'level']);
 
                         if (currentOrgUnitLevel < lowestOrgUnitLevel.level) {
@@ -138,7 +138,7 @@ export default function TableCellAnalysis({
     return (
         <Modal className="large-modal h-100" position="middle" onClose={onClose} large>
             <ModalContent>
-                <div style={{ overflow: "hidden", height: "72vh" }} className="h-100 w-100 column flex-1 ">
+                <div style={{overflow: "hidden", height: "72vh"}} className="h-100 w-100 column flex-1 ">
                     <DimensionsSelector/>
                     <h3 className="pt-8">{getDataSourcesDisplayName(dataSources)}</h3>
                     <Suspense fallback={<ModalLoader/>}>

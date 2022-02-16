@@ -4,7 +4,7 @@ export function getOrgUnitsFromAnalytics(analytics) {
     return dimensions?.ou?.map(ou => ({
         id: ou,
         displayName: items?.[ou]?.name,
-        path: `${ouHierarchy?.[ou]}/${ou}`,
+        path: `/${ouHierarchy?.[ou]}/${ou}`,
         level: ouHierarchy?.[ou]?.split("/").length + 1,
         hierarchy: ouNameHierarchy?.[ou].replace("/", "")
     }));
