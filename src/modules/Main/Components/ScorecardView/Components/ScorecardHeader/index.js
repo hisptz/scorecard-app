@@ -20,6 +20,7 @@ export default function ScorecardHeader() {
                 {customHeader ? (
                     <JsxParser
                         autoCloseVoidElements
+                        className="w-100"
                         onError={console.error}
                         bindings={{
                             title,
