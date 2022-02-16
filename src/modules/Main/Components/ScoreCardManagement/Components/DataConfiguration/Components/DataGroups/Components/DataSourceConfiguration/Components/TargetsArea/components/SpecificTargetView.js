@@ -6,6 +6,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import {useRecoilValue} from "recoil";
 import {SelectedOrgUnits} from "../../../../../../../../../../../../../core/state/orgUnit";
+import {SystemSettingsState} from "../../../../../../../../../../../../../core/state/system";
 
 function LegendsView({legends, legendDefinitions}) {
     return <div className="row gap-16 space-evenly">
@@ -36,17 +37,6 @@ function getTypeLabel(type) {
             return i18n.t('Organisation unit(s)');
         case "orgUnitLevel":
             return i18n.t('Organisation unit levels');
-    }
-}
-
-function getItemDisplayName(type, item) {
-    switch (type) {
-        case "period":
-            return new Period().setPreferences({ allowFuturePeriods: true}).getById(item)?.name;
-        case "orgUnit":
-            return item;
-        case "orgUnitLevel":
-            return item.name;
     }
 }
 
@@ -90,6 +80,7 @@ export function OrgUnitSpecificTargetView({specificTarget, legendDefinitions, on
 
 export function PeriodSpecificTargetView({specificTarget, legendDefinitions, onUpdate, onDelete, defaultLegends}) {
     const {legends, type, items} = specificTarget ?? {};
+    const {calendar} = useRecoilValue(SystemSettingsState);
 
     return (
         <div style={{
@@ -103,7 +94,7 @@ export function PeriodSpecificTargetView({specificTarget, legendDefinitions, onU
                     {
                         items?.map(item => {
                             return <Tag key={`${item}-tag`}>
-                                {getItemDisplayName(type, item)}
+                                {new Period().setPreferences({allowFuturePeriods: true}).setCalendar(calendar).getById(item)?.name}
                             </Tag>
                         })
                     }

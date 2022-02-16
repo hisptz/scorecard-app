@@ -33,6 +33,7 @@ export default class ScorecardDataEngine {
     _dataEntities$ = new BehaviorSubject(this._dataEntities);
     dataEntities$ = this._dataEntities$.asObservable();
     _previousPeriods = [];
+    _calendar
 
     constructor() {
         this._cancelled = false;
@@ -51,7 +52,7 @@ export default class ScorecardDataEngine {
         let previousPeriods = [];
         this._selectedPeriods = uniqBy(
             (periods || []).map((period) => {
-                const currentPeriod = new Period().setPreferences({allowFuturePeriods: true}).getById(period?.id);
+                const currentPeriod = new Period().setPreferences({allowFuturePeriods: true}).setCalendar(this._calendar).getById(period?.id);
                 previousPeriods = [...previousPeriods, currentPeriod?.lastPeriod];
                 return currentPeriod || period;
             }),
@@ -75,6 +76,11 @@ export default class ScorecardDataEngine {
                     return period?.id;
                 })
             ) ?? [];
+        return this;
+    }
+
+    setCalendar(calendar) {
+        this._calendar = calendar;
         return this;
     }
 

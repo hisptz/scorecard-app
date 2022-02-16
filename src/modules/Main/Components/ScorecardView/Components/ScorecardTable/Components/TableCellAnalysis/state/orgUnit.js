@@ -1,6 +1,7 @@
-import { head, isEmpty, uniqBy } from "lodash";
+import {find, head, isEmpty, uniqBy} from "lodash";
 import { atom, selector } from "recoil";
 import { EngineState } from "../../../../../../../../../core/state/engine";
+import {OrgUnitLevels} from "../../../../../../../../../core/state/orgUnit";
 import { PeriodResolverState } from "../../../../../../../../../core/state/period";
 import {
   ScorecardDataSourceState,
@@ -57,34 +58,20 @@ export const InitialOrgUnits = selector({
     const periods = get(PeriodResolverState) ?? [];
     const dataHolders = get(ScorecardDataSourceState) ?? [];
     const { organisationUnits } = get(UserState);
-    const engine = get(EngineState);
+    const orgUnitLevels = get(OrgUnitLevels);
     let resolvedOrgUnits = orgUnits;
 
     if (!isEmpty(dataHolders) && !isEmpty(periods)) {
       if (userSubX2Unit) {
-        const { ou } = await engine.query(userSubUnitsQuery, {
-          variables: {
-            pe: head(periods)?.id,
-            dx: head(head(dataHolders)?.dataSources)?.id,
-            ou: "USER_ORGUNIT_GRANDCHILDREN",
-          },
-        });
         resolvedOrgUnits = [
           ...resolvedOrgUnits,
-          ...ou?.metaData?.dimensions?.ou?.map((ou) => ({ id: ou })),
+          {id: "USER_ORGUNIT_GRANDCHILDREN"}
         ];
       }
       if (userSubUnit) {
-        const { ou } = await engine.query(userSubUnitsQuery, {
-          variables: {
-            pe: head(periods)?.id,
-            dx: head(head(dataHolders)?.dataSources)?.id,
-            ou: "USER_ORGUNIT_CHILDREN",
-          },
-        });
         resolvedOrgUnits = [
           ...resolvedOrgUnits,
-          ...ou?.metaData?.dimensions?.ou?.map((ou) => ({ id: ou })),
+          {id: "USER_ORGUNIT_CHILDREN"}
         ];
       }
       if (userOrgUnit) {
@@ -92,30 +79,16 @@ export const InitialOrgUnits = selector({
       }
 
       if (!isEmpty(levels)) {
-        const { ou } = await engine.query(userSubUnitsQuery, {
-          variables: {
-            pe: head(periods)?.id,
-            dx: head(head(dataHolders)?.dataSources)?.id,
-            ou: levels?.map((level) => `LEVEL-${level}`)?.join(";"),
-          },
-        });
         resolvedOrgUnits = [
           ...resolvedOrgUnits,
-          ...ou?.metaData?.dimensions?.ou?.map((ou) => ({ id: ou })),
+          ...(levels?.map((level) => ({id: `LEVEL-${find(orgUnitLevels, {id: level})?.level}`})) ?? []),
         ];
       }
 
       if (!isEmpty(groups)) {
-        const { ou } = await engine.query(userSubUnitsQuery, {
-          variables: {
-            pe: head(periods)?.id,
-            dx: head(head(dataHolders)?.dataSources)?.id,
-            ou: groups?.map((group) => `OU_GROUP-${group}`)?.join(";"),
-          },
-        });
         resolvedOrgUnits = [
           ...resolvedOrgUnits,
-          ...ou?.metaData?.dimensions?.ou?.map((ou) => ({ id: ou })),
+          ...(groups?.map((group) => ({id: `OU_GROUP-${group}`})) ?? []),
         ];
       }
     }

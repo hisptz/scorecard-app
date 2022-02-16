@@ -6,12 +6,16 @@ import {compact, isEmpty} from "lodash";
 import PropTypes from 'prop-types'
 import React, {useCallback, useState} from 'react'
 import {useFormContext} from "react-hook-form";
+import {useRecoilValue} from "recoil";
+import {SystemSettingsState} from "../../../../../../../../../../../../core/state/system";
 import {getNonDefaultLegendDefinitions} from "../../../../../../../General/utils/utils";
 import LegendsField from "../TargetsArea/components/LegendsField";
 
 export default function PeriodSpecificTargetsModal({open, onClose, onUpdate, specificTarget, defaultLegends, onChangeDefaultLegends}) {
     const {watch} = useFormContext();
     const [target, setTarget] = useState(specificTarget);
+    const {calendar} = useRecoilValue(SystemSettingsState);
+
     const legendDefinitions = getNonDefaultLegendDefinitions(watch("legendDefinitions"));
     const [periodSelectorOpen, setPeriodSelectorOpen] = useState(isEmpty(target.items))
 
@@ -35,7 +39,7 @@ export default function PeriodSpecificTargetsModal({open, onClose, onUpdate, spe
                         <div className="column flex-1">
                             <InputField fullWidth label={i18n.t("Period")} disabled value={target?.items?.map(item => {
                                 if (item) {
-                                    return new Period().setPreferences({ allowFuturePeriods: true}).getById(item)?.name
+                                    return new Period().setPreferences({ allowFuturePeriods: true}).setCalendar(calendar).getById(item)?.name
                                 }
                             })?.join(", ")}/>
                         </div>
@@ -50,7 +54,7 @@ export default function PeriodSpecificTargetsModal({open, onClose, onUpdate, spe
                             singleSelection
                             selectedPeriods={compact([...(target.items?.map(item => {
                                 if (item) {
-                                    return new Period().setPreferences({ allowFuturePeriods: true}).getById(item)
+                                    return new Period().setPreferences({ allowFuturePeriods: true}).setCalendar(calendar).getById(item)
                                 }
                             }) ?? [])])}
                             onClose={() => setPeriodSelectorOpen(false)} hide={!periodSelectorOpen}

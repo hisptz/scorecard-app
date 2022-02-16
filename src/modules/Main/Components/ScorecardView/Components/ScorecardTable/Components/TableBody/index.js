@@ -14,6 +14,7 @@ import {
     ScorecardTableOrientationState,
     ScorecardViewState,
 } from "../../../../../../../../core/state/scorecard";
+import {SystemSettingsState} from "../../../../../../../../core/state/system";
 import AverageDataSourceRow from "./Components/AverageDataSourceRow";
 import AverageOrgUnitRow from "./Components/AverageOrgUnitRow";
 import ChildOrgUnitRow from "./Components/ChildOrgUnitRow";
@@ -22,10 +23,10 @@ import ParentOrgUnitRow from "./Components/ParentOrgUnitRow";
 
 export default function ScorecardTableBody({orgUnits, dataEngine}) {
     const [expandedOrgUnit, setExpandedOrgUnit] = useState();
+    const {calendar} = useRecoilValue(SystemSettingsState);
     const tableOrientation = useRecoilValue(ScorecardTableOrientationState);
     const lowestOrgUnitLevel = useRecoilValue(LowestOrgUnitLevel);
-    const {dataGroups} =
-    useRecoilValue(ScorecardViewState("dataSelection")) ?? {};
+    const {dataGroups} = useRecoilValue(ScorecardViewState("dataSelection")) ?? {};
     const {averageRow} = useRecoilValue(ScorecardViewState("options")) ?? {};
     const filteredDataHolders = useRecoilValue(ScorecardDataSourceState);
     const loading = useRecoilValue(ScorecardDataLoadingState(orgUnits));
@@ -56,6 +57,7 @@ export default function ScorecardTableBody({orgUnits, dataEngine}) {
                 .setPeriods(periods)
                 .setOrgUnits([...(filteredOrgUnits ?? []), ...(childrenOrgUnits ?? [])])
                 .setPeriodType(periodType)
+                .setCalendar(calendar)
                 .load();
         }
     }, [dataGroups, filteredOrgUnits, childrenOrgUnits, periodType, periods]);
