@@ -53,6 +53,7 @@ const viewTypes = [
     },
 ];
 
+
 export default function TableCellAnalysis({
                                               onClose,
                                               dataHolder,
