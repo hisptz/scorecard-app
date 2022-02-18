@@ -355,7 +355,6 @@ const ScorecardOrgUnitState = atomFamily({
                     if (orgUnits.length === 1) {
                         if (isOrgUnitId(head(orgUnits))) {
                             childrenOrgUnits = get(OrgUnitChildren(head(orgUnits)));
-                            console.log(childrenOrgUnits);
                         }
                     }
                     return {

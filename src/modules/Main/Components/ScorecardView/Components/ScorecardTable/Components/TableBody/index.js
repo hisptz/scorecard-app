@@ -1,5 +1,5 @@
+import {useConfig} from "@dhis2/app-runtime";
 import {DataTableBody} from "@dhis2/ui";
-import {isEmpty} from "lodash";
 import PropTypes from "prop-types";
 import React, {Fragment, useEffect, useState} from "react";
 import {useRecoilValue} from "recoil";
@@ -23,7 +23,6 @@ import ParentOrgUnitRow from "./Components/ParentOrgUnitRow";
 
 
 function childrenAlreadyDisplayed(orgUnit, childrenOrgUnit) {
-    console.log({orgUnit, childrenOrgUnit});
     return childrenOrgUnit.some(childOrgUnit => childOrgUnit.level === orgUnit.level + 1);
 }
 
@@ -36,7 +35,7 @@ export default function ScorecardTableBody({orgUnits, dataEngine}) {
     const {averageRow} = useRecoilValue(ScorecardViewState("options")) ?? {};
     const filteredDataHolders = useRecoilValue(ScorecardDataSourceState);
     const loading = useRecoilValue(ScorecardDataLoadingState(orgUnits));
-    const periods = useRecoilValue(PeriodResolverState) ?? [];
+    const periods = useRecoilValue(PeriodResolverState);
     const {periodType} = useRecoilValue(ScorecardViewState("periodSelection"));
     const {childrenOrgUnits, filteredOrgUnits} = useRecoilValue(
         ScorecardOrgUnitState(orgUnits)
@@ -54,19 +53,14 @@ export default function ScorecardTableBody({orgUnits, dataEngine}) {
     }, [childrenOrgUnits, filteredOrgUnits, loading]);
 
     useEffect(() => {
-        if (
-            (orgUnits.length === 1 && !isEmpty(childrenOrgUnits)) ||
-            orgUnits.length > 1
-        ) {
-            dataEngine
-                .setDataGroups(dataGroups)
-                .setPeriods(periods)
-                .setOrgUnits([...(filteredOrgUnits ?? []), ...(childrenOrgUnits ?? [])])
-                .setPeriodType(periodType)
-                .setCalendar(calendar)
-                .load();
-        }
-    }, [dataGroups, filteredOrgUnits, childrenOrgUnits, periodType, periods]);
+        dataEngine
+            .setDataGroups(dataGroups)
+            .setPeriods(periods)
+            .setOrgUnits([...(filteredOrgUnits ?? []), ...(childrenOrgUnits ?? [])])
+            .setPeriodType(periodType)
+            .setCalendar(calendar)
+            .load();
+    }, [dataGroups, filteredOrgUnits, childrenOrgUnits, periodType, periods, dataEngine, calendar]);
     return (
         <DataTableBody>
             {
