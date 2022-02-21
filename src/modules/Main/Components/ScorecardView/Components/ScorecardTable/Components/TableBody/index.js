@@ -1,7 +1,7 @@
 import {DataTableBody} from "@dhis2/ui";
 import PropTypes from "prop-types";
 import React, {Fragment, useEffect, useState} from "react";
-import {useRecoilValue} from "recoil";
+import {useRecoilValue, useResetRecoilState} from "recoil";
 import {Orientation} from "../../../../../../../../core/constants/orientation";
 import ScorecardDataEngine from "../../../../../../../../core/models/scorecardData";
 import {LowestOrgUnitLevel} from "../../../../../../../../core/state/orgUnit";
@@ -41,6 +41,7 @@ export default function ScorecardTableBody({orgUnits, dataEngine}) {
         ScorecardOrgUnitState(orgUnits)
     );
     const refreshScorecard = useRecoilValue(RefreshScorecardState);
+    const resetRefreshScorecard = useResetRecoilState(RefreshScorecardState);
     const [overallAverage, setOverallAverage] = useState();
 
     useEffect(() => {
@@ -61,7 +62,17 @@ export default function ScorecardTableBody({orgUnits, dataEngine}) {
             .setPeriodType(periodType)
             .setCalendar(calendar)
             .load();
-    }, [dataGroups, filteredOrgUnits, childrenOrgUnits, periodType, periods, dataEngine, calendar, refreshScorecard]);
+        return () => {
+            resetRefreshScorecard();
+        }
+    }, [dataGroups, filteredOrgUnits, childrenOrgUnits, periodType, periods, dataEngine, calendar]);
+
+    useEffect(() => {
+        if (refreshScorecard !== 0) {
+            dataEngine.refresh();
+        }
+    }, [dataEngine, refreshScorecard]);
+
     return (
         <DataTableBody>
             {

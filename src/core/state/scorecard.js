@@ -207,7 +207,7 @@ const ScorecardConfigEditState = atom({
 
 const RefreshScorecardState = atom({
     key: "refresh-scorecard",
-    default: false,
+    default: 0,
 });
 
 const ScorecardViewState = atomFamily({

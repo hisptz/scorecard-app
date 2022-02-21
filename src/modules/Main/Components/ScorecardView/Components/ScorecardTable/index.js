@@ -32,7 +32,7 @@ export default function ScorecardTable({
   const reset = useRecoilCallback(({ reset }) => () => {
     reset(ScorecardViewState("orgUnitSearchKeyword"));
     reset(ScorecardDataLoadingState(orgUnits));
-    dataEngine.reset();
+    dataEngine.reset(true);
   });
 
   useEffect(() => {

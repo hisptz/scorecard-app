@@ -23,12 +23,10 @@ export default function ScorecardActions({downloadAreaRef, dataEngine}) {
     const userAuthority = useRecoilValue(UserAuthorityOnScorecard(scorecardId));
     const writeAccess = userAuthority?.write;
     const history = useHistory();
-
-
     const onRefresh = useRecoilCallback(({set, reset}) => () => {
-        reset(ScorecardViewState("orgUnitSelection"))
-        reset(ScorecardViewState("periodSelection"))
-        set(RefreshScorecardState, prevValue => !prevValue)
+        reset(ScorecardViewState("orgUnitSelection"));
+        reset(ScorecardViewState("periodSelection"));
+        set(RefreshScorecardState, prevValue => prevValue + 1);
     });
 
     const onEdit = () => {

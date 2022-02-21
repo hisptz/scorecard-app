@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React, {useEffect, useRef, useState} from "react";
+import React, {memo, useEffect, useRef, useState} from "react";
 import {useRecoilValue, useResetRecoilState} from "recoil";
 import ScorecardDataEngine from "../../../../../../../../core/models/scorecardData";
 import {OrgUnitLevels} from "../../../../../../../../core/state/orgUnit";
@@ -12,12 +12,12 @@ import {LinkedDataCell, SingleDataCell} from "./Components/DataCells";
 import FurtherAnalysisMenu from "./Components/FurtherAnalysisMenu";
 import LoadingCell from "./Components/LoadingCell";
 
-export default function DataContainer({
-                                          dataSources,
-                                          orgUnit,
-                                          period,
-                                          dataEngine,
-                                      }) {
+function DataContainer({
+                           dataSources,
+                           orgUnit,
+                           period,
+                           dataEngine,
+                       }) {
     const orgUnitLevels = useRecoilValue(OrgUnitLevels);
     const legendDefinitions = useRecoilValue(
         ScorecardViewState("legendDefinitions")
@@ -120,6 +120,9 @@ export default function DataContainer({
         </>
     );
 }
+
+
+export default memo(DataContainer)
 
 DataContainer.propTypes = {
     dataEngine: PropTypes.instanceOf(ScorecardDataEngine).isRequired,
