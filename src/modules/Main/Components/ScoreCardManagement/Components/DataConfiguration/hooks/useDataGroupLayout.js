@@ -1,4 +1,4 @@
-import {cloneDeep, find, findIndex, head, last} from "lodash";
+import {cloneDeep, find, findIndex, head, last, set} from "lodash";
 import {useCallback, useMemo} from "react";
 import {useFormContext} from "react-hook-form";
 import {useRecoilCallback} from "recoil";
@@ -53,7 +53,7 @@ export default function useDataGroupLayout({handleAccordionChange, index}) {
             dataHolderToModify?.dataSources?.splice(0, 1)
         );
         const updatedHolderList = [...dataHolders];
-        updatedHolderList.splice(dataHolderIndex, 1, modifiedDataHolder);
+        set(updatedHolderList, [dataHolderIndex], modifiedDataHolder);
         updatedHolderList.splice(dataHolderIndex, 0, newDataHolder);
         setGroup(
             ScorecardIndicatorGroup.set(group, "dataHolders", updatedHolderList)
@@ -85,7 +85,6 @@ export default function useDataGroupLayout({handleAccordionChange, index}) {
     const onExpand = (event, newExpanded) => {
         handleAccordionChange(id)(event, newExpanded);
     };
-
 
     return {
         onLink,
