@@ -2,7 +2,7 @@ import {useAlert} from "@dhis2/app-runtime";
 import i18n from "@dhis2/d2-i18n";
 import produce from "immer";
 import {cloneDeep, findIndex, set} from "lodash";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useForm} from "react-hook-form";
 import {useHistory, useParams} from "react-router-dom";
 import {useRecoilCallback, useRecoilState, useRecoilValue, useSetRecoilState} from "recoil";
@@ -50,17 +50,24 @@ export default function useScorecardManage() {
         ({type}) => ({...type, duration: 3000})
     );
 
-
     const resetEditStates = useRecoilCallback(({reset}) => () => {
         reset(ScorecardConfigEditState);
         reset(ScorecardConfigErrorState);
         reset(ShouldValidate);
         reset(IsNewScorecardState);
+        reset(ActiveStepState);
     });
     const resetScorecardStates = useRecoilCallback(({reset}) => () => {
         reset(ScorecardConfState(scorecardId));
         reset(ScorecardIdState);
     });
+
+    useEffect(() => {
+        return () => {
+            resetEditStates();
+            resetScorecardStates();
+        };
+    }, []);
 
     const onNavigate = () => {
         setRoute((prevRoute) => ({
