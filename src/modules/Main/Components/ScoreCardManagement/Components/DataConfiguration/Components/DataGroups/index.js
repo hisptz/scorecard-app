@@ -1,18 +1,18 @@
 import i18n from "@dhis2/d2-i18n";
 import {isEmpty, last, remove, set} from "lodash";
-import React, {useCallback, useEffect, useState} from "react";
+import React, {useCallback, useEffect, useMemo, useState} from "react";
 import {Droppable} from "react-beautiful-dnd";
-import {useFormContext, Controller} from "react-hook-form";
+import {Controller, useFormContext} from "react-hook-form";
 import {useRecoilValue, useResetRecoilState} from "recoil";
 import DataSelection from "../../../../../../../../core/models/dataSelection";
 import {ScorecardConfigEditState,} from "../../../../../../../../core/state/scorecard";
-import { dataSelector } from "../../DataGroupArea";
+import {SearchedGroupsState} from "../../DataGroupArea";
 import DataGroup from "./Components/DataGroup";
 
 export default function DataGroups() {
     const {setValue, watch} = useFormContext();
     const dataSelection = watch("dataSelection");
-    const filteredIndicator = useRecoilValue(dataSelector);
+    const searchedGroups = useRecoilValue(SearchedGroupsState);
     const updateDataSelection = useCallback((updatedDataSelection) => {
         setValue("dataSelection", updatedDataSelection);
     }, [setValue])
@@ -45,21 +45,24 @@ export default function DataGroups() {
             DataSelection.set(dataSelection, "dataGroups", updatedGroupList)
         );
     };
-useEffect(()=>{
-  if(filteredIndicator.length > 0){
-    updateDataSelection(
-        DataSelection.set(dataSelection, "dataGroups", filteredIndicator)
-    );
-  }
-},[filteredIndicator])
-    
+
+    const filteredGroups = useMemo(() => {
+        if (isEmpty(searchedGroups)) {
+            return groups;
+        } else {
+            console.log({searchedGroups})
+            return groups.filter(group => searchedGroups.includes(group.id));
+        }
+    }, [searchedGroups, groups]);
+
+
 
     return (
         <Droppable droppableId={"group-area"}>
             {(provided) => (
                 <div {...provided.droppableProps} ref={provided.innerRef}>
                     <div>
-                        {groups?.map((group, index) => (
+                        {filteredGroups?.map((group, index) => (
                             <Controller
                                 key={group.id}
                                 rules={{
