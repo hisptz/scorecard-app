@@ -1,13 +1,13 @@
-import {useConfig} from "@dhis2/app-runtime";
 import {DataTableBody} from "@dhis2/ui";
 import PropTypes from "prop-types";
 import React, {Fragment, useEffect, useState} from "react";
-import {useRecoilValue} from "recoil";
+import {useRecoilValue, useResetRecoilState} from "recoil";
 import {Orientation} from "../../../../../../../../core/constants/orientation";
 import ScorecardDataEngine from "../../../../../../../../core/models/scorecardData";
 import {LowestOrgUnitLevel} from "../../../../../../../../core/state/orgUnit";
 import {PeriodResolverState} from "../../../../../../../../core/state/period";
 import {
+    RefreshScorecardState,
     ScorecardDataLoadingState,
     ScorecardDataSourceState,
     ScorecardOrgUnitState,
@@ -40,6 +40,8 @@ export default function ScorecardTableBody({orgUnits, dataEngine}) {
     const {childrenOrgUnits, filteredOrgUnits} = useRecoilValue(
         ScorecardOrgUnitState(orgUnits)
     );
+    const refreshScorecard = useRecoilValue(RefreshScorecardState);
+    const resetRefreshScorecard = useResetRecoilState(RefreshScorecardState);
     const [overallAverage, setOverallAverage] = useState();
 
     useEffect(() => {
@@ -60,7 +62,17 @@ export default function ScorecardTableBody({orgUnits, dataEngine}) {
             .setPeriodType(periodType)
             .setCalendar(calendar)
             .load();
+        return () => {
+            resetRefreshScorecard();
+        }
     }, [dataGroups, filteredOrgUnits, childrenOrgUnits, periodType, periods, dataEngine, calendar]);
+
+    useEffect(() => {
+        if (refreshScorecard !== 0) {
+            dataEngine.refresh();
+        }
+    }, [dataEngine, refreshScorecard]);
+
     return (
         <DataTableBody>
             {

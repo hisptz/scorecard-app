@@ -205,6 +205,11 @@ const ScorecardConfigEditState = atom({
     default: {},
 });
 
+const RefreshScorecardState = atom({
+    key: "refresh-scorecard",
+    default: 0,
+});
+
 const ScorecardViewState = atomFamily({
     key: "scorecard-view-config",
     default: selectorFamily({
@@ -411,5 +416,6 @@ export {
     ScorecardLegendDefinitionSelector,
     AllScorecardsSummaryState,
     IsNewScorecardState,
-    IsSpecificTargetsSet
+    IsSpecificTargetsSet,
+    RefreshScorecardState
 };

@@ -48,6 +48,12 @@ export default class ScorecardDataEngine {
         return this;
     }
 
+    refresh() {
+        this.reset(false);
+        this.load();
+        return this;
+    }
+
     setPeriods(periods) {
         let previousPeriods = [];
         this._selectedPeriods = uniqBy(
@@ -459,11 +465,17 @@ export default class ScorecardDataEngine {
         );
     }
 
-    reset() {
+    reset(cancel = false) {
+        this._totalRequests = 0;
+        this._progress = 0;
+        this._progress$ = new BehaviorSubject();
+        this._loading$ = new BehaviorSubject();
         this._dataEntities = {};
-        this._dataEntities$.next(this._dataEntities);
-        this._loading$.next(false);
-        this._cancelled = true;
+        this._dataEntities$ = new BehaviorSubject(this._dataEntities);
+        this.dataEntities$ = this._dataEntities$.asObservable();
+        this._previousPeriods = [];
+        this._dataEntities = {};
+        this._cancelled = cancel;
     }
 
     _getScorecardData(selections) {

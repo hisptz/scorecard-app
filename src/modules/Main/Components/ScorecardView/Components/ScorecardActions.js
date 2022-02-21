@@ -6,7 +6,7 @@ import {useHistory} from "react-router-dom";
 import {useRecoilCallback, useRecoilState, useRecoilValue, useSetRecoilState,} from "recoil";
 import ScorecardDataEngine from "../../../../../core/models/scorecardData";
 import RouterState from "../../../../../core/state/router";
-import {ScorecardIdState, ScorecardRequestId, ScorecardViewState,} from "../../../../../core/state/scorecard";
+import {RefreshScorecardState, ScorecardIdState, ScorecardViewState,} from "../../../../../core/state/scorecard";
 import {UserAuthorityOnScorecard} from "../../../../../core/state/user";
 import ScorecardOptionsModal from "../../../../../shared/Components/ScorecardOptionsModal";
 import DownloadMenu from "./Download/Components/DownloadMenu";
@@ -23,11 +23,10 @@ export default function ScorecardActions({downloadAreaRef, dataEngine}) {
     const userAuthority = useRecoilValue(UserAuthorityOnScorecard(scorecardId));
     const writeAccess = userAuthority?.write;
     const history = useHistory();
-
-
-    const onRefresh = useRecoilCallback(({reset, set}) => () => {
-        set(ScorecardRequestId(scorecardId), prevValue => prevValue + 1)
-        reset(ScorecardViewState(scorecardId))
+    const onRefresh = useRecoilCallback(({set, reset}) => () => {
+        reset(ScorecardViewState("orgUnitSelection"));
+        reset(ScorecardViewState("periodSelection"));
+        set(RefreshScorecardState, prevValue => prevValue + 1);
     });
 
     const onEdit = () => {
