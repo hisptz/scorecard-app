@@ -40,6 +40,7 @@ export default function TargetsArea({path}) {
 
     useEffect(() => {
         if (!areSpecificTargetsSet && !isEmpty(specificTargets)) {
+            setSelectedType(null);
             setValue(`${path}.specificTargets`, []);
         }
     }, [areSpecificTargetsSet, specificTargets, setValue, path]);
