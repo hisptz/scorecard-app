@@ -22,17 +22,16 @@ export default function SelectedDataSourceConfigurationForm() {
     const selectedDataHolder = watch(path);
 
     return (
-        <div className="row-media">
+        <div className="data-configuration-row">
             {selectedDataHolder?.dataSources?.map((dataSource, index) => {
-
                 const dataSourcePath = `${path}.dataSources.${index}`;
                 return (
                     <div
                         key={dataSource.id}
-                        className="col-lg-6 col-md-6"
-                        style={{height: "100%"}}
+                        style={{maxWidth: 720, minWidth: 480}}
+                        className="w-100 h-100"
                     >
-                        <div className="container-bordered">
+                        <div className="container-bordered h-100">
                             <div className="column">
                                 <div className="p-16">
                                     <Suspense
