@@ -1,4 +1,4 @@
-import {cloneDeep, find, findIndex, head, last} from "lodash";
+import {cloneDeep, find, findIndex, head, last, set} from "lodash";
 import {useCallback, useMemo} from "react";
 import {useFormContext} from "react-hook-form";
 import {useRecoilCallback} from "recoil";
@@ -10,7 +10,6 @@ import {updateListFromDragAndDrop} from "../../../../../../../shared/utils/dnd";
 
 export default function useDataGroupLayout({handleAccordionChange, index}) {
     const {watch, setValue} = useFormContext();
-
     const path = useMemo(() => ["dataSelection", "dataGroups", index].join("."), [index]);
 
     const group = watch(path);
@@ -22,7 +21,7 @@ export default function useDataGroupLayout({handleAccordionChange, index}) {
         [path, setValue],
     );
 
-    const onLink = (indexOfMergedHolder, indexOfTheDeletedHolder) => {
+    const onLink = useRecoilCallback(({snapshot, set}) => (indexOfMergedHolder, indexOfTheDeletedHolder) => {
         const dataSourceToLink = head(
             dataHolders[indexOfTheDeletedHolder]?.dataSources
         );
@@ -33,12 +32,24 @@ export default function useDataGroupLayout({handleAccordionChange, index}) {
         const updatedHolderList = [...dataHolders];
         updatedHolderList.splice(indexOfMergedHolder, 1, mergedHolder);
         updatedHolderList.splice(indexOfTheDeletedHolder, 1);
+
+        const selectedDataHolderIndex = snapshot.getLoadable(ScorecardConfigEditState).contents?.selectedDataHolderIndex;
+
+        if (selectedDataHolderIndex === indexOfMergedHolder || selectedDataHolderIndex === indexOfTheDeletedHolder) {
+            set(ScorecardConfigEditState, (prevState) => {
+                return {
+                    ...prevState,
+                    selectedDataHolderIndex: indexOfMergedHolder
+                }
+            })
+        }
+
         setGroup(
             ScorecardIndicatorGroup.set(group, "dataHolders", updatedHolderList)
         );
-    };
+    }, [dataHolders, group, setGroup]);
 
-    const onUnlink = (id) => {
+    const onUnlink = useRecoilCallback(({set: setState}) => (id) => {
         //get the linked holder by id
         const dataHolder = find(dataHolders, ["id", id]);
         const dataHolderIndex = findIndex(dataHolders, ["id", id]);
@@ -53,12 +64,19 @@ export default function useDataGroupLayout({handleAccordionChange, index}) {
             dataHolderToModify?.dataSources?.splice(0, 1)
         );
         const updatedHolderList = [...dataHolders];
-        updatedHolderList.splice(dataHolderIndex, 1, modifiedDataHolder);
+        set(updatedHolderList, [dataHolderIndex], modifiedDataHolder);
         updatedHolderList.splice(dataHolderIndex, 0, newDataHolder);
         setGroup(
             ScorecardIndicatorGroup.set(group, "dataHolders", updatedHolderList)
         );
-    };
+
+        setState(ScorecardConfigEditState, (prevState) => {
+            return {
+                ...prevState,
+                selectedDataHolderIndex: undefined
+            }
+        })
+    });
 
     const onDragEnd = useRecoilCallback(({set}) => (result) => {
         const {destination, source} = result || {};
@@ -85,7 +103,6 @@ export default function useDataGroupLayout({handleAccordionChange, index}) {
     const onExpand = (event, newExpanded) => {
         handleAccordionChange(id)(event, newExpanded);
     };
-
 
     return {
         onLink,

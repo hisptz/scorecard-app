@@ -58,7 +58,7 @@ const defaultValue = {
             name: i18n.t("Not on track"),
         },
     ],
-    scorecardOptions: new ScorecardOptions(),
+    options: new ScorecardOptions(),
     publicAccess: new ScorecardAccess({
         id: "public",
         type: "public",
