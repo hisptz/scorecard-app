@@ -3,7 +3,7 @@ import {CircularLoader, SingleSelectField, SingleSelectOption} from '@dhis2/ui'
 import {RHFCustomInput} from "@hisptz/react-ui";
 import {head, isEmpty} from "lodash";
 import PropTypes from 'prop-types'
-import React, {useEffect, useState, Suspense} from "react";
+import React, {Suspense, useEffect, useState} from "react";
 import {useFormContext} from "react-hook-form";
 import TargetsField
     from "../../../../../../../../../../../../shared/Components/CustomForm/components/DataSourceConfigurationForm/Components/TargetsField";
@@ -16,11 +16,11 @@ import OrgUnitSpecificTargetsModal from "../OrgUnitSpecificTargetsModal";
 import PeriodSpecificTargetsModal from "../PeriodSpecificTargetsModal";
 import {OrgUnitSpecificTargetView, PeriodSpecificTargetView} from "./components/SpecificTargetView";
 
-function getSelectedType(specificTargets, specificTargetSet) {
-    if (!isEmpty(specificTargets) && specificTargetSet) {
+function getSelectedType(specificTargets, specificTargetsSet) {
+    if (!isEmpty(specificTargets) && specificTargetsSet) {
         return head(specificTargets)?.type;
     }
-    if (specificTargetSet) {
+    if (specificTargetsSet) {
         return "orgUnitLevel";
     }
     return null;
@@ -38,13 +38,17 @@ export default function TargetsArea({path}) {
 
     const [selectedType, setSelectedType] = useState(getSelectedType(specificTargets, areSpecificTargetsSet));
 
+    useEffect(() => {
+        if (!areSpecificTargetsSet && !isEmpty(specificTargets)) {
+            setValue(`${path}.specificTargets`, []);
+        }
+    }, [areSpecificTargetsSet, specificTargets, setValue, path]);
 
     useEffect(() => {
         if (selectedType && isEmpty(specificTargets[0]?.items)) {
             setOpenConfigDialog(true);
         }
     }, [selectedType, specificTargets]);
-
 
     return <div className="column gap-16">
         <RHFCustomInput
@@ -77,7 +81,8 @@ export default function TargetsArea({path}) {
                         <SingleSelectOption value="orgUnitLevel" label={i18n.t("Organisation Unit Level")}/>
                     </SingleSelectField>
                     <div className="column gap-8">
-                        <Suspense fallback={ <div className="column align-items-center justify-content-center" style={{ height: 100, width: "100%",}}><CircularLoader small/></div> }>
+                        <Suspense fallback={<div className="column align-items-center justify-content-center"
+                                                 style={{height: 100, width: "100%",}}><CircularLoader small/></div>}>
                             {
                                 selectedType !== "orgUnitLevel" && specificTargets?.map(target => (
                                     selectedType === "period" ?

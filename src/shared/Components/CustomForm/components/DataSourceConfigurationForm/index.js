@@ -9,13 +9,13 @@ import TargetsArea
 import {DHIS2ValueTypes} from "../../constants";
 
 export default function DataSourceConfigurationForm({path}) {
-    const {getValues, setValue} = useFormContext();
+    const {watch, setValue} = useFormContext();
 
     useEffect(() => {
         if (path) {
-            setValue(path, getValues(path))
+            setValue(path, watch(path))
         }
-    }, [getValues, path, setValue]);
+    }, [watch, path, setValue]);
 
     return (
         <div className="container p-16 data-source-form-container">

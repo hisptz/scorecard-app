@@ -6,11 +6,11 @@ import ScorecardOptions from "../../../../../../../core/models/scorecardOptions"
 export default function useOptionsManage(){
     const {watch, setValue} = useFormContext();
 
-    const scorecardOptions = watch("scorecardOptions");
+    const scorecardOptions = watch("options");
 
     const setScorecardOptions = useCallback(
         (updatedOptions) => {
-            setValue("scorecardOptions", updatedOptions);
+            setValue("options", updatedOptions);
         },
         [setValue],
     );

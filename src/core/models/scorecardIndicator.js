@@ -15,7 +15,7 @@ export default class ScorecardIndicator extends DataModel {
       showColors: true,
       legends: [],
       specificTargets: [],
-      specificTargetSet: false
+      specificTargetsSet: false
     };
   }
 }
