@@ -21,7 +21,7 @@ export default function PeriodHeaderRow({orgUnits}) {
     const orientation = useRecoilValue(ScorecardTableOrientationState);
     const periods = useRecoilValue(PeriodResolverState) ?? [];
     const [{name: sortName, direction}, setDataSort] = useRecoilState(
-        ScorecardTableSortState
+        ScorecardTableSortState(orgUnits)
     );
 
     const onSortClick = (direction) => {

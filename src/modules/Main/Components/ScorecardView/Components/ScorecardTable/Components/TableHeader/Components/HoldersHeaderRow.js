@@ -14,11 +14,12 @@ import { getDataSourcesDisplayName } from "../../../../../../../../../shared/uti
 import classes from '../../../scorecardTable.module.css'
 import DraggableCell from "../../TableBody/Components/DraggableCell";
 import DroppableCell from "../../TableBody/Components/DroppableCell";
-export default function HoldersHeaderRow() {
+
+export default function HoldersHeaderRow({ orgUnits }) {
   const { dataGroups } =
     useRecoilValue(ScorecardViewState("dataSelection")) ?? {};
   const [{ name, direction }, setDataSort] = useRecoilState(
-    ScorecardTableSortState
+    ScorecardTableSortState(orgUnits)
   );
   const periods = useRecoilValue(PeriodResolverState) ?? [];
 

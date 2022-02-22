@@ -36,7 +36,7 @@ export default function OrgUnitHeaderRow({ orgUnits, nested }) {
   const [searchValue, setSearchValue] = useState(dataKeyword);
   const [sort, setSort] = useRecoilState(ScorecardViewState("tableSort"));
   const [{ name, direction }, setDataSort] = useRecoilState(
-    ScorecardTableSortState
+    ScorecardTableSortState(orgUnits)
   );
   const onDataSearch = useRef(
     debounce(setDataKeyword, 1000, { trailing: true, leading: false })
