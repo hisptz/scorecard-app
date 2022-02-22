@@ -39,7 +39,7 @@ export default function useScorecardManagerNavigate({form, onSave, onNavigate}) 
 
     const onNextStep = async () => {
         if (!hasNextStep) {
-            form.handleSubmit(onSave);
+            await form.handleSubmit(onSave)();
             return;
         }
 
