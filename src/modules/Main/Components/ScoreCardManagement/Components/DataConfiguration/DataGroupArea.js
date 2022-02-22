@@ -73,7 +73,6 @@ export default function DataGroupArea({onGroupAdd}) {
             <div className="p-16">
                 <Input value={keyword} name="" onChange={({value}) => {
                     setKeyword(value)
-                    console.log(value)
                     if (value !== "" && value !== undefined) {
                         onSearch.current(value)
                     } else {

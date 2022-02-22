@@ -210,6 +210,15 @@ const RefreshScorecardState = atom({
     default: 0,
 });
 
+
+const ScorecardNameSort = atomFamily({
+    key: "scorecard-name-sort",
+    default: {
+        orgUnit: TableSort.DEFAULT,
+        data: TableSort.DEFAULT,
+    },
+});
+
 const ScorecardViewState = atomFamily({
     key: "scorecard-view-config",
     default: selectorFamily({
@@ -220,12 +229,6 @@ const ScorecardViewState = atomFamily({
                     const scorecardId = get(ScorecardIdState);
                     const {calendar} = get(SystemSettingsState);
                     const configState = get(ScorecardConfState(scorecardId));
-                    if (key === "tableSort") {
-                        return {
-                            orgUnit: TableSort.DEFAULT,
-                            data: TableSort.DEFAULT,
-                        };
-                    }
                     if (key === "periodSelection") {
                         if (isEmpty(configState?.periodSelection?.periods)) {
                             const {periodType} = configState;
@@ -268,9 +271,14 @@ const ScorecardLegendDefinitionSelector = selectorFamily({
             },
 });
 
-const ScorecardTableSortState = atom({
+const ScorecardTableSortState = atomFamily({
     key: "scorecard-table-state",
-    default: {},
+    default: (orgUnitId) => {
+        return {
+            orgUnit: TableSort.DEFAULT,
+            data: TableSort.DEFAULT,
+        };
+    },
 });
 
 const ScorecardTableOrientationState = selector({
@@ -417,5 +425,6 @@ export {
     AllScorecardsSummaryState,
     IsNewScorecardState,
     IsSpecificTargetsSet,
-    RefreshScorecardState
+    RefreshScorecardState,
+    ScorecardNameSort
 };

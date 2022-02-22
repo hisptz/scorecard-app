@@ -4,7 +4,7 @@ import useTableOrgUnits from "./useTableOrgUnits";
 
 export default function useTableConfig(dataEngine, orgUnits) {
   const { loading: orgUnitLoading } = useTableOrgUnits(dataEngine, orgUnits);
-  const { loading: dataSourcesLoading } = useTableDataSources(dataEngine);
+  const { loading: dataSourcesLoading } = useTableDataSources(dataEngine, orgUnits);
   useTableLoadingState(dataEngine, orgUnits);
 
   return {

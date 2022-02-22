@@ -50,7 +50,7 @@ export default function ScorecardView() {
 
     const reset = useRecoilCallback(({reset}) => () => {
         reset(ScorecardViewState("periodSelection"));
-        reset(ScorecardViewState("tableSort"));
+        reset(ScorecardNameSort(orgUnitsIds));
         reset(ScorecardViewState("options"));
         reset(ScorecardIdState);
         reset(ScorecardTableOrientationState);
