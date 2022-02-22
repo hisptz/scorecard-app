@@ -11,6 +11,7 @@ import {
 import {DecreasingArrows, IncreasingArrows,} from "../../../../../../shared/Components/ScorecardCell/Components/Arrows";
 import SpecificTargetsLibraryModal from "../SpecificTargetsLibrary";
 import LegendView from "./Components/LegendView";
+import classes from "./ScorecardLegendsView.module.css";
 
 export default function ScorecardLegendsView() {
     const {legend: showLegends, arrows: showArrows} = useRecoilValue(ScorecardViewState("options"));
@@ -26,17 +27,15 @@ export default function ScorecardLegendsView() {
             <div>
                 <h3>{i18n.t("Legends")}</h3>
             </div>
-            <div  className="row align-items-center gap-16 space-between">
-                <div style={{
-                    flex: `0 0 ${showArrows ? "70%" : "90%"}`,
-                }} className="column">
+            <div className={classes["legend-container"]}>
+                <div  className={classes["legends"]}>
                     <div className="row align-items-center">
                         {legends?.map((legend) => (
                             <LegendView key={legend.color} legend={legend}/>
                         ))}
                     </div>
                 </div>
-                <div className="column">
+                <div className={classes["other"]}>
                     <div className="row gap-16 space-between justify-content-end">
                         {
                             showArrows && <div style={{minWidth: 400}} className="row align-items-center end">
