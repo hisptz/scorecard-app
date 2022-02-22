@@ -9,7 +9,7 @@ import {PeriodResolverState} from "../../../../core/state/period";
 import {
     IsSpecificTargetsSet,
     ScorecardDataSourceState,
-    ScorecardIdState,
+    ScorecardIdState, ScorecardNameSort,
     ScorecardTableOrientationState,
     ScorecardViewState,
 } from "../../../../core/state/scorecard";
