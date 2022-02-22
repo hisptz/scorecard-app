@@ -1,18 +1,18 @@
 import i18n from "@dhis2/d2-i18n";
-import {isEmpty, last, remove, set} from "lodash";
-import React, {useCallback, useEffect, useState} from "react";
+import {filter, findIndex, isEmpty, last, remove, set} from "lodash";
+import React, {useCallback, useEffect, useMemo, useState} from "react";
 import {Droppable} from "react-beautiful-dnd";
-import {useFormContext, Controller} from "react-hook-form";
+import {Controller, useFormContext} from "react-hook-form";
 import {useRecoilValue, useResetRecoilState} from "recoil";
 import DataSelection from "../../../../../../../../core/models/dataSelection";
 import {ScorecardConfigEditState,} from "../../../../../../../../core/state/scorecard";
-import { dataSelector } from "../../DataGroupArea";
+import {SearchedGroupsState} from "../../DataGroupArea";
 import DataGroup from "./Components/DataGroup";
 
 export default function DataGroups() {
     const {setValue, watch} = useFormContext();
     const dataSelection = watch("dataSelection");
-    const filteredIndicator = useRecoilValue(dataSelector);
+    const searchedGroups = useRecoilValue(SearchedGroupsState);
     const updateDataSelection = useCallback((updatedDataSelection) => {
         setValue("dataSelection", updatedDataSelection);
     }, [setValue])
@@ -24,10 +24,6 @@ export default function DataGroups() {
     const handleAccordionChange = (panel) => (event, newExpanded) => {
         setExpanded(newExpanded ? panel : false);
     };
-
-    useEffect(() => {
-        setExpanded(last(groups)?.id);
-    }, [groups.length]);
 
     const onDeleteGroup = (id) => {
         const updatedGroupList = [...groups];
@@ -45,43 +41,51 @@ export default function DataGroups() {
             DataSelection.set(dataSelection, "dataGroups", updatedGroupList)
         );
     };
-useEffect(()=>{
-  if(filteredIndicator.length > 0){
-    updateDataSelection(
-        DataSelection.set(dataSelection, "dataGroups", filteredIndicator)
-    );
-  }
-},[filteredIndicator])
-    
+
+    const filteredGroups = useMemo(() => {
+        if (isEmpty(searchedGroups)) {
+            return groups;
+        } else {
+            return filter(groups, ({id}) => searchedGroups.includes(id));
+        }
+    }, [searchedGroups, groups]);
+
+    useEffect(() => {
+        setExpanded(last(filteredGroups)?.id);
+    }, [filteredGroups, filteredGroups.length]);
+
 
     return (
         <Droppable droppableId={"group-area"}>
             {(provided) => (
                 <div {...provided.droppableProps} ref={provided.innerRef}>
                     <div>
-                        {groups?.map((group, index) => (
-                            <Controller
-                                key={group.id}
-                                rules={{
-                                    validate: {
-                                        isNotEmpty: (value) => !isEmpty(value?.dataHolders) || i18n.t("Please select at least one data source for this group")
-                                    }
-                                }}
-                                name={`dataSelection.dataGroups.${index}`}
-                                render={({field, fieldState}) => (
-                                    <DataGroup
-                                        {...field}
-                                        error={fieldState.error}
-                                        onGroupUpdate={onGroupUpdate}
-                                        onDelete={onDeleteGroup}
-                                        index={index}
-                                        group={group}
-                                        expanded={expanded}
-                                        handleAccordionChange={handleAccordionChange}
-                                    />
-                                )}
-                            />
-                        ))}
+                        {filteredGroups?.map((group) => {
+                                const groupIndex = findIndex(groups, ["id", group.id]);
+                                return <Controller
+                                    key={group.id}
+                                    id={group.id}
+                                    rules={{
+                                        validate: {
+                                            isNotEmpty: (value) => !isEmpty(value?.dataHolders) || i18n.t("Please select at least one data source for this group")
+                                        }
+                                    }}
+                                    name={`dataSelection.dataGroups.${groupIndex}`}
+                                    render={({field, fieldState}) => (
+                                        <DataGroup
+                                            {...field}
+                                            error={fieldState.error}
+                                            onGroupUpdate={onGroupUpdate}
+                                            onDelete={onDeleteGroup}
+                                            index={groupIndex}
+                                            group={group}
+                                            expanded={expanded}
+                                            handleAccordionChange={handleAccordionChange}
+                                        />
+                                    )}
+                                />
+                            }
+                        )}
                         {provided.placeholder}
                     </div>
                 </div>
