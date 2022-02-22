@@ -6,6 +6,7 @@ import {Orientation} from "../../../../../../../core/constants/orientation";
 import {TableSort} from "../../../../../../../core/constants/tableSort";
 import {PeriodResolverState} from "../../../../../../../core/state/period";
 import {
+    ScorecardNameSort,
     ScorecardOrgUnitState,
     ScorecardTableOrientationState,
     ScorecardTableSortState,
@@ -21,7 +22,7 @@ export default function useTableOrgUnits(dataEngine, orgUnits) {
     const searchKeyword = useRecoilValue(
         ScorecardViewState("orgUnitSearchKeyword")
     );
-    const {orgUnit: sort} = useRecoilValue(ScorecardViewState("tableSort"));
+    const {orgUnit: sort} = useRecoilValue(ScorecardNameSort(orgUnits));
     const dataSort = useRecoilValue(ScorecardTableSortState(orgUnits));
     const periods = useRecoilValue(PeriodResolverState);
     const orientation = useRecoilValue(ScorecardTableOrientationState);

@@ -12,6 +12,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { ScorecardTableConstants } from "../../../../../../../../../core/constants/table";
 import { PeriodResolverState } from "../../../../../../../../../core/state/period";
 import {
+  ScorecardNameSort,
   ScorecardTableConfigState,
   ScorecardViewState,
 } from "../../../../../../../../../core/state/scorecard";
@@ -26,7 +27,7 @@ export default function GroupsHeaderRow({ nested, orgUnits }) {
   const [orgUnitKeyword, setOrgUnitKeyword] = useRecoilState(
     ScorecardViewState("orgUnitSearchKeyword")
   );
-  const [sort, setSort] = useRecoilState(ScorecardViewState("tableSort"));
+  const [sort, setSort] = useRecoilState(ScorecardNameSort(orgUnits));
   const [searchValue, setSearchValue] = useState(orgUnitKeyword);
   const { nameColumnWidth } = useRecoilValue(
     ScorecardTableConfigState(orgUnits)

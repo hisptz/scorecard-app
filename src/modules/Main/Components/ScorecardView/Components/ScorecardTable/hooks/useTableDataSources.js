@@ -4,7 +4,7 @@ import {useRecoilValue, useSetRecoilState} from "recoil";
 import {Orientation} from "../../../../../../../core/constants/orientation";
 import {PeriodResolverState} from "../../../../../../../core/state/period";
 import {
-    ScorecardDataSourceState,
+    ScorecardDataSourceState, ScorecardNameSort,
     ScorecardTableOrientationState,
     ScorecardTableSortState,
     ScorecardViewState,
@@ -16,7 +16,7 @@ export default function useTableDataSources(dataEngine, orgUnits) {
     const dataSearchKeyword = useRecoilValue(
         ScorecardViewState("dataSearchKeyword")
     );
-    const {data: sort} = useRecoilValue(ScorecardViewState("tableSort"));
+    const {data: sort} = useRecoilValue(ScorecardNameSort(orgUnits));
 
     const dataSort = useRecoilValue(ScorecardTableSortState(orgUnits));
     const periods = useRecoilValue(PeriodResolverState);
