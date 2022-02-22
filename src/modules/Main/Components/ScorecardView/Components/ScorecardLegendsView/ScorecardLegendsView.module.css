@@ -1,0 +1,13 @@
+.legend-container {
+    display: flex;
+    align-items: flex-end;
+    flex-wrap: wrap;
+}
+
+.legends {
+    flex-grow: 1;
+}
+
+.other {
+    white-space: nowrap;
+}

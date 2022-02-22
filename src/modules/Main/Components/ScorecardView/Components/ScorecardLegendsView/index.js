@@ -11,6 +11,7 @@ import {
 import {DecreasingArrows, IncreasingArrows,} from "../../../../../../shared/Components/ScorecardCell/Components/Arrows";
 import SpecificTargetsLibraryModal from "../SpecificTargetsLibrary";
 import LegendView from "./Components/LegendView";
+import classes from "./ScorecardLegendsView.module.css";
 
 export default function ScorecardLegendsView() {
     const {legend: showLegends, arrows: showArrows} = useRecoilValue(ScorecardViewState("options"));
@@ -26,34 +27,41 @@ export default function ScorecardLegendsView() {
             <div>
                 <h3>{i18n.t("Legends")}</h3>
             </div>
-            <div className="row space-between align-items-center gap-16">
-                <div className="row align-items-center ">
-                    {legends?.map((legend) => (
-                        <LegendView key={legend.color} legend={legend}/>
-                    ))}
+            <div className={classes["legend-container"]}>
+                <div  className={classes["legends"]}>
+                    <div className="row align-items-center">
+                        {legends?.map((legend) => (
+                            <LegendView key={legend.color} legend={legend}/>
+                        ))}
+                    </div>
                 </div>
-                {
-                    showArrows && <div className="row align-items-center end">
-                        <div className="pr-16">
-                            <svg height={14} width={14}>
-                                <IncreasingArrows fontSize={14} y={0} x={7}/>
-                            </svg>
-                            &nbsp; {i18n.t("Increased from last period")}
-                        </div>
-                        <div>
-                            <svg height={14} width={14}>
-                                <DecreasingArrows fontSize={14} y={14} x={7}/>
-                            </svg>
-                            &nbsp; {i18n.t("Decreased from last period")}
+                <div className={classes["other"]}>
+                    <div className="row gap-16 space-between justify-content-end">
+                        {
+                            showArrows && <div style={{minWidth: 400}} className="row align-items-center end">
+                                <div className="pr-16">
+                                    <svg height={14} width={14}>
+                                        <IncreasingArrows fontSize={14} y={0} x={7}/>
+                                    </svg>
+                                    &nbsp; {i18n.t("Increased from last period")}
+                                </div>
+                                <div>
+                                    <svg height={14} width={14}>
+                                        <DecreasingArrows fontSize={14} y={14} x={7}/>
+                                    </svg>
+                                    &nbsp; {i18n.t("Decreased from last period")}
+                                </div>
+                            </div>
+                        }
+                        <div className="print-hide" style={{minWidth: 200}}>
+                            {
+                                isSpecificTargetsSet && <Button onClick={() => setSpecificTargetsLibraryOpen(true)}>
+                                    {i18n.t("Specific Targets Library")}
+                                </Button>
+                            }
                         </div>
                     </div>
-                }
-                <div className="print-hide" style={{minWidth: 200}}>
-                    {
-                        isSpecificTargetsSet && <Button onClick={() => setSpecificTargetsLibraryOpen(true)}>
-                            {i18n.t("Specific Targets Library")}
-                        </Button>
-                    }
+
                 </div>
                 {
                     specificTargetsLibraryOpen &&
