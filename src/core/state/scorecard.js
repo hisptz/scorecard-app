@@ -273,11 +273,9 @@ const ScorecardLegendDefinitionSelector = selectorFamily({
 
 const ScorecardTableSortState = atomFamily({
     key: "scorecard-table-state",
-    default: (orgUnitId) => {
-        return {
-            orgUnit: TableSort.DEFAULT,
-            data: TableSort.DEFAULT,
-        };
+    default: {
+        orgUnit: TableSort.DEFAULT,
+        data: TableSort.DEFAULT,
     },
 });
 
