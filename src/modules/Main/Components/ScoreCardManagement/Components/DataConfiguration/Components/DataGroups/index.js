@@ -1,5 +1,5 @@
 import i18n from "@dhis2/d2-i18n";
-import {isEmpty, last, remove, set} from "lodash";
+import {filter, findIndex, isEmpty, last, remove, set} from "lodash";
 import React, {useCallback, useEffect, useMemo, useState} from "react";
 import {Droppable} from "react-beautiful-dnd";
 import {Controller, useFormContext} from "react-hook-form";
@@ -25,10 +25,6 @@ export default function DataGroups() {
         setExpanded(newExpanded ? panel : false);
     };
 
-    useEffect(() => {
-        setExpanded(last(groups)?.id);
-    }, [groups.length]);
-
     const onDeleteGroup = (id) => {
         const updatedGroupList = [...groups];
         remove(updatedGroupList, ["id", id]);
@@ -50,11 +46,13 @@ export default function DataGroups() {
         if (isEmpty(searchedGroups)) {
             return groups;
         } else {
-            console.log({searchedGroups})
-            return groups.filter(group => searchedGroups.includes(group.id));
+            return filter(groups, ({id}) => searchedGroups.includes(id));
         }
     }, [searchedGroups, groups]);
 
+    useEffect(() => {
+        setExpanded(last(filteredGroups)?.id);
+    }, [filteredGroups, filteredGroups.length]);
 
 
     return (
@@ -62,29 +60,32 @@ export default function DataGroups() {
             {(provided) => (
                 <div {...provided.droppableProps} ref={provided.innerRef}>
                     <div>
-                        {filteredGroups?.map((group, index) => (
-                            <Controller
-                                key={group.id}
-                                rules={{
-                                    validate: {
-                                        isNotEmpty: (value) => !isEmpty(value?.dataHolders) || i18n.t("Please select at least one data source for this group")
-                                    }
-                                }}
-                                name={`dataSelection.dataGroups.${index}`}
-                                render={({field, fieldState}) => (
-                                    <DataGroup
-                                        {...field}
-                                        error={fieldState.error}
-                                        onGroupUpdate={onGroupUpdate}
-                                        onDelete={onDeleteGroup}
-                                        index={index}
-                                        group={group}
-                                        expanded={expanded}
-                                        handleAccordionChange={handleAccordionChange}
-                                    />
-                                )}
-                            />
-                        ))}
+                        {filteredGroups?.map((group) => {
+                                const groupIndex = findIndex(groups, ["id", group.id]);
+                                return <Controller
+                                    key={group.id}
+                                    id={group.id}
+                                    rules={{
+                                        validate: {
+                                            isNotEmpty: (value) => !isEmpty(value?.dataHolders) || i18n.t("Please select at least one data source for this group")
+                                        }
+                                    }}
+                                    name={`dataSelection.dataGroups.${groupIndex}`}
+                                    render={({field, fieldState}) => (
+                                        <DataGroup
+                                            {...field}
+                                            error={fieldState.error}
+                                            onGroupUpdate={onGroupUpdate}
+                                            onDelete={onDeleteGroup}
+                                            index={groupIndex}
+                                            group={group}
+                                            expanded={expanded}
+                                            handleAccordionChange={handleAccordionChange}
+                                        />
+                                    )}
+                                />
+                            }
+                        )}
                         {provided.placeholder}
                     </div>
                 </div>

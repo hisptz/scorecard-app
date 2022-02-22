@@ -26,20 +26,23 @@ export default function DataGroupArea({onGroupAdd}) {
 
     const onSearch = useRef(
         debounce((keyword) => {
-            console.log("searching")
                 setSearchedGroups(() => {
-                    return dataSelection?.dataGroups.filter(dataHolderGroup => {
-                        return find(dataHolderGroup?.dataHolders, (dataHolderIndicator) => {
-                            return find(dataHolderIndicator?.dataSources, (dataHolderIndicatorSelections) => {
-                                const searchIndex =
-                                    `${dataHolderIndicatorSelections.name} ${dataHolderIndicatorSelections.label}`.toLowerCase();
-                                return searchIndex.match(new RegExp(keyword.toLowerCase()))
+                    if (keyword) {
+                        return dataSelection?.dataGroups.filter(dataHolderGroup => {
+                            return find(dataHolderGroup?.dataHolders, (dataHolderIndicator) => {
+                                return find(dataHolderIndicator?.dataSources, (dataHolderIndicatorSelections) => {
+                                    const searchIndex =
+                                        `${dataHolderIndicatorSelections.name} ${dataHolderIndicatorSelections.label}`.toLowerCase();
+                                    return searchIndex.match(new RegExp(keyword.toLowerCase()))
+                                })
                             })
-                        })
-                    })?.map(({id}) => id)
+                        })?.map(({id}) => id)
+                    } else {
+                        return []
+                    }
                 })
             }
-        ))
+            , 500))
 
     const onDragEnd = useRecoilCallback(
         ({set}) =>
@@ -68,10 +71,11 @@ export default function DataGroupArea({onGroupAdd}) {
     return (
         <div className="column h-100">
             <div className="p-16">
-                <Input name="" onChange={({value}) => {
+                <Input value={keyword} name="" onChange={({value}) => {
                     setKeyword(value)
-                    if (keyword !== "" || keyword !== undefined) {
-                        onSearch.current(keyword)
+                    console.log(value)
+                    if (value !== "" && value !== undefined) {
+                        onSearch.current(value)
                     } else {
                         setSearchedGroups([])
                     }
