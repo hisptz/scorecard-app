@@ -17,5 +17,9 @@ export function resetLegends(setValue, groups, legendDefinitions) {
 
 
 export function getNonDefaultLegendDefinitions(legendDefinitions) {
-    return legendDefinitions.filter(legendDefinition => legendDefinition.isDefault !== true);
+    return legendDefinitions?.filter(legendDefinition => !legendDefinition.isDefault) ?? [];
+}
+
+export function getDefaultLegendDefinitions(legendDefinitions) {
+    return legendDefinitions?.filter(legendDefinition => legendDefinition.isDefault) ?? [];
 }
