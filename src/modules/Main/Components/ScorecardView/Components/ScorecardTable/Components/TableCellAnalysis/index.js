@@ -23,7 +23,7 @@ import {DataSourceState, DataState} from "./state/data";
 import {LayoutState} from "./state/layout";
 import {orgUnitSelectorOptionOnCell, OrgUnitState} from "./state/orgUnit";
 import {cellPeriodOptionAtom, PeriodState} from "./state/period";
-
+import classes from "./TableCellAnalysis.module.css"
 const DictionaryAnalysis = React.lazy(() =>
     import("./Components/DictionaryAnalysis")
 );
@@ -137,18 +137,17 @@ export default function TableCellAnalysis({
     }, [dataSources, orgUnit, period]);
 
     return (
-        <Modal className="large-modal h-100" position="middle" onClose={onClose} large>
+        <Modal className="large-modal" position="middle" onClose={onClose} large>
             <ModalContent>
-                <div style={{overflow: "hidden", height: "72vh"}} className="h-100 w-100 column flex-1 ">
+                <div style={{overflow: "hidden", minHeight: 400}} className="h-100 w-100 column">
                     <DimensionsSelector/>
                     <h3 className="pt-8">{getDataSourcesDisplayName(dataSources)}</h3>
                     <Suspense fallback={<ModalLoader/>}>
                         <div
                             style={{
-                                flex: 1,
                                 overflow: "auto",
                                 margin: "16px 0",
-                                height: "100%"
+                                height: "100%",
                             }}
                         >
                             {dataState.state === "hasError" && (
@@ -161,7 +160,7 @@ export default function TableCellAnalysis({
                 </div>
             </ModalContent>
             <ModalActions>
-                <div className="row space-between align-items-center">
+                <div style={{position: "absolute", bottom: 16, left: 16, width: `calc(100% - 32px)` }} className="row space-between align-items-end">
                     <div>
                         {viewTypes?.map((type) => (
                             <Chip
