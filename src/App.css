@@ -506,7 +506,11 @@ span.jsx-2694284040 {
 
 .large-modal {
     width: 75vw !important;
-    height: 80vh !important;
+    height: 90vh !important;
+}
+
+.large-modal > div > div {
+    height: 100% !important;
 }
 
 .p-0 {

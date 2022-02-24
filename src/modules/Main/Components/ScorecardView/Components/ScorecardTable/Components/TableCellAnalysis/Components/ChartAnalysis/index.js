@@ -5,7 +5,6 @@ export default function ChartAnalysis() {
   return (
     <div
       className="column align-items-center center h-100"
-      style={{ minHeight: 500 }}
     >
       <ChartListComponent width="100%" />
     </div>

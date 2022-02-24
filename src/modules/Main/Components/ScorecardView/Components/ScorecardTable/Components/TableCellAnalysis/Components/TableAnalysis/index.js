@@ -6,9 +6,9 @@ export default function TableAnalysis() {
   return (
     <div
       className="column align-items-center"
-      style={{ minHeight: 500 }}
+      style={{ height: "100%"}}
     >
       <TableItemComponent width="100%" />
-    </div> // TODO: @danford
+    </div>
   );
 }
