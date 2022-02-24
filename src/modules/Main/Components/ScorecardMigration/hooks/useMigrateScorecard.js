@@ -1,5 +1,6 @@
 import {useDataEngine} from "@dhis2/app-runtime";
 import {useSetting} from "@dhis2/app-service-datastore";
+import {map as mapAsync} from "async"
 import {compact, filter, isEmpty, map, uniqBy} from "lodash";
 import {useCallback, useEffect, useState} from "react";
 import {useRecoilRefresher_UNSTABLE, useRecoilValue} from "recoil";
@@ -23,7 +24,7 @@ export default function useMigrateScorecard(onComplete) {
     const resetSummary = useRecoilRefresher_UNSTABLE(AllScorecardsSummaryState);
     const [summaries, setSummaries] = useState();
     const engine = useDataEngine();
-    const [, { set: setSkipMigration }] = useSetting(DATA_MIGRATION_CHECK, { global: true });
+    const [, {set: setSkipMigration}] = useSetting(DATA_MIGRATION_CHECK, {global: true});
 
 
     const migrate = useCallback(
@@ -55,7 +56,7 @@ export default function useMigrateScorecard(onComplete) {
             });
             if (filteredKeys && !isEmpty(filteredKeys)) {
                 const oldScorecards = compact(await getOldScorecards(engine, filteredKeys));
-                const newScorecards = compact(map(oldScorecards, migrateScorecard));
+                const newScorecards = compact(await mapAsync(oldScorecards, async (oldScorecard) => await migrateScorecard(oldScorecard, engine)));
                 const newScorecardsSummaries = compact(map(newScorecards, generateScorecardSummary))
                 setSummaries(newScorecardsSummaries);
                 for (const scorecard of newScorecards) {

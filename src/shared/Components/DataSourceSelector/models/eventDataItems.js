@@ -10,7 +10,7 @@ export default class EventDataItems extends NativeDataSource {
       filterType: "in",
       groupKey: "programId",
       groupResource: "programs",
-      type: "programDataItem",
+      type: "dataElement",
     });
 
     this.dataSourcesQuery = {

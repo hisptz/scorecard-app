@@ -18,7 +18,7 @@ export const dataSourceTypes = {
   INDICATOR_GROUP: "indicatorGroup",
   FUNCTION: "customFunction",
   DATASET: "dataSet",
-  PROGRAM_DATA_ELEMENT: "programDataItem",
+  PROGRAM_DATA_ELEMENT: "dataElement",
 };
 
 export const dataElementDomainTypes = {
