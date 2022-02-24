@@ -28,10 +28,20 @@ export function useManageLegendDefinitions() {
                 confirm({
                     title: i18n.t("Confirm legend reset"),
                     message: i18n.t("Adding a legend definition will reset all legends to their default values. Are you sure you want to continue?"),
+                    confirmButtonColor: "primary",
+                    confirmButtonText: i18n.t("Reset"),
                     onConfirm: () => {
                         add();
                         onResetLegends(newLegendDefinitions);
-                    }
+                    },
+                    customActions: [
+                        {
+                            label: i18n.t("Leave as is"),
+                            onClick: () => {
+                                add();
+                            }
+                        }
+                    ]
                 })
             } else {
                 add();
@@ -54,6 +64,8 @@ export function useManageLegendDefinitions() {
             confirm({
                 title: `${i18n.t("Confirm legends reset")}`,
                 message: `${i18n.t("Deleting this definition will reset all configured legends. Are you sure you want to delete this legend definition?")}`,
+                confirmButtonColor: "primary",
+                confirmButtonText: i18n.t("Reset"),
                 onConfirm: () => {
                     deleteDefinition();
                     onResetLegends(updatedDefinitions);

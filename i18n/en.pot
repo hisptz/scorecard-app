@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-02-23T12:35:36.283Z\n"
-"PO-Revision-Date: 2022-02-23T12:35:36.283Z\n"
+"POT-Creation-Date: 2022-02-24T08:50:50.538Z\n"
+"PO-Revision-Date: 2022-02-24T08:50:50.538Z\n"
 
 msgid "Next"
 msgstr "Next"
@@ -605,9 +605,6 @@ msgstr "Select a data source to configure"
 msgid "Groups"
 msgstr "Groups"
 
-msgid "Default Legend Definitions"
-msgstr "Default Legend Definitions"
-
 msgid "Title is required"
 msgstr "Title is required"
 
@@ -634,6 +631,35 @@ msgstr "Color is required"
 
 msgid "Label is required"
 msgstr "Label is required"
+
+msgid "Confirm legend reset"
+msgstr "Confirm legend reset"
+
+msgid ""
+"Adding a legend definition will reset all legends to their default values. "
+"Are you sure you want to continue?"
+msgstr ""
+"Adding a legend definition will reset all legends to their default values. "
+"Are you sure you want to continue?"
+
+msgid "Reset"
+msgstr "Reset"
+
+msgid "Leave as is"
+msgstr "Leave as is"
+
+msgid "Confirm legends reset"
+msgstr "Confirm legends reset"
+
+msgid ""
+"Deleting this definition will reset all configured legends. Are you sure "
+"you want to delete this legend definition?"
+msgstr ""
+"Deleting this definition will reset all configured legends. Are you sure "
+"you want to delete this legend definition?"
+
+msgid "At least two non-default legend definitions are required"
+msgstr "At least two non-default legend definitions are required"
 
 msgid "Legend Definitions"
 msgstr "Legend Definitions"
