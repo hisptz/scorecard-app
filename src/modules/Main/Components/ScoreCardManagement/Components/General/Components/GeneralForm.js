@@ -53,19 +53,8 @@ export default function GeneralForm() {
                     valueType={DHIS2ValueTypes.RICH_TEXT.name}
                 />
             </div>
-            <div className="col-sm-6 col-xl-4 legend-definitions-settings">
-                <LegendDefinitionFormField
-                    field={
-                        {
-                            valueType: DHIS2ValueTypes.MULTIPLE_FIELDS.name,
-                            multipleField: {
-                                name: "legendDefinition",
-                                valueType: DHIS2ValueTypes.LEGEND_DEFINITION.name
-                            },
-                            label: i18n.t("Legend Definitions")
-                        }
-                    }
-                />
+            <div className="col-sm-6 col-xl-4 legend-definitions-settings gap-8">
+                <LegendDefinitionFormField/>
             </div>
             <div className="col-sm-6 col-xl-4 additional-labels-settings">
                 <RHFCustomInput
