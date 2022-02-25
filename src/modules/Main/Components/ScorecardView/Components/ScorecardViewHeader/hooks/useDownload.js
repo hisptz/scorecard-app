@@ -43,6 +43,7 @@ export default function useDownload(downloadRef, dataEngine) {
     );
     const handlePDFDownload = useReactToPrint({
         content: () => downloadRef?.current,
+        documentTitle: `${title}`
     });
 
     function subscribe() {

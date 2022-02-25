@@ -12,6 +12,7 @@ import {
   ScorecardViewState,
 } from "../../../../../../../../../core/state/scorecard";
 import { getDataSourcesDisplayName } from "../../../../../../../../../shared/utils/utils";
+import classes from "../../../scorecardTable.module.css";
 import DataContainer from "../../TableDataContainer";
 import AverageCell from "./AverageCell";
 import DraggableCell from "./DraggableCell";
@@ -47,7 +48,7 @@ export default function DataSourceRow({
   }, [dataSources]);
 
   const Component = (
-    <DataTableRow bordered>
+    <DataTableRow bordered className={classes["average-row"]}>
       <DataTableCell
         className="jsx-1369417008"
         fixed
