@@ -85,9 +85,25 @@
         border-right: none !important;
     }
 
+    .table-print {
+        border: 1px solid #212934 !important;
+        page-break-inside: auto !important;
+    }
+
+    .table-print > tr:last-child > * {
+        border-bottom: none !important;
+    }
+
     .average-row > th:first-child {
         border-left: none !important;
         border-right: none !important;
+    }
+
+    .average-row > *{
+        border-bottom: none !important;
+    }
+    .average-row > th{
+        border-bottom: none !important;
     }
 
     .child-table-row > td:first-child {
@@ -100,6 +116,10 @@
 
     .table-header-row > th:first-child {
         border-left: none !important;
+        border-right: none !important;
+    }
+
+    .table-header-row > th:last-child{
         border-right: none !important;
     }
 

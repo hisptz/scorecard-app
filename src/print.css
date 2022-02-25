@@ -4,11 +4,6 @@
         overflow: visible !important;
     }
 
-    .table-print {
-        border: 1px solid #4A5768 !important;
-        page-break-inside: auto;
-    }
-
     .print-hide {
         display: none !important;
     }
@@ -40,7 +35,12 @@
 
 
     .data-cell {
-        border: 1px solid #4A5768 !important;
+        border-bottom: 1px solid #4A5768 !important;
+        border-right: 1px solid #4A5768 !important;
+    }
+
+    .data-cell:last-child {
+        border-right: none !important;
     }
 
     *::-webkit-scrollbar {
