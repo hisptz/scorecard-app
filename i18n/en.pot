@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-02-24T08:50:50.538Z\n"
-"PO-Revision-Date: 2022-02-24T08:50:50.538Z\n"
+"POT-Creation-Date: 2022-02-25T06:52:44.450Z\n"
+"PO-Revision-Date: 2022-02-25T06:52:44.450Z\n"
 
 msgid "Next"
 msgstr "Next"
@@ -378,6 +378,9 @@ msgstr "Search organisation units"
 
 msgid "Change the table layout"
 msgstr "Change the table layout"
+
+msgid "Further analyse data in the cells"
+msgstr "Further analyse data in the cells"
 
 msgid "Search here for a specific organisation unit"
 msgstr "Search here for a specific organisation unit"
