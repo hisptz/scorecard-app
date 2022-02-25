@@ -56,7 +56,7 @@ export default function OrgUnitHeaderRow({orgUnits, nested}) {
     };
 
     return (
-        <DataTableRow>
+        <DataTableRow className={classes["table-header-row"]}>
             <DataTableCell
                 rowSpan={"2"}
                 fixed

@@ -35,7 +35,7 @@ export default function HoldersHeaderRow({orgUnits, nested}) {
 
 
     return (
-        <DataTableRow>
+        <DataTableRow className={classes["table-header-row"]}>
             {
                 isSingleGroup && <OrgUnitHeaderCells nested={nested} orgUnits={orgUnits}/>
             }

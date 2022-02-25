@@ -32,7 +32,7 @@ export default function PeriodHeaderRow({orgUnits}) {
     };
 
     return (periods.length > 1 ?
-            <DataTableRow>
+            <DataTableRow className={classes["table-header-row"]}>
                 {orientation === Orientation.ORG_UNIT_VS_DATA
                     ? dataGroups?.map(({dataHolders}) =>
                         dataHolders?.map(({id, dataSources}) =>

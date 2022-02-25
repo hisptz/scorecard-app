@@ -9,9 +9,9 @@ import {
   ScorecardOrgUnitState,
   ScorecardViewState,
 } from "../../../../../../../../../core/state/scorecard";
+import classes from "../../../scorecardTable.module.css"
 import AverageCell from "./AverageCell";
 import AverageDataContainer from "./AverageDataContainer";
-
 export default function AverageOrgUnitRow({
   orgUnits,
   overallAverage,
@@ -26,7 +26,7 @@ export default function AverageOrgUnitRow({
   );
 
   return (
-    <DataTableRow bordered>
+    <DataTableRow className={classes["average-row"]} bordered>
       <DataTableCell fixed left={"0"} width={"50px"} />
       {itemNumber && <DataTableCell fixed left={"50px"} width={"50px"} />}
       <DataTableCell

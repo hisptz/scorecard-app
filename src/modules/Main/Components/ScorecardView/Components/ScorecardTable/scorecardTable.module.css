@@ -1,3 +1,4 @@
+
 .org-unit-header-cell {
     text-align: center !important;
     vertical-align: middle !important;
@@ -77,31 +78,29 @@
     background: #E8EDF2;
 }
 
-@media print {
-    .print-visible {
-        overflow: visible !important;
-    }
 
-    .child-table-row td:first-child {
-        background: white !important;
-        border-left: 1px solid #D5DDE5 !important;
-        border-bottom: 1px solid #D5DDE5 !important;
+@media print {
+    .parent-table-row > th:first-child {
+        border-left: none !important;
         border-right: none !important;
     }
 
-    .period-header-cell > span > span > button {
-        display: none !important;
+    .average-row > th:first-child {
+        border-left: none !important;
+        border-right: none !important;
     }
 
-    .child-table-row td:first-child > svg {
-        display: none;
+    .child-table-row > td:first-child {
+        background: white !important;
+        border-left: 1px solid #212934 !important;
+        border-bottom: 1px solid #212934 !important;
+        border-right: none !important;
+        border-left: none !important;
     }
 
-    [data-test="dhis2-uicore-tableheadercellaction"] {
-        display: none;
+    .table-header-row > th:first-child {
+        border-left: none !important;
+        border-right: none !important;
     }
 
-    .print-hide {
-        display: none;
-    }
 }
