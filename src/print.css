@@ -5,7 +5,7 @@
     }
 
     .table-print {
-        border: 1px solid #212934 !important;
+        border: 1px solid #4A5768 !important;
         page-break-inside: auto;
     }
 
@@ -33,14 +33,14 @@
     th.fixed {
         background: white !important;
         font-weight: bold !important;
-        border-bottom: 1px solid #212934 !important;
-        border-right: 1px solid #212934 !important;
+        border-bottom: 1px solid #4A5768 !important;
+        border-right: 1px solid #4A5768 !important;
         border-left: none;
     }
 
 
     .data-cell {
-        border: 1px solid #212934 !important;
+        border: 1px solid #4A5768 !important;
     }
 
     *::-webkit-scrollbar {
@@ -80,8 +80,8 @@
 
     .child-table-row td:first-child {
         background: white !important;
-        border-left: 1px solid #212934 !important;
-        border-bottom: 1px solid #212934 !important;
+        border-left: 1px solid #4A5768 !important;
+        border-bottom: 1px solid #4A5768 !important;
         border-right: none !important;
     }
 
