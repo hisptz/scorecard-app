@@ -23,48 +23,58 @@ export function SpecificTargetsLibrary() {
         return data;
     }, [dataSources])
     return (
-        <div className="column gap-16">
-            <div>
-                <h3>{i18n.t("Organisation Units Specific targets")}</h3>
-                <div className="row gap-16">
-                    {
-                        specificTargetsDataSourcesByType?.orgUnit?.map(dataSource => <>
-                            <OrgUnitSpecificTargetView
-                                key={`${dataSource.id}-orgUnit-specific-target`}
-                                specificTarget={head(dataSource.specificTargets)} dataSourceLabel={dataSource.label}/>
-                            <div className="page-break"/>
-                        </>)
-                    }
-                </div>
-                <div className="page-break"/>
+        <>
+            <div className="column gap-16">
+                {
+                    !isEmpty(specificTargetsDataSourcesByType?.orgUnit) && <div>
+                        <h3>{i18n.t("Organisation Units Specific targets")}</h3>
+                        <div className="row gap-16">
+                            {
+                                specificTargetsDataSourcesByType?.orgUnit?.map(dataSource => <>
+                                    <OrgUnitSpecificTargetView
+                                        key={`${dataSource.id}-orgUnit-specific-target`}
+                                        specificTarget={head(dataSource.specificTargets)}
+                                        dataSourceLabel={dataSource.label}/>
+                                    <div className="page-break"/>
+                                </>)
+                            }
+                        </div>
+                        <div className="page-break"/>
+                    </div>
+                }
+                {
+                    !isEmpty(specificTargetsDataSourcesByType?.period) && <div>
+                        <h3>{i18n.t("Period Specific targets")}</h3>
+                        <div className="row gap-16">
+                            {
+                                specificTargetsDataSourcesByType?.period?.map(dataSource => <>
+                                    <PeriodSpecificTargetView
+                                        key={`${dataSource.id}-orgUnit-specific-target`}
+                                        specificTarget={head(dataSource.specificTargets)}
+                                        dataSourceLabel={dataSource.label}/>
+                                    <div className="page-break"/>
+                                </>)
+                            }
+                        </div>
+                        <div className="page-break"/>
+                    </div>
+                }
+                {
+                    !isEmpty(specificTargetsDataSourcesByType?.orgUnitLevell) && <div>
+                        <h3>{i18n.t("Organisation unit level targets")}</h3>
+                        <div className="column gap-16">
+                            {
+                                specificTargetsDataSourcesByType?.orgUnitLevel?.map(dataSource =>
+                                    <OrgUnitLevelSpecificTargetView
+                                        key={`${dataSource.id}-orgUnit-specific-target`}
+                                        legends={dataSource.legends} dataSourceLabel={dataSource.label}/>)
+                            }
+                        </div>
+                        <div className="page-break"/>
+                    </div>
+                }
             </div>
-            <div>
-                <h3>{i18n.t("Period Specific targets")}</h3>
-                <div className="row gap-16">
-                    {
-                        specificTargetsDataSourcesByType?.period?.map(dataSource => <>
-                            <PeriodSpecificTargetView
-                                key={`${dataSource.id}-orgUnit-specific-target`}
-                                specificTarget={head(dataSource.specificTargets)} dataSourceLabel={dataSource.label}/>
-                            <div className="page-break"/>
-                        </>)
-                    }
-                </div>
-                <div className="page-break"/>
-            </div>
-            <div>
-                <h3>{i18n.t("Organisation unit level targets")}</h3>
-                <div className="column gap-16">
-                    {
-                        specificTargetsDataSourcesByType?.orgUnitLevel?.map(dataSource =>
-                            <OrgUnitLevelSpecificTargetView
-                                key={`${dataSource.id}-orgUnit-specific-target`}
-                                legends={dataSource.legends} dataSourceLabel={dataSource.label}/>)
-                    }
-                </div>
-                <div className="page-break"/>
-            </div>
-        </div>
+        </>
     )
 }
 
