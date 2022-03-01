@@ -2609,10 +2609,10 @@
     node-fetch "^2.6.1"
     progress-promise "^0.0.6"
 
-"@iapps/period-utilities@^1.0.0-beta.5":
-  version "1.0.0-beta.5"
-  resolved "https://registry.yarnpkg.com/@iapps/period-utilities/-/period-utilities-1.0.0-beta.5.tgz#e5c4a97f191f8b781b777b558a62d2f0d53b684b"
-  integrity sha512-ErZyAyIx7Z1V+YrPGwfP8hx/qPi1Waxtk4Bv78L63wQ8GBET0aH6WohMhSJwjEl9Np3+Uz1s47Hb3r6Q3xsHPg==
+"@iapps/period-utilities@^1.0.0-beta.5", "@iapps/period-utilities@^1.0.0-beta.6":
+  version "1.0.0-beta.6"
+  resolved "https://registry.yarnpkg.com/@iapps/period-utilities/-/period-utilities-1.0.0-beta.6.tgz#c50a47b21ed9eeab3235b9b9b8894fb4df4b602b"
+  integrity sha512-zE7nHzNF4USpEEcI4cKB9HU0Ooa/Exky+s46oGf0q+hCIkXGc4tP++nklQ/kE+2Jzns/Ox3QlgKRoYIFozrMEQ==
 
 "@icons/material@^0.2.4":
   version "0.2.4"
