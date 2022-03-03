@@ -12,31 +12,31 @@ Feature: Manage Scorecard
     And providing general scorecard details
     And configuring indicator groups details
     And configuring indicator data details
+    And configuring highlighted indicators
+    And configuring access and organisation unit
+    And configuring options
     Then scorecard should be saved and be available in the list
 
   @focus
   Scenario: Assign Indicators to groups
     Given authorized user at national level
-    When opening scorecard form
+    When opening scorecard form to edit Sample Scorecard
     And configuring indicator groups details
-    And creating data groups
-    And selecting to view available indicators
     And selecting an indicator group
-    And adding an indicator to a data group
     And configuring indicator data details
     Then the configured indicator should be displayed in the specific data group on the scorecard visualization
 
   @focus
   Scenario: Creating/updating Scorecard legends
     Given authorized user at national level
-    When opening scorecard form
+    When opening scorecard form to edit Sample Scorecard
     And editing scorecard legends
     Then the changes on the scorecard legends should be visible
 
   @focus
   Scenario: Pair Indicators
     Given authorized user at national level
-    When opening scorecard form
+    When opening scorecard form to edit Sample Scorecard
     And configuring indicator groups details
     And selecting indicators
     And selecting an indicator group
@@ -60,7 +60,6 @@ Feature: Manage Scorecard
     And configuring maximum and minimum values for predefined legend values and saving the changes
     Then the changes on the legend values should be reflected in the scorecard
 
-  @focus
   Scenario: Deleting Scorecard
     Given  authorized coordinator
     When deleting scorecard

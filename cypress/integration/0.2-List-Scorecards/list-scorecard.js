@@ -6,7 +6,7 @@
 
 const apiVersion = Cypress.env("apiVersion");
 
-const scorecardName = 'Old Scorecard Test'
+const scorecardName = 'Sample Scorecard'
 
 Then(
     "I should be presented with a list of already configured scorecards",
@@ -32,8 +32,7 @@ When("opening a list of many scorecards", () => {
 });
 Then("I should be presented with a chunked list of scorecards", () => {
     cy.wait("@many-scorecards").then(() => {
-        cy.get(".main-container").scrollTo("bottom");
-        cy.get("[data-test='dhis2-uiwidgets-pagination-page-next']")
+        cy.get("[data-test='dhis2-uiwidgets-pagination-page-next']").scrollIntoView()
             .contains("Next")
             .should("be.visible");
     });
@@ -42,8 +41,7 @@ And(
     "I should be able to navigate through chunks to view more scorecards",
     () => {
         cy.wait("@many-scorecards").then(() => {
-            cy.get("[data-test='dhis2-uiwidgets-pagination-page-next']").click();
-            cy.get(".main-container").scrollTo("top");
+            cy.get("[data-test='dhis2-uiwidgets-pagination-page-next']").scrollIntoView().click();
             cy.contains("Test Scorecard 6").should("be.visible");
             cy.contains("Test Scorecard 7").should("be.visible");
         });

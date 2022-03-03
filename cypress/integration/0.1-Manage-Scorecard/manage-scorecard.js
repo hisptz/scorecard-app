@@ -2,6 +2,8 @@
  * Scenario: Create Scorecard
  */
 
+
+
 When("opening scorecard form", () => {
     cy.get("[data-test='new-scorecard-button']").click();
 });
@@ -27,6 +29,24 @@ And("configuring indicator data details", () => {
     cy.get("[data-test='dhis2-uicore-transferoption']").first().dblclick();
     cy.get("[data-test='scorecard-data-source-add']").click();
 });
+And("configuring highlighted indicators", () => {
+
+    cy.get('[data-test=scorecard-admin-next-button]').click();
+    cy.get('[data-test=dhis2-uicore-button]').contains("Add Highlighted Indicator").click();
+    cy.get('[data-test=dhis2-uicore-transferoption]').first().dblclick();
+    cy.get('[data-test=scorecard-data-source-add]').click();
+})
+And("configuring access and organisation unit", () => {
+    cy.get('[data-test=scorecard-admin-next-button]').click();
+    cy.get('[data-test="user-org-unit-content"] > [data-test="dhis2-uicore-checkbox"] > .jsx-1366065624:nth-child(1)').click();
+})
+
+And("configuring options", () => {
+    cy.get('[data-test=scorecard-admin-next-button]').click();
+    cy.get('.other-options > [data-test="dhis2-uiwidgets-checkboxfield"]:nth-child(1) [data-test="dhis2-uicore-checkbox"] > .jsx-1366065624:nth-child(1)').click();
+    cy.get('[data-test="dhis2-uiwidgets-checkboxfield"]:nth-child(7) [data-test="dhis2-uicore-checkbox"] > .jsx-1366065624:nth-child(1)').click();
+    cy.get('[data-test="dhis2-uiwidgets-checkboxfield"]:nth-child(6) [data-test="dhis2-uicore-checkbox"] > .jsx-1366065624:nth-child(1)').click();
+})
 Then("scorecard should be saved and be available in the list", () => {
     cy.get("[data-test='scorecard-save-button']").click();
     cy.contains("Sample Scorecard").should("be.visible");
@@ -35,17 +55,6 @@ Then("scorecard should be saved and be available in the list", () => {
 /**
  * Scenario: Assign Indicators to groups
  */
-
-And("creating data groups", () => {
-});
-And("selecting to view available indicators", () => {
-});
-And("selecting an indicator group", () => {
-});
-And("adding an indicator to a data group", () => {
-});
-And("configuring indicator data details", () => {
-});
 Then(
     "the configured indicator should be displayed in the specific data group on the scorecard visualization",
     () => {
@@ -57,7 +66,9 @@ Then(
  */
 
 
-When("opening scorecard form", () => {
+When("opening scorecard form to edit Sample Scorecard", () => {
+    cy.get('[data-test="edit-scorecard-button"]').first().click();
+
 });
 And("editing scorecard legends and saving changes", () => {
 });
@@ -126,7 +137,7 @@ When(/^editing scorecard legends$/, function () {
 
 });
 When(/^deleting scorecard$/, function () {
-    cy.get('button[data-test=scorecard-delete-button]').eq(1).click()
+    cy.get('[data-test="scorecard-delete-button"]').first().click();
 });
 When(/^confirming to delete scorecard$/, function () {
     cy.get('[data-test=delete-confirm-modal]').should('be.visible')
