@@ -9,7 +9,7 @@
     "start": "d2-app-scripts start",
     "test": "d2-app-scripts test",
     "start:proxy": "yarn start --proxy https://hisp.apps.dhis2.org/dev",
-    "cy:open": "concurrently 'BROWSER=none yarn start' 'wait-on 'http-get://localhost:3000' && cypress open' --kill-others --success first ",
+    "cy:open": "concurrently 'BROWSER=none yarn start' 'wait-on 'http-get://localhost:3000' && cypress open --browser electron' --kill-others --success first ",
     "cy:open:proxy": "concurrently 'BROWSER=none yarn start:proxy' 'wait-on 'http-get://localhost:3000' && cypress open' --kill-others --success first ",
     "cy:open:capture": "concurrently 'BROWSER=none yarn start' 'wait-on 'http-get://localhost:3000' && cypress open --env networkMode=capture' --kill-others --success first ",
     "cy:open:stub": "concurrently 'BROWSER=none yarn start' 'wait-on 'http-get://localhost:3000' && cypress open --env networkMode=stub' --kill-others --success first ",
