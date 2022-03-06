@@ -131,6 +131,8 @@ Feature: Display Indicators
     And selecting to view indicator details
     Then indicator details including metadata details,numerator,denominator and description
 
+
+    @focus
   @focus
   Scenario: Visualize Scorecard by Facility Type
     Given authorized Data Manager
@@ -149,7 +151,6 @@ Feature: Display Indicators
     Then a table of indicators against location for the selected location ownership type should be displayed
 
 
-  @focus
   Scenario: Set targets for district level
     Given user with privilege access at district level
     When creating or editing scorecard

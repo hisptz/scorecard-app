@@ -5,7 +5,7 @@
  */
 
 And("filter the indicators based on a specific location", () => {
-  cy.get("[data-test=org-unit-search-content] >div > div> input").type("Sierra Leone{enter}");
+  cy.get("[data-test=org-unit-search-content] >div > div> input").type("Trainingland{enter}");
 });
 Then("a table of indicators against locations should be displayed", () => {
   cy.get("[data-test=orgUnit-parent-table-column-cell]")
