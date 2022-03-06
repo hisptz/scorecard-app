@@ -2,7 +2,7 @@ Feature: Download Feature
 
   This is feature which involve all download activities scenarios in scorecards
 
-  @focus
+#  @focus
   Scenario: Download Indicator Visualizations PDF
     Given authorized Regional Manager
     When opening a list of available scorecards

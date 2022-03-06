@@ -60,10 +60,3 @@ Feature: Manage Scorecard
     And configuring maximum and minimum values for predefined legend values and saving the changes
     Then the changes on the legend values should be reflected in the scorecard
 
-  Scenario: Deleting Scorecard
-    Given  authorized coordinator
-    When deleting scorecard
-    And confirming to delete scorecard
-    Then the deleted scorecard should not be on the list
-
-

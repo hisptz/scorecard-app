@@ -49,9 +49,7 @@ function selectDataValue() {
  *   Scenario: Visualising Indicator perfomance on lower levels
  */
 And("selecting a lower level locations", () => {
-    cy.get(
-        ":nth-child(2) > [data-test=dhis2-uicore-tabledatacel] > svg > path"
-    ).click({force: true});
+    cy.get(':nth-child(4) > [data-test="dhis2-uicore-tabledatacel"]').click({force: true});
 });
 Then(
     "a table of indicators against selected lower level locations should be displayed",
@@ -265,11 +263,11 @@ Then(
  *
  */
 And("filtering the locations by facility Type", () => {
+
     cy.get("[data-test=test-selected-organization-unit]").click();
-    cy.get("[data-test=select-facility-group").click();
-    cy.get(
-        '[data-value="tDZVQ1WtwpA"] > [data-test=dhis2-uicore-checkbox]'
-    ).click();
+    cy.get('[data-test="user-org-unit"] > [data-test="user-org-unit-content"]').click()
+    cy.get('[data-test="select-facility-group-content"]').click();
+    cy.get(`[data-test="Districts-option"]`).first().click();
     cy.get('[data-test=modal-update-button]').click({force: true});
 });
 Then(
@@ -351,14 +349,10 @@ Then(
  *   Scenario: Visualize Filtered Scorecard with The Parent Location at the Top Row
  */
 And("sorting based on different Indicators", () => {
-    cy.get(
-        ":nth-child(2) > :nth-child(1) > .container > .jsx-3463223249 > [data-test=dhis2-uicore-tableheadercellaction] > .default > g.jsx-3044873695 > .top"
-    ).click();
+    cy.get('[data-test="indicator-table-header-cell"] > .container > .top > [data-test="dhis2-uicore-tableheadercellaction"]').click();
 });
 Then("the parent location should always be the first row", () => {
-    cy.get(
-        ":nth-child(1) > [data-test=orgUnit-parent-table-column-cell] > [data-test=dhis2-uicore-tooltip-reference] > .align-items-center > .column"
-    ).should("be.visible");
+    cy.get('[data-test="orgUnit-parent-table-column-cell"]').should("be.visible");
 });
 
 /**

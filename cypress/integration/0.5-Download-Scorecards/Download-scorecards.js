@@ -5,7 +5,7 @@ import path from "path";
  * Scenario: Download Indicator Visualizations PDF
  */
 
-const fileName = 'Old Scorecard Test'
+const fileName = 'Sample Scorecard'
 
 function openDownloadMenu(){
     cy.get("[data-test=download-button]").should("be.visible").click();
