@@ -22,7 +22,7 @@
     "format:staged": "yarn format --staged",
     "cy:start": "BROWSER=none yarn start",
     "cy:run": "wait-on 'http-get://localhost:3000' && cypress run",
-    "cy:capture": "concurrently 'yarn cy:start' 'yarn cy:run --env networkMode=capture --browser electron' --kill-others --success first",
+    "cy:capture": "concurrently 'yarn cy:start' 'yarn cy:run --env networkMode=capture --browser firefox' --kill-others --success first",
     "cy:stub": "concurrently 'yarn cy:start' 'yarn cy:run --env networkMode=stub' --kill-others --success first"
   },
   "devDependencies": {
