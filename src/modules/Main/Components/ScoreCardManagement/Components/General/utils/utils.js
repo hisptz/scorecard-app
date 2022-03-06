@@ -1,4 +1,5 @@
-import {cloneDeep, isEmpty, set} from "lodash";
+import {cloneDeep, find, isEmpty, set} from "lodash";
+import getScorecardSummary from "../../../../../../../shared/services/getScorecardSummary";
 import {generateLegendDefaults} from "../../../../../../../shared/utils/utils";
 
 export function resetLegends(groups, legendDefinitions) {
@@ -27,4 +28,17 @@ export function getNonDefaultLegendDefinitions(legendDefinitions) {
 
 export function getDefaultLegendDefinitions(legendDefinitions) {
     return legendDefinitions?.filter(legendDefinition => legendDefinition.isDefault) ?? [];
+}
+
+
+export async function titleDoesNotExist(engine, id, title) {
+    const {summary} = await getScorecardSummary(engine);
+    if (isEmpty(summary)) {
+        return true;
+    }
+    const scorecard = find(summary, {title});
+    if (scorecard) {
+        return scorecard.id === id;
+    }
+    return !scorecard;
 }

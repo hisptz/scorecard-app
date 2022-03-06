@@ -21,8 +21,8 @@
   "env": {
     "dhis2DataTestPrefix": "dhis2-hisptzscorecard",
     "networkMode": "live",
-    "dhis2ApiVersion": "36",
-    "apiVersion": "36"
+    "dhis2ApiVersion": "37",
+    "apiVersion": "37"
   },
   "experimentalInteractiveRunEvents": true,
   "waitForAnimations": true
