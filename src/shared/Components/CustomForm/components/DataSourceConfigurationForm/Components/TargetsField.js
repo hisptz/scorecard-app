@@ -1,28 +1,32 @@
-import {RHFCustomInput} from "@hisptz/react-ui";
-import PropTypes from "prop-types";
 import React from "react";
+import {useFormContext} from "react-hook-form";
+import LegendsField
+    from "../../../../../../modules/Main/Components/ScoreCardManagement/Components/DataConfiguration/Components/DataGroups/Components/DataSourceConfiguration/Components/TargetsArea/components/LegendsField";
 import useTargetsManage
     from "../../../../../../modules/Main/Components/ScoreCardManagement/Components/DataConfiguration/Components/DataGroups/Components/DataSourceConfiguration/hooks/useTargetsManage";
-import {DHIS2ValueTypes} from "../../../constants";
-import {FormFieldModel} from "../../../models";
+import {
+    getNonDefaultLegendDefinitions
+} from "../../../../../../modules/Main/Components/ScoreCardManagement/Components/General/utils/utils";
 
 export default function TargetsField(props) {
     const {
         name,
     } = props ?? {};
+    const {watch, setValue} = useFormContext();
+    const legendDefinitions = getNonDefaultLegendDefinitions(watch("legendDefinitions"));
+
     useTargetsManage(props);
 
-    return (
-        <RHFCustomInput
-            valueType={DHIS2ValueTypes.MULTIPLE_FIELDS.name}
-            name={name}
-            {...props}
-        />
-    );
+    const onChange = (value) => {
+        setValue(name, value);
+    };
+
+    const value = watch(name);
+
+    return (<LegendsField
+        legendDefinitions={legendDefinitions}
+        value={value}
+        onChange={onChange}
+    />);
 }
 
-TargetsField.propTypes = {
-    multipleFields: PropTypes.arrayOf(PropTypes.instanceOf(FormFieldModel))
-        .isRequired,
-    name: PropTypes.string.isRequired,
-};
