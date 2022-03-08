@@ -11388,10 +11388,10 @@ jest@26.6.0:
     import-local "^3.0.2"
     jest-cli "^26.6.0"
 
-jodit-react@^1.1.10, jodit-react@^1.1.25:
-  version "1.1.25"
-  resolved "https://registry.yarnpkg.com/jodit-react/-/jodit-react-1.1.25.tgz#6a9d68fc993f89cfac5789f2731af78a8af83aeb"
-  integrity sha512-uHcs3mKe7K+sjbjCv5j1onS5qL4pq+X2ugNVehb5gIOiDgE9V5DSXwRrouACI8H5SgIfjONrXBdjjyYTY9LpBg==
+jodit-react@^1.1.10, jodit-react@^1.2.10:
+  version "1.2.10"
+  resolved "https://registry.yarnpkg.com/jodit-react/-/jodit-react-1.2.10.tgz#f906d63a786bf7455a546a69fed9c1f63b85a3df"
+  integrity sha512-VwQgk8OJ0h2A4jpUx39rlQ2VOnZqJRDUgWpT5OMgCCtzwo0oKb0q4HUaONLty3sCGAk9jJBjH9VixFyFEOOvQA==
   dependencies:
     jodit "^3.9.4"
 
