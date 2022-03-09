@@ -1,3 +1,3 @@
-import DHIS2ValueTypes from "./valueTypes.constants";
+import DHIS2ValueTypes from "@hisptz/scorecard-constants/src/form";
 
-export { DHIS2ValueTypes };
+export {DHIS2ValueTypes};

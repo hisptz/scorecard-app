@@ -1,16 +1,16 @@
 import {useAlert} from "@dhis2/app-runtime";
 import i18n from "@dhis2/d2-i18n";
 import {Button, ButtonStrip, colors} from "@dhis2/ui";
+import {useConfirmDialog} from "@hisptz/react-ui";
+import {useDeleteScorecard} from "@hisptz/scorecard-hooks";
+import {ScorecardCardImage as holderImage} from "@hisptz/scorecard-resources";
+import {RouterState, UserAuthorityOnScorecard} from "@hisptz/scorecard-state";
+import {truncateDescription} from "@hisptz/scorecard-utils";
 import PropTypes from "prop-types";
 import React, {useState} from "react";
 import {useHistory} from "react-router-dom";
 import {useRecoilValue, useSetRecoilState} from "recoil";
-import DeleteConfirmation from "../../../../../../../../../shared/components/src/DeleteConfirmation";
-import {useDeleteScorecard} from "../../../../../../../../../shared/hooks/src/datastore/useScorecard";
-import holderImage from "../../../../../../../../../shared/resources/images/img.png";
-import RouterState from "../../../../../../../../../shared/state/src/router";
-import {UserAuthorityOnScorecard} from "../../../../../../../../../shared/state/src/user";
-import {truncateDescription} from "../../../../../../../../../shared/utils/src/utils";
+
 
 export default function ScorecardListCard({scorecard, grid}) {
     const setRoute = useSetRecoilState(RouterState);
@@ -18,7 +18,6 @@ export default function ScorecardListCard({scorecard, grid}) {
         UserAuthorityOnScorecard(scorecard?.id)
     );
     const {title, description, id} = scorecard;
-    const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
     const [showFullDescription, setShowFullDescription] = useState(false);
     const history = useHistory();
     const {remove} = useDeleteScorecard(id);
@@ -26,6 +25,8 @@ export default function ScorecardListCard({scorecard, grid}) {
         ({message}) => message,
         ({type}) => ({...type, duration: 3000})
     );
+
+    const {confirm} = useConfirmDialog();
 
     const onView = () => {
         setRoute((prevRoute) => ({...prevRoute, previous: `/`}));
@@ -39,7 +40,7 @@ export default function ScorecardListCard({scorecard, grid}) {
         }
     };
 
-    const onDelete = async () => {
+    const deleteScorecard = async () => {
         if (deletePermission) {
             try {
                 await remove();
@@ -49,13 +50,28 @@ export default function ScorecardListCard({scorecard, grid}) {
                     type: {info: true},
                 });
             }
-            setDeleteConfirmOpen(false);
             show({
                 message: i18n.t("Scorecard deleted successfully"),
                 type: {success: true},
             });
         }
     };
+
+    const onDelete = () => {
+        confirm({
+            title: i18n.t("Confirm scorecard delete"),
+            message: <p>
+                {i18n.t("Are you sure you want to delete scorecard ")}:
+                <b>{title}</b>
+            </p>,
+            onCancel: () => {
+
+            },
+            onConfirm: () => {
+                deleteScorecard();
+            }
+        })
+    }
 
     return grid ? (
         <div
@@ -112,34 +128,13 @@ export default function ScorecardListCard({scorecard, grid}) {
                         {deletePermission && (
                             <Button
                                 dataTest="scorecard-delete-button"
-                                onClick={function (_, e) {
-                                    e.stopPropagation();
-                                    setDeleteConfirmOpen(true);
-                                }}
+                                onClick={onDelete}
                             >
                                 {i18n.t("Delete")}
                             </Button>
                         )}
                     </ButtonStrip>
                 </div>
-                {deleteConfirmOpen && (
-                    <DeleteConfirmation
-                        component={
-                            <p>
-                                {i18n.t("Are you sure you want to delete scorecard ")}:
-                                <b>{title}</b>
-                            </p>
-                        }
-                        onConfirm={function (_, e) {
-                            e.stopPropagation();
-                            onDelete();
-                        }}
-                        onCancel={function (_, e) {
-                            e.stopPropagation();
-                            setDeleteConfirmOpen(false);
-                        }}
-                    />
-                )}
             </div>
         </div>
     ) : (
@@ -199,33 +194,12 @@ export default function ScorecardListCard({scorecard, grid}) {
                         {deletePermission && (
                             <Button
                                 dataTest="scorecard-delete-button"
-                                onClick={function (_, e) {
-                                    e.stopPropagation();
-                                    setDeleteConfirmOpen(true);
-                                }}
+                                onClick={onDelete}
                             >
                                 {i18n.t("Delete")}
                             </Button>
                         )}
                     </ButtonStrip>
-                    {deleteConfirmOpen && (
-                        <DeleteConfirmation
-                            component={
-                                <p>
-                                    {i18n.t("Are you sure you want to delete scorecard")}:
-                                    <b>{title}</b>
-                                </p>
-                            }
-                            onConfirm={function (_, e) {
-                                e.stopPropagation();
-                                onDelete();
-                            }}
-                            onCancel={function (_, e) {
-                                e.stopPropagation();
-                                setDeleteConfirmOpen(false);
-                            }}
-                        />
-                    )}
                 </div>
             </div>
         </div>

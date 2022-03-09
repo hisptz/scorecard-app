@@ -13,7 +13,7 @@ export {CalendarTypes} from "./src/calendar";
 export {CHART_TYPES} from "./src/chart-types.constant";
 export {DownloadTypes} from "./src/download";
 export {DraggableItems} from "./src/draggables"
-export {REQUIRED_FIELDS} from "./src/form"
+export {REQUIRED_FIELDS, DHIS2ValueTypes} from "./src/form"
 export {DEFAULT_LAYOUT, LAYOUTS} from "./src/layout";
 export {DATA_MIGRATION_CHECK} from "./src/migration"
 export {Orientation} from "./src/orientation";

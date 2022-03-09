@@ -1,9 +1,9 @@
 import {useAlert} from "@dhis2/app-runtime";
+import {useDeleteScorecard} from "@hisptz/scorecard-hooks";
+import {UserAuthorityOnScorecard} from "@hisptz/scorecard-state";
 import {useEffect, useState} from "react";
 import {useHistory} from "react-router-dom";
 import {useRecoilValue} from "recoil";
-import {useDeleteScorecard} from "../../../../../../../../../../shared/hooks/src/datastore/useScorecard";
-import {UserAuthorityOnScorecard} from "../../../../../../../../../../shared/state/src/user";
 
 export default function useCardDetails(scorecard) {
     const {title, description, id} = scorecard;

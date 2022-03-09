@@ -9,10 +9,16 @@
     "shared/*"
   ],
   "scripts": {
+    "start:app": "yarn workspace hisptz-scorecard start"
   },
   "devDependencies": {
   },
   "dependencies": {
+    "@dhis2/app-runtime": "^3.2.5",
+    "@dhis2/app-service-datastore": "^1.0.0-alpha.2",
+    "@dhis2/ui": "^7.16.2",
+    "@hisptz/react-ui": "^1.0.31",
+    "recoil": "^0.6.1"
   },
   "cypress-cucumber-preprocessor": {
     "nonGlobalStepDefinitions": true

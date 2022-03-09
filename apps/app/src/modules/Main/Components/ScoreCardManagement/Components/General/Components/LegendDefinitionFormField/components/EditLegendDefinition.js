@@ -1,9 +1,9 @@
 import i18n from "@dhis2/d2-i18n";
 import {Button, IconDelete24} from "@dhis2/ui";
 import {CustomInput} from "@hisptz/react-ui";
+import {DHIS2ValueTypes} from "@hisptz/scorecard-constants";
 import PropTypes from "prop-types";
 import React, {useCallback} from "react";
-import {DHIS2ValueTypes} from "../../../../../../../../../../../../shared/components/src/CustomForm/constants";
 
 export function EditLegendDefinition({legendDefinition, onEdit, onDelete}) {
 

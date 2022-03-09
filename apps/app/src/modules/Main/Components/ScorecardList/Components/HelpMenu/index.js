@@ -1,9 +1,9 @@
 import i18n from "@dhis2/d2-i18n";
 import {FlyoutMenu, MenuItem} from "@dhis2/ui";
+import {SCORECARD_DOCUMENTATION_URL} from "@hisptz/scorecard-constants";
+import {HelpState} from "@hisptz/scorecard-state";
 import React from "react";
 import {useSetRecoilState} from "recoil";
-import {SCORECARD_DOCUMENTATION_URL} from "../../../../../../../../../shared/constants/src/config";
-import HelpState from "../../../../../../../../../shared/state/src/help";
 
 export default function HelpMenu() {
     const setHelpEnabled = useSetRecoilState(HelpState);

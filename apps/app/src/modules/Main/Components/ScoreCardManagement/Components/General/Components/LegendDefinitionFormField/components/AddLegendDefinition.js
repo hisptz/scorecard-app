@@ -1,10 +1,10 @@
 import i18n from "@dhis2/d2-i18n";
 import {Button, Field, IconAdd24} from "@dhis2/ui";
 import {RHFCustomInput} from "@hisptz/react-ui";
+import {DHIS2ValueTypes} from "@hisptz/scorecard-constants";
 import PropTypes from "prop-types";
 import React from "react";
 import {FormProvider, useForm} from "react-hook-form";
-import {DHIS2ValueTypes} from "../../../../../../../../../../../../shared/components/src/CustomForm/constants";
 
 export function AddLegendDefinition({onAdd}) {
     const form = useForm();

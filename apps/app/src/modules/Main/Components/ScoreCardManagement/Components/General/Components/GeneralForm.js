@@ -1,8 +1,8 @@
 import i18n from "@dhis2/d2-i18n";
 import {RHFCustomInput} from "@hisptz/react-ui";
+import {DHIS2ValueTypes} from "@hisptz/scorecard-constants";
 import React from "react";
 import {useParams} from "react-router-dom";
-import {DHIS2ValueTypes} from "../../../../../../../../../../shared/components/src/CustomForm/constants";
 import "../../../ScorecardManagement.module.css";
 import {titleDoesNotExist} from "../utils/utils";
 import LegendDefinitionFormField from "./LegendDefinitionFormField";

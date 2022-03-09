@@ -1,9 +1,7 @@
 import {CustomInput} from "@hisptz/react-ui";
+import {DHIS2ValueTypes} from "@hisptz/scorecard-constants";
 import {set} from "lodash";
 import React from "react";
-import {
-    DHIS2ValueTypes
-} from "../../../../../../../../../../../../../../../../shared/components/src/CustomForm/constants";
 
 
 function autoSetAdjacentValues(data, index) {

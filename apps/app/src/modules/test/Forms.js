@@ -1,8 +1,8 @@
 import {Button} from "@dhis2/ui";
+import {DHIS2ValueTypes} from "@hisptz/scorecard-constants";
 import {map} from "lodash";
 import React, {useRef} from "react";
 import CustomForm from "../../../../../shared/components/src/CustomForm";
-import {DHIS2ValueTypes} from "../../../../../shared/components/src/CustomForm/constants";
 import {FormFieldModel} from "../../../../../shared/components/src/CustomForm/models";
 
 export default function ExampleForms() {

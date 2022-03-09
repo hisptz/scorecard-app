@@ -6,7 +6,7 @@ import React, {useEffect} from "react";
 import {useFormContext} from "react-hook-form";
 import TargetsArea
     from "hisptz-scorecard/src/modules/Main/Components/ScoreCardManagement/Components/DataConfiguration/Components/DataGroups/Components/DataSourceConfiguration/Components/TargetsArea";
-import {DHIS2ValueTypes} from "../../constants";
+import {DHIS2ValueTypes} from "@hisptz/scorecard-constants";
 
 export default function DataSourceConfigurationForm({path}) {
     const {watch, setValue} = useFormContext();
