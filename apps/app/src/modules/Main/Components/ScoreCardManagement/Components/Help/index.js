@@ -1,8 +1,8 @@
+import {HelpSteps} from "@hisptz/scorecard-state";
 import {isEqual, pullAllWith} from "lodash";
 import PropTypes from "prop-types";
 import {useEffect} from "react";
 import {useSetRecoilState} from "recoil";
-import {HelpSteps} from "../../../../../../../../../shared/state/src/help";
 
 export default function Help({helpSteps}) {
     const setHelpSteps = useSetRecoilState(HelpSteps);

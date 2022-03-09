@@ -1,11 +1,11 @@
 import i18n from "@dhis2/d2-i18n";
-import {IconError24, colors} from '@dhis2/ui'
+import {colors, IconError24} from '@dhis2/ui'
 import {OrgUnitSelector} from '@hisptz/react-ui'
+import {ContainerLoader} from "@hisptz/scorecard-components";
+import {OrgUnitSelection} from "@hisptz/scorecard-models";
 import {get} from 'lodash'
 import React, {Suspense, useCallback} from "react";
 import {useFormContext} from "react-hook-form";
-import ContainerLoader from "../../../../../../../../../../../shared/components/src/Loaders/ContainerLoader";
-import OrgUnitSelection from "../../../../../../../../core/models/orgUnitSelection";
 
 function anyOrgUnitSelected({groups, levels, orgUnits, userOrgUnit, userSubUnit, userSubX2Unit}) {
     return userSubX2Unit || userSubUnit || userOrgUnit || groups.length > 0 || levels.length > 0 || orgUnits.length > 0;

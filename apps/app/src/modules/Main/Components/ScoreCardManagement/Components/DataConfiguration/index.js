@@ -1,8 +1,8 @@
+import {ContainerLoader} from "@hisptz/scorecard-components";
+import {DataSelection} from "@hisptz/scorecard-models";
 import {isEmpty} from "lodash";
 import React, {Suspense, useCallback} from "react";
 import {useFormContext} from "react-hook-form";
-import ContainerLoader from "../../../../../../../../../shared/components/src/Loaders/ContainerLoader";
-import DataSelection from "../../../../../../core/models/dataSelection";
 import Help from "../Help";
 import DataSourceConfiguration from "./Components/DataGroups/Components/DataSourceConfiguration";
 import EmptyDataGroups from "./Components/EmptyDataGroups";

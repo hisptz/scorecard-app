@@ -1,6 +1,6 @@
+import {getScorecardSummary} from "@hisptz/scorecard-services";
+import {generateLegendDefaults} from "@hisptz/scorecard-utils";
 import {cloneDeep, find, isEmpty, set} from "lodash";
-import getScorecardSummary from "../../../../../../../../../../shared/services/src/getScorecardSummary";
-import {generateLegendDefaults} from "../../../../../../../../../../shared/utils/src/utils";
 
 export function resetLegends(groups, legendDefinitions) {
     const newGroups = cloneDeep(groups);

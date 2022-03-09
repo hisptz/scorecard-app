@@ -1,5 +1,8 @@
 import i18n from "@dhis2/d2-i18n";
 import {Button, Input} from "@dhis2/ui";
+import {DataSelection} from "@hisptz/scorecard-models";
+import {ScorecardConfigEditState,} from "@hisptz/scorecard-state";
+import {updateListFromDragAndDrop} from "@hisptz/scorecard-utils";
 import AddIcon from "@material-ui/icons/Add";
 import {debounce, find,} from "lodash";
 import PropTypes from "prop-types";
@@ -7,9 +10,6 @@ import React, {useRef, useState} from "react";
 import {DragDropContext} from "react-beautiful-dnd";
 import {useFormContext} from "react-hook-form";
 import {atom, useRecoilCallback, useSetRecoilState} from "recoil";
-import {ScorecardConfigEditState,} from "../../../../../../../../../shared/state/src/scorecard";
-import {updateListFromDragAndDrop} from "../../../../../../../../../shared/utils/src/dnd";
-import DataSelection from "../../../../../../core/models/dataSelection";
 import DataGroups from "./Components/DataGroups";
 
 

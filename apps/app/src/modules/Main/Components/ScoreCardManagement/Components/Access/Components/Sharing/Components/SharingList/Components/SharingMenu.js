@@ -1,5 +1,5 @@
 import {FlyoutMenu, Layer, MenuItem, Popper} from "@dhis2/ui";
-import {ACCESS_TYPES} from "@hisptz/scorecard-constants/src/scorecardAccessType";
+import {ACCESS_TYPES} from "@hisptz/scorecard-constants";
 import CheckIcon from "@material-ui/icons/Check";
 import PropTypes from "prop-types";
 import React, {Fragment} from "react";

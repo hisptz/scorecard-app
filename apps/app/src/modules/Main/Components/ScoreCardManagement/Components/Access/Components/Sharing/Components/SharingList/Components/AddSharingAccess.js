@@ -1,6 +1,6 @@
 import i18n from "@dhis2/d2-i18n";
 import {Button, SingleSelectField, SingleSelectOption} from "@dhis2/ui";
-import {ACCESS_TYPES} from "@hisptz/scorecard-constants/src/scorecardAccessType";
+import {ACCESS_TYPES} from "@hisptz/scorecard-constants";
 import AddIcon from "@material-ui/icons/Add";
 import React, {useState} from "react";
 import useAccessManage from "../../../../../hooks/useAccessManage";

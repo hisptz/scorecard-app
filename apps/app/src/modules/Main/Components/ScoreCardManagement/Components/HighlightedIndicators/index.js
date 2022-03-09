@@ -1,16 +1,14 @@
 import i18n from "@dhis2/d2-i18n";
 import {Button} from "@dhis2/ui";
+import {HIGHLIGHTED_INDICATOR_HELP_STEPS} from "@hisptz/scorecard-constants";
+import {ScorecardIndicator} from "@hisptz/scorecard-models";
+import {ScorecardConfigEditState,} from "@hisptz/scorecard-state";
+import {generateLegendDefaults} from "@hisptz/scorecard-utils";
 import AddIcon from "@material-ui/icons/Add";
 import {isEmpty} from "lodash";
 import React, {Fragment, useCallback, useState} from "react";
 import {useFormContext} from "react-hook-form";
 import {useSetRecoilState} from "recoil";
-import {
-    HIGHLIGHTED_INDICATOR_HELP_STEPS
-} from "../../../../../../../../../shared/constants/src/help/scorecardManagement";
-import {ScorecardConfigEditState,} from "../../../../../../../../../shared/state/src/scorecard";
-import {generateLegendDefaults} from "../../../../../../../../../shared/utils/src/utils";
-import ScorecardIndicator from "../../../../../../core/models/scorecardIndicator";
 import DataSourceSelectorModal from "../DataConfiguration/Components/DataGroups/Components/DataSourceSelectorModal";
 import {getNonDefaultLegendDefinitions} from "../General/utils/utils";
 import Help from "../Help";

@@ -1,10 +1,9 @@
+import {CustomInput} from "@hisptz/react-ui";
+import {FieldErrorState, ScorecardConfigDirtyState} from "@hisptz/scorecard-state";
 import PropTypes from "prop-types";
 import React, {useMemo} from "react";
 import {useRecoilState, useRecoilValue} from "recoil";
-import {CustomInput} from "../../../../../../../../../../shared/components/src/CustomForm/components/CustomField";
 import {FormFieldModel} from "../../../../../../../../../../shared/components/src/CustomForm/models";
-import {ScorecardConfigDirtyState} from "../../../../../../../../../../shared/state/src/scorecard";
-import {FieldErrorState} from "../../../../../../../../../../shared/state/src/validators";
 
 export default function GeneralFormField({field, dataTest}) {
     const [value, setValue] = useRecoilState(ScorecardConfigDirtyState(field.id));

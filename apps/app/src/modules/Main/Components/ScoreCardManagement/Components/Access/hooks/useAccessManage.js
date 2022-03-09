@@ -1,9 +1,9 @@
+import {AccessTypes} from "@hisptz/scorecard-constants";
+import {ScorecardAccess} from "@hisptz/scorecard-models";
 import produce from "immer";
 import {cloneDeep, findIndex, remove, set} from "lodash";
 import {useCallback, useMemo} from "react";
 import {useFormContext} from "react-hook-form";
-import {AccessTypes} from "../../../../../../../../../../shared/constants/src/scorecardAccessType";
-import ScorecardAccess from "../../../../../../../core/models/scorecardAccess";
 
 
 export default function useAccessManage() {

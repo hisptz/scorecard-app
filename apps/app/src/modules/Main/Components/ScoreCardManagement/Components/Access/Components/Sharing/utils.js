@@ -1,9 +1,9 @@
 import i18n from "@dhis2/d2-i18n";
+import {ScorecardAccessType} from "@hisptz/scorecard-constants";
 import UserGroupIcon from "@material-ui/icons/People";
 import UserIcon from "@material-ui/icons/Person";
 import PublicIcon from "@material-ui/icons/Public";
 import React from "react";
-import ScorecardAccessType from "../../../../../../../../../../../shared/constants/src/scorecardAccessType";
 
 export function getAccessName(access = "") {
     switch (access) {

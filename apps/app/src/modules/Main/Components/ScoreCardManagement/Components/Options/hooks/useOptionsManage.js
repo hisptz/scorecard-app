@@ -1,9 +1,9 @@
+import {ScorecardOptions} from "@hisptz/scorecard-models";
 import {useCallback} from "react";
 import {useFormContext} from "react-hook-form";
-import ScorecardOptions from "../../../../../../../core/models/scorecardOptions";
 
 
-export default function useOptionsManage(){
+export default function useOptionsManage() {
     const {watch, setValue} = useFormContext();
 
     const scorecardOptions = watch("options");
@@ -28,7 +28,7 @@ export default function useOptionsManage(){
         );
     };
 
-    return{
+    return {
         onAverageChange,
         onChange,
         scorecardOptions

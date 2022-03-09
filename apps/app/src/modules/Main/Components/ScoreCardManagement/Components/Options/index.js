@@ -1,5 +1,5 @@
+import {ScorecardOptionsForm} from "@hisptz/scorecard-components";
 import React from "react";
-import ScorecardOptionsForm from "../../../../../../../../../shared/components/src/ScorecardOptionsForm";
 import useOptionsManage from "./hooks/useOptionsManage";
 
 export default function OptionsScorecardForm() {

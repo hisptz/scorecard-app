@@ -8,15 +8,13 @@ import {
     DataTableRow,
     TableBody,
 } from "@dhis2/ui";
+import {HIGHLIGHTED_TABLE_HELP_STEPS} from "@hisptz/scorecard-constants";
+import {ScorecardConfigEditState} from "@hisptz/scorecard-state";
 import DeleteIcon from "@material-ui/icons/Delete";
 import {cloneDeep, findIndex, get, isEmpty, remove} from "lodash";
 import React, {Fragment, useCallback} from "react";
 import {useFormContext} from "react-hook-form";
 import {useRecoilState} from "recoil";
-import {
-    HIGHLIGHTED_TABLE_HELP_STEPS
-} from "../../../../../../../../../../shared/constants/src/help/scorecardManagement";
-import {ScorecardConfigEditState,} from "../../../../../../../../../../shared/state/src/scorecard";
 import Help from "../../Help";
 
 const columns = [

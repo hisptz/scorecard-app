@@ -9,3 +9,4 @@ export ScorecardIndicator from "./src/scorecardIndicator";
 export ScorecardIndicatorHolder from "./src/scorecardIndicatorHolder";
 export ScorecardLegend from "./src/scorecardLegend";
 export ScorecardOptions from "./src/scorecardOptions";
+export ScorecardIndicatorGroup from "./src/scorecardIndicatorGroup"

@@ -1,11 +1,8 @@
+import {DataSourceConfigurationForm} from "@hisptz/scorecard-components";
+import {INDICATOR_CONFIGURATION_STEPS} from "@hisptz/scorecard-constants";
+import {ScorecardConfigEditState,} from "@hisptz/scorecard-state";
 import React from "react";
 import {useRecoilValue} from "recoil";
-import DataSourceConfigurationForm
-    from "../../../../../../../../../../shared/components/src/CustomForm/components/DataSourceConfigurationForm";
-import {
-    INDICATOR_CONFIGURATION_STEPS
-} from "../../../../../../../../../../shared/constants/src/help/scorecardManagement";
-import {ScorecardConfigEditState,} from "../../../../../../../../../../shared/state/src/scorecard";
 import Help from "../../Help";
 
 export default function HighlightedDataSourceConfigurationForm() {

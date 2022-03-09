@@ -1,5 +1,5 @@
+import {ACCESS_HELP_STEPS} from "@hisptz/scorecard-constants";
 import React from "react";
-import {ACCESS_HELP_STEPS} from "../../../../../../../../../shared/constants/src/help/scorecardManagement";
 import Help from "../Help";
 import OrgUnit from "./Components/OrgUnitFilter";
 import Sharing from "./Components/Sharing";

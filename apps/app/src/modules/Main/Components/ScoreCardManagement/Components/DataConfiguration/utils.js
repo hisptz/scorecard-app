@@ -1,7 +1,6 @@
-/* eslint-disable no-unsafe-optional-chaining */
+import {ScorecardIndicatorGroup} from "@hisptz/scorecard-models";
+import {generateLegendDefaults} from "@hisptz/scorecard-utils";
 import {fromPairs, set} from "lodash";
-import {generateLegendDefaults} from "../../../../../../../../../shared/utils/src/utils";
-import ScorecardIndicatorGroup from "../../../../../../core/models/scorecardIndicatorGroup";
 
 export function generateNewGroupData(groups) {
     return new ScorecardIndicatorGroup({
