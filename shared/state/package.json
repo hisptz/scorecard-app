@@ -1,0 +1,11 @@
+{
+  "name": "@hisptz/scorecard-state",
+  "version": "2.5.0",
+  "dependencies": {
+    "recoil": "^0.6.1",
+    "@hisptz/scorecard-models": "^2.5.0",
+    "@hisptz/scorecard-utils": "^2.5.0",
+    "@hisptz/scorecard-constants": "^2.5.0",
+    "@iapps/period-utilities": "^1.0.0-beta.7"
+  }
+}

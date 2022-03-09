@@ -1,0 +1,9 @@
+{
+  "name": "@hisptz/scorecard-models",
+  "version": "2.5.0",
+  "dependencies": {
+    "immer": "^9.0.5",
+    "@hisptz/scorecard-utils": "^2.5.0"
+  },
+  "main": "index.js"
+}

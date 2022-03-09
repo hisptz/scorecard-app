@@ -1,0 +1,7 @@
+{
+  "name": "@hisptz/scorecard-resources",
+  "version": "2.5.0",
+  "main": "index.js",
+  "dependencies": {
+  }
+}

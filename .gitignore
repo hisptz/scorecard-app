@@ -1,14 +1,14 @@
 # DHIS2 Platform
 node_modules
 .d2
-src/locales
+apps/app/src/locales
 build
-.env
+apps/app/.env
 logs
-cypress.env.json
+apps/app/cypress.env.json
 *.log
-i18n
+apps/app/i18n
 .vscode
-cypress/videos
-cypress/screenshots
-cypress/downloads
+*cypress/videos
+*cypress/screenshots
+*cypress/downloads
