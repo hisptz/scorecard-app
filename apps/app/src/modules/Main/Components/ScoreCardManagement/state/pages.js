@@ -1,13 +1,11 @@
 import i18n from "@dhis2/d2-i18n";
-import {findIndex} from "lodash";
-import {atom, selector} from "recoil";
 import {
     DATA_CONFIGURATION_HELP_STEPS,
-    GENERAL_HELP_STEPS
-} from "../../../../../../../../shared/constants/src/help/scorecardManagement";
-import {
+    GENERAL_HELP_STEPS,
     scorecardManagementTooltips
-} from "../../../../../../../../shared/constants/src/tooltips/scorecardManagement";
+} from "@hisptz/scorecard-constants";
+import {findIndex} from "lodash";
+import {atom, selector} from "recoil";
 import AccessScorecardForm from "../Components/Access";
 import DataConfigurationScorecardForm from "../Components/DataConfiguration";
 import GeneralScorecardForm from "../Components/General";

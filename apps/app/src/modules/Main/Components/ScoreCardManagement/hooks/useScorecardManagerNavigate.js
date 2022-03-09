@@ -1,11 +1,10 @@
 import {useAlert} from "@dhis2/app-runtime";
 import i18n from "@dhis2/d2-i18n";
+import {HelpIndex, IsNewScorecardState} from "@hisptz/scorecard-state";
 import {getValidationPageFields} from "@hisptz/scorecard-utils/src/validator";
 import {findIndex} from "lodash";
 import {useCallback, useEffect, useMemo} from "react";
 import {useRecoilState, useRecoilValue, useResetRecoilState} from "recoil";
-import {HelpIndex} from "../../../../../../../../shared/state/src/help";
-import {IsNewScorecardState} from "../../../../../../../../shared/state/src/scorecard";
 import {ActiveStepState, steps} from "../state/pages";
 
 export default function useScorecardManagerNavigate({form, onSave, onNavigate}) {

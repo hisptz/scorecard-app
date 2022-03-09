@@ -1,23 +1,24 @@
 import {useAlert} from "@dhis2/app-runtime";
 import i18n from "@dhis2/d2-i18n";
+import {useAddScorecard, useUpdateScorecard} from "@hisptz/scorecard-hooks";
+import {Scorecard} from "@hisptz/scorecard-models";
+import {
+    IsNewScorecardState,
+    ScorecardConfigEditState,
+    ScorecardConfigErrorState,
+    ScorecardConfState,
+    ScorecardIdState,
+    ShouldValidate,
+    UserState
+} from "@hisptz/scorecard-state";
+import {uid} from "@hisptz/scorecard-utils";
 import produce from "immer";
 import {cloneDeep, findIndex, set} from "lodash";
 import {useEffect, useState} from "react";
 import {useForm} from "react-hook-form";
 import {useHistory, useParams} from "react-router-dom";
 import {useRecoilCallback, useRecoilState, useRecoilValue, useSetRecoilState} from "recoil";
-import {useAddScorecard, useUpdateScorecard} from "../../../../../../../../shared/hooks/src/datastore/useScorecard";
 import RouterState from "../../../../../../../../shared/state/src/router";
-import ScorecardConfState, {
-    IsNewScorecardState,
-    ScorecardConfigEditState,
-    ScorecardConfigErrorState,
-    ScorecardIdState
-} from "../../../../../../../../shared/state/src/scorecard";
-import {UserState} from "../../../../../../../../shared/state/src/user";
-import {ShouldValidate} from "../../../../../../../../shared/state/src/validators";
-import {uid} from "../../../../../../../../shared/utils/src/utils";
-import Scorecard from "../../../../../core/models/scorecard";
 import {ActiveStepIndexState, ActiveStepState, steps} from "../state/pages";
 
 
