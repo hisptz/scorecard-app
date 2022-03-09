@@ -24,8 +24,24 @@ export {ScorecardTableConstants} from "./src/table";
 export {TableSort} from "./src/tableSort";
 
 
-export * from "src/help/options"
-export * from "src/help/scorecardList"
-export * from "src/help/scorecardManagement"
-export * from "src/help/scorecardView"
-export * from "src/tooltips/scorecardManagement"
+export {STEP_OPTIONS} from "src/help/options"
+export {SCORECARD_LIST_HELP_STEPS} from "src/help/scorecardList"
+export {
+    ACCESS_HELP_STEPS,
+    DATA_CONFIGURATION_HELP_STEPS,
+    DATA_CONFIGURATION_STEPS_MAP,
+    DATA_CONFIGURATION_WITH_DATA_HELP_STEPS,
+    GENERAL_HELP_STEPS,
+    GROUPS_CONFIG_HELP_STEPS,
+    HIGHLIGHTED_INDICATOR_HELP_STEPS,
+    HIGHLIGHTED_TABLE_HELP_STEPS,
+    INDICATOR_CONFIGURATION_STEPS,
+    INDICATOR_SETUP_HELP_STEPS,
+    INTRODUCTION_HELP_STEPS,
+    NO_GROUPS_HELP_STEPS,
+    NO_INDICATORS_HELP_STEPS,
+    OPTIONS_HELP_STEPS,
+    PREVIEW_TABLE_HELP_STEPS
+} from "src/help/scorecardManagement"
+export {SCORECARD_VIEW_HELP_STEPS} from "src/help/scorecardView"
+export {scorecardManagementTooltips} from "src/tooltips/scorecardManagement"

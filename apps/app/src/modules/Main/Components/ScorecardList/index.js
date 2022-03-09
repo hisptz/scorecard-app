@@ -2,6 +2,8 @@ import {useAlert} from "@dhis2/app-runtime";
 import {useSetting} from "@dhis2/app-service-datastore";
 import i18n from "@dhis2/d2-i18n";
 import {Button, ButtonStrip, DropdownButton, Input, Tooltip} from "@dhis2/ui";
+import {SCORECARD_LIST_HELP_STEPS, STEP_OPTIONS} from "@hisptz/scorecard-constants";
+import {HelpState, RouterState, ScorecardIdState, ScorecardSummaryState} from "@hisptz/scorecard-state";
 import AddIcon from "@material-ui/icons/Add";
 import HelpIcon from "@material-ui/icons/Help";
 import ListViewIcon from "@material-ui/icons/Reorder";
@@ -10,21 +12,8 @@ import {Steps} from "intro.js-react";
 import {debounce, isEmpty} from "lodash";
 import React, {Suspense, useEffect, useRef, useState} from "react";
 import {useHistory} from "react-router-dom";
-import {
-    useRecoilState,
-    useRecoilValue,
-    useResetRecoilState,
-    useSetRecoilState,
-} from "recoil";
+import {useRecoilState, useRecoilValue, useResetRecoilState, useSetRecoilState,} from "recoil";
 import {FullPageLoader} from "../../../../../../../shared/components/src/Loaders";
-import {STEP_OPTIONS} from "../../../../../../../shared/constants/src/help/options";
-import {SCORECARD_LIST_HELP_STEPS} from "../../../../../../../shared/constants/src/help/scorecardList";
-import HelpState from "../../../../../../../shared/state/src/help";
-import RouterState from "../../../../../../../shared/state/src/router";
-import {
-    ScorecardIdState,
-    ScorecardSummaryState,
-} from "../../../../../../../shared/state/src/scorecard";
 import EmptyScoreCardList from "../EmptyScoreCardList";
 import EmptySearchList from "./Components/EmptySearchList";
 import GridScorecardDisplay from "./Components/GridScorecardDisplay";

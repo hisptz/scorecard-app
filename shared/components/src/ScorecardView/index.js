@@ -16,7 +16,7 @@ import {
     UserAuthorityOnScorecard
 } from "@hisptz/scorecard-state";
 import {FullPageLoader} from "../Loaders";
-import AccessDeniedPage from "./components/AccessDeniedPage";
+import AccessDeniedPage from "../Errors/AccessDeniedPage";
 import EmptyOrgUnitsOrPeriod from "./components/EmptyOrgUnitsOrPeriod";
 import HighlightedIndicatorsView from "./components/HighlightedIndicatorsView";
 import ScorecardActions from "./components/ScorecardActions";

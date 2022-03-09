@@ -1,5 +1,6 @@
 import i18n from "@dhis2/d2-i18n";
 import {Button, colors} from "@dhis2/ui";
+import {ScorecardIdState} from "@hisptz/scorecard-state";
 import React from "react";
 import {useHistory} from "react-router-dom";
 import {useResetRecoilState} from "recoil";
@@ -7,7 +8,6 @@ import useMediaQuery from "../../../../../../../shared/hooks/src/useMediaQuery";
 import {
     ReactComponent as ScorecardIllustration
 } from "../../../../../../../shared/resources/images/scorecard_illustration.svg";
-import {ScorecardIdState} from "../../../../../../../shared/state/src/scorecard";
 
 export default function EmptyScoreCardList() {
     const resetScorecardIdState = useResetRecoilState(ScorecardIdState);
