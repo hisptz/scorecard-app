@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
 import React from "react";
 import {useRecoilValue} from "recoil";
-import {DraggableItems} from "../../../../../../../../../core/constants/draggables";
-import {ScorecardViewState} from "../../../../../../../../../core/state/scorecard";
 import DraggableCell from "./DraggableCell";
+import {ScorecardViewState} from "@hisptz/scorecard-state";
+import {DraggableItems} from "@hisptz/scorecard-constants";
 
 export default function OrgUnitContainer({orgUnit}) {
     const {showHierarchy} = useRecoilValue(ScorecardViewState("options"));

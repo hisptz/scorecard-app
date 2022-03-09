@@ -3,7 +3,7 @@ import {atom, selector, selectorFamily} from "recoil";
 import {DefaultAuthority} from "@hisptz/scorecard-constants";
 import {EngineState} from "./engine";
 import {ScorecardSummaryState} from "./scorecard";
-import {getUserAuthority} from "@hisptz/scorecard-utils";
+import {getUserAuthority} from "@hisptz/scorecard-utils/src";
 
 const userQuery = {
     user: {

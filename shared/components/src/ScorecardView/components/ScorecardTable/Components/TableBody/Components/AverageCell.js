@@ -2,11 +2,9 @@ import {head, last, round} from "lodash";
 import PropTypes from "prop-types";
 import React from "react";
 import {useRecoilValue} from "recoil";
-import {OrgUnitLevels} from "../../../../../../../../../core/state/orgUnit";
-import {ScorecardLegendDefinitionSelector, ScorecardViewState} from "../../../../../../../../../core/state/scorecard";
-import LinkedCellSvg from "../../../../../../../../../shared/components/ScorecardCell/components/LinkedCellSvg";
-import SingleCellSvg from "../../../../../../../../../shared/components/ScorecardCell/components/SingleCellSvg";
-import {getLegend} from "../../../../../../../../../shared/utils/utils";
+import {OrgUnitLevels, ScorecardLegendDefinitionSelector, ScorecardViewState} from "@hisptz/scorecard-state";
+import {getLegend} from "@hisptz/scorecard-utils/src";
+import {LinkedCellSvg, SingleCellSvg} from "@hisptz/scorecard-components";
 
 
 function SingleAverageCell({dataSources, values, bold, period, orgUnit}) {

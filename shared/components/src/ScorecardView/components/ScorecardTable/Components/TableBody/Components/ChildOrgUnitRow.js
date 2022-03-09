@@ -3,11 +3,6 @@ import {DataTableCell, DataTableRow, Tooltip} from "@dhis2/ui";
 import PropTypes from "prop-types";
 import React, {Suspense, useCallback, useEffect, useState} from "react";
 import {useRecoilValue} from "recoil";
-import AverageDisplayType from "../../../../../../../../../core/constants/averageDisplayType";
-import {DraggableItems} from "../../../../../../../../../core/constants/draggables";
-import ScorecardDataEngine from "../../../../../../../../../core/models/scorecardData";
-import {PeriodResolverState} from "../../../../../../../../../core/state/period";
-import {ScorecardDataLoadingState, ScorecardViewState,} from "../../../../../../../../../core/state/scorecard";
 import ScorecardTable from "../../../index";
 import classes from '../../../scorecardTable.module.css'
 import DataContainer from "../../TableDataContainer";
@@ -15,6 +10,9 @@ import TableLoader from "../../TableLoader";
 import AverageCell from "./AverageCell";
 import DroppableCell from "./DroppableCell";
 import OrgUnitContainer from "./OrgUnitContainer";
+import {PeriodResolverState, ScorecardDataLoadingState, ScorecardViewState} from "@hisptz/scorecard-state";
+import {AverageDisplayType, DraggableItems} from "@hisptz/scorecard-constants";
+import {ScorecardDataEngine} from "@hisptz/scorecard-models";
 
 export default function ChildOrgUnitRow({
                                             orgUnit,

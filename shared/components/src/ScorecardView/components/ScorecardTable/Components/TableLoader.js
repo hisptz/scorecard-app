@@ -1,58 +1,56 @@
 import {
-  CircularLoader,
-  DataTableCell,
-  DataTableRow,
-  LinearLoader,
+    CircularLoader,
+    DataTableCell,
+    DataTableRow,
+    LinearLoader,
 } from "@dhis2/ui";
 import PropTypes from "prop-types";
-import React, { useEffect, useState } from "react";
-import { useRecoilValue } from "recoil";
-import ScorecardDataEngine from "../../../../../../../core/models/scorecardData";
-import {
-  ScorecardDataLoadingState,
-  ScorecardTableConfigState,
-} from "../../../../../../../core/state/scorecard";
-import useMediaQuery from "../../../../../../../shared/hooks/useMediaQuery";
+import React, {useEffect, useState} from "react";
+import {useRecoilValue} from "recoil";
+import {useMediaQuery} from "@hisptz/scorecard-hooks";
+import {ScorecardDataLoadingState, ScorecardTableConfigState} from "@hisptz/scorecard-state";
+import {ScorecardDataEngine} from "@hisptz/scorecard-models";
+
 
 export default function TableLoader() {
-  const { width: screenWidth } = useMediaQuery();
-  return (
-    <DataTableRow>
-      <DataTableCell width={`${screenWidth}px`} align="center">
-        <div
-          className="row center align-items-center"
-          style={{ height: 400, width: "100%" }}
-        >
-          <CircularLoader small />
-        </div>
-      </DataTableCell>
-    </DataTableRow>
-  );
+    const {width: screenWidth} = useMediaQuery();
+    return (
+        <DataTableRow>
+            <DataTableCell width={`${screenWidth}px`} align="center">
+                <div
+                    className="row center align-items-center"
+                    style={{height: 400, width: "100%"}}
+                >
+                    <CircularLoader small/>
+                </div>
+            </DataTableCell>
+        </DataTableRow>
+    );
 }
 
-export function TableLinearLoader({ dataEngine, orgUnits }) {
-  const { width: screenWidth } = useMediaQuery();
-  const { colSpan } = useRecoilValue(ScorecardTableConfigState(orgUnits));
-  const loading = useRecoilValue(ScorecardDataLoadingState(orgUnits));
-  const [progress, setProgress] = useState(0);
+export function TableLinearLoader({dataEngine, orgUnits}) {
+    const {width: screenWidth} = useMediaQuery();
+    const {colSpan} = useRecoilValue(ScorecardTableConfigState(orgUnits));
+    const loading = useRecoilValue(ScorecardDataLoadingState(orgUnits));
+    const [progress, setProgress] = useState(0);
 
-  useEffect(() => {
-    const subscription = dataEngine.getProgress().subscribe(setProgress);
-    return () => {
-      subscription.unsubscribe();
-    };
-  }, [orgUnits, dataEngine]);
+    useEffect(() => {
+        const subscription = dataEngine.getProgress().subscribe(setProgress);
+        return () => {
+            subscription.unsubscribe();
+        };
+    }, [orgUnits, dataEngine]);
 
-  return loading ? (
-    <DataTableRow>
-      <td colSpan={colSpan}>
-        <LinearLoader width={`${screenWidth}px`} amount={progress} margin={0} />
-      </td>
-    </DataTableRow>
-  ) : null;
+    return loading ? (
+        <DataTableRow>
+            <td colSpan={colSpan}>
+                <LinearLoader width={`${screenWidth}px`} amount={progress} margin={0}/>
+            </td>
+        </DataTableRow>
+    ) : null;
 }
 
 TableLinearLoader.propTypes = {
-  dataEngine: PropTypes.instanceOf(ScorecardDataEngine).isRequired,
-  orgUnits: PropTypes.array.isRequired,
+    dataEngine: PropTypes.instanceOf(ScorecardDataEngine).isRequired,
+    orgUnits: PropTypes.array.isRequired,
 };

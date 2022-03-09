@@ -12,7 +12,7 @@ import {
     getNameCellWidth, getTableWidthWithDataGroups, getTableWidthWithOrgUnit,
     getUserAuthority,
     uid
-} from "@hisptz/scorecard-utils";
+} from "@hisptz/scorecard-utils/src";
 import {OrgUnitSelection, Scorecard, ScorecardAccess, ScorecardOptions} from "@hisptz/scorecard-models";
 import {
     isOrgUnitId,

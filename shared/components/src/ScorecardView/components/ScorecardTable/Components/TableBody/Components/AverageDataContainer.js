@@ -2,9 +2,9 @@ import {isEmpty} from "lodash";
 import PropTypes from "prop-types";
 import React, {useEffect, useState} from "react";
 import {useRecoilValue} from "recoil";
-import ScorecardDataEngine from "../../../../../../../../../core/models/scorecardData";
-import {ScorecardDataLoadingState, ScorecardOrgUnitState,} from "../../../../../../../../../core/state/scorecard";
 import AverageCell from "./AverageCell";
+import {ScorecardDataLoadingState, ScorecardOrgUnitState} from "@hisptz/scorecard-state";
+import {ScorecardDataEngine} from "@hisptz/scorecard-models";
 
 export default function AverageDataContainer({
                                                  period,
@@ -56,7 +56,7 @@ export default function AverageDataContainer({
         filteredOrgUnits,
     ]);
 
-    return <AverageCell dataSources={dataSources} bold value={average} period={period} />;
+    return <AverageCell dataSources={dataSources} bold value={average} period={period}/>;
 }
 
 AverageDataContainer.propTypes = {

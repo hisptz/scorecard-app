@@ -1,16 +1,12 @@
 import {colors, Field} from "@dhis2/ui";
-import {
-    Accordion,
-    AccordionDetails,
-    AccordionSummary,
-} from "@material-ui/core";
+import {Accordion, AccordionDetails, AccordionSummary,} from "@material-ui/core";
 import produce from "immer";
 import {fromPairs, head, set} from "lodash";
 import PropTypes from "prop-types";
 import React, {useEffect, useMemo, useState} from "react";
 import {useRecoilValue} from "recoil";
-import {OrgUnitLevels} from "@hisptz/scorecard-state/src/orgUnit";
-import {generateLegendDefaults} from "@hisptz/scorecard-utils/src/utils";
+import {OrgUnitLevels} from "@hisptz/scorecard-state";
+import {generateLegendDefaults} from "@hisptz/scorecard-utils/src";
 import {FormFieldModel} from "../../../models";
 import {CustomInput} from "../../CustomField";
 

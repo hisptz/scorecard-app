@@ -3,15 +3,14 @@ import {head} from "lodash";
 import PropTypes from "prop-types";
 import React from "react";
 import {useRecoilState, useRecoilValue} from "recoil";
-import {Orientation} from "../../../../../../../../../core/constants/orientation";
-import {PeriodResolverState} from "../../../../../../../../../core/state/period";
-import {
-    ScorecardOrgUnitState,
-    ScorecardTableOrientationState,
-    ScorecardTableSortState,
-    ScorecardViewState,
-} from "../../../../../../../../../core/state/scorecard";
 import classes from '../../../scorecardTable.module.css'
+import {
+    PeriodResolverState,
+    ScorecardOrgUnitState,
+    ScorecardTableOrientationState, ScorecardTableSortState,
+    ScorecardViewState
+} from "@hisptz/scorecard-state";
+import {Orientation} from "@hisptz/scorecard-constants";
 
 export default function PeriodHeaderRow({orgUnits}) {
     const {dataGroups} =

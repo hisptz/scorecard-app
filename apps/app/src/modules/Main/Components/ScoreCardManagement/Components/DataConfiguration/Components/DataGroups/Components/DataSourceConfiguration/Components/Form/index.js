@@ -1,10 +1,10 @@
 import {CircularLoader} from "@dhis2/ui";
+import {DataSourceConfigurationForm} from "@hisptz/scorecard-components";
+import {ScorecardConfigEditState} from "@hisptz/scorecard-state";
 import React, {Suspense} from "react";
 import {useFormContext} from "react-hook-form";
 import {useRecoilValue} from "recoil";
-import DataSourceConfigurationForm
-    from "../../../../../../../../../../../../../../../shared/components/src/CustomForm/components/DataSourceConfigurationForm";
-import {ScorecardConfigEditState,} from "../../../../../../../../../../../../../../../shared/state/src/scorecard";
+
 
 export default function SelectedDataSourceConfigurationForm() {
     const {watch} = useFormContext();

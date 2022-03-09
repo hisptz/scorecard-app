@@ -4,12 +4,8 @@ import {debounce} from "lodash";
 import PropTypes from 'prop-types'
 import React, {useEffect, useRef, useState} from "react";
 import {useRecoilState, useRecoilValue} from "recoil";
-import {
-    ScorecardNameSort,
-    ScorecardTableConfigState,
-    ScorecardViewState
-} from "../../../../../../../../../core/state/scorecard";
 import classes from "../../../scorecardTable.module.css";
+import {ScorecardNameSort, ScorecardTableConfigState, ScorecardViewState} from "@hisptz/scorecard-state";
 
 export default function OrgUnitHeaderCells({orgUnits, nested}) {
     const [orgUnitKeyword, setOrgUnitKeyword] = useRecoilState(

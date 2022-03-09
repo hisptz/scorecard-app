@@ -13,17 +13,16 @@ import {
     useResetRecoilState,
     useSetRecoilState
 } from "recoil";
-import OrgUnitSelection from "../../../../../../../../core/models/orgUnitSelection";
-import {LowestOrgUnitLevel, OrgUnitLevels,} from "../../../../../../../../core/state/orgUnit";
-import FullPageError from "../../../../../../../../shared/components/Errors/FullPageError";
-import ModalLoader from "../../../../../../../../shared/components/Loaders/ModalLoader";
-import {getDataSourcesDisplayName} from "../../../../../../../../shared/utils/utils";
+
 import ChartAnalysis from "./Components/ChartAnalysis";
 import {DataSourceState, DataState} from "./state/data";
 import {LayoutState} from "./state/layout";
 import {orgUnitSelectorOptionOnCell, OrgUnitState} from "./state/orgUnit";
 import {cellPeriodOptionAtom, PeriodState} from "./state/period";
 import classes from "./TableCellAnalysis.module.css"
+import {LowestOrgUnitLevel, OrgUnitLevels} from "@hisptz/scorecard-state";
+import {OrgUnitSelection} from "@hisptz/scorecard-models";
+import {getDataSourcesDisplayName} from "@hisptz/scorecard-utils/src";
 
 const DictionaryAnalysis = React.lazy(() =>
     import("./Components/DictionaryAnalysis")

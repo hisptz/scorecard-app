@@ -3,7 +3,7 @@ import {Button} from "@dhis2/ui";
 import {HIGHLIGHTED_INDICATOR_HELP_STEPS} from "@hisptz/scorecard-constants";
 import {ScorecardIndicator} from "@hisptz/scorecard-models";
 import {ScorecardConfigEditState,} from "@hisptz/scorecard-state";
-import {generateLegendDefaults} from "@hisptz/scorecard-utils";
+import {generateLegendDefaults} from "@hisptz/scorecard-utils/src";
 import AddIcon from "@material-ui/icons/Add";
 import {isEmpty} from "lodash";
 import React, {Fragment, useCallback, useState} from "react";

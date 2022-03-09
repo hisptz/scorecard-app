@@ -1,10 +1,8 @@
+import {FormFieldModel, LevelTargetsField} from "@hisptz/scorecard-components";
 import {DHIS2ValueTypes} from "@hisptz/scorecard-constants";
 import PropTypes from 'prop-types'
 import React from 'react'
 import {useFormContext} from "react-hook-form";
-import LevelTargetsField
-    from "../../../../../../../../../../../../../../../shared/components/src/CustomForm/components/DataSourceConfigurationForm/Components/LevelTargetsField";
-import {FormFieldModel} from "../../../../../../../../../../../../../../../shared/components/src/CustomForm/models";
 import {getNonDefaultLegendDefinitions} from "../../../../../../../General/utils/utils";
 
 export default function OrgUnitLevelSpecificTargets({path}) {

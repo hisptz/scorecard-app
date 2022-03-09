@@ -1,10 +1,9 @@
+import {FullPageError, FullPageLoader} from "@hisptz/scorecard-components";
 import {SystemSettingsState} from "@hisptz/scorecard-state";
 import React, {Suspense} from "react";
 import {ErrorBoundary} from "react-error-boundary";
 import {HashRouter, Redirect, Route, Switch} from "react-router-dom";
 import {useRecoilValue} from "recoil";
-import FullPageError from "../../../../../shared/components/src/Errors/FullPageError";
-import {FullPageLoader} from "../../../../../shared/components/src/Loaders";
 
 const Main = React.lazy(() => import("../Main"));
 const ScorecardManagement = React.lazy(() =>

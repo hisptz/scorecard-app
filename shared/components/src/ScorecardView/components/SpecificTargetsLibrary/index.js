@@ -4,14 +4,15 @@ import {filter, groupBy, head, isEmpty} from "lodash";
 import PropTypes from 'prop-types'
 import React, {Suspense, useMemo} from "react";
 import {useRecoilValue} from "recoil";
-import {ScorecardViewState} from "../../../../../../core/state/scorecard";
-import {getDataSourcesFromGroups} from "../../../../../../shared/utils/utils";
+
 import {
     OrgUnitLevelSpecificTargetView,
     OrgUnitSpecificTargetView,
     PeriodSpecificTargetView
 } from "./components/SpecificTargetView";
 import classes from "./SpecificTargetsLibrary.module.css"
+import {ScorecardViewState} from "@hisptz/scorecard-state";
+import {getDataSourcesFromGroups} from "@hisptz/scorecard-utils/src";
 
 export function SpecificTargetsLibrary() {
     const {dataGroups} = useRecoilValue(ScorecardViewState("dataSelection"))

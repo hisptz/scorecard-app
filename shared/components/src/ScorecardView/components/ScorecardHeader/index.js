@@ -2,8 +2,7 @@ import {colors} from "@dhis2/ui";
 import React from "react";
 import JsxParser from "react-jsx-parser";
 import {useRecoilValue} from "recoil";
-import {PeriodResolverState} from "../../../../../../core/state/period";
-import {ScorecardViewState,} from "../../../../../../core/state/scorecard";
+import {PeriodResolverState, ScorecardViewState} from "@hisptz/scorecard-state";
 
 export default function ScorecardHeader() {
     const {title: showTitle} = useRecoilValue(ScorecardViewState("options"));

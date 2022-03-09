@@ -1,5 +1,5 @@
 import {getScorecardSummary} from "@hisptz/scorecard-services";
-import {generateLegendDefaults} from "@hisptz/scorecard-utils";
+import {generateLegendDefaults} from "@hisptz/scorecard-utils/src";
 import {cloneDeep, find, isEmpty, set} from "lodash";
 
 export function resetLegends(groups, legendDefinitions) {

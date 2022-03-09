@@ -2,18 +2,17 @@ import {useDataEngine} from "@dhis2/app-runtime";
 import {isEmpty} from "lodash";
 import {useEffect, useState} from "react";
 import {useRecoilCallback, useRecoilValue, useSetRecoilState} from "recoil";
-import {Orientation} from "../../../../../../../core/constants/orientation";
-import {TableSort} from "../../../../../../../core/constants/tableSort";
-import {PeriodResolverState} from "../../../../../../../core/state/period";
 import {
+    PeriodResolverState,
     ScorecardNameSort,
-    ScorecardOrgUnitState,
-    ScorecardTableOrientationState,
+    ScorecardOrgUnitState, ScorecardTableOrientationState,
     ScorecardTableSortState,
-    ScorecardViewState,
-} from "../../../../../../../core/state/scorecard";
-import {sortOrgUnitsBasedOnData, sortOrgUnitsBasedOnNames,} from "../../../../../../../core/state/utils";
-import {searchOrganisationUnit} from "../../../../../../../shared/hooks/useOrganisationUnits";
+    ScorecardViewState
+} from "@hisptz/scorecard-state";
+import {searchOrganisationUnit} from "@hisptz/scorecard-hooks";
+import {sortOrgUnitsBasedOnData, sortOrgUnitsBasedOnNames} from "@hisptz/scorecard-utils/src";
+import {TableSort} from "@hisptz/scorecard-constants";
+
 
 export default function useTableOrgUnits(dataEngine, orgUnits) {
     const [loading, setLoading] = useState(false);

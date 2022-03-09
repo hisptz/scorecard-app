@@ -3,7 +3,7 @@ import {
     DATASTORE_ENDPOINT,
     DATASTORE_SCORECARD_SUMMARY_KEY,
 } from "@hisptz/scorecard-constants";
-import {generateScorecardSummary} from "@hisptz/scorecard-utils";
+import {generateScorecardSummary} from "@hisptz/scorecard-utils/src";
 
 const query = {
     summary: {

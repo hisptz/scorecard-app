@@ -5,7 +5,7 @@ import {useConfirmDialog} from "@hisptz/react-ui";
 import {useDeleteScorecard} from "@hisptz/scorecard-hooks";
 import {ScorecardCardImage as holderImage} from "@hisptz/scorecard-resources";
 import {RouterState, UserAuthorityOnScorecard} from "@hisptz/scorecard-state";
-import {truncateDescription} from "@hisptz/scorecard-utils";
+import {truncateDescription} from "@hisptz/scorecard-utils/src";
 import PropTypes from "prop-types";
 import React, {useState} from "react";
 import {useHistory} from "react-router-dom";

@@ -2,16 +2,14 @@ import {useAlert} from "@dhis2/app-runtime";
 import {useEffect, useMemo, useState} from "react";
 import {useReactToPrint} from "react-to-print";
 import {useRecoilValue, useRecoilValueLoadable} from "recoil";
-import {DownloadTypes} from "../../../../../../../core/constants/download";
-import {InitialOrgUnits} from "../../../../../../../core/state/orgUnit";
-import {PeriodResolverState} from "../../../../../../../core/state/period";
+import {downloadALMAData, downloadALMAMeta, downloadCSV, downloadExcel,} from "../services/download";
 import {
-    ScorecardDataLoadingState,
+    InitialOrgUnits, PeriodResolverState, ScorecardDataLoadingState,
     ScorecardDataSourceState,
     ScorecardOrgUnitState,
-    ScorecardViewState,
-} from "../../../../../../../core/state/scorecard";
-import {downloadALMAData, downloadALMAMeta, downloadCSV, downloadExcel,} from "../services/download";
+    ScorecardViewState
+} from "@hisptz/scorecard-state";
+import {DownloadTypes} from "@hisptz/scorecard-constants";
 
 export default function useDownload(downloadRef, dataEngine) {
     const title = useRecoilValue(ScorecardViewState("title"));

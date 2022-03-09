@@ -4,15 +4,13 @@ import {head} from "lodash";
 import PropTypes from 'prop-types'
 import React from "react";
 import {useRecoilState, useRecoilValue} from "recoil";
-import {DraggableItems} from "../../../../../../../../../core/constants/draggables";
-import {ScorecardTableConstants} from "../../../../../../../../../core/constants/table";
-import {PeriodResolverState} from "../../../../../../../../../core/state/period";
-import {ScorecardTableSortState, ScorecardViewState,} from "../../../../../../../../../core/state/scorecard";
-import {getDataSourcesDisplayName} from "../../../../../../../../../shared/utils/utils";
 import classes from '../../../scorecardTable.module.css'
 import DraggableCell from "../../TableBody/Components/DraggableCell";
 import DroppableCell from "../../TableBody/Components/DroppableCell";
 import OrgUnitHeaderCells from "./OrgUnitHeaderCells";
+import {PeriodResolverState, ScorecardTableSortState, ScorecardViewState} from "@hisptz/scorecard-state";
+import {DraggableItems, ScorecardTableConstants} from "@hisptz/scorecard-constants";
+import {getDataSourcesDisplayName} from "@hisptz/scorecard-utils/src";
 
 export default function HoldersHeaderRow({orgUnits, nested}) {
     const {dataGroups} =

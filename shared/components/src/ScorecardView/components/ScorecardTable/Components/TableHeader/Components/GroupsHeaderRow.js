@@ -3,11 +3,10 @@ import {DataTableCell, DataTableRow,} from "@dhis2/ui";
 import PropTypes from "prop-types";
 import React from "react";
 import {useRecoilValue} from "recoil";
-import {ScorecardTableConstants} from "../../../../../../../../../core/constants/table";
-import {PeriodResolverState} from "../../../../../../../../../core/state/period";
-import {ScorecardViewState,} from "../../../../../../../../../core/state/scorecard";
 import classes from "../../../scorecardTable.module.css"
 import OrgUnitHeaderCells from "./OrgUnitHeaderCells";
+import {PeriodResolverState, ScorecardViewState} from "@hisptz/scorecard-state";
+
 export default function GroupsHeaderRow({nested, orgUnits}) {
     const {dataGroups} =
     useRecoilValue(ScorecardViewState("dataSelection")) ?? {};
@@ -18,7 +17,7 @@ export default function GroupsHeaderRow({nested, orgUnits}) {
     const isSingleGroup = dataGroups.length === 1
 
     return (
-        !isSingleGroup && <DataTableRow  className={classes["table-header-row"]} >
+        !isSingleGroup && <DataTableRow className={classes["table-header-row"]}>
             <OrgUnitHeaderCells orgUnits={orgUnits} nested={nested}/>
             {dataGroups?.map(({title, id, dataHolders}) => (
                 <DataTableCell

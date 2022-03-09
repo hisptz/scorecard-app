@@ -1,15 +1,15 @@
 import {filter, flatten, isEmpty} from "lodash";
 import {useEffect} from "react";
 import {useRecoilValue, useSetRecoilState} from "recoil";
-import {Orientation} from "../../../../../../../core/constants/orientation";
-import {PeriodResolverState} from "../../../../../../../core/state/period";
 import {
-    ScorecardDataSourceState, ScorecardNameSort,
-    ScorecardTableOrientationState,
+    PeriodResolverState,
+    ScorecardDataSourceState,
+    ScorecardNameSort, ScorecardTableOrientationState,
     ScorecardTableSortState,
-    ScorecardViewState,
-} from "../../../../../../../core/state/scorecard";
-import {sortDataSourcesBasedOnData, sortDataSourcesBasedOnNames,} from "../../../../../../../core/state/utils";
+    ScorecardViewState
+} from "@hisptz/scorecard-state";
+import {Orientation} from "@hisptz/scorecard-constants";
+import {sortDataSourcesBasedOnData, sortDataSourcesBasedOnNames} from "@hisptz/scorecard-utils/src";
 
 export default function useTableDataSources(dataEngine, orgUnits) {
     const setDataSources = useSetRecoilState(ScorecardDataSourceState);

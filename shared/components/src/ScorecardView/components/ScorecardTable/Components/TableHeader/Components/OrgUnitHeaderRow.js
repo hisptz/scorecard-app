@@ -4,19 +4,16 @@ import {debounce} from "lodash";
 import PropTypes from "prop-types";
 import React, {useEffect, useRef, useState} from "react";
 import {useRecoilState, useRecoilValue} from "recoil";
-import {DraggableItems} from "../../../../../../../../../core/constants/draggables";
-import {ScorecardTableConstants} from "../../../../../../../../../core/constants/table";
-import {PeriodResolverState} from "../../../../../../../../../core/state/period";
-import {
-    ScorecardNameSort,
-    ScorecardOrgUnitState,
-    ScorecardTableConfigState,
-    ScorecardTableSortState,
-    ScorecardViewState,
-} from "../../../../../../../../../core/state/scorecard";
 import classes from '../../../scorecardTable.module.css'
 import DraggableCell from "../../TableBody/Components/DraggableCell";
 import DroppableCell from "../../TableBody/Components/DroppableCell";
+import {
+    PeriodResolverState,
+    ScorecardNameSort,
+    ScorecardOrgUnitState, ScorecardTableConfigState, ScorecardTableSortState,
+    ScorecardViewState
+} from "@hisptz/scorecard-state";
+import {DraggableItems, ScorecardTableConstants} from "@hisptz/scorecard-constants";
 
 export default function OrgUnitHeaderRow({orgUnits, nested}) {
     const {averageColumn, itemNumber} = useRecoilValue(

@@ -3,12 +3,8 @@ import {Button} from "@dhis2/ui";
 import {isEmpty} from "lodash";
 import React, {useState} from "react";
 import {useRecoilValue} from "recoil";
-import {
-    IsSpecificTargetsSet,
-    ScorecardConfigDirtyState,
-    ScorecardViewState,
-} from "../../../../../../core/state/scorecard";
-import {DecreasingArrows, IncreasingArrows,} from "../../../../../../shared/components/ScorecardCell/components/Arrows";
+import {IsSpecificTargetsSet, ScorecardConfigDirtyState, ScorecardViewState,} from "@hisptz/scorecard-state";
+import {DecreasingArrows, IncreasingArrows,} from "@hisptz/scorecard-components";
 import SpecificTargetsLibraryModal from "../SpecificTargetsLibrary";
 import LegendView from "./Components/LegendView";
 import classes from "./ScorecardLegendsView.module.css";

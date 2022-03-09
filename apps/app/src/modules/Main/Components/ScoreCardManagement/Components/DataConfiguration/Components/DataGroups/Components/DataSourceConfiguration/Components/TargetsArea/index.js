@@ -1,15 +1,13 @@
 import i18n from "@dhis2/d2-i18n";
 import {CircularLoader, SingleSelectField, SingleSelectOption} from '@dhis2/ui'
 import {RHFCustomInput} from "@hisptz/react-ui";
+import {FormFieldModel, TargetsField} from "@hisptz/scorecard-components";
 import {DHIS2ValueTypes} from "@hisptz/scorecard-constants";
-import {generateLegendDefaults, uid} from "@hisptz/scorecard-utils";
+import {generateLegendDefaults, uid} from "@hisptz/scorecard-utils/src";
 import {head, isEmpty} from "lodash";
 import PropTypes from 'prop-types'
 import React, {Suspense, useEffect, useState} from "react";
 import {useFormContext} from "react-hook-form";
-import TargetsField
-    from "../../../../../../../../../../../../../../../shared/components/src/CustomForm/components/DataSourceConfigurationForm/Components/TargetsField";
-import {FormFieldModel} from "../../../../../../../../../../../../../../../shared/components/src/CustomForm/models";
 import {getNonDefaultLegendDefinitions} from "../../../../../../../General/utils/utils";
 import OrgUnitLevelSpecificTargets from "../OrgUnitLevelSpecificTargetsModal";
 import OrgUnitSpecificTargetsModal from "../OrgUnitSpecificTargetsModal";

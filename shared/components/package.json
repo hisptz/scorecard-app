@@ -1,6 +1,12 @@
 {
   "name": "@hisptz/scorecard-components",
   "version": "2.5.0",
+  "main": "index.js",
   "dependencies": {
+    "@hisptz/scorecard-state": "^2.5.0",
+    "@hisptz/scorecard-constants": "^2.5.0",
+    "@hisptz/scorecard-utils": "^2.5.0",
+    "@hisptz/scorecard-services": "^2.5.0",
+    "@hisptz/scorecard-resources": "^2.5.0"
   }
 }

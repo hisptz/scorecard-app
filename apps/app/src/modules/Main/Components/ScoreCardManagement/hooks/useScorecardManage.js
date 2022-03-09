@@ -11,7 +11,7 @@ import {
     ShouldValidate,
     UserState
 } from "@hisptz/scorecard-state";
-import {uid} from "@hisptz/scorecard-utils";
+import {uid} from "@hisptz/scorecard-utils/src";
 import produce from "immer";
 import {cloneDeep, findIndex, set} from "lodash";
 import {useEffect, useState} from "react";

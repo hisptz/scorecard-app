@@ -3,10 +3,10 @@ import {OrgUnitSelectorModal} from "@hisptz/react-ui";
 import OrgUnitIcon from "@material-ui/icons/AccountTree";
 import React, {useMemo, useState} from "react";
 import {useRecoilState, useRecoilValue} from "recoil";
-import {OrgUnitGroups, OrgUnitLevels,} from "../../../../../../../../../../../core/state/orgUnit";
-import getSelectedOrgUnitSelectionDisplay from "../../../../../../../../../../../shared/utils/orgUnit";
 import {OrgUnitState} from "../../../state/orgUnit";
 import SelectionWrapper from "./SelectionWrapper";
+import {OrgUnitGroups, OrgUnitLevels} from "@hisptz/scorecard-state";
+import {getSelectedOrgUnitSelectionDisplay} from "@hisptz/scorecard-utils/src";
 
 export default function OrgUnitSelector() {
     const [orgUnitSelection, onChange] = useRecoilState(OrgUnitState);

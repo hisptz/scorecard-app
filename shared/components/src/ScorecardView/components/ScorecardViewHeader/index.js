@@ -5,16 +5,23 @@ import {Steps} from "intro.js-react";
 import React, {useEffect, useMemo, useState} from "react";
 import {useHistory} from "react-router-dom";
 import {useRecoilCallback, useRecoilState, useRecoilValue} from "recoil";
-import {STEP_OPTIONS} from "../../../../../../core/constants/help/options";
-import {SCORECARD_VIEW_HELP_STEPS} from "../../../../../../core/constants/help/scorecardView";
-import {UNSUPPORTED_PERIOD_TYPES} from "../../../../../../core/constants/period";
-import {FilterComponentTypes} from "../../../../../../core/constants/selection";
-import HelpState from "../../../../../../core/state/help";
-import {OrgUnitGroups, OrgUnitLevels,} from "../../../../../../core/state/orgUnit";
-import ScorecardConfState, {ScorecardIdState, ScorecardViewState,} from "../../../../../../core/state/scorecard";
-import {SystemSettingsState} from "../../../../../../core/state/system";
-import SelectionWrapper from "../../../../../../shared/components/SelectionWrapper";
-import getSelectedOrgUnitSelectionDisplay from "../../../../../../shared/utils/orgUnit";
+import {
+    HelpState,
+    OrgUnitGroups,
+    OrgUnitLevels, ScorecardConfState,
+    ScorecardIdState,
+    ScorecardViewState,
+    SystemSettingsState
+} from "@hisptz/scorecard-state";
+import {getSelectedOrgUnitSelectionDisplay} from "@hisptz/scorecard-utils/src";
+import SelectionWrapper from "../../../SelectionWrapper";
+import {
+    FilterComponentTypes,
+    SCORECARD_VIEW_HELP_STEPS,
+    STEP_OPTIONS,
+    UNSUPPORTED_PERIOD_TYPES
+} from "@hisptz/scorecard-constants";
+
 
 export default function ScorecardViewHeader() {
     const [helpEnabled, setHelpEnabled] = useRecoilState(HelpState);

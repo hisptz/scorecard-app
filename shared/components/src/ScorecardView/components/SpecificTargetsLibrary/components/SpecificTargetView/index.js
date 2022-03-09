@@ -5,8 +5,8 @@ import {find} from "lodash";
 import PropTypes from 'prop-types'
 import React from 'react'
 import {useRecoilValue} from "recoil";
-import {OrgUnitLevels, SelectedOrgUnits} from "../../../../../../../../core/state/orgUnit";
-import {ScorecardViewState} from "../../../../../../../../core/state/scorecard";
+import {OrgUnitLevels, ScorecardViewState, SelectedOrgUnits} from "@hisptz/scorecard-state";
+
 
 function LegendsView({legends}) {
     const legendDefinitions = useRecoilValue(ScorecardViewState("legendDefinitions"));

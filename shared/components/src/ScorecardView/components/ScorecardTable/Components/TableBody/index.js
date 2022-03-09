@@ -2,24 +2,24 @@ import {DataTableBody} from "@dhis2/ui";
 import PropTypes from "prop-types";
 import React, {Fragment, useEffect, useState} from "react";
 import {useRecoilValue, useResetRecoilState} from "recoil";
-import {Orientation} from "../../../../../../../../core/constants/orientation";
-import ScorecardDataEngine from "../../../../../../../../core/models/scorecardData";
-import {LowestOrgUnitLevel} from "../../../../../../../../core/state/orgUnit";
-import {PeriodResolverState} from "../../../../../../../../core/state/period";
+import AverageDataSourceRow from "./Components/AverageDataSourceRow";
+import AverageOrgUnitRow from "./Components/AverageOrgUnitRow";
+import ChildOrgUnitRow from "./Components/ChildOrgUnitRow";
+import DataSourceRow from "./Components/DataSourceRow";
+import ParentOrgUnitRow from "./Components/ParentOrgUnitRow";
 import {
+    LowestOrgUnitLevel,
+    PeriodResolverState,
     RefreshScorecardState,
     ScorecardDataLoadingState,
     ScorecardDataSourceState,
     ScorecardOrgUnitState,
     ScorecardTableOrientationState,
     ScorecardViewState,
-} from "../../../../../../../../core/state/scorecard";
-import {SystemSettingsState} from "../../../../../../../../core/state/system";
-import AverageDataSourceRow from "./Components/AverageDataSourceRow";
-import AverageOrgUnitRow from "./Components/AverageOrgUnitRow";
-import ChildOrgUnitRow from "./Components/ChildOrgUnitRow";
-import DataSourceRow from "./Components/DataSourceRow";
-import ParentOrgUnitRow from "./Components/ParentOrgUnitRow";
+    SystemSettingsState
+} from "@hisptz/scorecard-state";
+import {ScorecardDataEngine} from "@hisptz/scorecard-models";
+import {Orientation} from "@hisptz/scorecard-constants";
 
 
 function childrenAlreadyDisplayed(orgUnit, childrenOrgUnit) {

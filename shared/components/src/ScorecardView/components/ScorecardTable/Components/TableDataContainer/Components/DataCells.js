@@ -2,10 +2,10 @@ import {colors} from "@dhis2/ui";
 import PropTypes from "prop-types";
 import React, {useMemo} from "react";
 import {useRecoilValue} from "recoil";
-import {ScorecardViewState} from "../../../../../../../../../core/state/scorecard";
-import LinkedCellSvg from "../../../../../../../../../shared/components/ScorecardCell/components/LinkedCellSvg";
-import SingleCellSvg from "../../../../../../../../../shared/components/ScorecardCell/components/SingleCellSvg";
-import {getIncreasingStatus} from "../../../utils";
+
+import {getIncreasingStatus} from "@hisptz/scorecard-utils/src";
+import {ScorecardViewState} from "@hisptz/scorecard-state";
+import {LinkedCellSvg, SingleCellSvg} from "../../../../../../../index";
 
 
 export function SingleDataCell({data, color, indicator}) {

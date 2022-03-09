@@ -22,8 +22,7 @@ export ScorecardAccessType, {AccessTypes, DefaultAuthority, ACCESS_TYPES} from "
 export {FilterComponentTypes} from "./src/selection";
 export {ScorecardTableConstants} from "./src/table";
 export {TableSort} from "./src/tableSort";
-
-
+export {default as AverageDisplayType} from "./src/averageDisplayType"
 export {STEP_OPTIONS} from "src/help/options"
 export {SCORECARD_LIST_HELP_STEPS} from "src/help/scorecardList"
 export {

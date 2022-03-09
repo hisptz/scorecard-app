@@ -1,5 +1,5 @@
 import {ScorecardIndicatorGroup} from "@hisptz/scorecard-models";
-import {generateLegendDefaults} from "@hisptz/scorecard-utils";
+import {generateLegendDefaults} from "@hisptz/scorecard-utils/src";
 import {fromPairs, set} from "lodash";
 
 export function generateNewGroupData(groups) {
