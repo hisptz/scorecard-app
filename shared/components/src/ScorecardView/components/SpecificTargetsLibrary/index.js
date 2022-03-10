@@ -12,7 +12,7 @@ import {
 } from "./components/SpecificTargetView";
 import classes from "./SpecificTargetsLibrary.module.css"
 import {ScorecardViewState} from "@hisptz/scorecard-state";
-import {getDataSourcesFromGroups} from "@hisptz/scorecard-utils/src";
+import {getDataSourcesFromGroups} from "@hisptz/scorecard-utils";
 
 export function SpecificTargetsLibrary() {
     const {dataGroups} = useRecoilValue(ScorecardViewState("dataSelection"))

@@ -10,7 +10,7 @@ import DraggableCell from "./DraggableCell";
 import DroppableCell from "./DroppableCell";
 import {PeriodResolverState, ScorecardOrgUnitState, ScorecardViewState} from "@hisptz/scorecard-state";
 import {AverageDisplayType, DraggableItems} from "@hisptz/scorecard-constants";
-import {getDataSourcesDisplayName} from "@hisptz/scorecard-utils/src";
+import {getDataSourcesDisplayName} from "@hisptz/scorecard-utils";
 import {ScorecardDataEngine} from "@hisptz/scorecard-models";
 
 export default function DataSourceRow({

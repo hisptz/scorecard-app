@@ -1,9 +1,6 @@
 import {filter, isEmpty} from "lodash";
-import {
-    DATASTORE_ENDPOINT,
-    DATASTORE_SCORECARD_SUMMARY_KEY,
-} from "@hisptz/scorecard-constants";
-import {generateScorecardSummary} from "@hisptz/scorecard-utils/src";
+import {DATASTORE_ENDPOINT, DATASTORE_SCORECARD_SUMMARY_KEY,} from "@hisptz/scorecard-constants";
+import {generateScorecardSummary} from "@hisptz/scorecard-utils";
 
 const query = {
     summary: {

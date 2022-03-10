@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import React, {useEffect, useMemo, useState} from "react";
 import {useRecoilValue} from "recoil";
 import {OrgUnitLevels} from "@hisptz/scorecard-state";
-import {generateLegendDefaults} from "@hisptz/scorecard-utils/src";
+import {generateLegendDefaults} from "@hisptz/scorecard-utils";
 import {FormFieldModel} from "../../../models";
 import {CustomInput} from "../../CustomField";
 

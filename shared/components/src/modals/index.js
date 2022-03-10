@@ -1,1 +1,1 @@
-export ScorecardOptionsModal from "./ScorecardOptionsModal"
+export {default as ScorecardOptionsModal} from "./ScorecardOptionsModal"

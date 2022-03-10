@@ -1,5 +1,5 @@
 import {filter as _filter, flattenDeep} from "lodash";
-import {updatePager} from "@hisptz/scorecard-utils/src/utils";
+import {updatePager} from "@hisptz/scorecard-utils/utils";
 import DataSource from "./dataSource";
 
 export default class DataSets extends DataSource {

@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 import React, {useMemo} from "react";
 import {useRecoilValue} from "recoil";
 
-import {getIncreasingStatus} from "@hisptz/scorecard-utils/src";
+import {getIncreasingStatus} from "@hisptz/scorecard-utils";
 import {ScorecardViewState} from "@hisptz/scorecard-state";
-import {LinkedCellSvg, SingleCellSvg} from "../../../../../../../index";
+import {LinkedCellSvg, SingleCellSvg} from "../../../../../../index";
 
 
 export function SingleDataCell({data, color, indicator}) {

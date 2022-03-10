@@ -13,8 +13,7 @@ import PeriodIcon from "@material-ui/icons/AccessTime";
 import {filter, head} from "lodash";
 import PropTypes from "prop-types";
 import React, {useMemo, useState} from "react";
-import {CalendarTypes} from "@hisptz/scorecard-constants/src/calendar";
-import {PeriodCategories} from "@hisptz/scorecard-constants/src/period";
+import {CalendarTypes, PeriodCategories} from "@hisptz/scorecard-constants";
 
 export default function CalendarSpecificPeriodDimension({
                                                             calendar,

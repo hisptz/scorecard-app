@@ -9,7 +9,17 @@
     "shared/*"
   ],
   "scripts": {
-    "start:app": "yarn workspace app start"
+    "start:app": "yarn workspace app start",
+    "build:utils": "yarn workspace @hisptz/scorecard-utils build",
+    "build:constants": "yarn workspace @hisptz/scorecard-constants build",
+    "build:state": "yarn workspace @hisptz/scorecard-state build",
+    "build:components": "yarn workspace @hisptz/scorecard-components build",
+    "build:hooks": "yarn workspace @hisptz/scorecard-hooks build",
+    "build:models": "yarn workspace @hisptz/scorecard-models build",
+    "build:resources": "yarn workspace @hisptz/scorecard-resources build",
+    "build:services": "yarn workspace @hisptz/scorecard-services build",
+    "build:app": "yarn workspace app build",
+    "build:all": "yarn build:utils && yarn build:constants && yarn build:state && yarn build:components && yarn build:hooks && yarn build:models && yarn build:resources && yarn build:services"
   },
   "devDependencies": {
     "@cypress/react": "^5.10.3",

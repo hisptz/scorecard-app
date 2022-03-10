@@ -3,7 +3,7 @@ import i18n from "@dhis2/d2-i18n";
 import {isEmpty} from "lodash";
 import {atom, selector, selectorFamily, waitForAll} from "recoil";
 import {REQUIRED_FIELDS} from "@hisptz/scorecard-constants";
-import {validateGroups} from "@hisptz/scorecard-utils/src";
+import {validateGroups} from "@hisptz/scorecard-utils";
 import {ScorecardConfigDirtyState} from "./scorecard";
 
 const ShouldValidate = atom({

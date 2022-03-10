@@ -1,19 +1,20 @@
-import { uid } from "../../shared/utils/utils";
+import {uid} from "@hisptz/scorecard-utils";
 import DataModel from "./base";
 
 export default class ScorecardIndicatorGroup extends DataModel {
-  get defaults() {
-    return {
-      id: uid(),
-      title: "",
-      dataHolders: [],
-      style: {
-        backgroundColor: "#FFFFFF",
-        color: "#000000",
-      },
-    };
-  }
-  constructor(attributes) {
-    super(attributes);
-  }
+    constructor(attributes) {
+        super(attributes);
+    }
+
+    get defaults() {
+        return {
+            id: uid(),
+            title: "",
+            dataHolders: [],
+            style: {
+                backgroundColor: "#FFFFFF",
+                color: "#000000",
+            },
+        };
+    }
 }

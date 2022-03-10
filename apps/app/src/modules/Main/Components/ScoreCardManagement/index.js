@@ -3,7 +3,7 @@ import {Button, ButtonStrip, Tooltip} from "@dhis2/ui";
 import {AccessDeniedPage, FullPageLoader} from "@hisptz/scorecard-components";
 import {STEP_OPTIONS} from "@hisptz/scorecard-constants";
 import {useMediaQuery} from "@hisptz/scorecard-hooks";
-import {UserAuthorityOnScorecard, HelpSteps, HelpState} from "@hisptz/scorecard-state";
+import {HelpState, HelpSteps, UserAuthorityOnScorecard} from "@hisptz/scorecard-state";
 import {DevTool} from "@hookform/devtools";
 import {Step, StepLabel, Stepper} from "@material-ui/core";
 import HelpIcon from "@material-ui/icons/Help";

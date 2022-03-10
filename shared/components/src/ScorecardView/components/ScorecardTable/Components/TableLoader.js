@@ -1,9 +1,4 @@
-import {
-    CircularLoader,
-    DataTableCell,
-    DataTableRow,
-    LinearLoader,
-} from "@dhis2/ui";
+import {CircularLoader, DataTableCell, DataTableRow, LinearLoader,} from "@dhis2/ui";
 import PropTypes from "prop-types";
 import React, {useEffect, useState} from "react";
 import {useRecoilValue} from "recoil";

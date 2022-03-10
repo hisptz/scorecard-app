@@ -1,5 +1,5 @@
 import {useRecoilValue} from "recoil";
-import {OrgUnitGroups, OrgUnitLevels} from "@hisptz/scorecard-state/src/orgUnit";
+import {OrgUnitGroups, OrgUnitLevels} from "@hisptz/scorecard-state";
 
 export default function useOrgUnitLevelsAndGroups() {
     const levels = useRecoilValue(OrgUnitLevels);

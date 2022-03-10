@@ -10,7 +10,7 @@ import DroppableCell from "../../TableBody/Components/DroppableCell";
 import OrgUnitHeaderCells from "./OrgUnitHeaderCells";
 import {PeriodResolverState, ScorecardTableSortState, ScorecardViewState} from "@hisptz/scorecard-state";
 import {DraggableItems, ScorecardTableConstants} from "@hisptz/scorecard-constants";
-import {getDataSourcesDisplayName} from "@hisptz/scorecard-utils/src";
+import {getDataSourcesDisplayName} from "@hisptz/scorecard-utils";
 
 export default function HoldersHeaderRow({orgUnits, nested}) {
     const {dataGroups} =

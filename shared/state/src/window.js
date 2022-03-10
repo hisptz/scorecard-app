@@ -1,5 +1,5 @@
 import {atom} from "recoil";
-import {getWindowDimensions} from "@hisptz/scorecard-utils/src";
+import {getWindowDimensions} from "@hisptz/scorecard-utils";
 
 const ScreenDimensionState = atom({
     key: "screen-dimensions",

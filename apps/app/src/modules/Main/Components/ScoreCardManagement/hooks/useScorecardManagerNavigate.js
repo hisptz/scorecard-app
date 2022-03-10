@@ -1,7 +1,7 @@
 import {useAlert} from "@dhis2/app-runtime";
 import i18n from "@dhis2/d2-i18n";
 import {HelpIndex, IsNewScorecardState} from "@hisptz/scorecard-state";
-import {getValidationPageFields} from "@hisptz/scorecard-utils/src/validator";
+import {getValidationPageFields} from "@hisptz/scorecard-utils";
 import {findIndex} from "lodash";
 import {useCallback, useEffect, useMemo} from "react";
 import {useRecoilState, useRecoilValue, useResetRecoilState} from "recoil";

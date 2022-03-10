@@ -1,33 +1,30 @@
-import area from "hisptz-scorecard/src/resources/icons/area.png";
-import bar from "hisptz-scorecard/src/resources/icons/bar.png";
-import column from "hisptz-scorecard/src/resources/icons/column.png";
-import dotted from "hisptz-scorecard/src/resources/icons/dotted.png";
-import pie from "hisptz-scorecard/src/resources/icons/pie.png";
+import i18n from '@dhis2/d2-i18n'
+import {Area, Bar, Column, Dotted, Pie} from "@hisptz/scorecard-resources"
 
 export const CHART_TYPES = [
     {
         type: "column",
-        description: "Column chart",
-        icon: column,
+        description: i18n.t("Column chart"),
+        icon: Column,
     },
     {
         type: "line",
-        description: "Line chart",
-        icon: dotted,
+        description: i18n.t("Line chart"),
+        icon: Dotted,
     },
     {
         type: "bar",
-        description: "Bar chart",
-        icon: bar,
+        description: i18n.t("Bar chart"),
+        icon: Bar,
     },
     {
         type: "area",
-        description: "Area chart",
-        icon: area,
+        description: i18n.t("Area chart"),
+        icon: Area,
     },
     {
         type: "pie",
-        description: "Pie chart",
-        icon: pie,
+        description: i18n.t("Pie chart"),
+        icon: Pie,
     },
 ];

@@ -19,10 +19,9 @@ import {DataSourceState, DataState} from "./state/data";
 import {LayoutState} from "./state/layout";
 import {orgUnitSelectorOptionOnCell, OrgUnitState} from "./state/orgUnit";
 import {cellPeriodOptionAtom, PeriodState} from "./state/period";
-import classes from "./TableCellAnalysis.module.css"
 import {LowestOrgUnitLevel, OrgUnitLevels} from "@hisptz/scorecard-state";
 import {OrgUnitSelection} from "@hisptz/scorecard-models";
-import {getDataSourcesDisplayName} from "@hisptz/scorecard-utils/src";
+import {getDataSourcesDisplayName} from "@hisptz/scorecard-utils";
 
 const DictionaryAnalysis = React.lazy(() =>
     import("./Components/DictionaryAnalysis")

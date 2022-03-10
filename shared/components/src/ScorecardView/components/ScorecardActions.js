@@ -12,7 +12,7 @@ import {
     ScorecardViewState,
     UserAuthorityOnScorecard
 } from "@hisptz/scorecard-state";
-import {ScorecardOptionsModal} from "@hisptz/scorecard-components";
+import {ScorecardOptionsModal} from "shared/components/src/index";
 import DownloadMenu from "./Download/Components/DownloadMenu";
 import useDownload from "./ScorecardViewHeader/hooks/useDownload";
 

@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import React from "react";
-import {CalendarTypes} from "@hisptz/scorecard-constants/src/calendar";
+import {CalendarTypes} from "@hisptz/scorecard-constants";
 import CalendarSpecificPeriodDimension from "./CalendarSpecificPeriodDimension";
 
 export default function EthiopianPeriodDimension({

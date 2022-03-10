@@ -2,7 +2,7 @@ import {useDataQuery} from "@dhis2/app-runtime";
 import {debounce, isEmpty} from "lodash";
 import {useEffect, useMemo, useRef, useState} from "react";
 import {useRecoilValueLoadable} from "recoil";
-import {OrgUnitChildren} from "@hisptz/scorecard-components/ScorecardView/state/orgUnit";
+import {OrgUnitChildren} from "@hisptz/scorecard-state";
 
 export function useOrganisationUnitChildren(orgUnitId = "") {
     const [id, setId] = useState(orgUnitId);

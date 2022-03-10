@@ -1,5 +1,5 @@
 import {filter as _filter, flattenDeep, fromPairs, isEmpty} from "lodash";
-import {DATASTORE_FUNCTIONS_ENDPOINT} from "@hisptz/scorecard-constants/src/config";
+import {DATASTORE_FUNCTIONS_ENDPOINT} from "@hisptz/scorecard-constants";
 import DataSource from "./dataSource";
 
 const keysQuery = {

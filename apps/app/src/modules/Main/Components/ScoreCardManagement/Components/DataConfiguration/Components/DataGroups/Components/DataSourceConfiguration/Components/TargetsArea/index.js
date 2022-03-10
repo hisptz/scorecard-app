@@ -3,7 +3,7 @@ import {CircularLoader, SingleSelectField, SingleSelectOption} from '@dhis2/ui'
 import {RHFCustomInput} from "@hisptz/react-ui";
 import {FormFieldModel, TargetsField} from "@hisptz/scorecard-components";
 import {DHIS2ValueTypes} from "@hisptz/scorecard-constants";
-import {generateLegendDefaults, uid} from "@hisptz/scorecard-utils/src";
+import {generateLegendDefaults, uid} from "@hisptz/scorecard-utils";
 import {head, isEmpty} from "lodash";
 import PropTypes from 'prop-types'
 import React, {Suspense, useEffect, useState} from "react";

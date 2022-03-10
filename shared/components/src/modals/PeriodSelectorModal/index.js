@@ -11,8 +11,8 @@ import {
 import PropTypes from "prop-types";
 import React, {useState} from "react";
 import {useRecoilValue} from "recoil";
-import {CalendarTypes} from "@hisptz/scorecard-constants/src/calendar";
-import {SystemSettingsState} from "@hisptz/scorecard-state/src/system";
+import {CalendarTypes} from "@hisptz/scorecard-constants";
+import {SystemSettingsState} from "@hisptz/scorecard-state";
 import EthiopianPeriodDimension from "./Components/EthiopianPeriodDimension";
 
 export default function PeriodSelectorModal({

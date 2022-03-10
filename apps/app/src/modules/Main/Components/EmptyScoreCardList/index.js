@@ -7,7 +7,7 @@ import {useResetRecoilState} from "recoil";
 import useMediaQuery from "../../../../../../../shared/hooks/src/useMediaQuery";
 import {
     ReactComponent as ScorecardIllustration
-} from "../../../../../../../shared/resources/images/scorecard_illustration.svg";
+} from "../../../../../../../shared/resources/src/images/scorecard_illustration.svg";
 
 export default function EmptyScoreCardList() {
     const resetScorecardIdState = useResetRecoilState(ScorecardIdState);

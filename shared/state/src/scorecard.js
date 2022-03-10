@@ -3,22 +3,24 @@ import {Period} from "@iapps/period-utilities";
 import {cloneDeep, filter, get as _get, head, isEmpty, set as _set, some,} from "lodash";
 import {atom, atomFamily, selector, selectorFamily} from "recoil";
 import {OrgUnitChildren, SelectedOrgUnits} from "./orgUnit";
-import {Orientation, TableSort, ScorecardAccessType} from "@hisptz/scorecard-constants";
+import {Orientation, ScorecardAccessType, TableSort} from "@hisptz/scorecard-constants";
 import {
     getColSpanDataGroups,
     getColSpanWithOrgUnit,
     getDataSourcesFromGroups,
     getHoldersFromGroups,
-    getNameCellWidth, getTableWidthWithDataGroups, getTableWidthWithOrgUnit,
+    getNameCellWidth,
+    getTableWidthWithDataGroups,
+    getTableWidthWithOrgUnit,
     getUserAuthority,
     uid
-} from "@hisptz/scorecard-utils/src";
+} from "@hisptz/scorecard-utils";
 import {OrgUnitSelection, Scorecard, ScorecardAccess, ScorecardOptions} from "@hisptz/scorecard-models";
 import {
-    isOrgUnitId,
-    getScorecard,
     getOrgUnitSelection,
+    getScorecard,
     getScorecardSummary,
+    isOrgUnitId,
     restoreScorecardSummary
 } from "@hisptz/scorecard-services";
 import {EngineState} from "./engine";
@@ -208,7 +210,6 @@ const RefreshScorecardState = atom({
     key: "refresh-scorecard",
     default: 0,
 });
-
 
 const ScorecardNameSort = atomFamily({
     key: "scorecard-name-sort",
@@ -401,6 +402,11 @@ const IsSpecificTargetsSet = selector({
     }
 })
 
+const ScorecardForceUpdateState = atomFamily({
+    key: "scorecard-force-update-state",
+    default: 0
+})
+
 export default ScorecardConfState;
 export {
     ScorecardConfigEditState,
@@ -423,5 +429,6 @@ export {
     IsNewScorecardState,
     IsSpecificTargetsSet,
     RefreshScorecardState,
-    ScorecardNameSort
+    ScorecardNameSort,
+    ScorecardForceUpdateState
 };

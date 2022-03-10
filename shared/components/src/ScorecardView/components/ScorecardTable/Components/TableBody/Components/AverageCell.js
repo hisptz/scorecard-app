@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import React from "react";
 import {useRecoilValue} from "recoil";
 import {OrgUnitLevels, ScorecardLegendDefinitionSelector, ScorecardViewState} from "@hisptz/scorecard-state";
-import {getLegend} from "@hisptz/scorecard-utils/src";
-import {LinkedCellSvg, SingleCellSvg} from "@hisptz/scorecard-components";
+import {getLegend} from "@hisptz/scorecard-utils";
+import {LinkedCellSvg, SingleCellSvg} from "shared/components/src/index";
 
 
 function SingleAverageCell({dataSources, values, bold, period, orgUnit}) {

@@ -5,12 +5,13 @@ import {useRecoilCallback, useRecoilValue, useSetRecoilState} from "recoil";
 import {
     PeriodResolverState,
     ScorecardNameSort,
-    ScorecardOrgUnitState, ScorecardTableOrientationState,
+    ScorecardOrgUnitState,
+    ScorecardTableOrientationState,
     ScorecardTableSortState,
     ScorecardViewState
 } from "@hisptz/scorecard-state";
 import {searchOrganisationUnit} from "@hisptz/scorecard-hooks";
-import {sortOrgUnitsBasedOnData, sortOrgUnitsBasedOnNames} from "@hisptz/scorecard-utils/src";
+import {sortOrgUnitsBasedOnData, sortOrgUnitsBasedOnNames} from "@hisptz/scorecard-utils";
 import {TableSort} from "@hisptz/scorecard-constants";
 
 

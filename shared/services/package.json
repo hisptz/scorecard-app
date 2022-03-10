@@ -1,6 +1,20 @@
 {
-  "name": "@hisptz/scorecard-services",
-  "version": "2.5.0",
-  "dependencies": {
-  }
+    "name": "@hisptz/scorecard-services",
+    "version": "2.5.0",
+    "scripts": {
+        "build": "d2 app scripts build --verbose"
+    },
+    "dependencies": {
+        "@hisptz/scorecard-constants": "^2.5.0",
+        "@hisptz/scorecard-models": "^2.5.0",
+        "@iapps/period-utilities": "^1.0.0-beta.7",
+        "@iapps/function-analytics": "^1.0.0-beta.23",
+        "lodash": "^4.17.21"
+    },
+    "main": "./build/cjs/index.js",
+    "module": "./build/es/index.js",
+    "exports": {
+        "import": "./build/es/index.js",
+        "require": "./build/cjs/index.js"
+    }
 }

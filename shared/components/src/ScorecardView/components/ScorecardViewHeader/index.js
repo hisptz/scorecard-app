@@ -8,12 +8,13 @@ import {useRecoilCallback, useRecoilState, useRecoilValue} from "recoil";
 import {
     HelpState,
     OrgUnitGroups,
-    OrgUnitLevels, ScorecardConfState,
+    OrgUnitLevels,
+    ScorecardConfState,
     ScorecardIdState,
     ScorecardViewState,
     SystemSettingsState
 } from "@hisptz/scorecard-state";
-import {getSelectedOrgUnitSelectionDisplay} from "@hisptz/scorecard-utils/src";
+import {getSelectedOrgUnitSelectionDisplay} from "@hisptz/scorecard-utils";
 import SelectionWrapper from "../../../SelectionWrapper";
 import {
     FilterComponentTypes,

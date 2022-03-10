@@ -6,7 +6,7 @@ import {useRecoilState, useRecoilValue} from "recoil";
 import {OrgUnitState} from "../../../state/orgUnit";
 import SelectionWrapper from "./SelectionWrapper";
 import {OrgUnitGroups, OrgUnitLevels} from "@hisptz/scorecard-state";
-import {getSelectedOrgUnitSelectionDisplay} from "@hisptz/scorecard-utils/src";
+import {getSelectedOrgUnitSelectionDisplay} from "@hisptz/scorecard-utils";
 
 export default function OrgUnitSelector() {
     const [orgUnitSelection, onChange] = useRecoilState(OrgUnitState);

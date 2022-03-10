@@ -4,12 +4,13 @@ import {useRecoilValue, useSetRecoilState} from "recoil";
 import {
     PeriodResolverState,
     ScorecardDataSourceState,
-    ScorecardNameSort, ScorecardTableOrientationState,
+    ScorecardNameSort,
+    ScorecardTableOrientationState,
     ScorecardTableSortState,
     ScorecardViewState
 } from "@hisptz/scorecard-state";
 import {Orientation} from "@hisptz/scorecard-constants";
-import {sortDataSourcesBasedOnData, sortDataSourcesBasedOnNames} from "@hisptz/scorecard-utils/src";
+import {sortDataSourcesBasedOnData, sortDataSourcesBasedOnNames} from "@hisptz/scorecard-utils";
 
 export default function useTableDataSources(dataEngine, orgUnits) {
     const setDataSources = useSetRecoilState(ScorecardDataSourceState);

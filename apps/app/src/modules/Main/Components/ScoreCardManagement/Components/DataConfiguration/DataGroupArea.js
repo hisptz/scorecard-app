@@ -2,7 +2,7 @@ import i18n from "@dhis2/d2-i18n";
 import {Button, Input} from "@dhis2/ui";
 import {DataSelection} from "@hisptz/scorecard-models";
 import {ScorecardConfigEditState,} from "@hisptz/scorecard-state";
-import {updateListFromDragAndDrop} from "@hisptz/scorecard-utils/src";
+import {updateListFromDragAndDrop} from "@hisptz/scorecard-utils";
 import AddIcon from "@material-ui/icons/Add";
 import {debounce, find,} from "lodash";
 import PropTypes from "prop-types";

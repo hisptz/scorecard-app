@@ -1,26 +1,26 @@
-import { uid } from "../../shared/utils/utils";
+import {uid} from "@hisptz/scorecard-utils";
 import DataModel from "./base";
 import ScorecardIndicator from "./scorecardIndicator";
 
 export default class ScorecardIndicatorHolder extends DataModel {
-  get defaults() {
-    return {
-      id: uid(),
-      dataSources: [],
-    };
-  }
+    constructor(attributes) {
+        super(attributes);
+    }
 
-  constructor(attributes) {
-    super(attributes);
-  }
+    get defaults() {
+        return {
+            id: uid(),
+            dataSources: [],
+        };
+    }
 
-  static linkDataSource(
-    holder = new ScorecardIndicatorHolder(),
-    scorecardIndicator = new ScorecardIndicator()
-  ) {
-    return ScorecardIndicatorHolder.set(holder, "dataSources", [
-      ...holder.dataSources,
-      scorecardIndicator,
-    ]);
-  }
+    static linkDataSource(
+        holder = new ScorecardIndicatorHolder(),
+        scorecardIndicator = new ScorecardIndicator()
+    ) {
+        return ScorecardIndicatorHolder.set(holder, "dataSources", [
+            ...holder.dataSources,
+            scorecardIndicator,
+        ]);
+    }
 }

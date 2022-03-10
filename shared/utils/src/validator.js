@@ -1,13 +1,13 @@
 import i18n from "@dhis2/d2-i18n";
-import {REQUIRED_FIELDS} from "@hisptz/scorecard-constants";
-import {forIn, get, isEmpty} from "lodash";
 import {
     accessPageFields,
     dataConfigurationPageFields,
     generalPageFields,
     highlightedIndicatorPageFields,
-    optionsPageFields
-} from "hisptz-scorecard/src/modules/Main/Components/ScoreCardManagement/constants";
+    optionsPageFields,
+    REQUIRED_FIELDS
+} from "@hisptz/scorecard-constants";
+import {forIn, get, isEmpty} from "lodash";
 
 function validateRequiredFields(scorecard, requiredFieldsPath = []) {
     const errors = {};

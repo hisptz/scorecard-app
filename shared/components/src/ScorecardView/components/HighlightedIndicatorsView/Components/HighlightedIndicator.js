@@ -7,7 +7,7 @@ import {
     ScorecardViewState,
     SingleHighlightedIndicatorState
 } from "@hisptz/scorecard-state";
-import {getLegend} from "@hisptz/scorecard-utils/src";
+import {getLegend} from "@hisptz/scorecard-utils";
 
 export default function HighlightedIndicator({highlightedIndicator}) {
     const orgUnitLevels = useRecoilValue(OrgUnitLevels);

@@ -1,9 +1,9 @@
 import {useDataEngine, useDataMutation, useDataQuery,} from "@dhis2/app-runtime";
 import {useEffect, useState} from "react";
 import {useSetRecoilState} from "recoil";
-import {DATASTORE_ENDPOINT} from "../../../constants/src/config";
-import ScorecardConfState, {ScorecardRequestId,} from "hisptz-scorecard/src/core/state/scorecard";
-import {generateCreateMutation, generateScorecardSummary,} from "@hisptz/scorecard-utils/src/scorecard";
+import {DATASTORE_ENDPOINT} from "@hisptz/scorecard-constants";
+import {ScorecardConfState, ScorecardRequestId} from "@hisptz/scorecard-state";
+import {generateCreateMutation, generateScorecardSummary,} from "@hisptz/scorecard-utils";
 import useScorecardsSummary from "./useScorecardsSummary";
 
 const query = {

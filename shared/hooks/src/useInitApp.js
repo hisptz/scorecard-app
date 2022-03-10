@@ -1,9 +1,8 @@
 import {useConfig, useDataEngine} from "@dhis2/app-runtime";
 import {Fn} from "@iapps/function-analytics";
 import {useWebVitals} from "react-web-vitals";
-import {EngineState} from "@hisptz/scorecard-state/src/engine";
-import {ScreenDimensionState} from "@hisptz/scorecard-state/src/window";
-import {getWindowDimensions} from "@hisptz/scorecard-utils/src/utils";
+import {EngineState, ScreenDimensionState} from "@hisptz/scorecard-state";
+import {getWindowDimensions} from "@hisptz/scorecard-utils";
 
 export default function useInitApp() {
     useWebVitals();

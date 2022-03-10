@@ -3,7 +3,7 @@ import {CssReset} from "@dhis2/ui";
 import {ConfirmDialogProvider} from "@hisptz/react-ui";
 import {FullPageError, FullPageLoader} from "@hisptz/scorecard-components";
 import {DATASTORE_NAMESPACE} from "@hisptz/scorecard-constants";
-import useInitApp from "@hisptz/scorecard-hooks/src/useInitApp";
+import {useInitApp} from "@hisptz/scorecard-hooks";
 import React, {Suspense} from "react";
 import {ErrorBoundary} from "react-error-boundary";
 import {RecoilRoot} from "recoil";

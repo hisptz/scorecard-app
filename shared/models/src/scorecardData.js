@@ -21,14 +21,13 @@ import {
 } from "lodash";
 import {BehaviorSubject, of} from "rxjs";
 import {map, take} from "rxjs/operators";
-import {TableSort} from "../constants/tableSort";
+import {TableSort} from "@hisptz/scorecard-constants";
 
 export default class ScorecardDataEngine {
     _cancelled = false;
     _totalRequests = 0;
     _progress = 0;
     _progress$ = new BehaviorSubject();
-    _loading$ = new BehaviorSubject();
     _dataEntities = {};
     _dataEntities$ = new BehaviorSubject(this._dataEntities);
     dataEntities$ = this._dataEntities$.asObservable();
@@ -37,6 +36,21 @@ export default class ScorecardDataEngine {
 
     constructor() {
         this._cancelled = false;
+    }
+
+    _loading$ = new BehaviorSubject();
+
+    get loading$() {
+        return this._loading$.asObservable();
+    }
+
+    get _canLoadData() {
+        return (
+            this._selectedOrgUnits?.length > 0 &&
+            this._selectedPeriods?.length > 0 &&
+            (this._selectedData.normalDataItems?.length > 0 ||
+                this._selectedData.customDataItems?.length > 0)
+        );
     }
 
     setPeriodType(periodType) {
@@ -446,22 +460,9 @@ export default class ScorecardDataEngine {
         );
     }
 
-    get loading$() {
-        return this._loading$.asObservable();
-    }
-
     get(id) {
         return this.dataEntities$.pipe(
             map((dataEntities) => (dataEntities ? dataEntities[id] : null))
-        );
-    }
-
-    get _canLoadData() {
-        return (
-            this._selectedOrgUnits?.length > 0 &&
-            this._selectedPeriods?.length > 0 &&
-            (this._selectedData.normalDataItems?.length > 0 ||
-                this._selectedData.customDataItems?.length > 0)
         );
     }
 
