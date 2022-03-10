@@ -4,13 +4,13 @@ import React, {Suspense, useEffect, useMemo} from "react";
 import {DndProvider} from "react-dnd";
 import {HTML5Backend} from "react-dnd-html5-backend";
 import {useRecoilCallback, useRecoilValue} from "recoil";
-import ScorecardDataEngine from "../../../../../../core/models/scorecardData";
+import {ScorecardDataEngine} from "@hisptz/scorecard-models";
 import {
     ScorecardDataLoadingState,
     ScorecardTableConfigState,
     ScorecardViewState,
-} from "../../../../../../core/state/scorecard";
-import {ScreenDimensionState} from "../../../../../../core/state/window";
+    ScreenDimensionState
+} from "@hisptz/scorecard-state";
 import ScorecardTableBody from "./Components/TableBody";
 import TableHeader from "./Components/TableHeader";
 import TableLoader, {TableLinearLoader} from "./Components/TableLoader";

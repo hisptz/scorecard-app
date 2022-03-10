@@ -1,3 +1,4 @@
+import {useDataEngine} from "@dhis2/app-runtime";
 import i18n from "@dhis2/d2-i18n";
 import {RHFCustomInput} from "@hisptz/react-ui";
 import {DHIS2ValueTypes} from "@hisptz/scorecard-constants";
@@ -8,7 +9,6 @@ import {titleDoesNotExist} from "../utils/utils";
 import LegendDefinitionFormField from "./LegendDefinitionFormField";
 import PeriodSelector from "./PeriodSelector";
 import PeriodTypeSelector from "./PeriodTypeSelector";
-import {useDataEngine} from "@dhis2/app-runtime";
 
 
 export default function GeneralForm() {

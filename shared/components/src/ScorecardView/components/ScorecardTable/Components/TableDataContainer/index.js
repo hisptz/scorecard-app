@@ -1,10 +1,9 @@
 import PropTypes from "prop-types";
 import React, {memo, useEffect, useRef, useState} from "react";
 import {useRecoilValue, useResetRecoilState} from "recoil";
-import ScorecardDataEngine from "../../../../../../../../core/models/scorecardData";
-import {OrgUnitLevels} from "../../../../../../../../core/state/orgUnit";
-import {ScorecardViewState,} from "../../../../../../../../core/state/scorecard";
-import {getLegend} from "../../../../../../../../shared/utils/utils";
+import {ScorecardDataEngine} from "@hisptz/scorecard-models";
+import {OrgUnitLevels, ScorecardViewState} from "@hisptz/scorecard-state";
+import {getLegend} from "@hisptz/scorecard-utils";
 import TableCellAnalysis from "../TableCellAnalysis";
 import {orgUnitOptionOnCell} from "../TableCellAnalysis/state/orgUnit";
 import {cellPeriodOptionAtom} from "../TableCellAnalysis/state/period";

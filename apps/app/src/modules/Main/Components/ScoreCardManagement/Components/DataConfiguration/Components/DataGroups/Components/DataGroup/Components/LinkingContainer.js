@@ -1,11 +1,11 @@
 import i18n from "@dhis2/d2-i18n";
 import {Tooltip} from "@dhis2/ui";
+import {ScorecardIndicatorHolder} from "@hisptz/scorecard-models";
 import {IconButton} from "@material-ui/core";
 import LinkIcon from "@material-ui/icons/Link";
 import UnlinkIcon from "@material-ui/icons/LinkOff";
 import PropTypes from "prop-types";
 import React from "react";
-import ScorecardIndicatorHolder from "../../../../../../../../../../../core/models/scorecardIndicatorHolder";
 import useLinkManage from "../../../../../hooks/useLinkManage";
 import DataSourceHolder from "../../DataSourceHolder";
 

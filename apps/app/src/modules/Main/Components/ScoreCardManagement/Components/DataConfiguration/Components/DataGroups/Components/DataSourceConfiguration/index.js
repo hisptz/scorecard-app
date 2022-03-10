@@ -1,7 +1,7 @@
+import {ContainerLoader} from "@hisptz/scorecard-components";
+import {ScorecardConfigEditState} from "@hisptz/scorecard-state";
 import React, {Suspense} from "react";
 import {useRecoilValue} from "recoil";
-import ContainerLoader from "../../../../../../../../../../../../../shared/components/src/Loaders/ContainerLoader";
-import {ScorecardConfigEditState} from "../../../../../../../../../../../../../shared/state/src/scorecard";
 import {DataSourceInstructions} from "../../../Instructions";
 import SelectedDataSourceConfigurationForm from "./Components/Form";
 

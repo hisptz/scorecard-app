@@ -1,12 +1,12 @@
 import i18n from "@dhis2/d2-i18n";
 import {Button, colors, Tooltip} from "@dhis2/ui";
+import {ScorecardIndicatorGroup} from "@hisptz/scorecard-models";
 import AddIcon from "@material-ui/icons/Add";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import {isEmpty,} from "lodash";
 import PropTypes from "prop-types";
 import React, {forwardRef, useRef, useState} from "react";
 import {DragDropContext, Draggable, Droppable} from "react-beautiful-dnd";
-import ScorecardIndicatorGroup from "../../../../../../../../../../core/models/scorecardIndicatorGroup";
 import useDataGroupLayout from "../../../../hooks/useDataGroupLayout";
 import useDataGroupManage from "../../../../hooks/useDataGroupManage";
 import useDataHolders from "../../../../hooks/useDataHolders";
@@ -21,7 +21,7 @@ function DataGroup({
                        expanded,
                        index,
                        onDelete,
-    error,
+                       error,
                    }, ref) {
 
     const {

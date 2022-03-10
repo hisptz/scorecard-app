@@ -1,16 +1,10 @@
+import {ScorecardIndicator, ScorecardIndicatorGroup, ScorecardIndicatorHolder} from "@hisptz/scorecard-models";
+import {OrgUnitLevels, ScorecardConfigDirtyState, ScorecardConfigEditState} from "@hisptz/scorecard-state";
+import {generateLegendDefaults, uid} from "@hisptz/scorecard-utils";
 import {cloneDeep, filter, fromPairs, isEmpty} from "lodash";
 import {useCallback, useEffect, useMemo, useState} from "react";
 import {useFormContext} from "react-hook-form";
 import {useRecoilState, useRecoilValue} from "recoil";
-import {OrgUnitLevels} from "../../../../../../../../../../shared/state/src/orgUnit";
-import {
-    ScorecardConfigDirtyState,
-    ScorecardConfigEditState
-} from "../../../../../../../../../../shared/state/src/scorecard";
-import {generateLegendDefaults, uid} from "../../../../../../../../../../shared/utils/src/utils";
-import ScorecardIndicator from "../../../../../../../core/models/scorecardIndicator";
-import ScorecardIndicatorGroup from "../../../../../../../core/models/scorecardIndicatorGroup";
-import ScorecardIndicatorHolder from "../../../../../../../core/models/scorecardIndicatorHolder";
 
 
 export default function useDataGroupManage({index, expanded}) {

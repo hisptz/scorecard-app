@@ -1,11 +1,11 @@
 import i18n from "@dhis2/d2-i18n";
 import {Button} from "@dhis2/ui";
+import {ScorecardIndicator} from "@hisptz/scorecard-models";
+import {getDataSourceShortName} from "@hisptz/scorecard-utils";
 import {Avatar} from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import PropTypes from "prop-types";
 import React from "react";
-import {getDataSourceShortName} from "../../../../../../../../../../../../../shared/utils/src/utils";
-import ScorecardIndicator from "../../../../../../../../../../core/models/scorecardIndicator";
 
 export default function DataSource({dataSource, index, onDelete}) {
     const {label, type} = dataSource ?? new ScorecardIndicator();

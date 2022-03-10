@@ -1,11 +1,11 @@
 import i18n from "@dhis2/d2-i18n";
+import {DataSelection} from "@hisptz/scorecard-models";
+import {ScorecardConfigEditState,} from "@hisptz/scorecard-state";
 import {filter, findIndex, isEmpty, last, remove, set} from "lodash";
 import React, {useCallback, useEffect, useMemo, useState} from "react";
 import {Droppable} from "react-beautiful-dnd";
 import {Controller, useFormContext} from "react-hook-form";
 import {useRecoilValue, useResetRecoilState} from "recoil";
-import {ScorecardConfigEditState,} from "../../../../../../../../../../../shared/state/src/scorecard";
-import DataSelection from "../../../../../../../../core/models/dataSelection";
 import {SearchedGroupsState} from "../../DataGroupArea";
 import DataGroup from "./Components/DataGroup";
 

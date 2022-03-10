@@ -1,7 +1,7 @@
 import i18n from "@dhis2/d2-i18n";
 import {CircularLoader, SingleSelectField, SingleSelectOption} from '@dhis2/ui'
 import {RHFCustomInput} from "@hisptz/react-ui";
-import {FormFieldModel, TargetsField} from "@hisptz/scorecard-components";
+import {FormFieldModel} from "@hisptz/scorecard-components";
 import {DHIS2ValueTypes} from "@hisptz/scorecard-constants";
 import {generateLegendDefaults, uid} from "@hisptz/scorecard-utils";
 import {head, isEmpty} from "lodash";
@@ -13,6 +13,7 @@ import OrgUnitLevelSpecificTargets from "../OrgUnitLevelSpecificTargetsModal";
 import OrgUnitSpecificTargetsModal from "../OrgUnitSpecificTargetsModal";
 import PeriodSpecificTargetsModal from "../PeriodSpecificTargetsModal";
 import {OrgUnitSpecificTargetView, PeriodSpecificTargetView} from "./components/SpecificTargetView";
+import TargetsField from "./components/TargetsField";
 
 function getSelectedType(specificTargets, specificTargetsSet) {
     if (!isEmpty(specificTargets) && specificTargetsSet) {

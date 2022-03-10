@@ -1,14 +1,11 @@
 import {colors} from "@dhis2/ui";
+import {ScorecardIndicatorHolder} from "@hisptz/scorecard-models";
+import {ScorecardConfigDirtySelector, ScorecardConfigEditState,} from "@hisptz/scorecard-state";
 import PropTypes from "prop-types";
 import React from "react";
 import {Draggable} from "react-beautiful-dnd";
 import {useFormContext} from "react-hook-form";
 import {useRecoilState, useSetRecoilState} from "recoil";
-import {
-    ScorecardConfigDirtySelector,
-    ScorecardConfigEditState,
-} from "../../../../../../../../../../../../../shared/state/src/scorecard";
-import ScorecardIndicatorHolder from "../../../../../../../../../../core/models/scorecardIndicatorHolder";
 import DataSource from "../DataSource";
 
 

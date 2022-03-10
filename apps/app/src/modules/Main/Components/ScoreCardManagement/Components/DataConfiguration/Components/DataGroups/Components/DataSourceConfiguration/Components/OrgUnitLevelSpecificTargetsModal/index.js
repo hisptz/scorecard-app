@@ -1,9 +1,10 @@
-import {FormFieldModel, LevelTargetsField} from "@hisptz/scorecard-components";
+import {FormFieldModel} from "@hisptz/scorecard-components";
 import {DHIS2ValueTypes} from "@hisptz/scorecard-constants";
 import PropTypes from 'prop-types'
 import React from 'react'
 import {useFormContext} from "react-hook-form";
 import {getNonDefaultLegendDefinitions} from "../../../../../../../General/utils/utils";
+import LevelTargetsField from "../TargetsArea/components/LevelTargetsField";
 
 export default function OrgUnitLevelSpecificTargets({path}) {
     const {watch, setValue} = useFormContext();

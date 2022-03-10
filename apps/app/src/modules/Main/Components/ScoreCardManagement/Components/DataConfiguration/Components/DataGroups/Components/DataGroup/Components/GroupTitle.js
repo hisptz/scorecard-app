@@ -1,11 +1,11 @@
 import i18n from "@dhis2/d2-i18n";
 import {Button} from "@dhis2/ui";
+import {ErrorIcon} from "@hisptz/scorecard-components";
 import {IconButton} from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import PropTypes from "prop-types";
 import React from "react";
-import ErrorIcon from "../../../../../../../../../../../../../../shared/components/src/icons/ErrorIcon";
 
 export default function GroupTitle({
                                        setTitleEditOpen,

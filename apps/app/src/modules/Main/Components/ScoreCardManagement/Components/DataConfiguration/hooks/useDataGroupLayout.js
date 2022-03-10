@@ -1,11 +1,10 @@
+import {ScorecardIndicatorGroup, ScorecardIndicatorHolder} from "@hisptz/scorecard-models";
+import {ScorecardConfigEditState} from "@hisptz/scorecard-state";
+import {updateListFromDragAndDrop} from "@hisptz/scorecard-utils";
 import {cloneDeep, find, findIndex, head, last, set} from "lodash";
 import {useCallback, useMemo} from "react";
 import {useFormContext} from "react-hook-form";
 import {useRecoilCallback} from "recoil";
-import {ScorecardConfigEditState} from "../../../../../../../../../../shared/state/src/scorecard";
-import {updateListFromDragAndDrop} from "../../../../../../../../../../shared/utils/src/dnd";
-import ScorecardIndicatorGroup from "../../../../../../../core/models/scorecardIndicatorGroup";
-import ScorecardIndicatorHolder from "../../../../../../../core/models/scorecardIndicatorHolder";
 
 
 export default function useDataGroupLayout({handleAccordionChange, index}) {

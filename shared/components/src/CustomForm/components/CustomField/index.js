@@ -3,8 +3,6 @@ import {map} from "lodash";
 import PropTypes from "prop-types";
 import React, {useMemo} from "react";
 import {FormFieldModel} from "../../models";
-import LevelTargetsField from "../DataSourceConfigurationForm/Components/LevelTargetsField";
-import TargetsField from "../DataSourceConfigurationForm/Components/TargetsField";
 import CustomCheckboxField from "./components/CustomCheckboxField";
 import CustomSingleSelect from "./components/CustomSingleSelect";
 import LegendDefinitionField from "./components/LegendDefinitionField";
@@ -13,6 +11,10 @@ import MultipleFieldsField from "./components/MultipleFieldsField";
 import RichTextEditor from "./components/RichTextEditor";
 import classes from "./CustomField.module.css";
 import {DHIS2ValueTypes} from "@hisptz/scorecard-constants";
+import TargetsField
+    from "app/src/modules/Main/Components/ScoreCardManagement/Components/DataConfiguration/Components/DataGroups/Components/DataSourceConfiguration/Components/TargetsArea/components/TargetsField";
+import LevelTargetsField
+    from "app/src/modules/Main/Components/ScoreCardManagement/Components/DataConfiguration/Components/DataGroups/Components/DataSourceConfiguration/Components/TargetsArea/components/LevelTargetsField";
 
 const {Field} = ReactFinalForm;
 
