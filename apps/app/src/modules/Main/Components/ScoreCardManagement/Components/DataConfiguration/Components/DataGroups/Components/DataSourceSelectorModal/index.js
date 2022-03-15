@@ -20,7 +20,18 @@ export default function DataSourceSelectorModal({
             <ModalTitle>{i18n.t("Add Data source")}</ModalTitle>
             <ModalContent>
                 <div className="w-100">
-                    <DataSourceSelector disabled={disabled} onSelect={setSelectedItems}/>
+                    <DataSourceSelector
+                        dataSources={[
+                            "indicator",
+                            "dataElement",
+                            "dataSet",
+                            "programIndicator",
+                            "customFunction",
+                        ]}
+                        selected={selectedItems}
+                        disabled={disabled}
+                        onSelect={setSelectedItems}
+                    />
                 </div>
             </ModalContent>
             <ModalActions>

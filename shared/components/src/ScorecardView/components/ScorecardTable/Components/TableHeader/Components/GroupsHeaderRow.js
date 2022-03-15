@@ -6,6 +6,7 @@ import {useRecoilValue} from "recoil";
 import classes from "../../../scorecardTable.module.css"
 import OrgUnitHeaderCells from "./OrgUnitHeaderCells";
 import {PeriodResolverState, ScorecardViewState} from "@hisptz/scorecard-state";
+import {ScorecardTableConstants} from "@hisptz/scorecard-constants";
 
 export default function GroupsHeaderRow({nested, orgUnits}) {
     const {dataGroups} =

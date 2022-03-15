@@ -22,6 +22,7 @@ import {cellPeriodOptionAtom, PeriodState} from "./state/period";
 import {LowestOrgUnitLevel, OrgUnitLevels} from "@hisptz/scorecard-state";
 import {OrgUnitSelection} from "@hisptz/scorecard-models";
 import {getDataSourcesDisplayName} from "@hisptz/scorecard-utils";
+import {FullPageError, ModalLoader} from "@hisptz/scorecard-components"
 
 const DictionaryAnalysis = React.lazy(() =>
     import("./Components/DictionaryAnalysis")
