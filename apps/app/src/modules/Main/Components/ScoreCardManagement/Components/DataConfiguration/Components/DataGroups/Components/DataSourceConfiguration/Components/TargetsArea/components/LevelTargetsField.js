@@ -1,6 +1,6 @@
 import {colors, Field} from "@dhis2/ui";
-import {CustomInput} from "@hisptz/scorecard-components/src/CustomForm/components/CustomField";
-import {FormFieldModel} from "@hisptz/scorecard-components/src/CustomForm/models";
+import {CustomInput} from "@hisptz/react-ui"
+import {FormFieldModel} from "@hisptz/scorecard-components";
 import {OrgUnitLevels} from "@hisptz/scorecard-state";
 import {generateLegendDefaults} from "@hisptz/scorecard-utils";
 import {Accordion, AccordionDetails, AccordionSummary} from "@material-ui/core";

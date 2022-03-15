@@ -3,7 +3,7 @@ import {CheckboxField, Radio} from "@dhis2/ui";
 import PropTypes from "prop-types";
 import React from "react";
 import {AverageDisplayType, OPTIONS_HELP_STEPS} from "@hisptz/scorecard-constants";
-import Help from "hisptz-scorecard/src/modules/Main/Components/ScoreCardManagement/Components/Help";
+import Help from "../Help";
 
 export default function ScorecardOptionsForm({options, onChange}) {
     return (

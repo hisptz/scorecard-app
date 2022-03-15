@@ -1,7 +1,7 @@
 import {useSetting} from "@dhis2/app-service-datastore";
+import {DATA_MIGRATION_CHECK} from "@hisptz/scorecard-constants";
 import {useEffect} from "react";
 import {useHistory} from "react-router-dom";
-import {DATA_MIGRATION_CHECK} from "../../../../../../shared/constants/src/migration";
 
 export function useAutoMigration() {
     const [skipMigration] = useSetting(DATA_MIGRATION_CHECK, {global: true});

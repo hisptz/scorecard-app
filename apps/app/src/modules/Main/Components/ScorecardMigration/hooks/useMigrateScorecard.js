@@ -1,13 +1,12 @@
 import {useDataEngine} from "@dhis2/app-runtime";
 import {useSetting} from "@dhis2/app-service-datastore";
+import {DATA_MIGRATION_CHECK} from "@hisptz/scorecard-constants";
+import {AllScorecardsSummaryState} from "@hisptz/scorecard-state";
+import {generateScorecardSummary, migrateScorecard} from "@hisptz/scorecard-utils";
 import {map as mapAsync} from "async"
 import {compact, filter, isEmpty, map, uniqBy} from "lodash";
 import {useCallback, useEffect, useState} from "react";
 import {useRecoilRefresher_UNSTABLE, useRecoilValue} from "recoil";
-import {DATA_MIGRATION_CHECK} from "../../../../../../../../shared/constants/src/migration";
-import {AllScorecardsSummaryState} from "../../../../../../../../shared/state/src/scorecard";
-import {migrateScorecard} from "../../../../../../../../shared/utils/src/migrate";
-import {generateScorecardSummary} from "../../../../../../../../shared/utils/src/scorecard";
 import {
     getOldScorecardKeys,
     getOldScorecards,

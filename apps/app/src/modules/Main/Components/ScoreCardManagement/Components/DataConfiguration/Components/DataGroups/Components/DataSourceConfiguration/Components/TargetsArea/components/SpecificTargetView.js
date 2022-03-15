@@ -1,14 +1,11 @@
 import i18n from '@dhis2/d2-i18n'
 import {Button, colors, Tag} from '@dhis2/ui'
+import {SelectedOrgUnits, SystemSettingsState} from "@hisptz/scorecard-state";
 import {Period} from "@iapps/period-utilities";
 import {find} from "lodash";
 import PropTypes from 'prop-types'
 import React from 'react'
 import {useRecoilValue} from "recoil";
-import {
-    SelectedOrgUnits
-} from "../../../../../../../../../../../../../../../../shared/state/src/orgUnit";
-import {SystemSettingsState} from "../../../../../../../../../../../../../../../../shared/state/src/system";
 
 function LegendsView({legends, legendDefinitions}) {
     return <div className="row gap-16 space-evenly">
@@ -43,7 +40,7 @@ function getTypeLabel(type) {
 }
 
 
-export function OrgUnitSpecificTargetView({specificTarget, legendDefinitions, onUpdate, onDelete, defaultLegends}) {
+export function OrgUnitSpecificTargetView({specificTarget, legendDefinitions, onUpdate, defaultLegends}) {
     const {legends, items} = specificTarget ?? {};
     const orgUnits = useRecoilValue(SelectedOrgUnits(items))
 
@@ -80,7 +77,7 @@ export function OrgUnitSpecificTargetView({specificTarget, legendDefinitions, on
     )
 }
 
-export function PeriodSpecificTargetView({specificTarget, legendDefinitions, onUpdate, onDelete, defaultLegends}) {
+export function PeriodSpecificTargetView({specificTarget, legendDefinitions, onUpdate, defaultLegends}) {
     const {legends, type, items} = specificTarget ?? {};
     const {calendar} = useRecoilValue(SystemSettingsState);
 

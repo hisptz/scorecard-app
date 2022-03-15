@@ -1,8 +1,5 @@
 import {get} from "lodash";
-import {
-    DATASTORE_ENDPOINT,
-    DATASTORE_SCORECARD_SUMMARY_INCLUDE_KEYS,
-} from "../../constants/src/config";
+import {DATASTORE_ENDPOINT, DATASTORE_SCORECARD_SUMMARY_INCLUDE_KEYS} from "@hisptz/scorecard-constants";
 
 export function generateScorecardSummary(data) {
     const summary = {};

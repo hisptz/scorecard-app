@@ -1,6 +1,6 @@
 import {mount} from "@cypress/react";
 import {ReactFinalForm} from "@dhis2/ui";
-import CustomField from "@hisptz/scorecard-components/src/CustomForm/components/CustomField";
+import {CustomField} from "@hisptz/scorecard-components";
 import React from "react";
 
 const {Form} = ReactFinalForm;

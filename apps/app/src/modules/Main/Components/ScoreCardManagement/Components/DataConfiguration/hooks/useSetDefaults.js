@@ -1,11 +1,7 @@
+import {OrgUnitLevels, ScorecardConfigDirtySelector, ScorecardConfigDirtyState} from "@hisptz/scorecard-state";
 import {filter, isEmpty} from "lodash";
 import {useEffect} from "react";
 import {useRecoilCallback, useRecoilValue, waitForAll} from "recoil";
-import {OrgUnitLevels} from "../../../../../../../../../../shared/state/src/orgUnit";
-import {
-    ScorecardConfigDirtySelector,
-    ScorecardConfigDirtyState,
-} from "../../../../../../../../../../shared/state/src/scorecard";
 import {updateLegendsOnDataGroups} from "../utils";
 
 export default function useSetDefaults() {

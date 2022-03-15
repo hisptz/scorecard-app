@@ -1,10 +1,10 @@
 import i18n from "@dhis2/d2-i18n";
 import {DataTable, DataTableBody, DataTableCell, DataTableHead, DataTableRow,} from "@dhis2/ui";
+import {UserState} from "@hisptz/scorecard-state";
 import {head} from "lodash";
 import React, {useMemo} from "react";
 import {useFormContext} from "react-hook-form";
 import {useRecoilValue} from "recoil";
-import {UserState} from "../../../../../../../../../../../shared/state/src/user";
 import PreviewCustomCell from "./Components/PreviewCustomCell";
 
 export default function PreviewScorecardTable() {

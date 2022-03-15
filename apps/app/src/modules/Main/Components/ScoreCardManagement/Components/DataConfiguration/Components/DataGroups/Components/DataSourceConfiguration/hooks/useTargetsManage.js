@@ -1,6 +1,6 @@
+import {generateLegendDefaults} from "@hisptz/scorecard-utils";
 import {useCallback, useEffect, useMemo, useState} from "react";
 import {useFormContext} from "react-hook-form";
-import {generateLegendDefaults} from "../../../../../../../../../../../../../../shared/utils/src/utils";
 
 
 export default function useTargetsManage(props) {

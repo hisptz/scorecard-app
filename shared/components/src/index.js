@@ -11,7 +11,8 @@ import ModalLoader from "./Loaders/ModalLoader";
 import FormFieldModel from "./CustomForm/models/formField.model"
 
 export {default as ErrorIcon} from "./icons/ErrorIcon"
-export {ScorecardOptionsModal} from "./modals"
+export {ScorecardOptionsModal} from "./modals";
+export {default as Help} from "./Help";
 export {
     ScorecardView,
     AccessDeniedPage,
@@ -24,5 +25,5 @@ export {
     SingleCellSvg,
     LinkedCellSvg,
     ModalLoader,
-    FormFieldModel
+    FormFieldModel,
 }

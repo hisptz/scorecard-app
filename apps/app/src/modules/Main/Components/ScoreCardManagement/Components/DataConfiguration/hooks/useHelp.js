@@ -1,6 +1,3 @@
-import {isEmpty, uniqBy} from "lodash";
-import {useEffect, useState} from "react";
-import {useRecoilValue} from "recoil";
 import {
     GROUPS_CONFIG_HELP_STEPS,
     INDICATOR_CONFIGURATION_STEPS,
@@ -9,9 +6,12 @@ import {
     NO_GROUPS_HELP_STEPS,
     NO_INDICATORS_HELP_STEPS,
     PREVIEW_TABLE_HELP_STEPS,
-} from "../../../../../../../../../../shared/constants/src/help/scorecardManagement";
-import {ScorecardConfigEditState} from "../../../../../../../../../../shared/state/src/scorecard";
-import {getHoldersFromGroups} from "../../../../../../../../../../shared/utils/src/utils";
+} from "@hisptz/scorecard-constants";
+import {ScorecardConfigEditState} from "@hisptz/scorecard-state";
+import {getHoldersFromGroups} from "@hisptz/scorecard-utils";
+import {isEmpty, uniqBy} from "lodash";
+import {useEffect, useState} from "react";
+import {useRecoilValue} from "recoil";
 
 export default function useHelp(groups) {
     const [helpSteps, setHelpSteps] = useState(INTRODUCTION_HELP_STEPS);

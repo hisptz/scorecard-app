@@ -11,10 +11,6 @@ import MultipleFieldsField from "./components/MultipleFieldsField";
 import RichTextEditor from "./components/RichTextEditor";
 import classes from "./CustomField.module.css";
 import {DHIS2ValueTypes} from "@hisptz/scorecard-constants";
-import TargetsField
-    from "app/src/modules/Main/Components/ScoreCardManagement/Components/DataConfiguration/Components/DataGroups/Components/DataSourceConfiguration/Components/TargetsArea/components/TargetsField";
-import LevelTargetsField
-    from "app/src/modules/Main/Components/ScoreCardManagement/Components/DataConfiguration/Components/DataGroups/Components/DataSourceConfiguration/Components/TargetsArea/components/LevelTargetsField";
 
 const {Field} = ReactFinalForm;
 
@@ -46,10 +42,6 @@ export function CustomInput({input, valueType, optionSet, ...props}) {
                     return LegendMinMax;
                 case DHIS2ValueTypes.MULTIPLE_FIELDS.name:
                     return MultipleFieldsField;
-                case DHIS2ValueTypes.LEVEL_LEGEND_MIN_MAX.name:
-                    return LevelTargetsField;
-                case DHIS2ValueTypes.NORMAL_LEGEND_MIN_MAX.name:
-                    return TargetsField;
                 default:
                     return InputField;
             }

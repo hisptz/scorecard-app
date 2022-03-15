@@ -4,10 +4,10 @@ import {isEmpty} from "lodash";
 import React, {useState} from "react";
 import {useRecoilValue} from "recoil";
 import {IsSpecificTargetsSet, ScorecardConfigDirtyState, ScorecardViewState,} from "@hisptz/scorecard-state";
-import {DecreasingArrows, IncreasingArrows,} from "shared/components/src/index";
 import SpecificTargetsLibraryModal from "../SpecificTargetsLibrary";
 import LegendView from "./Components/LegendView";
 import classes from "./ScorecardLegendsView.module.css";
+import {DecreasingArrows, IncreasingArrows} from "../../../ScorecardCell/Components/Arrows";
 
 export default function ScorecardLegendsView() {
     const {legend: showLegends, arrows: showArrows} = useRecoilValue(ScorecardViewState("options"));

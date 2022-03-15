@@ -1,6 +1,6 @@
+import {Help} from "@hisptz/scorecard-components"
 import {ACCESS_HELP_STEPS} from "@hisptz/scorecard-constants";
 import React from "react";
-import Help from "../Help";
 import OrgUnit from "./Components/OrgUnitFilter";
 import Sharing from "./Components/Sharing";
 

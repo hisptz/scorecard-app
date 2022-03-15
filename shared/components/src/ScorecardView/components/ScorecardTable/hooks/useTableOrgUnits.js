@@ -12,7 +12,7 @@ import {
 } from "@hisptz/scorecard-state";
 import {searchOrganisationUnit} from "@hisptz/scorecard-hooks";
 import {sortOrgUnitsBasedOnData, sortOrgUnitsBasedOnNames} from "@hisptz/scorecard-utils";
-import {TableSort} from "@hisptz/scorecard-constants";
+import {Orientation, TableSort} from "@hisptz/scorecard-constants";
 
 
 export default function useTableOrgUnits(dataEngine, orgUnits) {

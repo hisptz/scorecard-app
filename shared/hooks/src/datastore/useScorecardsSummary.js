@@ -3,8 +3,8 @@ import produce from "immer";
 import {cloneDeep, findIndex} from "lodash";
 import {useCallback, useState} from "react";
 import {useRecoilCallback, useRecoilState} from "recoil";
-import {DATASTORE_ENDPOINT, DATASTORE_SCORECARD_SUMMARY_KEY,} from "../../../constants/src/config";
-import {ScorecardSummaryState} from "hisptz-scorecard/src/core/state/scorecard";
+import {DATASTORE_ENDPOINT, DATASTORE_SCORECARD_SUMMARY_KEY,} from "@hisptz/scorecard-constants";
+import {ScorecardSummaryState} from "@hisptz/scorecard-state";
 
 const updateMutation = {
     type: "update",

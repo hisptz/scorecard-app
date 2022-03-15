@@ -1,13 +1,11 @@
+import {SingleCellSvg} from "@hisptz/scorecard-components";
+import {OrgUnitLevels, UserState} from "@hisptz/scorecard-state";
+import {generateRandomValues, getLegend} from "@hisptz/scorecard-utils";
 import {head} from "lodash";
 import PropTypes from "prop-types";
 import React, {useMemo} from "react";
 import {useFormContext} from "react-hook-form";
 import {useRecoilValue} from "recoil";
-import SingleCellSvg
-    from "../../../../../../../../../../../../shared/components/src/ScorecardCell/Components/SingleCellSvg";
-import {OrgUnitLevels} from "../../../../../../../../../../../../shared/state/src/orgUnit";
-import {UserState} from "../../../../../../../../../../../../shared/state/src/user";
-import {generateRandomValues, getLegend,} from "../../../../../../../../../../../../shared/utils/src/utils";
 import CustomLinkedCell from "./CustomLinkedCell";
 
 export default function PreviewCustomCell({config}) {

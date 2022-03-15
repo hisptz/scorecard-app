@@ -1,9 +1,9 @@
+import {Help} from "@hisptz/scorecard-components";
 import {INDICATOR_CONFIGURATION_STEPS} from "@hisptz/scorecard-constants";
 import {ScorecardConfigEditState,} from "@hisptz/scorecard-state";
 import React from "react";
 import {useRecoilValue} from "recoil";
 import DataSourceConfigurationForm from "../../DataSourceConfigurationForm";
-import Help from "../../Help";
 
 export default function HighlightedDataSourceConfigurationForm() {
     const {selectedHighlightedIndicatorIndex} = useRecoilValue(

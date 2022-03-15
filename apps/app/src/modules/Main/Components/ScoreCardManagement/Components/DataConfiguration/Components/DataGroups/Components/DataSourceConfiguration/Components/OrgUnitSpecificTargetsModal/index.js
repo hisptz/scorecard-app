@@ -1,14 +1,12 @@
 import i18n from '@dhis2/d2-i18n'
 import {Button, ButtonStrip, CircularLoader, InputField, Modal, ModalActions, ModalContent, ModalTitle} from '@dhis2/ui'
 import {OrgUnitSelectorModal} from "@hisptz/react-ui";
+import {SelectedOrgUnits} from "@hisptz/scorecard-state";
 import {isEmpty} from "lodash";
 import PropTypes from 'prop-types'
 import React, {Suspense, useCallback, useState} from 'react'
 import {useFormContext} from "react-hook-form";
 import {useRecoilValue} from "recoil";
-import {
-    SelectedOrgUnits
-} from "../../../../../../../../../../../../../../../shared/state/src/orgUnit";
 import {getNonDefaultLegendDefinitions} from "../../../../../../../General/utils/utils";
 import LegendsField from "../TargetsArea/components/LegendsField";
 

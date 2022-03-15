@@ -1,7 +1,7 @@
 import {Button, ButtonStrip, Modal, ModalActions, ModalContent, ModalTitle,} from "@dhis2/ui";
 import PropTypes from "prop-types";
 import React, {useState} from "react";
-import ScorecardOptions from "../../../core/models/scorecardOptions";
+import {ScorecardOptions} from "@hisptz/scorecard-models";
 import ScorecardOptionsForm from "../../ScorecardOptionsForm";
 import i18n from '@dhis2/d2-i18n'
 

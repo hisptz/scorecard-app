@@ -3,7 +3,7 @@ import i18n from "@dhis2/d2-i18n";
 import {Button, ButtonStrip, colors} from "@dhis2/ui";
 import {useConfirmDialog} from "@hisptz/react-ui";
 import {useDeleteScorecard} from "@hisptz/scorecard-hooks";
-import {ScorecardCardImage as holderImage} from "@hisptz/scorecard-resources/src";
+import {ScorecardCardImage as holderImage} from "@hisptz/scorecard-resources";
 import {RouterState, UserAuthorityOnScorecard} from "@hisptz/scorecard-state";
 import {truncateDescription} from "@hisptz/scorecard-utils";
 import PropTypes from "prop-types";

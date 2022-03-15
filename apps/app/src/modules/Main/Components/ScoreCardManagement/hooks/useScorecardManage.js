@@ -4,6 +4,7 @@ import {useAddScorecard, useUpdateScorecard} from "@hisptz/scorecard-hooks";
 import {Scorecard} from "@hisptz/scorecard-models";
 import {
     IsNewScorecardState,
+    RouterState,
     ScorecardConfigEditState,
     ScorecardConfigErrorState,
     ScorecardConfState,
@@ -18,7 +19,6 @@ import {useEffect, useState} from "react";
 import {useForm} from "react-hook-form";
 import {useHistory, useParams} from "react-router-dom";
 import {useRecoilCallback, useRecoilState, useRecoilValue, useSetRecoilState} from "recoil";
-import RouterState from "../../../../../../../../shared/state/src/router";
 import {ActiveStepIndexState, ActiveStepState, steps} from "../state/pages";
 
 

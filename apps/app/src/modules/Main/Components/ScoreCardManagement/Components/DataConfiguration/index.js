@@ -1,9 +1,8 @@
-import {ContainerLoader} from "@hisptz/scorecard-components";
+import {ContainerLoader, Help} from "@hisptz/scorecard-components";
 import {DataSelection} from "@hisptz/scorecard-models";
 import {isEmpty} from "lodash";
 import React, {Suspense, useCallback} from "react";
 import {useFormContext} from "react-hook-form";
-import Help from "../Help";
 import DataSourceConfiguration from "./Components/DataGroups/Components/DataSourceConfiguration";
 import EmptyDataGroups from "./Components/EmptyDataGroups";
 import Instructions from "./Components/Instructions";

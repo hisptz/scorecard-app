@@ -10,7 +10,7 @@ const ScorecardManagement = React.lazy(() =>
     import("../Main/Components/ScoreCardManagement")
 );
 const ScorecardView = React.lazy(() =>
-    import("@hisptz/scorecard-components")
+    import("@hisptz/scorecard-components").then(module => ({default: module.ScorecardView}))
 );
 
 const ScorecardMigration = React.lazy(() =>

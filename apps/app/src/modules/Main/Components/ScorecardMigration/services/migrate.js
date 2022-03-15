@@ -1,10 +1,10 @@
-import {filter, forIn, fromPairs, isEmpty} from "lodash";
 import {
     DATASTORE_ENDPOINT,
     DATASTORE_OLD_SCORECARD_ENDPOINT,
     DATASTORE_SCORECARD_SUMMARY_KEY
-} from "../../../../../../../../shared/constants/src/config";
-import {generateCreateMutation} from "../../../../../../../../shared/utils/src/scorecard";
+} from "@hisptz/scorecard-constants";
+import {generateCreateMutation} from "@hisptz/scorecard-utils";
+import {filter, forIn, fromPairs, isEmpty} from "lodash";
 
 const generateOldScorecardQueries = (ids = []) => {
     return fromPairs(

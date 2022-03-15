@@ -1,5 +1,6 @@
 import i18n from "@dhis2/d2-i18n";
 import {Button} from "@dhis2/ui";
+import {Help} from "@hisptz/scorecard-components"
 import {HIGHLIGHTED_INDICATOR_HELP_STEPS} from "@hisptz/scorecard-constants";
 import {ScorecardIndicator} from "@hisptz/scorecard-models";
 import {ScorecardConfigEditState,} from "@hisptz/scorecard-state";
@@ -11,7 +12,6 @@ import {useFormContext} from "react-hook-form";
 import {useSetRecoilState} from "recoil";
 import DataSourceSelectorModal from "../DataConfiguration/Components/DataGroups/Components/DataSourceSelectorModal";
 import {getNonDefaultLegendDefinitions} from "../General/utils/utils";
-import Help from "../Help";
 import HighlightedDataSourceConfigurationForm from "./HighlightedDataSourceConfigurationForm";
 import HighlightedIndicatorsTable from "./Table";
 

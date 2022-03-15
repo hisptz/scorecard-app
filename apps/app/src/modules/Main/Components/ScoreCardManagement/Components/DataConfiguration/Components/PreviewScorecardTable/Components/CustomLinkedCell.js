@@ -1,9 +1,9 @@
+import {LinkedCellSvg} from "@hisptz/scorecard-components";
+import {generateRandomValues, getLegend,} from "@hisptz/scorecard-utils";
 import PropTypes from "prop-types";
 import React, {useMemo} from "react";
 import {useFormContext} from "react-hook-form";
-import LinkedCellSvg
-    from "../../../../../../../../../../../../shared/components/src/ScorecardCell/Components/LinkedCellSvg";
-import {generateRandomValues, getLegend,} from "../../../../../../../../../../../../shared/utils/src/utils";
+
 
 export default function CustomLinkedCell({top, bottom, orgUnit, period}) {
     const {

@@ -12,9 +12,9 @@ import {
     ScorecardViewState,
     UserAuthorityOnScorecard
 } from "@hisptz/scorecard-state";
-import {ScorecardOptionsModal} from "shared/components/src/index";
 import DownloadMenu from "./Download/Components/DownloadMenu";
 import useDownload from "./ScorecardViewHeader/hooks/useDownload";
+import {ScorecardOptionsModal} from "../../modals";
 
 export default function ScorecardActions({downloadAreaRef, dataEngine}) {
     const setRoute = useSetRecoilState(RouterState);
