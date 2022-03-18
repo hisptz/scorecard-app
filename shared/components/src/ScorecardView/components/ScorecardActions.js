@@ -16,7 +16,7 @@ import DownloadMenu from "./Download/Components/DownloadMenu";
 import useDownload from "./ScorecardViewHeader/hooks/useDownload";
 import {ScorecardOptionsModal} from "../../modals";
 
-export default function ScorecardActions({downloadAreaRef, dataEngine}) {
+export default function ScorecardActions({downloadAreaRef, dataEngine, widget}) {
     const setRoute = useSetRecoilState(RouterState);
     const [scorecardOptions, setScorecardOptions] = useRecoilState(
         ScorecardViewState("options")
@@ -46,40 +46,51 @@ export default function ScorecardActions({downloadAreaRef, dataEngine}) {
     return (
         <div className="row end print-hide">
             <div className="column align-items-end">
-                <ButtonStrip>
+                {
+                    !widget && <ButtonStrip>
 
-                    <Button
-                        className="option-button"
-                        dataTest={"scorecard-option-button"}
-                        onClick={() => setOptionsOpen(true)}
-                    >
-                        {i18n.t("Options")}
-                    </Button>
-                    {writeAccess && (
                         <Button
-                            dataTest={"edit-scorecard-button"}
-                            className="scorecard-view-edit-button"
-                            onClick={onEdit}
+                            className="option-button"
+                            dataTest={"scorecard-option-button"}
+                            onClick={() => setOptionsOpen(true)}
                         >
-                            {i18n.t("Edit")}
+                            {i18n.t("Options")}
                         </Button>
-                    )}
-                    <DropdownButton
-                        component={
-                            <DownloadMenu onClose={() => {
-                            }} onDownload={onDownload}/>
-                        }
-                        className="download-button"
-                        dataTest={"download-button"}
-                    >
-                        {i18n.t("Download")}
-                    </DropdownButton>
+                        {writeAccess && (
+                            <Button
+                                dataTest={"edit-scorecard-button"}
+                                className="scorecard-view-edit-button"
+                                onClick={onEdit}
+                            >
+                                {i18n.t("Edit")}
+                            </Button>
+                        )}
+                        <DropdownButton
+                            component={
+                                <DownloadMenu onClose={() => {
+                                }} onDownload={onDownload}/>
+                            }
+                            className="download-button"
+                            dataTest={"download-button"}
+                        >
+                            {i18n.t("Download")}
+                        </DropdownButton>
 
-                    <Button className="refresh-button" onClick={onRefresh}>
-                        {i18n.t("Refresh")}
-                    </Button>
-                </ButtonStrip>
+                        <Button className="refresh-button" onClick={onRefresh}>
+                            {i18n.t("Refresh")}
+                        </Button>
+                    </ButtonStrip>
+                }
             </div>
+            {(widget && writeAccess) ? (
+                <Button
+                    dataTest={"edit-scorecard-button"}
+                    className="scorecard-view-edit-button"
+                    onClick={onEdit}
+                >
+                    {i18n.t("Edit")}
+                </Button>
+            ) : null}
             {optionsOpen && (
                 <ScorecardOptionsModal
                     onClose={() => setOptionsOpen(false)}

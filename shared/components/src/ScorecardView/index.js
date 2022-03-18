@@ -29,7 +29,7 @@ const ScorecardLegendsView = lazy(() =>
 );
 const ScorecardTable = lazy(() => import("./components/ScorecardTable"));
 
-export default function ScorecardView() {
+export default function ScorecardView({widget}) {
     const {id: scorecardId} = useParams();
     const setScorecardIdState = useSetRecoilState(ScorecardIdState);
     const orgUnitState = useRecoilValueLoadable(InitialOrgUnits);
@@ -71,7 +71,9 @@ export default function ScorecardView() {
 
     return (
         <Suspense fallback={<FullPageLoader/>}>
-            <ScorecardViewHeader/>
+            {
+                !widget && <ScorecardViewHeader/>
+            }
             <Suspense fallback={<FullPageLoader/>}>
                 <div
                     ref={downloadRef}
@@ -79,6 +81,7 @@ export default function ScorecardView() {
                     style={{height: "100%", width: "100%", overflow: "visible"}}
                 >
                     <ScorecardActions
+                        widget={widget}
                         dataEngine={initialDataEngine}
                         downloadAreaRef={downloadRef}
                     />

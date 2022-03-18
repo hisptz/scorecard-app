@@ -1,7 +1,7 @@
+import React from "react";
+
 export {default as ScorecardCardImage} from "./images/img.png"
-export {default as ScorecardIllustration} from "./images/scorecard_illustration.svg"
-export {default as ScorecardUnderConstruction} from "./images/scorecard_under_construction.svg"
-export {default as ScorecardsIllustration} from "./images/scorecards_illustration.svg"
+
 
 export {default as Area} from "./icons/area.png"
 export {default as Bar} from "./icons/bar.png"
@@ -13,3 +13,5 @@ export {default as Gauge} from "./icons/gauge.png"
 export {default as Radar} from "./icons/radar.png"
 export {default as StackedBar} from "./icons/stacked-bar.png"
 export {default as StackedColumn} from "./icons/stacked-column.png"
+
+

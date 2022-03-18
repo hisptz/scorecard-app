@@ -2,6 +2,7 @@
 node_modules
 .d2
 apps/app/src/locales
+*/locales/
 build
 apps/app/.env
 logs
@@ -12,3 +13,5 @@ apps/app/i18n
 *cypress/videos
 *cypress/screenshots
 *cypress/downloads
+apps/widget/src/locales
+apps/widget/scorecard_widget.zip

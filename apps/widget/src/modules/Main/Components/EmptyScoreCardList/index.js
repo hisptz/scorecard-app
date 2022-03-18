@@ -1,22 +1,12 @@
 import i18n from "@dhis2/d2-i18n";
-import {Button, colors} from "@dhis2/ui";
-import {useMediaQuery} from "@hisptz/scorecard-hooks";
-import {ScorecardIdState} from "@hisptz/scorecard-state";
+import {colors} from "@dhis2/ui";
 import React from "react";
-import {useHistory} from "react-router-dom";
-import {useResetRecoilState} from "recoil";
-import {ReactComponent as ScorecardIllustration} from "./resources/scorecard_illustration.svg";
+import {useMediaQuery} from "@hisptz/scorecard-hooks";
+import {ReactComponent as ScorecardIllustration} from "./resources/scorecard-illustration.svg";
 
 
 export default function EmptyScoreCardList() {
-    const resetScorecardIdState = useResetRecoilState(ScorecardIdState);
     const {width, height} = useMediaQuery();
-    const history = useHistory();
-
-    const onNewScorecardClick = () => {
-        resetScorecardIdState();
-        history.push("/add", {from: "home"});
-    };
 
     return (
         <div className="center">
@@ -42,17 +32,8 @@ export default function EmptyScoreCardList() {
                                 position: "relative",
                             }}
                         >
-                            {i18n.t("Create a scorecard instantly, over tea break")}...
+                            {i18n.t("Create a new scorecard in the scorecard app to see it here.")}
                         </p>
-                    </div>
-                    <div className="pt-16">
-                        <Button
-                            onClick={onNewScorecardClick}
-                            dataTest={"new-scorecard-button"}
-                            primary
-                        >
-                            {i18n.t("New Scorecard")}
-                        </Button>
                     </div>
                 </div>
             </div>

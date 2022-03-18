@@ -1,0 +1,453 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: i18next-conv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"POT-Creation-Date: 2022-03-15T11:59:48.141Z\n"
+"PO-Revision-Date: 2022-03-15T11:59:48.141Z\n"
+
+msgid "Column chart"
+msgstr "Column chart"
+
+msgid "Line chart"
+msgstr "Line chart"
+
+msgid "Bar chart"
+msgstr "Bar chart"
+
+msgid "Area chart"
+msgstr "Area chart"
+
+msgid "Pie chart"
+msgstr "Pie chart"
+
+msgid "Next"
+msgstr "Next"
+
+msgid "Previous"
+msgstr "Previous"
+
+msgid "Skip"
+msgstr "Skip"
+
+msgid "Done"
+msgstr "Done"
+
+msgid "Welcome to the most interactive scorecard ever!"
+msgstr "Welcome to the most interactive scorecard ever!"
+
+msgid "Search here for scorecards by name, id, or description"
+msgstr "Search here for scorecards by name, id, or description"
+
+msgid "Click here to change the scorecards view to either list or grid"
+msgstr "Click here to change the scorecards view to either list or grid"
+
+msgid "Click here to add a new scorecard"
+msgstr "Click here to add a new scorecard"
+
+msgid ""
+"Click on View or anywhere on the scorecard to view, click on Edit to edit "
+"configurations and click on Delete to delete the scorecard"
+msgstr ""
+"Click on View or anywhere on the scorecard to view, click on Edit to edit "
+"configurations and click on Delete to delete the scorecard"
+
+msgid "Scorecard Management"
+msgstr "Scorecard Management"
+
+msgid "Here you can modify your scorecard configuration"
+msgstr "Here you can modify your scorecard configuration"
+
+msgid "Set your title and subtitle here"
+msgstr "Set your title and subtitle here"
+
+msgid "Describe your scorecard"
+msgstr "Describe your scorecard"
+
+msgid ""
+"Set the default period type here. This will determine which periods will be "
+"selected as defaults"
+msgstr ""
+"Set the default period type here. This will determine which periods will be "
+"selected as defaults"
+
+msgid ""
+"Modify the scorecard header here. You can add different styling, icons, "
+"images,and much more"
+msgstr ""
+"Modify the scorecard header here. You can add different styling, icons, "
+"images,and much more"
+
+msgid "Define legends here. Set the title and color"
+msgstr "Define legends here. Set the title and color"
+
+msgid "Set additional labels here"
+msgstr "Set additional labels here"
+
+msgid "Click on next to move to data configuration page"
+msgstr "Click on next to move to data configuration page"
+
+msgid "Data Configuration"
+msgstr "Data Configuration"
+
+msgid ""
+"On this page, you can configure different data sources (indicators, "
+"dataElements, e.t.c) for the scorecard. You can also preview the scorecard "
+"table."
+msgstr ""
+"On this page, you can configure different data sources (indicators, "
+"dataElements, e.t.c) for the scorecard. You can also preview the scorecard "
+"table."
+
+msgid "This is the preview area. It shows how your scorecard will look like."
+msgstr "This is the preview area. It shows how your scorecard will look like."
+
+msgid "You can configure different data sources on this area."
+msgstr "You can configure different data sources on this area."
+
+msgid "Indicators are configured and displayed in groups"
+msgstr "Indicators are configured and displayed in groups"
+
+msgid "Click Here to add a group"
+msgstr "Click Here to add a group"
+
+msgid "Double click or click on the edit button to edit the group name"
+msgstr "Double click or click on the edit button to edit the group name"
+
+msgid "Click here to expand or collapse the group area"
+msgstr "Click here to expand or collapse the group area"
+
+msgid "Click here to delete the group"
+msgstr "Click here to delete the group"
+
+msgid "Click Here to add more groups"
+msgstr "Click Here to add more groups"
+
+msgid "Click here to add an indicator"
+msgstr "Click here to add an indicator"
+
+msgid "Selected indicators appear here"
+msgstr "Selected indicators appear here"
+
+msgid ""
+"Click here to configure this indicator. You can also drag this to rearrange "
+"the indicators within a group"
+msgstr ""
+"Click here to configure this indicator. You can also drag this to rearrange "
+"the indicators within a group"
+
+msgid "Click here to link two adjacent indicators or to unlink linked indicators"
+msgstr "Click here to link two adjacent indicators or to unlink linked indicators"
+
+msgid "Click here to delete this indicator"
+msgstr "Click here to delete this indicator"
+
+msgid "Click here to add more indicators"
+msgstr "Click here to add more indicators"
+
+msgid "You can configure different data sources on this area"
+msgstr "You can configure different data sources on this area"
+
+msgid ""
+"Check this box to set legend configuration according to organisation unit "
+"levels"
+msgstr ""
+"Check this box to set legend configuration according to organisation unit "
+"levels"
+
+msgid "You can edit indicator configuration here"
+msgstr "You can edit indicator configuration here"
+
+msgid ""
+"Edit indicator label here. This label will displayed on the scorecard table "
+"header"
+msgstr ""
+"Edit indicator label here. This label will displayed on the scorecard table "
+"header"
+
+msgid "You can set the indicator weight here. This is the indicator's maximum value"
+msgstr "You can set the indicator weight here. This is the indicator's maximum value"
+
+msgid "You can set the effective gap here."
+msgstr "You can set the effective gap here."
+
+msgid "Here you can set different options for the indicator"
+msgstr "Here you can set different options for the indicator"
+
+msgid "Display Arrows"
+msgstr "Display Arrows"
+
+msgid "Check this to display increasing/decreasing arrows on this indicator's value"
+msgstr "Check this to display increasing/decreasing arrows on this indicator's value"
+
+msgid "High is Good"
+msgstr "High is Good"
+
+msgid "Check this to indicate that higher values are good for this indicator  "
+msgstr "Check this to indicate that higher values are good for this indicator  "
+
+msgid "Show Colors"
+msgstr "Show Colors"
+
+msgid "Check this to enable legend color on an indicator value "
+msgstr "Check this to enable legend color on an indicator value "
+
+msgid "Here you can configure the maximum and minimum values for each legend"
+msgstr "Here you can configure the maximum and minimum values for each legend"
+
+msgid "Highlighted Indicators"
+msgstr "Highlighted Indicators"
+
+msgid ""
+"In this page you can add and configure highlighted indicators. These "
+"indicators appear on top of the scorecard table"
+msgstr ""
+"In this page you can add and configure highlighted indicators. These "
+"indicators appear on top of the scorecard table"
+
+msgid "To add a highlighted indicator click here"
+msgstr "To add a highlighted indicator click here"
+
+msgid "Selected indicators will appear here"
+msgstr "Selected indicators will appear here"
+
+msgid "Click on the row to configure the indicator"
+msgstr "Click on the row to configure the indicator"
+
+msgid "Click on the remove button to delete the indicator from the list"
+msgstr "Click on the remove button to delete the indicator from the list"
+
+msgid "To add more highlighted indicators click here"
+msgstr "To add more highlighted indicators click here"
+
+msgid "Access Settings"
+msgstr "Access Settings"
+
+msgid ""
+"In this page you can configure the default organisation unit and sharing "
+"access"
+msgstr ""
+"In this page you can configure the default organisation unit and sharing "
+"access"
+
+msgid "Choose the default organisation unit from this selector"
+msgstr "Choose the default organisation unit from this selector"
+
+msgid "You can add a new user or user group to share the scorecard with here"
+msgstr "You can add a new user or user group to share the scorecard with here"
+
+msgid "Search and select a user or user group here"
+msgstr "Search and select a user or user group here"
+
+msgid "Select the appropriate access here"
+msgstr "Select the appropriate access here"
+
+msgid "Click here to add the access settings"
+msgstr "Click here to add the access settings"
+
+msgid "List of shared users and user groups will appear here"
+msgstr "List of shared users and user groups will appear here"
+
+msgid "You can edit or delete access here"
+msgstr "You can edit or delete access here"
+
+msgid "Default Options Settings"
+msgstr "Default Options Settings"
+
+msgid "In this page you can set default options for the scorecard view"
+msgstr "In this page you can set default options for the scorecard view"
+
+msgid "These options affect the scorecard view"
+msgstr "These options affect the scorecard view"
+
+msgid "Legend"
+msgstr "Legend"
+
+msgid "Allows the legends on the scorecard header to be displayed when checked"
+msgstr "Allows the legends on the scorecard header to be displayed when checked"
+
+msgid "Title"
+msgstr "Title"
+
+msgid "Allows the title on the scorecard header to be displayed when checked"
+msgstr "Allows the title on the scorecard header to be displayed when checked"
+
+msgid "Item Number"
+msgstr "Item Number"
+
+msgid "Allows row numbers on the scorecard to be displayed when checked"
+msgstr "Allows row numbers on the scorecard to be displayed when checked"
+
+msgid "Empty Rows"
+msgstr "Empty Rows"
+
+msgid "Allows the empty rows on the scorecard to be displayed when checked"
+msgstr "Allows the empty rows on the scorecard to be displayed when checked"
+
+msgid "Show Hierarchy"
+msgstr "Show Hierarchy"
+
+msgid "Allows the organisation units hierarchy to be displayed when checked"
+msgstr "Allows the organisation units hierarchy to be displayed when checked"
+
+msgid "Average Column"
+msgstr "Average Column"
+
+msgid "Allows the average column to be displayed when checked"
+msgstr "Allows the average column to be displayed when checked"
+
+msgid "Average Row"
+msgstr "Average Row"
+
+msgid "Allows the average row to be displayed when checked"
+msgstr "Allows the average row to be displayed when checked"
+
+msgid "Allows the highlighted indicators to be displayed when checked"
+msgstr "Allows the highlighted indicators to be displayed when checked"
+
+msgid "These options allow to view data based on the average"
+msgstr "These options allow to view data based on the average"
+
+msgid "All"
+msgstr "All"
+
+msgid "Allows all data to be displayed"
+msgstr "Allows all data to be displayed"
+
+msgid "Below Average"
+msgstr "Below Average"
+
+msgid "Allows data that is below the overall average to be displayed"
+msgstr "Allows data that is below the overall average to be displayed"
+
+msgid "Above Average"
+msgstr "Above Average"
+
+msgid "Allows data that is above the overall average to be displayed"
+msgstr "Allows data that is above the overall average to be displayed"
+
+msgid "Score"
+msgstr "Score"
+
+msgid "Arrows"
+msgstr "Arrows"
+
+msgid "Allows increasing or decreasing indicators on data cells to be displayed"
+msgstr "Allows increasing or decreasing indicators on data cells to be displayed"
+
+msgid "Show Data in Rows"
+msgstr "Show Data in Rows"
+
+msgid ""
+"Changes the table layout, the indicators are shown in rows and "
+"orgaunisation units in columns"
+msgstr ""
+"Changes the table layout, the indicators are shown in rows and "
+"orgaunisation units in columns"
+
+msgid "Scorecard View"
+msgstr "Scorecard View"
+
+msgid "This is the default view for your scorecard"
+msgstr "This is the default view for your scorecard"
+
+msgid "Click here to select different organisation units"
+msgstr "Click here to select different organisation units"
+
+msgid "Click here to select different periods"
+msgstr "Click here to select different periods"
+
+msgid "Click here to return to scorecard list"
+msgstr "Click here to return to scorecard list"
+
+msgid ""
+"Click here to refresh the scorecard page. This will reset organisation "
+"units, periods, and options to default values"
+msgstr ""
+"Click here to refresh the scorecard page. This will reset organisation "
+"units, periods, and options to default values"
+
+msgid ""
+"Click here to customize the scorecard look. Add numbering, enable average "
+"rows and columns, hide or show arrows and many more"
+msgstr ""
+"Click here to customize the scorecard look. Add numbering, enable average "
+"rows and columns, hide or show arrows and many more"
+
+msgid "Click here to edit scorecard configuration"
+msgstr "Click here to edit scorecard configuration"
+
+msgid "Click here to download the scorecard in Excel, PDF, CSV, and JSON formats"
+msgstr "Click here to download the scorecard in Excel, PDF, CSV, and JSON formats"
+
+msgid "Here is the scorecard!"
+msgstr "Here is the scorecard!"
+
+msgid "Sort table based on organisation unit names or values"
+msgstr "Sort table based on organisation unit names or values"
+
+msgid "Search organisation units"
+msgstr "Search organisation units"
+
+msgid "Change the table layout"
+msgstr "Change the table layout"
+
+msgid "Further analyse data in the cells"
+msgstr "Further analyse data in the cells"
+
+msgid "Search here for a specific organisation unit"
+msgstr "Search here for a specific organisation unit"
+
+msgid "Click on the arrows to sort the table based on the name or values"
+msgstr "Click on the arrows to sort the table based on the name or values"
+
+msgid ""
+"To change the table layout, click, hold, and drag this cell to the table "
+"headers"
+msgstr ""
+"To change the table layout, click, hold, and drag this cell to the table "
+"headers"
+
+msgid "Click on a data cell to see further analysis"
+msgstr "Click on a data cell to see further analysis"
+
+msgid "You can also right click to view the cell data in different options"
+msgstr "You can also right click to view the cell data in different options"
+
+msgid ""
+"Click on the arrow to drill down to the scorecard of this organisation "
+"unit's lower level"
+msgstr ""
+"Click on the arrow to drill down to the scorecard of this organisation "
+"unit's lower level"
+
+msgid "Data"
+msgstr "Data"
+
+msgid "Organisation Unit"
+msgstr "Organisation Unit"
+
+msgid "Period"
+msgstr "Period"
+
+msgid "Relative Periods"
+msgstr "Relative Periods"
+
+msgid "Fixed Periods"
+msgstr "Fixed Periods"
+
+msgid ""
+"In this page you can configure the default organisation unit and sharing "
+"access for the scorecard."
+msgstr ""
+"In this page you can configure the default organisation unit and sharing "
+"access for the scorecard."
+
+msgid ""
+"In this page you can set default options for the scorecard view. These "
+"options affect the scorecard view"
+msgstr ""
+"In this page you can set default options for the scorecard view. These "
+"options affect the scorecard view"
