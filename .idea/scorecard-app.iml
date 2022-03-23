@@ -20,6 +20,8 @@
       <excludeFolder url="file://$MODULE_DIR$/shared/resources/build" />
       <excludeFolder url="file://$MODULE_DIR$/shared/services/build" />
       <excludeFolder url="file://$MODULE_DIR$/apps/widget/src/locales" />
+      <excludeFolder url="file://$MODULE_DIR$/apps/widget/.d2" />
+      <excludeFolder url="file://$MODULE_DIR$/apps/widget/build" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

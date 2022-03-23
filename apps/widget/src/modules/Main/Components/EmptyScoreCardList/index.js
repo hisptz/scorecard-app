@@ -2,7 +2,7 @@ import i18n from "@dhis2/d2-i18n";
 import {colors} from "@dhis2/ui";
 import React from "react";
 import {useMediaQuery} from "@hisptz/scorecard-hooks";
-import {ReactComponent as ScorecardIllustration} from "./resources/scorecard-illustration.svg";
+import {ReactComponent as ScorecardIllustration} from "./resources/scorecard_illustration.svg";
 
 
 export default function EmptyScoreCardList() {

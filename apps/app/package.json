@@ -51,8 +51,8 @@
   "dependencies": {
     "@dhis2/app-runtime": "^3.2.5",
     "@dhis2/app-service-datastore": "^1.0.0-alpha.2",
-    "@dhis2/ui": "^7.16.2",
-    "@hisptz/react-ui": "^1.0.31",
+    "@dhis2/ui": "^8.1.7",
+    "@hisptz/react-ui": "^1.0.33",
     "@hisptz/scorecard-components": "^2.5.0",
     "@hisptz/scorecard-constants": "^2.5.0",
     "@hisptz/scorecard-models": "^2.5.0",
