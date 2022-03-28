@@ -1,0 +1,969 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: POEditor.com\n"
+"Project-Id-Version: Scorecard App\n"
+"Language: fr\n"
+
+#: 
+msgid "Welcome to Scorecard App!"
+msgstr "Bienvenue sur l'application Scorecard !"
+
+#: 
+msgid "Create a scorecard instantly, over tea break"
+msgstr "Créez un tableau de bord instantanément, pendant la pause thé"
+
+#: 
+msgid "New Scorecard"
+msgstr "Nouvelle carte de pointage"
+
+#: 
+msgid "Please select at least one organisation unit"
+msgstr "Veuillez sélectionner au moins une unité organisationnelle"
+
+#: 
+msgid "Organisation Unit"
+msgstr "Unité organisationnelle"
+
+#: 
+msgid "Select Access"
+msgstr "Sélectionnez l'accès"
+
+#: 
+msgid "Add"
+msgstr "Ajouter"
+
+#: 
+msgid "Edit"
+msgstr "Éditer"
+
+#: 
+msgid "Delete"
+msgstr "Supprimer"
+
+#: 
+msgid "Sharing"
+msgstr "Partage"
+
+#: 
+msgid "Shared With"
+msgstr "Partagé avec"
+
+#: 
+msgid "Add Access"
+msgstr "Ajouter un accès"
+
+#: 
+msgid "No Access"
+msgstr "Pas d'accès"
+
+#: 
+msgid "Can Read"
+msgstr "Peut lire"
+
+#: 
+msgid "Can Read and Write"
+msgstr "Peut lire et écrire"
+
+#: 
+msgid "Save"
+msgstr "sauvegarder"
+
+#: 
+msgid "Cancel"
+msgstr "Annuler"
+
+#: 
+msgid "Click to configure, drag to rearrange"
+msgstr "Cliquez pour configurer, faites glisser pour réorganiser"
+
+#: 
+msgid "Click to {{linkAction}}"
+msgstr "Cliquez pour {{linkAction}}"
+
+#: 
+msgid "unlink"
+msgstr "dissocier"
+
+#: 
+msgid "link"
+msgstr "lien"
+
+#: 
+msgid "Click to {{action}}, drag to rearrange"
+msgstr "Cliquez pour {{action}}, faites glisser pour réorganiser"
+
+#: 
+msgid "collapse"
+msgstr "s'effondrer"
+
+#: 
+msgid "expand"
+msgstr "développer"
+
+#: 
+msgid "Add a data source"
+msgstr "Ajouter une source de données"
+
+#: 
+msgid "Add Item"
+msgstr "Ajouter un item"
+
+#: 
+msgid "Organisation Unit(s)"
+msgstr "Unité(s) organisationnelle(s)"
+
+#: 
+msgid "Change"
+msgstr "Changement"
+
+#: 
+msgid "Organisation Unit Specific Targets"
+msgstr "Cibles spécifiques à l'unité organisationnelle"
+
+#: 
+msgid "Other Periods"
+msgstr "Autres périodes"
+
+#: 
+msgid "Update"
+msgstr "Mettre à jour"
+
+#: 
+msgid "Period Specific Targets"
+msgstr "Cibles spécifiques à la période"
+
+#: 
+msgid "Period"
+msgstr "Point final"
+
+#: 
+msgid "Change Period"
+msgstr "Modifier la période"
+
+#: 
+msgid "Organisation unit(s)"
+msgstr "Unité(s) organisationnelle(s)"
+
+#: 
+msgid "Organisation unit levels"
+msgstr "Niveaux d'unité d'organisation"
+
+#: 
+msgid "Legends"
+msgstr "Légendes"
+
+#: 
+msgid "Other Organisation Units"
+msgstr "Autres unités organisationnelles"
+
+#: 
+msgid "Set Specific Targets"
+msgstr "Définir des cibles spécifiques"
+
+#: 
+msgid "Specific target type"
+msgstr "Type de cible spécifique"
+
+#: 
+msgid "Organisation Unit Level"
+msgstr "Niveau de l'unité d'organisation"
+
+#: 
+msgid "Add Data source"
+msgstr "Ajouter une source de données"
+
+#: 
+msgid "Please select at least one data source for this group"
+msgstr "Veuillez sélectionner au moins une source de données pour ce groupe"
+
+#: 
+msgid "Add Group"
+msgstr "Ajouter un groupe"
+
+#: 
+msgid "Configure Data Sources"
+msgstr "Configurer les sources de données"
+
+#: 
+msgid "Add a data source group"
+msgstr "Ajouter un groupe de sources de données"
+
+#: 
+msgid "Modify the group name"
+msgstr "Modifier le nom du groupe"
+
+#: 
+msgid "Add different data sources to a group"
+msgstr "Ajouter différentes sources de données à un groupe"
+
+#: 
+msgid "Click on a data source to configure it"
+msgstr "Cliquez sur une source de données pour la configurer"
+
+#: 
+msgid "View the changes on the preview panel above"
+msgstr "Voir les changements sur le panneau de prévisualisation ci-dessus"
+
+#: 
+msgid "Select a data source to configure"
+msgstr "Sélectionnez une source de données à configurer"
+
+#: 
+msgid "Groups"
+msgstr "Groupes"
+
+#: 
+msgid "Name"
+msgstr "Nom"
+
+#: 
+msgid "Label"
+msgstr "Étiqueter"
+
+#: 
+msgid "Label is required"
+msgstr "L'étiquette est obligatoire"
+
+#: 
+msgid "Weight"
+msgstr "Poids"
+
+#: 
+msgid "Effective Gap"
+msgstr "Écart effectif"
+
+#: 
+msgid "Display Arrows"
+msgstr "Afficher les flèches"
+
+#: 
+msgid "High is Good"
+msgstr "Haut est bon"
+
+#: 
+msgid "Show Colors"
+msgstr "Afficher les couleurs"
+
+#: 
+msgid "Title"
+msgstr "Titre"
+
+#: 
+msgid "Title is required"
+msgstr "Le titre est requis"
+
+#: 
+msgid "A scorecard with the title '{{value}}' already exists. Please select another title"
+msgstr "Une carte de performance avec le titre '{{value}}' existe déjà. Veuillez sélectionner un autre titre"
+
+#: 
+msgid "Subtitle"
+msgstr "Sous-titre"
+
+#: 
+msgid "Description"
+msgstr "La description"
+
+#: 
+msgid "Period Type"
+msgstr "Type de période"
+
+#: 
+msgid "Custom Header"
+msgstr "En-tête personnalisé"
+
+#: 
+msgid "Additional Labels (Tags)"
+msgstr "Étiquettes supplémentaires (Tags)"
+
+#: 
+msgid "New Legend Definition"
+msgstr "Nouvelle définition de légende"
+
+#: 
+msgid "Color is required"
+msgstr "La couleur est requise"
+
+#: 
+msgid "Confirm legend reset"
+msgstr "Confirmer la réinitialisation de la légende"
+
+#: 
+msgid "Adding a legend definition will reset all legends to their default values. Are you sure you want to continue?"
+msgstr "L'ajout d'une définition de légende réinitialisera toutes les légendes à leurs valeurs par défaut. Es-tu sur de vouloir continuer?"
+
+#: 
+msgid "Reset"
+msgstr "Réinitialiser"
+
+#: 
+msgid "Leave as is"
+msgstr "Laissez tel quel"
+
+#: 
+msgid "Confirm legends reset"
+msgstr "Confirmer la réinitialisation des légendes"
+
+#: 
+msgid "Deleting this definition will reset all configured legends. Are you sure you want to delete this legend definition?"
+msgstr "La suppression de cette définition réinitialisera toutes les légendes configurées. Voulez-vous vraiment supprimer cette définition de légende ?"
+
+#: 
+msgid "At least two non-default legend definitions are required"
+msgstr "Au moins deux définitions de légende autres que celles par défaut sont requises"
+
+#: 
+msgid "Legend Definitions"
+msgstr "Définitions des légendes"
+
+#: 
+msgid "Change Periods"
+msgstr "Modifier les périodes"
+
+#: 
+msgid "Select Periods"
+msgstr "Sélectionnez les périodes"
+
+#: 
+msgid "Period type is required"
+msgstr "Le type de période est requis"
+
+#: 
+msgid "Fixed Periods"
+msgstr "Périodes fixes"
+
+#: 
+msgid "Relative Periods"
+msgstr "Périodes relatives"
+
+#: 
+msgid "Highlighted Indicators"
+msgstr "Indicateurs mis en évidence"
+
+#: 
+msgid "Add Highlighted Indicator"
+msgstr "Ajouter un indicateur en surbrillance"
+
+#: 
+msgid "Scorecard updated successfully"
+msgstr "La carte de pointage a été mise à jour avec succès"
+
+#: 
+msgid "Scorecard added successfully"
+msgstr "Carte de score ajoutée avec succès"
+
+#: 
+msgid "Please fill in all required fields"
+msgstr "Veuillez remplir tous les champs requis"
+
+#: 
+msgid "Help"
+msgstr "Aider"
+
+#: 
+msgid "Saving"
+msgstr "Économie"
+
+#: 
+msgid "Save and exit"
+msgstr "Sauvegarder et quitter"
+
+#: 
+msgid "Save and continue"
+msgstr "Sauvegarder et continuer"
+
+#: 
+msgid "Exit without saving"
+msgstr "Quitter sans sauvegarder"
+
+#: 
+msgid "General"
+msgstr "Général"
+
+#: 
+msgid "Data Configuration"
+msgstr "Configuration des données"
+
+#: 
+msgid "Access"
+msgstr "Accéder"
+
+#: 
+msgid "Options"
+msgstr "Choix"
+
+#: 
+msgid "Scorecard deleted successfully"
+msgstr "Carte de score supprimée avec succès"
+
+#: 
+msgid "Confirm scorecard delete"
+msgstr "Confirmer la suppression de la carte de score"
+
+#: 
+msgid "Are you sure you want to delete scorecard "
+msgstr "Êtes-vous sûr de vouloir supprimer la carte de score ? "
+
+#: 
+msgid "View"
+msgstr "Voir"
+
+#: 
+msgid "No scorecards found"
+msgstr "Aucun tableau de bord trouvé"
+
+#: 
+msgid "Could not find scorecards matching the keyword "
+msgstr "Impossible de trouver des fiches d'évaluation correspondant au mot clé "
+
+#: 
+msgid "Start a guided tour"
+msgstr "Démarrer une visite guidée"
+
+#: 
+msgid "Documentation"
+msgstr "Documentation"
+
+#: 
+msgid "Search"
+msgstr "Rechercher"
+
+#: 
+msgid "Switch to {{viewType}} view"
+msgstr "Passer à la vue {{viewType}}"
+
+#: 
+msgid "list"
+msgstr "liste"
+
+#: 
+msgid "grid"
+msgstr "la grille"
+
+#: 
+msgid "Add New Scorecard"
+msgstr "Ajouter une nouvelle carte de pointage"
+
+#: 
+msgid "Preparing migration..."
+msgstr "Préparation de la migration..."
+
+#: 
+msgid "Migrating scorecards"
+msgstr "Migrer des tableaux de bord"
+
+#: 
+msgid "of"
+msgstr "de"
+
+#: 
+msgid "Column chart"
+msgstr "Diagramme à colonnes"
+
+#: 
+msgid "Line chart"
+msgstr "Graphique en ligne"
+
+#: 
+msgid "Bar chart"
+msgstr "Diagramme à bandes"
+
+#: 
+msgid "Area chart"
+msgstr "Graphique en aires"
+
+#: 
+msgid "Pie chart"
+msgstr "Diagramme circulaire"
+
+#: 
+msgid "Next"
+msgstr "Suivant"
+
+#: 
+msgid "Previous"
+msgstr "Précédent"
+
+#: 
+msgid "Skip"
+msgstr "Sauter"
+
+#: 
+msgid "Done"
+msgstr "Terminé"
+
+#: 
+msgid "Welcome to the most interactive scorecard ever!"
+msgstr "Bienvenue sur le tableau de bord le plus interactif de tous les temps !"
+
+#: 
+msgid "Search here for scorecards by name, id, or description"
+msgstr "Recherchez ici les tableaux de bord par nom, identifiant ou description"
+
+#: 
+msgid "Click here to change the scorecards view to either list or grid"
+msgstr "Cliquez ici pour modifier l'affichage des tableaux de bord en liste ou en grille"
+
+#: 
+msgid "Click here to add a new scorecard"
+msgstr "Cliquez ici pour ajouter une nouvelle carte de pointage"
+
+#: 
+msgid "Click on View or anywhere on the scorecard to view, click on Edit to edit configurations and click on Delete to delete the scorecard"
+msgstr "Cliquez sur Afficher ou n'importe où sur la carte de pointage pour afficher, cliquez sur Modifier pour modifier les configurations et cliquez sur Supprimer pour supprimer la carte de pointage"
+
+#: 
+msgid "Scorecard Management"
+msgstr "Gestion des tableaux de bord"
+
+#: 
+msgid "Here you can modify your scorecard configuration"
+msgstr "Ici, vous pouvez modifier la configuration de votre tableau de bord"
+
+#: 
+msgid "Set your title and subtitle here"
+msgstr "Définissez votre titre et sous-titre ici"
+
+#: 
+msgid "Describe your scorecard"
+msgstr "Décrivez votre tableau de bord"
+
+#: 
+msgid "Set the default period type here. This will determine which periods will be selected as defaults"
+msgstr "Définissez ici le type de période par défaut. Cela déterminera quelles périodes seront sélectionnées par défaut"
+
+#: 
+msgid "Modify the scorecard header here. You can add different styling, icons, images,and much more"
+msgstr "Modifiez l'en-tête de la carte de score ici. Vous pouvez ajouter différents styles, icônes, images et bien plus encore"
+
+#: 
+msgid "Define legends here. Set the title and color"
+msgstr "Définissez les légendes ici. Définir le titre et la couleur"
+
+#: 
+msgid "Set additional labels here"
+msgstr "Définissez des libellés supplémentaires ici"
+
+#: 
+msgid "Click on next to move to data configuration page"
+msgstr "Cliquez sur suivant pour passer à la page de configuration des données"
+
+#: 
+msgid "On this page, you can configure different data sources (indicators, dataElements, e.t.c) for the scorecard. You can also preview the scorecard table."
+msgstr "Sur cette page, vous pouvez configurer différentes sources de données (indicateurs, éléments de données, etc.) pour le tableau de bord. Vous pouvez également prévisualiser le tableau de la carte de score."
+
+#: 
+msgid "This is the preview area. It shows how your scorecard will look like."
+msgstr "C'est la zone de prévisualisation. Il montre à quoi ressemblera votre tableau de bord."
+
+#: 
+msgid "You can configure different data sources on this area."
+msgstr "Vous pouvez configurer différentes sources de données sur cette zone."
+
+#: 
+msgid "Indicators are configured and displayed in groups"
+msgstr "Les indicateurs sont configurés et affichés en groupes"
+
+#: 
+msgid "Click Here to add a group"
+msgstr "Cliquez ici pour ajouter un groupe"
+
+#: 
+msgid "Double click or click on the edit button to edit the group name"
+msgstr "Double-cliquez ou cliquez sur le bouton Modifier pour modifier le nom du groupe"
+
+#: 
+msgid "Click here to expand or collapse the group area"
+msgstr "Cliquez ici pour développer ou réduire la zone du groupe"
+
+#: 
+msgid "Click here to delete the group"
+msgstr "Cliquez ici pour supprimer le groupe"
+
+#: 
+msgid "Click Here to add more groups"
+msgstr "Cliquez ici pour ajouter plus de groupes"
+
+#: 
+msgid "Click here to add an indicator"
+msgstr "Cliquez ici pour ajouter un indicateur"
+
+#: 
+msgid "Selected indicators appear here"
+msgstr "Les indicateurs sélectionnés apparaissent ici"
+
+#: 
+msgid "Click here to configure this indicator. You can also drag this to rearrange the indicators within a group"
+msgstr "Cliquez ici pour configurer cet indicateur. Vous pouvez également le faire glisser pour réorganiser les indicateurs au sein d'un groupe"
+
+#: 
+msgid "Click here to link two adjacent indicators or to unlink linked indicators"
+msgstr "Cliquez ici pour lier deux indicateurs adjacents ou pour dissocier des indicateurs liés"
+
+#: 
+msgid "Click here to delete this indicator"
+msgstr "Cliquez ici pour supprimer cet indicateur"
+
+#: 
+msgid "Click here to add more indicators"
+msgstr "Cliquez ici pour ajouter plus d'indicateurs"
+
+#: 
+msgid "You can configure different data sources on this area"
+msgstr "Vous pouvez configurer différentes sources de données sur cette zone"
+
+#: 
+msgid "Check this box to set legend configuration according to organisation unit levels"
+msgstr "Cochez cette case pour définir la configuration de la légende en fonction des niveaux d'unité d'organisation"
+
+#: 
+msgid "You can edit indicator configuration here"
+msgstr "Vous pouvez modifier la configuration de l'indicateur ici"
+
+#: 
+msgid "Edit indicator label here. This label will displayed on the scorecard table header"
+msgstr "Modifier l'étiquette de l'indicateur ici. Cette étiquette s'affichera sur l'en-tête du tableau de score"
+
+#: 
+msgid "You can set the indicator weight here. This is the indicator's maximum value"
+msgstr "Vous pouvez définir ici le poids de l'indicateur. C'est la valeur maximale de l'indicateur"
+
+#: 
+msgid "You can set the effective gap here."
+msgstr "Vous pouvez définir ici l'écart effectif."
+
+#: 
+msgid "Here you can set different options for the indicator"
+msgstr "Ici, vous pouvez définir différentes options pour l'indicateur"
+
+#: 
+msgid "Check this to display increasing/decreasing arrows on this indicator's value"
+msgstr "Cochez cette case pour afficher des flèches croissantes/décroissantes sur la valeur de cet indicateur"
+
+#: 
+msgid "Check this to indicate that higher values are good for this indicator  "
+msgstr "Cochez cette case pour indiquer que des valeurs plus élevées sont bonnes pour cet indicateur  "
+
+#: 
+msgid "Check this to enable legend color on an indicator value "
+msgstr "Cochez cette case pour activer la couleur de la légende sur une valeur d'indicateur "
+
+#: 
+msgid "Here you can configure the maximum and minimum values for each legend"
+msgstr "Ici, vous pouvez configurer les valeurs maximales et minimales pour chaque légende"
+
+#: 
+msgid "In this page you can add and configure highlighted indicators. These indicators appear on top of the scorecard table"
+msgstr "Dans cette page, vous pouvez ajouter et configurer des indicateurs en surbrillance. Ces indicateurs apparaissent en haut du tableau de bord"
+
+#: 
+msgid "To add a highlighted indicator click here"
+msgstr "Pour ajouter un indicateur en surbrillance cliquez ici"
+
+#: 
+msgid "Selected indicators will appear here"
+msgstr "Les indicateurs sélectionnés apparaîtront ici"
+
+#: 
+msgid "Click on the row to configure the indicator"
+msgstr "Cliquez sur la ligne pour configurer l'indicateur"
+
+#: 
+msgid "Click on the remove button to delete the indicator from the list"
+msgstr "Cliquez sur le bouton supprimer pour supprimer l'indicateur de la liste"
+
+#: 
+msgid "To add more highlighted indicators click here"
+msgstr "Pour ajouter d'autres indicateurs en surbrillance, cliquez ici"
+
+#: 
+msgid "Access Settings"
+msgstr "Paramètres d'accès"
+
+#: 
+msgid "In this page you can configure the default organisation unit and sharing access"
+msgstr "Dans cette page, vous pouvez configurer l'unité d'organisation par défaut et l'accès au partage"
+
+#: 
+msgid "Choose the default organisation unit from this selector"
+msgstr "Choisissez l'unité d'organisation par défaut dans ce sélecteur"
+
+#: 
+msgid "You can add a new user or user group to share the scorecard with here"
+msgstr "Vous pouvez ajouter ici un nouvel utilisateur ou groupe d'utilisateurs avec qui partager la fiche d'évaluation"
+
+#: 
+msgid "Search and select a user or user group here"
+msgstr "Recherchez et sélectionnez un utilisateur ou un groupe d'utilisateurs ici"
+
+#: 
+msgid "Select the appropriate access here"
+msgstr "Sélectionnez ici l'accès approprié"
+
+#: 
+msgid "Click here to add the access settings"
+msgstr "Cliquez ici pour ajouter les paramètres d'accès"
+
+#: 
+msgid "List of shared users and user groups will appear here"
+msgstr "La liste des utilisateurs partagés et des groupes d'utilisateurs apparaîtra ici"
+
+#: 
+msgid "You can edit or delete access here"
+msgstr "Vous pouvez modifier ou supprimer l'accès ici"
+
+#: 
+msgid "Default Options Settings"
+msgstr "Paramètres d'options par défaut"
+
+#: 
+msgid "In this page you can set default options for the scorecard view"
+msgstr "Dans cette page, vous pouvez définir les options par défaut pour la vue de la carte de score"
+
+#: 
+msgid "These options affect the scorecard view"
+msgstr "Ces options affectent la vue de la carte de performance"
+
+#: 
+msgid "Legend"
+msgstr "Légende"
+
+#: 
+msgid "Allows the legends on the scorecard header to be displayed when checked"
+msgstr "Permet d'afficher les légendes sur l'en-tête de la carte de score lorsqu'elles sont cochées"
+
+#: 
+msgid "Allows the title on the scorecard header to be displayed when checked"
+msgstr "Permet d'afficher le titre sur l'en-tête de la carte de score lorsqu'il est coché"
+
+#: 
+msgid "Item Number"
+msgstr "Numéro d'article"
+
+#: 
+msgid "Allows row numbers on the scorecard to be displayed when checked"
+msgstr "Permet d'afficher les numéros de ligne sur la carte de score lorsqu'ils sont cochés"
+
+#: 
+msgid "Empty Rows"
+msgstr "Lignes vides"
+
+#: 
+msgid "Allows the empty rows on the scorecard to be displayed when checked"
+msgstr "Permet d'afficher les lignes vides de la carte de score lorsqu'elles sont cochées"
+
+#: 
+msgid "Show Hierarchy"
+msgstr "Afficher la hiérarchie"
+
+#: 
+msgid "Allows the organisation units hierarchy to be displayed when checked"
+msgstr "Permet d'afficher la hiérarchie des unités d'organisation lorsqu'elle est cochée"
+
+#: 
+msgid "Average Column"
+msgstr "Colonne moyenne"
+
+#: 
+msgid "Allows the average column to be displayed when checked"
+msgstr "Permet d'afficher la colonne moyenne lorsqu'elle est cochée"
+
+#: 
+msgid "Average Row"
+msgstr "Ligne moyenne"
+
+#: 
+msgid "Allows the average row to be displayed when checked"
+msgstr "Permet d'afficher la ligne moyenne lorsqu'elle est cochée"
+
+#: 
+msgid "Allows the highlighted indicators to be displayed when checked"
+msgstr "Permet d'afficher les indicateurs en surbrillance lorsqu'ils sont cochés"
+
+#: 
+msgid "These options allow to view data based on the average"
+msgstr "Ces options permettent de visualiser les données basées sur la moyenne"
+
+#: 
+msgid "All"
+msgstr "Tous"
+
+#: 
+msgid "Allows all data to be displayed"
+msgstr "Permet d'afficher toutes les données"
+
+#: 
+msgid "Below Average"
+msgstr "Sous la moyenne"
+
+#: 
+msgid "Allows data that is below the overall average to be displayed"
+msgstr "Permet d'afficher les données inférieures à la moyenne globale"
+
+#: 
+msgid "Above Average"
+msgstr "Au dessus de la moyenne"
+
+#: 
+msgid "Allows data that is above the overall average to be displayed"
+msgstr "Permet d'afficher les données supérieures à la moyenne globale"
+
+#: 
+msgid "Score"
+msgstr "But"
+
+#: 
+msgid "Arrows"
+msgstr "Flèches"
+
+#: 
+msgid "Allows increasing or decreasing indicators on data cells to be displayed"
+msgstr "Permet d'afficher des indicateurs croissants ou décroissants sur les cellules de données"
+
+#: 
+msgid "Show Data in Rows"
+msgstr "Afficher les données dans les lignes"
+
+#: 
+msgid "Changes the table layout, the indicators are shown in rows and orgaunisation units in columns"
+msgstr "Modifie la disposition du tableau, les indicateurs sont affichés en lignes et les unités d'organisation en colonnes"
+
+#: 
+msgid "Scorecard View"
+msgstr "Affichage de la carte de pointage"
+
+#: 
+msgid "This is the default view for your scorecard"
+msgstr "Il s'agit de la vue par défaut de votre tableau de bord"
+
+#: 
+msgid "Click here to select different organisation units"
+msgstr "Cliquez ici pour sélectionner différentes unités d'organisation"
+
+#: 
+msgid "Click here to select different periods"
+msgstr "Cliquez ici pour sélectionner différentes périodes"
+
+#: 
+msgid "Click here to return to scorecard list"
+msgstr "Cliquez ici pour revenir à la liste des cartes de pointage"
+
+#: 
+msgid "Click here to refresh the scorecard page. This will reset organisation units, periods, and options to default values"
+msgstr "Cliquez ici pour actualiser la page de la carte de pointage. Cela réinitialisera les unités d'organisation, les périodes et les options aux valeurs par défaut"
+
+#: 
+msgid "Click here to customize the scorecard look. Add numbering, enable average rows and columns, hide or show arrows and many more"
+msgstr "Cliquez ici pour personnaliser l'apparence de la carte de pointage. Ajoutez une numérotation, activez les lignes et les colonnes moyennes, masquez ou affichez les flèches et bien plus encore"
+
+#: 
+msgid "Click here to edit scorecard configuration"
+msgstr "Cliquez ici pour modifier la configuration de la carte de score"
+
+#: 
+msgid "Click here to download the scorecard in Excel, PDF, CSV, and JSON formats"
+msgstr "Cliquez ici pour télécharger la carte de pointage aux formats Excel, PDF, CSV et JSON"
+
+#: 
+msgid "Here is the scorecard!"
+msgstr "Voici le tableau des scores !"
+
+#: 
+msgid "Sort table based on organisation unit names or values"
+msgstr "Trier le tableau en fonction des noms ou des valeurs des unités d'organisation"
+
+#: 
+msgid "Search organisation units"
+msgstr "Rechercher des unités d'organisation"
+
+#: 
+msgid "Change the table layout"
+msgstr "Modifier la disposition du tableau"
+
+#: 
+msgid "Further analyse data in the cells"
+msgstr "Analyser davantage les données dans les cellules"
+
+#: 
+msgid "Search here for a specific organisation unit"
+msgstr "Recherchez ici une unité organisationnelle spécifique"
+
+#: 
+msgid "Click on the arrows to sort the table based on the name or values"
+msgstr "Cliquez sur les flèches pour trier le tableau en fonction du nom ou des valeurs"
+
+#: 
+msgid "To change the table layout, click, hold, and drag this cell to the table headers"
+msgstr "Pour modifier la disposition du tableau, cliquez, maintenez enfoncé et faites glisser cette cellule vers les en-têtes du tableau"
+
+#: 
+msgid "Click on a data cell to see further analysis"
+msgstr "Cliquez sur une cellule de données pour voir une analyse plus approfondie"
+
+#: 
+msgid "You can also right click to view the cell data in different options"
+msgstr "Vous pouvez également cliquer avec le bouton droit pour afficher les données de la cellule dans différentes options"
+
+#: 
+msgid "Click on the arrow to drill down to the scorecard of this organisation unit's lower level"
+msgstr "Cliquez sur la flèche pour accéder au tableau de bord du niveau inférieur de cette unité organisationnelle"
+
+#: 
+msgid "Data"
+msgstr "Données"
+
+#: 
+msgid "In this page you can configure the default organisation unit and sharing access for the scorecard."
+msgstr "Dans cette page, vous pouvez configurer l'unité d'organisation par défaut et l'accès au partage pour la carte de performance."
+
+#: 
+msgid "In this page you can set default options for the scorecard view. These options affect the scorecard view"
+msgstr "Dans cette page, vous pouvez définir les options par défaut pour l'affichage de la carte de performance. Ces options affectent la vue de la carte de performance"
+
+#: 
+msgid "N/A"
+msgstr "N / A"
+
+#: 
+msgid "No Data"
+msgstr "Pas de données"
+
+#: 
+msgid "Target Reached/ On Track"
+msgstr "Objectif atteint/en bonne voie"
+
+#: 
+msgid "Progress, but more effort required"
+msgstr "Des progrès, mais plus d'efforts requis"
+
+#: 
+msgid "Not on track"
+msgstr "Pas sur la bonne voie"
+
+#: 
+msgid "Scorecard Not Found"
+msgstr "Carte de score introuvable"
+
+#: 
+msgid "This field is required"
+msgstr "Ce champ est requis"
+
+#: 
+msgid "User Organisation Unit"
+msgstr "Unité d'organisation de l'utilisateur"
+
+#: 
+msgid "User Sub-units"
+msgstr "Sous-unités utilisateur"
+
+#: 
+msgid "User Sub-x2-units"
+msgstr "Sous-unités utilisateur x2"
+
+#: 
+msgid "This group does not have any configured data sources"
+msgstr "Ce groupe n'a aucune source de données configurée"
+

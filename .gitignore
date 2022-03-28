@@ -8,7 +8,6 @@ apps/app/.env
 logs
 apps/app/cypress.env.json
 *.log
-apps/app/i18n
 .vscode
 *cypress/videos
 *cypress/screenshots
