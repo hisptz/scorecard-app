@@ -29,8 +29,7 @@
     "prestart": "yarn extract-translations && yarn generate-translations",
     "start": "react-scripts start",
     "prebuild": "yarn extract-translations && yarn generate-translations && rimraf build",
-    "build": "react-scripts build && d2-manifest package.json build/manifest.webapp",
-    "postbuild": "rimraf scorecard_widget.zip && cd build && bestzip ../scorecard_widget.zip *  && mkdir bundle && cp ../scorecard_widget.zip ./bundle && cd ..",
+    "build": "./build.sh",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "deploy": "d2-app-scripts deploy"
