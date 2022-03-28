@@ -77,7 +77,7 @@
     "@dhis2/cli-style": "^4.1.1",
     "bestzip": "^2.1.4",
     "d2-manifest": "^1.0.0",
-    "react-scripts": "^3.1.2",
+    "react-scripts": "^5.0.0",
     "rimraf": "^3.0.0"
   },
   "browserslist": {
