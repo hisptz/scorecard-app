@@ -1,0 +1,19 @@
+{
+    "name": "@hisptz/scorecard-hooks",
+    "version": "2.5.0",
+    "scripts": {
+        "build": "d2 app scripts build --verbose"
+    },
+    "dependencies": {
+        "@iapps/function-analytics": "^1.0.0-beta.23",
+        "@hisptz/scorecard-utils": "^2.5.0",
+        "@iapps/period-utilities": "^1.0.0-beta.7",
+        "react": "16.14.0"
+    },
+    "main": "./build/cjs/index.js",
+    "module": "./build/es/index.js",
+    "exports": {
+        "import": "./build/es/index.js",
+        "require": "./build/cjs/index.js"
+    }
+}
