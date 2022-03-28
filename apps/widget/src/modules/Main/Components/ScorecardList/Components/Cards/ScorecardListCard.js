@@ -9,7 +9,7 @@ import {scorecardWidgetState} from "../../../../../../states/scorecard"
 import {createWidget} from "../../../../../../services/widget";
 import {truncateDescription} from "@hisptz/scorecard-utils";
 import {useConfirmDialog} from "@hisptz/react-ui";
-import {ScorecardCardImage} from "@hisptz/scorecard-resources";
+import {ScorecardCardImage as holderImage} from "@hisptz/scorecard-resources";
 
 export default function ScorecardListCard({scorecard, grid}) {
     const setRoute = useSetRecoilState(RouterState);
@@ -62,7 +62,11 @@ export default function ScorecardListCard({scorecard, grid}) {
         >
             <div className="column space-between h-100">
                 <div className="text-center p-8">
-                    <ScorecardCardImage/>
+                    <img
+                        alt="img"
+                        src={holderImage}
+                        style={{height: 100, width: 200}}
+                    />
                 </div>
                 <div className="flex-1 column align-items-center">
                     <h4 className="scorecard-list-card-title">{title}</h4>
@@ -111,7 +115,11 @@ export default function ScorecardListCard({scorecard, grid}) {
             <div className="row space-between align-items-center">
                 <div className="row align-items-center">
                     <div>
-                        <ScorecardCardImage/>
+                        <img
+                            alt="img"
+                            src={holderImage}
+                            style={{height: 100, width: 200}}
+                        />
                     </div>
                     <div className="column start">
                         <h4 className="scorecard-list-card-title">{title}</h4>
