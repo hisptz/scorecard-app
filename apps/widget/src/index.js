@@ -43,8 +43,13 @@ if (process.env.NODE_ENV === 'production') {
     ReactDOM.render(
         <Provider
             config={{
-                baseUrl: "http://localhost:8081",
-                apiVersion: 34,
+                baseUrl: process.env.REACT_APP_BASE_URL ?? "http://localhost:8081",
+                apiVersion: process.env.REACT_APP_API_VERSION ?? 37,
+                serverVersion: {
+                    major: process.env.REACT_APP_SERVER_VERSION_MAJOR ?? 2,
+                    minor: process.env.REACT_APP_SERVER_VERSION_MINOR ?? 37,
+                    patch: process.env.REACT_APP_SERVER_VERSION_PATCH ?? 3
+                }
             }}
         >
             <App/>

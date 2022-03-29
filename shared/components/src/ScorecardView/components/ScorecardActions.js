@@ -15,6 +15,9 @@ import {
 import DownloadMenu from "./Download/Components/DownloadMenu";
 import useDownload from "./ScorecardViewHeader/hooks/useDownload";
 import {ScorecardOptionsModal} from "../../modals";
+import {useConfig} from "@dhis2/app-runtime";
+import {constructAppUrl} from "@hisptz/scorecard-utils";
+import {APP_NAME, APP_TITLE} from "@hisptz/scorecard-constants";
 
 export default function ScorecardActions({downloadAreaRef, dataEngine, widget}) {
     const setRoute = useSetRecoilState(RouterState);
@@ -22,6 +25,7 @@ export default function ScorecardActions({downloadAreaRef, dataEngine, widget}) 
         ScorecardViewState("options")
     );
     const [optionsOpen, setOptionsOpen] = useState(false);
+    const {baseUrl, serverVersion} = useConfig();
     const {download: onDownload} = useDownload(downloadAreaRef, dataEngine);
     const scorecardId = useRecoilValue(ScorecardIdState);
     const userAuthority = useRecoilValue(UserAuthorityOnScorecard(scorecardId));
@@ -39,7 +43,16 @@ export default function ScorecardActions({downloadAreaRef, dataEngine, widget}) 
                 ...prevRoute,
                 previous: `/view/${scorecardId}`,
             }));
-            history.push(`/edit/${scorecardId}`);
+
+            if (widget) {
+                const appUrl = constructAppUrl(baseUrl, {
+                    name: APP_NAME,
+                    title: APP_TITLE
+                }, serverVersion)
+                return window.parent.open(appUrl + "#/edit/" + scorecardId)
+            } else {
+                history.push(`/edit/${scorecardId}`);
+            }
         }
     };
 

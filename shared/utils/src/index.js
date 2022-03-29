@@ -21,7 +21,8 @@ export {
     getDataSourcesDisplayName,
     getDataSourcesFromGroups,
     generateRandomValues,
-    generateLegendDefaults
+    generateLegendDefaults,
+    constructAppUrl
 } from "./utils"
 
 export {getIncreasingStatus} from "./table";

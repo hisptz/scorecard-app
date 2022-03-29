@@ -32,26 +32,16 @@ export default function ScorecardList() {
     const [isLoading, setIsLoading] = useState(false);
 
     const engineState = useRecoilValue(EngineState);
-    const {show} = useAlert(
-        ({message}) => message,
-        ({type}) => ({...type, duration: 3000})
-    );
+    const {show} = useAlert(({message}) => message, ({type}) => ({...type, duration: 3000}));
 
-    const onSearch = useRef(
-        debounce((keyword) => {
-            setFilteredScorecards(() => {
-                return scorecards.filter(
-                    ({id, title, description, additionalLabels}) => {
-                        const index =
-                            `${id} ${title} ${description} ${additionalLabels?.join(
-                                " "
-                            )}`.toLowerCase();
-                        return index.match(new RegExp(keyword.toLowerCase()));
-                    }
-                );
+    const onSearch = useRef(debounce((keyword) => {
+        setFilteredScorecards(() => {
+            return scorecards.filter(({id, title, description, additionalLabels}) => {
+                const index = `${id} ${title} ${description} ${additionalLabels?.join(" ")}`.toLowerCase();
+                return index.match(new RegExp(keyword.toLowerCase()));
             });
-        })
-    );
+        });
+    }));
 
     useEffect(() => {
         if (keyword) {
@@ -76,8 +66,8 @@ export default function ScorecardList() {
             setCurrentDashboardId(dashboardItemId);
             load(dashboardItemId, engineState).then(({widget}) => {
                 if (widget !== undefined) {
-                    let scorecardId = widget['scoreCardId'];
-                    setDashboardAvailable(true)
+                    let scorecardId = widget['scorecardId'];
+                    setDashboardAvailable(true);
                     setRoute((prevRoute) => ({...prevRoute, previous: `/`}));
                     setIsLoading(false);
                     return history.push(`/view/${scorecardId}`);
@@ -101,45 +91,32 @@ export default function ScorecardList() {
                 initialStep={0}
             />
             {isEmpty(scorecards) && dashboardId !== "" && !dashboardAvailable ? (
-                    <EmptyScoreCardList/>
-                ) :
-                !isLoading && !dashboardAvailable && (
-                    <div className="column h-100">
-                        <div className="row p-16">
-                            <div className="row p-45 center" style={{paddingLeft: "25%"}}>
-                                <div className="column w-30">
-                                    <Input
-                                        className="search-input"
-                                        value={keyword}
-                                        onChange={({value}) => {
-                                            setKeyword(value);
-                                        }}
-                                        placeholder={i18n.t("Search")}
-                                    />
-                                </div>
-                            </div>
-                            <div className="w-100">
+                <EmptyScoreCardList/>) : !isLoading && !dashboardAvailable && (<div className="column h-100">
+                    <div className="row p-16">
+                        <div className="row p-45 center" style={{paddingLeft: "25%"}}>
+                            <div className="column w-30">
+                                <Input
+                                    className="search-input"
+                                    value={keyword}
+                                    onChange={({value}) => {
+                                        setKeyword(value);
+                                    }}
+                                    placeholder={i18n.t("Search")}
+                                />
                             </div>
                         </div>
-                        {isEmpty(filteredScorecards) ? (
-                            <div className="flex-1">
-                                <EmptySearchList keyword={keyword}/>
-                            </div>
-                        ) : (
-                            <PaginatedDisplay
-                                scorecards={filteredScorecards}
-                                pageSize={scorecardViewType === "grid" ? 8 : 5}
-                                listComponent={
-                                    scorecardViewType === "grid"
-                                        ? GridScorecardDisplay
-                                        : ListScorecardDisplay
-                                }
-                            />
-                        )}
+                        <div className="w-100">
+                        </div>
                     </div>
+                    {isEmpty(filteredScorecards) ? (<div className="flex-1">
+                        <EmptySearchList keyword={keyword}/>
+                    </div>) : (<PaginatedDisplay
+                        scorecards={filteredScorecards}
+                        pageSize={scorecardViewType === "grid" ? 8 : 5}
+                        listComponent={scorecardViewType === "grid" ? GridScorecardDisplay : ListScorecardDisplay}
+                    />)}
+                </div>
 
-                )
-            }
-        </Suspense>
-    );
+            )}
+        </Suspense>);
 }

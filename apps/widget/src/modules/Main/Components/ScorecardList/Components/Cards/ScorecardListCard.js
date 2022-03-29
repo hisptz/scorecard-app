@@ -39,7 +39,7 @@ export default function ScorecardListCard({scorecard, grid}) {
     const onCreateWidget = async () => {
         let scoreCardWidget = {
             dashboardId: useCurrentDashboardIdState,
-            scoreCardId: id,
+            scorecardId: id,
             periodType: "",
             period: "",
             organisation_unit: "",
