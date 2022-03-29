@@ -49,7 +49,7 @@ export const SCORECARD_VIEW_HELP_STEPS = [
         intro: (
             <div>
                 <h3>{i18n.t("Here is the scorecard!")}</h3>
-                {i18n.t("Here you can: ")}
+                {`${i18n.t("Here you can")}: `}
                 <ul>
                     <li>
                         {i18n.t("Sort table based on organisation unit names or values")}
