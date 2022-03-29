@@ -1,20 +1,20 @@
 {
-    "name": "@hisptz/scorecard-components",
-    "version": "2.5.0",
-    "main": "./build/cjs/index.js",
-    "scripts": {
-        "build": "d2 app scripts build --verbose"
-    },
-    "dependencies": {
-        "@hisptz/scorecard-state": "^2.5.0",
-        "@hisptz/scorecard-constants": "^2.5.0",
-        "@hisptz/scorecard-utils": "^2.5.0",
-        "@hisptz/scorecard-services": "^2.5.0",
-        "@hisptz/scorecard-resources": "^2.5.0"
-    },
-    "module": "./build/es/index.js",
-    "exports": {
-        "import": "./build/es/index.js",
-        "require": "./build/cjs/index.js"
-    }
+  "name": "@hisptz/scorecard-components",
+  "version": "2.5.1-beta.1",
+  "main": "./build/cjs/index.js",
+  "scripts": {
+    "build": "d2 app scripts build --verbose"
+  },
+  "dependencies": {
+    "@hisptz/scorecard-state": "^2.5.1-beta.1",
+    "@hisptz/scorecard-constants": "^2.5.1-beta.1",
+    "@hisptz/scorecard-utils": "^2.5.1-beta.1",
+    "@hisptz/scorecard-services": "^2.5.1-beta.1",
+    "@hisptz/scorecard-resources": "^2.5.1-beta.1"
+  },
+  "module": "./build/es/index.js",
+  "exports": {
+    "import": "./build/es/index.js",
+    "require": "./build/cjs/index.js"
+  }
 }

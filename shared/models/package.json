@@ -1,12 +1,12 @@
 {
   "name": "@hisptz/scorecard-models",
-  "version": "2.5.0",
+  "version": "2.5.1-beta.1",
   "scripts": {
     "build": "d2 app scripts build --verbose"
   },
   "dependencies": {
     "immer": "^9.0.5",
-    "@hisptz/scorecard-utils": "^2.5.0",
+    "@hisptz/scorecard-utils": "^2.5.1-beta.1",
     "@iapps/function-analytics": "^1.0.0-beta.23",
     "@iapps/period-utilities": "^1.0.0-beta.7",
     "lodash": "^4.17.21"
