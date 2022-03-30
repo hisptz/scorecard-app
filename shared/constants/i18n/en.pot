@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-03-15T11:59:48.141Z\n"
-"PO-Revision-Date: 2022-03-15T11:59:48.141Z\n"
+"POT-Creation-Date: 2022-03-29T09:31:39.479Z\n"
+"PO-Revision-Date: 2022-03-29T09:31:39.479Z\n"
 
 msgid "Column chart"
 msgstr "Column chart"
@@ -384,6 +384,9 @@ msgstr "Click here to download the scorecard in Excel, PDF, CSV, and JSON format
 
 msgid "Here is the scorecard!"
 msgstr "Here is the scorecard!"
+
+msgid "Here you can"
+msgstr "Here you can"
 
 msgid "Sort table based on organisation unit names or values"
 msgstr "Sort table based on organisation unit names or values"

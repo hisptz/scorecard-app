@@ -3,6 +3,7 @@ import {isEqual, pullAllWith} from "lodash";
 import PropTypes from "prop-types";
 import {useEffect} from "react";
 import {useSetRecoilState} from "recoil";
+import "../locales"
 
 export default function Help({helpSteps}) {
     const setHelpSteps = useSetRecoilState(HelpSteps);

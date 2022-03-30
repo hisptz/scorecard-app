@@ -33,7 +33,7 @@ export default function PeriodSelector() {
                 <InputField
                     fullWidth
                     name={"period"}
-                    label={"Period"}
+                    label={i18n.t("Period")}
                     value={periodSelection?.periods?.map(({name}) => name).join(", ")}
                     disabled
                 />

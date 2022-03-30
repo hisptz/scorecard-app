@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-03-10T11:51:18.154Z\n"
-"PO-Revision-Date: 2022-03-10T11:51:18.154Z\n"
+"POT-Creation-Date: 2022-03-30T06:56:33.408Z\n"
+"PO-Revision-Date: 2022-03-30T06:56:33.408Z\n"
 
 msgid "Welcome to Scorecard App!"
 msgstr "Welcome to Scorecard App!"
@@ -160,6 +160,9 @@ msgstr "View the changes on the preview panel above"
 
 msgid "Select a data source to configure"
 msgstr "Select a data source to configure"
+
+msgid "Search for Indicator"
+msgstr "Search for Indicator"
 
 msgid "Groups"
 msgstr "Groups"

@@ -24,7 +24,6 @@ export {
     generateLegendDefaults,
     constructAppUrl
 } from "./utils"
-
 export {getIncreasingStatus} from "./table";
 export {getNameCellWidth} from "./table";
 export {getColSpanWithOrgUnit} from "./table";

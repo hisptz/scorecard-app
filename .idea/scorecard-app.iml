@@ -23,6 +23,10 @@
       <excludeFolder url="file://$MODULE_DIR$/apps/widget/.d2" />
       <excludeFolder url="file://$MODULE_DIR$/apps/widget/build" />
       <excludeFolder url="file://$MODULE_DIR$/apps/app/build" />
+      <excludeFolder url="file://$MODULE_DIR$/shared/components/src/locales" />
+      <excludeFolder url="file://$MODULE_DIR$/shared/constants/src/locales" />
+      <excludeFolder url="file://$MODULE_DIR$/shared/state/src/locales" />
+      <excludeFolder url="file://$MODULE_DIR$/shared/utils/src/locales" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

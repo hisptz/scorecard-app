@@ -9,6 +9,8 @@ export {
     DATASTORE_SCORECARD_SUMMARY_KEY,
     SCORECARD_DOCUMENTATION_URL,
 } from "./config"
+import "./locales"
+
 export {ALMA_HEADERS} from "./alma"
 export {CalendarTypes} from "./calendar";
 export {CHART_TYPES} from "./chart-types.constant";

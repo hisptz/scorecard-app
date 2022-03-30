@@ -14,3 +14,7 @@ apps/app/cypress.env.json
 *cypress/downloads
 apps/widget/src/locales
 apps/widget/scorecard_widget.zip
+/shared/components/src/locales/
+/shared/constants/src/locales/
+/shared/state/src/locales/
+/shared/utils/src/locales/
