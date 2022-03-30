@@ -78,7 +78,7 @@ export default function DataGroupArea({onGroupAdd}) {
                     } else {
                         setSearchedGroups([])
                     }
-                }} placeholder="Search for Indicator"/>
+                }} placeholder={i18n.t("Search for Indicator")}/>
             </div>
             <h4 className="pl-16">{i18n.t("Groups")}</h4>
             <div style={{maxHeight: '60vh', overflowY: 'auto', flex: 1}}>
