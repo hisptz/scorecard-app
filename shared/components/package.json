@@ -3,7 +3,8 @@
   "version": "2.5.1-beta.1",
   "main": "./build/cjs/index.js",
   "scripts": {
-    "build": "d2 app scripts build --verbose"
+    "build": "d2 app scripts build --verbose",
+    "start": "d2 app scripts build --watch"
   },
   "dependencies": {
     "@hisptz/scorecard-state": "^2.5.1-beta.1",
