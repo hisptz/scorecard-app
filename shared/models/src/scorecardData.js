@@ -125,7 +125,6 @@ export default class ScorecardDataEngine {
 
     _updateDataEntities(rows) {
         (rows || []).forEach((row) => {
-            console.log({row})
             const dataEntityId = `${row?.dx?.id}_${row?.ou?.id}_${row?.pe?.id}`;
             const previousPeriod = find(this._selectedPeriods, [
                 "id",
@@ -659,7 +658,6 @@ export default class ScorecardDataEngine {
             (selection, callback) => {
                 this._getCustomAnalyticsData(selection)
                     .then((result) => {
-                        console.log({result})
                         this._updateDataEntities(result?.rows?.map(([dx, pe, ou, value]) => fromPairs([["dx", {id: dx}], ["pe", {id: pe}], ["ou", {id: ou}], ["value", `${value}`]])) ?? []);
                         this._progress = this._progress + 1;
                         this._progress$.next(this._progress);

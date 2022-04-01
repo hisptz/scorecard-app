@@ -1,4 +1,4 @@
-import {compact, find, findIndex, isEmpty, mergeWith, reduce, set} from "lodash";
+import {compact, find, findIndex, forIn, isEmpty, mergeWith, reduce, set} from "lodash";
 
 const customFunctionQuery = {
     function: {
@@ -53,6 +53,28 @@ export async function runCustomFunction({
     });
 }
 
+
+function formatData(data, {customFunction, rule}) {
+    const updatedData = {...data};
+    const updatedId = `${customFunction.id}.${rule.id}`;
+    const dxIndex = findIndex(updatedData?.headers, {name: "dx"});
+    set(updatedData, "metaData.dimensions.dx", [updatedId]);
+    updatedData[`metaData`]['items'][updatedId] = {name: `${customFunction.name} - ${rule.name}`};
+    updatedData["metaData"]["names"] = {};
+    forIn(updatedData?.[`metaData`]?.['items'], (value, key) => {
+        updatedData[`metaData`]['names'][key] = value?.name
+    });
+    forIn(updatedData['metaData']?.['dimensions'], (value, key) => {
+        updatedData["metaData"][key] = value;
+    })
+    set(updatedData, "rows", updatedData?.rows?.map(row => {
+        const updatedRow = [...row];
+        set(updatedRow, dxIndex, updatedId);
+        return updatedRow;
+    }))
+    return updatedData;
+}
+
 export async function evaluateCustomFunction({
                                                  customFunction,
                                                  ruleId,
@@ -74,13 +96,7 @@ export async function evaluateCustomFunction({
 
                 //This is under the assumption a custom function returns analytics object with only one dx value
                 if (data) {
-                    const dxIndex = findIndex(data?.headers, {name: "dx"});
-                    set(data, "rows", data?.rows?.map(row => {
-                        const updatedRow = [...row];
-                        set(updatedRow, dxIndex, `${customFunction.id}.${ruleId}`);
-                        return updatedRow;
-                    }))
-                    return data;
+                    return formatData(data, {customFunction, rule})
                 }
             }
         }

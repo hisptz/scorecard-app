@@ -1,29 +1,23 @@
-import React, {useEffect, useState} from "react";
+import React, {useMemo} from "react";
 import "./table-item.component.css";
 import {useRecoilValue} from "recoil";
 import {DataState} from "../../../../state/data";
 import {LayoutState} from "../../../../state/layout";
 import drawBnaTable from "../helper/draw-analytics-table-helper";
 import TableItemCellComponent from "../table-item-cell/table-item-cell.component";
-import {isEmpty} from "lodash";
 
 export default function TableItemComponent() {
     const data = useRecoilValue(DataState);
     const layout = useRecoilValue(LayoutState);
-    const [tableData, setTabledata] = useState();
-
-    useEffect(() => {
-        if (!isEmpty(data)) {
-            setTabledata(drawBnaTable(data["_data"], layout));
-        }
+    const tableData = useMemo(() => {
+        return drawBnaTable(data["_data"], layout);
     }, [data, layout]);
+
 
     return (
         <div className="table-item-container">
             <table
                 className="table table-bordered"
-
-                // #table [id]="tableConfiguration?.id"
             >
                 <thead>
                 {tableData?.subtitle !== " " ? (
