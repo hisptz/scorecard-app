@@ -23,7 +23,8 @@ export {
     generateRandomValues,
     generateLegendDefaults,
     constructAppUrl
-} from "./utils"
+} from "./utils";
+export {getCustomFunctionAnalytics} from "./customFunctions";
 export {getIncreasingStatus} from "./table";
 export {getNameCellWidth} from "./table";
 export {getColSpanWithOrgUnit} from "./table";

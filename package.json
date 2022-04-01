@@ -9,7 +9,8 @@
     "shared/*"
   ],
   "scripts": {
-    "start:app": "yarn workspace app start",
+    "start:app": "concurrently \"yarn start:libs\"  \"yarn workspace app start\"",
+    "deploy:app": "yarn workspace app deploy",
     "test:open:app": "yarn workspace app cy:open",
     "start:widget": "yarn workspace widget start",
     "build:utils": "yarn workspace @hisptz/scorecard-utils build",
@@ -20,8 +21,12 @@
     "build:models": "yarn workspace @hisptz/scorecard-models build",
     "build:resources": "yarn workspace @hisptz/scorecard-resources build",
     "build:services": "yarn workspace @hisptz/scorecard-services build",
-    "build:app": "yarn workspace app build",
-    "build:widget": "yarn workspace widget build",
+    "build:app": "yarn build:all && yarn workspace app build",
+    "build:widget": "yarn build:all && yarn workspace widget build",
+    "start:libs": "concurrently \"yarn workspace @hisptz/scorecard-utils start\" \"yarn workspace @hisptz/scorecard-constants start\" \"yarn workspace @hisptz/scorecard-state start\" \"yarn workspace @hisptz/scorecard-components start\" \"yarn workspace @hisptz/scorecard-hooks start\" \"yarn workspace @hisptz/scorecard-models start\" \"yarn workspace @hisptz/scorecard-resources start\" \"yarn workspace @hisptz/scorecard-services start\"",
     "build:all": "yarn build:utils && yarn build:constants && yarn build:state && yarn build:components && yarn build:hooks && yarn build:models && yarn build:resources && yarn build:services"
+  },
+  "devDependencies": {
+    "concurrently": "^7.0.0"
   }
 }

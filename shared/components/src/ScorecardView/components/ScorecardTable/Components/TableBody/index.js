@@ -20,6 +20,7 @@ import {
 } from "@hisptz/scorecard-state";
 import {ScorecardDataEngine} from "@hisptz/scorecard-models";
 import {Orientation} from "@hisptz/scorecard-constants";
+import {useDataEngine} from "@dhis2/app-runtime";
 
 
 function childrenAlreadyDisplayed(orgUnit, childrenOrgUnit) {
@@ -28,6 +29,7 @@ function childrenAlreadyDisplayed(orgUnit, childrenOrgUnit) {
 
 export default function ScorecardTableBody({orgUnits, dataEngine}) {
     const [expandedOrgUnit, setExpandedOrgUnit] = useState();
+    const dhis2Engine = useDataEngine();
     const {calendar} = useRecoilValue(SystemSettingsState);
     const tableOrientation = useRecoilValue(ScorecardTableOrientationState);
     const lowestOrgUnitLevel = useRecoilValue(LowestOrgUnitLevel);
@@ -56,6 +58,7 @@ export default function ScorecardTableBody({orgUnits, dataEngine}) {
 
     useEffect(() => {
         dataEngine
+            .setDataQueryEngine(dhis2Engine)
             .setDataGroups(dataGroups)
             .setPeriods(periods)
             .setOrgUnits([...(filteredOrgUnits ?? []), ...(childrenOrgUnits ?? [])])

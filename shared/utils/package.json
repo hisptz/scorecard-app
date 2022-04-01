@@ -16,7 +16,8 @@
     "require": "./build/cjs/index.js"
   },
   "scripts": {
-    "build": "d2 app scripts build --verbose"
+    "build": "d2 app scripts build --verbose",
+    "start": "d2 app scripts build --watch"
   },
   "main": "./build/cjs/index.js",
   "module": "./build/es/index.js"

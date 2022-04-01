@@ -8,6 +8,7 @@ import {
     find,
     flatten,
     forIn,
+    fromPairs,
     groupBy,
     head,
     isEmpty,
@@ -22,8 +23,11 @@ import {
 import {BehaviorSubject, of} from "rxjs";
 import {map, take} from "rxjs/operators";
 import {TableSort} from "@hisptz/scorecard-constants";
+import $ from "jquery";
+import {getCustomFunctionAnalytics} from "@hisptz/scorecard-utils";
 
 export default class ScorecardDataEngine {
+    engine
     _cancelled = false;
     _totalRequests = 0;
     _progress = 0;
@@ -51,6 +55,11 @@ export default class ScorecardDataEngine {
             (this._selectedData.normalDataItems?.length > 0 ||
                 this._selectedData.customDataItems?.length > 0)
         );
+    }
+
+    setDataQueryEngine(engine) {
+        this.engine = engine;
+        return this;
     }
 
     setPeriodType(periodType) {
@@ -533,6 +542,41 @@ export default class ScorecardDataEngine {
         return of(null).toPromise();
     }
 
+    _getCustomAnalyticsData(selections) {
+        if (!this._cancelled) {
+            let dx = [];
+            let ou = [];
+            let pe = [];
+
+            (selections || []).forEach((selection) => {
+                const availableData =
+                    this._dataEntities[`${selection.dx}_${selection.ou}_${selection.pe}`];
+
+                if (!availableData) {
+                    dx = [...dx, selection.dx];
+                    ou = [...ou, selection.ou];
+                    pe = [...pe, selection.pe];
+                }
+            });
+
+            dx = uniq(dx);
+            ou = uniq(ou);
+            pe = uniq(pe);
+
+            if (dx?.length === 0 && ou?.length === 0 && pe?.length === 0) {
+                return of(null).toPromise();
+            }
+
+            return getCustomFunctionAnalytics(this.engine, {
+                functions: dx,
+                orgUnits: ou,
+                periods: pe,
+            });
+
+        }
+        return of(null).toPromise();
+    }
+
     _getNormalScorecardData(selections) {
         const {selectedOrgUnits, selectedPeriods, selectedDataItems} =
         selections ?? {};
@@ -581,14 +625,49 @@ export default class ScorecardDataEngine {
     }
 
     _getCustomScorecardData(selections) {
-        const {selectedOrgUnits, selectedPeriods, selectedDataItems} = selections;
+        window.$ = $;
+        const {selectedOrgUnits, selectedPeriods, selectedDataItems} = selections ?? {};
         if (selectedDataItems?.length === 0) {
             return new Promise((resolve) => resolve(null));
         }
 
-        // TODO Add implementation when there is custom indicator
-        new Promise((resolve) => resolve(null)).then(() => {
+        let selectionList = [];
+
+        selectedOrgUnits.forEach((orgUnit) => {
+            const dataItemList = chunk(
+                selectedDataItems.map((dataItem) => {
+                    return selectedPeriods.map((period) => {
+                        return {
+                            dx: dataItem.id,
+                            ou: orgUnit,
+                            pe: period,
+                        };
+                    });
+                }),
+                2
+            );
+            dataItemList.forEach((selectedDataList) => {
+                selectionList = [...selectionList, flatten(selectedDataList)];
+            });
         });
+
+
+        mapLimit(
+            selectionList,
+            10,
+            (selection, callback) => {
+                this._getCustomAnalyticsData(selection)
+                    .then((result) => {
+                        this._updateDataEntities(result?.rows?.map(([dx, pe, ou, value]) => fromPairs([["dx", {id: dx}], ["pe", {id: pe}], ["ou", {id: ou}], ["value", `${value}`]])) ?? []);
+                        this._progress = this._progress + 1;
+                        this._progress$.next(this._progress);
+                        callback(null, result);
+                    })
+                    .catch((error) => {
+                        callback(error, null);
+                    });
+            }
+        )
     }
 
     _getSelectedPeriods(periods, periodType) {
@@ -621,10 +700,10 @@ export default class ScorecardDataEngine {
         );
         return {
             normalDataItems: selectedItems.filter(
-                (selectedItem) => selectedItem.type !== "functionRule"
+                (selectedItem) => selectedItem.type !== "customFunction"
             ),
             customDataItems: selectedItems.filter(
-                (selectedItem) => selectedItem.type === "functionRule"
+                (selectedItem) => selectedItem.type === "customFunction"
             ),
         };
     }
