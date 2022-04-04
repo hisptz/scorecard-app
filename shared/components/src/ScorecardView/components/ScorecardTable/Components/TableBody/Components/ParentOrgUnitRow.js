@@ -54,6 +54,7 @@ export default function ParentOrgUnitRow({
                 dataTest={"orgUnit-parent-table-column-cell"}
                 fixed
                 left={itemNumber ? "100px" : "50px"}
+                width="30%"
                 className="scorecard-org-unit-cell parent-org-unit-cell"
             >
                 <Tooltip
@@ -67,18 +68,13 @@ export default function ParentOrgUnitRow({
             {dataGroups?.map(({id: groupId, dataHolders}) =>
                 dataHolders?.map(({id: holderId, dataSources}) =>
                     periods?.map((period) => (
-                        <td
-                            className="data-cell"
-                            align="center"
+                        <DataContainer
                             key={`${groupId}-${holderId}-${period.id}`}
-                        >
-                            <DataContainer
-                                dataEngine={dataEngine}
-                                orgUnit={orgUnit}
-                                dataSources={dataSources}
-                                period={period}
-                            />
-                        </td>
+                            dataEngine={dataEngine}
+                            orgUnit={orgUnit}
+                            dataSources={dataSources}
+                            period={period}
+                        />
                     ))
                 )
             )}

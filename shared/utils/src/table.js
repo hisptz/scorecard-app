@@ -38,11 +38,14 @@ function getDataCellsWidth(screenWidth, colSpan) {
 export function getNameCellWidth(screenWidth, colSpan) {
     const dataCellsWidth = getDataCellsWidth(screenWidth, colSpan);
     const width = 100 - (dataCellsWidth / screenWidth) * 100;
+    if (width > 30) {
+        return `30%`
+    }
     if (width > 10) {
         return `${Math.abs(width)}%`;
-    } else {
-        return `${200}px`;
     }
+    return `${200}px`;
+
 }
 
 export function getIncreasingStatus(current, previous, effectiveGap) {

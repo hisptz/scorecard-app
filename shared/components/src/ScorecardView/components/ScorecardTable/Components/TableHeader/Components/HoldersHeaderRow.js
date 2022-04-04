@@ -38,7 +38,7 @@ export default function HoldersHeaderRow({orgUnits, nested}) {
                 isSingleGroup && <OrgUnitHeaderCells nested={nested} orgUnits={orgUnits}/>
             }
             {dataGroups?.map(({dataHolders}) =>
-                dataHolders?.map(({id, dataSources}) => (
+                dataHolders?.map(({id, dataSources}, index) => (
                     <DataTableColumnHeader
                         onSortIconClick={onSortClick}
                         sortDirection={

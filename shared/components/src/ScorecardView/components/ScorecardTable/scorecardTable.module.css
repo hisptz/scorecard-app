@@ -2,6 +2,7 @@
 .org-unit-header-cell {
     text-align: center !important;
     vertical-align: middle !important;
+    min-width: 200px !important;
 }
 
 .org-unit-header-cell > span {
@@ -99,10 +100,11 @@
         border-right: none !important;
     }
 
-    .average-row > *{
+    .average-row > * {
         border-bottom: none !important;
     }
-    .average-row > th{
+
+    .average-row > th {
         border-bottom: none !important;
     }
 
@@ -119,7 +121,7 @@
         border-right: none !important;
     }
 
-    .table-header-row > th:last-child{
+    .table-header-row > th:last-child {
         border-right: none !important;
     }
 

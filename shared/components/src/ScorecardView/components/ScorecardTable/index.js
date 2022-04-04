@@ -16,6 +16,7 @@ import TableHeader from "./Components/TableHeader";
 import TableLoader, {TableLinearLoader} from "./Components/TableLoader";
 import useTableConfig from "./hooks/useTableConfig";
 import classes from "./scorecardTable.module.css"
+import TableWidth from "./Components/TableWidth";
 
 export default function ScorecardTable({
                                            orgUnits,
@@ -53,6 +54,7 @@ export default function ScorecardTable({
                         layout="fixed"
                         scrollWidth={tableWidth ?? screenWidth}
                     >
+                        <TableWidth orgUnits={orgUnits}/>
                         <TableHeader
                             width={screenWidth}
                             orgUnits={orgUnits}
