@@ -74,7 +74,13 @@ function DataContainer({
     }, [orgUnitId, periodId, top, bottom,]);
 
     return (
-        <>
+        <td
+            className="data-cell"
+            align="center"
+            style={{
+                background: topColor,
+            }}
+        >
             <div
                 data-test={"data-cell"}
                 onClick={() => {
@@ -116,7 +122,7 @@ function DataContainer({
                                      analysisOpen={analysisOpen} setAnalysisOpen={setAnalysisOpen}
                                      stateActionRef={stateActionRef} setStateActionRef={setStateActionRef}/>
             )}
-        </>
+        </td>
     );
 }
 

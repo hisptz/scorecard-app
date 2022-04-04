@@ -99,18 +99,13 @@ export default function ChildOrgUnitRow({
             {dataGroups?.map(({id: groupId, dataHolders}) =>
                 dataHolders?.map(({id: holderId, dataSources}) =>
                     periods?.map((period) => (
-                        <td
-                            className="data-cell"
-                            align="center"
+                        <DataContainer
                             key={`${groupId}-${holderId}-${period.id}`}
-                        >
-                            <DataContainer
-                                dataEngine={dataEngine}
-                                orgUnit={orgUnit}
-                                dataSources={dataSources}
-                                period={period}
-                            />
-                        </td>
+                            dataEngine={dataEngine}
+                            orgUnit={orgUnit}
+                            dataSources={dataSources}
+                            period={period}
+                        />
                     ))
                 )
             )}
