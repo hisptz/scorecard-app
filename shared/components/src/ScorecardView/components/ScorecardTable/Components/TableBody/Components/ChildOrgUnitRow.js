@@ -87,6 +87,7 @@ export default function ChildOrgUnitRow({
                 dataTest={"orgUnit-parent-table-column-cell"}
                 fixed
                 left={itemNumber ? "100px" : "50px"}
+                width={"30%"}
                 onClick={onExpandClick}
             >
                 <Tooltip content={i18n.t("Drag to column headers to change layout")}>

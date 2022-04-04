@@ -49,9 +49,8 @@ export default function OrgUnitHeaderCells({orgUnits, nested}) {
                 top={"0"}
                 left={itemNumber ? "100px" : "50px"}
                 bordered
-                width={nameColumnWidth}
+                width={"200px"}
                 className={classes['org-unit-header-cell']}
-
                 rowSpan={"3"}
             >
                 {!nested && (

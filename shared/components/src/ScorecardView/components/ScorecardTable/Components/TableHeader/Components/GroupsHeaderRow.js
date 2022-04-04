@@ -20,7 +20,7 @@ export default function GroupsHeaderRow({nested, orgUnits}) {
     return (
         !isSingleGroup && <DataTableRow className={classes["table-header-row"]}>
             <OrgUnitHeaderCells orgUnits={orgUnits} nested={nested}/>
-            {dataGroups?.map(({title, id, dataHolders}) => (
+            {dataGroups?.map(({title, id, dataHolders}, index) => (
                 <DataTableCell
                     fixed
                     className="scorecard-table-header header"
