@@ -2917,6 +2917,20 @@
     react-color "^2.19.3"
     react-hook-form "^7.25.1"
 
+"@hisptz/react-ui@^1.0.35":
+  version "1.0.35"
+  resolved "https://registry.yarnpkg.com/@hisptz/react-ui/-/react-ui-1.0.35.tgz#0b2dea4bd2ade53f1bced54c42b7c39ac8ba9cfb"
+  integrity sha512-WJflJshkn5XQFtUBPUd9EP/gejo/CITHr7CpZhg4rLWokPNXY1OB77dbSWu/6jTnfQ/iBMADh4apLkSV2mSPJQ==
+  dependencies:
+    "@iapps/period-utilities" "^1.0.0-beta.5"
+    "@material-ui/core" "^4.12.3"
+    highcharts "^9.3.0"
+    highcharts-react-official "^3.1.0"
+    jodit-react "^1.1.10"
+    react-beautiful-dnd "^13.1.0"
+    react-color "^2.19.3"
+    react-hook-form "^7.25.1"
+
 "@hookform/devtools@^4.0.2":
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/@hookform/devtools/-/devtools-4.1.0.tgz#00b2083c704ae855d3485d7336ce3d18e44e4d46"
