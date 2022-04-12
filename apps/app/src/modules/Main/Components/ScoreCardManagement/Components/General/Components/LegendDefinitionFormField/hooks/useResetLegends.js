@@ -6,7 +6,6 @@ import {resetLegends} from "../../../utils/utils";
 export function useResetLegends() {
     const {watch, setValue} = useFormContext();
     const dataGroups = watch("dataSelection.dataGroups");
-    resetLegends()
     const shouldVerify = dataGroups.length > 0;
 
     const onResetLegends = useCallback((updatedDefinitions) => {
