@@ -8194,10 +8194,10 @@ cypress-cucumber-preprocessor@^4.3.0:
     minimist "^1.2.5"
     through "^2.3.8"
 
-cypress-multi-reporters@^1.5.0:
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/cypress-multi-reporters/-/cypress-multi-reporters-1.5.0.tgz#fff2758c082b49e8b91fed39f9650c70bc06de0d"
-  integrity sha512-6rJ1rk1RpjZwTeydCDc8r3iOmWj2ZEYo++oDTJHNEu7eetb3W1cYDNo5CdxF/r0bo7TLQsOEpBHOCYBZfPVt/g==
+cypress-multi-reporters@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/cypress-multi-reporters/-/cypress-multi-reporters-1.6.0.tgz#2c6833b92e3df412c233657c55009e2d5e1cc7c1"
+  integrity sha512-JN9yMzDmPwwirzi95N2FC8VJZ0qp+uUJ1ixYHpJFaAtGgIx15LjVmASqQaxnDh8q57jIIJ6C0o7imiLU6N1YNQ==
   dependencies:
     debug "^4.1.1"
     lodash "^4.17.15"
@@ -20695,8 +20695,10 @@ watchpack@^1.6.0, watchpack@^1.7.4:
   resolved "https://registry.yarnpkg.com/watchpack/-/watchpack-1.7.5.tgz#1267e6c55e0b9b5be44c2023aed5437a2c26c453"
   integrity sha512-9P3MWk6SrKjHsGkLT2KHXdQ/9SNkyoJbabxnKOoJepsvJjJG8uYTR3yTPxPQvNDI3w4Nz1xnE0TLHK4RIVe/MQ==
   dependencies:
+    chokidar "^3.4.1"
     graceful-fs "^4.1.2"
     neo-async "^2.5.0"
+    watchpack-chokidar2 "^2.0.1"
   optionalDependencies:
     chokidar "^3.4.1"
     watchpack-chokidar2 "^2.0.1"

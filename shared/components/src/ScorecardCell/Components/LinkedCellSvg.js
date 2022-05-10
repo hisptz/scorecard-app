@@ -10,9 +10,11 @@ export default function LinkedCellSvg({
                                           bottomColor,
                                           topStatus,
                                           bottomStatus,
+    cellRef
                                       }) {
-    const width = 100;
-    const height = 47;
+    console.log(cellRef);
+    const width = cellRef?.offsetWidth - 1 || 100;
+    const height = cellRef?.offsetHeight - 1 || 47;
     const fontSize = 12;
     const topFontSize = 12;
     const bottomFontSize = 12;

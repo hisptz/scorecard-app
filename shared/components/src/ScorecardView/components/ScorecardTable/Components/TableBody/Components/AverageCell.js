@@ -1,13 +1,13 @@
 import {head, last, round} from "lodash";
 import PropTypes from "prop-types";
-import React from "react";
+import React, {useRef, useState} from "react";
 import {useRecoilValue} from "recoil";
 import {OrgUnitLevels, ScorecardLegendDefinitionSelector, ScorecardViewState} from "@hisptz/scorecard-state";
 import {getLegend} from "@hisptz/scorecard-utils";
 import {LinkedCellSvg, SingleCellSvg} from "../../../../../../index";
 
 
-function SingleAverageCell({dataSources, values, bold, period, orgUnit}) {
+function SingleAverageCell({cellRef, dataSources, values, bold, period, orgUnit}) {
 
     const [dataSource] = dataSources ?? [];
     const defaultLegendDefinitions = useRecoilValue(
@@ -35,13 +35,14 @@ function SingleAverageCell({dataSources, values, bold, period, orgUnit}) {
     }
 
     return <SingleCellSvg
+        cellRef={cellRef}
         color={cellColor}
         bold={bold}
         value={head(values) !== undefined ? round(head(values), 2) : ""}
     />
 }
 
-function LinkedAverageCell({dataSources, values, bold, period, orgUnit}) {
+function LinkedAverageCell({cellRef, dataSources, values, bold, period, orgUnit}) {
     const defaultLegendDefinitions = useRecoilValue(
         ScorecardLegendDefinitionSelector(true)
     );
@@ -77,6 +78,7 @@ function LinkedAverageCell({dataSources, values, bold, period, orgUnit}) {
 
     return (
         <LinkedCellSvg
+            cellRef={cellRef}
             topColor={topCellColor}
             bottomColor={bottomCellColor}
             bold={bold}
@@ -106,12 +108,17 @@ LinkedAverageCell.propTypes = {
 
 function ComplexAverageCell({value, bold, dataSources, period, orgUnit}) {
     const values = Object.values(value);
+
+    const [tableCellRef, setTableCellRef] = useState();
+
     return (
-        <td className="data-cell" align="center">
+        <td ref={setTableCellRef} className="data-cell" align="center">
             {values.length > 1 ? (
-                <LinkedAverageCell period={period} orgUnit bold={bold} dataSources={dataSources} values={values}/>
+                <LinkedAverageCell cellRef={tableCellRef} period={period} orgUnit bold={bold} dataSources={dataSources}
+                                   values={values}/>
             ) : (
-                <SingleAverageCell period={period} orgUnit={orgUnit} bold={bold} dataSources={dataSources}
+                <SingleAverageCell cellRef={tableCellRef} period={period} orgUnit={orgUnit} bold={bold}
+                                   dataSources={dataSources}
                                    values={values}/>
             )}
         </td>
@@ -128,14 +135,18 @@ ComplexAverageCell.propTypes = {
 
 
 export default function AverageCell({value, bold, dataSources, orgUnit, period}) {
+
+    const [singleCellRef, setSingleCellRef] = useState();
+
     if (value === undefined) {
         return null;
     }
 
     if (typeof value === "number") {
+
         return (
-            <td className="data-cell" align="center">
-                <SingleCellSvg bold={bold} value={value ? round(value, 2) : ""}/>
+            <td ref={setSingleCellRef} className="data-cell" align="center">
+                <SingleCellSvg cellRef={singleCellRef} bold={bold} value={value ? round(value, 2) : ""}/>
             </td>
         );
     }
