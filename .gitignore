@@ -18,3 +18,4 @@ apps/widget/scorecard_widget.zip
 /shared/constants/src/locales/
 /shared/state/src/locales/
 /shared/utils/src/locales/
+/apps/app/cypress/downloads/

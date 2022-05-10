@@ -57,7 +57,8 @@ export default function ScorecardListCard({scorecard, grid}) {
         }
     };
 
-    const onDelete = () => {
+    const onDelete = (value, event) => {
+        event.stopPropagation();
         confirm({
             title: i18n.t("Confirm scorecard delete"),
             message: <p>
