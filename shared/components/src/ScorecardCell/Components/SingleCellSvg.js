@@ -8,6 +8,8 @@ export default function SingleCellSvg({cellRef, color, value, status, bold}) {
     const fontSize = 12;
     const arrowFontSize = 10;
 
+    const decreasing = status === "decreasing";
+
     return (
         <svg width={width} height={height} style={{display: "block"}}>
             <polygon
@@ -15,26 +17,23 @@ export default function SingleCellSvg({cellRef, color, value, status, bold}) {
                 style={{fill: color ?? "#FFFFFF"}}
             />
             {status &&
-                (status === "increasing" ? (
-                    <IncreasingArrows
-                        fontSize={arrowFontSize}
-                        y={height - arrowFontSize * 2}
-                        x={width / 2 - fontSize * 2}
-                    />
-                ) : (
-                    <DecreasingArrows
-                        fontSize={arrowFontSize}
-                        y={height - fontSize}
-                        x={width / 2 - fontSize * 2}
-                    />
-                ))}
+                (
+                    decreasing ?
+                        <DecreasingArrows x={width / 2 - fontSize * 2} y={(height - arrowFontSize) / 2 + arrowFontSize}
+                                          fontSize={arrowFontSize}/> :
+                        <IncreasingArrows
+                            fontSize={arrowFontSize}
+                            y={(height - arrowFontSize) / 2}
+                            x={width / 2 - fontSize * 2}
+                        />
+                )}
             <text
                 id={"test-average-column"}
                 style={{fontWeight: bold && "bold"}}
                 lengthAdjust="spacingAndGlyphs"
                 fontSize={fontSize}
                 x={width / 2 - fontSize}
-                y={height - fontSize}
+                y={(height - fontSize) / 2 + fontSize}
             >
                 {value}
             </text>
