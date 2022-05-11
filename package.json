@@ -4,14 +4,21 @@
   "description": "Interactive Scorecard Application",
   "license": "BSD-3-Clause",
   "private": true,
-  "workspaces": [
-    "apps/*",
-    "shared/*"
-  ],
+  "workspaces": {
+    "packages": [
+      "apps/*",
+      "shared/*"
+    ],
+    "nohoist": [
+      "**/cypress-multi-reporters/**"
+    ]
+  },
   "scripts": {
     "start:app": "concurrently \"yarn start:libs\"  \"yarn workspace app start\"",
     "deploy:app": "yarn workspace app deploy",
     "test:open:app": "yarn workspace app cy:open",
+    "test:capture:app": "yarn workspace app cy:capture",
+    "test:stub:app": "yarn workspace app cy:stub",
     "start:widget": "yarn workspace widget start",
     "build:utils": "yarn workspace @hisptz/scorecard-utils build",
     "build:constants": "yarn workspace @hisptz/scorecard-constants build",

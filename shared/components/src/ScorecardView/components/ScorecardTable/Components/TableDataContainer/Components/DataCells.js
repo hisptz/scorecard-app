@@ -8,7 +8,7 @@ import {ScorecardViewState} from "@hisptz/scorecard-state";
 import {LinkedCellSvg, SingleCellSvg} from "../../../../../../index";
 
 
-export function SingleDataCell({data, color, indicator}) {
+export function SingleDataCell({cellRef, data, color, indicator}) {
     const {arrows} = useRecoilValue(ScorecardViewState("options")) ?? {};
     const {current, previous} = data ?? {};
     const increasing = useMemo(() => {
@@ -23,6 +23,7 @@ export function SingleDataCell({data, color, indicator}) {
     ;
     return current ? (
         <SingleCellSvg
+            cellRef={cellRef}
             status={increasing}
             value={`${current ?? ""}`}
             color={color}
@@ -39,7 +40,7 @@ SingleDataCell.propTypes = {
 };
 
 
-export function LinkedDataCell({topData, bottomData, topColor, bottomColor, topIndicator, bottomIndicator}) {
+export function LinkedDataCell({cellRef, topData, bottomData, topColor, bottomColor, topIndicator, bottomIndicator}) {
     const {current: topCurrent, previous: topPrevious} = topData ?? {};
     const {current: bottomCurrent, previous: bottomPrevious} = bottomData ?? {};
     const {arrows} = useRecoilValue(ScorecardViewState("options")) ?? {};
@@ -61,6 +62,7 @@ export function LinkedDataCell({topData, bottomData, topColor, bottomColor, topI
 
     return topCurrent || bottomCurrent ? (
         <LinkedCellSvg
+            cellRef={cellRef}
             topValue={topCurrent}
             topColor={topColor}
             bottomValue={bottomCurrent}

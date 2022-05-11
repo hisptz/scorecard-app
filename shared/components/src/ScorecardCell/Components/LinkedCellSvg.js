@@ -10,9 +10,10 @@ export default function LinkedCellSvg({
                                           bottomColor,
                                           topStatus,
                                           bottomStatus,
+                                          cellRef
                                       }) {
-    const width = 100;
-    const height = 47;
+    const width = cellRef?.offsetWidth - 1 || 100;
+    const height = cellRef?.offsetHeight - 1 || 47;
     const fontSize = 12;
     const topFontSize = 12;
     const bottomFontSize = 12;
@@ -73,7 +74,7 @@ export default function LinkedCellSvg({
                 lengthAdjust="spacingAndGlyphs"
                 textLength={bottomValue?.length > 4 ? 28 : null}
                 fontSize={bottomFontSize}
-                x={width / 2 + padding / 4}
+                x={width / 2 + padding}
                 y={height - padding}
             >
                 {bottomValue}

@@ -26,11 +26,11 @@ function DataContainer({
     const [analysisOpen, setAnalysisOpen] = useState(false);
     const [topData, setTopData] = useState();
     const [bottomData, setBottomData] = useState();
-    const ref = useRef(null);
     const [stateActionRef, setStateActionRef] = useState(null);
     const resetPeriodsOptionSelection = useResetRecoilState(cellPeriodOptionAtom);
     const resetOrgUnitOptionSelection = useResetRecoilState(orgUnitOptionOnCell);
 
+    const [tableCellRef, setTableRef] = useState();
 
     const [top, bottom] = dataSources ?? [];
     const {color: topColor} =
@@ -75,44 +75,41 @@ function DataContainer({
 
     return (
         <td
+            ref={setTableRef}
             className="data-cell"
             align="center"
-            style={{
-                background: topColor,
+            data-test={"data-cell"}
+            onClick={(event) => {
+                event.stopPropagation();
+                setAnalysisOpen(true);
+            }}
+            onContextMenu={(e) => {
+                e.preventDefault();
+                setStateActionRef(e.target);
             }}
         >
-            <div
-                data-test={"data-cell"}
-                onClick={() => {
-                    setAnalysisOpen(true);
-                }}
-                onContextMenu={(e) => {
-                    e.preventDefault();
-                    setStateActionRef(e.target);
-                }}
-                ref={ref}
-            >
-                {loading ? (
-                    <LoadingCell/>
-                ) : dataSources?.length > 1 ? (
-                    <LinkedDataCell
-                        topIndicator={top}
-                        bottomIndicator={bottom}
-                        bottomData={bottomData}
-                        topData={topData}
-                        bottomColor={bottomColor}
-                        topColor={topColor}
-                    />
-                ) : (
-                    <SingleDataCell indicator={top} data={topData} color={topColor}/>
-                )}
-            </div>
+            {loading ? (
+                <LoadingCell/>
+            ) : dataSources?.length > 1 ? (
+                <LinkedDataCell
+                    cellRef={tableCellRef}
+                    topIndicator={top}
+                    bottomIndicator={bottom}
+                    bottomData={bottomData}
+                    topData={topData}
+                    bottomColor={bottomColor}
+                    topColor={topColor}
+                />
+            ) : (
+                <SingleDataCell cellRef={tableCellRef} indicator={top} data={topData} color={topColor}/>
+            )}
             {analysisOpen && (
                 <TableCellAnalysis
                     orgUnit={orgUnit}
                     period={period}
                     dataHolder={{dataSources}}
-                    onClose={() => {
+                    onClose={(_, event) => {
+                        event.stopPropagation();
                         setAnalysisOpen(false);
                     }}
                 />
@@ -127,7 +124,7 @@ function DataContainer({
 }
 
 
-export default memo(DataContainer)
+export default DataContainer;
 
 DataContainer.propTypes = {
     dataEngine: PropTypes.instanceOf(ScorecardDataEngine).isRequired,
