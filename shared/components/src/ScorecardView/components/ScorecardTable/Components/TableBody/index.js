@@ -46,6 +46,7 @@ export default function ScorecardTableBody({orgUnits, dataEngine}) {
     const resetRefreshScorecard = useResetRecoilState(RefreshScorecardState);
     const [overallAverage, setOverallAverage] = useState();
 
+
     useEffect(() => {
         if (loading !== undefined && !loading) {
             dataEngine

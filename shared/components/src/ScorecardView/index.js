@@ -51,6 +51,7 @@ export default function ScorecardView({widget}) {
 
     const reset = useRecoilCallback(({reset}) => () => {
         reset(ScorecardViewState("periodSelection"));
+        reset(ScorecardViewState("orgUnitSearchKeyword"))
         reset(ScorecardNameSort(orgUnitsIds));
         reset(ScorecardViewState("options"));
         reset(ScorecardIdState);

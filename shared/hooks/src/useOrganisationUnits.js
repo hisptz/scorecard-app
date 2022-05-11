@@ -20,17 +20,28 @@ const orgUnitSearchQuery = {
         resource: "organisationUnits",
         params: ({keyword}) => ({
             filter: [`displayName:ilike:${keyword}`],
-            fields: ["id", "displayName", "path"],
+            fields: ["id", "displayName", "path", "level"],
         }),
     },
     idQuery: {
         resource: "organisationUnits",
         params: ({keyword}) => ({
             filter: [`id:ilike:${keyword}`],
-            fields: ["id", "displayName", "path"],
+            fields: ["id", "displayName", "path", "level"],
         }),
     },
 };
+
+
+function formatSearchedOrgUnits(orgUnits) {
+    return orgUnits.map(orgUnit => {
+        return {
+            ...orgUnit,
+            hierarchy: orgUnit.displayName,
+        }
+
+    });
+}
 
 export async function searchOrganisationUnit(keyword, engine) {
     if (!isEmpty(keyword)) {
@@ -40,7 +51,7 @@ export async function searchOrganisationUnit(keyword, engine) {
         if (!isEmpty(data)) {
             const idResponse = data?.idQuery?.organisationUnits ?? [];
             const nameResponse = data?.nameQuery?.organisationUnits ?? [];
-            return [...idResponse, ...nameResponse];
+            return formatSearchedOrgUnits([...idResponse, ...nameResponse]);
         }
     }
     return [];

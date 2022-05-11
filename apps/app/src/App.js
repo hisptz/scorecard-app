@@ -4,9 +4,9 @@ import {ConfirmDialogProvider} from "@hisptz/react-ui";
 import {FullPageError, FullPageLoader} from "@hisptz/scorecard-components";
 import {DATASTORE_NAMESPACE} from "@hisptz/scorecard-constants";
 import {useInitApp} from "@hisptz/scorecard-hooks";
-import React, {Suspense} from "react";
+import React, {Suspense, useEffect} from "react";
 import {ErrorBoundary} from "react-error-boundary";
-import {RecoilRoot} from "recoil";
+import {RecoilRoot, useRecoilSnapshot} from "recoil";
 import "./media-queries.css";
 import "./App.css";
 import "./print.css"
@@ -14,6 +14,18 @@ import Router from "./modules/Router";
 import "./locales";
 import "intro.js/introjs.css";
 import "./intro-dhis2.css";
+
+function DebugObserver(){
+    const snapshot = useRecoilSnapshot();
+    useEffect(() => {
+        console.debug('The following atoms were modified:');
+        for (const node of snapshot.getNodes_UNSTABLE({isModified: true})) {
+            console.debug(node.key, snapshot.getLoadable(node));
+        }
+    }, [snapshot]);
+
+    return null;
+}
 
 const MyApp = () => {
     const {initializeState} = useInitApp();
@@ -25,6 +37,7 @@ const MyApp = () => {
         >
             <CssReset/>
             <RecoilRoot initializeState={initializeState}>
+                <DebugObserver/>
                 <ErrorBoundary FallbackComponent={FullPageError}>
                     <ConfirmDialogProvider>
                         <Suspense fallback={<FullPageLoader/>}>

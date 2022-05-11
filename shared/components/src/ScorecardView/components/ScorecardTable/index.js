@@ -27,12 +27,11 @@ export default function ScorecardTable({
         () => initialDataEngine ?? new ScorecardDataEngine(),
         [initialDataEngine]
     );
-    const {loading} = useTableConfig(dataEngine, orgUnits);
+    const {loading} = useTableConfig(dataEngine, orgUnits, nested);
 
     const {width: screenWidth} = useRecoilValue(ScreenDimensionState);
     const {tableWidth} = useRecoilValue(ScorecardTableConfigState(orgUnits));
     const reset = useRecoilCallback(({reset}) => () => {
-        reset(ScorecardViewState("orgUnitSearchKeyword"));
         reset(ScorecardDataLoadingState(orgUnits));
         dataEngine.reset(true);
     });
