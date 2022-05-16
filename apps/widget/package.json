@@ -38,7 +38,7 @@
     "@dhis2/app-runtime": "^3.2.9",
     "@dhis2/app-service-datastore": "^1.0.0-alpha.2",
     "@dhis2/d2-i18n": "^1.1.0",
-    "@dhis2/ui": "^8.1.7",
+    "@dhis2/ui": "^8.2.5",
     "@hisptz/react-ui": "^1.0.33",
     "@hisptz/scorecard-components": "^2.5.1-beta.2",
     "@hisptz/scorecard-constants": "^2.5.1-beta.2",
