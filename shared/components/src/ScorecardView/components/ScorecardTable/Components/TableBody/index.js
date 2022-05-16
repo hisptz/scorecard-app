@@ -21,13 +21,15 @@ import {
 import {ScorecardDataEngine} from "@hisptz/scorecard-models";
 import {Orientation} from "@hisptz/scorecard-constants";
 import {useDataEngine} from "@dhis2/app-runtime";
+import useTableConfig from "../../hooks/useTableConfig";
 
 
 function childrenAlreadyDisplayed(orgUnit, childrenOrgUnit) {
     return childrenOrgUnit.some(childOrgUnit => childOrgUnit.level === orgUnit.level + 1);
 }
 
-export default function ScorecardTableBody({orgUnits, dataEngine}) {
+export default function ScorecardTableBody({orgUnits, dataEngine, nested}) {
+    const {loading: configLoader} = useTableConfig(dataEngine, orgUnits, nested);
     const [expandedOrgUnit, setExpandedOrgUnit] = useState();
     const dhis2Engine = useDataEngine();
     const {calendar} = useRecoilValue(SystemSettingsState);
@@ -78,25 +80,61 @@ export default function ScorecardTableBody({orgUnits, dataEngine}) {
     }, [dataEngine, refreshScorecard]);
 
     return (
-        <DataTableBody>
-            {
-                <Fragment>
-                    {tableOrientation === Orientation.ORG_UNIT_VS_DATA ? (
-                        <Fragment>
-                            {filteredOrgUnits?.map((orgUnit, index) => (
-                                <>
-                                    <div className="page-break"/>
-                                    {
-                                        (orgUnit.level === lowestOrgUnitLevel.level || childrenAlreadyDisplayed(orgUnit, childrenOrgUnits)) ?
-                                            <ParentOrgUnitRow
-                                                index={index}
-                                                dataEngine={dataEngine}
-                                                key={`${orgUnit?.id}-row`}
-                                                orgUnit={orgUnit}
-                                                overallAverage={overallAverage}
-                                                orgUnits={orgUnits}
-                                            /> : <ChildOrgUnitRow
-                                                index={index}
+
+        configLoader ? <div/> :
+            <DataTableBody>
+                {
+                    <Fragment>
+                        {tableOrientation === Orientation.ORG_UNIT_VS_DATA ? (
+                            <Fragment>
+                                {filteredOrgUnits?.map((orgUnit, index) => (
+                                    <>
+                                        <div className="page-break"/>
+                                        {
+                                            (orgUnit.level === lowestOrgUnitLevel.level || childrenAlreadyDisplayed(orgUnit, childrenOrgUnits)) ?
+                                                <ParentOrgUnitRow
+                                                    index={index}
+                                                    dataEngine={dataEngine}
+                                                    key={`${orgUnit?.id}-row`}
+                                                    orgUnit={orgUnit}
+                                                    overallAverage={overallAverage}
+                                                    orgUnits={orgUnits}
+                                                /> : <ChildOrgUnitRow
+                                                    index={index}
+                                                    dataEngine={dataEngine}
+                                                    key={`${orgUnit?.id}-row`}
+                                                    onExpand={setExpandedOrgUnit}
+                                                    orgUnit={orgUnit}
+                                                    expandedOrgUnit={expandedOrgUnit}
+                                                    overallAverage={overallAverage}
+                                                    orgUnits={orgUnits}
+                                                />
+                                        }
+                                    </>
+                                ))}
+                                {childrenOrgUnits?.map((orgUnit, index) => {
+                                    if (orgUnit.level === lowestOrgUnitLevel.level) {
+
+                                        return (
+                                            <>
+                                                <div className="page-break"/>
+                                                <ParentOrgUnitRow
+                                                    index={index + 1}
+                                                    dataEngine={dataEngine}
+                                                    key={`${orgUnit?.id}-row`}
+                                                    orgUnit={orgUnit}
+                                                    overallAverage={overallAverage}
+                                                    orgUnits={orgUnits}
+                                                />
+                                            </>
+                                        )
+                                    }
+
+                                    return (
+                                        <>
+                                            <div className="page-break"/>
+                                            <ChildOrgUnitRow
+                                                index={index + 1}
                                                 dataEngine={dataEngine}
                                                 key={`${orgUnit?.id}-row`}
                                                 onExpand={setExpandedOrgUnit}
@@ -105,82 +143,49 @@ export default function ScorecardTableBody({orgUnits, dataEngine}) {
                                                 overallAverage={overallAverage}
                                                 orgUnits={orgUnits}
                                             />
-                                    }
-                                </>
-                            ))}
-                            {childrenOrgUnits?.map((orgUnit, index) => {
-                                if (orgUnit.level === lowestOrgUnitLevel.level) {
-
-                                    return (
-                                        <>
-                                            <div className="page-break"/>
-                                            <ParentOrgUnitRow
-                                                index={index + 1}
-                                                dataEngine={dataEngine}
-                                                key={`${orgUnit?.id}-row`}
-                                                orgUnit={orgUnit}
-                                                overallAverage={overallAverage}
-                                                orgUnits={orgUnits}
-                                            />
                                         </>
                                     )
-                                }
-
-                                return (
-                                    <>
-                                        <div className="page-break"/>
-                                        <ChildOrgUnitRow
-                                            index={index + 1}
-                                            dataEngine={dataEngine}
-                                            key={`${orgUnit?.id}-row`}
-                                            onExpand={setExpandedOrgUnit}
-                                            orgUnit={orgUnit}
-                                            expandedOrgUnit={expandedOrgUnit}
-                                            overallAverage={overallAverage}
-                                            orgUnits={orgUnits}
-                                        />
-                                    </>
-                                )
-                            })}
-                        </Fragment>
-                    ) : (
-                        filteredDataHolders?.map(({id, dataSources}, index) => (
-                            <>
-                                <div className="page-break"/>
-                                <DataSourceRow
-                                    index={index}
-                                    dataEngine={dataEngine}
-                                    orgUnits={orgUnits}
-                                    dataSources={dataSources}
-                                    key={`${id}-row`}
-                                    overallAverage={overallAverage}
-                                />
-                            </>
-                        ))
-                    )}
-                    {averageRow &&
-                        (tableOrientation === Orientation.ORG_UNIT_VS_DATA ? (
-                            <>
-                                <div className="page-break"/>
-                                <AverageDataSourceRow
-                                    dataEngine={dataEngine}
-                                    orgUnits={orgUnits}
-                                    overallAverage={overallAverage}
-                                />
-                            </>
+                                })}
+                            </Fragment>
                         ) : (
-                            <>
-                                <div className="page-break"/>
-                                <AverageOrgUnitRow
-                                    dataEngine={dataEngine}
-                                    orgUnits={orgUnits}
-                                    overallAverage={overallAverage}
-                                />
-                            </>
-                        ))}
-                </Fragment>
-            }
-        </DataTableBody>
+                            filteredDataHolders?.map(({id, dataSources}, index) => (
+                                <>
+                                    <div className="page-break"/>
+                                    <DataSourceRow
+                                        index={index}
+                                        dataEngine={dataEngine}
+                                        orgUnits={orgUnits}
+                                        dataSources={dataSources}
+                                        key={`${id}-row`}
+                                        overallAverage={overallAverage}
+                                    />
+                                </>
+                            ))
+                        )}
+                        {averageRow &&
+                            (tableOrientation === Orientation.ORG_UNIT_VS_DATA ? (
+                                <>
+                                    <div className="page-break"/>
+                                    <AverageDataSourceRow
+                                        dataEngine={dataEngine}
+                                        orgUnits={orgUnits}
+                                        overallAverage={overallAverage}
+                                    />
+                                </>
+                            ) : (
+                                <>
+                                    <div className="page-break"/>
+                                    <AverageOrgUnitRow
+                                        dataEngine={dataEngine}
+                                        orgUnits={orgUnits}
+                                        overallAverage={overallAverage}
+                                    />
+                                </>
+                            ))}
+                    </Fragment>
+                }
+            </DataTableBody>
+
     );
 }
 
