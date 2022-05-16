@@ -5,6 +5,7 @@ import {EngineState} from "./engine";
 import {PeriodResolverState} from "./period";
 import {ScorecardDataSourceState, ScorecardViewState} from "./scorecard";
 import {UserState} from "./user";
+import {getHoldersFromGroups} from "@hisptz/scorecard-utils";
 
 const {atomFamily} = require("recoil");
 
@@ -156,7 +157,8 @@ export const InitialOrgUnits = selector({
         } = get(ScorecardViewState("orgUnitSelection")) ?? {};
         const periods = get(PeriodResolverState) ?? [];
         const orgUnitLevels = get(OrgUnitLevels);
-        const dataHolders = get(ScorecardDataSourceState) ?? [];
+        const {dataGroups} = get(ScorecardViewState("dataSelection")) ?? {};
+        const dataHolders = getHoldersFromGroups(dataGroups) ?? [];
         const {organisationUnits} = get(UserState);
 
         let resolvedOrgUnits = orgUnits;

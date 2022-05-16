@@ -1,6 +1,6 @@
 import {filter, flatten, isEmpty} from "lodash";
 import {useEffect} from "react";
-import {useRecoilValue, useSetRecoilState} from "recoil";
+import {useRecoilValue, useResetRecoilState, useSetRecoilState} from "recoil";
 import {
     PeriodResolverState,
     ScorecardDataSourceState,
@@ -18,6 +18,8 @@ export default function useTableDataSources(dataEngine, orgUnits) {
         ScorecardViewState("dataSearchKeyword")
     );
     const {data: sort} = useRecoilValue(ScorecardNameSort(orgUnits));
+
+    const resetDataSources = useResetRecoilState(ScorecardDataSourceState);
 
     const dataSort = useRecoilValue(ScorecardTableSortState(orgUnits));
     const periods = useRecoilValue(PeriodResolverState);
@@ -41,6 +43,8 @@ export default function useTableDataSources(dataEngine, orgUnits) {
 
         if (dataSearchKeyword) {
             search();
+        } else {
+            resetDataSources();
         }
     }, [dataSearchKeyword]);
 

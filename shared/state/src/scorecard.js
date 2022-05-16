@@ -407,6 +407,11 @@ const ScorecardForceUpdateState = atomFamily({
     default: 0
 })
 
+const ScorecardInSearchState = atomFamily({
+    key: "scorecard-in-search-state",
+    default: false
+})
+
 export default ScorecardConfState;
 export {
     ScorecardConfigEditState,
@@ -430,5 +435,6 @@ export {
     IsSpecificTargetsSet,
     RefreshScorecardState,
     ScorecardNameSort,
-    ScorecardForceUpdateState
+    ScorecardForceUpdateState,
+    ScorecardInSearchState,
 };
