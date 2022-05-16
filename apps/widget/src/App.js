@@ -11,8 +11,8 @@ import "intro.js/introjs.css";
 import "./intro-dhis2.css";
 import "./media-queries.css";
 import "./App.css";
-import {DATASTORE_WIDGET_NAMESPACE} from "./constants/scorecard";
-import Router from "./modules/Router";
+import {DATASTORE_WIDGET_NAMESPACE} from "./constants/scorecard.js";
+import Router from "./modules/Router/index.js";
 
 
 export const App = () => {

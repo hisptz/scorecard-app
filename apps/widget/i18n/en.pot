@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-03-23T12:06:48.960Z\n"
-"PO-Revision-Date: 2022-03-23T12:06:48.960Z\n"
+"POT-Creation-Date: 2022-05-13T07:37:58.521Z\n"
+"PO-Revision-Date: 2022-05-13T07:37:58.521Z\n"
 
 msgid "Welcome to Scorecard App!"
 msgstr "Welcome to Scorecard App!"
@@ -40,3 +40,12 @@ msgstr "Documentation"
 
 msgid "Search"
 msgstr "Search"
+
+msgid "Preparing widgets migration..."
+msgstr "Preparing widgets migration..."
+
+msgid "Migrating scorecards widgets"
+msgstr "Migrating scorecards widgets"
+
+msgid "of"
+msgstr "of"
