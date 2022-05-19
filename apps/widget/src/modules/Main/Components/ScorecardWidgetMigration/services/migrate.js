@@ -5,9 +5,7 @@ import {
 } from "@hisptz/scorecard-constants";
 import {generateCreateMutation} from "@hisptz/scorecard-utils";
 import {filter, forIn, fromPairs, isEmpty} from "lodash";
-
-export const DATASTORE_SCORECARD_WIDGET = "dataStore/hisptz-scorecardwidget";
-export const DATASTORE_OLD_WIDGET_NAMESPACE ="dataStore/scorecardswidget";
+import {DATASTORE_WIDGET_NAMESPACE,DATASTORE_OLD_WIDGET_NAMESPACE} from "../../../../../constants/scorecard";
 
 
 const generateOldScorecardQueries = (ids = []) => {
@@ -63,7 +61,7 @@ export async function getNewScorecardKeys(engine){
     try {
         const {keys} =  await engine.query({
             keys: {
-                resource: DATASTORE_SCORECARD_WIDGET ,
+                resource: DATASTORE_WIDGET_NAMESPACE ,
             }
         }) ?? {};
         return keys;
