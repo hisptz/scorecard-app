@@ -25,6 +25,7 @@ export default function Router() {
                         const Component = component;
                         return (<Route key={pathname} path={pathname}>
                             <ErrorBoundary FallbackComponent={FullPageError}>
+                                
                                 <Component widget={true}/>
                             </ErrorBoundary>
                         </Route>);

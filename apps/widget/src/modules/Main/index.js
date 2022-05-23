@@ -3,7 +3,7 @@ import ScorecardList from "./Components/ScorecardList";
 import ScorecardWidgetMigration from "../Main/Components/ScorecardWidgetMigration/index"
 
 export default function Main() {
-    ScorecardWidgetMigration()
+    ScorecardWidgetMigration();
     return (
         <ScorecardList/>
     )

@@ -1,26 +1,27 @@
 import {
     DATASTORE_ENDPOINT,
-    DATASTORE_OLD_SCORECARD_ENDPOINT,
     DATASTORE_SCORECARD_SUMMARY_KEY
 } from "@hisptz/scorecard-constants";
 import {generateCreateMutation} from "@hisptz/scorecard-utils";
-import {filter, forIn, fromPairs, isEmpty} from "lodash";
-import {DATASTORE_WIDGET_NAMESPACE,DATASTORE_OLD_WIDGET_NAMESPACE} from "../../../../../constants/scorecard";
+import {filter, forIn, fromPairs, isEmpty, omit} from "lodash";
+import {DATASTORE_WIDGET_NAMESPACE,DATASTORE_OLD_WIDGET_NAMESPACE,DATASTORE_WIDGET} from "../../../../../constants/scorecard";
 
 
 const generateOldScorecardQueries = (ids = []) => {
     return fromPairs(
-        ids?.map((id) => [
-            id,
-            {
-                resource: DATASTORE_OLD_SCORECARD_ENDPOINT,
+        ids?.map((id) => {
+            return [
                 id,
-            },
-        ])
+                {
+                    resource: DATASTORE_OLD_WIDGET_NAMESPACE,
+                    id,
+                },
+            ]
+        })
     );
 };
 
-export async function getOldScorecards(engine, keys) {
+export async function getOldScorecardWidgets(engine, keys) {
     if (isEmpty(keys)) {
         return [];
     }
@@ -44,6 +45,27 @@ export const uploadNewScorecard = async ({newScorecard, engine}) => {
 };
 
 
+
+export async function uploadNewScorecardWidget({newScorecardWidget, engine}) {
+    let dashboardIdValue = newScorecardWidget?.dashboardId;
+    let widget  = omit(newScorecardWidget, ["id"]);
+    const addWidgetMutation = {
+        type: "create",
+        resource: `${DATASTORE_WIDGET}/${dashboardIdValue}`,
+        data: ({data}) => data,
+    };
+    try {
+        const response = await engine.mutate(addWidgetMutation, {variables: {data: widget}});
+        return {widget: response};
+    } catch (e) {
+        return {error: e};
+    }
+}
+
+
+
+
+
 export async function getOldScorecardKeys(engine) {
     try {
         const {keys} = await engine.query({
@@ -51,11 +73,12 @@ export async function getOldScorecardKeys(engine) {
                 resource: DATASTORE_OLD_WIDGET_NAMESPACE,
             }
         }) ?? {};
-        return keys;
+        return filter(keys, (key) => !(key.includes(DATASTORE_SCORECARD_SUMMARY_KEY) || key.includes("settings") || key.includes("savedObjects")));
     } catch (e) {
         return [];
     }
 }
+
 
 export async function getNewScorecardKeys(engine){
     try {
@@ -74,7 +97,7 @@ export async function getScorecardKeys(engine) {
     try {
         const {keys} = await engine.query({
             keys: {
-                resource: DATASTORE_ENDPOINT,
+                resource: DATASTORE_WIDGET,
             }
         }) ?? {};
         return filter(keys, (key) => !(key.includes(DATASTORE_SCORECARD_SUMMARY_KEY) || key.includes("settings") || key.includes("savedObjects")));

@@ -11,7 +11,7 @@ export default function useQueue({ drain, task }) {
             });
         }, 1),
     );
-    queue.current?.drain(drain);
+    // queue.current?.drain(drain);
 
     const add = useCallback((task) => {
         queue.current.push(task, (err) => {
@@ -21,7 +21,6 @@ export default function useQueue({ drain, task }) {
             setProgress((prevState) => prevState + 1);
         });
     }, []);
-
 
     return {
         add,
