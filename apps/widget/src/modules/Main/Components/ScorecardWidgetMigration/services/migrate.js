@@ -1,5 +1,4 @@
 import {
-    DATASTORE_ENDPOINT,
     DATASTORE_SCORECARD_SUMMARY_KEY
 } from "@hisptz/scorecard-constants";
 import {generateCreateMutation} from "@hisptz/scorecard-utils";
@@ -106,13 +105,4 @@ export async function getScorecardKeys(engine) {
     }
 }
 
-const summaryMutation = {
-    type: "update",
-    resource: DATASTORE_ENDPOINT,
-    id: DATASTORE_SCORECARD_SUMMARY_KEY,
-    data: ({data}) => data,
-};
 
-export const uploadSummary = async (engine, summary) => {
-    return await engine.mutate(summaryMutation, {variables: {data: summary}});
-};
