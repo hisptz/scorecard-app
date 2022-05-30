@@ -1,7 +1,7 @@
+import {Provider} from '@dhis2/app-runtime'
 import {App} from './App'
 import ReactDOM from 'react-dom'
 import React from 'react'
-import {Provider} from '@dhis2/app-runtime'
 import "./locales"
 
 const rootElement = document.getElementById('root')

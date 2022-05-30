@@ -32,7 +32,6 @@ export default function ScorecardList() {
     const [isLoading, setIsLoading] = useState(false);
 
     const engineState = useRecoilValue(EngineState);
-    const {show} = useAlert(({message}) => message, ({type}) => ({...type, duration: 3000}));
 
     const onSearch = useRef(debounce((keyword) => {
         setFilteredScorecards(() => {
