@@ -8,7 +8,6 @@ import {ScorecardDataEngine} from "@hisptz/scorecard-models";
 import {
     ScorecardDataLoadingState,
     ScorecardTableConfigState,
-    ScorecardViewState,
     ScreenDimensionState
 } from "@hisptz/scorecard-state";
 import ScorecardTableBody from "./Components/TableBody";
@@ -27,12 +26,10 @@ export default function ScorecardTable({
         () => initialDataEngine ?? new ScorecardDataEngine(),
         [initialDataEngine]
     );
-    const {loading} = useTableConfig(dataEngine, orgUnits);
 
     const {width: screenWidth} = useRecoilValue(ScreenDimensionState);
     const {tableWidth} = useRecoilValue(ScorecardTableConfigState(orgUnits));
     const reset = useRecoilCallback(({reset}) => () => {
-        reset(ScorecardViewState("orgUnitSearchKeyword"));
         reset(ScorecardDataLoadingState(orgUnits));
         dataEngine.reset(true);
     });
@@ -45,28 +42,24 @@ export default function ScorecardTable({
 
     return (
         <div className="w-100 pb-32 flex-1 print-area scorecard-table overflow-hidden">
-            {loading ? (
-                <TableLoader/>
-            ) : (
-                <DndProvider backend={HTML5Backend}>
-                    <DataTable
-                        className={classes["table-print"]}
-                        layout="fixed"
-                        scrollWidth={tableWidth ?? screenWidth}
-                    >
-                        <TableWidth orgUnits={orgUnits}/>
-                        <TableHeader
-                            width={screenWidth}
-                            orgUnits={orgUnits}
-                            nested={nested}
-                        />
-                        <TableLinearLoader orgUnits={orgUnits} dataEngine={dataEngine}/>
-                        <Suspense fallback={<TableLoader orgUnits={orgUnits}/>}>
-                            <ScorecardTableBody dataEngine={dataEngine} orgUnits={orgUnits}/>
-                        </Suspense>
-                    </DataTable>
-                </DndProvider>
-            )}
+            <DndProvider backend={HTML5Backend}>
+                <DataTable
+                    className={classes["table-print"]}
+                    layout="fixed"
+                    scrollWidth={tableWidth ?? screenWidth}
+                >
+                    <TableWidth orgUnits={orgUnits}/>
+                    <TableHeader
+                        width={screenWidth}
+                        orgUnits={orgUnits}
+                        nested={nested}
+                    />
+                    <TableLinearLoader orgUnits={orgUnits} dataEngine={dataEngine}/>
+                    <Suspense fallback={<TableLoader orgUnits={orgUnits}/>}>
+                        <ScorecardTableBody dataEngine={dataEngine} orgUnits={orgUnits}/>
+                    </Suspense>
+                </DataTable>
+            </DndProvider>
         </div>
     );
 }

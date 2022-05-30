@@ -15,7 +15,7 @@ import {sortOrgUnitsBasedOnData, sortOrgUnitsBasedOnNames} from "@hisptz/scoreca
 import {Orientation, TableSort} from "@hisptz/scorecard-constants";
 
 
-export default function useTableOrgUnits(dataEngine, orgUnits) {
+export default function useTableOrgUnits(dataEngine, orgUnits, nested) {
     const [loading, setLoading] = useState(false);
     const engine = useDataEngine();
     const setOrgUnits = useSetRecoilState(ScorecardOrgUnitState(orgUnits));
@@ -45,11 +45,12 @@ export default function useTableOrgUnits(dataEngine, orgUnits) {
             }));
         }
 
-        if (!isEmpty(searchKeyword)) {
+        if (!isEmpty(searchKeyword) && !nested) {
             setLoading(true);
             search()
-                .then(() => setLoading(false))
-                .catch((e) => console.error(e));
+                .catch((e) => console.error(e))
+                .finally(() => setLoading(false))
+            ;
         } else {
             setDefaults();
         }

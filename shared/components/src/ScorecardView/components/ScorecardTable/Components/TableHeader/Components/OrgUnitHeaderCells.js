@@ -21,15 +21,12 @@ export default function OrgUnitHeaderCells({orgUnits, nested}) {
         setSort((prevValue) => ({...prevValue, orgUnit: direction}));
     };
 
-    const {nameColumnWidth} = useRecoilValue(
-        ScorecardTableConfigState(orgUnits)
-    );
-
     const onOrgUnitSearch = useRef(
         debounce(setOrgUnitKeyword, 1000, {trailing: true, leading: false})
     );
 
     useEffect(() => {
+        console.log(searchValue);
         onOrgUnitSearch.current(searchValue);
     }, [searchValue]);
 
