@@ -28,10 +28,14 @@ function getTypeFromResource(resource) {
 }
 
 export async function getDataSourceType(engine, dataSourceId) {
-    const {object} = await engine.query(identifiableObjectsQuery, {variables: {id: dataSourceId}}) ?? {};
-    if (object.href) {
-        const resource = getResourceFromHref(object.href);
-        return getTypeFromResource(resource);
+    try {
+        const {object} = await engine.query(identifiableObjectsQuery, {variables: {id: dataSourceId}}) ?? {};
+        if (object.href) {
+            const resource = getResourceFromHref(object.href);
+            return getTypeFromResource(resource);
+        }
+        return null;
+    } catch (e) {
+        return null;
     }
-    return null;
 }

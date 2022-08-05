@@ -4,49 +4,53 @@ import {getDataSourceType} from "./dataSource";
 import {uid} from "./utils";
 
 export async function migrateScorecard(oldScorecard, engine) {
-    if (oldScorecard) {
-        return {
-            id: oldScorecard?.id,
-            name: oldScorecard?.header?.title,
-            title: oldScorecard?.header?.title,
-            subtitle: oldScorecard?.header?.sub_title,
-            description: oldScorecard?.header?.description,
-            user: {id: oldScorecard?.user?.id},
-            periodType: oldScorecard?.periodType,
-            customHeader: oldScorecard?.header?.template?.content,
-            publicAccess: getScorecardPublicAccess(oldScorecard?.user_groups),
-            userAccesses: [],
-            userGroupAccesses: getScorecardUserGroupAccesses(
-                oldScorecard?.user_groups
-            ),
-            targetOnLevels: false,
-            periodSelection: getScorecardPeriodSelection(
-                oldScorecard.selected_periods,
-                oldScorecard.periodType
-            ),
-            orgUnitSelection: getScorecardOrgUnitSelection(
-                oldScorecard.orgunit_settings
-            ),
-            dataSelection: await getScorecardDataSelection(oldScorecard.data_settings, engine),
-            additionalLabels: oldScorecard.additional_labels,
-            legendDefinitions: getScorecardLegendDefinitions(
-                oldScorecard?.legendset_definitions
-            ),
-            options: {
-                title: true,
-                legend: oldScorecard?.header?.show_legend_definition,
-                emptyRows: oldScorecard?.empty_rows,
-                averageRow: oldScorecard?.show_average_in_row,
-                itemNumber: true,
-                averageColumn: oldScorecard?.show_average_in_column,
-                showHierarchy: oldScorecard?.show_hierarchy,
-                averageDisplayType: oldScorecard?.average_selection?.toUpperCase(),
-                highlightedIndicators: oldScorecard?.highlighted_indicators?.display,
-            },
-            highlightedIndicators: await map((
-                oldScorecard?.highlighted_indicators?.definitions || []
-            ), async (indicator) => await getScorecardDataSource(indicator, engine)),
-        };
+    try {
+        if (oldScorecard) {
+            return {
+                id: oldScorecard?.id,
+                name: oldScorecard?.header?.title,
+                title: oldScorecard?.header?.title,
+                subtitle: oldScorecard?.header?.sub_title,
+                description: oldScorecard?.header?.description,
+                user: {id: oldScorecard?.user?.id},
+                periodType: oldScorecard?.periodType,
+                customHeader: oldScorecard?.header?.template?.content,
+                publicAccess: getScorecardPublicAccess(oldScorecard?.user_groups),
+                userAccesses: [],
+                userGroupAccesses: getScorecardUserGroupAccesses(
+                    oldScorecard?.user_groups
+                ),
+                targetOnLevels: false,
+                periodSelection: getScorecardPeriodSelection(
+                    oldScorecard.selected_periods,
+                    oldScorecard.periodType
+                ),
+                orgUnitSelection: getScorecardOrgUnitSelection(
+                    oldScorecard.orgunit_settings
+                ),
+                dataSelection: await getScorecardDataSelection(oldScorecard.data_settings, engine),
+                additionalLabels: oldScorecard.additional_labels,
+                legendDefinitions: getScorecardLegendDefinitions(
+                    oldScorecard?.legendset_definitions
+                ),
+                options: {
+                    title: true,
+                    legend: oldScorecard?.header?.show_legend_definition,
+                    emptyRows: oldScorecard?.empty_rows,
+                    averageRow: oldScorecard?.show_average_in_row,
+                    itemNumber: true,
+                    averageColumn: oldScorecard?.show_average_in_column,
+                    showHierarchy: oldScorecard?.show_hierarchy,
+                    averageDisplayType: oldScorecard?.average_selection?.toUpperCase(),
+                    highlightedIndicators: oldScorecard?.highlighted_indicators?.display,
+                },
+                highlightedIndicators: await map((
+                    oldScorecard?.highlighted_indicators?.definitions || []
+                ), async (indicator) => await getScorecardDataSource(indicator, engine)),
+            };
+        }
+    } catch (e) {
+        console.error(e);
     }
 }
 
