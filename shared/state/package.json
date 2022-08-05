@@ -1,6 +1,6 @@
 {
   "name": "@hisptz/scorecard-state",
-  "version": "2.5.1-beta.2",
+  "version": "2.6.0-beta.3",
   "scripts": {
     "build": "d2 app scripts build --verbose",
     "start": "d2 app scripts build --watch"
@@ -8,9 +8,9 @@
   "dependencies": {
     "recoil": "^0.6.1",
     "lodash": "^4.17.21",
-    "@hisptz/scorecard-models": "^2.5.1-beta.2",
-    "@hisptz/scorecard-utils": "^2.5.1-beta.2",
-    "@hisptz/scorecard-constants": "^2.5.1-beta.2",
+    "@hisptz/scorecard-models": "^2.6.0-beta.3",
+    "@hisptz/scorecard-utils": "^2.6.0-beta.3",
+    "@hisptz/scorecard-constants": "^2.6.0-beta.3",
     "@iapps/period-utilities": "^1.0.0-beta.7"
   },
   "main": "./build/cjs/index.js",
