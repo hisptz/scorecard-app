@@ -1,14 +1,16 @@
 import {colors, Field} from "@dhis2/ui";
-import {CustomInput} from "@hisptz/react-ui"
 import {FormFieldModel} from "@hisptz/scorecard-components";
 import {OrgUnitLevels} from "@hisptz/scorecard-state";
 import {generateLegendDefaults} from "@hisptz/scorecard-utils";
 import {Accordion, AccordionDetails, AccordionSummary} from "@material-ui/core";
 import produce from "immer";
-import {fromPairs, head, set} from "lodash";
+import {fromPairs, get, head, set} from "lodash";
 import PropTypes from "prop-types";
 import React, {useEffect, useMemo, useState} from "react";
+import {useFormContext} from "react-hook-form";
 import {useRecoilValue} from "recoil";
+import {getNonDefaultLegendDefinitions} from "../../../../../../../../General/utils/utils";
+import LegendsField from "./LegendsField";
 
 export default function LevelTargetsField({
                                               name,
@@ -20,7 +22,10 @@ export default function LevelTargetsField({
                                               ...props
                                           }) {
     const orgUnitLevels = useRecoilValue(OrgUnitLevels);
+    const {watch} = useFormContext();
     const [expanded, setExpanded] = useState(head(orgUnitLevels)?.id);
+    const legendDefinitions = getNonDefaultLegendDefinitions(watch("legendDefinitions"));
+
     const handleChange = (panel) => (event, isExpanded) => {
         setExpanded(isExpanded ? panel : false);
     };
@@ -36,10 +41,10 @@ export default function LevelTargetsField({
                 ]),
         [highIsGood, initialValue, multipleFields, orgUnitLevels, weight]
     );
-    const onFieldChange = (index, newValue, level) => {
+    const onFieldChange = (newValue, level) => {
         onChange({
             value: produce(value, (draft) => {
-                return set(draft, [level, index], newValue);
+                return set(draft, [level], newValue);
             }),
         });
     };
@@ -65,21 +70,11 @@ export default function LevelTargetsField({
                     </AccordionSummary>
                     <AccordionDetails>
                         <div className="column w-100">
-                            {multipleFields?.map((field, index) => {
-                                const input = {
-                                    name: field?.name,
-                                    onChange: (value) => onFieldChange(index, value, id),
-                                    value: value?.[id]?.[index],
-                                };
-                                return (
-                                    <CustomInput
-                                        key={`level-${id}-${index}`}
-                                        valueType={field.valueType}
-                                        input={input}
-                                        {...field}
-                                    />
-                                );
-                            })}
+                            <LegendsField
+                                legendDefinitions={legendDefinitions}
+                                value={get(value, id) ?? []}
+                                onChange={(value) => onFieldChange(value, id)}
+                            />
                         </div>
                     </AccordionDetails>
                 </Accordion>

@@ -37,7 +37,6 @@ const MyApp = () => {
         >
             <CssReset/>
             <RecoilRoot initializeState={initializeState}>
-                <DebugObserver/>
                 <ErrorBoundary FallbackComponent={FullPageError}>
                     <ConfirmDialogProvider>
                         <Suspense fallback={<FullPageLoader/>}>

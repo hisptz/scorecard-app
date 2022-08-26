@@ -5,15 +5,10 @@ import {DndProvider} from "react-dnd";
 import {HTML5Backend} from "react-dnd-html5-backend";
 import {useRecoilCallback, useRecoilValue} from "recoil";
 import {ScorecardDataEngine} from "@hisptz/scorecard-models";
-import {
-    ScorecardDataLoadingState,
-    ScorecardTableConfigState,
-    ScreenDimensionState
-} from "@hisptz/scorecard-state";
+import {ScorecardDataLoadingState, ScorecardTableConfigState, ScreenDimensionState} from "@hisptz/scorecard-state";
 import ScorecardTableBody from "./Components/TableBody";
 import TableHeader from "./Components/TableHeader";
 import TableLoader, {TableLinearLoader} from "./Components/TableLoader";
-import useTableConfig from "./hooks/useTableConfig";
 import classes from "./scorecardTable.module.css"
 import TableWidth from "./Components/TableWidth";
 

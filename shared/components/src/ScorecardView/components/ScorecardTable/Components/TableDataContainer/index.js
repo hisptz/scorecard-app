@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React, {memo, useEffect, useRef, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useRecoilValue, useResetRecoilState} from "recoil";
 import {ScorecardDataEngine} from "@hisptz/scorecard-models";
 import {OrgUnitLevels, ScorecardViewState} from "@hisptz/scorecard-state";
@@ -79,6 +79,9 @@ function DataContainer({
             className="data-cell"
             align="center"
             data-test={"data-cell"}
+            style={{
+                minWidth: 100
+            }}
             onClick={(event) => {
                 event.stopPropagation();
                 setAnalysisOpen(true);
