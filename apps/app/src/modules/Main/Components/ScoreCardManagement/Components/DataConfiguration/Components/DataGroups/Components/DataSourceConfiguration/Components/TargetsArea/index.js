@@ -7,7 +7,7 @@ import {generateLegendDefaults, uid} from "@hisptz/scorecard-utils";
 import {head, isEmpty} from "lodash";
 import PropTypes from 'prop-types'
 import React, {Suspense, useEffect, useState} from "react";
-import {useFormContext} from "react-hook-form";
+import {useFormContext, useWatch} from "react-hook-form";
 import {getNonDefaultLegendDefinitions} from "../../../../../../../General/utils/utils";
 import OrgUnitLevelSpecificTargets from "../OrgUnitLevelSpecificTargetsModal";
 import OrgUnitSpecificTargetsModal from "../OrgUnitSpecificTargetsModal";
@@ -26,14 +26,20 @@ function getSelectedType(specificTargets, specificTargetsSet) {
 }
 
 export default function TargetsArea({path}) {
-    const {watch, setValue} = useFormContext();
-    const legendDefinitions = getNonDefaultLegendDefinitions(watch("legendDefinitions"));
+    const {setValue} = useFormContext();
+
+    const [
+        allLegendDefinitions,
+        areSpecificTargetsSet,
+        specificTargets,
+        defaultLegends,
+        weight,
+        highIsGood
+    ] = useWatch({name: ["legendDefinitions", `${path}.specificTargetsSet`, `${path}.specificTargets`, `${path}.legends`, `${path}.weight`, `${path}.highIsGood`]});
+
+    const legendDefinitions = getNonDefaultLegendDefinitions(allLegendDefinitions);
+
     const [openConfigDialog, setOpenConfigDialog] = useState(false);
-    const areSpecificTargetsSet = watch(`${path}.specificTargetsSet`);
-    const specificTargets = watch(`${path}.specificTargets`)
-    const defaultLegends = watch(`${path}.legends`);
-    const weight = watch(`${path}.weight`);
-    const highIsGood = watch(`${path}.highIsGood`);
 
     const [selectedType, setSelectedType] = useState(getSelectedType(specificTargets, areSpecificTargetsSet));
 
