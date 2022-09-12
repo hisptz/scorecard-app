@@ -1,86 +1,39 @@
 {
-  "name": "hisptz-scorecard",
-  "version": "2.5.0",
+  "name": "hisptz-scorecard-workspaces",
+  "version": "2.6.0",
   "description": "Interactive Scorecard Application",
   "license": "BSD-3-Clause",
   "private": true,
+  "workspaces": {
+    "packages": [
+      "apps/*",
+      "shared/*"
+    ],
+    "nohoist": [
+      "**/cypress-multi-reporters/**"
+    ]
+  },
   "scripts": {
-    "build": "d2-app-scripts build",
-    "start": "d2-app-scripts start",
-    "test": "d2-app-scripts test",
-    "cy:open": "concurrently 'BROWSER=none yarn start' 'wait-on 'http-get://localhost:3000' && cypress open' --kill-others --success first ",
-    "cy:open:capture": "concurrently 'BROWSER=none yarn start' 'wait-on 'http-get://localhost:3000' && cypress open --env networkMode=capture' --kill-others --success first ",
-    "cy:open:stub": "concurrently 'BROWSER=none yarn start' 'wait-on 'http-get://localhost:3000' && cypress open --env networkMode=stub' --kill-others --success first ",
-    "e2e": "cypress run",
-    "cy:component": "yarn cypress open-ct",
-    "deploy": "d2-app-scripts deploy",
-    "lint": "yarn d2-style check",
-    "lint:staged": "yarn lint --staged",
-    "format": "yarn d2-style apply",
-    "format:staged": "yarn format --staged",
-    "cy:start": "BROWSER=none yarn start",
-    "cy:run": "wait-on 'http-get://localhost:3000' && cypress run",
-    "cy:capture": "concurrently 'yarn cy:start' 'yarn cy:run --env networkMode=capture' --kill-others --success first",
-    "cy:stub": "concurrently 'yarn cy:start' 'yarn cy:run --env networkMode=stub' --kill-others --success first"
+    "start:app": "concurrently \"yarn start:libs\"  \"yarn workspace app start\"",
+    "deploy:app": "yarn workspace app deploy",
+    "test:open:app": "yarn workspace app cy:open",
+    "test:capture:app": "yarn workspace app cy:capture",
+    "test:stub:app": "yarn workspace app cy:stub",
+    "start:widget": "yarn workspace widget start",
+    "build:utils": "yarn workspace @hisptz/scorecard-utils build",
+    "build:constants": "yarn workspace @hisptz/scorecard-constants build",
+    "build:state": "yarn workspace @hisptz/scorecard-state build",
+    "build:components": "yarn workspace @hisptz/scorecard-components build",
+    "build:hooks": "yarn workspace @hisptz/scorecard-hooks build",
+    "build:models": "yarn workspace @hisptz/scorecard-models build",
+    "build:resources": "yarn workspace @hisptz/scorecard-resources build",
+    "build:services": "yarn workspace @hisptz/scorecard-services build",
+    "build:app": "yarn build:all && yarn workspace app build",
+    "build:widget": "yarn build:all && yarn workspace widget build",
+    "start:libs": "concurrently \"yarn workspace @hisptz/scorecard-utils start\" \"yarn workspace @hisptz/scorecard-constants start\" \"yarn workspace @hisptz/scorecard-state start\" \"yarn workspace @hisptz/scorecard-components start\" \"yarn workspace @hisptz/scorecard-hooks start\" \"yarn workspace @hisptz/scorecard-models start\" \"yarn workspace @hisptz/scorecard-resources start\" \"yarn workspace @hisptz/scorecard-services start\"",
+    "build:all": "yarn build:utils && yarn build:constants && yarn build:state && yarn build:components && yarn build:hooks && yarn build:models && yarn build:resources && yarn build:services"
   },
   "devDependencies": {
-    "@cypress/react": "^5.9.1",
-    "@cypress/webpack-dev-server": "^1.3.1",
-    "@dhis2/cli-app-scripts": "^7.3.0",
-    "@dhis2/cli-style": "^9.2.0",
-    "@dhis2/cli-utils-cypress": "^8.0.4",
-    "@dhis2/cypress-commands": "^8.0.4",
-    "@dhis2/cypress-plugins": "^8.0.4",
-    "@dhis2/d2-i18n": "^1.1.0",
-    "concurrently": "^6.3.0",
-    "cucumber": "^7.0.0-rc.0",
-    "cypress": "8.6.0",
-    "cypress-cucumber-preprocessor": "^4.1.2",
-    "cypress-multi-reporters": "^1.5.0",
-    "cz-conventional-changelog": "3.3.0",
-    "eslint-plugin-cypress": "^2.11.3",
-    "prop-types": "^15.7.2",
-    "react": "16.14.0",
-    "wait-on": "^6.0.0"
-  },
-  "dependencies": {
-    "@dhis2/analytics": "^20.0.2",
-    "@dhis2/app-runtime": "^2.8.0",
-    "@dhis2/app-service-datastore": "^1.0.0-alpha.2",
-    "@dhis2/ui": "^6.8.0",
-    "@iapps/function-analytics": "^1.0.0-beta.23",
-    "@iapps/period-utilities": "^1.0.0-beta.4",
-    "@material-ui/core": "^4.11.4",
-    "@material-ui/icons": "^4.11.2",
-    "async": "^3.2.0",
-    "file-saver": "^2.0.5",
-    "highcharts": "^9.2.2",
-    "immer": "^9.0.5",
-    "intro.js": "^4.2.2",
-    "intro.js-react": "^0.5.0",
-    "jodit-react": "^1.0.88",
-    "lodash": "^4.17.21",
-    "luxon": "^2.0.2",
-    "react-beautiful-dnd": "^13.1.0",
-    "react-color": "^2.19.3",
-    "react-dnd": "^14.0.3",
-    "react-dnd-html5-backend": "^14.0.1",
-    "react-error-boundary": "^3.1.3",
-    "react-js-loading-shimmer": "^1.0.10",
-    "react-jsx-parser": "^1.28.4",
-    "react-router-dom": "^5.2.0",
-    "react-to-print": "^2.13.0",
-    "react-web-vitals": "^1.0.1",
-    "recoil": "^0.4.1",
-    "rxjs": "^7.3.0",
-    "xlsx": "^0.17.1"
-  },
-  "cypress-cucumber-preprocessor": {
-    "nonGlobalStepDefinitions": true
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
+    "concurrently": "^7.0.0"
   }
 }

@@ -1,11 +1,21 @@
 # DHIS2 Platform
 node_modules
 .d2
-src/locales
+apps/app/src/locales
+*/locales/
 build
-.env
+apps/app/.env
 logs
-cypress.env.json
+apps/app/cypress.env.json
 *.log
-i18n
 .vscode
+*cypress/videos
+*cypress/screenshots
+*cypress/downloads
+apps/widget/src/locales
+apps/widget/scorecard_widget.zip
+/shared/components/src/locales/
+/shared/constants/src/locales/
+/shared/state/src/locales/
+/shared/utils/src/locales/
+/apps/app/cypress/downloads/

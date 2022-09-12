@@ -1,9 +1,7 @@
 name: E2E Tests
 
 on:
-   - push
-
-
+  - push
 jobs:
    e2e:
       runs-on: ubuntu-latest

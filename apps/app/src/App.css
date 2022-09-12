@@ -1,0 +1,561 @@
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1rem;
+    overflow: auto;
+    height: 100%;
+    min-width: 1240px;
+}
+
+.overflow-hidden {
+    overflow: hidden;
+}
+
+div.jsx-4084082020 {
+    z-index: 4000;
+}
+
+.popper {
+    z-index: 9999;
+}
+
+.background-white {
+    background: #FFFFFF;
+}
+
+body {
+    background: #F8F9FA;
+    height: 100%;
+    width: 100%;
+}
+
+.column {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.overflow-auto {
+    overflow: auto;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.wrap {
+    flex-wrap: wrap;
+}
+
+.start {
+    justify-content: flex-start;
+}
+
+.center {
+    justify-content: center;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+.align-items-end {
+    align-items: flex-end;
+}
+
+.space-between {
+    justify-content: space-between;
+}
+
+.space-around {
+    justify-content: space-around;
+}
+
+.end {
+    justify-content: flex-end;
+}
+
+.space-evenly {
+    justify-content: space-evenly;
+}
+
+.flex-1 {
+    flex: 1;
+}
+
+.p-4 {
+    padding: 4px;
+}
+
+.p-8 {
+    padding: 8px;
+}
+
+.pt-8 {
+    padding-top: 8px;
+}
+
+.pb-8 {
+    padding-bottom: 8px;
+}
+
+.pl-8 {
+    padding-left: 8px;
+}
+
+.pr-8 {
+    padding-right: 8px;
+}
+
+.p-16 {
+    padding: 16px;
+}
+
+.pt-16 {
+    padding-top: 16px;
+}
+
+.pb-16 {
+    padding-bottom: 16px;
+}
+
+.pl-16 {
+    padding-left: 16px;
+}
+
+.pr-16 {
+    padding-right: 16px;
+}
+
+/*padding - 32*/
+.p-32 {
+    padding: 32px;
+}
+
+.pt-32 {
+    padding-top: 32px;
+}
+
+.pb-32 {
+    padding-bottom: 32px;
+}
+
+.pl-32 {
+    padding-left: 32px;
+}
+
+.pr-32 {
+    padding-right: 32px;
+}
+
+
+.w-100 {
+    width: 100%;
+}
+
+.w-50 {
+    width: 50%;
+}
+
+.w-75 {
+    width: 75%;
+}
+
+.w-25 {
+    width: 25%;
+}
+
+.w-60 {
+    width: 60%;
+}
+
+.w-40 {
+    width: 40%;
+}
+
+.w-auto {
+    width: auto;
+}
+
+.h-100 {
+    height: 100%;
+}
+
+.h-50 {
+    height: 50%;
+}
+
+.h-75 {
+    height: 75%;
+}
+
+.h-25 {
+    height: 25%;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.container-bordered {
+    box-sizing: border-box;
+    border-radius: 4px;
+    border: 1px solid #A0ADBA;
+}
+
+*::-webkit-scrollbar {
+    width: 0.5em;
+    height: 0.5em;
+}
+
+*::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.00)
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #A0ADBA;
+    outline: 0.5px solid #E8EDF2;
+}
+
+div.jsx-1730587817 {
+    z-index: 3000;
+}
+
+
+/*steps*/
+.MuiSvgIcon-root {
+    width: 8px;
+}
+
+.MuiSvgIcon-root.MuiStepIcon-root.MuiStepIcon-active {
+    color: #FFFFFF;
+    text-decoration-color: #00695c;
+}
+
+.MuiSvgIcon-root.MuiStepIcon-root.MuiStepIcon-active > text {
+    fill: #00695c !important;
+    font-weight: bold;
+}
+
+.MuiSvgIcon-root.MuiStepIcon-root > text {
+    font-weight: bold;
+}
+
+.MuiStepIcon-text.active {
+
+}
+
+.MuiSvgIcon-root.MuiStepIcon-root {
+    width: 32px;
+    height: 32px;
+}
+
+.MuiTypography-root.MuiStepLabel-label.MuiStepLabel-active.MuiTypography-body2.MuiTypography-displayBlock {
+    color: #FFFFFF;
+}
+
+.MuiTypography-root.MuiStepLabel-label.MuiTypography-body2.MuiTypography-displayBlock {
+    font-weight: bold;
+}
+
+.MuiStep-root.MuiStep-horizontal {
+    margin: 0 8px;
+    padding: 8px;
+    border-radius: 8px;
+}
+
+.MuiStepConnector-line.MuiStepConnector-lineHorizontal {
+    border-width: 2px;
+}
+
+.MuiPaper-root.MuiStepper-root.MuiStepper-horizontal.MuiPaper-elevation0 {
+    background: transparent;
+}
+
+
+/*Accordion*/
+.accordion-title {
+    font-size: 16px;
+    margin: 0;
+}
+
+.accordion-title-edit {
+    display: none !important;
+}
+
+.accordion-title-container:hover > .accordion-title-edit {
+    display: block !important;
+}
+
+/*Data Source */
+.data-source.container-bordered {
+    border-radius: 4px;
+}
+
+.data-source.avatar {
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+    text-align: center;
+}
+
+.data-source.name {
+    margin: 0;
+    padding-left: 16px;
+}
+
+.info-box {
+    padding: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #F8F9FA;
+    border-radius: 8px;
+}
+
+.header-row {
+    border-bottom: 1px solid rgb(232, 237, 242) !important;
+}
+
+.table-header {
+    font-weight: bold;
+}
+
+.info-box-title {
+    color: #4A5768;
+}
+
+.info-box-list > li {
+    margin-bottom: 16px;
+    color: #4A5768;
+}
+
+.info-box-list > p {
+    margin-bottom: 16px;
+    color: #4A5768;
+}
+
+.layer-1 {
+    z-index: 2;
+}
+
+.link-button-container {
+    width: 56px;
+}
+
+.link-button {
+    transform: rotate(90deg) !important;
+}
+
+.link-button-container:hover > .link-button {
+    display: block !important;
+
+}
+
+/*linked table cell*/
+
+td.data-cell {
+    min-width: 100px;
+    border-right: 1px solid rgb(232, 237, 242);
+    max-height: 47px;
+    max-width: 101px;
+    width: 100px;
+    height: 47px;
+    font-size: 14px;
+    background: rgb(255, 255, 255);
+    color: rgb(33, 41, 52);
+    border-bottom: 1px solid rgb(232, 237, 242);
+    margin: 0;
+    padding: 0;
+}
+
+
+.linked-table-cell {
+    margin: 0;
+    max-width: 200px;
+    max-height: 47px;
+}
+
+.bottom {
+    position: relative;
+    right: 32px;
+    bottom: 8px;
+}
+
+
+table {
+    table-layout: fixed;
+    width: 100%;
+}
+
+.data-source-form-container:first-child {
+    padding-right: 16px;
+}
+
+.data-source-form-container:last-child {
+    padding-left: 16px;
+}
+
+.scorecard-list-container {
+    width: 100%;
+    height: 100%;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.selection-card {
+    width: 100%;
+    z-index: 4;
+}
+
+.selection-box {
+    cursor: pointer;
+    margin: 8px;
+    display: flex;
+    flex-direction: column;
+    background: #E8EDF2;
+    height: 5em;
+    width: 25em;
+    justify-content: center;
+    border-radius: 8px;
+}
+
+.selection-box-header {
+    margin-top: 16px;
+    margin-left: 16px;
+    margin-bottom: 0;
+}
+
+.selection-text-box {
+    margin: auto 16px;
+    border-left: 4px solid #28468B;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    text-align: start;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.selection-text-box > p {
+    padding-left: 16px;
+    font-size: 16px;
+    color: #4A5768;
+    overflow-x: auto;
+}
+
+.scorecard-table-header {
+    font-weight: bold !important;
+    font-size: 16px;
+    margin: auto;
+}
+
+span.jsx-2694284040 {
+    height: auto !important;
+}
+
+.header > span.container > span.top {
+    padding: 8px;
+    height: max-content;
+}
+
+.header > span.container {
+    height: auto;
+}
+
+.scorecard-table-cell {
+    border-right: 1px solid rgb(232, 237, 242);
+
+}
+
+.child-org-unit-row td:first-child {
+    max-width: 40px !important;
+    background: rgb(243, 245, 247);
+    position: sticky;
+    left: 0;
+    top: auto;
+    z-index: 1;
+}
+
+.child-org-unit-row td:first-child:hover {
+    background: rgb(232, 237, 242)
+}
+
+.child-org-unit-row td:first-child::selection {
+    background: rgb(232, 237, 242)
+}
+
+.scorecard-org-unit-cell {
+
+    background: #E8EDF2;
+    padding-top: 24px;
+    min-width: 200px !important;
+}
+
+.large-modal {
+    width: 75vw !important;
+    height: 90vh !important;
+}
+
+.large-modal > div > div {
+    height: 100% !important;
+}
+
+.p-0 {
+    padding: 0 !important;
+}
+
+
+.m-auto {
+    margin: auto;
+}
+
+.hide {
+    display: none;
+}
+
+.no-wrap {
+    white-space: nowrap;
+}
+
+.min-width-200 {
+    min-width: 200px;
+}
+
+td.extra-table-cell > svg {
+    left: 0;
+}
+
+
+.warning-popover {
+    border: 1px solid #A0ADBA;
+    padding: 8px;
+}
+
+
+.scorecard-list-card-title {
+    font-weight: 500;
+    margin: 4px;
+    font-size: 18px;
+    color: rgba(0, 0, 0, 0.87);
+}
+
+.scorecard-list-card-description {
+    margin: 8px;
+    font-size: 16px;
+    line-height: 2;
+    text-align: justify;
+}
+

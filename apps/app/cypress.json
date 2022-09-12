@@ -1,0 +1,29 @@
+{
+  "baseUrl": "http://localhost:3000",
+  "testFiles": "**/*.feature",
+  "chromeWebSecurity": true,
+  "reporter": "cypress-multi-reporters",
+  "video": false,
+  "experimentalStudio": true,
+  "viewportWidth": 1366,
+  "viewportHeight": 768,
+  "defaultCommandTimeout": 20000,
+  "watchForFileChanges": true,
+  "projectId": "9ps7gr",
+  "component": {
+    "baseUrl": "http://localhost:8080",
+    "testFiles": "**/*.test.{js,ts,jsx,tsx}",
+    "componentFolder": "src",
+    "env": {
+      "dhis2DatatestPrefix": "dhis2-scorecard"
+    }
+  },
+  "env": {
+    "dhis2DataTestPrefix": "dhis2-hisptzscorecard",
+    "networkMode": "live",
+    "dhis2ApiVersion": "38",
+    "apiVersion": "38"
+  },
+  "experimentalInteractiveRunEvents": true,
+  "waitForAnimations": true
+}

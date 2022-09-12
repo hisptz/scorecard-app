@@ -1,0 +1,128 @@
+
+.org-unit-header-cell {
+    text-align: center !important;
+    vertical-align: middle !important;
+    min-width: 200px !important;
+}
+
+.org-unit-header-cell > span {
+    margin: auto;
+}
+
+.org-unit-header-cell > span > span {
+    align-items: center !important;
+}
+
+.holder-header-cell {
+    margin: 4px;
+    vertical-align: middle;
+    text-align: center;
+    padding: 8px;
+    height: max-content;
+    border-right: 1px solid rgb(232, 237, 242);
+}
+
+.holder-header-cell > span {
+    align-items: center;
+}
+
+.data-header-cell {
+    margin: 4px;
+    vertical-align: middle;
+    text-align: center;
+    padding: 8px;
+    height: max-content;
+    border-right: 1px solid rgb(232, 237, 242);
+    font-weight: bold;
+}
+
+.data-header-cell > span {
+    align-items: center;
+    font-weight: bold;
+}
+
+.data-header-cell > span > span > span {
+    font-weight: bold;
+    align-items: center;
+}
+
+.period-header-cell {
+    vertical-align: middle;
+    text-align: center;
+    padding: 8px !important;
+    height: max-content;
+    border-right: 1px solid rgb(232, 237, 242);
+}
+
+.period-header-cell > span > span {
+    align-items: center !important;
+    justify-content: center;
+}
+
+.child-table-row .parent-table-row {
+    page-break-inside: avoid;
+    page-break-after: auto;
+}
+
+
+.child-table-row td:first-child {
+    padding: 8px;
+    max-width: 40px !important;
+    background: rgb(243, 245, 247);
+    position: sticky;
+    left: 0;
+    top: auto;
+    z-index: 1;
+}
+
+.child-table-row td:first-child:hover {
+    background: #E8EDF2;
+}
+
+
+@media print {
+    .parent-table-row > th:first-child {
+        border-left: none !important;
+        border-right: none !important;
+    }
+
+    .table-print {
+        border: 1px solid #212934 !important;
+        page-break-inside: auto !important;
+    }
+
+    .table-print > tr:last-child > * {
+        border-bottom: none !important;
+    }
+
+    .average-row > th:first-child {
+        border-left: none !important;
+        border-right: none !important;
+    }
+
+    .average-row > * {
+        border-bottom: none !important;
+    }
+
+    .average-row > th {
+        border-bottom: none !important;
+    }
+
+    .child-table-row > td:first-child {
+        background: white !important;
+        border-left: 1px solid #212934 !important;
+        border-bottom: 1px solid #212934 !important;
+        border-right: none !important;
+        border-left: none !important;
+    }
+
+    .table-header-row > th:first-child {
+        border-left: none !important;
+        border-right: none !important;
+    }
+
+    .table-header-row > th:last-child {
+        border-right: none !important;
+    }
+
+}

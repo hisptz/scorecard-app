@@ -1,0 +1,118 @@
+@media print {
+
+    .print-area {
+        overflow: visible !important;
+    }
+
+    .print-hide {
+        display: none !important;
+    }
+
+    .print-show {
+        display: block !important;
+    }
+
+    .child-org-unit-row td:first-child > svg {
+        display: none;
+        color: black;
+    }
+
+    .child-org-unit-row td:first-child {
+        display: none;
+    }
+
+    [data-test="dhis2-uicore-tableheadercellaction"] {
+        display: none !important;
+    }
+
+    th.fixed {
+        background: white !important;
+        font-weight: bold !important;
+        border-bottom: 1px solid #4A5768 !important;
+        border-right: 1px solid #4A5768 !important;
+        border-left: none;
+    }
+
+
+    .data-cell {
+        border-bottom: 1px solid #4A5768 !important;
+        border-right: 1px solid #4A5768 !important;
+    }
+
+    .data-cell:last-child {
+        border-right: none !important;
+    }
+
+    *::-webkit-scrollbar {
+        display: none;
+    }
+
+    *::-webkit-scrollbar-track {
+        display: none;
+    }
+
+    *::-webkit-scrollbar-thumb {
+        display: none;
+    }
+
+    body {
+        background: #FFFFFF;
+    }
+
+    .page-break {
+        page-break-before: auto;
+        page-break-inside: avoid;
+    }
+
+
+    .page-break-avoid {
+        page-break-inside: avoid;
+    }
+
+    .always-page-break {
+        page-break-before: always;
+    }
+
+    .print-visible {
+        overflow: visible !important;
+    }
+
+
+    .child-table-row td:first-child {
+        background: white !important;
+        border-left: 1px solid #4A5768 !important;
+        border-bottom: 1px solid #4A5768 !important;
+        border-right: none !important;
+    }
+
+    .period-header-cell > span > span > button {
+        display: none !important;
+    }
+
+    .child-table-row td:first-child > svg {
+        display: none;
+    }
+
+    [data-test="orgUnit-children-table-column-cell"] > td > svg {
+        display: none;
+    }
+
+    [data-test="dhis2-uicore-tableheadercellaction"] {
+        display: none;
+    }
+
+
+    .print-hide {
+        display: none;
+    }
+
+    @page {
+        margin: 32px 16px 16px;
+    }
+
+    @page :first {
+        margin-top: 16px;
+    }
+
+}
+

@@ -1,0 +1,51 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: i18next-conv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"POT-Creation-Date: 2022-05-13T07:37:58.521Z\n"
+"PO-Revision-Date: 2022-05-13T07:37:58.521Z\n"
+
+msgid "Welcome to Scorecard App!"
+msgstr "Welcome to Scorecard App!"
+
+msgid "Create a new scorecard in the scorecard app to see it here."
+msgstr "Create a new scorecard in the scorecard app to see it here."
+
+msgid "Confirm scorecard selection"
+msgstr "Confirm scorecard selection"
+
+msgid "Are you sure you want to select this scorecard for this dashboard?"
+msgstr "Are you sure you want to select this scorecard for this dashboard?"
+
+msgid "Select"
+msgstr "Select"
+
+msgid "Scorecard deleted successfully"
+msgstr "Scorecard deleted successfully"
+
+msgid "No scorecards found"
+msgstr "No scorecards found"
+
+msgid "Could not find scorecards matching the keyword "
+msgstr "Could not find scorecards matching the keyword "
+
+msgid "Start a guided tour"
+msgstr "Start a guided tour"
+
+msgid "Documentation"
+msgstr "Documentation"
+
+msgid "Search"
+msgstr "Search"
+
+msgid "Preparing widgets migration..."
+msgstr "Preparing widgets migration..."
+
+msgid "Migrating scorecards widgets"
+msgstr "Migrating scorecards widgets"
+
+msgid "of"
+msgstr "of"
