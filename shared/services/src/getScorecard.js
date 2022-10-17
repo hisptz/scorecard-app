@@ -1,5 +1,6 @@
 import {DATASTORE_ENDPOINT} from "@hisptz/scorecard-constants";
 import {OrgUnitSelection} from "@hisptz/scorecard-models";
+import {compact} from "lodash";
 
 const query = {
     scorecard: {
@@ -12,12 +13,28 @@ export default async function getScorecard(id = "", engine) {
     if (id) {
         try {
             const response = await engine.query(query, {variables: {id}});
-            return {scorecard: response?.scorecard};
+            const sanitizedScorecard = sanitizeDataSelection(response?.scorecard)
+            return {scorecard: sanitizedScorecard};
         } catch (e) {
             return {error: e};
         }
     }
     return {error: "not found"};
+}
+
+function sanitizeDataSelection(scorecard) {
+    const {dataGroups} = scorecard['dataSelection'] ?? {}
+    const sanitizedGroups = dataGroups.map(group => ({
+        ...group,
+        dataHolders: compact(group?.dataHolders)
+    }))
+
+    return {
+        ...scorecard,
+        dataSelection: {
+            dataGroups: sanitizedGroups
+        }
+    }
 }
 
 const orgUnitQuery = {

@@ -44,7 +44,6 @@ export default function useScorecardManage() {
 
     const setActiveStep = useSetRecoilState(ActiveStepState);
 
-
     const {add} = useAddScorecard();
     const {show} = useAlert(
         ({message}) => message,

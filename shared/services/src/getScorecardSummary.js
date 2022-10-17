@@ -1,4 +1,4 @@
-import {filter, isEmpty} from "lodash";
+import {compact, filter, isEmpty} from "lodash";
 import {DATASTORE_ENDPOINT, DATASTORE_SCORECARD_SUMMARY_KEY,} from "@hisptz/scorecard-constants";
 import {generateScorecardSummary} from "@hisptz/scorecard-utils";
 
@@ -74,7 +74,7 @@ export const restoreScorecardSummary = async (engine) => {
                     updatedSummary.push(scorecardSummary);
                 }
                 await engine.mutate(restoreMutation, {
-                    variables: {data: updatedSummary},
+                    variables: {data: updatedSummary.filter((summary) => !isEmpty(compact(Object.values(summary))))},
                 });
             }
         }

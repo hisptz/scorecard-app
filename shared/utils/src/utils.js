@@ -92,7 +92,7 @@ export function getHoldersFromGroups(dataGroups = []) {
 }
 
 export function getDataSourcesFromGroups(dataGroups) {
-    const dataHolders = getHoldersFromGroups(dataGroups);
+    const dataHolders = compact(getHoldersFromGroups(dataGroups));
     return flattenDeep(dataHolders?.map(({dataSources}) => dataSources));
 }
 
