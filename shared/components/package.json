@@ -1,6 +1,6 @@
 {
   "name": "@hisptz/scorecard-components",
-  "version": "2.6.0",
+  "version": "2.6.0-hotfix.1",
   "main": "./build/cjs/index.js",
   "scripts": {
     "build": "d2 app scripts build --verbose",

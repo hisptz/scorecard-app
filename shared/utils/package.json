@@ -1,6 +1,6 @@
 {
   "name": "@hisptz/scorecard-utils",
-  "version": "2.6.0",
+  "version": "2.6.0-hotfix.1",
   "dependencies": {
     "lodash": "^4.17.21",
     "@dhis2/d2-i18n": "^1.1.0",
