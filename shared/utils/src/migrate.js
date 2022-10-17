@@ -1,5 +1,5 @@
 import {map} from "async";
-import {find, has} from "lodash";
+import {compact, find, has} from "lodash";
 import {getDataSourceType} from "./dataSource";
 import {uid} from "./utils";
 
@@ -92,11 +92,11 @@ async function getScorecardDataSelection(oldScorecardDataSelections, engine) {
                     },
                     title: dataGroup?.name,
                     dataHolders: await map(dataGroup?.indicator_holder_ids, async (holderId) => {
-                        return await getScorecardDataHolder(
+                        return compact(await getScorecardDataHolder(
                             oldScorecardDataSelections.indicator_holders,
                             holderId,
                             engine
-                        );
+                        ));
                     }),
                 };
             }
@@ -113,7 +113,7 @@ async function getScorecardDataHolder(dataHolders, holderId, engine) {
                 return await getScorecardDataSource(indicator, engine);
             }),
         }
-        : null;
+        : undefined;
 }
 
 async function getScorecardDataSource(indicator, engine) {
