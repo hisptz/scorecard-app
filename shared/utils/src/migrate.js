@@ -91,13 +91,13 @@ async function getScorecardDataSelection(oldScorecardDataSelections, engine) {
                         backgroundColor: dataGroup.background_color,
                     },
                     title: dataGroup?.name,
-                    dataHolders: await map(dataGroup?.indicator_holder_ids, async (holderId) => {
-                        return compact(await getScorecardDataHolder(
+                    dataHolders: compact(await map(dataGroup?.indicator_holder_ids, async (holderId) => {
+                        return await getScorecardDataHolder(
                             oldScorecardDataSelections.indicator_holders,
                             holderId,
                             engine
-                        ));
-                    }),
+                        );
+                    })),
                 };
             }
         ),

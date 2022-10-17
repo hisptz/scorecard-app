@@ -15,6 +15,7 @@
   },
   "scripts": {
     "start:app": "concurrently \"yarn start:libs\"  \"yarn workspace app start\"",
+    "start:app-proxy": "concurrently \"yarn start:libs\"  \"yarn workspace app start:proxy\"",
     "deploy:app": "yarn workspace app deploy",
     "test:open:app": "yarn workspace app cy:open",
     "test:capture:app": "yarn workspace app cy:capture",
