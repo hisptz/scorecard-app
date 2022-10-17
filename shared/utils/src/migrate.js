@@ -127,8 +127,8 @@ async function getScorecardDataSource(indicator, engine) {
             return {
                 id: uid(),
                 legendDefinitionId: legendSet?.color,
-                endValue: legendSet?.max,
-                startValue: legendSet?.min,
+                endValue: typeof legendSet?.max === "string" ? parseFloat(legendSet?.max) : legendSet?.max,
+                startValue: typeof legendSet?.min === "string" ? parseFloat(legendSet?.min) : legendSet.min,
             };
         }),
         highIsGood: indicator?.high_is_good,
