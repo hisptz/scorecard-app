@@ -134,7 +134,7 @@ export default function useScorecardManage() {
                 });
                 await createNewScorecard(updatedData);
                 setIsNew({nextStepIndex: activeStepIndex + 1});
-                history.replace(`edit/${id}`);
+                history.replace(`edit/${id}?new=true`);
             }
         } catch (e) {
             console.error(e);
