@@ -4,23 +4,32 @@ import {HelpIndex, IsNewScorecardState} from "@hisptz/scorecard-state";
 import {getValidationPageFields} from "@hisptz/scorecard-utils";
 import {findIndex} from "lodash";
 import {useCallback, useEffect, useMemo} from "react";
-import {useRecoilState, useRecoilValue, useResetRecoilState} from "recoil";
+import {useLocation} from "react-router-dom";
+import {useRecoilState, useResetRecoilState} from "recoil";
 import {ActiveStepState, steps} from "../state/pages";
 
 export default function useScorecardManagerNavigate({form, onSave, onNavigate}) {
     const [helpStepIndex, setHelpStepIndex] = useRecoilState(HelpIndex);
     const [activeStep, setActiveStep] = useRecoilState(ActiveStepState);
-    const isNew = useRecoilValue(IsNewScorecardState);
+    const {search} = useLocation();
     const resetNewState = useResetRecoilState(IsNewScorecardState);
     const Component = activeStep.component;
     const {show} = useAlert(({message}) => message, ({type}) => ({...type, duration: 3000}))
 
+
     useEffect(() => {
+        const searchParams = new URLSearchParams(search);
+        const isNew = searchParams.get('new');
         if (isNew) {
-            setActiveStep(steps[isNew.nextStepIndex]);
-            return resetNewState;
+            setActiveStep(prevStep => {
+                const currentIndex = findIndex(steps, ['id', prevStep.id]);
+                if (currentIndex === 0) {
+                    return steps[1]
+                } else {return prevStep;}
+            });
         }
-    }, [isNew, resetNewState, setActiveStep]);
+
+    }, [resetNewState, search, setActiveStep]);
 
     const hasNextStep = useMemo(
         () => findIndex(steps, ["id", activeStep.id]) !== steps.length - 1,
