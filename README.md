@@ -82,11 +82,19 @@ Then open your project and run:
 
 ## <a name="running" >Running the app</a>
 
-To start the app in development mode run:
+To start the main app in development mode run:
 
-### `yarn start`
+### `yarn start:app`
+or 
+### `yarn start:app-proxy` 
+To start the app in proxy mode.
 
-This command runs the app in the development mode.<br />
+To start the widget in development mode run:
+### `yarn start:widget`
+
+##
+
+These commands run the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.<br />
@@ -106,11 +114,14 @@ at `http://localhost:8080` (It may change ports if 8080 is busy)
 
 ## <a name="building" >Building</a>
 
-To build your app ready for production run:
+To build your main app ready for production run:
 
-### `yarn build`
+### `yarn build:app`
+and to build your widget run: 
 
-This command builds the app for production to the `build` folder.<br />
+### `yarn build:widget`
+
+These commands build the app for production to the `build` folder.<br />
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
 The build is minified and the filenames include the hashes.<br />
@@ -122,29 +133,34 @@ See the section about [building](https://platform.dhis2.nu/#/scripts/build) for 
 
 In the project directory, you can run:
 
-### `yarn test`
+### `yarn workspace app test`
 
-Launches the test runner and runs all available tests found in `/src`.<br />
+Launches the test runner and runs all available tests found in the main app's `/src`.<br />
 
 See the section about [running tests](https://platform.dhis2.nu/#/scripts/test) for more information.
 
 To run end-to-end testing, use:
 
-### `yarn e2e:open`
+### `yarn e2e:open:app`
 
 To open the cypress test runner or use:
 
-### `yarn e2e:run`
+### `yarn e2e:stub`
 
-To run the tests without opening the runner
+To run the tests without opening the runner in stub mode
+
+or 
+### `yarn e2e:capture`
+
+To run the tests in capture mode.
 
 ## <a name="deployment">Deployment</a>
 
-### `yarn deploy`
+### `yarn deploy:app`
 
 Deploys the built app in the `build` folder to a running DHIS2 instance.<br />
 This command will prompt you to enter a server URL as well as the username and password of a DHIS2 user with the App
 Management authority.<br/>
-You must run `yarn build` before running `yarn deploy`.<br />
+You must run `yarn build:app` before running `yarn deploy`.<br />
 
 See the section about [deploying](https://platform.dhis2.nu/#/scripts/deploy) for more information.
