@@ -7,8 +7,13 @@
 
 2.  [Admin Guide](#Admin)
 3.  [Developer Guide](#Developer)
-
-    3.1. [Installations](#DevInstallation)
+    - [Project Structure](#project-structure)
+    - [Pre-requisites](#pre-requisites)
+    - [Getting started](#started)
+    - [Running the app](#running)
+    - [Building](#building)
+    - [Testing](#testing)
+    - [Deployment](#deployment)
 
 ## 1. <a name='Introduction'></a>Introduction
 
@@ -28,107 +33,118 @@ https://github.com/hisptz/scorecard-app/releases
 Go to your DHIS2 instance with the organisation units already in place,then install the downloaded app via App Management
 
 ## 3. <a name='Developer'></a>Developer Guide
+## <a name="project-structure">Project Structure<a/>
 
-### 3.1. <a name='DevInstallation'></a>Installations
+The project is a yarn monorepo consisting of 2 workspaces: 
+ - Shared workspace: contains all reusable implementations
+ - Apps workspace: contains the scorecard and scorecard widget apps
 
-#### 3.1.1.The DHIS2 CLI installation guide for Linux operating systems.
+### Shared
+Contains the sub-modules:
+ - Components: Shared React components
+ - Constants: Shared constants
+ - Hooks: Shared React hooks
+ - Models: Shared class models
+ - Services: Shared services 
+ - State: Shared state
+ - Utils: Shared utility functions
 
-##### 3.1.1.1.Yarn installation:
+### Apps
+#### Scorecard App
+Contains the actual scorecard app implementation. It is divided into 3 modules:
+ - Scorecard list: Lists all accessible scorecards
+ - Scorecard view: Displays the scorecard itself and contains organisation and period filters as well as other viewing options
+ - Scorecard configuration: Allows configuration of the scorecard. Divided into 5 steps
 
-```bash
-$ curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-$ echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sourcechh::s.list.d/yarn.list
+        
 
-$ sudo apt update && sudo apt install yarn
+## <a name="pre-requisites" >Pre-requisites</a>
 
-# If you are using nvm you can avoid the node installation by running
-$ sudo apt update && sudo apt install --no-install-recommends yarn
+This project was bootstrapped with [DHIS2 Application Platform](https://github.com/dhis2/app-platform). To start
+development you require:
 
-# To verify yarn installation, run
-$ yarn --version
+- Node - 16.x or later
+- Yarn - 1.22.19 or later
+
+## <a name="started" >Getting started</a>
+
+To get started with the project, clone the project into your local environment
+
+```shell
+git clone https://github.com/hisptz/bottleneck-analysis-app
 ```
 
-##### 3.1.1.2.d2-cli installation:
+Then open your project and run:
 
-```bash
-$ yarn global add @dhis2/cli
-
-# To verify d2 is installed
-$ d2 --help
+```shell
+ yarn install
 ```
 
-##### NOTE: If the &nbsp;<strong>"d2: command not found"</strong>&nbsp; then run the below commands:
+## <a name="running" >Running the app</a>
 
-```bash
-# Check path to yarn packages
-$ yarn global bin
+To start the app in development mode run:
 
-# Add yarn installed packages to path
-# Example: export PATH=$PATH:/home/dhis/.yarn/bin
-$ export PATH=$PATH:<path_to_yarn_packages>
+### `yarn start`
 
-# Check if yarn is installed
- $ d2 --help
-```
+This command runs the app in the development mode.<br />
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-#### 3.1.2.The DHIS2 CLI installation guide for MacOS.
+The page will reload if you make edits.<br />
+You will also see any lint errors in the console.
 
-##### 3.1.2.1.Installing d2-app-scripts
+#### `.env` file Usage
 
-```bash
-$ yarn global add @dhis2/cli-app-scripts
+To avoid having to specify the server URL everytime you start the app, you can duplicate the `.env.example` file and
+rename it to `.env`. Then change the `REACT_APP_DHIS2_BASE_URL` variable to the URL of your DHIS2 instances
 
-# To verify d2-app-scripts is installed
-$ d2 --help
+#### CORS issues
 
-# Add yarn installed packages to path
-$ export PATH=$PATH:<path_to_yarn_packages>
+When running in development mode, you may encounter CORS error. To fix this issue, proxy your DHIS2 instance by
+appending `--proxy http://link-to-dhis2-instance` to the start command. This will start a local proxy server
+at `http://localhost:8080` (It may change ports if 8080 is busy)
+. You can then point your app to `http://localhost:8080`
 
-```
+## <a name="building" >Building</a>
 
-##### 3.1.2.2.Bootstrapping
+To build your app ready for production run:
 
-To create a new template application (or upgrade and existing React app), use the d2-app-scripts init command.
+### `yarn build`
 
-```bash
-$ d2-app-scripts init app-name
-$ cd app-name
+This command builds the app for production to the `build` folder.<br />
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-#To start app
-$ yarn start
-```
+The build is minified and the filenames include the hashes.<br />
+A deployable `.zip` file can be found in `build/bundle`!
 
-##### 3.1.2.3.Proxying to remote server
+See the section about [building](https://platform.dhis2.nu/#/scripts/build) for more information.
 
-Local server should whitelist
-localhost:4200 in system settings
-<br>
-<br>
-Chrome
+## <a name="testing" >Testing</a>
 
-```bash
-As of mid-July 2020, the Chrome (and Chromium) stable release channel has started to disable cross-site cookies by default. Mozilla Firefox has pushed this change to their beta channel and will likely release it to the stable channel soon.
+In the project directory, you can run:
 
-# To enable proxying to remote server developer needs to edit SameSite Cookie Attribute when debugging app or developing app
+### `yarn test`
 
-1. Open chrome browser
-2. Paste chrome://flags/#same-site-by-default-cookies in address bar
-3. Set SameSite Flag to disabled
-```
+Launches the test runner and runs all available tests found in `/src`.<br />
 
-Mozilla
-<br>
+See the section about [running tests](https://platform.dhis2.nu/#/scripts/test) for more information.
 
-```bash
-Firefox stable channel does not yet enforce this cookie policy, so for the moment everything should continue to work. Currently there doesn’t appear to be an easy way to disable the policy in Firefox Beta.
-```
+To run end-to-end testing, use:
 
-Safari
+### `yarn e2e:open`
 
-```bash
-To disable SameSite Cookie in Safari:
-1. Open Safari
-2. Go to Preferences
-3. Navigate to privacy
-4. Uncheck “Prevent cross-site tracking” option
-```
+To open the cypress test runner or use:
+
+### `yarn e2e:run`
+
+To run the tests without opening the runner
+
+## <a name="deployment">Deployment</a>
+
+### `yarn deploy`
+
+Deploys the built app in the `build` folder to a running DHIS2 instance.<br />
+This command will prompt you to enter a server URL as well as the username and password of a DHIS2 user with the App
+Management authority.<br/>
+You must run `yarn build` before running `yarn deploy`.<br />
+
+See the section about [deploying](https://platform.dhis2.nu/#/scripts/deploy) for more information.
