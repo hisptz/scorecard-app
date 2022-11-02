@@ -83,7 +83,7 @@
     "react-hook-form": "^7.25.1",
     "react-js-loading-shimmer": "^1.0.10",
     "react-jsx-parser": "^1.28.4",
-    "react-router-dom": "^5.2.0",
+    "react-router-dom": "^6.4.3",
     "react-to-print": "^2.14.0",
     "react-web-vitals": "^1.0.1",
     "recoil": "^0.6.1",
