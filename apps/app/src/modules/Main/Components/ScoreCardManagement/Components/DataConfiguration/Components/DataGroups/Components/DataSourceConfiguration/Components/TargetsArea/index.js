@@ -117,6 +117,7 @@ export default function TargetsArea({path}) {
                     {
                         selectedType === "period" && openConfigDialog && !isEmpty(specificTargets) ?
                             <PeriodSpecificTargetsModal
+                                path={path}
                                 defaultLegends={defaultLegends}
                                 onChangeDefaultLegends={(legends) => setValue(`${path}.legends`, legends)}
                                 specificTarget={specificTargets[0]}
@@ -131,6 +132,7 @@ export default function TargetsArea({path}) {
                     {
                         selectedType === "orgUnit" && openConfigDialog && !isEmpty(specificTargets) ?
                             <OrgUnitSpecificTargetsModal
+                                path={path}
                                 defaultLegends={defaultLegends}
                                 onChangeDefaultLegends={(legends) => setValue(`${path}.legends`, legends)}
                                 specificTarget={specificTargets[0]}
@@ -150,6 +152,7 @@ export default function TargetsArea({path}) {
                     <div className="column w-100 legend-settings-area">
                         <TargetsField
                             name={`${path}.legends`}
+                            path={path}
                             multipleFields={
                                 legendDefinitions?.map(
                                     (legend) =>
