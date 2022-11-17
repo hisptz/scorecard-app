@@ -1,13 +1,13 @@
 {
   "name": "@hisptz/scorecard-hooks",
-  "version": "2.6.0",
+  "version": "2.6.1-beta.01",
   "scripts": {
     "build": "d2 app scripts build --verbose",
     "start": "d2 app scripts build --watch"
   },
   "dependencies": {
     "@iapps/function-analytics": "^1.0.0-beta.23",
-    "@hisptz/scorecard-utils": "^2.6.0",
+    "@hisptz/scorecard-utils": "^2.6.1-beta.01",
     "@iapps/period-utilities": "^1.0.0-beta.7",
     "react": "16.14.0"
   },

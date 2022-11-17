@@ -1,6 +1,6 @@
 {
   "name": "@hisptz/scorecard-resources",
-  "version": "2.6.0",
+  "version": "2.6.1-beta.01",
   "scripts": {
     "build": "d2 app scripts build --verbose",
     "start": "d2 app scripts build --watch"

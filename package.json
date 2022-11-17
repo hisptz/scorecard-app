@@ -1,6 +1,6 @@
 {
   "name": "hisptz-scorecard-workspaces",
-  "version": "2.6.0",
+  "version": "2.6.1-beta.01",
   "description": "Interactive Scorecard Application",
   "license": "BSD-3-Clause",
   "private": true,
