@@ -25,7 +25,7 @@ export default function DataSourceConfigurationForm({path}) {
                     mandatory
                     valueType={DHIS2ValueTypes.TEXT.name}
                     label={i18n.t("Name")}
-                    name={`${path}.displayName`}
+                    name={`${path}.name`}
                 />
                 <RHFCustomInput
                     mandatory

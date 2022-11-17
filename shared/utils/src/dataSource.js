@@ -27,12 +27,15 @@ function getTypeFromResource(resource) {
     }
 }
 
-export async function getDataSourceType(engine, dataSourceId) {
+export async function getDataSourceDetails(engine, dataSourceId) {
     try {
         const {object} = await engine.query(identifiableObjectsQuery, {variables: {id: dataSourceId}}) ?? {};
         if (object.href) {
             const resource = getResourceFromHref(object.href);
-            return getTypeFromResource(resource);
+            return {
+                type: getTypeFromResource(resource),
+                name: object.displayName ?? object.name
+            };
         }
         return null;
     } catch (e) {

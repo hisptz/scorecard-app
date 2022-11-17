@@ -52,6 +52,7 @@ export default function useDataGroupManage({index, expanded}) {
                         new ScorecardIndicator({
                             ...dataSource,
                             label: dataSource.displayName,
+                            name: dataSource.displayName,
                             legends: targetOnLevels
                                 ? fromPairs([
                                     ...(orgUnitLevels?.map(({id}) => [

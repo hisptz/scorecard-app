@@ -1,4 +1,4 @@
-export {getDataSourceType} from './dataSource';
+export {getDataSourceDetails} from './dataSource';
 export {updateListFromDragAndDrop, updateListsFromDragAndDrop} from "./dnd";
 export {migrateScorecard,} from "./migrate";
 export {default as getSelectedOrgUnitSelectionDisplay} from "./orgUnit"

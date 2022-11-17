@@ -2,7 +2,7 @@ import {useDataEngine} from "@dhis2/app-runtime";
 import PropTypes from "prop-types";
 import React, {useEffect, useState} from "react";
 import {useRecoilCallback} from "recoil";
-import {getDataSourceType} from "@hisptz/scorecard-utils";
+import {getDataSourceDetails} from "@hisptz/scorecard-utils";
 import {
     dataElementsStateDictionary,
     dataSetDataElementCountState,
@@ -49,7 +49,7 @@ export default function DataSourceSelector({type, id}) {
         async function getType() {
             setLoading(true);
             try {
-                setDataType(await getDataSourceType(engine, id));
+                setDataType((await getDataSourceDetails(engine, id))?.type);
             } catch (e) {
                 console.error(e)
             } finally {

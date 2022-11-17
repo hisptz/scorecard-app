@@ -1,6 +1,6 @@
 import {map} from "async";
 import {compact, find, has} from "lodash";
-import {getDataSourceType} from "./dataSource";
+import {getDataSourceDetails} from "./dataSource";
 import {uid} from "./utils";
 
 export async function migrateScorecard(oldScorecard, engine) {
@@ -117,13 +117,16 @@ async function getScorecardDataHolder(dataHolders, holderId, engine) {
 }
 
 async function getScorecardDataSource(indicator, engine) {
+
+    const {name, type} = await getDataSourceDetails(engine, indicator.id) ?? {}
+
     return {
         id: indicator.id,
-        name: indicator.title,
-        type: await getDataSourceType(engine, indicator.id) ?? "customFunction",
+        name: indicator.title ?? name,
+        type: type ?? "customFunction",
         label: indicator.title,
         weight: indicator.weight,
-        legends: indicator.legendset.map((legendSet) => {
+        legends: indicator.legendset.map((  legendSet) => {
             return {
                 id: uid(),
                 legendDefinitionId: legendSet?.color,
