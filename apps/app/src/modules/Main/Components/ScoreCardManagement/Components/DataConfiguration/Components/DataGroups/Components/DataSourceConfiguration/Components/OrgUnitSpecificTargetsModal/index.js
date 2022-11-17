@@ -61,12 +61,13 @@ export default function OrgUnitSpecificTargetsModal({
                                                         onUpdate,
                                                         specificTarget,
                                                         defaultLegends,
-                                                        onChangeDefaultLegends
+                                                        onChangeDefaultLegends,
+                                                        path
                                                     }) {
     const {watch} = useFormContext();
     const [target, setTarget] = useState(specificTarget);
     const legendDefinitions = getNonDefaultLegendDefinitions(watch("legendDefinitions"));
-
+    const highIsGood = watch(`${path}.highIsGood`);
 
     const onUpdateClick = useCallback(
         () => {
@@ -89,6 +90,7 @@ export default function OrgUnitSpecificTargetsModal({
                         <div className="row">
                             <div className="column w-100 legend-settings-area">
                                 <LegendsField
+                                    highIsGood={highIsGood}
                                     legendDefinitions={legendDefinitions}
                                     value={target.legends}
                                     onChange={(legends) => {
@@ -106,6 +108,7 @@ export default function OrgUnitSpecificTargetsModal({
                             <div className="column w-100 legend-settings-area">
                                 <p>{i18n.t("Other Periods")}</p>
                                 <LegendsField
+                                    highIsGood={highIsGood}
                                     legendDefinitions={legendDefinitions}
                                     value={defaultLegends}
                                     onChange={onChangeDefaultLegends}
@@ -128,6 +131,7 @@ export default function OrgUnitSpecificTargetsModal({
 
 OrgUnitSpecificTargetsModal.propTypes = {
     defaultLegends: PropTypes.array.isRequired,
+    path: PropTypes.string.isRequired,
     specificTarget: PropTypes.object.isRequired,
     onChangeDefaultLegends: PropTypes.func.isRequired,
     open: PropTypes.bool,

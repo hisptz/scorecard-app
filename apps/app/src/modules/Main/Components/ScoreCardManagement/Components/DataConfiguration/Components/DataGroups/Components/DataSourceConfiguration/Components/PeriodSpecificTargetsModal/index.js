@@ -17,13 +17,16 @@ export default function PeriodSpecificTargetsModal({
                                                        onUpdate,
                                                        specificTarget,
                                                        defaultLegends,
-                                                       onChangeDefaultLegends
+                                                       onChangeDefaultLegends,
+                                                       path
                                                    }) {
     const {watch} = useFormContext();
+
     const [target, setTarget] = useState(specificTarget);
     const {calendar} = useRecoilValue(SystemSettingsState);
 
     const legendDefinitions = getNonDefaultLegendDefinitions(watch("legendDefinitions"));
+    const highIsGood = watch(`${path}.highIsGood`);
     const [periodSelectorOpen, setPeriodSelectorOpen] = useState(isEmpty(target.items))
 
 
@@ -79,6 +82,7 @@ export default function PeriodSpecificTargetsModal({
                     <div className="row">
                         <div className="column w-100 legend-settings-area">
                             <LegendsField
+                                highIsGood={highIsGood}
                                 legendDefinitions={legendDefinitions}
                                 value={target.legends}
                                 onChange={(legends) => {
@@ -96,6 +100,7 @@ export default function PeriodSpecificTargetsModal({
                         <div className="column w-100 legend-settings-area">
                             <p>{i18n.t("Other Periods")}</p>
                             <LegendsField
+                                highIsGood={highIsGood}
                                 legendDefinitions={legendDefinitions}
                                 value={defaultLegends}
                                 onChange={onChangeDefaultLegends}
@@ -116,6 +121,7 @@ export default function PeriodSpecificTargetsModal({
 
 
 PeriodSpecificTargetsModal.propTypes = {
+    path: PropTypes.string.isRequired,
     specificTarget: PropTypes.object.isRequired,
     defaultLegends: PropTypes.any,
     open: PropTypes.bool,

@@ -71,6 +71,7 @@ export default function LevelTargetsField({
                     <AccordionDetails>
                         <div className="column w-100">
                             <LegendsField
+                                highIsGood={highIsGood}
                                 legendDefinitions={legendDefinitions}
                                 value={get(value, id) ?? []}
                                 onChange={(value) => onFieldChange(value, id)}

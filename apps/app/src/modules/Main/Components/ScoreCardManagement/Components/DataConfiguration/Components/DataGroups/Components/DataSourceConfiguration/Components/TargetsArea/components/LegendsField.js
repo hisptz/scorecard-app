@@ -4,11 +4,11 @@ import {set} from "lodash";
 import React from "react";
 
 
-function autoSetAdjacentValues(data, index) {
+function autoSetAdjacentValues(data, index, highIsGood) {
     const newData = [...data];
     const updatedValue = newData[index];
-    const previousValueIndex = index - 1;
-    const nextValueIndex = index + 1;
+    const previousValueIndex = highIsGood ? index - 1 : index + 1;
+    const nextValueIndex = highIsGood ? index + 1 : index - 1;
 
     if (previousValueIndex >= 0) {
         set(newData, `${previousValueIndex}.startValue`, updatedValue?.endValue);
@@ -19,13 +19,13 @@ function autoSetAdjacentValues(data, index) {
     return newData;
 }
 
-function editAtIndex(index, value, data) {
+function editAtIndex(index, value, {data, highIsGood}) {
     const newData = [...data];
     set(newData, index, value);
-    return autoSetAdjacentValues(newData, index);
+    return autoSetAdjacentValues(newData, index, highIsGood);
 }
 
-export default function LegendsField({value, onChange, legendDefinitions}) {
+export default function LegendsField({value, onChange, legendDefinitions, highIsGood}) {
 
 
     return (
@@ -39,7 +39,7 @@ export default function LegendsField({value, onChange, legendDefinitions}) {
                     label: "",
                     value: value[index],
                     onChange: (legendValue) => {
-                        onChange([...editAtIndex(index, legendValue, value)]);
+                        onChange([...editAtIndex(index, legendValue, {data: value, highIsGood})]);
                     }
                 }}
                 valueType={DHIS2ValueTypes.LEGEND_MIN_MAX.name}
