@@ -5,8 +5,9 @@ import React from "react";
 import {useRecoilValue} from "recoil";
 import classes from "../../../scorecardTable.module.css"
 import OrgUnitHeaderCells from "./OrgUnitHeaderCells";
-import {PeriodResolverState, ScorecardViewState} from "@scorecard/state";
-import {ScorecardTableConstants} from "@scorecard/constants";
+import {PeriodResolverState, ScorecardViewState} from "../../../../../../../state";
+import {ScorecardTableConstants} from "../../../../../../../constants";
+
 
 export default function GroupsHeaderRow({nested, orgUnits}) {
     const {dataGroups} =

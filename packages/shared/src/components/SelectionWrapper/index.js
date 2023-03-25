@@ -3,7 +3,7 @@ import {Box, Chip, Tooltip} from "@dhis2/ui";
 import {chunk, head} from "lodash";
 import PropTypes from "prop-types";
 import React from "react";
-import {FilterComponentTypes} from "@scorecard/constants";
+import {FilterComponentTypes} from "../../constants";
 
 const ITEM_DISPLAY_NO = 1;
 

@@ -1,6 +1,6 @@
 import {compact, filter, isEmpty} from "lodash";
-import {DATASTORE_ENDPOINT, DATASTORE_SCORECARD_SUMMARY_KEY,} from "@scorecard/constants";
-import {generateScorecardSummary} from "@scorecard/utils";
+import {DATASTORE_ENDPOINT, DATASTORE_SCORECARD_SUMMARY_KEY} from "../constants";
+import {generateScorecardSummary} from "../utils";
 
 const query = {
     summary: {

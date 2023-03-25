@@ -1,5 +1,5 @@
-import {ScorecardAccessType} from "@scorecard/constants";
 import DataModel from "./base";
+import {ScorecardAccessType} from "../constants";
 
 export default class ScorecardAccess extends DataModel {
     get defaults() {

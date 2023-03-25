@@ -3,11 +3,11 @@ import {Button} from "@dhis2/ui";
 import {isEmpty} from "lodash";
 import React, {useState} from "react";
 import {useRecoilValue} from "recoil";
-import {IsSpecificTargetsSet, ScorecardConfigDirtyState, ScorecardViewState,} from "@scorecard/state";
 import SpecificTargetsLibraryModal from "../SpecificTargetsLibrary";
 import LegendView from "./Components/LegendView";
 import classes from "./ScorecardLegendsView.module.css";
 import {DecreasingArrows, IncreasingArrows} from "../../../ScorecardCell/Components/Arrows";
+import {IsSpecificTargetsSet, ScorecardConfigDirtyState, ScorecardViewState} from "../../../../state";
 
 export default function ScorecardLegendsView() {
     const {legend: showLegends, arrows: showArrows} = useRecoilValue(ScorecardViewState("options"));

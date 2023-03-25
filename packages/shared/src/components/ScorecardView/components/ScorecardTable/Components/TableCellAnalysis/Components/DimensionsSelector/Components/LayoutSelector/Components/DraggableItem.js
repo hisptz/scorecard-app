@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import React from "react";
 import {Draggable} from "react-beautiful-dnd";
-import {DraggableItems} from "@scorecard/constants";
+import {DraggableItems} from "../../../../../../../../../../../constants";
 
 export default function DraggableItem({children, type, index}) {
     return (

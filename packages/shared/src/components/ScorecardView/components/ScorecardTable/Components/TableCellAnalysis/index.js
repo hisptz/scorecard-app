@@ -19,10 +19,11 @@ import {DataSourceState, DataState} from "./state/data";
 import {LayoutState} from "./state/layout";
 import {orgUnitSelectorOptionOnCell, OrgUnitState} from "./state/orgUnit";
 import {cellPeriodOptionAtom, PeriodState} from "./state/period";
-import {LowestOrgUnitLevel, OrgUnitLevels} from "@scorecard/state";
-import {OrgUnitSelection} from "@scorecard/models";
-import {getDataSourcesDisplayName} from "@scorecard/utils";
-import {FullPageError, ModalLoader} from "@scorecard/components"
+import {LowestOrgUnitLevel, OrgUnitLevels} from "../../../../../../state";
+import {OrgUnitSelection} from "../../../../../../models";
+import {getDataSourcesDisplayName} from "../../../../../../utils";
+import ModalLoader from "../../../../../Loaders/ModalLoader";
+import FullPageError from "../../../../../Errors/FullPageError";
 
 const DictionaryAnalysis = React.lazy(() =>
     import("./Components/DictionaryAnalysis")

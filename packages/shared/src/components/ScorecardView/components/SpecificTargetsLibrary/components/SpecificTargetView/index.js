@@ -5,7 +5,7 @@ import {find} from "lodash";
 import PropTypes from 'prop-types'
 import React from 'react'
 import {useRecoilValue} from "recoil";
-import {OrgUnitLevels, ScorecardViewState, SelectedOrgUnits} from "@scorecard/state";
+import {OrgUnitLevels, ScorecardViewState, SelectedOrgUnits} from "../../../../../../state";
 
 
 function LegendsView({legends}) {

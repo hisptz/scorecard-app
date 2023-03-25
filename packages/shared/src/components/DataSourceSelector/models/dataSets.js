@@ -1,6 +1,6 @@
 import {filter as _filter, flattenDeep} from "lodash";
-import {updatePager} from "@scorecard/utils";
 import DataSource from "./dataSource";
+import {updatePager} from "../../../utils";
 
 export default class DataSets extends DataSource {
     constructor({label}) {

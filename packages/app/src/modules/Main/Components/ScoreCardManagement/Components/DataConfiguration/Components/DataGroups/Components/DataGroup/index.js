@@ -1,8 +1,8 @@
 import i18n from "@dhis2/d2-i18n";
 import {Button, colors, Tooltip} from "@dhis2/ui";
-import {ScorecardIndicatorGroup} from "@scorecard/shared";
 import AddIcon from "@material-ui/icons/Add";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import {ScorecardIndicatorGroup} from "@scorecard/shared";
 import {isEmpty,} from "lodash";
 import PropTypes from "prop-types";
 import React, {forwardRef, useRef, useState} from "react";
@@ -72,12 +72,12 @@ function DataGroup({
                             expandIcon={
                                 <ExpandMoreIcon
                                     className="expand-group-icon"
-                                    dataTest="@scorecard/group-expand"
+                                    dataTest="scorecard-group-expand"
                                 />
                             }
                             aria-controls={`${id}d-content`}
                             id={`${id}d--header`}
-                            dataTest="@scorecard/group-item"
+                            dataTest="scorecard-group-item"
                         >
                             {titleEditOpen ? (
                                 <EditTitle
@@ -137,8 +137,8 @@ function DataGroup({
                             )}
                             <div>
                                 <Button
-                                    className="@scorecard/indicator-add"
-                                    dataTest="@scorecard/indicator-add"
+                                    className="scorecard-indicator-add"
+                                    dataTest="scorecard-indicator-add"
                                     onClick={() => setOpenAdd(true)}
                                     icon={<AddIcon/>}
                                 >

@@ -6,8 +6,9 @@ import {
     ScorecardLegendDefinitionSelector,
     ScorecardViewState,
     SingleHighlightedIndicatorState
-} from "@scorecard/state";
-import {getLegend} from "@scorecard/utils";
+} from "../../../../../state";
+import {getLegend} from "../../../../../utils";
+
 
 export default function HighlightedIndicator({highlightedIndicator}) {
     const orgUnitLevels = useRecoilValue(OrgUnitLevels);

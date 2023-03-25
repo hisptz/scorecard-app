@@ -1,6 +1,6 @@
 import {useEffect} from "react";
 import {useSetRecoilState} from "recoil";
-import {ScorecardDataLoadingState} from "@scorecard/state";
+import {ScorecardDataLoadingState} from "../../../../../state";
 
 export default function useTableLoadingState(dataEngine, orgUnits) {
     const setLoadingState = useSetRecoilState(

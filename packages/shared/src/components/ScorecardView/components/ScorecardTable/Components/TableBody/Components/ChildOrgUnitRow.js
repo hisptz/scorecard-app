@@ -10,9 +10,10 @@ import TableLoader from "../../TableLoader";
 import AverageCell from "./AverageCell";
 import DroppableCell from "./DroppableCell";
 import OrgUnitContainer from "./OrgUnitContainer";
-import {PeriodResolverState, ScorecardDataLoadingState, ScorecardViewState} from "@scorecard/state";
-import {AverageDisplayType, DraggableItems} from "@scorecard/constants";
-import {ScorecardDataEngine} from "@scorecard/models";
+import {PeriodResolverState, ScorecardDataLoadingState, ScorecardViewState} from "../../../../../../../state";
+import {AverageDisplayType, DraggableItems} from "../../../../../../../constants";
+import {ScorecardDataEngine} from "../../../../../../../models";
+
 
 export default function ChildOrgUnitRow({
                                             orgUnit,

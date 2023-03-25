@@ -1,9 +1,9 @@
 import {findIndex, get as _get, isEmpty} from "lodash";
 import {atom, selector, selectorFamily} from "recoil";
 import {InitialOrgUnits} from "./orgUnit";
-import {getHighlightedIndicatorsData} from "@scorecard/services";
 import {PeriodResolverState} from "./period";
 import {ScorecardViewState} from "./scorecard";
+import {getHighlightedIndicatorsData} from "../services";
 
 const HighlightedIndicatorsState = atom({
     key: "highlighted-indicators-state",

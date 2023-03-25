@@ -4,7 +4,7 @@ import {Period} from "@iapps/period-utilities";
 import {filter, head} from "lodash";
 import PropTypes from "prop-types";
 import React, {useMemo, useState} from "react";
-import {CalendarTypes, PeriodCategories} from "@scorecard/constants";
+import {CalendarTypes, PeriodCategories} from "../../../../constants";
 
 export default function CalendarSpecificPeriodDimension({
                                                             calendar,

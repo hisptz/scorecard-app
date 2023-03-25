@@ -3,7 +3,20 @@ import {Period} from "@iapps/period-utilities";
 import {cloneDeep, filter, get as _get, head, isEmpty, set as _set, some,} from "lodash";
 import {atom, atomFamily, selector, selectorFamily} from "recoil";
 import {OrgUnitChildren, SelectedOrgUnits} from "./orgUnit";
-import {Orientation, ScorecardAccessType, TableSort} from "@scorecard/constants";
+import {EngineState} from "./engine";
+import {PeriodResolverState} from "./period";
+import {SystemSettingsState} from "./system";
+import {UserState} from "./user";
+import {ScreenDimensionState} from "./window";
+import {OrgUnitSelection, Scorecard, ScorecardAccess, ScorecardOptions} from "../models";
+import {Orientation, ScorecardAccessType, TableSort} from "../constants";
+import {
+    getOrgUnitSelection,
+    getScorecard,
+    getScorecardSummary,
+    isOrgUnitId,
+    restoreScorecardSummary
+} from "../services";
 import {
     getColSpanDataGroups,
     getColSpanWithOrgUnit,
@@ -14,20 +27,7 @@ import {
     getTableWidthWithOrgUnit,
     getUserAuthority,
     uid
-} from "@scorecard/utils";
-import {OrgUnitSelection, Scorecard, ScorecardAccess, ScorecardOptions} from "@scorecard/models";
-import {
-    getOrgUnitSelection,
-    getScorecard,
-    getScorecardSummary,
-    isOrgUnitId,
-    restoreScorecardSummary
-} from "@scorecard/services";
-import {EngineState} from "./engine";
-import {PeriodResolverState} from "./period";
-import {SystemSettingsState} from "./system";
-import {UserState} from "./user";
-import {ScreenDimensionState} from "./window";
+} from "../utils";
 
 const defaultValue = {
     legendDefinitions: [

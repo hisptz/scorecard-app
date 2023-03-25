@@ -1,6 +1,6 @@
 import React from 'react'
 import {useRecoilValue} from "recoil";
-import {ScorecardTableConfigState} from "@scorecard/state";
+import {ScorecardTableConfigState} from "../../../../../../state";
 
 
 export default function TableWidth({orgUnits}) {

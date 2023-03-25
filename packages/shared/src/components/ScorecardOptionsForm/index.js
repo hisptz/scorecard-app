@@ -2,8 +2,8 @@ import i18n from "@dhis2/d2-i18n";
 import {CheckboxField, Radio} from "@dhis2/ui";
 import PropTypes from "prop-types";
 import React from "react";
-import {AverageDisplayType, OPTIONS_HELP_STEPS} from "@scorecard/constants";
 import Help from "../Help";
+import {AverageDisplayType, OPTIONS_HELP_STEPS} from "../../constants";
 
 export default function ScorecardOptionsForm({options, onChange}) {
     return (

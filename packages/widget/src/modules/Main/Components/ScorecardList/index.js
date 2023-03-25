@@ -1,4 +1,3 @@
-import {useAlert} from "@dhis2/app-runtime";
 import i18n from "@dhis2/d2-i18n";
 import {Input} from "@dhis2/ui";
 import {Steps} from "intro.js-react";
@@ -11,12 +10,10 @@ import EmptySearchList from "./Components/EmptySearchList";
 import GridScorecardDisplay from "./Components/GridScorecardDisplay";
 import ListScorecardDisplay from "./Components/ListScorecardDisplay";
 import PaginatedDisplay from "./Components/PaginatedDisplay";
-import {EngineState, HelpState, RouterState, ScorecardSummaryState} from "@scorecard/state";
 import {scorecardWidgetState} from "../../../../states/scorecard";
-import {SCORECARD_LIST_HELP_STEPS, STEP_OPTIONS} from "@scorecard/shared";
-import {FullPageLoader} from "@scorecard/shared";
 import {load} from "../../../../services/widget";
-
+import {EngineState, HelpState, RouterState, ScorecardSummaryState} from "@scorecard/shared/src";
+import {FullPageLoader} from ""
 
 export default function ScorecardList() {
     const setRoute = useSetRecoilState(RouterState);

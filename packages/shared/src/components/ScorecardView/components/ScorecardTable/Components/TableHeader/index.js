@@ -6,7 +6,7 @@ import GroupsHeaderRow from "./Components/GroupsHeaderRow";
 import HoldersHeaderRow from "./Components/HoldersHeaderRow";
 import OrgUnitHeaderRow from "./Components/OrgUnitHeaderRow";
 import PeriodHeaderRow from "./Components/PeriodHeaderRow";
-import {ScorecardTableConfigState} from "@scorecard/state";
+import {ScorecardTableConfigState} from "../../../../../../state";
 
 function getHeaderRow(type) {
     switch (type) {

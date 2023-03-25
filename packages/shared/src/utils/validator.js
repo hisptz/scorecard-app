@@ -1,4 +1,6 @@
 import i18n from "@dhis2/d2-i18n";
+
+import {forIn, get, isEmpty} from "lodash";
 import {
     accessPageFields,
     dataConfigurationPageFields,
@@ -6,8 +8,7 @@ import {
     highlightedIndicatorPageFields,
     optionsPageFields,
     REQUIRED_FIELDS
-} from "@scorecard/constants";
-import {forIn, get, isEmpty} from "lodash";
+} from "../constants";
 
 function validateRequiredFields(scorecard, requiredFieldsPath = []) {
     const errors = {};

@@ -2,8 +2,7 @@ import i18n from "@dhis2/d2-i18n";
 import {FlyoutMenu, MenuItem} from "@dhis2/ui";
 import React from "react";
 import {useSetRecoilState} from "recoil";
-import {HelpState} from "@scorecard/state";
-import {SCORECARD_DOCUMENTATION_URL} from "@scorecard/shared";
+import {HelpState, SCORECARD_DOCUMENTATION_URL} from "@scorecard/shared/src";
 
 
 export default function HelpMenu() {

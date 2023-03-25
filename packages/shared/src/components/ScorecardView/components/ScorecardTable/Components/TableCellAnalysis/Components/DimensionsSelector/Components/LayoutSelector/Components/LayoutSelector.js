@@ -4,10 +4,10 @@ import {isEmpty} from "lodash";
 import PropTypes from "prop-types";
 import React from "react";
 import {DragDropContext} from "react-beautiful-dnd";
-import {LAYOUTS} from "@scorecard/constants";
-import {updateListFromDragAndDrop, updateListsFromDragAndDrop,} from "@scorecard/utils";
 import DraggableItem from "./DraggableItem";
 import DroppableArea from "./DroppableArea";
+import {updateListFromDragAndDrop, updateListsFromDragAndDrop} from "../../../../../../../../../../../utils";
+import {LAYOUTS} from "../../../../../../../../../../../constants";
 
 export default function LayoutSelector({layout, onLayoutChange}) {
     const {column, row, series, category, filter} = layout ?? {};

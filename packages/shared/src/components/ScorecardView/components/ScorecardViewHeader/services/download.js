@@ -2,7 +2,7 @@ import i18n from "@dhis2/d2-i18n";
 import {saveAs} from "file-saver";
 import {find, flatten, forIn, set} from "lodash";
 import {utils as xlsx, writeFile} from "xlsx";
-import {ALMA_HEADERS} from "@scorecard/constants";
+import {ALMA_HEADERS} from "../../../../../constants";
 
 function generateExcelJSON({
                                periods = [],

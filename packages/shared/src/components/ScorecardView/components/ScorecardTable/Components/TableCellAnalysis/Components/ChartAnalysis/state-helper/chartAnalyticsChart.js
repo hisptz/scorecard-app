@@ -1,7 +1,7 @@
 /* eslint-disable import/no-unresolved */
 import {atom, selectorFamily} from "recoil";
-import {CHART_TYPES} from "@scorecard/constants";
 import {getChartConfiguration} from "../helper/get-chart-configuration.helper";
+import {CHART_TYPES} from "../../../../../../../../../constants";
 
 export const chartTypesAtom = atom({
     key: "chartTypes-atom",

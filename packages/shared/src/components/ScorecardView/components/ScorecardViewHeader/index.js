@@ -5,6 +5,8 @@ import {Steps} from "intro.js-react";
 import React, {useEffect, useMemo, useState} from "react";
 import {useHistory} from "react-router-dom";
 import {useRecoilCallback, useRecoilState, useRecoilValue} from "recoil";
+
+import SelectionWrapper from "../../../SelectionWrapper";
 import {
     HelpState,
     OrgUnitGroups,
@@ -13,15 +15,14 @@ import {
     ScorecardIdState,
     ScorecardViewState,
     SystemSettingsState
-} from "@scorecard/state";
-import {getSelectedOrgUnitSelectionDisplay} from "@scorecard/utils";
-import SelectionWrapper from "../../../SelectionWrapper";
+} from "../../../../state";
+import {getSelectedOrgUnitSelectionDisplay} from "../../../../utils";
 import {
     FilterComponentTypes,
     SCORECARD_VIEW_HELP_STEPS,
     STEP_OPTIONS,
     UNSUPPORTED_PERIOD_TYPES
-} from "@scorecard/constants";
+} from "../../../../constants";
 
 
 export default function ScorecardViewHeader() {

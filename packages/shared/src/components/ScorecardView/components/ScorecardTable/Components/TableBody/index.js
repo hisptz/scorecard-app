@@ -7,6 +7,8 @@ import AverageOrgUnitRow from "./Components/AverageOrgUnitRow";
 import ChildOrgUnitRow from "./Components/ChildOrgUnitRow";
 import DataSourceRow from "./Components/DataSourceRow";
 import ParentOrgUnitRow from "./Components/ParentOrgUnitRow";
+import {useDataEngine} from "@dhis2/app-runtime";
+import useTableConfig from "../../hooks/useTableConfig";
 import {
     LowestOrgUnitLevel,
     PeriodResolverState,
@@ -17,11 +19,9 @@ import {
     ScorecardTableOrientationState,
     ScorecardViewState,
     SystemSettingsState
-} from "@scorecard/state";
-import {ScorecardDataEngine} from "@scorecard/models";
-import {Orientation} from "@scorecard/constants";
-import {useDataEngine} from "@dhis2/app-runtime";
-import useTableConfig from "../../hooks/useTableConfig";
+} from "../../../../../../state";
+import {Orientation} from "../../../../../../constants";
+import {ScorecardDataEngine} from "../../../../../../models";
 
 
 function childrenAlreadyDisplayed(orgUnit, childrenOrgUnit) {

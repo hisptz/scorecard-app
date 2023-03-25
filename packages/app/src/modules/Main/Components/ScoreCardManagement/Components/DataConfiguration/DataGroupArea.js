@@ -1,9 +1,7 @@
 import i18n from "@dhis2/d2-i18n";
 import {Button, Input} from "@dhis2/ui";
-import {DataSelection} from "@scorecard/shared";
-import {ScorecardConfigEditState,} from "@scorecard/shared";
-import {updateListFromDragAndDrop} from "@scorecard/shared";
 import AddIcon from "@material-ui/icons/Add";
+import {DataSelection, ScorecardConfigEditState, updateListFromDragAndDrop} from "@scorecard/shared";
 import {debounce, find,} from "lodash";
 import PropTypes from "prop-types";
 import React, {useRef, useState} from "react";
@@ -91,7 +89,7 @@ export default function DataGroupArea({onGroupAdd}) {
                     onClick={onGroupAdd}
                     icon={<AddIcon/>}
                     dataTest="scocecard-add-group-button"
-                    className="@scorecard/add-group-button"
+                    className="scorecard-add-group-button"
                 >
                     {i18n.t("Add Group")}
                 </Button>

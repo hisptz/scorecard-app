@@ -2,7 +2,7 @@ import {colors} from "@dhis2/ui";
 import PropTypes from "prop-types";
 import React from "react";
 import {useDrag} from "react-dnd";
-import {DraggableItems} from "@scorecard/constants";
+import {DraggableItems} from "../../../../../../../constants";
 
 export default function DraggableCell({label, type, style, ...props}) {
     const [{isDragging}, dragRef] = useDrag(() => ({

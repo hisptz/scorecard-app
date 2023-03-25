@@ -1,4 +1,4 @@
-import {find, head, isEmpty, uniqBy} from "lodash";
+import {find, isEmpty, uniqBy} from "lodash";
 import {atom, selector} from "recoil";
 import {
     OrgUnitLevels,
@@ -6,7 +6,8 @@ import {
     ScorecardDataSourceState,
     ScorecardViewState,
     UserState
-} from "@scorecard/state";
+} from "../../../../../../../state";
+
 
 const OrgUnitState = atom({
     key: "cell-analysis-orgUnit-state",

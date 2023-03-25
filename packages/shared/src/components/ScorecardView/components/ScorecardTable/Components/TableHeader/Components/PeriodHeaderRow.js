@@ -7,10 +7,12 @@ import classes from '../../../scorecardTable.module.css'
 import {
     PeriodResolverState,
     ScorecardOrgUnitState,
-    ScorecardTableOrientationState, ScorecardTableSortState,
+    ScorecardTableOrientationState,
+    ScorecardTableSortState,
     ScorecardViewState
-} from "@scorecard/state";
-import {Orientation} from "@scorecard/constants";
+} from "../../../../../../../state";
+import {Orientation} from "../../../../../../../constants";
+
 
 export default function PeriodHeaderRow({orgUnits}) {
     const {dataGroups} =

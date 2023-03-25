@@ -4,20 +4,21 @@ import PropTypes from "prop-types";
 import React, {useState} from "react";
 import {useHistory} from "react-router-dom";
 import {useRecoilCallback, useRecoilState, useRecoilValue, useSetRecoilState,} from "recoil";
-import {ScorecardDataEngine} from "@scorecard/models";
+
+import DownloadMenu from "./Download/Components/DownloadMenu";
+import useDownload from "./ScorecardViewHeader/hooks/useDownload";
+import {ScorecardOptionsModal} from "../../modals";
+import {useConfig} from "@dhis2/app-runtime";
+import {APP_NAME, APP_TITLE} from "../../../constants";
 import {
     RefreshScorecardState,
     RouterState,
     ScorecardIdState,
     ScorecardViewState,
     UserAuthorityOnScorecard
-} from "@scorecard/state";
-import DownloadMenu from "./Download/Components/DownloadMenu";
-import useDownload from "./ScorecardViewHeader/hooks/useDownload";
-import {ScorecardOptionsModal} from "../../modals";
-import {useConfig} from "@dhis2/app-runtime";
-import {constructAppUrl} from "@scorecard/utils";
-import {APP_NAME, APP_TITLE} from "@scorecard/constants";
+} from "../../../state";
+import {constructAppUrl} from "../../../utils";
+import {ScorecardDataEngine} from "../../../models";
 
 export default function ScorecardActions({downloadAreaRef, dataEngine, widget}) {
     const setRoute = useSetRecoilState(RouterState);

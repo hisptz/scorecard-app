@@ -22,9 +22,8 @@ import {
 } from "lodash";
 import {BehaviorSubject, of} from "rxjs";
 import {map, take} from "rxjs/operators";
-import {TableSort} from "@scorecard/constants";
 import $ from "jquery";
-import {getCustomFunctionAnalytics} from "@scorecard/utils";
+import {TableSort} from "../constants";
 
 export default class ScorecardDataEngine {
     engine

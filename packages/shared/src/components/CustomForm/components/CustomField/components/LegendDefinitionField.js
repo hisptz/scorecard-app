@@ -2,8 +2,8 @@ import {Field, Input, Popover} from "@dhis2/ui";
 import PropTypes from "prop-types";
 import React, {useState} from "react";
 import {SketchPicker} from "react-color";
-import {uid} from "@scorecard/utils/utils";
 import classes from "../CustomField.module.css";
+import {uid} from "../../../../../utils";
 
 function ColorPickerPopper({reference, value, onClose, onChange}) {
     return (

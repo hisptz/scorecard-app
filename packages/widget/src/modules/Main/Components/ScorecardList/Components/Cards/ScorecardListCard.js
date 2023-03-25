@@ -4,12 +4,10 @@ import PropTypes from "prop-types";
 import React, {useState} from "react";
 import {useHistory} from "react-router-dom";
 import {useRecoilValue, useSetRecoilState} from "recoil";
-import {EngineState, RouterState} from "@scorecard/state";
+import {EngineState, RouterState, ScorecardCardImage as holderImage, truncateDescription} from "@scorecard/shared";
 import {scorecardWidgetState} from "../../../../../../states/scorecard"
 import {createWidget} from "../../../../../../services/widget";
-import {truncateDescription} from "@scorecard/shared";
 import {useConfirmDialog} from "@hisptz/react-ui";
-import {ScorecardCardImage as holderImage} from "@scorecard/shared";
 
 export default function ScorecardListCard({scorecard, grid}) {
     const setRoute = useSetRecoilState(RouterState);

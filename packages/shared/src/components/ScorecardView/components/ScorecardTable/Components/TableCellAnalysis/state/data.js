@@ -3,8 +3,8 @@ import {isEmpty} from "lodash";
 import {atom, selector} from "recoil";
 import {InitialOrgUnits} from "./orgUnit";
 import {ResolvedPeriodState} from "./period";
-import {getCustomFunctionAnalytics} from "@scorecard/utils";
-import {EngineState} from "@scorecard/state";
+import {EngineState} from "../../../../../../../state";
+import {getCustomFunctionAnalytics} from "../../../../../../../utils";
 
 const DataState = selector({
     key: "cell-analysis-data",

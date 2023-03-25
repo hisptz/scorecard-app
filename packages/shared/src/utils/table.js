@@ -1,4 +1,4 @@
-import {ScorecardTableConstants} from "@scorecard/constants";
+import {ScorecardTableConstants} from "../constants";
 
 export function getTableWidthWithDataGroups(
     periods = [],

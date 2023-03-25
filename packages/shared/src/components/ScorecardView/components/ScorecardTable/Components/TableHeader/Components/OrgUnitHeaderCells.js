@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import React, {useEffect, useRef, useState} from "react";
 import {useRecoilState, useRecoilValue} from "recoil";
 import classes from "../../../scorecardTable.module.css";
-import {ScorecardNameSort, ScorecardTableConfigState, ScorecardViewState} from "@scorecard/state";
+import {ScorecardNameSort, ScorecardViewState} from "../../../../../../../state";
 
 export default function OrgUnitHeaderCells({orgUnits, nested}) {
     const [orgUnitKeyword, setOrgUnitKeyword] = useRecoilState(
@@ -26,7 +26,6 @@ export default function OrgUnitHeaderCells({orgUnits, nested}) {
     );
 
     useEffect(() => {
-        console.log(searchValue);
         onOrgUnitSearch.current(searchValue);
     }, [searchValue]);
 

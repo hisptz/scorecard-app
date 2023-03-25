@@ -2,10 +2,13 @@ import {useAlert} from "@dhis2/app-runtime";
 import i18n from "@dhis2/d2-i18n";
 import {Button, ButtonStrip, colors} from "@dhis2/ui";
 import {useConfirmDialog} from "@hisptz/react-ui";
-import {useDeleteScorecard} from "@scorecard/shared";
-import {ScorecardCardImage as holderImage} from "@scorecard/shared";
-import {RouterState, UserAuthorityOnScorecard} from "@scorecard/shared";
-import {truncateDescription} from "@scorecard/shared";
+import {
+    RouterState,
+    ScorecardCardImage as holderImage,
+    truncateDescription,
+    useDeleteScorecard,
+    UserAuthorityOnScorecard
+} from "@scorecard/shared";
 import PropTypes from "prop-types";
 import React, {useState} from "react";
 import {useHistory} from "react-router-dom";
@@ -77,7 +80,7 @@ export default function ScorecardListCard({scorecard, grid}) {
     return grid ? (
         <div
             className="container-bordered p-16 "
-            data-test="@scorecard/thumbnail-view"
+            data-test="scorecard-thumbnail-view"
             style={{margin: 16, background: "white"}}
             onClick={onView}
         >
@@ -90,9 +93,9 @@ export default function ScorecardListCard({scorecard, grid}) {
                     />
                 </div>
                 <div className="flex-1 column align-items-center">
-                    <h4 className="@scorecard/list-card-title">{title}</h4>
+                    <h4 className="scorecard-list-card-title">{title}</h4>
                     <p
-                        className="@scorecard/list-card-description"
+                        className="scorecard-list-card-description"
                         style={{color: colors.grey700}}
                     >
                         {description?.length > 100 ? (
@@ -117,7 +120,7 @@ export default function ScorecardListCard({scorecard, grid}) {
                         <Button onClick={onView}>{i18n.t("View")}</Button>
                         {write && (
                             <Button
-                                dataTest={"edit-@scorecard/button"}
+                                dataTest={"edit-scorecard-button"}
                                 onClick={function (_, e) {
                                     e.stopPropagation();
                                     onEdit();
@@ -128,7 +131,7 @@ export default function ScorecardListCard({scorecard, grid}) {
                         )}
                         {deletePermission && (
                             <Button
-                                dataTest="@scorecard/delete-button"
+                                dataTest="scorecard-delete-button"
                                 onClick={onDelete}
                             >
                                 {i18n.t("Delete")}
@@ -140,7 +143,7 @@ export default function ScorecardListCard({scorecard, grid}) {
         </div>
     ) : (
         <div
-            data-test="@scorecard/thumbnail-view"
+            data-test="scorecard-thumbnail-view"
             className="container-bordered p-32"
             style={{margin: 16, background: "white"}}
             onClick={onView}
@@ -155,9 +158,9 @@ export default function ScorecardListCard({scorecard, grid}) {
                         />
                     </div>
                     <div className="column start">
-                        <h4 className="@scorecard/list-card-title">{title}</h4>
+                        <h4 className="scorecard-list-card-title">{title}</h4>
                         <p
-                            className="@scorecard/list-card-description"
+                            className="scorecard-list-card-description"
                             style={{color: colors.grey700}}
                         >
                             {description?.length > 100 ? (
@@ -183,7 +186,7 @@ export default function ScorecardListCard({scorecard, grid}) {
                         <Button onClick={onView}>{i18n.t("View")}</Button>
                         {write && (
                             <Button
-                                dataTest={"edit-@scorecard/button"}
+                                dataTest={"edit-scorecard-button"}
                                 onClick={function (_, e) {
                                     e.stopPropagation();
                                     onEdit();
@@ -194,7 +197,7 @@ export default function ScorecardListCard({scorecard, grid}) {
                         )}
                         {deletePermission && (
                             <Button
-                                dataTest="@scorecard/delete-button"
+                                dataTest="scorecard-delete-button"
                                 onClick={onDelete}
                             >
                                 {i18n.t("Delete")}

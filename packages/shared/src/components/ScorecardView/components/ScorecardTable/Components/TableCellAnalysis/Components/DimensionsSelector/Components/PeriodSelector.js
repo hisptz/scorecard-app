@@ -5,8 +5,8 @@ import React, {useState} from "react";
 import {useRecoilState, useRecoilValue} from "recoil";
 import {PeriodState} from "../../../state/period";
 import SelectionWrapper from "./SelectionWrapper";
-import {SystemSettingsState} from "@scorecard/state";
-import {UNSUPPORTED_PERIOD_TYPES} from "@scorecard/constants";
+import {SystemSettingsState} from "../../../../../../../../../state";
+import {UNSUPPORTED_PERIOD_TYPES} from "../../../../../../../../../constants";
 
 export default function PeriodSelector() {
     const [periodSelection, setPeriodSelection] = useRecoilState(PeriodState);

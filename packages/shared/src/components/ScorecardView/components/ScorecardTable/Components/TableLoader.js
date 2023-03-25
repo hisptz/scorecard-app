@@ -2,9 +2,9 @@ import {CircularLoader, DataTableCell, DataTableRow, LinearLoader,} from "@dhis2
 import PropTypes from "prop-types";
 import React, {useEffect, useState} from "react";
 import {useRecoilValue} from "recoil";
-import {useMediaQuery} from "@scorecard/hooks";
-import {ScorecardDataLoadingState, ScorecardTableConfigState} from "@scorecard/state";
-import {ScorecardDataEngine} from "@scorecard/models";
+import {useMediaQuery} from "../../../../../hooks";
+import {ScorecardDataLoadingState, ScorecardTableConfigState} from "../../../../../state";
+import {ScorecardDataEngine} from "../../../../../models";
 
 
 export default function TableLoader() {

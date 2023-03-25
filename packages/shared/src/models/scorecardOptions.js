@@ -1,5 +1,5 @@
-import {AverageDisplayType} from "@scorecard/constants";
 import DataModel from "./base";
+import {AverageDisplayType} from "../constants";
 
 export default class ScorecardOption extends DataModel {
     get defaults() {

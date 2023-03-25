@@ -13,8 +13,8 @@ import {
     truncate,
     uniqBy,
 } from "lodash";
-import {ScorecardLegend} from "@scorecard/models";
-import {DefaultAuthority, TableSort} from "@scorecard/constants";
+import {ScorecardLegend} from "../models";
+import {DefaultAuthority, TableSort} from "../constants";
 
 export function getWindowDimensions() {
     const {innerWidth: width, innerHeight: height} = window;

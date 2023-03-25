@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 import React, {useMemo} from "react";
 import {useRecoilValue} from "recoil";
 
-import {getIncreasingStatus} from "@scorecard/utils";
-import {ScorecardViewState} from "@scorecard/state";
 import {LinkedCellSvg, SingleCellSvg} from "../../../../../../index";
+import {ScorecardViewState} from "../../../../../../../state";
+import {getIncreasingStatus} from "../../../../../../../utils";
 
 
 export function SingleDataCell({cellRef, data, color, indicator}) {
@@ -15,7 +15,7 @@ export function SingleDataCell({cellRef, data, color, indicator}) {
             const {effectiveGap, displayArrows} = indicator ?? {};
             if (arrows && displayArrows) {
                 return getIncreasingStatus(current, previous, effectiveGap);
-                }
+            }
                 return null;
             },
             [current, previous, arrows, indicator]

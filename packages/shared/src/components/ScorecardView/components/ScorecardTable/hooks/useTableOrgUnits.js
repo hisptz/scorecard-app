@@ -9,10 +9,10 @@ import {
     ScorecardTableOrientationState,
     ScorecardTableSortState,
     ScorecardViewState
-} from "@scorecard/state";
-import {searchOrganisationUnit} from "@scorecard/hooks";
-import {sortOrgUnitsBasedOnData, sortOrgUnitsBasedOnNames} from "@scorecard/utils";
-import {Orientation, TableSort} from "@scorecard/constants";
+} from "../../../../../state";
+import {searchOrganisationUnit} from "../../../../../hooks";
+import {Orientation, TableSort} from "../../../../../constants";
+import {sortOrgUnitsBasedOnData, sortOrgUnitsBasedOnNames} from "../../../../../utils";
 
 
 export default function useTableOrgUnits(dataEngine, orgUnits, nested) {

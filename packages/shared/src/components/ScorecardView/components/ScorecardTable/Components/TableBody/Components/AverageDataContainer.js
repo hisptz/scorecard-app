@@ -3,8 +3,9 @@ import PropTypes from "prop-types";
 import React, {useEffect, useState} from "react";
 import {useRecoilValue} from "recoil";
 import AverageCell from "./AverageCell";
-import {ScorecardDataLoadingState, ScorecardOrgUnitState} from "@scorecard/state";
-import {ScorecardDataEngine} from "@scorecard/models";
+import {ScorecardDataLoadingState, ScorecardOrgUnitState} from "../../../../../../../state";
+import {ScorecardDataEngine} from "../../../../../../../models";
+
 
 export default function AverageDataContainer({
                                                  period,

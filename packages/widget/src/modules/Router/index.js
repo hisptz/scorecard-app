@@ -1,5 +1,4 @@
-import {FullPageError, FullPageLoader, ScorecardView} from "@scorecard/shared";
-import {SystemSettingsState} from "@scorecard/state";
+import {FullPageError, FullPageLoader, ScorecardView, SystemSettingsState} from "@scorecard/shared";
 import React, {Suspense} from "react";
 import {ErrorBoundary} from "react-error-boundary";
 import {HashRouter, Redirect, Route, Switch} from "react-router-dom";

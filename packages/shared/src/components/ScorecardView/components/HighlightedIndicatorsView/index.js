@@ -3,9 +3,8 @@ import {CircularLoader} from "@dhis2/ui";
 import {isEmpty} from "lodash";
 import React from "react";
 import {useRecoilValue, useRecoilValueLoadable} from "recoil";
-import {HighlightedIndicatorsState, ScorecardViewState} from "@scorecard/state";
-import {ErrorIcon} from "@scorecard/components";
 import HighlightedIndicator from "./Components/HighlightedIndicator";
+import {HighlightedIndicatorsState, ScorecardViewState} from "../../../../state";
 
 export default function HighlightedIndicatorsView() {
     const highlightedIndicators = useRecoilValue(

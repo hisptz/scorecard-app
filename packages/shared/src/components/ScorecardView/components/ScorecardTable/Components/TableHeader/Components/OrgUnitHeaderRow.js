@@ -10,10 +10,13 @@ import DroppableCell from "../../TableBody/Components/DroppableCell";
 import {
     PeriodResolverState,
     ScorecardNameSort,
-    ScorecardOrgUnitState, ScorecardTableConfigState, ScorecardTableSortState,
+    ScorecardOrgUnitState,
+    ScorecardTableConfigState,
+    ScorecardTableSortState,
     ScorecardViewState
-} from "@scorecard/state";
-import {DraggableItems, ScorecardTableConstants} from "@scorecard/constants";
+} from "../../../../../../../state";
+import {DraggableItems, ScorecardTableConstants} from "../../../../../../../constants";
+
 
 export default function OrgUnitHeaderRow({orgUnits, nested}) {
     const {averageColumn, itemNumber} = useRecoilValue(

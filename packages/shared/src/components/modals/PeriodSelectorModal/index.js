@@ -1,19 +1,11 @@
 import {PeriodDimension} from "@dhis2/analytics";
-import {
-    Button,
-    ButtonStrip,
-    Modal,
-    ModalActions,
-    ModalContent,
-    ModalTitle,
-    TransferOption,
-} from "@dhis2/ui";
+import {Button, ButtonStrip, Modal, ModalActions, ModalContent, ModalTitle,} from "@dhis2/ui";
 import PropTypes from "prop-types";
 import React, {useState} from "react";
 import {useRecoilValue} from "recoil";
-import {CalendarTypes} from "@scorecard/constants";
-import {SystemSettingsState} from "@scorecard/state";
 import EthiopianPeriodDimension from "./Components/EthiopianPeriodDimension";
+import {SystemSettingsState} from "../../../state";
+import {CalendarTypes} from "../../../constants";
 
 export default function PeriodSelectorModal({
                                                 initialValue,

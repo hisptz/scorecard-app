@@ -1,12 +1,17 @@
 import i18n from "@dhis2/d2-i18n";
 import {Button, ButtonStrip, Tooltip} from "@dhis2/ui";
-import {AccessDeniedPage, FullPageLoader} from "@scorecard/shared";
-import {STEP_OPTIONS} from "@scorecard/shared";
-import {useMediaQuery} from "@scorecard/shared";
-import {HelpState, HelpSteps, UserAuthorityOnScorecard} from "@scorecard/shared";
 import {DevTool} from "@hookform/devtools";
 import {Step, StepLabel, Stepper} from "@material-ui/core";
 import HelpIcon from "@material-ui/icons/Help";
+import {
+    AccessDeniedPage,
+    FullPageLoader,
+    HelpState,
+    HelpSteps,
+    STEP_OPTIONS,
+    useMediaQuery,
+    UserAuthorityOnScorecard
+} from "@scorecard/shared";
 import {Steps} from "intro.js-react";
 import React, {Suspense} from "react";
 import {FormProvider} from "react-hook-form";
@@ -152,7 +157,7 @@ export default function ScoreCardManagement() {
                                                     disabled={saving}
                                                     onClick={onNextStep}
                                                     className="settings-next-button"
-                                                    dataTest="@scorecard/admin-next-button"
+                                                    dataTest="scorecard-admin-next-button"
                                                 >
                                                     {!hasNextStep
                                                         ? saving
@@ -170,7 +175,7 @@ export default function ScoreCardManagement() {
                             <ButtonStrip center>
                                 <Button
                                     loading={saving}
-                                    dataTest="@scorecard/save-button"
+                                    dataTest="scorecard-save-button"
                                     disabled={saving}
                                     onClick={form.handleSubmit(onSave)}
                                 >
@@ -179,7 +184,7 @@ export default function ScoreCardManagement() {
                                 {hasNextStep && (
                                     <Button
                                         loading={savingAndContinue}
-                                        dataTest="@scorecard/save-and-continue-button"
+                                        dataTest="scorecard-save-and-continue-button"
                                         disabled={savingAndContinue}
                                         onClick={form.handleSubmit(onSaveAndContinue)}
                                     >

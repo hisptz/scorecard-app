@@ -1,10 +1,10 @@
 import {head, last, round} from "lodash";
 import PropTypes from "prop-types";
-import React, {useRef, useState} from "react";
+import React, {useState} from "react";
 import {useRecoilValue} from "recoil";
-import {OrgUnitLevels, ScorecardLegendDefinitionSelector, ScorecardViewState} from "@scorecard/state";
-import {getLegend} from "@scorecard/utils";
 import {LinkedCellSvg, SingleCellSvg} from "../../../../../../index";
+import {OrgUnitLevels, ScorecardLegendDefinitionSelector, ScorecardViewState} from "../../../../../../../state";
+import {getLegend} from "../../../../../../../utils";
 
 
 function SingleAverageCell({cellRef, dataSources, values, bold, period, orgUnit}) {

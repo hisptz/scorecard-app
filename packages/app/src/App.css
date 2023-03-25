@@ -399,9 +399,7 @@ table {
     padding-left: 16px;
 }
 
-.
-
-@scorecard/list-container {
+.scorecard-list-container {
     width: 100%;
     height: 100%;
 }
@@ -458,9 +456,7 @@ table {
     overflow-x: auto;
 }
 
-.
-
-@scorecard/table-header {
+.scorecard-table-header {
     font-weight: bold !important;
     font-size: 16px;
     margin: auto;
@@ -479,9 +475,7 @@ span.jsx-2694284040 {
     height: auto;
 }
 
-.
-
-@scorecard/table-cell {
+.scorecard-table-cell {
     border-right: 1px solid rgb(232, 237, 242);
 
 }
@@ -503,9 +497,7 @@ span.jsx-2694284040 {
     background: rgb(232, 237, 242)
 }
 
-.
-
-@scorecard/org-unit-cell {
+.scorecard-org-unit-cell {
 
     background: #E8EDF2;
     padding-top: 24px;
@@ -553,18 +545,14 @@ td.extra-table-cell > svg {
 }
 
 
-.
-
-@scorecard/list-card-title {
+.scorecard-list-card-title {
     font-weight: 500;
     margin: 4px;
     font-size: 18px;
     color: rgba(0, 0, 0, 0.87);
 }
 
-.
-
-@scorecard/list-card-description {
+.scorecard-list-card-description {
     margin: 8px;
     font-size: 16px;
     line-height: 2;

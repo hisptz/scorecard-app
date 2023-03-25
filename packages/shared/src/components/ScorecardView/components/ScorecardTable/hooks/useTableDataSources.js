@@ -8,9 +8,10 @@ import {
     ScorecardTableOrientationState,
     ScorecardTableSortState,
     ScorecardViewState
-} from "@scorecard/state";
-import {Orientation} from "@scorecard/constants";
-import {sortDataSourcesBasedOnData, sortDataSourcesBasedOnNames} from "@scorecard/utils";
+} from "../../../../../state";
+import {Orientation} from "../../../../../constants";
+import {sortDataSourcesBasedOnData, sortDataSourcesBasedOnNames} from "../../../../../utils";
+
 
 export default function useTableDataSources(dataEngine, orgUnits) {
     const setDataSources = useSetRecoilState(ScorecardDataSourceState);

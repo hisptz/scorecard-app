@@ -4,12 +4,15 @@ import {useReactToPrint} from "react-to-print";
 import {useRecoilValue, useRecoilValueLoadable} from "recoil";
 import {downloadALMAData, downloadALMAMeta, downloadCSV, downloadExcel,} from "../services/download";
 import {
-    InitialOrgUnits, PeriodResolverState, ScorecardDataLoadingState,
+    InitialOrgUnits,
+    PeriodResolverState,
+    ScorecardDataLoadingState,
     ScorecardDataSourceState,
     ScorecardOrgUnitState,
     ScorecardViewState
-} from "@scorecard/state";
-import {DownloadTypes} from "@scorecard/constants";
+} from "../../../../../state";
+import {DownloadTypes} from "../../../../../constants";
+
 
 export default function useDownload(downloadRef, dataEngine) {
     const title = useRecoilValue(ScorecardViewState("title"));

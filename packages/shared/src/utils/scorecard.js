@@ -1,5 +1,5 @@
 import {get} from "lodash";
-import {DATASTORE_ENDPOINT, DATASTORE_SCORECARD_SUMMARY_INCLUDE_KEYS} from "@scorecard/constants";
+import {DATASTORE_ENDPOINT, DATASTORE_SCORECARD_SUMMARY_INCLUDE_KEYS} from "../constants";
 
 export function generateScorecardSummary(data) {
     const summary = {};

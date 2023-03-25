@@ -8,9 +8,9 @@ import classes from '../../../scorecardTable.module.css'
 import DraggableCell from "../../TableBody/Components/DraggableCell";
 import DroppableCell from "../../TableBody/Components/DroppableCell";
 import OrgUnitHeaderCells from "./OrgUnitHeaderCells";
-import {PeriodResolverState, ScorecardTableSortState, ScorecardViewState} from "@scorecard/state";
-import {DraggableItems, ScorecardTableConstants} from "@scorecard/constants";
-import {getDataSourcesDisplayName} from "@scorecard/utils";
+import {PeriodResolverState, ScorecardTableSortState, ScorecardViewState} from "../../../../../../../state";
+import {DraggableItems, ScorecardTableConstants} from "../../../../../../../constants";
+import {getDataSourcesDisplayName} from "../../../../../../../utils";
 
 export default function HoldersHeaderRow({orgUnits, nested}) {
     const {dataGroups} =

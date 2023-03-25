@@ -3,8 +3,9 @@ import produce from "immer";
 import {cloneDeep, findIndex} from "lodash";
 import {useCallback, useState} from "react";
 import {useRecoilCallback, useRecoilState} from "recoil";
-import {DATASTORE_ENDPOINT, DATASTORE_SCORECARD_SUMMARY_KEY,} from "@scorecard/constants";
-import {ScorecardSummaryState} from "@scorecard/state";
+import {DATASTORE_ENDPOINT, DATASTORE_SCORECARD_SUMMARY_KEY} from "../../constants";
+import {ScorecardSummaryState} from "../../state";
+
 
 const updateMutation = {
     type: "update",

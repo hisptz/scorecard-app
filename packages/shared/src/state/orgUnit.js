@@ -1,11 +1,11 @@
 import {chunk, compact, find, flatten, isEmpty, reduce, sortBy, uniqBy} from "lodash";
 import {atom, selector, selectorFamily} from "recoil";
-import {getOrgUnitsFromAnalytics} from "@scorecard/services";
 import {EngineState} from "./engine";
 import {PeriodResolverState} from "./period";
-import {ScorecardDataSourceState, ScorecardViewState} from "./scorecard";
+import {ScorecardViewState} from "./scorecard";
 import {UserState} from "./user";
-import {getHoldersFromGroups} from "@scorecard/utils";
+import {getHoldersFromGroups} from "../utils";
+import {getOrgUnitsFromAnalytics} from "../services";
 
 const {atomFamily} = require("recoil");
 

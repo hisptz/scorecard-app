@@ -2,9 +2,9 @@
 import i18n from "@dhis2/d2-i18n";
 import {isEmpty} from "lodash";
 import {atom, selector, selectorFamily, waitForAll} from "recoil";
-import {REQUIRED_FIELDS} from "@scorecard/constants";
-import {validateGroups} from "@scorecard/utils";
 import {ScorecardConfigDirtyState} from "./scorecard";
+import {REQUIRED_FIELDS} from "../constants";
+import {validateGroups} from "../utils";
 
 const ShouldValidate = atom({
     key: "should-validate-state",

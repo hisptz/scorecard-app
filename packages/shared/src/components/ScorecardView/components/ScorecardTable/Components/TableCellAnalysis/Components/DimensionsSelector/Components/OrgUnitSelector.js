@@ -5,8 +5,8 @@ import React, {useMemo, useState} from "react";
 import {useRecoilState, useRecoilValue} from "recoil";
 import {OrgUnitState} from "../../../state/orgUnit";
 import SelectionWrapper from "./SelectionWrapper";
-import {OrgUnitGroups, OrgUnitLevels} from "@scorecard/state";
-import {getSelectedOrgUnitSelectionDisplay} from "@scorecard/utils";
+import {OrgUnitGroups, OrgUnitLevels} from "../../../../../../../../../state";
+import {getSelectedOrgUnitSelectionDisplay} from "../../../../../../../../../utils";
 
 export default function OrgUnitSelector() {
     const [orgUnitSelection, onChange] = useRecoilState(OrgUnitState);

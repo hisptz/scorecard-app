@@ -1,5 +1,5 @@
-import {uid} from "@scorecard/utils";
 import DataModel from "./base";
+import {uid} from "../utils";
 
 export default class ScorecardLegend extends DataModel {
     get defaults() {

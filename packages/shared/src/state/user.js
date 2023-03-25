@@ -1,9 +1,9 @@
 import {find} from "lodash";
 import {atom, selector, selectorFamily} from "recoil";
-import {DefaultAuthority} from "@scorecard/constants";
 import {EngineState} from "./engine";
 import {ScorecardSummaryState} from "./scorecard";
-import {getUserAuthority} from "@scorecard/utils";
+import {DefaultAuthority} from "../constants";
+import {getUserAuthority} from "../utils";
 
 const userQuery = {
     user: {

@@ -3,7 +3,14 @@ import {isEmpty} from "lodash";
 import React, {lazy, Suspense, useEffect, useMemo, useRef} from "react";
 import {useParams} from "react-router-dom";
 import {useRecoilCallback, useRecoilValue, useRecoilValueLoadable, useSetRecoilState} from "recoil";
-import {ScorecardDataEngine} from "@scorecard/models";
+import {FullPageLoader} from "../Loaders";
+import AccessDeniedPage from "../Errors/AccessDeniedPage";
+import EmptyOrgUnitsOrPeriod from "./components/EmptyOrgUnitsOrPeriod";
+import HighlightedIndicatorsView from "./components/HighlightedIndicatorsView";
+import ScorecardActions from "./components/ScorecardActions";
+import ScorecardHeader from "./components/ScorecardHeader";
+import ScorecardViewHeader from "./components/ScorecardViewHeader";
+import {SpecificTargetsLibrary} from "./components/SpecificTargetsLibrary";
 import {
     InitialOrgUnits,
     IsSpecificTargetsSet,
@@ -14,15 +21,8 @@ import {
     ScorecardTableOrientationState,
     ScorecardViewState,
     UserAuthorityOnScorecard
-} from "@scorecard/state";
-import {FullPageLoader} from "../Loaders";
-import AccessDeniedPage from "../Errors/AccessDeniedPage";
-import EmptyOrgUnitsOrPeriod from "./components/EmptyOrgUnitsOrPeriod";
-import HighlightedIndicatorsView from "./components/HighlightedIndicatorsView";
-import ScorecardActions from "./components/ScorecardActions";
-import ScorecardHeader from "./components/ScorecardHeader";
-import ScorecardViewHeader from "./components/ScorecardViewHeader";
-import {SpecificTargetsLibrary} from "./components/SpecificTargetsLibrary";
+} from "../../state";
+import {ScorecardDataEngine} from "../../models";
 
 const ScorecardLegendsView = lazy(() =>
     import("./components/ScorecardLegendsView")

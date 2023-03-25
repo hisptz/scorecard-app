@@ -11,22 +11,23 @@
       <excludeFolder url="file://$MODULE_DIR$/.d2" />
       <excludeFolder url="file://$MODULE_DIR$/packages/app/src/locales" />
       <excludeFolder url="file://$MODULE_DIR$/packages/app/.d2" />
-      <excludeFolder url="file://$MODULE_DIR$/packages/utils/build" />
-      <excludeFolder url="file://$MODULE_DIR$/packages/state/build" />
-      <excludeFolder url="file://$MODULE_DIR$/packages/components/build" />
-      <excludeFolder url="file://$MODULE_DIR$/packages/constants/build" />
-      <excludeFolder url="file://$MODULE_DIR$/packages/hooks/build" />
-      <excludeFolder url="file://$MODULE_DIR$/packages/models/build" />
-      <excludeFolder url="file://$MODULE_DIR$/packages/resources/build" />
-      <excludeFolder url="file://$MODULE_DIR$/packages/services/build" />
       <excludeFolder url="file://$MODULE_DIR$/packages/widget/src/locales" />
       <excludeFolder url="file://$MODULE_DIR$/packages/widget/.d2" />
       <excludeFolder url="file://$MODULE_DIR$/packages/widget/build" />
       <excludeFolder url="file://$MODULE_DIR$/packages/app/build" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/hooks/build" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/components/build" />
       <excludeFolder url="file://$MODULE_DIR$/packages/components/src/locales" />
-      <excludeFolder url="file://$MODULE_DIR$/packages/constants/src/locales" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/resources/build" />
       <excludeFolder url="file://$MODULE_DIR$/packages/state/src/locales" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/utils/build" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/services/build" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/constants/src/locales" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/state/build" />
       <excludeFolder url="file://$MODULE_DIR$/packages/utils/src/locales" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/models/build" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/constants/build" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/shared/build" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

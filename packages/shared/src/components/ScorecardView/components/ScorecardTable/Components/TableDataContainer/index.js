@@ -1,15 +1,15 @@
 import PropTypes from "prop-types";
 import React, {useEffect, useState} from "react";
 import {useRecoilValue, useResetRecoilState} from "recoil";
-import {ScorecardDataEngine} from "@scorecard/models";
-import {OrgUnitLevels, ScorecardViewState} from "@scorecard/state";
-import {getLegend} from "@scorecard/utils";
 import TableCellAnalysis from "../TableCellAnalysis";
 import {orgUnitOptionOnCell} from "../TableCellAnalysis/state/orgUnit";
 import {cellPeriodOptionAtom} from "../TableCellAnalysis/state/period";
 import {LinkedDataCell, SingleDataCell} from "./Components/DataCells";
 import FurtherAnalysisMenu from "./Components/FurtherAnalysisMenu";
 import LoadingCell from "./Components/LoadingCell";
+import {OrgUnitLevels, ScorecardViewState} from "../../../../../../state";
+import {getLegend} from "../../../../../../utils";
+import {ScorecardDataEngine} from "../../../../../../models";
 
 function DataContainer({
                            dataSources,

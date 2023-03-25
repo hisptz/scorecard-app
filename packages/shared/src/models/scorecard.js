@@ -1,10 +1,10 @@
-import {uid} from "@scorecard/utils";
 import {SavableDataModel} from "./base";
 import DataSelection from "./dataSelection";
 import OrgUnitSelection from "./orgUnitSelection";
 import PeriodSelection from "./periodSelection";
 import ScorecardAccess from "./scorecardAccess";
 import ScorecardOption from "./scorecardOptions";
+import {uid} from "../utils";
 
 export default class Scorecard extends SavableDataModel {
     get defaults() {

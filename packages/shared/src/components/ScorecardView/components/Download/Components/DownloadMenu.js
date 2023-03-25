@@ -2,7 +2,7 @@ import i18n from "@dhis2/d2-i18n";
 import {FlyoutMenu, MenuItem} from "@dhis2/ui";
 import PropTypes from "prop-types";
 import React from "react";
-import {DownloadTypes} from "@scorecard/constants";
+import {DownloadTypes} from "../../../../../constants";
 
 export default function DownloadMenu({onClose, onDownload}) {
     return (

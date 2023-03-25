@@ -1,6 +1,6 @@
-import {uid} from "@scorecard/utils";
 import DataModel from "./base";
 import ScorecardIndicator from "./scorecardIndicator";
+import {uid} from "../utils";
 
 export default class ScorecardIndicatorHolder extends DataModel {
     constructor(attributes) {

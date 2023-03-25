@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import {Area, Bar, Column, Dotted, Pie} from "@scorecard/resources"
+import {Area, Bar, Column, Dotted, Pie} from "../resources";
 
 export const CHART_TYPES = [
     {

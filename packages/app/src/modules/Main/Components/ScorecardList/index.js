@@ -2,13 +2,19 @@ import {useAlert} from "@dhis2/app-runtime";
 import {useSetting} from "@dhis2/app-service-datastore";
 import i18n from "@dhis2/d2-i18n";
 import {Button, ButtonStrip, DropdownButton, Input, Tooltip} from "@dhis2/ui";
-import {FullPageLoader} from "@scorecard/shared";
-import {SCORECARD_LIST_HELP_STEPS, STEP_OPTIONS} from "@scorecard/shared";
-import {HelpState, RouterState, ScorecardIdState, ScorecardSummaryState} from "@scorecard/shared";
 import AddIcon from "@material-ui/icons/Add";
 import HelpIcon from "@material-ui/icons/Help";
 import ListViewIcon from "@material-ui/icons/Reorder";
 import GridViewIcon from "@material-ui/icons/ViewModule";
+import {
+    FullPageLoader,
+    HelpState,
+    RouterState,
+    SCORECARD_LIST_HELP_STEPS,
+    ScorecardIdState,
+    ScorecardSummaryState,
+    STEP_OPTIONS
+} from "@scorecard/shared";
 import {Steps} from "intro.js-react";
 import {debounce, isEmpty} from "lodash";
 import React, {Suspense, useEffect, useRef, useState} from "react";
@@ -130,7 +136,7 @@ export default function ScorecardList() {
                                     <Button
                                         onClick={onViewChange}
                                         className="change-view-button"
-                                        dataTest="@scorecard/view-orientation"
+                                        dataTest="scorecard-view-orientation"
                                         icon={
                                             scorecardViewType === "grid" ? (
                                                 <ListViewIcon/>
@@ -141,8 +147,8 @@ export default function ScorecardList() {
                                     />
                                 </Tooltip>
                                 <Button
-                                    dataTest="new-@scorecard/button"
-                                    className="add-@scorecard/button"
+                                    dataTest="new-scorecard-button"
+                                    className="add-scorecard-button"
                                     onClick={onAddClick}
                                     primary
                                     icon={<AddIcon/>}

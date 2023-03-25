@@ -11,8 +11,8 @@ import {
     PeriodSpecificTargetView
 } from "./components/SpecificTargetView";
 import classes from "./SpecificTargetsLibrary.module.css"
-import {ScorecardViewState} from "@scorecard/state";
-import {getDataSourcesFromGroups} from "@scorecard/utils";
+import {ScorecardViewState} from "../../../../state";
+import {getDataSourcesFromGroups} from "../../../../utils";
 
 export function SpecificTargetsLibrary() {
     const {dataGroups} = useRecoilValue(ScorecardViewState("dataSelection"))

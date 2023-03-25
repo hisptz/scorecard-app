@@ -1,6 +1,6 @@
-import {DATASTORE_ENDPOINT} from "@scorecard/constants";
-import {OrgUnitSelection} from "@scorecard/models";
 import {compact} from "lodash";
+import {DATASTORE_ENDPOINT} from "../constants";
+import {OrgUnitSelection} from "../models";
 
 const query = {
     scorecard: {

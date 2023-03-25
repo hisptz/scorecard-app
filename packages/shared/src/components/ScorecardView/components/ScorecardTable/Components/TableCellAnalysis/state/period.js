@@ -1,14 +1,7 @@
 import {Period} from "@iapps/period-utilities";
-import {
-    compact,
-    differenceBy,
-    filter,
-    isArray,
-    isEmpty,
-    uniqBy,
-} from "lodash";
+import {compact, differenceBy, filter, isArray, isEmpty, uniqBy,} from "lodash";
 import {atom, selector} from "recoil";
-import {ScorecardViewState} from "@scorecard/state";
+import {ScorecardViewState} from "../../../../../../../state";
 
 const PeriodState = atom({
     key: "cell-analysis-period-state",

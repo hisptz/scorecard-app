@@ -8,10 +8,11 @@ import DataContainer from "../../TableDataContainer";
 import AverageCell from "./AverageCell";
 import DraggableCell from "./DraggableCell";
 import DroppableCell from "./DroppableCell";
-import {PeriodResolverState, ScorecardOrgUnitState, ScorecardViewState} from "@scorecard/state";
-import {AverageDisplayType, DraggableItems} from "@scorecard/constants";
-import {getDataSourcesDisplayName} from "@scorecard/utils";
-import {ScorecardDataEngine} from "@scorecard/models";
+import {PeriodResolverState, ScorecardOrgUnitState, ScorecardViewState} from "../../../../../../../state";
+import {AverageDisplayType, DraggableItems} from "../../../../../../../constants";
+import {getDataSourcesDisplayName} from "../../../../../../../utils";
+import {ScorecardDataEngine} from "../../../../../../../models";
+
 
 export default function DataSourceRow({
                                           orgUnits,

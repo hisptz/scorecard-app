@@ -1,7 +1,6 @@
 import i18n from "@dhis2/d2-i18n";
 import {Button, colors} from "@dhis2/ui";
-import {useMediaQuery} from "@scorecard/shared";
-import {ScorecardIdState} from "@scorecard/shared";
+import {ScorecardIdState, useMediaQuery} from "@scorecard/shared";
 import React from "react";
 import {useHistory} from "react-router-dom";
 import {useResetRecoilState} from "recoil";
@@ -48,7 +47,7 @@ export default function EmptyScoreCardList() {
                     <div className="pt-16">
                         <Button
                             onClick={onNewScorecardClick}
-                            dataTest={"new-@scorecard/button"}
+                            dataTest={"new-scorecard-button"}
                             primary
                         >
                             {i18n.t("New Scorecard")}

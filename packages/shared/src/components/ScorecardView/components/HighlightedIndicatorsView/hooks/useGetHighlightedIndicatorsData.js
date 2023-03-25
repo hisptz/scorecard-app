@@ -1,8 +1,8 @@
 import {sortBy} from "lodash";
 import {useEffect, useState} from "react";
 import {useRecoilValue} from "recoil";
-import {PeriodResolverState, ScorecardConfigDirtyState} from "@scorecard/state";
-import {getHighlightedIndicatorsData} from "@scorecard/services";
+import {PeriodResolverState, ScorecardConfigDirtyState} from "../../../../../state";
+import {getHighlightedIndicatorsData} from "../../../../../services";
 
 
 export default function useGetHighlightedIndicatorsData() {

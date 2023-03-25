@@ -10,7 +10,7 @@ import LegendMinMax from "./components/LegendMinMax";
 import MultipleFieldsField from "./components/MultipleFieldsField";
 import RichTextEditor from "./components/RichTextEditor";
 import classes from "./CustomField.module.css";
-import {DHIS2ValueTypes} from "@scorecard/constants";
+import {DHIS2ValueTypes} from "../../constants";
 
 const {Field} = ReactFinalForm;
 

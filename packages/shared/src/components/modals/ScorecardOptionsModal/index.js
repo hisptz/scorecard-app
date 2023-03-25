@@ -1,9 +1,9 @@
 import {Button, ButtonStrip, Modal, ModalActions, ModalContent, ModalTitle,} from "@dhis2/ui";
 import PropTypes from "prop-types";
 import React, {useState} from "react";
-import {ScorecardOptions} from "@scorecard/models";
 import ScorecardOptionsForm from "../../ScorecardOptionsForm";
 import i18n from '@dhis2/d2-i18n'
+import {ScorecardOptions} from "../../../models";
 
 export default function ScorecardOptionsModal({
                                                   onSelect,

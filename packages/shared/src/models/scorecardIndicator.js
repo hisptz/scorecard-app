@@ -1,5 +1,5 @@
-import {uid} from "@scorecard/utils";
 import DataModel from "./base";
+import {uid} from "../utils";
 
 export default class ScorecardIndicator extends DataModel {
     get defaults() {

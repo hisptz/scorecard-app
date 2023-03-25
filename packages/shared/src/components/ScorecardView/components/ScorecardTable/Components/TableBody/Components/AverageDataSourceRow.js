@@ -6,8 +6,9 @@ import {useRecoilValue} from "recoil";
 import classes from "../../../scorecardTable.module.css";
 import AverageCell from "./AverageCell";
 import AverageDataContainer from "./AverageDataContainer";
-import {PeriodResolverState, ScorecardDataSourceState, ScorecardViewState} from "@scorecard/state";
-import {ScorecardDataEngine} from "@scorecard/models";
+import {PeriodResolverState, ScorecardDataSourceState, ScorecardViewState} from "../../../../../../../state";
+import {ScorecardDataEngine} from "../../../../../../../models";
+
 
 export default function AverageDataSourceRow({
                                                  orgUnits,

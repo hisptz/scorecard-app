@@ -1,6 +1,6 @@
 import {atom, selector} from "recoil";
-import {getCustomFunctions} from "@scorecard/services";
 import {EngineState} from "./engine";
+import {getCustomFunctions} from "../services";
 
 const customFunctionsKeysQuery = {
     keys: {
