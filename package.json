@@ -1,16 +1,15 @@
 {
-  "name": "hisptz-scorecard-workspaces",
+  "name": "root",
   "version": "2.6.1-beta.01",
   "description": "Interactive Scorecard Application",
   "license": "BSD-3-Clause",
   "private": true,
   "workspaces": {
     "packages": [
-      "apps/*",
-      "shared/*"
+      "packages/*"
     ],
     "nohoist": [
-      "**/cypress-multi-reporters/**"
+
     ]
   },
   "scripts": {
@@ -21,20 +20,21 @@
     "test:capture:app": "yarn workspace app cy:capture",
     "test:stub:app": "yarn workspace app cy:stub",
     "start:widget": "yarn workspace widget start",
-    "build:utils": "yarn workspace @hisptz/scorecard-utils build",
-    "build:constants": "yarn workspace @hisptz/scorecard-constants build",
-    "build:state": "yarn workspace @hisptz/scorecard-state build",
-    "build:components": "yarn workspace @hisptz/scorecard-components build",
-    "build:hooks": "yarn workspace @hisptz/scorecard-hooks build",
-    "build:models": "yarn workspace @hisptz/scorecard-models build",
-    "build:resources": "yarn workspace @hisptz/scorecard-resources build",
-    "build:services": "yarn workspace @hisptz/scorecard-services build",
+    "build:utils": "yarn workspace @scorecard/utils build",
+    "build:constants": "yarn workspace @scorecard/constants build",
+    "build:state": "yarn workspace @scorecard/state build",
+    "build:components": "yarn workspace @scorecard/components build",
+    "build:hooks": "yarn workspace @scorecard/hooks build",
+    "build:models": "yarn workspace @scorecard/models build",
+    "build:resources": "yarn workspace @scorecard/resources build",
+    "build:services": "yarn workspace @scorecard/services build",
     "build:app": "yarn build:all && yarn workspace app build",
     "build:widget": "yarn build:all && yarn workspace widget build",
-    "start:libs": "concurrently \"yarn workspace @hisptz/scorecard-utils start\" \"yarn workspace @hisptz/scorecard-constants start\" \"yarn workspace @hisptz/scorecard-state start\" \"yarn workspace @hisptz/scorecard-components start\" \"yarn workspace @hisptz/scorecard-hooks start\" \"yarn workspace @hisptz/scorecard-models start\" \"yarn workspace @hisptz/scorecard-resources start\" \"yarn workspace @hisptz/scorecard-services start\"",
+    "start:libs": "concurrently \"yarn workspace @scorecard/utils start\" \"yarn workspace @scorecard/constants start\" \"yarn workspace @scorecard/state start\" \"yarn workspace @scorecard/components start\" \"yarn workspace @scorecard/hooks start\" \"yarn workspace @scorecard/models start\" \"yarn workspace @scorecard/resources start\" \"yarn workspace @scorecard/services start\"",
     "build:all": "yarn build:utils && yarn build:constants && yarn build:state && yarn build:components && yarn build:hooks && yarn build:models && yarn build:resources && yarn build:services"
   },
   "devDependencies": {
-    "concurrently": "^7.0.0"
+    "concurrently": "^7.0.0",
+    "lerna": "^6.6.0"
   }
 }

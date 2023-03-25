@@ -1,6 +1,6 @@
 # INTERACTIVE SCORECARD
-[![scorecard-app](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/count/9ps7gr/develop&style=flat&logo=cypress)](https://dashboard.cypress.io/projects/9ps7gr/runs)
-[![scorecard-app](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/simple/9ps7gr/develop&style=flat&logo=cypress)](https://dashboard.cypress.io/projects/9ps7gr/runs)
+[![@scorecard/app](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/count/9ps7gr/develop&style=flat&logo=cypress)](https://dashboard.cypress.io/projects/9ps7gr/runs)
+[![@scorecard/app](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/simple/9ps7gr/develop&style=flat&logo=cypress)](https://dashboard.cypress.io/projects/9ps7gr/runs)
 [![dhis2: tests](https://github.com/hisptz/action-tracker-standalone/actions/workflows/tests.yml/badge.svg?branch=develop)](https://github.com/hisptz/action-tracker-standalone/actions/workflows/tests.yml)
 
 1.  [Introduction](#Introduction)
@@ -27,7 +27,7 @@ The Scorecard is an application developed to operate and installed in DHIS 2 ins
 Download the latest version of the App via
 
 ```
-https://github.com/hisptz/scorecard-app/releases
+https://github.com/hisptz/@scorecard/app/releases
 ```
 
 Go to your DHIS2 instance with the organisation units already in place,then install the downloaded app via App Management

@@ -1,0 +1,1053 @@
+[
+    {
+        "path": "/api/37/systemSettings/helpPageLink",
+        "featureName": "Manage Scorecard",
+        "static": false,
+        "count": 6,
+        "nonDeterministic": false,
+        "method": "GET",
+        "requestBody": "",
+        "requestHeaders": {
+            "host": "localhost:8081",
+            "proxy-connection": "keep-alive",
+            "accept": "application/json",
+            "origin": "http://localhost:3000",
+            "sec-fetch-site": "same-site",
+            "sec-fetch-mode": "cors"
+        },
+        "statusCode": 200,
+        "responseBody": "{\"helpPageLink\":\"https://dhis2.github.io/dhis2-docs/master/en/user/html/dhis2_user_manual_en.html\"}",
+        "responseSize": 99,
+        "responseHeaders": {
+            "server": "nginx/1.21.6",
+            "content-type": "application/json;charset=UTF-8",
+            "transfer-encoding": "chunked",
+            "connection": "keep-alive",
+            "access-control-allow-credentials": "true",
+            "access-control-allow-origin": "http://localhost:3000",
+            "vary": "Origin",
+            "access-control-expose-headers": "ETag, Location",
+            "cache-control": "no-cache, private",
+            "x-content-type-options": "nosniff",
+            "x-xss-protection": "1; mode=block",
+            "x-frame-options": "SAMEORIGIN"
+        }
+    },
+    {
+        "path": "/api/37/dataStore/hisptz-scorecard/savedObjects",
+        "featureName": "Manage Scorecard",
+        "static": false,
+        "count": 4,
+        "nonDeterministic": false,
+        "method": "GET",
+        "requestBody": "",
+        "requestHeaders": {
+            "host": "localhost:8081",
+            "proxy-connection": "keep-alive",
+            "accept": "application/json",
+            "origin": "http://localhost:3000",
+            "sec-fetch-site": "same-site",
+            "sec-fetch-mode": "cors"
+        },
+        "statusCode": 200,
+        "responseBody": "{}",
+        "responseSize": 2,
+        "responseHeaders": {
+            "server": "nginx/1.21.6",
+            "content-type": "application/json;charset=UTF-8",
+            "connection": "keep-alive",
+            "access-control-allow-credentials": "true",
+            "access-control-allow-origin": "http://localhost:3000",
+            "vary": "Origin",
+            "access-control-expose-headers": "ETag, Location",
+            "x-content-type-options": "nosniff",
+            "x-xss-protection": "1; mode=block",
+            "x-frame-options": "SAMEORIGIN"
+        }
+    },
+    {
+        "path": "/api/37/userDataStore/hisptz-scorecard/savedObjects",
+        "featureName": "Manage Scorecard",
+        "static": false,
+        "count": 4,
+        "nonDeterministic": false,
+        "method": "GET",
+        "requestBody": "",
+        "requestHeaders": {
+            "host": "localhost:8081",
+            "proxy-connection": "keep-alive",
+            "accept": "application/json",
+            "origin": "http://localhost:3000",
+            "sec-fetch-site": "same-site",
+            "sec-fetch-mode": "cors"
+        },
+        "statusCode": 200,
+        "responseBody": "{}",
+        "responseSize": 2,
+        "responseHeaders": {
+            "server": "nginx/1.21.6",
+            "content-type": "application/json;charset=UTF-8",
+            "connection": "keep-alive",
+            "access-control-allow-credentials": "true",
+            "access-control-allow-origin": "http://localhost:3000",
+            "vary": "Origin",
+            "access-control-expose-headers": "ETag, Location",
+            "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+            "x-content-type-options": "nosniff",
+            "x-xss-protection": "1; mode=block",
+            "x-frame-options": "SAMEORIGIN"
+        }
+    },
+    {
+        "path": "/api/37/dataStore/hisptz-scorecard/settings",
+        "featureName": "Manage Scorecard",
+        "static": false,
+        "count": 4,
+        "nonDeterministic": false,
+        "method": "GET",
+        "requestBody": "",
+        "requestHeaders": {
+            "host": "localhost:8081",
+            "proxy-connection": "keep-alive",
+            "accept": "application/json",
+            "origin": "http://localhost:3000",
+            "sec-fetch-site": "same-site",
+            "sec-fetch-mode": "cors"
+        },
+        "statusCode": 200,
+        "responseBody": "{\"skipMigration\":true}",
+        "responseSize": 22,
+        "responseHeaders": {
+            "server": "nginx/1.21.6",
+            "content-type": "application/json;charset=UTF-8",
+            "transfer-encoding": "chunked",
+            "connection": "keep-alive",
+            "access-control-allow-credentials": "true",
+            "access-control-allow-origin": "http://localhost:3000",
+            "vary": "Origin",
+            "access-control-expose-headers": "ETag, Location",
+            "x-content-type-options": "nosniff",
+            "x-xss-protection": "1; mode=block",
+            "x-frame-options": "SAMEORIGIN"
+        }
+    },
+    {
+        "path": "/api/37/userDataStore/hisptz-scorecard/settings",
+        "featureName": "Manage Scorecard",
+        "static": false,
+        "count": 4,
+        "nonDeterministic": false,
+        "method": "GET",
+        "requestBody": "",
+        "requestHeaders": {
+            "host": "localhost:8081",
+            "proxy-connection": "keep-alive",
+            "accept": "application/json",
+            "origin": "http://localhost:3000",
+            "sec-fetch-site": "same-site",
+            "sec-fetch-mode": "cors"
+        },
+        "statusCode": 200,
+        "responseBody": "{\"scorecardViewType\":\"grid\"}",
+        "responseSize": 28,
+        "responseHeaders": {
+            "server": "nginx/1.21.6",
+            "content-type": "application/json;charset=UTF-8",
+            "transfer-encoding": "chunked",
+            "connection": "keep-alive",
+            "access-control-allow-credentials": "true",
+            "access-control-allow-origin": "http://localhost:3000",
+            "vary": "Origin",
+            "access-control-expose-headers": "ETag, Location",
+            "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+            "x-content-type-options": "nosniff",
+            "x-xss-protection": "1; mode=block",
+            "x-frame-options": "SAMEORIGIN"
+        }
+    },
+    {
+        "path": "/api/37/systemSettings?keys=key%3DkeyCalendar",
+        "featureName": "Manage Scorecard",
+        "static": false,
+        "count": 4,
+        "nonDeterministic": false,
+        "method": "GET",
+        "requestBody": "",
+        "requestHeaders": {
+            "host": "localhost:8081",
+            "proxy-connection": "keep-alive",
+            "accept": "application/json",
+            "origin": "http://localhost:3000",
+            "sec-fetch-site": "same-site",
+            "sec-fetch-mode": "cors"
+        },
+        "statusCode": 200,
+        "responseBody": "{\"keyIgnoreAnalyticsApprovalYearThreshold\":-1,\"keySelfRegistrationNoRecaptcha\":false,\"keyHideBiWeeklyPeriods\":false,\"keyDateFormat\":\"yyyy-MM-dd\",\"applicationTitle\":\"Scorecard, BNA and Action tracker Apps - Training Instance\",\"keyGoogleMapsApiKey\":\"AIzaSyBjlDmwuON9lJbPMDlh_LI3zGpGtpK9erc\",\"keyRemoteInstanceUsername\":\"admin\",\"syncSkipSyncForDataChangedBefore\":\"1970-01-01T00:00:00.000\",\"keyFileResourceRetentionStrategy\":\"NONE\",\"keyEmailSender\":\"no-reply@dhis2.org\",\"keyEmailUsername\":\"admin\",\"keyAnalysisDigitGroupSeparator\":\"SPACE\",\"maxPasswordLength\":40,\"keyAnalysisDisplayProperty\":\"shortName\",\"keyDashboardContextMenuItemSwitchViewType\":true,\"keyCustomLoginPageLogo\":false,\"keyLastCompleteDataSetRegistrationSyncSuccess\":\"1970-01-01T00:00:00.000\",\"keyMetaDataRepoUrl\":\"https://raw.githubusercontent.com/dhis2/dhis2-metadata-repo/master/repo/221/index.json\",\"keyApplicationNotification\":\"Content purely for training purposes ONLY. \\n<br/>\\n<br/>\\nusername: admin \\n<br/>\\n<br/>\\npassword: District1#\",\"keyUseCustomLogoBanner\":false,\"keyLastSuccessfulAnalyticsTablesUpdate\":\"2022-03-02T10:17:40.489\",\"keyUiLocale\":\"en\",\"keyRespectMetaDataStartEndDatesInAnalyticsTableExport\":false,\"keyEmailPort\":587,\"keyDashboardContextMenuItemOpenInRelevantApp\":true,\"keyCalendar\":\"iso8601\",\"keyEmailTls\":true,\"keyHideBiMonthlyPeriods\":false,\"keyCacheability\":\"PUBLIC\",\"keyDataImportRequireAttributeOptionCombo\":false,\"keyLastSuccessfulAnalyticsTablesRuntime\":\"00:00:47.558\",\"keyStyle\":\"light_blue/light_blue.css\",\"keyRemoteInstanceUrl\":\"\",\"keyLastSuccessfulResourceTablesUpdate\":\"2022-03-02T10:17:40.518\",\"factorDeviation\":2,\"keyVersionEnabled\":false,\"keyHideDailyPeriods\":false,\"keySqlViewMaxLimit\":-1,\"accountExpiryAlert\":false,\"keyFlag\":\"demoland\",\"keyAnalysisRelativePeriod\":\"LAST_12_MONTHS\",\"minPasswordLength\":8,\"keyDashboardContextMenuItemShowInterpretationsAndDetails\":true,\"analyticsFinancialYearStart\":\"FINANCIAL_YEAR_OCTOBER\",\"accountExpiresInDays\":7,\"keyBingMapsApiKey\":\"AoifMs0zqvpAEuI6OX5Kk93rEM-oLrvQIJe_xdCv1BF4J3yquFnUozze-M7gEf0b\",\"keyUseCustomLogoFront\":false,\"keyLastSuccessfulEventsDataSynch\":\"1970-01-01T00:00:00.000\",\"keySkipDataTypeValidationInAnalyticsTableExport\":false,\"keyAnalyticsCacheProgressiveTtlFactor\":160,\"syncMaxRemoteServerAvailabilityCheckAttempts\":3,\"keyAllowObjectAssignment\":false,\"keyStopMetadataSync\":false,\"keySmsSetting\":{\"gateways\":[]},\"keyHideMonthlyPeriods\":false,\"startModule\":\"dhis-web-dashboard\",\"keyDataImportStrictDataElements\":false,\"ruleEngineAssignOverwrite\":false,\"keyLastSuccessfulDataSynch\":\"1970-01-01T00:00:00.000\",\"keyApplicationIntro\":\"Content is developed for training purposes\",\"keyCacheStrategy\":\"CACHE_1_MINUTE\",\"keyDataImportStrictOrganisationUnits\":false,\"keyDataImportRequireCategoryOptionCombo\":false,\"multiOrganisationUnitForms\":false,\"syncMaxAttempts\":3,\"keyDataImportStrictAttributeOptionCombos\":false,\"helpPageLink\":\"https://dhis2.github.io/dhis2-docs/master/en/user/html/dhis2_user_manual_en.html\",\"keyDataImportStrictCategoryOptionCombos\":false,\"keyGatherAnalyticalObjectStatisticsInDashboardViews\":false,\"keyHideWeeklyPeriods\":false,\"credentialsExpires\":0,\"credentialsExpiryAlert\":false,\"keyCustomTopMenuLogo\":false,\"keyAccountRecovery\":false,\"keyCanGrantOwnUserAuthorityGroups\":false,\"keyAcceptanceRequiredForApproval\":false,\"keyAnalyticsMaxLimit\":100000,\"keyLockMultipleFailedLogins\":false,\"keyAnalyticsMaintenanceMode\":false,\"keyRequireAddToView\":false,\"keyCountPassiveDashboardViewsInUsageAnalytics\":false,\"keyDashboardContextMenuItemViewFullscreen\":true,\"keyIncludeZeroValuesInAnalytics\":false,\"startModuleEnableLightweight\":false,\"keyDatabaseServerCpus\":0,\"keyAnalyticsCacheTtlMode\":\"FIXED\",\"keyDataImportStrictPeriods\":false,\"syncDelayBetweenRemoteServerAvailabilityCheckAttempts\":500}",
+        "responseSize": 3759,
+        "responseHeaders": {
+            "server": "nginx/1.21.6",
+            "content-type": "application/json;charset=UTF-8",
+            "transfer-encoding": "chunked",
+            "connection": "keep-alive",
+            "access-control-allow-credentials": "true",
+            "access-control-allow-origin": "http://localhost:3000",
+            "vary": "Origin",
+            "access-control-expose-headers": "ETag, Location",
+            "cache-control": "no-cache, private",
+            "x-content-type-options": "nosniff",
+            "x-xss-protection": "1; mode=block",
+            "x-frame-options": "SAMEORIGIN"
+        }
+    },
+    {
+      "path": "/api/37/dataStore/hisptz-scorecard/@scorecard/summary",
+      "featureName": "Manage Scorecard",
+      "static": false,
+      "count": 12,
+      "nonDeterministic": true,
+      "method": "GET",
+      "requestBody": "",
+      "requestHeaders": {
+        "host": "localhost:8081",
+        "proxy-connection": "keep-alive",
+        "accept": "application/json",
+            "origin": "http://localhost:3000",
+            "sec-fetch-site": "same-site",
+            "sec-fetch-mode": "cors"
+        },
+        "statusCode": 200,
+        "responseBody": [
+            "[{}]",
+            "[{},{}]",
+            "[{\"id\":\"rZdi1ghZceu\",\"user\":\"M5zQapPyTZI\",\"title\":\"Sample Scorecard\",\"description\":\"Scorecard Description\",\"publicAccess\":{\"id\":\"public\",\"type\":\"public\",\"access\":\"------\",\"displayName\":\"Public\"},\"userAccesses\":[],\"additionalLabels\":[],\"userGroupAccesses\":[]}]",
+            "[{\"title\":\"Sample Scorecard\",\"description\":\"Scorecard Description\",\"id\":\"rZdi1ghZceu\",\"user\":\"M5zQapPyTZI\",\"userAccesses\":[],\"userGroupAccesses\":[],\"publicAccess\":{\"id\":\"public\",\"type\":\"public\",\"access\":\"------\",\"displayName\":\"Public\"},\"additionalLabels\":[]}]",
+            "[{\"id\":\"rZdi1ghZceu\",\"user\":\"M5zQapPyTZI\",\"title\":\"Sample Scorecard\",\"description\":\"Scorecard Description\",\"publicAccess\":{\"id\":\"public\",\"type\":\"public\",\"access\":\"------\",\"displayName\":\"Public\"},\"userAccesses\":[],\"additionalLabels\":[],\"userGroupAccesses\":[]},{}]",
+            "[{\"id\":\"rZdi1ghZceu\",\"user\":\"M5zQapPyTZI\",\"title\":\"Sample Scorecard\",\"description\":\"Scorecard Description\",\"publicAccess\":{\"id\":\"public\",\"type\":\"public\",\"access\":\"------\",\"displayName\":\"Public\"},\"userAccesses\":[],\"additionalLabels\":[],\"userGroupAccesses\":[]},{},{}]",
+            "[{\"id\":\"rZdi1ghZceu\",\"user\":\"M5zQapPyTZI\",\"title\":\"Sample Scorecard\",\"description\":\"Scorecard Description\",\"publicAccess\":{\"id\":\"public\",\"type\":\"public\",\"access\":\"------\",\"displayName\":\"Public\"},\"userAccesses\":[],\"additionalLabels\":[],\"userGroupAccesses\":[]},{},{},{}]"
+        ],
+        "responseSize": 4,
+        "responseHeaders": {
+            "server": "nginx/1.21.6",
+            "content-type": "application/json;charset=UTF-8",
+            "connection": "keep-alive",
+            "access-control-allow-credentials": "true",
+            "access-control-allow-origin": "http://localhost:3000",
+            "vary": "Origin",
+            "access-control-expose-headers": "ETag, Location",
+            "x-content-type-options": "nosniff",
+            "x-xss-protection": "1; mode=block",
+            "x-frame-options": "SAMEORIGIN"
+        },
+        "responseLookup": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            4,
+            4,
+            5,
+            5,
+            5,
+            6
+        ]
+    },
+    {
+        "path": "/api/37/dataStore/hisptz-scorecard",
+        "featureName": "Manage Scorecard",
+        "static": false,
+        "count": 4,
+        "nonDeterministic": true,
+        "method": "GET",
+        "requestBody": "",
+        "requestHeaders": {
+            "host": "localhost:8081",
+            "proxy-connection": "keep-alive",
+            "accept": "application/json",
+            "origin": "http://localhost:3000",
+            "sec-fetch-site": "same-site",
+            "sec-fetch-mode": "cors"
+        },
+        "statusCode": 200,
+        "responseBody": [
+          "[\"savedObjects\",\"@scorecard/summary\",\"settings\"]",
+          "[\"rZdi1ghZceu\",\"savedObjects\",\"@scorecard/summary\",\"settings\"]"
+        ],
+        "responseSize": 47,
+        "responseHeaders": {
+            "server": "nginx/1.21.6",
+            "content-type": "application/json;charset=UTF-8",
+            "transfer-encoding": "chunked",
+            "connection": "keep-alive",
+            "access-control-allow-credentials": "true",
+            "access-control-allow-origin": "http://localhost:3000",
+            "vary": "Origin",
+            "access-control-expose-headers": "ETag, Location",
+            "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+            "x-content-type-options": "nosniff",
+            "x-xss-protection": "1; mode=block",
+            "x-frame-options": "SAMEORIGIN"
+        },
+        "responseLookup": [
+            0,
+            1,
+            1,
+            1
+        ]
+    },
+  {
+    "path": "/api/37/dataStore/hisptz-scorecard/@scorecard/summary",
+    "featureName": "Manage Scorecard",
+    "static": false,
+    "count": 1,
+    "nonDeterministic": false,
+    "method": "PUT",
+    "requestBody": [
+      {},
+      {}
+    ],
+    "requestHeaders": {
+      "host": "localhost:8081",
+      "proxy-connection": "keep-alive",
+      "content-length": "7",
+      "accept": "application/json",
+      "content-type": "application/json",
+      "origin": "http://localhost:3000",
+      "sec-fetch-site": "same-site",
+      "sec-fetch-mode": "cors"
+    },
+    "statusCode": 200,
+    "responseBody": "{\"httpStatus\":\"OK\",\"httpStatusCode\":200,\"status\":\"OK\",\"message\":\"Key updated: '@scorecard/summary'\"}",
+    "responseSize": 99,
+    "responseHeaders": {
+      "server": "nginx/1.21.6",
+      "content-type": "application/json;charset=UTF-8",
+      "transfer-encoding": "chunked",
+      "connection": "keep-alive",
+      "access-control-allow-credentials": "true",
+      "access-control-allow-origin": "http://localhost:3000",
+      "vary": "Origin",
+      "access-control-expose-headers": "ETag, Location",
+            "x-content-type-options": "nosniff",
+            "x-xss-protection": "1; mode=block",
+            "x-frame-options": "SAMEORIGIN"
+        }
+    },
+    {
+        "path": "/api/37/organisationUnitLevels?fields=id,displayName,level",
+        "featureName": "Manage Scorecard",
+        "static": false,
+        "count": 4,
+        "nonDeterministic": false,
+        "method": "GET",
+        "requestBody": "",
+        "requestHeaders": {
+            "host": "localhost:8081",
+            "proxy-connection": "keep-alive",
+            "accept": "application/json",
+            "origin": "http://localhost:3000",
+            "sec-fetch-site": "same-site",
+            "sec-fetch-mode": "cors"
+        },
+        "statusCode": 200,
+        "responseBody": "{\"pager\":{\"page\":1,\"pageCount\":1,\"total\":4,\"pageSize\":50},\"organisationUnitLevels\":[{\"level\":1,\"id\":\"ZqI1kKnH7ve\",\"displayName\":\"Country\"},{\"level\":3,\"id\":\"P0QFTFfTl2X\",\"displayName\":\"District\"},{\"level\":4,\"id\":\"VJJOhuBJSJe\",\"displayName\":\"Facility\"},{\"level\":2,\"id\":\"BNQIkbGlA00\",\"displayName\":\"Region\"}]}",
+        "responseSize": 306,
+        "responseHeaders": {
+            "server": "nginx/1.21.6",
+            "content-type": "application/json;charset=UTF-8",
+            "transfer-encoding": "chunked",
+            "connection": "keep-alive",
+            "access-control-allow-credentials": "true",
+            "access-control-allow-origin": "http://localhost:3000",
+            "vary": "Origin",
+            "access-control-expose-headers": "ETag, Location",
+            "cache-control": "no-cache, private",
+            "x-content-type-options": "nosniff",
+            "x-xss-protection": "1; mode=block",
+            "x-frame-options": "SAMEORIGIN"
+        }
+    },
+    {
+        "path": "/api/37/indicatorGroups?fields=displayName,id,indicators%5BdisplayName%2Cid%5D",
+        "featureName": "Manage Scorecard",
+        "static": false,
+        "count": 4,
+        "nonDeterministic": false,
+        "method": "GET",
+        "requestBody": "",
+        "requestHeaders": {
+            "host": "localhost:8081",
+            "proxy-connection": "keep-alive",
+            "accept": "application/json",
+            "origin": "http://localhost:3000",
+            "sec-fetch-site": "same-site",
+            "sec-fetch-mode": "cors"
+        },
+        "statusCode": 200,
+        "responseBody": "{\"pager\":{\"page\":1,\"pageCount\":1,\"total\":6,\"pageSize\":50},\"indicatorGroups\":[{\"id\":\"W7JKdjFuOpU\",\"displayName\":\"Focused Antenatal\",\"indicators\":[{\"id\":\"C2R035EN1zx\",\"displayName\":\"Availability of Tetanus Toxoid\"},{\"id\":\"CDcCdx4FpnU\",\"displayName\":\"Availability of Iron Folic Acid\"},{\"id\":\"BVmO0Bd9VtS\",\"displayName\":\"Effective Coverage/Quality FANC Visits\"},{\"id\":\"DjsVrjWMW5S\",\"displayName\":\"Continuous Utilization ANC Visits\"},{\"id\":\"BvG8P80QxqZ\",\"displayName\":\"Access to ANC Services\"},{\"id\":\"Ho2X2O2NIzk\",\"displayName\":\"Availability of Trained FANC Providers\"},{\"id\":\"niRusLxmwo4\",\"displayName\":\"Continuous Utilization Breastfeeding\"},{\"id\":\"GUEA7Zd1F54\",\"displayName\":\"Effective Coverage/Quality FANC Lab Tests\"},{\"id\":\"cn8c5IGTCrf\",\"displayName\":\"Initial Utilization ANC\"}]},{\"id\":\"humX6uARs1S\",\"displayName\":\"Full Immunization\",\"indicators\":[{\"id\":\"TyvkjWQLXIS\",\"displayName\":\"Availability of Trained Skilled Delivery Providers\"},{\"id\":\"RmilE0Cc5ad\",\"displayName\":\"Effective Coverage DPT Immunization\"},{\"id\":\"TGFBdsVUobf\",\"displayName\":\"Effective Coverage Full Immunization\"},{\"id\":\"EzE8xZ31zfC\",\"displayName\":\"Availability of Vaccines BCG\"},{\"id\":\"YT5UD0H7875\",\"displayName\":\"Continuous Utilization DPT2\"},{\"id\":\"wpgvPjYTBba\",\"displayName\":\"Effective Coverage Measles Immunization\"},{\"id\":\"Dca85UJ7O40\",\"displayName\":\"Initial Utilization DPT1\"},{\"id\":\"k7S2WEEZeWO\",\"displayName\":\"Initial Utilization BCG\"},{\"id\":\"hTUspcBc4Yn\",\"displayName\":\"Access to Immunization Services\"},{\"id\":\"E31SemmmFGb\",\"displayName\":\"Continuous Utilization DPT3\"},{\"id\":\"uNau1zjH08I\",\"displayName\":\"Availability of Vaccines DPT\"},{\"id\":\"JwRORgiBAIh\",\"displayName\":\"Availability of Trained Immunization Providers\"}]},{\"id\":\"oLKbEkaZKnO\",\"displayName\":\"PMTCT-ART\",\"indicators\":[{\"id\":\"OqzP6Hjcdex\",\"displayName\":\"Initial Utilization PMTCT\"},{\"id\":\"XdOi1uR8A9n\",\"displayName\":\"Access to PMTCT Services\"},{\"id\":\"TCYklnegj0N\",\"displayName\":\"Continuous Utilization PMTCT\"},{\"id\":\"EHd0c7wcNr4\",\"displayName\":\"Availability of ART\"},{\"id\":\"Mk7TOqGoqGd\",\"displayName\":\"Effective Coverage/Quality PMTCT Infants\"},{\"id\":\"AA6Bd4kuxCr\",\"displayName\":\"Availability of Trained PMTCT Providers\"}]},{\"id\":\"Mzt0rpC8LVO\",\"displayName\":\"Severe Acute Malnutrition\",\"indicators\":[{\"id\":\"gY1v9JJjvAh\",\"displayName\":\"Availability of RUTF\"},{\"id\":\"TasTGJbiTKS\",\"displayName\":\"Initial Utilization SAM Treatment\"},{\"id\":\"KzFXrhFaBsG\",\"displayName\":\"Access to SAM Services by children under 5 yrs\"},{\"id\":\"DAXv9sS63ay\",\"displayName\":\"Availability of Trained SAM Providers\"},{\"id\":\"nJmI87zLsIy\",\"displayName\":\"Continuous Utilization SAM Treatment\"}]},{\"id\":\"xTAOvw3f7bt\",\"displayName\":\"Skilled Birth Delivery\",\"indicators\":[{\"id\":\"TyvkjWQLXIS\",\"displayName\":\"Availability of Trained Skilled Delivery Providers\"},{\"id\":\"inwBdMHgTt4\",\"displayName\":\"Continuous Utilization Partograph Use\"},{\"id\":\"vwTUKDE48oP\",\"displayName\":\"Effective Coverage Child Birth Survival\"},{\"id\":\"u60Aq1m3rth\",\"displayName\":\"Access to Skilled Delivery Services 24/7\"},{\"id\":\"NZrLwW5idYW\",\"displayName\":\"Continuous Utilization Infant Feeding\"},{\"id\":\"V3uTnnIJvRW\",\"displayName\":\"Access to Skilled Delivery Services BEmOC\"},{\"id\":\"CDcCdx4FpnU\",\"displayName\":\"Availability of Iron Folic Acid\"},{\"id\":\"njIRREV0oUm\",\"displayName\":\"Availability of Oxytocin\"},{\"id\":\"bFjZn7Qd7qC\",\"displayName\":\"Initial Utilization Skilled Birth Delivery\"},{\"id\":\"rcDhSGtdFuA\",\"displayName\":\"Continuous Utilization Oxytocin Use\"}]},{\"id\":\"CEM3EpXByt3\",\"displayName\":\"Vitamin A Supplementation\",\"indicators\":[{\"id\":\"hWgzPzUOL7P\",\"displayName\":\"Initial Utilization VAS\"},{\"id\":\"fTE6er8cInA\",\"displayName\":\"Access to VAS Services\"},{\"id\":\"y7flu2v4APc\",\"displayName\":\"Effective Coverage/Quality VAS 12-59 months\"},{\"id\":\"ME1me1HHvyA\",\"displayName\":\"Availability of Vitamin A\"},{\"id\":\"dTSS3Rpx2lh\",\"displayName\":\"Effective Coverage/Quality VAS 24-59 Months\"},{\"id\":\"NMVneMJGt5B\",\"displayName\":\"Availability of Trained VAS Providers\"},{\"id\":\"TGaWH68N0ze\",\"displayName\":\"Continuous Utilization VAS\"}]}]}",
+        "responseSize": 4001,
+        "responseHeaders": {
+            "server": "nginx/1.21.6",
+            "content-type": "application/json;charset=UTF-8",
+            "transfer-encoding": "chunked",
+            "connection": "keep-alive",
+            "access-control-allow-credentials": "true",
+            "access-control-allow-origin": "http://localhost:3000",
+            "vary": "Origin",
+            "access-control-expose-headers": "ETag, Location",
+            "cache-control": "no-cache, private",
+            "x-content-type-options": "nosniff",
+            "x-xss-protection": "1; mode=block",
+            "x-frame-options": "SAMEORIGIN"
+        }
+    },
+    {
+        "path": "/api/37/indicators?page=1&totalPages=true&fields=displayName,id&order=displayName%3Aasc",
+        "featureName": "Manage Scorecard",
+        "static": false,
+        "count": 4,
+        "nonDeterministic": false,
+        "method": "GET",
+        "requestBody": "",
+        "requestHeaders": {
+            "host": "localhost:8081",
+            "proxy-connection": "keep-alive",
+            "accept": "application/json",
+            "origin": "http://localhost:3000",
+            "sec-fetch-site": "same-site",
+            "sec-fetch-mode": "cors"
+        },
+        "statusCode": 200,
+        "responseBody": "{\"pager\":{\"page\":1,\"pageCount\":1,\"total\":47,\"pageSize\":50},\"indicators\":[{\"id\":\"BvG8P80QxqZ\",\"displayName\":\"Access to ANC Services\"},{\"id\":\"hTUspcBc4Yn\",\"displayName\":\"Access to Immunization Services\"},{\"id\":\"XdOi1uR8A9n\",\"displayName\":\"Access to PMTCT Services\"},{\"id\":\"KzFXrhFaBsG\",\"displayName\":\"Access to SAM Services by children under 5 yrs\"},{\"id\":\"u60Aq1m3rth\",\"displayName\":\"Access to Skilled Delivery Services 24/7\"},{\"id\":\"V3uTnnIJvRW\",\"displayName\":\"Access to Skilled Delivery Services BEmOC\"},{\"id\":\"fTE6er8cInA\",\"displayName\":\"Access to VAS Services\"},{\"id\":\"EHd0c7wcNr4\",\"displayName\":\"Availability of ART\"},{\"id\":\"CDcCdx4FpnU\",\"displayName\":\"Availability of Iron Folic Acid\"},{\"id\":\"njIRREV0oUm\",\"displayName\":\"Availability of Oxytocin\"},{\"id\":\"gY1v9JJjvAh\",\"displayName\":\"Availability of RUTF\"},{\"id\":\"C2R035EN1zx\",\"displayName\":\"Availability of Tetanus Toxoid\"},{\"id\":\"Ho2X2O2NIzk\",\"displayName\":\"Availability of Trained FANC Providers\"},{\"id\":\"JwRORgiBAIh\",\"displayName\":\"Availability of Trained Immunization Providers\"},{\"id\":\"AA6Bd4kuxCr\",\"displayName\":\"Availability of Trained PMTCT Providers\"},{\"id\":\"DAXv9sS63ay\",\"displayName\":\"Availability of Trained SAM Providers\"},{\"id\":\"TyvkjWQLXIS\",\"displayName\":\"Availability of Trained Skilled Delivery Providers\"},{\"id\":\"NMVneMJGt5B\",\"displayName\":\"Availability of Trained VAS Providers\"},{\"id\":\"EzE8xZ31zfC\",\"displayName\":\"Availability of Vaccines BCG\"},{\"id\":\"uNau1zjH08I\",\"displayName\":\"Availability of Vaccines DPT\"},{\"id\":\"ME1me1HHvyA\",\"displayName\":\"Availability of Vitamin A\"},{\"id\":\"DjsVrjWMW5S\",\"displayName\":\"Continuous Utilization ANC Visits\"},{\"id\":\"niRusLxmwo4\",\"displayName\":\"Continuous Utilization Breastfeeding\"},{\"id\":\"YT5UD0H7875\",\"displayName\":\"Continuous Utilization DPT2\"},{\"id\":\"E31SemmmFGb\",\"displayName\":\"Continuous Utilization DPT3\"},{\"id\":\"NZrLwW5idYW\",\"displayName\":\"Continuous Utilization Infant Feeding\"},{\"id\":\"rcDhSGtdFuA\",\"displayName\":\"Continuous Utilization Oxytocin Use\"},{\"id\":\"TCYklnegj0N\",\"displayName\":\"Continuous Utilization PMTCT\"},{\"id\":\"inwBdMHgTt4\",\"displayName\":\"Continuous Utilization Partograph Use\"},{\"id\":\"nJmI87zLsIy\",\"displayName\":\"Continuous Utilization SAM Treatment\"},{\"id\":\"TGaWH68N0ze\",\"displayName\":\"Continuous Utilization VAS\"},{\"id\":\"vwTUKDE48oP\",\"displayName\":\"Effective Coverage Child Birth Survival\"},{\"id\":\"RmilE0Cc5ad\",\"displayName\":\"Effective Coverage DPT Immunization\"},{\"id\":\"TGFBdsVUobf\",\"displayName\":\"Effective Coverage Full Immunization\"},{\"id\":\"wpgvPjYTBba\",\"displayName\":\"Effective Coverage Measles Immunization\"},{\"id\":\"GUEA7Zd1F54\",\"displayName\":\"Effective Coverage/Quality FANC Lab Tests\"},{\"id\":\"BVmO0Bd9VtS\",\"displayName\":\"Effective Coverage/Quality FANC Visits\"},{\"id\":\"Mk7TOqGoqGd\",\"displayName\":\"Effective Coverage/Quality PMTCT Infants\"},{\"id\":\"y7flu2v4APc\",\"displayName\":\"Effective Coverage/Quality VAS 12-59 months\"},{\"id\":\"dTSS3Rpx2lh\",\"displayName\":\"Effective Coverage/Quality VAS 24-59 Months\"},{\"id\":\"cn8c5IGTCrf\",\"displayName\":\"Initial Utilization ANC\"},{\"id\":\"k7S2WEEZeWO\",\"displayName\":\"Initial Utilization BCG\"},{\"id\":\"Dca85UJ7O40\",\"displayName\":\"Initial Utilization DPT1\"},{\"id\":\"OqzP6Hjcdex\",\"displayName\":\"Initial Utilization PMTCT\"},{\"id\":\"TasTGJbiTKS\",\"displayName\":\"Initial Utilization SAM Treatment\"},{\"id\":\"bFjZn7Qd7qC\",\"displayName\":\"Initial Utilization Skilled Birth Delivery\"},{\"id\":\"hWgzPzUOL7P\",\"displayName\":\"Initial Utilization VAS\"}]}",
+        "responseSize": 3407,
+        "responseHeaders": {
+            "server": "nginx/1.21.6",
+            "content-type": "application/json;charset=UTF-8",
+            "transfer-encoding": "chunked",
+            "connection": "keep-alive",
+            "access-control-allow-credentials": "true",
+            "access-control-allow-origin": "http://localhost:3000",
+            "vary": "Origin",
+            "access-control-expose-headers": "ETag, Location",
+            "cache-control": "no-cache, private",
+            "x-content-type-options": "nosniff",
+            "x-xss-protection": "1; mode=block",
+            "x-frame-options": "SAMEORIGIN"
+        }
+    },
+    {
+        "path": "/api/37/organisationUnits?fields=id%2CdisplayName%2Cname&userDataViewFallback=true&paging=false",
+        "featureName": "Manage Scorecard",
+        "static": false,
+        "count": 1,
+        "nonDeterministic": false,
+        "method": "GET",
+        "requestBody": "",
+        "requestHeaders": {
+            "host": "localhost:8081",
+            "proxy-connection": "keep-alive",
+            "accept": "application/json",
+            "origin": "http://localhost:3000",
+            "sec-fetch-site": "same-site",
+            "sec-fetch-mode": "cors"
+        },
+        "statusCode": 200,
+        "responseBody": "{\"organisationUnits\":[{\"name\":\"Trainingland\",\"id\":\"GD7TowwI46c\",\"displayName\":\"Trainingland\"}]}",
+        "responseSize": 95,
+        "responseHeaders": {
+            "server": "nginx/1.21.6",
+            "content-type": "application/json;charset=UTF-8",
+            "transfer-encoding": "chunked",
+            "connection": "keep-alive",
+            "access-control-allow-credentials": "true",
+            "access-control-allow-origin": "http://localhost:3000",
+            "vary": "Origin",
+            "access-control-expose-headers": "ETag, Location",
+            "cache-control": "no-cache, private",
+            "x-content-type-options": "nosniff",
+            "x-xss-protection": "1; mode=block",
+            "x-frame-options": "SAMEORIGIN"
+        }
+    },
+    {
+        "path": "/api/37/organisationUnitGroups?fields=id,displayName",
+        "featureName": "Manage Scorecard",
+        "static": false,
+        "count": 1,
+        "nonDeterministic": false,
+        "method": "GET",
+        "requestBody": "",
+        "requestHeaders": {
+            "host": "localhost:8081",
+            "proxy-connection": "keep-alive",
+            "accept": "application/json",
+            "origin": "http://localhost:3000",
+            "sec-fetch-site": "same-site",
+            "sec-fetch-mode": "cors"
+        },
+        "statusCode": 200,
+        "responseBody": "{\"pager\":{\"page\":1,\"pageCount\":1,\"total\":3,\"pageSize\":50},\"organisationUnitGroups\":[{\"id\":\"Z2iBR6hRXHS\",\"displayName\":\"Districts\"},{\"id\":\"sQXBR6nw3Vt\",\"displayName\":\"Facility\"},{\"id\":\"kCNqefF1kq8\",\"displayName\":\"Regions\"}]}",
+        "responseSize": 223,
+        "responseHeaders": {
+            "server": "nginx/1.21.6",
+            "content-type": "application/json;charset=UTF-8",
+            "transfer-encoding": "chunked",
+            "connection": "keep-alive",
+            "access-control-allow-credentials": "true",
+            "access-control-allow-origin": "http://localhost:3000",
+            "vary": "Origin",
+            "access-control-expose-headers": "ETag, Location",
+            "cache-control": "no-cache, private",
+            "x-content-type-options": "nosniff",
+            "x-xss-protection": "1; mode=block",
+            "x-frame-options": "SAMEORIGIN"
+        }
+    },
+    {
+        "path": "/api/37/organisationUnits/GD7TowwI46c?fields=displayName,path,id&paging=false",
+        "featureName": "Manage Scorecard",
+        "static": false,
+        "count": 1,
+        "nonDeterministic": false,
+        "method": "GET",
+        "requestBody": "",
+        "requestHeaders": {
+            "host": "localhost:8081",
+            "proxy-connection": "keep-alive",
+            "accept": "application/json",
+            "origin": "http://localhost:3000",
+            "sec-fetch-site": "same-site",
+            "sec-fetch-mode": "cors"
+        },
+        "statusCode": 200,
+        "responseBody": "{\"id\":\"GD7TowwI46c\",\"path\":\"/GD7TowwI46c\",\"displayName\":\"Trainingland\"}",
+        "responseSize": 71,
+        "responseHeaders": {
+            "server": "nginx/1.21.6",
+            "content-type": "application/json;charset=UTF-8",
+            "transfer-encoding": "chunked",
+            "connection": "keep-alive",
+            "access-control-allow-credentials": "true",
+            "access-control-allow-origin": "http://localhost:3000",
+            "vary": "Origin",
+            "access-control-expose-headers": "ETag, Location",
+            "cache-control": "no-cache, private",
+            "x-content-type-options": "nosniff",
+            "x-xss-protection": "1; mode=block",
+            "x-frame-options": "SAMEORIGIN"
+        }
+    },
+    {
+        "path": "/api/37/organisationUnits/GD7TowwI46c?fields=id,path,children%5Bid%2Cpath%2CdisplayName%5D",
+        "featureName": "Manage Scorecard",
+        "static": false,
+        "count": 1,
+        "nonDeterministic": false,
+        "method": "GET",
+        "requestBody": "",
+        "requestHeaders": {
+            "host": "localhost:8081",
+            "proxy-connection": "keep-alive",
+            "accept": "application/json",
+            "origin": "http://localhost:3000",
+            "sec-fetch-site": "same-site",
+            "sec-fetch-mode": "cors"
+        },
+        "statusCode": 200,
+        "responseBody": "{\"id\":\"GD7TowwI46c\",\"path\":\"/GD7TowwI46c\",\"children\":[{\"id\":\"gwAcS6gaz7D\",\"path\":\"/GD7TowwI46c/gwAcS6gaz7D\",\"displayName\":\"Food Region\"},{\"id\":\"zj9LoeErgkP\",\"path\":\"/GD7TowwI46c/zj9LoeErgkP\",\"displayName\":\"Animal Region\"}]}",
+        "responseSize": 223,
+        "responseHeaders": {
+            "server": "nginx/1.21.6",
+            "content-type": "application/json;charset=UTF-8",
+            "transfer-encoding": "chunked",
+            "connection": "keep-alive",
+            "access-control-allow-credentials": "true",
+            "access-control-allow-origin": "http://localhost:3000",
+            "vary": "Origin",
+            "access-control-expose-headers": "ETag, Location",
+            "cache-control": "no-cache, private",
+            "x-content-type-options": "nosniff",
+            "x-xss-protection": "1; mode=block",
+            "x-frame-options": "SAMEORIGIN"
+        }
+    },
+    {
+        "path": "/api/37/dataStore/hisptz-scorecard/rZdi1ghZceu",
+        "featureName": "Manage Scorecard",
+        "static": false,
+        "count": 1,
+        "nonDeterministic": false,
+        "method": "POST",
+        "requestBody": {
+            "legendDefinitions": [
+                {
+                    "color": "#D3D3D3",
+                    "name": "N/A",
+                    "isDefault": true,
+                    "id": "N/A"
+                },
+                {
+                    "color": "#FFFFFF",
+                    "name": "No Data",
+                    "isDefault": true,
+                    "id": "No Data"
+                },
+                {
+                    "id": "NUYjXdkYKDo",
+                    "color": "#008000",
+                    "name": "Target Reached/ On Track"
+                },
+                {
+                    "id": "dpctr4NxdBp",
+                    "color": "#FFFF00",
+                    "name": "Progress, but more effort required"
+                },
+                {
+                    "id": "gm4OUZJPfuk",
+                    "color": "#FF0000",
+                    "name": "Not on track"
+                }
+            ],
+            "options": {
+                "averageDisplayType": "ALL",
+                "legend": true,
+                "title": true,
+                "itemNumber": true,
+                "emptyRows": true,
+                "showHierarchy": false,
+                "averageColumn": true,
+                "averageRow": true,
+                "highlightedIndicators": false,
+                "arrows": true
+            },
+            "publicAccess": {
+                "id": "public",
+                "type": "public",
+                "access": "------",
+                "displayName": "Public"
+            },
+            "orgUnitSelection": {
+                "levels": [],
+                "groups": [],
+                "orgUnits": [],
+                "userSubX2Unit": false,
+                "userSubUnit": false,
+                "userOrgUnit": true
+            },
+            "userGroupAccesses": [],
+            "userAccesses": [],
+            "highlightedIndicators": [
+                {
+                    "id": "BvG8P80QxqZ",
+                    "displayName": "Access to ANC Services",
+                    "type": "indicator",
+                    "label": "Access to ANC Services",
+                    "legends": [
+                        {
+                            "startValue": "66",
+                            "endValue": "100",
+                            "legendDefinitionId": "NUYjXdkYKDo",
+                            "id": "Lm2Uqk9OMh4"
+                        },
+                        {
+                            "startValue": "33",
+                            "endValue": "66",
+                            "legendDefinitionId": "dpctr4NxdBp",
+                            "id": "Wb0EfXTy3If"
+                        },
+                        {
+                            "startValue": "0",
+                            "endValue": "33",
+                            "legendDefinitionId": "gm4OUZJPfuk",
+                            "id": "CH6iMYDmRn4"
+                        }
+                    ],
+                    "name": "",
+                    "weight": 100,
+                    "effectiveGap": 5,
+                    "displayArrows": true,
+                    "highIsGood": true,
+                    "showColors": true,
+                    "specificTargets": [],
+                    "specificTargetsSet": false
+                }
+            ],
+            "id": "rZdi1ghZceu",
+            "name": "",
+            "title": "Sample Scorecard",
+            "subtitle": "Sample Scorecard Subtitle",
+            "description": "Scorecard Description",
+            "customHeader": "",
+            "periodType": "Yearly",
+            "dataSelection": {
+                "dataGroups": [
+                    {
+                        "title": "Group 1",
+                        "id": "Ljdrk862q9t",
+                        "dataHolders": [
+                            {
+                                "id": "uibNmPgOfft",
+                                "dataSources": [
+                                    {
+                                        "id": "BvG8P80QxqZ",
+                                        "displayName": "Access to ANC Services",
+                                        "type": "indicator",
+                                        "label": "Access to ANC Services",
+                                        "legends": [
+                                            {
+                                                "startValue": "66",
+                                                "endValue": "100",
+                                                "legendDefinitionId": "NUYjXdkYKDo",
+                                                "id": "hNWsDwVYqye"
+                                            },
+                                            {
+                                                "startValue": "33",
+                                                "endValue": "66",
+                                                "legendDefinitionId": "dpctr4NxdBp",
+                                                "id": "iVLt0Q69Yqs"
+                                            },
+                                            {
+                                                "startValue": "0",
+                                                "endValue": "33",
+                                                "legendDefinitionId": "gm4OUZJPfuk",
+                                                "id": "kIVLJs1QyVg"
+                                            }
+                                        ],
+                                        "name": "",
+                                        "weight": 100,
+                                        "effectiveGap": 5,
+                                        "displayArrows": true,
+                                        "highIsGood": true,
+                                        "showColors": true,
+                                        "specificTargets": [],
+                                        "specificTargetsSet": false
+                                    }
+                                ]
+                            }
+                        ],
+                        "style": {
+                            "backgroundColor": "#FFFFFF",
+                            "color": "#000000"
+                        }
+                    }
+                ]
+            },
+            "periodSelection": {
+                "periods": [
+                    {
+                        "id": "2019",
+                        "name": "2019"
+                    }
+                ],
+                "type": "Yearly"
+            },
+            "user": {
+                "id": "M5zQapPyTZI"
+            },
+            "targetOnLevels": false,
+            "additionalLabels": []
+        },
+        "requestHeaders": {
+            "host": "localhost:8081",
+            "proxy-connection": "keep-alive",
+            "content-length": "2432",
+            "accept": "application/json",
+            "content-type": "application/json",
+            "origin": "http://localhost:3000",
+            "sec-fetch-site": "same-site",
+            "sec-fetch-mode": "cors"
+        },
+        "statusCode": 201,
+        "responseBody": "{\"httpStatus\":\"Created\",\"httpStatusCode\":201,\"status\":\"OK\",\"message\":\"Key created: 'rZdi1ghZceu'\"}",
+        "responseSize": 98,
+        "responseHeaders": {
+            "server": "nginx/1.21.6",
+            "content-type": "application/json;charset=UTF-8",
+            "connection": "keep-alive",
+            "access-control-allow-credentials": "true",
+            "access-control-allow-origin": "http://localhost:3000",
+            "vary": "Origin",
+            "access-control-expose-headers": "ETag, Location",
+            "x-content-type-options": "nosniff",
+            "x-xss-protection": "1; mode=block",
+            "x-frame-options": "SAMEORIGIN"
+        }
+    },
+  {
+    "path": "/api/37/dataStore/hisptz-scorecard/@scorecard/summary",
+    "featureName": "Manage Scorecard",
+    "static": false,
+    "count": 1,
+    "nonDeterministic": false,
+    "method": "PUT",
+    "requestBody": [
+      {
+        "title": "Sample Scorecard",
+        "description": "Scorecard Description",
+        "id": "rZdi1ghZceu",
+                "user": "M5zQapPyTZI",
+                "userAccesses": [],
+                "userGroupAccesses": [],
+                "publicAccess": {
+                    "id": "public",
+                    "type": "public",
+                    "access": "------",
+                    "displayName": "Public"
+                },
+                "additionalLabels": []
+            }
+        ],
+        "requestHeaders": {
+          "host": "localhost:8081",
+          "proxy-connection": "keep-alive",
+          "content-length": "259",
+          "accept": "application/json",
+          "content-type": "application/json",
+          "origin": "http://localhost:3000",
+          "sec-fetch-site": "same-site",
+          "sec-fetch-mode": "cors"
+        },
+    "statusCode": 200,
+    "responseBody": "{\"httpStatus\":\"OK\",\"httpStatusCode\":200,\"status\":\"OK\",\"message\":\"Key updated: '@scorecard/summary'\"}",
+    "responseSize": 99,
+    "responseHeaders": {
+      "server": "nginx/1.21.6",
+      "content-type": "application/json;charset=UTF-8",
+      "transfer-encoding": "chunked",
+      "connection": "keep-alive",
+      "access-control-allow-credentials": "true",
+      "access-control-allow-origin": "http://localhost:3000",
+      "vary": "Origin",
+      "access-control-expose-headers": "ETag, Location",
+            "x-content-type-options": "nosniff",
+            "x-xss-protection": "1; mode=block",
+            "x-frame-options": "SAMEORIGIN"
+        }
+    },
+  {
+    "path": "/api/37/dataStore/hisptz-scorecard/@scorecard/summary",
+    "featureName": "Manage Scorecard",
+    "static": false,
+    "count": 1,
+    "nonDeterministic": false,
+    "method": "PUT",
+    "requestBody": [
+      {
+        "id": "rZdi1ghZceu",
+        "user": "M5zQapPyTZI",
+        "title": "Sample Scorecard",
+                "description": "Scorecard Description",
+                "publicAccess": {
+                    "id": "public",
+                    "type": "public",
+                    "access": "------",
+                    "displayName": "Public"
+                },
+                "userAccesses": [],
+                "additionalLabels": [],
+                "userGroupAccesses": []
+            },
+            {}
+        ],
+        "requestHeaders": {
+          "host": "localhost:8081",
+          "proxy-connection": "keep-alive",
+          "content-length": "262",
+          "accept": "application/json",
+          "content-type": "application/json",
+          "origin": "http://localhost:3000",
+          "sec-fetch-site": "same-site",
+          "sec-fetch-mode": "cors"
+        },
+    "statusCode": 200,
+    "responseBody": "{\"httpStatus\":\"OK\",\"httpStatusCode\":200,\"status\":\"OK\",\"message\":\"Key updated: '@scorecard/summary'\"}",
+    "responseSize": 99,
+    "responseHeaders": {
+      "server": "nginx/1.21.6",
+      "content-type": "application/json;charset=UTF-8",
+      "transfer-encoding": "chunked",
+      "connection": "keep-alive",
+      "access-control-allow-credentials": "true",
+      "access-control-allow-origin": "http://localhost:3000",
+      "vary": "Origin",
+      "access-control-expose-headers": "ETag, Location",
+            "x-content-type-options": "nosniff",
+            "x-xss-protection": "1; mode=block",
+            "x-frame-options": "SAMEORIGIN"
+        }
+    },
+    {
+        "path": "/api/37/dataStore/hisptz-scorecard/rZdi1ghZceu",
+        "featureName": "Manage Scorecard",
+        "static": false,
+        "count": 3,
+        "nonDeterministic": false,
+        "method": "GET",
+        "requestBody": "",
+        "requestHeaders": {
+            "host": "localhost:8081",
+            "proxy-connection": "keep-alive",
+            "accept": "application/json",
+            "origin": "http://localhost:3000",
+            "sec-fetch-site": "same-site",
+            "sec-fetch-mode": "cors"
+        },
+        "statusCode": 200,
+        "responseBody": "{\"id\":\"rZdi1ghZceu\",\"name\":\"\",\"user\":{\"id\":\"M5zQapPyTZI\"},\"title\":\"Sample Scorecard\",\"options\":{\"title\":true,\"arrows\":true,\"legend\":true,\"emptyRows\":true,\"averageRow\":true,\"itemNumber\":true,\"averageColumn\":true,\"showHierarchy\":false,\"averageDisplayType\":\"ALL\",\"highlightedIndicators\":false},\"subtitle\":\"Sample Scorecard Subtitle\",\"periodType\":\"Yearly\",\"description\":\"Scorecard Description\",\"customHeader\":\"\",\"publicAccess\":{\"id\":\"public\",\"type\":\"public\",\"access\":\"------\",\"displayName\":\"Public\"},\"userAccesses\":[],\"dataSelection\":{\"dataGroups\":[{\"id\":\"Ljdrk862q9t\",\"style\":{\"color\":\"#000000\",\"backgroundColor\":\"#FFFFFF\"},\"title\":\"Group 1\",\"dataHolders\":[{\"id\":\"uibNmPgOfft\",\"dataSources\":[{\"id\":\"BvG8P80QxqZ\",\"name\":\"\",\"type\":\"indicator\",\"label\":\"Access to ANC Services\",\"weight\":100,\"legends\":[{\"id\":\"hNWsDwVYqye\",\"endValue\":\"100\",\"startValue\":\"66\",\"legendDefinitionId\":\"NUYjXdkYKDo\"},{\"id\":\"iVLt0Q69Yqs\",\"endValue\":\"66\",\"startValue\":\"33\",\"legendDefinitionId\":\"dpctr4NxdBp\"},{\"id\":\"kIVLJs1QyVg\",\"endValue\":\"33\",\"startValue\":\"0\",\"legendDefinitionId\":\"gm4OUZJPfuk\"}],\"highIsGood\":true,\"showColors\":true,\"displayName\":\"Access to ANC Services\",\"effectiveGap\":5,\"displayArrows\":true,\"specificTargets\":[],\"specificTargetsSet\":false}]}]}]},\"targetOnLevels\":false,\"periodSelection\":{\"type\":\"Yearly\",\"periods\":[{\"id\":\"2019\",\"name\":\"2019\"}]},\"additionalLabels\":[],\"orgUnitSelection\":{\"groups\":[],\"levels\":[],\"orgUnits\":[],\"userOrgUnit\":true,\"userSubUnit\":false,\"userSubX2Unit\":false},\"legendDefinitions\":[{\"id\":\"N/A\",\"name\":\"N/A\",\"color\":\"#D3D3D3\",\"isDefault\":true},{\"id\":\"No Data\",\"name\":\"No Data\",\"color\":\"#FFFFFF\",\"isDefault\":true},{\"id\":\"NUYjXdkYKDo\",\"name\":\"Target Reached/ On Track\",\"color\":\"#008000\"},{\"id\":\"dpctr4NxdBp\",\"name\":\"Progress, but more effort required\",\"color\":\"#FFFF00\"},{\"id\":\"gm4OUZJPfuk\",\"name\":\"Not on track\",\"color\":\"#FF0000\"}],\"userGroupAccesses\":[],\"highlightedIndicators\":[{\"id\":\"BvG8P80QxqZ\",\"name\":\"\",\"type\":\"indicator\",\"label\":\"Access to ANC Services\",\"weight\":100,\"legends\":[{\"id\":\"Lm2Uqk9OMh4\",\"endValue\":\"100\",\"startValue\":\"66\",\"legendDefinitionId\":\"NUYjXdkYKDo\"},{\"id\":\"Wb0EfXTy3If\",\"endValue\":\"66\",\"startValue\":\"33\",\"legendDefinitionId\":\"dpctr4NxdBp\"},{\"id\":\"CH6iMYDmRn4\",\"endValue\":\"33\",\"startValue\":\"0\",\"legendDefinitionId\":\"gm4OUZJPfuk\"}],\"highIsGood\":true,\"showColors\":true,\"displayName\":\"Access to ANC Services\",\"effectiveGap\":5,\"displayArrows\":true,\"specificTargets\":[],\"specificTargetsSet\":false}]}",
+        "responseSize": 2432,
+        "responseHeaders": {
+            "server": "nginx/1.21.6",
+            "content-type": "application/json;charset=UTF-8",
+            "transfer-encoding": "chunked",
+            "connection": "keep-alive",
+            "access-control-allow-credentials": "true",
+            "access-control-allow-origin": "http://localhost:3000",
+            "vary": "Origin",
+            "access-control-expose-headers": "ETag, Location",
+            "x-content-type-options": "nosniff",
+            "x-xss-protection": "1; mode=block",
+            "x-frame-options": "SAMEORIGIN"
+        }
+    },
+    {
+        "path": "/api/37/organisationUnits?filter=id%3Ain%3A%5B%5D&fields=path,displayName,level,id",
+        "featureName": "Manage Scorecard",
+        "static": false,
+        "count": 3,
+        "nonDeterministic": false,
+        "method": "GET",
+        "requestBody": "",
+        "requestHeaders": {
+            "host": "localhost:8081",
+            "proxy-connection": "keep-alive",
+            "accept": "application/json",
+            "origin": "http://localhost:3000",
+            "sec-fetch-site": "same-site",
+            "sec-fetch-mode": "cors"
+        },
+        "statusCode": 200,
+        "responseBody": "{\"pager\":{\"page\":1,\"pageCount\":1,\"total\":0,\"pageSize\":50},\"organisationUnits\":[]}",
+        "responseSize": 81,
+        "responseHeaders": {
+            "server": "nginx/1.21.6",
+            "content-type": "application/json;charset=UTF-8",
+            "transfer-encoding": "chunked",
+            "connection": "keep-alive",
+            "access-control-allow-credentials": "true",
+            "access-control-allow-origin": "http://localhost:3000",
+            "vary": "Origin",
+            "access-control-expose-headers": "ETag, Location",
+            "cache-control": "no-cache, private",
+            "x-content-type-options": "nosniff",
+            "x-xss-protection": "1; mode=block",
+            "x-frame-options": "SAMEORIGIN"
+        }
+    },
+  {
+    "path": "/api/37/dataStore/hisptz-scorecard/@scorecard/summary",
+    "featureName": "Manage Scorecard",
+    "static": false,
+    "count": 1,
+    "nonDeterministic": false,
+    "method": "PUT",
+    "requestBody": [
+      {
+        "id": "rZdi1ghZceu",
+        "user": "M5zQapPyTZI",
+        "title": "Sample Scorecard",
+                "description": "Scorecard Description",
+                "publicAccess": {
+                    "id": "public",
+                    "type": "public",
+                    "access": "------",
+                    "displayName": "Public"
+                },
+                "userAccesses": [],
+                "additionalLabels": [],
+                "userGroupAccesses": []
+            },
+            {},
+            {}
+        ],
+        "requestHeaders": {
+          "host": "localhost:8081",
+          "proxy-connection": "keep-alive",
+          "content-length": "265",
+          "accept": "application/json",
+          "content-type": "application/json",
+          "origin": "http://localhost:3000",
+          "sec-fetch-site": "same-site",
+          "sec-fetch-mode": "cors"
+        },
+    "statusCode": 200,
+    "responseBody": "{\"httpStatus\":\"OK\",\"httpStatusCode\":200,\"status\":\"OK\",\"message\":\"Key updated: '@scorecard/summary'\"}",
+    "responseSize": 99,
+    "responseHeaders": {
+      "server": "nginx/1.21.6",
+      "content-type": "application/json;charset=UTF-8",
+      "transfer-encoding": "chunked",
+      "connection": "keep-alive",
+      "access-control-allow-credentials": "true",
+      "access-control-allow-origin": "http://localhost:3000",
+      "vary": "Origin",
+      "access-control-expose-headers": "ETag, Location",
+            "x-content-type-options": "nosniff",
+            "x-xss-protection": "1; mode=block",
+            "x-frame-options": "SAMEORIGIN"
+        }
+    },
+  {
+    "path": "/api/37/dataStore/hisptz-scorecard/@scorecard/summary",
+    "featureName": "Manage Scorecard",
+    "static": false,
+    "count": 1,
+    "nonDeterministic": false,
+    "method": "PUT",
+    "requestBody": [
+      {
+        "id": "rZdi1ghZceu",
+        "user": "M5zQapPyTZI",
+        "title": "Sample Scorecard",
+                "description": "Scorecard Description",
+                "publicAccess": {
+                    "id": "public",
+                    "type": "public",
+                    "access": "------",
+                    "displayName": "Public"
+                },
+                "userAccesses": [],
+                "additionalLabels": [],
+                "userGroupAccesses": []
+            },
+            {},
+            {},
+            {}
+        ],
+        "requestHeaders": {
+          "host": "localhost:8081",
+          "proxy-connection": "keep-alive",
+          "content-length": "268",
+          "accept": "application/json",
+          "content-type": "application/json",
+          "origin": "http://localhost:3000",
+          "sec-fetch-site": "same-site",
+          "sec-fetch-mode": "cors"
+        },
+    "statusCode": 200,
+    "responseBody": "{\"httpStatus\":\"OK\",\"httpStatusCode\":200,\"status\":\"OK\",\"message\":\"Key updated: '@scorecard/summary'\"}",
+    "responseSize": 99,
+    "responseHeaders": {
+      "server": "nginx/1.21.6",
+      "content-type": "application/json;charset=UTF-8",
+      "transfer-encoding": "chunked",
+      "connection": "keep-alive",
+      "access-control-allow-credentials": "true",
+      "access-control-allow-origin": "http://localhost:3000",
+      "vary": "Origin",
+      "access-control-expose-headers": "ETag, Location",
+            "x-content-type-options": "nosniff",
+            "x-xss-protection": "1; mode=block",
+            "x-frame-options": "SAMEORIGIN"
+        }
+    }
+]

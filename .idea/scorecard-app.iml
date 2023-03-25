@@ -2,31 +2,31 @@
 <module type="WEB_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/apps/app/cypress" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/packages/app/cypress" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/temp" />
       <excludeFolder url="file://$MODULE_DIR$/.tmp" />
       <excludeFolder url="file://$MODULE_DIR$/tmp" />
       <excludeFolder url="file://$MODULE_DIR$/dist" />
       <excludeFolder url="file://$MODULE_DIR$/build" />
       <excludeFolder url="file://$MODULE_DIR$/.d2" />
-      <excludeFolder url="file://$MODULE_DIR$/apps/app/src/locales" />
-      <excludeFolder url="file://$MODULE_DIR$/apps/app/.d2" />
-      <excludeFolder url="file://$MODULE_DIR$/shared/utils/build" />
-      <excludeFolder url="file://$MODULE_DIR$/shared/state/build" />
-      <excludeFolder url="file://$MODULE_DIR$/shared/components/build" />
-      <excludeFolder url="file://$MODULE_DIR$/shared/constants/build" />
-      <excludeFolder url="file://$MODULE_DIR$/shared/hooks/build" />
-      <excludeFolder url="file://$MODULE_DIR$/shared/models/build" />
-      <excludeFolder url="file://$MODULE_DIR$/shared/resources/build" />
-      <excludeFolder url="file://$MODULE_DIR$/shared/services/build" />
-      <excludeFolder url="file://$MODULE_DIR$/apps/widget/src/locales" />
-      <excludeFolder url="file://$MODULE_DIR$/apps/widget/.d2" />
-      <excludeFolder url="file://$MODULE_DIR$/apps/widget/build" />
-      <excludeFolder url="file://$MODULE_DIR$/apps/app/build" />
-      <excludeFolder url="file://$MODULE_DIR$/shared/components/src/locales" />
-      <excludeFolder url="file://$MODULE_DIR$/shared/constants/src/locales" />
-      <excludeFolder url="file://$MODULE_DIR$/shared/state/src/locales" />
-      <excludeFolder url="file://$MODULE_DIR$/shared/utils/src/locales" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/app/src/locales" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/app/.d2" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/utils/build" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/state/build" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/components/build" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/constants/build" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/hooks/build" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/models/build" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/resources/build" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/services/build" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/widget/src/locales" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/widget/.d2" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/widget/build" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/app/build" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/components/src/locales" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/constants/src/locales" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/state/src/locales" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/utils/src/locales" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
