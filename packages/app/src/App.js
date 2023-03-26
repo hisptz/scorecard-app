@@ -1,6 +1,6 @@
 import {DataStoreProvider} from "@dhis2/app-service-datastore";
 import {CssReset} from "@dhis2/ui";
-import {ConfirmDialogProvider} from "@hisptz/react-ui";
+import {ConfirmDialogProvider} from "@hisptz/dhis2-ui";
 import {DATASTORE_NAMESPACE, FullPageError, FullPageLoader, useInitApp} from "@scorecard/shared";
 import React, {Suspense} from "react";
 import {ErrorBoundary} from "react-error-boundary";

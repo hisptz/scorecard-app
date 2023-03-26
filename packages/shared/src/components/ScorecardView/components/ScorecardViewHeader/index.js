@@ -1,6 +1,6 @@
 import i18n from "@dhis2/d2-i18n";
 import {Button, ButtonStrip, Card} from "@dhis2/ui";
-import {OrgUnitSelectorModal, PeriodSelectorModal} from "@hisptz/react-ui";
+import {OrgUnitSelectorModal, PeriodSelectorModal} from "@hisptz/dhis2-ui";
 import {Steps} from "intro.js-react";
 import React, {useEffect, useMemo, useState} from "react";
 import {useHistory} from "react-router-dom";

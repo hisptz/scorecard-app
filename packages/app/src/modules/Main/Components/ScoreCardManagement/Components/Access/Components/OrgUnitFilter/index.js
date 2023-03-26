@@ -1,8 +1,7 @@
 import i18n from "@dhis2/d2-i18n";
 import {colors, IconError24} from '@dhis2/ui'
-import {OrgUnitSelector} from '@hisptz/react-ui'
-import {ContainerLoader} from "@scorecard/shared";
-import {OrgUnitSelection} from "@scorecard/shared";
+import {OrgUnitSelector} from '@hisptz/dhis2-ui'
+import {ContainerLoader, OrgUnitSelection} from "@scorecard/shared";
 import {get} from 'lodash'
 import React, {Suspense, useCallback} from "react";
 import {useFormContext} from "react-hook-form";

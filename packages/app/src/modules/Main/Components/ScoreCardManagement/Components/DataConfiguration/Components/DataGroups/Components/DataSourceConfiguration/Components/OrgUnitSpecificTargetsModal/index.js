@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import {Button, ButtonStrip, CircularLoader, InputField, Modal, ModalActions, ModalContent, ModalTitle} from '@dhis2/ui'
-import {OrgUnitSelectorModal} from "@hisptz/react-ui";
+import {OrgUnitSelectorModal} from "@hisptz/dhis2-ui";
 import {SelectedOrgUnits} from "@scorecard/shared";
 import {isEmpty} from "lodash";
 import PropTypes from 'prop-types'

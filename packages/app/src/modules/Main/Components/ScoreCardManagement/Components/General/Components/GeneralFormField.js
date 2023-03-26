@@ -1,6 +1,5 @@
-import {CustomInput} from "@hisptz/react-ui";
-import {FormFieldModel} from "@scorecard/shared";
-import {FieldErrorState, ScorecardConfigDirtyState} from "@scorecard/shared";
+import {DHIS2FormField} from "@hisptz/dhis2-ui";
+import {FieldErrorState, FormFieldModel, ScorecardConfigDirtyState} from "@scorecard/shared";
 import PropTypes from "prop-types";
 import React, {useMemo} from "react";
 import {useRecoilState, useRecoilValue} from "recoil";
@@ -29,7 +28,7 @@ export default function GeneralFormField({field, dataTest}) {
     );
 
     return (
-        <CustomInput
+        <DHIS2FormField
             dataTest={dataTest}
             valueType={field.valueType}
             input={input}

@@ -2,7 +2,7 @@ export const APP_NAME = "hisptz-scorecard";
 export const APP_TITLE = "Interactive Scorecard";
 export const DATASTORE_NAMESPACE = "hisptz-scorecard";
 export const DATASTORE_ENDPOINT = "dataStore/hisptz-scorecard";
-export const DATASTORE_SCORECARD_SUMMARY_KEY = "@scorecard/summary";
+export const DATASTORE_SCORECARD_SUMMARY_KEY = "scorecard-summary";
 export const DATASTORE_SCORECARD_SUMMARY_INCLUDE_KEYS = [
     {
         key: "title",

@@ -1,8 +1,8 @@
 import i18n from '@dhis2/d2-i18n'
 import {Button, ButtonStrip, InputField, Modal, ModalActions, ModalContent, ModalTitle} from '@dhis2/ui'
-import {PeriodSelectorModal} from "@hisptz/react-ui";
-import {SystemSettingsState} from "@scorecard/shared";
+import {PeriodSelectorModal} from "@hisptz/dhis2-ui";
 import {Period} from "@iapps/period-utilities";
+import {SystemSettingsState} from "@scorecard/shared";
 import {compact, isEmpty} from "lodash";
 import PropTypes from 'prop-types'
 import React, {useCallback, useState} from 'react'

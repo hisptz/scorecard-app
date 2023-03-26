@@ -1,57 +1,78 @@
-import i18n from '@dhis2/d2-i18n'
-import {Button, InputField, Tooltip} from "@dhis2/ui";
-import {PeriodSelectorModal} from "@hisptz/react-ui";
-import {Period} from "@iapps/period-utilities";
-import {filter, isEmpty} from 'lodash'
-import React, {useCallback, useMemo, useState} from "react";
-import {useFormContext} from "react-hook-form";
+import i18n from '@dhis2/d2-i18n';
+import {CustomSelectField} from "@hisptz/dhis2-ui";
+import {PeriodTypeCategory, PeriodUtility} from "@hisptz/dhis2-utils";
+import {find, head} from "lodash";
+import React, {useMemo, useState} from "react";
+import {Controller, useWatch} from "react-hook-form";
 
 export default function PeriodSelector() {
-    const {watch, setValue} = useFormContext();
-    const selectedPeriodType = watch("periodType");
+    const [year, setYear] = useState(new Date().getFullYear());
+    const periodType = useWatch({
+        name: "periodType"
+    });
 
-    const periodSelection = watch("periodSelection");
+    const options = useMemo(() => {
+        if (!periodType) {
+            return [];
+        }
 
-    const setPeriodSelection = useCallback((updatedPeriodSelection) => setValue("periodSelection", updatedPeriodSelection), [setValue]);
+        const utility = PeriodUtility.fromObject({
+            year,
+            category: PeriodTypeCategory.FIXED,
+        });
+        const type = utility.getPeriodType(periodType.toUpperCase());
+        return type?.periods?.map(({id, name}) => ({
+            name: name,
+            code: id
+        }))
+    }, [periodType, year]);
 
-    const [periodSelectorHide, setPeriodSelectorHide] = useState(true);
+    const years = useMemo(() => new Array(10).fill("").map((_, index) => ({
+            code: (new Date().getFullYear() - index).toString(),
+            name: new Date().getFullYear() - index
+        })).reverse(),
+        []
+    );
 
-    const periodsTypesToExclude = useMemo(() => {
-        if (selectedPeriodType) {
-            if (selectedPeriodType !== periodSelection.type) {
-                setValue("periodSelection", {periods: [], type: selectedPeriodType});
+
+    return (<Controller
+        render={({field}) => {
+
+            const onChange = (code) => {
+                const period = PeriodUtility.getPeriodById(code);
+
+                field.onChange({
+                    periods: [{
+                        name: period.name,
+                        id: period?.id
+                    }]
+                })
             }
-            const periodTypes = new Period().get()?._periodType?._periodTypes;
-            return filter(periodTypes, (periodType) => periodType.id !== selectedPeriodType)?.map(({id}) => id);
-        }
-        return [];
-    }, [selectedPeriodType, setValue]);
 
-    return <div style={{display: "flex", gap: 16, alignItems: "end", width: '100%'}}>
-        <div className="w-50">
-            <Tooltip content={<div>{periodSelection?.periods?.map(({name}) => name).join(",\n")}</div>}>
-                <InputField
+            const valueId = head(field?.value?.periods)?.id;
+
+            const value = find(options, ['code', valueId]) ? valueId : undefined;
+
+
+            return (<div style={{display: "flex", gap: 16, width: "100%"}}>
+                <CustomSelectField
                     fullWidth
-                    name={"period"}
-                    label={i18n.t("Period")}
-                    value={periodSelection?.periods?.map(({name}) => name).join(", ")}
-                    disabled
+                    label={i18n.t("Year")}
+                    value={year.toString()}
+                    optionSet={{options: years}}
+                    name="year"
+                    onChange={setYear}
                 />
-            </Tooltip>
-        </div>
-        {
-            !periodSelectorHide && <PeriodSelectorModal
-                selectedPeriods={periodSelection?.periods}
-                excludedPeriodTypes={periodsTypesToExclude}
-                onClose={() => setPeriodSelectorHide(true)}
-                hide={periodSelectorHide}
-                onUpdate={(periods) => {
-                    setPeriodSelection({periods: periods?.map(({id, name}) => ({id, name})), type: selectedPeriodType});
-                    setPeriodSelectorHide(true);
-                }}
-            />
-        }
-        <Button dataTest="config-open-period-selector-button"
-                onClick={() => setPeriodSelectorHide(false)}>{!isEmpty(periodSelection.periods) ? i18n.t("Change Periods") : i18n.t("Select Periods")}</Button>
-    </div>
+                <CustomSelectField
+                    fullWidth
+                    label={i18n.t("Period")}
+                    value={value}
+                    optionSet={{options}}
+                    name="periodSelection"
+                    onChange={onChange}
+                />
+            </div>)
+        }}
+        name="periodSelection"
+    />)
 }

@@ -20,7 +20,7 @@ export default function PreviewScorecardTable() {
                         <DataTableCell
                             fixed
                             align="center"
-                            className="table-header @scorecard/table-header"
+                            className="table-header scorecard-table-header"
                             bordered
                             rowSpan={"2"}
                         >
@@ -30,7 +30,7 @@ export default function PreviewScorecardTable() {
                             <DataTableCell
                                 fixed
                                 align="center"
-                                className="table-header @scorecard/table-header"
+                                className="table-header scorecard-table-header"
                                 bordered
                                 colSpan={column?.dataHolders?.length}
                                 key={column?.id}

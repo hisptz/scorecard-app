@@ -1,7 +1,7 @@
 import {useAlert} from "@dhis2/app-runtime";
 import i18n from "@dhis2/d2-i18n";
 import {Button, ButtonStrip, colors} from "@dhis2/ui";
-import {useConfirmDialog} from "@hisptz/react-ui";
+import {useConfirmDialog} from "@hisptz/dhis2-ui";
 import {
     RouterState,
     ScorecardCardImage as holderImage,

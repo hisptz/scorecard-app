@@ -1,5 +1,5 @@
 import i18n from "@dhis2/d2-i18n";
-import {PeriodSelectorModal} from '@hisptz/react-ui'
+import {PeriodSelectorModal} from '@hisptz/dhis2-ui'
 import PeriodIcon from "@material-ui/icons/AccessTime";
 import React, {useState} from "react";
 import {useRecoilState, useRecoilValue} from "recoil";

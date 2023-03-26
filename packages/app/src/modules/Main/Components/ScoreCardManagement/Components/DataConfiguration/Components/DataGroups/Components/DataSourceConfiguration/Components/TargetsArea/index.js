@@ -1,9 +1,7 @@
 import i18n from "@dhis2/d2-i18n";
 import {CircularLoader, SingleSelectField, SingleSelectOption} from '@dhis2/ui'
-import {RHFCustomInput} from "@hisptz/react-ui";
-import {FormFieldModel} from "@scorecard/shared";
-import {DHIS2ValueTypes} from "@scorecard/shared";
-import {generateLegendDefaults, uid} from "@scorecard/shared";
+import {RHFDHIS2FormField} from "@hisptz/dhis2-ui";
+import {DHIS2ValueTypes, FormFieldModel, generateLegendDefaults, uid} from "@scorecard/shared";
 import {head, isEmpty} from "lodash";
 import PropTypes from 'prop-types'
 import React, {Suspense, useEffect, useState} from "react";
@@ -57,7 +55,7 @@ export default function TargetsArea({path}) {
     }, [selectedType, specificTargets]);
 
     return <div className="column gap-16">
-        <RHFCustomInput
+        <RHFDHIS2FormField
             valueType={DHIS2ValueTypes.TRUE_ONLY.name}
             label={i18n.t("Set Specific Targets")}
             name={`${path}.specificTargetsSet`}

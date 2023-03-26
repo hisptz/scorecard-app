@@ -1,6 +1,6 @@
 import i18n from "@dhis2/d2-i18n";
 import {Button, ButtonStrip, Modal, ModalActions, ModalContent, ModalTitle,} from "@dhis2/ui";
-import {DataSourceSelector} from "@hisptz/react-ui";
+import {DataSourceSelector} from "@hisptz/dhis2-ui";
 import PropTypes from "prop-types";
 import React, {useState} from "react";
 
@@ -38,7 +38,7 @@ export default function DataSourceSelectorModal({
                 <ButtonStrip end>
                     <Button onClick={onClose}>{i18n.t("Cancel")}</Button>
                     <Button
-                        dataTest={"@scorecard/data-source-add"}
+                        dataTest={"scorecard-data-source-add"}
                         primary
                         onClick={() => {
                             onSelect(selectedItems);

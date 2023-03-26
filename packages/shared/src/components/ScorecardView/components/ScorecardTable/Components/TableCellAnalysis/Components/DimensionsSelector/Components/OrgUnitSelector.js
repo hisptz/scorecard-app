@@ -1,5 +1,5 @@
 import i18n from "@dhis2/d2-i18n";
-import {OrgUnitSelectorModal} from "@hisptz/react-ui";
+import {OrgUnitSelectorModal} from "@hisptz/dhis2-ui";
 import OrgUnitIcon from "@material-ui/icons/AccountTree";
 import React, {useMemo, useState} from "react";
 import {useRecoilState, useRecoilValue} from "recoil";

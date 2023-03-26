@@ -7,7 +7,9 @@
     "start": "d2 app scripts build --watch"
   },
   "dependencies": {
-    "jquery": "^3.6.4"
+    "jquery": "^3.6.4",
+    "react-hook-form": "^7.43.8",
+    "react-router-dom": "5"
   },
   "module": "./build/es/index.js",
   "exports": {

@@ -7,7 +7,7 @@ import {useRecoilValue, useSetRecoilState} from "recoil";
 import {EngineState, RouterState, ScorecardCardImage as holderImage, truncateDescription} from "@scorecard/shared";
 import {scorecardWidgetState} from "../../../../../../states/scorecard"
 import {createWidget} from "../../../../../../services/widget";
-import {useConfirmDialog} from "@hisptz/react-ui";
+import {useConfirmDialog} from "@hisptz/dhis2-ui";
 
 export default function ScorecardListCard({scorecard, grid}) {
     const setRoute = useSetRecoilState(RouterState);

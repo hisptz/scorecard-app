@@ -1,6 +1,5 @@
 import i18n from "@dhis2/d2-i18n";
 import {Button, ButtonStrip, Tooltip} from "@dhis2/ui";
-import {DevTool} from "@hookform/devtools";
 import {Step, StepLabel, Stepper} from "@material-ui/core";
 import HelpIcon from "@material-ui/icons/Help";
 import {
@@ -58,7 +57,6 @@ export default function ScoreCardManagement() {
     //scorecardManagementTooltips
     return (
         <FormProvider {...form}>
-            <DevTool/>
             <Suspense fallback={<FullPageLoader/>}>
                 <div className={classes["edit-container"]}>
                     <Steps

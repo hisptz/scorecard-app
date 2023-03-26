@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import {Button, colors, Tag} from '@dhis2/ui'
-import {SelectedOrgUnits, SystemSettingsState} from "@scorecard/shared";
 import {Period} from "@iapps/period-utilities";
+import {SelectedOrgUnits, SystemSettingsState} from "@scorecard/shared";
 import {find} from "lodash";
 import PropTypes from 'prop-types'
 import React from 'react'

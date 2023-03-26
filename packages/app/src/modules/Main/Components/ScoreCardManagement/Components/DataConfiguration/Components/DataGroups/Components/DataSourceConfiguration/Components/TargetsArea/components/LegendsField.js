@@ -1,4 +1,4 @@
-import {CustomInput} from "@hisptz/react-ui";
+import {DHIS2FormField} from "@hisptz/dhis2-ui";
 import {DHIS2ValueTypes} from "@scorecard/shared";
 import {set} from "lodash";
 import React from "react";
@@ -27,10 +27,9 @@ function editAtIndex(index, value, {data, highIsGood}) {
 
 export default function LegendsField({value, onChange, legendDefinitions, highIsGood}) {
 
-
     return (
         legendDefinitions?.map((definition, index) => {
-            return <CustomInput
+            return <DHIS2FormField
                 legendDefinition={definition}
                 label={""}
                 key={`${definition.id}_${index}`}

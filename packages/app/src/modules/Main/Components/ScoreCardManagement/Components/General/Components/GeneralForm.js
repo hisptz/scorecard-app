@@ -1,6 +1,6 @@
 import {useDataEngine} from "@dhis2/app-runtime";
 import i18n from "@dhis2/d2-i18n";
-import {RHFCustomInput} from "@hisptz/react-ui";
+import {RHFDHIS2FormField as RHFCustomInput} from "@hisptz/dhis2-ui";
 import {DHIS2ValueTypes} from "@scorecard/shared";
 import React from "react";
 import {useParams} from "react-router-dom";
@@ -14,13 +14,13 @@ import PeriodTypeSelector from "./PeriodTypeSelector";
 export default function GeneralForm() {
     const {id} = useParams();
     const engine = useDataEngine()
-    return (<div className="col-12">
-        <div className="col-12 general-settings">
+    return (<div style={{gap: 16, display: "flex", flexDirection: "column"}} className="col-12">
+        <div style={{display: "flex", flexDirection: "column", gap: 16}} className="col-12 general-settings">
             <RHFCustomInput
                 valueType={DHIS2ValueTypes.TEXT.name}
                 name="title"
                 label={i18n.t("Title")}
-                mandatory
+                required
                 validations={{
                     required: i18n.t("Title is required"), validate: async (value) => {
                         return await titleDoesNotExist(engine, id, value) || i18n.t(`A scorecard with the title '{{value}}' already exists. Please select another title`, {value})
@@ -48,7 +48,7 @@ export default function GeneralForm() {
                     name="periodType"
                 />
             </div>
-            <div className="flex-1 period-settings">
+            <div className="flex-1 period-settings w-100">
                 <PeriodSelector/>
             </div>
         </div>

@@ -1,8 +1,8 @@
+import {DHIS2FormField} from "@hisptz/dhis2-ui";
 import React from "react";
 import {useFormContext} from "react-hook-form";
 import {getNonDefaultLegendDefinitions} from "../../../../../../../../General/utils/utils";
 import useTargetsManage from "../../../hooks/useTargetsManage";
-import LegendsField from "./LegendsField";
 
 export default function TargetsField(props) {
     const {
@@ -13,6 +13,7 @@ export default function TargetsField(props) {
     const legendDefinitions = getNonDefaultLegendDefinitions(watch("legendDefinitions"));
     const highIsGood = watch(`${path}.highIsGood`);
 
+
     useTargetsManage(props);
 
     const onChange = (value) => {
@@ -21,7 +22,8 @@ export default function TargetsField(props) {
 
     const value = watch(name);
 
-    return (<LegendsField
+    return (<DHIS2FormField
+        valueType={'LEGEND_MIN_MAX_GROUP'}
         highIsGood={highIsGood}
         legendDefinitions={legendDefinitions}
         value={value}
