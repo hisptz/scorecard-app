@@ -3,6 +3,7 @@ import React from "react";
 import JsxParser from "react-jsx-parser";
 import {useRecoilValue} from "recoil";
 import {PeriodResolverState, ScorecardViewState} from "../../../../state";
+import {head, isEmpty} from "lodash";
 
 export default function ScorecardHeader() {
     const {title: showTitle} = useRecoilValue(ScorecardViewState("options"));
@@ -13,7 +14,7 @@ export default function ScorecardHeader() {
     const title = useRecoilValue(ScorecardViewState("title"));
     const subtitle = useRecoilValue(ScorecardViewState("subtitle"));
 
-    return showTitle ? (
+    return showTitle && !isEmpty(periods) ? (
         <div className="row space-between" id={"@scorecard/header"}>
             <div className="row">
                 {customHeader ? (
@@ -24,6 +25,7 @@ export default function ScorecardHeader() {
                         bindings={{
                             title,
                             subtitle,
+                            period: head(periods)?.name
                         }}
                         jsx={customHeader}
                     />
