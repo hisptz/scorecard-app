@@ -17,7 +17,8 @@
     "shared": "yarn workspace @scorecard/shared",
     "start:app": "npx lerna run start --scope=app",
     "build": "npx lerna run build",
-    "test": "npx lerna run test"
+    "test": "npx lerna run test",
+    "deploy:app": "yarn app deploy"
   },
   "devDependencies": {
     "concurrently": "^7.0.0",

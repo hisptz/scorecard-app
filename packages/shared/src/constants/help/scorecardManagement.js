@@ -79,7 +79,7 @@ export const NO_GROUPS_HELP_STEPS = [
     ),
   },
   {
-      element: ".@scorecard/add-group-button",
+      element: ".scorecard-add-group-button",
       intro: i18n.t("Click Here to add a group"),
   },
 ];
@@ -111,14 +111,14 @@ export const GROUPS_CONFIG_HELP_STEPS = [
     intro: i18n.t("Click here to delete the group"),
   },
     {
-        element: ".@scorecard/add-group-button",
+        element: ".scorecard-add-group-button",
         intro: i18n.t("Click Here to add more groups"),
     },
 ];
 
 export const NO_INDICATORS_HELP_STEPS = [
     {
-        element: ".@scorecard/indicator-add",
+        element: ".scorecard-indicator-add",
         intro: i18n.t("Click here to add an indicator"),
     },
 ];
@@ -145,7 +145,7 @@ export const INDICATOR_SETUP_HELP_STEPS = [
     intro: i18n.t("Click here to delete this indicator"),
   },
     {
-        element: ".@scorecard/indicator-add",
+        element: ".scorecard-indicator-add",
         intro: i18n.t("Click here to add more indicators"),
     },
 ];
@@ -163,7 +163,7 @@ export const DATA_CONFIGURATION_WITH_DATA_HELP_STEPS = [
     ),
   },
     {
-        element: ".@scorecard/add-group-button",
+        element: ".scorecard-add-group-button",
         intro: i18n.t("Click Here to add a group"),
     },
   ...GROUPS_CONFIG_HELP_STEPS,

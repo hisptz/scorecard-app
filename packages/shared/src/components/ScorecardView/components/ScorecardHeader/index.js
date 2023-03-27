@@ -15,7 +15,7 @@ export default function ScorecardHeader() {
     const subtitle = useRecoilValue(ScorecardViewState("subtitle"));
 
     return showTitle && !isEmpty(periods) ? (
-        <div className="row space-between" id={"@scorecard/header"}>
+        <div className="row space-between" id={"scorecard-header"}>
             <div className="row">
                 {customHeader ? (
                     <JsxParser

@@ -59,7 +59,7 @@ export default function DataSourceRow({
             <DataTableCell
                 fixed
                 left={itemNumber ? "100px" : "50px"}
-                className="@scorecard/org-unit-cell"
+                className="scorecard-org-unit-cell"
             >
                 <DroppableCell accept={[DraggableItems.ORG_UNIT_COLUMN]}>
                     <DraggableCell

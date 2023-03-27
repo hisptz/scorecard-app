@@ -1,6 +1,7 @@
 import i18n from "@dhis2/d2-i18n";
 import {Button, ButtonStrip, Card} from "@dhis2/ui";
 import {OrgUnitSelectorModal, PeriodSelectorModal} from "@hisptz/dhis2-ui";
+import {PeriodUtility} from "@hisptz/dhis2-utils"
 import {Steps} from "intro.js-react";
 import React, {useEffect, useMemo, useState} from "react";
 import {useHistory} from "react-router-dom";
@@ -133,13 +134,14 @@ export default function ScorecardViewHeader() {
                     }
                     {
                         periodSelectionOpen && <PeriodSelectorModal
+                            enablePeriodSelector
                             excludedPeriodTypes={UNSUPPORTED_PERIOD_TYPES}
                             calendar={calendar}
-                            selectedPeriods={periodSelection.periods}
+                            selectedPeriods={periodSelection.periods.map(({id}) => id)}
                             hide={!periodSelectionOpen}
                             onClose={() => setPeriodSelectionOpen(false)}
                             onUpdate={(selectedPeriods) => {
-                                setPeriodSelection({periods: selectedPeriods})
+                                setPeriodSelection({periods: selectedPeriods.map(period => PeriodUtility.getPeriodById(period))})
                                 setPeriodSelectionOpen(false)
                             }}
                         />

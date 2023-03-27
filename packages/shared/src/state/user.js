@@ -42,7 +42,7 @@ export const UserState = atom({
 });
 
 export const UserAuthorityOnScorecard = selectorFamily({
-    key: "user-@scorecard/authority",
+    key: "user-scorecard-authority",
     get:
         (scorecardId) =>
             ({get}) => {

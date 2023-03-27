@@ -55,7 +55,7 @@ export default function ParentOrgUnitRow({
                 fixed
                 left={itemNumber ? "100px" : "50px"}
                 width="30%"
-                className="@scorecard/org-unit-cell parent-org-unit-cell"
+                className="scorecard-org-unit-cell parent-org-unit-cell"
             >
                 <Tooltip
                     content={i18n.t("Drag to the column headers to change layout")}

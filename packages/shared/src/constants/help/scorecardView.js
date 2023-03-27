@@ -35,7 +35,7 @@ export const SCORECARD_VIEW_HELP_STEPS = [
         ),
     },
     {
-        element: ".@scorecard/view-edit-button",
+        element: ".scorecard-view-edit-button",
         intro: i18n.t("Click here to edit scorecard configuration"),
     },
     {
@@ -45,7 +45,7 @@ export const SCORECARD_VIEW_HELP_STEPS = [
         ),
     },
     {
-        element: ".@scorecard/table",
+        element: ".scorecard-table",
         intro: (
             <div>
                 <h3>{i18n.t("Here is the scorecard!")}</h3>

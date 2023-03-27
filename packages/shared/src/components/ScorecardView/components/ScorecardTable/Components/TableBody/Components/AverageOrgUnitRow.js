@@ -30,7 +30,7 @@ export default function AverageOrgUnitRow({
             <DataTableCell
                 fixed
                 left={itemNumber ? "100px" : "50px"}
-                className="@scorecard/org-unit-cell"
+                className="scorecard-org-unit-cell"
             >
                 <b>{i18n.t("Average")}</b>
             </DataTableCell>

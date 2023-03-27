@@ -20,11 +20,11 @@ export const SCORECARD_LIST_HELP_STEPS = [
     ),
   },
   {
-      element: ".add-@scorecard/button",
+      element: ".add-scorecard-button",
       intro: i18n.t("Click here to add a new scorecard"),
   },
     {
-        element: ".@scorecard/list",
+        element: ".scorecard-list",
         intro: i18n.t(
             "Click on View or anywhere on the scorecard to view, click on Edit to edit configurations and click on Delete to delete the scorecard"
         ),

@@ -7,6 +7,7 @@ import {PeriodState} from "../../../state/period";
 import SelectionWrapper from "./SelectionWrapper";
 import {SystemSettingsState} from "../../../../../../../../../state";
 import {UNSUPPORTED_PERIOD_TYPES} from "../../../../../../../../../constants";
+import {PeriodUtility} from "@hisptz/dhis2-utils";
 
 export default function PeriodSelector() {
     const [periodSelection, setPeriodSelection] = useRecoilState(PeriodState);
@@ -24,11 +25,12 @@ export default function PeriodSelector() {
             {
                 selectorOpen &&
                 <PeriodSelectorModal
-                    selectedPeriods={periods} calendar={calendar} hide={!selectorOpen}
+                    enablePeriodSelector
+                    selectedPeriods={periods.map(({id}) => id)} calendar={calendar} hide={!selectorOpen}
                     onClose={() => setSelectorOpen(false)}
                     excludedPeriodTypes={UNSUPPORTED_PERIOD_TYPES}
                     onUpdate={(selectedPeriods) => {
-                        setPeriodSelection({periods: selectedPeriods})
+                        setPeriodSelection({periods: selectedPeriods.map(period => PeriodUtility.getPeriodById(period))})
                         setSelectorOpen(false)
                     }}
                 />

@@ -73,13 +73,13 @@ const defaultValue = {
 };
 
 const ScorecardIdState = atom({
-    key: "@scorecard/id",
+    key: "scorecard-id",
     default: null,
 });
 
 
 const AllScorecardsSummaryState = selector({
-    key: "all-@scorecard/summary-state",
+    key: "all-scorecard-summary-state",
     get: async ({get}) => {
         const engine = get(EngineState);
         await restoreScorecardSummary(engine);
@@ -93,9 +93,9 @@ const AllScorecardsSummaryState = selector({
 
 
 const ScorecardSummaryState = atom({
-    key: "@scorecard/summary",
+    key: "scorecard-summary",
     default: selector({
-        key: "@scorecard/summary-selector",
+        key: "scorecard-summary-selector",
         get: async ({get}) => {
             const summary = get(AllScorecardsSummaryState);
             const user = get(UserState);
@@ -118,9 +118,9 @@ const IsNewScorecardState = atom({
 });
 
 const ScorecardConfState = atomFamily({
-    key: "@scorecard/config",
+    key: "scorecard-config",
     default: selectorFamily({
-        key: "active-@scorecard/config",
+        key: "active-scorecard-config",
         get:
             (scorecardId) =>
                 async ({get}) => {
@@ -149,9 +149,9 @@ const ScorecardConfState = atomFamily({
 });
 
 const ScorecardConfigDirtyState = atomFamily({
-    key: "@scorecard/config-edit-state",
+    key: "scorecard-config-edit-state",
     default: selectorFamily({
-        key: "@scorecard/state-default",
+        key: "scorecard-state-default",
         get:
             (path) =>
                 async ({get}) => {
@@ -165,7 +165,7 @@ const ScorecardConfigDirtyState = atomFamily({
 });
 
 const ScorecardConfigDirtySelector = selectorFamily({
-    key: "@scorecard/dirty-state-selector",
+    key: "scorecard-dirty-state-selector",
     get:
         ({key, path}) =>
             ({get}) => {
@@ -181,12 +181,12 @@ const ScorecardConfigDirtySelector = selectorFamily({
 });
 
 const ScorecardConfigErrorState = atom({
-    key: "@scorecard/config-error-state",
+    key: "scorecard-config-error-state",
     default: {},
 });
 
 const ScorecardConfigErrorSelector = selectorFamily({
-    key: "@scorecard/config-error-selector",
+    key: "scorecard-config-error-selector",
     get:
         (path) =>
             ({get}) => {
@@ -202,7 +202,7 @@ const ScorecardConfigErrorSelector = selectorFamily({
 });
 
 const ScorecardConfigEditState = atom({
-    key: "@scorecard/edit-state",
+    key: "scorecard-edit-state",
     default: {},
 });
 
@@ -212,7 +212,7 @@ const RefreshScorecardState = atom({
 });
 
 const ScorecardNameSort = atomFamily({
-    key: "@scorecard/name-sort",
+    key: "scorecard-name-sort",
     default: {
         orgUnit: TableSort.DEFAULT,
         data: TableSort.DEFAULT,
@@ -220,7 +220,7 @@ const ScorecardNameSort = atomFamily({
 });
 
 const ScorecardViewState = atomFamily({
-    key: "@scorecard/view-config",
+    key: "scorecard-view-config",
     default: selectorFamily({
         key: "scorecardViewStateSelector",
         get:
@@ -272,7 +272,7 @@ const ScorecardLegendDefinitionSelector = selectorFamily({
 });
 
 const ScorecardTableSortState = atomFamily({
-    key: "@scorecard/table-state",
+    key: "scorecard-table-state",
     default: {
         orgUnit: TableSort.DEFAULT,
         data: TableSort.DEFAULT,
@@ -280,7 +280,7 @@ const ScorecardTableSortState = atomFamily({
 });
 
 const ScorecardTableOrientationState = selector({
-    key: "@scorecard/table-orientation-default",
+    key: "scorecard-table-orientation-default",
     get: ({get}) => {
         const {showDataInRows} = get(ScorecardViewState("options")) ?? {};
         if (showDataInRows) {
@@ -300,7 +300,7 @@ const ScorecardTableOrientationState = selector({
 });
 
 const ScorecardTableConfigState = selectorFamily({
-    key: "@scorecard/table-details",
+    key: "scorecard-table-details",
     get:
         (orgUnits) =>
             ({get}) => {
@@ -380,7 +380,7 @@ const ScorecardOrgUnitState = atomFamily({
 const ScorecardDataSourceState = atom({
     key: "data-source-state",
     default: selector({
-        key: "@scorecard/data-sources-default",
+        key: "scorecard-data-sources-default",
         get: ({get}) => {
             const {dataGroups} = get(ScorecardViewState("dataSelection")) ?? {};
             return getHoldersFromGroups(dataGroups);
@@ -403,12 +403,12 @@ const IsSpecificTargetsSet = selector({
 })
 
 const ScorecardForceUpdateState = atomFamily({
-    key: "@scorecard/force-update-state",
+    key: "scorecard-force-update-state",
     default: 0
 })
 
 const ScorecardInSearchState = atomFamily({
-    key: "@scorecard/in-search-state",
+    key: "scorecard-in-search-state",
     default: false
 })
 

@@ -77,7 +77,7 @@ export default function HoldersHeaderRow({orgUnits, nested}) {
                     fixed
                     align="center"
                     bordered
-                    className="@scorecard/table-header header"
+                    className="scorecard-table-header header"
                     rowSpan={"3"}
                 >
                     {i18n.t("Average")}

@@ -24,7 +24,7 @@ export default function GroupsHeaderRow({nested, orgUnits}) {
             {dataGroups?.map(({title, id, dataHolders}, index) => (
                 <DataTableCell
                     fixed
-                    className="@scorecard/table-header header"
+                    className="scorecard-table-header header"
                     align="center"
                     bordered
                     width={`${
@@ -45,7 +45,7 @@ export default function GroupsHeaderRow({nested, orgUnits}) {
                     fixed
                     align="center"
                     bordered
-                    className="@scorecard/table-header header"
+                    className="scorecard-table-header header"
                     rowSpan={"3"}
                 >
                     {i18n.t("Average")}

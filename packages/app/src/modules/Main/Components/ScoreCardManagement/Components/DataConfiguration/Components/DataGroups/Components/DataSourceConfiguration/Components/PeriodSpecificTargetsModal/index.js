@@ -60,11 +60,12 @@ export default function PeriodSpecificTargetsModal({
                     {
                         periodSelectorOpen &&
                         <PeriodSelectorModal
+                            enablePeriodSelector
                             excludeRelativePeriods
                             singleSelection
                             selectedPeriods={compact([...(target.items?.map(item => {
                                 if (item) {
-                                    return new Period().setPreferences({allowFuturePeriods: true}).setCalendar(calendar).getById(item)
+                                    return item;
                                 }
                             }) ?? [])])}
                             onClose={() => setPeriodSelectorOpen(false)} hide={!periodSelectorOpen}

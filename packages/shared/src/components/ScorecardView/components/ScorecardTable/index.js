@@ -36,7 +36,7 @@ export default function ScorecardTable({
     }, []);
 
     return (
-        <div className="w-100 pb-32 flex-1 print-area @scorecard/table overflow-hidden">
+        <div className="w-100 pb-32 flex-1 print-area scorecard-table overflow-hidden">
             <DndProvider backend={HTML5Backend}>
                 <DataTable
                     className={classes["table-print"]}

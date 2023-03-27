@@ -29,7 +29,7 @@ const FieldErrorState = selectorFamily({
 });
 
 const ErrorState = selector({
-    key: "@scorecard/error-state",
+    key: "scorecard-error-state",
     get: ({getCallback}) => {
         return getCallback(({snapshot}) => () => {
             return snapshot.getLoadable(

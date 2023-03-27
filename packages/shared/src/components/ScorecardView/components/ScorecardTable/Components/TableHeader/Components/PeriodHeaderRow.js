@@ -74,7 +74,7 @@ export default function PeriodHeaderRow({orgUnits}) {
                                 bordered
                                 align="center"
                                 key={`${id}-${periodId}`}
-                                className="@scorecard/table-cell header"
+                                className="scorecard-table-cell header"
                                 name={`${id}-${periodId}`}
                             >
                                 {name}
