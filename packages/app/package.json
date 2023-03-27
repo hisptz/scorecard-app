@@ -55,7 +55,7 @@
     "@dhis2/app-runtime": "^3.2.9",
     "@dhis2/app-service-datastore": "^1.0.0-alpha.2",
     "@dhis2/ui": "^8.1.7",
-    "@hisptz/dhis2-ui": "^1.0.38",
+    "@hisptz/dhis2-ui": "^1.0.40",
     "@hisptz/dhis2-utils": "^1.0.37",
     "@iapps/function-analytics": "^1.0.0-beta.23",
     "@iapps/period-utilities": "^1.0.0-beta.5",

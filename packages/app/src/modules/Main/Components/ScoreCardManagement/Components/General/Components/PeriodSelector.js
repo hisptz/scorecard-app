@@ -3,10 +3,17 @@ import {CustomSelectField} from "@hisptz/dhis2-ui";
 import {PeriodTypeCategory, PeriodUtility} from "@hisptz/dhis2-utils";
 import {find, head} from "lodash";
 import React, {useMemo, useState} from "react";
-import {Controller, useWatch} from "react-hook-form";
+import {Controller, useFormContext, useWatch} from "react-hook-form";
 
 export default function PeriodSelector() {
-    const [year, setYear] = useState(new Date().getFullYear());
+    const {getValues} = useFormContext();
+
+    const defaultYear = useMemo(() => {
+        const period = head(getValues('periodSelection.periods'));
+        const periodObject = PeriodUtility.getPeriodById(period?.id);
+        return periodObject.start.year;
+    }, [getValues]);
+    const [year, setYear] = useState(defaultYear ?? new Date().getFullYear());
     const periodType = useWatch({
         name: "periodType"
     });
