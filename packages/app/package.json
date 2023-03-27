@@ -66,7 +66,7 @@
     "async-es": "^3.2.4",
     "cypress-multi-reporters": "^1.6.0",
     "file-saver": "^2.0.5",
-    "highcharts": "^9.3.1",
+    "highcharts": "^10.3.3",
     "immer": "^9.0.5",
     "intro.js": "^5.0.0",
     "intro.js-react": "^0.5.0",
