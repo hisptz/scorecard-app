@@ -1,6 +1,6 @@
 {
   "name": "@scorecard/shared",
-  "version": "2.6.1-beta.01",
+  "version": "2.6.1",
   "main": "./build/cjs/index.js",
   "scripts": {
     "build": "d2 app scripts build --verbose",
