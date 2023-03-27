@@ -13975,10 +13975,10 @@ intro.js-react@^0.5.0:
   resolved "https://registry.yarnpkg.com/intro.js-react/-/intro.js-react-0.5.0.tgz#d4e67a4f6e4726bee803222ff09d6deacb4598c8"
   integrity sha512-tr9uhoy/aRgcdZxpqYC/TPSVlJ/Gt9Kx4mpI7clCdFa7c3SG8reJugIa1U5XnWlDLRNMc+e8egb8Jf186yvc1A==
 
-intro.js@^5.0.0:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/intro.js/-/intro.js-5.1.0.tgz#ffa804cd03f464198aa9be505afdd7fb814def3a"
-  integrity sha512-zwWl/duTh00eeNcZRU4o4/xxloNYPFKs4n4lMRDNx59jZr+qRI0jSOnzqYMOuVftD4beGrmxBHz4k8qp9/dCMA==
+intro.js@^7.0.1:
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/intro.js/-/intro.js-7.0.1.tgz#65bfebe5fea7b54b79f24ebc8e059f9f62eb28af"
+  integrity sha512-1oqz6aOz9cGQ3CrtVYhCSo6AkjnXUn302kcIWLaZ3TI4kKssRXDwDSz4VRoGcfC1jN+WfaSJXRBrITz+QVEBzg==
 
 invariant@^2.2.2, invariant@^2.2.4:
   version "2.2.4"
