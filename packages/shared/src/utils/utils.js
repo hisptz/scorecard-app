@@ -54,13 +54,18 @@ export function generateLegendDefaults(
     weight,
     highIsGood = true
 ) {
-    if (!isEmpty(legendDefinitions)) {
+    let definitions = legendDefinitions;
+    if (!highIsGood) {
+        definitions = definitions.reverse();
+    }
+
+    if (!isEmpty(definitions)) {
         const actualWeight = weight ?? 100; //sets 100 as the default weight
-        const range = actualWeight / legendDefinitions?.length;
+        const range = actualWeight / definitions?.length;
         const values = [];
-        let legendDefinitionIterator = legendDefinitions.length - 1;
+        let legendDefinitionIterator = definitions.length - 1;
         for (let i = 0; i < actualWeight; i += range) {
-            const {id} = legendDefinitions[legendDefinitionIterator];
+            const {id} = definitions[legendDefinitionIterator];
             values.push(
                 new ScorecardLegend({
                     startValue: `${Math.floor(i)}`,
@@ -70,7 +75,7 @@ export function generateLegendDefaults(
             );
             legendDefinitionIterator--;
         }
-        return highIsGood ? values.reverse() : values;
+        return values;
     }
     return [];
 }

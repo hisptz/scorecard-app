@@ -1,5 +1,4 @@
 import {DHIS2FormField} from "@hisptz/dhis2-ui";
-import {DHIS2ValueTypes} from "@scorecard/shared";
 import {set} from "lodash";
 import React from "react";
 
@@ -28,22 +27,13 @@ function editAtIndex(index, value, {data, highIsGood}) {
 export default function LegendsField({value, onChange, legendDefinitions, highIsGood}) {
 
     return (
-        legendDefinitions?.map((definition, index) => {
-            return <DHIS2FormField
-                legendDefinition={definition}
-                label={""}
-                key={`${definition.id}_${index}`}
-                input={{
-                    name: `legend_${definition.id}`,
-                    label: "",
-                    value: value[index],
-                    onChange: (legendValue) => {
-                        onChange([...editAtIndex(index, legendValue, {data: value, highIsGood})]);
-                    }
-                }}
-                valueType={DHIS2ValueTypes.LEGEND_MIN_MAX.name}
-
-            />
-        })
+        <DHIS2FormField
+            value={value}
+            legendDefinitions={legendDefinitions}
+            highIsGood={highIsGood}
+            valueType="LEGEND_MIN_MAX_GROUP"
+            name="legend-min-max-group"
+            onChange={onChange}
+        />
     )
 }
