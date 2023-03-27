@@ -62,7 +62,7 @@
     "react-router-dom": "5",
     "react-to-print": "^2.14.4",
     "react-web-vitals": "^1.0.1",
-    "recoil": "^0.6.1",
+    "recoil": "^0.7.7",
     "rxjs": "^7.5.4",
     "typeface-roboto": "^0.0.75",
     "xlsx": "^0.18.0"
