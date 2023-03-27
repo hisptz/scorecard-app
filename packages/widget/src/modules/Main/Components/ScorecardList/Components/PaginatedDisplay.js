@@ -1,7 +1,7 @@
-import { Pagination } from "@dhis2/ui";
-import { chunk } from "lodash";
+import {Pagination} from "@dhis2/ui";
+import {chunk} from "lodash";
 import PropTypes from "prop-types";
-import React, { useMemo, useState } from "react";
+import React, {useMemo, useState} from "react";
 
 export default function PaginatedDisplay({
   pageSize = 8,
@@ -20,17 +20,17 @@ export default function PaginatedDisplay({
   };
 
   return (
-    <div className="p-16 @scorecard/list">
-        <Component scorecards={chunks[page]}/>
-        {chunks.length > 1 && (
-            <div className="p-16">
-                <Pagination
-                    hidePageSizeSelect
-                    total={scorecards.length}
-                    pageCount={chunks.length}
-                    pageSize={pageSize}
-                    page={page + 1}
-                    onPageChange={onPageChange}
+    <div className="p-16 scorecard-list">
+      <Component scorecards={chunks[page]}/>
+      {chunks.length > 1 && (
+          <div className="p-16">
+            <Pagination
+                hidePageSizeSelect
+                total={scorecards.length}
+                pageCount={chunks.length}
+                pageSize={pageSize}
+                page={page + 1}
+                onPageChange={onPageChange}
             onPageSizeChange={() => {}}
           />
         </div>

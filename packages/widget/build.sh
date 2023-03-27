@@ -11,7 +11,7 @@ echo "Done!"
 echo "Generating manifest..."
 d2-manifest package.json build/manifest.webapp
 
-BUNDLE_NAME="hisptz-@scorecard/widget-$PKG_VERSION.zip"
+BUNDLE_NAME="hisptz-scorecard-widget-$PKG_VERSION.zip"
 
 rimraf $BUNDLE_NAME
 cd build

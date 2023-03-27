@@ -19,7 +19,7 @@
     "appType": "DASHBOARD_WIDGET",
     "activities": {
       "dhis": {
-        "href": "^2.6.1-beta.01"
+        "href": "*"
       }
     }
   },
@@ -27,7 +27,7 @@
     "generate-translations": "d2-app-scripts i18n generate",
     "extract-translations": "d2-app-scripts i18n extract",
     "prestart": "yarn extract-translations && yarn generate-translations",
-    "start": "react-scripts start",
+    "start": "react-scripts start -p 3001",
     "prebuild": "yarn extract-translations && yarn generate-translations && rimraf build",
     "build": "./build.sh",
     "test": "react-scripts test",

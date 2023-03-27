@@ -12,8 +12,15 @@ import ListScorecardDisplay from "./Components/ListScorecardDisplay";
 import PaginatedDisplay from "./Components/PaginatedDisplay";
 import {scorecardWidgetState} from "../../../../states/scorecard";
 import {load} from "../../../../services/widget";
-import {EngineState, HelpState, RouterState, ScorecardSummaryState} from "@scorecard/shared/src";
-import {FullPageLoader} from ""
+import {
+    EngineState,
+    FullPageLoader,
+    HelpState,
+    RouterState,
+    SCORECARD_LIST_HELP_STEPS,
+    ScorecardSummaryState,
+    STEP_OPTIONS
+} from "@scorecard/shared";
 
 export default function ScorecardList() {
     const setRoute = useSetRecoilState(RouterState);
