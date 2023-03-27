@@ -47,7 +47,7 @@
     "async-es": "^3.2.4",
     "file-saver": "^2.0.5",
     "immer": "^9.0.12",
-    "intro.js": "^5.0.0",
+    "intro.js": "^7.0.1",
     "intro.js-react": "^0.5.0",
     "lodash": "^4.17.21",
     "luxon": "^2.3.0",
