@@ -25,7 +25,7 @@ export default function ScorecardHeader() {
                         bindings={{
                             title,
                             subtitle,
-                            period: head(periods)?.name
+                            period: periods.length === 1 ? head(periods)?.name : ""
                         }}
                         jsx={customHeader}
                     />
