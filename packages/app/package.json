@@ -1,29 +1,14 @@
 {
   "name": "app",
-  "version": "2.6.1",
+  "version": "2.6.1.1",
   "description": "Interactive Scorecard Application",
   "license": "BSD-3-Clause",
   "private": true,
   "scripts": {
     "build": "d2-app-scripts build",
-    "start": "dotenv -- cross-var d2-app-scripts start --proxy %DHIS2_PROXY%",
-    "test": "d2-app-scripts test",
-    "start:proxy": "yarn start --proxy https://hisp.apps.dhis2.org/dev",
-    "cy:open": "concurrently 'BROWSER=none yarn start' 'wait-on 'http-get://localhost:3000' && cypress open --browser firefox' --kill-others --success first ",
-    "cy:open:proxy": "concurrently 'BROWSER=none yarn start:proxy' 'wait-on 'http-get://localhost:3000' && cypress open' --kill-others --success first ",
-    "cy:open:capture": "concurrently 'BROWSER=none yarn start' 'wait-on 'http-get://localhost:3000' && cypress open --env networkMode=capture' --kill-others --success first ",
-    "cy:open:stub": "concurrently 'BROWSER=none yarn start' 'wait-on 'http-get://localhost:3000' && cypress open --env networkMode=stub' --kill-others --success first ",
-    "e2e": "cypress run",
-    "cy:component": "yarn cypress open-ct",
     "deploy": "d2-app-scripts deploy",
-    "lint": "yarn d2-style check",
-    "lint:staged": "yarn lint --staged",
-    "format": "yarn d2-style apply",
-    "format:staged": "yarn format --staged",
-    "cy:start": "BROWSER=none yarn start",
-    "cy:run": "wait-on 'http-get://localhost:3000' && cypress run",
-    "cy:capture": "concurrently 'yarn cy:start' 'yarn cy:run --env networkMode=capture --browser firefox' --kill-others --success first",
-    "cy:stub": "concurrently 'yarn cy:start' 'yarn cy:run --env networkMode=stub' --kill-others --success first"
+    "start": "dotenv -- cross-var d2-app-scripts start --proxy %DHIS2_PROXY%",
+    "test": "concurrently 'BROWSER=none yarn start' 'wait-on 'http-get://localhost:3000' && cypress open --browser firefox' --kill-others --success first"
   },
   "devDependencies": {
     "@cypress/react": "^5.10.3",

@@ -16,6 +16,7 @@
     "widget": "yarn workspace widget",
     "shared": "yarn workspace @scorecard/shared",
     "start:app": "npx lerna run start --scope=app",
+    "test:app": "npx lerna run test --scope=app",
     "start:widget": "npx lerna run start --scope=widget",
     "build": "npx lerna run build",
     "test": "npx lerna run test",

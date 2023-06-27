@@ -20,3 +20,4 @@ apps/widget/scorecard_widget.zip
 /shared/utils/src/locales/
 /apps/app/cypress/downloads/
 /packages/app/.env
+/packages/app/cypress.env.json
