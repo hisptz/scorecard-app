@@ -1,7 +1,7 @@
 import i18n from "@dhis2/d2-i18n";
 import {CircularLoader, SingleSelectField, SingleSelectOption} from '@dhis2/ui'
 import {RHFDHIS2FormField} from "@hisptz/dhis2-ui";
-import {DHIS2ValueTypes, FormFieldModel, generateLegendDefaults, uid} from "@scorecard/shared";
+import {DHIS2ValueTypes, generateLegendDefaults, uid} from "@scorecard/shared";
 import {head, isEmpty} from "lodash";
 import PropTypes from 'prop-types'
 import React, {Suspense, useEffect, useState} from "react";
@@ -151,18 +151,6 @@ export default function TargetsArea({path}) {
                         <TargetsField
                             name={`${path}.legends`}
                             path={path}
-                            multipleFields={
-                                legendDefinitions?.map(
-                                    (legend) =>
-                                        new FormFieldModel({
-                                            id: legend.id,
-                                            mandatory: false,
-                                            name: legend.name,
-                                            legendDefinition: legend,
-                                            valueType: DHIS2ValueTypes.LEGEND_MIN_MAX.name,
-                                        })
-                                )
-                            }
                         />
                     </div>
                 </div>

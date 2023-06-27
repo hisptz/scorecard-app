@@ -68,8 +68,8 @@ export function generateLegendDefaults(
             const {id} = definitions[legendDefinitionIterator];
             values.push(
                 new ScorecardLegend({
-                    startValue: `${Math.floor(i)}`,
-                    endValue: `${Math.floor(i + range)}`,
+                    startValue: Math.floor(i),
+                    endValue: Math.floor(i + range),
                     legendDefinitionId: id,
                 })
             );

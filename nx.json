@@ -16,7 +16,9 @@
         "^build"
       ],
       "outputs": [
-        "{projectRoot}/packages/shared/build"
+        "{projectRoot}/packages/shared/build",
+        "{projectRoot}/packages/app/build",
+        "{projectRoot}/packages/widget/build"
       ]
     },
     "start": {

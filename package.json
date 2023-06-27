@@ -1,6 +1,6 @@
 {
   "name": "root",
-  "version": "2.6.1-beta.01",
+  "version": "2.6.2",
   "description": "Interactive Scorecard Application",
   "license": "BSD-3-Clause",
   "private": true,
@@ -15,6 +15,7 @@
     "app": "yarn workspace app",
     "widget": "yarn workspace widget",
     "shared": "yarn workspace @scorecard/shared",
+    "build:shared": "npx lerna run build --scope=@scorecard/shared",
     "start:app": "npx lerna run start --scope=app",
     "test:app": "npx lerna run test --scope=app",
     "start:widget": "npx lerna run start --scope=widget",
