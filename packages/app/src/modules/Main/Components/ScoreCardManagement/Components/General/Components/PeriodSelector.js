@@ -10,8 +10,11 @@ export default function PeriodSelector() {
 
     const defaultYear = useMemo(() => {
         const period = head(getValues('periodSelection.periods'));
-        const periodObject = PeriodUtility.getPeriodById(period?.id);
-        return periodObject.start.year;
+        if (period) {
+
+            return PeriodUtility.getPeriodById(period?.id).start.year;
+        }
+        return new Date().getFullYear();
     }, [getValues]);
     const [year, setYear] = useState(defaultYear ?? new Date().getFullYear());
     const periodType = useWatch({

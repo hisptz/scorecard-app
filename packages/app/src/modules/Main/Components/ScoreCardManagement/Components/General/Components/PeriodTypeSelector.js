@@ -1,16 +1,14 @@
 import i18n from '@dhis2/d2-i18n'
 import {SingleSelectField, SingleSelectOption} from '@dhis2/ui'
-import {PeriodType} from "@iapps/period-utilities";
-import {filter} from "lodash";
+import {PeriodTypeCategory, PeriodUtility} from "@hisptz/dhis2-utils";
 import PropTypes from 'prop-types'
 import React, {useMemo} from "react";
 import {Controller} from "react-hook-form";
 import classes from "../styles/PeriodTypeSelector.module.css";
 
 export default function PeriodTypeSelector({label, name}) {
-    const periodTypes = useMemo(() => new PeriodType().get(), []);
-    const fixedPeriodTypes = useMemo(() => filter(periodTypes, (periodType) => !periodType.name.match(RegExp("relative", "i"))), [periodTypes]);
-    const relativePeriodTypes = useMemo(() => filter(periodTypes, (periodType) => periodType.name.match(RegExp("relative", "i"))), [periodTypes]);
+    const fixedPeriodTypes = useMemo(() => new PeriodUtility().setCategory(PeriodTypeCategory.FIXED).periodTypes, []);
+    const relativePeriodTypes = useMemo(() => new PeriodUtility().setCategory(PeriodTypeCategory.RELATIVE).periodTypes, []);
 
     return (
         <Controller
@@ -38,7 +36,7 @@ export default function PeriodTypeSelector({label, name}) {
                                     <SingleSelectOption
                                         key={periodType.id}
                                         value={periodType.id}
-                                        label={periodType.name}
+                                        label={periodType.config.name}
                                     />
                                 )
                             })
@@ -51,7 +49,7 @@ export default function PeriodTypeSelector({label, name}) {
                                     <SingleSelectOption
                                         key={periodType.id}
                                         value={periodType.id}
-                                        label={periodType.name}
+                                        label={periodType.config.name}
                                     />
                                 )
                             })
