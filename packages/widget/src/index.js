@@ -47,8 +47,8 @@ if (process.env.NODE_ENV === 'production') {
                 apiVersion: process.env.REACT_APP_API_VERSION ?? 34,
                 serverVersion: {
                     major: process.env.REACT_APP_SERVER_VERSION_MAJOR ?? 2,
-                    minor: process.env.REACT_APP_SERVER_VERSION_MINOR ?? 34,
-                    patch: process.env.REACT_APP_SERVER_VERSION_PATCH ?? 3
+                    minor: process.env.REACT_APP_SERVER_VERSION_MINOR ?? process.env.REACT_APP_API_VERSION,
+                    patch: process.env.REACT_APP_SERVER_VERSION_PATCH ?? 0
                 }
             }}
         >
