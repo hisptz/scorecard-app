@@ -22,3 +22,4 @@ apps/widget/scorecard_widget.zip
 /packages/app/.env
 /packages/app/cypress.env.json
 *.env
+.env
