@@ -13,7 +13,7 @@ import React, {useState} from "react";
 import {useSetRecoilState} from "recoil";
 import {orgUnitSelectorOptionOnCell} from "../../../TableCellAnalysis/state/orgUnit";
 import {cellPeriodOptionSelector} from "../../../TableCellAnalysis/state/period";
-import * as styles from "./FurtherAnalysisMenu.module.css";
+import styles from "./FurtherAnalysisMenu.module.css";
 
 export default function FurtherAnalysisMenu({
                                                 stateActionRef,
@@ -29,7 +29,7 @@ export default function FurtherAnalysisMenu({
             <Popover
                 onClickOutside={() => setStateActionRef(undefined)}
                 placement="bottom-start"
-                reference={stateActionRef} 
+                reference={stateActionRef}
             >
                 <Menu>
                     <MenuItem
