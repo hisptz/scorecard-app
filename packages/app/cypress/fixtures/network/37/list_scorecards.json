@@ -1,0 +1,374 @@
+[
+    {
+        "path": "/api/37/systemSettings/helpPageLink",
+        "featureName": "List Scorecards",
+        "static": false,
+        "count": 5,
+        "nonDeterministic": false,
+        "method": "GET",
+        "requestBody": "",
+        "requestHeaders": {
+            "host": "localhost:8081",
+            "proxy-connection": "keep-alive",
+            "accept": "application/json",
+            "origin": "http://localhost:3000",
+            "sec-fetch-site": "same-site",
+            "sec-fetch-mode": "cors"
+        },
+        "statusCode": 200,
+        "responseBody": "{\"helpPageLink\":\"https://dhis2.github.io/dhis2-docs/master/en/user/html/dhis2_user_manual_en.html\"}",
+        "responseSize": 99,
+        "responseHeaders": {
+            "server": "nginx/1.21.6",
+            "content-type": "application/json;charset=UTF-8",
+            "transfer-encoding": "chunked",
+            "connection": "keep-alive",
+            "access-control-allow-credentials": "true",
+            "access-control-allow-origin": "http://localhost:3000",
+            "vary": "Origin",
+            "access-control-expose-headers": "ETag, Location",
+            "cache-control": "no-cache, private",
+            "x-content-type-options": "nosniff",
+            "x-xss-protection": "1; mode=block",
+            "x-frame-options": "SAMEORIGIN"
+        }
+    },
+    {
+        "path": "/api/37/dataStore/hisptz-scorecard/settings",
+        "featureName": "List Scorecards",
+        "static": false,
+        "count": 5,
+        "nonDeterministic": false,
+        "method": "GET",
+        "requestBody": "",
+        "requestHeaders": {
+            "host": "localhost:8081",
+            "proxy-connection": "keep-alive",
+            "accept": "application/json",
+            "origin": "http://localhost:3000",
+            "sec-fetch-site": "same-site",
+            "sec-fetch-mode": "cors"
+        },
+        "statusCode": 200,
+        "responseBody": "{\"skipMigration\":true}",
+        "responseSize": 22,
+        "responseHeaders": {
+            "server": "nginx/1.21.6",
+            "content-type": "application/json;charset=UTF-8",
+            "transfer-encoding": "chunked",
+            "connection": "keep-alive",
+            "access-control-allow-credentials": "true",
+            "access-control-allow-origin": "http://localhost:3000",
+            "vary": "Origin",
+            "access-control-expose-headers": "ETag, Location",
+            "x-content-type-options": "nosniff",
+            "x-xss-protection": "1; mode=block",
+            "x-frame-options": "SAMEORIGIN"
+        }
+    },
+    {
+        "path": "/api/37/userDataStore/hisptz-scorecard/settings",
+        "featureName": "List Scorecards",
+        "static": false,
+        "count": 5,
+        "nonDeterministic": false,
+        "method": "GET",
+        "requestBody": "",
+        "requestHeaders": {
+            "host": "localhost:8081",
+            "proxy-connection": "keep-alive",
+            "accept": "application/json",
+            "origin": "http://localhost:3000",
+            "sec-fetch-site": "same-site",
+            "sec-fetch-mode": "cors"
+        },
+        "statusCode": 200,
+        "responseBody": "{\"scorecardViewType\":\"grid\"}",
+        "responseSize": 28,
+        "responseHeaders": {
+            "server": "nginx/1.21.6",
+            "content-type": "application/json;charset=UTF-8",
+            "transfer-encoding": "chunked",
+            "connection": "keep-alive",
+            "access-control-allow-credentials": "true",
+            "access-control-allow-origin": "http://localhost:3000",
+            "vary": "Origin",
+            "access-control-expose-headers": "ETag, Location",
+            "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+            "x-content-type-options": "nosniff",
+            "x-xss-protection": "1; mode=block",
+            "x-frame-options": "SAMEORIGIN"
+        }
+    },
+    {
+        "path": "/api/37/userDataStore/hisptz-scorecard/savedObjects",
+        "featureName": "List Scorecards",
+        "static": false,
+        "count": 5,
+        "nonDeterministic": false,
+        "method": "GET",
+        "requestBody": "",
+        "requestHeaders": {
+            "host": "localhost:8081",
+            "proxy-connection": "keep-alive",
+            "accept": "application/json",
+            "origin": "http://localhost:3000",
+            "sec-fetch-site": "same-site",
+            "sec-fetch-mode": "cors"
+        },
+        "statusCode": 200,
+        "responseBody": "{}",
+        "responseSize": 2,
+        "responseHeaders": {
+            "server": "nginx/1.21.6",
+            "content-type": "application/json;charset=UTF-8",
+            "connection": "keep-alive",
+            "access-control-allow-credentials": "true",
+            "access-control-allow-origin": "http://localhost:3000",
+            "vary": "Origin",
+            "access-control-expose-headers": "ETag, Location",
+            "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+            "x-content-type-options": "nosniff",
+            "x-xss-protection": "1; mode=block",
+            "x-frame-options": "SAMEORIGIN"
+        }
+    },
+    {
+        "path": "/api/37/dataStore/hisptz-scorecard/savedObjects",
+        "featureName": "List Scorecards",
+        "static": false,
+        "count": 5,
+        "nonDeterministic": false,
+        "method": "GET",
+        "requestBody": "",
+        "requestHeaders": {
+            "host": "localhost:8081",
+            "proxy-connection": "keep-alive",
+            "accept": "application/json",
+            "origin": "http://localhost:3000",
+            "sec-fetch-site": "same-site",
+            "sec-fetch-mode": "cors"
+        },
+        "statusCode": 200,
+        "responseBody": "{}",
+        "responseSize": 2,
+        "responseHeaders": {
+            "server": "nginx/1.21.6",
+            "content-type": "application/json;charset=UTF-8",
+            "connection": "keep-alive",
+            "access-control-allow-credentials": "true",
+            "access-control-allow-origin": "http://localhost:3000",
+            "vary": "Origin",
+            "access-control-expose-headers": "ETag, Location",
+            "x-content-type-options": "nosniff",
+            "x-xss-protection": "1; mode=block",
+            "x-frame-options": "SAMEORIGIN"
+        }
+    },
+    {
+        "path": "/api/37/systemSettings?keys=key%3DkeyCalendar",
+        "featureName": "List Scorecards",
+        "static": false,
+        "count": 5,
+        "nonDeterministic": false,
+        "method": "GET",
+        "requestBody": "",
+        "requestHeaders": {
+            "host": "localhost:8081",
+            "proxy-connection": "keep-alive",
+            "accept": "application/json",
+            "origin": "http://localhost:3000",
+            "sec-fetch-site": "same-site",
+            "sec-fetch-mode": "cors"
+        },
+        "statusCode": 200,
+        "responseBody": "{\"keyIgnoreAnalyticsApprovalYearThreshold\":-1,\"keySelfRegistrationNoRecaptcha\":false,\"keyHideBiWeeklyPeriods\":false,\"keyDateFormat\":\"yyyy-MM-dd\",\"applicationTitle\":\"Scorecard, BNA and Action tracker Apps - Training Instance\",\"keyGoogleMapsApiKey\":\"AIzaSyBjlDmwuON9lJbPMDlh_LI3zGpGtpK9erc\",\"keyRemoteInstanceUsername\":\"admin\",\"syncSkipSyncForDataChangedBefore\":\"1970-01-01T00:00:00.000\",\"keyFileResourceRetentionStrategy\":\"NONE\",\"keyEmailSender\":\"no-reply@dhis2.org\",\"keyEmailUsername\":\"admin\",\"keyAnalysisDigitGroupSeparator\":\"SPACE\",\"maxPasswordLength\":40,\"keyAnalysisDisplayProperty\":\"shortName\",\"keyDashboardContextMenuItemSwitchViewType\":true,\"keyCustomLoginPageLogo\":false,\"keyLastCompleteDataSetRegistrationSyncSuccess\":\"1970-01-01T00:00:00.000\",\"keyMetaDataRepoUrl\":\"https://raw.githubusercontent.com/dhis2/dhis2-metadata-repo/master/repo/221/index.json\",\"keyApplicationNotification\":\"Content purely for training purposes ONLY. \\n<br/>\\n<br/>\\nusername: admin \\n<br/>\\n<br/>\\npassword: District1#\",\"keyUseCustomLogoBanner\":false,\"keyLastSuccessfulAnalyticsTablesUpdate\":\"2022-03-02T10:17:40.489\",\"keyUiLocale\":\"en\",\"keyRespectMetaDataStartEndDatesInAnalyticsTableExport\":false,\"keyEmailPort\":587,\"keyDashboardContextMenuItemOpenInRelevantApp\":true,\"keyCalendar\":\"iso8601\",\"keyEmailTls\":true,\"keyHideBiMonthlyPeriods\":false,\"keyCacheability\":\"PUBLIC\",\"keyDataImportRequireAttributeOptionCombo\":false,\"keyLastSuccessfulAnalyticsTablesRuntime\":\"00:00:47.558\",\"keyStyle\":\"light_blue/light_blue.css\",\"keyRemoteInstanceUrl\":\"\",\"keyLastSuccessfulResourceTablesUpdate\":\"2022-03-02T10:17:40.518\",\"factorDeviation\":2,\"keyVersionEnabled\":false,\"keyHideDailyPeriods\":false,\"keySqlViewMaxLimit\":-1,\"accountExpiryAlert\":false,\"keyFlag\":\"demoland\",\"keyAnalysisRelativePeriod\":\"LAST_12_MONTHS\",\"minPasswordLength\":8,\"keyDashboardContextMenuItemShowInterpretationsAndDetails\":true,\"analyticsFinancialYearStart\":\"FINANCIAL_YEAR_OCTOBER\",\"accountExpiresInDays\":7,\"keyBingMapsApiKey\":\"AoifMs0zqvpAEuI6OX5Kk93rEM-oLrvQIJe_xdCv1BF4J3yquFnUozze-M7gEf0b\",\"keyUseCustomLogoFront\":false,\"keyLastSuccessfulEventsDataSynch\":\"1970-01-01T00:00:00.000\",\"keySkipDataTypeValidationInAnalyticsTableExport\":false,\"keyAnalyticsCacheProgressiveTtlFactor\":160,\"syncMaxRemoteServerAvailabilityCheckAttempts\":3,\"keyAllowObjectAssignment\":false,\"keyStopMetadataSync\":false,\"keySmsSetting\":{\"gateways\":[]},\"keyHideMonthlyPeriods\":false,\"startModule\":\"dhis-web-dashboard\",\"keyDataImportStrictDataElements\":false,\"ruleEngineAssignOverwrite\":false,\"keyLastSuccessfulDataSynch\":\"1970-01-01T00:00:00.000\",\"keyApplicationIntro\":\"Content is developed for training purposes\",\"keyCacheStrategy\":\"CACHE_1_MINUTE\",\"keyDataImportStrictOrganisationUnits\":false,\"keyDataImportRequireCategoryOptionCombo\":false,\"multiOrganisationUnitForms\":false,\"syncMaxAttempts\":3,\"keyDataImportStrictAttributeOptionCombos\":false,\"helpPageLink\":\"https://dhis2.github.io/dhis2-docs/master/en/user/html/dhis2_user_manual_en.html\",\"keyDataImportStrictCategoryOptionCombos\":false,\"keyGatherAnalyticalObjectStatisticsInDashboardViews\":false,\"keyHideWeeklyPeriods\":false,\"credentialsExpires\":0,\"credentialsExpiryAlert\":false,\"keyCustomTopMenuLogo\":false,\"keyAccountRecovery\":false,\"keyCanGrantOwnUserAuthorityGroups\":false,\"keyAcceptanceRequiredForApproval\":false,\"keyAnalyticsMaxLimit\":100000,\"keyLockMultipleFailedLogins\":false,\"keyAnalyticsMaintenanceMode\":false,\"keyRequireAddToView\":false,\"keyCountPassiveDashboardViewsInUsageAnalytics\":false,\"keyDashboardContextMenuItemViewFullscreen\":true,\"keyIncludeZeroValuesInAnalytics\":false,\"startModuleEnableLightweight\":false,\"keyDatabaseServerCpus\":0,\"keyAnalyticsCacheTtlMode\":\"FIXED\",\"keyDataImportStrictPeriods\":false,\"syncDelayBetweenRemoteServerAvailabilityCheckAttempts\":500}",
+        "responseSize": 3759,
+        "responseHeaders": {
+            "server": "nginx/1.21.6",
+            "content-type": "application/json;charset=UTF-8",
+            "transfer-encoding": "chunked",
+            "connection": "keep-alive",
+            "access-control-allow-credentials": "true",
+            "access-control-allow-origin": "http://localhost:3000",
+            "vary": "Origin",
+            "access-control-expose-headers": "ETag, Location",
+            "cache-control": "no-cache, private",
+            "x-content-type-options": "nosniff",
+            "x-xss-protection": "1; mode=block",
+            "x-frame-options": "SAMEORIGIN"
+        }
+    },
+    {
+      "path": "/api/37/dataStore/hisptz-scorecard/@scorecard/summary",
+      "featureName": "List Scorecards",
+      "static": false,
+      "count": 9,
+      "nonDeterministic": true,
+      "method": "GET",
+      "requestBody": "",
+      "requestHeaders": {
+        "host": "localhost:8081",
+        "proxy-connection": "keep-alive",
+        "accept": "application/json",
+            "origin": "http://localhost:3000",
+            "sec-fetch-site": "same-site",
+            "sec-fetch-mode": "cors"
+        },
+        "statusCode": 200,
+        "responseBody": [
+            "[{\"id\":\"rZdi1ghZceu\",\"user\":\"M5zQapPyTZI\",\"title\":\"Sample Scorecard\",\"description\":\"Scorecard Description\",\"publicAccess\":{\"id\":\"public\",\"type\":\"public\",\"access\":\"------\",\"displayName\":\"Public\"},\"userAccesses\":[],\"additionalLabels\":[],\"userGroupAccesses\":[]},{},{},{}]",
+            "[{\"id\":\"rZdi1ghZceu\",\"user\":\"M5zQapPyTZI\",\"title\":\"Sample Scorecard\",\"description\":\"Scorecard Description\",\"publicAccess\":{\"id\":\"public\",\"type\":\"public\",\"access\":\"------\",\"displayName\":\"Public\"},\"userAccesses\":[],\"additionalLabels\":[],\"userGroupAccesses\":[]},{}]",
+            "[{\"title\":\"Sample Scorecard\",\"description\":\"Scorecard Description\",\"id\":\"rZdi1ghZceu\",\"user\":\"M5zQapPyTZI\",\"userAccesses\":[],\"userGroupAccesses\":[],\"publicAccess\":{\"id\":\"public\",\"type\":\"public\",\"access\":\"------\",\"displayName\":\"Public\"},\"additionalLabels\":[]},{}]"
+        ],
+        "responseSize": 268,
+        "responseHeaders": {
+            "server": "nginx/1.21.6",
+            "content-type": "application/json;charset=UTF-8",
+            "transfer-encoding": "chunked",
+            "connection": "keep-alive",
+            "access-control-allow-credentials": "true",
+            "access-control-allow-origin": "http://localhost:3000",
+            "vary": "Origin",
+            "access-control-expose-headers": "ETag, Location",
+            "x-content-type-options": "nosniff",
+            "x-xss-protection": "1; mode=block",
+            "x-frame-options": "SAMEORIGIN"
+        },
+        "responseLookup": [
+            0,
+            1,
+            2,
+            2,
+            2,
+            2,
+            2
+        ]
+    },
+    {
+        "path": "/api/37/dataStore/hisptz-scorecard",
+        "featureName": "List Scorecards",
+        "static": false,
+        "count": 5,
+        "nonDeterministic": false,
+        "method": "GET",
+      "requestBody": "",
+      "requestHeaders": {
+        "host": "localhost:8081",
+        "proxy-connection": "keep-alive",
+        "accept": "application/json",
+        "origin": "http://localhost:3000",
+        "sec-fetch-site": "same-site",
+        "sec-fetch-mode": "cors"
+      },
+      "statusCode": 200,
+      "responseBody": "[\"rZdi1ghZceu\",\"savedObjects\",\"@scorecard/summary\",\"settings\"]",
+      "responseSize": 61,
+      "responseHeaders": {
+        "server": "nginx/1.21.6",
+        "content-type": "application/json;charset=UTF-8",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "access-control-allow-credentials": "true",
+        "access-control-allow-origin": "http://localhost:3000",
+        "vary": "Origin",
+        "access-control-expose-headers": "ETag, Location",
+            "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+            "x-content-type-options": "nosniff",
+            "x-xss-protection": "1; mode=block",
+            "x-frame-options": "SAMEORIGIN"
+        }
+    },
+    {
+        "path": "/api/37/dataStore/hisptz-scorecard/rZdi1ghZceu",
+        "featureName": "List Scorecards",
+        "static": false,
+        "count": 2,
+        "nonDeterministic": true,
+        "method": "GET",
+        "requestBody": "",
+        "requestHeaders": {
+            "host": "localhost:8081",
+            "proxy-connection": "keep-alive",
+            "accept": "application/json",
+            "origin": "http://localhost:3000",
+            "sec-fetch-site": "same-site",
+            "sec-fetch-mode": "cors"
+        },
+        "statusCode": 200,
+        "responseBody": [
+            "{\"legendDefinitions\":[{\"color\":\"#D3D3D3\",\"name\":\"N/A\",\"isDefault\":true,\"id\":\"N/A\"},{\"color\":\"#FFFFFF\",\"name\":\"No Data\",\"isDefault\":true,\"id\":\"No Data\"},{\"id\":\"NUYjXdkYKDo\",\"color\":\"#008000\",\"name\":\"Target Reached/ On Track\"},{\"id\":\"dpctr4NxdBp\",\"color\":\"#FFFF00\",\"name\":\"Progress, but more effort required\"},{\"id\":\"gm4OUZJPfuk\",\"color\":\"#FF0000\",\"name\":\"Not on track\"}],\"options\":{\"averageDisplayType\":\"ALL\",\"legend\":true,\"title\":true,\"itemNumber\":true,\"emptyRows\":true,\"showHierarchy\":false,\"averageColumn\":true,\"averageRow\":true,\"highlightedIndicators\":false,\"arrows\":true},\"publicAccess\":{\"id\":\"public\",\"type\":\"public\",\"access\":\"------\",\"displayName\":\"Public\"},\"orgUnitSelection\":{\"levels\":[],\"groups\":[],\"orgUnits\":[],\"userSubX2Unit\":false,\"userSubUnit\":false,\"userOrgUnit\":true},\"userGroupAccesses\":[],\"userAccesses\":[],\"highlightedIndicators\":[{\"id\":\"BvG8P80QxqZ\",\"displayName\":\"Access to ANC Services\",\"type\":\"indicator\",\"label\":\"Access to ANC Services\",\"legends\":[{\"startValue\":\"66\",\"endValue\":\"100\",\"legendDefinitionId\":\"NUYjXdkYKDo\",\"id\":\"Lm2Uqk9OMh4\"},{\"startValue\":\"33\",\"endValue\":\"66\",\"legendDefinitionId\":\"dpctr4NxdBp\",\"id\":\"Wb0EfXTy3If\"},{\"startValue\":\"0\",\"endValue\":\"33\",\"legendDefinitionId\":\"gm4OUZJPfuk\",\"id\":\"CH6iMYDmRn4\"}],\"name\":\"\",\"weight\":100,\"effectiveGap\":5,\"displayArrows\":true,\"highIsGood\":true,\"showColors\":true,\"specificTargets\":[],\"specificTargetsSet\":false}],\"id\":\"rZdi1ghZceu\",\"name\":\"\",\"title\":\"Sample Scorecard\",\"subtitle\":\"Sample Scorecard Subtitle\",\"description\":\"Scorecard Description\",\"customHeader\":\"\",\"periodType\":\"Yearly\",\"dataSelection\":{\"dataGroups\":[{\"title\":\"Group 1\",\"id\":\"Ljdrk862q9t\",\"dataHolders\":[{\"id\":\"uibNmPgOfft\",\"dataSources\":[{\"id\":\"BvG8P80QxqZ\",\"displayName\":\"Access to ANC Services\",\"type\":\"indicator\",\"label\":\"Access to ANC Services\",\"legends\":[{\"startValue\":\"66\",\"endValue\":\"100\",\"legendDefinitionId\":\"NUYjXdkYKDo\",\"id\":\"hNWsDwVYqye\"},{\"startValue\":\"33\",\"endValue\":\"66\",\"legendDefinitionId\":\"dpctr4NxdBp\",\"id\":\"iVLt0Q69Yqs\"},{\"startValue\":\"0\",\"endValue\":\"33\",\"legendDefinitionId\":\"gm4OUZJPfuk\",\"id\":\"kIVLJs1QyVg\"}],\"name\":\"\",\"weight\":100,\"effectiveGap\":5,\"displayArrows\":true,\"highIsGood\":true,\"showColors\":true,\"specificTargets\":[],\"specificTargetsSet\":false}]}],\"style\":{\"backgroundColor\":\"#FFFFFF\",\"color\":\"#000000\"}}]},\"periodSelection\":{\"periods\":[{\"id\":\"2019\",\"name\":\"2019\"}],\"type\":\"Yearly\"},\"user\":{\"id\":\"M5zQapPyTZI\"},\"targetOnLevels\":false,\"additionalLabels\":[]}",
+            "{\"id\":\"rZdi1ghZceu\",\"name\":\"\",\"user\":{\"id\":\"M5zQapPyTZI\"},\"title\":\"Sample Scorecard\",\"options\":{\"title\":true,\"arrows\":true,\"legend\":true,\"emptyRows\":true,\"averageRow\":true,\"itemNumber\":true,\"averageColumn\":true,\"showHierarchy\":false,\"averageDisplayType\":\"ALL\",\"highlightedIndicators\":false},\"subtitle\":\"Sample Scorecard Subtitle\",\"periodType\":\"Yearly\",\"description\":\"Scorecard Description\",\"customHeader\":\"\",\"publicAccess\":{\"id\":\"public\",\"type\":\"public\",\"access\":\"------\",\"displayName\":\"Public\"},\"userAccesses\":[],\"dataSelection\":{\"dataGroups\":[{\"id\":\"Ljdrk862q9t\",\"style\":{\"color\":\"#000000\",\"backgroundColor\":\"#FFFFFF\"},\"title\":\"Group 1\",\"dataHolders\":[{\"id\":\"uibNmPgOfft\",\"dataSources\":[{\"id\":\"BvG8P80QxqZ\",\"name\":\"\",\"type\":\"indicator\",\"label\":\"Access to ANC Services\",\"weight\":100,\"legends\":[{\"id\":\"hNWsDwVYqye\",\"endValue\":\"100\",\"startValue\":\"66\",\"legendDefinitionId\":\"NUYjXdkYKDo\"},{\"id\":\"iVLt0Q69Yqs\",\"endValue\":\"66\",\"startValue\":\"33\",\"legendDefinitionId\":\"dpctr4NxdBp\"},{\"id\":\"kIVLJs1QyVg\",\"endValue\":\"33\",\"startValue\":\"0\",\"legendDefinitionId\":\"gm4OUZJPfuk\"}],\"highIsGood\":true,\"showColors\":true,\"displayName\":\"Access to ANC Services\",\"effectiveGap\":5,\"displayArrows\":true,\"specificTargets\":[],\"specificTargetsSet\":false}]}]}]},\"targetOnLevels\":false,\"periodSelection\":{\"type\":\"Yearly\",\"periods\":[{\"id\":\"2019\",\"name\":\"2019\"}]},\"additionalLabels\":[],\"orgUnitSelection\":{\"groups\":[],\"levels\":[],\"orgUnits\":[],\"userOrgUnit\":true,\"userSubUnit\":false,\"userSubX2Unit\":false},\"legendDefinitions\":[{\"id\":\"N/A\",\"name\":\"N/A\",\"color\":\"#D3D3D3\",\"isDefault\":true},{\"id\":\"No Data\",\"name\":\"No Data\",\"color\":\"#FFFFFF\",\"isDefault\":true},{\"id\":\"NUYjXdkYKDo\",\"name\":\"Target Reached/ On Track\",\"color\":\"#008000\"},{\"id\":\"dpctr4NxdBp\",\"name\":\"Progress, but more effort required\",\"color\":\"#FFFF00\"},{\"id\":\"gm4OUZJPfuk\",\"name\":\"Not on track\",\"color\":\"#FF0000\"}],\"userGroupAccesses\":[],\"highlightedIndicators\":[{\"id\":\"BvG8P80QxqZ\",\"name\":\"\",\"type\":\"indicator\",\"label\":\"Access to ANC Services\",\"weight\":100,\"legends\":[{\"id\":\"Lm2Uqk9OMh4\",\"endValue\":\"100\",\"startValue\":\"66\",\"legendDefinitionId\":\"NUYjXdkYKDo\"},{\"id\":\"Wb0EfXTy3If\",\"endValue\":\"66\",\"startValue\":\"33\",\"legendDefinitionId\":\"dpctr4NxdBp\"},{\"id\":\"CH6iMYDmRn4\",\"endValue\":\"33\",\"startValue\":\"0\",\"legendDefinitionId\":\"gm4OUZJPfuk\"}],\"highIsGood\":true,\"showColors\":true,\"displayName\":\"Access to ANC Services\",\"effectiveGap\":5,\"displayArrows\":true,\"specificTargets\":[],\"specificTargetsSet\":false}]}"
+        ],
+        "responseSize": 2432,
+        "responseHeaders": {
+            "server": "nginx/1.21.6",
+            "content-type": "application/json;charset=UTF-8",
+            "transfer-encoding": "chunked",
+            "connection": "keep-alive",
+            "access-control-allow-credentials": "true",
+            "access-control-allow-origin": "http://localhost:3000",
+            "vary": "Origin",
+            "access-control-expose-headers": "ETag, Location",
+            "x-content-type-options": "nosniff",
+            "x-xss-protection": "1; mode=block",
+            "x-frame-options": "SAMEORIGIN"
+        },
+        "responseLookup": [
+            0,
+            1
+        ]
+    },
+  {
+    "path": "/api/37/dataStore/hisptz-scorecard/@scorecard/summary",
+    "featureName": "List Scorecards",
+    "static": false,
+    "count": 1,
+    "nonDeterministic": false,
+    "method": "PUT",
+    "requestBody": [
+      {
+        "title": "Sample Scorecard",
+        "description": "Scorecard Description",
+        "id": "rZdi1ghZceu",
+                "user": "M5zQapPyTZI",
+                "userAccesses": [],
+                "userGroupAccesses": [],
+                "publicAccess": {
+                    "id": "public",
+                    "type": "public",
+                    "access": "------",
+                    "displayName": "Public"
+                },
+                "additionalLabels": []
+            },
+            {}
+        ],
+        "requestHeaders": {
+          "host": "localhost:8081",
+          "proxy-connection": "keep-alive",
+          "content-length": "262",
+          "accept": "application/json",
+          "content-type": "application/json",
+          "origin": "http://localhost:3000",
+          "sec-fetch-site": "same-site",
+          "sec-fetch-mode": "cors"
+        },
+    "statusCode": 200,
+    "responseBody": "{\"httpStatus\":\"OK\",\"httpStatusCode\":200,\"status\":\"OK\",\"message\":\"Key updated: '@scorecard/summary'\"}",
+    "responseSize": 99,
+    "responseHeaders": {
+      "server": "nginx/1.21.6",
+      "content-type": "application/json;charset=UTF-8",
+      "transfer-encoding": "chunked",
+      "connection": "keep-alive",
+      "access-control-allow-credentials": "true",
+      "access-control-allow-origin": "http://localhost:3000",
+      "vary": "Origin",
+      "access-control-expose-headers": "ETag, Location",
+            "x-content-type-options": "nosniff",
+            "x-xss-protection": "1; mode=block",
+            "x-frame-options": "SAMEORIGIN"
+        }
+    }
+]

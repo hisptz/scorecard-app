@@ -1,0 +1,325 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: i18next-conv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"POT-Creation-Date: 2023-03-27T06:34:57.952Z\n"
+"PO-Revision-Date: 2023-03-27T06:34:57.952Z\n"
+
+msgid "Welcome to Scorecard App!"
+msgstr "Welcome to Scorecard App!"
+
+msgid "Create a scorecard instantly, over tea break"
+msgstr "Create a scorecard instantly, over tea break"
+
+msgid "New Scorecard"
+msgstr "New Scorecard"
+
+msgid "Please select at least one organisation unit"
+msgstr "Please select at least one organisation unit"
+
+msgid "Organisation Unit"
+msgstr "Organisation Unit"
+
+msgid "Select Access"
+msgstr "Select Access"
+
+msgid "Add"
+msgstr "Add"
+
+msgid "Edit"
+msgstr "Edit"
+
+msgid "Delete"
+msgstr "Delete"
+
+msgid "Sharing"
+msgstr "Sharing"
+
+msgid "Shared With"
+msgstr "Shared With"
+
+msgid "Add Access"
+msgstr "Add Access"
+
+msgid "No Access"
+msgstr "No Access"
+
+msgid "Can Read"
+msgstr "Can Read"
+
+msgid "Can Read and Write"
+msgstr "Can Read and Write"
+
+msgid "Save"
+msgstr "Save"
+
+msgid "Cancel"
+msgstr "Cancel"
+
+msgid "Click to configure, drag to rearrange"
+msgstr "Click to configure, drag to rearrange"
+
+msgid "Click to {{linkAction}}"
+msgstr "Click to {{linkAction}}"
+
+msgid "unlink"
+msgstr "unlink"
+
+msgid "link"
+msgstr "link"
+
+msgid "Click to {{action}}, drag to rearrange"
+msgstr "Click to {{action}}, drag to rearrange"
+
+msgid "collapse"
+msgstr "collapse"
+
+msgid "expand"
+msgstr "expand"
+
+msgid "Add a data source"
+msgstr "Add a data source"
+
+msgid "Add Item"
+msgstr "Add Item"
+
+msgid "Organisation Unit(s)"
+msgstr "Organisation Unit(s)"
+
+msgid "Change"
+msgstr "Change"
+
+msgid "Organisation Unit Specific Targets"
+msgstr "Organisation Unit Specific Targets"
+
+msgid "Other Periods"
+msgstr "Other Periods"
+
+msgid "Update"
+msgstr "Update"
+
+msgid "Period Specific Targets"
+msgstr "Period Specific Targets"
+
+msgid "Period"
+msgstr "Period"
+
+msgid "Change Period"
+msgstr "Change Period"
+
+msgid "Organisation unit(s)"
+msgstr "Organisation unit(s)"
+
+msgid "Organisation unit levels"
+msgstr "Organisation unit levels"
+
+msgid "Legends"
+msgstr "Legends"
+
+msgid "Other Organisation Units"
+msgstr "Other Organisation Units"
+
+msgid "Set Specific Targets"
+msgstr "Set Specific Targets"
+
+msgid "Specific target type"
+msgstr "Specific target type"
+
+msgid "Organisation Unit Level"
+msgstr "Organisation Unit Level"
+
+msgid "Add Data source"
+msgstr "Add Data source"
+
+msgid "Please select at least one data source for this group"
+msgstr "Please select at least one data source for this group"
+
+msgid "Add Group"
+msgstr "Add Group"
+
+msgid "Configure Data Sources"
+msgstr "Configure Data Sources"
+
+msgid "Add a data source group"
+msgstr "Add a data source group"
+
+msgid "Modify the group name"
+msgstr "Modify the group name"
+
+msgid "Add different data sources to a group"
+msgstr "Add different data sources to a group"
+
+msgid "Click on a data source to configure it"
+msgstr "Click on a data source to configure it"
+
+msgid "View the changes on the preview panel above"
+msgstr "View the changes on the preview panel above"
+
+msgid "Select a data source to configure"
+msgstr "Select a data source to configure"
+
+msgid "Search for Indicator"
+msgstr "Search for Indicator"
+
+msgid "Groups"
+msgstr "Groups"
+
+msgid "Name"
+msgstr "Name"
+
+msgid "Label"
+msgstr "Label"
+
+msgid "Label is required"
+msgstr "Label is required"
+
+msgid "Weight"
+msgstr "Weight"
+
+msgid "Effective Gap"
+msgstr "Effective Gap"
+
+msgid "Display Arrows"
+msgstr "Display Arrows"
+
+msgid "High is Good"
+msgstr "High is Good"
+
+msgid "Show Colors"
+msgstr "Show Colors"
+
+msgid "Title"
+msgstr "Title"
+
+msgid "Title is required"
+msgstr "Title is required"
+
+msgid ""
+"A scorecard with the title '{{value}}' already exists. Please select "
+"another title"
+msgstr ""
+"A scorecard with the title '{{value}}' already exists. Please select "
+"another title"
+
+msgid "Subtitle"
+msgstr "Subtitle"
+
+msgid "Description"
+msgstr "Description"
+
+msgid "Period Type"
+msgstr "Period Type"
+
+msgid "Custom Header"
+msgstr "Custom Header"
+
+msgid "Additional Labels (Tags)"
+msgstr "Additional Labels (Tags)"
+
+msgid "Legend Definitions"
+msgstr "Legend Definitions"
+
+msgid "Year"
+msgstr "Year"
+
+msgid "Period type is required"
+msgstr "Period type is required"
+
+msgid "Fixed Periods"
+msgstr "Fixed Periods"
+
+msgid "Relative Periods"
+msgstr "Relative Periods"
+
+msgid "Highlighted Indicators"
+msgstr "Highlighted Indicators"
+
+msgid "Add Highlighted Indicator"
+msgstr "Add Highlighted Indicator"
+
+msgid "Scorecard updated successfully"
+msgstr "Scorecard updated successfully"
+
+msgid "Scorecard added successfully"
+msgstr "Scorecard added successfully"
+
+msgid "Please fill in all required fields"
+msgstr "Please fill in all required fields"
+
+msgid "Help"
+msgstr "Help"
+
+msgid "Saving"
+msgstr "Saving"
+
+msgid "Save and exit"
+msgstr "Save and exit"
+
+msgid "Save and continue"
+msgstr "Save and continue"
+
+msgid "Exit without saving"
+msgstr "Exit without saving"
+
+msgid "General"
+msgstr "General"
+
+msgid "Data Configuration"
+msgstr "Data Configuration"
+
+msgid "Access"
+msgstr "Access"
+
+msgid "Options"
+msgstr "Options"
+
+msgid "Scorecard deleted successfully"
+msgstr "Scorecard deleted successfully"
+
+msgid "Confirm scorecard delete"
+msgstr "Confirm scorecard delete"
+
+msgid "Are you sure you want to delete scorecard "
+msgstr "Are you sure you want to delete scorecard "
+
+msgid "View"
+msgstr "View"
+
+msgid "No scorecards found"
+msgstr "No scorecards found"
+
+msgid "Could not find scorecards matching the keyword "
+msgstr "Could not find scorecards matching the keyword "
+
+msgid "Start a guided tour"
+msgstr "Start a guided tour"
+
+msgid "Documentation"
+msgstr "Documentation"
+
+msgid "Search"
+msgstr "Search"
+
+msgid "Switch to {{viewType}} view"
+msgstr "Switch to {{viewType}} view"
+
+msgid "list"
+msgstr "list"
+
+msgid "grid"
+msgstr "grid"
+
+msgid "Add New Scorecard"
+msgstr "Add New Scorecard"
+
+msgid "Preparing migration..."
+msgstr "Preparing migration..."
+
+msgid "Migrating scorecards"
+msgstr "Migrating scorecards"
+
+msgid "of"
+msgstr "of"
