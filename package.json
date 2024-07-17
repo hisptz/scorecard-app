@@ -21,7 +21,8 @@
     "start:widget": "npx lerna run start --scope=widget",
     "build": "npx lerna run build",
     "test": "npx lerna run test",
-    "deploy:app": "yarn app deploy"
+    "deploy:app": "yarn app deploy",
+    "deploy": "yarn widget deploy"
   },
   "devDependencies": {
     "concurrently": "^7.0.0",
