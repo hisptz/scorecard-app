@@ -1,0 +1,41 @@
+[2K[1G[2m$ dotenv -- cross-var d2-app-scripts start --proxy %DHIS2_PROXY%[22m
+ 
+The proxy for [1mhttps://hisp.apps.dhis2.org/demo[22m is now available on port 8080 
+ 
+[36mStarting proxy server... [39m
+[36mGenerating internationalization strings... [39m
+[2mNo i18n updates found![22m 
+[36mBootstrapping local appShell... [39m
+[2m[33mLocal shell version does not match scripts version[39m[22m 
+[2mRemoving existing directory...[22m 
+[2mCopying appShell to temporary directory...[22m 
+[36mBuilding app [1mhisptz-scorecard[22m... [39m
+[36mGenerating manifests... [39m
+ 
+[36mStarting development server... [39m
+The app [1mhisptz-scorecard[22m is now available on port 3000 
+ 
+(node:35997) [DEP_WEBPACK_DEV_SERVER_ON_AFTER_SETUP_MIDDLEWARE] DeprecationWarning: 'onAfterSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+ (node:35997) [DEP_WEBPACK_DEV_SERVER_ON_BEFORE_SETUP_MIDDLEWARE] DeprecationWarning: 'onBeforeSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+ [0;33mOne of your dependencies, babel-preset-react-app, is importing the
+"@babel/plugin-proposal-private-property-in-object" package without
+declaring it in its dependencies. This is currently working because
+"@babel/plugin-proposal-private-property-in-object" is already in your
+node_modules folder for unrelated reasons, but it [1mmay break at any time[0;33m.
+
+babel-preset-react-app is part of the create-react-app project, [1mwhich
+is not maintianed anymore[0;33m. It is thus unlikely that this bug will
+ever be fixed. Add "@babel/plugin-proposal-private-property-in-object" to
+your devDependencies to work around this error. This will make this message
+go away.[0m
+  
+ [1m[31m[ERROR][39m[22m [31mFailed to compile src/App.ts. Fix the problem and save the file to automatically reload. [39m
+[1m[31m[ERROR][39m[22m [31mFailed to compile src/App.test.ts. Fix the problem and save the file to automatically reload. [39m
+[1m[31m[ERROR][39m[22m [31mFailed to compile src/modules/Main/Components/ScoreCardManagement/Components/Access/Components/Sharing/utils.ts. Fix the problem and save the file to automatically reload. [39m
+[1m[31m[ERROR][39m[22m [31mFailed to compile src/modules/Main/Components/ScoreCardManagement/Components/Access/Components/Sharing/index.ts. Fix the problem and save the file to automatically reload. [39m
+[1m[31m[ERROR][39m[22m [31mFailed to compile src/modules/Main/Components/ScoreCardManagement/Components/DataConfiguration/Components/DataGroups/Components/DataGroup/index.tsx. Fix the problem and save the file to automatically reload. [39m
+[1m[31m[ERROR][39m[22m [31mFailed to compile src/modules/Main/Components/ScoreCardManagement/Components/DataConfiguration/Components/DataGroups/Components/DataGroup/index.tsx. Fix the problem and save the file to automatically reload. [39m
+[1m[31m[ERROR][39m[22m [31mFailed to compile src/modules/Main/Components/ScoreCardManagement/Components/DataConfiguration/Components/DataGroups/Components/DataGroup/index.tsx. Fix the problem and save the file to automatically reload. [39m
+[1m[31m[ERROR][39m[22m [31mFailed to compile src/modules/Main/Components/ScoreCardManagement/Components/HighlightedIndicators/index.ts. Fix the problem and save the file to automatically reload. [39m
+[1m[31m[ERROR][39m[22m [31mFailed to compile src/modules/Main/Components/ScoreCardManagement/Components/Options/index.ts. Fix the problem and save the file to automatically reload. [39m
