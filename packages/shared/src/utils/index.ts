@@ -1,7 +1,7 @@
 export { getDataSourceDetails } from "./dataSource";
 export { updateListFromDragAndDrop, updateListsFromDragAndDrop } from "./dnd";
 export { migrateScorecard } from "./migrate";
-export { default as getSelectedOrgUnitSelectionDisplay } from "./orgUnit";
+export { default as getSelectedOrgUnitSelectionDisplay } from "./orgUnit.ts";
 export { generateCreateMutation, generateScorecardSummary } from "./scorecard";
 export {
 	sortDataSourcesBasedOnData,
