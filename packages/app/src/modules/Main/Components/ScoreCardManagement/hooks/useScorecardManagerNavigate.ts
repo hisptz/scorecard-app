@@ -30,11 +30,13 @@ export default function useScorecardManagerNavigate({
 
 	useEffect(() => {
 		const searchParams = new URLSearchParams(search);
+		const currentStep = find(steps, { id: step });
 
-		setActiveStep(() => {
-			const currentStep = find(steps, { id: step });
-			return currentStep;
-		});
+		if (!isEmpty(currentStep)) {
+			setActiveStep(() => {
+				return currentStep;
+			});
+		}
 
 		const isNew = searchParams.get("new");
 		if (isNew) {
