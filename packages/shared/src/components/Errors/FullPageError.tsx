@@ -12,7 +12,7 @@ import {
 import ErrorIcon from "@material-ui/icons/Error";
 import PropTypes from "prop-types";
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function ErrorDialog({ error, onClose }: any) {
 	const { details } = error ?? {};
@@ -44,7 +44,7 @@ ErrorDialog.propTypes = {
 
 export default function FullPageError({ error, resetErrorBoundary }: any) {
 	const [errorDialogShow, setErrorDialogShow] = useState(false);
-	const history = useHistory();
+	const navigate = useNavigate();
 
 	const onRefresh = () => {
 		if (resetErrorBoundary) {
@@ -55,8 +55,10 @@ export default function FullPageError({ error, resetErrorBoundary }: any) {
 	};
 
 	const onGoToHome = () => {
-		if (history) {
-			history?.replace("/");
+		if (navigate) {
+			navigate("/", {
+				replace: true,
+			});
 		} else {
 			onRefresh();
 		}

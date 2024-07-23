@@ -18,7 +18,7 @@ import {
 import { Steps } from "intro.js-react";
 import { debounce, isEmpty } from "lodash";
 import React, { Suspense, useEffect, useRef, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
 	useRecoilState,
 	useRecoilValue,
@@ -26,6 +26,7 @@ import {
 	useSetRecoilState,
 } from "recoil";
 import EmptyScoreCardList from "../EmptyScoreCardList";
+import { steps } from "../ScoreCardManagement/state/pages";
 import EmptySearchList from "./Components/EmptySearchList";
 import GridScorecardDisplay from "./Components/GridScorecardDisplay";
 import HelpMenu from "./Components/HelpMenu";
@@ -36,10 +37,10 @@ export default function ScorecardList() {
 	const resetScorecardIdState = useResetRecoilState(ScorecardIdState);
 	const setRoute = useSetRecoilState(RouterState);
 	const [helpEnabled, setHelpEnabled] = useRecoilState(HelpState);
-	const history = useHistory();
+	const navigate = useNavigate();
 	const [scorecardViewType, { set }] = useSetting("scorecardViewType");
 	const scorecards: any = useRecoilValue(ScorecardSummaryState);
-	const [keyword, setKeyword] = useState<any>();
+	const [keyword, setKeyword] = useState();
 	const [filteredScorecards, setFilteredScorecards] = useState(scorecards);
 	const { show } = useAlert(
 		({ message }) => message,
@@ -66,10 +67,9 @@ export default function ScorecardList() {
 			setFilteredScorecards(() => {
 				return scorecards.filter(
 					({ id, title, description, additionalLabels }: any) => {
-						const index =
-							`${id} ${title} ${description} ${additionalLabels?.join(
-								" ",
-							)}`.toLowerCase();
+						const index = `${id} ${title} ${description} ${additionalLabels?.join(
+							" ",
+						)}`.toLowerCase();
 						return index.match(new RegExp(keyword.toLowerCase()));
 					},
 				);
@@ -86,9 +86,10 @@ export default function ScorecardList() {
 	}, [keyword, scorecards]);
 
 	const onAddClick = () => {
+		const initialStep = steps[0].id;
 		resetScorecardIdState();
 		setRoute((prevRoute: any) => ({ ...prevRoute, previous: `/` }));
-		history.push("/add");
+		navigate(`/add/${initialStep}`);
 	};
 
 	const onHelpExit = () => {
@@ -109,10 +110,7 @@ export default function ScorecardList() {
 			) : (
 				<div className="column h-100">
 					<div className="row p-16">
-						<div
-							className="row p-45 center"
-							style={{ paddingLeft: "35%" }}
-						>
+						<div className="row p-45 center" style={{ paddingLeft: "35%" }}>
 							<div className="column w-30">
 								<Input
 									className="search-input"

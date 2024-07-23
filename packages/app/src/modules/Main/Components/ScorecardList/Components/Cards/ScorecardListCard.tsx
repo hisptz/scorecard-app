@@ -11,23 +11,18 @@ import {
 } from "@scorecard/shared";
 import PropTypes from "prop-types";
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
+import { steps } from "../../../ScoreCardManagement/state/pages";
 
-export default function ScorecardListCard({
-	scorecard,
-	grid,
-}: {
-	scorecard: any;
-	grid: any;
-}) {
+export default function ScorecardListCard({ scorecard, grid }: any) {
 	const setRoute = useSetRecoilState(RouterState);
-	const { write, delete: deletePermission }: any = useRecoilValue(
+	const { write, delete: deletePermission } = useRecoilValue(
 		UserAuthorityOnScorecard(scorecard?.id),
 	);
 	const { title, description, id } = scorecard;
 	const [showFullDescription, setShowFullDescription] = useState(false);
-	const history = useHistory();
+	const navigate = useNavigate();
 	const { remove } = useDeleteScorecard(id);
 	const { show } = useAlert(
 		({ message }) => message,
@@ -38,13 +33,14 @@ export default function ScorecardListCard({
 
 	const onView = () => {
 		setRoute((prevRoute: any) => ({ ...prevRoute, previous: `/` }));
-		history.push(`/view/${id}`);
+		navigate(`/view/${id}`);
 	};
 
 	const onEdit = () => {
 		if (write) {
 			setRoute((prevRoute: any) => ({ ...prevRoute, previous: `/` }));
-			history.push(`/edit/${id}`);
+			const initialStep = steps[0].id;
+			navigate(`/edit/${initialStep}/${id}`);
 		}
 	};
 
@@ -125,7 +121,7 @@ export default function ScorecardListCard({
 						{write && (
 							<Button
 								dataTest={"edit-scorecard-button"}
-								onClick={function (_: any, e: any) {
+								onClick={function(_: any, e: any) {
 									e.stopPropagation();
 									onEdit();
 								}}
@@ -134,10 +130,7 @@ export default function ScorecardListCard({
 							</Button>
 						)}
 						{deletePermission && (
-							<Button
-								dataTest="scorecard-delete-button"
-								onClick={onDelete}
-							>
+							<Button dataTest="scorecard-delete-button" onClick={onDelete}>
 								{i18n.t("Delete")}
 							</Button>
 						)}
@@ -191,7 +184,7 @@ export default function ScorecardListCard({
 						{write && (
 							<Button
 								dataTest={"edit-scorecard-button"}
-								onClick={function (_: any, e: any) {
+								onClick={function(_: any, e: any) {
 									e.stopPropagation();
 									onEdit();
 								}}
@@ -200,10 +193,7 @@ export default function ScorecardListCard({
 							</Button>
 						)}
 						{deletePermission && (
-							<Button
-								dataTest="scorecard-delete-button"
-								onClick={onDelete}
-							>
+							<Button dataTest="scorecard-delete-button" onClick={onDelete}>
 								{i18n.t("Delete")}
 							</Button>
 						)}

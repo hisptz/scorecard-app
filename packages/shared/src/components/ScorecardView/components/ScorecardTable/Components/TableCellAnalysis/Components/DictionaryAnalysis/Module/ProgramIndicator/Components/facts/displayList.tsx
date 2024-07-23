@@ -2,14 +2,14 @@ import i18n from "@dhis2/d2-i18n";
 import { Button } from "@dhis2/ui";
 import PropTypes from "prop-types";
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import classes from "./indicatorGroupRow.module.css";
 
 export default function DisplayList({ list }: any) {
 	const [isListFull, setListFull] = useState(false);
 
 	const [inList, setInList] = useState(list.slice(0, 3));
-	const history = useHistory();
+	const navigate = useNavigate();
 
 	function toogleIndicatorList() {
 		setInList((prev: any) => {
@@ -24,7 +24,7 @@ export default function DisplayList({ list }: any) {
 	}
 
 	function navigateToIndicatorHandler(id: any) {
-		history.replace("/programIndicator/" + id);
+		navigate("/programIndicator/" + id, { replace: true });
 	}
 
 	if (isListFull) {

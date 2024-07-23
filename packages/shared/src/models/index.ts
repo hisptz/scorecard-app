@@ -4,7 +4,7 @@ export { default as OrgUnitSelection } from "./orgUnitSelection";
 export { default as PeriodSelection } from "./periodSelection";
 export { default as Scorecard } from "./scorecard";
 export { default as ScorecardAccess } from "./scorecardAccess";
-export { default as ScorecardDataEngine } from "./scorecardData.ts";
+export { default as ScorecardDataEngine } from "./scorecardData";
 export { default as ScorecardIndicator } from "./scorecardIndicator";
 export { default as ScorecardIndicatorHolder } from "./scorecardIndicatorHolder";
 export { default as ScorecardLegend } from "./scorecardLegend";

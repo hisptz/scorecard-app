@@ -125,7 +125,7 @@ export default class ScorecardDataEngine {
 		return this;
 	}
 
-	_updateDataEntities(rows:any) {
+	_updateDataEntities(rows: any) {
 		(rows || []).forEach((row: any) => {
 			const dataEntityId = `${row?.dx?.id}_${row?.ou?.id}_${row?.pe?.id}`;
 			const previousPeriod = find(this._selectedPeriods, ["id", row?.pe?.id])
@@ -155,7 +155,9 @@ export default class ScorecardDataEngine {
 			this._progress = 0;
 			this._progress$.next(this._progress);
 			this._getScorecardData({
-				selectedOrgUnits: this._selectedOrgUnits.map((orgUnit:any) => orgUnit?.id),
+				selectedOrgUnits: this._selectedOrgUnits.map(
+					(orgUnit: any) => orgUnit?.id,
+				),
 				selectedPeriods: this._selectedPeriods.map((period: any) => period?.id),
 				selectedData: this._selectedData,
 			});
@@ -295,7 +297,7 @@ export default class ScorecardDataEngine {
 					toPairs(requiredDataEntities),
 					(value) => (head(value)?.split("_"))[0],
 				);
-				const averageValues : any= {};
+				const averageValues: any = {};
 
 				forIn(groupedValues, (value, key) => {
 					averageValues[key] = reduce(
@@ -333,8 +335,9 @@ export default class ScorecardDataEngine {
 				const noOfOrgUnits = Object.keys(orgUnitsData).length;
 
 				if (
-					compact(Object.values(orgUnitsData).map(({ current }:any) => current))
-						?.length === 0
+					compact(
+						Object.values(orgUnitsData).map(({ current }: any) => current),
+					)?.length === 0
 				) {
 					return undefined;
 				}
@@ -359,8 +362,13 @@ export default class ScorecardDataEngine {
 						return (
 							dataSource === dx &&
 							!this._previousPeriods.includes(pe) &&
-							!!find(this._selectedPeriods, (period: any) => period?.id === pe) &&
-							this._selectedOrgUnits?.map((orgUnit: any) => o: anyrgUnit?.id).includes(ou)
+							!!find(
+								this._selectedPeriods,
+								(period: any) => period?.id === pe,
+							) &&
+							this._selectedOrgUnits
+								?.map((orgUnit: any) => orgUnit?.id)
+								.includes(ou)
 						);
 					});
 					const noOfDataSources = Object.keys(dataSourcesData).length;
@@ -386,7 +394,7 @@ export default class ScorecardDataEngine {
 		);
 	}
 
-	getOrgUnitColumnAverage({ period, orgUnit }:any) {
+	getOrgUnitColumnAverage({ period, orgUnit }: any) {
 		return this.dataEntities$.pipe(
 			map((dataEntities) => {
 				const orgUnitsData = pickBy(dataEntities, (val, key) => {
@@ -395,8 +403,9 @@ export default class ScorecardDataEngine {
 				});
 				const noOfOrgUnits = Object.keys(orgUnitsData).length;
 				if (
-					compact(Object.values(orgUnitsData).map(({ current }:any) => current))
-						?.length === 0
+					compact(
+						Object.values(orgUnitsData).map(({ current }: any) => current),
+					)?.length === 0
 				) {
 					return undefined;
 				}
@@ -411,7 +420,7 @@ export default class ScorecardDataEngine {
 		);
 	}
 
-	getDataSourceColumnAverage({ period, dataSources, orgUnits }:any) {
+	getDataSourceColumnAverage({ period, dataSources, orgUnits }: any) {
 		return this.dataEntities$.pipe(
 			map((dataEntities) => {
 				const data = {};
@@ -424,7 +433,7 @@ export default class ScorecardDataEngine {
 					const noOfDataSources = Object.keys(dataSourcesData).length;
 					if (
 						compact(
-							Object.values(dataSourcesData).map(({ current }:any) => current),
+							Object.values(dataSourcesData).map(({ current }: any) => current),
 						)?.length === 0
 					) {
 						data[dataSource] = undefined;
@@ -443,7 +452,7 @@ export default class ScorecardDataEngine {
 		);
 	}
 
-	getOverallAverage(orgUnits:any) {
+	getOverallAverage(orgUnits: any) {
 		return this.dataEntities$.pipe(
 			map((dataEntities) => {
 				if (!isEmpty(dataEntities)) {
@@ -475,7 +484,7 @@ export default class ScorecardDataEngine {
 		);
 	}
 
-	getAllOrgUnitData(orgUnits:any) {
+	getAllOrgUnitData(orgUnits: any) {
 		return this.dataEntities$.pipe(
 			map((dataEntities) => {
 				return pickBy(dataEntities, (value, key) => {
@@ -486,7 +495,7 @@ export default class ScorecardDataEngine {
 		);
 	}
 
-	get(id:any) {
+	get(id: any) {
 		return this.dataEntities$.pipe(
 			map((dataEntities) => (dataEntities ? dataEntities[id] : null)),
 		);
@@ -505,7 +514,7 @@ export default class ScorecardDataEngine {
 		this._cancelled = cancel;
 	}
 
-	_getScorecardData(selections:any) {
+	_getScorecardData(selections: any) {
 		const { selectedOrgUnits, selectedPeriods, selectedData } = selections;
 		const { normalDataItems, customDataItems } = selectedData;
 
@@ -522,11 +531,11 @@ export default class ScorecardDataEngine {
 		});
 	}
 
-	_getAnalyticsData(selections:any) {
+	_getAnalyticsData(selections: any) {
 		if (!this._cancelled) {
-			let dx : any= [];
-			let ou : any= [];
-			let pe : any= [];
+			let dx: any = [];
+			let ou: any = [];
+			let pe: any = [];
 
 			(selections || []).forEach((selection: any) => {
 				const availableData = this._dataEntities[
@@ -560,13 +569,13 @@ export default class ScorecardDataEngine {
 		return of(null).toPromise();
 	}
 
-	_getCustomAnalyticsData(selections:any) {
+	_getCustomAnalyticsData(selections: any) {
 		if (!this._cancelled) {
 			let dx: any = [];
 			let ou: any = [];
 			let pe: any = [];
 
-			(selections || []).forEach((selection:any) => {
+			(selections || []).forEach((selection: any) => {
 				const availableData = this._dataEntities[
 					`${selection.dx}_${selection.ou}_${selection.pe}`
 				];
@@ -595,16 +604,16 @@ export default class ScorecardDataEngine {
 		return of(null).toPromise();
 	}
 
-	_getNormalScorecardData(selections:any) {
+	_getNormalScorecardData(selections: any) {
 		const { selectedOrgUnits, selectedPeriods, selectedDataItems } =
 			selections ?? {};
 
-		let selectionList : any= [];
+		let selectionList: any = [];
 
-		selectedOrgUnits.forEach((orgUnit:any) => {
+		selectedOrgUnits.forEach((orgUnit: any) => {
 			const dataItemList = chunk(
-				selectedDataItems.map((dataItem:any) => {
-					return selectedPeriods.map((period:any) => {
+				selectedDataItems.map((dataItem: any) => {
+					return selectedPeriods.map((period: any) => {
 						return {
 							dx: dataItem.id,
 							ou: orgUnit,
@@ -632,17 +641,17 @@ export default class ScorecardDataEngine {
 						this._progress$.next(this._progress);
 						callback(null, result);
 					})
-					.catch((error:any) => {
+					.catch((error: any) => {
 						callback(error, null);
 					});
 			},
-			(totalErr:any, totalRes:any) => {
+			(totalErr: any, totalRes: any) => {
 				this._loading$.next(false);
 			},
 		);
 	}
 
-	_getCustomScorecardData(selections:any) {
+	_getCustomScorecardData(selections: any) {
 		window.$ = $;
 		const { selectedOrgUnits, selectedPeriods, selectedDataItems } =
 			selections ?? {};

@@ -6,13 +6,13 @@
 // the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-import i18n from "@dhis2/d2-i18n";
+import i18n from '@dhis2/d2-i18n'
 
-import enTranslations from "./en/translations.json";
-import frTranslations from "./fr/translations.json";
+import enTranslations from './en/translations.json'
+import frTranslations from './fr/translations.json'
 
-const namespace = "default";
-i18n.addResources("en", namespace, enTranslations);
-i18n.addResources("fr", namespace, frTranslations);
+const namespace = 'default'
+i18n.addResources('en', namespace, enTranslations)
+i18n.addResources('fr', namespace, frTranslations)
 
-export default i18n;
+export default i18n

@@ -2,13 +2,14 @@ import i18n from "@dhis2/d2-i18n";
 import { Button, ButtonStrip, DropdownButton } from "@dhis2/ui";
 import PropTypes from "prop-types";
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
 	useRecoilCallback,
 	useRecoilState,
 	useRecoilValue,
 	useSetRecoilState,
 } from "recoil";
+
 import DownloadMenu from "./Download/Components/DownloadMenu";
 import useDownload from "./ScorecardViewHeader/hooks/useDownload";
 import { ScorecardOptionsModal } from "../../modals";
@@ -39,7 +40,7 @@ export default function ScorecardActions({
 	const scorecardId = useRecoilValue(ScorecardIdState);
 	const userAuthority = useRecoilValue(UserAuthorityOnScorecard(scorecardId));
 	const writeAccess = userAuthority?.write;
-	const history = useHistory();
+	const navigate = useNavigate();
 	const onRefresh = useRecoilCallback(({ set, reset }) => () => {
 		reset(ScorecardViewState("orgUnitSelection"));
 		reset(ScorecardViewState("periodSelection"));
@@ -64,7 +65,7 @@ export default function ScorecardActions({
 				);
 				return window.parent.open(appUrl + "#/edit/" + scorecardId);
 			} else {
-				history.push(`/edit/${scorecardId}`);
+				navigate(`/edit/${scorecardId}`);
 			}
 		}
 	};

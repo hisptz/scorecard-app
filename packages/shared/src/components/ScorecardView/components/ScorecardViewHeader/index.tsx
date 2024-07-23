@@ -4,7 +4,7 @@ import { OrgUnitSelectorModal, PeriodSelectorModal } from "@hisptz/dhis2-ui";
 import { PeriodUtility } from "@hisptz/dhis2-utils";
 import { Steps } from "intro.js-react";
 import React, { useEffect, useMemo, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useRecoilCallback, useRecoilState, useRecoilValue } from "recoil";
 
 import SelectionWrapper from "../../../SelectionWrapper";
@@ -28,7 +28,7 @@ import {
 export default function ScorecardViewHeader() {
 	const [helpEnabled, setHelpEnabled] = useRecoilState(HelpState);
 	const { calendar } = useRecoilValue(SystemSettingsState) ?? {};
-	const history = useHistory();
+	const navigate = useNavigate();
 	const scorecardId = useRecoilValue(ScorecardIdState);
 	const orgUnitLevels = useRecoilValue(OrgUnitLevels);
 	const orgUnitGroups = useRecoilValue(OrgUnitGroups);
@@ -51,7 +51,7 @@ export default function ScorecardViewHeader() {
 	);
 
 	const onHome = () => {
-		history.replace("/");
+		navigate("/", { replace: true });
 	};
 
 	useEffect(() => {

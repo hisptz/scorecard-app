@@ -3,13 +3,13 @@ import { Button, CenteredContent, colors } from "@dhis2/ui";
 import ErrorIcon from "@material-ui/icons/Warning";
 import PropTypes from "prop-types";
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function AccessDeniedPage({ accessType }: any) {
-	const history = useHistory();
+	const navigate = useNavigate();
 
 	const onHomeClick = () => {
-		history.replace("/");
+		navigate("/", { replace: true });
 	};
 
 	return (

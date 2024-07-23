@@ -2,26 +2,25 @@ import i18n from "@dhis2/d2-i18n";
 import { Button, colors } from "@dhis2/ui";
 import { ScorecardIdState, useMediaQuery } from "@scorecard/shared";
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useResetRecoilState } from "recoil";
+import { steps } from "../ScoreCardManagement/state/pages";
 import { ReactComponent as ScorecardIllustration } from "./resources/scorecard_illustration.svg";
 
 export default function EmptyScoreCardList() {
 	const resetScorecardIdState = useResetRecoilState(ScorecardIdState);
 	const { width, height } = useMediaQuery();
-	const history = useHistory();
+	const navigate = useNavigate();
 
 	const onNewScorecardClick = () => {
 		resetScorecardIdState();
-		history.push("/add", { from: "home" });
+		const initialStep = steps[0].id;
+		navigate(`/add/${initialStep}`, { state: { from: "home" } });
 	};
 
 	return (
 		<div className="center">
-			<div
-				className="column center"
-				style={{ height }}
-			>
+			<div className="column center" style={{ height }}>
 				<div
 					className="container-bordered text-center center column background-white"
 					style={{ height: height * 0.6, width: width * 0.5, borderRadius: 8 }}

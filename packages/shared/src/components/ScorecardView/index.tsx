@@ -1,7 +1,7 @@
 import i18n from "@dhis2/d2-i18n";
 import { isEmpty } from "lodash";
 import React, { lazy, Suspense, useEffect, useMemo, useRef } from "react";
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router";
 import {
 	useRecoilCallback,
 	useRecoilValue,
@@ -36,12 +36,14 @@ const ScorecardTable = lazy(() => import("./components/ScorecardTable"));
 
 export default function ScorecardView({ widget }: any) {
 	const { id: scorecardId } = useParams();
+
 	const setScorecardIdState = useSetRecoilState(ScorecardIdState);
 	const orgUnitState = useRecoilValueLoadable(InitialOrgUnits);
 	const orgUnitsIds = useMemo(() => {
 		if (orgUnitState.state === "hasValue") {
 			return (
-				orgUnitState.contents?.orgUnits?.map((orgUnit) => orgUnit?.id) ?? []
+				orgUnitState.contents?.orgUnits?.map((orgUnit: any) => orgUnit?.id) ??
+				[]
 			);
 		}
 		return [];

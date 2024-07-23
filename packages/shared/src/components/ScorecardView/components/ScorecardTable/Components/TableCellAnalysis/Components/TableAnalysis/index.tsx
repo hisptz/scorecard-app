@@ -1,5 +1,5 @@
 import React from "react";
-import TableItemComponent from "./Components/table-item/table-item.component.tsx";
+import TableItemComponent from "./Components/table-item/table-item.component";
 
 export default function TableAnalysis() {
 	return (
