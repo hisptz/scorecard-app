@@ -1,15 +1,15 @@
 import { useSetting } from "@dhis2/app-service-datastore";
 import { DATA_MIGRATION_CHECK } from "@scorecard/shared";
 import { useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export function useAutoMigration() {
 	const [skipMigration] = useSetting(DATA_MIGRATION_CHECK, { global: true });
-	const history = useHistory();
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		if (!skipMigration) {
-			history.replace("/migrate");
+			navigate("/migrate", { replace: true });
 		}
-	}, [history, skipMigration]);
+	}, [navigate, skipMigration]);
 }

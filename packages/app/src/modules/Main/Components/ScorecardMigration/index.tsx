@@ -2,21 +2,22 @@ import { useAlert } from "@dhis2/app-runtime";
 import i18n from "@dhis2/d2-i18n";
 import { CircularLoader, LinearLoader } from "@dhis2/ui";
 import React, { useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import useMigrateScorecard from "./hooks/useMigrateScorecard";
 
 export default function ScorecardMigration() {
-	const history = useHistory();
+	const navigate = useNavigate();
 	const onComplete = () => {
-		history.replace("/");
+		navigate("/", { replace: true });
 	};
 
 	const { show } = useAlert(
 		({ message }) => message,
 		({ type }) => ({ ...type, duration: 3000 }),
 	);
-	const { error, progress, count, migrationStarted } =
-		useMigrateScorecard(onComplete);
+	const { error, progress, count, migrationStarted } = useMigrateScorecard(
+		onComplete,
+	);
 	useEffect(() => {
 		if (error) {
 			show({

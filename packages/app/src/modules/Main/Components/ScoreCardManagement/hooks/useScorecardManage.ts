@@ -17,7 +17,7 @@ import produce from "immer";
 import { cloneDeep, findIndex, set } from "lodash";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useHistory, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
 	useRecoilCallback,
 	useRecoilState,
@@ -27,12 +27,12 @@ import {
 import { ActiveStepIndexState, ActiveStepState, steps } from "../state/pages";
 
 export default function useScorecardManage() {
-	const history = useHistory();
+	const navigate = useNavigate();
 	const { id: scorecardId } = useParams();
 	const setIsNew = useSetRecoilState(IsNewScorecardState);
 	const activeStepIndex = useRecoilValue(ActiveStepIndexState);
 	const user = useRecoilValue(UserState);
-	const [route, setRoute] = useRecoilState<any>(RouterState);
+	const [route, setRoute] = useRecoilState(RouterState);
 	const { update } = useUpdateScorecard(scorecardId);
 	const scorecardConf = useRecoilValue(ScorecardConfState(scorecardId));
 	const [saving, setSaving] = useState(false);
@@ -46,7 +46,7 @@ export default function useScorecardManage() {
 		reValidateMode: "onChange",
 	});
 
-	const setActiveStep: any = useSetRecoilState(ActiveStepState);
+	const setActiveStep = useSetRecoilState(ActiveStepState);
 
 	const { add } = useAddScorecard();
 	const { show } = useAlert(
@@ -78,7 +78,7 @@ export default function useScorecardManage() {
 			...prevRoute,
 			previous: `/edit/${scorecardId}`,
 		}));
-		history.replace(route?.previous);
+		navigate(route?.previous, { replace: true });
 	};
 
 	const createNewScorecard = async (updatedScorecard: any) => {
@@ -100,12 +100,9 @@ export default function useScorecardManage() {
 				});
 			} else {
 				const id = uid();
-				const updatedData = produce(
-					cloneDeep(updatedScorecard),
-					(draft: any) => {
-						set(draft, "id", id);
-					},
-				);
+				const updatedData = produce(cloneDeep(updatedScorecard), (draft) => {
+					set(draft, "id", id);
+				});
 				await createNewScorecard(cloneDeep(updatedData));
 				show({
 					message: i18n.t("Scorecard added successfully"),
@@ -137,12 +134,16 @@ export default function useScorecardManage() {
 					});
 				} else {
 					const id = uid();
-					const updatedData = produce(updatedScorecard, (draft: any) => {
+					const updatedData = produce(updatedScorecard, (draft) => {
 						set(draft, "id", id);
 					});
 					await createNewScorecard(updatedData);
 					setIsNew({ nextStepIndex: activeStepIndex + 1 });
-					history.replace(`edit/${id}?new=true`);
+
+					const nextStep = steps[activeStepIndex + 1].id;
+					navigate(`/edit/${nextStep}/${id}?new=true`, {
+						replace: true,
+					});
 				}
 			} catch (e) {
 				console.error(e);

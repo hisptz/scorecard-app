@@ -24,7 +24,7 @@ export default function ScoreCardManagement() {
 	const [helpEnabled, setHelpEnabled] = useRecoilState(HelpState);
 	const helpSteps = useRecoilValue(HelpSteps);
 	const { id: scorecardId } = useParams();
-	const { write: writeAccess }: any = useRecoilValue(
+	const { write: writeAccess } = useRecoilValue(
 		UserAuthorityOnScorecard(scorecardId),
 	);
 	const { height } = useMediaQuery();
@@ -74,34 +74,30 @@ export default function ScoreCardManagement() {
 					<div className="column">
 						<div>
 							<Stepper>
-								{steps?.map((step) => (
-									<Step
-										style={
-											step === activeStep
-												? { background: "#00695c" }
-												: undefined
-										}
-										active={step === activeStep}
-										onClick={() => onStepChange(step)}
-										key={`${step.id}-step`}
-									>
-										<StepLabel>
-											<Tooltip
-												content={step.tooltip}
-												key={`${step.id}-step`}
-											>
-												{step.label}
-											</Tooltip>
-										</StepLabel>
-									</Step>
-								))}
+								{steps?.map((step) => {
+									return (
+										<Step
+											style={
+												step === activeStep
+													? { background: "#00695c" }
+													: undefined
+											}
+											active={step === activeStep}
+											onClick={() => onStepChange(step)}
+											key={`${step.id}-step`}
+										>
+											<StepLabel>
+												<Tooltip content={step.tooltip} key={`${step.id}-step`}>
+													{step.label}
+												</Tooltip>
+											</StepLabel>
+										</Step>
+									);
+								})}
 							</Stepper>
 						</div>
 						<div className="row">
-							<div
-								className="column center"
-								style={{ flex: 1 }}
-							>
+							<div className="column center" style={{ flex: 1 }}>
 								<div
 									className="container container-bordered background-white center"
 									style={{
@@ -110,10 +106,7 @@ export default function ScoreCardManagement() {
 										minHeight: height * 0.8,
 									}}
 								>
-									<div
-										className="row"
-										style={{ height: "100%" }}
-									>
+									<div className="row" style={{ height: "100%" }}>
 										<div
 											className="column p-16"
 											style={{
@@ -132,6 +125,7 @@ export default function ScoreCardManagement() {
 													{i18n.t("Help")}
 												</Button>
 											</div>
+
 											<div style={{ height: "100%", padding: 16 }}>
 												{
 													<Suspense fallback={<FullPageLoader small />}>
@@ -142,6 +136,7 @@ export default function ScoreCardManagement() {
 													</Suspense>
 												}
 											</div>
+
 											<ButtonStrip start>
 												<Button
 													disabled={!hasPreviousStep}
