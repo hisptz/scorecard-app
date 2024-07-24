@@ -1,19 +1,13 @@
-import { useAlert } from "@dhis2/app-runtime";
-import i18n from "@dhis2/d2-i18n";
-import { Button, ButtonStrip, colors } from "@dhis2/ui";
-import { useConfirmDialog } from "@hisptz/dhis2-ui";
-import {
-	RouterState,
-	ScorecardCardImage as holderImage,
-	truncateDescription,
-	useDeleteScorecard,
-	UserAuthorityOnScorecard,
-} from "@scorecard/shared";
-import PropTypes from "prop-types";
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import { steps } from "../../../ScoreCardManagement/state/pages";
+import {useAlert} from '@dhis2/app-runtime';
+import i18n from '@dhis2/d2-i18n';
+import {Button, ButtonStrip, colors} from '@dhis2/ui';
+import {useConfirmDialog} from '@hisptz/dhis2-ui';
+import {RouterState, ScorecardCardImage as holderImage, truncateDescription, useDeleteScorecard, UserAuthorityOnScorecard,} from '@scorecard/shared';
+import PropTypes from 'prop-types';
+import React, {useState} from 'react';
+import {useNavigate} from 'react-router-dom';
+import {useRecoilValue, useSetRecoilState} from 'recoil';
+import {steps} from '../../../ScoreCardManagement/state/pages';
 
 export default function ScorecardListCard({ scorecard, grid }: any) {
 	const setRoute = useSetRecoilState(RouterState);
@@ -40,7 +34,7 @@ export default function ScorecardListCard({ scorecard, grid }: any) {
 		if (write) {
 			setRoute((prevRoute: any) => ({ ...prevRoute, previous: `/` }));
 			const initialStep = steps[0].id;
-			navigate(`/edit/${initialStep}/${id}`);
+			navigate(`/edit/${id}/${initialStep}`);
 		}
 	};
 
