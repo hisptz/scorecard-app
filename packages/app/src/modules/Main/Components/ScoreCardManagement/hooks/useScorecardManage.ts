@@ -141,7 +141,7 @@ export default function useScorecardManage() {
 					setIsNew({ nextStepIndex: activeStepIndex + 1 });
 
 					const nextStep = steps[activeStepIndex + 1].id;
-					navigate(`/edit/${nextStep}/${id}?new=true`, {
+					navigate(`/edit/${id}/${nextStep}?new=true`, {
 						replace: true,
 					});
 				}

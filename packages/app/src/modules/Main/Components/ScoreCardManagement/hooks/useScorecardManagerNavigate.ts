@@ -16,11 +16,11 @@ export default function useScorecardManagerNavigate({
 	onSave,
 	onNavigate,
 }: any) {
-	const { step = "general", id } = useParams();
+	const { id } = useParams();
 	const navigate = useNavigate();
 	const [helpStepIndex, setHelpStepIndex] = useRecoilState(HelpIndex);
 	const [activeStep, setActiveStep] = useRecoilState(ActiveStepState);
-	const { search } = useLocation();
+	const { search, pathname } = useLocation();
 	const resetNewState = useResetRecoilState(IsNewScorecardState);
 	const Component = activeStep.component;
 	const { show } = useAlert(
@@ -30,12 +30,17 @@ export default function useScorecardManagerNavigate({
 
 	useEffect(() => {
 		const searchParams = new URLSearchParams(search);
-		const currentStep = find(steps, { id: step });
 
-		if (!isEmpty(currentStep)) {
-			setActiveStep(() => {
-				return currentStep;
-			});
+		const step = pathname.substring(pathname.lastIndexOf("/") + 1);
+
+		if (!isEmpty(step)) {
+			const currentStep = find(steps, { id: step });
+
+			if (!isEmpty(currentStep)) {
+				setActiveStep(() => {
+					return currentStep;
+				});
+			}
 		}
 
 		const isNew = searchParams.get("new");
@@ -43,13 +48,13 @@ export default function useScorecardManagerNavigate({
 			setActiveStep((prevStep) => {
 				const currentIndex = findIndex(steps, ["id", prevStep.id]);
 				if (currentIndex === 0) {
-					return steps[1];
+					return steps[0];
 				} else {
 					return prevStep;
 				}
 			});
 		}
-	}, [resetNewState, search, setActiveStep, step]);
+	}, [resetNewState, search, setActiveStep, pathname, id]);
 
 	const hasNextStep = useMemo(
 		() => findIndex(steps, ["id", activeStep.id]) !== steps.length - 1,
@@ -70,18 +75,9 @@ export default function useScorecardManagerNavigate({
 			return;
 		}
 
-		// if (!(await form.trigger())) {
-		// 	show({
-		// 		message: i18n.t("Please fill in all required fields"),
-		// 		type: { info: true },
-		// 	});
-		// 	return;
-		// }
-
 		const index = findIndex(steps, ["id", activeStep.id]);
 		if (index !== steps.length - 1) {
 			onStepChange(steps[index + 1]);
-			// setActiveStep(steps[index + 1]);
 			setHelpStepIndex(0);
 		}
 	};
@@ -99,10 +95,10 @@ export default function useScorecardManagerNavigate({
 			if (isEmpty(id)) {
 				navigate(`/add/${step.id}`);
 			} else {
-				const index = findIndex(steps, ["id", step.id]);
-				if (index !== 0) {
-					navigate(`/edit/${step.id}/${id}?new=true`);
-				}
+				const searchParams = new URLSearchParams(search);
+				const isNew = searchParams.get("new");
+				const newQuery = isNew ? "?new=true" : "";
+				navigate(`/edit/${id}/${step.id}${newQuery}`);
 			}
 		},
 		[activeStep, form, navigate],
@@ -110,9 +106,8 @@ export default function useScorecardManagerNavigate({
 
 	const onPreviousStep = () => {
 		const index = findIndex(steps, ["id", activeStep.id]);
-		//Why does it not allow to go back to the "General" step??
+
 		if (index !== 0) {
-			// setActiveStep(steps[index - 1]);
 			onStepChange(steps[index - 1]);
 			setHelpStepIndex(0);
 		}

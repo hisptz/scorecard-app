@@ -63,9 +63,11 @@ export default function ScorecardActions({
 					},
 					serverVersion,
 				);
-				return window.parent.open(appUrl + "#/edit/" + scorecardId);
+				return window.parent.open(
+					appUrl + "#/edit/" + scorecardId + "/general",
+				);
 			} else {
-				navigate(`/edit/${scorecardId}`);
+				navigate(`/edit/${scorecardId}/general`);
 			}
 		}
 	};
