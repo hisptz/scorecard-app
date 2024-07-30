@@ -2,10 +2,12 @@ import { useAlert } from "@dhis2/app-runtime";
 import { useSetting } from "@dhis2/app-service-datastore";
 import i18n from "@dhis2/d2-i18n";
 import { Button, ButtonStrip, DropdownButton, Input, Tooltip } from "@dhis2/ui";
-import AddIcon from "@material-ui/icons/Add";
-import HelpIcon from "@material-ui/icons/Help";
-import ListViewIcon from "@material-ui/icons/Reorder";
-import GridViewIcon from "@material-ui/icons/ViewModule";
+import {
+	IconAdd24,
+	IconList24,
+	IconQuestionFilled24,
+	IconApps24,
+} from "@dhis2/ui-icons";
 import {
 	FullPageLoader,
 	HelpState,
@@ -127,7 +129,7 @@ export default function ScorecardList() {
 								<DropdownButton
 									type="button"
 									component={<HelpMenu />}
-									icon={<HelpIcon />}
+									icon={<IconQuestionFilled24 />}
 								>
 									{i18n.t("Help")}
 								</DropdownButton>
@@ -145,9 +147,9 @@ export default function ScorecardList() {
 										dataTest="scorecard-view-orientation"
 										icon={
 											scorecardViewType === "grid" ? (
-												<ListViewIcon />
+												<IconList24 />
 											) : (
-												<GridViewIcon />
+												<IconApps24 />
 											)
 										}
 									/>
@@ -157,7 +159,7 @@ export default function ScorecardList() {
 									className="add-scorecard-button"
 									onClick={onAddClick}
 									primary
-									icon={<AddIcon />}
+									icon={<IconAdd24 />}
 								>
 									{i18n.t("Add New Scorecard")}
 								</Button>
