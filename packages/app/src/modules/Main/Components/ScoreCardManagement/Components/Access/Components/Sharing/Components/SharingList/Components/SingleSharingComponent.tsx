@@ -1,8 +1,7 @@
 import i18n from "@dhis2/d2-i18n";
 import { Button, ButtonStrip, colors, MenuItem } from "@dhis2/ui";
 import { ScorecardAccess } from "@scorecard/shared";
-import DeleteIcon from "@material-ui/icons/Delete";
-import EditIcon from "@material-ui/icons/Edit";
+import { IconDelete24, IconEdit24 } from "@dhis2/ui-icons";
 import { cloneDeep, set } from "lodash";
 import PropTypes from "prop-types";
 import React, { useState } from "react";
@@ -39,7 +38,7 @@ export default function SingleSharingComponent({
 						<ButtonStrip className="edit-delete-access">
 							<Button
 								onClick={(_: any, e: any) => setRef(e.currentTarget)}
-								icon={<EditIcon />}
+								icon={<IconEdit24 />}
 							>
 								{i18n.t("Edit")}
 							</Button>
@@ -48,7 +47,7 @@ export default function SingleSharingComponent({
 									onClick={() => {
 										onDelete(access);
 									}}
-									icon={<DeleteIcon />}
+									icon={<IconDelete24 />}
 								>
 									{i18n.t("Delete")}
 								</Button>
