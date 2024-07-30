@@ -1,94 +1,94 @@
 {
-  "name": "widget",
-  "description": "Scorecard widget for the interactive scorecard app",
-  "homepage": ".",
-  "version": "2.6.3",
-  "private": true,
-  "developer": {
-    "name": "Hisp Tanzania",
-    "url": "https://hisptanzania.org"
-  },
-  "icons": {
-    "16": "favicon-16x16.png",
-    "32": "favicon-32x32.png",
-    "48": "dhis2-app-icon.png"
-  },
-  "manifest.webapp": {
-    "name": "Interactive Scorecard Widget",
-    "description": "Score card widget",
-    "appType": "DASHBOARD_WIDGET",
-    "activities": {
-      "dhis": {
-        "href": "*"
-      }
-    }
-  },
-  "scripts": {
-    "generate-translations": "d2-app-scripts i18n generate",
-    "extract-translations": "d2-app-scripts i18n extract",
-    "prestart": "yarn extract-translations && yarn generate-translations",
-    "start": "react-scripts start -p 3001",
-    "prebuild": "yarn extract-translations && yarn generate-translations && rimraf build",
-    "build": "./build.sh",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "deploy": "d2-app-scripts deploy"
-  },
-  "dependencies": {
-    "@dhis2/app-runtime": "^3.9.4",
-    "@dhis2/app-service-datastore": "^1.0.0-alpha.2",
-    "@dhis2/d2-i18n": "^1.1.0",
-    "@dhis2/ui": "^8.15.1",
-    "@iapps/function-analytics": "^1.0.0-beta.24",
-    "@material-ui/core": "^4.12.3",
-    "@material-ui/icons": "^4.11.2",
-    "@scorecard/shared": "*",
-    "async": "^3.2.3",
-    "async-es": "^3.2.4",
-    "file-saver": "^2.0.5",
-    "immer": "^9.0.12",
-    "intro.js": "^5.0.0",
-    "intro.js-react": "^0.5.0",
-    "lodash": "^4.17.21",
-    "luxon": "^2.3.0",
-    "react": "^16.14.0",
-    "react-color": "^2.19.3",
-    "react-dnd": "^15.1.1",
-    "react-dnd-html5-backend": "^15.1.2",
-    "react-dom": "^16.14.0",
-    "react-error-boundary": "^3.1.4",
-    "react-js-loading-shimmer": "^1.0.10",
-    "react-jsx-parser": "^1.29.0",
-    "react-router-dom": "5",
-    "react-to-print": "^2.14.4",
-    "react-web-vitals": "^1.0.1",
-    "recoil": "^0.6.1",
-    "rxjs": "^7.5.4",
-    "typeface-roboto": "^0.0.75",
-    "xlsx": "^0.18.0"
-  },
-  "devDependencies": {
-    "@dhis2/cli-app-scripts": "^9.0.0",
-    "@dhis2/cli-style": "^4.1.1",
-    "@types/node": "^20.14.11",
-    "@types/react": "^18.3.3",
-    "@types/react-dom": "^18.3.0",
-    "bestzip": "^2.1.4",
-    "d2-manifest": "^1.0.0",
-    "react-scripts": "^5.0.1",
-    "rimraf": "^3.0.0",
-    "typescript": "^5.5.3"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+	"name": "widget",
+	"description": "Scorecard widget for the interactive scorecard app",
+	"homepage": ".",
+	"version": "2.6.3",
+	"private": true,
+	"developer": {
+		"name": "Hisp Tanzania",
+		"url": "https://hisptanzania.org"
+	},
+	"icons": {
+		"16": "favicon-16x16.png",
+		"32": "favicon-32x32.png",
+		"48": "dhis2-app-icon.png"
+	},
+	"manifest.webapp": {
+		"name": "Interactive Scorecard Widget",
+		"description": "Score card widget",
+		"appType": "DASHBOARD_WIDGET",
+		"activities": {
+			"dhis": {
+				"href": "*"
+			}
+		}
+	},
+	"scripts": {
+		"generate-translations": "d2-app-scripts i18n generate",
+		"extract-translations": "d2-app-scripts i18n extract",
+		"prestart": "yarn extract-translations && yarn generate-translations",
+		"start": "react-scripts start -p 3001",
+		"prebuild": "yarn extract-translations && yarn generate-translations && rimraf build",
+		"build": "./build.sh",
+		"test": "react-scripts test",
+		"eject": "react-scripts eject",
+		"deploy": "d2-app-scripts deploy"
+	},
+	"dependencies": {
+		"@dhis2/app-runtime": "^3.9.4",
+		"@dhis2/app-service-datastore": "^1.0.0-alpha.2",
+		"@dhis2/d2-i18n": "^1.1.0",
+		"@dhis2/ui": "^9.10.2",
+		"@iapps/function-analytics": "^1.0.0-beta.24",
+		"@material-ui/core": "^4.12.3",
+		"@material-ui/icons": "^4.11.2",
+		"@scorecard/shared": "*",
+		"async": "^3.2.3",
+		"async-es": "^3.2.4",
+		"file-saver": "^2.0.5",
+		"immer": "^9.0.12",
+		"intro.js": "^5.0.0",
+		"intro.js-react": "^0.5.0",
+		"lodash": "^4.17.21",
+		"luxon": "^2.3.0",
+		"react": "^16.14.0",
+		"react-color": "^2.19.3",
+		"react-dnd": "^15.1.1",
+		"react-dnd-html5-backend": "^15.1.2",
+		"react-dom": "^16.14.0",
+		"react-error-boundary": "^3.1.4",
+		"react-js-loading-shimmer": "^1.0.10",
+		"react-jsx-parser": "^1.29.0",
+		"react-router-dom": "5",
+		"react-to-print": "^2.14.4",
+		"react-web-vitals": "^1.0.1",
+		"recoil": "^0.6.1",
+		"rxjs": "^7.5.4",
+		"typeface-roboto": "^0.0.75",
+		"xlsx": "^0.18.0"
+	},
+	"devDependencies": {
+		"@dhis2/cli-app-scripts": "^11.7.0",
+		"@dhis2/cli-style": "^4.1.1",
+		"@types/node": "^20.14.11",
+		"@types/react": "^18.3.3",
+		"@types/react-dom": "^18.3.0",
+		"bestzip": "^2.1.4",
+		"d2-manifest": "^1.0.0",
+		"react-scripts": "^5.0.1",
+		"rimraf": "^3.0.0",
+		"typescript": "^5.5.3"
+	},
+	"browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
+	}
 }
