@@ -30,7 +30,7 @@ export default function PeriodTypeSelector({ label, name }: any) {
 						label={label}
 						required
 						filterable
-						selected={field.value}
+						selected={field.value.toString().toUpperCase()}
 						onChange={({ selected }: any) => field.onChange(selected)}
 						validationText={fieldState.error?.message}
 						error={!!fieldState.error}
