@@ -1,6 +1,6 @@
 import i18n from "@dhis2/d2-i18n";
 import { Button, Input } from "@dhis2/ui";
-import AddIcon from "@material-ui/icons/Add";
+import { IconAdd24 } from "@dhis2/ui-icons";
 import {
 	DataSelection,
 	ScorecardConfigEditState,
@@ -37,8 +37,7 @@ export default function DataGroupArea({ onGroupAdd }: any) {
 									return find(
 										dataHolderIndicator?.dataSources,
 										(dataHolderIndicatorSelections) => {
-											const searchIndex =
-												`${dataHolderIndicatorSelections.name} ${dataHolderIndicatorSelections.label}`.toLowerCase();
+											const searchIndex = `${dataHolderIndicatorSelections.name} ${dataHolderIndicatorSelections.label}`.toLowerCase();
 											return searchIndex.match(
 												new RegExp(keyword.toLowerCase()),
 											);
@@ -56,29 +55,28 @@ export default function DataGroupArea({ onGroupAdd }: any) {
 	);
 
 	const onDragEnd = useRecoilCallback(
-		({ set }) =>
-			(result) => {
-				const { destination, source }: any = result ?? {};
-				setValue(
-					"dataSelection",
-					DataSelection.set(dataSelection, "dataGroups", [
-						...updateListFromDragAndDrop(
-							dataSelection?.dataGroups,
-							source?.index,
-							destination?.index,
-						),
-					]),
-				);
-				set(ScorecardConfigEditState, (prevState: any) => {
-					if (prevState.selectedGroupIndex === source?.index) {
-						return {
-							...prevState,
-							selectedGroupIndex: destination?.index,
-						};
-					}
-					return prevState;
-				});
-			},
+		({ set }) => (result) => {
+			const { destination, source }: any = result ?? {};
+			setValue(
+				"dataSelection",
+				DataSelection.set(dataSelection, "dataGroups", [
+					...updateListFromDragAndDrop(
+						dataSelection?.dataGroups,
+						source?.index,
+						destination?.index,
+					),
+				]),
+			);
+			set(ScorecardConfigEditState, (prevState: any) => {
+				if (prevState.selectedGroupIndex === source?.index) {
+					return {
+						...prevState,
+						selectedGroupIndex: destination?.index,
+					};
+				}
+				return prevState;
+			});
+		},
 		[dataSelection, setValue],
 	);
 
@@ -105,13 +103,10 @@ export default function DataGroupArea({ onGroupAdd }: any) {
 					<DataGroups />
 				</DragDropContext>
 			</div>
-			<div
-				className="p-8 column"
-				style={{ alignItems: "start" }}
-			>
+			<div className="p-8 column" style={{ alignItems: "start" }}>
 				<Button
 					onClick={onGroupAdd}
-					icon={<AddIcon />}
+					icon={<IconAdd24 />}
 					dataTest="scocecard-add-group-button"
 					className="scorecard-add-group-button"
 				>
