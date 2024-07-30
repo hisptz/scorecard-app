@@ -8,6 +8,10 @@
 	},
 	"dependencies": {
 		"@dhis2/ui": "^9.10.2",
+		"@hisptz/dhis2-ui": "^1.0.49",
+		"@material-ui/icons": "^4.11.2",
+		"@iapps/period-utilities": "^1.0.0-beta.5",
+		"react-dnd": "^15.1.1",
 		"jquery": "^3.6.4",
 		"react-hook-form": "^7.43.8",
 		"react-router-dom": "^6.25.1"
