@@ -9,7 +9,7 @@ import {
 	ModalTitle,
 } from "@dhis2/ui";
 import { PeriodSelectorModal } from "@hisptz/dhis2-ui";
-import { Period } from "@iapps/period-utilities";
+import { createFixedPeriodFromPeriodId } from "@dhis2/multi-calendar-dates";
 import { SystemSettingsState } from "@scorecard/shared";
 import { compact, isEmpty } from "lodash";
 import PropTypes from "prop-types";
@@ -48,11 +48,7 @@ export default function PeriodSpecificTargetsModal({
 	}, [onClose, onUpdate, target]);
 
 	return (
-		<Modal
-			onClose={onClose}
-			hide={!open}
-			position="middle"
-		>
+		<Modal onClose={onClose} hide={!open} position="middle">
 			<ModalTitle>{i18n.t("Period Specific Targets")}</ModalTitle>
 			<ModalContent>
 				<div className="column w-100 gap-16">
@@ -65,10 +61,10 @@ export default function PeriodSpecificTargetsModal({
 								value={target?.items
 									?.map((item: any) => {
 										if (item) {
-											return new Period()
-												.setPreferences({ allowFuturePeriods: true })
-												.setCalendar(calendar)
-												.getById(item)?.name;
+											return createFixedPeriodFromPeriodId({
+												calendar: calendar,
+												periodId: item,
+											}).displayName;
 										}
 									})
 									?.join(", ")}
@@ -96,9 +92,10 @@ export default function PeriodSpecificTargetsModal({
 							hide={!periodSelectorOpen}
 							onUpdate={(periods) => {
 								setTarget((prevState: any) => {
+									//Changed period[0]?.id to period[0]
 									return {
 										...prevState,
-										items: [periods[0]?.id],
+										items: [periods[0]],
 									};
 								});
 								setPeriodSelectorOpen(false);
@@ -138,10 +135,7 @@ export default function PeriodSpecificTargetsModal({
 			<ModalActions>
 				<ButtonStrip>
 					<Button onClick={onClose}>{i18n.t("Cancel")}</Button>
-					<Button
-						onClick={onUpdateClick}
-						primary
-					>
+					<Button onClick={onUpdateClick} primary>
 						{i18n.t("Update")}
 					</Button>
 				</ButtonStrip>
