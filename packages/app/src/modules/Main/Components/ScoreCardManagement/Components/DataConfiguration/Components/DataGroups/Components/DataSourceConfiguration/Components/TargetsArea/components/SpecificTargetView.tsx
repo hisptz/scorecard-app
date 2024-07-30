@@ -1,6 +1,6 @@
 import i18n from "@dhis2/d2-i18n";
 import { Button, colors, Tag } from "@dhis2/ui";
-import { Period } from "@iapps/period-utilities";
+import { createFixedPeriodFromPeriodId } from "@dhis2/multi-calendar-dates";
 import { SelectedOrgUnits, SystemSettingsState } from "@scorecard/shared";
 import { find } from "lodash";
 import PropTypes from "prop-types";
@@ -15,10 +15,7 @@ function LegendsView({ legends, legendDefinitions }: any) {
 				const legendDefinition =
 					find(legendDefinitions, { id: legendDefinitionId }) ?? {};
 				return (
-					<div
-						className="row gap-8 align-items-center"
-						key={index}
-					>
+					<div className="row gap-8 align-items-center" key={index}>
 						<div
 							style={{
 								height: 32,
@@ -78,10 +75,7 @@ export function OrgUnitSpecificTargetView({
 			</div>
 			<div>
 				<p>{i18n.t("Legends")}</p>
-				<LegendsView
-					legends={legends}
-					legendDefinitions={legendDefinitions}
-				/>
+				<LegendsView legends={legends} legendDefinitions={legendDefinitions} />
 			</div>
 			<div>
 				<p>{i18n.t(`Other Organisation Units`)}</p>
@@ -122,10 +116,10 @@ export function PeriodSpecificTargetView({
 						return (
 							<Tag key={`${item}-tag`}>
 								{
-									new Period()
-										.setPreferences({ allowFuturePeriods: true })
-										.setCalendar(calendar)
-										.getById(item)?.name
+									createFixedPeriodFromPeriodId({
+										calendar: calendar,
+										periodId: item,
+									}).displayName
 								}
 							</Tag>
 						);
@@ -134,10 +128,7 @@ export function PeriodSpecificTargetView({
 			</div>
 			<div>
 				<p>{i18n.t("Legends")}</p>
-				<LegendsView
-					legends={legends}
-					legendDefinitions={legendDefinitions}
-				/>
+				<LegendsView legends={legends} legendDefinitions={legendDefinitions} />
 			</div>
 			<div>
 				<p>{i18n.t(`Other ${getTypeLabel(type)}`)}</p>
