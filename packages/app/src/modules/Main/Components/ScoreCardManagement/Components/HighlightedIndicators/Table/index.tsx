@@ -11,7 +11,7 @@ import {
 import { Help } from "@scorecard/shared";
 import { HIGHLIGHTED_TABLE_HELP_STEPS } from "@scorecard/shared";
 import { ScorecardConfigEditState } from "@scorecard/shared";
-import DeleteIcon from "@material-ui/icons/Delete";
+import { IconDelete24 } from "@dhis2/ui-icons";
 import { cloneDeep, findIndex, get, isEmpty, remove } from "lodash";
 import React, { Fragment, useCallback } from "react";
 import { useFormContext } from "react-hook-form";
@@ -79,25 +79,15 @@ export default function HighlightedIndicatorsTable() {
 	return !isEmpty(highlightedIndicators) ? (
 		<Fragment>
 			<Help helpSteps={HIGHLIGHTED_TABLE_HELP_STEPS} />
-			<DataTable
-				fixed
-				scrollHeight={"75vh"}
-			>
+			<DataTable fixed scrollHeight={"75vh"}>
 				<DataTableHead>
 					<DataTableRow>
 						{columns?.map(({ label, path }) => (
-							<DataTableColumnHeader
-								fixed
-								top={"0"}
-								key={`${path}-column`}
-							>
+							<DataTableColumnHeader fixed top={"0"} key={`${path}-column`}>
 								{label}
 							</DataTableColumnHeader>
 						))}
-						<DataTableColumnHeader
-							fixed
-							top={"0"}
-						/>
+						<DataTableColumnHeader fixed top={"0"} />
 					</DataTableRow>
 				</DataTableHead>
 				<TableBody>
@@ -122,7 +112,7 @@ export default function HighlightedIndicatorsTable() {
 										e.stopPropagation();
 										onRemove(data?.id);
 									}}
-									icon={<DeleteIcon />}
+									icon={<IconDelete24 />}
 								>
 									{i18n.t("Delete")}
 								</Button>
