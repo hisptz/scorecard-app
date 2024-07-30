@@ -1,7 +1,7 @@
 import { colors } from "@dhis2/ui";
 import { getDataSourceShortName } from "@scorecard/shared";
 import { Avatar, IconButton } from "@material-ui/core";
-import CloseIcon from "@material-ui/icons/Close";
+import { IconCross24 } from "@dhis2/ui-icons";
 import PropTypes from "prop-types";
 import React from "react";
 import { Draggable } from "react-beautiful-dnd";
@@ -11,10 +11,7 @@ export default function LinkedDataSource({ index, onDelete, dataSource }: any) {
 	const selected = false;
 
 	return (
-		<Draggable
-			draggableId={id}
-			index={index}
-		>
+		<Draggable draggableId={id} index={index}>
 			{(provided: any) => (
 				<div
 					{...provided.draggableProps}
@@ -41,7 +38,7 @@ export default function LinkedDataSource({ index, onDelete, dataSource }: any) {
 									}}
 									className="data-source close-icon"
 								>
-									<CloseIcon />
+									<IconCross24 />
 								</IconButton>
 							</div>
 						</div>
