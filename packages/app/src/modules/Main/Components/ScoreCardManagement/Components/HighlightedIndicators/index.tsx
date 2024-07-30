@@ -5,7 +5,7 @@ import { HIGHLIGHTED_INDICATOR_HELP_STEPS } from "@scorecard/shared";
 import { ScorecardIndicator } from "@scorecard/shared";
 import { ScorecardConfigEditState } from "@scorecard/shared";
 import { generateLegendDefaults } from "@scorecard/shared";
-import AddIcon from "@material-ui/icons/Add";
+import { IconAdd24 } from "@dhis2/ui-icons";
 import { isEmpty } from "lodash";
 import React, { Fragment, useCallback, useState } from "react";
 import { useFormContext } from "react-hook-form";
@@ -73,10 +73,7 @@ export default function HighlightedIndicatorsScorecardForm() {
 	);
 
 	return (
-		<div
-			className="column"
-			style={{ height: "100%" }}
-		>
+		<div className="column" style={{ height: "100%" }}>
 			<Help helpSteps={HIGHLIGHTED_INDICATOR_HELP_STEPS} />
 			<h3>{i18n.t("Highlighted Indicators")}</h3>
 			{!isEmpty(highlightedIndicators) ? (
@@ -85,7 +82,7 @@ export default function HighlightedIndicatorsScorecardForm() {
 						<Button
 							className="add-highlighted-indicator-button"
 							onClick={onAddClick}
-							icon={<AddIcon />}
+							icon={<IconAdd24 />}
 						>
 							{i18n.t("Add")}
 						</Button>
@@ -106,7 +103,7 @@ export default function HighlightedIndicatorsScorecardForm() {
 					<Button
 						className="add-highlighted-indicator-button"
 						onClick={onAddClick}
-						icon={<AddIcon />}
+						icon={<IconAdd24 />}
 					>
 						{i18n.t("Add Highlighted Indicator")}
 					</Button>
