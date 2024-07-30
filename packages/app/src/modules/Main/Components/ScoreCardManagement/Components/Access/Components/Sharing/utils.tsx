@@ -1,8 +1,6 @@
 import i18n from "@dhis2/d2-i18n";
 import { ScorecardAccessType } from "@scorecard/shared";
-import UserGroupIcon from "@material-ui/icons/People";
-import UserIcon from "@material-ui/icons/Person";
-import PublicIcon from "@material-ui/icons/Public";
+import { IconUser24, IconUserGroup24, IconWorld24 } from "@dhis2/ui-icons";
 import React from "react";
 
 export function getAccessName(access = "") {
@@ -19,10 +17,10 @@ export function getAccessName(access = "") {
 export function getAccessIcon(type = "") {
 	switch (type) {
 		case "public":
-			return <PublicIcon />;
+			return <IconWorld24 />;
 		case "user":
-			return <UserIcon />;
+			return <IconUser24 />;
 		case "userGroup":
-			return <UserGroupIcon />;
+			return <IconUserGroup24 />;
 	}
 }
