@@ -2,8 +2,7 @@ import i18n from "@dhis2/d2-i18n";
 import { Button } from "@dhis2/ui";
 import { ErrorIcon } from "@scorecard/shared";
 import { IconButton } from "@material-ui/core";
-import DeleteIcon from "@material-ui/icons/Delete";
-import EditIcon from "@material-ui/icons/Edit";
+import { IconEdit24, IconDelete24 } from "@dhis2/ui-icons";
 import PropTypes from "prop-types";
 import React from "react";
 
@@ -42,7 +41,7 @@ export default function GroupTitle({
 					size="small"
 					className="accordion-title-edit"
 				>
-					<EditIcon />
+					<IconEdit24 />
 				</IconButton>
 			</div>
 			<div className="">
@@ -55,16 +54,13 @@ export default function GroupTitle({
 								onDelete(id);
 							}
 						}}
-						icon={<DeleteIcon />}
+						icon={<IconDelete24 />}
 					>
 						{i18n.t("Delete")}
 					</Button>
 					{error && (
 						<div style={{ paddingLeft: 16 }}>
-							<ErrorIcon
-								color={"#f44336"}
-								size={24}
-							/>
+							<ErrorIcon color={"#f44336"} size={24} />
 						</div>
 					)}
 				</div>
