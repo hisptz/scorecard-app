@@ -1,7 +1,6 @@
 import i18n from "@dhis2/d2-i18n";
 import { Button, colors, Tooltip } from "@dhis2/ui";
-import AddIcon from "@material-ui/icons/Add";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import { IconAdd24, IconArrowDown24, IconChevronDown24 } from "@dhis2/ui-icons";
 import { ScorecardIndicatorGroup } from "@scorecard/shared";
 import { isEmpty } from "lodash";
 import PropTypes from "prop-types";
@@ -49,16 +48,12 @@ function DataGroup(
 	const summaryRef = useRef();
 
 	return (
-		<Draggable
-			ref={ref}
-			index={index}
-			draggableId={id}
-		>
+		<Draggable ref={ref} index={index} draggableId={id}>
 			{(provided: any) => (
 				<Accordion
 					innerRef={provided.innerRef}
 					onDoubleClick={(event) => event.stopPropagation()}
-					expandIcon={<ExpandMoreIcon />}
+					expandIcon={<IconChevronDown24 />}
 					square
 					expanded={expanded === id}
 					onChange={onExpand}
@@ -73,12 +68,7 @@ function DataGroup(
 							onClick={(event) => event.stopPropagation()}
 							{...provided.draggableProps}
 							{...provided.dragHandleProps}
-							expandIcon={
-								<ExpandMoreIcon
-									className="expand-group-icon"
-									dataTest="scorecard-group-expand"
-								/>
-							}
+							expandIcon={<IconChevronDown24 key={"scorecard-group-expand"} />}
 							aria-controls={`${id}d-content`}
 							id={`${id}d--header`}
 							dataTest="scorecard-group-item"
@@ -144,7 +134,7 @@ function DataGroup(
 									className="scorecard-indicator-add"
 									dataTest="scorecard-indicator-add"
 									onClick={() => setOpenAdd(true)}
-									icon={<AddIcon />}
+									icon={<IconAdd24 />}
 								>
 									{i18n.t("Add Item")}
 								</Button>
