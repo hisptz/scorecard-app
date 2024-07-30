@@ -1,7 +1,7 @@
 import i18n from "@dhis2/d2-i18n";
 import { Button, ButtonStrip, Tooltip } from "@dhis2/ui";
 import { Step, StepLabel, Stepper } from "@material-ui/core";
-import HelpIcon from "@material-ui/icons/Help";
+import { IconQuestionFilled24 } from "@dhis2/ui-icons";
 import {
 	AccessDeniedPage,
 	FullPageLoader,
@@ -118,7 +118,7 @@ export default function ScoreCardManagement() {
 										>
 											<div className="row end align-items-center">
 												<Button
-													icon={<HelpIcon />}
+													icon={<IconQuestionFilled24 />}
 													onClick={() => {
 														setHelpStepIndex(0);
 														setHelpEnabled(true);
