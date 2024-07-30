@@ -1,7 +1,7 @@
 import i18n from "@dhis2/d2-i18n";
 import { Button, SingleSelectField, SingleSelectOption } from "@dhis2/ui";
 import { ACCESS_TYPES } from "@scorecard/shared";
-import AddIcon from "@material-ui/icons/Add";
+import { IconAdd24 } from "@dhis2/ui-icons";
 import React, { useState } from "react";
 import useAccessManage from "../../../../../hooks/useAccessManage";
 import { getAccessName } from "../../../utils";
@@ -22,20 +22,14 @@ export default function AddSharingAccess() {
 
 	return (
 		<div className="row align-items-end add-sharing-access">
-			<div
-				className="column pr-16 user-selector"
-				style={{ width: "50%" }}
-			>
+			<div className="column pr-16 user-selector" style={{ width: "50%" }}>
 				<UserAndUserGroupSelector
 					selectedList={selectedList?.map(({ id }) => id)}
 					selected={selectedUserGroup}
 					onChange={setSelectedUserGroup}
 				/>
 			</div>
-			<div
-				className="column pr-16"
-				style={{ width: "30%" }}
-			>
+			<div className="column pr-16" style={{ width: "30%" }}>
 				<SingleSelectField
 					className="access-selector"
 					required
@@ -54,14 +48,11 @@ export default function AddSharingAccess() {
 					))}
 				</SingleSelectField>
 			</div>
-			<div
-				className="column"
-				style={{ width: "20%" }}
-			>
+			<div className="column" style={{ width: "20%" }}>
 				<Button
 					className="add-access-button"
 					onClick={onAddClick}
-					icon={<AddIcon />}
+					icon={<IconAdd24 />}
 				>
 					{i18n.t("Add")}
 				</Button>
