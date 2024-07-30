@@ -3,7 +3,7 @@ import { Button } from "@dhis2/ui";
 import { ScorecardIndicator } from "@scorecard/shared";
 import { getDataSourceShortName } from "@scorecard/shared";
 import { Avatar } from "@material-ui/core";
-import DeleteIcon from "@material-ui/icons/Delete";
+import { IconDelete16 } from "@dhis2/ui-icons";
 import PropTypes from "prop-types";
 import React from "react";
 
@@ -27,7 +27,7 @@ export default function DataSource({ dataSource, index, onDelete }: any) {
 								event.stopPropagation();
 								onDelete(index);
 							}}
-							icon={<DeleteIcon />}
+							icon={<IconDelete16 />}
 						>
 							{i18n.t("Delete")}
 						</Button>
