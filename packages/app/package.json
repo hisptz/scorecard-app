@@ -1,6 +1,6 @@
 {
 	"name": "app",
-	"version": "2.6.2",
+	"version": "2.6.2-beta20",
 	"description": "Interactive Scorecard Application",
 	"license": "BSD-3-Clause",
 	"private": true,
@@ -45,7 +45,7 @@
 		"wait-on": "^6.0.0"
 	},
 	"dependencies": {
-		"@dhis2/app-runtime": "^3.9.4",
+		"@dhis2/app-runtime": "^3.10.6",
 		"@dhis2/app-service-datastore": "^1.0.0-alpha.2",
 		"@dhis2/multi-calendar-dates": "^1.2.3",
 		"@dhis2/ui": "^9.10.2",
@@ -54,6 +54,7 @@
 		"@hisptz/dhis2-utils": "^2.0.5",
 		"@iapps/function-analytics": "^1.0.0-beta.23",
 		"@material-ui/core": "^4.11.4",
+		"@krakenjs/post-robot": "^11.0.0",
 		"@scorecard/shared": "*",
 		"async": "^3.2.0",
 		"async-es": "^3.2.4",
