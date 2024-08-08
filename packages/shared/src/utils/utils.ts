@@ -299,7 +299,10 @@ export function sortDataSourcesBasedOnNames({ sort, dataSources }: any) {
 	return filteredDataSources;
 }
 
-function translateAccess(access = "") {
+function translateAccess(access: string = ""): {
+	read: boolean;
+	write: boolean;
+} {
 	const translatedAccess = {
 		read: false,
 		write: false,
@@ -313,7 +316,10 @@ function translateAccess(access = "") {
 	return translatedAccess;
 }
 
-export function getUserAuthority(user: D2User, sharing: Sharing) {
+export function getUserAuthority(
+	user: D2User,
+	sharing: Sharing,
+): { read: boolean; write: boolean } {
 	const {
 		users,
 		userGroups,
@@ -321,7 +327,7 @@ export function getUserAuthority(user: D2User, sharing: Sharing) {
 		owner: userId,
 	} = sharing ?? {};
 	if (user.id === userId) {
-		return { ...translateAccess("rw-----"), delete: true };
+		return { ...translateAccess("rw-----") };
 	}
 
 	if (!isEmpty(users)) {

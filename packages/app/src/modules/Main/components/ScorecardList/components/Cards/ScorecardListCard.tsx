@@ -1,14 +1,13 @@
-import i18n from "@dhis2/d2-i18n";
-import { Button, ButtonStrip, colors } from "@dhis2/ui";
+import { colors } from "@dhis2/ui";
 import {
 	ScorecardCardImage as holderImage,
 	truncateDescription,
-	UserAuthorityOnScorecard,
 } from "@scorecard/shared";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useRecoilValue } from "recoil";
 import { ScorecardListItem } from "../../types";
+import { useScorecardSharingSettings } from "../../hooks/authority";
+import { ScorecardListCardActions } from "./ScorecardListCardActions";
 
 export default function ScorecardListCard({
 	scorecard,
@@ -17,9 +16,8 @@ export default function ScorecardListCard({
 	scorecard: ScorecardListItem;
 	grid: boolean;
 }) {
-	const { write, delete: deletePermission } = useRecoilValue(
-		UserAuthorityOnScorecard(scorecard?.id),
-	);
+	const { write, read } = useScorecardSharingSettings(scorecard);
+
 	const { title, description, id } = scorecard ?? {};
 	const [showFullDescription, setShowFullDescription] = useState(false);
 	const navigate = useNavigate();
@@ -27,6 +25,7 @@ export default function ScorecardListCard({
 	const onView = () => {
 		navigate(`/view/${id}`);
 	};
+
 	return grid ? (
 		<div
 			className="container-bordered p-16 "
@@ -68,28 +67,7 @@ export default function ScorecardListCard({
 					</p>
 				</div>
 				<div style={{ margin: "0 8px" }}>
-					<ButtonStrip middle>
-						<Button onClick={onView}>{i18n.t("View")}</Button>
-						{write && (
-							<Button
-								dataTest={"edit-scorecard-button"}
-								onClick={function (_: any, e: any) {
-									e.stopPropagation();
-									onEdit();
-								}}
-							>
-								{i18n.t("Edit")}
-							</Button>
-						)}
-						{deletePermission && (
-							<Button
-								dataTest="scorecard-delete-button"
-								onClick={onDelete}
-							>
-								{i18n.t("Delete")}
-							</Button>
-						)}
-					</ButtonStrip>
+					<ScorecardListCardActions scorecard={scorecard} />
 				</div>
 			</div>
 		</div>

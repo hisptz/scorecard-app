@@ -9,7 +9,7 @@ export default function GridScorecardDisplay({
 }) {
 	return (
 		<div className="scorecard-list-container grid p-32">
-			{scorecards?.map((scorecard: any) => (
+			{scorecards?.map((scorecard) => (
 				<ScorecardListCard
 					grid
 					key={scorecard.id}

@@ -49,12 +49,22 @@ export function useScorecardSharingSettings({ id }: { id: string }) {
 			},
 		},
 	);
-	return useMemo(() => {
+	const access = useMemo(() => {
 		if (!data) {
-			return;
+			return {
+				write: false,
+				read: false,
+				delete: false,
+			};
 		} else {
 			const sharing = data.meta.sharing;
 			return getUserAuthority(user, sharing);
 		}
 	}, [data, user]);
+
+	return {
+		access,
+		loading,
+		error,
+	};
 }

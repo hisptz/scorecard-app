@@ -1,4 +1,4 @@
-import { Button, ButtonStrip } from "@dhis2/ui";
+import { Button, ButtonStrip, CircularLoader } from "@dhis2/ui";
 import i18n from "@dhis2/d2-i18n";
 import React from "react";
 import { useScorecardSharingSettings } from "../../hooks/authority";
@@ -15,7 +15,11 @@ export interface ScorecardListCardActionsProps {
 export function ScorecardListCardActions({
 	scorecard,
 }: ScorecardListCardActionsProps) {
-	const accessConfig = useScorecardSharingSettings({
+	const {
+		access: accessConfig,
+		loading,
+		error,
+	} = useScorecardSharingSettings({
 		id: scorecard.id,
 	});
 	const navigate = useNavigate();
@@ -28,8 +32,21 @@ export function ScorecardListCardActions({
 	);
 	const { remove } = useDeleteScorecard(scorecard.id);
 
-	if (!accessConfig) {
-		return null;
+	if (loading) {
+		return (
+			<div className="column w-100 center align-content-center">
+				<CircularLoader extrasmall />
+			</div>
+		);
+	}
+
+	if (error) {
+		const message = error.message;
+		return (
+			<div>
+				{i18n.t("Could not determine scorecard's access")}: {message}
+			</div>
+		);
 	}
 
 	const onView = () => {
@@ -42,7 +59,7 @@ export function ScorecardListCardActions({
 		if (write) {
 			try {
 				await remove();
-			} catch (e) {
+			} catch (e: any) {
 				show({
 					message: e.message,
 					type: { info: true },
@@ -59,7 +76,6 @@ export function ScorecardListCardActions({
 			navigate(`/edit/${scorecard.id}`);
 		}
 	};
-
 	const onDelete = (value: any, event: any) => {
 		event.stopPropagation();
 		confirm({
@@ -79,7 +95,7 @@ export function ScorecardListCardActions({
 
 	return (
 		<ButtonStrip middle>
-			<Button onClick={onView}>{i18n.t("View")}</Button>
+			{read && <Button onClick={onView}>{i18n.t("View")}</Button>}
 			{write && (
 				<Button
 					dataTest={"edit-scorecard-button"}
