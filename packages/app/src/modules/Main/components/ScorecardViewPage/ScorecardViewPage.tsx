@@ -5,9 +5,14 @@ import i18n from "@dhis2/d2-i18n";
 import { useEffect } from "react";
 import { useDimensions } from "./hooks/dimensions";
 import { OrgUnitSelection } from "@hisptz/dhis2-utils";
+import { ScorecardActions } from "./components/ScorecardActions/ScorecardActions";
+import { ScorecardStateProvider } from "./state/state";
+import { ScorecardView } from "./components/ScorecardView";
+import { ScorecardConfigProvider } from "./state/config";
+import { ScorecardHeader } from "./components/ScorecardHeader";
 
 export function ScorecardViewPage() {
-	const { setDimensions } = useDimensions();
+	const { setDimensions, orgUnit, periods } = useDimensions();
 	const { config, loading, error, refetch } = useScorecardConfig();
 
 	useEffect(() => {
@@ -36,6 +41,16 @@ export function ScorecardViewPage() {
 			/>
 		);
 	}
+	if (!config) {
+		return (
+			<FullPageError
+				resetErrorBoundary={() => {
+					refetch();
+				}}
+				error={Error("Could not get information about the scorecard")}
+			/>
+		);
+	}
 
 	return (
 		<div
@@ -47,7 +62,32 @@ export function ScorecardViewPage() {
 				gap: 16,
 			}}
 		>
-			<DimensionFilterArea />
+			<ScorecardConfigProvider config={config}>
+				<ScorecardStateProvider
+					initialState={{
+						...config,
+						periodSelection: {
+							...config.periodSelection,
+							periods:
+								periods?.map((period) => ({ id: period })) ??
+								[],
+						},
+						orgUnitSelection: {
+							...orgUnit,
+							orgUnits: orgUnit.orgUnits ?? [],
+							groups: orgUnit.groups ?? [],
+							levels: orgUnit.levels ?? [],
+						},
+					}}
+				>
+					<DimensionFilterArea />
+					<ScorecardActions />
+					<ScorecardHeader />
+					<div className="flex-1">
+						<ScorecardView config={config} />
+					</div>
+				</ScorecardStateProvider>
+			</ScorecardConfigProvider>
 		</div>
 	);
 }

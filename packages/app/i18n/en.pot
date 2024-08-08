@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-08-08T12:12:32.681Z\n"
-"PO-Revision-Date: 2024-08-08T12:12:32.681Z\n"
+"POT-Creation-Date: 2024-08-08T12:57:40.085Z\n"
+"PO-Revision-Date: 2024-08-08T12:57:40.086Z\n"
 
 msgid "Welcome to Scorecard App!"
 msgstr "Welcome to Scorecard App!"
@@ -333,6 +333,9 @@ msgstr "of"
 msgid "Getting your scorecard configuration..."
 msgstr "Getting your scorecard configuration..."
 
+msgid "Back to all scorecards"
+msgstr "Back to all scorecards"
+
 msgid "Select organisation unit"
 msgstr "Select organisation unit"
 
@@ -341,6 +344,12 @@ msgstr "Select period"
 
 msgid "and {{number}} more"
 msgstr "and {{number}} more"
+
+msgid "Download"
+msgstr "Download"
+
+msgid "Reset"
+msgstr "Reset"
 
 msgid "Create a new scorecard in the scorecard app to see it here."
 msgstr "Create a new scorecard in the scorecard app to see it here."

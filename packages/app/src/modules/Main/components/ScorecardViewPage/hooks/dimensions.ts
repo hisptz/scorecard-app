@@ -63,9 +63,14 @@ export function useDimensions() {
 		setParam("ou")(ous.join(";"));
 	};
 
+	const noDimensionsSelected = useMemo(() => {
+		return !params.get("ou") || !params.get("pe");
+	}, [params.get("ou"), params.get("pe")]);
+
 	return {
 		periods,
 		orgUnit,
+		noDimensionsSelected,
 		setPeriod,
 		setOrgUnit,
 		setDimensions,
