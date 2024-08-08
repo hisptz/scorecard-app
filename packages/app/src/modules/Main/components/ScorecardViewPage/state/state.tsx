@@ -8,7 +8,7 @@ const ScorecardSetStateContext = createContext<ScorecardSetState | null>(null);
 export function useScorecardState() {
 	const scorecardState = useContext(ScorecardStateContext)!;
 	const setState = useContext(ScorecardSetStateContext)!;
-	return [scorecardState, setState];
+	return [scorecardState, setState] as [ScorecardState, ScorecardSetState];
 }
 
 export function ScorecardStateProvider({
