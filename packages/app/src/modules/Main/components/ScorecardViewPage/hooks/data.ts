@@ -1,10 +1,10 @@
-import { DATASTORE_NAMESPACE } from "../../../constants";
 import { ScorecardConfig } from "@hisptz/dhis2-analytics";
 import { useDataQuery } from "@dhis2/app-runtime";
 import { useParams } from "react-router-dom";
 import { useMemo } from "react";
+import { DATASTORE_NAMESPACE } from "@scorecard/shared";
 
-const query = {
+const query: any = {
 	config: {
 		resource: `dataStore/${DATASTORE_NAMESPACE}`,
 		id: ({ id }: { id: string }) => id,

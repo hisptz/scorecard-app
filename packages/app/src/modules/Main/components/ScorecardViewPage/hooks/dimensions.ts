@@ -32,6 +32,25 @@ export function useDimensions() {
 		[setParams],
 	);
 
+	const setDimensions = ({
+		orgUnitSelection,
+		periods,
+	}: {
+		orgUnitSelection: OrgUnitSelection;
+		periods: { id: string }[];
+	}) => {
+		const ous = getOrgUnitIdsFromOrgUnitSelection(orgUnitSelection);
+		setParams((prev) => {
+			if (!prev.get("ou") || !prev.get("pe")) {
+				const updatedParams = new URLSearchParams(prev);
+				updatedParams.set("ou", ous.join(";"));
+				updatedParams.set("pe", periods.map(({ id }) => id).join(";"));
+				return updatedParams;
+			}
+			return prev;
+		});
+	};
+
 	const setPeriod = useCallback(
 		(periods: string[]) => {
 			setParam("pe")(periods.join(";"));
@@ -49,5 +68,6 @@ export function useDimensions() {
 		orgUnit,
 		setPeriod,
 		setOrgUnit,
+		setDimensions,
 	};
 }

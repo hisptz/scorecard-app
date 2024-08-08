@@ -122,7 +122,10 @@ export function OrgUnitDimensionSelection() {
 		<>
 			{loading ? null : (
 				<CustomOrgUnitSelectorModal
-					selected={orgUnit}
+					selected={{
+						...orgUnit,
+						orgUnits: orgUnitWithData,
+					}}
 					onClose={hideOrgUnit}
 					hide={orgUnitHidden}
 					onSelect={setOrgUnit}
