@@ -12,17 +12,20 @@
     "start": "tsc && d2 app scripts build --watch"
   },
   "dependencies": {
+    "@dhis2/multi-calendar-dates": "^1.2.4",
     "@dhis2/ui": "^9.10.2",
     "@hisptz/dhis2-analytics": "^2.0.17",
     "@hisptz/dhis2-ui": "^2.0.14",
     "@material-ui/icons": "^4.11.2",
     "jquery": "^3.6.4",
+    "lodash": "^4.17.21",
     "react-dnd": "^15.1.1",
     "react-hook-form": "^7.43.8",
     "react-router-dom": "^6.25.1",
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@types/lodash": "^4.17.7",
     "@types/node": "^20.14.11",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",

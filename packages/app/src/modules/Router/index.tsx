@@ -14,8 +14,8 @@ const ScorecardManagement = React.lazy(
 	() => import("../Main/components/ScoreCardManagement"),
 );
 const ScorecardView = React.lazy(() =>
-	import("@scorecard/shared").then((module) => ({
-		default: module.ScorecardView,
+	import("../Main/components/ScorecardViewPage").then((module) => ({
+		default: module.ScorecardViewPage,
 	})),
 );
 const ScorecardMigration = React.lazy(

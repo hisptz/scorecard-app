@@ -55,13 +55,13 @@ export default function GeneralForm() {
 				/>
 			</div>
 			<div className="row align-items-center" style={{ gap: 24 }}>
-				<div className="col-md-4 period-type-settings">
+				<div className="col-md-4 periods-type-settings">
 					<PeriodTypeSelector
 						label={i18n.t("Period Type")}
 						name="periodType"
 					/>
 				</div>
-				<div className="flex-1 period-settings w-100">
+				<div className="flex-1 periods-settings w-100">
 					<PeriodSelector />
 				</div>
 			</div>

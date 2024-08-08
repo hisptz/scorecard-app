@@ -53,7 +53,7 @@ Contains the sub-modules:
 #### Scorecard App
 Contains the actual scorecard app implementation. It is divided into 3 modules:
  - Scorecard list: Lists all accessible scorecards
- - Scorecard view: Displays the scorecard itself and contains organisation and period filters as well as other viewing options
+ - Scorecard view: Displays the scorecard itself and contains organisation and periods filters as well as other viewing options
  - Scorecard configuration: Allows configuration of the scorecard. Divided into 5 steps
 
         

@@ -1,8 +1,4 @@
-export {
-	searchOrganisationUnit,
-	useOrganisationUnitChildren,
-	useSearchOrganisationUnit,
-} from "./useOrganisationUnits";
+export * from "./useOrganisationUnits";
 export { default as useMediaQuery } from "./useMediaQuery";
 export { default as useAllScorecards } from "./datastore/useAllScorecards";
 export {

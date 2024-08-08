@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-08-07T12:12:08.194Z\n"
-"PO-Revision-Date: 2024-08-07T12:12:08.194Z\n"
+"POT-Creation-Date: 2024-08-08T10:26:04.971Z\n"
+"PO-Revision-Date: 2024-08-08T10:26:04.971Z\n"
 
 msgid "Welcome to Scorecard App!"
 msgstr "Welcome to Scorecard App!"
@@ -276,8 +276,8 @@ msgstr "Access"
 msgid "Options"
 msgstr "Options"
 
-msgid "View"
-msgstr "View"
+msgid "Could not determine scorecard's access"
+msgstr "Could not determine scorecard's access"
 
 msgid "Scorecard deleted successfully"
 msgstr "Scorecard deleted successfully"
@@ -287,6 +287,9 @@ msgstr "Confirm scorecard delete"
 
 msgid "Are you sure you want to delete scorecard "
 msgstr "Are you sure you want to delete scorecard "
+
+msgid "View"
+msgstr "View"
 
 msgid "No scorecards found"
 msgstr "No scorecards found"
@@ -300,8 +303,11 @@ msgstr "Start a guided tour"
 msgid "Documentation"
 msgstr "Documentation"
 
-msgid "Search"
-msgstr "Search"
+msgid "Search by id, title, or description"
+msgstr "Search by id, title, or description"
+
+msgid "Clear search"
+msgstr "Clear search"
 
 msgid "Switch to {{viewType}} view"
 msgstr "Switch to {{viewType}} view"
@@ -324,6 +330,15 @@ msgstr "Migrating scorecards"
 msgid "of"
 msgstr "of"
 
+msgid "Select period"
+msgstr "Select period"
+
+msgid "Select organisation unit"
+msgstr "Select organisation unit"
+
+msgid "and {{number}} more"
+msgstr "and {{number}} more"
+
 msgid "Create a new scorecard in the scorecard app to see it here."
 msgstr "Create a new scorecard in the scorecard app to see it here."
 
@@ -335,6 +350,9 @@ msgstr "Are you sure you want to select this scorecard for this dashboard?"
 
 msgid "Select"
 msgstr "Select"
+
+msgid "Search"
+msgstr "Search"
 
 msgid "Preparing widgets migration..."
 msgstr "Preparing widgets migration..."

@@ -12,8 +12,6 @@ import LinkedCellSvg from "./ScorecardCell/Components/LinkedCellSvg";
 import ModalLoader from "./Loaders/ModalLoader";
 import FormFieldModel from "./CustomForm/models/formField.model";
 
-export * from "./ScorecardView";
-
 export { default as ErrorIcon } from "./icons/ErrorIcon";
 export { ScorecardOptionsModal } from "./modals";
 export { default as Help } from "./Help";

@@ -121,7 +121,7 @@ export default function TargetsArea({ path }: any) {
 						}}
 					>
 						<SingleSelectOption
-							value="period"
+							value="periods"
 							label={i18n.t("Period")}
 						/>
 						<SingleSelectOption
@@ -146,7 +146,7 @@ export default function TargetsArea({ path }: any) {
 						>
 							{selectedType !== "orgUnitLevel" &&
 								specificTargets?.map((target: any) =>
-									selectedType === "period" ? (
+									selectedType === "periods" ? (
 										<PeriodSpecificTargetView
 											defaultLegends={defaultLegends}
 											onDelete={() => {
@@ -186,7 +186,7 @@ export default function TargetsArea({ path }: any) {
 								)}
 						</Suspense>
 					</div>
-					{selectedType === "period" &&
+					{selectedType === "periods" &&
 					openConfigDialog &&
 					!isEmpty(specificTargets) ? (
 						<PeriodSpecificTargetsModal
