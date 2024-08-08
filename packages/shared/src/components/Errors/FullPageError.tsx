@@ -10,11 +10,18 @@ import {
 	ModalTitle,
 } from "@dhis2/ui";
 import ErrorIcon from "@material-ui/icons/Error";
-import PropTypes from "prop-types";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDataQuery } from "@dhis2/app-runtime";
+import { FallbackProps } from "react-error-boundary";
 
-function ErrorDialog({ error, onClose }: any) {
+function ErrorDialog({
+	error,
+	onClose,
+}: {
+	error: Error | ReturnType<typeof useDataQuery>["error"];
+	onClose: () => void;
+}) {
 	const { details } = error ?? {};
 	return (
 		<Modal position="middle" onClose={onClose}>
@@ -27,7 +34,9 @@ function ErrorDialog({ error, onClose }: any) {
 						border: `1px solid ${colors.grey300}`,
 					}}
 				>
-					<code style={{ fontSize: 14 }}>{JSON.stringify(details)}</code>
+					<code style={{ fontSize: 14 }}>
+						{JSON.stringify(details)}
+					</code>
 				</div>
 			</ModalContent>
 			<ModalActions>
@@ -37,12 +46,10 @@ function ErrorDialog({ error, onClose }: any) {
 	);
 }
 
-ErrorDialog.propTypes = {
-	error: PropTypes.object.isRequired,
-	onClose: PropTypes.func.isRequired,
-};
-
-export default function FullPageError({ error, resetErrorBoundary }: any) {
+export default function FullPageError({
+	error,
+	resetErrorBoundary,
+}: FallbackProps) {
 	const [errorDialogShow, setErrorDialogShow] = useState(false);
 	const navigate = useNavigate();
 
@@ -87,7 +94,9 @@ export default function FullPageError({ error, resetErrorBoundary }: any) {
 								{i18n.t("Back to scorecard list")}
 							</Button>
 						) : (
-							<Button onClick={onRefresh}>{i18n.t("Refresh")}</Button>
+							<Button onClick={onRefresh}>
+								{i18n.t("Refresh")}
+							</Button>
 						)}
 						{error?.details && (
 							<Button onClick={() => setErrorDialogShow(true)}>
@@ -106,8 +115,3 @@ export default function FullPageError({ error, resetErrorBoundary }: any) {
 		</div>
 	);
 }
-
-FullPageError.propTypes = {
-	error: PropTypes.any,
-	resetErrorBoundary: PropTypes.func,
-};

@@ -1,6 +1,5 @@
 import { DataStoreProvider } from "@dhis2/app-service-datastore";
 import { CssReset } from "@dhis2/ui";
-import { ConfirmDialogProvider } from "@hisptz/dhis2-ui";
 import {
 	DATASTORE_NAMESPACE,
 	FullPageError,
@@ -14,11 +13,12 @@ import postRobot from "@krakenjs/post-robot";
 import "./media-queries.css";
 import "./App.css";
 import "./print.css";
-import Router from "./modules/Router";
 import "./locales";
 import "intro.js/introjs.css";
 import "./intro-dhis2.css";
 import { isEmpty } from "lodash";
+import { DialogProvider } from "@hisptz/dhis2-ui";
+import Router from "./modules/Router";
 
 const MyApp = () => {
 	const { initializeState } = useInitApp();
@@ -69,13 +69,13 @@ const MyApp = () => {
 			<CssReset />
 			<RecoilRoot initializeState={initializeState}>
 				<ErrorBoundary FallbackComponent={FullPageError}>
-					<ConfirmDialogProvider>
+					<DialogProvider>
 						<Suspense fallback={<FullPageLoader />}>
 							<div className="main-container">
 								<Router />
 							</div>
 						</Suspense>
-					</ConfirmDialogProvider>
+					</DialogProvider>
 				</ErrorBoundary>
 			</RecoilRoot>
 		</DataStoreProvider>

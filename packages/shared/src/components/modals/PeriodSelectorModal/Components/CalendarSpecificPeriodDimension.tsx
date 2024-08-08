@@ -7,8 +7,7 @@ import {
 	TabBar,
 	Transfer,
 } from "@dhis2/ui";
-import { Period } from "@iapps/period-utilities";
-import { filter, head } from "lodash";
+import { head } from "lodash";
 import PropTypes from "prop-types";
 import React, { useMemo, useState } from "react";
 import { CalendarTypes, PeriodCategories } from "../../../../constants";
@@ -18,25 +17,15 @@ export default function CalendarSpecificPeriodDimension({
 	onSelect,
 	selectedPeriods,
 }: any) {
-	const periodInstance = new Period()
-		.setPreferences({ allowFuturePeriods: true })
-		.setCalendar(calendar);
 	const [selectedPeriodCategory, setSelectedPeriodCategory] = useState(
 		head(Object.values(PeriodCategories)),
 	);
-	const { _periodType } = periodInstance.get() ?? {};
-	const { _periodTypes } = _periodType ?? {};
-	const relativePeriodTypes = filter(_periodTypes, ({ id }) =>
-		id.toLowerCase().match(RegExp("relative".toLowerCase())),
-	);
-	const fixedPeriodTypes = filter(
-		_periodTypes,
-		({ id }) => !id.toLowerCase().match(RegExp("relative".toLowerCase())),
-	);
 
-	const [selectedRelativePeriodType, setSelectedRelativePeriodType] = useState(
-		head(relativePeriodTypes)?.id,
-	);
+	const relativePeriodTypes = [];
+	const fixedPeriodTypes = [];
+
+	const [selectedRelativePeriodType, setSelectedRelativePeriodType] =
+		useState(head(relativePeriodTypes)?.id);
 	const [selectedFixedPeriodType, setSelectedFixedPeriodType] = useState(
 		head(fixedPeriodTypes)?.id,
 	);
@@ -44,22 +33,7 @@ export default function CalendarSpecificPeriodDimension({
 	const [year, setYear] = useState(2013); //TODO: Fix getting the current year from the period utilities
 
 	const periods = useMemo(() => {
-		if (selectedPeriodCategory?.key === PeriodCategories.RELATIVE.key) {
-			return new Period()
-				.setPreferences({ allowFuturePeriods: true })
-				.setCalendar(calendar)
-				.setYear(year)
-				.setType(selectedRelativePeriodType)
-				.get()
-				.list();
-		}
-		return new Period()
-			.setPreferences({ allowFuturePeriods: true })
-			.setCalendar(calendar)
-			.setYear(year)
-			.setType(selectedFixedPeriodType)
-			.get()
-			.list();
+		return [];
 	}, [
 		selectedPeriodCategory,
 		selectedRelativePeriodType,
@@ -77,17 +51,24 @@ export default function CalendarSpecificPeriodDimension({
 				leftHeader={
 					<div className="column pb-8">
 						<TabBar>
-							{Object.values(PeriodCategories)?.map((periodCategory) => (
-								<Tab
-									onClick={() => {
-										setSelectedPeriodCategory(periodCategory);
-									}}
-									selected={selectedPeriodCategory?.key === periodCategory.key}
-									key={`${periodCategory.key}-tab`}
-								>
-									{periodCategory.name}
-								</Tab>
-							))}
+							{Object.values(PeriodCategories)?.map(
+								(periodCategory) => (
+									<Tab
+										onClick={() => {
+											setSelectedPeriodCategory(
+												periodCategory,
+											);
+										}}
+										selected={
+											selectedPeriodCategory?.key ===
+											periodCategory.key
+										}
+										key={`${periodCategory.key}-tab`}
+									>
+										{periodCategory.name}
+									</Tab>
+								),
+							)}
 						</TabBar>
 						{selectedPeriodCategory?.key === "relative" ? (
 							<div className="pt-8">
@@ -135,7 +116,9 @@ export default function CalendarSpecificPeriodDimension({
 										label={i18n.t("Year")}
 										type={"number"}
 										value={year}
-										onChange={({ value }: any) => setYear(value)}
+										onChange={({ value }: any) =>
+											setYear(value)
+										}
 									/>
 								</div>
 							</div>

@@ -20,15 +20,33 @@ const userQuery = {
 	},
 };
 
-export const UserState = atom({
+export type D2User = {
+	id: string;
+	displayName: string;
+	userGroups: Array<{ id: string }>;
+	authorities: string[];
+	organisationUnits: Array<{
+		id: string;
+		level: number;
+		displayName: string;
+	}>;
+};
+
+type UserQueryResponse = {
+	user: D2User;
+};
+
+export const UserState = atom<D2User>({
 	key: "userState",
 	default: selector({
 		key: "userStateSelector",
 		get: async ({ get }) => {
 			try {
-				const engine: any = get(EngineState);
+				const engine = get(EngineState);
 				if (engine) {
-					const { user } = await engine.query(userQuery);
+					const { user } = (await engine.query(
+						userQuery,
+					)) as UserQueryResponse;
 					if (user) {
 						return user;
 					}
@@ -43,12 +61,14 @@ export const UserState = atom({
 
 export const UserAuthorityOnScorecard = selectorFamily({
 	key: "user-scorecard-authority",
-	get: (scorecardId) => ({ get }) => {
-		const scorecardSummary = find(get(ScorecardSummaryState), [
-			"id",
-			scorecardId,
-		]);
-		const user = get(UserState);
-		return getUserAuthority(user, scorecardSummary) ?? DefaultAuthority;
-	},
+	get:
+		(scorecardId) =>
+		({ get }) => {
+			const scorecardSummary = find(get(ScorecardSummaryState), [
+				"id",
+				scorecardId,
+			]);
+			const user = get(UserState);
+			return getUserAuthority(user, scorecardSummary) ?? DefaultAuthority;
+		},
 });

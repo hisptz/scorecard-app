@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-07-31T09:45:00.107Z\n"
-"PO-Revision-Date: 2024-07-31T09:45:00.107Z\n"
+"POT-Creation-Date: 2024-08-07T12:12:08.194Z\n"
+"PO-Revision-Date: 2024-08-07T12:12:08.194Z\n"
 
 msgid "Welcome to Scorecard App!"
 msgstr "Welcome to Scorecard App!"
@@ -276,6 +276,9 @@ msgstr "Access"
 msgid "Options"
 msgstr "Options"
 
+msgid "View"
+msgstr "View"
+
 msgid "Scorecard deleted successfully"
 msgstr "Scorecard deleted successfully"
 
@@ -284,9 +287,6 @@ msgstr "Confirm scorecard delete"
 
 msgid "Are you sure you want to delete scorecard "
 msgstr "Are you sure you want to delete scorecard "
-
-msgid "View"
-msgstr "View"
 
 msgid "No scorecards found"
 msgstr "No scorecards found"

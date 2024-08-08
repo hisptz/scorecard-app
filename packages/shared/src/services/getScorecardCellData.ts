@@ -1,5 +1,4 @@
 import { Fn } from "@iapps/function-analytics";
-import { Period } from "@iapps/period-utilities";
 import { uniq } from "lodash";
 
 export default async function getScorecardCellData({
@@ -9,10 +8,7 @@ export default async function getScorecardCellData({
 }: any) {
 	try {
 		const previousPeriods = periods?.map((id: any) => {
-			const period = new Period()
-				.setPreferences({ allowFuturePeriods: true })
-				.getById(id);
-			return period?.lastPeriod?.id;
+			return;
 		});
 		const allPeriods = uniq([...periods, ...previousPeriods]);
 		return await new Fn.Analytics()

@@ -3,27 +3,23 @@ import {
 	FullPageLoader,
 	SystemSettingsState,
 } from "@scorecard/shared";
-import React, { Suspense, useEffect } from "react";
+import React, { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { HashRouter, Navigate, Route, Routes } from "react-router-dom";
-import { useRecoilState, useRecoilValue } from "recoil";
-import {
-	ActiveStepState,
-	steps,
-} from "../Main/Components/ScoreCardManagement/state/pages";
-import { find } from "lodash";
+import { useRecoilValue } from "recoil";
+import { steps } from "../Main/components/ScoreCardManagement/state/pages";
 
 const Main = React.lazy(() => import("../Main"));
-const ScorecardManagement = React.lazy(() =>
-	import("../Main/Components/ScoreCardManagement"),
+const ScorecardManagement = React.lazy(
+	() => import("../Main/components/ScoreCardManagement"),
 );
 const ScorecardView = React.lazy(() =>
 	import("@scorecard/shared").then((module) => ({
 		default: module.ScorecardView,
 	})),
 );
-const ScorecardMigration = React.lazy(() =>
-	import("../Main/Components/ScorecardMigration"),
+const ScorecardMigration = React.lazy(
+	() => import("../Main/components/ScorecardMigration"),
 );
 
 const pages = [
@@ -69,31 +65,41 @@ export default function Router() {
 			<ErrorBoundary FallbackComponent={FullPageError}>
 				<Suspense fallback={<FullPageLoader />}>
 					<Routes>
-						{pages.map(({ path, component: Component, subItems }) => (
-							<Route
-								key={path}
-								path={path}
-								element={
-									<ErrorBoundary FallbackComponent={FullPageError}>
-										<Component />
-									</ErrorBoundary>
-								}
-							>
-								{subItems?.map(({ path, component: Component }) => {
-									return (
-										<Route
-											element={
-												<ErrorBoundary FallbackComponent={FullPageError}>
-													<Component />
-												</ErrorBoundary>
-											}
-											key={path}
-											path={path}
-										/>
-									);
-								})}
-							</Route>
-						))}
+						{pages.map(
+							({ path, component: Component, subItems }) => (
+								<Route
+									key={path}
+									path={path}
+									element={
+										<ErrorBoundary
+											FallbackComponent={FullPageError}
+										>
+											<Component />
+										</ErrorBoundary>
+									}
+								>
+									{subItems?.map(
+										({ path, component: Component }) => {
+											return (
+												<Route
+													element={
+														<ErrorBoundary
+															FallbackComponent={
+																FullPageError
+															}
+														>
+															<Component />
+														</ErrorBoundary>
+													}
+													key={path}
+													path={path}
+												/>
+											);
+										},
+									)}
+								</Route>
+							),
+						)}
 						<Route path="*" element={<Navigate to="/" />} />
 					</Routes>
 				</Suspense>

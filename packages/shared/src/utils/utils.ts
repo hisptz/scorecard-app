@@ -15,6 +15,8 @@ import {
 } from "lodash";
 import { ScorecardLegend } from "../models";
 import { DefaultAuthority, TableSort } from "../constants";
+import { D2User } from "../state/user";
+import { Sharing } from "app/src/modules/Main/components/ScorecardList/hooks/authority";
 
 export function getWindowDimensions() {
 	const { innerWidth: width, innerHeight: height } = window;
@@ -141,11 +143,13 @@ function findLegend(legends: any, value: any, { max, legendDefinitions }: any) {
 				const { startValue, endValue } = legend;
 				if (+endValue === max) {
 					return (
-						+startValue <= Math.round(value) && +endValue >= Math.round(value)
+						+startValue <= Math.round(value) &&
+						+endValue >= Math.round(value)
 					);
 				}
 				return (
-					+startValue <= Math.round(value) && +endValue > Math.round(value)
+					+startValue <= Math.round(value) &&
+					+endValue > Math.round(value)
 				);
 			}
 			return false;
@@ -184,12 +188,19 @@ export function getLegend(
 			if (specificTarget.type === "period") {
 				const specificLegends =
 					getPeriodSpecificLegends(specificTarget, period) ?? legends;
-				return findLegend(specificLegends, value, { max, legendDefinitions });
+				return findLegend(specificLegends, value, {
+					max,
+					legendDefinitions,
+				});
 			}
 			if (specificTarget.type === "orgUnit") {
 				const specificLegends =
-					getOrgUnitSpecificLegends(specificTarget, orgUnit) ?? legends;
-				return findLegend(specificLegends, value, { max, legendDefinitions });
+					getOrgUnitSpecificLegends(specificTarget, orgUnit) ??
+					legends;
+				return findLegend(specificLegends, value, {
+					max,
+					legendDefinitions,
+				});
 			}
 		}
 	}
@@ -199,10 +210,16 @@ export function getLegend(
 		return findLegend(allLegends, value, { max, legendDefinitions });
 	}
 	if (typeof legends === "object") {
-		const orgUnitLevelId = getOrgUnitLevelId(orgUnitLevels, dataOrgUnitLevel);
+		const orgUnitLevelId = getOrgUnitLevelId(
+			orgUnitLevels,
+			dataOrgUnitLevel,
+		);
 		if (orgUnitLevelId) {
 			const orgUnitLegends = legends[orgUnitLevelId];
-			return findLegend(orgUnitLegends, value, { max, legendDefinitions });
+			return findLegend(orgUnitLegends, value, {
+				max,
+				legendDefinitions,
+			});
 		}
 	}
 }
@@ -219,7 +236,10 @@ export function sortOrgUnitsBasedOnData({
 		childrenTemp.push(find(childrenOrgUnits, ["id", ou]));
 	}
 	return {
-		parentOrgUnits: uniqBy(compact([...parentTemp, ...filteredOrgUnits]), "id"),
+		parentOrgUnits: uniqBy(
+			compact([...parentTemp, ...filteredOrgUnits]),
+			"id",
+		),
 		childOrgUnits: uniqBy(
 			compact([...childrenTemp, ...childrenOrgUnits]),
 			"id",
@@ -258,7 +278,10 @@ export function sortDataSourcesBasedOnData({ dataSort, dataSources }: any) {
 	const temp = [];
 	for (const dx of dataSort) {
 		temp.push(
-			find(dataSources, ({ dataSources }) => !!find(dataSources, ["id", dx])),
+			find(
+				dataSources,
+				({ dataSources }) => !!find(dataSources, ["id", dx]),
+			),
 		);
 	}
 	return uniqBy(temp, "id");
@@ -290,28 +313,34 @@ function translateAccess(access = "") {
 	return translatedAccess;
 }
 
-export function getUserAuthority(user: any, scorecardSummary: any) {
-	const { user: userId, userAccesses, userGroupAccesses, publicAccess } =
-		scorecardSummary ?? {};
-	if (user?.id === userId) {
+export function getUserAuthority(user: D2User, sharing: Sharing) {
+	const {
+		users,
+		userGroups,
+		public: publicAccess,
+		owner: userId,
+	} = sharing ?? {};
+	if (user.id === userId) {
 		return { ...translateAccess("rw-----"), delete: true };
 	}
 
-	if (!isEmpty(userAccesses)) {
-		const userAccess = find(userAccesses, ["id", user?.id]);
+	if (!isEmpty(users)) {
+		const userAccess = users[user.id];
 		if (userAccess) {
 			return translateAccess(userAccess?.access);
 		}
 	}
 
-	if (!isEmpty(userGroupAccesses)) {
-		const userGroups = intersectionBy(
-			[...userGroupAccesses],
+	if (!isEmpty(userGroups)) {
+		const userUserGroups = intersectionBy(
+			[...Object.values(userGroups)],
 			[...user.userGroups],
 			"id",
 		);
-		if (!isEmpty(userGroups)) {
-			const accesses = userGroups.map(({ access }) => access);
+		if (!isEmpty(userUserGroups)) {
+			const accesses = Object.values(userGroups).map(
+				({ access }) => access,
+			);
 			const translatedAccesses = accesses.map(translateAccess);
 
 			return {
@@ -330,14 +359,15 @@ export function getUserAuthority(user: any, scorecardSummary: any) {
 	}
 
 	if (publicAccess) {
-		return translateAccess(publicAccess?.access);
+		return translateAccess(publicAccess);
 	}
 	return DefaultAuthority;
 }
 
 export function constructAppUrl(baseUrl: any, config: any, serverVersion: any) {
 	let appUrl = baseUrl;
-	const isModernServer = serverVersion.major >= 2 && serverVersion.minor >= 35;
+	const isModernServer =
+		serverVersion.major >= 2 && serverVersion.minor >= 35;
 	// From core version 2.35, short_name is used instead of the human-readable title to generate the url slug
 	const urlSafeAppSlug = (isModernServer ? config.name : config.title)
 		.replace(/[^A-Za-z0-9\s-]/g, "")

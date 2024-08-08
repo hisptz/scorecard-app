@@ -6,3 +6,4 @@ export * from "./utils";
 export * from "./state";
 export * from "./services";
 export * from "./resources";
+export * from "./schemas/config";

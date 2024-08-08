@@ -3,7 +3,7 @@ import {
 	useDataMutation,
 	useDataQuery,
 } from "@dhis2/app-runtime";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSetRecoilState } from "recoil";
 import useScorecardsSummary from "./useScorecardsSummary";
 import { DATASTORE_ENDPOINT } from "../../constants";
@@ -31,26 +31,22 @@ const deleteMutation: any = {
 };
 
 export function useDeleteScorecard(id: any) {
-	const [executionError, setExecutionError] = useState<any>();
-	const [
-		removeMutate,
-		{ loading, error: removeError },
-	] = useDataMutation(deleteMutation, { variables: { id } });
-	const { removeSingleScorecardSummary, error } = useScorecardsSummary();
+	const [removeMutate, { loading, error: removeError }] = useDataMutation(
+		deleteMutation,
+		{ variables: { id } },
+	);
 
 	const remove = async () => {
 		try {
 			await removeMutate({ id });
-			await removeSingleScorecardSummary(id);
 		} catch (e) {
 			console.error(e);
-			setExecutionError(e);
 		}
 	};
 
 	return {
 		remove,
-		error: removeError ?? executionError ?? error,
+		error: removeError,
 		loading,
 	};
 }
@@ -93,8 +89,12 @@ export function useAddScorecard() {
 }
 
 export default function useScorecard(scorecardId: any) {
-	const setScorecardState = useSetRecoilState(ScorecardConfState(scorecardId));
-	const { loading, data, error, refetch } = useDataQuery(query, { lazy: true });
+	const setScorecardState = useSetRecoilState(
+		ScorecardConfState(scorecardId),
+	);
+	const { loading, data, error, refetch } = useDataQuery(query, {
+		lazy: true,
+	});
 
 	const set = async (id: any) => {
 		await refetch({ id });

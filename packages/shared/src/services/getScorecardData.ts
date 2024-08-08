@@ -1,5 +1,4 @@
 import { Fn } from "@iapps/function-analytics";
-import { Period } from "@iapps/period-utilities";
 import { flatten } from "lodash";
 
 export default async function getScorecardData(scorecard: any) {
@@ -55,7 +54,9 @@ function _getNormalScorecardData(selections: any) {
 	return new Fn.Analytics()
 		.setOrgUnit(selectedOrgUnits?.join(";"))
 		.setPeriod(selectedPeriods?.join(";"))
-		.setData(selectedDataItems.map((dataItem: any) => dataItem.id).join(";"))
+		.setData(
+			selectedDataItems.map((dataItem: any) => dataItem.id).join(";"),
+		)
 		.get();
 }
 
@@ -72,18 +73,6 @@ function _getCustomScorecardData(selections: any) {
 // TODO Derive selected period from period selection if supplied
 function _getSelectedPeriods(periodSelection: any, periodType: any) {
 	try {
-		const periods = new Period()
-			.setPreferences({ allowFuturePeriods: true })
-			?.setType(periodType)
-			?.get()
-			?.list();
-		const currentPeriod = periods ? periods[0] : null;
-		return {
-			currentPeriods: currentPeriod ? [currentPeriod.id] : [],
-			previousPeriods: currentPeriod?.lastPeriod
-				? [currentPeriod.lastPeriod?.id]
-				: [],
-		};
 	} catch (e) {
 		console.warn(e);
 		return null;

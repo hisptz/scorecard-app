@@ -2,13 +2,7 @@ import { DataStoreProvider } from "@dhis2/app-service-datastore";
 import { CssReset } from "@dhis2/ui";
 import { ConfirmDialogProvider } from "@hisptz/dhis2-ui";
 import { FullPageError, FullPageLoader, useInitApp } from "@scorecard/shared";
-import React, {
-	ReactNode,
-	Suspense,
-	useEffect,
-	useLayoutEffect,
-	useState,
-} from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { RecoilRoot } from "recoil";
 import postRobot from "@krakenjs/post-robot";
@@ -24,7 +18,8 @@ const Plugin = () => {
 	const [propsFromParent, setPropsFromParent] = useState<any>();
 	const { initializeState } = useInitApp();
 
-	const receivePropsFromParent = (event: any) => setPropsFromParent(event.data);
+	const receivePropsFromParent = (event: any) =>
+		setPropsFromParent(event.data);
 
 	useEffect(() => {
 		const dataListener = postRobot.on(
@@ -49,7 +44,11 @@ const Plugin = () => {
 					<ConfirmDialogProvider>
 						<Suspense fallback={<FullPageLoader />}>
 							<div className="main-container">
-								<Router dashboardId={propsFromParent.dashboardItemId} />
+								<Router
+									dashboardId={
+										propsFromParent.dashboardItemId
+									}
+								/>
 							</div>
 						</Suspense>
 					</ConfirmDialogProvider>
