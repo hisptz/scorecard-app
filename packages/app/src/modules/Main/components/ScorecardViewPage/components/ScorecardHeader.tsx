@@ -28,6 +28,8 @@ export function ScorecardHeader() {
 		<div className="row space-between" id={"scorecard-header"}>
 			<div className="row">
 				{customHeader ? (
+					/*
+      // @ts-ignore */
 					<JsxParser
 						autoCloseVoidElements
 						className="w-100"

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-08-08T12:57:40.085Z\n"
-"PO-Revision-Date: 2024-08-08T12:57:40.086Z\n"
+"POT-Creation-Date: 2024-08-08T18:16:26.041Z\n"
+"PO-Revision-Date: 2024-08-08T18:16:26.041Z\n"
 
 msgid "Welcome to Scorecard App!"
 msgstr "Welcome to Scorecard App!"
@@ -348,8 +348,53 @@ msgstr "and {{number}} more"
 msgid "Download"
 msgstr "Download"
 
+msgid "All"
+msgstr "All"
+
+msgid "Below Average"
+msgstr "Below Average"
+
+msgid "Above Average"
+msgstr "Above Average"
+
+msgid "Visibility"
+msgstr "Visibility"
+
+msgid "Legend"
+msgstr "Legend"
+
+msgid "Item Number"
+msgstr "Item Number"
+
+msgid "Empty Rows"
+msgstr "Empty Rows"
+
+msgid "Show Hierarchy"
+msgstr "Show Hierarchy"
+
+msgid "Average Column"
+msgstr "Average Column"
+
+msgid "Average Row"
+msgstr "Average Row"
+
+msgid "Average"
+msgstr "Average"
+
+msgid "Arrows"
+msgstr "Arrows"
+
+msgid "Show Data in Rows"
+msgstr "Show Data in Rows"
+
 msgid "Reset"
 msgstr "Reset"
+
+msgid "Select organisation unit and period to view scorecard"
+msgstr "Select organisation unit and period to view scorecard"
+
+msgid "Could not get scorecard config"
+msgstr "Could not get scorecard config"
 
 msgid "Create a new scorecard in the scorecard app to see it here."
 msgstr "Create a new scorecard in the scorecard app to see it here."

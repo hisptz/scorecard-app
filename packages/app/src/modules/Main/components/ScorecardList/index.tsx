@@ -1,11 +1,12 @@
 import i18n from "@dhis2/d2-i18n";
-import { Button, ButtonStrip, DropdownButton, Tooltip } from "@dhis2/ui";
 import {
-	IconAdd24,
-	IconApps24,
-	IconList24,
-	IconQuestionFilled24,
-} from "@dhis2/ui-icons";
+	Button,
+	ButtonStrip,
+	DropdownButton,
+	IconQuestion24,
+	Tooltip,
+} from "@dhis2/ui";
+import { IconAdd24, IconApps24, IconList24 } from "@dhis2/ui-icons";
 import { SCORECARD_LIST_HELP_STEPS, STEP_OPTIONS } from "@scorecard/shared";
 import { Steps } from "intro.js-react";
 import React, { useState } from "react";
@@ -71,7 +72,7 @@ export default function ScorecardList() {
 							<DropdownButton
 								type="button"
 								component={<HelpMenu />}
-								icon={<IconQuestionFilled24 />}
+								icon={<IconQuestion24 />}
 							>
 								{i18n.t("Help")}
 							</DropdownButton>

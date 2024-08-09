@@ -3,6 +3,8 @@ import { ScorecardConfig } from "@hisptz/dhis2-analytics";
 import { useDimensions } from "../hooks/dimensions";
 import i18n from "@dhis2/d2-i18n";
 import { colors } from "@dhis2/ui";
+import { ErrorBoundary } from "react-error-boundary";
+import { FullPageError } from "@scorecard/shared";
 
 export interface ScorecardViewProps {
 	config: ScorecardConfig;
@@ -31,8 +33,16 @@ export function ScorecardView({ config }: ScorecardViewProps) {
 	}
 
 	return (
-		<div className="h-100 w-100 column align-items-center justify-content-center">
-			{/*<Scorecard config={config} state={state} setState={setState} />*/}
-		</div>
+		<ErrorBoundary
+			resetKeys={[state, noDimensionsSelected]}
+			FallbackComponent={FullPageError}
+		>
+			<div
+				style={{ padding: 16 }}
+				className="h-100 w-100 column align-items-center justify-content-center"
+			>
+				{/*<Scorecard config={config} state={state} setState={setState} />*/}
+			</div>
+		</ErrorBoundary>
 	);
 }

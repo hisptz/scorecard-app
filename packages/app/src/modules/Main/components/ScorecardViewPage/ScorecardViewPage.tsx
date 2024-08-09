@@ -10,6 +10,7 @@ import { ScorecardStateProvider } from "./state/state";
 import { ScorecardView } from "./components/ScorecardView";
 import { ScorecardConfigProvider } from "./state/config";
 import { ScorecardHeader } from "./components/ScorecardHeader";
+import { ScorecardLegendsView } from "./ScorecardLegendsView";
 
 export function ScorecardViewPage() {
 	const { setDimensions, orgUnit, periods } = useDimensions();
@@ -65,7 +66,7 @@ export function ScorecardViewPage() {
 			<ScorecardConfigProvider config={config}>
 				<ScorecardStateProvider
 					initialState={{
-						...config,
+						options: config.options,
 						periodSelection: {
 							...config.periodSelection,
 							periods:
@@ -83,6 +84,7 @@ export function ScorecardViewPage() {
 					<DimensionFilterArea />
 					<ScorecardActions />
 					<ScorecardHeader />
+					<ScorecardLegendsView config={config} />
 					<div className="flex-1">
 						<ScorecardView config={config} />
 					</div>
