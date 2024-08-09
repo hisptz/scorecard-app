@@ -2,7 +2,7 @@
   "name": "widget",
   "description": "Scorecard widget for the interactive scorecard app",
   "homepage": ".",
-  "version": "2.6.3",
+  "version": "2.6.4",
   "private": true,
   "developer": {
     "name": "Hisp Tanzania",
