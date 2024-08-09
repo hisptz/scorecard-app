@@ -17,6 +17,11 @@ import { ScorecardLegend } from "../models";
 import { DefaultAuthority, TableSort } from "../constants";
 import { D2User } from "../state/user";
 import { Sharing } from "app/src/modules/Main/components/ScorecardList/hooks/authority";
+import {
+	ScorecardDataGroup,
+	ScorecardDataHolder,
+	ScorecardDataSource,
+} from "@hisptz/dhis2-analytics";
 
 export function getWindowDimensions() {
 	const { innerWidth: width, innerHeight: height } = window;
@@ -94,11 +99,15 @@ export function specificTargetsSet(dataSources: any) {
 	);
 }
 
-export function getHoldersFromGroups(dataGroups = []) {
+export function getHoldersFromGroups(
+	dataGroups: ScorecardDataGroup[] = [],
+): ScorecardDataHolder[] {
 	return flattenDeep(dataGroups?.map(({ dataHolders }) => dataHolders) ?? []);
 }
 
-export function getDataSourcesFromGroups(dataGroups: any) {
+export function getDataSourcesFromGroups(
+	dataGroups: ScorecardDataGroup[],
+): ScorecardDataSource[] {
 	const dataHolders = compact(getHoldersFromGroups(dataGroups));
 	return flattenDeep(dataHolders?.map(({ dataSources }) => dataSources));
 }

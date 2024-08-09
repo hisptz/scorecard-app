@@ -1,6 +1,7 @@
 import { ArrowLegendsView } from "./components/ArrowLegendView";
 import { ScorecardConfig } from "@hisptz/dhis2-analytics";
 import { LegendView } from "./components/LegendView";
+import { SpecificTargetLegendsView } from "./components/SpecificTargetLegendsView";
 
 export function ScorecardLegendsView({ config }: { config: ScorecardConfig }) {
 	const legendDefinitions = config.legendDefinitions;
@@ -21,7 +22,15 @@ export function ScorecardLegendsView({ config }: { config: ScorecardConfig }) {
 					<LegendView legend={item} key={item.id} />
 				))}
 			</div>
-			<ArrowLegendsView />
+			<div>
+				<div
+					style={{ gap: 16, justifySelf: "flex-end" }}
+					className="row align-items-center space-between"
+				>
+					<ArrowLegendsView />
+					<SpecificTargetLegendsView config={config} />
+				</div>
+			</div>
 		</div>
 	);
 }

@@ -10,7 +10,7 @@ import { ScorecardStateProvider } from "./state/state";
 import { ScorecardView } from "./components/ScorecardView";
 import { ScorecardConfigProvider } from "./state/config";
 import { ScorecardHeader } from "./components/ScorecardHeader";
-import { ScorecardLegendsView } from "./ScorecardLegendsView";
+import { ScorecardLegendsView } from "./components/ScorecardLegendsView";
 
 export function ScorecardViewPage() {
 	const { setDimensions, orgUnit, periods } = useDimensions();
