@@ -3116,10 +3116,10 @@
   dependencies:
     "@hapi/hoek" "^9.0.0"
 
-"@hisptz/dhis2-ui@^1.0.68":
-  version "1.0.68"
-  resolved "https://registry.yarnpkg.com/@hisptz/dhis2-ui/-/dhis2-ui-1.0.68.tgz#b5b668b6fc3004b58a687649e58c851d288dfff0"
-  integrity sha512-I7rDYgPyShJVCdZkDmXRNeDHhVHQZsYaOtoaHx7uqqTQsYS2ciihvhkQ4hY1QUMtUvlFTKxYg3tAXZUZ70+2BA==
+"@hisptz/dhis2-ui@^1.0.69":
+  version "1.0.69"
+  resolved "https://registry.yarnpkg.com/@hisptz/dhis2-ui/-/dhis2-ui-1.0.69.tgz#7250c2908806a624512f4436d145b5b6fd515541"
+  integrity sha512-Mtac9CCQPVQ4DUEEmgV8mvKF9KqUpoNTmE+y3qdlB1fAVKTlJ//cjOlEzIi6+aIfL1tG16bXnnYQChLwtsIvjQ==
   dependencies:
     "@dhis2/app-runtime" "^3.7.0"
     "@emotion/react" "^11.10.5"
