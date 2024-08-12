@@ -1,16 +1,11 @@
 import { useAlert } from "@dhis2/app-runtime";
-import {
-	useDeleteScorecard,
-	UserAuthorityOnScorecard,
-} from "@scorecard/shared";
+import { useDeleteScorecard, UserAuthorityOnScorecard } from "@scorecard/shared";
 import { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 
 export default function useCardDetails(scorecard: any) {
 	const { title, description, id } = scorecard;
 	const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
-	const history = useHistory();
 	const { remove, error: deleteError } = useDeleteScorecard(id);
 	const {
 		write: writeAccess,

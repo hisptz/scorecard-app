@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-08-08T18:16:26.041Z\n"
-"PO-Revision-Date: 2024-08-08T18:16:26.041Z\n"
+"POT-Creation-Date: 2024-08-12T13:51:17.693Z\n"
+"PO-Revision-Date: 2024-08-12T13:51:17.693Z\n"
 
 msgid "Welcome to Scorecard App!"
 msgstr "Welcome to Scorecard App!"
@@ -390,11 +390,44 @@ msgstr "Show Data in Rows"
 msgid "Reset"
 msgstr "Reset"
 
+msgid "Increased from last period"
+msgstr "Increased from last period"
+
+msgid "Decreased from last period"
+msgstr "Decreased from last period"
+
+msgid "Min"
+msgstr "Min"
+
+msgid "Max"
+msgstr "Max"
+
+msgid "Data Source"
+msgstr "Data Source"
+
+msgid "Period(s)"
+msgstr "Period(s)"
+
+msgid "Organisation Units Specific targets"
+msgstr "Organisation Units Specific targets"
+
+msgid "Period Specific targets"
+msgstr "Period Specific targets"
+
+msgid "Organisation unit level targets"
+msgstr "Organisation unit level targets"
+
+msgid "Specific targets"
+msgstr "Specific targets"
+
+msgid "Close"
+msgstr "Close"
+
+msgid "Specific Targets Library"
+msgstr "Specific Targets Library"
+
 msgid "Select organisation unit and period to view scorecard"
 msgstr "Select organisation unit and period to view scorecard"
-
-msgid "Could not get scorecard config"
-msgstr "Could not get scorecard config"
 
 msgid "Create a new scorecard in the scorecard app to see it here."
 msgstr "Create a new scorecard in the scorecard app to see it here."

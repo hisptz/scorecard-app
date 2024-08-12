@@ -2933,44 +2933,13 @@
   dependencies:
     "@hapi/hoek" "^9.0.0"
 
-"@hisptz/dhis2-analytics@^2.0.17":
-  version "2.0.17"
-  resolved "https://registry.yarnpkg.com/@hisptz/dhis2-analytics/-/dhis2-analytics-2.0.17.tgz#cf5f24ca8ac2050b0626534df8ef31bb2ed8519e"
-  integrity sha512-rekZp29fQsul2rJhIu1ILaZ+mMwJoT8eRCY6ZJaIgjG2oMSPJ++XaIY2yWLiNNinQwLokWBvp7GGO6kIMkJZTw==
-  dependencies:
-    "@dhis2/multi-calendar-dates" "^1.2.3"
-    "@dnd-kit/core" "^6.1.0"
-    "@dnd-kit/utilities" "^3.2.2"
-    "@hisptz/dhis2-ui" "2.0.14"
-    "@hisptz/dhis2-utils" "2.0.5"
-    "@react-leaflet/core" "^2.1.0"
-    "@tanstack/react-table" "^8.19.3"
-    d3-color "^3.1.0"
-    d3-scale "^4.0.2"
-    highcharts "^10.3.2"
-    highcharts-react-official "^3.1.0"
-    leaflet "^1.9.3"
-    leaflet-easyprint "^2.1.9"
-    leaflet.fullscreen "^2.4.0"
-    react-circular-progressbar "^2.1.0"
-    react-dnd-html5-backend "^16.0.1"
-    react-helmet "^6.1.0"
-    react-leaflet "^4.2.0"
-    react-leaflet-custom-control "^1.3.1"
-    react-query "^3.39.3"
-    react-spring "^9.6.1"
-    screenfull "^6.0.2"
-    zod "^3.23.8"
-
-"@hisptz/dhis2-analytics@^2.0.18":
+"@hisptz/dhis2-analytics@file:../dhis2-utils-v2/packages/analytics":
   version "2.0.18"
-  resolved "https://registry.yarnpkg.com/@hisptz/dhis2-analytics/-/dhis2-analytics-2.0.18.tgz#b4ee2dd12119a4f60e2275f620195fb9eadf5b4c"
-  integrity sha512-v/rDP/XQ1zTdsKgN0gMys6BQt4llfxJm354IndLioojxD5hd8OPv0kVVgxq4rxTvYr+88vPrmLoqZUOdLGkvYQ==
   dependencies:
     "@dnd-kit/core" "^6.1.0"
     "@dnd-kit/utilities" "^3.2.2"
-    "@hisptz/dhis2-ui" "2.0.14"
-    "@hisptz/dhis2-utils" "2.0.5"
+    "@hisptz/dhis2-ui" "workspace:*"
+    "@hisptz/dhis2-utils" "workspace:*"
     "@react-leaflet/core" "^2.1.0"
     "@tanstack/react-table" "^8.19.3"
     d3-color "^3.1.0"
@@ -2990,7 +2959,24 @@
     screenfull "^6.0.2"
     zod "^3.23.8"
 
-"@hisptz/dhis2-ui@2.0.14", "@hisptz/dhis2-ui@^2.0.14":
+"@hisptz/dhis2-ui@file:../dhis2-utils-v2/packages/ui":
+  version "2.0.14"
+  dependencies:
+    "@hisptz/dhis2-utils" "workspace:*"
+    classnames "^2.5.1"
+    dexie "^3.2.3"
+    jodit-react "^1.3.39"
+    lodash "^4.17.21"
+    luxon "^3.4.4"
+    react-circular-progressbar "^2.1.0"
+    react-collapsible "^2.10.0"
+    react-color "^2.19.3"
+    react-hook-form "^7.51.5"
+    recoil "^0.7.7"
+    styled-components "^6.1.8"
+    usehooks-ts "^2.9.2"
+
+"@hisptz/dhis2-ui@workspace:*":
   version "2.0.14"
   resolved "https://registry.yarnpkg.com/@hisptz/dhis2-ui/-/dhis2-ui-2.0.14.tgz#acf1f0af8383c0d3a6fdfa555a97d23dc6e17cb3"
   integrity sha512-wfmxO+clJUMrhU87181yTxfnCBY/SxEBTv/cEZ8XgHKBk/3AaUD/1fsaCJ78/jqlc4XyPyhB8WpovL489t0U9Q==
@@ -3009,10 +2995,15 @@
     styled-components "^6.1.8"
     usehooks-ts "^2.9.2"
 
-"@hisptz/dhis2-utils@2.0.5", "@hisptz/dhis2-utils@^2.0.5":
+"@hisptz/dhis2-utils@2.0.5", "@hisptz/dhis2-utils@workspace:*":
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/@hisptz/dhis2-utils/-/dhis2-utils-2.0.5.tgz#d595d0bf1db554fc4e8a1943e863f917ef931138"
   integrity sha512-hCJ2STjDVbJZSnp37QZJbVNa1SF8FZmyun2z8YXETv+Xvih9jbbvx+USLYbktEVjdhg0WpmFQMGskDFJv39vBw==
+  dependencies:
+    luxon "^3.4.4"
+
+"@hisptz/dhis2-utils@file:../dhis2-utils-v2/packages/utils":
+  version "2.0.5"
   dependencies:
     luxon "^3.4.4"
 
@@ -19047,16 +19038,7 @@ string-natural-compare@^3.0.1:
   resolved "https://registry.yarnpkg.com/string-natural-compare/-/string-natural-compare-3.0.1.tgz#7a42d58474454963759e8e8b7ae63d71c1e7fdf4"
   integrity sha512-n3sPwynL1nwKi3WJ6AIsClwBMa0zTi54fn2oLU6ndfTSIO05xaznjSf15PcBZU6FNWbmN5Q6cxT4V5hGvB4taw==
 
-"string-width-cjs@npm:string-width@^4.2.0":
-  version "4.2.3"
-  resolved "https://registry.yarnpkg.com/string-width/-/string-width-4.2.3.tgz#269c7117d27b05ad2e536830a8ec895ef9c6d010"
-  integrity sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==
-  dependencies:
-    emoji-regex "^8.0.0"
-    is-fullwidth-code-point "^3.0.0"
-    strip-ansi "^6.0.1"
-
-"string-width@^1.0.2 || 2 || 3 || 4", string-width@^4.1.0, string-width@^4.2.0, string-width@^4.2.3:
+"string-width-cjs@npm:string-width@^4.2.0", "string-width@^1.0.2 || 2 || 3 || 4", string-width@^4.1.0, string-width@^4.2.0, string-width@^4.2.3:
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/string-width/-/string-width-4.2.3.tgz#269c7117d27b05ad2e536830a8ec895ef9c6d010"
   integrity sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==
@@ -19176,7 +19158,7 @@ stringify-object@^3.3.0:
     is-obj "^1.0.1"
     is-regexp "^1.0.0"
 
-"strip-ansi-cjs@npm:strip-ansi@^6.0.1":
+"strip-ansi-cjs@npm:strip-ansi@^6.0.1", strip-ansi@^6.0.0, strip-ansi@^6.0.1:
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-6.0.1.tgz#9e26c63d30f53443e9489495b2105d37b67a85d9"
   integrity sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==
@@ -19203,13 +19185,6 @@ strip-ansi@^5.0.0, strip-ansi@^5.1.0, strip-ansi@^5.2.0:
   integrity sha512-DuRs1gKbBqsMKIZlrffwlug8MHkcnpjs5VPmL1PAh+mA30U0DTotfDZ0d2UUsXpPmPmMMJ6W773MaA3J+lbiWA==
   dependencies:
     ansi-regex "^4.1.0"
-
-strip-ansi@^6.0.0, strip-ansi@^6.0.1:
-  version "6.0.1"
-  resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-6.0.1.tgz#9e26c63d30f53443e9489495b2105d37b67a85d9"
-  integrity sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==
-  dependencies:
-    ansi-regex "^5.0.1"
 
 strip-ansi@^7.0.1, strip-ansi@^7.1.0:
   version "7.1.0"
@@ -21149,7 +21124,7 @@ workbox-window@6.6.1:
     "@types/trusted-types" "^2.0.2"
     workbox-core "6.6.1"
 
-"wrap-ansi-cjs@npm:wrap-ansi@^7.0.0":
+"wrap-ansi-cjs@npm:wrap-ansi@^7.0.0", wrap-ansi@^7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/wrap-ansi/-/wrap-ansi-7.0.0.tgz#67e145cff510a6a6984bdf1152911d69d2eb9e43"
   integrity sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==
@@ -21171,15 +21146,6 @@ wrap-ansi@^6.0.1, wrap-ansi@^6.2.0:
   version "6.2.0"
   resolved "https://registry.yarnpkg.com/wrap-ansi/-/wrap-ansi-6.2.0.tgz#e9393ba07102e6c91a3b221478f0257cd2856e53"
   integrity sha512-r6lPcBGxZXlIcymEu7InxDMhdW0KDxpLgoFLcguasxCaJ/SOIZwINatK9KY/tf+ZrlywOKU0UDj3ATXUBfxJXA==
-  dependencies:
-    ansi-styles "^4.0.0"
-    string-width "^4.1.0"
-    strip-ansi "^6.0.0"
-
-wrap-ansi@^7.0.0:
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/wrap-ansi/-/wrap-ansi-7.0.0.tgz#67e145cff510a6a6984bdf1152911d69d2eb9e43"
-  integrity sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==
   dependencies:
     ansi-styles "^4.0.0"
     string-width "^4.1.0"

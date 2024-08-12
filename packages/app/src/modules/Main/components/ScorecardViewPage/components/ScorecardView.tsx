@@ -1,5 +1,4 @@
-import { useScorecardState } from "../state/state";
-import { ScorecardConfig } from "@hisptz/dhis2-analytics";
+import { Scorecard, ScorecardConfig, useScorecardState } from "@hisptz/dhis2-analytics";
 import { useDimensions } from "../hooks/dimensions";
 import i18n from "@dhis2/d2-i18n";
 import { colors } from "@dhis2/ui";
@@ -10,9 +9,9 @@ export interface ScorecardViewProps {
 	config: ScorecardConfig;
 }
 
-export function ScorecardView({ config }: ScorecardViewProps) {
+export function ScorecardView() {
 	const { noDimensionsSelected } = useDimensions();
-	const [state, setState] = useScorecardState();
+	const state = useScorecardState();
 
 	if (noDimensionsSelected) {
 		return (
@@ -21,11 +20,11 @@ export function ScorecardView({ config }: ScorecardViewProps) {
 					style={{
 						color: colors.grey700,
 						fontWeight: "bold",
-						fontSize: 24,
+						fontSize: 24
 					}}
 				>
 					{i18n.t(
-						"Select organisation unit and period to view scorecard",
+						"Select organisation unit and period to view scorecard"
 					)}
 				</span>
 			</div>
@@ -38,10 +37,15 @@ export function ScorecardView({ config }: ScorecardViewProps) {
 			FallbackComponent={FullPageError}
 		>
 			<div
-				style={{ padding: 16 }}
-				className="h-100 w-100 column align-items-center justify-content-center"
+				style={{ padding: 16, width: "100%" }}
+				className="h-100 w-100 column align-items-center"
 			>
-				{/*<Scorecard config={config} state={state} setState={setState} />*/}
+				<Scorecard
+					tableProps={{
+						width: "100%",
+						scrollWidth: "100%"
+					}}
+				/>
 			</div>
 		</ErrorBoundary>
 	);

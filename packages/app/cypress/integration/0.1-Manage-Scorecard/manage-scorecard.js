@@ -62,7 +62,7 @@ Then(
 );
 
 /**
- * Scenario: Creating/updating Scorecard legends
+ * Scenario: Creating/updating Scorecard legendDefinitions
  */
 
 
@@ -70,9 +70,9 @@ When("opening scorecard form to edit Sample Scorecard", () => {
     cy.get('[data-test="edit-@scorecard/button"]').first().click();
 
 });
-And("editing scorecard legends and saving changes", () => {
+And("editing scorecard legendDefinitions and saving changes", () => {
 });
-Then("the changes on the scorecard legends should be visible", () => {
+Then("the changes on the scorecard legendDefinitions should be visible", () => {
 });
 
 /**
@@ -117,7 +117,7 @@ Then(
 );
 
 /**
- * Scenario: Configure legends for indicators
+ * Scenario: Configure legendDefinitions for indicators
  */
 When("adding indicators to a scorecard", () => {
 });
@@ -133,7 +133,7 @@ Then(
 );
 
 
-When(/^editing scorecard legends$/, function () {
+When(/^editing scorecard legendDefinitions$/, function () {
 
 });
 When(/^deleting scorecard$/, function () {

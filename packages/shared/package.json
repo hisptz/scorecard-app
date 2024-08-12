@@ -14,8 +14,9 @@
   "dependencies": {
     "@dhis2/multi-calendar-dates": "^1.2.4",
     "@dhis2/ui": "^9.10.2",
-    "@hisptz/dhis2-analytics": "^2.0.17",
-    "@hisptz/dhis2-ui": "^2.0.14",
+    "@hisptz/dhis2-analytics": "file:../../../dhis2-utils-v2/packages/analytics",
+    "@hisptz/dhis2-ui": "file:../../../dhis2-utils-v2/packages/ui",
+    "@hisptz/dhis2-utils": "file:../../../dhis2-utils-v2/packages/utils",
     "@material-ui/icons": "^4.11.2",
     "jquery": "^3.6.4",
     "lodash": "^4.17.21",

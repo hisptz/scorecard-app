@@ -1,17 +1,16 @@
 import JsxParser from "react-jsx-parser";
-import { useScorecardConfigFromContext } from "../state/config";
 import { head } from "lodash";
 import { colors } from "@dhis2/ui";
 import { useMemo } from "react";
 import { PeriodUtility } from "@hisptz/dhis2-utils";
-import { useScorecardState } from "../state/state";
+import { useScorecardConfig, useScorecardState } from "@hisptz/dhis2-analytics";
 
 export function ScorecardHeader() {
-	const config = useScorecardConfigFromContext();
+	const config = useScorecardConfig();
 	const { customHeader, title, subtitle, periodSelection } = config ?? {};
 	const periods = periodSelection.periods ?? [];
 
-	const [state] = useScorecardState();
+	const state = useScorecardState();
 
 	const period = useMemo(() => {
 		if (periods.length > 1) {
@@ -37,7 +36,7 @@ export function ScorecardHeader() {
 						bindings={{
 							title,
 							subtitle,
-							period: periods.length === 1 ? period?.name : "",
+							period: periods.length === 1 ? period?.name : ""
 						}}
 						jsx={customHeader}
 					/>

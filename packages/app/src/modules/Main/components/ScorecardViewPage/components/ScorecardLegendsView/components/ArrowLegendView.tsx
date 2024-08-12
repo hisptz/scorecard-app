@@ -1,9 +1,9 @@
 import { IconArrowDown24, IconArrowUp24 } from "@dhis2/ui";
 import i18n from "@dhis2/d2-i18n";
-import { useScorecardState } from "../../../state/state";
+import { useScorecardState } from "@hisptz/dhis2-analytics";
 
 export function ArrowLegendsView(props: any) {
-	const [state] = useScorecardState();
+	const state = useScorecardState();
 	const showArrows = state.options.arrows;
 
 	if (!showArrows) {

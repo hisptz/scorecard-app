@@ -1,10 +1,11 @@
 import { ArrowLegendsView } from "./components/ArrowLegendView";
-import { ScorecardConfig } from "@hisptz/dhis2-analytics";
-import { LegendView } from "./components/LegendView";
 import { SpecificTargetLegendsView } from "./components/SpecificTargetLegendsView";
+import { useScorecardConfig } from "@hisptz/dhis2-analytics";
+import { LegendView } from "./components/LegendView";
 
-export function ScorecardLegendsView({ config }: { config: ScorecardConfig }) {
-	const legendDefinitions = config.legendDefinitions;
+export function ScorecardLegendsView() {
+	const config = useScorecardConfig();
+	const legendDefinitions = config!.legendDefinitions;
 
 	return (
 		<div
@@ -15,7 +16,7 @@ export function ScorecardLegendsView({ config }: { config: ScorecardConfig }) {
 				style={{
 					display: "grid",
 					gap: 8,
-					gridTemplateColumns: `repeat(${legendDefinitions.length}, auto)`,
+					gridTemplateColumns: `repeat(${legendDefinitions.length}, auto)`
 				}}
 			>
 				{legendDefinitions.map((item) => (
@@ -28,9 +29,11 @@ export function ScorecardLegendsView({ config }: { config: ScorecardConfig }) {
 					className="row align-items-center space-between"
 				>
 					<ArrowLegendsView />
-					<SpecificTargetLegendsView config={config} />
+					<SpecificTargetLegendsView  />
 				</div>
 			</div>
 		</div>
 	);
 }
+
+

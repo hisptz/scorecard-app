@@ -1,19 +1,9 @@
 import i18n from "@dhis2/d2-i18n";
-import {
-	Button,
-	ButtonStrip,
-	Field,
-	Modal,
-	ModalActions,
-	ModalContent,
-	ModalTitle,
-	Radio,
-} from "@dhis2/ui";
+import { Button, ButtonStrip, Field, Modal, ModalActions, ModalContent, ModalTitle, Radio } from "@dhis2/ui";
 import { AverageDisplayType } from "@scorecard/shared";
 import React from "react";
-import { useScorecardState } from "../../../state/state";
 import { FormProvider, useController, useForm } from "react-hook-form";
-import { ScorecardViewOptions } from "@hisptz/dhis2-analytics";
+import { ScorecardViewOptions, useScorecardSetState, useScorecardState } from "@hisptz/dhis2-analytics";
 import { RHFCheckboxField } from "@hisptz/dhis2-ui";
 
 function AverageDisplayTypeField() {
@@ -63,7 +53,8 @@ export function ScorecardOptionsModal({
 	hide,
 	onClose,
 }: ScorecardOptionsModalProps) {
-	const [state, setState] = useScorecardState();
+	const state = useScorecardState();
+	const setState = useScorecardSetState();
 	const initialOptions = state.options;
 	const form = useForm<ScorecardViewOptions>({
 		defaultValues: initialOptions,

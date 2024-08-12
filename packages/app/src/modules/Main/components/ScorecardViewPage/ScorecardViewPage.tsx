@@ -6,11 +6,10 @@ import { useEffect } from "react";
 import { useDimensions } from "./hooks/dimensions";
 import { OrgUnitSelection } from "@hisptz/dhis2-utils";
 import { ScorecardActions } from "./components/ScorecardActions/ScorecardActions";
-import { ScorecardStateProvider } from "./state/state";
 import { ScorecardView } from "./components/ScorecardView";
-import { ScorecardConfigProvider } from "./state/config";
 import { ScorecardHeader } from "./components/ScorecardHeader";
 import { ScorecardLegendsView } from "./components/ScorecardLegendsView";
+import { ScorecardContext } from "@hisptz/dhis2-analytics";
 
 export function ScorecardViewPage() {
 	const { setDimensions, orgUnit, periods } = useDimensions();
@@ -20,7 +19,7 @@ export function ScorecardViewPage() {
 		if (config) {
 			setDimensions({
 				orgUnitSelection: config.orgUnitSelection as OrgUnitSelection,
-				periods: config.periodSelection.periods,
+				periods: config.periodSelection.periods
 			});
 		}
 	}, [config]);
@@ -60,36 +59,18 @@ export function ScorecardViewPage() {
 				height: "100%",
 				display: "flex",
 				flexDirection: "column",
-				gap: 16,
+				gap: 16
 			}}
 		>
-			<ScorecardConfigProvider config={config}>
-				<ScorecardStateProvider
-					initialState={{
-						options: config.options,
-						periodSelection: {
-							...config.periodSelection,
-							periods:
-								periods?.map((period) => ({ id: period })) ??
-								[],
-						},
-						orgUnitSelection: {
-							...orgUnit,
-							orgUnits: orgUnit.orgUnits ?? [],
-							groups: orgUnit.groups ?? [],
-							levels: orgUnit.levels ?? [],
-						},
-					}}
-				>
-					<DimensionFilterArea />
-					<ScorecardActions />
-					<ScorecardHeader />
-					<ScorecardLegendsView config={config} />
-					<div className="flex-1">
-						<ScorecardView config={config} />
-					</div>
-				</ScorecardStateProvider>
-			</ScorecardConfigProvider>
+			<ScorecardContext config={config}>
+				<DimensionFilterArea />
+				<ScorecardActions />
+				<ScorecardHeader />
+				<ScorecardLegendsView />
+				<div className="flex-1">
+					<ScorecardView />
+				</div>
+			</ScorecardContext>
 		</div>
 	);
 }
