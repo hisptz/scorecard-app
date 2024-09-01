@@ -8,16 +8,15 @@ import { useScorecardConfig, useScorecardState } from "@hisptz/dhis2-analytics";
 export function ScorecardHeader() {
 	const config = useScorecardConfig();
 	const { customHeader, title, subtitle, periodSelection } = config ?? {};
-	const periods = periodSelection.periods ?? [];
-
 	const state = useScorecardState();
+	const periods = useMemo(() => state.periodSelection.periods, [state]);
 
 	const period = useMemo(() => {
 		if (periods.length > 1) {
 			return;
 		}
 		return PeriodUtility.getPeriodById(head(periods)?.id as string);
-	}, [periods]);
+	}, [state]);
 
 	if (!state.options.title) {
 		return null;

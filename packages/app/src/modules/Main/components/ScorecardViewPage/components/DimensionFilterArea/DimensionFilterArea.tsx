@@ -8,6 +8,8 @@ import { HelpButton } from "./components/HelpButton";
 import { SCORECARD_VIEW_HELP_STEPS } from "@scorecard/shared";
 
 export function DimensionFilterArea() {
+
+
 	return (
 		<div className={classes["selection-card"]}>
 			<Card>

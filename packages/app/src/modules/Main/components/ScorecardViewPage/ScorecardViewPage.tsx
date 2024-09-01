@@ -1,30 +1,38 @@
 import { DimensionFilterArea } from "./components/DimensionFilterArea";
-import { useScorecardConfig } from "./hooks/data";
-import { FullPageError, FullPageLoader } from "@scorecard/shared";
+import { useScorecardConfigFromServer } from "./hooks/data";
+import { FullPageError, FullPageLoader, getOrgUnitSelectionFromIds } from "@scorecard/shared";
 import i18n from "@dhis2/d2-i18n";
-import { useEffect } from "react";
-import { useDimensions } from "./hooks/dimensions";
-import { OrgUnitSelection } from "@hisptz/dhis2-utils";
 import { ScorecardActions } from "./components/ScorecardActions/ScorecardActions";
 import { ScorecardView } from "./components/ScorecardView";
 import { ScorecardHeader } from "./components/ScorecardHeader";
 import { ScorecardLegendsView } from "./components/ScorecardLegendsView";
-import { ScorecardContext } from "@hisptz/dhis2-analytics";
+import { ScorecardContext, ScorecardState } from "@hisptz/dhis2-analytics";
+import { useRawDimensions } from "./hooks/dimensions";
+import { useMemo } from "react";
+import { isEmpty } from "lodash";
 
 export function ScorecardViewPage() {
-	const { setDimensions, orgUnit, periods } = useDimensions();
-	const { config, loading, error, refetch } = useScorecardConfig();
+	const { periods, orgUnits } = useRawDimensions();
+	const { config, loading, error, refetch } = useScorecardConfigFromServer();
 
-	useEffect(() => {
-		if (config) {
-			setDimensions({
-				orgUnitSelection: config.orgUnitSelection as OrgUnitSelection,
-				periods: config.periodSelection.periods
-			});
+	const initialState = useMemo(() => {
+		if (!config) {
+			return;
 		}
-	}, [config]);
+		const periodSelection = !isEmpty(periods) ? {
+			periods: periods.map((periodId) => ({ id: periodId }))
+		} : config?.periodSelection;
+		const orgUnitSelection = !isEmpty(orgUnits) ? getOrgUnitSelectionFromIds(orgUnits) : config?.orgUnitSelection;
 
-	if (loading) {
+		return {
+			options: config.options,
+			orgUnitSelection,
+			periodSelection
+		} as ScorecardState;
+
+	}, [periods, orgUnits, config]);
+
+	if (loading || !initialState) {
 		return (
 			<FullPageLoader
 				text={i18n.t("Getting your scorecard configuration...")}
@@ -52,6 +60,7 @@ export function ScorecardViewPage() {
 		);
 	}
 
+
 	return (
 		<div
 			style={{
@@ -62,8 +71,8 @@ export function ScorecardViewPage() {
 				gap: 16
 			}}
 		>
-			<ScorecardContext config={config}>
-				<DimensionFilterArea />
+			<DimensionFilterArea />
+			<ScorecardContext initialState={initialState} config={config}>
 				<ScorecardActions />
 				<ScorecardHeader />
 				<ScorecardLegendsView />

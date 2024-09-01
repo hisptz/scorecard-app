@@ -7,23 +7,23 @@ import { DATASTORE_NAMESPACE } from "@scorecard/shared";
 const query: any = {
 	config: {
 		resource: `dataStore/${DATASTORE_NAMESPACE}`,
-		id: ({ id }: { id: string }) => id,
-	},
+		id: ({ id }: { id: string }) => id
+	}
 };
 
 type ConfigQueryResponse = {
 	config: ScorecardConfig;
 };
 
-export function useScorecardConfig() {
+export function useScorecardConfigFromServer() {
 	const { id } = useParams<{ id?: string }>();
 	const { data, loading, refetch, error } = useDataQuery<ConfigQueryResponse>(
 		query,
 		{
 			variables: {
-				id,
-			},
-		},
+				id
+			}
+		}
 	);
 	const config = useMemo(() => data?.config, [data?.config]);
 
@@ -31,6 +31,6 @@ export function useScorecardConfig() {
 		config,
 		loading,
 		error,
-		refetch,
+		refetch
 	};
 }

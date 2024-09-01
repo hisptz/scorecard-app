@@ -1,13 +1,7 @@
 import i18n from "@dhis2/d2-i18n";
-import {
-	Button,
-	ButtonStrip,
-	DropdownButton,
-	IconQuestion24,
-	Tooltip,
-} from "@dhis2/ui";
+import { Button, ButtonStrip, DropdownButton, IconQuestion24, Tooltip } from "@dhis2/ui";
 import { IconAdd24, IconApps24, IconList24 } from "@dhis2/ui-icons";
-import { SCORECARD_LIST_HELP_STEPS, STEP_OPTIONS } from "@scorecard/shared";
+import { FullPageError, SCORECARD_LIST_HELP_STEPS, STEP_OPTIONS } from "@scorecard/shared";
 import { Steps } from "intro.js-react";
 import React, { useState } from "react";
 import HelpMenu from "./components/HelpMenu";
@@ -16,13 +10,14 @@ import { useSetting } from "@dhis2/app-service-datastore";
 import { useAlert } from "@dhis2/app-runtime";
 import { useNavigate } from "react-router-dom";
 import { ScorecardListArea } from "./components/ScorecardListArea";
+import { ErrorBoundary } from "react-error-boundary";
 
 export default function ScorecardList() {
 	const [scorecardViewType, { set }] = useSetting("scorecardViewType");
 	const [helpEnabled, setHelpEnabled] = useState<boolean>(false);
 	const { show } = useAlert(
 		({ message }) => message,
-		({ type }) => ({ ...type, duration: 3000 }),
+		({ type }) => ({ ...type, duration: 3000 })
 	);
 	const onViewChange = () => {
 		try {
@@ -34,7 +29,7 @@ export default function ScorecardList() {
 		} catch (e: any) {
 			show({
 				message: e.message ?? e.toString(),
-				type: { critical: true },
+				type: { critical: true }
 			});
 		}
 	};
@@ -81,7 +76,7 @@ export default function ScorecardList() {
 									viewType:
 										scorecardViewType === "grid"
 											? i18n.t("list")
-											: i18n.t("grid"),
+											: i18n.t("grid")
 								})}
 							>
 								<Button
@@ -110,7 +105,9 @@ export default function ScorecardList() {
 					</div>
 				</div>
 				<div className="flex-1">
-					<ScorecardListArea />
+					<ErrorBoundary FallbackComponent={FullPageError}>
+						<ScorecardListArea />
+					</ErrorBoundary>
 				</div>
 			</div>
 		</>

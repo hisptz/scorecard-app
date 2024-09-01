@@ -1,26 +1,47 @@
 import { useSearchParams } from "react-router-dom";
-import { useCallback, useMemo } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import { OrgUnitSelection } from "@hisptz/dhis2-utils";
-import {
-	getOrgUnitIdsFromOrgUnitSelection,
-	getOrgUnitSelectionFromIds,
-} from "@scorecard/shared";
+import { getOrgUnitIdsFromOrgUnitSelection, getOrgUnitSelectionFromIds } from "@scorecard/shared";
+import { ScorecardState, useScorecardConfig, useScorecardSetState } from "@hisptz/dhis2-analytics";
+import { isEqual } from "lodash";
+
+
+export function useRawDimensions() {
+	const [params] = useSearchParams();
+	const noDimensionsSelected = useMemo(() => {
+		return !params.get("ou") || !params.get("pe");
+	}, [params.get("ou"), params.get("pe")]);
+
+	const periods = useMemo(() => {
+		return params.get("pe")?.split(";") ?? [];
+	}, [params.get("pe")]);
+
+	const orgUnits = useMemo(() => {
+		return params.get("ou")?.split(";") ?? [];
+	}, [params.get("ou")]);
+
+
+	return {
+		periods,
+		orgUnits,
+		noDimensionsSelected
+	};
+
+}
+
 
 export function useDimensions() {
 	const [params, setParams] = useSearchParams();
-
 	const periods = useMemo(() => {
 		if (params.get("pe") == null) {
 			return undefined;
 		}
 		return params.get("pe")?.split(";") ?? [];
 	}, [params.get("pe")]);
-
 	const orgUnit = useMemo(() => {
 		const orgUnits = params.get("ou")?.split(";") ?? [];
 		return getOrgUnitSelectionFromIds(orgUnits);
 	}, [params.get("ou")]);
-
 	const setParam = useCallback(
 		(key: string) => (value: string) => {
 			setParams((prev) => {
@@ -29,13 +50,13 @@ export function useDimensions() {
 				return updatedParams;
 			});
 		},
-		[setParams],
+		[setParams]
 	);
 
 	const setDimensions = ({
-		orgUnitSelection,
-		periods,
-	}: {
+							   orgUnitSelection,
+							   periods
+						   }: {
 		orgUnitSelection: OrgUnitSelection;
 		periods: { id: string }[];
 	}) => {
@@ -55,7 +76,7 @@ export function useDimensions() {
 		(periods: string[]) => {
 			setParam("pe")(periods.join(";"));
 		},
-		[setParam],
+		[setParam]
 	);
 
 	const setOrgUnit = (orgUnitSelection: OrgUnitSelection) => {
@@ -73,6 +94,44 @@ export function useDimensions() {
 		noDimensionsSelected,
 		setPeriod,
 		setOrgUnit,
-		setDimensions,
+		setDimensions
 	};
+}
+
+
+export function useSetInitialDimensions() {
+	const config = useScorecardConfig();
+	const { setDimensions } = useDimensions();
+
+	useEffect(() => {
+		if (config) {
+			setDimensions({
+				orgUnitSelection: config.orgUnitSelection as OrgUnitSelection,
+				periods: config.periodSelection.periods
+			});
+		}
+	}, [config]);
+}
+
+
+export function useApplyDimensions() {
+	const setState = useScorecardSetState();
+	const { orgUnit, periods } = useDimensions();
+
+	useEffect(() => {
+		setState((prevState) => {
+			if (isEqual(prevState.periodSelection.periods, periods) && isEqual(prevState.orgUnitSelection, orgUnit)) {
+				return prevState;
+			} else {
+				return {
+					...prevState,
+					periodSelection: {
+						periods: periods?.map((id) => ({ id }))
+					},
+					orgUnitSelection: orgUnit
+				} as ScorecardState;
+			}
+		});
+	}, [orgUnit, periods]);
+
 }

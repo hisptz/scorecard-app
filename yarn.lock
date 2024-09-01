@@ -2949,6 +2949,7 @@
     leaflet "^1.9.3"
     leaflet-easyprint "^2.1.9"
     leaflet.fullscreen "^2.4.0"
+    luxon "^3.4.4"
     react-circular-progressbar "^2.1.0"
     react-dnd-html5-backend "^16.0.1"
     react-helmet "^6.1.0"

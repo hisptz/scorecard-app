@@ -10,10 +10,10 @@ const query: any = {
 		resource: "dataStore",
 		id: "hisptz-scorecard",
 		params: ({
-			keyword,
-			page,
-			pageSize,
-		}: {
+					 keyword,
+					 page,
+					 pageSize
+				 }: {
 			keyword: string;
 			page: number;
 			pageSize: number;
@@ -21,20 +21,20 @@ const query: any = {
 			return {
 				filter: keyword
 					? ["title", "description", "additionalLabels"].map(
-							(key) => `${key}:ilike:${keyword}`,
-						)
+						(key) => `${key}:ilike:${keyword}`
+					)
 					: undefined,
 				rootJunction: "or",
 				page,
 				pageSize,
-				fields: ["id", "title", "description", "additionalLabels"],
+				fields: ["id", "title", "description", "additionalLabels", "orgUnitSelection", "periodSelection"]
 			};
-		},
+		}
 	},
 	keys: {
 		resource: "dataStore",
-		id: "hisptz-scorecard",
-	},
+		id: "hisptz-scorecard"
+	}
 };
 
 type ListDataQueryResponse = {
@@ -55,8 +55,8 @@ export function useScorecardListData() {
 			variables: {
 				keyword: searchParams.get("query"),
 				page: 1,
-				pageSize: 8,
-			},
+				pageSize: 10
+			}
 		});
 
 	const scorecards = useMemo(() => {
@@ -67,17 +67,17 @@ export function useScorecardListData() {
 		const keys =
 			data?.keys?.filter(
 				(key) =>
-					!["savedObjects", "settings", "scorecard-sumary"].includes(
-						key,
-					),
+					!["savedObjects", "settings", "scorecard-summary"].includes(
+						key
+					)
 			) ?? [];
 
 		return {
 			...(data?.list?.pager ?? {}),
 			total: keys.length,
 			totalPages: Math.ceil(
-				keys.length / (data?.list.pager.pageSize ?? 1),
-			),
+				keys.length / (data?.list.pager.pageSize ?? 1)
+			)
 		};
 	}, [data]);
 
@@ -87,27 +87,27 @@ export function useScorecardListData() {
 				refetch({
 					keyword,
 					page: 1,
-					pageSize: 10,
+					pageSize: 10
 				});
 			} else {
 				refetch({
 					keyword: undefined,
 					page: 1,
-					pageSize: 10,
+					pageSize: 10
 				});
 			}
-		}, 800),
+		}, 800)
 	);
 
 	const onPageChange = (page: number) => {
 		refetch({
-			page,
+			page
 		});
 	};
 	const onPageSizeChange = (pageSize: number) => {
 		refetch({
 			pageSize,
-			page: 1,
+			page: 1
 		});
 	};
 
@@ -120,10 +120,10 @@ export function useScorecardListData() {
 		pager: {
 			...pager,
 			onPageChange,
-			onPageSizeChange,
+			onPageSizeChange
 		},
 		error,
 		loading,
-		refetch,
+		refetch
 	};
 }

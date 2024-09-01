@@ -1,29 +1,26 @@
 import { colors } from "@dhis2/ui";
-import {
-	ScorecardCardImage as holderImage,
-	truncateDescription,
-} from "@scorecard/shared";
+import { getOrgUnitIdsFromOrgUnitSelection, ScorecardCardImage as holderImage, truncateDescription } from "@scorecard/shared";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ScorecardListItem } from "../../types";
-import { useScorecardSharingSettings } from "../../hooks/authority";
 import { ScorecardListCardActions } from "./ScorecardListCardActions";
+import { OrgUnitSelection } from "@hisptz/dhis2-utils";
 
 export default function ScorecardListCard({
-	scorecard,
-	grid,
-}: {
+											  scorecard,
+											  grid
+										  }: {
 	scorecard: ScorecardListItem;
 	grid: boolean;
 }) {
-	const { write, read } = useScorecardSharingSettings(scorecard);
-
-	const { title, description, id } = scorecard ?? {};
+	const { title, description, id, orgUnitSelection, periodSelection } = scorecard ?? {};
 	const [showFullDescription, setShowFullDescription] = useState(false);
 	const navigate = useNavigate();
 
 	const onView = () => {
-		navigate(`/view/${id}`);
+		const orgUnitIds = getOrgUnitIdsFromOrgUnitSelection(orgUnitSelection as OrgUnitSelection).join(";");
+		const periodIds = periodSelection.periods.map(({ id }) => id).join(";");
+		navigate(`/view/${id}?ou=${orgUnitIds}&pe=${periodIds}`);
 	};
 
 	return grid ? (
@@ -52,7 +49,7 @@ export default function ScorecardListCard({
 								onClick={(event) => {
 									event.stopPropagation();
 									setShowFullDescription(
-										(prevState) => !prevState,
+										(prevState) => !prevState
 									);
 								}}
 								className="row space-between align-content-end"
@@ -98,7 +95,7 @@ export default function ScorecardListCard({
 									onClick={(event) => {
 										event.stopPropagation();
 										setShowFullDescription(
-											(prevState) => !prevState,
+											(prevState) => !prevState
 										);
 									}}
 									className="row space-between align-content-end"
