@@ -1,31 +1,30 @@
-import {
-	FullPageError,
-	FullPageLoader,
-	SystemSettingsState,
-} from "@scorecard/shared";
+import { FullPageError, FullPageLoader, SystemSettingsState } from "@scorecard/shared";
 import React, { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { HashRouter, Navigate, Route, Routes } from "react-router-dom";
 import { useRecoilValue } from "recoil";
-import { steps } from "../Main/components/ScoreCardManagement/state/pages";
+import { steps } from "../ScoreCardManagement/state/pages";
 
-const Main = React.lazy(() => import("../Main"));
 const ScorecardManagement = React.lazy(
-	() => import("../Main/components/ScoreCardManagement"),
+	() => import("../ScoreCardManagement")
 );
 const ScorecardView = React.lazy(() =>
-	import("../Main/components/ScorecardViewPage").then((module) => ({
-		default: module.ScorecardViewPage,
-	})),
+	import("../ScorecardViewPage").then((module) => ({
+		default: module.ScorecardViewPage
+	}))
 );
 const ScorecardMigration = React.lazy(
-	() => import("../Main/components/ScorecardMigration"),
+	() => import("../ScorecardMigration")
+);
+
+const ScorecardList = React.lazy(
+	() => import("../ScorecardList")
 );
 
 const pages = [
 	{
 		path: "/migrate",
-		component: ScorecardMigration,
+		component: ScorecardMigration
 	},
 	{
 		path: "/edit/:id",
@@ -33,9 +32,9 @@ const pages = [
 		subItems: [
 			...steps.map((step) => ({
 				path: step.id,
-				component: step.component,
-			})),
-		],
+				component: step.component
+			}))
+		]
 	},
 	{
 		path: "/add",
@@ -43,23 +42,22 @@ const pages = [
 		subItems: [
 			...steps.map((step) => ({
 				path: step.id,
-				component: step.component,
-			})),
-		],
+				component: step.component
+			}))
+		]
 	},
 	{
 		path: "/view/:id",
-		component: ScorecardView,
+		component: ScorecardView
 	},
 	{
 		path: "/",
-		component: Main,
-	},
+		component: ScorecardList
+	}
 ];
 
 export default function Router() {
 	useRecoilValue(SystemSettingsState);
-
 	return (
 		<HashRouter>
 			<ErrorBoundary FallbackComponent={FullPageError}>
@@ -95,10 +93,10 @@ export default function Router() {
 													path={path}
 												/>
 											);
-										},
+										}
 									)}
 								</Route>
-							),
+							)
 						)}
 						<Route path="*" element={<Navigate to="/" />} />
 					</Routes>
