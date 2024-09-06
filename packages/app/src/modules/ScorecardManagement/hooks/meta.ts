@@ -1,11 +1,11 @@
-import { DATASTORE_NAMESPACE, ScorecardConfig, scorecardConfigSchema } from "@scorecard/shared";
+import { DATASTORE_NAMESPACE, ScorecardConfig } from "@scorecard/shared";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useDataQuery } from "@dhis2/app-runtime";
 import { useGetScorecardSharingSettings } from "../../ScorecardList/hooks/authority";
 import { useEffect, useState } from "react";
-
+import { useFormSchema } from "./schema";
 
 const query: any = {
 	scorecard: {
@@ -25,6 +25,7 @@ export default function useScorecardFormMetadata() {
 		},
 		lazy: true
 	});
+	const schema = useFormSchema();
 	const getAccess = useGetScorecardSharingSettings();
 	const form = useForm<ScorecardConfig>({
 		shouldFocusError: true,
@@ -35,8 +36,9 @@ export default function useScorecardFormMetadata() {
 			}
 			return {} as ScorecardConfig;
 		},
-		reValidateMode: "onChange",
-		resolver: zodResolver(scorecardConfigSchema)
+		mode: "onSubmit",
+		reValidateMode: "onSubmit",
+		resolver: zodResolver(schema)
 	});
 
 	async function getScorecardAccess() {

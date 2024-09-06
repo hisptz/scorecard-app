@@ -3075,7 +3075,7 @@
   dependencies:
     luxon "^3.4.4"
 
-"@hookform/devtools@^4.0.2":
+"@hookform/devtools@^4.3.1":
   version "4.3.1"
   resolved "https://registry.yarnpkg.com/@hookform/devtools/-/devtools-4.3.1.tgz#5df1b77ea12b4f1c220da3d2dba737f81cbb12bc"
   integrity sha512-CrWxEoHQZaOXJZVQ8KBgOuAa8p2LI8M0DAN5GTRTmdCieRwFVjVDEmuTAVazWVRRkpEQSgSt3KYp7VmmqXdEnw==

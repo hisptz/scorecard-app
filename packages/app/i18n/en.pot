@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-09-06T07:09:21.611Z\n"
-"PO-Revision-Date: 2024-09-06T07:09:21.611Z\n"
+"POT-Creation-Date: 2024-09-06T09:01:38.368Z\n"
+"PO-Revision-Date: 2024-09-06T09:01:38.368Z\n"
 
 msgid "Could not determine scorecard's access"
 msgstr "Could not determine scorecard's access"
@@ -267,17 +267,26 @@ msgstr "Additional Labels (Tags)"
 msgid "Legend Definitions"
 msgstr "Legend Definitions"
 
+msgid "Select"
+msgstr "Select"
+
+msgid "Select default period(s)"
+msgstr "Select default period(s)"
+
 msgid "Default period"
 msgstr "Default period"
 
 msgid "Selected"
 msgstr "Selected"
 
-msgid "Select default period"
-msgstr "Select default period"
+msgid "{{buttonLabel}} default period"
+msgstr "{{buttonLabel}} default period"
 
-msgid "Period type is required"
-msgstr "Period type is required"
+msgid "Allowed period type"
+msgstr "Allowed period type"
+
+msgid "The period selector will only show periods of this type"
+msgstr "The period selector will only show periods of this type"
 
 msgid "Fixed Periods"
 msgstr "Fixed Periods"
@@ -290,6 +299,12 @@ msgstr "Highlighted Indicators"
 
 msgid "Add Highlighted Indicator"
 msgstr "Add Highlighted Indicator"
+
+msgid "You need to fix issues on this step before moving to another step"
+msgstr "You need to fix issues on this step before moving to another step"
+
+msgid "Form contains errors. Please fix them to continue."
+msgstr "Form contains errors. Please fix them to continue."
 
 msgid "Saving"
 msgstr "Saving"
@@ -461,9 +476,6 @@ msgstr "Confirm scorecard selection"
 
 msgid "Are you sure you want to select this scorecard for this dashboard?"
 msgstr "Are you sure you want to select this scorecard for this dashboard?"
-
-msgid "Select"
-msgstr "Select"
 
 msgid "Search"
 msgstr "Search"

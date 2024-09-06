@@ -1,17 +1,12 @@
-import { useDataEngine } from "@dhis2/app-runtime";
 import i18n from "@dhis2/d2-i18n";
 import { RHFDHIS2FormField as RHFCustomInput, RHFTextInputField } from "@hisptz/dhis2-ui";
 import React from "react";
-import { useParams } from "react-router-dom";
 import "../../../ScorecardManagement.module.css";
-import { titleDoesNotExist } from "../utils/utils";
 import { PeriodSelector } from "./PeriodSelector";
 import LegendDefinitionFormField from "./LegendDefinitionFormField";
 import { PeriodTypeSelector } from "./PeriodTypeSelector";
 
 export default function GeneralForm() {
-	const { id } = useParams();
-	const engine = useDataEngine();
 
 	return (
 		<div
@@ -25,18 +20,6 @@ export default function GeneralForm() {
 					name="title"
 					label={i18n.t("Title")}
 					required
-					validations={{
-						required: i18n.t("Title is required"),
-						validate: async (value: any) => {
-							return (
-								(await titleDoesNotExist(engine, id, value)) ||
-								i18n.t(
-									`A scorecard with the title '{{value}}' already exists. Please select another title`,
-									{ value }
-								)
-							);
-						}
-					}}
 				/>
 				<RHFTextInputField
 					valueType="TEXT"
@@ -53,7 +36,7 @@ export default function GeneralForm() {
 				/>
 			</div>
 			<div className="row align-items-center" style={{ gap: 24 }}>
-				<PeriodTypeSelector  />
+				<PeriodTypeSelector />
 				<PeriodSelector />
 			</div>
 			<div className="custom-header-settings">
