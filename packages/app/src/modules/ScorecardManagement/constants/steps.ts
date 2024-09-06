@@ -15,6 +15,7 @@ export interface FormStep {
 	component: JSXElementConstructor<any>;
 	helpSteps: Array<{ intro?: ReactElement | string; element?: string }>;
 	tooltip: string;
+	fieldIds: string[];
 }
 
 export const steps: FormStep[] = [
@@ -26,7 +27,15 @@ export const steps: FormStep[] = [
 			"Here you can set your scorecard general information \n" +
 			" You can set name, period type, legends and additional labels of your scorecard."
 		),
-		id: "general"
+		id: "general",
+		fieldIds: [
+			"title",
+			"subtitle",
+			"description",
+			"customHeader",
+			"additionalLabels",
+			"legendDefinitions"
+		]
 	},
 	{
 		label: i18n.t("Data Configuration"),
@@ -35,7 +44,10 @@ export const steps: FormStep[] = [
 		tooltip: i18n.t(
 			"On this page, you can configure different data sources (indicators, dataElements, e.t.c) for the scorecard. You can also preview the scorecard table."
 		),
-		id: "dataConfiguration"
+		id: "dataConfiguration",
+		fieldIds: [
+			"dataSelection"
+		]
 	},
 	{
 		label: i18n.t("Highlighted Indicators"),
@@ -44,7 +56,10 @@ export const steps: FormStep[] = [
 		tooltip: i18n.t(
 			"In this page you can add and configure highlighted indicators. These indicators appear on top of the scorecard table"
 		),
-		id: "highlightedIndicators"
+		id: "highlightedIndicators",
+		fieldIds: [
+			"highlightedIndicators"
+		]
 	},
 	{
 		label: i18n.t("Access"),
@@ -53,7 +68,10 @@ export const steps: FormStep[] = [
 		tooltip: i18n.t(
 			"In this page you can configure the default organisation unit and sharing access for the scorecard."
 		),
-		id: "access"
+		id: "access",
+		fieldIds: [
+			"orgUnitSelection"
+		]
 	},
 	{
 		label: i18n.t("Options"),
@@ -62,9 +80,16 @@ export const steps: FormStep[] = [
 		tooltip: i18n.t(
 			"In this page you can set default options for the scorecard view. These options affect the scorecard view"
 		),
-		id: "options"
+		id: "options",
+		fieldIds: [
+			"options"
+		]
 	}
 ] as const;
+
+export function getCurrentStepId(location: { pathname: string }): string {
+	return location.pathname.split("/").pop()!;
+}
 
 export function getStep(id: string): FormStep {
 	return find(steps, ["id", id])!;

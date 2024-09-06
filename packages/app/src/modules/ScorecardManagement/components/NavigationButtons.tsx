@@ -4,22 +4,32 @@ import React from "react";
 import { useFormContext } from "react-hook-form";
 import useScorecardManagerNavigate from "../hooks/navigate";
 import { useNavigate } from "react-router-dom";
+import { useAlert } from "@dhis2/app-runtime";
 
 
 export function StepNavigationButtons() {
-	const { formState } = useFormContext();
+	const { formState, trigger } = useFormContext();
+	const { show } = useAlert(({ message }) => message, ({ type }) => ({ ...type, duration: 3000 }));
 	const navigate = useNavigate();
 	const saving = formState.isSubmitting || formState.isValidating;
-	const { hasNext, hasPrevious, next, previous } = useScorecardManagerNavigate();
-	const onNext = () => {
+	const { hasNext, hasPrevious, next, previous, currentStep } = useScorecardManagerNavigate();
+	const onNext = async () => {
 		if (next) {
-			navigate(next.id);
+			if (await trigger(currentStep.fieldIds)) {
+				navigate(next.id);
+			} else {
+				show({ message: i18n.t("Form contains errors. Please fix them to continue."), type: { info: true } });
+			}
 		}
 	};
 
-	const onPrevious = () => {
+	const onPrevious = async () => {
 		if (previous) {
-			navigate(previous.id);
+			if (await trigger(currentStep.fieldIds)) {
+				navigate(previous.id);
+			} else {
+				show({ message: i18n.t("Form contains errors. Please fix them to continue."), type: { info: true } });
+			}
 		}
 	};
 
@@ -57,7 +67,7 @@ export function StepNavigationButtons() {
 export function NavigationButtons() {
 	const { formState, handleSubmit } = useFormContext();
 	const saving = formState.isSubmitting || formState.isValidating;
-	const { hasNext, hasPrevious, next, previous } = useScorecardManagerNavigate();
+	const { hasNext } = useScorecardManagerNavigate();
 
 	const onSaveAndContinue = async () => {
 
@@ -70,7 +80,7 @@ export function NavigationButtons() {
 	};
 
 	return (
-		<ButtonStrip center>
+		<ButtonStrip>
 			<Button
 				loading={saving}
 				dataTest="scorecard-save-button"
