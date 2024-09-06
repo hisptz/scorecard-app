@@ -1,10 +1,12 @@
+
+
 .main-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     font-size: 1rem;
     overflow: auto;
-    height: 100%;
+    height: calc(100vh - 48px);
     min-width: 1240px;
 }
 
@@ -261,17 +263,17 @@ div.jsx-1730587817 {
     font-weight: bold;
 }
 
-.MuiStep-root.MuiStep-horizontal {
+.MuiStep-root {
     margin: 0 8px;
     padding: 8px;
     border-radius: 8px;
 }
 
-.MuiStepConnector-line.MuiStepConnector-lineHorizontal {
+.MuiStepConnector-line {
     border-width: 2px;
 }
 
-.MuiPaper-root.MuiStepper-root.MuiStepper-horizontal.MuiPaper-elevation0 {
+.MuiPaper-root.MuiStepper-root.MuiPaper-elevation0 {
     background: transparent;
 }
 

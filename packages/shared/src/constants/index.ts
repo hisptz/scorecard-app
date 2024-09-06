@@ -50,7 +50,6 @@ export {
 	PREVIEW_TABLE_HELP_STEPS,
 } from "./help/scorecardManagement";
 export { SCORECARD_VIEW_HELP_STEPS } from "./help/scorecardView";
-export { scorecardManagementTooltips } from "./tooltips/scorecardManagement";
 export { optionsPageFields } from "./form";
 export { accessPageFields } from "./form";
 export { highlightedIndicatorPageFields } from "./form";

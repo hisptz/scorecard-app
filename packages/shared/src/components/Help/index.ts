@@ -6,7 +6,6 @@ import { HelpSteps } from "../../state";
 
 export default function Help({ helpSteps }: any) {
 	const setHelpSteps = useSetRecoilState(HelpSteps);
-
 	useEffect(() => {
 		setHelpSteps((prevSteps: any) => [...prevSteps, ...helpSteps]);
 		return () => {

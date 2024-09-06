@@ -1,8 +1,4 @@
-import {
-	OrgUnitLevels,
-	ScorecardConfigDirtySelector,
-	ScorecardConfigDirtyState,
-} from "@scorecard/shared";
+import { OrgUnitLevels, ScorecardConfigDirtySelector, ScorecardConfigDirtyState } from "@scorecard/shared";
 import { filter, isEmpty } from "lodash";
 import { useEffect } from "react";
 import { useRecoilCallback, useRecoilValue, waitForAll } from "recoil";

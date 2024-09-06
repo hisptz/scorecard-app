@@ -3,10 +3,11 @@ import React, { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { HashRouter, Navigate, Route, Routes } from "react-router-dom";
 import { useRecoilValue } from "recoil";
-import { steps } from "../ScoreCardManagement/state/pages";
+import { steps } from "../ScorecardManagement/constants/steps";
+import { head, isEmpty } from "lodash";
 
 const ScorecardManagement = React.lazy(
-	() => import("../ScoreCardManagement")
+	() => import("../ScorecardManagement")
 );
 const ScorecardView = React.lazy(() =>
 	import("../ScorecardViewPage").then((module) => ({
@@ -76,8 +77,9 @@ export default function Router() {
 										</ErrorBoundary>
 									}
 								>
+									{!isEmpty(subItems) && (<Route path="" element={<Navigate to={head(subItems)?.path ?? ""} />} />)}
 									{subItems?.map(
-										({ path, component: Component }) => {
+										({ path, component: Component }, index) => {
 											return (
 												<Route
 													element={

@@ -110,7 +110,9 @@ export default function ScorecardListCard({
 						</p>
 					</div>
 				</div>
-				<div className="row end"></div>
+				<div className="row end">
+					<ScorecardListCardActions scorecard={scorecard} />
+				</div>
 			</div>
 		</div>
 	);

@@ -1,29 +1,27 @@
 import { useDataEngine } from "@dhis2/app-runtime";
 import i18n from "@dhis2/d2-i18n";
-import { RHFDHIS2FormField as RHFCustomInput } from "@hisptz/dhis2-ui";
-import { DHIS2ValueTypes } from "@scorecard/shared";
+import { RHFDHIS2FormField as RHFCustomInput, RHFTextInputField } from "@hisptz/dhis2-ui";
 import React from "react";
 import { useParams } from "react-router-dom";
 import "../../../ScorecardManagement.module.css";
 import { titleDoesNotExist } from "../utils/utils";
+import { PeriodSelector } from "./PeriodSelector";
 import LegendDefinitionFormField from "./LegendDefinitionFormField";
-import PeriodSelector from "./PeriodSelector";
-import PeriodTypeSelector from "./PeriodTypeSelector";
+import { PeriodTypeSelector } from "./PeriodTypeSelector";
 
 export default function GeneralForm() {
 	const { id } = useParams();
 	const engine = useDataEngine();
+
 	return (
 		<div
 			style={{ gap: 16, display: "flex", flexDirection: "column" }}
-			className="col-12"
 		>
 			<div
 				style={{ display: "flex", flexDirection: "column", gap: 16 }}
 				className="col-12 general-settings"
 			>
-				<RHFCustomInput
-					valueType={DHIS2ValueTypes.TEXT.name}
+				<RHFTextInputField
 					name="title"
 					label={i18n.t("Title")}
 					required
@@ -34,14 +32,14 @@ export default function GeneralForm() {
 								(await titleDoesNotExist(engine, id, value)) ||
 								i18n.t(
 									`A scorecard with the title '{{value}}' already exists. Please select another title`,
-									{ value },
+									{ value }
 								)
 							);
-						},
+						}
 					}}
 				/>
-				<RHFCustomInput
-					valueType={DHIS2ValueTypes.TEXT.name}
+				<RHFTextInputField
+					valueType="TEXT"
 					name="subtitle"
 					label={i18n.t("Subtitle")}
 					max="120"
@@ -50,26 +48,19 @@ export default function GeneralForm() {
 			<div className="description-settings">
 				<RHFCustomInput
 					name="description"
-					valueType={DHIS2ValueTypes.LONG_TEXT.name}
+					valueType="LONG_TEXT"
 					label={i18n.t("Description")}
 				/>
 			</div>
 			<div className="row align-items-center" style={{ gap: 24 }}>
-				<div className="col-md-4 periods-type-settings">
-					<PeriodTypeSelector
-						label={i18n.t("Period Type")}
-						name="periodType"
-					/>
-				</div>
-				<div className="flex-1 periods-settings w-100">
-					<PeriodSelector />
-				</div>
+				<PeriodTypeSelector  />
+				<PeriodSelector />
 			</div>
 			<div className="custom-header-settings">
 				<RHFCustomInput
 					name="customHeader"
 					label={i18n.t("Custom Header")}
-					valueType={DHIS2ValueTypes.RICH_TEXT.name}
+					valueType="RICH_TEXT"
 				/>
 			</div>
 			<div className="col-sm-6 col-xl-4 legend-definitions-settings gap-8">
@@ -80,16 +71,14 @@ export default function GeneralForm() {
 					addable
 					deletable
 					name="additionalLabels"
-					valueType={DHIS2ValueTypes.MULTIPLE_FIELDS.name}
+					valueType="MULTIPLE_FIELDS"
 					label={i18n.t("Additional Labels (Tags)")}
 					multipleField={{
 						name: "label",
-						valueType: DHIS2ValueTypes.TEXT.name,
+						valueType: "TEXT"
 					}}
 				/>
 			</div>
 		</div>
 	);
 }
-
-GeneralForm.propTypes = {};

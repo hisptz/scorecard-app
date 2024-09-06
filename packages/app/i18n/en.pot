@@ -5,8 +5,29 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-08-12T13:51:17.693Z\n"
-"PO-Revision-Date: 2024-08-12T13:51:17.693Z\n"
+"POT-Creation-Date: 2024-09-06T07:09:21.611Z\n"
+"PO-Revision-Date: 2024-09-06T07:09:21.611Z\n"
+
+msgid "Could not determine scorecard's access"
+msgstr "Could not determine scorecard's access"
+
+msgid "Scorecard deleted successfully"
+msgstr "Scorecard deleted successfully"
+
+msgid "Confirm scorecard delete"
+msgstr "Confirm scorecard delete"
+
+msgid "Are you sure you want to delete scorecard "
+msgstr "Are you sure you want to delete scorecard "
+
+msgid "View"
+msgstr "View"
+
+msgid "Edit"
+msgstr "Edit"
+
+msgid "Delete"
+msgstr "Delete"
 
 msgid "Welcome to Scorecard App!"
 msgstr "Welcome to Scorecard App!"
@@ -16,6 +37,39 @@ msgstr "Create a scorecard instantly, over tea break"
 
 msgid "New Scorecard"
 msgstr "New Scorecard"
+
+msgid "No scorecards found"
+msgstr "No scorecards found"
+
+msgid "Could not find scorecards matching the keyword "
+msgstr "Could not find scorecards matching the keyword "
+
+msgid "Start a guided tour"
+msgstr "Start a guided tour"
+
+msgid "Documentation"
+msgstr "Documentation"
+
+msgid "Search by id, title, or description"
+msgstr "Search by id, title, or description"
+
+msgid "Clear search"
+msgstr "Clear search"
+
+msgid "Help"
+msgstr "Help"
+
+msgid "Switch to {{viewType}} view"
+msgstr "Switch to {{viewType}} view"
+
+msgid "list"
+msgstr "list"
+
+msgid "grid"
+msgstr "grid"
+
+msgid "Add New Scorecard"
+msgstr "Add New Scorecard"
 
 msgid "Please select at least one organisation unit"
 msgstr "Please select at least one organisation unit"
@@ -28,12 +82,6 @@ msgstr "Select Access"
 
 msgid "Add"
 msgstr "Add"
-
-msgid "Edit"
-msgstr "Edit"
-
-msgid "Delete"
-msgstr "Delete"
 
 msgid "Sharing"
 msgstr "Sharing"
@@ -210,9 +258,6 @@ msgstr "Subtitle"
 msgid "Description"
 msgstr "Description"
 
-msgid "Period Type"
-msgstr "Period Type"
-
 msgid "Custom Header"
 msgstr "Custom Header"
 
@@ -222,8 +267,14 @@ msgstr "Additional Labels (Tags)"
 msgid "Legend Definitions"
 msgstr "Legend Definitions"
 
-msgid "Year"
-msgstr "Year"
+msgid "Default period"
+msgstr "Default period"
+
+msgid "Selected"
+msgstr "Selected"
+
+msgid "Select default period"
+msgstr "Select default period"
 
 msgid "Period type is required"
 msgstr "Period type is required"
@@ -239,18 +290,6 @@ msgstr "Highlighted Indicators"
 
 msgid "Add Highlighted Indicator"
 msgstr "Add Highlighted Indicator"
-
-msgid "Scorecard updated successfully"
-msgstr "Scorecard updated successfully"
-
-msgid "Scorecard added successfully"
-msgstr "Scorecard added successfully"
-
-msgid "Please fill in all required fields"
-msgstr "Please fill in all required fields"
-
-msgid "Help"
-msgstr "Help"
 
 msgid "Saving"
 msgstr "Saving"
@@ -270,56 +309,41 @@ msgstr "General"
 msgid "Data Configuration"
 msgstr "Data Configuration"
 
+msgid ""
+"On this page, you can configure different data sources (indicators, "
+"dataElements, e.t.c) for the scorecard. You can also preview the scorecard "
+"table."
+msgstr ""
+"On this page, you can configure different data sources (indicators, "
+"dataElements, e.t.c) for the scorecard. You can also preview the scorecard "
+"table."
+
+msgid ""
+"In this page you can add and configure highlighted indicators. These "
+"indicators appear on top of the scorecard table"
+msgstr ""
+"In this page you can add and configure highlighted indicators. These "
+"indicators appear on top of the scorecard table"
+
 msgid "Access"
 msgstr "Access"
+
+msgid ""
+"In this page you can configure the default organisation unit and sharing "
+"access for the scorecard."
+msgstr ""
+"In this page you can configure the default organisation unit and sharing "
+"access for the scorecard."
 
 msgid "Options"
 msgstr "Options"
 
-msgid "Could not determine scorecard's access"
-msgstr "Could not determine scorecard's access"
-
-msgid "Scorecard deleted successfully"
-msgstr "Scorecard deleted successfully"
-
-msgid "Confirm scorecard delete"
-msgstr "Confirm scorecard delete"
-
-msgid "Are you sure you want to delete scorecard "
-msgstr "Are you sure you want to delete scorecard "
-
-msgid "View"
-msgstr "View"
-
-msgid "No scorecards found"
-msgstr "No scorecards found"
-
-msgid "Could not find scorecards matching the keyword "
-msgstr "Could not find scorecards matching the keyword "
-
-msgid "Start a guided tour"
-msgstr "Start a guided tour"
-
-msgid "Documentation"
-msgstr "Documentation"
-
-msgid "Search by id, title, or description"
-msgstr "Search by id, title, or description"
-
-msgid "Clear search"
-msgstr "Clear search"
-
-msgid "Switch to {{viewType}} view"
-msgstr "Switch to {{viewType}} view"
-
-msgid "list"
-msgstr "list"
-
-msgid "grid"
-msgstr "grid"
-
-msgid "Add New Scorecard"
-msgstr "Add New Scorecard"
+msgid ""
+"In this page you can set default options for the scorecard view. These "
+"options affect the scorecard view"
+msgstr ""
+"In this page you can set default options for the scorecard view. These "
+"options affect the scorecard view"
 
 msgid "Preparing migration..."
 msgstr "Preparing migration..."

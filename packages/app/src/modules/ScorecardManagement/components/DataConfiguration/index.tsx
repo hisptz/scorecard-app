@@ -19,7 +19,7 @@ export default function DataConfigurationScorecardForm() {
 		(updatedDataSelection: any) => {
 			setValue("dataSelection", updatedDataSelection);
 		},
-		[setValue],
+		[setValue]
 	);
 
 	const { dataGroups: groups } = dataSelection ?? new DataSelection();
@@ -29,13 +29,13 @@ export default function DataConfigurationScorecardForm() {
 		updateDataSelection(
 			DataSelection.set(dataSelection, "dataGroups", [
 				...(dataSelection?.dataGroups ?? []),
-				generateNewGroupData(groups),
-			]),
+				generateNewGroupData(groups)
+			])
 		);
 	}, [dataSelection, groups, updateDataSelection]);
 
 	return (
-		<div className="row" style={{ height: "100%" }}>
+		<div className="row">
 			<Help helpSteps={helpSteps} />
 			<div className="col-md-4 col-sm-6 p-16 groups-configuration-area">
 				<div

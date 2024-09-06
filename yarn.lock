@@ -2933,8 +2933,37 @@
   dependencies:
     "@hapi/hoek" "^9.0.0"
 
+"@hisptz/dhis2-analytics@^2.0.20":
+  version "2.0.20"
+  resolved "https://registry.yarnpkg.com/@hisptz/dhis2-analytics/-/dhis2-analytics-2.0.20.tgz#5a406b3a8bb1319932c587b535f9cf622bcd243f"
+  integrity sha512-N1y/TsXPDDOKkL+FcS7eguoO9YdNhYuqsNnz2s8zZoCB74ISZMGy45fymHdpg/rCp6knzTNcJaLCqzJq3dPmbg==
+  dependencies:
+    "@dnd-kit/core" "^6.1.0"
+    "@dnd-kit/utilities" "^3.2.2"
+    "@hisptz/dhis2-ui" "2.0.16"
+    "@hisptz/dhis2-utils" "2.0.6"
+    "@react-leaflet/core" "^2.1.0"
+    "@tanstack/react-table" "^8.19.3"
+    d3-color "^3.1.0"
+    d3-scale "^4.0.2"
+    highcharts "^10.3.2"
+    highcharts-react-official "^3.1.0"
+    leaflet "^1.9.3"
+    leaflet-easyprint "^2.1.9"
+    leaflet.fullscreen "^2.4.0"
+    luxon "^3.4.4"
+    react-circular-progressbar "^2.1.0"
+    react-dnd-html5-backend "^16.0.1"
+    react-helmet "^6.1.0"
+    react-leaflet "^4.2.0"
+    react-leaflet-custom-control "^1.3.1"
+    react-query "^3.39.3"
+    react-spring "^9.6.1"
+    screenfull "^6.0.2"
+    zod "^3.23.8"
+
 "@hisptz/dhis2-analytics@file:../dhis2-utils-v2/packages/analytics":
-  version "2.0.18"
+  version "2.0.21"
   dependencies:
     "@dnd-kit/core" "^6.1.0"
     "@dnd-kit/utilities" "^3.2.2"
@@ -2960,8 +2989,46 @@
     screenfull "^6.0.2"
     zod "^3.23.8"
 
+"@hisptz/dhis2-ui@2.0.16":
+  version "2.0.16"
+  resolved "https://registry.yarnpkg.com/@hisptz/dhis2-ui/-/dhis2-ui-2.0.16.tgz#15608304503048f05c2977af654f52d88cad503b"
+  integrity sha512-TThMfoJYwggDo7RM9ci0V0dRMLGi1o4lgZfKEjEwdZOEtwwkLA0gJzTMBonblZNvmbVI4rdV+psh15Y2tBZrRA==
+  dependencies:
+    "@hisptz/dhis2-utils" "2.0.6"
+    classnames "^2.5.1"
+    dexie "^3.2.3"
+    jodit-react "^1.3.39"
+    lodash "^4.17.21"
+    luxon "^3.4.4"
+    react-circular-progressbar "^2.1.0"
+    react-collapsible "^2.10.0"
+    react-color "^2.19.3"
+    react-hook-form "^7.51.5"
+    recoil "^0.7.7"
+    styled-components "^6.1.8"
+    usehooks-ts "^2.9.2"
+
+"@hisptz/dhis2-ui@^2.0.17":
+  version "2.0.17"
+  resolved "https://registry.yarnpkg.com/@hisptz/dhis2-ui/-/dhis2-ui-2.0.17.tgz#17d9bc8e37fb198ca77428f604a862d6237a0e84"
+  integrity sha512-ThjvNjskuvnA+eTx7paeZqEfWmPU0mscB/o5gPq/jFRwm8OASRgT8RwVkSpPC1iBfid7uDI62K9qHSQ9rgp0TA==
+  dependencies:
+    "@hisptz/dhis2-utils" "2.0.6"
+    classnames "^2.5.1"
+    dexie "^3.2.3"
+    jodit-react "^1.3.39"
+    lodash "^4.17.21"
+    luxon "^3.4.4"
+    react-circular-progressbar "^2.1.0"
+    react-collapsible "^2.10.0"
+    react-color "^2.19.3"
+    react-hook-form "^7.53.0"
+    recoil "^0.7.7"
+    styled-components "^6.1.8"
+    usehooks-ts "^2.9.2"
+
 "@hisptz/dhis2-ui@file:../dhis2-utils-v2/packages/ui":
-  version "2.0.14"
+  version "2.0.17"
   dependencies:
     "@hisptz/dhis2-utils" "workspace:*"
     classnames "^2.5.1"
@@ -2972,7 +3039,7 @@
     react-circular-progressbar "^2.1.0"
     react-collapsible "^2.10.0"
     react-color "^2.19.3"
-    react-hook-form "^7.51.5"
+    react-hook-form "^7.53.0"
     recoil "^0.7.7"
     styled-components "^6.1.8"
     usehooks-ts "^2.9.2"
@@ -2996,15 +3063,15 @@
     styled-components "^6.1.8"
     usehooks-ts "^2.9.2"
 
-"@hisptz/dhis2-utils@2.0.5", "@hisptz/dhis2-utils@workspace:*":
+"@hisptz/dhis2-utils@2.0.5", "@hisptz/dhis2-utils@^2.0.5", "@hisptz/dhis2-utils@workspace:*":
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/@hisptz/dhis2-utils/-/dhis2-utils-2.0.5.tgz#d595d0bf1db554fc4e8a1943e863f917ef931138"
   integrity sha512-hCJ2STjDVbJZSnp37QZJbVNa1SF8FZmyun2z8YXETv+Xvih9jbbvx+USLYbktEVjdhg0WpmFQMGskDFJv39vBw==
   dependencies:
     luxon "^3.4.4"
 
-"@hisptz/dhis2-utils@file:../dhis2-utils-v2/packages/utils":
-  version "2.0.5"
+"@hisptz/dhis2-utils@2.0.6", "@hisptz/dhis2-utils@file:../dhis2-utils-v2/packages/utils":
+  version "2.0.6"
   dependencies:
     luxon "^3.4.4"
 
@@ -16418,6 +16485,15 @@ postcss-import@^15.1.0:
     read-cache "^1.0.0"
     resolve "^1.1.7"
 
+postcss-import@^16.1.0:
+  version "16.1.0"
+  resolved "https://registry.yarnpkg.com/postcss-import/-/postcss-import-16.1.0.tgz#258732175518129667fe1e2e2a05b19b5654b96a"
+  integrity sha512-7hsAZ4xGXl4MW+OKEWCnF6T5jqBw80/EE9aXg1r2yyn1RsVEU8EtKXbijEODa+rg7iih4bKf7vlvTGYR4CnPNg==
+  dependencies:
+    postcss-value-parser "^4.0.0"
+    read-cache "^1.0.0"
+    resolve "^1.1.7"
+
 postcss-initial@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/postcss-initial/-/postcss-initial-4.0.1.tgz#529f735f72c5724a0fb30527df6fb7ac54d7de42"
@@ -17331,10 +17407,15 @@ react-helmet@^6.1.0:
     react-fast-compare "^3.1.1"
     react-side-effect "^2.1.0"
 
-react-hook-form@^7.43.8, react-hook-form@^7.51.5, react-hook-form@^7.52.1:
+react-hook-form@^7.43.8, react-hook-form@^7.51.5:
   version "7.52.2"
   resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.52.2.tgz#ff40f4776250b86ddfcde6be68d34aa82b1c60fe"
   integrity sha512-pqfPEbERnxxiNMPd0bzmt1tuaPcVccywFDpyk2uV5xCIBphHV5T8SVnX9/o3kplPE1zzKt77+YIoq+EMwJp56A==
+
+react-hook-form@^7.53.0:
+  version "7.53.0"
+  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.53.0.tgz#3cf70951bf41fa95207b34486203ebefbd3a05ab"
+  integrity sha512-M1n3HhqCww6S2hxLxciEXy2oISPnAzxY7gvwVPrtlczTM/1dDadXgUxDpHMrMTblDOcm/AXtXxHwZ3jpg1mqKQ==
 
 react-is@^16.13.1, react-is@^16.7.0:
   version "16.13.1"
@@ -19509,6 +19590,34 @@ tailwindcss@^3.0.2:
   version "3.4.7"
   resolved "https://registry.yarnpkg.com/tailwindcss/-/tailwindcss-3.4.7.tgz#6092f18767f5933f59375b9afe558e592fc77201"
   integrity sha512-rxWZbe87YJb4OcSopb7up2Ba4U82BoiSGUdoDr3Ydrg9ckxFS/YWsvhN323GMcddgU65QRy7JndC7ahhInhvlQ==
+  dependencies:
+    "@alloc/quick-lru" "^5.2.0"
+    arg "^5.0.2"
+    chokidar "^3.5.3"
+    didyoumean "^1.2.2"
+    dlv "^1.1.3"
+    fast-glob "^3.3.0"
+    glob-parent "^6.0.2"
+    is-glob "^4.0.3"
+    jiti "^1.21.0"
+    lilconfig "^2.1.0"
+    micromatch "^4.0.5"
+    normalize-path "^3.0.0"
+    object-hash "^3.0.0"
+    picocolors "^1.0.0"
+    postcss "^8.4.23"
+    postcss-import "^15.1.0"
+    postcss-js "^4.0.1"
+    postcss-load-config "^4.0.1"
+    postcss-nested "^6.0.1"
+    postcss-selector-parser "^6.0.11"
+    resolve "^1.22.2"
+    sucrase "^3.32.0"
+
+tailwindcss@^3.4.10:
+  version "3.4.10"
+  resolved "https://registry.yarnpkg.com/tailwindcss/-/tailwindcss-3.4.10.tgz#70442d9aeb78758d1f911af29af8255ecdb8ffef"
+  integrity sha512-KWZkVPm7yJRhdu4SRSl9d4AK2wM3a50UsvgHZO7xY77NQr2V+fIrEuoDGQcbvswWvFGbS2f6e+jC/6WJm1Dl0w==
   dependencies:
     "@alloc/quick-lru" "^5.2.0"
     arg "^5.0.2"
