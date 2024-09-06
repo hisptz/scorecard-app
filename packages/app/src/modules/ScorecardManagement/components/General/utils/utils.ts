@@ -1,32 +1,37 @@
 import { generateLegendDefaults, getScorecardSummary } from "@scorecard/shared";
 import { cloneDeep, find, isEmpty, set } from "lodash";
+import { LegendDefinition, ScorecardDataGroup, ScorecardDataHolder, ScorecardDataSource, SpecificTarget } from "@hisptz/dhis2-analytics";
 
-export function resetLegends(groups: any, legendDefinitions: any) {
+export function resetLegends(groups: ScorecardDataGroup[], legendDefinitions: LegendDefinition[]) {
 	const newGroups = cloneDeep(groups);
 	if (newGroups) {
 		newGroups?.forEach((group: any) => {
-			group?.dataHolders?.forEach((dataHolder: any) => {
-				dataHolder?.dataSources?.forEach((dataSource: any) => {
+			group?.dataHolders?.forEach((dataHolder: ScorecardDataHolder) => {
+				dataHolder?.dataSources?.forEach((dataSource: ScorecardDataSource) => {
 					set(
 						dataSource,
 						"legends",
 						generateLegendDefaults(
 							getNonDefaultLegendDefinitions(legendDefinitions),
-						),
+							dataSource.weight,
+							dataSource.highIsGood
+						)
 					);
 					if (!isEmpty(dataSource.specificTargets)) {
 						dataSource.specificTargets.forEach(
-							(specificTarget: any) => {
+							(specificTarget: SpecificTarget) => {
 								set(
 									specificTarget,
 									"legends",
 									generateLegendDefaults(
 										getNonDefaultLegendDefinitions(
-											legendDefinitions,
+											legendDefinitions
 										),
-									),
+										dataSource.weight,
+										dataSource.highIsGood
+									)
 								);
-							},
+							}
 						);
 					}
 				});
@@ -39,15 +44,7 @@ export function resetLegends(groups: any, legendDefinitions: any) {
 export function getNonDefaultLegendDefinitions(legendDefinitions: any) {
 	return (
 		legendDefinitions?.filter(
-			(legendDefinition: any) => !legendDefinition.isDefault,
-		) ?? []
-	);
-}
-
-export function getDefaultLegendDefinitions(legendDefinitions: any) {
-	return (
-		legendDefinitions?.filter(
-			(legendDefinition: any) => legendDefinition.isDefault,
+			(legendDefinition: any) => !legendDefinition.isDefault
 		) ?? []
 	);
 }

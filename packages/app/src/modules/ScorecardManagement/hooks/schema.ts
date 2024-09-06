@@ -11,13 +11,13 @@ export function useFormSchema() {
 	const engine = useDataEngine();
 	return scorecardConfigSchema.extend({
 		title: z.string({ required_error: i18n.t("Title is required") }).min(4, i18n.t("Title must have at least 4 characters")).refine(async (value) => {
-			console.log(value);
 			const titleExists = await titleDoesNotExist(engine, id, value);
 			return !titleExists || i18n.t(
 				`A scorecard with the title '{{value}}' already exists. Please select another title`,
 				{ value }
 			);
 		}),
+		additionalLabels: z.array(z.string()).optional(),
 		subtitle: z.string().optional(),
 		customHeader: z.string().optional(),
 		description: z.string().optional()

@@ -5,6 +5,7 @@ import "../../../ScorecardManagement.module.css";
 import { PeriodSelector } from "./PeriodSelector";
 import LegendDefinitionFormField from "./LegendDefinitionFormField";
 import { PeriodTypeSelector } from "./PeriodTypeSelector";
+import { AdditionalLabelsField } from "./AdditionalLabelsField";
 
 export default function GeneralForm() {
 
@@ -50,17 +51,7 @@ export default function GeneralForm() {
 				<LegendDefinitionFormField />
 			</div>
 			<div className="col-sm-6 col-xl-4 additional-labels-settings">
-				<RHFCustomInput
-					addable
-					deletable
-					name="additionalLabels"
-					valueType="MULTIPLE_FIELDS"
-					label={i18n.t("Additional Labels (Tags)")}
-					multipleField={{
-						name: "label",
-						valueType: "TEXT"
-					}}
-				/>
+				<AdditionalLabelsField />
 			</div>
 		</div>
 	);
