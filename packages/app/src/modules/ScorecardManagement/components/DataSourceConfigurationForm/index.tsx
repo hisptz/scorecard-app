@@ -5,7 +5,7 @@ import { DHIS2ValueTypes } from "@scorecard/shared";
 import PropTypes from "prop-types";
 import React, { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
-import TargetsArea from "../DataConfiguration/Components/DataGroups/Components/DataSourceConfiguration/Components/TargetsArea";
+import TargetsArea from "../DataConfiguration/components/DataGroups/components/DataSourceConfiguration/Components/TargetsArea";
 
 export default function DataSourceConfigurationForm({ path }: any) {
 	const { watch, setValue } = useFormContext();

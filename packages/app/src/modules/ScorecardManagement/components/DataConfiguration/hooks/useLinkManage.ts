@@ -1,29 +1,33 @@
-import { findIndex, head, last } from "lodash";
-import { useCallback } from "react";
+import { head, last } from "lodash";
+import { useFormContext } from "react-hook-form";
+import { ScorecardConfig, ScorecardDataHolder } from "@hisptz/dhis2-analytics";
 
 export default function useLinkManage({
-	onLink,
-	onUnlink,
-	dataHolders,
-	chunk,
-}: any) {
+										  groupIndex,
+										  onLink,
+										  onUnlink,
+										  chunk
+									  }: { groupIndex: number; chunk: ScorecardDataHolder[], onLink: (index1: number, index2: number) => void, onUnlink: (index1: number) => void }) {
 	const linkable = chunk.length > 1;
-	const hasLink = head(chunk)?.dataSources?.length > 1;
+	const { getValues } = useFormContext<ScorecardConfig>();
+	const hasLink = head(chunk)!.dataSources?.length > 1;
 
-	const getIndex = useCallback(
-		(id: any) => {
-			return findIndex(dataHolders, ["id", id]);
-		},
-		[dataHolders],
-	);
 	const onLinkClick = () => {
-		const indexOfMergedHolder = getIndex(head(chunk)?.id);
-		const indexOfDeletedHolder = getIndex(last(chunk)?.id);
-		onLink(indexOfMergedHolder, indexOfDeletedHolder);
+		const dataHolders = getValues(`dataSelection.dataGroups.${groupIndex}.dataHolders`) ?? [];
+		const firstHolderIndex = dataHolders.findIndex((holder) => holder.id === head(chunk)!.id);
+		const secondHolderIndex = dataHolders.findIndex((holder) => holder.id === last(chunk)!.id);
+
+		if (chunk.length > 1) {
+			onLink(firstHolderIndex, secondHolderIndex);
+		}
 	};
 
 	const onUnlinkClick = () => {
-		onUnlink(head(chunk).id);
+		if (hasLink) {
+			const dataHolders = getValues(`dataSelection.dataGroups.${groupIndex}.dataHolders`) ?? [];
+			const holderIndex = dataHolders.findIndex((holder) => holder.id === head(chunk)!.id);
+			onUnlink(holderIndex);
+		}
 	};
 
 	const onIconClick = () => {
@@ -35,7 +39,6 @@ export default function useLinkManage({
 		hasLink,
 		onIconClick,
 		onLinkClick,
-		onUnlinkClick,
-		getIndex,
+		onUnlinkClick
 	};
 }

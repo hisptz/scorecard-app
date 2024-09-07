@@ -1,6 +1,5 @@
 import produce from "immer";
 import { cloneDeep, defaultsDeep } from "lodash";
-import { ScorecardOptions } from "./index";
 
 export default class DataModel {
 	constructor(attributes = {}) {
@@ -21,7 +20,7 @@ export default class DataModel {
 	}
 
 	static setObject(object: any, values: any = {}) {
-		const updatedObject =new ScorecardOptions cloneDeep(object);
+		const updatedObject = cloneDeep(object);
 		for (const key of Object.keys(values)) {
 			updatedObject[key] = values[key];
 		}

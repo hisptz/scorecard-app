@@ -17,7 +17,6 @@ export function PeriodSelector() {
 		name: "periodSelection.type"
 	});
 
-	console.log({ periodTypeId });
 	const { field, fieldState } = useController<ScorecardConfig>({
 		name: "periodSelection.periods"
 	});
@@ -51,8 +50,6 @@ export function PeriodSelector() {
 			...new PeriodUtility().setCategory(PeriodTypeCategory.RELATIVE).periodTypes
 		], "id").filter((periodType) => periodType.id != periodTypeId).map((periodType) => periodType.id);
 	}, [periodTypeId]);
-
-	console.log(filteredPeriodTypes);
 
 	return (
 		<>

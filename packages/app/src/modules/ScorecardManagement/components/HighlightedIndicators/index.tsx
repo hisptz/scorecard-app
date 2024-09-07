@@ -6,7 +6,7 @@ import { isEmpty } from "lodash";
 import React, { Fragment, useCallback, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { useSetRecoilState } from "recoil";
-import DataSourceSelectorModal from "../DataConfiguration/Components/DataGroups/Components/DataSourceSelectorModal";
+import DataSourceSelectorModal from "../DataConfiguration/components/DataGroups/components/DataSourceSelectorModal";
 import { getNonDefaultLegendDefinitions } from "../General/utils/utils";
 import HighlightedDataSourceConfigurationForm from "./HighlightedDataSourceConfigurationForm";
 import HighlightedIndicatorsTable from "./Table";

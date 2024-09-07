@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-09-06T09:01:38.368Z\n"
-"PO-Revision-Date: 2024-09-06T09:01:38.368Z\n"
+"POT-Creation-Date: 2024-09-07T15:01:43.543Z\n"
+"PO-Revision-Date: 2024-09-07T15:01:43.543Z\n"
 
 msgid "Could not determine scorecard's access"
 msgstr "Could not determine scorecard's access"
@@ -101,11 +101,11 @@ msgstr "Can Read"
 msgid "Can Read and Write"
 msgstr "Can Read and Write"
 
+msgid "Groups"
+msgstr "Groups"
+
 msgid "Save"
 msgstr "Save"
-
-msgid "Cancel"
-msgstr "Cancel"
 
 msgid "Click to configure, drag to rearrange"
 msgstr "Click to configure, drag to rearrange"
@@ -146,6 +146,9 @@ msgstr "Organisation Unit Specific Targets"
 msgid "Other Periods"
 msgstr "Other Periods"
 
+msgid "Cancel"
+msgstr "Cancel"
+
 msgid "Update"
 msgstr "Update"
 
@@ -182,8 +185,11 @@ msgstr "Organisation Unit Level"
 msgid "Add Data source"
 msgstr "Add Data source"
 
-msgid "Please select at least one data source for this group"
-msgstr "Please select at least one data source for this group"
+msgid "Default"
+msgstr "Default"
+
+msgid "Add group"
+msgstr "Add group"
 
 msgid "Add Group"
 msgstr "Add Group"
@@ -212,9 +218,6 @@ msgstr "Select a data source to configure"
 msgid "Search for Indicator"
 msgstr "Search for Indicator"
 
-msgid "Groups"
-msgstr "Groups"
-
 msgid "Name"
 msgstr "Name"
 
@@ -239,18 +242,14 @@ msgstr "High is Good"
 msgid "Show Colors"
 msgstr "Show Colors"
 
+msgid "Additional labels"
+msgstr "Additional labels"
+
+msgid "Add new label"
+msgstr "Add new label"
+
 msgid "Title"
 msgstr "Title"
-
-msgid "Title is required"
-msgstr "Title is required"
-
-msgid ""
-"A scorecard with the title '{{value}}' already exists. Please select "
-"another title"
-msgstr ""
-"A scorecard with the title '{{value}}' already exists. Please select "
-"another title"
 
 msgid "Subtitle"
 msgstr "Subtitle"
@@ -260,9 +259,6 @@ msgstr "Description"
 
 msgid "Custom Header"
 msgstr "Custom Header"
-
-msgid "Additional Labels (Tags)"
-msgstr "Additional Labels (Tags)"
 
 msgid "Legend Definitions"
 msgstr "Legend Definitions"
@@ -359,6 +355,34 @@ msgid ""
 msgstr ""
 "In this page you can set default options for the scorecard view. These "
 "options affect the scorecard view"
+
+msgid "N/A"
+msgstr "N/A"
+
+msgid "No Data"
+msgstr "No Data"
+
+msgid "Target Reached/ On Track"
+msgstr "Target Reached/ On Track"
+
+msgid "Progress, but more effort required"
+msgstr "Progress, but more effort required"
+
+msgid "Not on track"
+msgstr "Not on track"
+
+msgid "Title is required"
+msgstr "Title is required"
+
+msgid "Title must have at least 4 characters"
+msgstr "Title must have at least 4 characters"
+
+msgid ""
+"A scorecard with the title '{{value}}' already exists. Please select "
+"another title"
+msgstr ""
+"A scorecard with the title '{{value}}' already exists. Please select "
+"another title"
 
 msgid "Preparing migration..."
 msgstr "Preparing migration..."

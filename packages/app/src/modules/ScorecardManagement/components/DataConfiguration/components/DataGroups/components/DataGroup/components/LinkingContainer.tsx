@@ -1,42 +1,41 @@
 import i18n from "@dhis2/d2-i18n";
 import { Tooltip } from "@dhis2/ui";
-import { ScorecardIndicatorHolder } from "@scorecard/shared";
 import { IconButton } from "@material-ui/core";
 import { IconLink24 } from "@dhis2/ui-icons";
 import UnlinkIcon from "@material-ui/icons/LinkOff";
-import PropTypes from "prop-types";
 import React from "react";
 import useLinkManage from "../../../../../hooks/useLinkManage";
 import DataSourceHolder from "../../DataSourceHolder";
+import { ScorecardDataHolder } from "@hisptz/dhis2-analytics";
 
-export default function LinkingContainer({
-	chunk,
-	onDataSourceDelete,
-	onLink,
-	onUnlink,
-	dataHolders,
-}: any) {
-	const { linkable, hasLink, onIconClick, getIndex, onUnlinkClick } =
-		useLinkManage({ onLink, onUnlink, dataHolders, chunk });
+export function LinkingContainer({
+									 chunk,
+									 onDelete,
+									 onLink,
+									 onUnlink,
+									 groupIndex
+								 }: { groupIndex: number; chunk: Array<ScorecardDataHolder>; onDelete: (index: number) => void, onLink: (index1: number, index2: number) => void, onUnlink: (index: number) => void }) {
+	const { linkable, hasLink, onIconClick, onUnlinkClick } =
+		useLinkManage({ onLink, onUnlink, chunk, groupIndex });
 
 	return (
 		<div className="linking-container">
 			<div className="row align-items-center">
 				<div className="column">
-					{chunk?.map((source: any) => (
+					{chunk?.map((source: ScorecardDataHolder, index) => (
 						<Tooltip
 							content={i18n.t(
-								"Click to configure, drag to rearrange",
+								"Click to configure, drag to rearrange"
 							)}
-							key={source.id}
+							key={`group-${groupIndex}-holder-${source}`}
 						>
 							<DataSourceHolder
-								onUnlink={onUnlinkClick}
 								dataHolder={source}
-								onDelete={onDataSourceDelete}
-								key={source.id}
-								id={source.id}
-								index={getIndex(source.id)}
+								groupIndex={groupIndex}
+								onUnlink={onUnlinkClick}
+								onDelete={onDelete}
+								key={`group-${groupIndex}-holder-${source}`}
+								index={index}
 							/>
 						</Tooltip>
 					))}
@@ -46,7 +45,7 @@ export default function LinkingContainer({
 						content={i18n.t("Click to {{linkAction}}", {
 							linkAction: hasLink
 								? i18n.t("unlink")
-								: i18n.t("link"),
+								: i18n.t("link")
 						})}
 					>
 						<IconButton
@@ -66,13 +65,3 @@ export default function LinkingContainer({
 		</div>
 	);
 }
-
-LinkingContainer.propTypes = {
-	chunk: PropTypes.array.isRequired,
-	dataHolders: PropTypes.arrayOf(
-		PropTypes.instanceOf(ScorecardIndicatorHolder),
-	).isRequired,
-	onDataSourceDelete: PropTypes.func.isRequired,
-	onLink: PropTypes.func.isRequired,
-	onUnlink: PropTypes.func.isRequired,
-};

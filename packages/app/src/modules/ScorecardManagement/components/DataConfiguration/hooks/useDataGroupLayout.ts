@@ -1,134 +1,76 @@
-import { ScorecardConfigEditState, ScorecardIndicatorGroup, ScorecardIndicatorHolder, updateListFromDragAndDrop } from "@scorecard/shared";
-import { cloneDeep, find, findIndex, head, last, set } from "lodash";
+import { useBoolean } from "usehooks-ts";
+import { useFieldArray, useFormContext } from "react-hook-form";
+import { ScorecardConfig } from "@hisptz/dhis2-analytics";
 import { useCallback, useMemo } from "react";
-import { useFormContext } from "react-hook-form";
-import { useRecoilCallback } from "recoil";
+import { customChunk } from "../components/DataGroups/components/DataGroup/utils";
+import { DropResult } from "react-beautiful-dnd";
+import { head } from "lodash";
+import { uid } from "@hisptz/dhis2-utils";
 
 export default function useDataGroupLayout({
-	handleAccordionChange,
-	index,
-}: any) {
-	const { watch, setValue } = useFormContext();
-	const path = useMemo(
-		() => ["dataSelection", "dataGroups", index].join("."),
-		[index],
-	);
-
-	const group = watch(path);
-	const { id, dataHolders } = group ?? new ScorecardIndicatorGroup();
-	const setGroup = useCallback(
-		(updatedGroup: any) => {
-			setValue(path, updatedGroup);
-		},
-		[path, setValue],
-	);
-
-	const onLink = useRecoilCallback(
-		({ snapshot, set }) =>
-			(indexOfMergedHolder: any, indexOfTheDeletedHolder: any) => {
-				const dataSourceToLink = head(
-					dataHolders[indexOfTheDeletedHolder]?.dataSources,
-				);
-				const mergedHolder = ScorecardIndicatorHolder.linkDataSource(
-					dataHolders[indexOfMergedHolder],
-					dataSourceToLink,
-				);
-				const updatedHolderList = [...dataHolders];
-				updatedHolderList.splice(indexOfMergedHolder, 1, mergedHolder);
-				updatedHolderList.splice(indexOfTheDeletedHolder, 1);
-
-				const selectedDataHolderIndex = snapshot.getLoadable(
-					ScorecardConfigEditState,
-				).contents?.selectedDataHolderIndex;
-
-				if (
-					selectedDataHolderIndex === indexOfMergedHolder ||
-					selectedDataHolderIndex === indexOfTheDeletedHolder
-				) {
-					set(ScorecardConfigEditState, (prevState: any) => {
-						return {
-							...prevState,
-							selectedDataHolderIndex: indexOfMergedHolder,
-						};
-					});
-				}
-
-				setGroup(
-					ScorecardIndicatorGroup.set(
-						group,
-						"dataHolders",
-						updatedHolderList,
-					),
-				);
-			},
-		[dataHolders, group, setGroup],
-	);
-
-	const onUnlink = useRecoilCallback(({ set: setState }) => (id) => {
-		//get the linked holder by id
-		const dataHolder = find(dataHolders, ["id", id]);
-		const dataHolderIndex = findIndex(dataHolders, ["id", id]);
-		//create a new holder for the last dataSource
-		const newDataHolder = new ScorecardIndicatorHolder({
-			dataSources: [last(dataHolder?.dataSources)],
-		});
-		const dataHolderToModify = cloneDeep(dataHolder);
-		const modifiedDataHolder = ScorecardIndicatorHolder.set(
-			dataHolderToModify,
-			"dataSources",
-			dataHolderToModify?.dataSources?.splice(0, 1),
-		);
-		const updatedHolderList = [...dataHolders];
-		set(updatedHolderList, [dataHolderIndex], modifiedDataHolder);
-		updatedHolderList.splice(dataHolderIndex, 0, newDataHolder);
-		setGroup(
-			ScorecardIndicatorGroup.set(
-				group,
-				"dataHolders",
-				updatedHolderList,
-			),
-		);
-
-		setState(ScorecardConfigEditState, (prevState: any) => {
-			return {
-				...prevState,
-				selectedDataHolderIndex: undefined,
-			};
-		});
+											   index
+										   }: { index: number }) {
+	const { value: expanded, toggle: toggleExpansion } = useBoolean(false);
+	// @ts-ignore
+	const { fields, remove, insert } = useFieldArray<ScorecardConfig, `dataSelection.dataGroups.${number}.dataHolders`>({
+		name: `dataSelection.dataGroups.${index}.dataHolders`
 	});
+	const { getValues, setValue } = useFormContext<ScorecardConfig>();
 
-	const onDragEnd = useRecoilCallback(({ set }) => (result) => {
-		const { destination, source }: any = result || {};
-		setGroup(
-			ScorecardIndicatorGroup.set(
-				group,
-				"dataHolders",
-				updateListFromDragAndDrop(
-					group?.dataHolders,
-					source?.index,
-					destination?.index,
-				),
-			),
-		);
-		set(ScorecardConfigEditState, (prevState: any) => {
-			if (prevState.selectedDataHolderIndex === source?.index) {
-				return {
-					...prevState,
-					selectedDataHolderIndex: destination?.index,
-				};
-			}
-			return prevState;
+	const dataHolderChunks = useMemo(() => {
+		const dataHolders = getValues(`dataSelection.dataGroups.${index}.dataHolders`);
+		return customChunk(dataHolders);
+	}, [fields]);
+
+	const onDragEnd = useCallback((result: DropResult) => {
+		const { source, destination } = result ?? {};
+
+	}, []);
+
+	const onLink = (index1: number, index2: number) => {
+		//We need to set the first data source of the second index to the second data source of the first and remove the second data holder
+		const dataHolder = getValues(`dataSelection.dataGroups.${index}.dataHolders.${index1}`);
+		const secondDataHolder = getValues(`dataSelection.dataGroups.${index}.dataHolders.${index2}`);
+		setValue(`dataSelection.dataGroups.${index}.dataHolders.${index1}`, {
+			...dataHolder,
+			dataSources: [
+				...dataHolder.dataSources,
+				head(secondDataHolder.dataSources)!
+			]
 		});
-	});
+		remove(index2);
+	};
 
-	const onExpand = (event: any, newExpanded: any) => {
-		handleAccordionChange(id)(event, newExpanded);
+	const onUnlink = (index: number) => {
+		//Create a new data holder and send the second data item of the split data holder to the new data holder
+		const dataHolder = getValues(`dataSelection.dataGroups.${index}.dataHolders.${index}`);
+		if (dataHolder.dataSources.length > 1) {
+			const [first, second] = dataHolder.dataSources;
+			setValue(`dataSelection.dataGroups.${index}.dataHolders.${index}`, {
+				...dataHolder,
+				dataSources: [
+					first
+				]
+			});
+			//We insert the new data holder right under the existing one
+			insert(index + 1, {
+				id: uid(),
+				dataSources: [
+					second
+				]
+			});
+		}
+
 	};
 
 	return {
+		toggleExpansion,
 		onLink,
 		onUnlink,
 		onDragEnd,
-		onExpand,
+		expanded,
+		dataHolders: fields,
+		dataHolderChunks,
+		remove
 	};
 }

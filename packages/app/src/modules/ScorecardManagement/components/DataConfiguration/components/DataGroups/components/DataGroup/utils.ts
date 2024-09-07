@@ -1,18 +1,20 @@
+import { ScorecardDataHolder } from "@hisptz/dhis2-analytics";
+
 export function getChunkChildIndex(
 	chunkSize = 2,
 	chunkIndex: any,
-	childIndex: any,
+	childIndex: any
 ) {
 	return chunkSize * chunkIndex + childIndex;
 }
 
-export function customChunk(list = []) {
+export function customChunk(list: ScorecardDataHolder[],) {
 	const chunks = [];
-	const listToModify: any = [...list];
+	const listToModify: ScorecardDataHolder[] = [...list];
 	const i = 0;
 
 	while (listToModify.length > 0) {
-		if (listToModify[i]?.dataSources > 1) {
+		if (listToModify[i]?.dataSources.length > 1) {
 			chunks.push(listToModify.splice(i, 1));
 			continue;
 		}
