@@ -27,7 +27,7 @@ export function LinkingContainer({
 							content={i18n.t(
 								"Click to configure, drag to rearrange"
 							)}
-							key={`group-${groupIndex}-holder-${source}`}
+							key={`group-${groupIndex}-holder-${source.id}`}
 						>
 							<DataSourceHolder
 								dataHolder={source}

@@ -12,7 +12,7 @@ export default function useDataGroupLayout({
 										   }: { index: number }) {
 	const { value: expanded, toggle: toggleExpansion } = useBoolean(false);
 	// @ts-ignore
-	const { fields, remove, insert } = useFieldArray<ScorecardConfig, `dataSelection.dataGroups.${number}.dataHolders`>({
+	const { fields, remove, insert, replace, swap, move } = useFieldArray<ScorecardConfig, `dataSelection.dataGroups.${number}.dataHolders`>({
 		name: `dataSelection.dataGroups.${index}.dataHolders`
 	});
 	const { getValues, setValue } = useFormContext<ScorecardConfig>();
@@ -25,7 +25,14 @@ export default function useDataGroupLayout({
 	const onDragEnd = useCallback((result: DropResult) => {
 		const { source, destination } = result ?? {};
 
-	}, []);
+		console.log({
+			result
+		});
+		if (source && destination) {
+			move(source.index, destination.index);
+		}
+
+	}, [insert, replace]);
 
 	const onLink = (index1: number, index2: number) => {
 		//We need to set the first data source of the second index to the second data source of the first and remove the second data holder

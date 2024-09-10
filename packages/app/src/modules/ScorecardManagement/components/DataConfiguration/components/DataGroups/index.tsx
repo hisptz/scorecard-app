@@ -1,6 +1,4 @@
 import React from "react";
-import { DndContext } from "@dnd-kit/core";
-import { DataGroupDroppable } from "./components/DataGroup/components/DataGroupDroppable";
 import { useDataItemSearchState } from "../../states/searchState";
 import { useFieldArray } from "react-hook-form";
 import { ScorecardConfig, ScorecardDataGroup } from "@hisptz/dhis2-analytics";
@@ -11,10 +9,11 @@ import i18n from "@dhis2/d2-i18n";
 import { Button } from "@dhis2/ui";
 import { IconAdd24 } from "@dhis2/ui-icons";
 import { DataGroup } from "./components/DataGroup";
+import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd";
 
 export default function DataGroups() {
 	const [filteredDataGroupIds] = useDataItemSearchState();
-	const { fields, append, remove } = useFieldArray<ScorecardConfig, "dataSelection.dataGroups">({
+	const { fields, append, remove, move } = useFieldArray<ScorecardConfig, "dataSelection.dataGroups">({
 		name: "dataSelection.dataGroups"
 	});
 
@@ -22,7 +21,7 @@ export default function DataGroups() {
 		append({
 			id: uid(),
 			dataHolders: [],
-			title: i18n.t("Default"),
+			title: `${i18n.t("Default")} ${fields.length + 1}`,
 			style: {}
 		} as ScorecardDataGroup);
 	};
@@ -31,22 +30,35 @@ export default function DataGroups() {
 		return <EmptyDataGroups onGroupAdd={onGroupAdd} />;
 	}
 
+	const onDragEnd = (result: DropResult) => {
+		const { source, destination } = result;
+		if (destination) {
+			move(source.index, destination.index);
+		}
+	};
+
 	return (
-		<DndContext>
-			<DataGroupDroppable>
-				<div style={{ gap: 24 }} className="column">
-					<div style={{ flex: 1 }} className="column">
-						{
-							fields.map((field, i) => (
-								<DataGroup onRemove={remove} key={field.id} index={i} />
-							))
-						}
-					</div>
-					<div style={{ padding: 16 }}>
-						<Button icon={<IconAdd24 />}>{i18n.t("Add group")}</Button>
-					</div>
-				</div>
-			</DataGroupDroppable>
-		</DndContext>
+		<DragDropContext onDragEnd={onDragEnd}>
+			<Droppable droppableId={"group-area"}>
+				{
+					(provided) => {
+
+						return <div {...provided.droppableProps} ref={provided.innerRef} style={{ gap: 24 }} className="column">
+							<div style={{ flex: 1 }} className="column">
+								{
+									fields.map((field, i) => (
+										<DataGroup onRemove={remove} key={field.id} index={i} />
+									))
+								}
+							</div>
+							<div style={{ padding: 16 }}>
+								<Button onClick={onGroupAdd} icon={<IconAdd24 />}>{i18n.t("Add group")}</Button>
+							</div>
+							{provided.placeholder}
+						</div>;
+					}
+				}
+			</Droppable>
+		</DragDropContext>
 	);
 }

@@ -7,7 +7,7 @@ import { InstructionArea } from "./components/DataGroups/components/DataGroup/co
 export default function DataConfigurationScorecardForm() {
 
 	return (
-		<div className="row">
+		<div className="row h-100">
 			<div className="col-md-4 col-sm-6 p-16 groups-configuration-area">
 				<div
 					className=" container-bordered column"

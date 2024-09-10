@@ -1,18 +1,15 @@
 import i18n from "@dhis2/d2-i18n";
 import { Button, ButtonStrip, Modal, ModalActions, ModalContent, ModalTitle } from "@dhis2/ui";
-import { DataSourceSelector } from "@hisptz/dhis2-ui";
-import PropTypes from "prop-types";
+import { DataSourceSelector, SelectedDataItem } from "@hisptz/dhis2-ui";
 import React, { useState } from "react";
 
-//TODO: Refactor to shared
-
 export default function DataSourceSelectorModal({
-	onClose,
-	open,
-	onSelect,
-	disabled,
-}: any) {
-	const [selectedItems, setSelectedItems] = useState([]);
+													onClose,
+													open,
+													onSelect,
+													disabled
+												}: { onClose: () => void, open: boolean; onSelect: (dataItems: SelectedDataItem[]) => void, disabled: string[] }) {
+	const [selectedItems, setSelectedItems] = useState<SelectedDataItem[]>([]);
 
 	return (
 		<Modal onClose={onClose} position={"middle"} large hide={!open}>
@@ -25,7 +22,7 @@ export default function DataSourceSelectorModal({
 							"dataElement",
 							"dataSet",
 							"programIndicator",
-							"customFunction",
+							"customFunction"
 						]}
 						selected={selectedItems}
 						disabled={disabled}
@@ -51,10 +48,3 @@ export default function DataSourceSelectorModal({
 		</Modal>
 	);
 }
-
-DataSourceSelectorModal.propTypes = {
-	onClose: PropTypes.func.isRequired,
-	onSelect: PropTypes.func.isRequired,
-	disabled: PropTypes.array,
-	open: PropTypes.bool,
-};

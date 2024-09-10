@@ -29,7 +29,7 @@ export default function DataSourceHolder({
 	};
 	return (
 		<Draggable draggableId={`${id}`} index={index}>
-			{(provided: any) => (
+			{(provided) => (
 				<div
 					{...provided.draggableProps}
 					{...provided.dragHandleProps}

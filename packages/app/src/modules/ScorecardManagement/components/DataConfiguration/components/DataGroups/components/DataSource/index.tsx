@@ -1,5 +1,5 @@
 import i18n from "@dhis2/d2-i18n";
-import { Button } from "@dhis2/ui";
+import { Button, IconDragHandle24 } from "@dhis2/ui";
 import { getDataSourceShortName } from "@scorecard/shared";
 import { Avatar } from "@material-ui/core";
 import { IconDelete16 } from "@dhis2/ui-icons";
@@ -13,6 +13,7 @@ export default function DataSource({ dataSource, index, onDelete }: { dataSource
 			<div className="container-bordered data-source p-8 w-100">
 				<div className="row space-between align-items-center">
 					<div className="row align-items-center ">
+						<IconDragHandle24 />
 						<Avatar className="data-source avatar">
 							{getDataSourceShortName(type)}
 						</Avatar>
