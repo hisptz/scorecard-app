@@ -10,6 +10,7 @@ export default function DataSourceHolder({
 											 dataHolder,
 											 onDelete,
 											 groupIndex
+
 										 }: { index: number; dataHolder: ScorecardDataHolder, onDelete: (index: number) => void, groupIndex: number; onUnlink: (index: number) => void }) {
 	const { setValue, getValues } = useFormContext<ScorecardConfig>();
 	const { id, dataSources } = dataHolder ?? {};

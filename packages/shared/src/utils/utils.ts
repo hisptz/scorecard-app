@@ -1,33 +1,14 @@
-import {
-	capitalize,
-	compact,
-	find,
-	flattenDeep,
-	head,
-	intersectionBy,
-	isEmpty,
-	last,
-	reduce,
-	snakeCase,
-	sortBy,
-	truncate,
-	uniqBy,
-} from "lodash";
+import { capitalize, compact, find, flattenDeep, head, intersectionBy, isEmpty, last, reduce, snakeCase, sortBy, truncate, uniqBy } from "lodash";
 import { ScorecardLegend } from "../models";
 import { DefaultAuthority, TableSort } from "../constants";
 import { D2User } from "../state/user";
-import { Sharing } from "app/src/modules/Main/components/ScorecardList/hooks/authority";
-import {
-	ScorecardDataGroup,
-	ScorecardDataHolder,
-	ScorecardDataSource,
-} from "@hisptz/dhis2-analytics";
+import { LegendDefinition, ScorecardDataGroup, ScorecardDataHolder, ScorecardDataSource } from "@hisptz/dhis2-analytics";
 
 export function getWindowDimensions() {
 	const { innerWidth: width, innerHeight: height } = window;
 	return {
 		width: width > 1366 ? width : 1366,
-		height: (height > 763 ? height : 763) - 48, //considering the appbar
+		height: (height > 763 ? height : 763) - 48 //considering the appbar
 	};
 }
 
@@ -57,15 +38,15 @@ export function generateRandomValues(max: any) {
 }
 
 export function generateLegendDefaults(
-	legendDefinitions = [],
-	weight: any,
-	highIsGood = true,
-) {
+	{
+		legendDefinitions = [],
+		weight,
+		highIsGood
+	}: { legendDefinitions: LegendDefinition[], weight: number; highIsGood: boolean }): ScorecardLegend[] {
 	let definitions = legendDefinitions;
 	if (!highIsGood) {
 		definitions = definitions.reverse();
 	}
-
 	if (!isEmpty(definitions)) {
 		const actualWeight = weight ?? 100; //sets 100 as the default weight
 		const range = actualWeight / definitions?.length;
@@ -77,17 +58,18 @@ export function generateLegendDefaults(
 				new ScorecardLegend({
 					startValue: Math.floor(i),
 					endValue: Math.floor(i + range),
-					legendDefinitionId: id,
-				}),
+					legendDefinitionId: id
+				})
 			);
 			legendDefinitionIterator--;
 		}
 		return values;
 	}
-	return [];
+	return [] as ScorecardLegend[];
 }
 
-export function reverseLegends(legends: any) {}
+export function reverseLegends(legends: any) {
+}
 
 export function specificTargetsSet(dataSources: any) {
 	return reduce(
@@ -95,24 +77,24 @@ export function specificTargetsSet(dataSources: any) {
 		(isSet, dataSource) => {
 			return isSet || dataSource.specificTargetsSet;
 		},
-		false,
+		false
 	);
 }
 
 export function getHoldersFromGroups(
-	dataGroups: ScorecardDataGroup[] = [],
+	dataGroups: ScorecardDataGroup[] = []
 ): ScorecardDataHolder[] {
 	return flattenDeep(dataGroups?.map(({ dataHolders }) => dataHolders) ?? []);
 }
 
 export function getDataSourcesFromGroups(
-	dataGroups: ScorecardDataGroup[],
+	dataGroups: ScorecardDataGroup[]
 ): ScorecardDataSource[] {
 	const dataHolders = compact(getHoldersFromGroups(dataGroups));
 	return flattenDeep(dataHolders?.map(({ dataSources }) => dataSources));
 }
 
-export function getDataSourcesDisplayName(dataSources: any) {
+export function getDataSourcesDisplayName(dataSources: ScorecardDataSource[]) {
 	return dataSources?.length > 1
 		? `${head(dataSources)?.label} / ${last(dataSources)?.label}`
 		: `${head(dataSources)?.label}`;
@@ -125,7 +107,7 @@ export function updatePager(pager: any, itemListLength: any) {
 		page,
 		pageSize,
 		pageCount: Math.ceil(itemListLength / pageSize),
-		total: itemListLength,
+		total: itemListLength
 	};
 }
 
@@ -147,22 +129,22 @@ function findLegend(legends: any, value: any, { max, legendDefinitions }: any) {
 	}
 
 	const { legendDefinitionId } =
-		find(legends, (legend) => {
-			if (legend) {
-				const { startValue, endValue } = legend;
-				if (+endValue === max) {
-					return (
-						+startValue <= Math.round(value) &&
-						+endValue >= Math.round(value)
-					);
-				}
+	find(legends, (legend) => {
+		if (legend) {
+			const { startValue, endValue } = legend;
+			if (+endValue === max) {
 				return (
 					+startValue <= Math.round(value) &&
-					+endValue > Math.round(value)
+					+endValue >= Math.round(value)
 				);
 			}
-			return false;
-		}) ?? {};
+			return (
+				+startValue <= Math.round(value) &&
+				+endValue > Math.round(value)
+			);
+		}
+		return false;
+	}) ?? {};
 	return find(legendDefinitions, ["id", legendDefinitionId]);
 }
 
@@ -188,8 +170,8 @@ export function getLegend(
 		legendDefinitions,
 		specificTargets,
 		period,
-		orgUnit,
-	}: any,
+		orgUnit
+	}: any
 ) {
 	if (!isEmpty(specificTargets)) {
 		const specificTarget: any = head(specificTargets);
@@ -199,7 +181,7 @@ export function getLegend(
 					getPeriodSpecificLegends(specificTarget, period) ?? legends;
 				return findLegend(specificLegends, value, {
 					max,
-					legendDefinitions,
+					legendDefinitions
 				});
 			}
 			if (specificTarget.type === "orgUnit") {
@@ -208,7 +190,7 @@ export function getLegend(
 					legends;
 				return findLegend(specificLegends, value, {
 					max,
-					legendDefinitions,
+					legendDefinitions
 				});
 			}
 		}
@@ -221,23 +203,23 @@ export function getLegend(
 	if (typeof legends === "object") {
 		const orgUnitLevelId = getOrgUnitLevelId(
 			orgUnitLevels,
-			dataOrgUnitLevel,
+			dataOrgUnitLevel
 		);
 		if (orgUnitLevelId) {
 			const orgUnitLegends = legends[orgUnitLevelId];
 			return findLegend(orgUnitLegends, value, {
 				max,
-				legendDefinitions,
+				legendDefinitions
 			});
 		}
 	}
 }
 
 export function sortOrgUnitsBasedOnData({
-	orgUnitSort,
-	filteredOrgUnits,
-	childrenOrgUnits,
-}: any) {
+											orgUnitSort,
+											filteredOrgUnits,
+											childrenOrgUnits
+										}: any) {
 	const parentTemp = [];
 	const childrenTemp = [];
 	for (const ou of orgUnitSort) {
@@ -247,20 +229,20 @@ export function sortOrgUnitsBasedOnData({
 	return {
 		parentOrgUnits: uniqBy(
 			compact([...parentTemp, ...filteredOrgUnits]),
-			"id",
+			"id"
 		),
 		childOrgUnits: uniqBy(
 			compact([...childrenTemp, ...childrenOrgUnits]),
-			"id",
-		),
+			"id"
+		)
 	};
 }
 
 export function sortOrgUnitsBasedOnNames({
-	sort,
-	filteredOrgUnits,
-	childrenOrgUnits,
-}: any) {
+											 sort,
+											 filteredOrgUnits,
+											 childrenOrgUnits
+										 }: any) {
 	let childOrgUnits = childrenOrgUnits;
 	let parentOrgUnits = filteredOrgUnits;
 
@@ -279,7 +261,7 @@ export function sortOrgUnitsBasedOnNames({
 
 	return {
 		childOrgUnits,
-		parentOrgUnits,
+		parentOrgUnits
 	};
 }
 
@@ -289,8 +271,8 @@ export function sortDataSourcesBasedOnData({ dataSort, dataSources }: any) {
 		temp.push(
 			find(
 				dataSources,
-				({ dataSources }) => !!find(dataSources, ["id", dx]),
-			),
+				({ dataSources }) => !!find(dataSources, ["id", dx])
+			)
 		);
 	}
 	return uniqBy(temp, "id");
@@ -314,7 +296,7 @@ function translateAccess(access: string = ""): {
 } {
 	const translatedAccess = {
 		read: false,
-		write: false,
+		write: false
 	};
 	if (access.includes("r")) {
 		translatedAccess.read = true;
@@ -327,13 +309,29 @@ function translateAccess(access: string = ""): {
 
 export function getUserAuthority(
 	user: D2User,
-	sharing: Sharing,
+	sharing: {
+		owner: string;
+		external: boolean;
+		users: {
+			[key: string]: {
+				access: string;
+				id: string;
+			};
+		};
+		userGroups: {
+			[key: string]: {
+				access: string;
+				id: string;
+			};
+		};
+		public: string;
+	}
 ): { read: boolean; write: boolean } {
 	const {
 		users,
 		userGroups,
 		public: publicAccess,
-		owner: userId,
+		owner: userId
 	} = sharing ?? {};
 	if (user.id === userId) {
 		return { ...translateAccess("rw-----") };
@@ -350,11 +348,11 @@ export function getUserAuthority(
 		const userUserGroups = intersectionBy(
 			[...Object.values(userGroups)],
 			[...user.userGroups],
-			"id",
+			"id"
 		);
 		if (!isEmpty(userUserGroups)) {
 			const accesses = Object.values(userGroups).map(
-				({ access }) => access,
+				({ access }) => access
 			);
 			const translatedAccesses = accesses.map(translateAccess);
 
@@ -362,13 +360,13 @@ export function getUserAuthority(
 				read: reduce(
 					translatedAccesses,
 					(acc, value) => acc || value.read,
-					false,
+					false
 				),
 				write: reduce(
 					translatedAccesses,
 					(acc, value) => acc || value.write,
-					false,
-				),
+					false
+				)
 			};
 		}
 	}

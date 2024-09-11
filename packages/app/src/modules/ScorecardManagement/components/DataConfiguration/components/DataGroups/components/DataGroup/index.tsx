@@ -2,8 +2,7 @@ import i18n from "@dhis2/d2-i18n";
 import { Button, colors, IconDragHandle24, Tooltip } from "@dhis2/ui";
 import { IconAdd24, IconChevronDown24 } from "@dhis2/ui-icons";
 import React, { useRef, useState } from "react";
-import useDataGroupLayout from "../../../../hooks/useDataGroupLayout";
-import useDataGroupManage from "../../../../hooks/useDataGroupManage";
+import useDataGroupManage from "../../../../hooks/useDataGroupLayout";
 import { Accordion, AccordionDetails, AccordionSummary } from "./components/Accordions";
 import GroupTitle from "./components/GroupTitle";
 import { isEmpty } from "lodash";
@@ -14,13 +13,8 @@ import DataSourceSelectorModal from "../DataSourceSelectorModal";
 export function DataGroup(
 	{ index, onRemove }: { index: number, onRemove: (index: number) => void }
 ) {
-	const {
-		onDataSourceAdd,
-		group
-	} = useDataGroupManage({ index });
 
-	const { dataHolderChunks, expanded, toggleExpansion, remove, onLink, onUnlink, onDragEnd } = useDataGroupLayout({ index });
-
+	const { dataHolderChunks, expanded, toggleExpansion, remove, onLink, onUnlink, onDragEnd, group, onDataItemAdd, selectedDataItems } = useDataGroupManage({ index });
 	const { id, dataHolders } = group;
 	const [openAdd, setOpenAdd] = useState(false);
 	const summaryRef = useRef();
@@ -43,7 +37,7 @@ export function DataGroup(
 									"Click to {{action}}, drag to rearrange",
 									{
 										action:
-											expanded === id
+											expanded
 												? i18n.t("collapse")
 												: i18n.t("expand")
 									}
@@ -85,7 +79,7 @@ export function DataGroup(
 									) : (
 										<DragDropContext onDragEnd={onDragEnd}>
 											<Droppable droppableId={`${id}`}>
-												{(provided: any) => (
+												{(provided) => (
 													<div
 														className="w-100"
 														{...provided.droppableProps}
@@ -94,6 +88,7 @@ export function DataGroup(
 														{dataHolderChunks?.map(
 															(chunk, i) => (
 																<LinkingContainer
+																	index={i}
 																	groupIndex={index}
 																	onDelete={remove}
 																	onUnlink={onUnlink}
@@ -122,8 +117,8 @@ export function DataGroup(
 								</div>
 								{openAdd && (
 									<DataSourceSelectorModal
-										disabled={[]}
-										onSelect={onDataSourceAdd}
+										disabled={selectedDataItems}
+										onSelect={onDataItemAdd}
 										onClose={() => setOpenAdd(false)}
 										open={openAdd}
 									/>

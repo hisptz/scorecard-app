@@ -1,21 +1,51 @@
 import { useBoolean } from "usehooks-ts";
-import { useFieldArray, useFormContext } from "react-hook-form";
-import { ScorecardConfig } from "@hisptz/dhis2-analytics";
+import { useFieldArray, useFormContext, useWatch } from "react-hook-form";
+import { ScorecardConfig, ScorecardLegend } from "@hisptz/dhis2-analytics";
 import { useCallback, useMemo } from "react";
 import { customChunk } from "../components/DataGroups/components/DataGroup/utils";
 import { DropResult } from "react-beautiful-dnd";
-import { head } from "lodash";
+import { flattenDeep, head } from "lodash";
 import { uid } from "@hisptz/dhis2-utils";
+import { generateLegendDefaults } from "@scorecard/shared";
+import { getNonDefaultLegendDefinitions } from "../../General/utils/utils";
+import { SelectedDataItem } from "@hisptz/dhis2-ui";
 
 export default function useDataGroupLayout({
 											   index
 										   }: { index: number }) {
 	const { value: expanded, toggle: toggleExpansion } = useBoolean(false);
 	// @ts-ignore
-	const { fields, remove, insert, replace, swap, move } = useFieldArray<ScorecardConfig, `dataSelection.dataGroups.${number}.dataHolders`>({
+	const { fields, remove, insert, replace, move, append } = useFieldArray<ScorecardConfig, `dataSelection.dataGroups.${number}.dataHolders`>({
 		name: `dataSelection.dataGroups.${index}.dataHolders`
 	});
 	const { getValues, setValue } = useFormContext<ScorecardConfig>();
+	const nonDefaultLegendDefinitions = getNonDefaultLegendDefinitions(getValues("legendDefinitions"));
+	const group = useWatch<ScorecardConfig, `dataSelection.dataGroups.${number}`>({
+		name: `dataSelection.dataGroups.${index}`
+	});
+
+	const onDataItemAdd = (items: SelectedDataItem[]) => {
+		for (const item of items) {
+			append({
+				id: uid(),
+				dataSources: [
+					{
+						id: item.id,
+						highIsGood: true,
+						type: item.type,
+						label: item.displayName,
+						weight: 100,
+						showColors: true,
+						displayArrows: false,
+						effectiveGap: 5,
+						legends: generateLegendDefaults({ legendDefinitions: nonDefaultLegendDefinitions, weight: 100, highIsGood: true }) as unknown as ScorecardLegend[],
+						specificTargetsSet: false,
+						specificTargets: []
+					}
+				]
+			});
+		}
+	};
 
 	const dataHolderChunks = useMemo(() => {
 		const dataHolders = getValues(`dataSelection.dataGroups.${index}.dataHolders`);
@@ -25,9 +55,7 @@ export default function useDataGroupLayout({
 	const onDragEnd = useCallback((result: DropResult) => {
 		const { source, destination } = result ?? {};
 
-		console.log({
-			result
-		});
+
 		if (source && destination) {
 			move(source.index, destination.index);
 		}
@@ -70,7 +98,14 @@ export default function useDataGroupLayout({
 
 	};
 
+	const selectedDataItems = useMemo(() => {
+		return flattenDeep(group.dataHolders.map(({ dataSources }) => dataSources.map(({ id }) => id)));
+	}, [group]);
+
 	return {
+		group,
+		selectedDataItems,
+		onDataItemAdd,
 		toggleExpansion,
 		onLink,
 		onUnlink,

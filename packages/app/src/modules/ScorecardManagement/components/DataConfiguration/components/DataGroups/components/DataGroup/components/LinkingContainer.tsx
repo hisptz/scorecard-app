@@ -13,16 +13,17 @@ export function LinkingContainer({
 									 onDelete,
 									 onLink,
 									 onUnlink,
-									 groupIndex
-								 }: { groupIndex: number; chunk: Array<ScorecardDataHolder>; onDelete: (index: number) => void, onLink: (index1: number, index2: number) => void, onUnlink: (index: number) => void }) {
-	const { linkable, hasLink, onIconClick, onUnlinkClick } =
+									 groupIndex,
+									 index
+								 }: { index: number; groupIndex: number; chunk: Array<ScorecardDataHolder>; onDelete: (index: number) => void, onLink: (index1: number, index2: number) => void, onUnlink: (index: number) => void }) {
+	const { linkable, hasLink, getIndex, onIconClick, onUnlinkClick } =
 		useLinkManage({ onLink, onUnlink, chunk, groupIndex });
 
 	return (
 		<div className="linking-container">
 			<div className="row align-items-center">
 				<div className="column">
-					{chunk?.map((source: ScorecardDataHolder, index) => (
+					{chunk?.map((source: ScorecardDataHolder, i) => (
 						<Tooltip
 							content={i18n.t(
 								"Click to configure, drag to rearrange"
@@ -35,7 +36,7 @@ export function LinkingContainer({
 								onUnlink={onUnlinkClick}
 								onDelete={onDelete}
 								key={`group-${groupIndex}-holder-${source}`}
-								index={index}
+								index={getIndex(source.id as string)}
 							/>
 						</Tooltip>
 					))}

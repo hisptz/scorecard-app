@@ -1,6 +1,7 @@
-import { head, last } from "lodash";
+import { findIndex, head, last } from "lodash";
 import { useFormContext } from "react-hook-form";
 import { ScorecardConfig, ScorecardDataHolder } from "@hisptz/dhis2-analytics";
+import { useCallback } from "react";
 
 export default function useLinkManage({
 										  groupIndex,
@@ -34,9 +35,18 @@ export default function useLinkManage({
 		hasLink ? onUnlinkClick() : onLinkClick();
 	};
 
+	const getIndex = useCallback(
+		(id: string) => {
+			const dataHolders = getValues(`dataSelection.dataGroups.${groupIndex}.dataHolders`) ?? [];
+			return findIndex(dataHolders, ["id", id]);
+		},
+		[getValues, chunk]
+	);
+
 	return {
 		linkable,
 		hasLink,
+		getIndex,
 		onIconClick,
 		onLinkClick,
 		onUnlinkClick
