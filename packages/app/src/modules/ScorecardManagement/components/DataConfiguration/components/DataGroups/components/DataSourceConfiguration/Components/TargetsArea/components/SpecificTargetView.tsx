@@ -1,22 +1,22 @@
 import i18n from "@dhis2/d2-i18n";
 import { Button, colors, Tag } from "@dhis2/ui";
 import { createFixedPeriodFromPeriodId } from "@dhis2/multi-calendar-dates";
-import { SelectedOrgUnits, SystemSettingsState } from "@scorecard/shared";
+import { SelectedOrgUnits, useCalendar } from "@scorecard/shared";
 import { find } from "lodash";
 import React from "react";
-import { useRecoilValue } from "recoil";
 import { LegendDefinition, ScorecardLegend, SpecificTarget } from "@hisptz/dhis2-analytics";
+import { useRecoilValue } from "recoil";
 
 function LegendsView({ legends, legendDefinitions }: { legends: ScorecardLegend[], legendDefinitions: LegendDefinition[] }) {
 	return (
-		<div className="row gap-16 space-evenly">
-			{legends?.map((legend: any, index: any) => {
+		<div style={{ gap: 16 }} className="row gap-16 space-evenly">
+			{legends?.map((legend, index) => {
 				const { legendDefinitionId, startValue, endValue } =
 				legend ?? {};
 				const legendDefinition =
 					find(legendDefinitions, { id: legendDefinitionId }) ?? { color: undefined };
 				return (
-					<div className="row gap-8 align-items-center" key={index}>
+					<div style={{ gap: 8 }} className="row gap-8 align-items-center" key={index}>
 						<div
 							style={{
 								height: 32,
@@ -32,10 +32,11 @@ function LegendsView({ legends, legendDefinitions }: { legends: ScorecardLegend[
 	);
 }
 
-function getTypeLabel(type: any) {
+function getTypeLabel(type: "periods" | "orgUnit" | "orgUnitLevel") {
+
 	switch (type) {
-		case "period":
-			return i18n.t("Period");
+		case "periods":
+			return i18n.t("Periods");
 		case "orgUnit":
 			return i18n.t("Organisation unit(s)");
 		case "orgUnitLevel":
@@ -48,7 +49,7 @@ export function OrgUnitSpecificTargetView({
 											  legendDefinitions,
 											  onUpdate,
 											  defaultLegends
-										  }: { label: string; specificTarget: SpecificTarget, legendDefinitions: LegendDefinition[]; defaultLegends: ScorecardLegend[], onUpdate?: () => void; }) {
+										  }: { specificTarget: SpecificTarget, legendDefinitions: LegendDefinition[]; defaultLegends: ScorecardLegend[], onUpdate?: () => void; }) {
 	const { legends, items } = specificTarget ?? {};
 	const orgUnits: any = useRecoilValue(SelectedOrgUnits(items));
 
@@ -101,7 +102,7 @@ export function PeriodSpecificTargetView({
 											 defaultLegends
 										 }: { specificTarget: SpecificTarget, legendDefinitions: LegendDefinition[]; defaultLegends: ScorecardLegend[], onUpdate?: () => void }) {
 	const { legends, type, items } = specificTarget ?? {};
-	const { calendar } = useRecoilValue(SystemSettingsState);
+	const calendar = useCalendar();
 
 	return (
 		<div

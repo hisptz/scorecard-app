@@ -1,67 +1,58 @@
 import i18n from "@dhis2/d2-i18n";
 import { Divider } from "@dhis2/ui";
-import { RHFDHIS2FormField } from "@hisptz/dhis2-ui";
+import { RHFCheckboxField, RHFTextInputField } from "@hisptz/dhis2-ui";
 import { DHIS2ValueTypes } from "@scorecard/shared";
-import PropTypes from "prop-types";
-import React, { useEffect } from "react";
-import { useFormContext } from "react-hook-form";
-import TargetsArea from "../DataConfiguration/components/DataGroups/components/DataSourceConfiguration/Components/TargetsArea";
+import React from "react";
+import TargetsArea from "../DataGroups/components/DataSourceConfiguration/Components/TargetsArea";
 
-export default function DataSourceConfigurationForm({ path }: any) {
-	const { watch, setValue } = useFormContext();
-
-	useEffect(() => {
-		if (path) {
-			setValue(path, watch(path));
-		}
-	}, [watch, path, setValue]);
+export default function DataSourceConfigurationForm({ path }: { path: string }) {
 
 	return (
 		<div className="container p-16 data-source-form-container">
 			<div style={{ gap: 16 }} className="column">
-				<RHFDHIS2FormField
+				<RHFTextInputField
 					disabled
 					mandatory
 					valueType={DHIS2ValueTypes.TEXT.name}
 					label={i18n.t("Name")}
 					name={`${path}.name`}
 				/>
-				<RHFDHIS2FormField
+				<RHFTextInputField
 					mandatory
 					valueType={DHIS2ValueTypes.TEXT.name}
 					label={i18n.t("Label")}
 					name={`${path}.label`}
 					validations={{
-						required: i18n.t("Label is required"),
+						required: i18n.t("Label is required")
 					}}
 				/>
-				<RHFDHIS2FormField
+				<RHFTextInputField
 					valueType={DHIS2ValueTypes.NUMBER.name}
 					label={i18n.t("Weight")}
 					name={`${path}.weight`}
 				/>
 				<div className="row space-between">
 					<div className="column pr-16 effective-gap-settings">
-						<RHFDHIS2FormField
+						<RHFTextInputField
 							valueType={DHIS2ValueTypes.NUMBER.name}
 							label={i18n.t("Effective Gap")}
 							name={`${path}.effectiveGap`}
 						/>
 					</div>
 					<div className="column pl-16 indicator-options-settings-area">
-						<RHFDHIS2FormField
+						<RHFCheckboxField
 							renderAsCheckbox
 							valueType="BOOLEAN"
 							label={i18n.t("Display Arrows")}
 							name={`${path}.displayArrows`}
 						/>
-						<RHFDHIS2FormField
+						<RHFCheckboxField
 							renderAsCheckbox
 							valueType="BOOLEAN"
 							label={i18n.t("High is Good")}
 							name={`${path}.highIsGood`}
 						/>
-						<RHFDHIS2FormField
+						<RHFCheckboxField
 							renderAsCheckbox
 							valueType="BOOLEAN"
 							label={i18n.t("Show Colors")}
@@ -75,7 +66,3 @@ export default function DataSourceConfigurationForm({ path }: any) {
 		</div>
 	);
 }
-
-DataSourceConfigurationForm.propTypes = {
-	path: PropTypes.string.isRequired,
-};

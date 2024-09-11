@@ -1,29 +1,24 @@
 import { CircularLoader } from "@dhis2/ui";
-import { ScorecardConfigEditState } from "@scorecard/shared";
-import React, { Suspense } from "react";
+import React, { Suspense, useMemo } from "react";
 import { useFormContext } from "react-hook-form";
-import { useRecoilValue } from "recoil";
-import DataSourceConfigurationForm from "../../../../../../../DataSourceConfigurationForm";
+import DataSourceConfigurationForm from "../../../../../DataSourceConfigurationForm";
+import { useSelectedData } from "../../../../../../states/selectionState";
+import { ScorecardDataSource } from "@hisptz/dhis2-analytics";
 
 export default function SelectedDataSourceConfigurationForm() {
-	const { watch } = useFormContext();
-	const scorecardEditState: any = useRecoilValue(ScorecardConfigEditState);
-	const selectedGroupIndex = scorecardEditState?.selectedGroupIndex;
-	const selectedDataHolderIndex = scorecardEditState?.selectedDataHolderIndex;
-	const path = [
-		"dataSelection",
-		"dataGroups",
-		selectedGroupIndex,
-		"dataHolders",
-		selectedDataHolderIndex,
-	]?.join(".");
+	const { getValues } = useFormContext();
+	const selectedData = useSelectedData();
 
-	const selectedDataHolder = watch(path);
+	const path = useMemo(() => `dataSelection.dataGroups.${selectedData?.groupIndex}.dataHolders.${selectedData?.holderIndex}`, [selectedData]);
+
+	const selectedDataHolder = useMemo(() => {
+		return getValues(path);
+	}, [path]);
 
 	return (
 		<div className="data-configuration-row">
 			{selectedDataHolder?.dataSources?.map(
-				(dataSource: any, index: any) => {
+				(dataSource: ScorecardDataSource, index: number) => {
 					const dataSourcePath = `${path}.dataSources.${index}`;
 					return (
 						<div
@@ -31,7 +26,7 @@ export default function SelectedDataSourceConfigurationForm() {
 							style={{ maxWidth: 720, minWidth: 480 }}
 							className="w-100 h-100"
 						>
-							<div className="container-bordered h-100">
+							<div style={{ background: "white" }} className="container-bordered h-100">
 								<div className="column">
 									<div className="p-16">
 										<Suspense
@@ -50,7 +45,7 @@ export default function SelectedDataSourceConfigurationForm() {
 							</div>
 						</div>
 					);
-				},
+				}
 			) || null}
 		</div>
 	);

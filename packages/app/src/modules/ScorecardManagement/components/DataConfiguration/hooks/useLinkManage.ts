@@ -2,6 +2,7 @@ import { findIndex, head, last } from "lodash";
 import { useFormContext } from "react-hook-form";
 import { ScorecardConfig, ScorecardDataHolder } from "@hisptz/dhis2-analytics";
 import { useCallback } from "react";
+import { useClearSelectedDataState } from "../states/selectionState";
 
 export default function useLinkManage({
 										  groupIndex,
@@ -12,6 +13,7 @@ export default function useLinkManage({
 	const linkable = chunk.length > 1;
 	const { getValues } = useFormContext<ScorecardConfig>();
 	const hasLink = head(chunk)!.dataSources?.length > 1;
+	const clearDataSelection = useClearSelectedDataState();
 
 	const onLinkClick = () => {
 		const dataHolders = getValues(`dataSelection.dataGroups.${groupIndex}.dataHolders`) ?? [];
@@ -32,6 +34,7 @@ export default function useLinkManage({
 	};
 
 	const onIconClick = () => {
+		clearDataSelection();
 		hasLink ? onUnlinkClick() : onLinkClick();
 	};
 

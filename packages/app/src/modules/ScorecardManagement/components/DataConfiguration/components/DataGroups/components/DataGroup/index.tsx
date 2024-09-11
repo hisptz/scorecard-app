@@ -14,7 +14,7 @@ export function DataGroup(
 	{ index, onRemove }: { index: number, onRemove: (index: number) => void }
 ) {
 
-	const { dataHolderChunks, expanded, toggleExpansion, remove, onLink, onUnlink, onDragEnd, group, onDataItemAdd, selectedDataItems } = useDataGroupManage({ index });
+	const { dataHolderChunks, expanded, toggleExpansion, onDelete, onLink, onUnlink, onDragEnd, group, onDataItemAdd, selectedDataItems } = useDataGroupManage({ index });
 	const { id, dataHolders } = group;
 	const [openAdd, setOpenAdd] = useState(false);
 	const summaryRef = useRef();
@@ -90,7 +90,7 @@ export function DataGroup(
 																<LinkingContainer
 																	index={i}
 																	groupIndex={index}
-																	onDelete={remove}
+																	onDelete={onDelete}
 																	onUnlink={onUnlink}
 																	onLink={onLink}
 																	chunk={chunk}

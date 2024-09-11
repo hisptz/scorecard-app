@@ -4,6 +4,7 @@ import i18n from "@dhis2/d2-i18n";
 import { titleDoesNotExist } from "../components/General/utils/utils";
 import { useParams } from "react-router-dom";
 import { useDataEngine } from "@dhis2/app-runtime";
+import { dataGroupSchema, dataHolderSchema } from "@hisptz/dhis2-analytics";
 
 
 export function useFormSchema() {
@@ -16,6 +17,11 @@ export function useFormSchema() {
 				`A scorecard with the title '{{value}}' already exists. Please select another title`,
 				{ value }
 			);
+		}),
+		dataSelection: z.object({
+			dataGroups: z.array(dataGroupSchema.extend({
+				dataHolders: z.array(dataHolderSchema).min(1, i18n.t("A data group must have at least one data item"))
+			})).min(1, i18n.t("A scorecard needs at least one data group"))
 		}),
 		additionalLabels: z.array(z.string()).optional(),
 		subtitle: z.string().optional(),

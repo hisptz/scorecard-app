@@ -1,55 +1,49 @@
 import i18n from "@dhis2/d2-i18n";
-import { Button, ButtonStrip, CircularLoader, InputField, Modal, ModalActions, ModalContent, ModalTitle } from "@dhis2/ui";
+import { Button, ButtonStrip, CircularLoader, Field, Modal, ModalActions, ModalContent, ModalTitle } from "@dhis2/ui";
 import { OrgUnitSelectorModal } from "@hisptz/dhis2-ui";
 import { SelectedOrgUnits } from "@scorecard/shared";
 import { isEmpty } from "lodash";
-import PropTypes from "prop-types";
-import React, { Suspense, useCallback, useState } from "react";
-import { useFormContext } from "react-hook-form";
+import React, { Dispatch, SetStateAction, Suspense, useCallback, useState } from "react";
+import { useFormContext, useWatch } from "react-hook-form";
 import { useRecoilValue } from "recoil";
 import { getNonDefaultLegendDefinitions } from "../../../../../../../General/utils/utils";
 import LegendsField from "../TargetsArea/components/LegendsField";
+import { ScorecardLegend, SpecificTarget } from "@hisptz/dhis2-analytics";
 
-function OrgUnitSelector({ target, setTarget }: any) {
+function OrgUnitSelector({ target, setTarget }: { target: SpecificTarget, setTarget: Dispatch<SetStateAction<SpecificTarget>> }) {
 	const [periodSelectorOpen, setPeriodSelectorOpen] = useState(
-		isEmpty(target.items),
+		isEmpty(target.items)
 	);
 
-	const orgUnits: any = useRecoilValue(SelectedOrgUnits(target.items));
+	const orgUnits = useRecoilValue(SelectedOrgUnits(target.items));
+
+	const label = orgUnits
+		?.map((ou) => ou?.displayName)
+		?.join(", ");
 
 	return (
 		<>
 			<div className=" align-items-end row gap-8 w-100">
-				<div className="column flex-1">
-					<InputField
-						fullWidth
-						label={i18n.t("Organisation Unit(s)")}
-						disabled
-						value={orgUnits
-							?.map((ou: any) => ou?.displayName)
-							?.join(", ")}
-					/>
-				</div>
-				<div className="w-25">
+				<Field helpText={`Selected: ${label}`} label={i18n.t("Organisation unit")}>
 					<Button onClick={() => setPeriodSelectorOpen(true)}>
-						{i18n.t("Change")}
+						{!isEmpty(target.items) ? i18n.t("Change organisation unit") : i18n.t("Select organisation unit")}
 					</Button>
-				</div>
+				</Field>
 			</div>
 			{periodSelectorOpen && (
 				<OrgUnitSelectorModal
 					value={{
-						orgUnits: orgUnits ?? [],
+						orgUnits: orgUnits ?? []
 					}}
 					onClose={() => setPeriodSelectorOpen(false)}
 					hide={!periodSelectorOpen}
 					onUpdate={({ orgUnits }) => {
-						setTarget((prevState: any) => {
+						setTarget((prevState) => {
 							return {
 								...prevState,
 								items: orgUnits?.map(
-									(orgUnit: any) => orgUnit.id,
-								),
+									(orgUnit: { id: string; }) => orgUnit.id
+								)
 							};
 						});
 						setPeriodSelectorOpen(false);
@@ -60,30 +54,28 @@ function OrgUnitSelector({ target, setTarget }: any) {
 	);
 }
 
-OrgUnitSelector.propTypes = {
-	setTarget: PropTypes.func,
-	target: PropTypes.object,
-};
-
 export default function OrgUnitSpecificTargetsModal({
-	open,
-	onClose,
-	onUpdate,
-	specificTarget,
-	defaultLegends,
-	onChangeDefaultLegends,
-	path,
-}: any) {
-	const { watch } = useFormContext();
-	const [target, setTarget] = useState(specificTarget);
+														open,
+														onClose,
+														onUpdate,
+														specificTarget,
+														defaultLegends,
+														onChangeDefaultLegends,
+														path
+													}: { path: string; open: boolean; onClose: () => void; onUpdate: (specificTarget: SpecificTarget) => void; specificTarget: SpecificTarget, defaultLegends: ScorecardLegend[]; onChangeDefaultLegends: (legends: ScorecardLegend[]) => void }) {
+	const { getValues } = useFormContext();
+	const [target, setTarget] = useState<SpecificTarget>(specificTarget);
+
 	const legendDefinitions = getNonDefaultLegendDefinitions(
-		watch("legendDefinitions"),
+		getValues("legendDefinitions")
 	);
-	const highIsGood = watch(`${path}.highIsGood`);
+	const highIsGood = useWatch({
+		name: `${path}.highIsGood`
+	});
 
 	const onUpdateClick = useCallback(() => {
 		onUpdate({
-			...target,
+			...target
 		});
 		onClose();
 	}, [onClose, onUpdate, target]);
@@ -115,11 +107,11 @@ export default function OrgUnitSpecificTargetsModal({
 									highIsGood={highIsGood}
 									legendDefinitions={legendDefinitions}
 									value={target.legends}
-									onChange={(legends: any) => {
-										setTarget((prevState: any) => {
+									onChange={(legends) => {
+										setTarget((prevState) => {
 											return {
 												...prevState,
-												legends,
+												legends
 											};
 										});
 									}}
@@ -152,12 +144,3 @@ export default function OrgUnitSpecificTargetsModal({
 	);
 }
 
-OrgUnitSpecificTargetsModal.propTypes = {
-	defaultLegends: PropTypes.array.isRequired,
-	path: PropTypes.string.isRequired,
-	specificTarget: PropTypes.object.isRequired,
-	onChangeDefaultLegends: PropTypes.func.isRequired,
-	open: PropTypes.bool,
-	onClose: PropTypes.func,
-	onUpdate: PropTypes.func,
-};

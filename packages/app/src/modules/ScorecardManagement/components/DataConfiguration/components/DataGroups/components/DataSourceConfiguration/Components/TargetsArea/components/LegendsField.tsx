@@ -1,8 +1,9 @@
 import { DHIS2FormField } from "@hisptz/dhis2-ui";
 import { set } from "lodash";
 import React from "react";
+import { LegendDefinition, ScorecardLegend } from "@hisptz/dhis2-analytics";
 
-function autoSetAdjacentValues(data: any, index: any, highIsGood: any) {
+function autoSetAdjacentValues(data: { startValue: number; endValue: number }[], index: number, highIsGood: boolean) {
 	const newData = [...data];
 	const updatedValue = newData[index];
 	const previousValueIndex = highIsGood ? index - 1 : index + 1;
@@ -12,7 +13,7 @@ function autoSetAdjacentValues(data: any, index: any, highIsGood: any) {
 		set(
 			newData,
 			`${previousValueIndex}.startValue`,
-			updatedValue?.endValue,
+			updatedValue?.endValue
 		);
 	}
 	if (nextValueIndex < newData.length) {
@@ -21,18 +22,13 @@ function autoSetAdjacentValues(data: any, index: any, highIsGood: any) {
 	return newData;
 }
 
-function editAtIndex(index: any, value: any, { data, highIsGood }: any) {
+function editAtIndex(index: number, value: number, { data, highIsGood }: { data: { startValue: number; endValue: number }[], highIsGood: boolean }) {
 	const newData = [...data];
 	set(newData, index, value);
 	return autoSetAdjacentValues(newData, index, highIsGood);
 }
 
-export default function LegendsField({
-	value,
-	onChange,
-	legendDefinitions,
-	highIsGood,
-}: any) {
+export default function LegendsField({ value, onChange, legendDefinitions, highIsGood }: { value: ScorecardLegend[], onChange: (legends: ScorecardLegend[]) => void; legendDefinitions: LegendDefinition[]; highIsGood: boolean }) {
 	return (
 		<DHIS2FormField
 			value={value}

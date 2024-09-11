@@ -1,12 +1,13 @@
 import i18n from "@dhis2/d2-i18n";
-import { Button } from "@dhis2/ui";
+import { Button, colors } from "@dhis2/ui";
 import { IconButton } from "@material-ui/core";
 import { IconDelete24, IconEdit24 } from "@dhis2/ui-icons";
 import React from "react";
 import { useBoolean } from "usehooks-ts";
 import EditTitle from "./EditTitle";
-import { useWatch } from "react-hook-form";
+import { useFormContext, useWatch } from "react-hook-form";
 import { ScorecardConfig } from "@hisptz/dhis2-analytics";
+import { ErrorIcon } from "@scorecard/shared";
 
 export default function GroupTitle({
 									   index,
@@ -16,10 +17,14 @@ export default function GroupTitle({
 	const title = useWatch<ScorecardConfig, `dataSelection.dataGroups.${number}.title`>({
 		name: `dataSelection.dataGroups.${index}.title`
 	});
+	const { getFieldState } = useFormContext<ScorecardConfig>();
+
+	const error = getFieldState(`dataSelection.dataGroups.${index}.dataHolders`)?.error;
 
 	if (editTitleOpen) {
 		return <EditTitle index={index} onClose={closeEditTitle} />;
 	}
+
 
 	return (
 		<div className="row space-between align-items-center">
@@ -35,17 +40,17 @@ export default function GroupTitle({
 					>
 						{title}
 					</p>
-					{/*{error && (*/}
-					{/*	<p*/}
-					{/*		style={{*/}
-					{/*			fontSize: 12,*/}
-					{/*			margin: 4,*/}
-					{/*			color: "#f44336"*/}
-					{/*		}}*/}
-					{/*	>*/}
-					{/*		{error?.message}*/}
-					{/*	</p>*/}
-					{/*)}*/}
+					{error && (
+						<p
+							style={{
+								fontSize: 12,
+								margin: 4,
+								color: colors.red500
+							}}
+						>
+							{error?.message}
+						</p>
+					)}
 				</div>
 				<IconButton
 					onClick={(event) => {
@@ -72,11 +77,11 @@ export default function GroupTitle({
 					>
 						{i18n.t("Delete")}
 					</Button>
-					{/*{error && (*/}
-					{/*	<div style={{ paddingLeft: 16 }}>*/}
-					{/*		<ErrorIcon color={"#f44336"} size={24} />*/}
-					{/*	</div>*/}
-					{/*)}*/}
+					{error && (
+						<div style={{ paddingLeft: 16 }}>
+							<ErrorIcon color={colors.red500} size={24} />
+						</div>
+					)}
 				</div>
 			</div>
 		</div>

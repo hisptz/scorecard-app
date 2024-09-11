@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-09-07T15:01:43.543Z\n"
-"PO-Revision-Date: 2024-09-07T15:01:43.543Z\n"
+"POT-Creation-Date: 2024-09-11T13:24:45.734Z\n"
+"PO-Revision-Date: 2024-09-11T13:24:45.734Z\n"
 
 msgid "Could not determine scorecard's access"
 msgstr "Could not determine scorecard's access"
@@ -134,11 +134,14 @@ msgstr "Add a data source"
 msgid "Add Item"
 msgstr "Add Item"
 
-msgid "Organisation Unit(s)"
-msgstr "Organisation Unit(s)"
+msgid "Organisation unit"
+msgstr "Organisation unit"
 
-msgid "Change"
-msgstr "Change"
+msgid "Change organisation unit"
+msgstr "Change organisation unit"
+
+msgid "Select organisation unit"
+msgstr "Select organisation unit"
 
 msgid "Organisation Unit Specific Targets"
 msgstr "Organisation Unit Specific Targets"
@@ -158,14 +161,26 @@ msgstr "Period Specific Targets"
 msgid "Period"
 msgstr "Period"
 
+msgid "Select Period"
+msgstr "Select Period"
+
 msgid "Change Period"
 msgstr "Change Period"
+
+msgid "Specific target type"
+msgstr "Specific target type"
+
+msgid "Organisation Unit Level"
+msgstr "Organisation Unit Level"
 
 msgid "Organisation unit(s)"
 msgstr "Organisation unit(s)"
 
 msgid "Organisation unit levels"
 msgstr "Organisation unit levels"
+
+msgid "Organisation Unit(s)"
+msgstr "Organisation Unit(s)"
 
 msgid "Legends"
 msgstr "Legends"
@@ -176,12 +191,6 @@ msgstr "Other Organisation Units"
 msgid "Set Specific Targets"
 msgstr "Set Specific Targets"
 
-msgid "Specific target type"
-msgstr "Specific target type"
-
-msgid "Organisation Unit Level"
-msgstr "Organisation Unit Level"
-
 msgid "Add Data source"
 msgstr "Add Data source"
 
@@ -190,6 +199,30 @@ msgstr "Default"
 
 msgid "Add group"
 msgstr "Add group"
+
+msgid "Name"
+msgstr "Name"
+
+msgid "Label"
+msgstr "Label"
+
+msgid "Label is required"
+msgstr "Label is required"
+
+msgid "Weight"
+msgstr "Weight"
+
+msgid "Effective Gap"
+msgstr "Effective Gap"
+
+msgid "Display Arrows"
+msgstr "Display Arrows"
+
+msgid "High is Good"
+msgstr "High is Good"
+
+msgid "Show Colors"
+msgstr "Show Colors"
 
 msgid "Add Group"
 msgstr "Add Group"
@@ -218,30 +251,6 @@ msgstr "Select a data source to configure"
 msgid "Search for Indicator"
 msgstr "Search for Indicator"
 
-msgid "Name"
-msgstr "Name"
-
-msgid "Label"
-msgstr "Label"
-
-msgid "Label is required"
-msgstr "Label is required"
-
-msgid "Weight"
-msgstr "Weight"
-
-msgid "Effective Gap"
-msgstr "Effective Gap"
-
-msgid "Display Arrows"
-msgstr "Display Arrows"
-
-msgid "High is Good"
-msgstr "High is Good"
-
-msgid "Show Colors"
-msgstr "Show Colors"
-
 msgid "Additional labels"
 msgstr "Additional labels"
 
@@ -262,6 +271,9 @@ msgstr "Custom Header"
 
 msgid "Legend Definitions"
 msgstr "Legend Definitions"
+
+msgid "Change"
+msgstr "Change"
 
 msgid "Select"
 msgstr "Select"
@@ -398,9 +410,6 @@ msgstr "Getting your scorecard configuration..."
 
 msgid "Back to all scorecards"
 msgstr "Back to all scorecards"
-
-msgid "Select organisation unit"
-msgstr "Select organisation unit"
 
 msgid "Select period"
 msgstr "Select period"

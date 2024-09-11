@@ -4,6 +4,7 @@ import { Draggable } from "react-beautiful-dnd";
 import DataSource from "../DataSource";
 import { ScorecardConfig, ScorecardDataHolder, ScorecardDataSource } from "@hisptz/dhis2-analytics";
 import { useFormContext } from "react-hook-form";
+import { useSelectedDataState } from "../../../../states/selectionState";
 
 export default function DataSourceHolder({
 											 index,
@@ -12,9 +13,10 @@ export default function DataSourceHolder({
 											 groupIndex
 
 										 }: { index: number; dataHolder: ScorecardDataHolder, onDelete: (index: number) => void, groupIndex: number; onUnlink: (index: number) => void }) {
+	const [selectedData, setSelectedData] = useSelectedDataState();
 	const { setValue, getValues } = useFormContext<ScorecardConfig>();
 	const { id, dataSources } = dataHolder ?? {};
-	const selected = false;
+	const selected = groupIndex === selectedData?.groupIndex && index === selectedData?.holderIndex;
 	const hasLinked = dataSources?.length > 1;
 	const onDataSourceDelete = (indicatorIndex: number) => {
 		const dataHolders = getValues(`dataSelection.dataGroups.${groupIndex}.dataHolders`) ?? [];
@@ -28,6 +30,7 @@ export default function DataSourceHolder({
 		//Just remove the whole data holder
 		onDelete(dataHolderIndex);
 	};
+
 	return (
 		<Draggable draggableId={`${id}`} index={index}>
 			{(provided) => (
@@ -38,13 +41,17 @@ export default function DataSourceHolder({
 				>
 					<div className="row align-items-center">
 						<div
-							onClick={async () => {
+							onClick={() => {
 								if (id) {
-
+									setSelectedData({
+										groupIndex,
+										holderIndex: index
+									});
 								}
 							}}
 							className="column center"
 							style={{
+								borderRadius: 4,
 								border: hasLinked
 									? `1px solid ${colors.grey400}`
 									: undefined,
@@ -55,18 +62,20 @@ export default function DataSourceHolder({
 								marginBottom: 8
 							}}
 						>
-							{dataSources?.map((dataGroup: ScorecardDataSource, index: number) => {
+							{dataSources?.map((dataGroup: ScorecardDataSource, sourceIndex: number) => {
 								return (
 									<div
 										className="data-holder"
 										key={dataGroup.id}
-										style={{ margin: "4px 0" }}
+										style={{ margin: "4px" }}
 									>
 										<DataSource
+											groupIndex={groupIndex}
+											holderIndex={index}
 											dataSource={dataGroup}
 											key={dataGroup.id}
 											onDelete={onDataSourceDelete}
-											index={index}
+											index={sourceIndex}
 										/>
 									</div>
 								);

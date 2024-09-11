@@ -9,16 +9,19 @@ import { uid } from "@hisptz/dhis2-utils";
 import { generateLegendDefaults } from "@scorecard/shared";
 import { getNonDefaultLegendDefinitions } from "../../General/utils/utils";
 import { SelectedDataItem } from "@hisptz/dhis2-ui";
+import { useClearSelectedDataState, useSelectedData } from "../states/selectionState";
 
 export default function useDataGroupLayout({
 											   index
 										   }: { index: number }) {
 	const { value: expanded, toggle: toggleExpansion } = useBoolean(false);
-	// @ts-ignore
+
 	const { fields, remove, insert, replace, move, append } = useFieldArray<ScorecardConfig, `dataSelection.dataGroups.${number}.dataHolders`>({
 		name: `dataSelection.dataGroups.${index}.dataHolders`
 	});
 	const { getValues, setValue } = useFormContext<ScorecardConfig>();
+	const selectedData = useSelectedData();
+	const clearSelectedData = useClearSelectedDataState();
 	const nonDefaultLegendDefinitions = getNonDefaultLegendDefinitions(getValues("legendDefinitions"));
 	const group = useWatch<ScorecardConfig, `dataSelection.dataGroups.${number}`>({
 		name: `dataSelection.dataGroups.${index}`
@@ -34,6 +37,7 @@ export default function useDataGroupLayout({
 						highIsGood: true,
 						type: item.type,
 						label: item.displayName,
+						name: item.displayName,
 						weight: 100,
 						showColors: true,
 						displayArrows: false,
@@ -53,10 +57,12 @@ export default function useDataGroupLayout({
 	}, [fields]);
 
 	const onDragEnd = useCallback((result: DropResult) => {
+
 		const { source, destination } = result ?? {};
-
-
 		if (source && destination) {
+			if (source.index === selectedData?.holderIndex && index === selectedData?.groupIndex) {
+				clearSelectedData();
+			}
 			move(source.index, destination.index);
 		}
 
@@ -102,6 +108,21 @@ export default function useDataGroupLayout({
 		return flattenDeep(group.dataHolders.map(({ dataSources }) => dataSources.map(({ id }) => id)));
 	}, [group]);
 
+	const onDelete = (holderIndex: number) => {
+		if (selectedData?.holderIndex === holderIndex && selectedData?.groupIndex === index) {
+			clearSelectedData();
+		}
+		//We need to remove the actual data from group
+		const updatedGroup = {
+			...group,
+			dataHolders: group.dataHolders.toSpliced(holderIndex, 1)
+		};
+
+		setValue(`dataSelection.dataGroups.${index}`, updatedGroup);
+
+		remove(holderIndex);
+	};
+
 	return {
 		group,
 		selectedDataItems,
@@ -113,6 +134,6 @@ export default function useDataGroupLayout({
 		expanded,
 		dataHolders: fields,
 		dataHolderChunks,
-		remove
+		onDelete
 	};
 }

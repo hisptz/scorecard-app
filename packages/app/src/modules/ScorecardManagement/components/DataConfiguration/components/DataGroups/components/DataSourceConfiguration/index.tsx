@@ -1,18 +1,16 @@
-import { ContainerLoader, ScorecardConfigEditState } from "@scorecard/shared";
+import { ContainerLoader } from "@scorecard/shared";
 import React, { Suspense } from "react";
-import { useRecoilValue } from "recoil";
 import { DataSourceInstructions } from "../../../Instructions";
 import SelectedDataSourceConfigurationForm from "./Components/Form";
+import { useSelectedData } from "../../../../states/selectionState";
 
 export default function DataSourceConfiguration() {
-	const { selectedDataHolderIndex } = useRecoilValue(
-		ScorecardConfigEditState,
-	);
+	const selectedData = useSelectedData();
 
 	return (
 		<div>
 			<Suspense fallback={<ContainerLoader />}>
-				{!isNaN(selectedDataHolderIndex) ? (
+				{selectedData ? (
 					<SelectedDataSourceConfigurationForm />
 				) : (
 					<div className="row center align-items-center">

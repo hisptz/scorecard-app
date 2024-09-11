@@ -1,7 +1,7 @@
 import { Help, INDICATOR_CONFIGURATION_STEPS, ScorecardConfigEditState } from "@scorecard/shared";
 import React from "react";
 import { useRecoilValue } from "recoil";
-import DataSourceConfigurationForm from "../../DataSourceConfigurationForm";
+import DataSourceConfigurationForm from "../../DataConfiguration/components/DataSourceConfigurationForm";
 
 export default function HighlightedDataSourceConfigurationForm() {
 	const { selectedHighlightedIndicatorIndex } =
