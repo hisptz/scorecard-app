@@ -3,7 +3,7 @@ import { Divider } from "@dhis2/ui";
 import { RHFCheckboxField, RHFTextInputField } from "@hisptz/dhis2-ui";
 import { DHIS2ValueTypes } from "@scorecard/shared";
 import React from "react";
-import TargetsArea from "../DataGroups/components/DataSourceConfiguration/Components/TargetsArea";
+import TargetsArea from "../DataGroups/components/DataSourceConfiguration/components/TargetsArea";
 
 export default function DataSourceConfigurationForm({ path }: { path: string }) {
 
@@ -12,13 +12,13 @@ export default function DataSourceConfigurationForm({ path }: { path: string }) 
 			<div style={{ gap: 16 }} className="column">
 				<RHFTextInputField
 					disabled
-					mandatory
+					required
 					valueType={DHIS2ValueTypes.TEXT.name}
 					label={i18n.t("Name")}
 					name={`${path}.name`}
 				/>
 				<RHFTextInputField
-					mandatory
+					required
 					valueType={DHIS2ValueTypes.TEXT.name}
 					label={i18n.t("Label")}
 					name={`${path}.label`}
@@ -27,6 +27,7 @@ export default function DataSourceConfigurationForm({ path }: { path: string }) 
 					}}
 				/>
 				<RHFTextInputField
+					required
 					valueType={DHIS2ValueTypes.NUMBER.name}
 					label={i18n.t("Weight")}
 					name={`${path}.weight`}

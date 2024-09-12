@@ -10,7 +10,7 @@ export default function DataSource({ dataSource, index, onDelete, groupIndex, ho
 	const { getFieldState } = useFormContext();
 
 	const error = getFieldState(`dataSelection.dataGroups.${groupIndex}.dataHolders.${holderIndex}.dataSources.${index}`).error;
-	const errorMessages = error ? Object.values(error as unknown as Record<string, FieldError>)?.map(({ message }) => message) : "";
+	const errorMessages = error ? Object.values(error as unknown as Record<string, FieldError>)?.map(({ message }) => message) : [];
 
 	return (
 		<div>

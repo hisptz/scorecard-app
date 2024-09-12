@@ -2933,15 +2933,15 @@
   dependencies:
     "@hapi/hoek" "^9.0.0"
 
-"@hisptz/dhis2-analytics@^2.0.20":
-  version "2.0.20"
-  resolved "https://registry.yarnpkg.com/@hisptz/dhis2-analytics/-/dhis2-analytics-2.0.20.tgz#5a406b3a8bb1319932c587b535f9cf622bcd243f"
-  integrity sha512-N1y/TsXPDDOKkL+FcS7eguoO9YdNhYuqsNnz2s8zZoCB74ISZMGy45fymHdpg/rCp6knzTNcJaLCqzJq3dPmbg==
+"@hisptz/dhis2-analytics@^2.0.24":
+  version "2.0.24"
+  resolved "https://registry.yarnpkg.com/@hisptz/dhis2-analytics/-/dhis2-analytics-2.0.24.tgz#19110f811d9b7a5e565721407fcf04a48bf9d63c"
+  integrity sha512-acgve/uInH3n31ShNrJImE3pyJbcCylO3Bdlz/mbf/44UjS1EjqWdSUc/r+dx2UVC+xaryEgeDa1xajHlGkbjA==
   dependencies:
     "@dnd-kit/core" "^6.1.0"
     "@dnd-kit/utilities" "^3.2.2"
-    "@hisptz/dhis2-ui" "2.0.16"
-    "@hisptz/dhis2-utils" "2.0.6"
+    "@hisptz/dhis2-ui" "2.0.19"
+    "@hisptz/dhis2-utils" "2.0.7"
     "@react-leaflet/core" "^2.1.0"
     "@tanstack/react-table" "^8.19.3"
     d3-color "^3.1.0"
@@ -2963,7 +2963,7 @@
     zod "^3.23.8"
 
 "@hisptz/dhis2-analytics@file:../dhis2-utils-v2/packages/analytics":
-  version "2.0.23"
+  version "2.0.24"
   dependencies:
     "@dnd-kit/core" "^6.1.0"
     "@dnd-kit/utilities" "^3.2.2"
@@ -2989,31 +2989,10 @@
     screenfull "^6.0.2"
     zod "^3.23.8"
 
-"@hisptz/dhis2-ui@2.0.16":
-  version "2.0.16"
-  resolved "https://registry.yarnpkg.com/@hisptz/dhis2-ui/-/dhis2-ui-2.0.16.tgz#15608304503048f05c2977af654f52d88cad503b"
-  integrity sha512-TThMfoJYwggDo7RM9ci0V0dRMLGi1o4lgZfKEjEwdZOEtwwkLA0gJzTMBonblZNvmbVI4rdV+psh15Y2tBZrRA==
+"@hisptz/dhis2-ui@2.0.19", "@hisptz/dhis2-ui@file:../dhis2-utils-v2/packages/ui":
+  version "2.0.19"
   dependencies:
-    "@hisptz/dhis2-utils" "2.0.6"
-    classnames "^2.5.1"
-    dexie "^3.2.3"
-    jodit-react "^1.3.39"
-    lodash "^4.17.21"
-    luxon "^3.4.4"
-    react-circular-progressbar "^2.1.0"
-    react-collapsible "^2.10.0"
-    react-color "^2.19.3"
-    react-hook-form "^7.51.5"
-    recoil "^0.7.7"
-    styled-components "^6.1.8"
-    usehooks-ts "^2.9.2"
-
-"@hisptz/dhis2-ui@^2.0.17":
-  version "2.0.17"
-  resolved "https://registry.yarnpkg.com/@hisptz/dhis2-ui/-/dhis2-ui-2.0.17.tgz#17d9bc8e37fb198ca77428f604a862d6237a0e84"
-  integrity sha512-ThjvNjskuvnA+eTx7paeZqEfWmPU0mscB/o5gPq/jFRwm8OASRgT8RwVkSpPC1iBfid7uDI62K9qHSQ9rgp0TA==
-  dependencies:
-    "@hisptz/dhis2-utils" "2.0.6"
+    "@hisptz/dhis2-utils" "workspace:*"
     classnames "^2.5.1"
     dexie "^3.2.3"
     jodit-react "^1.3.39"
@@ -3027,10 +3006,12 @@
     styled-components "^6.1.8"
     usehooks-ts "^2.9.2"
 
-"@hisptz/dhis2-ui@file:../dhis2-utils-v2/packages/ui":
+"@hisptz/dhis2-ui@^2.0.19":
   version "2.0.19"
+  resolved "https://registry.yarnpkg.com/@hisptz/dhis2-ui/-/dhis2-ui-2.0.19.tgz#48723c73330b88029ccb151811c69de2a297b060"
+  integrity sha512-fbyLshZrK4I2HQjPxANT+TriCthbhtNV4LpUTrXzSA38njcKH8PV50JKLDUqHQJyGgkhvsLqV7E9BKaV4feMiQ==
   dependencies:
-    "@hisptz/dhis2-utils" "workspace:*"
+    "@hisptz/dhis2-utils" "2.0.7"
     classnames "^2.5.1"
     dexie "^3.2.3"
     jodit-react "^1.3.39"
@@ -3070,14 +3051,7 @@
   dependencies:
     luxon "^3.4.4"
 
-"@hisptz/dhis2-utils@2.0.6":
-  version "2.0.6"
-  resolved "https://registry.yarnpkg.com/@hisptz/dhis2-utils/-/dhis2-utils-2.0.6.tgz#11c254aea166c6c8987ae016502ddaa2420283b2"
-  integrity sha512-oGBqv/xaYNYqxx3WzPN0qW9SSmXq+a4jgaWffKWeP+U/zKADykUU3cQEdyYGzIvgqTp3FNZ0U80r6Q8aHi3JMw==
-  dependencies:
-    luxon "^3.4.4"
-
-"@hisptz/dhis2-utils@file:../dhis2-utils-v2/packages/utils":
+"@hisptz/dhis2-utils@2.0.7", "@hisptz/dhis2-utils@file:../dhis2-utils-v2/packages/utils":
   version "2.0.7"
   dependencies:
     "@dhis2/multi-calendar-dates" "^1.2.4"

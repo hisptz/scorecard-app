@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-09-11T13:24:45.734Z\n"
-"PO-Revision-Date: 2024-09-11T13:24:45.734Z\n"
+"POT-Creation-Date: 2024-09-12T05:03:56.135Z\n"
+"PO-Revision-Date: 2024-09-12T05:03:56.135Z\n"
 
 msgid "Could not determine scorecard's access"
 msgstr "Could not determine scorecard's access"
@@ -173,6 +173,9 @@ msgstr "Specific target type"
 msgid "Organisation Unit Level"
 msgstr "Organisation Unit Level"
 
+msgid "Periods"
+msgstr "Periods"
+
 msgid "Organisation unit(s)"
 msgstr "Organisation unit(s)"
 
@@ -302,8 +305,11 @@ msgstr "Fixed Periods"
 msgid "Relative Periods"
 msgstr "Relative Periods"
 
-msgid "Highlighted Indicators"
-msgstr "Highlighted Indicators"
+msgid "Edit Highlighted Indicator"
+msgstr "Edit Highlighted Indicator"
+
+msgid "Actions"
+msgstr "Actions"
 
 msgid "Add Highlighted Indicator"
 msgstr "Add Highlighted Indicator"
@@ -340,6 +346,9 @@ msgstr ""
 "On this page, you can configure different data sources (indicators, "
 "dataElements, e.t.c) for the scorecard. You can also preview the scorecard "
 "table."
+
+msgid "Highlighted Indicators"
+msgstr "Highlighted Indicators"
 
 msgid ""
 "In this page you can add and configure highlighted indicators. These "
@@ -395,6 +404,12 @@ msgid ""
 msgstr ""
 "A scorecard with the title '{{value}}' already exists. Please select "
 "another title"
+
+msgid "A data group must have at least one data item"
+msgstr "A data group must have at least one data item"
+
+msgid "A scorecard needs at least one data group"
+msgstr "A scorecard needs at least one data group"
 
 msgid "Preparing migration..."
 msgstr "Preparing migration..."

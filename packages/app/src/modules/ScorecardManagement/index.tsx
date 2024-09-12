@@ -6,7 +6,6 @@ import { ManagementTabBar } from "./components/ManagementTabBar";
 import { Outlet } from "react-router-dom";
 import { TabHeader } from "./components/TabHeader";
 import { NavigationButtons, StepNavigationButtons } from "./components/NavigationButtons";
-import { DevTool } from "@hookform/devtools";
 
 export default function ScoreCardManagement() {
 	const { form, access } = useScorecardFormMetadata();
@@ -38,7 +37,7 @@ export default function ScoreCardManagement() {
 					</div>
 				</div>
 			</Suspense>
-			<DevTool control={form.control} />
+			{/*<DevTool control={form.control} />*/}
 		</FormProvider>
 	);
 }

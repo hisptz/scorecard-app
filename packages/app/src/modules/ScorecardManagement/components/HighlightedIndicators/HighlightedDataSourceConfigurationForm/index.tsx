@@ -1,18 +1,28 @@
-import { Help, INDICATOR_CONFIGURATION_STEPS, ScorecardConfigEditState } from "@scorecard/shared";
+import { Help, INDICATOR_CONFIGURATION_STEPS } from "@scorecard/shared";
 import React from "react";
-import { useRecoilValue } from "recoil";
 import DataSourceConfigurationForm from "../../DataConfiguration/components/DataSourceConfigurationForm";
+import { Button, ButtonStrip, Modal, ModalActions, ModalContent, ModalTitle } from "@dhis2/ui";
+import i18n from "@dhis2/d2-i18n";
 
-export default function HighlightedDataSourceConfigurationForm() {
-	const { selectedHighlightedIndicatorIndex } =
-		useRecoilValue(ScorecardConfigEditState) ?? {};
+export default function HighlightedDataSourceConfigurationForm({ index, hide, onClose }: { index: number, hide: boolean; onClose: () => void }) {
+	const path = `highlightedIndicators.${index}`;
 
-	const path = `highlightedIndicators.${selectedHighlightedIndicatorIndex}`;
-
-	return !isNaN(selectedHighlightedIndicatorIndex) ? (
-		<div className="container-bordered">
-			<Help helpSteps={INDICATOR_CONFIGURATION_STEPS} />
-			<DataSourceConfigurationForm path={path} />
-		</div>
-	) : null;
+	return (
+		<Modal onClose={onClose} hide={hide} position="middle">
+			<ModalTitle>
+				{i18n.t("Edit Highlighted Indicator")}
+			</ModalTitle>
+			<ModalContent>
+				<Help helpSteps={INDICATOR_CONFIGURATION_STEPS} />
+				<DataSourceConfigurationForm path={path} />
+			</ModalContent>
+			<ModalActions>
+				<ButtonStrip>
+					<Button onClick={onClose} primary>
+						{i18n.t("Save")}
+					</Button>
+				</ButtonStrip>
+			</ModalActions>
+		</Modal>
+	);
 }

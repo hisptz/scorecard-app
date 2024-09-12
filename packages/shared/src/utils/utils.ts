@@ -1,8 +1,7 @@
 import { capitalize, compact, find, flattenDeep, head, intersectionBy, isEmpty, last, reduce, snakeCase, sortBy, truncate, uniqBy } from "lodash";
-import { ScorecardLegend } from "../models";
 import { DefaultAuthority, TableSort } from "../constants";
 import { D2User } from "../state/user";
-import { LegendDefinition, ScorecardDataGroup, ScorecardDataHolder, ScorecardDataSource } from "@hisptz/dhis2-analytics";
+import { LegendDefinition, ScorecardDataGroup, ScorecardDataHolder, ScorecardDataSource, ScorecardLegend } from "@hisptz/dhis2-analytics";
 
 export function getWindowDimensions() {
 	const { innerWidth: width, innerHeight: height } = window;
@@ -55,11 +54,12 @@ export function generateLegendDefaults(
 		for (let i = 0; i < actualWeight; i += range) {
 			const { id } = definitions[legendDefinitionIterator];
 			values.push(
-				new ScorecardLegend({
+				{
+					id: uid(),
 					startValue: Math.floor(i),
 					endValue: Math.floor(i + range),
 					legendDefinitionId: id
-				})
+				}
 			);
 			legendDefinitionIterator--;
 		}
