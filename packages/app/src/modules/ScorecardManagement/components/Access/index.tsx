@@ -1,12 +1,12 @@
 import { ACCESS_HELP_STEPS, Help } from "@scorecard/shared";
 import React from "react";
-import OrgUnit from "./Components/OrgUnitFilter";
-import Sharing from "./Components/Sharing";
+import OrgUnit from "./components/OrgUnitFilter";
+import Sharing from "./components/Sharing";
 
 export default function AccessScorecardForm() {
 	return (
 		<div
-			style={{ minHeight: "70vh", height: "100%" }}
+			style={{ width: "100%", height: "100%" }}
 			className="container p-16"
 		>
 			<Help helpSteps={ACCESS_HELP_STEPS} />

@@ -1,10 +1,9 @@
 import i18n from "@dhis2/d2-i18n";
-import { Button, ButtonStrip, IconEdit16, Table, TableBody, TableCell, TableCellHead, TableHead, TableRow, TableRowHead } from "@dhis2/ui";
+import { Button, ButtonStrip, colors, IconEdit16, IconError16, Table, TableBody, TableCell, TableCellHead, TableHead, TableRow, TableRowHead, Tooltip } from "@dhis2/ui";
 import { Help, HIGHLIGHTED_TABLE_HELP_STEPS } from "@scorecard/shared";
 import { IconDelete16 } from "@dhis2/ui-icons";
-import { get, isEmpty } from "lodash";
-import React, { Fragment } from "react";
-import { useController } from "react-hook-form";
+import { capitalize, get, isEmpty } from "lodash";
+import { FieldError, useController } from "react-hook-form";
 import { ScorecardConfig } from "@hisptz/dhis2-analytics";
 import { useBoolean } from "usehooks-ts";
 import HighlightedDataSourceConfigurationForm from "../HighlightedDataSourceConfigurationForm";
@@ -30,15 +29,21 @@ function HighlightedTableRow({ index, onRemove }: { index: number; onRemove: (in
 		name: `highlightedIndicators.${index}`
 	});
 
+	const errorObject = fieldState.error as unknown as Record<string, FieldError> ?? {};
+
+	const errorMessage = Object.keys(errorObject).map((key: string) => `${capitalize(key)}: ${errorObject[key]?.message as string}`);
 
 	return (
 		<TableRow
 		>
-			{columns?.map(({ path }) => (
+			{columns?.map(({ path }, index) => (
 				<TableCell
 					key={`${index}-${path}`}
 				>
-					{get(field.value, path)}
+					<div style={{ gap: 8 }} className="row align-items-center">
+						{index === 0 && fieldState.error ? <Tooltip content={errorMessage.join(", ")}><IconError16 color={colors.red500} /></Tooltip> : null}
+						{get(field.value, path)}
+					</div>
 				</TableCell>
 			))}
 			<TableCell>

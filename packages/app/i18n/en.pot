@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-09-12T05:03:56.135Z\n"
-"PO-Revision-Date: 2024-09-12T05:03:56.135Z\n"
+"POT-Creation-Date: 2024-09-16T09:21:02.849Z\n"
+"PO-Revision-Date: 2024-09-16T09:21:02.849Z\n"
 
 msgid "Could not determine scorecard's access"
 msgstr "Could not determine scorecard's access"
@@ -70,9 +70,6 @@ msgstr "grid"
 
 msgid "Add New Scorecard"
 msgstr "Add New Scorecard"
-
-msgid "Please select at least one organisation unit"
-msgstr "Please select at least one organisation unit"
 
 msgid "Organisation Unit"
 msgstr "Organisation Unit"
@@ -410,6 +407,9 @@ msgstr "A data group must have at least one data item"
 
 msgid "A scorecard needs at least one data group"
 msgstr "A scorecard needs at least one data group"
+
+msgid "You must select at least one organisation unit"
+msgstr "You must select at least one organisation unit"
 
 msgid "Preparing migration..."
 msgstr "Preparing migration..."

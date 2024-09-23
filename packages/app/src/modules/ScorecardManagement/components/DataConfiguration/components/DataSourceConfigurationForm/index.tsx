@@ -28,6 +28,7 @@ export default function DataSourceConfigurationForm({ path }: { path: string }) 
 				/>
 				<RHFTextInputField
 					required
+					type="number"
 					valueType={DHIS2ValueTypes.NUMBER.name}
 					label={i18n.t("Weight")}
 					name={`${path}.weight`}
@@ -36,6 +37,7 @@ export default function DataSourceConfigurationForm({ path }: { path: string }) 
 					<div className="column pr-16 effective-gap-settings">
 						<RHFTextInputField
 							valueType={DHIS2ValueTypes.NUMBER.name}
+							type="number"
 							label={i18n.t("Effective Gap")}
 							name={`${path}.effectiveGap`}
 						/>

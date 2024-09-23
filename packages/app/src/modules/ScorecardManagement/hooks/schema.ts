@@ -4,7 +4,26 @@ import i18n from "@dhis2/d2-i18n";
 import { titleDoesNotExist } from "../components/General/utils/utils";
 import { useParams } from "react-router-dom";
 import { useDataEngine } from "@dhis2/app-runtime";
-import { dataGroupSchema, dataHolderSchema } from "@hisptz/dhis2-analytics";
+import { dataGroupSchema, dataHolderSchema, organisationUnitSelectionSchema } from "@hisptz/dhis2-analytics";
+
+
+function anyOrgUnitSelected({
+								groups,
+								levels,
+								orgUnits,
+								userOrgUnit,
+								userSubUnit,
+								userSubX2Unit
+							}: any) {
+	return (
+		userSubX2Unit ||
+		userSubUnit ||
+		userOrgUnit ||
+		groups.length > 0 ||
+		levels.length > 0 ||
+		orgUnits.length > 0
+	);
+}
 
 
 export function useFormSchema() {
@@ -22,6 +41,11 @@ export function useFormSchema() {
 			dataGroups: z.array(dataGroupSchema.extend({
 				dataHolders: z.array(dataHolderSchema).min(1, i18n.t("A data group must have at least one data item"))
 			})).min(1, i18n.t("A scorecard needs at least one data group"))
+		}),
+		orgUnitSelection: organisationUnitSelectionSchema.refine((value) => {
+			return anyOrgUnitSelected(value);
+		}, {
+			message: i18n.t("You must select at least one organisation unit")
 		}),
 		additionalLabels: z.array(z.string()).optional(),
 		subtitle: z.string().optional(),

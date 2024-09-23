@@ -1,7 +1,8 @@
 import i18n from "@dhis2/d2-i18n";
 import React from "react";
-import SharingList from "./Components/SharingList";
-import AddSharingAccess from "./Components/SharingList/Components/AddSharingAccess";
+import SharingList from "./components/SharingList";
+import AddSharingAccess from "./components/SharingList/components/AddSharingAccess";
+
 
 export default function Sharing() {
 	return (

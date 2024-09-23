@@ -1,7 +1,7 @@
 import { Menu, MenuDivider } from "@dhis2/ui";
 import React, { Fragment } from "react";
 import useAccessManage from "../../../../hooks/useAccessManage";
-import SingleSharingComponent from "./Components/SingleSharingComponent";
+import SingleSharingComponent from "./components/SingleSharingComponent";
 
 export default function SharingList() {
 	const {
