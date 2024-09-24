@@ -1,6 +1,7 @@
-import { generateLegendDefaults, getScorecardSummary } from "@scorecard/shared";
-import { cloneDeep, find, isEmpty, set } from "lodash";
+import { DATASTORE_NAMESPACE, generateLegendDefaults } from "@scorecard/shared";
+import { cloneDeep, isEmpty, set } from "lodash";
 import { LegendDefinition, ScorecardDataGroup, ScorecardDataHolder, ScorecardDataSource, SpecificTarget } from "@hisptz/dhis2-analytics";
+import { useDataEngine } from "@dhis2/app-runtime";
 
 export function resetLegends(groups: ScorecardDataGroup[], legendDefinitions: LegendDefinition[]) {
 	const newGroups = cloneDeep(groups);
@@ -12,23 +13,25 @@ export function resetLegends(groups: ScorecardDataGroup[], legendDefinitions: Le
 						dataSource,
 						"legends",
 						generateLegendDefaults(
-							getNonDefaultLegendDefinitions(legendDefinitions),
-							dataSource.weight,
-							dataSource.highIsGood
+							{
+								legendDefinitions: getNonDefaultLegendDefinitions(legendDefinitions),
+								weight: dataSource.weight,
+								highIsGood: dataSource.highIsGood
+							}
 						)
 					);
 					if (!isEmpty(dataSource.specificTargets)) {
-						dataSource.specificTargets.forEach(
+						dataSource.specificTargets?.forEach(
 							(specificTarget: SpecificTarget) => {
 								set(
 									specificTarget,
 									"legends",
 									generateLegendDefaults(
-										getNonDefaultLegendDefinitions(
-											legendDefinitions
-										),
-										dataSource.weight,
-										dataSource.highIsGood
+										{
+											legendDefinitions: getNonDefaultLegendDefinitions(legendDefinitions),
+											weight: dataSource.weight,
+											highIsGood: dataSource.highIsGood
+										}
 									)
 								);
 							}
@@ -49,14 +52,39 @@ export function getNonDefaultLegendDefinitions(legendDefinitions: any) {
 	);
 }
 
-export async function titleDoesNotExist(engine: any, id: any, title: any) {
-	const { summary } = await getScorecardSummary(engine);
-	if (isEmpty(summary)) {
+
+const query: any = {
+	titleCheck: {
+		resource: `dataStore/${DATASTORE_NAMESPACE}`,
+		params: ({ title }: { title: string }) => ({
+			fields: ["title", "id"],
+			filter: `title:eq:${title}`
+		})
+	}
+};
+
+export async function checkTitleAvailability({ title, id, engine }: { engine: ReturnType<typeof useDataEngine>, id?: string, title?: string }) {
+	if (!title) {
+		return false;
+	}
+
+	const response = await engine.query(query, {
+		variables: {
+			title
+		}
+	});
+
+	const results = (response.titleCheck as { entries: Record<string, unknown>[] })?.entries;
+	if (isEmpty(results)) {
 		return true;
 	}
-	const scorecard = find(summary, { title });
-	if (scorecard) {
-		return scorecard.id === id;
+	if (results.length > 1) {
+		return false;
 	}
-	return !scorecard;
+	if (!id) {
+		return true;
+	}
+
+	const existingConfig = results.find((result) => result.id === id);
+	return !existingConfig;
 }

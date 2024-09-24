@@ -14,7 +14,7 @@ export default function DataGroupArea() {
 					<SearchDataItem />
 				</div>
 				<h4 className="pl-16">{i18n.t("Groups")}</h4>
-				<div style={{ maxHeight: "60vh", overflowY: "auto", flex: 1, justifySelf: "stretch" }}>
+				<div style={{ height: "100%", overflowY: "auto", flex: 1, justifySelf: "stretch" }}>
 					<DataGroups />
 				</div>
 			</div>

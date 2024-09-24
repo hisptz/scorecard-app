@@ -1,9 +1,7 @@
 import { compact, filter, isEmpty } from "lodash";
-import {
-	DATASTORE_ENDPOINT,
-	DATASTORE_SCORECARD_SUMMARY_KEY,
-} from "../constants";
+import { DATASTORE_ENDPOINT, DATASTORE_SCORECARD_SUMMARY_KEY } from "../constants";
 import { generateScorecardSummary } from "../utils";
+import { useDataEngine } from "@dhis2/app-runtime";
 
 const query = {
 	summary: {
@@ -22,7 +20,7 @@ async function initializeKey(engine: any) {
 	return await engine.mutate(addMutation, { variables: { data: [] } });
 }
 
-export default async function getScorecardSummary(engine: any) {
+export default async function getScorecardSummary(engine: ReturnType<typeof useDataEngine>) {
 	try {
 		const response = await engine.query(query);
 		return { summary: response?.summary };
@@ -47,7 +45,7 @@ const restoreMutation = {
 	id: DATASTORE_SCORECARD_SUMMARY_KEY,
 	data: ({ data }: any) => data,
 };
-
+const { summary } = await getScorecardSummary(engine);
 const singleScorecardQuery = {
 	scorecard: {
 		resource: DATASTORE_ENDPOINT,

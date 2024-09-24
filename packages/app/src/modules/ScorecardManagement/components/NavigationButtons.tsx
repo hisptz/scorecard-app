@@ -51,7 +51,6 @@ export function NavigationButtons() {
 				loading: true
 			});
 			const formValid = await trigger(currentStep.fieldIds as any);
-
 			if (formValid) {
 				const config = getValues();
 				await save(config);
