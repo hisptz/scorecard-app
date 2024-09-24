@@ -27,7 +27,7 @@ const query: any = {
 				rootJunction: "or",
 				page,
 				pageSize,
-				fields: ["id", "title", "description", "additionalLabels", "orgUnitSelection", "periodSelection"]
+				fields: ["id", "title", "description", "additionalLabels", "orgUnitSelection", "periodSelection", "sharing", "user", "userAccesses", "userGroupAccesses", "publicAccess"]
 			};
 		}
 	},

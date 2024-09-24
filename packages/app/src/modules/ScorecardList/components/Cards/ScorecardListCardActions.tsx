@@ -1,57 +1,37 @@
-import { Button, ButtonStrip, CircularLoader } from "@dhis2/ui";
+import { Button, ButtonStrip } from "@dhis2/ui";
 import i18n from "@dhis2/d2-i18n";
 import React from "react";
-import { useScorecardSharingSettings } from "../../hooks/authority";
 import { ScorecardListItem } from "../../types";
-import { useDeleteScorecard } from "@scorecard/shared";
+import { getUserAuthority, useDeleteScorecard, UserState } from "@scorecard/shared";
 import { useAlert } from "@dhis2/app-runtime";
 import { useDialog } from "@hisptz/dhis2-ui";
 import { useNavigate } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import { getSharingSettingsFromOldConfiguration } from "../../../../utils/sharing";
 
 export interface ScorecardListCardActionsProps {
 	scorecard: ScorecardListItem;
 }
 
 export function ScorecardListCardActions({
-	scorecard,
-}: ScorecardListCardActionsProps) {
-	const {
-		access: accessConfig,
-		loading,
-		error,
-	} = useScorecardSharingSettings({
-		id: scorecard.id,
-	});
+											 scorecard
+										 }: ScorecardListCardActionsProps) {
+	const user = useRecoilValue(UserState);
 	const navigate = useNavigate();
 
 	const { confirm } = useDialog();
 
 	const { show } = useAlert(
 		({ message }) => message,
-		({ type }) => ({ ...type, duration: 3000 }),
+		({ type }) => ({ ...type, duration: 3000 })
 	);
 	const { remove } = useDeleteScorecard(scorecard.id);
-
-	if (loading) {
-		return (
-			<div className="column w-100 center align-content-center">
-				<CircularLoader extrasmall />
-			</div>
-		);
-	}
-
-	if (error) {
-		const message = error.message;
-		return (
-			<div>
-				{i18n.t("Could not determine scorecard's access")}: {message}
-			</div>
-		);
-	}
 
 	const onView = () => {
 		navigate(`/view/${scorecard.id}`);
 	};
+
+	const accessConfig = getUserAuthority(user, scorecard.sharing ?? getSharingSettingsFromOldConfiguration(scorecard as any));
 
 	const { read, write } = accessConfig;
 
@@ -62,12 +42,12 @@ export function ScorecardListCardActions({
 			} catch (e: any) {
 				show({
 					message: e.message,
-					type: { info: true },
+					type: { info: true }
 				});
 			}
 			show({
 				message: i18n.t("Scorecard deleted successfully"),
-				type: { success: true },
+				type: { success: true }
 			});
 		}
 	};
@@ -86,10 +66,11 @@ export function ScorecardListCardActions({
 					<b>{scorecard.title}</b>
 				</p>
 			),
-			onCancel: () => {},
+			onCancel: () => {
+			},
 			onConfirm: async () => {
 				await deleteScorecard();
-			},
+			}
 		});
 	};
 
@@ -99,7 +80,7 @@ export function ScorecardListCardActions({
 			{write && (
 				<Button
 					dataTest={"edit-scorecard-button"}
-					onClick={function (_: any, e: any) {
+					onClick={function(_: any, e: any) {
 						e.stopPropagation();
 						onEdit();
 					}}
