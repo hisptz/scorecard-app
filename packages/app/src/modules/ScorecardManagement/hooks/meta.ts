@@ -1,4 +1,4 @@
-import { DATASTORE_NAMESPACE, ScorecardConfig } from "@scorecard/shared";
+import { DATASTORE_NAMESPACE, UserState } from "@scorecard/shared";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -8,6 +8,8 @@ import { useEffect, useState } from "react";
 import { useFormSchema } from "./schema";
 import { uid } from "@hisptz/dhis2-utils";
 import i18n from "@dhis2/d2-i18n";
+import { ScorecardConfig } from "@hisptz/dhis2-analytics";
+import { useRecoilValue } from "recoil";
 
 const query: any = {
 	scorecard: {
@@ -17,8 +19,17 @@ const query: any = {
 	}
 };
 
-const defaultValue: Partial<ScorecardConfig> = {
+const getDefaultValue = (user: { id: string }): Partial<ScorecardConfig> => ({
 	id: uid(),
+	title: "",
+	additionalLabels: [],
+	customHeader: undefined,
+	description: undefined,
+	subtitle: undefined,
+	periodSelection: {
+		periods: [],
+		type: undefined
+	},
 	legendDefinitions: [
 		{
 			color: "#D3D3D3",
@@ -72,11 +83,18 @@ const defaultValue: Partial<ScorecardConfig> = {
 	highlightedIndicators: [],
 	dataSelection: {
 		dataGroups: []
+	},
+	sharing: {
+		external: false,
+		owner: user.id,
+		users: {},
+		userGroups: {},
+		public: "rw------"
 	}
-};
-
+});
 
 export default function useScorecardFormMetadata() {
+	const user = useRecoilValue(UserState);
 	const { id } = useParams<{ id: string }>();
 	const [access, setAccess] = useState<{ read: boolean; write: boolean } | null>(null);
 	const { refetch } = useDataQuery<{ scorecard: ScorecardConfig }>(query, {
@@ -94,7 +112,7 @@ export default function useScorecardFormMetadata() {
 				const scorecardDefaultValues = await refetch() as { scorecard: ScorecardConfig };
 				return scorecardDefaultValues.scorecard;
 			}
-			return defaultValue as ScorecardConfig;
+			return getDefaultValue(user) as ScorecardConfig;
 		},
 		mode: "onSubmit",
 		reValidateMode: "onSubmit",

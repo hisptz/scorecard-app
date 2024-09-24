@@ -3,104 +3,133 @@ import i18n from "@dhis2/d2-i18n";
 import React from "react";
 import { useFormContext } from "react-hook-form";
 import useScorecardManagerNavigate from "../hooks/navigate";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useAlert } from "@dhis2/app-runtime";
+import { useSaveScorecard } from "../hooks/save";
+import { ScorecardConfig } from "@hisptz/dhis2-analytics";
+import { useDialog } from "@hisptz/dhis2-ui";
+import { useRecoilState } from "recoil";
+import { FormLoadingState } from "../state/loading";
+import { PreviousButton } from "./PreviousButton";
+import { NextButton } from "./NextButton";
+import { SaveButton } from "./SaveButton";
 
 
 export function StepNavigationButtons() {
-	const { formState, trigger } = useFormContext();
-	const { show } = useAlert(({ message }) => message, ({ type }) => ({ ...type, duration: 3000 }));
-	const navigate = useNavigate();
-	const saving = formState.isSubmitting || formState.isValidating;
-	const { hasNext, hasPrevious, next, previous, currentStep } = useScorecardManagerNavigate();
-	const onNext = async () => {
-		if (next) {
-			if (await trigger(currentStep.fieldIds)) {
-				navigate(next.id);
-			} else {
-				show({ message: i18n.t("Form contains errors. Please fix them to continue."), type: { info: true } });
-			}
-		}
-	};
-
-	const onPrevious = async () => {
-		if (previous) {
-			if (await trigger(currentStep.fieldIds)) {
-				navigate(previous.id);
-			} else {
-				show({ message: i18n.t("Form contains errors. Please fix them to continue."), type: { info: true } });
-			}
-		}
-	};
+	const { hasNext } = useScorecardManagerNavigate();
 
 
 	return (
 		<div style={{ gap: 8 }} className="row align-items-center">
-			<Button
-				disabled={!hasPrevious}
-				onClick={onPrevious}
-			>
-				{i18n.t(
-					`Previous: ${previous?.label ?? ""}`
-				)}
-			</Button>
-			<Button
-				loading={saving}
-				primary
-				disabled={saving}
-				onClick={onNext}
-				className="settings-next-button"
-				dataTest="scorecard-admin-next-button"
-			>
-				{!hasNext
-					? saving
-						? `${i18n.t("Saving")}...`
-						: i18n.t("Save")
-					: i18n.t(
-						`Next: ${next!.label}`
-					)}
-			</Button>
+			<PreviousButton />
+			{
+				hasNext && <NextButton />
+			}
+			{
+				!hasNext && <SaveButton />
+			}
 		</div>
 	);
 }
 
 export function NavigationButtons() {
-	const { formState, handleSubmit } = useFormContext();
-	const saving = formState.isSubmitting || formState.isValidating;
-	const { hasNext } = useScorecardManagerNavigate();
+	const { id } = useParams<{ id?: string }>();
+	const navigate = useNavigate();
+	const { handleSubmit, trigger, getValues } = useFormContext<ScorecardConfig>();
+	const { hasNext, next, currentStep } = useScorecardManagerNavigate();
+	const { show } = useAlert(({ message }) => message, ({ type }) => ({ ...type, duration: 3000 }));
+	const { confirm } = useDialog();
+	const [loadingState, setLoadingState] = useRecoilState(FormLoadingState);
+
+	const { save } = useSaveScorecard();
 
 	const onSaveAndContinue = async () => {
+		try {
+			setLoadingState({
+				button: "saveAndContinue",
+				action: "saveAndContinue",
+				loading: true
+			});
+			const formValid = await trigger(currentStep.fieldIds as any);
 
+			if (formValid) {
+				const config = getValues();
+				await save(config);
+				setLoadingState({
+					button: "saveAndContinue",
+					action: "saveAndContinue",
+					loading: false
+				});
+				navigate(`/edit/${config.id}/${next?.id}`);
+			} else {
+				setLoadingState({
+					button: "saveAndContinue",
+					action: "saveAndContinue",
+					loading: false
+				});
+				show({ message: i18n.t("Form contains errors. Please fix them to continue."), type: { info: true } });
+			}
+		} catch (err) {
+			//Error is already shown in the save function.
+		}
 	};
-	const onSave = () => {
-
+	const onSave = async (config: ScorecardConfig) => {
+		try {
+			setLoadingState({
+				button: "save",
+				action: "save",
+				loading: true
+			});
+			await save(config);
+			setLoadingState({
+				button: "save",
+				action: "save",
+				loading: false
+			});
+			navigate(`/view/${config.id}`);
+		} catch (err) {
+			//Error is already shown in the save function.
+		}
 	};
 	const onCancel = () => {
-
+		confirm({
+			title: i18n.t("Confirm form exit"),
+			message: i18n.t("Are you sure you want to discard all changes and exit?"),
+			confirmButtonText: i18n.t("Exit"),
+			confirmButtonColor: "primary",
+			onConfirm: () => {
+				if (id) {
+					navigate(`/view/${id}`);
+				} else {
+					navigate("/");
+				}
+			}
+		});
 	};
+
+	const saveLoading = loadingState?.button === "save" && loadingState?.loading;
+	const saveAndContinueLoading = loadingState?.button === "saveAndContinue" && loadingState?.loading;
 
 	return (
 		<ButtonStrip>
 			<Button
-				loading={saving}
+				loading={saveLoading}
 				dataTest="scorecard-save-button"
-				disabled={saving}
+				disabled={saveLoading}
 				onClick={() => handleSubmit(onSave)()}
 			>
-				{saving
+				{saveLoading
 					? `${i18n.t("Saving")}...`
 					: i18n.t("Save and exit")}
 			</Button>
 			{hasNext && (
 				<Button
-					loading={saving}
+					loading={saveAndContinueLoading}
 					dataTest="scorecard-save-and-continue-button"
-					disabled={saving}
-					onClick={() => handleSubmit(
-						onSaveAndContinue
-					)()}
+					disabled={saveAndContinueLoading}
+					onClick={onSaveAndContinue}
 				>
-					{saving
+					{saveAndContinueLoading
 						? `${i18n.t("Saving")}...`
 						: i18n.t("Save and continue")}
 				</Button>

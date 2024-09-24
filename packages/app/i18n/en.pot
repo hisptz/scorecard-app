@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-09-16T09:21:02.849Z\n"
-"PO-Revision-Date: 2024-09-16T09:21:02.849Z\n"
+"POT-Creation-Date: 2024-09-24T08:03:46.605Z\n"
+"PO-Revision-Date: 2024-09-24T08:03:46.605Z\n"
 
 msgid "Could not determine scorecard's access"
 msgstr "Could not determine scorecard's access"
@@ -317,6 +317,15 @@ msgstr "You need to fix issues on this step before moving to another step"
 msgid "Form contains errors. Please fix them to continue."
 msgstr "Form contains errors. Please fix them to continue."
 
+msgid "Confirm form exit"
+msgstr "Confirm form exit"
+
+msgid "Are you sure you want to discard all changes and exit?"
+msgstr "Are you sure you want to discard all changes and exit?"
+
+msgid "Exit"
+msgstr "Exit"
+
 msgid "Saving"
 msgstr "Saving"
 
@@ -328,6 +337,15 @@ msgstr "Save and continue"
 
 msgid "Exit without saving"
 msgstr "Exit without saving"
+
+msgid "Validating..."
+msgstr "Validating..."
+
+msgid "Next"
+msgstr "Next"
+
+msgid "Saving..."
+msgstr "Saving..."
 
 msgid "General"
 msgstr "General"
@@ -388,6 +406,15 @@ msgstr "Progress, but more effort required"
 
 msgid "Not on track"
 msgstr "Not on track"
+
+msgid "Scorecard updated successfully"
+msgstr "Scorecard updated successfully"
+
+msgid "Scorecard created successfully"
+msgstr "Scorecard created successfully"
+
+msgid "Error saving scorecard"
+msgstr "Error saving scorecard"
 
 msgid "Title is required"
 msgstr "Title is required"

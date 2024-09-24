@@ -19,6 +19,7 @@ export default function GeneralForm() {
 			>
 				<RHFTextInputField
 					name="title"
+					type="text"
 					label={i18n.t("Title")}
 					required
 				/>

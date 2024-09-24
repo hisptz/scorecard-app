@@ -35,7 +35,7 @@ export const steps: FormStep[] = [
 			"customHeader",
 			"additionalLabels",
 			"legendDefinitions"
-		]
+		]as const
 	},
 	{
 		label: i18n.t("Data Configuration"),
@@ -47,7 +47,7 @@ export const steps: FormStep[] = [
 		id: "dataConfiguration",
 		fieldIds: [
 			"dataSelection"
-		]
+		]as const
 	},
 	{
 		label: i18n.t("Highlighted Indicators"),
@@ -59,7 +59,7 @@ export const steps: FormStep[] = [
 		id: "highlightedIndicators",
 		fieldIds: [
 			"highlightedIndicators"
-		]
+		]as const
 	},
 	{
 		label: i18n.t("Access"),
@@ -71,7 +71,7 @@ export const steps: FormStep[] = [
 		id: "access",
 		fieldIds: [
 			"orgUnitSelection"
-		]
+		]as const
 	},
 	{
 		label: i18n.t("Options"),
@@ -83,7 +83,7 @@ export const steps: FormStep[] = [
 		id: "options",
 		fieldIds: [
 			"options"
-		]
+		] as const
 	}
 ] as const;
 
