@@ -7,7 +7,7 @@ export {
 	DATASTORE_OLD_SCORECARD_ENDPOINT,
 	DATASTORE_SCORECARD_SUMMARY_INCLUDE_KEYS,
 	DATASTORE_SCORECARD_SUMMARY_KEY,
-	SCORECARD_DOCUMENTATION_URL,
+	SCORECARD_DOCUMENTATION_URL
 } from "./config";
 
 export { ALMA_HEADERS } from "./alma";
@@ -20,12 +20,7 @@ export { DEFAULT_LAYOUT, LAYOUTS } from "./layout";
 export { DATA_MIGRATION_CHECK } from "./migration";
 export { Orientation } from "./orientation";
 export { PeriodCategories, UNSUPPORTED_PERIOD_TYPES } from "./period";
-export {
-	AccessTypes,
-	DefaultAuthority,
-	ACCESS_TYPES,
-	default as ScorecardAccessType,
-} from "./scorecardAccessType";
+export * from "./scorecardAccessType";
 export { FilterComponentTypes } from "./selection";
 export { ScorecardTableConstants } from "./table";
 export { TableSort } from "./tableSort";
@@ -47,7 +42,7 @@ export {
 	NO_GROUPS_HELP_STEPS,
 	NO_INDICATORS_HELP_STEPS,
 	OPTIONS_HELP_STEPS,
-	PREVIEW_TABLE_HELP_STEPS,
+	PREVIEW_TABLE_HELP_STEPS
 } from "./help/scorecardManagement";
 export { SCORECARD_VIEW_HELP_STEPS } from "./help/scorecardView";
 export { optionsPageFields } from "./form";

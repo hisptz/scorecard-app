@@ -86,5 +86,5 @@ export async function checkTitleAvailability({ title, id, engine }: { engine: Re
 	}
 
 	const existingConfig = results.find((result) => result.id === id);
-	return !existingConfig;
+	return !!existingConfig;
 }

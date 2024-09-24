@@ -18,7 +18,10 @@ export default function EditTitle({
 			</div>
 			<div className="column ">
 				<ButtonStrip end>
-					<Button onClick={onClose}>
+					<Button onClick={(_, event) => {
+						event.stopPropagation();
+						onClose();
+					}}>
 						{i18n.t("Save")}
 					</Button>
 				</ButtonStrip>

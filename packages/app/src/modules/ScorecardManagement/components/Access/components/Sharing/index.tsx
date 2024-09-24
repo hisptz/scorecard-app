@@ -1,27 +1,37 @@
-import i18n from "@dhis2/d2-i18n";
 import React from "react";
-import SharingList from "./components/SharingList";
-import AddSharingAccess from "./components/SharingList/components/AddSharingAccess";
-
+import "./sharing.css";
+import i18n from "@dhis2/d2-i18n";
+import { SharingDialog } from "./components/CustomSharingDialog/SharingDialog";
+import { colors, IconError24 } from "@dhis2/ui";
+import { ScorecardConfig } from "@hisptz/dhis2-analytics";
+import { useController } from "react-hook-form";
 
 export default function Sharing() {
+	const { fieldState } = useController<ScorecardConfig, "sharing">({
+		name: "sharing"
+	});
 	return (
-		<div className="p-16 pl-32">
-			<div>
+		<div style={{ gap: 16 }} className="column h-100">
+			<div className="pt-16 pb-16">
 				<h3>{i18n.t("Sharing")}</h3>
 			</div>
-			<div>
-				<p style={{ fontSize: 18 }}>{i18n.t("Shared With")}</p>
-			</div>
-			<div className="sharing-list">
-				<SharingList />
-			</div>
-			<div className="pt-32">
-				<p style={{ fontSize: 18 }}>{i18n.t("Add Access")}</p>
-			</div>
-			<div>
-				<AddSharingAccess />
-			</div>
+			{fieldState.error && (
+				<div
+					style={{
+						display: "flex",
+						gap: 8,
+						alignItems: "center",
+						padding: "8px 0",
+						color: colors.red500
+					}}
+				>
+					<IconError24 />
+					{fieldState.error?.message}
+				</div>
+			)}
+			<SharingDialog />
 		</div>
 	);
 }
+
+

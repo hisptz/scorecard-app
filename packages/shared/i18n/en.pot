@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-09-23T12:07:56.537Z\n"
-"PO-Revision-Date: 2024-09-23T12:07:56.537Z\n"
+"POT-Creation-Date: 2024-09-24T09:21:52.288Z\n"
+"PO-Revision-Date: 2024-09-24T09:21:52.288Z\n"
 
 msgid "Are you sure you want to delete this entity?"
 msgstr "Are you sure you want to delete this entity?"
@@ -515,6 +515,15 @@ msgstr "Relative Periods"
 
 msgid "Fixed Periods"
 msgstr "Fixed Periods"
+
+msgid "No Access"
+msgstr "No Access"
+
+msgid "View Only"
+msgstr "View Only"
+
+msgid "View and Edit"
+msgstr "View and Edit"
 
 msgid "Period should be an object with an id property"
 msgstr "Period should be an object with an id property"

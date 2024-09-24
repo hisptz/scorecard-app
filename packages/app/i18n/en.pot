@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-09-24T08:03:46.605Z\n"
-"PO-Revision-Date: 2024-09-24T08:03:46.605Z\n"
+"POT-Creation-Date: 2024-09-24T10:31:52.171Z\n"
+"PO-Revision-Date: 2024-09-24T10:31:52.171Z\n"
 
 msgid "Could not determine scorecard's access"
 msgstr "Could not determine scorecard's access"
@@ -74,6 +74,42 @@ msgstr "Add New Scorecard"
 msgid "Organisation Unit"
 msgstr "Organisation Unit"
 
+msgid "Give Access to a user , group or role"
+msgstr "Give Access to a user , group or role"
+
+msgid "Access level"
+msgstr "Access level"
+
+msgid "Select a level"
+msgstr "Select a level"
+
+msgid "Give access"
+msgstr "Give access"
+
+msgid "Users and groups that currently have access"
+msgstr "Users and groups that currently have access"
+
+msgid "User / Group / Role"
+msgstr "User / Group / Role"
+
+msgid "All users"
+msgstr "All users"
+
+msgid "Not available offline"
+msgstr "Not available offline"
+
+msgid "User, group or role"
+msgstr "User, group or role"
+
+msgid "Search"
+msgstr "Search"
+
+msgid "Confirm action"
+msgstr "Confirm action"
+
+msgid "Are you sure you want to delete this access?"
+msgstr "Are you sure you want to delete this access?"
+
 msgid "Select Access"
 msgstr "Select Access"
 
@@ -82,12 +118,6 @@ msgstr "Add"
 
 msgid "Sharing"
 msgstr "Sharing"
-
-msgid "Shared With"
-msgstr "Shared With"
-
-msgid "Add Access"
-msgstr "Add Access"
 
 msgid "No Access"
 msgstr "No Access"
@@ -422,12 +452,8 @@ msgstr "Title is required"
 msgid "Title must have at least 4 characters"
 msgstr "Title must have at least 4 characters"
 
-msgid ""
-"A scorecard with the title '{{value}}' already exists. Please select "
-"another title"
-msgstr ""
-"A scorecard with the title '{{value}}' already exists. Please select "
-"another title"
+msgid "A scorecard with this title already exists. Please select another title"
+msgstr "A scorecard with this title already exists. Please select another title"
 
 msgid "A data group must have at least one data item"
 msgstr "A data group must have at least one data item"
@@ -551,9 +577,6 @@ msgstr "Confirm scorecard selection"
 
 msgid "Are you sure you want to select this scorecard for this dashboard?"
 msgstr "Are you sure you want to select this scorecard for this dashboard?"
-
-msgid "Search"
-msgstr "Search"
 
 msgid "Preparing widgets migration..."
 msgstr "Preparing widgets migration..."
