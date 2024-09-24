@@ -3,17 +3,20 @@ import React, { Suspense } from "react";
 import { FormProvider } from "react-hook-form";
 import useScorecardFormMetadata from "./hooks/meta";
 import { ManagementTabBar } from "./components/ManagementTabBar";
-import { Outlet } from "react-router-dom";
+import { Outlet, useParams } from "react-router-dom";
 import { TabHeader } from "./components/TabHeader";
 import { NavigationButtons, StepNavigationButtons } from "./components/NavigationButtons";
 
 export default function ScoreCardManagement() {
+	const { id } = useParams<{ id?: string }>();
 	const { form, access } = useScorecardFormMetadata();
 	if (form.formState.isLoading || access == null) {
 		return <FullPageLoader />;
 	}
 	if (!access.write) {
-		return <AccessDeniedPage accessType={"edit"} />;
+		if (id) {
+			return <AccessDeniedPage accessType={"edit"} />;
+		}
 	}
 
 	return (
