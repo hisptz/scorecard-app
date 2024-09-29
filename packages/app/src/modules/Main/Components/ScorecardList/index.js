@@ -62,10 +62,14 @@ export default function ScorecardList() {
                 return scorecards.filter(
                     ({id, title, description, additionalLabels}) => {
                         const index =
-                            `${id} ${title} ${description} ${additionalLabels?.join(
-                                " "
-                            )}`.toLowerCase();
-                        return index.match(new RegExp(keyword.toLowerCase()));
+                            `${id} ${title} ${description}`.toLowerCase();
+                        if (Array.isArray(additionalLabels) && additionalLabels.length > 0) {
+                            index.concat(additionalLabels.join(" ").toLowerCase());
+                        }
+                        if (typeof additionalLabels === "string") {
+                            index.concat(additionalLabels.toLowerCase());
+                        }
+                        return index.includes(keyword.toLowerCase());
                     }
                 );
             });
