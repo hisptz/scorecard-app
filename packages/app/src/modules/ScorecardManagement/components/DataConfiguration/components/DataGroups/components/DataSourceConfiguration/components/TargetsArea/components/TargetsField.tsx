@@ -2,17 +2,17 @@ import { RHFDHIS2FormField } from "@hisptz/dhis2-ui";
 import React, { useMemo } from "react";
 import { useWatch } from "react-hook-form";
 
-export default function TargetsField(props: any) {
+export default function TargetsField(props: { name: string; path: string; }) {
 	const { name, path } = props ?? {};
 	const [legendDefinitions, highIsGood] = useWatch({
-		name: [`legendDefinitions`, `${path}.highIsGood`],
+		name: [`legendDefinitions`, `${path}.highIsGood`]
 	});
 	const nonDefaultLegendDefinitions = useMemo(
 		() =>
 			legendDefinitions.filter(
-				(legendDefinition: any) => !legendDefinition.isDefault,
+				(legendDefinition: any) => !legendDefinition.isDefault
 			),
-		[legendDefinitions],
+		[legendDefinitions]
 	);
 
 	return (

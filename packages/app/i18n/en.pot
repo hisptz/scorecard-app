@@ -5,11 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-09-24T10:31:52.171Z\n"
-"PO-Revision-Date: 2024-09-24T10:31:52.171Z\n"
-
-msgid "Could not determine scorecard's access"
-msgstr "Could not determine scorecard's access"
+"POT-Creation-Date: 2024-09-24T12:03:10.128Z\n"
+"PO-Revision-Date: 2024-09-24T12:03:10.128Z\n"
 
 msgid "Scorecard deleted successfully"
 msgstr "Scorecard deleted successfully"

@@ -21,8 +21,7 @@ export default function DataSourceSelectorModal({
 							"indicator",
 							"dataElement",
 							"dataSet",
-							"programIndicator",
-							"customFunction"
+							"programIndicator"
 						]}
 						selected={selectedItems}
 						disabled={disabled}

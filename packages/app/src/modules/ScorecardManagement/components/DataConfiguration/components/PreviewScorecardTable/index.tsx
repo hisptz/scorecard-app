@@ -14,7 +14,7 @@ export default function PreviewScorecardTable() {
 	const columns = useMemo(() => [...dataGroups], [dataGroups]);
 	return (
 		<div className="column" style={{ width: "100%", overflowX: "auto" }}>
-			<DataTable bordered width={"100%"}>
+			<DataTable width={"100%"}>
 				<DataTableHead>
 					<DataTableRow>
 						<DataTableCell
@@ -63,7 +63,7 @@ export default function PreviewScorecardTable() {
 													{dataSources.length > 1 &&
 														`/${dataSources?.[1]?.label}`}
 												</DataTableCell>
-											),
+											)
 										)}
 									</tr>
 								</table>
@@ -72,7 +72,7 @@ export default function PreviewScorecardTable() {
 					</DataTableRow>
 				</DataTableHead>
 				<DataTableBody>
-					<DataTableRow bordered>
+					<DataTableRow>
 						<DataTableCell
 							width={"100%"}
 							className={"min-width-200"}
@@ -92,8 +92,8 @@ export default function PreviewScorecardTable() {
 							>
 								<table
 									style={{
-										borders: "none",
-										borderSpacing: 0,
+										border: "none",
+										borderSpacing: 0
 									}}
 								>
 									<DataTableRow>
@@ -103,7 +103,7 @@ export default function PreviewScorecardTable() {
 													key={config.id}
 													config={config}
 												/>
-											),
+											)
 										)}
 									</DataTableRow>
 								</table>

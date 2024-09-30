@@ -32,8 +32,8 @@ export default function DataConfigurationScorecardForm() {
 				<div className="col-md-8 p-16 h-100">
 					<Suspense fallback={<ContainerLoader />}>
 						<PreviewArea />
+						<InstructionArea />
 					</Suspense>
-					<InstructionArea />
 				</div>
 			</div>
 		</SelectedDataStateProvider>
