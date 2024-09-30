@@ -59,6 +59,10 @@ body {
     justify-content: center;
 }
 
+.items-center {
+    align-items: center;
+}
+
 .align-items-center {
     align-items: center;
 }
@@ -562,4 +566,12 @@ td.extra-table-cell > svg {
 
 .jsx-3375842594 {
     height: 100% !important;
+}
+
+.gap-24 {
+    gap: 24px;
+}
+
+.gap-16 {
+    gap: 16px;
 }

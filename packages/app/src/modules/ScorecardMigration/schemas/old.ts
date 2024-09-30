@@ -7,6 +7,8 @@ const oldLegendSet = z.object({
 	min: z.union([z.string(), z.number()])
 });
 
+export type OldLegendSet = z.infer<typeof oldLegendSet>;
+
 const oldIndicator = z.object({
 	id: z.string(),
 	title: z.string(),
@@ -22,10 +24,14 @@ const oldIndicator = z.object({
 
 });
 
+export type OldIndicator = z.infer<typeof oldIndicator>;
+
 const oldIndicatorHolder = z.object({
 	holder_id: z.union([z.string(), z.number()]),
 	indicators: z.array(oldIndicator)
 });
+
+export type OldIndicatorHolder = z.infer<typeof oldIndicatorHolder>;
 
 const oldIndicatorGroup = z.object({
 	id: z.string(),
@@ -38,7 +44,9 @@ const oldIndicatorGroup = z.object({
 	indicator_holder_ids: z.array(z.number())
 });
 
-const oldDataSourceSchema = z.object({
+export type OldIndicatorGroup = z.infer<typeof oldIndicatorGroup>;
+
+export const oldDataSourceSchema = z.object({
 	title: z.string(),
 	id: z.string(),
 	weight: z.number(),
@@ -56,34 +64,83 @@ const oldDataSourceSchema = z.object({
 
 });
 
-export const oldScorecardSchema = z.object({
+export type OldDataSourceSchema = z.infer<typeof oldDataSourceSchema>;
+
+export const oldUserGroup = z.object({
 	id: z.string(),
-	header: z.object({
-		title: z.string(),
-		sub_title: z.string(),
-		description: z.string(),
-		template: z.object({
-			content: z.string(),
-			display: z.boolean().optional()
-		})
-	}),
-	legendset_definitions: z.array(z.object({
-		color: z.string(),
-		definition: z.string(),
-		default: z.boolean().optional()
-	})),
-	empty_rows: z.boolean().optional(),
-	show_average_in_row: z.boolean().optional(),
-	average_selection: z.string().optional(),
-	highlighted_indicators: z.object({
-		display: z.boolean().optional(),
-		definitions: z.array(oldDataSourceSchema).optional()
-	}),
-	data_settings: z.object({
-		indicator_holder_groups: oldIndicatorGroup,
-		indicator_holders: z.array(oldIndicatorHolder)
-	}),
-	user: z.object({
-		id: z.string()
-	}),
+	name: z.string(),
+	see: z.boolean().optional(),
+	edit: z.boolean().optional(),
+	delete: z.boolean().optional()
 });
+
+export const orgUnitSettings = z.object({
+	selected_groups: z.array(z.object({
+		id: z.string(),
+		level: z.number().optional(),
+		name: z.string().optional()
+	})),
+	selected_levels: z.array(z.object({
+		id: z.string()
+	})),
+	selected_orgunits: z.array(z.object({
+		id: z.string()
+	})),
+	selected_user_orgunit: z.array(z.string())
+
+});
+
+
+export const oldLegendDefinition = z.object({
+	color: z.string(),
+	definition: z.string(),
+	default: z.boolean().optional()
+});
+
+export type OldLegendDefinition = z.infer<typeof oldLegendDefinition>;
+
+export type OrgUnitSettings = z.infer<typeof orgUnitSettings>;
+
+export type OldUserGroup = z.infer<typeof oldUserGroup>;
+
+export const oldScorecardSchema = z.object({
+		id: z.string(),
+		header: z.object({
+			title: z.string(),
+			sub_title: z.string(),
+			description: z.string(),
+			template: z.object({
+				content: z.string(),
+				display: z.boolean().optional()
+			}),
+			show_arrows_definition: z.boolean().optional(),
+			show_legend_definition: z.boolean().optional()
+		}),
+		legendset_definitions: z.array(oldLegendDefinition),
+		empty_rows: z.boolean().optional(),
+		show_average_in_row: z.boolean().optional(),
+		show_average_in_column: z.boolean().optional(),
+		show_hierarchy: z.boolean().optional(),
+		average_selection: z.string().optional(),
+		highlighted_indicators: z.object({
+			display: z.boolean().optional(),
+			definitions: z.array(oldDataSourceSchema).optional()
+		}),
+		data_settings: z.object({
+			indicator_holder_groups: oldIndicatorGroup,
+			indicator_holders: z.array(oldIndicatorHolder)
+		}),
+		user: z.object({
+			id: z.string()
+		}),
+		user_groups: z.array(oldUserGroup),
+		periodType: z.string().optional(),
+		selected_periods: z.object({
+			id: z.string()
+		}),
+		orgunit_settings: orgUnitSettings,
+		additional_labels: z.array(z.string()).optional()
+	})
+;
+
+export type OldScorecardSchema = z.infer<typeof oldScorecardSchema>;

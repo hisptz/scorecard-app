@@ -144,9 +144,12 @@
     "A data group must have at least one data item": "A data group must have at least one data item",
     "A scorecard needs at least one data group": "A scorecard needs at least one data group",
     "You must select at least one organisation unit": "You must select at least one organisation unit",
-    "Preparing migration...": "Preparing migration...",
-    "Migrating scorecards": "Migrating scorecards",
-    "of": "of",
+    "Migrating scorecard(s)... ({{progress}}/{{count}})": "Migrating scorecard(s)... ({{progress}}/{{count}})",
+    "Migrating scorecard(s)... ({{progress}}/{{count}})_plural": "Migrating scorecard(s)... ({{progress}}/{{count}})",
+    "Migrate {{count}} scorecard(s)": "Migrate {{count}} scorecard(s)",
+    "Migrate {{count}} scorecard(s)_plural": "Migrate {{count}} scorecard(s)",
+    "Scorecards to migrate": "Scorecards to migrate",
+    "Select the scorecards configuration that you would like to migrate": "Select the scorecards configuration that you would like to migrate",
     "Getting your scorecard configuration...": "Getting your scorecard configuration...",
     "Back to all scorecards": "Back to all scorecards",
     "Select period": "Select period",
@@ -183,5 +186,6 @@
     "Confirm scorecard selection": "Confirm scorecard selection",
     "Are you sure you want to select this scorecard for this dashboard?": "Are you sure you want to select this scorecard for this dashboard?",
     "Preparing widgets migration...": "Preparing widgets migration...",
-    "Migrating scorecards widgets": "Migrating scorecards widgets"
+    "Migrating scorecards widgets": "Migrating scorecards widgets",
+    "of": "of"
 }

@@ -1,49 +1,16 @@
-import { useAlert } from "@dhis2/app-runtime";
+import React from "react";
 import i18n from "@dhis2/d2-i18n";
-import { CircularLoader, LinearLoader } from "@dhis2/ui";
-import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import useMigrateScorecard from "./hooks/useMigrateScorecard";
+import { OldScorecardList } from "./components/OldScorecardList";
 
 export default function ScorecardMigration() {
-	const navigate = useNavigate();
-	const onComplete = () => {
-		navigate("/", { replace: true });
-	};
-
-	const { show } = useAlert(
-		({ message }) => message,
-		({ type }) => ({ ...type, duration: 3000 }),
-	);
-	const { error, progress, count, migrationStarted } =
-		useMigrateScorecard(onComplete);
-	useEffect(() => {
-		if (error) {
-			show({
-				message: i18n.t(
-					"Error Migrating Scorecards: " + (error?.message ?? ""),
-				),
-				type: { info: true },
-			});
-		}
-	}, [error, show]);
-
-	if (!migrationStarted) {
-		return (
-			<div className="column center align-items-center h-100 w-100">
-				<CircularLoader small />
-				<h4>{i18n.t("Preparing migration...")}</h4>
-			</div>
-		);
-	}
 
 	return (
-		<div className="column center align-items-center h-100 w-100">
-			<LinearLoader amount={(progress / count) * 100} />
-			<h4>
-				{i18n.t("Migrating scorecards")}...{+progress} {i18n.t("of")}{" "}
-				{+count}
-			</h4>
+		<div className="column h-100 w-100 p-32 gap-24">
+			<div>
+				<h2>{i18n.t("Scorecards to migrate")}</h2>
+				<span>{i18n.t("Select the scorecards configuration that you would like to migrate")}</span>
+			</div>
+			<OldScorecardList />
 		</div>
 	);
 }

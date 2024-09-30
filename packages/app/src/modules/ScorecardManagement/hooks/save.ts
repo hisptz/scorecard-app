@@ -79,7 +79,27 @@ export function useSaveScorecard() {
 			show({ message: `${i18n.t("Error saving scorecard")}: ${e.message}`, type: { critical: true } });
 		}
 	}, [id]);
+	const saveSilently = useCallback(async (config: ScorecardConfig) => {
+		if (id) {
+			//updating
+			await update({
+				data: config,
+				id
+			});
+			await onUpdateSharing(config);
+		} else {
+			const mutation: any = {
+				type: "create",
+				resource: `dataStore/${DATASTORE_NAMESPACE}/${config.id}`,
+				data: config
+			};
+			await engine.mutate(mutation);
 
-	return { save };
+			await onUpdateSharing(config);
+		}
+
+	}, [id]);
+
+	return { save, saveSilently };
 
 }

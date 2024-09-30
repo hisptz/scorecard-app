@@ -1,96 +1,52 @@
-import { useDataEngine } from "@dhis2/app-runtime";
-import { useSetting } from "@dhis2/app-service-datastore";
-import { AllScorecardsSummaryState, DATA_MIGRATION_CHECK, generateScorecardSummary, migrateScorecard } from "@scorecard/shared";
-import { map as mapAsync } from "async";
-import { compact, filter, isEmpty, map, uniqBy } from "lodash";
-import { useCallback, useEffect, useState } from "react";
-import { useRecoilRefresher_UNSTABLE, useRecoilValue } from "recoil";
-import { getOldScorecardKeys, getOldScorecards, getScorecardKeys, uploadNewScorecard, uploadSummary } from "../services/migrate";
-import useQueue from "./useQueue";
+import { useCallback } from "react";
+import { OldScorecardSchema } from "../schemas/old";
+import { FetchError, useDataEngine, useDataQuery } from "@dhis2/app-runtime";
+import { DATASTORE_NAMESPACE, migrateScorecard } from "@scorecard/shared";
+import { useSaveScorecard } from "../../ScorecardManagement/hooks/save";
 
-export default function useMigrateScorecard(onComplete: any) {
-	const [error, setError] = useState<any>();
-	const allSummary: any = useRecoilValue(AllScorecardsSummaryState);
-	const resetSummary = useRecoilRefresher_UNSTABLE(AllScorecardsSummaryState);
-	const [summaries, setSummaries] = useState<any>();
+
+const newScorecardConfigQuery: any = {
+	config: {
+		resource: `dataStore/${DATASTORE_NAMESPACE}`,
+		id: ({ id }: { id: string }) => id
+	}
+};
+
+export function useMigrateScorecard() {
 	const engine = useDataEngine();
-	const [, { set: setSkipMigration }] = useSetting(DATA_MIGRATION_CHECK, {
-		global: true,
+	const { saveSilently } = useSaveScorecard();
+	const { refetch } = useDataQuery(newScorecardConfigQuery, {
+		lazy: true
 	});
 
-	const migrate = useCallback(
-		async (scorecard: any) => {
-			await uploadNewScorecard({ newScorecard: scorecard, engine });
-		},
-		[engine],
-	);
+	const createNewConfiguration = useCallback(async (oldScorecard: OldScorecardSchema) => {
+		return migrateScorecard({ oldScorecard, engine });
+	}, [engine]);
 
-	const onMigrationComplete = useCallback(async () => {
-		await uploadSummary(
-			engine,
-			uniqBy([...allSummary, ...summaries], "id"),
-		);
-		resetSummary();
-		setSkipMigration(true);
-		onComplete();
-	}, [
-		allSummary,
-		engine,
-		onComplete,
-		resetSummary,
-		setSkipMigration,
-		summaries,
-	]);
 
-	const { add, progress, length, started } = useQueue({
-		drain: onMigrationComplete,
-		task: migrate,
-	});
-
-	const onMigrationInitiated = useCallback(async () => {
+	const migrate = useCallback(async (oldScorecard: OldScorecardSchema): Promise<"SUCCESS" | "EXISTS" | "FAILED"> => {
+		const config = await createNewConfiguration(oldScorecard);
+		//check if the scorecard exists
 		try {
-			const scorecardKeys = await getScorecardKeys(engine);
-			const oldScorecardKeys = await getOldScorecardKeys(engine);
-			const filteredKeys = filter(oldScorecardKeys, (key) => {
-				return !scorecardKeys.includes(key);
-			});
-			if (filteredKeys && !isEmpty(filteredKeys)) {
-				const oldScorecards = compact(
-					await getOldScorecards(engine, filteredKeys),
-				);
-				const newScorecards = compact(
-					await mapAsync(
-						oldScorecards,
-						async (oldScorecard: any) =>
-							await migrateScorecard(oldScorecard, engine),
-					),
-				);
-				const newScorecardsSummaries = compact(
-					map(newScorecards, generateScorecardSummary),
-				);
-				setSummaries(newScorecardsSummaries);
-				for (const scorecard of newScorecards) {
-					add(scorecard);
+			await refetch({ id: config.id });
+			return "EXISTS";
+		} catch (error) {
+			try {
+				if (error instanceof FetchError) {
+					//My bad, It's not there. Let's put it
+					await saveSilently(config);
+					return "SUCCESS";
+				} else {
+					return "FAILED";
 				}
-			} else {
-				onComplete();
-				setSkipMigration(true);
+			} catch (error) {
+				return "FAILED";
 			}
-		} catch (e) {
-			setError(e);
-			setSkipMigration(true);
-			onComplete();
-		}
-	}, [add, engine, onComplete, setSkipMigration]);
 
-	useEffect(() => {
-		onMigrationInitiated();
-	}, []);
+		}
+	}, [engine]);
 
 	return {
-		progress,
-		count: progress + length,
-		error,
-		migrationStarted: started,
+		migrate
 	};
 }
