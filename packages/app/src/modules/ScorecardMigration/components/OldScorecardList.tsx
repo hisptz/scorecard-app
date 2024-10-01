@@ -3,9 +3,10 @@ import { FullPageError } from "@scorecard/shared";
 import { CircularLoader, Tag } from "@dhis2/ui";
 import { SimpleDataTable, SimpleDataTableColumn, SimpleDataTableRow } from "@hisptz/dhis2-ui";
 import i18n from "@dhis2/d2-i18n";
-import { useEffect, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { fromPairs, get, uniq } from "lodash";
 import { MigrateButton } from "./MigrateButton";
+import { OldScorecardSchema } from "../schemas/old";
 
 
 const columns: SimpleDataTableColumn[] = [
@@ -24,11 +25,11 @@ const columns: SimpleDataTableColumn[] = [
 
 ];
 
-export function OldScorecardList() {
-	const { loading, scorecards, error, refetch, existingScorecards } = useOldScorecards();
-	const [selectedConfig, setSelectedConfig] = useState<string[]>([]);
-	const [progress, setProgress] = useState<Record<string, "SUCCESS" | "EXISTS" | "FAILED">>({});
 
+function MigrationTable({ scorecards, existingScorecards }: { scorecards: Array<OldScorecardSchema>; existingScorecards: Array<string> }) {
+
+	const [selectedConfig, setSelectedConfig] = useState<string[]>([]);
+	const [progress, setProgress] = useState<Record<string, "SUCCESS" | "EXISTS" | "FAILED">>(fromPairs(existingScorecards.map((id) => ([id, "EXISTS"]))));
 
 	const onRemove = (values: string[]) => {
 		setSelectedConfig((prevState) => {
@@ -57,7 +58,6 @@ export function OldScorecardList() {
 
 	const rows = useMemo(() => scorecards?.map((config) => {
 		const selectable = !["EXISTS", "SUCCESS"].includes(get(progress, config.id));
-
 		return {
 			id: config.id,
 			title: config.header.title,
@@ -68,13 +68,23 @@ export function OldScorecardList() {
 				disableSelection: !selectable
 			}
 		} as SimpleDataTableRow;
-	}) ?? [], [scorecards]);
+	}) ?? [], [scorecards, progress]);
 
-	useEffect(() => {
-		if (existingScorecards) {
-			setProgress(fromPairs(existingScorecards.map((id) => ([id, "EXISTS"]))));
-		}
-	}, [existingScorecards]);
+	return (
+		<div className="column w-100 h-100 flex-1 gap-16 pb-32">
+			<span style={{ fontSize: 14 }}>{i18n.t("Only the scorecard's owner can migrate their scorecards")}</span>
+			<SimpleDataTable tableProps={{ scrollHeight: "100%", bordered: true }} onRowDeselect={onRemove} selectedRows={selectedConfig} onRowSelect={onAdd} selectable columns={columns} rows={rows} />
+			<div className="row end">
+				{
+					!!scorecards && (<MigrateButton onClearSelection={() => setSelectedConfig([])} progress={progress} onProgressUpdate={setProgress} selected={selectedConfig} scorecards={scorecards!} />)
+				}
+			</div>
+		</div>
+	);
+}
+
+export function OldScorecardList() {
+	const { loading, scorecards, error, refetch, existingScorecards } = useOldScorecards();
 
 	if (loading) {
 		return <div className="column center items-center w-100 h-100 flex-1">
@@ -91,14 +101,7 @@ export function OldScorecardList() {
 	}
 
 	return (
-		<div className="column w-100 h-100 flex-1 gap-16 pb-32">
-			<SimpleDataTable tableProps={{ scrollHeight: "100%", bordered: true }} onRowDeselect={onRemove} selectedRows={selectedConfig} onRowSelect={onAdd} selectable columns={columns} rows={rows} />
-			<div className="row end">
-				{
-					!!scorecards && (<MigrateButton onClearSelection={() => setSelectedConfig([])} progress={progress} onProgressUpdate={setProgress} selected={selectedConfig} scorecards={scorecards!} />)
-				}
-			</div>
-		</div>
+		<MigrationTable scorecards={scorecards ?? []} existingScorecards={existingScorecards} />
 	);
 
 }

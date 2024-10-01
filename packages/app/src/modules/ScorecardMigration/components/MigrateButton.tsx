@@ -22,13 +22,13 @@ export function MigrateButton({ scorecards, selected, onProgressUpdate, onClearS
 	const { show } = useAlert(({ message }) => message, ({ type }) => ({ ...type, duration: 3000 }));
 	const count = selected.length;
 
-
 	const onMigrateClick = useCallback(async () => {
 		setLoading(true);
 		const selectedScorecards = scorecards.filter(scorecard => selected.includes(scorecard.id));
 		for (const scorecard of selectedScorecards) {
 			const results = await migrate(scorecard);
 			onProgressUpdate(prev => {
+				console.log(results);
 				return {
 					...prev,
 					[scorecard.id]: results
@@ -45,7 +45,6 @@ export function MigrateButton({ scorecards, selected, onProgressUpdate, onClearS
 		reset();
 		setLoading(false);
 	}, [selected, scorecards, onProgressUpdate, goToNextStep, migrate]);
-
 
 	return (
 		<Button loading={loading} onClick={onMigrateClick} primary disabled={count === 0}>
