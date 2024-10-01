@@ -8,7 +8,7 @@ import { uid } from "@hisptz/dhis2-utils";
 import i18n from "@dhis2/d2-i18n";
 import { ScorecardConfig } from "@hisptz/dhis2-analytics";
 import { useRecoilValue } from "recoil";
-import { getSharingSettingsFromOldConfiguration } from "../../../utils/sharing";
+import { getSharingSettingsFromOldConfiguration, ScorecardConfigWithOldSharing } from "../../../utils/sharing";
 
 const query: any = {
 	scorecard: {
@@ -103,7 +103,8 @@ export default function useScorecardFormMetadata() {
 	});
 	const schema = useFormSchema();
 	const form = useForm<ScorecardConfig>({
-		shouldFocusError: true,
+		shouldFocusError: false,
+		progressive: true,
 		defaultValues: async () => {
 			if (id) {
 				const scorecardDefaultValues = await getScorecard() as { scorecard: ScorecardConfig };
@@ -115,7 +116,10 @@ export default function useScorecardFormMetadata() {
 					defaultValue.sharing = getSharingSettingsFromOldConfiguration(defaultValue as any);
 				}
 
-				console.log(defaultValue);
+
+				console.log({
+					defaultValue
+				});
 
 				return defaultValue;
 			}
@@ -128,6 +132,6 @@ export default function useScorecardFormMetadata() {
 
 	return {
 		form,
-		access: data ? getUserAuthority(user, data?.scorecard.sharing ?? getSharingSettingsFromOldConfiguration(data?.scorecard)) : undefined
+		access: data ? getUserAuthority(user, data?.scorecard.sharing ?? getSharingSettingsFromOldConfiguration(data?.scorecard as ScorecardConfigWithOldSharing)) : undefined
 	};
 }

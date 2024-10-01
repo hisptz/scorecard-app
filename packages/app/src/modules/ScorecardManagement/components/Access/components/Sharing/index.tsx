@@ -7,9 +7,15 @@ import { ScorecardConfig } from "@hisptz/dhis2-analytics";
 import { useController } from "react-hook-form";
 
 export default function Sharing() {
-	const { fieldState } = useController<ScorecardConfig, "sharing">({
+	const { fieldState, field } = useController<ScorecardConfig, "sharing">({
 		name: "sharing"
 	});
+
+
+	console.log({
+		sharing: field.value
+	});
+
 	return (
 		<div style={{ gap: 16 }} className="column h-100">
 			<div className="pt-16 pb-16">

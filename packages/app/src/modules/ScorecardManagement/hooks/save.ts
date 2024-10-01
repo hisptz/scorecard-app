@@ -77,6 +77,7 @@ export function useSaveScorecard() {
 			}
 		} catch (e: any) {
 			show({ message: `${i18n.t("Error saving scorecard")}: ${e.message}`, type: { critical: true } });
+			throw e;
 		}
 	}, [id]);
 	const saveSilently = useCallback(async (config: ScorecardConfig) => {

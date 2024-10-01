@@ -1,4 +1,4 @@
-import { Tab, TabBar, Tooltip } from "@dhis2/ui";
+import { colors, IconErrorFilled16, Tab, TabBar, Tooltip } from "@dhis2/ui";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getCurrentStepId, getStep, steps } from "../constants/steps";
 import { useCallback, useMemo } from "react";
@@ -8,7 +8,7 @@ import i18n from "@dhis2/d2-i18n";
 
 
 function StepTab({ id }: { id: string }) {
-	const { trigger } = useFormContext();
+	const { trigger, formState } = useFormContext();
 	const { show } = useAlert(({ message }) => message, ({ type }) => ({ ...type, duration: 3000 }));
 	const navigate = useNavigate();
 	const location = useLocation();
@@ -26,8 +26,10 @@ function StepTab({ id }: { id: string }) {
 		}
 	}, [location]);
 
+	const hasErrors = Object.keys(formState.errors).some((key) => step.fieldIds.includes(key));
+
 	return (
-		<Tab onClick={onStepClick} selected={active}>
+		<Tab  icon={hasErrors ? (<IconErrorFilled16 color={colors.red500} />) : undefined} onClick={onStepClick} selected={active}>
 			<Tooltip
 				content={step.tooltip}
 				key={`${step.id}-step`}

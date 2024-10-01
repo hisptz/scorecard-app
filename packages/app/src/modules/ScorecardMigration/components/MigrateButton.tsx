@@ -46,13 +46,15 @@ export function MigrateButton({ scorecards, selected, onProgressUpdate, onClearS
 		setLoading(false);
 	}, [selected, scorecards, onProgressUpdate, goToNextStep, migrate]);
 
+	const countString = count === 0 ? "" : `${count}`;
+
 	return (
 		<Button loading={loading} onClick={onMigrateClick} primary disabled={count === 0}>
 			{loading ? i18n.t("Migrating scorecard(s)... ({{progress}}/{{count}})", {
 				count,
 				progress: value
 			}) : i18n.t("Migrate {{count}} scorecard(s)", {
-				count: count === 0 ? "" : `${count}`
+				count: countString as any
 			})}
 		</Button>
 	);

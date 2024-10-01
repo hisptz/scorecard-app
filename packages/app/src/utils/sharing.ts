@@ -1,8 +1,9 @@
 import { ScorecardConfig, ScorecardSharing } from "@hisptz/dhis2-analytics";
 import { fromPairs } from "lodash";
 
+export type ScorecardConfigWithOldSharing = ScorecardConfig & { user: { id: string }, publicAccess: { access: string; }; userAccesses: Array<{ id: string; access: string; }>; userGroupAccesses: Array<{ id: string; access: string; }> };
 
-export function getSharingSettingsFromOldConfiguration({ user, publicAccess, userGroupAccesses, userAccesses }: ScorecardConfig & { user: { id: string }, publicAccess: { access: string; }; userAccesses: Array<{ id: string; access: string; }>; userGroupAccesses: Array<{ id: string; access: string; }> }): ScorecardSharing {
+export function getSharingSettingsFromOldConfiguration({ user, publicAccess, userGroupAccesses, userAccesses }: ScorecardConfigWithOldSharing): ScorecardSharing {
 
 	return {
 		owner: user?.id ?? "",

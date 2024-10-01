@@ -219,7 +219,7 @@ function getScorecardPublicAccess(oldScorecardUserGroups: OldUserGroup[]) {
 	};
 }
 
-function getScorecardUserGroupAccesses(oldScorecardUserGroups: OldUserGroup[]): Record<string, { id: string; access: string }> {
+function getScorecardUserGroupAccesses(oldScorecardUserGroups: OldUserGroup[]): Record<string, { id: string; access: string; name: string; displayName: string; }> {
 	const userGroupsOnly = oldScorecardUserGroups?.filter(
 		(userGroup) => userGroup.id !== "all"
 	);
@@ -228,7 +228,9 @@ function getScorecardUserGroupAccesses(oldScorecardUserGroups: OldUserGroup[]): 
 			userGroup.id,
 			{
 				id: userGroup?.id,
-				access: getScorecardAccess(userGroup)
+				access: getScorecardAccess(userGroup),
+				name: userGroup.name,
+				displayName: userGroup.name
 			}
 		];
 	}));

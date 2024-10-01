@@ -154,6 +154,7 @@
     "Success": "Success",
     "Migrated": "Migrated",
     "Failed": "Failed",
+    "Only the scorecard's owner can migrate their scorecards": "Only the scorecard's owner can migrate their scorecards",
     "Back": "Back",
     "Scorecards to migrate": "Scorecards to migrate",
     "Select the scorecards configuration that you would like to migrate": "Select the scorecards configuration that you would like to migrate",

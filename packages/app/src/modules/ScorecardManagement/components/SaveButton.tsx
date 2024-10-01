@@ -28,6 +28,7 @@ export function SaveButton() {
 			});
 			navigate(`/view/${config.id}`);
 		} catch (err) {
+
 			//Error is already shown in the save function.
 		}
 	};

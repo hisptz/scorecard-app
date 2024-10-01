@@ -4,7 +4,7 @@ import i18n from "@dhis2/d2-i18n";
 import { checkTitleAvailability } from "../components/General/utils/utils";
 import { useParams } from "react-router-dom";
 import { useDataEngine } from "@dhis2/app-runtime";
-import { dataGroupSchema, dataHolderSchema, organisationUnitSelectionSchema } from "@hisptz/dhis2-analytics";
+import { dataGroupSchema, dataHolderSchema, organisationUnitSelectionSchema, scorecardSharing, scorecardViewOptionsSchema } from "@hisptz/dhis2-analytics";
 
 
 function anyOrgUnitSelected({
@@ -48,6 +48,11 @@ export function useFormSchema() {
 		additionalLabels: z.array(z.string()).optional(),
 		subtitle: z.string().optional(),
 		customHeader: z.string().optional(),
-		description: z.string().optional()
+		description: z.string().optional(),
+		options: scorecardViewOptionsSchema.extend({
+			arrows: z.boolean().optional(),
+			showDataInRows: z.boolean().optional()
+		}),
+		sharing: scorecardSharing
 	});
 }
