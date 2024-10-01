@@ -1,7 +1,7 @@
 import { useOldScorecards } from "../hooks/data";
 import { FullPageError } from "@scorecard/shared";
 import { CircularLoader, Tag } from "@dhis2/ui";
-import { SimpleDataTable, SimpleDataTableColumn } from "@hisptz/dhis2-ui";
+import { SimpleDataTable, SimpleDataTableColumn, SimpleDataTableRow } from "@hisptz/dhis2-ui";
 import i18n from "@dhis2/d2-i18n";
 import { useEffect, useMemo, useState } from "react";
 import { fromPairs, get, uniq } from "lodash";
@@ -37,7 +37,9 @@ export function OldScorecardList() {
 	};
 
 	const onAdd = (values: string[]) => {
-		setSelectedConfig((prevState) => uniq([...prevState, ...values]));
+		setSelectedConfig((prevState) => {
+			return uniq([...prevState, ...values]).filter((value) => !["EXISTS", "SUCCESS"].includes(get(progress, value)));
+		});
 	};
 
 	const getStatus = (status?: "SUCCESS" | "EXISTS" | "FAILED") => {
@@ -54,6 +56,7 @@ export function OldScorecardList() {
 	};
 
 	const rows = useMemo(() => scorecards?.map((config) => {
+		const selectable = !["EXISTS", "SUCCESS"].includes(get(progress, config.id));
 
 		return {
 			id: config.id,
@@ -62,9 +65,9 @@ export function OldScorecardList() {
 			status: getStatus(get(progress, config.id)),
 			cellsStyle: {
 				bordered: true,
-				selectable: get(progress, config.id) === "EXISTS"
+				disableSelection: !selectable
 			}
-		};
+		} as SimpleDataTableRow;
 	}) ?? [], [scorecards]);
 
 	useEffect(() => {
