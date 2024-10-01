@@ -15,18 +15,18 @@ export default function EmptyScoreCardList() {
 		<div
 			style={{
 				alignItems: "center",
-				justifyContent: "center",
+				justifyContent: "center"
 			}}
 			className="center column align-center"
 		>
 			<div style={{ minWidth: "50dvw", maxWidth: "80dvw" }}>
 				<Card>
 					<div
-						className="container-bordered text-center center column background-white"
+						className="container-bordered text-center center align-items-center column background-white"
 						style={{ borderRadius: 8, padding: 32 }}
 					>
 						<div className="p-32">
-							<ScorecardIllustration />
+							<ScorecardIllustration height={200} width={200} />
 						</div>
 						<div className="p-8">
 							<h1
@@ -39,11 +39,11 @@ export default function EmptyScoreCardList() {
 								style={{
 									fontStyle: "italic",
 									color: colors.grey700,
-									position: "relative",
+									position: "relative"
 								}}
 							>
 								{i18n.t(
-									"Create a scorecard instantly, over tea break",
+									"Create a scorecard instantly, over tea break"
 								)}
 								...
 							</p>

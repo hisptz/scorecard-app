@@ -11,10 +11,9 @@ import { useAlert } from "@dhis2/app-runtime";
 import { useNavigate } from "react-router-dom";
 import { ScorecardListArea } from "./components/ScorecardListArea";
 import { ErrorBoundary } from "react-error-boundary";
-import { useAutoMigration } from "../ScorecardMigration/hooks/autoMigration";
+import { MigrationNavigateButton } from "../ScorecardMigration/components/MigrationNavigateButton";
 
 export default function ScorecardList() {
-	useAutoMigration();
 	const [scorecardViewType, { set }] = useSetting("scorecardViewType");
 	const [helpEnabled, setHelpEnabled] = useState<boolean>(false);
 	const { show } = useAlert(
@@ -54,8 +53,8 @@ export default function ScorecardList() {
 				onExit={onHelpExit}
 				initialStep={0}
 			/>
-			<div className="column h-100">
-				<div className="row p-16">
+			<div className="column h-100 p-16">
+				<div className="row">
 					<div
 						className="row p-45 center"
 						style={{ paddingLeft: "35%" }}
@@ -110,6 +109,9 @@ export default function ScorecardList() {
 					<ErrorBoundary FallbackComponent={FullPageError}>
 						<ScorecardListArea />
 					</ErrorBoundary>
+				</div>
+				<div className="row end">
+					<MigrationNavigateButton />
 				</div>
 			</div>
 		</>

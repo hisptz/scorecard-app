@@ -1,4 +1,4 @@
-import { DATASTORE_OLD_SCORECARD_ENDPOINT } from "@scorecard/shared";
+import { DATASTORE_NAMESPACE, DATASTORE_OLD_SCORECARD_ENDPOINT } from "@scorecard/shared";
 import { OldScorecardSchema } from "../schemas/old";
 import { useDataQuery } from "@dhis2/app-runtime";
 import { Pager } from "@hisptz/dhis2-ui";
@@ -11,6 +11,9 @@ const query = {
 			fields: ".",
 			paging: false
 		}
+	},
+	newConfig: {
+		resource: `dataStore/${DATASTORE_NAMESPACE}`
 	}
 };
 
@@ -21,7 +24,8 @@ type Response = {
 			value: OldScorecardSchema
 		}>,
 		pager: Pager
-	}
+	},
+	newConfig: string[]
 }
 
 export function useOldScorecards() {
@@ -32,8 +36,11 @@ export function useOldScorecards() {
 		id: key
 	}));
 
+	const existingScorecards = data?.newConfig ?? [];
+
 	return {
 		scorecards,
+		existingScorecards,
 		loading,
 		error,
 		refetch

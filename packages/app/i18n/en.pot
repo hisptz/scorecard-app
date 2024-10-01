@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-09-30T13:38:08.282Z\n"
-"PO-Revision-Date: 2024-09-30T13:38:08.282Z\n"
+"POT-Creation-Date: 2024-10-01T09:23:10.631Z\n"
+"PO-Revision-Date: 2024-10-01T09:23:10.631Z\n"
 
 msgid "Scorecard deleted successfully"
 msgstr "Scorecard deleted successfully"
@@ -460,6 +460,9 @@ msgstr "A scorecard needs at least one data group"
 
 msgid "You must select at least one organisation unit"
 msgstr "You must select at least one organisation unit"
+
+msgid "{{count}} scorecards successfully migrated"
+msgstr "{{count}} scorecards successfully migrated"
 
 msgid "Migrating scorecard(s)... ({{progress}}/{{count}})"
 msgid_plural "Migrating scorecard(s)... ({{progress}}/{{count}})"

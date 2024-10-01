@@ -144,6 +144,7 @@
     "A data group must have at least one data item": "A data group must have at least one data item",
     "A scorecard needs at least one data group": "A scorecard needs at least one data group",
     "You must select at least one organisation unit": "You must select at least one organisation unit",
+    "{{count}} scorecards successfully migrated": "{{count}} scorecards successfully migrated",
     "Migrating scorecard(s)... ({{progress}}/{{count}})": "Migrating scorecard(s)... ({{progress}}/{{count}})",
     "Migrating scorecard(s)... ({{progress}}/{{count}})_plural": "Migrating scorecard(s)... ({{progress}}/{{count}})",
     "Migrate {{count}} scorecard(s)": "Migrate {{count}} scorecard(s)",

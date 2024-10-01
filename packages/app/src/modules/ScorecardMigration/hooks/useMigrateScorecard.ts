@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { OldScorecardSchema } from "../schemas/old";
-import { FetchError, useDataEngine, useDataQuery } from "@dhis2/app-runtime";
+import { FetchError, useDataEngine } from "@dhis2/app-runtime";
 import { DATASTORE_NAMESPACE, migrateScorecard } from "@scorecard/shared";
 import { useSaveScorecard } from "../../ScorecardManagement/hooks/save";
 
@@ -15,9 +15,6 @@ const newScorecardConfigQuery: any = {
 export function useMigrateScorecard() {
 	const engine = useDataEngine();
 	const { saveSilently } = useSaveScorecard();
-	const { refetch } = useDataQuery(newScorecardConfigQuery, {
-		lazy: true
-	});
 
 	const createNewConfiguration = useCallback(async (oldScorecard: OldScorecardSchema) => {
 		return migrateScorecard({ oldScorecard, engine });
@@ -28,9 +25,14 @@ export function useMigrateScorecard() {
 		const config = await createNewConfiguration(oldScorecard);
 		//check if the scorecard exists
 		try {
-			await refetch({ id: config.id });
+			await engine.query(newScorecardConfigQuery, {
+				variables: {
+					id: config.id
+				}
+			});
 			return "EXISTS";
 		} catch (error) {
+			console.log(error);
 			try {
 				if (error instanceof FetchError) {
 					//My bad, It's not there. Let's put it
