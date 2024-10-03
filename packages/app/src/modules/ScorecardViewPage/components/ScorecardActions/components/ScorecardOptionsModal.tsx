@@ -1,14 +1,14 @@
 import i18n from "@dhis2/d2-i18n";
 import { Button, ButtonStrip, Field, Modal, ModalActions, ModalContent, ModalTitle, Radio } from "@dhis2/ui";
 import { AverageDisplayType } from "@scorecard/shared";
-import React from "react";
+import React, { useTransition } from "react";
 import { FormProvider, useController, useForm } from "react-hook-form";
 import { ScorecardViewOptions, useScorecardSetState, useScorecardState } from "@hisptz/dhis2-analytics";
 import { RHFCheckboxField } from "@hisptz/dhis2-ui";
 
 function AverageDisplayTypeField() {
 	const { field, fieldState } = useController<ScorecardViewOptions>({
-		name: "averageDisplayType",
+		name: "averageDisplayType"
 	});
 
 	return (
@@ -50,25 +50,28 @@ export interface ScorecardOptionsModalProps {
 }
 
 export function ScorecardOptionsModal({
-	hide,
-	onClose,
-}: ScorecardOptionsModalProps) {
+										  hide,
+										  onClose
+									  }: ScorecardOptionsModalProps) {
+	const [isPending, startTransition] = useTransition();
 	const state = useScorecardState();
 	const setState = useScorecardSetState();
 	const initialOptions = state.options;
 	const form = useForm<ScorecardViewOptions>({
-		defaultValues: initialOptions,
+		defaultValues: initialOptions
 	});
 
 	const onUpdate = (options: ScorecardViewOptions) => {
-		setState((prevState) => ({
-			...prevState,
-			options: {
-				...prevState.options,
-				...options,
-			},
-		}));
-		onClose();
+		startTransition(() => {
+			setState((prevState) => ({
+				...prevState,
+				options: {
+					...prevState.options,
+					...options
+				}
+			}));
+			onClose();
+		});
 	};
 
 	return (
@@ -131,10 +134,11 @@ export function ScorecardOptionsModal({
 					<ButtonStrip>
 						<Button onClick={onClose}>{i18n.t("Cancel")}</Button>
 						<Button
+							loading={isPending}
 							primary
 							onClick={() => form.handleSubmit(onUpdate)()}
 						>
-							{i18n.t("Update")}
+							{isPending ? i18n.t("Updating...") : i18n.t("Update")}
 						</Button>
 					</ButtonStrip>
 				</ModalActions>

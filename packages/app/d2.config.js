@@ -4,7 +4,6 @@ const config = {
 	title: "Interactive Scorecard",
 	entryPoints: {
 		app: "./src/App.tsx",
-		plugin: "./src/Plugin.tsx",
 	},
 	dataStoreNamespace: "hisptz-scorecard",
 };

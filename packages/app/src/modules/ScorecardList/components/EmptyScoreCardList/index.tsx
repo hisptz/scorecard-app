@@ -2,7 +2,7 @@ import i18n from "@dhis2/d2-i18n";
 import { Button, Card, colors } from "@dhis2/ui";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { ReactComponent as ScorecardIllustration } from "./resources/scorecard_illustration.svg";
+// import { ReactComponent as ScorecardIllustration } from "./resources/scorecard_illustration.svg";
 import { IconAdd24 } from "@dhis2/ui-icons";
 
 export default function EmptyScoreCardList() {
@@ -26,7 +26,7 @@ export default function EmptyScoreCardList() {
 						style={{ borderRadius: 8, padding: 32 }}
 					>
 						<div className="p-32">
-							<ScorecardIllustration height={200} width={200} />
+							{/*<ScorecardIllustration height={200} width={200} />*/}
 						</div>
 						<div className="p-8">
 							<h1

@@ -1,14 +1,5 @@
-import {
-	chunk,
-	compact,
-	find,
-	flatten,
-	isEmpty,
-	reduce,
-	sortBy,
-	uniqBy,
-} from "lodash";
-import { atom, selector, selectorFamily } from "recoil";
+import { chunk, compact, find, flatten, isEmpty, reduce, sortBy, uniqBy } from "lodash";
+import { atom, atomFamily, selector, selectorFamily } from "recoil";
 import { EngineState } from "./engine";
 import { PeriodResolverState } from "./period";
 import { ScorecardViewState } from "./scorecard";
@@ -16,16 +7,15 @@ import { UserState } from "./user";
 import { getHoldersFromGroups } from "../utils";
 import { getOrgUnitsFromAnalytics } from "../services";
 
-const { atomFamily } = require("recoil");
 
 const orgUnitQuery = {
 	orgUnit: {
 		resource: "organisationUnits",
 		id: ({ id }: any) => id,
 		params: {
-			fields: ["id", "displayName", "path", "level"],
-		},
-	},
+			fields: ["id", "displayName", "path", "level"]
+		}
+	}
 };
 
 const orgUnitChildrenQuery = {
@@ -35,9 +25,9 @@ const orgUnitChildrenQuery = {
 			dimension: [`ou:${id};LEVEL-${level}`, `pe:${new Date().getFullYear()}`],
 			skipData: true,
 			hierarchyMeta: true,
-			showHierarchy: true,
-		}),
-	},
+			showHierarchy: true
+		})
+	}
 };
 
 const selectedOrgUnitsQuery = {
@@ -47,26 +37,26 @@ const selectedOrgUnitsQuery = {
 			dimension: [`ou:${ou.join(";")}`, `pe:${pe}`],
 			skipData: true,
 			hierarchyMeta: true,
-			showHierarchy: true,
-		}),
-	},
+			showHierarchy: true
+		})
+	}
 };
 
 const orgUnitLevelsQuery = {
 	levels: {
 		resource: "organisationUnitLevels",
 		params: {
-			fields: ["id", "displayName", "level"],
-		},
-	},
+			fields: ["id", "displayName", "level"]
+		}
+	}
 };
 const orgUnitGroupsQuery = {
 	groups: {
 		resource: "organisationUnitGroups",
 		params: {
-			fields: ["id", "displayName"],
-		},
-	},
+			fields: ["id", "displayName"]
+		}
+	}
 };
 
 export const OrgUnitLevels = atom({
@@ -77,8 +67,8 @@ export const OrgUnitLevels = atom({
 			const engine: any = get(EngineState);
 			const { levels } = await engine.query(orgUnitLevelsQuery);
 			return levels?.organisationUnitLevels;
-		},
-	}),
+		}
+	})
 });
 export const OrgUnitGroups = atom({
 	key: "org-unit-group",
@@ -88,8 +78,8 @@ export const OrgUnitGroups = atom({
 			const engine: any = get(EngineState);
 			const { groups } = await engine.query(orgUnitGroupsQuery);
 			return groups?.organisationUnitGroups;
-		},
-	}),
+		}
+	})
 });
 
 export const OrgUnit = selectorFamily({
@@ -98,13 +88,13 @@ export const OrgUnit = selectorFamily({
 		try {
 			const engine: any = get(EngineState);
 			const { orgUnit } = await engine.query(orgUnitQuery, {
-				variables: { id },
+				variables: { id }
 			});
 			return orgUnit;
 		} catch (e) {
 			return {};
 		}
-	},
+	}
 });
 
 export const OrgUnitPathState = atomFamily({
@@ -115,11 +105,11 @@ export const OrgUnitPathState = atomFamily({
 			const orgUnits: any = compact(path?.split("/"));
 			const orgUnitNames = sortBy(
 				get(SelectedOrgUnits(orgUnits)),
-				"level",
+				"level"
 			)?.map(({ displayName }) => displayName);
 			return orgUnitNames.join("/");
-		},
-	}),
+		}
+	})
 });
 
 export const OrgUnitChildren = selectorFamily({
@@ -129,11 +119,11 @@ export const OrgUnitChildren = selectorFamily({
 		const parentOrgUnit = get(OrgUnit(orgUnitId));
 		if (parentOrgUnit) {
 			const { analytics } = await engine.query(orgUnitChildrenQuery, {
-				variables: { id: orgUnitId, level: parentOrgUnit.level + 1 },
+				variables: { id: orgUnitId, level: parentOrgUnit.level + 1 }
 			});
 			return getOrgUnitsFromAnalytics(analytics) ?? [];
 		}
-	},
+	}
 });
 
 export const LowestOrgUnitLevel = selector({
@@ -141,9 +131,9 @@ export const LowestOrgUnitLevel = selector({
 	get: ({ get }) => {
 		const orgUnitLevels = get(OrgUnitLevels);
 		return reduce(orgUnitLevels, (acc, level) =>
-			level.level > acc.level ? level : acc,
+			level.level > acc.level ? level : acc
 		);
-	},
+	}
 });
 
 export const InitialOrgUnits = selector({
@@ -155,7 +145,7 @@ export const InitialOrgUnits = selector({
 			groups,
 			userOrgUnit,
 			userSubUnit,
-			userSubX2Unit,
+			userSubX2Unit
 		} = get(ScorecardViewState("orgUnitSelection")) ?? {};
 		const periods = get(PeriodResolverState) ?? [];
 		const orgUnitLevels = get(OrgUnitLevels);
@@ -169,13 +159,13 @@ export const InitialOrgUnits = selector({
 			if (userSubX2Unit) {
 				resolvedOrgUnits = [
 					...resolvedOrgUnits,
-					{ id: "USER_ORGUNIT_GRANDCHILDREN" },
+					{ id: "USER_ORGUNIT_GRANDCHILDREN" }
 				];
 			}
 			if (userSubUnit) {
 				resolvedOrgUnits = [
 					...resolvedOrgUnits,
-					{ id: "USER_ORGUNIT_CHILDREN" },
+					{ id: "USER_ORGUNIT_CHILDREN" }
 				];
 			}
 			if (userOrgUnit) {
@@ -186,28 +176,28 @@ export const InitialOrgUnits = selector({
 				resolvedOrgUnits = [
 					...resolvedOrgUnits,
 					...(levels?.map((level: any) => ({
-						id: `LEVEL-${find(orgUnitLevels, { id: level })?.level}`,
-					})) ?? []),
+						id: `LEVEL-${find(orgUnitLevels, { id: level })?.level}`
+					})) ?? [])
 				];
 			}
 
 			if (!isEmpty(groups)) {
 				resolvedOrgUnits = [
 					...resolvedOrgUnits,
-					...(groups?.map((group: any) => ({ id: `OU_GROUP-${group}` })) ?? []),
+					...(groups?.map((group: any) => ({ id: `OU_GROUP-${group}` })) ?? [])
 				];
 			}
 		}
 
 		return { orgUnits: uniqBy(resolvedOrgUnits, "id") };
-	},
+	}
 });
 
 const getOrgUnits = async (engine: any, orgUnitsIds: any) => {
 	const pe = new Date().getFullYear();
 
 	const { analytics } = await engine.query(selectedOrgUnitsQuery, {
-		variables: { ou: orgUnitsIds ?? [], pe },
+		variables: { ou: orgUnitsIds ?? [], pe }
 	});
 
 	return getOrgUnitsFromAnalytics(analytics);
@@ -220,12 +210,12 @@ export const SelectedOrgUnits = selectorFamily({
 			const engine = get(EngineState);
 			const orgUnitsChunks = chunk(orgUnitsIds, 5);
 			const orgUnits = await Promise.all(
-				orgUnitsChunks.map((chunk) => getOrgUnits(engine, chunk)),
+				orgUnitsChunks.map((chunk) => getOrgUnits(engine, chunk))
 			);
 			return flatten(orgUnits);
 		} catch (e) {
 			console.error(e);
 			return [];
 		}
-	},
+	}
 });

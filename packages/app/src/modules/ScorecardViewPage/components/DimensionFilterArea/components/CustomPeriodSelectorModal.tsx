@@ -1,6 +1,6 @@
 import { Button, ButtonStrip, Modal, ModalActions, ModalContent, ModalTitle } from "@dhis2/ui";
 import i18n from "@dhis2/d2-i18n";
-import React, { useState } from "react";
+import React, { useState, useTransition } from "react";
 import { PeriodSelector } from "@hisptz/dhis2-ui";
 import { compact } from "lodash";
 
@@ -12,18 +12,21 @@ export interface CustomPeriodSelectorModalProps {
 }
 
 export function CustomPeriodSelectorModal({
-	hide,
-	selected,
-	onSelect,
-	onClose,
-}: CustomPeriodSelectorModalProps) {
+											  hide,
+											  selected,
+											  onSelect,
+											  onClose
+										  }: CustomPeriodSelectorModalProps) {
+	const [isPending, startTransition] = useTransition();
 	const [selectedPeriods, setSelectedPeriods] = useState<string[]>(
-		selected ?? [],
+		selected ?? []
 	);
 	const onUpdate = () => {
 		if (selectedPeriods) {
-			onSelect(selectedPeriods);
-			onClose();
+			startTransition(() => {
+				onSelect(selectedPeriods);
+				onClose();
+			});
 		}
 	};
 
@@ -48,8 +51,8 @@ export function CustomPeriodSelectorModal({
 			<ModalActions>
 				<ButtonStrip>
 					<Button onClick={onClose}>{i18n.t("Cancel")}</Button>
-					<Button primary onClick={onUpdate}>
-						{i18n.t("Update")}
+					<Button loading={isPending} primary onClick={onUpdate}>
+						{isPending ? i18n.t("Updating...") : i18n.t("Update")}
 					</Button>
 				</ButtonStrip>
 			</ModalActions>

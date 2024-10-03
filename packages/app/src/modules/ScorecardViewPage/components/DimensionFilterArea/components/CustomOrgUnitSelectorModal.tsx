@@ -1,6 +1,6 @@
 import { Button, ButtonStrip, Modal, ModalActions, ModalContent, ModalTitle } from "@dhis2/ui";
 import i18n from "@dhis2/d2-i18n";
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useTransition } from "react";
 import { OrgUnitSelector } from "@hisptz/dhis2-ui";
 import { compact } from "lodash";
 import { DimensionSelection } from "./DimensionSelection";
@@ -18,19 +18,22 @@ export interface CustomOrgUnitSelectorModalProps {
 }
 
 export function CustomOrgUnitSelectorModal({
-	hide,
-	selected,
-	onSelect,
-	onClose,
-}: CustomOrgUnitSelectorModalProps) {
+											   hide,
+											   selected,
+											   onSelect,
+											   onClose
+										   }: CustomOrgUnitSelectorModalProps) {
+	const [isPending, startTransition] = useTransition();
 	const [selectedOrgUnits, setSelectedOrgUnits] = useState<OrgUnitSelection>(
-		selected ?? { orgUnits: [] },
+		selected ?? { orgUnits: [] }
 	);
 
 	const onUpdate = () => {
 		if (selectedOrgUnits) {
-			onSelect(selectedOrgUnits);
-			onClose();
+			startTransition(() => {
+				onSelect(selectedOrgUnits);
+				onClose();
+			});
 		}
 	};
 
@@ -56,8 +59,8 @@ export function CustomOrgUnitSelectorModal({
 			<ModalActions>
 				<ButtonStrip>
 					<Button onClick={onClose}>{i18n.t("Cancel")}</Button>
-					<Button primary onClick={onUpdate}>
-						{i18n.t("Update")}
+					<Button loading={isPending} primary onClick={onUpdate}>
+						{isPending ? i18n.t("Updating...") : i18n.t("Update")}
 					</Button>
 				</ButtonStrip>
 			</ModalActions>
@@ -70,11 +73,11 @@ export function OrgUnitDimensionSelection() {
 	const {
 		orgUnitGroups,
 		orgUnitLevels,
-		loading: metaLoading,
+		loading: metaLoading
 	} = useOrganisationUnitLevelsAndGroups();
 	const orgUnitIds = useMemo(
 		() => orgUnit?.orgUnits?.map(({ id }) => id),
-		[orgUnit],
+		[orgUnit]
 	);
 	const { loading, orgUnits: orgUnitWithData } = useOrgUnits(orgUnitIds);
 
@@ -87,17 +90,17 @@ export function OrgUnitDimensionSelection() {
 				return getSelectedOrgUnitSelectionDisplay(
 					{
 						...orgUnit,
-						orgUnits: orgUnitWithData,
+						orgUnits: orgUnitWithData
 					},
 					{
 						orgUnitGroups,
-						orgUnitLevels,
-					},
+						orgUnitLevels
+					}
 				);
 			} else {
 				return getSelectedOrgUnitSelectionDisplay(orgUnit, {
 					orgUnitGroups,
-					orgUnitLevels,
+					orgUnitLevels
 				});
 			}
 		}, [loading, metaLoading, orgUnitWithData, orgUnit]);
@@ -105,7 +108,7 @@ export function OrgUnitDimensionSelection() {
 	const {
 		value: orgUnitHidden,
 		setTrue: hideOrgUnit,
-		setFalse: showOrgUnit,
+		setFalse: showOrgUnit
 	} = useBoolean(true);
 
 	return (
@@ -114,7 +117,7 @@ export function OrgUnitDimensionSelection() {
 				<CustomOrgUnitSelectorModal
 					selected={{
 						...orgUnit,
-						orgUnits: orgUnitWithData,
+						orgUnits: orgUnitWithData
 					}}
 					onClose={hideOrgUnit}
 					hide={orgUnitHidden}
