@@ -24,3 +24,4 @@ apps/widget/scorecard_widget.zip
 *.env
 .env
 .nx
+/packages/app/.env.production

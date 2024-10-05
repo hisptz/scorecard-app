@@ -9,13 +9,12 @@ const query: any = {
 	data: {
 		resource: `${DATASTORE_OLD_SCORECARD_ENDPOINT}`,
 		params: ({ userId }: { userId: string }) => {
-
 			return {
 				fields: ".",
 				paging: false,
-				filter: [
-					`user.id:eq:${userId}`
-				]
+				// filter: [
+				// 	`user.id:eq:${userId}`
+				// ]
 			};
 		}
 	},
@@ -31,7 +30,7 @@ type Response = {
 			value: OldScorecardSchema
 		}>,
 		pager: Pager
-	},
+	} | [],
 	newConfig: string[]
 }
 
@@ -43,7 +42,7 @@ export function useOldScorecards() {
 		}
 	});
 
-	const scorecards = data?.data?.entries?.map(({ value, key }) => ({
+	const scorecards = Array.isArray(data?.data) ? [] : data?.data?.entries?.map(({ value, key }) => ({
 		...value,
 		id: key
 	}));

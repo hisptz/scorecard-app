@@ -29,7 +29,7 @@ const columns: SimpleDataTableColumn[] = [
 function MigrationTable({ scorecards, existingScorecards }: { scorecards: Array<OldScorecardSchema>; existingScorecards: Array<string> }) {
 
 	const [selectedConfig, setSelectedConfig] = useState<string[]>([]);
-	const [progress, setProgress] = useState<Record<string, "SUCCESS" | "EXISTS" | "FAILED">>(fromPairs(existingScorecards.map((id) => ([id, "EXISTS"]))));
+	const [progress, setProgress] = useState<Record<string, "SUCCESS" | "EXISTS" | "FAILED">>(fromPairs(existingScorecards?.map((id) => ([id, "EXISTS"]))));
 
 	const onRemove = (values: string[]) => {
 		setSelectedConfig((prevState) => {
@@ -73,7 +73,7 @@ function MigrationTable({ scorecards, existingScorecards }: { scorecards: Array<
 	return (
 		<div className="column w-100 h-100 flex-1 gap-16 pb-32">
 			<span style={{ fontSize: 14 }}>{i18n.t("Only the scorecard's owner can migrate their scorecards")}</span>
-			<SimpleDataTable tableProps={{ scrollHeight: "100%", bordered: true }} onRowDeselect={onRemove} selectedRows={selectedConfig} onRowSelect={onAdd} selectable columns={columns} rows={rows} />
+			<SimpleDataTable emptyLabel={i18n.t("There are no v1 scorecards to migrate")} tableProps={{ scrollHeight: "100%", bordered: true }} onRowDeselect={onRemove} selectedRows={selectedConfig} onRowSelect={onAdd} selectable columns={columns} rows={rows} />
 			<div className="row end">
 				{
 					!!scorecards && (<MigrateButton onClearSelection={() => setSelectedConfig([])} progress={progress} onProgressUpdate={setProgress} selected={selectedConfig} scorecards={scorecards!} />)

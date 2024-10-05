@@ -3116,10 +3116,10 @@
     screenfull "^6.0.2"
     zod "^3.23.8"
 
-"@hisptz/dhis2-analytics@^2.0.34":
-  version "2.0.34"
-  resolved "https://registry.yarnpkg.com/@hisptz/dhis2-analytics/-/dhis2-analytics-2.0.34.tgz#f2994a48b74dad7330068593036718215cce3f4b"
-  integrity sha512-4qZON6ywnW8Yn2gItTV09WIElibo0kYEtIGbYwdS1j8NHPWEYnHgkfdC616Aab1H0pWPyzeLtuufV1JAhcfYzg==
+"@hisptz/dhis2-analytics@^2.0.35":
+  version "2.0.35"
+  resolved "https://registry.yarnpkg.com/@hisptz/dhis2-analytics/-/dhis2-analytics-2.0.35.tgz#1431a2bfac6828a769cd65c259bbd2fce5cd9bc5"
+  integrity sha512-BvbOOApe20QRoD+1AzMqa6c3TggbPu+44iVfEMkF1sYSCPUa40VanG6B3cKLW/OBikxcd6RjyUQ5AX6WaV7n7g==
   dependencies:
     "@dnd-kit/core" "^6.1.0"
     "@dnd-kit/utilities" "^3.2.2"
@@ -3127,6 +3127,7 @@
     "@hisptz/dhis2-utils" "2.0.8"
     "@react-leaflet/core" "^2.1.0"
     "@tanstack/react-table" "^8.19.3"
+    "@tanstack/react-virtual" "^3.10.8"
     async-es "^3.2.5"
     d3-color "^3.1.0"
     d3-scale "^4.0.2"
@@ -4529,10 +4530,22 @@
   dependencies:
     "@tanstack/table-core" "8.20.5"
 
+"@tanstack/react-virtual@^3.10.8":
+  version "3.10.8"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-virtual/-/react-virtual-3.10.8.tgz#bf4b06f157ed298644a96ab7efc1a2b01ab36e3c"
+  integrity sha512-VbzbVGSsZlQktyLrP5nxE+vE1ZR+U0NFAWPbJLoG2+DKPwd2D7dVICTVIIaYlJqX1ZCEnYDbaOpmMwbsyhBoIA==
+  dependencies:
+    "@tanstack/virtual-core" "3.10.8"
+
 "@tanstack/table-core@8.20.5":
   version "8.20.5"
   resolved "https://registry.yarnpkg.com/@tanstack/table-core/-/table-core-8.20.5.tgz#3974f0b090bed11243d4107283824167a395cf1d"
   integrity sha512-P9dF7XbibHph2PFRz8gfBKEXEY/HJPOhym8CHmjF8y3q5mWpKx9xtZapXQUWCgkqvsK0R46Azuz+VaxD4Xl+Tg==
+
+"@tanstack/virtual-core@3.10.8":
+  version "3.10.8"
+  resolved "https://registry.yarnpkg.com/@tanstack/virtual-core/-/virtual-core-3.10.8.tgz#975446a667755222f62884c19e5c3c66d959b8b4"
+  integrity sha512-PBu00mtt95jbKFi6Llk9aik8bnR3tR/oQP1o3TSi+iG//+Q2RTIzCEgKkHG8BB86kxMNW6O8wku+Lmi+QFR6jA==
 
 "@testing-library/dom@^8.0.0":
   version "8.20.1"
