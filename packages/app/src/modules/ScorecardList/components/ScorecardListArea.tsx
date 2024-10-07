@@ -20,6 +20,7 @@ export function ScorecardListArea() {
 		);
 	}
 
+
 	return (
 		<div style={{ gap: 16, justifyContent: "space-between", height: "100%" }} className="column ">
 			<Suspense fallback={<FullPageLoader />}>
@@ -43,22 +44,18 @@ export function ScorecardListArea() {
 									<PaginatedDisplay
 										scorecards={scorecards}
 									/>
-								) : null}
+								) : <EmptyScoreCardList />}
 							</div>
 						))
 					}
 				</div>
-				{
-					(pager.totalPages > 1 && (
-						<div className="p-16">
-							<Pagination
-								page={pager.page ?? 1}
-								pageSize={pager.pageSize ?? 10}
-								{...pager}
-							/>
-						</div>
-					))
-				}
+				<div className="p-16">
+					<Pagination
+						disabled={pager.pageCount === 1}
+						{...pager}
+						pageSizes={Array.from(new Array(10).keys()).map((i) => ((i + 1) * 4).toString())}
+					/>
+				</div>
 			</Suspense>
 		</div>
 	);

@@ -1,32 +1,19 @@
 import { useDataQuery } from "@dhis2/app-runtime";
 import { ScorecardListItem } from "../types";
 import { useSearchParams } from "react-router-dom";
-import { useMemo, useRef } from "react";
-import { debounce } from "lodash";
-import { useUpdateEffect } from "usehooks-ts";
+import { useMemo, useState } from "react";
+import { chunk } from "lodash";
+import { getUserAuthorityOnScorecards, UserState } from "@scorecard/shared";
+import { useRecoilValue } from "recoil";
 
 const query: any = {
 	list: {
 		resource: "dataStore",
 		id: "hisptz-scorecard",
-		params: ({
-					 keyword,
-					 page,
-					 pageSize
-				 }: {
-			keyword: string;
-			page: number;
-			pageSize: number;
-		}) => {
+		params: () => {
 			return {
-				filter: keyword
-					? ["title", "description", "additionalLabels"].map(
-						(key) => `${key}:ilike:${keyword}`
-					)
-					: undefined,
-				rootJunction: "or",
-				page,
-				pageSize,
+				skipPaging: false,
+				pageSize: 1000, //TODO: This is due to paging=false not working
 				fields: ["id", "title", "description", "additionalLabels", "orgUnitSelection", "periodSelection", "sharing", "user", "userAccesses", "userGroupAccesses", "publicAccess"]
 			};
 		}
@@ -50,70 +37,52 @@ type ListDataQueryResponse = {
 
 export function useScorecardListData() {
 	const [searchParams] = useSearchParams();
+	const user = useRecoilValue(UserState);
 	const { data, error, refetch, loading } =
-		useDataQuery<ListDataQueryResponse>(query, {
-			variables: {
-				keyword: searchParams.get("query"),
-				page: 1,
-				pageSize: 10
-			}
-		});
+		useDataQuery<ListDataQueryResponse>(query);
+	const [page, setPage] = useState<number>(1);
+	const [pageSize, setPageSize] = useState<number>(8);
+
+
+	const rawData = useMemo(() => {
+		const entries = data?.list.entries?.filter((scorecard) => {
+			const access = getUserAuthorityOnScorecards(user, scorecard);
+			return access.read;
+		}) ?? [];
+		const keyword = searchParams.get("query");
+		if (keyword) {
+			return entries.filter(({ title, id, additionalLabels, description }) => {
+				const searchKeywords = `${title} ${additionalLabels?.join(" ")} ${id} ${description}`;
+				return searchKeywords.toLowerCase().includes(keyword.toLowerCase());
+			});
+		}
+		return entries;
+	}, [data, searchParams.get("query")]);
+
+	const chunkedData = useMemo(() => chunk(rawData ?? [], pageSize), [pageSize, rawData]);
 
 	const scorecards = useMemo(() => {
-		return data?.list?.entries;
-	}, [data]);
+		return chunkedData[page - 1];
+	}, [page, chunkedData]);
 
 	const pager = useMemo(() => {
-		const keys =
-			data?.keys?.filter(
-				(key) =>
-					!["savedObjects", "settings", "scorecard-summary"].includes(
-						key
-					)
-			) ?? [];
-
+		const total = rawData.length;
 		return {
-			...(data?.list?.pager ?? {}),
-			total: keys.length,
-			totalPages: Math.ceil(
-				keys.length / (data?.list.pager.pageSize ?? 1)
-			)
+			page,
+			pageSize,
+			total,
+			pageCount: Math.ceil(total / pageSize)
 		};
-	}, [data]);
+	}, [rawData, page, pageSize]);
 
-	const onSearch = useRef(
-		debounce((keyword?: string | null) => {
-			if (keyword) {
-				refetch({
-					keyword,
-					page: 1,
-					pageSize: 10
-				});
-			} else {
-				refetch({
-					keyword: undefined,
-					page: 1,
-					pageSize: 10
-				});
-			}
-		}, 800)
-	);
 
 	const onPageChange = (page: number) => {
-		refetch({
-			page
-		});
+		setPage(page);
 	};
 	const onPageSizeChange = (pageSize: number) => {
-		refetch({
-			pageSize,
-			page: 1
-		});
+		setPage(1);
+		setPageSize(pageSize);
 	};
-
-	useUpdateEffect(() => {
-		onSearch.current(searchParams.get("query"));
-	}, [searchParams.get("query")]);
 
 	return {
 		scorecards,

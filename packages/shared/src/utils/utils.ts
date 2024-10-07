@@ -2,6 +2,8 @@ import { capitalize, compact, find, flattenDeep, head, intersectionBy, isEmpty, 
 import { DefaultAuthority, TableSort } from "../constants";
 import { D2User } from "../state/user";
 import { LegendDefinition, ScorecardDataGroup, ScorecardDataHolder, ScorecardDataSource, ScorecardLegend } from "@hisptz/dhis2-analytics";
+import { getSharingSettingsFromOldConfiguration } from "app/src/utils/sharing";
+import { ScorecardListItem } from "app/src/modules/ScorecardList/types";
 
 export function getWindowDimensions() {
 	const { innerWidth: width, innerHeight: height } = window;
@@ -305,6 +307,12 @@ function translateAccess(access: string = ""): {
 		translatedAccess.write = true;
 	}
 	return translatedAccess;
+}
+
+
+export function getUserAuthorityOnScorecards(user: D2User, scorecard: ScorecardListItem & { user: { id: string }, publicAccess: { id: string; access: string }, userAccesses: Array<{ id: string; access: string }>, userGroupAccesses: Array<{ id: string; access: string }> }) {
+	const sharing = scorecard.sharing ?? getSharingSettingsFromOldConfiguration(scorecard);
+	return getUserAuthority(user, sharing);
 }
 
 export function getUserAuthority(

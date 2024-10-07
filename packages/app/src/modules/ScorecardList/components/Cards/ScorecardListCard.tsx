@@ -31,11 +31,13 @@ export default function ScorecardListCard({
 		}
 	};
 
+	const styles = { margin: 16, background: "white", opacity: read ? 1 : 0.4, cursor: read ? "pointer" : "not-allowed" };
+
 	return grid ? (
 		<div
 			className="container-bordered p-16 "
 			data-test="scorecard-thumbnail-view"
-			style={{ margin: 16, background: "white", opacity: read ? 1 : 0.4, cursor: read ? "pointer" : "not-allowed" }}
+			style={styles}
 			onClick={onView}
 		>
 			<div className="column space-between h-100">
@@ -80,7 +82,7 @@ export default function ScorecardListCard({
 		<div
 			data-test="scorecard-thumbnail-view"
 			className="container-bordered p-32"
-			style={{ margin: 16, background: "white" }}
+			style={styles}
 			onClick={onView}
 		>
 			<div className="row space-between align-items-center">

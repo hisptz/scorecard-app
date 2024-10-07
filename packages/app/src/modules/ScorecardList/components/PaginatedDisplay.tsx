@@ -5,10 +5,12 @@ import GridScorecardDisplay from "./GridScorecardDisplay";
 import ListScorecardDisplay from "./ListScorecardDisplay";
 
 export default function PaginatedDisplay({
-		scorecards = [],
-}: {
+											 scorecards = []
+										 }: {
 	scorecards: ScorecardListItem[];
 }) {
+
+
 	const [scorecardViewType] = useSetting("scorecardViewType");
 
 	return (

@@ -1,11 +1,6 @@
 import { DataStoreProvider } from "@dhis2/app-service-datastore";
 import { CssReset } from "@dhis2/ui";
-import {
-	DATASTORE_NAMESPACE,
-	FullPageError,
-	FullPageLoader,
-	useInitApp,
-} from "@scorecard/shared";
+import { DATASTORE_NAMESPACE, FullPageError, FullPageLoader, useInitApp } from "@scorecard/shared";
 import React, { Suspense, useEffect, useLayoutEffect, useRef } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { RecoilRoot } from "recoil";
@@ -26,7 +21,7 @@ const MyApp = () => {
 
 	const dashboardItemId: String | undefined = (
 		/[?&]dashboardItemId=([a-zA-Z0-9]{11})(?:&|$)/g.exec(
-			window.location.search,
+			window.location.search
 		) || [undefined]
 	).pop();
 
@@ -43,7 +38,7 @@ const MyApp = () => {
 
 	const hideHeader = () => {
 		const header = document.querySelector(
-			"#dhis2-app-root > div > div:nth-child(1)",
+			"#dhis2-app-root > div > div:nth-child(1)"
 		);
 		if (header) {
 			header.remove();
@@ -64,6 +59,9 @@ const MyApp = () => {
 	return isEmpty(dashboardItemId) ? (
 		<DataStoreProvider
 			namespace={DATASTORE_NAMESPACE}
+			defaultUserSettings={{
+				scorecardDisplayType: "grid"
+			}}
 			loadingComponent={<FullPageLoader />}
 		>
 			<CssReset />
