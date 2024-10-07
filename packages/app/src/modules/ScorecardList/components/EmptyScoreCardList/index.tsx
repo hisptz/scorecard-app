@@ -8,7 +8,7 @@ import { IconAdd24 } from "@dhis2/ui-icons";
 export default function EmptyScoreCardList() {
 	const navigate = useNavigate();
 	const onNewScorecardClick = () => {
-		navigate(`/add`, { state: { from: "home" } });
+		navigate(`/add/general`, { state: { from: "home" } });
 	};
 
 	return (

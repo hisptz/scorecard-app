@@ -3116,10 +3116,10 @@
     screenfull "^6.0.2"
     zod "^3.23.8"
 
-"@hisptz/dhis2-analytics@^2.0.35":
-  version "2.0.35"
-  resolved "https://registry.yarnpkg.com/@hisptz/dhis2-analytics/-/dhis2-analytics-2.0.35.tgz#1431a2bfac6828a769cd65c259bbd2fce5cd9bc5"
-  integrity sha512-BvbOOApe20QRoD+1AzMqa6c3TggbPu+44iVfEMkF1sYSCPUa40VanG6B3cKLW/OBikxcd6RjyUQ5AX6WaV7n7g==
+"@hisptz/dhis2-analytics@^2.0.37":
+  version "2.0.37"
+  resolved "https://registry.yarnpkg.com/@hisptz/dhis2-analytics/-/dhis2-analytics-2.0.37.tgz#08feafab2054f3cca6d6134e250f32dcc0a750b4"
+  integrity sha512-Jdbq+dpEgSrAHyoGAdeap3lCSKbWpJO4Q0uzkUI9V6mat06frmwmFlbnIb3HD7jG/gUhLxTtiq+M6TUs2TRe6g==
   dependencies:
     "@dnd-kit/core" "^6.1.0"
     "@dnd-kit/utilities" "^3.2.2"

@@ -68,6 +68,10 @@ export async function checkTitleAvailability({ title, id, engine }: { engine: Re
 		return false;
 	}
 
+	if (id) {
+		return true;
+	}
+
 	const response = await engine.query(query, {
 		variables: {
 			title
@@ -80,9 +84,6 @@ export async function checkTitleAvailability({ title, id, engine }: { engine: Re
 	}
 	if (results.length > 1) {
 		return false;
-	}
-	if (!id) {
-		return true;
 	}
 
 	const existingConfig = results.find((result) => result.id === id);

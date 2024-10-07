@@ -6,7 +6,7 @@ import { useDataQuery } from "@dhis2/app-runtime";
 import { useFormSchema } from "./schema";
 import { uid } from "@hisptz/dhis2-utils";
 import i18n from "@dhis2/d2-i18n";
-import { ScorecardConfig } from "@hisptz/dhis2-analytics";
+import { ScorecardConfig, ScorecardSharing } from "@hisptz/dhis2-analytics";
 import { useRecoilValue } from "recoil";
 import { getSharingSettingsFromOldConfiguration, ScorecardConfigWithOldSharing } from "../../../utils/sharing";
 
@@ -17,6 +17,17 @@ const query: any = {
 
 	}
 };
+
+
+function getDefaultSharing(user: { id: string }): ScorecardSharing {
+	return {
+		external: false,
+		owner: user.id,
+		users: {},
+		userGroups: {},
+		public: "rw------"
+	};
+}
 
 const getDefaultValue = (user: { id: string }): Partial<ScorecardConfig> => ({
 	id: uid(),
@@ -83,14 +94,9 @@ const getDefaultValue = (user: { id: string }): Partial<ScorecardConfig> => ({
 	dataSelection: {
 		dataGroups: []
 	},
-	sharing: {
-		external: false,
-		owner: user.id,
-		users: {},
-		userGroups: {},
-		public: "rw------"
-	}
+	sharing: getDefaultSharing(user)
 });
+
 
 export default function useScorecardFormMetadata() {
 	const user = useRecoilValue(UserState);
@@ -115,12 +121,6 @@ export default function useScorecardFormMetadata() {
 					//Let's populate the new sharing object
 					defaultValue.sharing = getSharingSettingsFromOldConfiguration(defaultValue as any);
 				}
-
-
-				console.log({
-					defaultValue
-				});
-
 				return defaultValue;
 			}
 			return getDefaultValue(user) as ScorecardConfig;
@@ -132,6 +132,6 @@ export default function useScorecardFormMetadata() {
 
 	return {
 		form,
-		access: data ? getUserAuthority(user, data?.scorecard.sharing ?? getSharingSettingsFromOldConfiguration(data?.scorecard as ScorecardConfigWithOldSharing)) : undefined
+		access: data ? getUserAuthority(user, data?.scorecard.sharing ?? getSharingSettingsFromOldConfiguration(data?.scorecard as ScorecardConfigWithOldSharing)) : getUserAuthority(user, getDefaultSharing(user))
 	};
 }

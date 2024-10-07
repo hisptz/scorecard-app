@@ -1,33 +1,34 @@
 {
-	"name": "root",
-	"version": "2.6.2",
-	"description": "Interactive Scorecard Application",
-	"license": "BSD-3-Clause",
-	"private": true,
-	"workspaces": {
-		"packages": [
-			"packages/*"
-		],
-		"nohoist": []
-	},
-	"scripts": {
-		"app": "yarn workspace app",
-		"widget": "yarn workspace widget",
-		"shared": "yarn workspace @scorecard/shared",
-		"build:shared": "npx lerna run build --scope=@scorecard/shared",
-		"start:app": "npx lerna run start --scope=app",
-		"test:app": "npx lerna run test --scope=app",
-		"start:widget": "npx lerna run start --scope=widget",
-		"build": "npx lerna run build",
-		"test": "npx lerna run test",
-		"deploy:app": "yarn app deploy"
-	},
-	"devDependencies": {
-		"concurrently": "^8.2.2",
-		"lerna": "^8.1.8"
-	},
-	"dependencies": {
-		"eslint": "^9.8.0",
-		"prettier": "^3.3.3"
-	}
+  "name": "root",
+  "version": "2.6.2",
+  "description": "Interactive Scorecard Application",
+  "license": "BSD-3-Clause",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ],
+    "nohoist": []
+  },
+  "scripts": {
+    "app": "yarn workspace app",
+    "widget": "yarn workspace widget",
+    "shared": "yarn workspace @scorecard/shared",
+    "build:shared": "npx lerna run build --scope=@scorecard/shared",
+    "start:app": "npx lerna run start --scope=app",
+    "build:app": "npx lerna run build --scope=app",
+    "deploy:app": "npx lerna run deploy --scope=app",
+    "test:app": "npx lerna run test --scope=app",
+    "start:widget": "npx lerna run start --scope=widget",
+    "build": "npx lerna run build",
+    "test": "npx lerna run test"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "lerna": "^8.1.8"
+  },
+  "dependencies": {
+    "eslint": "^9.8.0",
+    "prettier": "^3.3.3"
+  }
 }

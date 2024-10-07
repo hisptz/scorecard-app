@@ -37,7 +37,7 @@ export default function ScorecardList() {
 	const navigate = useNavigate();
 
 	const onAddClick = () => {
-		navigate(`/add`);
+		navigate(`/add/general`);
 	};
 
 	const onHelpExit = () => {

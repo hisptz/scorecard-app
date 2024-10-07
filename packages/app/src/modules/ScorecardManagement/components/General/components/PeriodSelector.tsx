@@ -2,8 +2,6 @@ import { useController, useWatch } from "react-hook-form";
 import { ScorecardConfig } from "@hisptz/dhis2-analytics";
 import { Button, Field } from "@dhis2/ui";
 import i18n from "@dhis2/d2-i18n";
-import { createFixedPeriodFromPeriodId } from "@dhis2/multi-calendar-dates";
-import { useCalendar } from "@scorecard/shared";
 import { PeriodTypeCategory, PeriodUtility } from "@hisptz/dhis2-utils";
 import { isEmpty, uniqBy } from "lodash";
 import { useBoolean } from "usehooks-ts";
@@ -12,7 +10,6 @@ import { useMemo } from "react";
 
 
 export function PeriodSelector() {
-	const calendar = useCalendar();
 	const periodTypeId = useWatch<ScorecardConfig>({
 		name: "periodSelection.type"
 	});
@@ -23,15 +20,7 @@ export function PeriodSelector() {
 	const { value: hide, setTrue: onHide, setFalse: onShow } = useBoolean(true);
 
 	const selectedPeriods = (field.value as Array<{ id: string }> ?? []).map(({ id: periodId }) => {
-		if (/\d{4}/.test(periodId)) {
-			//Fixed period
-			return createFixedPeriodFromPeriodId({
-				calendar,
-				periodId
-			});
-		} else {
-			return PeriodUtility.getPeriodById(periodId);
-		}
+		return PeriodUtility.getPeriodById(periodId.toString());
 	});
 	const selectedPeriodIds = selectedPeriods.map((period) => period.id);
 	const selectedPeriodNames = selectedPeriods.map((period) => period.name);

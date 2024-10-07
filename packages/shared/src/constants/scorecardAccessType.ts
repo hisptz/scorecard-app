@@ -1,9 +1,9 @@
 import i18n from "@dhis2/d2-i18n";
 
 export class ScorecardAccessType {
-	static READ_WRITE = "rw----";
-	static READ_ONLY = "r-----";
-	static NO_ACCESS = "------";
+	static READ_WRITE = "rw------";
+	static READ_ONLY = "r-------";
+	static NO_ACCESS = "--------";
 }
 
 export const DefaultAuthority = {
@@ -25,15 +25,15 @@ export const ACCESS_TYPES = [
 ];
 
 export const ACCESS_NONE = {
-	value: "------",
+	value: ScorecardAccessType.NO_ACCESS,
 	label: i18n.t("No Access")
 } as const;
 export const ACCESS_VIEW_ONLY = {
-	value: "r-----",
+	value: ScorecardAccessType.READ_ONLY,
 	label: i18n.t("View Only")
 } as const;
 export const ACCESS_VIEW_AND_EDIT = {
-	value: "rw----",
+	value: ScorecardAccessType.READ_WRITE,
 	label: i18n.t("View and Edit")
 } as const;
 

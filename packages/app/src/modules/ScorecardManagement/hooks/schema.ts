@@ -1,10 +1,9 @@
-import { scorecardConfigSchema } from "@scorecard/shared";
 import { z } from "zod";
 import i18n from "@dhis2/d2-i18n";
 import { checkTitleAvailability } from "../components/General/utils/utils";
 import { useParams } from "react-router-dom";
 import { useDataEngine } from "@dhis2/app-runtime";
-import { dataGroupSchema, dataHolderSchema, organisationUnitSelectionSchema, scorecardSharing, scorecardViewOptionsSchema } from "@hisptz/dhis2-analytics";
+import { dataGroupSchema, dataHolderSchema, organisationUnitSelectionSchema, OrgUnitSelection, scorecardConfig, scorecardSharing, scorecardViewOptionsSchema } from "@hisptz/dhis2-analytics";
 
 
 function anyOrgUnitSelected({
@@ -14,14 +13,14 @@ function anyOrgUnitSelected({
 								userOrgUnit,
 								userSubUnit,
 								userSubX2Unit
-							}: any) {
+							}: OrgUnitSelection) {
 	return (
 		userSubX2Unit ||
 		userSubUnit ||
 		userOrgUnit ||
-		groups.length > 0 ||
-		levels.length > 0 ||
-		orgUnits.length > 0
+		(groups?.length ?? 0) > 0 ||
+		(levels?.length ?? 0) > 0 ||
+		(orgUnits?.length ?? 0) > 0
 	);
 }
 
@@ -29,7 +28,7 @@ function anyOrgUnitSelected({
 export function useFormSchema() {
 	const { id } = useParams();
 	const engine = useDataEngine();
-	return scorecardConfigSchema.extend({
+	return scorecardConfig.extend({
 		title: z.string({ required_error: i18n.t("Title is required") }).min(4, i18n.t("Title must have at least 4 characters")).refine(async (value) => {
 			return await checkTitleAvailability({ engine, id, title: value });
 		}, {
