@@ -17,7 +17,7 @@ export function ScorecardViewPage() {
 
 	const headerRef = useRef<HTMLDivElement | null>(null);
 
-	const { height, width } = useResizeObserver<HTMLDivElement>({
+	const { height } = useResizeObserver<HTMLDivElement>({
 		box: "border-box",
 		ref: headerRef
 	});
