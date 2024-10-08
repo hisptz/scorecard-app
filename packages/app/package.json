@@ -50,7 +50,7 @@
     "@dhis2/app-service-datastore": "^1.0.0-alpha.2",
     "@dhis2/multi-calendar-dates": "^1.2.4",
     "@dhis2/ui": "^9.11.0",
-    "@hisptz/dhis2-analytics": "^2.0.37",
+    "@hisptz/dhis2-analytics": "^2.0.41",
     "@hisptz/dhis2-ui": "^2.0.25",
     "@hisptz/dhis2-utils": "^2.0.8",
     "@hookform/resolvers": "^3.9.0",

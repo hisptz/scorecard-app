@@ -4,16 +4,14 @@ import i18n from "@dhis2/d2-i18n";
 import { colors } from "@dhis2/ui";
 import { ErrorBoundary } from "react-error-boundary";
 import { FullPageError } from "@scorecard/shared";
-import { useResizeObserver } from "usehooks-ts";
 import { useRef } from "react";
+import { useWindowSize } from "usehooks-ts";
 
-export function ScorecardView() {
+export function ScorecardView({ headerHeight }: { headerHeight?: number }) {
 	const ref = useRef<HTMLDivElement | null>(null);
-	const { height } = useResizeObserver({
-		ref
-	});
 	const { noDimensionsSelected } = useRawDimensions();
 	const state = useScorecardState();
+	const { width = 0, height = 0 } = useWindowSize();
 
 	useSetInitialDimensions();
 	useApplyDimensions();
@@ -43,13 +41,13 @@ export function ScorecardView() {
 		>
 			<div
 				ref={ref}
-				style={{ padding: 16, width: "100%", height: "100%" }}
+				style={{ padding: 16, width: "100%", height: "100%", position: "relative" }}
 				className="w-100 column"
 			>
 				<Scorecard
 					tableProps={{
-						scrollHeight: height ? `${height}px` : "100%",
-						scrollWidth: "100%"
+						scrollWidth: `${width - 32}px`,
+						scrollHeight: `${height - ((headerHeight ?? 300) + 96 + (16 * 2))}px`
 					}}
 				/>
 			</div>

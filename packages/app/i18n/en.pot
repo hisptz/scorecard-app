@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-10-07T04:48:29.516Z\n"
-"PO-Revision-Date: 2024-10-07T04:48:29.516Z\n"
+"POT-Creation-Date: 2024-10-08T09:34:59.993Z\n"
+"PO-Revision-Date: 2024-10-08T09:34:59.993Z\n"
 
 msgid "Scorecard deleted successfully"
 msgstr "Scorecard deleted successfully"
@@ -501,9 +501,6 @@ msgstr "Scorecards to migrate"
 
 msgid "Select the scorecards configuration that you would like to migrate"
 msgstr "Select the scorecards configuration that you would like to migrate"
-
-msgid "Getting your scorecard configuration..."
-msgstr "Getting your scorecard configuration..."
 
 msgid "Back to all scorecards"
 msgstr "Back to all scorecards"

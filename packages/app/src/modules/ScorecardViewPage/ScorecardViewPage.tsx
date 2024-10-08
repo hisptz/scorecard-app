@@ -1,19 +1,26 @@
 import { DimensionFilterArea } from "./components/DimensionFilterArea";
 import { useScorecardConfigFromServer } from "./hooks/data";
 import { FullPageError, FullPageLoader, getOrgUnitSelectionFromIds } from "@scorecard/shared";
-import i18n from "@dhis2/d2-i18n";
 import { ScorecardActions } from "./components/ScorecardActions/ScorecardActions";
 import { ScorecardView } from "./components/ScorecardView";
 import { ScorecardHeader } from "./components/ScorecardHeader";
 import { ScorecardLegendsView } from "./components/ScorecardLegendsView";
 import { ScorecardContext, ScorecardState } from "@hisptz/dhis2-analytics";
 import { useRawDimensions } from "./hooks/dimensions";
-import { useMemo } from "react";
+import { useMemo, useRef } from "react";
 import { isEmpty } from "lodash";
+import { useResizeObserver } from "usehooks-ts";
 
 export function ScorecardViewPage() {
 	const { periods, orgUnits } = useRawDimensions();
 	const { config, loading, error, refetch } = useScorecardConfigFromServer();
+
+	const headerRef = useRef<HTMLDivElement | null>(null);
+
+	const { height, width } = useResizeObserver<HTMLDivElement>({
+		box: "border-box",
+		ref: headerRef
+	});
 
 	const initialState = useMemo(() => {
 		if (!config) {
@@ -34,9 +41,7 @@ export function ScorecardViewPage() {
 
 	if (loading || !initialState) {
 		return (
-			<FullPageLoader
-				text={i18n.t("Getting your scorecard configuration...")}
-			/>
+			<FullPageLoader />
 		);
 	}
 	if (error) {
@@ -60,12 +65,11 @@ export function ScorecardViewPage() {
 		);
 	}
 
-
 	return (
 		<div
 			style={{
-				width: "100%",
-				height: "100%",
+				width: "100dvw",
+				height: "100dvh",
 				display: "flex",
 				flexDirection: "column",
 				gap: 16
@@ -73,11 +77,13 @@ export function ScorecardViewPage() {
 		>
 			<DimensionFilterArea />
 			<ScorecardContext initialState={initialState} config={config}>
-				<ScorecardActions />
-				<ScorecardHeader />
-				<ScorecardLegendsView />
-				<div className="flex-1">
-					<ScorecardView />
+				<div ref={headerRef} style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+					<ScorecardActions />
+					<ScorecardHeader />
+					<ScorecardLegendsView />
+				</div>
+				<div className="flex-1 h-100">
+					<ScorecardView headerHeight={height} />
 				</div>
 			</ScorecardContext>
 		</div>
