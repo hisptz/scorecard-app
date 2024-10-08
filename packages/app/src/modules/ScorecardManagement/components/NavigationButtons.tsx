@@ -13,6 +13,7 @@ import { FormLoadingState } from "../state/loading";
 import { PreviousButton } from "./PreviousButton";
 import { NextButton } from "./NextButton";
 import { SaveButton } from "./SaveButton";
+import { useNavigateToScorecardView } from "../../../hooks/navigate";
 
 
 export function StepNavigationButtons() {
@@ -40,6 +41,8 @@ export function NavigationButtons() {
 	const { show } = useAlert(({ message }) => message, ({ type }) => ({ ...type, duration: 3000 }));
 	const { confirm } = useDialog();
 	const [loadingState, setLoadingState] = useRecoilState(FormLoadingState);
+
+	const navigateToView = useNavigateToScorecardView();
 
 	const { save } = useSaveScorecard();
 
@@ -85,7 +88,7 @@ export function NavigationButtons() {
 				action: "save",
 				loading: false
 			});
-			navigate(`/view/${config.id}`);
+			navigateToView(config);
 		} catch (err) {
 			//Error is already shown in the save function.
 		}
@@ -98,7 +101,7 @@ export function NavigationButtons() {
 			confirmButtonColor: "primary",
 			onConfirm: () => {
 				if (id) {
-					navigate(`/view/${id}`);
+					navigateToView(getValues());
 				} else {
 					navigate("/");
 				}

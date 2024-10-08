@@ -1,12 +1,11 @@
 import { colors } from "@dhis2/ui";
-import { getOrgUnitIdsFromOrgUnitSelection, getUserAuthority, ScorecardCardImage as holderImage, truncateDescription, UserState } from "@scorecard/shared";
+import { getUserAuthority, ScorecardCardImage as holderImage, truncateDescription, UserState } from "@scorecard/shared";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { ScorecardListItem } from "../../types";
 import { ScorecardListCardActions } from "./ScorecardListCardActions";
-import { OrgUnitSelection } from "@hisptz/dhis2-utils";
 import { getSharingSettingsFromOldConfiguration } from "../../../../utils/sharing";
 import { useRecoilValue } from "recoil";
+import { useNavigateToScorecardView } from "../../../../hooks/navigate";
 
 export default function ScorecardListCard({
 											  scorecard,
@@ -16,18 +15,18 @@ export default function ScorecardListCard({
 	grid?: boolean;
 }) {
 	const user = useRecoilValue(UserState);
-	const { title, description, id, orgUnitSelection, periodSelection } = scorecard ?? {};
+	const { title, description } = scorecard ?? {};
 	const [showFullDescription, setShowFullDescription] = useState(false);
-	const navigate = useNavigate();
 
 	const accessConfig = getUserAuthority(user, scorecard.sharing ?? getSharingSettingsFromOldConfiguration(scorecard as any));
 	const { read } = accessConfig;
 
+	const navigateToView = useNavigateToScorecardView();
+
+
 	const onView = () => {
 		if (read) {
-			const orgUnitIds = getOrgUnitIdsFromOrgUnitSelection(orgUnitSelection as OrgUnitSelection).join(";");
-			const periodIds = periodSelection.periods.map(({ id }) => id).join(";");
-			navigate(`/view/${id}?ou=${orgUnitIds}&pe=${periodIds}`);
+			navigateToView(scorecard);
 		}
 	};
 

@@ -3,18 +3,20 @@ import { Button } from "@dhis2/ui";
 import React from "react";
 import { ScorecardConfig } from "@hisptz/dhis2-analytics";
 import { useFormContext } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { FormLoadingState } from "../state/loading";
 import { useSaveScorecard } from "../hooks/save";
 import { useAlert } from "@dhis2/app-runtime";
+import { useNavigateToScorecardView } from "../../../hooks/navigate";
 
 
 export function SaveButton() {
 	const { handleSubmit } = useFormContext<ScorecardConfig>();
-	const navigate = useNavigate();
 	const [loadingState, setLoadingState] = useRecoilState(FormLoadingState);
 	const { show } = useAlert(({ message }) => message, ({ type }) => ({ ...type, duration: 3000 }));
+
+	const navigateToView = useNavigateToScorecardView();
+
 
 	const { save } = useSaveScorecard();
 
@@ -26,7 +28,7 @@ export function SaveButton() {
 				loading: false,
 				button: "save"
 			});
-			navigate(`/view/${config.id}`);
+			navigateToView(config);
 		} catch (err) {
 
 			//Error is already shown in the save function.

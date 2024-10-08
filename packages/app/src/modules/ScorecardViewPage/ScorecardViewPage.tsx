@@ -10,6 +10,7 @@ import { useRawDimensions } from "./hooks/dimensions";
 import { useMemo, useRef } from "react";
 import { isEmpty } from "lodash";
 import { useResizeObserver } from "usehooks-ts";
+import { DimensionsNotSet } from "./components/DimensionsNotSet";
 
 export function ScorecardViewPage() {
 	const { periods, orgUnits } = useRawDimensions();
@@ -65,6 +66,8 @@ export function ScorecardViewPage() {
 		);
 	}
 
+	const dimensionNotSet = isEmpty(periods) || isEmpty(orgUnits);
+
 	return (
 		<div
 			style={{
@@ -76,16 +79,18 @@ export function ScorecardViewPage() {
 			}}
 		>
 			<DimensionFilterArea />
-			<ScorecardContext initialState={initialState} config={config}>
-				<div ref={headerRef} style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-					<ScorecardActions />
-					<ScorecardHeader />
-					<ScorecardLegendsView />
-				</div>
-				<div className="flex-1 h-100">
-					<ScorecardView headerHeight={height} />
-				</div>
-			</ScorecardContext>
+			{
+				dimensionNotSet ? <DimensionsNotSet /> : <ScorecardContext initialState={initialState} config={config}>
+					<div ref={headerRef} style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+						<ScorecardActions />
+						<ScorecardHeader />
+						<ScorecardLegendsView />
+					</div>
+					<div className="flex-1 h-100">
+						<ScorecardView headerHeight={height} />
+					</div>
+				</ScorecardContext>
+			}
 		</div>
 	);
 }

@@ -8,6 +8,7 @@ import { useDialog } from "@hisptz/dhis2-ui";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { getSharingSettingsFromOldConfiguration } from "../../../../utils/sharing";
+import { useNavigateToScorecardView } from "../../../../hooks/navigate";
 
 export interface ScorecardListCardActionsProps {
 	scorecard: ScorecardListItem;
@@ -19,6 +20,9 @@ export function ScorecardListCardActions({
 	const user = useRecoilValue(UserState);
 	const navigate = useNavigate();
 
+	const navigateToView = useNavigateToScorecardView();
+
+
 	const { confirm } = useDialog();
 
 	const { show } = useAlert(
@@ -28,7 +32,7 @@ export function ScorecardListCardActions({
 	const { remove } = useDeleteScorecard(scorecard.id);
 
 	const onView = () => {
-		navigate(`/view/${scorecard.id}`);
+		navigateToView(scorecard);
 	};
 
 	const accessConfig = getUserAuthority(user, scorecard.sharing ?? getSharingSettingsFromOldConfiguration(scorecard as any));
