@@ -15,12 +15,9 @@ export default function PaginatedDisplay({
 
 	return (
 		<div className="p-16 scorecard-list">
-			{scorecardViewType === "grid" && (
-				<GridScorecardDisplay scorecards={scorecards} />
-			)}
-			{scorecardViewType === "list" && (
-				<ListScorecardDisplay scorecards={scorecards} />
-			)}
+			{scorecardViewType === "list" ? (
+				<ListScorecardDisplay scorecards={scorecards} />) : <GridScorecardDisplay scorecards={scorecards} />
+			}
 		</div>
 	);
 }

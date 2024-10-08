@@ -42,7 +42,7 @@ export function PeriodSelector() {
 
 	return (
 		<>
-			<PeriodSelectorModal
+			{!hide && (<PeriodSelectorModal
 				title={i18n.t("Select default period(s)")}
 				enablePeriodSelector
 				excludedPeriodTypes={filteredPeriodTypes}
@@ -51,7 +51,7 @@ export function PeriodSelector() {
 				onClose={onHide}
 				hide={hide}
 				onUpdate={onUpdate}
-			/>
+			/>)}
 			<Field label={i18n.t("Default period")}
 				   validationText={fieldState.error?.message} error={!!fieldState.error} name="periods" helpText={!isEmpty(selectedPeriods) ? `${i18n.t("Selected")}: ${selectedPeriodNames.join(", ")}` : ""}>
 				<Button onClick={onShow}>{i18n.t("{{buttonLabel}} default period", { buttonLabel })}</Button>

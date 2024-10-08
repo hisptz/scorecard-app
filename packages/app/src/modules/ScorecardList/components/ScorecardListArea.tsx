@@ -49,13 +49,15 @@ export function ScorecardListArea() {
 						))
 					}
 				</div>
-				<div className="p-16">
-					<Pagination
-						disabled={pager.pageCount === 1}
-						{...pager}
-						pageSizes={Array.from(new Array(10).keys()).map((i) => ((i + 1) * 4).toString())}
-					/>
-				</div>
+				{
+					!isEmpty(scorecards) && (<div className="p-16">
+						<Pagination
+							disabled={pager.pageCount === 1 || isEmpty(scorecards)}
+							{...pager}
+							pageSizes={Array.from(new Array(10).keys()).map((i) => ((i + 1) * 4).toString())}
+						/>
+					</div>)
+				}
 			</Suspense>
 		</div>
 	);

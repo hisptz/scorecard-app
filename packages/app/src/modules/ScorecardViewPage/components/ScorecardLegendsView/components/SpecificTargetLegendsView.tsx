@@ -127,8 +127,10 @@ export function SpecificTargetLegendsView() {
 	);
 	const dataSourcesWithSpecificTargets = dataSources.filter(
 		(dataSource) =>
-			!!dataSource.specificTargets || !Array.isArray(dataSource.legends)
+			!isEmpty(dataSource.specificTargets) || !Array.isArray(dataSource.legends)
 	);
+
+	console.log(dataSourcesWithSpecificTargets);
 
 	if (isEmpty(dataSourcesWithSpecificTargets)) {
 		return null;

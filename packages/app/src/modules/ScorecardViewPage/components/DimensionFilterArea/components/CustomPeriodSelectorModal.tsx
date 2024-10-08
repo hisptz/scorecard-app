@@ -1,8 +1,10 @@
 import { Button, ButtonStrip, Modal, ModalActions, ModalContent, ModalTitle } from "@dhis2/ui";
 import i18n from "@dhis2/d2-i18n";
-import React, { useState, useTransition } from "react";
+import React, { useMemo, useState, useTransition } from "react";
 import { PeriodSelector } from "@hisptz/dhis2-ui";
-import { compact } from "lodash";
+import { compact, uniqBy } from "lodash";
+import { PeriodTypeCategory, PeriodUtility } from "@hisptz/dhis2-utils";
+import { useScorecardConfigFromServer } from "../../../hooks/data";
 
 export interface CustomPeriodSelectorModalProps {
 	hide: boolean;
@@ -17,6 +19,7 @@ export function CustomPeriodSelectorModal({
 											  onSelect,
 											  onClose
 										  }: CustomPeriodSelectorModalProps) {
+	const { config } = useScorecardConfigFromServer();
 	const [isPending, startTransition] = useTransition();
 	const [selectedPeriods, setSelectedPeriods] = useState<string[]>(
 		selected ?? []
@@ -30,22 +33,49 @@ export function CustomPeriodSelectorModal({
 		}
 	};
 
+	const filteredPeriodTypes = useMemo(() => {
+		const periodTypeId = config?.periodSelection.type;
+		if (!periodTypeId) {
+			return [];
+		}
+		return uniqBy([
+			...new PeriodUtility().setCategory(PeriodTypeCategory.FIXED).periodTypes,
+			...new PeriodUtility().setCategory(PeriodTypeCategory.RELATIVE).periodTypes
+		], "id").filter((periodType) => periodType.id != periodTypeId).map((periodType) => periodType.id);
+	}, [config]);
+
+	const periodType = useMemo(() => {
+		if (!config?.periodSelection.type) {
+			return null;
+		}
+		return [
+			...new PeriodUtility().setCategory(PeriodTypeCategory.FIXED).periodTypes,
+			...new PeriodUtility().setCategory(PeriodTypeCategory.RELATIVE).periodTypes
+		].find((periodType) => periodType.id == config?.periodSelection.type);
+	}, [config]);
+
+	if (hide) {
+		return null;
+	}
+
 	return (
 		<Modal position="middle" hide={hide} onClose={onClose}>
 			<ModalTitle>{i18n.t("Select period")}</ModalTitle>
 			<ModalContent>
 				<div className="column gap-16">
-					{!hide && (
-						<PeriodSelector
-							enablePeriodSelector
-							selectedPeriods={compact(selectedPeriods)}
-							onSelect={({ items }) => {
-								if (Array.isArray(items)) {
-									setSelectedPeriods(items as string[]);
-								}
-							}}
-						/>
-					)}
+					{
+						periodType && (<span>{i18n.t("Selection is limited to period of type")}: <b>{periodType?.config.name}</b></span>)
+					}
+					<PeriodSelector
+						enablePeriodSelector
+						excludedPeriodTypes={filteredPeriodTypes}
+						selectedPeriods={compact(selectedPeriods)}
+						onSelect={({ items }) => {
+							if (Array.isArray(items)) {
+								setSelectedPeriods(items as string[]);
+							}
+						}}
+					/>
 				</div>
 			</ModalContent>
 			<ModalActions>

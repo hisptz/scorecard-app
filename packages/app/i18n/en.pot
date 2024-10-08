@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-10-08T14:11:34.805Z\n"
-"PO-Revision-Date: 2024-10-08T14:11:34.805Z\n"
+"POT-Creation-Date: 2024-10-08T14:34:24.142Z\n"
+"PO-Revision-Date: 2024-10-08T14:34:24.142Z\n"
 
 msgid "Scorecard deleted successfully"
 msgstr "Scorecard deleted successfully"
@@ -510,6 +510,9 @@ msgstr "Updating..."
 
 msgid "Select period"
 msgstr "Select period"
+
+msgid "Selection is limited to period of type"
+msgstr "Selection is limited to period of type"
 
 msgid "and {{number}} more"
 msgstr "and {{number}} more"
