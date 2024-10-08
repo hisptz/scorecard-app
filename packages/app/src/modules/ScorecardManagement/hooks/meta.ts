@@ -25,7 +25,7 @@ function getDefaultSharing(user: { id: string }): ScorecardSharing {
 		owner: user.id,
 		users: {},
 		userGroups: {},
-		public: "rw------"
+		public: "--------"
 	};
 }
 

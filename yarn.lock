@@ -3116,10 +3116,10 @@
     screenfull "^6.0.2"
     zod "^3.23.8"
 
-"@hisptz/dhis2-analytics@^2.0.41":
-  version "2.0.41"
-  resolved "https://registry.yarnpkg.com/@hisptz/dhis2-analytics/-/dhis2-analytics-2.0.41.tgz#39ab9d2ca5acfd91696571352aac29c03d39faf2"
-  integrity sha512-NiSM33p1khmv+AS0MZIUCNHkaAkSpKz98nXyIRibbMbvGHK6kkNgtKOrqoTC5ReLA+y7aY1zlWqonBDcJQzDwA==
+"@hisptz/dhis2-analytics@^2.0.42":
+  version "2.0.42"
+  resolved "https://registry.yarnpkg.com/@hisptz/dhis2-analytics/-/dhis2-analytics-2.0.42.tgz#a33572d9fd71e1c1e838320f8b0e2f6840edf6d7"
+  integrity sha512-SR1BRRG99bqNyUGMRmTbHMuRXJXAp49sCwTLYVl5sibLhBtj+L9ohk+CmA4E22FKzI4nuuRaEBo9SfXtxV2HfQ==
   dependencies:
     "@hisptz/dhis2-ui" "2.0.25"
     "@hisptz/dhis2-utils" "2.0.8"

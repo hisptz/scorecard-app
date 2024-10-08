@@ -5,7 +5,6 @@ import { compact, isEmpty } from "lodash";
 import { getOrgUnitIdsFromOrgUnitSelection } from "@scorecard/shared";
 import { OrgUnitSelection } from "@hisptz/dhis2-utils";
 
-
 export function useNavigateToScorecardView() {
 	const navigate = useNavigate();
 	return useCallback((config: Pick<ScorecardConfig, "id" | "orgUnitSelection" | "periodSelection">) => {

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-10-08T09:34:59.993Z\n"
-"PO-Revision-Date: 2024-10-08T09:34:59.993Z\n"
+"POT-Creation-Date: 2024-10-08T14:11:34.805Z\n"
+"PO-Revision-Date: 2024-10-08T14:11:34.805Z\n"
 
 msgid "Scorecard deleted successfully"
 msgstr "Scorecard deleted successfully"
@@ -513,6 +513,9 @@ msgstr "Select period"
 
 msgid "and {{number}} more"
 msgstr "and {{number}} more"
+
+msgid "Select organisation unit(s) and period(s) to start"
+msgstr "Select organisation unit(s) and period(s) to start"
 
 msgid "Download"
 msgstr "Download"
