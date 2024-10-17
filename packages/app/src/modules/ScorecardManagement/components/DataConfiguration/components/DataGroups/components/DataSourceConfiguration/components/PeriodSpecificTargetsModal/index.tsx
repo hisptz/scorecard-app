@@ -8,7 +8,7 @@ import { useFormContext } from "react-hook-form";
 import { getNonDefaultLegendDefinitions } from "../../../../../../../General/utils/utils";
 import LegendsField from "../TargetsArea/components/LegendsField";
 import { createFixedPeriodFromPeriodId } from "@dhis2/multi-calendar-dates";
-import { ScorecardLegend, SpecificTarget } from "@hisptz/dhis2-analytics";
+import { ScorecardLegend, SpecificTarget } from "@hisptz/dhis2-scorecard";
 
 export default function PeriodSpecificTargetsModal({
 													   open,

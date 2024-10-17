@@ -1,9 +1,8 @@
 import { useSearchParams } from "react-router-dom";
-import { useCallback, useEffect, useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import { OrgUnitSelection } from "@hisptz/dhis2-utils";
 import { getOrgUnitIdsFromOrgUnitSelection, getOrgUnitSelectionFromIds } from "@scorecard/shared";
-import { ScorecardState, useScorecardConfig, useScorecardSetState } from "@hisptz/dhis2-analytics";
-import { isEqual } from "lodash";
+import { useScorecardOrgUnitSelectionState, useScorecardPeriodState } from "@hisptz/dhis2-scorecard";
 
 
 export function useRawDimensions() {
@@ -32,6 +31,8 @@ export function useRawDimensions() {
 
 export function useDimensions() {
 	const [params, setParams] = useSearchParams();
+	const [, setOrgUnitSelection] = useScorecardOrgUnitSelectionState();
+	const [, setPeriodSelection] = useScorecardPeriodState();
 	const periods = useMemo(() => {
 		if (params.get("pe") == null) {
 			return undefined;
@@ -74,12 +75,20 @@ export function useDimensions() {
 
 	const setPeriod = useCallback(
 		(periods: string[]) => {
+			setPeriodSelection((prev) => {
+				return {
+					...prev,
+					periods: periods.map((periodId) => ({ id: periodId }))
+				};
+			});
 			setParam("pe")(periods.join(";"));
+
 		},
 		[setParam]
 	);
 
 	const setOrgUnit = (orgUnitSelection: OrgUnitSelection) => {
+		setOrgUnitSelection(orgUnitSelection as any);
 		const ous = getOrgUnitIdsFromOrgUnitSelection(orgUnitSelection);
 		setParam("ou")(ous.join(";"));
 	};
@@ -96,42 +105,4 @@ export function useDimensions() {
 		setOrgUnit,
 		setDimensions
 	};
-}
-
-
-export function useSetInitialDimensions() {
-	const config = useScorecardConfig();
-	const { setDimensions } = useDimensions();
-
-	useEffect(() => {
-		if (config) {
-			setDimensions({
-				orgUnitSelection: config.orgUnitSelection as OrgUnitSelection,
-				periods: config.periodSelection.periods
-			});
-		}
-	}, [config]);
-}
-
-
-export function useApplyDimensions() {
-	const setState = useScorecardSetState();
-	const { orgUnit, periods } = useDimensions();
-
-	useEffect(() => {
-		setState((prevState) => {
-			if (isEqual(prevState.periodSelection.periods, periods) && isEqual(prevState.orgUnitSelection, orgUnit)) {
-				return prevState;
-			} else {
-				return {
-					...prevState,
-					periodSelection: {
-						periods: periods?.map((id) => ({ id }))
-					},
-					orgUnitSelection: orgUnit
-				} as ScorecardState;
-			}
-		});
-	}, [orgUnit, periods]);
-
 }

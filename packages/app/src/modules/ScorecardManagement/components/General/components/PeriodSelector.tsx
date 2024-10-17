@@ -1,5 +1,5 @@
 import { useController, useWatch } from "react-hook-form";
-import { ScorecardConfig } from "@hisptz/dhis2-analytics";
+import { ScorecardConfig } from "@hisptz/dhis2-scorecard";
 import { Button, Field } from "@dhis2/ui";
 import i18n from "@dhis2/d2-i18n";
 import { PeriodTypeCategory, PeriodUtility } from "@hisptz/dhis2-utils";

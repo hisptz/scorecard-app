@@ -4,7 +4,7 @@ import React, { useMemo, useState, useTransition } from "react";
 import { PeriodSelector } from "@hisptz/dhis2-ui";
 import { compact, uniqBy } from "lodash";
 import { PeriodTypeCategory, PeriodUtility } from "@hisptz/dhis2-utils";
-import { useScorecardConfigFromServer } from "../../../hooks/data";
+import { useConfigContext } from "../../../ConfigProvider";
 
 export interface CustomPeriodSelectorModalProps {
 	hide: boolean;
@@ -19,7 +19,7 @@ export function CustomPeriodSelectorModal({
 											  onSelect,
 											  onClose
 										  }: CustomPeriodSelectorModalProps) {
-	const { config } = useScorecardConfigFromServer();
+	const config = useConfigContext();
 	const [isPending, startTransition] = useTransition();
 	const [selectedPeriods, setSelectedPeriods] = useState<string[]>(
 		selected ?? []

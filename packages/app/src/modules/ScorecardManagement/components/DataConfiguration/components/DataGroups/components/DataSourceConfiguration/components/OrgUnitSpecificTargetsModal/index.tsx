@@ -8,7 +8,7 @@ import { useFormContext, useWatch } from "react-hook-form";
 import { useRecoilValue } from "recoil";
 import { getNonDefaultLegendDefinitions } from "../../../../../../../General/utils/utils";
 import LegendsField from "../TargetsArea/components/LegendsField";
-import { ScorecardLegend, SpecificTarget } from "@hisptz/dhis2-analytics";
+import { ScorecardLegend, SpecificTarget } from "@hisptz/dhis2-scorecard";
 
 function OrgUnitSelector({ target, setTarget }: { target: SpecificTarget, setTarget: Dispatch<SetStateAction<SpecificTarget>> }) {
 	const [periodSelectorOpen, setPeriodSelectorOpen] = useState(

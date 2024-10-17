@@ -1,7 +1,7 @@
 import React from "react";
 import { useDataItemSearchState } from "../../states/searchState";
 import { useFieldArray } from "react-hook-form";
-import { ScorecardConfig, ScorecardDataGroup } from "@hisptz/dhis2-analytics";
+import { ScorecardConfig, ScorecardDataGroup } from "@hisptz/dhis2-scorecard";
 import { isEmpty } from "lodash";
 import EmptyDataGroups from "../EmptyDataGroups";
 import { uid } from "@hisptz/dhis2-utils";

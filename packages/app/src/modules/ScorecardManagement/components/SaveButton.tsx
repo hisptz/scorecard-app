@@ -1,7 +1,7 @@
 import i18n from "@dhis2/d2-i18n";
 import { Button } from "@dhis2/ui";
 import React from "react";
-import { ScorecardConfig } from "@hisptz/dhis2-analytics";
+import { ScorecardConfig } from "@hisptz/dhis2-scorecard";
 import { useFormContext } from "react-hook-form";
 import { useRecoilState } from "recoil";
 import { FormLoadingState } from "../state/loading";

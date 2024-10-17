@@ -9,7 +9,7 @@ import DataSourceSelectorModal from "../DataConfiguration/components/DataGroups/
 import { getNonDefaultLegendDefinitions } from "../General/utils/utils";
 import HighlightedIndicatorsTable from "./Table";
 import { SelectedDataItem } from "@hisptz/dhis2-ui";
-import { ScorecardConfig, ScorecardDataSource } from "@hisptz/dhis2-analytics";
+import { ScorecardConfig, ScorecardDataSource } from "@hisptz/dhis2-scorecard";
 
 export default function HighlightedIndicatorsScorecardForm() {
 	const { getValues, setValue } = useFormContext<ScorecardConfig>();

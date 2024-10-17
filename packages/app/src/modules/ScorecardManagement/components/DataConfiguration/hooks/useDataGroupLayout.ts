@@ -1,6 +1,6 @@
 import { useBoolean } from "usehooks-ts";
 import { useFieldArray, useFormContext, useWatch } from "react-hook-form";
-import { ScorecardConfig, ScorecardLegend } from "@hisptz/dhis2-analytics";
+import { ScorecardConfig, ScorecardLegend } from "@hisptz/dhis2-scorecard";
 import { useCallback, useMemo } from "react";
 import { customChunk } from "../components/DataGroups/components/DataGroup/utils";
 import { DropResult } from "react-beautiful-dnd";

@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { ScorecardConfig } from "@hisptz/dhis2-analytics";
+import { ScorecardConfig } from "@hisptz/dhis2-scorecard";
 import { useParams } from "react-router-dom";
 import { DATASTORE_NAMESPACE } from "@scorecard/shared";
 import { useAlert, useDataEngine, useDataMutation, useDataQuery } from "@dhis2/app-runtime";

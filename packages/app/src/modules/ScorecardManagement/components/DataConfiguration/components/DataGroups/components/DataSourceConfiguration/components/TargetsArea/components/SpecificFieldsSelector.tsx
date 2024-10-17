@@ -7,7 +7,7 @@ import { head, isEmpty } from "lodash";
 import PeriodSpecificTargetsModal from "../../PeriodSpecificTargetsModal";
 import OrgUnitSpecificTargetsModal from "../../OrgUnitSpecificTargetsModal";
 import OrgUnitLevelSpecificTargets from "../../OrgUnitLevelSpecificTargetsModal";
-import { SpecificTarget } from "@hisptz/dhis2-analytics";
+import { SpecificTarget } from "@hisptz/dhis2-scorecard";
 import { useFormContext, useWatch } from "react-hook-form";
 import { getNonDefaultLegendDefinitions } from "../../../../../../../../General/utils/utils";
 

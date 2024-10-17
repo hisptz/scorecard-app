@@ -1,7 +1,7 @@
 import PreviewScorecardTable from "../../../../PreviewScorecardTable";
 import React from "react";
 import { useWatch } from "react-hook-form";
-import { ScorecardConfig } from "@hisptz/dhis2-analytics";
+import { ScorecardConfig } from "@hisptz/dhis2-scorecard";
 import { isEmpty } from "lodash";
 
 

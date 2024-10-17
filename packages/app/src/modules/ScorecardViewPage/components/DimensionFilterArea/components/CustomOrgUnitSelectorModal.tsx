@@ -32,6 +32,7 @@ export function CustomOrgUnitSelectorModal({
 		if (selectedOrgUnits) {
 			startTransition(() => {
 				onSelect(selectedOrgUnits);
+
 				onClose();
 			});
 		}

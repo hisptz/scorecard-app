@@ -1,6 +1,6 @@
 import { DATASTORE_NAMESPACE, generateLegendDefaults } from "@scorecard/shared";
 import { cloneDeep, isEmpty, set } from "lodash";
-import { LegendDefinition, ScorecardDataGroup, ScorecardDataHolder, ScorecardDataSource, SpecificTarget } from "@hisptz/dhis2-analytics";
+import { LegendDefinition, ScorecardDataGroup, ScorecardDataHolder, ScorecardDataSource, SpecificTarget } from "@hisptz/dhis2-scorecard";
 import { useDataEngine } from "@dhis2/app-runtime";
 
 export function resetLegends(groups: ScorecardDataGroup[], legendDefinitions: LegendDefinition[]) {

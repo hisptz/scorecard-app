@@ -3,7 +3,7 @@ import "./sharing.css";
 import i18n from "@dhis2/d2-i18n";
 import { SharingDialog } from "./components/CustomSharingDialog/SharingDialog";
 import { colors, IconError24 } from "@dhis2/ui";
-import { ScorecardConfig } from "@hisptz/dhis2-analytics";
+import { ScorecardConfig } from "@hisptz/dhis2-scorecard";
 import { useController } from "react-hook-form";
 
 export default function Sharing() {

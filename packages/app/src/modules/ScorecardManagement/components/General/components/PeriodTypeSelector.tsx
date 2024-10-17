@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import React, { useEffect, useMemo } from "react";
 import { useController } from "react-hook-form";
 import classes from "../styles/PeriodTypeSelector.module.css";
-import { ScorecardConfig } from "@hisptz/dhis2-analytics";
+import { ScorecardConfig } from "@hisptz/dhis2-scorecard";
 
 export function PeriodTypeSelector() {
 	const { field, fieldState } = useController<ScorecardConfig>({

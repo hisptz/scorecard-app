@@ -6,7 +6,7 @@ import useScorecardManagerNavigate from "../hooks/navigate";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAlert } from "@dhis2/app-runtime";
 import { useSaveScorecard } from "../hooks/save";
-import { ScorecardConfig } from "@hisptz/dhis2-analytics";
+import { ScorecardConfig } from "@hisptz/dhis2-scorecard";
 import { useDialog } from "@hisptz/dhis2-ui";
 import { useRecoilState } from "recoil";
 import { FormLoadingState } from "../state/loading";

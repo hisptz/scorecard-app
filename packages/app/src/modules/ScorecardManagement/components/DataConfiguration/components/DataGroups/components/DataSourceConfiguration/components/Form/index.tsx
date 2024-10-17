@@ -3,7 +3,7 @@ import React, { Suspense, useMemo } from "react";
 import { useFormContext } from "react-hook-form";
 import DataSourceConfigurationForm from "../../../../../DataSourceConfigurationForm";
 import { useSelectedData } from "../../../../../../states/selectionState";
-import { ScorecardDataSource } from "@hisptz/dhis2-analytics";
+import { ScorecardDataSource } from "@hisptz/dhis2-scorecard";
 
 export default function SelectedDataSourceConfigurationForm() {
 	const { getValues } = useFormContext();

@@ -6,7 +6,7 @@ import { InstructionArea } from "./components/DataGroups/components/DataGroup/co
 import { SelectedDataStateProvider } from "./states/selectionState";
 import { colors, Field } from "@dhis2/ui";
 import { useController } from "react-hook-form";
-import { ScorecardConfig } from "@hisptz/dhis2-analytics";
+import { ScorecardConfig } from "@hisptz/dhis2-scorecard";
 
 export default function DataConfigurationScorecardForm() {
 

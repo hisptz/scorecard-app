@@ -2,7 +2,7 @@ import i18n from "@dhis2/d2-i18n";
 import { Button, colors, IconDragHandle24, UserAvatar } from "@dhis2/ui";
 import { IconDelete16 } from "@dhis2/ui-icons";
 import React from "react";
-import { ScorecardDataSource } from "@hisptz/dhis2-analytics";
+import { ScorecardDataSource } from "@hisptz/dhis2-scorecard";
 import { FieldError, useFormContext } from "react-hook-form";
 
 export default function DataSource({ dataSource, index, onDelete, groupIndex, holderIndex }: { groupIndex: number; holderIndex: number; dataSource: ScorecardDataSource, index: number, onDelete: (index: number) => void }) {

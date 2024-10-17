@@ -4,7 +4,7 @@ import { Help, HIGHLIGHTED_TABLE_HELP_STEPS } from "@scorecard/shared";
 import { IconDelete16 } from "@dhis2/ui-icons";
 import { capitalize, get, isEmpty } from "lodash";
 import { FieldError, useController } from "react-hook-form";
-import { ScorecardConfig } from "@hisptz/dhis2-analytics";
+import { ScorecardConfig } from "@hisptz/dhis2-scorecard";
 import { useBoolean } from "usehooks-ts";
 import HighlightedDataSourceConfigurationForm from "../HighlightedDataSourceConfigurationForm";
 

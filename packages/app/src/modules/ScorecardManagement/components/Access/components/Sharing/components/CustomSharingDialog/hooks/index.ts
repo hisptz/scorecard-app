@@ -4,7 +4,7 @@ import { find, has, unset } from "lodash";
 import i18n from "@dhis2/d2-i18n";
 import { useDialog } from "@hisptz/dhis2-ui";
 import { ACCESS_TYPES_LABELLED, AccessTypes } from "@scorecard/shared";
-import { ScorecardConfig, ScorecardSharing } from "@hisptz/dhis2-analytics";
+import { ScorecardConfig, ScorecardSharing } from "@hisptz/dhis2-scorecard";
 
 export default function useManageAccess(): {
 	publicAccess: string;

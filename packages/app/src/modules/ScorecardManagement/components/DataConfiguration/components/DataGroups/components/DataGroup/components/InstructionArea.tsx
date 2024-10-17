@@ -3,7 +3,7 @@ import Instructions from "../../../../Instructions";
 import DataSourceConfiguration from "../../DataSourceConfiguration";
 import React from "react";
 import { useWatch } from "react-hook-form";
-import { ScorecardConfig } from "@hisptz/dhis2-analytics";
+import { ScorecardConfig } from "@hisptz/dhis2-scorecard";
 
 
 export function InstructionArea() {

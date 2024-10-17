@@ -6,7 +6,7 @@ import { useDataQuery } from "@dhis2/app-runtime";
 import { useFormSchema } from "./schema";
 import { uid } from "@hisptz/dhis2-utils";
 import i18n from "@dhis2/d2-i18n";
-import { ScorecardConfig, ScorecardSharing } from "@hisptz/dhis2-analytics";
+import { ScorecardConfig, ScorecardSharing } from "@hisptz/dhis2-scorecard";
 import { useRecoilValue } from "recoil";
 import { getSharingSettingsFromOldConfiguration, ScorecardConfigWithOldSharing } from "../../../utils/sharing";
 

@@ -4,7 +4,7 @@ import { OrgUnitSelector } from "@hisptz/dhis2-ui";
 import { ContainerLoader } from "@scorecard/shared";
 import React, { Suspense } from "react";
 import { useController } from "react-hook-form";
-import { ScorecardConfig } from "@hisptz/dhis2-analytics";
+import { ScorecardConfig } from "@hisptz/dhis2-scorecard";
 
 
 export default function OrgUnit() {

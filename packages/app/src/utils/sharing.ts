@@ -1,4 +1,4 @@
-import { ScorecardConfig, ScorecardSharing } from "@hisptz/dhis2-analytics";
+import { ScorecardConfig, ScorecardSharing } from "@hisptz/dhis2-scorecard";
 import { fromPairs } from "lodash";
 
 export type ScorecardConfigWithOldSharing = Partial<ScorecardConfig> & { user: { id: string }, publicAccess: { access: string; }; userAccesses: Array<{ id: string; access: string; }>; userGroupAccesses: Array<{ id: string; access: string; }> };

@@ -1,4 +1,4 @@
-import { ScorecardConfig } from "@hisptz/dhis2-analytics";
+import { ScorecardConfig } from "@hisptz/dhis2-scorecard";
 
 export type ScorecardListItem = Pick<
 	ScorecardConfig,

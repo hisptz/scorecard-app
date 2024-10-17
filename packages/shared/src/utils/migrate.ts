@@ -4,7 +4,7 @@ import { getDataSourceDetails } from "./dataSource";
 import { uid } from "./utils";
 import { OldLegendDefinition, OldScorecardSchema, OldUserGroup, OrgUnitSettings } from "app/src/modules/ScorecardMigration/schemas/old";
 import { useDataEngine } from "@dhis2/app-runtime";
-import { ScorecardConfig } from "@hisptz/dhis2-analytics";
+import { ScorecardConfig } from "@hisptz/dhis2-scorecard";
 
 export async function migrateScorecard({ oldScorecard, engine }: { oldScorecard: OldScorecardSchema, engine: ReturnType<typeof useDataEngine> }): Promise<ScorecardConfig> {
 	try {

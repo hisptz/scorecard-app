@@ -5,7 +5,7 @@ import { useRecoilState } from "recoil";
 import { FormLoadingState } from "../state/loading";
 import useScorecardManagerNavigate from "../hooks/navigate";
 import { useFormContext } from "react-hook-form";
-import { ScorecardConfig } from "@hisptz/dhis2-analytics";
+import { ScorecardConfig } from "@hisptz/dhis2-scorecard";
 import { useNavigate } from "react-router-dom";
 import { useAlert } from "@dhis2/app-runtime";
 

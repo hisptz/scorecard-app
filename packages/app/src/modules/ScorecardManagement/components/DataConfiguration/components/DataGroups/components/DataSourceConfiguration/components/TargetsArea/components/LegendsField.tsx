@@ -1,7 +1,7 @@
 import { DHIS2FormField } from "@hisptz/dhis2-ui";
 import { set } from "lodash";
 import React from "react";
-import { LegendDefinition, ScorecardLegend } from "@hisptz/dhis2-analytics";
+import { LegendDefinition, ScorecardLegend } from "@hisptz/dhis2-scorecard";
 
 function autoSetAdjacentValues(data: { startValue: number; endValue: number }[], index: number, highIsGood: boolean) {
 	const newData = [...data];

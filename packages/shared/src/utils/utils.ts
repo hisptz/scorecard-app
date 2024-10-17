@@ -1,7 +1,7 @@
 import { capitalize, compact, find, flattenDeep, head, intersectionBy, isEmpty, last, reduce, snakeCase, sortBy, truncate, uniqBy } from "lodash";
 import { DefaultAuthority, TableSort } from "../constants";
 import { D2User } from "../state/user";
-import { LegendDefinition, ScorecardDataGroup, ScorecardDataHolder, ScorecardDataSource, ScorecardLegend } from "@hisptz/dhis2-analytics";
+import { LegendDefinition, ScorecardDataGroup, ScorecardDataHolder, ScorecardDataSource, ScorecardLegend } from "@hisptz/dhis2-scorecard";
 import { getSharingSettingsFromOldConfiguration } from "app/src/utils/sharing";
 import { ScorecardListItem } from "app/src/modules/ScorecardList/types";
 

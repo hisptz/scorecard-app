@@ -1,6 +1,6 @@
 import { findIndex, head, last } from "lodash";
 import { useFormContext } from "react-hook-form";
-import { ScorecardConfig, ScorecardDataHolder } from "@hisptz/dhis2-analytics";
+import { ScorecardConfig, ScorecardDataHolder } from "@hisptz/dhis2-scorecard";
 import { useCallback } from "react";
 import { useClearSelectedDataState } from "../states/selectionState";
 

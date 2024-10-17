@@ -2,7 +2,7 @@ import { colors } from "@dhis2/ui";
 import React from "react";
 import { Draggable } from "react-beautiful-dnd";
 import DataSource from "../DataSource";
-import { ScorecardConfig, ScorecardDataHolder, ScorecardDataSource } from "@hisptz/dhis2-analytics";
+import { ScorecardConfig, ScorecardDataHolder, ScorecardDataSource } from "@hisptz/dhis2-scorecard";
 import { useFormContext } from "react-hook-form";
 import { useSelectedDataState } from "../../../../states/selectionState";
 

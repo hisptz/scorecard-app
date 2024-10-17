@@ -3,7 +3,7 @@ import i18n from "@dhis2/d2-i18n";
 import { checkTitleAvailability } from "../components/General/utils/utils";
 import { useParams } from "react-router-dom";
 import { useDataEngine } from "@dhis2/app-runtime";
-import { dataGroupSchema, dataHolderSchema, organisationUnitSelectionSchema, OrgUnitSelection, scorecardConfig, scorecardSharing, scorecardViewOptionsSchema } from "@hisptz/dhis2-analytics";
+import { dataGroupSchema, dataHolderSchema, organisationUnitSelectionSchema, OrgUnitSelection, scorecardConfig, scorecardSharing, scorecardViewOptionsSchema } from "@hisptz/dhis2-scorecard";
 
 
 function anyOrgUnitSelected({

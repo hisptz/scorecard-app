@@ -1,4 +1,4 @@
-import { ScorecardDataHolder } from "@hisptz/dhis2-analytics";
+import { ScorecardDataHolder } from "@hisptz/dhis2-scorecard";
 
 export function getChunkChildIndex(
 	chunkSize = 2,

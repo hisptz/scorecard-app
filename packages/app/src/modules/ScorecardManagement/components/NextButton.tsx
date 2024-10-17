@@ -2,7 +2,7 @@ import i18n from "@dhis2/d2-i18n";
 import { Button } from "@dhis2/ui";
 import React from "react";
 import { useFormContext } from "react-hook-form";
-import { ScorecardConfig } from "@hisptz/dhis2-analytics";
+import { ScorecardConfig } from "@hisptz/dhis2-scorecard";
 import { useAlert } from "@dhis2/app-runtime";
 import { useNavigate } from "react-router-dom";
 import useScorecardManagerNavigate from "../hooks/navigate";

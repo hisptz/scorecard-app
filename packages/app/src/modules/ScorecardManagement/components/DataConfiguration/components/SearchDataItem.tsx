@@ -2,7 +2,7 @@ import i18n from "@dhis2/d2-i18n";
 import { Input } from "@dhis2/ui";
 import React, { useRef, useState } from "react";
 import { debounce, isEmpty } from "lodash";
-import { ScorecardConfig, ScorecardDataGroup } from "@hisptz/dhis2-analytics";
+import { ScorecardConfig, ScorecardDataGroup } from "@hisptz/dhis2-scorecard";
 import { useWatch } from "react-hook-form";
 import { useDataItemSearchState } from "../states/searchState";
 

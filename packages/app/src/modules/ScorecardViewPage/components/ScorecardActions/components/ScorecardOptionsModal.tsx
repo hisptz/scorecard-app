@@ -3,7 +3,7 @@ import { Button, ButtonStrip, Field, Modal, ModalActions, ModalContent, ModalTit
 import { AverageDisplayType } from "@scorecard/shared";
 import React, { useTransition } from "react";
 import { FormProvider, useController, useForm } from "react-hook-form";
-import { ScorecardViewOptions, useScorecardSetState, useScorecardState } from "@hisptz/dhis2-analytics";
+import { ScorecardViewOptions, useScorecardStateSelectorValue, useSetScorecardStateSelector } from "@hisptz/dhis2-scorecard";
 import { RHFCheckboxField } from "@hisptz/dhis2-ui";
 
 function AverageDisplayTypeField() {
@@ -54,21 +54,17 @@ export function ScorecardOptionsModal({
 										  onClose
 									  }: ScorecardOptionsModalProps) {
 	const [isPending, startTransition] = useTransition();
-	const state = useScorecardState();
-	const setState = useScorecardSetState();
-	const initialOptions = state.options;
+	const setState = useSetScorecardStateSelector("options");
+	const initialOptions = useScorecardStateSelectorValue("options") as ScorecardViewOptions;
 	const form = useForm<ScorecardViewOptions>({
 		defaultValues: initialOptions
 	});
 
 	const onUpdate = (options: ScorecardViewOptions) => {
 		startTransition(() => {
-			setState((prevState) => ({
+			setState((prevState: ScorecardViewOptions) => ({
 				...prevState,
-				options: {
-					...prevState.options,
-					...options
-				}
+				...options
 			}));
 			onClose();
 		});

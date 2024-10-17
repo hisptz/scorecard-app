@@ -6,7 +6,7 @@ import React from "react";
 import { useBoolean } from "usehooks-ts";
 import EditTitle from "./EditTitle";
 import { useFormContext, useWatch } from "react-hook-form";
-import { ScorecardConfig } from "@hisptz/dhis2-analytics";
+import { ScorecardConfig } from "@hisptz/dhis2-scorecard";
 import { ErrorIcon } from "@scorecard/shared";
 
 export default function GroupTitle({

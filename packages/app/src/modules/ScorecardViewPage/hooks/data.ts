@@ -1,4 +1,4 @@
-import { ScorecardConfig } from "@hisptz/dhis2-analytics";
+import { ScorecardConfig } from "@hisptz/dhis2-scorecard";
 import { useDataQuery } from "@dhis2/app-runtime";
 import { useParams } from "react-router-dom";
 import { useMemo } from "react";

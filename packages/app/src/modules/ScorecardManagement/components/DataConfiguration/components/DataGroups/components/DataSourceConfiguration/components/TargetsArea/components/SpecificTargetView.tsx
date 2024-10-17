@@ -4,7 +4,7 @@ import { createFixedPeriodFromPeriodId } from "@dhis2/multi-calendar-dates";
 import { SelectedOrgUnits, useCalendar } from "@scorecard/shared";
 import { find } from "lodash";
 import React from "react";
-import { LegendDefinition, ScorecardLegend, SpecificTarget } from "@hisptz/dhis2-analytics";
+import { LegendDefinition, ScorecardLegend, SpecificTarget } from "@hisptz/dhis2-scorecard";
 import { useRecoilValue } from "recoil";
 
 function LegendsView({ legends, legendDefinitions }: { legends: ScorecardLegend[], legendDefinitions: LegendDefinition[] }) {

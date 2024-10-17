@@ -6,7 +6,7 @@ import UnlinkIcon from "@material-ui/icons/LinkOff";
 import React from "react";
 import useLinkManage from "../../../../../hooks/useLinkManage";
 import DataSourceHolder from "../../DataSourceHolder";
-import { ScorecardDataHolder } from "@hisptz/dhis2-analytics";
+import { ScorecardDataHolder } from "@hisptz/dhis2-scorecard";
 
 export function LinkingContainer({
 									 chunk,

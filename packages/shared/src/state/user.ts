@@ -47,6 +47,8 @@ export const UserState = atom<D2User>({
 					const { user } = (await engine.query(
 						userQuery,
 					)) as UserQueryResponse;
+
+					console.log({ user });
 					if (user) {
 						return user;
 					}
