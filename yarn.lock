@@ -2940,10 +2940,10 @@
     xlsx "^0.18.5"
     zod "^3.23.8"
 
-"@hisptz/dhis2-scorecard@^1.0.12":
-  version "1.0.12"
-  resolved "https://registry.yarnpkg.com/@hisptz/dhis2-scorecard/-/dhis2-scorecard-1.0.12.tgz#89d8801b0be2b6fc5ff795a54b6804795c8a6d6f"
-  integrity sha512-FHrW4YYkHgjJJNnQLwrqEQXyULvJclhnkZyeciruX9rpafW4pNmsUSQ9FG4ME872oPggg/Nx1YjZ0X9DCjdvmg==
+"@hisptz/dhis2-scorecard@^1.0.14":
+  version "1.0.14"
+  resolved "https://registry.yarnpkg.com/@hisptz/dhis2-scorecard/-/dhis2-scorecard-1.0.14.tgz#d0fb4958df1ad8aa2a8cdf25d973da4821919d28"
+  integrity sha512-Z9TydD3+ikZq/cu08JJimsdVugENdbmKTVreryIZmnULV6rpyymjIlcEBPZQqBo2xkmyomI5Y6UBu1Qp+u4PYQ==
   dependencies:
     "@hisptz/dhis2-analytics" "2.0.46"
     "@hisptz/dhis2-ui" "2.0.27"
@@ -4878,6 +4878,11 @@
   version "6.0.3"
   resolved "https://registry.yarnpkg.com/@types/parse5/-/parse5-6.0.3.tgz#705bb349e789efa06f43f128cef51240753424cb"
   integrity sha512-SuT16Q1K51EAVPz1K29DJ/sXjhSQ0zjvsypYJ6tlwVsRV9jwW5Adq2ch8Dq8kDBCkYnELS7N7VNCSB5nC56t/g==
+
+"@types/post-robot@^10.0.6":
+  version "10.0.6"
+  resolved "https://registry.yarnpkg.com/@types/post-robot/-/post-robot-10.0.6.tgz#9c8b1db55dd109cc36aa5a0d8edbd46827fd572c"
+  integrity sha512-x+LaZPQ4TYW8aBbKpFZsJn7TGipka7tC2ZokE8gpCAlh4E4XFgxxcvt19LD41BeExmlzAtjHh700r3r8SdfX9A==
 
 "@types/prettier@^2.1.5":
   version "2.7.3"
@@ -12478,15 +12483,15 @@ internal-slot@^1.0.4, internal-slot@^1.0.7:
   resolved "https://registry.yarnpkg.com/internmap/-/internmap-2.0.3.tgz#6685f23755e43c524e251d29cbc97248e3061009"
   integrity sha512-5Hh7Y1wQbvY5ooGgPbDaL5iYLAPzMTUrjMulskHLH6wnv/A+1q5rgEaiuqEjB+oxGXIVZs1FF+R/KPN3ZSQYYg==
 
-intro.js-react@^0.5.0:
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/intro.js-react/-/intro.js-react-0.5.0.tgz#d4e67a4f6e4726bee803222ff09d6deacb4598c8"
-  integrity sha512-tr9uhoy/aRgcdZxpqYC/TPSVlJ/Gt9Kx4mpI7clCdFa7c3SG8reJugIa1U5XnWlDLRNMc+e8egb8Jf186yvc1A==
+intro.js-react@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/intro.js-react/-/intro.js-react-1.0.0.tgz#28f17519f387c4e76ad0f75c2bd733440bda0a83"
+  integrity sha512-zR8pbTyX20RnCZpJMc0nuHBpsjcr1wFkj3ZookV6Ly4eE/LGpFTQwPsaA61Cryzwiy/tTFsusf4hPU9NpI9UOg==
 
-intro.js@^5.0.0:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/intro.js/-/intro.js-5.1.0.tgz#ffa804cd03f464198aa9be505afdd7fb814def3a"
-  integrity sha512-zwWl/duTh00eeNcZRU4o4/xxloNYPFKs4n4lMRDNx59jZr+qRI0jSOnzqYMOuVftD4beGrmxBHz4k8qp9/dCMA==
+intro.js@^7.2.0:
+  version "7.2.0"
+  resolved "https://registry.yarnpkg.com/intro.js/-/intro.js-7.2.0.tgz#e58e8fee4f6b43d6e0fcb264c9ca8a0f0565026d"
+  integrity sha512-qbMfaB70rOXVBceIWNYnYTpVTiZsvQh/MIkfdQbpA9di9VBfj1GigUPfcCv3aOfsbrtPcri8vTLTA4FcEDcHSQ==
 
 invariant@^2.2.2, invariant@^2.2.4:
   version "2.2.4"
@@ -16160,6 +16165,15 @@ post-robot@^10.0.46:
     cross-domain-safe-weakmap "^1.0.1"
     cross-domain-utils "^2.0.0"
     universal-serialize "^1.0.4"
+    zalgo-promise "^1.0.3"
+
+post-robot@^8.0.32:
+  version "8.0.32"
+  resolved "https://registry.yarnpkg.com/post-robot/-/post-robot-8.0.32.tgz#ce7b03225144bb321909b3ea1c184da3a7d34be0"
+  integrity sha512-PMOdDAt3pyuKUxZcTzdcXXFxLqkdeLpRlcCQl7QAJpI+e7J1YHH+PfC7KAbcL8hRVQ1LknQYGoirbA1/eO/a1g==
+  dependencies:
+    cross-domain-safe-weakmap "^1.0.1"
+    cross-domain-utils "^2.0.0"
     zalgo-promise "^1.0.3"
 
 postcss-calc@^8.2.3:

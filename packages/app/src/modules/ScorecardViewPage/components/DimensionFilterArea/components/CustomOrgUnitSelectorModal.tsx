@@ -113,7 +113,7 @@ export function OrgUnitDimensionSelection() {
 	} = useBoolean(true);
 
 	return (
-		<>
+		<div id="org-unit-selector">
 			{loading ? null : (
 				<CustomOrgUnitSelectorModal
 					selected={{
@@ -133,6 +133,6 @@ export function OrgUnitDimensionSelection() {
 				selectedItems={compact(orgUnitsWithData)}
 				title={i18n.t("Select organisation unit")}
 			/>
-		</>
+		</div>
 	);
 }

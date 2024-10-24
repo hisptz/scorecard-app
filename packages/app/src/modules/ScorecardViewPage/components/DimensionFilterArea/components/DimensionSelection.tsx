@@ -14,16 +14,16 @@ export interface DimensionSelectionProps {
 const ITEM_DISPLAY_NO = 1;
 
 export function DimensionSelection({
-	onClick,
-	title,
-	selectedItems = [],
-	loading,
-	...props
-}: DimensionSelectionProps) {
+									   onClick,
+									   title,
+									   selectedItems = [],
+									   loading,
+									   ...props
+								   }: DimensionSelectionProps) {
 	const itemsToDisplay = head(chunk(selectedItems, ITEM_DISPLAY_NO));
 
 	return (
-		<div onClick={onClick}>
+		<div  onClick={onClick}>
 			<Tooltip
 				content={
 					<div>
@@ -51,14 +51,14 @@ export function DimensionSelection({
 										<Chip key={id}>
 											{name ?? displayName}
 										</Chip>
-									),
+									)
 								)}
 								{selectedItems?.length > ITEM_DISPLAY_NO && (
 									<Chip>
 										{i18n.t(`and {{number}} more`, {
 											number:
 												selectedItems.length -
-												ITEM_DISPLAY_NO,
+												ITEM_DISPLAY_NO
 										})}
 									</Chip>
 								)}

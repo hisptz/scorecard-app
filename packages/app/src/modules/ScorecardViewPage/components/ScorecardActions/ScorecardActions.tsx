@@ -10,7 +10,9 @@ export function ScorecardActions() {
 			<ButtonStrip end>
 				<ScorecardOptionsControlButton />
 				<ScorecardEditButton />
-				<ScorecardPrint />
+				<div id="download-button">
+					<ScorecardPrint />
+				</div>
 				<ScorecardResetButton />
 			</ButtonStrip>
 		</div>

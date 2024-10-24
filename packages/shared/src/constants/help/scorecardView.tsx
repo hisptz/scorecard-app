@@ -23,12 +23,6 @@ export const SCORECARD_VIEW_HELP_STEPS = [
 		intro: i18n.t("Click here to return to scorecard list"),
 	},
 	{
-		element: ".refresh-button",
-		intro: i18n.t(
-			"Click here to refresh the scorecard page. This will reset organisation units, periods, and options to default values",
-		),
-	},
-	{
 		element: ".option-button",
 		intro: i18n.t(
 			"Click here to customize the scorecard look. Add numbering, enable average rows and columns, hide or show arrows and many more",
@@ -39,9 +33,15 @@ export const SCORECARD_VIEW_HELP_STEPS = [
 		intro: i18n.t("Click here to edit scorecard configuration"),
 	},
 	{
-		element: ".download-button",
+		element: "#download-button",
 		intro: i18n.t(
 			"Click here to download the scorecard in Excel, PDF, CSV, and JSON formats",
+		),
+	},
+	{
+		element: ".reset-button",
+		intro: i18n.t(
+			"Click here to reset the scorecard page. This will reset organisation units, periods, and options to default values",
 		),
 	},
 	{
@@ -62,7 +62,7 @@ export const SCORECARD_VIEW_HELP_STEPS = [
 		),
 	},
 	{
-		element: ".org-unit-search",
+		element: "[placeholder='Search organisation units']",
 		intro: i18n.t("Search here for a specific organisation unit"),
 	},
 	{

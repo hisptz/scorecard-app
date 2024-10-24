@@ -34,5 +34,5 @@ export function ScorecardEditButton() {
 		navigate(`/edit/${id}`);
 	};
 
-	return <Button disabled={!access.write} onClick={onEditClick}>{i18n.t("Edit")}</Button>;
+	return <Button className="scorecard-view-edit-button" disabled={!access.write} onClick={onEditClick}>{i18n.t("Edit")}</Button>;
 }

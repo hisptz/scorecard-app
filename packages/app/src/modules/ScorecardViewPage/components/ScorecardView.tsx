@@ -10,7 +10,8 @@ export function ScorecardView({ headerHeight }: { headerHeight?: number }) {
 		<div
 			ref={ref}
 			style={{ padding: 16, width: "100%", height: "100%", position: "relative" }}
-			className="w-100 column"
+			className="w-100 column scorecard-table"
+
 		>
 			<Scorecard
 				tableProps={{

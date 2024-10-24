@@ -13,7 +13,7 @@ export function ScorecardOptionsControlButton() {
 	return (
 		<>
 			{!hide && <ScorecardOptionsModal hide={hide} onClose={onClose} />}
-			<Button onClick={onShow}>{i18n.t("Options")}</Button>
+			<Button className="option-button" onClick={onShow}>{i18n.t("Options")}</Button>
 		</>
 	);
 }

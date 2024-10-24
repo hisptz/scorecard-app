@@ -12,7 +12,7 @@ export function PeriodDimensionSelector() {
 	const {
 		value: periodHidden,
 		setTrue: hidePeriod,
-		setFalse: showPeriod,
+		setFalse: showPeriod
 	} = useBoolean(true);
 
 	const periodObjects = useMemo(() => {
@@ -22,7 +22,7 @@ export function PeriodDimensionSelector() {
 	}, [periods]);
 
 	return (
-		<>
+		<div id="period-selector">
 			<CustomPeriodSelectorModal
 				onClose={hidePeriod}
 				hide={periodHidden}
@@ -34,6 +34,6 @@ export function PeriodDimensionSelector() {
 				selectedItems={compact(periodObjects)}
 				title={i18n.t("Select period")}
 			/>
-		</>
+		</div>
 	);
 }

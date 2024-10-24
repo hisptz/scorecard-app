@@ -10,7 +10,7 @@ export function BackButton() {
 	};
 
 	return (
-		<Button onClick={onBackClick}>
+		<Button className="home-button" onClick={onBackClick}>
 			{i18n.t("Back to all scorecards")}
 		</Button>
 	);
