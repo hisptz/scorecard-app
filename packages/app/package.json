@@ -5,7 +5,7 @@
   "license": "BSD-3-Clause",
   "private": true,
   "scripts": {
-    "build": "d2-app-scripts build",
+    "build": "d2-app-scripts build --no-verify",
     "deploy": "d2-app-scripts deploy",
     "start": "dotenv -- cross-var d2-app-scripts start --proxy %DHIS2_PROXY%",
     "test": "concurrently 'BROWSER=none yarn start' 'wait-on 'http-get://localhost:3000' && cypress open --browser firefox' --kill-others --success first"

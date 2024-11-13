@@ -6,6 +6,8 @@ const config = {
 		app: "./src/App.tsx",
 		plugin: "./src/Plugin.tsx"
 	},
+	skipPluginLogic: true,
+	direction: "auto",
 	dataStoreNamespace: "hisptz-scorecard"
 };
 

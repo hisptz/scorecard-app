@@ -23,7 +23,7 @@ export function EmptyScorecardList() {
 		}}>
 			<img width="auto" height={160} src={illustration} alt="scorecard-illustration" />
 			<div style={{ textAlign: "center" }}>
-				<h1 style={{ margin: 4, fontSize: "2rem" }}>{i18n.t("Welcome to the scorecard widget")}</h1>
+				<h1 style={{ margin: 4, fontSize: "2rem" }}>{i18n.t("Welcome to the scorecard plugin")}</h1>
 				<span>{i18n.t("It seems you do not have any scorecards configured. Create a scorecard first in the Interactive scorecard app first.")}</span>
 			</div>
 			<Button icon={<IconLaunch24 />} primary onClick={() => {

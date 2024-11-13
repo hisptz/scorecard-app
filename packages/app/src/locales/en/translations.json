@@ -185,6 +185,11 @@
     "Preparing widgets migration...": "Preparing widgets migration...",
     "Migrating scorecards widgets": "Migrating scorecards widgets",
     "of": "of",
-    "Welcome to the scorecard widget": "Welcome to the scorecard widget",
-    "It seems you do not have any scorecards configured. Create a scorecard first in the Interactive scorecard app first.": "It seems you do not have any scorecards configured. Create a scorecard first in the Interactive scorecard app first."
+    "Something Went Wrong": "Something Went Wrong",
+    "Welcome to the scorecard plugin": "Welcome to the scorecard plugin",
+    "It seems you do not have any scorecards configured. Create a scorecard first in the Interactive scorecard app first.": "It seems you do not have any scorecards configured. Create a scorecard first in the Interactive scorecard app first.",
+    "Go to scorecard app": "Go to scorecard app",
+    "Select a scorecard": "Select a scorecard",
+    "Please wait...": "Please wait...",
+    "Select scorecard": "Select scorecard"
 }

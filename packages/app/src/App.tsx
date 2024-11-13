@@ -16,6 +16,11 @@ import Router from "./modules/Router";
 const MyApp = () => {
 	const { initializeState } = useInitApp();
 
+	//This checks if this is accessed from a dashboard plugin
+	if(window.location.href.includes("dashboardItemId")) {
+		window.location.replace(window.location.href.replace("index.html", "plugin.html"));
+	}
+
 	return (
 		<DataStoreProvider
 			namespace={DATASTORE_NAMESPACE}

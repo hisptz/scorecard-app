@@ -7,16 +7,17 @@ import { useState } from "react";
 // @ts-ignore
 import { Button, Checkbox, colors, IconVisualizationPivotTable24, Menu, MenuItem } from "@dhis2/ui";
 import illustration from "../../../../assets/images/scorecard_illustration.png";
+import { usePluginConfigSave } from "../../../hooks/data";
 
 
 export function WidgetScorecardList() {
+	const { saving, save } = usePluginConfigSave();
 	const { loading, scorecards, error, refetch } = useScorecardListData();
 	const [selectedScorecard, setSelectedScorecard] = useState<string | undefined>(undefined);
 
 	if (loading) {
 		return (<FullPageLoader small />);
 	}
-
 
 	if (error) {
 		return (
@@ -32,6 +33,14 @@ export function WidgetScorecardList() {
 
 	const isChecked = (scorecardId: string) => scorecardId === selectedScorecard;
 
+	const onSelect = async () => {
+		if (selectedScorecard) {
+			await save({
+				scorecardId: selectedScorecard
+			});
+			window.location.reload();
+		}
+	};
 
 	return (
 		<div style={{
@@ -44,8 +53,8 @@ export function WidgetScorecardList() {
 			gap: 16
 		}}>
 			<img width="auto" height={100} src={illustration} alt="scorecard-illustration" />
-			<h1>{i18n.t("Select the scorecard to show in this widget")}</h1>
-			<div style={{ width: "100%", maxWidth: 600 }}>
+			<h1>{i18n.t("Select a scorecard")}</h1>
+			<div style={{ width: "100%", maxHeight: "80dvh", maxWidth: 600, padding: 8, borderRadius: 4, border: `1px solid ${colors.grey800}`, overflow: "auto" }}>
 				<Menu>
 					{
 						scorecards.map(scorecard => (<MenuItem active={isChecked(scorecard.id)} icon={<IconVisualizationPivotTable24 />} onClick={() => {
@@ -64,7 +73,8 @@ export function WidgetScorecardList() {
 					}
 				</Menu>
 			</div>
-			<Button primary disabled={selectedScorecard === undefined}>{i18n.t("Select scorecard")}</Button>
+			<Button loading={saving} onClick={onSelect} primary disabled={selectedScorecard === undefined}>{saving ? i18n.t("Please wait...") : i18n.t("Select scorecard")}</Button>
 		</div>
 	);
 }
+

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-11-13T08:47:24.325Z\n"
-"PO-Revision-Date: 2024-11-13T08:47:24.325Z\n"
+"POT-Creation-Date: 2024-11-13T12:50:07.353Z\n"
+"PO-Revision-Date: 2024-11-13T12:50:07.354Z\n"
 
 msgid "Scorecard deleted successfully"
 msgstr "Scorecard deleted successfully"
@@ -582,8 +582,11 @@ msgstr "Migrating scorecards widgets"
 msgid "of"
 msgstr "of"
 
-msgid "Welcome to the scorecard widget"
-msgstr "Welcome to the scorecard widget"
+msgid "Something Went Wrong"
+msgstr "Something Went Wrong"
+
+msgid "Welcome to the scorecard plugin"
+msgstr "Welcome to the scorecard plugin"
 
 msgid ""
 "It seems you do not have any scorecards configured. Create a scorecard "
@@ -591,3 +594,15 @@ msgid ""
 msgstr ""
 "It seems you do not have any scorecards configured. Create a scorecard "
 "first in the Interactive scorecard app first."
+
+msgid "Go to scorecard app"
+msgstr "Go to scorecard app"
+
+msgid "Select a scorecard"
+msgstr "Select a scorecard"
+
+msgid "Please wait..."
+msgstr "Please wait..."
+
+msgid "Select scorecard"
+msgstr "Select scorecard"
