@@ -1,61 +1,46 @@
-import { DataStoreProvider } from "@dhis2/app-service-datastore";
-import { CssReset } from "@dhis2/ui";
-import { ConfirmDialogProvider } from "@hisptz/dhis2-ui";
-import { FullPageError, FullPageLoader, useInitApp } from "@scorecard/shared";
-import React, { Suspense, useEffect, useState } from "react";
-import { ErrorBoundary } from "react-error-boundary";
-import { RecoilRoot } from "recoil";
-import postRobot from "@krakenjs/post-robot";
+import React, { Suspense } from "react";
 import "./locales";
-import "intro.js/introjs.css";
-import "./intro-dhis2.css";
-import "./media-queries.css";
-import "./App.css";
+import "./Plugin.css";
+import { FullPageLoader, useInitApp } from "@scorecard/shared";
+import { DataStoreProvider } from "@dhis2/app-service-datastore";
 import { DATASTORE_WIDGET_NAMESPACE } from "./plugin/constants/scorecard";
-import Router from "./plugin/modules/Router";
+import { RecoilRoot } from "recoil";
+import { WidgetRouter } from "./widget/modules/Router";
+import { CssReset } from "@dhis2/ui";
 
-const Plugin = () => {
-	const [propsFromParent, setPropsFromParent] = useState<any>();
+
+type PluginProps = {
+	config: {
+		apiVersion: number;
+		appName: string;
+		appVersion: string;
+		direction: any;
+		loginApp: boolean;
+		plugin: boolean;
+		pwaEnabled: boolean;
+		requiredProps: any[],
+		url: string;
+	}
+	resizePluginWidth: any
+}
+
+const Plugin = (props: PluginProps) => {
 	const { initializeState } = useInitApp();
 
-	const receivePropsFromParent = (event: any) =>
-		setPropsFromParent(event.data);
+	console.log({ props });
 
-	useEffect(() => {
-		const dataListener = postRobot.on(
-			"dataFromParent",
-			{ window: window.parent },
-			receivePropsFromParent,
-		);
-
-		return () => {
-			dataListener.cancel();
-		};
-	}, []);
-
-	return propsFromParent ? (
-		<DataStoreProvider
-			namespace={DATASTORE_WIDGET_NAMESPACE}
-			loadingComponent={<FullPageLoader />}
-		>
+	return (
+		<div className="plugin-container">
 			<CssReset />
-			<RecoilRoot initializeState={initializeState}>
-				<ErrorBoundary FallbackComponent={FullPageError}>
-					<ConfirmDialogProvider>
-						<Suspense fallback={<FullPageLoader />}>
-							<div className="main-container">
-								<Router
-									dashboardId={
-										propsFromParent.dashboardItemId
-									}
-								/>
-							</div>
-						</Suspense>
-					</ConfirmDialogProvider>
-				</ErrorBoundary>
-			</RecoilRoot>
-		</DataStoreProvider>
-	) : null;
+			<DataStoreProvider namespace={DATASTORE_WIDGET_NAMESPACE} loadingComponent={<FullPageLoader />}>
+				<RecoilRoot initializeState={initializeState}>
+					<Suspense fallback={<FullPageLoader />}>
+						<WidgetRouter />
+					</Suspense>
+				</RecoilRoot>
+			</DataStoreProvider>
+		</div>
+	);
 };
 
 export default Plugin;

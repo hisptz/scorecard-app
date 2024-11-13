@@ -184,5 +184,7 @@
     "Are you sure you want to select this scorecard for this dashboard?": "Are you sure you want to select this scorecard for this dashboard?",
     "Preparing widgets migration...": "Preparing widgets migration...",
     "Migrating scorecards widgets": "Migrating scorecards widgets",
-    "of": "of"
+    "of": "of",
+    "Welcome to the scorecard widget": "Welcome to the scorecard widget",
+    "It seems you do not have any scorecards configured. Create a scorecard first in the Interactive scorecard app first.": "It seems you do not have any scorecards configured. Create a scorecard first in the Interactive scorecard app first."
 }

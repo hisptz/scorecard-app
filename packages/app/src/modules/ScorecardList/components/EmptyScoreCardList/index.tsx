@@ -2,7 +2,7 @@ import i18n from "@dhis2/d2-i18n";
 import { Button, Card, colors } from "@dhis2/ui";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import illustration from "./resources/scorecard_illustration.png";
+import illustration from "../../../../assets/images/scorecard_illustration.png";
 import { IconAdd24 } from "@dhis2/ui-icons";
 
 export default function EmptyScoreCardList() {
