@@ -17,7 +17,7 @@ const MyApp = () => {
 	const { initializeState } = useInitApp();
 
 	//This checks if this is accessed from a dashboard plugin
-	if(window.location.href.includes("dashboardItemId")) {
+	if (window.location.href.includes("dashboardItemId")) {
 		window.location.replace(window.location.href.replace("index.html", "plugin.html"));
 	}
 
@@ -33,7 +33,7 @@ const MyApp = () => {
 			<RecoilRoot initializeState={initializeState}>
 				<ErrorBoundary FallbackComponent={FullPageError}>
 					<DialogProvider>
-						<Suspense fallback={<FullPageLoader />}>
+						<Suspense fallback={<FullPageLoader small />}>
 							<div className="main-container">
 								<Router />
 							</div>

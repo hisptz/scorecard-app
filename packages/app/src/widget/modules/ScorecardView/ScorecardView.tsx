@@ -37,7 +37,7 @@ export function ScorecardView() {
 
 	if (loading) {
 		return (
-			<FullPageLoader />
+			<FullPageLoader small />
 		);
 	}
 
