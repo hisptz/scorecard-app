@@ -1,3 +1,5 @@
+import { ScorecardPluginConfig } from "../hooks/config";
+
 export type PluginProps = {
 	config: {
 		apiVersion: number;
@@ -7,15 +9,29 @@ export type PluginProps = {
 		loginApp: boolean;
 		plugin: boolean;
 		pwaEnabled: boolean;
-		requiredProps: any[],
 		url: string;
 	}
-	resizePluginWidth: any
+	dashboardItemFilters: {
+		pe: {
+			name: string;
+			id: string;
+		}[],
+		ou: {
+			id: string;
+			name: string;
+		}[]
+	};
+	dashboardItemId: string;
+	dashboardMode: "edit" | "view",
+	setDashboardItemDetails: (dashboardItemDetails: {
+		itemTitle: string;
+		appUrl: string;
+		onRemove: () => void;
+	}) => void;
 }
 
 
 export type PluginConfig = {
 	props: PluginProps,
-	dashboardItemId: string;
-	scorecardId?: string;
+	config?: ScorecardPluginConfig,
 }

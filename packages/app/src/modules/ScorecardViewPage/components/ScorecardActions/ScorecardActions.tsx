@@ -1,7 +1,6 @@
 import { ButtonStrip } from "@dhis2/ui";
 import { ScorecardOptionsControlButton } from "./components/ScorecardOptionsControlButton";
 import { ScorecardEditButton } from "./components/ScorecardEditButton";
-import { ScorecardResetButton } from "./components/ScorecardResetButton";
 import { ScorecardPrint } from "@hisptz/dhis2-scorecard";
 
 export function ScorecardActions() {
@@ -13,7 +12,7 @@ export function ScorecardActions() {
 				<div id="download-button">
 					<ScorecardPrint />
 				</div>
-				<ScorecardResetButton />
+				{/*<ScorecardResetButton />*/}
 			</ButtonStrip>
 		</div>
 	);

@@ -1,4 +1,4 @@
-import { WidgetScorecardList } from "./components/WidgetScorecardList";
+import { PluginScorecardList } from "./components/PluginScorecardList";
 
 export function ScorecardList() {
 
@@ -10,7 +10,7 @@ export function ScorecardList() {
 			flexDirection: "column",
 			gap: 16
 		}}>
-			<WidgetScorecardList />
+			<PluginScorecardList />
 		</div>
 	);
 

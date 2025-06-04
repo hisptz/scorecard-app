@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@dhis2/multi-calendar-dates": "^1.2.4",
-    "@dhis2/ui": "^9.10.2",
+    "@dhis2/ui": "^10.7.2",
     "@hisptz/dhis2-analytics": "^2.0.46",
     "@hisptz/dhis2-ui": "^2.0.27",
     "@hisptz/dhis2-utils": "^2.0.8",

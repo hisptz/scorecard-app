@@ -1,66 +1,28 @@
-import { DATASTORE_WIDGET_NAMESPACE } from "../../plugin/constants/scorecard";
-import { useDataMutation, useDataQuery } from "@dhis2/app-runtime";
-import { useMemo } from "react";
-import { usePluginConfig } from "../components/PluginConfigProvider";
+import { SCORECARD_NAMESPACE } from "../constants/scorecard";
+import { useDataQuery } from "@dhis2/app-runtime";
+import { ScorecardConfig } from "@hisptz/dhis2-scorecard";
 
 
 const query: any = {
-	dataStoreConfig: {
-		resource: `dataStore/${DATASTORE_WIDGET_NAMESPACE}`,
+	config: {
+		resource: `dataStore/${SCORECARD_NAMESPACE}`,
 		id: ({ id }: { id: string }) => id
 	}
 };
 
-const createMutation = (id: string) => {
-	return {
-		resource: `dataStore/${DATASTORE_WIDGET_NAMESPACE}/${id}`,
-		type: "create",
-		data: ({ data }: { data: { dashboardItemId: string; scorecardId: string } }) => data
-	} as any;
-};
-
-
-type Response = {
-	dataStoreConfig: {
-		dashboardItemId: string;
-		scorecardId: string;
-	}
-}
-
-export function usePluginConfigData(dashboardItemId: string | null) {
-	const { loading, data, error } = useDataQuery<Response>(query, {
+export function usePluginScorecard(scorecardId: string) {
+	const { loading, data, error, ...rest } = useDataQuery<{ config: ScorecardConfig }>(query, {
 		variables: {
-			id: dashboardItemId
-		},
-		lazy: !dashboardItemId
+			id: scorecardId
+		}
 	});
-
-	const itemConfig = useMemo(() => {
-		return data?.dataStoreConfig ?? null;
-	}, [data?.dataStoreConfig]);
 
 	return {
 		loading,
 		error,
-		itemConfig
+		scorecard: data?.config,
+		...rest
 	};
 }
 
-export function usePluginConfigSave() {
-	const { dashboardItemId } = usePluginConfig();
-	const [mutate, { loading }] = useDataMutation(createMutation(dashboardItemId));
 
-	const save = async (data: { scorecardId: string }) => {
-		return mutate({
-			data: {
-				dashboardItemId,
-				scorecardId: data.scorecardId
-			}
-		});
-	};
-
-	return {
-		save,
-		saving: loading
-	};
-}

@@ -2,13 +2,20 @@ const config = {
 	type: "app",
 	name: "hisptz-scorecard",
 	title: "Interactive Scorecard",
+	pluginType: "DASHBOARD",
 	entryPoints: {
 		app: "./src/App.tsx",
 		plugin: "./src/Plugin.tsx"
 	},
-	skipPluginLogic: true,
+	dataStoreNamespace: "hisptz-scorecard",
+	minDHIS2Version: "2.40",
 	direction: "auto",
-	dataStoreNamespace: "hisptz-scorecard"
+	pwa: {
+		enabled: true,
+		caching: {
+			patternsToOmitFromAppShell: [/.*/]
+		}
+	}
 };
 
 module.exports = config;

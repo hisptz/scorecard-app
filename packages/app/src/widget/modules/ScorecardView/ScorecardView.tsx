@@ -1,9 +1,12 @@
 import { FullPageError, FullPageLoader } from "@scorecard/shared";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useResizeObserver } from "usehooks-ts";
 import { usePluginScorecardConfig } from "../../hooks/scorecard";
 import { ScorecardContext, ScorecardDataProvider, ScorecardHeader, ScorecardLegendsView, ScorecardStateProvider } from "@hisptz/dhis2-scorecard";
 import { ScorecardTable } from "./ScorecardTable";
+import { usePluginConfig } from "../../components/PluginConfigProvider";
+import { useManagePluginConfig } from "../../hooks/config";
+import { isEmpty } from "lodash";
 
 
 export function ScorecardView() {
@@ -17,6 +20,20 @@ export function ScorecardView() {
 	const { height: containerHeight, width: containerWidth } = useResizeObserver({
 		ref: containerRef
 	});
+	const { props: { setDashboardItemDetails, dashboardItemId, dashboardItemFilters } } = usePluginConfig();
+	const { deleteConfig } = useManagePluginConfig(dashboardItemId);
+
+	useEffect(() => {
+		if (config) {
+			setDashboardItemDetails({
+				itemTitle: config.title,
+				appUrl: `#/${config.id}`,
+				onRemove: () => {
+					deleteConfig();
+				}
+			});
+		}
+	}, [config]);
 
 	if (loading) {
 		return (
@@ -38,7 +55,16 @@ export function ScorecardView() {
 
 	return (
 		<div ref={containerRef} style={{ height: "100%", width: "100%" }}>
-			<ScorecardStateProvider config={config!}>
+			<ScorecardStateProvider
+				initialState={isEmpty(dashboardItemFilters) ? undefined : {
+					orgUnitSelection: isEmpty(dashboardItemFilters.ou) ? config.orgUnitSelection : {
+						orgUnits: dashboardItemFilters.ou
+					},
+					periodSelection: isEmpty(dashboardItemFilters.pe) ? config.periodSelection : {
+						periods: dashboardItemFilters.pe
+					},
+					options: config.options
+				}} config={config!}>
 				<ScorecardContext config={config!}>
 					<ScorecardDataProvider>
 						<div style={{ height: "100%", width: "100%", display: "flex", flexDirection: "column", gap: 16 }}>

@@ -179,17 +179,11 @@
     "Arrows": "Arrows",
     "Show Data in Rows": "Show Data in Rows",
     "Reset": "Reset",
-    "Create a new scorecard in the scorecard app to see it here.": "Create a new scorecard in the scorecard app to see it here.",
-    "Confirm scorecard selection": "Confirm scorecard selection",
-    "Are you sure you want to select this scorecard for this dashboard?": "Are you sure you want to select this scorecard for this dashboard?",
-    "Preparing widgets migration...": "Preparing widgets migration...",
-    "Migrating scorecards widgets": "Migrating scorecards widgets",
-    "of": "of",
-    "Something Went Wrong": "Something Went Wrong",
     "Welcome to the scorecard plugin": "Welcome to the scorecard plugin",
     "It seems you do not have any scorecards configured. Create a scorecard first in the Interactive scorecard app first.": "It seems you do not have any scorecards configured. Create a scorecard first in the Interactive scorecard app first.",
     "Go to scorecard app": "Go to scorecard app",
     "Select a scorecard": "Select a scorecard",
-    "Please wait...": "Please wait...",
-    "Select scorecard": "Select scorecard"
+    "Select scorecard": "Select scorecard",
+    "__MANIFEST_APP_TITLE_Application title": "Interactive Scorecard",
+    "__MANIFEST_APP_DESCRIPTION_Application description": "Interactive Scorecard Application"
 }

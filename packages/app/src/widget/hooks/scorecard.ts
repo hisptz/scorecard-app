@@ -1,8 +1,7 @@
 import { ScorecardConfig } from "@hisptz/dhis2-scorecard";
-import { useDataQuery } from "@dhis2/app-runtime";
-import { useMemo } from "react";
 import { DATASTORE_NAMESPACE } from "@scorecard/shared";
-import { usePluginConfig } from "../components/PluginConfigProvider";
+import { useParams } from "react-router-dom";
+import { usePluginScorecard } from "./data";
 
 const query: any = {
 	config: {
@@ -16,21 +15,13 @@ type ConfigQueryResponse = {
 };
 
 export function usePluginScorecardConfig() {
-	const { scorecardId } = usePluginConfig();
-	const { data, loading, refetch, error } = useDataQuery<ConfigQueryResponse>(
-		query,
-		{
-			variables: {
-				id: scorecardId
-			}
-		}
-	);
-	const config = useMemo(() => data?.config, [data?.config]);
+	const { id } = useParams<{ id: string }>();
+	const { loading, error, scorecard, ...rest } = usePluginScorecard(id!);
 
 	return {
-		config,
+		config: scorecard,
 		loading,
 		error,
-		refetch
+		...rest
 	};
 }

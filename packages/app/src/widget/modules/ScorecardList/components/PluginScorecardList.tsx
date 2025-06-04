@@ -4,15 +4,19 @@ import { isEmpty } from "lodash";
 import { EmptyScorecardList } from "./EmptyScorecardList";
 import i18n from "@dhis2/d2-i18n";
 import { useState } from "react";
-// @ts-ignore
+//@ts-expect-error missing type export
 import { Button, Checkbox, colors, IconVisualizationPivotTable24, Menu, MenuItem } from "@dhis2/ui";
 import illustration from "../../../../assets/images/scorecard_illustration.png";
-import { usePluginConfigSave } from "../../../hooks/data";
+import { usePluginConfig } from "../../../components/PluginConfigProvider";
+import { useNavigate } from "react-router-dom";
+import { useManagePluginConfig } from "../../../hooks/config";
 
 
-export function WidgetScorecardList() {
-	const { saving, save } = usePluginConfigSave();
+export function PluginScorecardList() {
 	const { loading, scorecards, error, refetch } = useScorecardListData();
+	const { props: { dashboardItemId } } = usePluginConfig();
+	const { addConfig } = useManagePluginConfig(dashboardItemId);
+	const navigate = useNavigate();
 	const [selectedScorecard, setSelectedScorecard] = useState<string | undefined>(undefined);
 
 	if (loading) {
@@ -35,10 +39,11 @@ export function WidgetScorecardList() {
 
 	const onSelect = async () => {
 		if (selectedScorecard) {
-			await save({
-				scorecardId: selectedScorecard
+			await addConfig({
+				scorecardId: selectedScorecard,
+				dashboardItemId
 			});
-			window.location.reload();
+			navigate(`${selectedScorecard}`);
 		}
 	};
 
@@ -73,7 +78,7 @@ export function WidgetScorecardList() {
 					}
 				</Menu>
 			</div>
-			<Button loading={saving} onClick={onSelect} primary disabled={selectedScorecard === undefined}>{saving ? i18n.t("Please wait...") : i18n.t("Select scorecard")}</Button>
+			<Button onClick={onSelect} primary disabled={selectedScorecard === undefined}>{i18n.t("Select scorecard")}</Button>
 		</div>
 	);
 }

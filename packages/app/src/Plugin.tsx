@@ -1,20 +1,17 @@
-import React, { Suspense } from "react";
+import React, { FC, Suspense } from "react";
 import "./locales";
 import "./Plugin.css";
 import { FullPageLoader, useInitApp } from "@scorecard/shared";
 import { DataStoreProvider } from "@dhis2/app-service-datastore";
-import { DATASTORE_WIDGET_NAMESPACE } from "./plugin/constants/scorecard";
 import { RecoilRoot } from "recoil";
 import { WidgetRouter } from "./widget/modules/Router";
 import { CssReset } from "@dhis2/ui";
-import { PluginConfigProvider } from "./widget/components/PluginConfigProvider";
+import { DATASTORE_WIDGET_NAMESPACE } from "./widget/constants/scorecard";
 import { PluginProps } from "./widget/types";
 
 
-const Plugin = (props: PluginProps) => {
+const DashboardPlugin: FC<PluginProps> = (props: PluginProps) => {
 	const { initializeState } = useInitApp();
-
-	console.log({ props });
 
 	return (
 		<div className="plugin-container">
@@ -22,9 +19,7 @@ const Plugin = (props: PluginProps) => {
 			<DataStoreProvider namespace={DATASTORE_WIDGET_NAMESPACE} loadingComponent={<FullPageLoader />}>
 				<RecoilRoot initializeState={initializeState}>
 					<Suspense fallback={<FullPageLoader />}>
-						<PluginConfigProvider props={props}>
-							<WidgetRouter />
-						</PluginConfigProvider>
+						<WidgetRouter props={props} />
 					</Suspense>
 				</RecoilRoot>
 			</DataStoreProvider>
@@ -32,4 +27,4 @@ const Plugin = (props: PluginProps) => {
 	);
 };
 
-export default Plugin;
+export default DashboardPlugin;

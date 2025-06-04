@@ -11,7 +11,7 @@ export function useNavigateToScorecardView() {
 		const { periodSelection, orgUnitSelection } = config;
 		const searchParams = new URLSearchParams();
 		const orgUnits = compact(getOrgUnitIdsFromOrgUnitSelection(orgUnitSelection as OrgUnitSelection));
-		const periods = compact(periodSelection.periods.map(({ id }) => id));
+		const periods = compact(periodSelection.periods?.map(({ id }) => id));
 
 		if (!isEmpty(periods)) {
 			searchParams.set("pe", periods.join(";"));
