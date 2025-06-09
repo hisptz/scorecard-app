@@ -18,7 +18,7 @@ const DashboardPlugin: FC<PluginProps> = (props: PluginProps) => {
 			<CssReset />
 			<DataStoreProvider namespace={DATASTORE_WIDGET_NAMESPACE} loadingComponent={<FullPageLoader />}>
 				<RecoilRoot initializeState={initializeState}>
-					<Suspense fallback={<FullPageLoader />}>
+					<Suspense fallback={<FullPageLoader small />}>
 						<WidgetRouter props={props} />
 					</Suspense>
 				</RecoilRoot>

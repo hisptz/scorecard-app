@@ -27,7 +27,7 @@ export function ScorecardView() {
 		if (config) {
 			setDashboardItemDetails({
 				itemTitle: config.title,
-				appUrl: `#/${config.id}`,
+				appUrl: `#/view/${config.id}`,
 				onRemove: () => {
 					deleteConfig();
 				}

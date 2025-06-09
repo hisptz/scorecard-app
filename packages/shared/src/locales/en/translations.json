@@ -162,5 +162,6 @@
     "User Organisation Unit": "User Organisation Unit",
     "User Sub-units": "User Sub-units",
     "User Sub-x2-units": "User Sub-x2-units",
-    "This group does not have any configured data sources": "This group does not have any configured data sources"
+    "This group does not have any configured data sources": "This group does not have any configured data sources",
+    "__MANIFEST_APP_TITLE_Application title": "@scorecard/shared"
 }
