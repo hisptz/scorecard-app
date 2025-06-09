@@ -5,8 +5,9 @@ import { compact, isEmpty } from "lodash";
 import { getOrgUnitIdsFromOrgUnitSelection } from "@scorecard/shared";
 import { OrgUnitSelection } from "@hisptz/dhis2-utils";
 
-export function useNavigateToScorecardView() {
-	const navigate = useNavigate();
+
+export function useGetScorecardViewLink() {
+
 	return useCallback((config: Pick<ScorecardConfig, "id" | "orgUnitSelection" | "periodSelection">) => {
 		const { periodSelection, orgUnitSelection } = config;
 		const searchParams = new URLSearchParams();
@@ -20,8 +21,14 @@ export function useNavigateToScorecardView() {
 			searchParams.set("ou", orgUnits.join(";"));
 		}
 
-		const url = `/view/${config.id}?${searchParams.toString()}`;
-		navigate(url);
+		return `/view/${config.id}?${searchParams.toString()}`;
+	}, []);
+}
 
+export function useNavigateToScorecardView() {
+	const navigate = useNavigate();
+	return useCallback((config: Pick<ScorecardConfig, "id" | "orgUnitSelection" | "periodSelection">) => {
+		const url = useGetScorecardViewLink()(config);
+		navigate(url);
 	}, [navigate]);
 }

@@ -7,6 +7,7 @@ import { ScorecardTable } from "./ScorecardTable";
 import { usePluginConfig } from "../../components/PluginConfigProvider";
 import { useManagePluginConfig } from "../../hooks/config";
 import { isEmpty } from "lodash";
+import { useGetScorecardViewLink } from "../../../hooks/navigate";
 
 
 export function ScorecardView() {
@@ -23,11 +24,13 @@ export function ScorecardView() {
 	const { props: { setDashboardItemDetails, dashboardItemId, dashboardItemFilters } } = usePluginConfig();
 	const { deleteConfig } = useManagePluginConfig(dashboardItemId);
 
+	const getLink = useGetScorecardViewLink();
+
 	useEffect(() => {
 		if (config) {
 			setDashboardItemDetails({
 				itemTitle: config.title,
-				appUrl: `#/view/${config.id}`,
+				appUrl: `#${getLink(config)}`,
 				onRemove: () => {
 					deleteConfig();
 				}
