@@ -17,7 +17,7 @@ sketch
 .d2
 src/locales
 build
-*.env
+.env
 cypress.env.json
 
 

@@ -19,9 +19,9 @@ apps/widget/scorecard_widget.zip
 /shared/state/src/locales/
 /shared/utils/src/locales/
 /apps/app/cypress/downloads/
-/packages/app/.env
+/.env
 /packages/app/cypress.env.json
 *.env
 .env
 .nx
-/packages/app/.env.production
+/.env.production
