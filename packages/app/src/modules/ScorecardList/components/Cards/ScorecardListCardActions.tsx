@@ -19,7 +19,6 @@ export function ScorecardListCardActions({
 										 }: ScorecardListCardActionsProps) {
 	const user = useRecoilValue(UserState);
 	const navigate = useNavigate();
-
 	const navigateToView = useNavigateToScorecardView();
 
 

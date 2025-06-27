@@ -78,7 +78,7 @@ export function OrgUnitDimensionSelection() {
 	} = useOrganisationUnitLevelsAndGroups();
 	const orgUnitIds = useMemo(
 		() => orgUnit?.orgUnits?.map(({ id }) => id),
-		[orgUnit]
+		[orgUnit?.orgUnits]
 	);
 	const { loading, orgUnits: orgUnitWithData } = useOrgUnits(orgUnitIds);
 
@@ -104,7 +104,7 @@ export function OrgUnitDimensionSelection() {
 					orgUnitLevels
 				});
 			}
-		}, [loading, metaLoading, orgUnitWithData, orgUnit]);
+		}, [loading, metaLoading, orgUnit]);
 
 	const {
 		value: orgUnitHidden,

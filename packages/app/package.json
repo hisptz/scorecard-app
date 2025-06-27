@@ -53,7 +53,7 @@
     "@dhis2/multi-calendar-dates": "^1.2.4",
     "@dhis2/ui": "^10.7.2",
     "@hisptz/dhis2-analytics": "^2.0.67",
-    "@hisptz/dhis2-scorecard": "^1.0.35",
+    "@hisptz/dhis2-scorecard": "^1.2.2",
     "@hisptz/dhis2-ui": "^2.0.48",
     "@hisptz/dhis2-utils": "^2.0.18",
     "@hookform/resolvers": "^3.9.0",

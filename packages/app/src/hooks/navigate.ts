@@ -6,9 +6,9 @@ import { getOrgUnitIdsFromOrgUnitSelection } from "@scorecard/shared";
 import { OrgUnitSelection } from "@hisptz/dhis2-utils";
 
 
-export function useGetScorecardViewLink() {
+export function getScorecardViewLink() {
 
-	return useCallback((config: Pick<ScorecardConfig, "id" | "orgUnitSelection" | "periodSelection">) => {
+	return (config: Pick<ScorecardConfig, "id" | "orgUnitSelection" | "periodSelection">) => {
 		const { periodSelection, orgUnitSelection } = config;
 		const searchParams = new URLSearchParams();
 		const orgUnits = compact(getOrgUnitIdsFromOrgUnitSelection(orgUnitSelection as OrgUnitSelection));
@@ -22,13 +22,13 @@ export function useGetScorecardViewLink() {
 		}
 
 		return `/view/${config.id}?${searchParams.toString()}`;
-	}, []);
+	};
 }
 
 export function useNavigateToScorecardView() {
 	const navigate = useNavigate();
 	return useCallback((config: Pick<ScorecardConfig, "id" | "orgUnitSelection" | "periodSelection">) => {
-		const url = useGetScorecardViewLink()(config);
+		const url = getScorecardViewLink()(config);
 		navigate(url);
 	}, [navigate]);
 }

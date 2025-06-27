@@ -2,7 +2,7 @@ import { useSearchParams } from "react-router-dom";
 import { useCallback, useMemo } from "react";
 import { OrgUnitSelection } from "@hisptz/dhis2-utils";
 import { getOrgUnitIdsFromOrgUnitSelection, getOrgUnitSelectionFromIds } from "@scorecard/shared";
-import { useScorecardOrgUnitSelectionState, useScorecardPeriodState } from "@hisptz/dhis2-scorecard";
+import { useUpdateDimensionState } from "@hisptz/dhis2-scorecard";
 
 
 export function useRawDimensions() {
@@ -31,8 +31,8 @@ export function useRawDimensions() {
 
 export function useDimensions() {
 	const [params, setParams] = useSearchParams();
-	const [, setOrgUnitSelection] = useScorecardOrgUnitSelectionState();
-	const [, setPeriodSelection] = useScorecardPeriodState();
+	const setOrgUnitSelection = useUpdateDimensionState("orgUnit");
+	const setPeriodSelection = useUpdateDimensionState("period");
 	const periods = useMemo(() => {
 		if (params.get("pe") == null) {
 			return undefined;
@@ -75,11 +75,8 @@ export function useDimensions() {
 
 	const setPeriod = useCallback(
 		(periods: string[]) => {
-			setPeriodSelection((prev) => {
-				return {
-					...prev,
-					periods: periods.map((periodId) => ({ id: periodId }))
-				};
+			setPeriodSelection({
+				periods: periods.map((periodId) => ({ id: periodId }))
 			});
 			setParam("pe")(periods.join(";"));
 

@@ -3189,10 +3189,10 @@
   dependencies:
     "@hapi/hoek" "^9.0.0"
 
-"@hisptz/dhis2-analytics@2.1.8", "@hisptz/dhis2-analytics@^2.0.67":
-  version "2.1.8"
-  resolved "https://registry.yarnpkg.com/@hisptz/dhis2-analytics/-/dhis2-analytics-2.1.8.tgz#443a88782be148b2d469fd61cb026869d0143ee0"
-  integrity sha512-XDq/2nGWv8jL0/mLV52QYVQsaVXHMo8qQof4EvQMgk624ARq0TqKEkPsa195MksmAHucXj//4pJJOE42wxIk8A==
+"@hisptz/dhis2-analytics@2.1.10":
+  version "2.1.10"
+  resolved "https://registry.yarnpkg.com/@hisptz/dhis2-analytics/-/dhis2-analytics-2.1.10.tgz#631d0ec959e3b9b59cd5e9d1d210ee4a983caa43"
+  integrity sha512-Pgq4PfDrPw6S5hR3U0wgTxHDJjqFilLRM9UFRoP7SqqBJsh7LQoRgXbcthLeDqPDBcpquf2dSI3EhXO8sGM54w==
   dependencies:
     "@hisptz/dhis2-ui" "2.0.48"
     "@hisptz/dhis2-utils" "2.0.18"
@@ -3220,10 +3220,8 @@
     react-query "^3.39.3"
     react-spring "^9.6.1"
     react-to-print "^3.0.1"
-    recoil "^0.7.7"
     screenfull "^6.0.2"
     xlsx "^0.18.5"
-    zod "^3.23.8"
 
 "@hisptz/dhis2-analytics@^2.0.46":
   version "2.0.46"
@@ -3261,15 +3259,51 @@
     xlsx "^0.18.5"
     zod "^3.23.8"
 
-"@hisptz/dhis2-scorecard@^1.0.35":
-  version "1.1.8"
-  resolved "https://registry.yarnpkg.com/@hisptz/dhis2-scorecard/-/dhis2-scorecard-1.1.8.tgz#e04d066f177c7f8fc099cee7e36aa66dd5ccef66"
-  integrity sha512-+GkgrLSBps1GEf/A9PMx5Sh+rVTEuY7HKRClmmE7Hrah9H0RgoZD4Dt/i7e1TVgZTH/wyP5s55qdW2BlBDTGzA==
+"@hisptz/dhis2-analytics@^2.0.67":
+  version "2.1.8"
+  resolved "https://registry.yarnpkg.com/@hisptz/dhis2-analytics/-/dhis2-analytics-2.1.8.tgz#443a88782be148b2d469fd61cb026869d0143ee0"
+  integrity sha512-XDq/2nGWv8jL0/mLV52QYVQsaVXHMo8qQof4EvQMgk624ARq0TqKEkPsa195MksmAHucXj//4pJJOE42wxIk8A==
   dependencies:
-    "@hisptz/dhis2-analytics" "2.1.8"
     "@hisptz/dhis2-ui" "2.0.48"
     "@hisptz/dhis2-utils" "2.0.18"
+    "@react-leaflet/core" "^2.1.0"
+    "@react-pdf/renderer" "^4.0.0"
     "@tanstack/react-table" "^8.19.3"
+    async-es "^3.2.5"
+    d3-color "^3.1.0"
+    d3-scale "^4.0.2"
+    file-saver "^2.0.5"
+    highcharts "^12.2.0"
+    highcharts-react-official "^3.2.1"
+    jotai-devtools "^0.10.1"
+    leaflet "^1.9.4"
+    leaflet-easyprint "^2.1.9"
+    leaflet.fullscreen "^4.0.0"
+    luxon "^3.4.4"
+    react-circular-progressbar "^2.1.0"
+    react-dnd "^16.0.1"
+    react-dnd-html5-backend "^16.0.1"
+    react-error-boundary "^4.0.12"
+    react-helmet "^6.1.0"
+    react-leaflet "^4.2.1"
+    react-leaflet-custom-control "^1.4.0"
+    react-query "^3.39.3"
+    react-spring "^9.6.1"
+    react-to-print "^3.0.1"
+    recoil "^0.7.7"
+    screenfull "^6.0.2"
+    xlsx "^0.18.5"
+    zod "^3.23.8"
+
+"@hisptz/dhis2-scorecard@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@hisptz/dhis2-scorecard/-/dhis2-scorecard-1.2.2.tgz#33501594e5105f0d1f555522905aa2d4bd00c247"
+  integrity sha512-8cp1VsFGTKXvj/dA7U8FyQZ62bDwTykwZsJ02qVHHmdEVN58+Fh2sWl6XnxvZf1X07Kx3zBArucEO3qlZ4JnJQ==
+  dependencies:
+    "@hisptz/dhis2-analytics" "2.1.10"
+    "@hisptz/dhis2-ui" "2.0.48"
+    "@hisptz/dhis2-utils" "2.0.18"
+    "@tanstack/react-table" "^8.21.3"
     async-es "^3.2.5"
     file-saver "^2.0.5"
     luxon "^3.4.4"
@@ -3278,9 +3312,7 @@
     react-error-boundary "^4.0.12"
     react-jsx-parser "^2.2.0"
     react-to-print "^3.0.1"
-    recoil "^0.7.7"
     xlsx "^0.18.5"
-    zod "^3.23.8"
 
 "@hisptz/dhis2-ui@2.0.27", "@hisptz/dhis2-ui@^2.0.27":
   version "2.0.27"
@@ -4850,10 +4882,22 @@
   dependencies:
     "@tanstack/table-core" "8.20.5"
 
+"@tanstack/react-table@^8.21.3":
+  version "8.21.3"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-table/-/react-table-8.21.3.tgz#2c38c747a5731c1a07174fda764b9c2b1fb5e91b"
+  integrity sha512-5nNMTSETP4ykGegmVkhjcS8tTLW6Vl4axfEGQN3v0zdHYbK4UfoqfPChclTrJ4EoK9QynqAu9oUf8VEmrpZ5Ww==
+  dependencies:
+    "@tanstack/table-core" "8.21.3"
+
 "@tanstack/table-core@8.20.5":
   version "8.20.5"
   resolved "https://registry.yarnpkg.com/@tanstack/table-core/-/table-core-8.20.5.tgz#3974f0b090bed11243d4107283824167a395cf1d"
   integrity sha512-P9dF7XbibHph2PFRz8gfBKEXEY/HJPOhym8CHmjF8y3q5mWpKx9xtZapXQUWCgkqvsK0R46Azuz+VaxD4Xl+Tg==
+
+"@tanstack/table-core@8.21.3":
+  version "8.21.3"
+  resolved "https://registry.yarnpkg.com/@tanstack/table-core/-/table-core-8.21.3.tgz#2977727d8fc8dfa079112d9f4d4c019110f1732c"
+  integrity sha512-ldZXEhOBb8Is7xLs01fR3YEc3DERiz5silj8tnGkFZytt1abEvl/GhUmCE0PMLaMPTa3Jk4HbKmRlHmu+gCftg==
 
 "@tootallnate/once@1":
   version "1.1.2"
