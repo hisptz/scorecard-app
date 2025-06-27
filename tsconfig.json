@@ -21,8 +21,7 @@
   },
   "include": [
     "src",
-    "../../type.d.ts",
-    "../shared/src"
+    "type.d.ts"
   ],
   "exclude": [
     "node_modules",

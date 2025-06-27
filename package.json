@@ -9,6 +9,7 @@
     "deploy": "d2-app-scripts deploy",
     "start": "dotenv -- cross-var d2-app-scripts start --proxy %DHIS2_PROXY%",
     "ybd": "yarn build && dotenv -- cross-var yarn deploy %DHIS2_PROXY% --username %D2_USERNAME%",
+    "type-check": "tsc --noEmit",
     "test": "concurrently 'BROWSER=none yarn start' 'wait-on 'http-get://localhost:3000' && cypress open --browser firefox' --kill-others --success first"
   },
   "devDependencies": {

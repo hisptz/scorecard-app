@@ -5,11 +5,14 @@ import { ContainerLoader } from "../../../../../../shared";
 import React, { Suspense } from "react";
 import { useController } from "react-hook-form";
 import { ScorecardConfig } from "@hisptz/dhis2-scorecard";
-
+import { OrgUnitSelection } from "@hisptz/dhis2-utils";
 
 export default function OrgUnit() {
-	const { field, fieldState } = useController<ScorecardConfig, `orgUnitSelection`>({
-		name: "orgUnitSelection"
+	const { field, fieldState } = useController<
+		ScorecardConfig,
+		`orgUnitSelection`
+	>({
+		name: "orgUnitSelection",
 	});
 
 	return (
@@ -24,7 +27,7 @@ export default function OrgUnit() {
 						gap: 8,
 						alignItems: "center",
 						padding: "8px 0",
-						color: colors.red500
+						color: colors.red500,
 					}}
 				>
 					<IconError24 />
@@ -41,7 +44,11 @@ export default function OrgUnit() {
 						showLevels
 						showUserOptions
 						onUpdate={field.onChange}
-						value={field.value ?? { orgUnits: [] }}
+						value={
+							(field.value as OrgUnitSelection) ?? {
+								orgUnits: [],
+							}
+						}
 					/>
 				</Suspense>
 			</div>

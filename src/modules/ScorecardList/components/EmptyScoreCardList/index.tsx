@@ -2,8 +2,8 @@ import i18n from "@dhis2/d2-i18n";
 import { Button, Card, colors } from "@dhis2/ui";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import illustration from "../../../../assets/images/scorecard_illustration.png";
 import { IconAdd24 } from "@dhis2/ui-icons";
+import illustration from "../../../../assets/images/scorecard_illustration.png";
 
 export default function EmptyScoreCardList() {
 	const navigate = useNavigate();
@@ -15,7 +15,7 @@ export default function EmptyScoreCardList() {
 		<div
 			style={{
 				alignItems: "center",
-				justifyContent: "center"
+				justifyContent: "center",
 			}}
 			className="center column align-center"
 		>
@@ -26,7 +26,12 @@ export default function EmptyScoreCardList() {
 						style={{ borderRadius: 8, padding: 32 }}
 					>
 						<div className="p-32">
-							<img alt="illustration" src={illustration} height={200} width={200} />
+							<img
+								alt="illustration"
+								src={illustration}
+								height={200}
+								width={200}
+							/>
 						</div>
 						<div className="p-8">
 							<h1
@@ -39,7 +44,7 @@ export default function EmptyScoreCardList() {
 								style={{
 									fontStyle: "italic",
 									color: colors.grey700,
-									position: "relative"
+									position: "relative",
 								}}
 							>
 								{i18n.t(
