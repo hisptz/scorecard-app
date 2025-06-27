@@ -1,4 +1,4 @@
-import { DATASTORE_NAMESPACE, DATASTORE_OLD_SCORECARD_ENDPOINT, UserState } from "@scorecard/shared";
+import { DATASTORE_NAMESPACE, DATASTORE_OLD_SCORECARD_ENDPOINT, UserState } from "../../../shared";
 import { OldScorecardSchema } from "../schemas/old";
 import { useDataQuery } from "@dhis2/app-runtime";
 import { Pager } from "@hisptz/dhis2-ui";

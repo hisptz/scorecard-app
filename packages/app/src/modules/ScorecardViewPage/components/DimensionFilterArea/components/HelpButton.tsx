@@ -3,7 +3,7 @@ import { Button, IconQuestion24 } from "@dhis2/ui";
 import i18n from "@dhis2/d2-i18n";
 import { useBoolean } from "usehooks-ts";
 import { Steps } from "intro.js-react";
-import { STEP_OPTIONS } from "@scorecard/shared";
+import { STEP_OPTIONS } from "../../../../../shared";
 
 export interface HelpButtonProps {
 	steps: any[];

@@ -7,7 +7,7 @@ import CustomCheckboxField from "./components/CustomCheckboxField";
 import CustomSingleSelect from "./components/CustomSingleSelect";
 import LegendDefinitionField from "./components/LegendDefinitionField";
 import LegendMinMax from "./components/LegendMinMax";
-import MultipleFieldsField from "./components/MultipleFieldsField/index.tsx";
+import MultipleFieldsField from "./components/MultipleFieldsField";
 import RichTextEditor from "./components/RichTextEditor";
 import classes from "./CustomField.module.css";
 import { DHIS2ValueTypes } from "../../constants";

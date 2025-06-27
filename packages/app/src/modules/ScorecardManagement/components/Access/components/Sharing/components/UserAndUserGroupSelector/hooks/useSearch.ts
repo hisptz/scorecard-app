@@ -7,24 +7,41 @@ const query = {
 		params: ({ keyword }: any) => ({
 			filter: [`displayName:ilike:${keyword}`],
 			fields: ["id", "displayName"],
-			order: "name:asc",
-		}),
+			order: "name:asc"
+		})
 	},
 	userGroups: {
 		resource: "userGroups",
 		params: ({ keyword }: any) => ({
 			filter: keyword ? [`displayName:ilike:${keyword}`] : undefined,
 			fields: ["id", "name", "displayName"],
-			order: "name:asc",
-		}),
-	},
+			order: "name:asc"
+		})
+	}
 };
+
+interface Response {
+	users: {
+		users: Array<{
+			id: string;
+			displayName: string;
+		}>
+	};
+	userGroups: {
+		userGroups: Array<{
+			id: string;
+			displayName: string;
+			name: string;
+		}>
+	};
+
+}
 
 export default function useSearchUserAndUserGroup(initialKeyword: any) {
 	const [keyword, setKeyword] = useState(initialKeyword);
-	const { data, errors, loading, refetch } = useDataQuery(query, {
+	const { data, error, loading, refetch } = useDataQuery<Response>(query, {
 		variables: { keyword },
-		lazy: true,
+		lazy: true
 	});
 
 	useEffect(() => {
@@ -33,6 +50,7 @@ export default function useSearchUserAndUserGroup(initialKeyword: any) {
 				refetch({ keyword });
 			}
 		}
+
 		search();
 	}, [keyword]);
 
@@ -40,15 +58,15 @@ export default function useSearchUserAndUserGroup(initialKeyword: any) {
 		const users =
 			data?.users?.users?.map((user: any) => ({
 				...user,
-				type: "user",
+				type: "user"
 			})) || [];
 		const userGroups =
 			data?.userGroups?.userGroups?.map((userGroup: any) => ({
 				...userGroup,
-				type: "userGroup",
+				type: "userGroup"
 			})) || [];
 		return [...users, ...userGroups];
 	}, [data?.users, data?.userGroups]);
 
-	return { data: userAndUserGroups, errors, loading, setKeyword };
+	return { data: userAndUserGroups, error, loading, setKeyword };
 }

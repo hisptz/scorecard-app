@@ -6,10 +6,10 @@ import { customChunk } from "../components/DataGroups/components/DataGroup/utils
 import { DropResult } from "react-beautiful-dnd";
 import { flattenDeep, head } from "lodash";
 import { uid } from "@hisptz/dhis2-utils";
-import { generateLegendDefaults } from "@scorecard/shared";
 import { getNonDefaultLegendDefinitions } from "../../General/utils/utils";
 import { SelectedDataItem } from "@hisptz/dhis2-ui";
 import { useClearSelectedDataState, useSelectedData } from "../states/selectionState";
+import { generateLegendDefaults } from "../../../../../shared";
 
 export default function useDataGroupLayout({
 											   index

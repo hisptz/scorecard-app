@@ -1,10 +1,10 @@
 import i18n from "@dhis2/d2-i18n";
 import { Button, ButtonStrip, Field, Modal, ModalActions, ModalContent, ModalTitle, Radio } from "@dhis2/ui";
-import { AverageDisplayType } from "@scorecard/shared";
 import React, { useTransition } from "react";
 import { FormProvider, useController, useForm } from "react-hook-form";
 import { ScorecardViewOptions, useScorecardViewStateEngine } from "@hisptz/dhis2-scorecard";
 import { RHFCheckboxField } from "@hisptz/dhis2-ui";
+import { AverageDisplayType } from "../../../../../shared";
 
 function AverageDisplayTypeField() {
 	const { field, fieldState } = useController<ScorecardViewOptions>({

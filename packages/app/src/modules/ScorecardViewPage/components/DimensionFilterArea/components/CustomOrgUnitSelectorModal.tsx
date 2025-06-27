@@ -8,7 +8,7 @@ import { useBoolean } from "usehooks-ts";
 import { useDimensions } from "../../../hooks/dimensions";
 import { useOrgUnits } from "../../../hooks/orgUnit";
 import { OrgUnitSelection } from "@hisptz/dhis2-utils";
-import { getSelectedOrgUnitSelectionDisplay, useOrganisationUnitLevelsAndGroups } from "@scorecard/shared";
+import { getSelectedOrgUnitSelectionDisplay, useOrganisationUnitLevelsAndGroups } from "../../../../../shared";
 
 export interface CustomOrgUnitSelectorModalProps {
 	hide: boolean;

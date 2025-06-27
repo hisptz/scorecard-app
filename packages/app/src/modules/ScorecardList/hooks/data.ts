@@ -3,7 +3,7 @@ import { ScorecardListItem } from "../types";
 import { useSearchParams } from "react-router-dom";
 import { useMemo, useState } from "react";
 import { chunk } from "lodash";
-import { getUserAuthorityOnScorecards, UserState } from "@scorecard/shared";
+import { getUserAuthorityOnScorecards, UserState } from "../../../shared";
 import { useRecoilValue } from "recoil";
 
 const query: any = {

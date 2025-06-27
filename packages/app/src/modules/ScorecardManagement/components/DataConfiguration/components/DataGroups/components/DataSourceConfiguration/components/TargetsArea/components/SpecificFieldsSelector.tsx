@@ -1,6 +1,5 @@
 import { CircularLoader, SingleSelectField, SingleSelectOption } from "@dhis2/ui";
 import i18n from "@dhis2/d2-i18n";
-import { generateLegendDefaults, uid } from "@scorecard/shared";
 import React, { Suspense, useEffect, useState } from "react";
 import { OrgUnitSpecificTargetView, PeriodSpecificTargetView } from "./SpecificTargetView";
 import { head, isEmpty } from "lodash";
@@ -10,6 +9,8 @@ import OrgUnitLevelSpecificTargets from "../../OrgUnitLevelSpecificTargetsModal"
 import { SpecificTarget } from "@hisptz/dhis2-scorecard";
 import { useFormContext, useWatch } from "react-hook-form";
 import { getNonDefaultLegendDefinitions } from "../../../../../../../../General/utils/utils";
+import { generateLegendDefaults } from "../../../../../../../../../../../shared";
+import { uid } from "@hisptz/dhis2-utils";
 
 
 function getSelectedType(specificTargets: Array<SpecificTarget>, specificTargetsSet: boolean) {

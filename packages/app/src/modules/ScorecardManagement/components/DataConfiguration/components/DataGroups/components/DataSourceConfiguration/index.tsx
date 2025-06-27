@@ -1,8 +1,8 @@
-import { ContainerLoader } from "@scorecard/shared";
 import React, { Suspense } from "react";
 import { DataSourceInstructions } from "../../../Instructions";
 import SelectedDataSourceConfigurationForm from "./components/Form";
 import { useSelectedData } from "../../../../states/selectionState";
+import { ContainerLoader } from "../../../../../../../../shared";
 
 export default function DataSourceConfiguration() {
 	const selectedData = useSelectedData();

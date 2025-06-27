@@ -1,9 +1,9 @@
 import { useCallback } from "react";
 import { ScorecardConfig } from "@hisptz/dhis2-scorecard";
 import { useParams } from "react-router-dom";
-import { DATASTORE_NAMESPACE } from "@scorecard/shared";
 import { useAlert, useDataEngine, useDataMutation, useDataQuery } from "@dhis2/app-runtime";
 import i18n from "@dhis2/d2-i18n";
+import { DATASTORE_NAMESPACE } from "../../../shared";
 
 const metadataQuery: any = {
 	meta: {

@@ -1,6 +1,6 @@
-import { ScorecardOptions } from "@scorecard/shared";
 import { useCallback } from "react";
 import { useFormContext } from "react-hook-form";
+import { ScorecardOptions } from "../../../../../shared";
 
 export default function useOptionsManage() {
 	const { watch, setValue } = useFormContext();

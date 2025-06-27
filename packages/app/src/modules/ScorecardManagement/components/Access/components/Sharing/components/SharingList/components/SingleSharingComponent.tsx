@@ -1,12 +1,12 @@
 import i18n from "@dhis2/d2-i18n";
 import { Button, ButtonStrip, colors, MenuItem } from "@dhis2/ui";
-import { ScorecardAccess } from "@scorecard/shared";
 import { IconDelete24, IconEdit24 } from "@dhis2/ui-icons";
 import { cloneDeep, set } from "lodash";
 import PropTypes from "prop-types";
 import React, { useState } from "react";
 import { getAccessIcon, getAccessName } from "../../../utils";
 import SharingMenu from "./SharingMenu";
+import { ScorecardAccess } from "../../../../../../../../../shared";
 
 export default function SingleSharingComponent({
 	access,

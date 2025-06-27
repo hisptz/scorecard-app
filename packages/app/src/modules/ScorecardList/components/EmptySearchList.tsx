@@ -1,4 +1,5 @@
 import i18n from "@dhis2/d2-i18n";
+//@ts-expect-error Centered Content type isn't exported from the UI lib
 import { CenteredContent, colors } from "@dhis2/ui";
 import { IconSearch24 } from "@dhis2/ui-icons";
 import PropTypes from "prop-types";
@@ -19,11 +20,11 @@ export default function EmptySearchList({ keyword }: any) {
 					<p
 						style={{
 							color: colors.grey700,
-							margin: 4,
+							margin: 4
 						}}
 					>
 						{i18n.t(
-							`Could not find scorecards matching the keyword `,
+							`Could not find scorecards matching the keyword `
 						)}
 						<b>{`'${keyword}'`}</b>
 					</p>
@@ -34,5 +35,5 @@ export default function EmptySearchList({ keyword }: any) {
 }
 
 EmptySearchList.propTypes = {
-	keyword: PropTypes.string.isRequired,
+	keyword: PropTypes.string.isRequired
 };

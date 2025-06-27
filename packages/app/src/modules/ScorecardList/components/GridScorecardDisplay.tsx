@@ -8,9 +8,6 @@ export default function GridScorecardDisplay({
 	scorecards: ScorecardListItem[];
 }) {
 
-	console.log({
-		scorecards
-	});
 	return (
 		<div className="scorecard-list-container grid p-32">
 			{scorecards?.map((scorecard) => (

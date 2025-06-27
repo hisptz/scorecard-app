@@ -59,7 +59,7 @@ const orgUnitGroupsQuery = {
 	}
 };
 
-export const OrgUnitLevels = atom({
+export const OrgUnitLevels = atom<Array<{ id: string; level: number }>>({
 	key: "org-unit-levels",
 	default: selector({
 		key: "org-unit-levels-default",

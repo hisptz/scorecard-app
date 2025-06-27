@@ -1,4 +1,4 @@
-import { DATASTORE_NAMESPACE, getUserAuthority, UserState } from "@scorecard/shared";
+import { DATASTORE_NAMESPACE, getUserAuthority, UserState } from "../../../shared";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";

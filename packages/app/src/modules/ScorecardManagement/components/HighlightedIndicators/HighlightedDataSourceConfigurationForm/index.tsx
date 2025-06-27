@@ -1,8 +1,8 @@
-import { Help, INDICATOR_CONFIGURATION_STEPS } from "@scorecard/shared";
 import React from "react";
 import DataSourceConfigurationForm from "../../DataConfiguration/components/DataSourceConfigurationForm";
 import { Button, ButtonStrip, Modal, ModalActions, ModalContent, ModalTitle } from "@dhis2/ui";
 import i18n from "@dhis2/d2-i18n";
+import { Help, INDICATOR_CONFIGURATION_STEPS } from "../../../../../shared";
 
 export default function HighlightedDataSourceConfigurationForm({ index, hide, onClose }: { index: number, hide: boolean; onClose: () => void }) {
 	const path = `highlightedIndicators.${index}`;

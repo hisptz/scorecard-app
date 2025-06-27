@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useCallback } from "react";
 import { ScorecardConfig } from "@hisptz/dhis2-scorecard";
 import { compact, isEmpty } from "lodash";
-import { getOrgUnitIdsFromOrgUnitSelection } from "@scorecard/shared";
+import { getOrgUnitIdsFromOrgUnitSelection } from "../shared";
 import { OrgUnitSelection } from "@hisptz/dhis2-utils";
 
 

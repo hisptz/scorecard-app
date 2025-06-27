@@ -1,7 +1,7 @@
-import { ACCESS_HELP_STEPS, Help } from "@scorecard/shared";
 import React from "react";
 import OrgUnit from "./components/OrgUnitFilter";
 import Sharing from "./components/Sharing";
+import { ACCESS_HELP_STEPS, Help } from "../../../../shared";
 
 export default function AccessScorecardForm() {
 	return (

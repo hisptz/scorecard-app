@@ -6,7 +6,7 @@ import "./ListAccessItem.css";
 
 import i18n from "@dhis2/d2-i18n";
 import { find } from "lodash";
-import { ACCESS_TYPES_LABELLED, AccessTypes } from "@scorecard/shared";
+import { ACCESS_TYPES_LABELLED, AccessTypes } from "../../../../../../../../../../shared";
 
 export function ListItem({
 							 entity,

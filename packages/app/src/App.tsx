@@ -1,6 +1,6 @@
 import { DataStoreProvider } from "@dhis2/app-service-datastore";
 import { CssReset } from "@dhis2/ui";
-import { DATASTORE_NAMESPACE, FullPageError, FullPageLoader, useInitApp } from "@scorecard/shared";
+import { DATASTORE_NAMESPACE, FullPageError, FullPageLoader, useInitApp } from "./shared";
 import React, { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { RecoilRoot } from "recoil";
@@ -15,8 +15,7 @@ import Router from "./modules/Router";
 
 const MyApp = () => {
 	const { initializeState } = useInitApp();
-
-	//This checks if this is accessed from a dashboard plugin
+	//This checks if this is accessed from a dashboard plugin. This is just a fallback for cases where the plugin isn't very well supported. It should be removed in the subsequent
 	if (window.location.href.includes("dashboardItemId")) {
 		window.location.replace(window.location.href.replace("index.html", "plugin.html"));
 	}

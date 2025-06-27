@@ -1,9 +1,9 @@
 import i18n from "@dhis2/d2-i18n";
 import { Divider } from "@dhis2/ui";
 import { RHFCheckboxField, RHFTextInputField } from "@hisptz/dhis2-ui";
-import { DHIS2ValueTypes } from "@scorecard/shared";
 import React from "react";
 import TargetsArea from "../DataGroups/components/DataSourceConfiguration/components/TargetsArea";
+import { DHIS2ValueTypes } from "../../../../../../shared";
 
 export default function DataSourceConfigurationForm({ path }: { path: string }) {
 

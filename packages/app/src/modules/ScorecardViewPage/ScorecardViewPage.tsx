@@ -1,5 +1,4 @@
 import { DimensionFilterArea } from "./components/DimensionFilterArea";
-import { getOrgUnitSelectionFromIds } from "@scorecard/shared";
 import { useRawDimensions } from "./hooks/dimensions";
 import { useMemo, useRef } from "react";
 import { isEmpty } from "lodash";
@@ -9,6 +8,7 @@ import { ConfigProvider, useConfigContext } from "./ConfigProvider";
 import { ScorecardContext, ScorecardDataProvider, ScorecardHeader, ScorecardLegendsView, ScorecardState, ScorecardStateProvider } from "@hisptz/dhis2-scorecard";
 import { ScorecardActions } from "./components/ScorecardActions/ScorecardActions";
 import { ScorecardView } from "./components/ScorecardView";
+import { getOrgUnitSelectionFromIds } from "../../shared";
 
 
 function MainView() {

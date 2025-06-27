@@ -1,8 +1,8 @@
 import { useSearchParams } from "react-router-dom";
 import { useCallback, useMemo } from "react";
 import { OrgUnitSelection } from "@hisptz/dhis2-utils";
-import { getOrgUnitIdsFromOrgUnitSelection, getOrgUnitSelectionFromIds } from "@scorecard/shared";
 import { useUpdateDimensionState } from "@hisptz/dhis2-scorecard";
+import { getOrgUnitIdsFromOrgUnitSelection, getOrgUnitSelectionFromIds } from "../../../shared";
 
 
 export function useRawDimensions() {

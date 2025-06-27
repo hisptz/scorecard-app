@@ -1,4 +1,4 @@
-import { DATASTORE_ENDPOINT, DATASTORE_OLD_SCORECARD_ENDPOINT, DATASTORE_SCORECARD_SUMMARY_KEY, generateCreateMutation } from "@scorecard/shared";
+import { DATASTORE_ENDPOINT, DATASTORE_OLD_SCORECARD_ENDPOINT, DATASTORE_SCORECARD_SUMMARY_KEY, generateCreateMutation } from "../../../shared";
 import { filter, forIn, fromPairs, isEmpty } from "lodash";
 
 const generateOldScorecardQueries = (ids = []) => {

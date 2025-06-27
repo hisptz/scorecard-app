@@ -1,7 +1,7 @@
 import { createContext, ReactNode, useContext } from "react";
 import { ScorecardConfig } from "@hisptz/dhis2-scorecard";
 import { useScorecardConfigFromServer } from "./hooks/data";
-import { FullPageError, FullPageLoader } from "@scorecard/shared";
+import { FullPageError, FullPageLoader } from "../../shared";
 
 const ConfigContext = createContext<ScorecardConfig | null>(null);
 

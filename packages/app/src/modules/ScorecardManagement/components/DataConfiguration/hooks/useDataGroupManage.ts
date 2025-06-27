@@ -1,4 +1,4 @@
-import { generateLegendDefaults, OrgUnitLevels, ScorecardConfigDirtyState, ScorecardConfigEditState, ScorecardIndicator, ScorecardIndicatorGroup, ScorecardIndicatorHolder, uid } from "@scorecard/shared";
+import { generateLegendDefaults, OrgUnitLevels, ScorecardConfigDirtyState, ScorecardConfigEditState, ScorecardIndicator, ScorecardIndicatorGroup, ScorecardIndicatorHolder, uid } from "../../../../../shared";
 import { cloneDeep, filter, fromPairs, isEmpty } from "lodash";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useFormContext } from "react-hook-form";
@@ -8,14 +8,14 @@ export default function useDataGroupManage({ index, expanded }: any) {
 	const { watch, setValue } = useFormContext();
 	const orgUnitLevels: any = useRecoilValue(OrgUnitLevels);
 	const targetOnLevels = useRecoilValue(
-		ScorecardConfigDirtyState("targetOnLevels"),
+		ScorecardConfigDirtyState("targetOnLevels")
 	);
 	const [scorecardEditorState, setScorecardEditorState] = useRecoilState(
-		ScorecardConfigEditState,
+		ScorecardConfigEditState
 	);
 	const path = useMemo(
 		() => ["dataSelection", "dataGroups", index].join("."),
-		[index],
+		[index]
 	);
 
 	const group = watch(path);
@@ -27,16 +27,16 @@ export default function useDataGroupManage({ index, expanded }: any) {
 				console.error(e);
 			}
 		},
-		[path, setValue],
+		[path, setValue]
 	);
 
 	const legendDefinitions = watch("legendDefinitions");
 	const filteredLegendDefinitions = useMemo(
 		() => filter(legendDefinitions, ({ isDefault }) => !isDefault),
-		[legendDefinitions],
+		[legendDefinitions]
 	);
 
-	const { title, id, dataHolders } = group ?? new ScorecardIndicatorGroup();
+	const { title, id, dataHolders } = group ?? new ScorecardIndicatorGroup({});
 
 	const [titleEditOpen, setTitleEditOpen] = useState(false);
 	const [titleEditValue, setTitleEditValue] = useState(title);
@@ -54,33 +54,37 @@ export default function useDataGroupManage({ index, expanded }: any) {
 							name: dataSource.displayName,
 							legends: targetOnLevels
 								? fromPairs([
-										...(orgUnitLevels?.map(
-											({ id }: any) => [
-												id,
-												generateLegendDefaults(
-													filteredLegendDefinitions,
-													100,
-													true,
-												),
-											],
-										) ?? []),
-									])
+									...(orgUnitLevels?.map(
+										({ id }: any) => [
+											id,
+											generateLegendDefaults(
+												{
+													legendDefinitions: filteredLegendDefinitions,
+													weight: 100,
+													highIsGood: true
+												}
+											)
+										]
+									) ?? [])
+								])
 								: generateLegendDefaults(
-										filteredLegendDefinitions,
-										100,
-										true,
-									),
-						}),
-					],
-				}),
+									{
+										legendDefinitions: filteredLegendDefinitions,
+										weight: 100,
+										highIsGood: true
+									}
+								)
+						})
+					]
+				})
 		);
 		const updatedDataSources = [...dataHolders, ...newDataSources];
 		setGroup(
 			ScorecardIndicatorGroup.set(
 				group,
 				"dataHolders",
-				updatedDataSources,
-			),
+				updatedDataSources
+			)
 		);
 	};
 
@@ -92,7 +96,7 @@ export default function useDataGroupManage({ index, expanded }: any) {
 			) {
 				setScorecardEditorState((prevState: any) => ({
 					...prevState,
-					selectedDataHolderIndex: undefined,
+					selectedDataHolderIndex: undefined
 				}));
 			}
 			const updatedDataSources = cloneDeep(dataHolders) || [];
@@ -102,8 +106,8 @@ export default function useDataGroupManage({ index, expanded }: any) {
 					ScorecardIndicatorGroup.set(
 						group,
 						"dataHolders",
-						updatedDataSources,
-					),
+						updatedDataSources
+					)
 				);
 			}
 		} catch (e) {
@@ -117,7 +121,7 @@ export default function useDataGroupManage({ index, expanded }: any) {
 				return {
 					...prevState,
 					selectedDataHolderIndex: undefined,
-					selectedGroupIndex: index,
+					selectedGroupIndex: index
 				};
 			});
 		}
@@ -131,7 +135,7 @@ export default function useDataGroupManage({ index, expanded }: any) {
 			setTitleEditOpen(false);
 		} else {
 			setGroup(
-				ScorecardIndicatorGroup.set(group, "title", titleEditValue),
+				ScorecardIndicatorGroup.set(group, "title", titleEditValue)
 			);
 			setTitleEditOpen(false);
 		}
@@ -145,6 +149,6 @@ export default function useDataGroupManage({ index, expanded }: any) {
 		titleEditValue,
 		setTitleEditValue,
 		setTitleEditOpen,
-		group,
+		group
 	};
 }

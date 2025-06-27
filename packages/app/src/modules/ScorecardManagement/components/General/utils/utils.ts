@@ -1,7 +1,7 @@
-import { DATASTORE_NAMESPACE, generateLegendDefaults } from "@scorecard/shared";
 import { cloneDeep, isEmpty, set } from "lodash";
 import { LegendDefinition, ScorecardDataGroup, ScorecardDataHolder, ScorecardDataSource, SpecificTarget } from "@hisptz/dhis2-scorecard";
 import { useDataEngine } from "@dhis2/app-runtime";
+import { DATASTORE_NAMESPACE, generateLegendDefaults } from "../../../../../shared";
 
 export function resetLegends(groups: ScorecardDataGroup[], legendDefinitions: LegendDefinition[]) {
 	const newGroups = cloneDeep(groups);

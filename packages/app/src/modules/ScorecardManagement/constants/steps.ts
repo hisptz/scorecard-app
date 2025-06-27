@@ -1,5 +1,5 @@
 import i18n from "@dhis2/d2-i18n";
-import { ACCESS_HELP_STEPS, DATA_CONFIGURATION_HELP_STEPS, GENERAL_HELP_STEPS, HIGHLIGHTED_INDICATOR_HELP_STEPS, OPTIONS_HELP_STEPS } from "@scorecard/shared";
+import { ACCESS_HELP_STEPS, DATA_CONFIGURATION_HELP_STEPS, GENERAL_HELP_STEPS, HIGHLIGHTED_INDICATOR_HELP_STEPS, OPTIONS_HELP_STEPS } from "../../../shared";
 import DataConfigurationScorecardForm from "../components/DataConfiguration";
 import HighlightedIndicatorsScorecardForm from "../components/HighlightedIndicators";
 import AccessScorecardForm from "../components/Access";

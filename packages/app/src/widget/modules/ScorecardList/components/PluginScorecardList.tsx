@@ -1,5 +1,4 @@
 import { useScorecardListData } from "../../../../modules/ScorecardList/hooks/data";
-import { FullPageError, FullPageLoader } from "@scorecard/shared";
 import { isEmpty } from "lodash";
 import { EmptyScorecardList } from "./EmptyScorecardList";
 import i18n from "@dhis2/d2-i18n";
@@ -10,6 +9,7 @@ import illustration from "../../../../assets/images/scorecard_illustration.png";
 import { usePluginConfig } from "../../../components/PluginConfigProvider";
 import { useNavigate } from "react-router-dom";
 import { useManagePluginConfig } from "../../../hooks/config";
+import { FullPageError, FullPageLoader } from "../../../../shared";
 
 
 export function PluginScorecardList() {

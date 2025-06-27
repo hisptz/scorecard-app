@@ -2,10 +2,10 @@ import { Button } from "@dhis2/ui";
 import i18n from "@dhis2/d2-i18n";
 import { useNavigate, useParams } from "react-router-dom";
 import { useMemo } from "react";
-import { getUserAuthority, UserState } from "@scorecard/shared";
 import { useRecoilValue } from "recoil";
 import { getSharingSettingsFromOldConfiguration, ScorecardConfigWithOldSharing } from "../../../../../utils/sharing";
 import { useConfigContext } from "../../../ConfigProvider";
+import { getUserAuthority, UserState } from "../../../../../shared";
 
 export function ScorecardEditButton() {
 	const { id } = useParams();

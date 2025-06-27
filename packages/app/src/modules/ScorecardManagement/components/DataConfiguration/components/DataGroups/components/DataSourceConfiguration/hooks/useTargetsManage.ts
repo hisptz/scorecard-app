@@ -1,20 +1,20 @@
-import { generateLegendDefaults } from "@scorecard/shared";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useFormContext } from "react-hook-form";
+import { generateLegendDefaults } from "../../../../../../../../../shared";
 
 export default function useTargetsManage(props: any) {
 	const { name, multipleFields } = props ?? {};
 	const { setValue, watch, getValues } = useFormContext();
 	const onChange = useCallback(
 		({ value }: any) => setValue(name, value),
-		[name, setValue],
+		[name, setValue]
 	);
 
 	const [initialHighIsGood, setInitialHighIsGood] = useState(
-		getValues(`${name.replace("legends", "highIsGood")}`),
+		getValues(`${name.replace("legends", "highIsGood")}`)
 	);
 	const [initialWeight, setInitialWeight] = useState(
-		getValues(`${name.replace("legends", "weight")}`),
+		getValues(`${name.replace("legends", "weight")}`)
 	);
 
 	const highIsGood = watch(`${name.replace("legends", "highIsGood")}`);
@@ -26,15 +26,19 @@ export default function useTargetsManage(props: any) {
 		() =>
 			Array.isArray(initialValue)
 				? initialValue
-				: generateLegendDefaults(multipleFields, weight, highIsGood),
-		[highIsGood, initialValue, multipleFields, weight],
+				: generateLegendDefaults({
+					legendDefinitions: multipleFields, weight, highIsGood
+				}),
+		[highIsGood, initialValue, multipleFields, weight]
 	);
 
 	useEffect(() => {
 		if (initialWeight !== weight || initialHighIsGood !== highIsGood) {
 			setValue(
 				name,
-				generateLegendDefaults(multipleFields, weight, highIsGood),
+				generateLegendDefaults({
+					legendDefinitions: multipleFields, weight, highIsGood
+				})
 			);
 			setInitialHighIsGood(highIsGood);
 			setInitialWeight(weight);
@@ -47,13 +51,13 @@ export default function useTargetsManage(props: any) {
 		name,
 		setValue,
 		value,
-		weight,
+		weight
 	]);
 
 	useEffect(() => {
 		if (!Array.isArray(initialValue)) {
 			onChange({
-				value,
+				value
 			});
 		}
 	}, [value, initialValue, onChange]);

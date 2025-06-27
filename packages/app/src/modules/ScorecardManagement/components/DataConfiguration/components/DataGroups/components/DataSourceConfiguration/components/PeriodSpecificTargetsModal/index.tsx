@@ -1,7 +1,6 @@
 import i18n from "@dhis2/d2-i18n";
 import { Button, ButtonStrip, Field, Modal, ModalActions, ModalContent, ModalTitle } from "@dhis2/ui";
 import { PeriodSelectorModal } from "@hisptz/dhis2-ui";
-import { useCalendar } from "@scorecard/shared";
 import { compact, isEmpty } from "lodash";
 import React, { useCallback, useState } from "react";
 import { useFormContext } from "react-hook-form";
@@ -9,6 +8,7 @@ import { getNonDefaultLegendDefinitions } from "../../../../../../../General/uti
 import LegendsField from "../TargetsArea/components/LegendsField";
 import { createFixedPeriodFromPeriodId } from "@dhis2/multi-calendar-dates";
 import { ScorecardLegend, SpecificTarget } from "@hisptz/dhis2-scorecard";
+import { useCalendar } from "../../../../../../../../../../shared";
 
 export default function PeriodSpecificTargetsModal({
 													   open,

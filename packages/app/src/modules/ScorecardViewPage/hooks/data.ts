@@ -2,7 +2,7 @@ import { ScorecardConfig } from "@hisptz/dhis2-scorecard";
 import { useDataQuery } from "@dhis2/app-runtime";
 import { useParams } from "react-router-dom";
 import { useMemo } from "react";
-import { DATASTORE_NAMESPACE } from "@scorecard/shared";
+import { DATASTORE_NAMESPACE } from "../../../shared";
 
 const query: any = {
 	config: {

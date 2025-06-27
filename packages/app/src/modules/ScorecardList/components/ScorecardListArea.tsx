@@ -1,5 +1,5 @@
 import { useScorecardListData } from "../hooks/data";
-import { FullPageError, FullPageLoader } from "@scorecard/shared";
+import { FullPageError, FullPageLoader } from "../../../shared";
 import React, { Suspense } from "react";
 import { isEmpty } from "lodash";
 import EmptySearchList from "./EmptySearchList";

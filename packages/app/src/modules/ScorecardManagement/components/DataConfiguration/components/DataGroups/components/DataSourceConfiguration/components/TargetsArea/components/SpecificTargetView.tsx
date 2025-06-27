@@ -1,11 +1,11 @@
 import i18n from "@dhis2/d2-i18n";
 import { Button, colors, Tag } from "@dhis2/ui";
 import { createFixedPeriodFromPeriodId } from "@dhis2/multi-calendar-dates";
-import { SelectedOrgUnits, useCalendar } from "@scorecard/shared";
 import { find } from "lodash";
 import React from "react";
 import { LegendDefinition, ScorecardLegend, SpecificTarget } from "@hisptz/dhis2-scorecard";
 import { useRecoilValue } from "recoil";
+import { SelectedOrgUnits, useCalendar } from "../../../../../../../../../../../shared";
 
 function LegendsView({ legends, legendDefinitions }: { legends: ScorecardLegend[], legendDefinitions: LegendDefinition[] }) {
 	return (

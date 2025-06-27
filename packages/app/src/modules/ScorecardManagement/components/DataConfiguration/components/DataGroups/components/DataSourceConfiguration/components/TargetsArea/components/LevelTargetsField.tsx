@@ -1,5 +1,5 @@
 import { colors, Field } from "@dhis2/ui";
-import { FormFieldModel, generateLegendDefaults, OrgUnitLevels } from "@scorecard/shared";
+import { FormFieldModel, generateLegendDefaults, OrgUnitLevels } from "../../../../../../../../../../../shared";
 import { Accordion, AccordionDetails, AccordionSummary } from "@material-ui/core";
 import produce from "immer";
 import { fromPairs, get, head, set } from "lodash";
@@ -11,19 +11,19 @@ import { getNonDefaultLegendDefinitions } from "../../../../../../../../General/
 import LegendsField from "./LegendsField";
 
 export default function LevelTargetsField({
-	name,
-	value: initialValue = [],
-	onChange,
-	multipleFields,
-	weight,
-	highIsGood,
-	...props
-}: any) {
-	const orgUnitLevels: any = useRecoilValue(OrgUnitLevels);
+											  name,
+											  value: initialValue = [],
+											  onChange,
+											  multipleFields,
+											  weight,
+											  highIsGood,
+											  ...props
+										  }: any) {
+	const orgUnitLevels = useRecoilValue(OrgUnitLevels);
 	const { watch } = useFormContext();
 	const [expanded, setExpanded] = useState(head(orgUnitLevels)?.id);
 	const legendDefinitions = getNonDefaultLegendDefinitions(
-		watch("legendDefinitions"),
+		watch("legendDefinitions")
 	);
 
 	const handleChange = (panel: any) => (event: any, isExpanded: any) => {
@@ -34,29 +34,31 @@ export default function LevelTargetsField({
 			!Array.isArray(initialValue)
 				? initialValue
 				: fromPairs([
-						...(orgUnitLevels?.map(({ id }: any) => [
-							id,
-							generateLegendDefaults(
-								multipleFields,
+					...(orgUnitLevels?.map(({ id }) => [
+						id,
+						generateLegendDefaults(
+							{
+								legendDefinitions: multipleFields,
 								weight,
-								highIsGood,
-							),
-						]) ?? []),
-					]),
-		[highIsGood, initialValue, multipleFields, orgUnitLevels, weight],
+								highIsGood
+							}
+						)
+					]) ?? [])
+				]),
+		[highIsGood, initialValue, multipleFields, orgUnitLevels, weight]
 	);
 	const onFieldChange = (newValue: any, level: any) => {
 		onChange({
 			value: produce(value, (draft: any) => {
 				return set(draft, [level], newValue);
-			}),
+			})
 		});
 	};
 
 	useEffect(() => {
 		if (Array.isArray(initialValue)) {
 			onChange({
-				value,
+				value
 			});
 		}
 	}, [value, initialValue]);
@@ -97,5 +99,5 @@ LevelTargetsField.propTypes = {
 	name: PropTypes.string.isRequired,
 	weight: PropTypes.number.isRequired,
 	onChange: PropTypes.func.isRequired,
-	value: PropTypes.any,
+	value: PropTypes.any
 };

@@ -1,7 +1,7 @@
 import i18n from "@dhis2/d2-i18n";
-import { ScorecardAccessType } from "@scorecard/shared";
 import { IconUser24, IconUserGroup24, IconWorld24 } from "@dhis2/ui-icons";
 import React from "react";
+import { ScorecardAccessType } from "../../../../../../shared";
 
 export function getAccessName(access = "") {
 	switch (access) {

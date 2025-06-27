@@ -1,4 +1,3 @@
-import { FullPageError, FullPageLoader } from "@scorecard/shared";
 import { useEffect, useRef } from "react";
 import { useResizeObserver } from "usehooks-ts";
 import { usePluginScorecardConfig } from "../../hooks/scorecard";
@@ -8,6 +7,7 @@ import { usePluginConfig } from "../../components/PluginConfigProvider";
 import { useManagePluginConfig } from "../../hooks/config";
 import { isEmpty } from "lodash";
 import { getScorecardViewLink } from "../../../hooks/navigate";
+import { FullPageError, FullPageLoader } from "../../../shared";
 
 
 export function ScorecardView() {

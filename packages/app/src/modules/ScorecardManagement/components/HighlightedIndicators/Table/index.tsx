@@ -1,12 +1,12 @@
 import i18n from "@dhis2/d2-i18n";
 import { Button, ButtonStrip, colors, IconEdit16, IconError16, Table, TableBody, TableCell, TableCellHead, TableHead, TableRow, TableRowHead, Tooltip } from "@dhis2/ui";
-import { Help, HIGHLIGHTED_TABLE_HELP_STEPS } from "@scorecard/shared";
 import { IconDelete16 } from "@dhis2/ui-icons";
 import { capitalize, get, isEmpty } from "lodash";
 import { FieldError, useController } from "react-hook-form";
 import { ScorecardConfig } from "@hisptz/dhis2-scorecard";
 import { useBoolean } from "usehooks-ts";
 import HighlightedDataSourceConfigurationForm from "../HighlightedDataSourceConfigurationForm";
+import { Help, HIGHLIGHTED_TABLE_HELP_STEPS } from "../../../../../shared";
 
 const columns = [
 	{

@@ -1,11 +1,11 @@
 import i18n from "@dhis2/d2-i18n";
 import { Button, SingleSelectField, SingleSelectOption } from "@dhis2/ui";
-import { ACCESS_TYPES } from "@scorecard/shared";
 import { IconAdd24 } from "@dhis2/ui-icons";
 import React, { useState } from "react";
 import useAccessManage from "../../../../../hooks/useAccessManage";
 import { getAccessName } from "../../../utils";
 import UserAndUserGroupSelector from "../../UserAndUserGroupSelector";
+import { ACCESS_TYPES } from "../../../../../../../../../shared";
 
 export default function AddSharingAccess() {
 	const { userAndUserGroupAccesses, onAdd } = useAccessManage();

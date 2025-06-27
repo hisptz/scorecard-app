@@ -3,7 +3,7 @@ import React from "react";
 import Title from "./Title";
 import { ListItem } from "./ListAccessItem";
 import useManageAccess from "../hooks";
-import { AccessTypes } from "@scorecard/shared";
+import { AccessTypes } from "../../../../../../../../../shared";
 
 export function AccessList(): React.ReactElement {
 	const {

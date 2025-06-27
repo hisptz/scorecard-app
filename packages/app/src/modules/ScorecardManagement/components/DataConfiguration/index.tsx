@@ -1,4 +1,3 @@
-import { ContainerLoader } from "@scorecard/shared";
 import React, { Suspense } from "react";
 import DataGroupArea from "./DataGroupArea";
 import { PreviewArea } from "./components/DataGroups/components/DataGroup/components/PreviewArea";
@@ -7,6 +6,7 @@ import { SelectedDataStateProvider } from "./states/selectionState";
 import { colors, Field } from "@dhis2/ui";
 import { useController } from "react-hook-form";
 import { ScorecardConfig } from "@hisptz/dhis2-scorecard";
+import { ContainerLoader } from "../../../../shared";
 
 export default function DataConfigurationScorecardForm() {
 

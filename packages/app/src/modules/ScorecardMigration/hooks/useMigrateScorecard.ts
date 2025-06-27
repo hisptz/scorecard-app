@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { OldScorecardSchema } from "../schemas/old";
 import { FetchError, useDataEngine } from "@dhis2/app-runtime";
-import { DATASTORE_NAMESPACE, migrateScorecard } from "@scorecard/shared";
+import { DATASTORE_NAMESPACE, migrateScorecard } from "../../../shared";
 import { useSaveScorecard } from "../../ScorecardManagement/hooks/save";
 
 

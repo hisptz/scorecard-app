@@ -1,4 +1,4 @@
-import { DATASTORE_NAMESPACE, getUserAuthority, UserState } from "@scorecard/shared";
+import { DATASTORE_NAMESPACE, getUserAuthority, UserState } from "../../../shared";
 import { useDataQuery } from "@dhis2/app-runtime";
 import { useCallback, useMemo } from "react";
 import { useRecoilValue } from "recoil";

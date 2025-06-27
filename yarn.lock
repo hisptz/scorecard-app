@@ -3223,42 +3223,6 @@
     screenfull "^6.0.2"
     xlsx "^0.18.5"
 
-"@hisptz/dhis2-analytics@^2.0.46":
-  version "2.0.46"
-  resolved "https://registry.yarnpkg.com/@hisptz/dhis2-analytics/-/dhis2-analytics-2.0.46.tgz#8636cac692f139646dc35e2ffc348bfc466675b1"
-  integrity sha512-fxaAw6SjPD+gOSvPZsPrGDtSRYSKZNaB/PxTevBObY39zbAt7Avyd9xXLAcNVTy5Jl5d5Vae90NaL83Y0FetZQ==
-  dependencies:
-    "@hisptz/dhis2-ui" "2.0.27"
-    "@hisptz/dhis2-utils" "2.0.8"
-    "@react-leaflet/core" "^2.1.0"
-    "@react-pdf/renderer" "^4.0.0"
-    "@tanstack/react-table" "^8.19.3"
-    async-es "^3.2.5"
-    d3-color "^3.1.0"
-    d3-scale "^4.0.2"
-    file-saver "^2.0.5"
-    highcharts "^10.3.2"
-    highcharts-react-official "^3.1.0"
-    jotai-devtools "^0.10.1"
-    leaflet "^1.9.3"
-    leaflet-easyprint "^2.1.9"
-    leaflet.fullscreen "^2.4.0"
-    luxon "^3.4.4"
-    react-circular-progressbar "^2.1.0"
-    react-dnd "^16.0.1"
-    react-dnd-html5-backend "^16.0.1"
-    react-error-boundary "^4.0.12"
-    react-helmet "^6.1.0"
-    react-leaflet "^4.2.0"
-    react-leaflet-custom-control "^1.3.1"
-    react-query "^3.39.3"
-    react-spring "^9.6.1"
-    react-to-print "^3.0.1"
-    recoil "^0.7.7"
-    screenfull "^6.0.2"
-    xlsx "^0.18.5"
-    zod "^3.23.8"
-
 "@hisptz/dhis2-analytics@^2.0.67":
   version "2.1.8"
   resolved "https://registry.yarnpkg.com/@hisptz/dhis2-analytics/-/dhis2-analytics-2.1.8.tgz#443a88782be148b2d469fd61cb026869d0143ee0"
@@ -3314,25 +3278,6 @@
     react-to-print "^3.0.1"
     xlsx "^0.18.5"
 
-"@hisptz/dhis2-ui@2.0.27", "@hisptz/dhis2-ui@^2.0.27":
-  version "2.0.27"
-  resolved "https://registry.yarnpkg.com/@hisptz/dhis2-ui/-/dhis2-ui-2.0.27.tgz#a83bfd3e9a250bc5d61c72fb625e5aa8611a8aee"
-  integrity sha512-hBaU9HEqe6JNDukj5nv3QWugq1IdAhLBE8hQ0lorjDtsCGP60D8BPNUk05By1Ac9mHexnQRFg0VUlNTM+ltlog==
-  dependencies:
-    "@hisptz/dhis2-utils" "2.0.8"
-    classnames "^2.5.1"
-    dexie "^3.2.3"
-    jodit-react "^1.3.39"
-    lodash "^4.17.21"
-    luxon "^3.4.4"
-    react-circular-progressbar "^2.1.0"
-    react-collapsible "^2.10.0"
-    react-color "^2.19.3"
-    react-hook-form "^7.53.0"
-    recoil "^0.7.7"
-    styled-components "^6.1.8"
-    usehooks-ts "^2.9.2"
-
 "@hisptz/dhis2-ui@2.0.48", "@hisptz/dhis2-ui@^2.0.48":
   version "2.0.48"
   resolved "https://registry.yarnpkg.com/@hisptz/dhis2-ui/-/dhis2-ui-2.0.48.tgz#d1373bd43e68254454d2602d254e9425d8407c58"
@@ -3354,14 +3299,6 @@
   version "2.0.18"
   resolved "https://registry.yarnpkg.com/@hisptz/dhis2-utils/-/dhis2-utils-2.0.18.tgz#56bc5a9fad96a1539198de2e7eed820546638f58"
   integrity sha512-tP33Xky9Sa9fd7EjTDS5SzRyOTWksQj81g8P2+vS/WQEdU9NMvPvtHNCmPnQ99sDclzY+ZoCTTGe8Ci3WBc3SA==
-  dependencies:
-    "@dhis2/multi-calendar-dates" "^1.2.4"
-    luxon "^3.4.4"
-
-"@hisptz/dhis2-utils@2.0.8", "@hisptz/dhis2-utils@^2.0.8":
-  version "2.0.8"
-  resolved "https://registry.yarnpkg.com/@hisptz/dhis2-utils/-/dhis2-utils-2.0.8.tgz#726d73e922bb377d14a1685fce320a7f3ac8e04b"
-  integrity sha512-FN4/tWDaTDyVWSLi02vFG+kavGH6M52IlA3/Wi/IzXAraWeiIFUhkwfQnyBUOFDej+K+meVHJRerXGZoPrQFjg==
   dependencies:
     "@dhis2/multi-calendar-dates" "^1.2.4"
     luxon "^3.4.4"
@@ -3823,13 +3760,6 @@
     prop-types "^15.7.2"
     react-is "^16.8.0 || ^17.0.0"
     react-transition-group "^4.4.0"
-
-"@material-ui/icons@^4.11.2":
-  version "4.11.3"
-  resolved "https://registry.yarnpkg.com/@material-ui/icons/-/icons-4.11.3.tgz#b0693709f9b161ce9ccde276a770d968484ecff1"
-  integrity sha512-IKHlyx6LDh8n19vzwH5RtHIOHl9Tu90aAAxcbWME6kp4dmvODM3UvOHJeMIDzUbd4muuJKHmlNoBN+mDY4XkBA==
-  dependencies:
-    "@babel/runtime" "^7.4.4"
 
 "@material-ui/styles@^4.11.5":
   version "4.11.5"
@@ -5152,7 +5082,7 @@
   resolved "https://registry.yarnpkg.com/@types/json5/-/json5-0.0.29.tgz#ee28707ae94e11d2b827bcbe5270bcea7f3e71ee"
   integrity sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==
 
-"@types/lodash@^4.14.168", "@types/lodash@^4.17.7":
+"@types/lodash@^4.14.168":
   version "4.17.13"
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.17.13.tgz#786e2d67cfd95e32862143abe7463a7f90c300eb"
   integrity sha512-lfx+dftrEZcdBPczf9d0Qv0x+j/rfNCMuC6OcfXmO8gkfeNAY88PgKUbvG56whcN23gc27yenwF6oJZXGFpYxg==
@@ -12241,20 +12171,10 @@ he@^1.2.0:
   resolved "https://registry.yarnpkg.com/he/-/he-1.2.0.tgz#84ae65fa7eafb165fddb61566ae14baf05664f0f"
   integrity sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw==
 
-highcharts-react-official@^3.1.0:
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/highcharts-react-official/-/highcharts-react-official-3.2.1.tgz#4b62a7af2969bdebde6b338d36f6b9bf1f1029bc"
-  integrity sha512-hyQTX7ezCxl7JqumaWiGsroGWalzh24GedQIgO3vJbkGOZ6ySRAltIYjfxhrq4HszJOySZegotEF7v+haQ75UA==
-
 highcharts-react-official@^3.2.1:
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/highcharts-react-official/-/highcharts-react-official-3.2.2.tgz#19e0c7d3746af5802b381d40253de4e63084dd02"
   integrity sha512-2kkWOB6RpdR26fmAJkrtJFG9xWFUDGKWyat88tW3fa/3l/Jc7D5ZfwTng2MZsdiKIH32AFy0Pr75udUe7uN6LA==
-
-highcharts@^10.3.2:
-  version "10.3.3"
-  resolved "https://registry.yarnpkg.com/highcharts/-/highcharts-10.3.3.tgz#b8acca24f2d4b1f2f726540734166e59e07b35c4"
-  integrity sha512-r7wgUPQI9tr3jFDn3XT36qsNwEIZYcfgz4mkKEA6E4nn5p86y+u1EZjazIG4TRkl5/gmGRtkBUiZW81g029RIw==
 
 highcharts@^12.2.0:
   version "12.2.0"
@@ -13903,7 +13823,7 @@ jiti@^1.20.0, jiti@^1.21.0, jiti@^1.21.6:
   resolved "https://registry.yarnpkg.com/jiti/-/jiti-1.21.6.tgz#6c7f7398dd4b3142767f9a168af2f317a428d268"
   integrity sha512-2yTgeWTWzMWkHu6Jp9NKgePDaYHbntiwvYuuJLbbN9vl7DC9DvXKOB2BC3ZZ92D3cvV/aflH0osDfwpHepQ53w==
 
-jodit-react@^1.1.25, jodit-react@^1.3.39:
+jodit-react@^1.1.25:
   version "1.3.39"
   resolved "https://registry.yarnpkg.com/jodit-react/-/jodit-react-1.3.39.tgz#9a2e0518fb53d89884ec115e17b9f3e35f0de44a"
   integrity sha512-uZSRadPlgvcB6Wn54RGZ6XQEN+JHj0dB1SI4OH42yTC5WTeoYavksUwzCgFuQF4+janjSCxn0CXNqzd0MJEhVw==
@@ -13959,11 +13879,6 @@ jotai-devtools@^0.10.1:
     react-error-boundary "^4.0.13"
     react-json-tree "^0.18.0"
     react-resizable-panels "2.0.10"
-
-jquery@^3.6.4:
-  version "3.7.1"
-  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.7.1.tgz#083ef98927c9a6a74d05a6af02806566d16274de"
-  integrity sha512-m4avr8yL8kmFN8psrbFFFmB/If14iN5o9nw/NgnnM+kybDJpRsAynV2BsfpTYrTRysYUdADVD7CkUUizgkpLfg==
 
 js-sha3@0.8.0:
   version "0.8.0"
@@ -14433,17 +14348,12 @@ leaflet-easyprint@^2.1.9:
     dom-to-image "^2.5.2"
     file-saver "^1.3.3"
 
-leaflet.fullscreen@^2.4.0:
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/leaflet.fullscreen/-/leaflet.fullscreen-2.4.0.tgz#8503c69b6f6afe6f54594c9cdd5e4f131cfa97b4"
-  integrity sha512-41O0ikdUR0bVC0QfoFN3W5S+9yoeHqL74i0QQafa/W79+ij/G7IRZwpfwPuxoNwpydoUJ/9Mq/6Hp7WZOnkWzQ==
-
 leaflet.fullscreen@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/leaflet.fullscreen/-/leaflet.fullscreen-4.0.0.tgz#a2517c2c9cb06d2be9d68e2ed0cf8d109867aec6"
   integrity sha512-wIV7R6yxtlk95/Er31ptCL0MQCmG4OUU4U0SwNeamEb2xBNDIeU8GtWF2S7PaxV/fdfReNmp+QCT9cUPSNIgdw==
 
-leaflet@^1.9.3, leaflet@^1.9.4:
+leaflet@^1.9.4:
   version "1.9.4"
   resolved "https://registry.yarnpkg.com/leaflet/-/leaflet-1.9.4.tgz#23fae724e282fa25745aff82ca4d394748db7d8d"
   integrity sha512-nxS1ynzJOmOlHp+iL3FyWqK89GtNL8U8rvlMOsQdTTssxZwCXh8N2NB3GDQOL+YR3XnWyZAxwQixURb+FA74PA==
@@ -17352,7 +17262,7 @@ react-helmet@^6.1.0:
     react-fast-compare "^3.1.1"
     react-side-effect "^2.1.0"
 
-react-hook-form@^7.43.8, react-hook-form@^7.53.0:
+react-hook-form@^7.53.0:
   version "7.53.0"
   resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.53.0.tgz#3cf70951bf41fa95207b34486203ebefbd3a05ab"
   integrity sha512-M1n3HhqCww6S2hxLxciEXy2oISPnAzxY7gvwVPrtlczTM/1dDadXgUxDpHMrMTblDOcm/AXtXxHwZ3jpg1mqKQ==
@@ -17411,13 +17321,6 @@ react-jsx-parser@^2.2.0:
     "@types/react" "^18.3.3"
     "@types/react-dom" "^18.3.0"
 
-react-leaflet-custom-control@^1.3.1:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/react-leaflet-custom-control/-/react-leaflet-custom-control-1.4.0.tgz#3f3a644c26bdedd10a44e57671d6958c6ff0a2ad"
-  integrity sha512-E5sM7avHdFApzXTW7GvdPbhgBonu3j0lr1/DzZWz9OMzGbnSTkYPhE0VIYHAyOBvUoZU/TWjtkyVPS68GyeDiw==
-  dependencies:
-    react-leaflet "^4.2.1"
-
 react-leaflet-custom-control@^1.4.0:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/react-leaflet-custom-control/-/react-leaflet-custom-control-1.4.1.tgz#89331b1257520a46254fd29ef8d0023fcd9d9ef1"
@@ -17425,7 +17328,7 @@ react-leaflet-custom-control@^1.4.0:
   dependencies:
     react-leaflet "^4.2.1"
 
-react-leaflet@^4.2.0, react-leaflet@^4.2.1:
+react-leaflet@^4.2.1:
   version "4.2.1"
   resolved "https://registry.yarnpkg.com/react-leaflet/-/react-leaflet-4.2.1.tgz#c300e9eccaf15cb40757552e181200aa10b94780"
   integrity sha512-p9chkvhcKrWn/H/1FFeVSqLdReGwn2qmiobOQGO3BifX+/vV/39qhY8dGqbdcPh1e6jxh/QHriLXr7a4eLFK4Q==
@@ -20441,7 +20344,7 @@ use@^3.1.0:
   resolved "https://registry.yarnpkg.com/use/-/use-3.1.1.tgz#d50c8cac79a19fbc20f2911f56eb973f4e10070f"
   integrity sha512-cwESVXlO3url9YWlFW/TA9cshCEhtu7IKJ/p5soJ/gGpj7vbvFrAY/eIioQ6Dw23KjZhYgiIo8HOs1nQ2vr/oQ==
 
-usehooks-ts@^2.9.1, usehooks-ts@^2.9.2:
+usehooks-ts@^2.9.1:
   version "2.16.0"
   resolved "https://registry.yarnpkg.com/usehooks-ts/-/usehooks-ts-2.16.0.tgz#31deaa2f1147f65666aae925bd890b54e63b0d3f"
   integrity sha512-bez95WqYujxp6hFdM/CpRDiVPirZPxlMzOH2QB8yopoKQMXpscyZoxOjpEdaxvV+CAWUDSM62cWnqHE0E/MZ7w==

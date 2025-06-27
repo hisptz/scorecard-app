@@ -1,10 +1,10 @@
 import { colors } from "@dhis2/ui";
-import { getDataSourceShortName } from "@scorecard/shared";
 import { Avatar, IconButton } from "@material-ui/core";
 import { IconCross24 } from "@dhis2/ui-icons";
 import PropTypes from "prop-types";
 import React from "react";
 import { Draggable } from "react-beautiful-dnd";
+import { getDataSourceShortName } from "../../../../../../../../../shared";
 
 export default function LinkedDataSource({ index, onDelete, dataSource }: any) {
 	const { label, type, id } = dataSource || {};

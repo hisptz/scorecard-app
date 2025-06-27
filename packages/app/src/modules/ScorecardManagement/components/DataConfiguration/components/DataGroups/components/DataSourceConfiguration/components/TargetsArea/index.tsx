@@ -1,10 +1,10 @@
 import i18n from "@dhis2/d2-i18n";
 import { RHFCheckboxField } from "@hisptz/dhis2-ui";
-import { DHIS2ValueTypes } from "@scorecard/shared";
 import React from "react";
 import { useWatch } from "react-hook-form";
 import TargetsField from "./components/TargetsField";
 import { SpecificFieldsSelector } from "./components/SpecificFieldsSelector";
+import { DHIS2ValueTypes } from "../../../../../../../../../../shared";
 
 
 export default function TargetsArea({ path }: { path: string }) {

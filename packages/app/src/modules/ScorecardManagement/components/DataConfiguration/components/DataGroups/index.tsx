@@ -12,7 +12,6 @@ import { DataGroup } from "./components/DataGroup";
 import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd";
 
 export default function DataGroups() {
-	const [filteredDataGroupIds] = useDataItemSearchState();
 	const { fields, append, remove, move } = useFieldArray<ScorecardConfig, "dataSelection.dataGroups">({
 		name: "dataSelection.dataGroups"
 	});

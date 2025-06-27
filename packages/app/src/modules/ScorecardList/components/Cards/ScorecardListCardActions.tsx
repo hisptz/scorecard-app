@@ -2,7 +2,7 @@ import { Button, ButtonStrip } from "@dhis2/ui";
 import i18n from "@dhis2/d2-i18n";
 import React from "react";
 import { ScorecardListItem } from "../../types";
-import { getUserAuthority, useDeleteScorecard, UserState } from "@scorecard/shared";
+import { getUserAuthority, useDeleteScorecard, UserState } from "../../../../shared";
 import { useAlert } from "@dhis2/app-runtime";
 import { useDialog } from "@hisptz/dhis2-ui";
 import { useNavigate } from "react-router-dom";

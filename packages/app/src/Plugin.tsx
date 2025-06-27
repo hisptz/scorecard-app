@@ -1,7 +1,7 @@
 import React, { FC, Suspense } from "react";
 import "./locales";
 import "./Plugin.css";
-import { FullPageLoader, useInitApp } from "@scorecard/shared";
+import { FullPageLoader, useInitApp } from "./shared";
 import { DataStoreProvider } from "@dhis2/app-service-datastore";
 import { RecoilRoot } from "recoil";
 import { WidgetRouter } from "./widget/modules/Router";

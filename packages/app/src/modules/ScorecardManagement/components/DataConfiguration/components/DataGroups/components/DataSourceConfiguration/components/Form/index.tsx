@@ -9,7 +9,7 @@ export default function SelectedDataSourceConfigurationForm() {
 	const { getValues } = useFormContext();
 	const selectedData = useSelectedData();
 
-	const path = useMemo(() => `dataSelection.dataGroups.${selectedData?.groupIndex}.dataHolders.${selectedData?.holderIndex}`, [selectedData]);
+	const path = useMemo(() => `dataSelection.dataGroups.${selectedData?.groupIndex}.dataHolders.${selectedData?.holderIndex}`, [selectedData?.groupIndex, selectedData?.holderIndex]);
 
 	const selectedDataHolder = useMemo(() => {
 		return getValues(path);

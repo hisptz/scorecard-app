@@ -1,9 +1,9 @@
-import { DHIS2ValueTypes, FormFieldModel } from "@scorecard/shared";
 import PropTypes from "prop-types";
 import React from "react";
 import { useFormContext } from "react-hook-form";
 import { getNonDefaultLegendDefinitions } from "../../../../../../../General/utils/utils";
 import LevelTargetsField from "../TargetsArea/components/LevelTargetsField";
+import { DHIS2ValueTypes, FormFieldModel } from "../../../../../../../../../../shared";
 
 export default function OrgUnitLevelSpecificTargets({ path }: any) {
 	const { watch, setValue } = useFormContext();

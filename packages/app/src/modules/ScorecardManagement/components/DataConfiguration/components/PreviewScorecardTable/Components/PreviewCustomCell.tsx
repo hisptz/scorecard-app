@@ -1,4 +1,4 @@
-import { generateRandomValues, getLegend, OrgUnitLevels, SingleCellSvg, UserState } from "@scorecard/shared";
+import { generateRandomValues, getLegend, OrgUnitLevels, SingleCellSvg, UserState } from "../../../../../../../shared";
 import { head } from "lodash";
 import PropTypes from "prop-types";
 import React, { useMemo } from "react";
@@ -14,8 +14,8 @@ export default function PreviewCustomCell({ config }: any) {
 	const hasLinked = config?.dataSources?.length > 1;
 	const [top, bottom] = config?.dataSources ?? [];
 	const { legends, showColors, id, displayArrows, weight, specificTargets } =
-		top ?? {};
-	const value = useMemo(generateRandomValues, []);
+	top ?? {};
+	const value = useMemo(() => generateRandomValues(weight), []);
 	const orgUnit = head(organisationUnits)?.id;
 	const period = new Date().getFullYear();
 	const legend = getLegend(value, legends, {
@@ -25,7 +25,7 @@ export default function PreviewCustomCell({ config }: any) {
 		legendDefinitions,
 		specificTargets,
 		orgUnit,
-		period,
+		period
 	});
 
 	return hasLinked ? (
@@ -54,5 +54,5 @@ export default function PreviewCustomCell({ config }: any) {
 }
 
 PreviewCustomCell.propTypes = {
-	config: PropTypes.object.isRequired,
+	config: PropTypes.object.isRequired
 };

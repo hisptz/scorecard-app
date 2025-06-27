@@ -1,7 +1,7 @@
 import i18n from "@dhis2/d2-i18n";
 import { colors, IconError24 } from "@dhis2/ui";
 import { OrgUnitSelector } from "@hisptz/dhis2-ui";
-import { ContainerLoader } from "@scorecard/shared";
+import { ContainerLoader } from "../../../../../../shared";
 import React, { Suspense } from "react";
 import { useController } from "react-hook-form";
 import { ScorecardConfig } from "@hisptz/dhis2-scorecard";

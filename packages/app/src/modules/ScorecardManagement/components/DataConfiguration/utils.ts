@@ -1,28 +1,34 @@
-import { generateLegendDefaults, ScorecardIndicatorGroup } from "@scorecard/shared";
 import { fromPairs, set } from "lodash";
+import { generateLegendDefaults, ScorecardIndicatorGroup } from "../../../../shared";
 
 export function generateNewGroupData(groups: any) {
 	return new ScorecardIndicatorGroup({
-		title: `Group ${groups?.length + 1 || 1}`,
+		title: `Group ${groups?.length + 1 || 1}`
 	});
 }
 
 export function updateLegendsOnDataGroups(
 	dataGroups: any,
-	{ targetOnLevels, filteredLegendDefinitions, orgUnitLevels }: any,
+	{ targetOnLevels, filteredLegendDefinitions, orgUnitLevels }: any
 ) {
 	const newValue = targetOnLevels
 		? fromPairs([
-				...orgUnitLevels?.map(({ id }: any) => [
-					id,
-					generateLegendDefaults(
-						filteredLegendDefinitions,
-						100,
-						true,
-					),
-				]),
+			...orgUnitLevels?.map(({ id }: any) => [
+				id,
+				generateLegendDefaults(
+					{
+						legendDefinitions: filteredLegendDefinitions,
+						weight: 100,
+						highIsGood: true
+					}
+				)
 			])
-		: generateLegendDefaults(filteredLegendDefinitions, 100, true);
+		])
+		: generateLegendDefaults({
+			legendDefinitions: filteredLegendDefinitions,
+			weight: 100,
+			highIsGood: true
+		});
 
 	let updatedGroups = [...dataGroups];
 
@@ -30,7 +36,7 @@ export function updateLegendsOnDataGroups(
 		for (const holderIndex in updatedGroups[groupIndex]?.dataHolders) {
 			for (const sourceIndex in updatedGroups[groupIndex]?.dataHolders?.[
 				holderIndex
-			]?.dataSources) {
+				]?.dataSources) {
 				updatedGroups = set(
 					updatedGroups,
 					[
@@ -39,9 +45,9 @@ export function updateLegendsOnDataGroups(
 						holderIndex,
 						"dataSources",
 						sourceIndex,
-						"legends",
+						"legends"
 					],
-					newValue,
+					newValue
 				);
 			}
 		}

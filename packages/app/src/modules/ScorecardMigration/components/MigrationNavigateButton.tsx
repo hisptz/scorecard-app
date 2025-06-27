@@ -1,9 +1,9 @@
 import { CircularLoader } from "@dhis2/ui";
 import i18n from "@dhis2/d2-i18n";
-import { DATASTORE_OLD_SCORECARD_ENDPOINT } from "@scorecard/shared";
 import { useDataQuery } from "@dhis2/app-runtime";
 import { isEmpty } from "lodash";
 import { Link } from "react-router-dom";
+import { DATASTORE_OLD_SCORECARD_ENDPOINT } from "../../../shared";
 
 
 const query = {

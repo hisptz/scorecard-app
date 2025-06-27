@@ -1,5 +1,5 @@
 import { colors } from "@dhis2/ui";
-import { getUserAuthority, ScorecardCardImage as holderImage, truncateDescription, UserState } from "@scorecard/shared";
+import { getUserAuthority, ScorecardCardImage as holderImage, truncateDescription, UserState } from "../../../../shared";
 import React, { useState } from "react";
 import { ScorecardListItem } from "../../types";
 import { ScorecardListCardActions } from "./ScorecardListCardActions";

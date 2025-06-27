@@ -2,7 +2,7 @@ import { map } from "async";
 import { compact, find, fromPairs, has } from "lodash";
 import { getDataSourceDetails } from "./dataSource";
 import { uid } from "./utils";
-import { OldLegendDefinition, OldScorecardSchema, OldUserGroup, OrgUnitSettings } from "app/src/modules/ScorecardMigration/schemas/old";
+import { OldLegendDefinition, OldScorecardSchema, OldUserGroup, OrgUnitSettings } from "src/modules/ScorecardMigration/schemas/old";
 import { useDataEngine } from "@dhis2/app-runtime";
 import { ScorecardConfig } from "@hisptz/dhis2-scorecard";
 

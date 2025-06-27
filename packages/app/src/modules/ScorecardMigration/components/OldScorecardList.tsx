@@ -1,5 +1,4 @@
 import { useOldScorecards } from "../hooks/data";
-import { FullPageError } from "@scorecard/shared";
 import { CircularLoader, Tag } from "@dhis2/ui";
 import { SimpleDataTable, SimpleDataTableColumn, SimpleDataTableRow } from "@hisptz/dhis2-ui";
 import i18n from "@dhis2/d2-i18n";
@@ -7,6 +6,7 @@ import React, { useMemo, useState } from "react";
 import { fromPairs, get, uniq } from "lodash";
 import { MigrateButton } from "./MigrateButton";
 import { OldScorecardSchema } from "../schemas/old";
+import { FullPageError } from "../../../shared";
 
 
 const columns: SimpleDataTableColumn[] = [

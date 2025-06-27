@@ -1,4 +1,4 @@
-import { getHoldersFromGroups, GROUPS_CONFIG_HELP_STEPS, INDICATOR_CONFIGURATION_STEPS, INDICATOR_SETUP_HELP_STEPS, INTRODUCTION_HELP_STEPS, NO_GROUPS_HELP_STEPS, NO_INDICATORS_HELP_STEPS, PREVIEW_TABLE_HELP_STEPS, ScorecardConfigEditState } from "@scorecard/shared";
+import { getHoldersFromGroups, GROUPS_CONFIG_HELP_STEPS, INDICATOR_CONFIGURATION_STEPS, INDICATOR_SETUP_HELP_STEPS, INTRODUCTION_HELP_STEPS, NO_GROUPS_HELP_STEPS, NO_INDICATORS_HELP_STEPS, PREVIEW_TABLE_HELP_STEPS, ScorecardConfigEditState } from "../../../../../shared";
 import { isEmpty, uniqBy } from "lodash";
 import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
@@ -6,7 +6,7 @@ import { useRecoilValue } from "recoil";
 export default function useHelp(groups: any) {
 	const [helpSteps, setHelpSteps] = useState(INTRODUCTION_HELP_STEPS);
 	const { selectedDataHolderIndex }: any = useRecoilValue(
-		ScorecardConfigEditState,
+		ScorecardConfigEditState
 	);
 	useEffect(() => {
 		setHelpSteps((prevSteps: any) => {
@@ -15,7 +15,7 @@ export default function useHelp(groups: any) {
 				steps = [
 					...INTRODUCTION_HELP_STEPS,
 					...GROUPS_CONFIG_HELP_STEPS,
-					...PREVIEW_TABLE_HELP_STEPS,
+					...PREVIEW_TABLE_HELP_STEPS
 				];
 			}
 			if (isEmpty(groups)) {

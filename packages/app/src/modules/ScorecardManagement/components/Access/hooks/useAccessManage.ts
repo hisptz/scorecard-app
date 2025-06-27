@@ -1,8 +1,8 @@
-import { AccessTypes, ScorecardAccess } from "@scorecard/shared";
 import produce from "immer";
 import { cloneDeep, findIndex, remove, set } from "lodash";
 import { useCallback, useMemo } from "react";
 import { useFormContext } from "react-hook-form";
+import { AccessTypes, ScorecardAccess } from "../../../../../shared";
 
 export default function useAccessManage() {
 	const { watch, setValue } = useFormContext();

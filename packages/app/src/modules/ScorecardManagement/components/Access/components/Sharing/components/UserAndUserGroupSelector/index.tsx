@@ -75,7 +75,7 @@ export default function UserAndUserGroupSelector({
 			<div ref={reference}>
 				<InputField
 					loading={loading}
-					error={error}
+					error={!!error}
 					validationText={error?.message}
 					label="Select User or User Group"
 					value={value}

@@ -1,8 +1,8 @@
 import React, { createContext, useContext, useEffect } from "react";
 import { PluginConfig, PluginProps } from "../types";
 import { useGetPluginConfig } from "../hooks/config";
-import { FullPageError, FullPageLoader } from "@scorecard/shared";
 import { useNavigate, useParams } from "react-router-dom";
+import { FullPageError, FullPageLoader } from "../../shared";
 
 const PluginConfigContext = createContext<PluginConfig | null>(null);
 

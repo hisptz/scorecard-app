@@ -1,16 +1,17 @@
 import i18n from "@dhis2/d2-i18n";
 import { DataTable, DataTableBody, DataTableCell, DataTableHead, DataTableRow } from "@dhis2/ui";
-import { UserState } from "@scorecard/shared";
 import { head } from "lodash";
 import React, { useMemo } from "react";
-import { useFormContext } from "react-hook-form";
+import { useWatch } from "react-hook-form";
 import { useRecoilValue } from "recoil";
 import PreviewCustomCell from "./Components/PreviewCustomCell";
+import { UserState } from "../../../../../../shared";
 
 export default function PreviewScorecardTable() {
-	const { watch } = useFormContext();
 	const { organisationUnits } = useRecoilValue(UserState);
-	const { dataGroups } = watch("dataSelection") ?? {};
+	const { dataGroups } = useWatch({
+		name: "dataSelection"
+	}) ?? {};
 	const columns = useMemo(() => [...dataGroups], [dataGroups]);
 	return (
 		<div className="column" style={{ width: "100%", overflowX: "auto" }}>

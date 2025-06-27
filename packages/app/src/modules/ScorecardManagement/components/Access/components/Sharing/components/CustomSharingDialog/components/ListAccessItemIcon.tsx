@@ -1,6 +1,6 @@
 import { colors, IconUserGroup24, IconWorld24, UserAvatar } from "@dhis2/ui";
 import React from "react";
-import { AccessTypes } from "@scorecard/shared";
+import { AccessTypes } from "../../../../../../../../../shared";
 
 export default function ListItemIcon({
 										 target,

@@ -1,5 +1,5 @@
-import { ScorecardOptionsForm } from "@scorecard/shared";
 import React from "react";
+import { ScorecardOptionsForm } from "../../../../shared";
 
 export default function OptionsScorecardForm() {
 

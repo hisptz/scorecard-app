@@ -7,7 +7,6 @@ export function EmptyScorecardList() {
 	const config = useConfig();
 
 	const appURL = `${config.baseUrl}/api/apps/hisptz-scorecard/index.html`;
-	console.log(config);
 
 	return (
 		<div style={{

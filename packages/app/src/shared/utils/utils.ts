@@ -2,8 +2,8 @@ import { capitalize, compact, find, flattenDeep, head, intersectionBy, isEmpty, 
 import { DefaultAuthority, TableSort } from "../constants";
 import { D2User } from "../state/user";
 import { LegendDefinition, ScorecardDataGroup, ScorecardDataHolder, ScorecardDataSource, ScorecardLegend } from "@hisptz/dhis2-scorecard";
-import { getSharingSettingsFromOldConfiguration } from "app/src/utils/sharing";
-import { ScorecardListItem } from "app/src/modules/ScorecardList/types";
+import { ScorecardListItem } from "../../modules/ScorecardList/types";
+import { getSharingSettingsFromOldConfiguration } from "../../utils/sharing";
 
 export function getWindowDimensions() {
 	const { innerWidth: width, innerHeight: height } = window;
@@ -33,7 +33,7 @@ export function uid() {
 	return uid;
 }
 
-export function generateRandomValues(max: any) {
+export function generateRandomValues(max: number) {
 	const maxNo = max || 100;
 	return Math.floor(Math.random() * maxNo);
 }

@@ -1,6 +1,6 @@
 import i18n from "@dhis2/d2-i18n";
 import { Button } from "@dhis2/ui";
-import { generateLegendDefaults, Help, HIGHLIGHTED_INDICATOR_HELP_STEPS } from "@scorecard/shared";
+import { generateLegendDefaults, Help, HIGHLIGHTED_INDICATOR_HELP_STEPS } from "../../../../shared";
 import { IconAdd24 } from "@dhis2/ui-icons";
 import { isEmpty } from "lodash";
 import React, { useCallback, useEffect, useState } from "react";

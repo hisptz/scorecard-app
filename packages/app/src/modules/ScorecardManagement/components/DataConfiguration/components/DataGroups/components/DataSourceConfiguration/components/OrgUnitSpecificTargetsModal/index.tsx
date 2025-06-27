@@ -1,7 +1,6 @@
 import i18n from "@dhis2/d2-i18n";
 import { Button, ButtonStrip, CircularLoader, Field, Modal, ModalActions, ModalContent, ModalTitle } from "@dhis2/ui";
 import { OrgUnitSelectorModal } from "@hisptz/dhis2-ui";
-import { SelectedOrgUnits } from "@scorecard/shared";
 import { isEmpty } from "lodash";
 import React, { Dispatch, SetStateAction, Suspense, useCallback, useState } from "react";
 import { useFormContext, useWatch } from "react-hook-form";
@@ -9,6 +8,7 @@ import { useRecoilValue } from "recoil";
 import { getNonDefaultLegendDefinitions } from "../../../../../../../General/utils/utils";
 import LegendsField from "../TargetsArea/components/LegendsField";
 import { ScorecardLegend, SpecificTarget } from "@hisptz/dhis2-scorecard";
+import { SelectedOrgUnits } from "../../../../../../../../../../shared";
 
 function OrgUnitSelector({ target, setTarget }: { target: SpecificTarget, setTarget: Dispatch<SetStateAction<SpecificTarget>> }) {
 	const [periodSelectorOpen, setPeriodSelectorOpen] = useState(

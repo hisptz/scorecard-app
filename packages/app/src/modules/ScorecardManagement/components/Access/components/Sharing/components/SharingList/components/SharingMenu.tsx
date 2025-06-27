@@ -1,9 +1,9 @@
 import { FlyoutMenu, Layer, MenuItem, Popper } from "@dhis2/ui";
-import { ACCESS_TYPES } from "@scorecard/shared";
 import { IconCheckmark24 } from "@dhis2/ui-icons";
 import PropTypes from "prop-types";
 import React, { Fragment } from "react";
 import { getAccessName } from "../../../utils";
+import { ACCESS_TYPES } from "../../../../../../../../../shared";
 
 export default function SharingMenu({
 	reference,

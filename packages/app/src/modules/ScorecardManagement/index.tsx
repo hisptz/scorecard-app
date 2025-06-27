@@ -1,4 +1,4 @@
-import { AccessDeniedPage, FullPageLoader } from "@scorecard/shared";
+import { AccessDeniedPage, FullPageLoader } from "../../shared";
 import React, { Suspense } from "react";
 import { FormProvider } from "react-hook-form";
 import useScorecardFormMetadata from "./hooks/meta";

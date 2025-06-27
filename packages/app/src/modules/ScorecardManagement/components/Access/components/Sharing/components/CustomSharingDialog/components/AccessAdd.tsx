@@ -4,7 +4,7 @@ import Title from "./Title";
 import i18n from "@dhis2/d2-i18n";
 import { SharingAutoComplete } from "./SharingAutocomplete";
 import { Button, colors, SingleSelectField, SingleSelectOption } from "@dhis2/ui";
-import { ACCESS_TYPES_LABELLED } from "@scorecard/shared";
+import { ACCESS_TYPES_LABELLED } from "../../../../../../../../../shared";
 
 export function AccessAdd(): React.ReactElement {
 	const { field: userAccessField } = useController({ name: "sharing.users" });
