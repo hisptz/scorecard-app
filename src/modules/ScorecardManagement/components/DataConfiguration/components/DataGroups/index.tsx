@@ -11,8 +11,11 @@ import { DataGroup } from "./components/DataGroup";
 import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd";
 
 export default function DataGroups() {
-	const { fields, append, remove, move } = useFieldArray<ScorecardConfig, "dataSelection.dataGroups">({
-		name: "dataSelection.dataGroups"
+	const { fields, append, remove, move } = useFieldArray<
+		ScorecardConfig,
+		"dataSelection.dataGroups"
+	>({
+		name: "dataSelection.dataGroups",
 	});
 
 	const onGroupAdd = () => {
@@ -20,7 +23,7 @@ export default function DataGroups() {
 			id: uid(),
 			dataHolders: [],
 			title: `${i18n.t("Default")} ${fields.length + 1}`,
-			style: {}
+			style: {},
 		} as ScorecardDataGroup);
 	};
 
@@ -36,26 +39,40 @@ export default function DataGroups() {
 	};
 
 	return (
+		// @ts-expect-error react-dnd issues
 		<DragDropContext onDragEnd={onDragEnd}>
+			{/*
+			 // @ts-expect-error react-dnd issues */}
 			<Droppable droppableId={"group-area"}>
-				{
-					(provided) => {
-
-						return <div {...provided.droppableProps} ref={provided.innerRef} style={{ gap: 24 }} className="column">
+				{(provided) => {
+					return (
+						<div
+							{...provided.droppableProps}
+							ref={provided.innerRef}
+							style={{ gap: 24 }}
+							className="column"
+						>
 							<div style={{ flex: 1 }} className="column">
-								{
-									fields.map((field, i) => (
-										<DataGroup onRemove={remove} key={field.id} index={i} />
-									))
-								}
+								{fields.map((field, i) => (
+									<DataGroup
+										onRemove={remove}
+										key={field.id}
+										index={i}
+									/>
+								))}
 							</div>
 							<div style={{ padding: 16 }}>
-								<Button onClick={onGroupAdd} icon={<IconAdd24 />}>{i18n.t("Add group")}</Button>
+								<Button
+									onClick={onGroupAdd}
+									icon={<IconAdd24 />}
+								>
+									{i18n.t("Add group")}
+								</Button>
 							</div>
-							{provided.placeholder}
-						</div>;
-					}
-				}
+							{provided.placeholder as React.ReactNode}
+						</div>
+					);
+				}}
 			</Droppable>
 		</DragDropContext>
 	);

@@ -1,5 +1,11 @@
 import i18n from "@dhis2/d2-i18n";
-import { DataTable, DataTableBody, DataTableCell, DataTableHead, DataTableRow } from "@dhis2/ui";
+import {
+	DataTable,
+	DataTableBody,
+	DataTableCell,
+	DataTableHead,
+	DataTableRow,
+} from "@dhis2/ui";
 import { head } from "lodash";
 import React, { useMemo } from "react";
 import { useWatch } from "react-hook-form";
@@ -9,9 +15,10 @@ import { UserState } from "../../../../../../shared";
 
 export default function PreviewScorecardTable() {
 	const { organisationUnits } = useRecoilValue(UserState);
-	const { dataGroups } = useWatch({
-		name: "dataSelection"
-	}) ?? {};
+	const { dataGroups } =
+		useWatch({
+			name: "dataSelection",
+		}) ?? {};
 	const columns = useMemo(() => [...dataGroups], [dataGroups]);
 	return (
 		<div className="column" style={{ width: "100%", overflowX: "auto" }}>
@@ -43,7 +50,6 @@ export default function PreviewScorecardTable() {
 					<DataTableRow>
 						{dataGroups?.map((group: any) => (
 							<th
-								width={`${group.dataHolders?.length * 100}px`}
 								key={group.id}
 								colSpan={group.dataHolders?.length || 1}
 							>
@@ -94,7 +100,7 @@ export default function PreviewScorecardTable() {
 								<table
 									style={{
 										border: "none",
-										borderSpacing: 0
+										borderSpacing: 0,
 									}}
 								>
 									<DataTableRow>

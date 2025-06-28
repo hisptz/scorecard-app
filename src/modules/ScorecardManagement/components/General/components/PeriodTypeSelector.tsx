@@ -2,14 +2,14 @@ import i18n from "@dhis2/d2-i18n";
 import { SingleSelectField, SingleSelectOption } from "@dhis2/ui";
 import { PeriodTypeCategory, PeriodUtility } from "@hisptz/dhis2-utils";
 import PropTypes from "prop-types";
-import React, { useEffect, useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { useController } from "react-hook-form";
 import classes from "../styles/PeriodTypeSelector.module.css";
 import { ScorecardConfig } from "@hisptz/dhis2-scorecard";
 
 export function PeriodTypeSelector() {
 	const { field, fieldState } = useController<ScorecardConfig>({
-		name: "periodSelection.type"
+		name: "periodSelection.type",
 	});
 	const fixedPeriodTypes = useMemo(
 		() =>
@@ -26,10 +26,9 @@ export function PeriodTypeSelector() {
 
 	useEffect(() => {
 		if (field.value) {
-			const value = [
-				...relativePeriodTypes,
-				...fixedPeriodTypes
-			].find((type) => type.id === field.value);
+			const value = [...relativePeriodTypes, ...fixedPeriodTypes].find(
+				(type) => type.id === field.value
+			);
 			if (!value) {
 				//This is an invalid value. Clear it
 				field.onChange(undefined);
@@ -39,10 +38,9 @@ export function PeriodTypeSelector() {
 
 	const selected = useMemo(() => {
 		if (field.value) {
-			const value = [
-				...relativePeriodTypes,
-				...fixedPeriodTypes
-			].find((type) => type.id === field.value);
+			const value = [...relativePeriodTypes, ...fixedPeriodTypes].find(
+				(type) => type.id === field.value
+			);
 			if (!value) {
 				return undefined;
 			} else {
@@ -52,7 +50,6 @@ export function PeriodTypeSelector() {
 		return field.value as string | undefined;
 	}, [field.value]);
 
-
 	return (
 		<SingleSelectField
 			{...field}
@@ -60,12 +57,12 @@ export function PeriodTypeSelector() {
 			clearable
 			filterable
 			selected={selected}
-			onChange={({ selected }: any) =>
-				field.onChange(selected)
-			}
+			onChange={({ selected }: any) => field.onChange(selected)}
 			validationText={fieldState.error?.message}
 			error={!!fieldState.error}
-			helpText={i18n.t("The period selector will only show periods of this type")}
+			helpText={i18n.t(
+				"The period selector will only show periods of this type"
+			)}
 		>
 			<SingleSelectOption
 				value={"disabled"}
@@ -103,5 +100,5 @@ export function PeriodTypeSelector() {
 
 PeriodTypeSelector.propTypes = {
 	label: PropTypes.string,
-	name: PropTypes.string
+	name: PropTypes.string,
 };

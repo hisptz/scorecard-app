@@ -1,14 +1,26 @@
 import i18n from "@dhis2/d2-i18n";
-import { Button, ButtonStrip, Field, Modal, ModalActions, ModalContent, ModalTitle, Radio } from "@dhis2/ui";
+import {
+	Button,
+	ButtonStrip,
+	Field,
+	Modal,
+	ModalActions,
+	ModalContent,
+	ModalTitle,
+	Radio,
+} from "@dhis2/ui";
 import React, { useTransition } from "react";
 import { FormProvider, useController, useForm } from "react-hook-form";
-import { ScorecardViewOptions, useScorecardViewStateEngine } from "@hisptz/dhis2-scorecard";
+import {
+	ScorecardViewOptions,
+	useScorecardViewStateEngine,
+} from "@hisptz/dhis2-scorecard";
 import { RHFCheckboxField } from "@hisptz/dhis2-ui";
 import { AverageDisplayType } from "../../../../../shared";
 
 function AverageDisplayTypeField() {
 	const { field, fieldState } = useController<ScorecardViewOptions>({
-		name: "averageDisplayType"
+		name: "averageDisplayType",
 	});
 
 	return (
@@ -50,18 +62,17 @@ export interface ScorecardOptionsModalProps {
 }
 
 export function ScorecardOptionsModal({
-										  hide,
-										  onClose
-									  }: ScorecardOptionsModalProps) {
+	hide,
+	onClose,
+}: ScorecardOptionsModalProps) {
 	const [isPending, startTransition] = useTransition();
 	const viewEngine = useScorecardViewStateEngine();
 	const form = useForm<ScorecardViewOptions>({
-		defaultValues: viewEngine.options
+		defaultValues: viewEngine.options,
 	});
 
 	const onUpdate = (options: ScorecardViewOptions) => {
 		startTransition(() => {
-			console.log(viewEngine);
 			viewEngine.updateOptions(options);
 			onClose();
 		});
@@ -131,7 +142,9 @@ export function ScorecardOptionsModal({
 							primary
 							onClick={() => form.handleSubmit(onUpdate)()}
 						>
-							{isPending ? i18n.t("Updating...") : i18n.t("Update")}
+							{isPending
+								? i18n.t("Updating...")
+								: i18n.t("Update")}
 						</Button>
 					</ButtonStrip>
 				</ModalActions>

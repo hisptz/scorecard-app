@@ -1,35 +1,26 @@
-import { useDataEngine, useDataMutation, useDataQuery } from "@dhis2/app-runtime";
-import { useEffect } from "react";
-import { useSetRecoilState } from "recoil";
-import useScorecardsSummary from "./useScorecardsSummary";
+import { useDataEngine, useDataMutation } from "@dhis2/app-runtime";
 import { DATASTORE_ENDPOINT } from "../../constants";
-import { ScorecardConfState, ScorecardRequestId } from "../../state";
-import { generateCreateMutation, generateScorecardSummary } from "../../utils";
+import { generateCreateMutation } from "../../utils";
+import { ScorecardConfig } from "@hisptz/dhis2-scorecard";
 
-const query = {
-	scorecard: {
-		resource: DATASTORE_ENDPOINT,
-		id: ({ id }: any) => id,
-	},
-};
-
-const updateMutation: any = {
+const updateMutation = {
 	type: "update",
 	resource: DATASTORE_ENDPOINT,
-	id: ({ id }: any) => id,
-	data: ({ data }: any) => data,
+	id: ({ id }: { id: string }) => id,
+	data: ({ data }: { data: ScorecardConfig }) => data,
 };
 
-const deleteMutation: any = {
+const deleteMutation = {
 	type: "delete",
 	resource: DATASTORE_ENDPOINT,
-	id: ({ id }: any) => id,
+	id: ({ id }: { id: string }) => id,
 };
 
-export function useDeleteScorecard(id: any) {
+export function useDeleteScorecard(id: string) {
 	const [removeMutate, { loading, error: removeError }] = useDataMutation(
+		// @ts-expect-error Mutation type issues
 		deleteMutation,
-		{ variables: { id } },
+		{ variables: { id } }
 	);
 
 	const remove = async () => {
@@ -47,18 +38,14 @@ export function useDeleteScorecard(id: any) {
 	};
 }
 
-export function useUpdateScorecard(id: any) {
-	const setScorecardRequestId = useSetRecoilState(ScorecardRequestId(id));
+export function useUpdateScorecard(id: string) {
+	//  @ts-expect-error Mutation type issues
 	const [updateMutate, { loading }] = useDataMutation(updateMutation, {
 		variables: { id },
 	});
-	const { updateSingleScorecardSummary } = useScorecardsSummary();
 
-	const update = async (data: any) => {
-		const scorecardSummary = generateScorecardSummary(data);
-		await updateSingleScorecardSummary(id, scorecardSummary);
+	const update = async (data: ScorecardConfig) => {
 		await updateMutate({ id, data });
-		setScorecardRequestId((prevState) => prevState + 1);
 	};
 
 	return {
@@ -69,46 +56,14 @@ export function useUpdateScorecard(id: any) {
 
 export function useAddScorecard() {
 	const engine = useDataEngine();
-	const { addSingleScorecardSummary } = useScorecardsSummary();
-
-	const add = async (data: any) => {
-		const scorecardSummary = generateScorecardSummary(data);
-		await engine.mutate(generateCreateMutation(data?.id), {
+	const add = async (data: ScorecardConfig) => {
+		// @ts-expect-error Mutation type issues
+		await engine.mutate(generateCreateMutation(data.id), {
 			variables: { data },
 		});
-		await addSingleScorecardSummary(scorecardSummary);
 	};
 
 	return {
 		add,
-	};
-}
-
-export default function useScorecard(scorecardId: any) {
-	const setScorecardState = useSetRecoilState(
-		ScorecardConfState(scorecardId),
-	);
-	const { loading, data, error, refetch } = useDataQuery(query, {
-		lazy: true,
-	});
-
-	const set = async (id: any) => {
-		await refetch({ id });
-	};
-
-	useEffect(() => {
-		function setState() {
-			if (data?.scorecard) {
-				setScorecardState(() => data?.scorecard);
-			}
-		}
-
-		setState();
-	}, [data]);
-
-	return {
-		loading,
-		error,
-		set,
 	};
 }

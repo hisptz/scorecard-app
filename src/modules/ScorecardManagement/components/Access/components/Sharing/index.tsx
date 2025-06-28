@@ -8,12 +8,7 @@ import { useController } from "react-hook-form";
 
 export default function Sharing() {
 	const { fieldState, field } = useController<ScorecardConfig, "sharing">({
-		name: "sharing"
-	});
-
-
-	console.log({
-		sharing: field.value
+		name: "sharing",
 	});
 
 	return (
@@ -28,7 +23,7 @@ export default function Sharing() {
 						gap: 8,
 						alignItems: "center",
 						padding: "8px 0",
-						color: colors.red500
+						color: colors.red500,
 					}}
 				>
 					<IconError24 />
@@ -39,5 +34,3 @@ export default function Sharing() {
 		</div>
 	);
 }
-
-

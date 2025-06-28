@@ -11,6 +11,7 @@ export default function LinkedDataSource({ index, onDelete, dataSource }: any) {
 	const selected = false;
 
 	return (
+		// @ts-expect-error react-dnd type issues
 		<Draggable draggableId={id} index={index}>
 			{(provided: any) => (
 				<div

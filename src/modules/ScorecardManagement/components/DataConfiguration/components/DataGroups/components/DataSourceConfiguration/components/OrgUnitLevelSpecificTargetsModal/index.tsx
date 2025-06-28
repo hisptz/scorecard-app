@@ -1,18 +1,29 @@
 import PropTypes from "prop-types";
 import React from "react";
-import { useFormContext } from "react-hook-form";
+import { useController, useFormContext } from "react-hook-form";
 import { getNonDefaultLegendDefinitions } from "../../../../../../../General/utils/utils";
 import LevelTargetsField from "../TargetsArea/components/LevelTargetsField";
-import { DHIS2ValueTypes, FormFieldModel } from "../../../../../../../../../../shared";
+import {
+	DHIS2ValueTypes,
+	FormFieldModel,
+} from "../../../../../../../../../../shared";
+import { ScorecardConfig } from "@hisptz/dhis2-scorecard";
 
-export default function OrgUnitLevelSpecificTargets({ path }: any) {
-	const { watch, setValue } = useFormContext();
+export default function OrgUnitLevelSpecificTargets({
+	path,
+}: {
+	path: string;
+}) {
+	const { getValues } = useFormContext<ScorecardConfig>();
+	const { field } = useController({
+		name: path,
+	});
 	const legendDefinitions = getNonDefaultLegendDefinitions(
-		watch("legendDefinitions"),
+		getValues("legendDefinitions")
 	);
-	const weight = watch(`${path}.weight`);
-	const highIsGood = watch(`${path}.highIsGood`);
-	const defaultLegends = watch(`${path}.legends`);
+	const weight = field.value?.weight ?? 100;
+	const highIsGood = field.value?.highIsGood ?? true;
+	const defaultLegends = field.value?.legends ?? [];
 
 	return (
 		<LevelTargetsField
@@ -24,13 +35,15 @@ export default function OrgUnitLevelSpecificTargets({ path }: any) {
 						name: legend.name,
 						legendDefinition: legend,
 						valueType: DHIS2ValueTypes.LEGEND_MIN_MAX.name,
-					}),
+					})
 			)}
 			value={defaultLegends}
 			onChange={({ value }: any) => {
-				setValue(`${path}.legends`, value);
+				field.onChange({
+					...field.value,
+					legends: value,
+				});
 			}}
-			legends={defaultLegends}
 			highIsGood={highIsGood}
 			weight={weight}
 			path={path}

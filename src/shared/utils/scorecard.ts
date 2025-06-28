@@ -1,5 +1,9 @@
 import { get } from "lodash";
-import { DATASTORE_ENDPOINT, DATASTORE_SCORECARD_SUMMARY_INCLUDE_KEYS } from "../constants";
+import {
+	DATASTORE_ENDPOINT,
+	DATASTORE_SCORECARD_SUMMARY_INCLUDE_KEYS,
+} from "../constants";
+import { ScorecardConfig } from "@hisptz/dhis2-scorecard";
 
 export function generateScorecardSummary(data: any) {
 	const summary: any = {};
@@ -9,8 +13,8 @@ export function generateScorecardSummary(data: any) {
 	return summary;
 }
 
-export const generateCreateMutation = (id: any) => ({
+export const generateCreateMutation = (id: string) => ({
 	type: "create",
 	resource: `${DATASTORE_ENDPOINT}/${id}`,
-	data: ({ data }: any) => data,
+	data: ({ data }: { data: ScorecardConfig }) => data,
 });

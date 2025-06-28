@@ -136,9 +136,9 @@ export function DataGroup({
 																/>
 															)
 														)}
-														{/*
-														// @ts-expect-error react-dnd type issues */}
-														{provided.placeholder}
+														{
+															provided.placeholder as React.ReactNode
+														}
 													</div>
 												)}
 											</Droppable>

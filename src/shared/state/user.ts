@@ -1,9 +1,5 @@
-import { find } from "lodash";
-import { atom, selector, selectorFamily } from "recoil";
+import { atom, selector } from "recoil";
 import { EngineState } from "./engine";
-import { ScorecardSummaryState } from "./scorecard";
-import { DefaultAuthority } from "../constants";
-import { getUserAuthority } from "../utils";
 
 const userQuery = {
 	user: {
@@ -36,41 +32,27 @@ type UserQueryResponse = {
 	user: D2User;
 };
 
-export const UserState = atom<D2User>({
+export const UserState = atom<D2User | null>({
 	key: "userState",
-	default: selector({
+	default: selector<D2User | null>({
 		key: "userStateSelector",
 		get: async ({ get }) => {
 			try {
 				const engine = get(EngineState);
 				if (engine) {
 					const { user } = (await engine.query(
-						userQuery,
+						userQuery
 					)) as UserQueryResponse;
-
-					console.log({ user });
 					if (user) {
 						return user;
 					}
 					return null;
 				}
+				return null;
 			} catch (e) {
 				console.error(e);
+				return null;
 			}
 		},
 	}),
-});
-
-export const UserAuthorityOnScorecard = selectorFamily({
-	key: "user-scorecard-authority",
-	get:
-		(scorecardId) =>
-		({ get }) => {
-			const scorecardSummary = find(get(ScorecardSummaryState), [
-				"id",
-				scorecardId,
-			]);
-			const user = get(UserState);
-			return getUserAuthority(user, scorecardSummary) ?? DefaultAuthority;
-		},
 });

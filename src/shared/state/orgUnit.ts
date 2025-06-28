@@ -1,62 +1,38 @@
-import { chunk, compact, find, flatten, isEmpty, reduce, sortBy, uniqBy } from "lodash";
-import { atom, atomFamily, selector, selectorFamily } from "recoil";
+import { chunk, flatten } from "lodash";
+import { atom, selector, selectorFamily } from "recoil";
 import { EngineState } from "./engine";
-import { PeriodResolverState } from "./period";
-import { ScorecardViewState } from "./scorecard";
-import { UserState } from "./user";
-import { getHoldersFromGroups } from "../utils";
+
 import { getOrgUnitsFromAnalytics } from "../services";
-
-
-const orgUnitQuery = {
-	orgUnit: {
-		resource: "organisationUnits",
-		id: ({ id }: any) => id,
-		params: {
-			fields: ["id", "displayName", "path", "level"]
-		}
-	}
-};
-
-const orgUnitChildrenQuery = {
-	analytics: {
-		resource: "analytics",
-		params: ({ id, level }: any) => ({
-			dimension: [`ou:${id};LEVEL-${level}`, `pe:${new Date().getFullYear()}`],
-			skipData: true,
-			hierarchyMeta: true,
-			showHierarchy: true
-		})
-	}
-};
+import { useDataEngine } from "@dhis2/app-runtime";
+import { Analytics } from "@hisptz/dhis2-utils";
 
 const selectedOrgUnitsQuery = {
 	analytics: {
 		resource: "analytics",
-		params: ({ ou, pe }: any) => ({
+		params: ({ ou, pe }: { ou: string[]; pe: string[] }) => ({
 			dimension: [`ou:${ou.join(";")}`, `pe:${pe}`],
 			skipData: true,
 			hierarchyMeta: true,
-			showHierarchy: true
-		})
-	}
+			showHierarchy: true,
+		}),
+	},
 };
 
 const orgUnitLevelsQuery = {
 	levels: {
 		resource: "organisationUnitLevels",
 		params: {
-			fields: ["id", "displayName", "level"]
-		}
-	}
+			fields: ["id", "displayName", "level"],
+		},
+	},
 };
 const orgUnitGroupsQuery = {
 	groups: {
 		resource: "organisationUnitGroups",
 		params: {
-			fields: ["id", "displayName"]
-		}
-	}
+			fields: ["id", "displayName"],
+		},
+	},
 };
 
 export const OrgUnitLevels = atom<Array<{ id: string; level: number }>>({
@@ -64,158 +40,73 @@ export const OrgUnitLevels = atom<Array<{ id: string; level: number }>>({
 	default: selector({
 		key: "org-unit-levels-default",
 		get: async ({ get }) => {
-			const engine: any = get(EngineState);
-			const { levels } = await engine.query(orgUnitLevelsQuery);
+			const engine = get(EngineState);
+			const { levels } = (await engine.query(orgUnitLevelsQuery)) as {
+				levels: {
+					organisationUnitLevels: Array<{
+						id: string;
+						level: number;
+					}>;
+				};
+			};
 			return levels?.organisationUnitLevels;
-		}
-	})
+		},
+	}),
 });
 export const OrgUnitGroups = atom({
 	key: "org-unit-group",
 	default: selector({
 		key: "org-unit-group-default",
 		get: async ({ get }) => {
-			const engine: any = get(EngineState);
-			const { groups } = await engine.query(orgUnitGroupsQuery);
+			const engine = get(EngineState);
+			const { groups } = (await engine.query(orgUnitGroupsQuery)) as {
+				groups: {
+					organisationUnitGroups: Array<{
+						id: string;
+						displayName: string;
+					}>;
+				};
+			};
 			return groups?.organisationUnitGroups;
-		}
-	})
+		},
+	}),
 });
 
-export const OrgUnit = selectorFamily({
-	key: "orgUnitSelector",
-	get: (id) => async ({ get }) => {
-		try {
-			const engine: any = get(EngineState);
-			const { orgUnit } = await engine.query(orgUnitQuery, {
-				variables: { id }
-			});
-			return orgUnit;
-		} catch (e) {
-			return {};
-		}
-	}
-});
-
-export const OrgUnitPathState = atomFamily({
-	key: "orgUnitPath",
-	default: selectorFamily({
-		key: "orgUnitPathSelector",
-		get: (path: any = "") => async ({ get }) => {
-			const orgUnits: any = compact(path?.split("/"));
-			const orgUnitNames = sortBy(
-				get(SelectedOrgUnits(orgUnits)),
-				"level"
-			)?.map(({ displayName }) => displayName);
-			return orgUnitNames.join("/");
-		}
-	})
-});
-
-export const OrgUnitChildren = selectorFamily({
-	key: "org-unit-children",
-	get: (orgUnitId) => async ({ get }) => {
-		const engine: any = get(EngineState);
-		const parentOrgUnit = get(OrgUnit(orgUnitId));
-		if (parentOrgUnit) {
-			const { analytics } = await engine.query(orgUnitChildrenQuery, {
-				variables: { id: orgUnitId, level: parentOrgUnit.level + 1 }
-			});
-			return getOrgUnitsFromAnalytics(analytics) ?? [];
-		}
-	}
-});
-
-export const LowestOrgUnitLevel = selector({
-	key: "last-org-unit-level",
-	get: ({ get }) => {
-		const orgUnitLevels = get(OrgUnitLevels);
-		return reduce(orgUnitLevels, (acc, level) =>
-			level.level > acc.level ? level : acc
-		);
-	}
-});
-
-export const InitialOrgUnits = selector({
-	key: "initial-org-units-resolver",
-	get: async ({ get }) => {
-		const {
-			orgUnits,
-			levels,
-			groups,
-			userOrgUnit,
-			userSubUnit,
-			userSubX2Unit
-		} = get(ScorecardViewState("orgUnitSelection")) ?? {};
-		const periods = get(PeriodResolverState) ?? [];
-		const orgUnitLevels = get(OrgUnitLevels);
-		const { dataGroups } = get(ScorecardViewState("dataSelection")) ?? {};
-		const dataHolders = getHoldersFromGroups(dataGroups) ?? [];
-		const { organisationUnits } = get(UserState);
-
-		let resolvedOrgUnits = orgUnits;
-
-		if (!isEmpty(dataHolders) && !isEmpty(periods)) {
-			if (userSubX2Unit) {
-				resolvedOrgUnits = [
-					...resolvedOrgUnits,
-					{ id: "USER_ORGUNIT_GRANDCHILDREN" }
-				];
-			}
-			if (userSubUnit) {
-				resolvedOrgUnits = [
-					...resolvedOrgUnits,
-					{ id: "USER_ORGUNIT_CHILDREN" }
-				];
-			}
-			if (userOrgUnit) {
-				resolvedOrgUnits = [...resolvedOrgUnits, ...organisationUnits];
-			}
-
-			if (!isEmpty(levels)) {
-				resolvedOrgUnits = [
-					...resolvedOrgUnits,
-					...(levels?.map((level: any) => ({
-						id: `LEVEL-${find(orgUnitLevels, { id: level })?.level}`
-					})) ?? [])
-				];
-			}
-
-			if (!isEmpty(groups)) {
-				resolvedOrgUnits = [
-					...resolvedOrgUnits,
-					...(groups?.map((group: any) => ({ id: `OU_GROUP-${group}` })) ?? [])
-				];
-			}
-		}
-
-		return { orgUnits: uniqBy(resolvedOrgUnits, "id") };
-	}
-});
-
-const getOrgUnits = async (engine: any, orgUnitsIds: any) => {
+const getOrgUnits = async (
+	engine: ReturnType<typeof useDataEngine>,
+	orgUnitsIds: string[]
+) => {
 	const pe = new Date().getFullYear();
-
-	const { analytics } = await engine.query(selectedOrgUnitsQuery, {
-		variables: { ou: orgUnitsIds ?? [], pe }
-	});
+	// @ts-expect-error Query errors
+	const { analytics } = (await engine.query(selectedOrgUnitsQuery, {
+		variables: { ou: orgUnitsIds ?? [], pe },
+	})) as unknown as {
+		analytics: Analytics & {
+			metaData: Analytics["metaData"] & {
+				ouHierarchy: Record<string, string>;
+				ouNameHierarchy: Record<string, string>;
+			};
+		};
+	};
 
 	return getOrgUnitsFromAnalytics(analytics);
 };
 
 export const SelectedOrgUnits = selectorFamily({
 	key: "selected-org-units-resolver",
-	get: (orgUnitsIds: any) => async ({ get }) => {
-		try {
-			const engine = get(EngineState);
-			const orgUnitsChunks = chunk(orgUnitsIds, 5);
-			const orgUnits = await Promise.all(
-				orgUnitsChunks.map((chunk) => getOrgUnits(engine, chunk))
-			);
-			return flatten(orgUnits);
-		} catch (e) {
-			console.error(e);
-			return [];
-		}
-	}
+	get:
+		(orgUnitsIds: string[]) =>
+		async ({ get }) => {
+			try {
+				const engine = get(EngineState);
+				const orgUnitsChunks = chunk(orgUnitsIds, 5);
+				const orgUnits = await Promise.all(
+					orgUnitsChunks.map((chunk) => getOrgUnits(engine, chunk))
+				);
+				return flatten(orgUnits);
+			} catch (e) {
+				console.error(e);
+				return [];
+			}
+		},
 });

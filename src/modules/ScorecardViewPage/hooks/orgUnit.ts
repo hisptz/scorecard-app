@@ -1,12 +1,14 @@
 import { useDataQuery } from "@dhis2/app-runtime";
-import { type OrganisationUnit, OrganisationUnitLevel } from "@hisptz/dhis2-utils";
-import { useUpdateEffect } from "usehooks-ts";
+import {
+	type OrganisationUnit,
+	OrganisationUnitLevel,
+} from "@hisptz/dhis2-utils";
 import { useEffect } from "react";
 import { isEmpty } from "lodash";
 
 const orgUnitQuery: any = {
 	ou: {
-		resource: `organisationUnits`,
+		resource: "organisationUnits",
 		params: ({ ids }: { ids: string[] }) => {
 			return {
 				filter: `id:in:[${ids.join(",")}]`,
@@ -29,11 +31,11 @@ export function useOrgUnits(initialIds?: string[]) {
 			variables: {
 				ids: initialIds,
 			},
-			lazy: isEmpty(initialIds),
-		},
+			lazy: true,
+		}
 	);
 
-	useUpdateEffect(() => {
+	useEffect(() => {
 		if (initialIds) {
 			refetch({ ids: initialIds }).catch(console.error);
 		}

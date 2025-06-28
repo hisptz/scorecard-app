@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import React from "react";
 import { DecreasingArrows, IncreasingArrows } from "./Arrows";
 
@@ -49,10 +48,3 @@ export default function SingleCellSvg({
 		</svg>
 	);
 }
-
-SingleCellSvg.propTypes = {
-	value: PropTypes.string.isRequired,
-	bold: PropTypes.bool,
-	color: PropTypes.string,
-	status: PropTypes.oneOf(["increasing", "decreasing"]),
-};

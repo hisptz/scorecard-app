@@ -1,9 +1,15 @@
 import { colors, Field } from "@dhis2/ui";
-import { FormFieldModel, generateLegendDefaults, OrgUnitLevels } from "../../../../../../../../../../../shared";
-import { Accordion, AccordionDetails, AccordionSummary } from "@material-ui/core";
+import {
+	generateLegendDefaults,
+	OrgUnitLevels,
+} from "../../../../../../../../../../../shared";
+import {
+	Accordion,
+	AccordionDetails,
+	AccordionSummary,
+} from "@material-ui/core";
 import produce from "immer";
 import { fromPairs, get, head, set } from "lodash";
-import PropTypes from "prop-types";
 import React, { useEffect, useMemo, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { useRecoilValue } from "recoil";
@@ -11,14 +17,14 @@ import { getNonDefaultLegendDefinitions } from "../../../../../../../../General/
 import LegendsField from "./LegendsField";
 
 export default function LevelTargetsField({
-											  name,
-											  value: initialValue = [],
-											  onChange,
-											  multipleFields,
-											  weight,
-											  highIsGood,
-											  ...props
-										  }: any) {
+	name,
+	value: initialValue = [],
+	onChange,
+	multipleFields,
+	weight,
+	highIsGood,
+	...props
+}: any) {
 	const orgUnitLevels = useRecoilValue(OrgUnitLevels);
 	const { watch } = useFormContext();
 	const [expanded, setExpanded] = useState(head(orgUnitLevels)?.id);
@@ -34,31 +40,29 @@ export default function LevelTargetsField({
 			!Array.isArray(initialValue)
 				? initialValue
 				: fromPairs([
-					...(orgUnitLevels?.map(({ id }) => [
-						id,
-						generateLegendDefaults(
-							{
+						...(orgUnitLevels?.map(({ id }) => [
+							id,
+							generateLegendDefaults({
 								legendDefinitions: multipleFields,
 								weight,
-								highIsGood
-							}
-						)
-					]) ?? [])
-				]),
+								highIsGood,
+							}),
+						]) ?? []),
+				  ]),
 		[highIsGood, initialValue, multipleFields, orgUnitLevels, weight]
 	);
 	const onFieldChange = (newValue: any, level: any) => {
 		onChange({
 			value: produce(value, (draft: any) => {
 				return set(draft, [level], newValue);
-			})
+			}),
 		});
 	};
 
 	useEffect(() => {
 		if (Array.isArray(initialValue)) {
 			onChange({
-				value
+				value,
 			});
 		}
 	}, [value, initialValue]);
@@ -91,13 +95,3 @@ export default function LevelTargetsField({
 		</Field>
 	);
 }
-
-LevelTargetsField.propTypes = {
-	highIsGood: PropTypes.bool.isRequired,
-	multipleFields: PropTypes.arrayOf(PropTypes.instanceOf(FormFieldModel))
-		.isRequired,
-	name: PropTypes.string.isRequired,
-	weight: PropTypes.number.isRequired,
-	onChange: PropTypes.func.isRequired,
-	value: PropTypes.any
-};

@@ -1,10 +1,18 @@
 import { omitBy } from "lodash";
+import { Analytics } from "@hisptz/dhis2-utils";
 
-export function getOrgUnitsFromAnalytics(analytics: any) {
+export function getOrgUnitsFromAnalytics(
+	analytics: Analytics & {
+		metaData: Analytics["metaData"] & {
+			ouHierarchy: Record<string, string>;
+			ouNameHierarchy: Record<string, string>;
+		};
+	}
+) {
 	const { metaData } = analytics ?? {};
 	const { ouHierarchy, items, ouNameHierarchy, dimensions } = metaData ?? {};
 	const cleanedOuHierarchy = omitBy(ouHierarchy, (ou) => !ou);
-	return dimensions?.ou?.map((ou: any) => {
+	return dimensions?.ou?.map((ou) => {
 		const path = `${cleanedOuHierarchy?.[ou] ?? ""}/${ou}`;
 		return {
 			id: ou,
@@ -16,6 +24,6 @@ export function getOrgUnitsFromAnalytics(analytics: any) {
 	});
 }
 
-export function isOrgUnitId(id: any) {
+export function isOrgUnitId(id: string) {
 	return !id.match(/(LEVEL-)|(USER_)|(OU_GROUP-)\w+/);
 }

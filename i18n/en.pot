@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-06-27T07:58:39.550Z\n"
-"PO-Revision-Date: 2025-06-27T07:58:39.551Z\n"
+"POT-Creation-Date: 2025-06-28T09:54:59.676Z\n"
+"PO-Revision-Date: 2025-06-28T09:54:59.676Z\n"
 
 msgid "Scorecard deleted successfully"
 msgstr "Scorecard deleted successfully"
@@ -298,6 +298,12 @@ msgstr "Custom Header"
 
 msgid "Legend Definitions"
 msgstr "Legend Definitions"
+
+msgid "Default organisation unit"
+msgstr "Default organisation unit"
+
+msgid "Update organisation unit"
+msgstr "Update organisation unit"
 
 msgid "Change"
 msgstr "Change"

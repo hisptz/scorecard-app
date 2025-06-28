@@ -1,18 +1,19 @@
 import i18n from "@dhis2/d2-i18n";
-import { RHFDHIS2FormField as RHFCustomInput, RHFTextInputField } from "@hisptz/dhis2-ui";
+import {
+	RHFDHIS2FormField as RHFCustomInput,
+	RHFTextInputField,
+} from "@hisptz/dhis2-ui";
 import React from "react";
 import "../../../ScorecardManagement.module.css";
 import { PeriodSelector } from "./PeriodSelector";
 import LegendDefinitionFormField from "./LegendDefinitionFormField";
 import { PeriodTypeSelector } from "./PeriodTypeSelector";
 import { AdditionalLabelsField } from "./AdditionalLabelsField";
+import { ScorecardOrgUnitSelection } from "./OrgUnitSelection";
 
 export default function GeneralForm() {
-
 	return (
-		<div
-			style={{ gap: 16, display: "flex", flexDirection: "column" }}
-		>
+		<div style={{ gap: 16, display: "flex", flexDirection: "column" }}>
 			<div
 				style={{ display: "flex", flexDirection: "column", gap: 16 }}
 				className="col-12 general-settings"
@@ -41,6 +42,7 @@ export default function GeneralForm() {
 				<PeriodTypeSelector />
 				<PeriodSelector />
 			</div>
+			<ScorecardOrgUnitSelection />
 			<div className="custom-header-settings">
 				<RHFCustomInput
 					name="customHeader"

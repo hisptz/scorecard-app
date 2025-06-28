@@ -1,39 +1,59 @@
 import i18n from "@dhis2/d2-i18n";
-import { Button, ButtonStrip, CircularLoader, Field, Modal, ModalActions, ModalContent, ModalTitle } from "@dhis2/ui";
+import {
+	Button,
+	ButtonStrip,
+	CircularLoader,
+	Field,
+	Modal,
+	ModalActions,
+	ModalContent,
+	ModalTitle,
+} from "@dhis2/ui";
 import { OrgUnitSelectorModal } from "@hisptz/dhis2-ui";
 import { isEmpty } from "lodash";
-import React, { Dispatch, SetStateAction, Suspense, useCallback, useState } from "react";
+import {
+	Dispatch,
+	SetStateAction,
+	Suspense,
+	useCallback,
+	useState,
+} from "react";
 import { useFormContext, useWatch } from "react-hook-form";
-import { useRecoilValue } from "recoil";
 import { getNonDefaultLegendDefinitions } from "../../../../../../../General/utils/utils";
 import LegendsField from "../TargetsArea/components/LegendsField";
 import { ScorecardLegend, SpecificTarget } from "@hisptz/dhis2-scorecard";
-import { SelectedOrgUnits } from "../../../../../../../../../../shared";
 
-function OrgUnitSelector({ target, setTarget }: { target: SpecificTarget, setTarget: Dispatch<SetStateAction<SpecificTarget>> }) {
+function OrgUnitSelector({
+	target,
+	setTarget,
+}: {
+	target: SpecificTarget;
+	setTarget: Dispatch<SetStateAction<SpecificTarget>>;
+}) {
 	const [periodSelectorOpen, setPeriodSelectorOpen] = useState(
 		isEmpty(target.items)
 	);
-
-	const orgUnits = useRecoilValue(SelectedOrgUnits(target.items));
-
-	const label = orgUnits
-		?.map((ou) => ou?.displayName)
-		?.join(", ");
+	const orgUnits: { displayName: string }[] = [];
+	const label = orgUnits?.map((ou) => ou?.displayName)?.join(", ");
 
 	return (
 		<>
 			<div className=" align-items-end row gap-8 w-100">
-				<Field helpText={`Selected: ${label}`} label={i18n.t("Organisation unit")}>
+				<Field
+					helpText={`Selected: ${label}`}
+					label={i18n.t("Organisation unit")}
+				>
 					<Button onClick={() => setPeriodSelectorOpen(true)}>
-						{!isEmpty(target.items) ? i18n.t("Change organisation unit") : i18n.t("Select organisation unit")}
+						{!isEmpty(target.items)
+							? i18n.t("Change organisation unit")
+							: i18n.t("Select organisation unit")}
 					</Button>
 				</Field>
 			</div>
 			{periodSelectorOpen && (
 				<OrgUnitSelectorModal
 					value={{
-						orgUnits: orgUnits ?? []
+						orgUnits: orgUnits ?? [],
 					}}
 					onClose={() => setPeriodSelectorOpen(false)}
 					hide={!periodSelectorOpen}
@@ -42,8 +62,8 @@ function OrgUnitSelector({ target, setTarget }: { target: SpecificTarget, setTar
 							return {
 								...prevState,
 								items: orgUnits?.map(
-									(orgUnit: { id: string; }) => orgUnit.id
-								)
+									(orgUnit: { id: string }) => orgUnit.id
+								),
 							};
 						});
 						setPeriodSelectorOpen(false);
@@ -55,14 +75,22 @@ function OrgUnitSelector({ target, setTarget }: { target: SpecificTarget, setTar
 }
 
 export default function OrgUnitSpecificTargetsModal({
-														open,
-														onClose,
-														onUpdate,
-														specificTarget,
-														defaultLegends,
-														onChangeDefaultLegends,
-														path
-													}: { path: string; open: boolean; onClose: () => void; onUpdate: (specificTarget: SpecificTarget) => void; specificTarget: SpecificTarget, defaultLegends: ScorecardLegend[]; onChangeDefaultLegends: (legends: ScorecardLegend[]) => void }) {
+	open,
+	onClose,
+	onUpdate,
+	specificTarget,
+	defaultLegends,
+	onChangeDefaultLegends,
+	path,
+}: {
+	path: string;
+	open: boolean;
+	onClose: () => void;
+	onUpdate: (specificTarget: SpecificTarget) => void;
+	specificTarget: SpecificTarget;
+	defaultLegends: ScorecardLegend[];
+	onChangeDefaultLegends: (legends: ScorecardLegend[]) => void;
+}) {
 	const { getValues } = useFormContext();
 	const [target, setTarget] = useState<SpecificTarget>(specificTarget);
 
@@ -70,12 +98,12 @@ export default function OrgUnitSpecificTargetsModal({
 		getValues("legendDefinitions")
 	);
 	const highIsGood = useWatch({
-		name: `${path}.highIsGood`
+		name: `${path}.highIsGood`,
 	});
 
 	const onUpdateClick = useCallback(() => {
 		onUpdate({
-			...target
+			...target,
 		});
 		onClose();
 	}, [onClose, onUpdate, target]);
@@ -111,7 +139,7 @@ export default function OrgUnitSpecificTargetsModal({
 										setTarget((prevState) => {
 											return {
 												...prevState,
-												legends
+												legends,
 											};
 										});
 									}}
@@ -143,4 +171,3 @@ export default function OrgUnitSpecificTargetsModal({
 		</Modal>
 	);
 }
-

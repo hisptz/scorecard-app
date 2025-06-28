@@ -1,6 +1,7 @@
 import { compact } from "lodash";
 import { DATASTORE_ENDPOINT } from "../constants";
 import { OrgUnitSelection } from "../models";
+import { FetchError, useDataEngine } from "@dhis2/app-runtime";
 
 const query = {
 	scorecard: {
@@ -9,17 +10,22 @@ const query = {
 	},
 };
 
-export default async function getScorecard(id = "", engine: any) {
+export default async function getScorecard(
+	id = "",
+	engine: ReturnType<typeof useDataEngine>
+) {
 	if (id) {
 		try {
 			const response = await engine.query(query, { variables: { id } });
-			const sanitizedScorecard = sanitizeDataSelection(response?.scorecard);
+			const sanitizedScorecard = sanitizeDataSelection(
+				response?.scorecard
+			);
 			return { scorecard: sanitizedScorecard };
 		} catch (e) {
-			return { error: e };
+			return { error: e as FetchError };
 		}
 	}
-	return { error: "not found" };
+	return null;
 }
 
 function sanitizeDataSelection(scorecard: any) {
@@ -49,7 +55,7 @@ const orgUnitQuery = {
 
 export async function getOrgUnitSelection(
 	{ orgUnitSelection }: any,
-	engine: any,
+	engine: any
 ) {
 	const { orgUnits: orgUnitsIds } = orgUnitSelection ?? {};
 	const { orgUnits: resolvedOrgUnits } = await engine.query(orgUnitQuery, {

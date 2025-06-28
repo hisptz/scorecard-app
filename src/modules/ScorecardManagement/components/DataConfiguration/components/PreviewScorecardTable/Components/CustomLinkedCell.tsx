@@ -1,48 +1,51 @@
-import { generateRandomValues, getLegend, LinkedCellSvg } from "../../../../../../../shared";
-import PropTypes from "prop-types";
+import {
+	generateRandomValues,
+	getLegend,
+	LinkedCellSvg,
+} from "../../../../../../../shared";
 import React, { useMemo } from "react";
 import { useFormContext } from "react-hook-form";
 
 export default function CustomLinkedCell({
-											 top,
-											 bottom,
-											 orgUnit,
-											 period
-										 }: any) {
+	top,
+	bottom,
+	orgUnit,
+	period,
+}: any) {
 	const {
 		legends: topLegends,
 		showColors: showTopColors,
 		displayArrows: topDisplayArrows,
 		weight: topWeight,
-		specificTargets: topSpecificTargets
+		specificTargets: topSpecificTargets,
 	} = top ?? {};
 	const {
 		legends: bottomLegends,
 		showColors: showBottomColors,
 		displayArrows: bottomDisplayArrows,
 		weight: bottomWeight,
-		specificTargets: bottomSpecificTargets
+		specificTargets: bottomSpecificTargets,
 	} = bottom ?? {};
 	const { watch } = useFormContext();
 	const legendDefinitions = watch("legendDefinitions");
 	const topValue = useMemo(() => generateRandomValues(topWeight), []);
 	const bottomValue = useMemo(() => generateRandomValues(bottomWeight), []);
 	const { color: topColor } =
-	getLegend(topValue, topLegends, {
-		max: topWeight,
-		specificTargets: topSpecificTargets,
-		orgUnit,
-		period,
-		legendDefinitions
-	}) ?? {};
+		getLegend(topValue, topLegends, {
+			max: topWeight,
+			specificTargets: topSpecificTargets,
+			orgUnit,
+			period,
+			legendDefinitions,
+		}) ?? {};
 	const { color: bottomColor } =
-	getLegend(bottomValue, bottomLegends, {
-		max: bottomWeight,
-		specificTargets: bottomSpecificTargets,
-		orgUnit,
-		period,
-		legendDefinitions
-	}) ?? {};
+		getLegend(bottomValue, bottomLegends, {
+			max: bottomWeight,
+			specificTargets: bottomSpecificTargets,
+			orgUnit,
+			period,
+			legendDefinitions,
+		}) ?? {};
 
 	return (
 		<td className="data-cell">
@@ -57,10 +60,3 @@ export default function CustomLinkedCell({
 		</td>
 	);
 }
-
-CustomLinkedCell.propTypes = {
-	bottom: PropTypes.object.isRequired,
-	top: PropTypes.object.isRequired,
-	orgUnit: PropTypes.string,
-	period: PropTypes.string
-};

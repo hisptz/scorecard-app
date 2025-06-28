@@ -6,7 +6,8 @@
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
-    "plugin:react/recommended"
+    "plugin:react/recommended",
+    "plugin:react/jsx-runtime"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -15,13 +16,12 @@
   },
   "plugins": [
     "@typescript-eslint",
-    "@tanstack/eslint-plugin-query",
     "react"
   ],
   "rules": {
     "@typescript-eslint/no-explicit-any": "warn",
     "indent": [
-      "error",
+      "warn",
       "tab"
     ],
     "linebreak-style": [
