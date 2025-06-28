@@ -3,13 +3,14 @@ import {
 	RHFDHIS2FormField as RHFCustomInput,
 	RHFTextInputField,
 } from "@hisptz/dhis2-ui";
-import React from "react";
 import "../../../ScorecardManagement.module.css";
 import { PeriodSelector } from "./PeriodSelector";
 import LegendDefinitionFormField from "./LegendDefinitionFormField";
 import { PeriodTypeSelector } from "./PeriodTypeSelector";
 import { AdditionalLabelsField } from "./AdditionalLabelsField";
 import { ScorecardOrgUnitSelection } from "./OrgUnitSelection";
+import { ScorecardSharing } from "./ScorecardSharing";
+import { Field } from "@dhis2/ui";
 
 export default function GeneralForm() {
 	return (
@@ -37,6 +38,11 @@ export default function GeneralForm() {
 					valueType="LONG_TEXT"
 					label={i18n.t("Description")}
 				/>
+			</div>
+			<div>
+				<Field label={i18n.t("Configure sharing settings")}>
+					<ScorecardSharing />
+				</Field>
 			</div>
 			<div className="row align-items-center" style={{ gap: 24 }}>
 				<PeriodTypeSelector />

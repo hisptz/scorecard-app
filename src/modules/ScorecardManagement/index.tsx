@@ -1,11 +1,14 @@
 import { AccessDeniedPage, FullPageLoader } from "../../shared";
-import React, { Suspense } from "react";
+import { Suspense } from "react";
 import { FormProvider } from "react-hook-form";
 import useScorecardFormMetadata from "./hooks/meta";
 import { ManagementTabBar } from "./components/ManagementTabBar";
 import { Outlet, useParams } from "react-router-dom";
 import { TabHeader } from "./components/TabHeader";
-import { NavigationButtons, StepNavigationButtons } from "./components/NavigationButtons";
+import {
+	NavigationButtons,
+	StepNavigationButtons,
+} from "./components/NavigationButtons";
 
 export default function ScoreCardManagement() {
 	const { id } = useParams<{ id?: string }>();
@@ -22,10 +25,25 @@ export default function ScoreCardManagement() {
 	return (
 		<FormProvider {...form}>
 			<Suspense fallback={<FullPageLoader />}>
-				<div style={{ display: "flex", flexDirection: "column", height: "100%" }} className="w-100">
+				<div
+					style={{
+						display: "flex",
+						flexDirection: "column",
+						height: "100%",
+					}}
+					className="w-100"
+				>
 					<ManagementTabBar />
 					<div className="column flex-1 overflow-auto">
-						<div style={{ flexGrow: 1, padding: "0 24px", display: "flex", flexDirection: "column", gap: 16 }}>
+						<div
+							style={{
+								flexGrow: 1,
+								padding: "0 24px",
+								display: "flex",
+								flexDirection: "column",
+								gap: 16,
+							}}
+						>
 							<TabHeader />
 							<div className="flex-1">
 								<Suspense fallback={<FullPageLoader />}>
@@ -34,7 +52,10 @@ export default function ScoreCardManagement() {
 							</div>
 							<StepNavigationButtons />
 						</div>
-						<div style={{ padding: 24 }} className="w-100 row center">
+						<div
+							style={{ padding: 24 }}
+							className="w-100 row center"
+						>
 							<NavigationButtons />
 						</div>
 					</div>
