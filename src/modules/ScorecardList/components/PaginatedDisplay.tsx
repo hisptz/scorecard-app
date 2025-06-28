@@ -5,19 +5,19 @@ import GridScorecardDisplay from "./GridScorecardDisplay";
 import ListScorecardDisplay from "./ListScorecardDisplay";
 
 export default function PaginatedDisplay({
-											 scorecards = []
-										 }: {
+	scorecards = [],
+}: {
 	scorecards: ScorecardListItem[];
 }) {
-
-
 	const [scorecardViewType] = useSetting("scorecardViewType");
 
 	return (
 		<div className="p-16 scorecard-list">
 			{scorecardViewType === "list" ? (
-				<ListScorecardDisplay scorecards={scorecards} />) : <GridScorecardDisplay scorecards={scorecards} />
-			}
+				<ListScorecardDisplay scorecards={scorecards} />
+			) : (
+				<GridScorecardDisplay scorecards={scorecards} />
+			)}
 		</div>
 	);
 }

@@ -1,9 +1,11 @@
-import React from "react";
 import ScorecardListCard from "./Cards/ScorecardListCard";
 import { ScorecardListItem } from "../types";
 
-
-export default function ListScorecardDisplay({ scorecards }: { scorecards: ScorecardListItem[] }) {
+export default function ListScorecardDisplay({
+	scorecards,
+}: {
+	scorecards: ScorecardListItem[];
+}) {
 	return (
 		<div className="column">
 			{scorecards?.map((scorecard) => (

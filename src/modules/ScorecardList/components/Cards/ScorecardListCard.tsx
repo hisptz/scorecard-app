@@ -1,6 +1,11 @@
 import { colors } from "@dhis2/ui";
-import { getUserAuthority, ScorecardCardImage as holderImage, truncateDescription, UserState } from "../../../../shared";
-import React, { useState } from "react";
+import {
+	getUserAuthority,
+	ScorecardCardImage as holderImage,
+	truncateDescription,
+	UserState,
+} from "../../../../shared";
+import { useState } from "react";
 import { ScorecardListItem } from "../../types";
 import { ScorecardListCardActions } from "./ScorecardListCardActions";
 import { getSharingSettingsFromOldConfiguration } from "../../../../utils/sharing";
@@ -8,9 +13,9 @@ import { useRecoilValue } from "recoil";
 import { useNavigateToScorecardView } from "../../../../hooks/navigate";
 
 export default function ScorecardListCard({
-											  scorecard,
-											  grid
-										  }: {
+	scorecard,
+	grid,
+}: {
 	scorecard: ScorecardListItem;
 	grid?: boolean;
 }) {
@@ -18,11 +23,14 @@ export default function ScorecardListCard({
 	const { title, description } = scorecard ?? {};
 	const [showFullDescription, setShowFullDescription] = useState(false);
 
-	const accessConfig = getUserAuthority(user, scorecard.sharing ?? getSharingSettingsFromOldConfiguration(scorecard as any));
+	const accessConfig = getUserAuthority(
+		user,
+		scorecard.sharing ??
+			getSharingSettingsFromOldConfiguration(scorecard as any)
+	);
 	const { read } = accessConfig;
 
 	const navigateToView = useNavigateToScorecardView();
-
 
 	const onView = () => {
 		if (read) {
@@ -30,7 +38,12 @@ export default function ScorecardListCard({
 		}
 	};
 
-	const styles = { margin: 16, background: "white", opacity: read ? 1 : 0.4, cursor: read ? "pointer" : "not-allowed" };
+	const styles = {
+		margin: 16,
+		background: "white",
+		opacity: read ? 1 : 0.4,
+		cursor: read ? "pointer" : "not-allowed",
+	};
 
 	return grid ? (
 		<div
