@@ -60,10 +60,6 @@ export function useDimensions() {
 		orgUnitSelection: OrgUnitSelection;
 		periods: { id: string }[];
 	}) => {
-		console.log({
-			orgUnitSelection,
-			periods,
-		});
 		const ous = getOrgUnitIdsFromOrgUnitSelection(orgUnitSelection);
 		setParams((prev) => {
 			const updatedParams = new URLSearchParams(prev);
