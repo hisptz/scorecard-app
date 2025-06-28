@@ -62,7 +62,7 @@ export function ScorecardSharing() {
 				onClick={onOpen}
 				disabled={!data}
 			>
-				{i18n.t("Sharing settings")}
+				{i18n.t("Sharing")}
 			</Button>
 			{!hide && (
 				<SharingDialog

@@ -1,23 +1,39 @@
 import { Button } from "@dhis2/ui";
 import i18n from "@dhis2/d2-i18n";
-import { useOrgUnitSelectionValue, usePeriodSelectionValue, useScorecardConfig, useUpdateDimensionState } from "@hisptz/dhis2-scorecard";
+import {
+	useOrgUnitSelectionValue,
+	usePeriodSelectionValue,
+	useScorecardConfig,
+} from "@hisptz/dhis2-scorecard";
 import { isEqual } from "lodash";
 import { useCallback } from "react";
+import { useDimensions } from "../../../hooks/dimensions";
 
 export function ScorecardResetButton() {
 	const config = useScorecardConfig();
-	const updateDimensionState = useUpdateDimensionState("all");
+	const { setDimensions } = useDimensions();
 	const periodSelection = usePeriodSelectionValue();
 	const orgUnitSelection = useOrgUnitSelectionValue();
 	const resetScorecardState = useCallback(() => {
-		updateDimensionState({
+		setDimensions({
+			// @ts-expect-error Org unit select type issues
 			orgUnitSelection: config.orgUnitSelection,
-			periodSelection: config.periodSelection
+			periods: config.periodSelection.periods,
 		});
+	}, [config.orgUnitSelection, config.periodSelection]);
 
-	}, [updateDimensionState, config.orgUnitSelection, config.periodSelection]);
+	//TODO: Not working, improve by checking specifics
+	const disable =
+		isEqual(config.orgUnitSelection, orgUnitSelection) &&
+		isEqual(config.periodSelection.periods, periodSelection.periods);
 
-	const disable = isEqual({ orgUnitSelection: config.orgUnitSelection, periodSelection: config.periodSelection }, { orgUnitSelection, periodSelection });
-
-	return <Button disabled={disable} onClick={resetScorecardState} className="reset-button">{i18n.t("Reset")}</Button>;
+	return (
+		<Button
+			disabled={disable}
+			onClick={resetScorecardState}
+			className="reset-button"
+		>
+			{i18n.t("Reset")}
+		</Button>
+	);
 }

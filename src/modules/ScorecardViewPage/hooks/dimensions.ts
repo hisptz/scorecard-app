@@ -2,8 +2,10 @@ import { useSearchParams } from "react-router-dom";
 import { useCallback, useMemo } from "react";
 import { OrgUnitSelection } from "@hisptz/dhis2-utils";
 import { useUpdateDimensionState } from "@hisptz/dhis2-scorecard";
-import { getOrgUnitIdsFromOrgUnitSelection, getOrgUnitSelectionFromIds } from "../../../shared";
-
+import {
+	getOrgUnitIdsFromOrgUnitSelection,
+	getOrgUnitSelectionFromIds,
+} from "../../../shared";
 
 export function useRawDimensions() {
 	const [params] = useSearchParams();
@@ -19,15 +21,12 @@ export function useRawDimensions() {
 		return params.get("ou")?.split(";") ?? [];
 	}, [params.get("ou")]);
 
-
 	return {
 		periods,
 		orgUnits,
-		noDimensionsSelected
+		noDimensionsSelected,
 	};
-
 }
-
 
 export function useDimensions() {
 	const [params, setParams] = useSearchParams();
@@ -55,31 +54,31 @@ export function useDimensions() {
 	);
 
 	const setDimensions = ({
-							   orgUnitSelection,
-							   periods
-						   }: {
+		orgUnitSelection,
+		periods,
+	}: {
 		orgUnitSelection: OrgUnitSelection;
 		periods: { id: string }[];
 	}) => {
+		console.log({
+			orgUnitSelection,
+			periods,
+		});
 		const ous = getOrgUnitIdsFromOrgUnitSelection(orgUnitSelection);
 		setParams((prev) => {
-			if (!prev.get("ou") || !prev.get("pe")) {
-				const updatedParams = new URLSearchParams(prev);
-				updatedParams.set("ou", ous.join(";"));
-				updatedParams.set("pe", periods.map(({ id }) => id).join(";"));
-				return updatedParams;
-			}
-			return prev;
+			const updatedParams = new URLSearchParams(prev);
+			updatedParams.set("ou", ous.join(";"));
+			updatedParams.set("pe", periods.map(({ id }) => id).join(";"));
+			return updatedParams;
 		});
 	};
 
 	const setPeriod = useCallback(
 		(periods: string[]) => {
 			setPeriodSelection({
-				periods: periods.map((periodId) => ({ id: periodId }))
+				periods: periods.map((periodId) => ({ id: periodId })),
 			});
 			setParam("pe")(periods.join(";"));
-
 		},
 		[setParam]
 	);
@@ -100,6 +99,6 @@ export function useDimensions() {
 		noDimensionsSelected,
 		setPeriod,
 		setOrgUnit,
-		setDimensions
+		setDimensions,
 	};
 }
