@@ -1,15 +1,19 @@
-import React from "react";
 import ScorecardListCard from "./Cards/ScorecardListCard";
 import { ScorecardListItem } from "../types";
 
 export default function GridScorecardDisplay({
-												 scorecards
-											 }: {
+	scorecards,
+}: {
 	scorecards: ScorecardListItem[];
 }) {
-
 	return (
-		<div className="scorecard-list-container grid p-32">
+		<div
+			style={{
+				display: "grid",
+				gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))",
+			}}
+			className="scorecard-list-container p-32"
+		>
 			{scorecards?.map((scorecard) => (
 				<ScorecardListCard
 					grid

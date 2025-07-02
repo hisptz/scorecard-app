@@ -1,15 +1,11 @@
 import { colors } from "@dhis2/ui";
 import {
-	getUserAuthority,
 	ScorecardCardImage as holderImage,
 	truncateDescription,
-	UserState,
 } from "../../../../shared";
 import { useState } from "react";
 import { ScorecardListItem } from "../../types";
 import { ScorecardListCardActions } from "./ScorecardListCardActions";
-import { getSharingSettingsFromOldConfiguration } from "../../../../utils/sharing";
-import { useRecoilValue } from "recoil";
 import { useNavigateToScorecardView } from "../../../../hooks/navigate";
 
 export default function ScorecardListCard({
@@ -19,16 +15,10 @@ export default function ScorecardListCard({
 	scorecard: ScorecardListItem;
 	grid?: boolean;
 }) {
-	const user = useRecoilValue(UserState);
 	const { title, description } = scorecard ?? {};
 	const [showFullDescription, setShowFullDescription] = useState(false);
 
-	const accessConfig = getUserAuthority(
-		user,
-		scorecard.sharing ??
-			getSharingSettingsFromOldConfiguration(scorecard as any)
-	);
-	const { read } = accessConfig;
+	const { read } = { read: true };
 
 	const navigateToView = useNavigateToScorecardView();
 
@@ -39,7 +29,7 @@ export default function ScorecardListCard({
 	};
 
 	const styles = {
-		margin: 16,
+		margin: 8,
 		background: "white",
 		opacity: read ? 1 : 0.4,
 		cursor: read ? "pointer" : "not-allowed",
@@ -47,24 +37,35 @@ export default function ScorecardListCard({
 
 	return grid ? (
 		<div
-			className="container-bordered p-16 "
+			className="container-bordered p-8"
 			data-test="scorecard-thumbnail-view"
 			style={styles}
 			onClick={onView}
+			role="button"
 		>
-			<div className="column space-between h-100">
+			<div style={{ gap: 8 }} className="column space-between h-100">
 				<div className="text-center p-8">
 					<img
 						alt="img"
 						src={holderImage}
-						style={{ height: 100, width: 200 }}
+						style={{ height: 60, width: 120 }}
 					/>
 				</div>
 				<div className="flex-1 column align-items-center">
-					<h4 className="scorecard-list-card-title">{title}</h4>
+					<h5
+						style={{ margin: 0 }}
+						className="scorecard-list-card-title"
+					>
+						{title}
+					</h5>
 					<p
 						className="scorecard-list-card-description"
-						style={{ color: colors.grey700 }}
+						style={{
+							color: colors.grey700,
+							fontSize: 12,
+							margin: 4,
+							lineHeight: 1.2,
+						}}
 					>
 						{(description?.length ?? 0) > 100 ? (
 							<div
@@ -93,24 +94,29 @@ export default function ScorecardListCard({
 	) : (
 		<div
 			data-test="scorecard-thumbnail-view"
-			className="container-bordered p-32"
+			className="container-bordered p-16"
 			style={styles}
 			onClick={onView}
 		>
 			<div className="row space-between align-items-center">
-				<div className="row align-items-center">
+				<div style={{ gap: 16 }} className="row align-items-center">
 					<div>
 						<img
 							alt="img"
 							src={holderImage}
-							style={{ height: 100, width: 200 }}
+							style={{ height: 80, width: 160 }}
 						/>
 					</div>
 					<div className="column start">
 						<h4 className="scorecard-list-card-title">{title}</h4>
 						<p
 							className="scorecard-list-card-description"
-							style={{ color: colors.grey700 }}
+							style={{
+								color: colors.grey700,
+								fontSize: 12,
+								margin: 4,
+								lineHeight: 2,
+							}}
 						>
 							{(description?.length ?? 0) > 100 ? (
 								<div

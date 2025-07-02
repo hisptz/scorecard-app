@@ -411,7 +411,7 @@ table {
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: auto;
 }
 
 .grid-2 {
@@ -553,7 +553,7 @@ td.extra-table-cell > svg {
 .scorecard-list-card-title {
     font-weight: 500;
     margin: 4px;
-    font-size: 18px;
+    font-size: 16px;
     color: rgba(0, 0, 0, 0.87);
 }
 

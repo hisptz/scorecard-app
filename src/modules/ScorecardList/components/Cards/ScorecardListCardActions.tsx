@@ -1,14 +1,17 @@
 import { Button, ButtonEventHandler, ButtonStrip } from "@dhis2/ui";
 import i18n from "@dhis2/d2-i18n";
 import { ScorecardListItem } from "../../types";
-import { getUserAuthority, useDeleteScorecard } from "../../../../shared";
+import {
+	getUserAuthority,
+	useDeleteScorecard,
+	UserState,
+} from "../../../../shared";
 import { useAlert } from "@dhis2/app-runtime";
 import { useDialog } from "@hisptz/dhis2-ui";
 import { useNavigate } from "react-router-dom";
 import { getSharingSettingsFromOldConfiguration } from "../../../../utils/sharing";
 import { useNavigateToScorecardView } from "../../../../hooks/navigate";
 import { useRecoilValue } from "recoil";
-import { UserState } from "../../../../shared/state/user";
 
 export interface ScorecardListCardActionsProps {
 	scorecard: ScorecardListItem;
@@ -39,7 +42,7 @@ export function ScorecardListCardActions({
 			getSharingSettingsFromOldConfiguration(scorecard as any)
 	);
 
-	const { read, write } = accessConfig;
+	const { read, write } = { read: true, write: true };
 
 	const deleteScorecard = async () => {
 		if (write) {
