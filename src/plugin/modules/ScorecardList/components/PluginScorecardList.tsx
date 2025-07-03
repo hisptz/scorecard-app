@@ -23,7 +23,8 @@ export function PluginScorecardList() {
 	const {
 		props: { dashboardItemId },
 	} = usePluginConfig();
-	const { addConfig } = useManagePluginConfig(dashboardItemId);
+	const { addConfig, loading: saving } =
+		useManagePluginConfig(dashboardItemId);
 	const navigate = useNavigate();
 	const [selectedScorecard, setSelectedScorecard] = useState<
 		string | undefined
@@ -87,6 +88,7 @@ export function PluginScorecardList() {
 				<Menu>
 					{scorecards.map((scorecard) => (
 						<MenuItem
+							key={scorecard.id}
 							active={isChecked(scorecard.id)}
 							icon={<IconVisualizationPivotTable24 />}
 							onClick={() => {
@@ -116,11 +118,12 @@ export function PluginScorecardList() {
 				</Menu>
 			</div>
 			<Button
+				loading={saving}
 				onClick={onSelect}
 				primary
 				disabled={selectedScorecard === undefined}
 			>
-				{i18n.t("Select scorecard")}
+				{saving ? i18n.t("Saving...") : i18n.t("Select scorecard")}
 			</Button>
 		</div>
 	);

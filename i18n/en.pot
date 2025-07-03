@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-06-28T11:04:45.997Z\n"
-"PO-Revision-Date: 2025-06-28T11:04:45.997Z\n"
+"POT-Creation-Date: 2025-07-03T08:16:48.925Z\n"
+"PO-Revision-Date: 2025-07-03T08:16:48.927Z\n"
 
 msgid "Scorecard deleted successfully"
 msgstr "Scorecard deleted successfully"
@@ -508,6 +508,25 @@ msgstr "Show Data in Rows"
 msgid "Reset"
 msgstr "Reset"
 
+msgid "Welcome to the scorecard plugin"
+msgstr "Welcome to the scorecard plugin"
+
+msgid ""
+"It seems you do not have any scorecards configured. Create a scorecard "
+"first in the Interactive scorecard app first."
+msgstr ""
+"It seems you do not have any scorecards configured. Create a scorecard "
+"first in the Interactive scorecard app first."
+
+msgid "Go to scorecard app"
+msgstr "Go to scorecard app"
+
+msgid "Select a scorecard"
+msgstr "Select a scorecard"
+
+msgid "Select scorecard"
+msgstr "Select scorecard"
+
 msgid "Are you sure you want to delete this entity?"
 msgstr "Are you sure you want to delete this entity?"
 
@@ -939,25 +958,6 @@ msgstr "User Sub-x2-units"
 
 msgid "This group does not have any configured data sources"
 msgstr "This group does not have any configured data sources"
-
-msgid "Welcome to the scorecard plugin"
-msgstr "Welcome to the scorecard plugin"
-
-msgid ""
-"It seems you do not have any scorecards configured. Create a scorecard "
-"first in the Interactive scorecard app first."
-msgstr ""
-"It seems you do not have any scorecards configured. Create a scorecard "
-"first in the Interactive scorecard app first."
-
-msgid "Go to scorecard app"
-msgstr "Go to scorecard app"
-
-msgid "Select a scorecard"
-msgstr "Select a scorecard"
-
-msgid "Select scorecard"
-msgstr "Select scorecard"
 
 msgctxt "Application title"
 msgid "__MANIFEST_APP_TITLE"
