@@ -4,9 +4,7 @@ import { ScorecardView } from "./ScorecardView/ScorecardView";
 import { PluginConfigProvider } from "../components/PluginConfigProvider";
 import { PluginProps } from "../types";
 
-
 export function WidgetRouter({ props }: { props: PluginProps }) {
-
 	return (
 		<HashRouter>
 			<PluginConfigProvider props={props}>
@@ -17,7 +15,4 @@ export function WidgetRouter({ props }: { props: PluginProps }) {
 			</PluginConfigProvider>
 		</HashRouter>
 	);
-
 }
-
-

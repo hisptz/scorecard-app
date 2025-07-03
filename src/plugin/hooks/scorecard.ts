@@ -6,8 +6,8 @@ import { DATASTORE_NAMESPACE } from "../../shared";
 const query: any = {
 	config: {
 		resource: `dataStore/${DATASTORE_NAMESPACE}`,
-		id: ({ id }: { id: string }) => id
-	}
+		id: ({ id }: { id: string }) => id,
+	},
 };
 
 type ConfigQueryResponse = {
@@ -22,6 +22,6 @@ export function usePluginScorecardConfig() {
 		config: scorecard,
 		loading,
 		error,
-		...rest
+		...rest,
 	};
 }

@@ -88,11 +88,12 @@ export function useScorecardListData() {
 		const total =
 			data?.keys?.filter((key) => !defaultKeys.includes(key)).length ?? 0;
 		return {
-			page: data?.list?.pager?.page ?? searchParams.get("page") ?? 1,
+			page:
+				data?.list?.pager?.page ??
+				parseInt(searchParams.get("page") ?? "1"),
 			pageSize:
 				data?.list?.pager?.pageSize ??
-				searchParams.get("pageSize") ??
-				8,
+				parseInt(searchParams.get("pageSize") ?? "8"),
 			pageCount: Math.ceil(total / (data?.list?.pager?.pageSize ?? 8)),
 			total,
 		};

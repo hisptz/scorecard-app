@@ -1,9 +1,19 @@
 import i18n from "@dhis2/d2-i18n";
-import { Button, ButtonStrip, DropdownButton, IconQuestion24, Tooltip } from "@dhis2/ui";
+import {
+	Button,
+	ButtonStrip,
+	DropdownButton,
+	IconQuestion24,
+	Tooltip,
+} from "@dhis2/ui";
 import { IconAdd24, IconApps24, IconList24 } from "@dhis2/ui-icons";
-import { FullPageError, SCORECARD_LIST_HELP_STEPS, STEP_OPTIONS } from "../../shared";
+import {
+	FullPageError,
+	SCORECARD_LIST_HELP_STEPS,
+	STEP_OPTIONS,
+} from "../../shared";
 import { Steps } from "intro.js-react";
-import React, { useState } from "react";
+import { useState } from "react";
 import HelpMenu from "./components/HelpMenu";
 import { SearchArea } from "./components/SearchArea";
 import { useSetting } from "@dhis2/app-service-datastore";
@@ -30,14 +40,14 @@ export default function ScorecardList() {
 		} catch (e: any) {
 			show({
 				message: e.message ?? e.toString(),
-				type: { critical: true }
+				type: { critical: true },
 			});
 		}
 	};
 	const navigate = useNavigate();
 
 	const onAddClick = () => {
-		navigate(`/add/general`);
+		navigate("/add/general");
 	};
 
 	const onHelpExit = () => {
@@ -77,7 +87,7 @@ export default function ScorecardList() {
 									viewType:
 										scorecardViewType === "grid"
 											? i18n.t("list")
-											: i18n.t("grid")
+											: i18n.t("grid"),
 								})}
 							>
 								<Button
