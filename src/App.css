@@ -9,6 +9,10 @@
     min-width: 1240px;
 }
 
+.container {
+    width: unset !important;
+}
+
 .overflow-hidden {
     overflow: hidden;
 }

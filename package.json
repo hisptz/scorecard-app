@@ -5,9 +5,12 @@
   "license": "BSD-3-Clause",
   "private": true,
   "scripts": {
-    "build": "d2-app-scripts build --no-verify",
+    "build": "yarn run tailwind:generate && d2-app-scripts build --no-verify",
     "deploy": "d2-app-scripts deploy",
-    "start": "dotenv -- cross-var d2-app-scripts start --proxy %DHIS2_PROXY%",
+    "tailwind:watch": "npx @tailwindcss/cli -c tailwind.config.ts -i ./src/main.css -o ./src/output.css --watch",
+    "tailwind:generate": "npx @tailwindcss/cli -i ./src/main.css -o ./src/output.css",
+    "dev": "concurrently --names tailwind,app 'yarn tailwind:watch' 'yarn start:app'",
+    "start:app": "dotenv -- cross-var d2-app-scripts start --proxy %DHIS2_PROXY%",
     "ybd": "yarn build && dotenv -- cross-var yarn deploy %DHIS2_PROXY% --username %D2_USERNAME%",
     "type-check": "tsc --noEmit",
     "test": "concurrently 'BROWSER=none yarn start' 'wait-on 'http-get://localhost:3000' && cypress open --browser firefox' --kill-others --success first"
@@ -44,7 +47,7 @@
     "eslint-plugin-react-hooks": "^4.3.0",
     "postcss-import": "^16.1.0",
     "prop-types": "^15.7.2",
-    "tailwindcss": "^3.4.10",
+    "tailwindcss": "^4.1.11",
     "typescript": "^5.5.3",
     "wait-on": "^6.0.0"
   },
@@ -84,6 +87,7 @@
     "react-router-dom": "^6.25.1",
     "react-to-print": "^3.0.1",
     "recoil": "^0.7.7",
+    "tailwind": "^4.0.0",
     "usehooks-ts": "^2.9.1",
     "xlsx": "^0.18.2",
     "zod": "^3.25.67"

@@ -1,7 +1,22 @@
-import { capitalize, compact, find, flattenDeep, head, intersectionBy, isEmpty, last, reduce, snakeCase, sortBy, truncate, uniqBy } from "lodash";
-import { DefaultAuthority, TableSort } from "../constants";
+import {
+	capitalize,
+	find,
+	flattenDeep,
+	head,
+	intersectionBy,
+	isEmpty,
+	reduce,
+	snakeCase,
+	truncate,
+} from "lodash";
+import { DefaultAuthority } from "../constants";
 import { D2User } from "../state/user";
-import { LegendDefinition, ScorecardDataGroup, ScorecardDataHolder, ScorecardDataSource, ScorecardLegend } from "@hisptz/dhis2-scorecard";
+import {
+	LegendDefinition,
+	ScorecardDataGroup,
+	ScorecardDataHolder,
+	ScorecardLegend,
+} from "@hisptz/dhis2-scorecard";
 import { ScorecardListItem } from "../../modules/ScorecardList/types";
 import { getSharingSettingsFromOldConfiguration } from "../../utils/sharing";
 
@@ -9,7 +24,7 @@ export function getWindowDimensions() {
 	const { innerWidth: width, innerHeight: height } = window;
 	return {
 		width: width > 1366 ? width : 1366,
-		height: (height > 763 ? height : 763) - 48 //considering the appbar
+		height: (height > 763 ? height : 763) - 48, //considering the appbar
 	};
 }
 
@@ -38,12 +53,15 @@ export function generateRandomValues(max: number) {
 	return Math.floor(Math.random() * maxNo);
 }
 
-export function generateLegendDefaults(
-	{
-		legendDefinitions = [],
-		weight,
-		highIsGood
-	}: { legendDefinitions: LegendDefinition[], weight: number; highIsGood: boolean }): ScorecardLegend[] {
+export function generateLegendDefaults({
+	legendDefinitions = [],
+	weight,
+	highIsGood,
+}: {
+	legendDefinitions: LegendDefinition[];
+	weight: number;
+	highIsGood: boolean;
+}): ScorecardLegend[] {
 	let definitions = legendDefinitions;
 	if (!highIsGood) {
 		definitions = definitions.reverse();
@@ -55,22 +73,17 @@ export function generateLegendDefaults(
 		let legendDefinitionIterator = definitions.length - 1;
 		for (let i = 0; i < actualWeight; i += range) {
 			const { id } = definitions[legendDefinitionIterator];
-			values.push(
-				{
-					id: uid(),
-					startValue: Math.floor(i),
-					endValue: Math.floor(i + range),
-					legendDefinitionId: id
-				}
-			);
+			values.push({
+				id: uid(),
+				startValue: Math.floor(i),
+				endValue: Math.floor(i + range),
+				legendDefinitionId: id,
+			});
 			legendDefinitionIterator--;
 		}
 		return values;
 	}
 	return [] as ScorecardLegend[];
-}
-
-export function reverseLegends(legends: any) {
 }
 
 export function specificTargetsSet(dataSources: any) {
@@ -89,19 +102,6 @@ export function getHoldersFromGroups(
 	return flattenDeep(dataGroups?.map(({ dataHolders }) => dataHolders) ?? []);
 }
 
-export function getDataSourcesFromGroups(
-	dataGroups: ScorecardDataGroup[]
-): ScorecardDataSource[] {
-	const dataHolders = compact(getHoldersFromGroups(dataGroups));
-	return flattenDeep(dataHolders?.map(({ dataSources }) => dataSources));
-}
-
-export function getDataSourcesDisplayName(dataSources: ScorecardDataSource[]) {
-	return dataSources?.length > 1
-		? `${head(dataSources)?.label} / ${last(dataSources)?.label}`
-		: `${head(dataSources)?.label}`;
-}
-
 export function updatePager(pager: any, itemListLength: any) {
 	const { page, pageSize } = pager;
 
@@ -109,7 +109,7 @@ export function updatePager(pager: any, itemListLength: any) {
 		page,
 		pageSize,
 		pageCount: Math.ceil(itemListLength / pageSize),
-		total: itemListLength
+		total: itemListLength,
 	};
 }
 
@@ -131,22 +131,22 @@ function findLegend(legends: any, value: any, { max, legendDefinitions }: any) {
 	}
 
 	const { legendDefinitionId } =
-	find(legends, (legend) => {
-		if (legend) {
-			const { startValue, endValue } = legend;
-			if (+endValue === max) {
+		find(legends, (legend) => {
+			if (legend) {
+				const { startValue, endValue } = legend;
+				if (+endValue === max) {
+					return (
+						+startValue <= Math.round(value) &&
+						+endValue >= Math.round(value)
+					);
+				}
 				return (
 					+startValue <= Math.round(value) &&
-					+endValue >= Math.round(value)
+					+endValue > Math.round(value)
 				);
 			}
-			return (
-				+startValue <= Math.round(value) &&
-				+endValue > Math.round(value)
-			);
-		}
-		return false;
-	}) ?? {};
+			return false;
+		}) ?? {};
 	return find(legendDefinitions, ["id", legendDefinitionId]);
 }
 
@@ -172,7 +172,7 @@ export function getLegend(
 		legendDefinitions,
 		specificTargets,
 		period,
-		orgUnit
+		orgUnit,
 	}: any
 ) {
 	if (!isEmpty(specificTargets)) {
@@ -183,7 +183,7 @@ export function getLegend(
 					getPeriodSpecificLegends(specificTarget, period) ?? legends;
 				return findLegend(specificLegends, value, {
 					max,
-					legendDefinitions
+					legendDefinitions,
 				});
 			}
 			if (specificTarget.type === "orgUnit") {
@@ -192,7 +192,7 @@ export function getLegend(
 					legends;
 				return findLegend(specificLegends, value, {
 					max,
-					legendDefinitions
+					legendDefinitions,
 				});
 			}
 		}
@@ -211,85 +211,10 @@ export function getLegend(
 			const orgUnitLegends = legends[orgUnitLevelId];
 			return findLegend(orgUnitLegends, value, {
 				max,
-				legendDefinitions
+				legendDefinitions,
 			});
 		}
 	}
-}
-
-export function sortOrgUnitsBasedOnData({
-											orgUnitSort,
-											filteredOrgUnits,
-											childrenOrgUnits
-										}: any) {
-	const parentTemp = [];
-	const childrenTemp = [];
-	for (const ou of orgUnitSort) {
-		parentTemp.push(find(filteredOrgUnits, ["id", ou]));
-		childrenTemp.push(find(childrenOrgUnits, ["id", ou]));
-	}
-	return {
-		parentOrgUnits: uniqBy(
-			compact([...parentTemp, ...filteredOrgUnits]),
-			"id"
-		),
-		childOrgUnits: uniqBy(
-			compact([...childrenTemp, ...childrenOrgUnits]),
-			"id"
-		)
-	};
-}
-
-export function sortOrgUnitsBasedOnNames({
-											 sort,
-											 filteredOrgUnits,
-											 childrenOrgUnits
-										 }: any) {
-	let childOrgUnits = childrenOrgUnits;
-	let parentOrgUnits = filteredOrgUnits;
-
-	if (sort === TableSort.ASC) {
-		childOrgUnits = sortBy(childrenOrgUnits, "displayName");
-	}
-	if (sort === TableSort.DESC) {
-		childOrgUnits = sortBy(childrenOrgUnits, "displayName").reverse();
-	}
-	if (sort === TableSort.ASC) {
-		parentOrgUnits = sortBy(filteredOrgUnits, "displayName");
-	}
-	if (sort === TableSort.DESC) {
-		parentOrgUnits = sortBy(filteredOrgUnits, "displayName").reverse();
-	}
-
-	return {
-		childOrgUnits,
-		parentOrgUnits
-	};
-}
-
-export function sortDataSourcesBasedOnData({ dataSort, dataSources }: any) {
-	const temp = [];
-	for (const dx of dataSort) {
-		temp.push(
-			find(
-				dataSources,
-				({ dataSources }) => !!find(dataSources, ["id", dx])
-			)
-		);
-	}
-	return uniqBy(temp, "id");
-}
-
-export function sortDataSourcesBasedOnNames({ sort, dataSources }: any) {
-	let filteredDataSources = dataSources;
-	if (sort === TableSort.ASC) {
-		filteredDataSources = sortBy(dataSources, "displayName");
-	}
-	if (sort === TableSort.DESC) {
-		filteredDataSources = sortBy(dataSources, "displayName").reverse();
-	}
-
-	return filteredDataSources;
 }
 
 function translateAccess(access: string = ""): {
@@ -298,7 +223,7 @@ function translateAccess(access: string = ""): {
 } {
 	const translatedAccess = {
 		read: false,
-		write: false
+		write: false,
 	};
 	if (access.includes("r")) {
 		translatedAccess.read = true;
@@ -309,9 +234,17 @@ function translateAccess(access: string = ""): {
 	return translatedAccess;
 }
 
-
-export function getUserAuthorityOnScorecards(user: D2User, scorecard: ScorecardListItem & { user: { id: string }, publicAccess: { id: string; access: string }, userAccesses: Array<{ id: string; access: string }>, userGroupAccesses: Array<{ id: string; access: string }> }) {
-	const sharing = scorecard.sharing ?? getSharingSettingsFromOldConfiguration(scorecard);
+export function getUserAuthorityOnScorecards(
+	user: D2User,
+	scorecard: ScorecardListItem & {
+		user: { id: string };
+		publicAccess: { id: string; access: string };
+		userAccesses: Array<{ id: string; access: string }>;
+		userGroupAccesses: Array<{ id: string; access: string }>;
+	}
+) {
+	const sharing =
+		scorecard.sharing ?? getSharingSettingsFromOldConfiguration(scorecard);
 	return getUserAuthority(user, sharing);
 }
 
@@ -334,21 +267,24 @@ export function getUserAuthority(
 		};
 		public: string;
 	}
-): { read: boolean; write: boolean } {
+): { read: boolean; write: boolean; delete: boolean } {
 	const {
 		users,
 		userGroups,
 		public: publicAccess,
-		owner: userId
+		owner: userId,
 	} = sharing ?? {};
 	if (user.id === userId) {
-		return { ...translateAccess("rw-----") };
+		return { ...translateAccess("rw-----"), delete: true };
 	}
 
 	if (!isEmpty(users)) {
 		const userAccess = users[user.id];
 		if (userAccess) {
-			return translateAccess(userAccess?.access);
+			return {
+				...translateAccess(userAccess?.access),
+				delete: user.id === userId,
+			};
 		}
 	}
 
@@ -374,39 +310,17 @@ export function getUserAuthority(
 					translatedAccesses,
 					(acc, value) => acc || value.write,
 					false
-				)
+				),
+				delete: false,
 			};
 		}
 	}
 
 	if (publicAccess) {
-		return translateAccess(publicAccess);
+		return {
+			delete: false,
+			...translateAccess(publicAccess),
+		};
 	}
 	return DefaultAuthority;
-}
-
-export function constructAppUrl(baseUrl: any, config: any, serverVersion: any) {
-	let appUrl = baseUrl;
-	const isModernServer =
-		serverVersion.major >= 2 && serverVersion.minor >= 35;
-	// From core version 2.35, short_name is used instead of the human-readable title to generate the url slug
-	const urlSafeAppSlug = (isModernServer ? config.name : config.title)
-		.replace(/[^A-Za-z0-9\s-]/g, "")
-		.replace(/\s+/g, "-");
-
-	// From core version 2.35, core apps are hosted at the server root under the /dhis-web-* namespace
-	if (config.coreApp && isModernServer) {
-		appUrl += `/dhis-web-${urlSafeAppSlug}/`;
-	} else {
-		appUrl += `/api/apps/${urlSafeAppSlug}/`;
-	}
-
-	// Prior to core version 2.35, installed applications did not properly serve "pretty" urls (`/` vs `/index.html`)
-	if (!isModernServer) {
-		appUrl += "index.html";
-	}
-	// Clean up any double slashes
-	const scheme = appUrl.substr(0, appUrl.indexOf("://") + 3);
-	appUrl = scheme + appUrl.substr(scheme.length).replace(/\/+/g, "/");
-	return appUrl;
 }

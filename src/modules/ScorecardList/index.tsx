@@ -37,11 +37,13 @@ export default function ScorecardList() {
 				return;
 			}
 			set("grid");
-		} catch (e: any) {
-			show({
-				message: e.message ?? e.toString(),
-				type: { critical: true },
-			});
+		} catch (e) {
+			if (e instanceof Error) {
+				show({
+					message: e.message ?? e.toString(),
+					type: { critical: true },
+				});
+			}
 		}
 	};
 	const navigate = useNavigate();
@@ -63,57 +65,52 @@ export default function ScorecardList() {
 				onExit={onHelpExit}
 				initialStep={0}
 			/>
-			<div className="column h-100 p-16">
-				<div className="row">
-					<div
-						className="row p-45 center"
-						style={{ paddingLeft: "35%" }}
-					>
-						<div className="column w-30">
+			<div className="column h-full p-16">
+				<div className="flex flex-row w-full gap-16 ">
+					<div className="flex items-center center flex-1">
+						<div className="min-w-[400px] max-w-full">
 							<SearchArea />
 						</div>
 					</div>
-					<div className="w-100">
-						<ButtonStrip end>
-							<DropdownButton
-								type="button"
-								component={<HelpMenu />}
-								icon={<IconQuestion24 />}
-							>
-								{i18n.t("Help")}
-							</DropdownButton>
-							<Tooltip
-								content={i18n.t("Switch to {{viewType}} view", {
-									viewType:
-										scorecardViewType === "grid"
-											? i18n.t("list")
-											: i18n.t("grid"),
-								})}
-							>
-								<Button
-									onClick={onViewChange}
-									className="change-view-button"
-									dataTest="scorecard-view-orientation"
-									icon={
-										scorecardViewType === "grid" ? (
-											<IconList24 />
-										) : (
-											<IconApps24 />
-										)
-									}
-								/>
-							</Tooltip>
+					<ButtonStrip end>
+						<DropdownButton
+							type="button"
+							component={<HelpMenu />}
+							icon={<IconQuestion24 />}
+						>
+							{i18n.t("Help")}
+						</DropdownButton>
+						<Tooltip
+							content={i18n.t("Switch to {{viewType}} view", {
+								viewType:
+									scorecardViewType === "grid"
+										? i18n.t("list")
+										: i18n.t("grid"),
+							})}
+						>
 							<Button
-								dataTest="new-scorecard-button"
-								className="add-scorecard-button"
-								onClick={onAddClick}
-								primary
-								icon={<IconAdd24 />}
-							>
-								{i18n.t("Add New Scorecard")}
-							</Button>
-						</ButtonStrip>
-					</div>
+								onClick={onViewChange}
+								className="change-view-button"
+								dataTest="scorecard-view-orientation"
+								icon={
+									scorecardViewType === "grid" ? (
+										<IconList24 />
+									) : (
+										<IconApps24 />
+									)
+								}
+							/>
+						</Tooltip>
+						<Button
+							dataTest="new-scorecard-button"
+							className="add-scorecard-button"
+							onClick={onAddClick}
+							primary
+							icon={<IconAdd24 />}
+						>
+							{i18n.t("Add New Scorecard")}
+						</Button>
+					</ButtonStrip>
 				</div>
 				<div className="flex-1">
 					<ErrorBoundary FallbackComponent={FullPageError}>

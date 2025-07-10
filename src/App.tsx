@@ -1,15 +1,22 @@
 import { DataStoreProvider } from "@dhis2/app-service-datastore";
 import { CssReset } from "@dhis2/ui";
-import { DATASTORE_NAMESPACE, FullPageError, FullPageLoader, useInitApp } from "./shared";
-import React, { Suspense } from "react";
+import {
+	DATASTORE_NAMESPACE,
+	FullPageError,
+	FullPageLoader,
+	useInitApp,
+} from "./shared";
+import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { RecoilRoot } from "recoil";
+import "./output.css";
 import "./media-queries.css";
 import "./App.css";
 import "./print.css";
 import "./locales";
 import "intro.js/introjs.css";
 import "./intro-dhis2.css";
+import "./main.css";
 import { DialogProvider } from "@hisptz/dhis2-ui";
 import Router from "./modules/Router";
 
@@ -17,14 +24,16 @@ const MyApp = () => {
 	const { initializeState } = useInitApp();
 	//This checks if this is accessed from a dashboard plugin. This is just a fallback for cases where the plugin isn't very well supported. It should be removed in the subsequent
 	if (window.location.href.includes("dashboardItemId")) {
-		window.location.replace(window.location.href.replace("index.html", "plugin.html"));
+		window.location.replace(
+			window.location.href.replace("index.html", "plugin.html")
+		);
 	}
 
 	return (
 		<DataStoreProvider
 			namespace={DATASTORE_NAMESPACE}
 			defaultUserSettings={{
-				scorecardDisplayType: "grid"
+				scorecardDisplayType: "grid",
 			}}
 			loadingComponent={<FullPageLoader />}
 		>

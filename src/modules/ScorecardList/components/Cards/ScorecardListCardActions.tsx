@@ -1,17 +1,17 @@
-import { Button, ButtonEventHandler, ButtonStrip } from "@dhis2/ui";
+import {
+	Button,
+	ButtonEventHandler,
+	ButtonStrip,
+	CircularLoader,
+} from "@dhis2/ui";
 import i18n from "@dhis2/d2-i18n";
 import { ScorecardListItem } from "../../types";
-import {
-	getUserAuthority,
-	useDeleteScorecard,
-	UserState,
-} from "../../../../shared";
+import { useDeleteScorecard } from "../../../../shared";
 import { useAlert } from "@dhis2/app-runtime";
 import { useDialog } from "@hisptz/dhis2-ui";
 import { useNavigate } from "react-router-dom";
-import { getSharingSettingsFromOldConfiguration } from "../../../../utils/sharing";
 import { useNavigateToScorecardView } from "../../../../hooks/navigate";
-import { useRecoilValue } from "recoil";
+import { useScorecardSharingSettings } from "../../hooks/authority";
 
 export interface ScorecardListCardActionsProps {
 	scorecard: ScorecardListItem;
@@ -20,9 +20,11 @@ export interface ScorecardListCardActionsProps {
 export function ScorecardListCardActions({
 	scorecard,
 }: ScorecardListCardActionsProps) {
-	const user = useRecoilValue(UserState)!;
 	const navigate = useNavigate();
 	const navigateToView = useNavigateToScorecardView();
+	const { access, loading } = useScorecardSharingSettings({
+		id: scorecard.id,
+	});
 
 	const { confirm } = useDialog();
 
@@ -36,13 +38,7 @@ export function ScorecardListCardActions({
 		navigateToView(scorecard);
 	};
 
-	const accessConfig = getUserAuthority(
-		user,
-		scorecard.sharing ??
-			getSharingSettingsFromOldConfiguration(scorecard as any)
-	);
-
-	const { read, write } = { read: true, write: true };
+	const { read, write, delete: canDelete } = access;
 
 	const deleteScorecard = async () => {
 		if (write) {
@@ -86,11 +82,20 @@ export function ScorecardListCardActions({
 		});
 	};
 
+	if (loading) {
+		return (
+			<div className="w-full h-[24px] flex display-flex align-items-center center">
+				<CircularLoader extrasmall />
+			</div>
+		);
+	}
+
 	return (
 		<ButtonStrip middle>
 			{read && <Button onClick={onView}>{i18n.t("View")}</Button>}
 			{write && (
 				<Button
+					loading={loading}
 					dataTest={"edit-scorecard-button"}
 					onClick={function (_, e) {
 						e.stopPropagation();
@@ -100,7 +105,7 @@ export function ScorecardListCardActions({
 					{i18n.t("Edit")}
 				</Button>
 			)}
-			{write && (
+			{canDelete && (
 				<Button dataTest="scorecard-delete-button" onClick={onDelete}>
 					{i18n.t("Delete")}
 				</Button>
