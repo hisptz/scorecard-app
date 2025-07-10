@@ -3,6 +3,7 @@
 
 @theme{
     --color-primary-500: rgb(44, 102, 147);
+    --container-width: 100%;
 }
 
 

@@ -66,8 +66,7 @@ export function useScorecardSharingSettings({ id }: { id: string }) {
 			};
 		} else {
 			const sharing = data.meta.sharing;
-			console.log(sharing);
-			return getUserAuthority(user, sharing);
+			return getUserAuthority(user!, sharing);
 		}
 	}, [data, user]);
 
@@ -96,7 +95,7 @@ export function useGetScorecardSharingSettings() {
 				};
 			} else {
 				const sharing = data.meta.sharing;
-				return getUserAuthority(user, sharing);
+				return getUserAuthority(user!, sharing);
 			}
 		},
 		[refetch]

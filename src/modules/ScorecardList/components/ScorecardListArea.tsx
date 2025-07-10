@@ -60,8 +60,9 @@ export function ScorecardListArea() {
 					)}
 				</div>
 			</Suspense>
-			<div className="p-16">
+			<div className="p-16 w-full">
 				<Pagination
+					className="!w-full !max-w-full"
 					disabled={pager.pageCount === 1 || isEmpty(scorecards)}
 					{...pager}
 					pageSizes={Array.from(new Array(10).keys()).map((i) =>
