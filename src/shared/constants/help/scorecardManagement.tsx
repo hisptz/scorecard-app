@@ -255,7 +255,9 @@ export const INDICATOR_CONFIGURATION_STEPS = [
 	},
 ];
 
-export const DATA_CONFIGURATION_HELP_STEPS = [];
+export const DATA_CONFIGURATION_HELP_STEPS = [
+	...DATA_CONFIGURATION_WITH_DATA_HELP_STEPS,
+];
 
 export const DATA_CONFIGURATION_STEPS_MAP = {
 	introduction: {

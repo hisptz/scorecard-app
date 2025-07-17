@@ -9,14 +9,15 @@ import { useSaveScorecard } from "../hooks/save";
 import { useAlert } from "@dhis2/app-runtime";
 import { useNavigateToScorecardView } from "../../../hooks/navigate";
 
-
 export function SaveButton() {
 	const { handleSubmit } = useFormContext<ScorecardConfig>();
 	const [loadingState, setLoadingState] = useRecoilState(FormLoadingState);
-	const { show } = useAlert(({ message }) => message, ({ type }) => ({ ...type, duration: 3000 }));
+	const { show } = useAlert(
+		({ message }) => message,
+		({ type }) => ({ ...type, duration: 3000 })
+	);
 
 	const navigateToView = useNavigateToScorecardView();
-
 
 	const { save } = useSaveScorecard();
 
@@ -26,40 +27,46 @@ export function SaveButton() {
 			setLoadingState({
 				action: "save",
 				loading: false,
-				button: "save"
+				button: "save",
 			});
 			navigateToView(config);
 		} catch (err) {
-
 			//Error is already shown in the save function.
 		}
 	};
 
 	return (
 		<Button
-			loading={(loadingState?.button === "save" && loadingState?.loading)}
+			loading={loadingState?.button === "save" && loadingState?.loading}
 			primary
 			disabled={loadingState?.button === "save" && loadingState?.loading}
 			onClick={() => {
 				setLoadingState({
 					action: "save",
 					loading: true,
-					button: "save"
+					button: "save",
 				});
-				handleSubmit(onSave, () => {
-					show({ message: i18n.t("Form contains errors. Please fix them to continue."), type: { info: true } });
+				handleSubmit(onSave, (errors) => {
+					console.error(errors);
+					show({
+						message: i18n.t(
+							"Form contains errors. Please fix them to continue."
+						),
+						type: { info: true },
+					});
 					setLoadingState({
 						action: "save",
 						loading: false,
-						button: "save"
+						button: "save",
 					});
 				})();
-
 			}}
 			className="settings-next-button"
 			dataTest="scorecard-admin-next-button"
 		>
-			{loadingState?.button === "save" && loadingState?.loading ? i18n.t("Saving...") : i18n.t("Save")}
+			{loadingState?.button === "save" && loadingState?.loading
+				? i18n.t("Saving...")
+				: i18n.t("Save")}
 		</Button>
 	);
 }

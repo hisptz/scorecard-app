@@ -52,7 +52,10 @@ export function ScorecardListArea() {
 					) : (
 						<div className="column h-100">
 							{scorecards ? (
-								<PaginatedDisplay scorecards={scorecards} />
+								<PaginatedDisplay
+									refetch={refetch}
+									scorecards={scorecards}
+								/>
 							) : (
 								<EmptyScoreCardList />
 							)}

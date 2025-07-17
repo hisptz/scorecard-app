@@ -86,6 +86,6 @@ export function useFormSchema() {
 			arrows: z.boolean().optional(),
 			showDataInRows: z.boolean().optional(),
 		}),
-		sharing: scorecardSharing,
+		sharing: scorecardSharing.optional(),
 	});
 }

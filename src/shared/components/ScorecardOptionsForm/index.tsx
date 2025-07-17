@@ -1,5 +1,4 @@
 import i18n from "@dhis2/d2-i18n";
-import React from "react";
 import Help from "../Help";
 import { AverageDisplayType, OPTIONS_HELP_STEPS } from "../../constants";
 import { RHFCheckboxField, RHFRadioField } from "@hisptz/dhis2-ui";
@@ -46,7 +45,7 @@ export default function ScorecardOptionsForm() {
 						/>
 					</div>
 					<h3>{i18n.t("Average")}</h3>
-					<div className="options.average-options">
+					<div className="average-options">
 						<RHFRadioField
 							name="options.averageDisplayType"
 							radioValue={AverageDisplayType.ALL}
@@ -79,4 +78,3 @@ export default function ScorecardOptionsForm() {
 		</div>
 	);
 }
-

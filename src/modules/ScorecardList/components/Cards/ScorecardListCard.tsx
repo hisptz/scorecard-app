@@ -11,9 +11,11 @@ import { useNavigateToScorecardView } from "../../../../hooks/navigate";
 export default function ScorecardListCard({
 	scorecard,
 	grid,
+	refetch,
 }: {
 	scorecard: ScorecardListItem;
 	grid?: boolean;
+	refetch: () => void;
 }) {
 	const { title, description } = scorecard ?? {};
 	const [showFullDescription, setShowFullDescription] = useState(false);
@@ -90,7 +92,10 @@ export default function ScorecardListCard({
 					</p>
 				</div>
 				<div style={{ margin: "0 8px" }}>
-					<ScorecardListCardActions scorecard={scorecard} />
+					<ScorecardListCardActions
+						refetch={refetch}
+						scorecard={scorecard}
+					/>
 				</div>
 			</div>
 		</div>
@@ -142,7 +147,10 @@ export default function ScorecardListCard({
 					</div>
 				</div>
 				<div className="flex justify-end">
-					<ScorecardListCardActions scorecard={scorecard} />
+					<ScorecardListCardActions
+						refetch={refetch}
+						scorecard={scorecard}
+					/>
 				</div>
 			</div>
 		</div>

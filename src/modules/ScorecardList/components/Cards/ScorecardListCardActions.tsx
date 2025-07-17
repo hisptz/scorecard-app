@@ -15,10 +15,12 @@ import { useScorecardSharingSettings } from "../../hooks/authority";
 
 export interface ScorecardListCardActionsProps {
 	scorecard: ScorecardListItem;
+	refetch: () => void;
 }
 
 export function ScorecardListCardActions({
 	scorecard,
+	refetch,
 }: ScorecardListCardActionsProps) {
 	const navigate = useNavigate();
 	const navigateToView = useNavigateToScorecardView();
@@ -44,6 +46,10 @@ export function ScorecardListCardActions({
 		if (write) {
 			try {
 				await remove();
+				show({
+					message: i18n.t("Scorecard deleted successfully"),
+					type: { success: true },
+				});
 			} catch (e) {
 				if (e instanceof Error) {
 					show({
@@ -52,10 +58,6 @@ export function ScorecardListCardActions({
 					});
 				}
 			}
-			show({
-				message: i18n.t("Scorecard deleted successfully"),
-				type: { success: true },
-			});
 		}
 	};
 	const onEdit = () => {
@@ -69,6 +71,7 @@ export function ScorecardListCardActions({
 		event.stopPropagation();
 		confirm({
 			title: i18n.t("Confirm scorecard delete"),
+			loadingText: i18n.t("Deleting..."),
 			message: (
 				<p>
 					{i18n.t("Are you sure you want to delete scorecard ")}:
@@ -78,6 +81,7 @@ export function ScorecardListCardActions({
 			onCancel: () => {},
 			onConfirm: async () => {
 				await deleteScorecard();
+				refetch();
 			},
 		});
 	};

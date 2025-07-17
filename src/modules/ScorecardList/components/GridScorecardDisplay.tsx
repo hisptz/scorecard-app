@@ -3,8 +3,10 @@ import { ScorecardListItem } from "../types";
 
 export default function GridScorecardDisplay({
 	scorecards,
+	refetch,
 }: {
 	scorecards: ScorecardListItem[];
+	refetch: () => void;
 }) {
 	return (
 		<div
@@ -16,6 +18,7 @@ export default function GridScorecardDisplay({
 		>
 			{scorecards?.map((scorecard) => (
 				<ScorecardListCard
+					refetch={refetch}
 					grid
 					key={scorecard.id}
 					scorecard={scorecard}
