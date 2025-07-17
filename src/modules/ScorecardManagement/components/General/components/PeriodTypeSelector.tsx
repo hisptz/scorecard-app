@@ -53,6 +53,7 @@ export function PeriodTypeSelector() {
 	return (
 		<SingleSelectField
 			{...field}
+			className="period-type-settings"
 			label={i18n.t("Allowed period type")}
 			clearable
 			filterable

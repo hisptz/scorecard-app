@@ -9,6 +9,7 @@ import {
 	NavigationButtons,
 	StepNavigationButtons,
 } from "./components/NavigationButtons";
+import { EditHelpSteps } from "./components/EditHelpSteps";
 
 export default function ScoreCardManagement() {
 	const { id } = useParams<{ id?: string }>();
@@ -34,6 +35,7 @@ export default function ScoreCardManagement() {
 					className="w-100"
 				>
 					<ManagementTabBar />
+					<EditHelpSteps />
 					<div className="column flex-1 overflow-auto">
 						<div
 							style={{

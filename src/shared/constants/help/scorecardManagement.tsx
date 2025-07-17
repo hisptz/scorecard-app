@@ -19,15 +19,33 @@ export const GENERAL_HELP_STEPS = [
 		intro: i18n.t("Describe your scorecard"),
 	},
 	{
-		element: ".period-type-settings",
+		element: ".custom-header-settings",
 		intro: i18n.t(
-			"Set the default period type here. This will determine which periods will be selected as defaults",
+			"Modify the scorecard header here. You can add different styling, icons, images,and much more"
 		),
 	},
 	{
-		element: ".custom-header-settings",
+		element: ".sharing-settings",
 		intro: i18n.t(
-			"Modify the scorecard header here. You can add different styling, icons, images,and much more",
+			"You can share your scorecard with public, users and user groups here"
+		),
+	},
+	{
+		element: ".period-type-settings",
+		intro: i18n.t(
+			"Set the default period type here. This will limit period selection to this type for this scorecard"
+		),
+	},
+	{
+		element: ".default-period",
+		intro: i18n.t(
+			"Set the default period here. This will be pre-selected when you open your scorecard."
+		),
+	},
+	{
+		element: ".org-unit-settings",
+		intro: i18n.t(
+			"You can set the default organisation unit here. This will be pre-selected when you open your scorecard."
 		),
 	},
 	{
@@ -50,7 +68,7 @@ export const INTRODUCTION_HELP_STEPS = [
 			<div>
 				<h3>{i18n.t("Data Configuration")}</h3>
 				{i18n.t(
-					"On this page, you can configure different data sources (indicators, dataElements, e.t.c) for the scorecard. You can also preview the scorecard table.",
+					"On this page, you can configure different data sources (indicators, dataElements, e.t.c) for the scorecard. You can also preview the scorecard table."
 				)}
 			</div>
 		),
@@ -61,7 +79,7 @@ export const PREVIEW_TABLE_HELP_STEPS = [
 	{
 		element: ".preview-table-area",
 		intro: i18n.t(
-			"This is the preview area. It shows how your scorecard will look like.",
+			"This is the preview area. It shows how your scorecard will look like."
 		),
 	},
 ];
@@ -72,9 +90,15 @@ export const NO_GROUPS_HELP_STEPS = [
 		intro: (
 			<div>
 				<p>
-					{i18n.t("You can configure different data sources on this area.")}
+					{i18n.t(
+						"You can configure different data sources on this area."
+					)}
 				</p>
-				<p>{i18n.t("Indicators are configured and displayed in groups")}</p>
+				<p>
+					{i18n.t(
+						"Indicators are configured and displayed in groups"
+					)}
+				</p>
 			</div>
 		),
 	},
@@ -90,16 +114,22 @@ export const GROUPS_CONFIG_HELP_STEPS = [
 		intro: (
 			<div>
 				<p>
-					{i18n.t("You can configure different data sources on this area.")}
+					{i18n.t(
+						"You can configure different data sources on this area."
+					)}
 				</p>
-				<p>{i18n.t("Indicators are configured and displayed in groups")}</p>
+				<p>
+					{i18n.t(
+						"Indicators are configured and displayed in groups"
+					)}
+				</p>
 			</div>
 		),
 	},
 	{
 		element: ".group-name-area",
 		intro: i18n.t(
-			"Double click or click on the edit button to edit the group name",
+			"Double click or click on the edit button to edit the group name"
 		),
 	},
 	{
@@ -131,13 +161,13 @@ export const INDICATOR_SETUP_HELP_STEPS = [
 	{
 		element: ".data-holder",
 		intro: i18n.t(
-			"Click here to configure this indicator. You can also drag this to rearrange the indicators within a group",
+			"Click here to configure this indicator. You can also drag this to rearrange the indicators within a group"
 		),
 	},
 	{
 		element: ".link-button",
 		intro: i18n.t(
-			"Click here to link two adjacent indicators or to unlink linked indicators",
+			"Click here to link two adjacent indicators or to unlink linked indicators"
 		),
 	},
 	{
@@ -159,7 +189,7 @@ export const DATA_CONFIGURATION_WITH_DATA_HELP_STEPS = [
 	{
 		element: ".target-on-level-selector",
 		intro: i18n.t(
-			"Check this box to set legend configuration according to organisation unit levels",
+			"Check this box to set legend configuration according to organisation unit levels"
 		),
 	},
 	{
@@ -178,13 +208,13 @@ export const INDICATOR_CONFIGURATION_STEPS = [
 	{
 		element: 'input[name="label"]',
 		intro: i18n.t(
-			"Edit indicator label here. This label will displayed on the scorecard table header",
+			"Edit indicator label here. This label will displayed on the scorecard table header"
 		),
 	},
 	{
 		element: 'input[name="weight"]',
 		intro: i18n.t(
-			"You can set the indicator weight here. This is the indicator's maximum value",
+			"You can set the indicator weight here. This is the indicator's maximum value"
 		),
 	},
 	{
@@ -199,18 +229,20 @@ export const INDICATOR_CONFIGURATION_STEPS = [
 				<p>
 					<b>{i18n.t("Display Arrows")}:</b>
 					{i18n.t(
-						"Check this to display increasing/decreasing arrows on this indicator's value",
+						"Check this to display increasing/decreasing arrows on this indicator's value"
 					)}
 				</p>
 				<p>
 					<b>{i18n.t("High is Good")}:</b>
 					{i18n.t(
-						"Check this to indicate that higher values are good for this indicator  ",
+						"Check this to indicate that higher values are good for this indicator  "
 					)}
 				</p>
 				<p>
 					<b>{i18n.t("Show Colors")}:</b>
-					{i18n.t("Check this to enable legend color on an indicator value ")}
+					{i18n.t(
+						"Check this to enable legend color on an indicator value "
+					)}
 				</p>
 			</div>
 		),
@@ -218,7 +250,7 @@ export const INDICATOR_CONFIGURATION_STEPS = [
 	{
 		element: ".legend-settings-area",
 		intro: i18n.t(
-			"Here you can configure the maximum and minimum values for each legend",
+			"Here you can configure the maximum and minimum values for each legend"
 		),
 	},
 ];
@@ -259,7 +291,7 @@ export const HIGHLIGHTED_INDICATOR_HELP_STEPS = [
 				<h3>{i18n.t("Highlighted Indicators")}</h3>
 				<p>
 					{i18n.t(
-						"In this page you can add and configure highlighted indicators. These indicators appear on top of the scorecard table",
+						"In this page you can add and configure highlighted indicators. These indicators appear on top of the scorecard table"
 					)}
 				</p>
 			</div>
@@ -283,7 +315,7 @@ export const HIGHLIGHTED_TABLE_HELP_STEPS = [
 	{
 		element: ".highlighted-indicator-delete",
 		intro: i18n.t(
-			"Click on the remove button to delete the indicator from the list",
+			"Click on the remove button to delete the indicator from the list"
 		),
 	},
 	{
@@ -299,7 +331,7 @@ export const ACCESS_HELP_STEPS = [
 				<h3>{i18n.t("Access Settings")}</h3>
 				<p>
 					{i18n.t(
-						"In this page you can configure the default organisation unit and sharing access",
+						"In this page you can configure the default organisation unit and sharing access"
 					)}
 				</p>
 			</div>
@@ -307,12 +339,14 @@ export const ACCESS_HELP_STEPS = [
 	},
 	{
 		element: ".access-org-unit-filter",
-		intro: i18n.t("Choose the default organisation unit from this selector"),
+		intro: i18n.t(
+			"Choose the default organisation unit from this selector"
+		),
 	},
 	{
 		element: ".add-sharing-access",
 		intro: i18n.t(
-			"You can add a new user or user group to share the scorecard with here",
+			"You can add a new user or user group to share the scorecard with here"
 		),
 	},
 	{
@@ -344,7 +378,7 @@ export const OPTIONS_HELP_STEPS = [
 				<h3>{i18n.t("Default Options Settings")}</h3>
 				<p>
 					{i18n.t(
-						"In this page you can set default options for the scorecard view",
+						"In this page you can set default options for the scorecard view"
 					)}
 				</p>
 			</div>
@@ -358,45 +392,49 @@ export const OPTIONS_HELP_STEPS = [
 				<p>
 					<b>{i18n.t("Legend")}:</b>
 					{i18n.t(
-						"Allows the legends on the scorecard header to be displayed when checked",
+						"Allows the legends on the scorecard header to be displayed when checked"
 					)}
 				</p>
 				<p>
 					<b>{i18n.t("Title")}:</b>
 					{i18n.t(
-						"Allows the title on the scorecard header to be displayed when checked",
+						"Allows the title on the scorecard header to be displayed when checked"
 					)}
 				</p>
 				<p>
 					<b>{i18n.t("Item Number")}:</b>
 					{i18n.t(
-						"Allows row numbers on the scorecard to be displayed when checked",
+						"Allows row numbers on the scorecard to be displayed when checked"
 					)}
 				</p>
 				<p>
 					<b>{i18n.t("Empty Rows")}:</b>
 					{i18n.t(
-						"Allows the empty rows on the scorecard to be displayed when checked",
+						"Allows the empty rows on the scorecard to be displayed when checked"
 					)}
 				</p>
 				<p>
 					<b>{i18n.t("Show Hierarchy")}:</b>
 					{i18n.t(
-						"Allows the organisation units hierarchy to be displayed when checked",
+						"Allows the organisation units hierarchy to be displayed when checked"
 					)}
 				</p>
 				<p>
 					<b>{i18n.t("Average Column")}:</b>
-					{i18n.t("Allows the average column to be displayed when checked")}
+					{i18n.t(
+						"Allows the average column to be displayed when checked"
+					)}
 				</p>
 				<p>
 					<b>{i18n.t("Average Row")}:</b>
-					{i18n.t("Allows the average row to be displayed when checked")}
+					{i18n.t(
+						"Allows the average row to be displayed when checked"
+					)}
 				</p>
 				<p>
 					<b>{i18n.t("Highlighted Indicators")}:</b>
 					{i18n.t(
-						"Allows the highlighted indicators to be displayed when checked",
+						"Allows the highlighted indicators to be displayed when checked"
 					)}
 				</p>
 			</div>
@@ -406,7 +444,9 @@ export const OPTIONS_HELP_STEPS = [
 		element: ".average-options",
 		intro: (
 			<div>
-				{i18n.t("These options allow to view data based on the average")}
+				{i18n.t(
+					"These options allow to view data based on the average"
+				)}
 				<p>
 					<b>{i18n.t("All")}:</b>
 					{i18n.t("Allows all data to be displayed")}
@@ -414,13 +454,13 @@ export const OPTIONS_HELP_STEPS = [
 				<p>
 					<b>{i18n.t("Below Average")}:</b>
 					{i18n.t(
-						"Allows data that is below the overall average to be displayed",
+						"Allows data that is below the overall average to be displayed"
 					)}
 				</p>
 				<p>
 					<b>{i18n.t("Above Average")}:</b>
 					{i18n.t(
-						"Allows data that is above the overall average to be displayed",
+						"Allows data that is above the overall average to be displayed"
 					)}
 				</p>
 			</div>
@@ -437,13 +477,13 @@ export const OPTIONS_HELP_STEPS = [
 				<p>
 					<b>{i18n.t("Arrows")}:</b>
 					{i18n.t(
-						"Allows increasing or decreasing indicators on data cells to be displayed",
+						"Allows increasing or decreasing indicators on data cells to be displayed"
 					)}
 				</p>
 				<p>
 					<b>{i18n.t("Show Data in Rows")}:</b>
 					{i18n.t(
-						"Changes the table layout, the indicators are shown in rows and orgaunisation units in columns",
+						"Changes the table layout, the indicators are shown in rows and orgaunisation units in columns"
 					)}
 				</p>
 			</div>

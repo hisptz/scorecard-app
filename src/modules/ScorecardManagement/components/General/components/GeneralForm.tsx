@@ -39,8 +39,18 @@ export default function GeneralForm() {
 					label={i18n.t("Description")}
 				/>
 			</div>
+			<div className="custom-header-settings">
+				<RHFCustomInput
+					name="customHeader"
+					label={i18n.t("Custom Header")}
+					valueType="RICH_TEXT"
+				/>
+			</div>
 			<div>
-				<Field label={i18n.t("Configure sharing settings")}>
+				<Field
+					className="sharing-settings"
+					label={i18n.t("Configure sharing settings")}
+				>
 					<ScorecardSharing />
 				</Field>
 			</div>
@@ -48,13 +58,8 @@ export default function GeneralForm() {
 				<PeriodTypeSelector />
 				<PeriodSelector />
 			</div>
-			<ScorecardOrgUnitSelection />
-			<div className="custom-header-settings">
-				<RHFCustomInput
-					name="customHeader"
-					label={i18n.t("Custom Header")}
-					valueType="RICH_TEXT"
-				/>
+			<div className="org-unit-settings">
+				<ScorecardOrgUnitSelection />
 			</div>
 			<div className="col-sm-6 col-xl-4 legend-definitions-settings gap-8">
 				<LegendDefinitionFormField />
