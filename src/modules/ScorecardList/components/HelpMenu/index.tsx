@@ -1,7 +1,6 @@
 import i18n from "@dhis2/d2-i18n";
 import { FlyoutMenu, MenuItem } from "@dhis2/ui";
 import { HelpState, SCORECARD_DOCUMENTATION_URL } from "../../../../shared";
-import React from "react";
 import { useSetRecoilState } from "recoil";
 
 export default function HelpMenu() {

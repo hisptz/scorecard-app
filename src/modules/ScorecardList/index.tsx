@@ -9,11 +9,11 @@ import {
 import { IconAdd24, IconApps24, IconList24 } from "@dhis2/ui-icons";
 import {
 	FullPageError,
+	HelpState,
 	SCORECARD_LIST_HELP_STEPS,
 	STEP_OPTIONS,
 } from "../../shared";
 import { Steps } from "intro.js-react";
-import { useState } from "react";
 import HelpMenu from "./components/HelpMenu";
 import { SearchArea } from "./components/SearchArea";
 import { useSetting } from "@dhis2/app-service-datastore";
@@ -22,10 +22,11 @@ import { useNavigate } from "react-router-dom";
 import { ScorecardListArea } from "./components/ScorecardListArea";
 import { ErrorBoundary } from "react-error-boundary";
 import { MigrationNavigateButton } from "../ScorecardMigration/components/MigrationNavigateButton";
+import { useRecoilState } from "recoil";
 
 export default function ScorecardList() {
 	const [scorecardViewType, { set }] = useSetting("scorecardViewType");
-	const [helpEnabled, setHelpEnabled] = useState<boolean>(false);
+	const [helpEnabled, setHelpEnabled] = useRecoilState<boolean>(HelpState);
 	const { show } = useAlert(
 		({ message }) => message,
 		({ type }) => ({ ...type, duration: 3000 })
