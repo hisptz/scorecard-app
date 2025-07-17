@@ -61,8 +61,6 @@ function MainView() {
 		<ScorecardStateProvider initialState={initialState} config={config}>
 			<div
 				style={{
-					width: "100dvw",
-					height: "100dvh",
 					display: "flex",
 					flexDirection: "column",
 					gap: 16,
