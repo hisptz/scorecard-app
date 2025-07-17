@@ -66,7 +66,7 @@ export function useScorecardListData() {
 		useDataQuery<ListDataQueryResponse>(query, {
 			variables: {
 				page: searchParams.get("page") ?? 1,
-				pageSize: searchParams.get("pageSize") ?? 8,
+				pageSize: searchParams.get("pageSize") ?? 10,
 				keyword: searchParams.get("query"),
 			},
 			lazy: true,
@@ -80,7 +80,7 @@ export function useScorecardListData() {
 		refetch({
 			keyword,
 			page: 1,
-			pageSize: 8,
+			pageSize: 10,
 		});
 	}, 1000);
 
@@ -93,13 +93,16 @@ export function useScorecardListData() {
 				parseInt(searchParams.get("page") ?? "1"),
 			pageSize:
 				data?.list?.pager?.pageSize ??
-				parseInt(searchParams.get("pageSize") ?? "8"),
-			pageCount: Math.ceil(total / (data?.list?.pager?.pageSize ?? 8)),
+				parseInt(searchParams.get("pageSize") ?? "10"),
+			pageCount: Math.ceil(total / (data?.list?.pager?.pageSize ?? 10)),
 			total,
 		};
 	}, [data]);
 
 	const onPageChange = (page: number) => {
+		if (page > pager.pageCount) {
+			return;
+		}
 		setSearchParams((prev) => {
 			const updatedParams = new URLSearchParams(prev);
 			updatedParams.set("page", page.toString());
@@ -119,7 +122,7 @@ export function useScorecardListData() {
 		refetch({
 			keyword: searchParams.get("query"),
 			page: searchParams.get("page") ?? 1,
-			pageSize: searchParams.get("pageSize") ?? 8,
+			pageSize: searchParams.get("pageSize") ?? 10,
 		});
 	}, [searchParams.get("page"), searchParams.get("pageSize")]);
 
