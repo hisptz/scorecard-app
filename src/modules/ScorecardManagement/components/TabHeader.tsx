@@ -10,9 +10,9 @@ export function TabHeader() {
 	const step = getStep(activeTabId!);
 
 	return (
-		<div className="row space-between align-items-center">
+		<div className="flex gap- 16 space-between items-center pt-8 pb-8">
 			<Help helpSteps={step?.helpSteps ?? []} />
-			<h2>{step?.label ?? ""}</h2>
+			<h2 className="text-2xl font-bold">{step?.label ?? ""}</h2>
 			<Button icon={<IconQuestion24 />}>{i18n.t("Help")}</Button>
 		</div>
 	);

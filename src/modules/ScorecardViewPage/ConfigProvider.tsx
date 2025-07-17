@@ -2,19 +2,21 @@ import { createContext, ReactNode, useContext } from "react";
 import { ScorecardConfig } from "@hisptz/dhis2-scorecard";
 import { useScorecardConfigFromServer } from "./hooks/data";
 import { FullPageError, FullPageLoader } from "../../shared";
+import { AccessObject } from "@hisptz/dhis2-utils";
 
-const ConfigContext = createContext<ScorecardConfig | null>(null);
+const ConfigContext = createContext<
+	(ScorecardConfig & { access: AccessObject }) | null
+>(null);
 
 export function useConfigContext() {
 	return useContext(ConfigContext)!;
 }
 
 export function ConfigProvider({ children }: { children: ReactNode }) {
-	const { loading, config, error, refetch } = useScorecardConfigFromServer();
+	const { loading, config, error, refetch, access } =
+		useScorecardConfigFromServer();
 	if (loading) {
-		return (
-			<FullPageLoader />
-		);
+		return <FullPageLoader />;
 	}
 	if (error) {
 		return (
@@ -38,9 +40,13 @@ export function ConfigProvider({ children }: { children: ReactNode }) {
 	}
 
 	return (
-		<ConfigContext.Provider value={config}>
+		<ConfigContext.Provider
+			value={{
+				...config,
+				access: access,
+			}}
+		>
 			{children}
 		</ConfigContext.Provider>
 	);
-
 }

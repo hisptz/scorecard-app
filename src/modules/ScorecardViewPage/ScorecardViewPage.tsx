@@ -53,6 +53,10 @@ function MainView() {
 		[periods, orgUnits]
 	);
 
+	if (!config.access.read) {
+		throw new Error("Access Denied");
+	}
+
 	return (
 		<ScorecardStateProvider initialState={initialState} config={config}>
 			<div

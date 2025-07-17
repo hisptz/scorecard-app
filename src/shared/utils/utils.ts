@@ -248,25 +248,27 @@ export function getUserAuthorityOnScorecards(
 	return getUserAuthority(user, sharing);
 }
 
+export type SharingObject = {
+	owner: string;
+	external: boolean;
+	users: {
+		[key: string]: {
+			access: string;
+			id: string;
+		};
+	};
+	userGroups: {
+		[key: string]: {
+			access: string;
+			id: string;
+		};
+	};
+	public: string;
+};
+
 export function getUserAuthority(
 	user: D2User,
-	sharing: {
-		owner: string;
-		external: boolean;
-		users: {
-			[key: string]: {
-				access: string;
-				id: string;
-			};
-		};
-		userGroups: {
-			[key: string]: {
-				access: string;
-				id: string;
-			};
-		};
-		public: string;
-	}
+	sharing: SharingObject
 ): { read: boolean; write: boolean; delete: boolean } {
 	const {
 		users,

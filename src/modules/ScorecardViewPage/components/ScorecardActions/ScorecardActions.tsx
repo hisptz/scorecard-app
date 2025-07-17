@@ -3,7 +3,6 @@ import { ScorecardOptionsControlButton } from "./components/ScorecardOptionsCont
 import { ScorecardEditButton } from "./components/ScorecardEditButton";
 import { ScorecardPrint } from "@hisptz/dhis2-scorecard";
 import { ScorecardResetButton } from "./components/ScorecardResetButton";
-import { ScorecardSharing } from "../../../ScorecardManagement/components/General/components/ScorecardSharing";
 
 export function ScorecardActions() {
 	return (
@@ -14,7 +13,6 @@ export function ScorecardActions() {
 				<div id="download-button">
 					<ScorecardPrint />
 				</div>
-				<ScorecardSharing />
 				<ScorecardResetButton />
 			</ButtonStrip>
 		</div>

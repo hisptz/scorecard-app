@@ -1,4 +1,9 @@
-import { DATASTORE_NAMESPACE, getUserAuthority, UserState } from "../../../shared";
+import {
+	DATASTORE_NAMESPACE,
+	getUserAuthority,
+	SharingObject,
+	UserState,
+} from "../../../shared";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -8,16 +13,18 @@ import { uid } from "@hisptz/dhis2-utils";
 import i18n from "@dhis2/d2-i18n";
 import { ScorecardConfig, ScorecardSharing } from "@hisptz/dhis2-scorecard";
 import { useRecoilValue } from "recoil";
-import { getSharingSettingsFromOldConfiguration, ScorecardConfigWithOldSharing } from "../../../utils/sharing";
+import { getSharingSettingsFromOldConfiguration } from "../../../utils/sharing";
 
-const query: any = {
+const query = {
 	scorecard: {
 		resource: `dataStore/${DATASTORE_NAMESPACE}`,
-		id: ({ id }: { id: string }) => id
-
-	}
+		id: ({ id }: { id: string }) => id,
+	},
+	metadata: {
+		resource: `dataStore/${DATASTORE_NAMESPACE}`,
+		id: ({ id }: { id: string }) => `${id}/metaData`,
+	},
 };
-
 
 function getDefaultSharing(user: { id: string }): ScorecardSharing {
 	return {
@@ -25,11 +32,11 @@ function getDefaultSharing(user: { id: string }): ScorecardSharing {
 		owner: user.id,
 		users: {},
 		userGroups: {},
-		public: "--------"
+		public: "--------",
 	};
 }
 
-const getDefaultValue = (user: { id: string }): Partial<ScorecardConfig> => ({
+const getDefaultValue = (): Partial<ScorecardConfig> => ({
 	id: uid(),
 	title: "",
 	additionalLabels: [],
@@ -38,36 +45,36 @@ const getDefaultValue = (user: { id: string }): Partial<ScorecardConfig> => ({
 	subtitle: undefined,
 	periodSelection: {
 		periods: [],
-		type: undefined
+		type: undefined,
 	},
 	legendDefinitions: [
 		{
 			color: "#D3D3D3",
 			name: i18n.t("N/A"),
 			isDefault: true,
-			id: "N/A"
+			id: "N/A",
 		},
 		{
 			color: "#FFFFFF",
 			name: i18n.t("No Data"),
 			isDefault: true,
-			id: "No Data"
+			id: "No Data",
 		},
 		{
 			id: uid(),
 			color: "#008000",
-			name: i18n.t("Target Reached/ On Track")
+			name: i18n.t("Target Reached/ On Track"),
 		},
 		{
 			id: uid(),
 			color: "#FFFF00",
-			name: i18n.t("Progress, but more effort required")
+			name: i18n.t("Progress, but more effort required"),
 		},
 		{
 			id: uid(),
 			color: "#FF0000",
-			name: i18n.t("Not on track")
-		}
+			name: i18n.t("Not on track"),
+		},
 	],
 	options: {
 		averageDisplayType: "ALL",
@@ -80,7 +87,7 @@ const getDefaultValue = (user: { id: string }): Partial<ScorecardConfig> => ({
 		averageRow: false,
 		highlightedIndicators: false,
 		arrows: false,
-		showDataInRows: false
+		showDataInRows: false,
 	},
 	orgUnitSelection: {
 		levels: [],
@@ -88,24 +95,28 @@ const getDefaultValue = (user: { id: string }): Partial<ScorecardConfig> => ({
 		orgUnits: [],
 		userSubX2Unit: false,
 		userSubUnit: false,
-		userOrgUnit: false
+		userOrgUnit: false,
 	},
 	highlightedIndicators: [],
 	dataSelection: {
-		dataGroups: []
+		dataGroups: [],
 	},
-	sharing: getDefaultSharing(user)
 });
-
 
 export default function useScorecardFormMetadata() {
 	const user = useRecoilValue(UserState);
 	const { id } = useParams<{ id: string }>();
-	const { refetch: getScorecard, data } = useDataQuery<{ scorecard: ScorecardConfig }>(query, {
+	const { refetch: getScorecard, data } = useDataQuery<{
+		scorecard: ScorecardConfig;
+		metadata: {
+			sharing: SharingObject;
+		};
+	}>(query, {
+		//@ts-expect-error query type errors
 		variables: {
-			id
+			id,
 		},
-		lazy: true
+		lazy: true,
 	});
 	const schema = useFormSchema();
 	const form = useForm<ScorecardConfig>({
@@ -113,25 +124,31 @@ export default function useScorecardFormMetadata() {
 		progressive: true,
 		defaultValues: async () => {
 			if (id) {
-				const scorecardDefaultValues = await getScorecard() as { scorecard: ScorecardConfig };
-
+				const scorecardDefaultValues = (await getScorecard()) as {
+					scorecard: ScorecardConfig;
+				};
 				const defaultValue = scorecardDefaultValues.scorecard;
 
 				if (!defaultValue.sharing) {
 					//Let's populate the new sharing object
-					defaultValue.sharing = getSharingSettingsFromOldConfiguration(defaultValue as any);
+					defaultValue.sharing =
+						getSharingSettingsFromOldConfiguration(
+							defaultValue as any
+						);
 				}
 				return defaultValue;
 			}
-			return getDefaultValue(user) as ScorecardConfig;
+			return getDefaultValue() as ScorecardConfig;
 		},
 		mode: "onSubmit",
 		reValidateMode: "onSubmit",
-		resolver: zodResolver(schema)
+		resolver: zodResolver(schema),
 	});
 
 	return {
 		form,
-		access: data ? getUserAuthority(user, data?.scorecard.sharing ?? getSharingSettingsFromOldConfiguration(data?.scorecard as ScorecardConfigWithOldSharing)) : getUserAuthority(user, getDefaultSharing(user))
+		access: data
+			? getUserAuthority(user!, data?.metadata.sharing)
+			: getUserAuthority(user!, getDefaultSharing(user!)),
 	};
 }
