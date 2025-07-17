@@ -37,21 +37,24 @@ export default function ScorecardListCard({
 
 	return grid ? (
 		<div
-			className="container-bordered p-8"
+			className="container-bordered p-8 hover:border-blue-950"
 			data-test="scorecard-thumbnail-view"
 			style={styles}
 			onClick={onView}
 			role="button"
 		>
-			<div style={{ gap: 8 }} className="column space-between h-100">
-				<div className="text-center p-8">
+			<div
+				style={{ gap: 8 }}
+				className="flex flex-col space-between h-100"
+			>
+				<div className="p-8 m-auto">
 					<img
 						alt="img"
 						src={holderImage}
 						style={{ height: 60, width: 120 }}
 					/>
 				</div>
-				<div className="flex-1 column align-items-center">
+				<div className="flex-1 flex flex-col items-center">
 					<h5
 						style={{ margin: 0 }}
 						className="scorecard-list-card-title"
@@ -75,7 +78,7 @@ export default function ScorecardListCard({
 										(prevState) => !prevState
 									);
 								}}
-								className="row space-between align-content-end"
+								className="flex space-between align-content-end"
 							>
 								{showFullDescription
 									? description
@@ -98,8 +101,8 @@ export default function ScorecardListCard({
 			style={styles}
 			onClick={onView}
 		>
-			<div className="row space-between align-items-center">
-				<div style={{ gap: 16 }} className="row align-items-center">
+			<div className="flex space-between align-items-center">
+				<div style={{ gap: 16 }} className="flex align-items-center">
 					<div>
 						<img
 							alt="img"
@@ -107,7 +110,7 @@ export default function ScorecardListCard({
 							style={{ height: 80, width: 160 }}
 						/>
 					</div>
-					<div className="column start">
+					<div className="flex flex-col justify-start">
 						<h4 className="scorecard-list-card-title">{title}</h4>
 						<p
 							className="scorecard-list-card-description"
@@ -138,7 +141,7 @@ export default function ScorecardListCard({
 						</p>
 					</div>
 				</div>
-				<div className="row end">
+				<div className="flex justify-end">
 					<ScorecardListCardActions scorecard={scorecard} />
 				</div>
 			</div>
