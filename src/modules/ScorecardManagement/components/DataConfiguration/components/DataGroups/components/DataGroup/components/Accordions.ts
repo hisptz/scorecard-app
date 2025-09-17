@@ -1,23 +1,26 @@
-import { withStyles } from "@material-ui/core";
-import MuiAccordion from "@material-ui/core/Accordion";
-import MuiAccordionDetails from "@material-ui/core/AccordionDetails";
-import MuiAccordionSummary from "@material-ui/core/AccordionSummary";
+import { withStyles } from "@mui/styles";
+
+
+import MuiAccordion from "@mui/material/Accordion";
+import MuiAccordionSummary from "@mui/material/AccordionSummary";
+import MuiAccordionDetails from "@mui/material/AccordionDetails";
+
 
 const Accordion = withStyles({
 	root: {
 		"border": "1px solid rgba(0, 0, 0, .125)",
 		"boxShadow": "none",
 		"&:not(:last-child)": {
-			borderBottom: 0,
+			borderBottom: 0
 		},
 		"&:before": {
-			display: "none",
+			display: "none"
 		},
 		"&$expanded": {
-			margin: "auto",
-		},
+			margin: "auto"
+		}
 	},
-	expanded: {},
+	expanded: {}
 })(MuiAccordion);
 
 const AccordionSummary = withStyles({
@@ -27,21 +30,21 @@ const AccordionSummary = withStyles({
 		"marginBottom": -1,
 		"minHeight": 56,
 		"&$expanded": {
-			minHeight: 56,
-		},
+			minHeight: 56
+		}
 	},
 	content: {
 		"&$expanded": {
-			margin: "12px 0",
-		},
+			margin: "12px 0"
+		}
 	},
-	expanded: {},
+	expanded: {}
 })(MuiAccordionSummary);
 
 const AccordionDetails = withStyles((theme) => ({
 	root: {
-		padding: theme.spacing(2),
-	},
+		padding: theme.spacing(2)
+	}
 }))(MuiAccordionDetails);
 
 export { AccordionSummary, AccordionDetails, Accordion };

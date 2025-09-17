@@ -1,5 +1,4 @@
 import { Chip } from "@dhis2/ui";
-import PropTypes from "prop-types";
 import React, { useState } from "react";
 import DataSource from "./Components/DataSource";
 import GroupSelector from "./Components/GroupSelector";
@@ -16,7 +15,7 @@ const nativeDataSources = [
 		groupResource: "indicatorGroups",
 		dimensionItemType: "INDICATOR",
 		groupKey: "indicatorGroups.id",
-		type: "indicator",
+		type: "indicator"
 	},
 	{
 		label: "Program Indicators",
@@ -24,8 +23,8 @@ const nativeDataSources = [
 		dimensionItemType: "PROGRAM_INDICATOR",
 		groupKey: "program.id",
 		groupResource: "programs",
-		type: "programIndicator",
-	},
+		type: "programIndicator"
+	}
 ].map((source) => new NativeDataSource(source));
 const dataElementConfig = new DataElements({
 	label: "Data Elements",
@@ -33,17 +32,20 @@ const dataElementConfig = new DataElements({
 	groupResource: "dataElementGroups",
 	dimensionItemType: "DATA_ELEMENT",
 	groupKey: "dataElementGroups.id",
-	type: "dataElement",
+	type: "dataElement"
 });
 const eventDataItemsConfig = new EventDataItems();
 const dataSetConfig = new DataSets({ label: "Data Sets" });
 const customFunctionsConfig = new CustomFunctions({
-	label: "Custom Functions",
+	label: "Custom Functions"
 });
 
-export default function DataSourceSelector({ onSubmit, disabled }: any) {
+export default function DataSourceSelector({ onSubmit, disabled }: {
+	disabled: Array<string>,
+	onSubmit: (selected: any) => void
+}) {
 	const [selectedDataSourceType, setSelectedDataSourceType] = useState(
-		nativeDataSources[0],
+		nativeDataSources[0]
 	);
 	const [selectedGroup, setSelectedGroup] = useState();
 	const [selectedDataSources, setSelectedDataSources] = useState([]);
@@ -124,7 +126,3 @@ export default function DataSourceSelector({ onSubmit, disabled }: any) {
 		</div>
 	);
 }
-DataSourceSelector.propTypes = {
-	onSubmit: PropTypes.func.isRequired,
-	disabled: PropTypes.array,
-};

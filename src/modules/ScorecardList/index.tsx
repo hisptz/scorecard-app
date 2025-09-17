@@ -3,16 +3,13 @@ import {
 	Button,
 	ButtonStrip,
 	DropdownButton,
+	IconAdd24,
+	IconApps24,
+	IconList24,
 	IconQuestion24,
-	Tooltip,
+	Tooltip
 } from "@dhis2/ui";
-import { IconAdd24, IconApps24, IconList24 } from "@dhis2/ui-icons";
-import {
-	FullPageError,
-	HelpState,
-	SCORECARD_LIST_HELP_STEPS,
-	STEP_OPTIONS,
-} from "../../shared";
+import { FullPageError, HelpState, SCORECARD_LIST_HELP_STEPS, STEP_OPTIONS } from "../../shared";
 import { Steps } from "intro.js-react";
 import HelpMenu from "./components/HelpMenu";
 import { SearchArea } from "./components/SearchArea";
@@ -42,7 +39,7 @@ export default function ScorecardList() {
 			if (e instanceof Error) {
 				show({
 					message: e.message ?? e.toString(),
-					type: { critical: true },
+					type: { critical: true }
 				});
 			}
 		}
@@ -86,7 +83,7 @@ export default function ScorecardList() {
 								viewType:
 									scorecardViewType === "grid"
 										? i18n.t("list")
-										: i18n.t("grid"),
+										: i18n.t("grid")
 							})}
 						>
 							<Button

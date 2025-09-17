@@ -15,7 +15,8 @@ const config = {
 		caching: {
 			patternsToOmitFromAppShell: [/.*/]
 		}
-	}
+	},
+	viteConfigExtensions: "./viteConfigExtensions.mts"
 };
 
 module.exports = config;

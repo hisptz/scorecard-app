@@ -1,6 +1,20 @@
 import i18n from "@dhis2/d2-i18n";
-import { Button, ButtonStrip, colors, IconEdit16, IconError16, Table, TableBody, TableCell, TableCellHead, TableHead, TableRow, TableRowHead, Tooltip } from "@dhis2/ui";
-import { IconDelete16 } from "@dhis2/ui-icons";
+import {
+	Button,
+	ButtonStrip,
+	colors,
+	IconDelete16,
+	IconEdit16,
+	IconError16,
+	Table,
+	TableBody,
+	TableCell,
+	TableCellHead,
+	TableHead,
+	TableRow,
+	TableRowHead,
+	Tooltip
+} from "@dhis2/ui";
 import { capitalize, get, isEmpty } from "lodash";
 import { FieldError, useController } from "react-hook-form";
 import { ScorecardConfig } from "@hisptz/dhis2-scorecard";
@@ -41,7 +55,8 @@ function HighlightedTableRow({ index, onRemove }: { index: number; onRemove: (in
 					key={`${index}-${path}`}
 				>
 					<div style={{ gap: 8 }} className="row align-items-center">
-						{index === 0 && fieldState.error ? <Tooltip content={errorMessage.join(", ")}><IconError16 color={colors.red500} /></Tooltip> : null}
+						{index === 0 && fieldState.error ? <Tooltip content={errorMessage.join(", ")}><IconError16
+							color={colors.red500} /></Tooltip> : null}
 						{get(field.value, path)}
 					</div>
 				</TableCell>
@@ -76,7 +91,10 @@ function HighlightedTableRow({ index, onRemove }: { index: number; onRemove: (in
 
 }
 
-export default function HighlightedIndicatorsTable({ fields, onRemove }: { fields: { id: string }[], onRemove: (index: number) => void }) {
+export default function HighlightedIndicatorsTable({ fields, onRemove }: {
+	fields: { id: string }[],
+	onRemove: (index: number) => void
+}) {
 
 
 	return !isEmpty(fields) ? (

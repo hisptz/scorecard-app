@@ -1,13 +1,8 @@
 import i18n from "@dhis2/d2-i18n";
-import { Button, colors, IconDragHandle24, Tooltip } from "@dhis2/ui";
-import { IconAdd24, IconChevronDown24 } from "@dhis2/ui-icons";
+import { Button, colors, IconAdd24, IconChevronDown24, IconDragHandle24, Tooltip } from "@dhis2/ui";
 import React, { useRef, useState } from "react";
 import useDataGroupManage from "../../../../hooks/useDataGroupLayout";
-import {
-	Accordion,
-	AccordionDetails,
-	AccordionSummary,
-} from "./components/Accordions";
+import { Accordion, AccordionDetails, AccordionSummary } from "./components/Accordions";
 import GroupTitle from "./components/GroupTitle";
 import { isEmpty } from "lodash";
 import { LinkingContainer } from "./components/LinkingContainer";
@@ -15,9 +10,9 @@ import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import DataSourceSelectorModal from "../DataSourceSelectorModal";
 
 export function DataGroup({
-	index,
-	onRemove,
-}: {
+							  index,
+							  onRemove
+						  }: {
 	index: number;
 	onRemove: (index: number) => void;
 }) {
@@ -31,7 +26,7 @@ export function DataGroup({
 		onDragEnd,
 		group,
 		onDataItemAdd,
-		selectedDataItems,
+		selectedDataItems
 	} = useDataGroupManage({ index });
 	const { id, dataHolders } = group;
 	const [openAdd, setOpenAdd] = useState(false);
@@ -57,7 +52,7 @@ export function DataGroup({
 									{
 										action: expanded
 											? i18n.t("collapse")
-											: i18n.t("expand"),
+											: i18n.t("expand")
 									}
 								)}
 							>
@@ -95,7 +90,7 @@ export function DataGroup({
 										>
 											<p
 												style={{
-													color: colors.grey600,
+													color: colors.grey600
 												}}
 											>
 												{i18n.t("Add a data source")}

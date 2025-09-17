@@ -1,20 +1,20 @@
 import i18n from "@dhis2/d2-i18n";
 //@ts-expect-error link off is not exported
 import { IconLink24, IconLinkOff24, Tooltip } from "@dhis2/ui";
-import { IconButton } from "@material-ui/core";
+import { IconButton } from "@mui/material";
 import React from "react";
 import useLinkManage from "../../../../../hooks/useLinkManage";
 import DataSourceHolder from "../../DataSourceHolder";
 import { ScorecardDataHolder } from "@hisptz/dhis2-scorecard";
 
 export function LinkingContainer({
-	chunk,
-	onDelete,
-	onLink,
-	onUnlink,
-	groupIndex,
-	index,
-}: {
+									 chunk,
+									 onDelete,
+									 onLink,
+									 onUnlink,
+									 groupIndex,
+									 index
+								 }: {
 	index: number;
 	groupIndex: number;
 	chunk: Array<ScorecardDataHolder>;
@@ -52,7 +52,7 @@ export function LinkingContainer({
 						content={i18n.t("Click to {{linkAction}}", {
 							linkAction: hasLink
 								? i18n.t("unlink")
-								: i18n.t("link"),
+								: i18n.t("link")
 						})}
 					>
 						<IconButton

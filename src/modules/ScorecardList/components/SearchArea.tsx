@@ -1,7 +1,6 @@
 import i18n from "@dhis2/d2-i18n";
-import { Button, Input } from "@dhis2/ui";
+import { Button, IconCross24, Input } from "@dhis2/ui";
 import { useSearchParams } from "react-router-dom";
-import { IconCross24 } from "@dhis2/ui-icons";
 
 export function SearchArea() {
 	const [searchParams, setSearchParams] = useSearchParams();

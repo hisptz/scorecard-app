@@ -1,11 +1,16 @@
 import i18n from "@dhis2/d2-i18n";
-import { Button, colors, IconDragHandle24, UserAvatar } from "@dhis2/ui";
-import { IconDelete16 } from "@dhis2/ui-icons";
+import { Button, colors, IconDelete16, IconDragHandle24, UserAvatar } from "@dhis2/ui";
 import React from "react";
 import { ScorecardDataSource } from "@hisptz/dhis2-scorecard";
 import { FieldError, useFormContext } from "react-hook-form";
 
-export default function DataSource({ dataSource, index, onDelete, groupIndex, holderIndex }: { groupIndex: number; holderIndex: number; dataSource: ScorecardDataSource, index: number, onDelete: (index: number) => void }) {
+export default function DataSource({ dataSource, index, onDelete, groupIndex, holderIndex }: {
+	groupIndex: number;
+	holderIndex: number;
+	dataSource: ScorecardDataSource,
+	index: number,
+	onDelete: (index: number) => void
+}) {
 	const { label, type } = dataSource;
 	const { getFieldState } = useFormContext();
 
@@ -14,7 +19,8 @@ export default function DataSource({ dataSource, index, onDelete, groupIndex, ho
 
 	return (
 		<div>
-			<div style={error ? { borderColor: colors.red500 } : undefined} className="container-bordered data-source p-8 w-100">
+			<div style={error ? { borderColor: colors.red500 } : undefined}
+				 className="container-bordered data-source p-8 w-100">
 				<div className="row space-between align-items-center">
 					<div style={{ gap: 8 }} className="row flex-1 align-items-center">
 						<IconDragHandle24 />

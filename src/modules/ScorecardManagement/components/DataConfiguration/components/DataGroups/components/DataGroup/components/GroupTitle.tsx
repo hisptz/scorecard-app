@@ -1,13 +1,12 @@
 import i18n from "@dhis2/d2-i18n";
-import { Button, colors } from "@dhis2/ui";
-import { IconButton } from "@material-ui/core";
-import { IconDelete24, IconEdit24 } from "@dhis2/ui-icons";
+import { Button, colors, IconDelete24, IconEdit24 } from "@dhis2/ui";
 import React from "react";
 import { useBoolean } from "usehooks-ts";
 import EditTitle from "./EditTitle";
 import { useFormContext, useWatch } from "react-hook-form";
 import { ScorecardConfig } from "@hisptz/dhis2-scorecard";
 import { ErrorIcon } from "../../../../../../../../../shared";
+import IconButton from "@mui/material/IconButton";
 
 export default function GroupTitle({
 									   index,

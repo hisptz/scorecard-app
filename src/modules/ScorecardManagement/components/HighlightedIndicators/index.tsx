@@ -1,7 +1,6 @@
 import i18n from "@dhis2/d2-i18n";
-import { Button } from "@dhis2/ui";
+import { Button, IconAdd24 } from "@dhis2/ui";
 import { generateLegendDefaults, Help, HIGHLIGHTED_INDICATOR_HELP_STEPS } from "../../../../shared";
-import { IconAdd24 } from "@dhis2/ui-icons";
 import { isEmpty } from "lodash";
 import React, { useCallback, useEffect, useState } from "react";
 import { useFieldArray, useFormContext, useWatch } from "react-hook-form";
@@ -44,7 +43,11 @@ export default function HighlightedIndicatorsScorecardForm() {
 					showColors: true,
 					displayArrows: false,
 					effectiveGap: 5,
-					legends: generateLegendDefaults({ legendDefinitions: legendDefinitions, weight: 100, highIsGood: true }),
+					legends: generateLegendDefaults({
+						legendDefinitions: legendDefinitions,
+						weight: 100,
+						highIsGood: true
+					}),
 					specificTargetsSet: false,
 					specificTargets: []
 

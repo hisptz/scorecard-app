@@ -5,8 +5,7 @@ import { isEmpty } from "lodash";
 import EmptyDataGroups from "../EmptyDataGroups";
 import { uid } from "@hisptz/dhis2-utils";
 import i18n from "@dhis2/d2-i18n";
-import { Button } from "@dhis2/ui";
-import { IconAdd24 } from "@dhis2/ui-icons";
+import { Button, IconAdd24 } from "@dhis2/ui";
 import { DataGroup } from "./components/DataGroup";
 import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd";
 
@@ -15,7 +14,7 @@ export default function DataGroups() {
 		ScorecardConfig,
 		"dataSelection.dataGroups"
 	>({
-		name: "dataSelection.dataGroups",
+		name: "dataSelection.dataGroups"
 	});
 
 	const onGroupAdd = () => {
@@ -23,7 +22,7 @@ export default function DataGroups() {
 			id: uid(),
 			dataHolders: [],
 			title: `${i18n.t("Default")} ${fields.length + 1}`,
-			style: {},
+			style: {}
 		} as ScorecardDataGroup);
 	};
 

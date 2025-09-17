@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-07-17T14:27:43.167Z\n"
-"PO-Revision-Date: 2025-07-17T14:27:43.168Z\n"
+"POT-Creation-Date: 2025-09-17T10:17:05.745Z\n"
+"PO-Revision-Date: 2025-09-17T10:17:05.745Z\n"
 
 msgid "Scorecard deleted successfully"
 msgstr "Scorecard deleted successfully"
@@ -978,11 +978,3 @@ msgstr "User Sub-x2-units"
 
 msgid "This group does not have any configured data sources"
 msgstr "This group does not have any configured data sources"
-
-msgctxt "Application title"
-msgid "__MANIFEST_APP_TITLE"
-msgstr "Interactive Scorecard"
-
-msgctxt "Application description"
-msgid "__MANIFEST_APP_DESCRIPTION"
-msgstr "Interactive Scorecard Application"

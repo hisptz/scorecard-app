@@ -1,8 +1,7 @@
 import i18n from "@dhis2/d2-i18n";
-import { Button, Card, colors } from "@dhis2/ui";
+import { Button, Card, colors, IconAdd24 } from "@dhis2/ui";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { IconAdd24 } from "@dhis2/ui-icons";
 import illustration from "../../../../assets/images/scorecard_illustration.png";
 
 export default function EmptyScoreCardList() {
@@ -15,7 +14,7 @@ export default function EmptyScoreCardList() {
 		<div
 			style={{
 				alignItems: "center",
-				justifyContent: "center",
+				justifyContent: "center"
 			}}
 			className="center column align-center"
 		>
@@ -44,7 +43,7 @@ export default function EmptyScoreCardList() {
 								style={{
 									fontStyle: "italic",
 									color: colors.grey700,
-									position: "relative",
+									position: "relative"
 								}}
 							>
 								{i18n.t(

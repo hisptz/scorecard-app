@@ -1,9 +1,8 @@
 import { useFieldArray } from "react-hook-form";
-import { Button, Field, InputField } from "@dhis2/ui";
+import { Button, Field, IconAdd24, IconDelete24, InputField } from "@dhis2/ui";
 import i18n from "@dhis2/d2-i18n";
 import { RHFTextInputField } from "@hisptz/dhis2-ui";
 import { useState } from "react";
-import { IconAdd24, IconDelete24 } from "@dhis2/ui-icons";
 
 
 export function AdditionalLabelsField() {
@@ -30,7 +29,8 @@ export function AdditionalLabelsField() {
 									<div style={{ flex: 1 }}>
 										<RHFTextInputField name={`additionalLabels.${i}`} />
 									</div>
-									<Button onClick={() => remove(i)} icon={<IconDelete24 />}>{i18n.t("Delete")}</Button>
+									<Button onClick={() => remove(i)}
+											icon={<IconDelete24 />}>{i18n.t("Delete")}</Button>
 								</div>
 							);
 						})
@@ -38,7 +38,8 @@ export function AdditionalLabelsField() {
 				</div>
 				<div style={{ gap: 8 }} className="row align-items-end">
 					<div style={{ flex: 1 }}>
-						<InputField label={i18n.t("Add new label")} value={addFieldValue} onChange={({ value }: { value?: string }) => setAddFieldValue(value)} />
+						<InputField label={i18n.t("Add new label")} value={addFieldValue}
+									onChange={({ value }: { value?: string }) => setAddFieldValue(value)} />
 					</div>
 					<Button onClick={onAdd} disabled={!addFieldValue} icon={<IconAdd24 />}>{i18n.t("Add")}</Button>
 				</div>

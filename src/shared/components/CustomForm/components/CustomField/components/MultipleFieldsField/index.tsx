@@ -1,21 +1,18 @@
-import { Button, Field } from "@dhis2/ui";
-import AddIcon from "@material-ui/icons/Add";
-import DeleteIcon from "@material-ui/icons/Delete";
+import { Button, Field, IconAdd24, IconDelete24 } from "@dhis2/ui";
 import { remove, set } from "lodash";
-import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
 import { FormFieldModel } from "../../../../models";
 import { CustomInput } from "../../index";
 
 export default function MultipleFieldsField({
-	name,
-	value,
-	onChange,
-	multipleField,
-	initialFieldCount,
-	multipleFields,
-	...props
-}: any) {
+												name,
+												value,
+												onChange,
+												multipleField,
+												initialFieldCount,
+												multipleFields,
+												...props
+											}: any) {
 	const [fields, setFields] = useState<any>([]);
 	useEffect(() => {
 		function setInitialFields() {
@@ -32,6 +29,7 @@ export default function MultipleFieldsField({
 				setFields(fields);
 			}
 		}
+
 		setInitialFields();
 	}, []);
 
@@ -65,74 +63,74 @@ export default function MultipleFieldsField({
 			<div className="column">
 				{multipleField
 					? fields.map((field: any, index: number) => {
-							const input = {
-								name: field.name,
-								onChange: (value: any) => onFieldValueChange(index, value),
-								value: value?.[index],
-							};
+						const input = {
+							name: field.name,
+							onChange: (value: any) => onFieldValueChange(index, value),
+							value: value?.[index]
+						};
 
-							return (
-								<div
-									key={`${field?.id}-${index}`}
-									className="row align-items-center w-100"
-								>
-									<div className="column w-75">
-										<CustomInput
-											onChange={(v: any) => onFieldValueChange(index, v)}
-											valueType={field.valueType}
-											input={input}
-										/>
-									</div>
-									<div className="column w-25">
-										{!value?.[index]?.isDefault && (
-											<Button
-												disabled={index === 0 && fields.length === 1}
-												icon={<DeleteIcon />}
-												onClick={() => onDeleteField(field, index)}
-											>
-												Delete
-											</Button>
-										)}
-									</div>
+						return (
+							<div
+								key={`${field?.id}-${index}`}
+								className="row align-items-center w-100"
+							>
+								<div className="column w-75">
+									<CustomInput
+										onChange={(v: any) => onFieldValueChange(index, v)}
+										valueType={field.valueType}
+										input={input}
+									/>
 								</div>
-							);
-					  })
-					: multipleFields?.map((field: any, index: number) => {
-							const input = {
-								name: field.name,
-								onChange: (value: any) => onFieldValueChange(index, value),
-								value: value?.[index],
-							};
-							return (
-								<div
-									key={`${field?.id}-${index}`}
-									className="row align-items-center w-100"
-								>
-									<div className="column">
-										<CustomInput
-											onChange={(v: any) => onFieldValueChange(index, v)}
-											valueType={field.valueType}
-											input={input}
-											{...field}
-										/>
-									</div>
-									{multipleField && (
-										<div className="column">
-											<Button
-												disabled={index === 0 && fields.length === 1}
-												icon={<DeleteIcon />}
-												onClick={() => onDeleteField(field, index)}
-											>
-												Delete
-											</Button>
-										</div>
+								<div className="column w-25">
+									{!value?.[index]?.isDefault && (
+										<Button
+											disabled={index === 0 && fields.length === 1}
+											icon={<IconDelete24 />}
+											onClick={() => onDeleteField(field, index)}
+										>
+											Delete
+										</Button>
 									)}
 								</div>
-							);
-					  })}
+							</div>
+						);
+					})
+					: multipleFields?.map((field: any, index: number) => {
+						const input = {
+							name: field.name,
+							onChange: (value: any) => onFieldValueChange(index, value),
+							value: value?.[index]
+						};
+						return (
+							<div
+								key={`${field?.id}-${index}`}
+								className="row align-items-center w-100"
+							>
+								<div className="column">
+									<CustomInput
+										onChange={(v: any) => onFieldValueChange(index, v)}
+										valueType={field.valueType}
+										input={input}
+										{...field}
+									/>
+								</div>
+								{multipleField && (
+									<div className="column">
+										<Button
+											disabled={index === 0 && fields.length === 1}
+											icon={<IconDelete24 />}
+											onClick={() => onDeleteField(field, index)}
+										>
+											Delete
+										</Button>
+									</div>
+								)}
+							</div>
+						);
+					})}
 				{multipleField && (
 					<div className="w-50">
-						<Button icon={<AddIcon />} onClick={onAddField}>
+						<Button icon={<IconAdd24 />} onClick={onAddField}>
 							Add Item
 						</Button>
 					</div>
@@ -141,12 +139,3 @@ export default function MultipleFieldsField({
 		</Field>
 	);
 }
-
-MultipleFieldsField.propTypes = {
-	name: PropTypes.string.isRequired,
-	onChange: PropTypes.func.isRequired,
-	initialFieldCount: PropTypes.number,
-	multipleField: PropTypes.object,
-	multipleFields: PropTypes.arrayOf(PropTypes.instanceOf(FormFieldModel)),
-	value: PropTypes.any,
-};
