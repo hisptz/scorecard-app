@@ -1,8 +1,4 @@
-import {
-	DATASTORE_NAMESPACE,
-	getUserAuthority,
-	UserState,
-} from "../../../shared";
+import { DATASTORE_NAMESPACE, getUserAuthority, UserState } from "../../../shared";
 import { useDataQuery } from "@dhis2/app-runtime";
 import { useCallback, useMemo } from "react";
 import { useRecoilValue } from "recoil";
@@ -10,8 +6,8 @@ import { useRecoilValue } from "recoil";
 const metadataQuery: any = {
 	meta: {
 		resource: `dataStore/${DATASTORE_NAMESPACE}`,
-		id: ({ id }: { id: string }) => `${id}/metaData`,
-	},
+		id: ({ id }: { id: string }) => `${id}/metaData`
+	}
 };
 
 export type Sharing = {
@@ -45,24 +41,16 @@ export function useScorecardSharingSettings({ id }: { id: string }) {
 		metadataQuery,
 		{
 			variables: {
-				id,
-			},
+				id
+			}
 		}
 	);
 	const access = useMemo(() => {
-		if (user?.authorities.includes("ALL")) {
-			//The access controls won't matter, the user will be able to do all
-			return {
-				write: true,
-				read: true,
-				delete: true,
-			};
-		}
 		if (!data) {
 			return {
 				write: false,
 				read: false,
-				delete: false,
+				delete: false
 			};
 		} else {
 			const sharing = data.meta.sharing;
@@ -73,14 +61,14 @@ export function useScorecardSharingSettings({ id }: { id: string }) {
 	return {
 		access,
 		loading,
-		error,
+		error
 	};
 }
 
 export function useGetScorecardSharingSettings() {
 	const user = useRecoilValue(UserState);
 	const { refetch } = useDataQuery<MetaQueryResponse>(metadataQuery, {
-		lazy: true,
+		lazy: true
 	});
 	return useCallback(
 		async (
@@ -91,7 +79,7 @@ export function useGetScorecardSharingSettings() {
 				return {
 					write: false,
 					read: false,
-					delete: false,
+					delete: false
 				};
 			} else {
 				const sharing = data.meta.sharing;

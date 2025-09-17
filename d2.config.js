@@ -1,7 +1,7 @@
 const config = {
 	type: "app",
 	name: "hisptz-scorecard",
-	title: "Interactive Scorecard",
+	title: "Scorecard",
 	pluginType: "DASHBOARD",
 	entryPoints: {
 		app: "./src/App.tsx",
@@ -18,5 +18,4 @@ const config = {
 	},
 	viteConfigExtensions: "./viteConfigExtensions.mts"
 };
-
 module.exports = config;

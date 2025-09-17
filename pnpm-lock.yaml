@@ -21,11 +21,11 @@ importers:
         specifier: ^10.7.4
         version: 10.9.0(@dhis2/app-runtime@3.14.5(react-dom@18.3.1(react@18.3.1))(react-native@0.81.4(@babel/core@7.28.4)(@types/react@18.3.24)(react@18.3.1))(react@18.3.1))(@dhis2/d2-i18n@1.1.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-jsx@4.0.1(@babel/core@7.28.4)(react@18.3.1))
       '@hisptz/dhis2-analytics':
-        specifier: ^2.0.67
-        version: 2.1.25(9ba9033447d62a81b91276cc461d49f5)
+        specifier: ^2.1.26
+        version: 2.1.26(9ba9033447d62a81b91276cc461d49f5)
       '@hisptz/dhis2-scorecard':
-        specifier: ^1.2.2
-        version: 1.2.17(c512c3a0bf16bff268e10f4e42555963)
+        specifier: ^1.2.19
+        version: 1.2.19(c512c3a0bf16bff268e10f4e42555963)
       '@hisptz/dhis2-ui':
         specifier: ^2.0.48
         version: 2.0.50(@dhis2/app-runtime@3.14.5(react-dom@18.3.1(react@18.3.1))(react-native@0.81.4(@babel/core@7.28.4)(@types/react@18.3.24)(react@18.3.1))(react@18.3.1))(@dhis2/d2-i18n@1.1.3)(@dhis2/ui@10.9.0(@dhis2/app-runtime@3.14.5(react-dom@18.3.1(react@18.3.1))(react-native@0.81.4(@babel/core@7.28.4)(@types/react@18.3.24)(react@18.3.1))(react@18.3.1))(@dhis2/d2-i18n@1.1.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-jsx@4.0.1(@babel/core@7.28.4)(react@18.3.1)))(classnames@2.5.1)(prop-types@15.8.1)(react-dom@18.3.1(react@18.3.1))(react-hook-form@7.62.0(react@18.3.1))(react-native@0.81.4(@babel/core@7.28.4)(@types/react@18.3.24)(react@18.3.1))(react@18.3.1)(usehooks-ts@2.16.0(react@18.3.1))
@@ -2094,8 +2094,8 @@ packages:
   '@hapi/topo@5.1.0':
     resolution: {integrity: sha512-foQZKJig7Ob0BMAYBfcJk8d77QtOe7Wo4ox7ff1lQYoNNAb6jwcY1ncdoy2e9wQZzvNy7ODZCYJkK8kzmcAnAg==}
 
-  '@hisptz/dhis2-analytics@2.1.25':
-    resolution: {integrity: sha512-2wQN2b50xZQJ4pH7wKp/fX6fVHNAXF7QcGYXh+DQBLXaDsQK8tqtX/YAX0gsrlg2JqutgqHQzS6jTeQHtMwwSQ==}
+  '@hisptz/dhis2-analytics@2.1.26':
+    resolution: {integrity: sha512-NK/om69/GwyzgWokrSOv0Ecvnf1TvRHSiHs0hI+M7jtGbZMwfJ2UI2cJeKQcpih4m0tU4UE2sLhwUliLMfat7A==}
     peerDependencies:
       '@dhis2/app-runtime': ^3
       '@dhis2/d2-i18n': ^1
@@ -2113,8 +2113,8 @@ packages:
       usehooks-ts: ^2
       zod: ^3
 
-  '@hisptz/dhis2-scorecard@1.2.17':
-    resolution: {integrity: sha512-g7jm0ZU9TGHaxylM/NWXXmjKvqzkK1eLu7UqAZ8tqtoJzGgKS/YKELqHKG+BWIwpoN7LCQqi1TuctNrG10oJOQ==}
+  '@hisptz/dhis2-scorecard@1.2.19':
+    resolution: {integrity: sha512-gnl3R7YT6XgnOGqtqgTaaCu9M6v+CMuB0wpD0WDcYfiq3j3OqyghbU1G8gSuORHskpKx23kq8E9o7X6WROojQg==}
     peerDependencies:
       '@dhis2/app-runtime': ^3
       '@dhis2/d2-i18n': ^1.1.3
@@ -8061,7 +8061,6 @@ packages:
     resolution: {integrity: sha512-Quz3MvAwHxVYNXsOByL7xI5EB2WYOeFswqaHIA3qOK3isRWTxiplBEocmmru6XmxDB2L7jDNYtYA4FyimoAFEw==}
     engines: {node: '>=8.17.0'}
     hasBin: true
-    bundledDependencies: []
 
   jsonfile@4.0.0:
     resolution: {integrity: sha512-m6F1R3z8jjlf2imQHS2Qez5sjKWQzbuuhuJ/FKYFRZvPE3PuHcSMVZzfsLhGVOkfd20obL5SWEBew5ShlquNxg==}
@@ -14762,7 +14761,7 @@ snapshots:
     dependencies:
       '@hapi/hoek': 9.3.0
 
-  '@hisptz/dhis2-analytics@2.1.25(9ba9033447d62a81b91276cc461d49f5)':
+  '@hisptz/dhis2-analytics@2.1.26(9ba9033447d62a81b91276cc461d49f5)':
     dependencies:
       '@dhis2/app-runtime': 3.14.5(react-dom@18.3.1(react@18.3.1))(react-native@0.81.4(@babel/core@7.28.4)(@types/react@18.3.24)(react@18.3.1))(react@18.3.1)
       '@dhis2/d2-i18n': 1.1.3
@@ -14819,13 +14818,13 @@ snapshots:
       - three
       - zdog
 
-  '@hisptz/dhis2-scorecard@1.2.17(c512c3a0bf16bff268e10f4e42555963)':
+  '@hisptz/dhis2-scorecard@1.2.19(c512c3a0bf16bff268e10f4e42555963)':
     dependencies:
       '@dhis2/app-runtime': 3.14.5(react-dom@18.3.1(react@18.3.1))(react-native@0.81.4(@babel/core@7.28.4)(@types/react@18.3.24)(react@18.3.1))(react@18.3.1)
       '@dhis2/d2-i18n': 1.1.3
       '@dhis2/multi-calendar-dates': 1.3.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@dhis2/ui': 10.9.0(@dhis2/app-runtime@3.14.5(react-dom@18.3.1(react@18.3.1))(react-native@0.81.4(@babel/core@7.28.4)(@types/react@18.3.24)(react@18.3.1))(react@18.3.1))(@dhis2/d2-i18n@1.1.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-jsx@4.0.1(@babel/core@7.28.4)(react@18.3.1))
-      '@hisptz/dhis2-analytics': 2.1.25(9ba9033447d62a81b91276cc461d49f5)
+      '@hisptz/dhis2-analytics': 2.1.26(9ba9033447d62a81b91276cc461d49f5)
       '@hisptz/dhis2-ui': 2.0.50(@dhis2/app-runtime@3.14.5(react-dom@18.3.1(react@18.3.1))(react-native@0.81.4(@babel/core@7.28.4)(@types/react@18.3.24)(react@18.3.1))(react@18.3.1))(@dhis2/d2-i18n@1.1.3)(@dhis2/ui@10.9.0(@dhis2/app-runtime@3.14.5(react-dom@18.3.1(react@18.3.1))(react-native@0.81.4(@babel/core@7.28.4)(@types/react@18.3.24)(react@18.3.1))(react@18.3.1))(@dhis2/d2-i18n@1.1.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-jsx@4.0.1(@babel/core@7.28.4)(react@18.3.1)))(classnames@2.5.1)(prop-types@15.8.1)(react-dom@18.3.1(react@18.3.1))(react-hook-form@7.62.0(react@18.3.1))(react-native@0.81.4(@babel/core@7.28.4)(@types/react@18.3.24)(react@18.3.1))(react@18.3.1)(usehooks-ts@2.16.0(react@18.3.1))
       '@hisptz/dhis2-utils': 2.0.18(@dhis2/d2-i18n@1.1.3)(lodash@4.17.21)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(usehooks-ts@2.16.0(react@18.3.1))
       '@tanstack/react-table': 8.21.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)

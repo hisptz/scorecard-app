@@ -2,6 +2,7 @@ import i18n from "@dhis2/d2-i18n";
 import {
 	Button,
 	ButtonStrip,
+	CircularLoader,
 	DropdownButton,
 	IconAdd24,
 	IconApps24,
@@ -15,13 +16,15 @@ import HelpMenu from "./components/HelpMenu";
 import { SearchArea } from "./components/SearchArea";
 import { useSetting } from "@dhis2/app-service-datastore";
 import { useAlert } from "@dhis2/app-runtime";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { ScorecardListArea } from "./components/ScorecardListArea";
 import { ErrorBoundary } from "react-error-boundary";
 import { MigrationNavigateButton } from "../ScorecardMigration/components/MigrationNavigateButton";
 import { useRecoilState } from "recoil";
+import { useSharingCleanupCheck } from "@/shared/components/SharingCleanup/hooks/service";
 
 export default function ScorecardList() {
+
 	const [scorecardViewType, { set }] = useSetting("scorecardViewType");
 	const [helpEnabled, setHelpEnabled] = useRecoilState<boolean>(HelpState);
 	const { show } = useAlert(
@@ -53,6 +56,19 @@ export default function ScorecardList() {
 	const onHelpExit = () => {
 		setHelpEnabled(false);
 	};
+	const { shouldCheck, loading } = useSharingCleanupCheck();
+
+	if (loading) {
+		return (
+			<div className="h-full flex flex-col gap-4 align-items-center center">
+				<CircularLoader />
+			</div>
+		);
+	}
+
+	if (shouldCheck) {
+		return <Navigate to="/cleanup" />;
+	}
 
 	return (
 		<>

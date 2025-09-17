@@ -1,16 +1,11 @@
-import {
-	Button,
-	ButtonEventHandler,
-	ButtonStrip,
-	CircularLoader,
-} from "@dhis2/ui";
+import { Button, ButtonEventHandler, ButtonStrip, CircularLoader } from "@dhis2/ui";
 import i18n from "@dhis2/d2-i18n";
 import { ScorecardListItem } from "../../types";
-import { useDeleteScorecard } from "../../../../shared";
+import { useDeleteScorecard } from "@/shared";
 import { useAlert } from "@dhis2/app-runtime";
 import { useDialog } from "@hisptz/dhis2-ui";
 import { useNavigate } from "react-router-dom";
-import { useNavigateToScorecardView } from "../../../../hooks/navigate";
+import { useNavigateToScorecardView } from "@/hooks/navigate";
 import { useScorecardSharingSettings } from "../../hooks/authority";
 
 export interface ScorecardListCardActionsProps {
@@ -19,14 +14,15 @@ export interface ScorecardListCardActionsProps {
 }
 
 export function ScorecardListCardActions({
-	scorecard,
-	refetch,
-}: ScorecardListCardActionsProps) {
+											 scorecard,
+											 refetch
+										 }: ScorecardListCardActionsProps) {
 	const navigate = useNavigate();
 	const navigateToView = useNavigateToScorecardView();
 	const { access, loading } = useScorecardSharingSettings({
-		id: scorecard.id,
+		id: scorecard.id
 	});
+
 
 	const { confirm } = useDialog();
 
@@ -48,13 +44,13 @@ export function ScorecardListCardActions({
 				await remove();
 				show({
 					message: i18n.t("Scorecard deleted successfully"),
-					type: { success: true },
+					type: { success: true }
 				});
 			} catch (e) {
 				if (e instanceof Error) {
 					show({
 						message: e.message,
-						type: { info: true },
+						type: { info: true }
 					});
 				}
 			}
@@ -78,11 +74,12 @@ export function ScorecardListCardActions({
 					<b>{scorecard.title}</b>
 				</p>
 			),
-			onCancel: () => {},
+			onCancel: () => {
+			},
 			onConfirm: async () => {
 				await deleteScorecard();
 				refetch();
-			},
+			}
 		});
 	};
 
@@ -101,7 +98,7 @@ export function ScorecardListCardActions({
 				<Button
 					loading={loading}
 					dataTest={"edit-scorecard-button"}
-					onClick={function (_, e) {
+					onClick={function(_, e) {
 						e.stopPropagation();
 						onEdit();
 					}}

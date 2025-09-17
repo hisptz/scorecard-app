@@ -22,6 +22,8 @@ const ScorecardList = React.lazy(
 	() => import("../ScorecardList")
 );
 
+const SharingCleanup = React.lazy(() => import("@/shared/components/SharingCleanup/SharingCleanup").then((module) => ({ default: module.SharingCleanup })));
+
 const pages = [
 	{
 		path: "/migrate",
@@ -52,6 +54,10 @@ const pages = [
 		component: ScorecardView
 	},
 	{
+		path: "/cleanup",
+		component: SharingCleanup
+	},
+	{
 		path: "/",
 		component: ScorecardList
 	}
@@ -77,7 +83,8 @@ export default function Router() {
 										</ErrorBoundary>
 									}
 								>
-									{!isEmpty(subItems) && (<Route path="" element={<Navigate to={head(subItems)?.path ?? ""} />} />)}
+									{!isEmpty(subItems) && (
+										<Route path="" element={<Navigate to={head(subItems)?.path ?? ""} />} />)}
 									{subItems?.map(
 										({ path, component: Component }, index) => {
 											return (

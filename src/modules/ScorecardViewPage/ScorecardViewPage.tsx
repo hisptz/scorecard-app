@@ -11,11 +11,11 @@ import {
 	ScorecardHeader,
 	ScorecardLegendsView,
 	ScorecardState,
-	ScorecardStateProvider,
+	ScorecardStateProvider
 } from "@hisptz/dhis2-scorecard";
 import { ScorecardActions } from "./components/ScorecardActions/ScorecardActions";
 import { ScorecardView } from "./components/ScorecardView";
-import { getOrgUnitSelectionFromIds } from "../../shared";
+import { getOrgUnitSelectionFromIds } from "@/shared";
 
 function MainView() {
 	const { periods, orgUnits } = useRawDimensions();
@@ -25,7 +25,7 @@ function MainView() {
 
 	const { height } = useResizeObserver<HTMLDivElement>({
 		box: "border-box",
-		ref: headerRef,
+		ref: headerRef
 	});
 
 	const initialState = useMemo(() => {
@@ -34,8 +34,8 @@ function MainView() {
 		}
 		const periodSelection = !isEmpty(periods)
 			? {
-					periods: periods.map((periodId) => ({ id: periodId })),
-			  }
+				periods: periods.map((periodId) => ({ id: periodId }))
+			}
 			: config?.periodSelection;
 		const orgUnitSelection = !isEmpty(orgUnits)
 			? getOrgUnitSelectionFromIds(orgUnits)
@@ -44,7 +44,7 @@ function MainView() {
 		return {
 			options: config.options,
 			orgUnitSelection,
-			periodSelection,
+			periodSelection
 		} as ScorecardState;
 	}, [periods, orgUnits, config]);
 
@@ -60,10 +60,9 @@ function MainView() {
 	return (
 		<ScorecardStateProvider initialState={initialState} config={config}>
 			<div
+				className="flex flex-col gap-[16px] w-full"
 				style={{
-					display: "flex",
-					flexDirection: "column",
-					gap: 16,
+					height: "stretch"
 				}}
 			>
 				<DimensionFilterArea />
@@ -78,7 +77,7 @@ function MainView() {
 									display: "flex",
 									flexDirection: "column",
 									gap: 16,
-									textAlign: "center",
+									textAlign: "center"
 								}}
 							>
 								<ScorecardActions />
