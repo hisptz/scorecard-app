@@ -1,12 +1,20 @@
 import { map } from "async";
 import { compact, find, fromPairs, has } from "lodash";
-import { getDataSourceDetails } from "./dataSource";
+import { getDataSourceDetails } from "@/shared";
 import { uid } from "./utils";
-import { OldLegendDefinition, OldScorecardSchema, OldUserGroup, OrgUnitSettings } from "src/modules/ScorecardMigration/schemas/old";
+import {
+	OldLegendDefinition,
+	OldScorecardSchema,
+	OldUserGroup,
+	OrgUnitSettings
+} from "src/modules/ScorecardMigration/schemas/old";
 import { useDataEngine } from "@dhis2/app-runtime";
 import { ScorecardConfig } from "@hisptz/dhis2-scorecard";
 
-export async function migrateScorecard({ oldScorecard, engine }: { oldScorecard: OldScorecardSchema, engine: ReturnType<typeof useDataEngine> }): Promise<ScorecardConfig> {
+export async function migrateScorecard({ oldScorecard, engine }: {
+	oldScorecard: OldScorecardSchema,
+	engine: ReturnType<typeof useDataEngine>
+}): Promise<ScorecardConfig> {
 	try {
 		if (oldScorecard) {
 			return {
@@ -219,7 +227,12 @@ function getScorecardPublicAccess(oldScorecardUserGroups: OldUserGroup[]) {
 	};
 }
 
-function getScorecardUserGroupAccesses(oldScorecardUserGroups: OldUserGroup[]): Record<string, { id: string; access: string; name: string; displayName: string; }> {
+function getScorecardUserGroupAccesses(oldScorecardUserGroups: OldUserGroup[]): Record<string, {
+	id: string;
+	access: string;
+	name: string;
+	displayName: string;
+}> {
 	const userGroupsOnly = oldScorecardUserGroups?.filter(
 		(userGroup) => userGroup.id !== "all"
 	);

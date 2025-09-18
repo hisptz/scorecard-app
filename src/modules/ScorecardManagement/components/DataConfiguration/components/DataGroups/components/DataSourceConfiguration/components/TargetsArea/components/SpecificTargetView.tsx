@@ -2,17 +2,13 @@ import i18n from "@dhis2/d2-i18n";
 import { Button, colors, Tag } from "@dhis2/ui";
 import { createFixedPeriodFromPeriodId } from "@dhis2/multi-calendar-dates";
 import { find } from "lodash";
-import {
-	LegendDefinition,
-	ScorecardLegend,
-	SpecificTarget,
-} from "@hisptz/dhis2-scorecard";
-import { useCalendar } from "../../../../../../../../../../../shared";
+import { LegendDefinition, ScorecardLegend, SpecificTarget } from "@hisptz/dhis2-scorecard";
+import { useCalendar } from "@/shared";
 
 function LegendsView({
-	legends,
-	legendDefinitions,
-}: {
+						 legends,
+						 legendDefinitions
+					 }: {
 	legends: ScorecardLegend[];
 	legendDefinitions: LegendDefinition[];
 }) {
@@ -20,9 +16,9 @@ function LegendsView({
 		<div style={{ gap: 16 }} className="row gap-16 space-evenly">
 			{legends?.map((legend, index) => {
 				const { legendDefinitionId, startValue, endValue } =
-					legend ?? {};
+				legend ?? {};
 				const legendDefinition = find(legendDefinitions, {
-					id: legendDefinitionId,
+					id: legendDefinitionId
 				}) ?? { color: undefined };
 				return (
 					<div
@@ -34,7 +30,7 @@ function LegendsView({
 							style={{
 								height: 32,
 								width: 48,
-								background: legendDefinition.color,
+								background: legendDefinition.color
 							}}
 						/>
 						<div>{`${endValue} - ${startValue}`}</div>
@@ -57,11 +53,11 @@ function getTypeLabel(type: "periods" | "orgUnit" | "orgUnitLevel") {
 }
 
 export function OrgUnitSpecificTargetView({
-	specificTarget,
-	legendDefinitions,
-	onUpdate,
-	defaultLegends,
-}: {
+											  specificTarget,
+											  legendDefinitions,
+											  onUpdate,
+											  defaultLegends
+										  }: {
 	specificTarget: SpecificTarget;
 	legendDefinitions: LegendDefinition[];
 	defaultLegends: ScorecardLegend[];
@@ -75,7 +71,7 @@ export function OrgUnitSpecificTargetView({
 			style={{
 				border: `1px solid ${colors.grey500}`,
 				borderRadius: 4,
-				padding: 8,
+				padding: 8
 			}}
 			className="column gap-8 flex-wrap"
 		>
@@ -113,11 +109,11 @@ export function OrgUnitSpecificTargetView({
 }
 
 export function PeriodSpecificTargetView({
-	specificTarget,
-	legendDefinitions,
-	onUpdate,
-	defaultLegends,
-}: {
+											 specificTarget,
+											 legendDefinitions,
+											 onUpdate,
+											 defaultLegends
+										 }: {
 	specificTarget: SpecificTarget;
 	legendDefinitions: LegendDefinition[];
 	defaultLegends: ScorecardLegend[];
@@ -131,7 +127,7 @@ export function PeriodSpecificTargetView({
 			style={{
 				border: `1px solid ${colors.grey500}`,
 				borderRadius: 4,
-				padding: 8,
+				padding: 8
 			}}
 			className="column gap-8 flex-wrap"
 		>
@@ -144,7 +140,7 @@ export function PeriodSpecificTargetView({
 								{
 									createFixedPeriodFromPeriodId({
 										calendar: calendar,
-										periodId: item,
+										periodId: item
 									}).displayName
 								}
 							</Tag>

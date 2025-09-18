@@ -6,13 +6,13 @@ import {
 	ScorecardDataProvider,
 	ScorecardHeader,
 	ScorecardLegendsView,
-	ScorecardStateProvider,
+	ScorecardStateProvider
 } from "@hisptz/dhis2-scorecard";
 import { ScorecardTable } from "./ScorecardTable";
 import { usePluginConfig } from "../../components/PluginConfigProvider";
 import { useManagePluginConfig } from "../../hooks/config";
 import { isEmpty } from "lodash";
-import { getScorecardViewLink } from "../../../hooks/navigate";
+import { getScorecardViewLink } from "@/hooks/navigate";
 import { FullPageError, FullPageLoader } from "../../../shared";
 
 export function ScorecardView() {
@@ -21,18 +21,18 @@ export function ScorecardView() {
 	const headerRef = useRef<HTMLDivElement | null>(null);
 	const { height: headerHeight } = useResizeObserver<HTMLDivElement>({
 		box: "border-box",
-		ref: headerRef,
+		ref: headerRef
 	});
 	const { height: containerHeight, width: containerWidth } =
 		useResizeObserver({
-			ref: containerRef,
+			ref: containerRef
 		});
 	const {
 		props: {
 			setDashboardItemDetails,
 			dashboardItemId,
-			dashboardItemFilters,
-		},
+			dashboardItemFilters
+		}
 	} = usePluginConfig();
 	const { deleteConfig } = useManagePluginConfig(dashboardItemId);
 
@@ -45,7 +45,7 @@ export function ScorecardView() {
 				appUrl: `#${getLink(config)}`,
 				onRemove: () => {
 					deleteConfig();
-				},
+				}
 			});
 		}
 	}, [config]);
@@ -71,25 +71,37 @@ export function ScorecardView() {
 		<div ref={containerRef} style={{ height: "100%", width: "100%" }}>
 			<ScorecardStateProvider
 				initialState={
-					isEmpty(dashboardItemFilters)
-						? undefined
-						: {
+					{
+						...(isEmpty(dashboardItemFilters)
+							? {
+								options: {
+									...config.options,
+									title: false,
+									disableFurtherAnalysis: true
+								}
+							}
+							: {
 								orgUnitSelection: isEmpty(
 									dashboardItemFilters.ou
 								)
 									? config.orgUnitSelection
 									: {
-											orgUnits: dashboardItemFilters.ou,
-									  },
+										orgUnits: dashboardItemFilters.ou
+									},
 								periodSelection: isEmpty(
 									dashboardItemFilters.pe
 								)
 									? config.periodSelection
 									: {
-											periods: dashboardItemFilters.pe,
-									  },
-								options: config.options,
-						  }
+										periods: dashboardItemFilters.pe
+									}
+							}),
+						options: {
+							...config.options,
+							title: false,
+							disableFurtherAnalysis: true
+						}
+					}
 				}
 				config={config!}
 			>
@@ -101,7 +113,7 @@ export function ScorecardView() {
 								width: "100%",
 								display: "flex",
 								flexDirection: "column",
-								gap: 16,
+								gap: 16
 							}}
 						>
 							<div
@@ -110,7 +122,7 @@ export function ScorecardView() {
 									display: "flex",
 									flexDirection: "column",
 									gap: 16,
-									textAlign: "center",
+									textAlign: "center"
 								}}
 							>
 								<ScorecardHeader />

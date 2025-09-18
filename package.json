@@ -24,6 +24,7 @@
     "@dhis2/d2-i18n": "^1.1.0",
     "@hookform/devtools": "^4.3.1",
     "@tailwindcss/vite": "^4.1.13",
+    "@types/async": "^3.2.25",
     "@types/lodash": "^4.17.20",
     "@types/node": "^20.19.16",
     "@types/react": "^18.3.3",

@@ -4,7 +4,7 @@ import React from "react";
 import { useWatch } from "react-hook-form";
 import TargetsField from "./components/TargetsField";
 import { SpecificFieldsSelector } from "./components/SpecificFieldsSelector";
-import { DHIS2ValueTypes } from "../../../../../../../../../../shared";
+import { DHIS2ValueTypes } from "@/shared";
 
 
 export default function TargetsArea({ path }: { path: string }) {

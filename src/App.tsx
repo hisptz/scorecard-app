@@ -1,15 +1,9 @@
 import { DataStoreProvider } from "@dhis2/app-service-datastore";
 import { CssReset } from "@dhis2/ui";
-import {
-	DATASTORE_NAMESPACE,
-	FullPageError,
-	FullPageLoader,
-	useInitApp,
-} from "./shared";
+import { DATASTORE_NAMESPACE, FullPageError, FullPageLoader, useInitApp } from "./shared";
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { RecoilRoot } from "recoil";
-import "./output.css";
 import "./media-queries.css";
 import "./App.css";
 import "./print.css";
@@ -33,7 +27,7 @@ const MyApp = () => {
 		<DataStoreProvider
 			namespace={DATASTORE_NAMESPACE}
 			defaultUserSettings={{
-				scorecardDisplayType: "grid",
+				scorecardDisplayType: "grid"
 			}}
 			loadingComponent={<FullPageLoader />}
 		>
