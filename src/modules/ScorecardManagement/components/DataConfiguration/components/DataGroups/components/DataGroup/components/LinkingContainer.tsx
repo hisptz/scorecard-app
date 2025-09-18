@@ -1,5 +1,4 @@
 import i18n from "@dhis2/d2-i18n";
-//@ts-expect-error link off is not exported
 import { IconLink24, IconLinkOff24, Tooltip } from "@dhis2/ui";
 import { IconButton } from "@mui/material";
 import React from "react";

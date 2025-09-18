@@ -34,8 +34,6 @@ export function DataGroup({
 
 	return (
 		<div className="w-100">
-			{/*
-// @ts-expect-error react-dnd type issues */}
 			<Draggable draggableId={`${id}`} index={index}>
 				{(provided) => {
 					return (
