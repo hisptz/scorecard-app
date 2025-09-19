@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { OldScorecardSchema } from "../schemas/old";
 import { FetchError, useDataEngine } from "@dhis2/app-runtime";
-import { DATASTORE_NAMESPACE, migrateScorecard } from "../../../shared";
+import { DATASTORE_NAMESPACE, migrateScorecard } from "@/shared";
 import { useSaveScorecard } from "../../ScorecardManagement/hooks/save";
 
 
@@ -27,7 +27,7 @@ export function useMigrateScorecard() {
 		try {
 			await engine.query(newScorecardConfigQuery, {
 				variables: {
-					id: config.id
+					id: config?.id
 				}
 			});
 			return "EXISTS";
@@ -36,7 +36,9 @@ export function useMigrateScorecard() {
 			try {
 				if (error instanceof FetchError) {
 					//My bad, It's not there. Let's put it
-					await saveSilently(config);
+					if (config) {
+						await saveSilently(config);
+					}
 					return "SUCCESS";
 				} else {
 					return "FAILED";
