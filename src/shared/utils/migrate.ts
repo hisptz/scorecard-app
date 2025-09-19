@@ -32,7 +32,7 @@ export async function migrateScorecard({ oldScorecard, engine }: {
 				customHeader: oldScorecard?.header?.template?.content,
 				periodSelection: getScorecardPeriodSelection(
 					oldScorecard.selected_periods,
-					oldScorecard.periodType
+					oldScorecard.periodType?.toUpperCase()
 				),
 				orgUnitSelection: getScorecardOrgUnitSelection(
 					oldScorecard.orgunit_settings

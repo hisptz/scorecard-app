@@ -7,13 +7,15 @@ export default function LegendDefinitionFormField() {
 	const { shouldVerify, onResetLegends } = useResetLegends();
 
 	return (
-		<RHFDHIS2FormField
-			label={i18n.t("Legend Definitions")}
-			onResetLegends={onResetLegends}
-			shouldVerify={shouldVerify}
-			valueType="LEGEND_DEFINITIONS"
-			name={"legendDefinitions"}
-			mandatory
-		/>
+		<div className="flex flex-col lg:w-1/2 md:w-full gap-4">
+			<RHFDHIS2FormField
+				label={i18n.t("Legend Definitions")}
+				onResetLegends={onResetLegends}
+				shouldVerify={shouldVerify}
+				valueType="LEGEND_DEFINITIONS"
+				name={"legendDefinitions"}
+				mandatory
+			/>
+		</div>
 	);
 }

@@ -5,7 +5,7 @@ import { OrgUnitDimensionSelection } from "./components/CustomOrgUnitSelectorMod
 import { PeriodDimensionSelector } from "./components/PeriodDimensionSelector";
 import { BackButton } from "./components/BackButton";
 import { HelpButton } from "./components/HelpButton";
-import { SCORECARD_VIEW_HELP_STEPS } from "../../../../shared";
+import { SCORECARD_VIEW_HELP_STEPS } from "@/shared";
 
 export function DimensionFilterArea() {
 

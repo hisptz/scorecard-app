@@ -1,15 +1,14 @@
 import i18n from "@dhis2/d2-i18n";
 import { SingleSelectField, SingleSelectOption } from "@dhis2/ui";
 import { PeriodTypeCategory, PeriodUtility } from "@hisptz/dhis2-utils";
-import PropTypes from "prop-types";
 import { useEffect, useMemo } from "react";
 import { useController } from "react-hook-form";
 import classes from "../styles/PeriodTypeSelector.module.css";
 import { ScorecardConfig } from "@hisptz/dhis2-scorecard";
 
 export function PeriodTypeSelector() {
-	const { field, fieldState } = useController<ScorecardConfig>({
-		name: "periodSelection.type",
+	const { field, fieldState } = useController<ScorecardConfig, "periodSelection.type">({
+		name: "periodSelection.type"
 	});
 	const fixedPeriodTypes = useMemo(
 		() =>
@@ -39,12 +38,12 @@ export function PeriodTypeSelector() {
 	const selected = useMemo(() => {
 		if (field.value) {
 			const value = [...relativePeriodTypes, ...fixedPeriodTypes].find(
-				(type) => type.id === field.value
+				(type) => type.id === field.value?.toUpperCase()
 			);
 			if (!value) {
 				return undefined;
 			} else {
-				return field.value as string | undefined;
+				return field.value.toUpperCase() as string | undefined;
 			}
 		}
 		return field.value as string | undefined;
@@ -98,8 +97,3 @@ export function PeriodTypeSelector() {
 		</SingleSelectField>
 	);
 }
-
-PeriodTypeSelector.propTypes = {
-	label: PropTypes.string,
-	name: PropTypes.string,
-};

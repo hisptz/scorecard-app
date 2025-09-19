@@ -17,7 +17,7 @@ export default function DataConfigurationScorecardForm() {
 	return (
 		<SelectedDataStateProvider>
 			<div className="flex h-full gap-4">
-				<div className="lg:w-1/4 md:w-1/3 sm:w-1/2 p-16 groups-configuration-area">
+				<div className="lg:w-1/3 md:w-1/3 sm:w-1/2 p-16 groups-configuration-area">
 					<Field className="h-100" validationText={fieldState?.error?.message} error={!!fieldState.error}>
 						<div
 							className=" container-bordered column"
@@ -32,7 +32,7 @@ export default function DataConfigurationScorecardForm() {
 						</div>
 					</Field>
 				</div>
-				<div className="flex-1 p-16 h-full">
+				<div className="flex-1 p-16">
 					<Suspense fallback={<ContainerLoader />}>
 						<PreviewArea />
 						<InstructionArea />

@@ -2,7 +2,7 @@ import { Button, ButtonStrip, Modal, ModalActions, ModalContent, ModalTitle } fr
 import i18n from "@dhis2/d2-i18n";
 import React, { useMemo, useState, useTransition } from "react";
 import { PeriodSelector } from "@hisptz/dhis2-ui";
-import { compact, uniqBy } from "lodash";
+import { compact, isEmpty, uniqBy } from "lodash";
 import { PeriodTypeCategory, PeriodUtility } from "@hisptz/dhis2-utils";
 import { useConfigContext } from "../../../ConfigProvider";
 
@@ -34,7 +34,7 @@ export function CustomPeriodSelectorModal({
 	};
 
 	const filteredPeriodTypes = useMemo(() => {
-		const periodTypeId = config?.periodSelection.type;
+		const periodTypeId = config?.periodSelection.type?.toUpperCase();
 		if (!periodTypeId) {
 			return [];
 		}
@@ -58,17 +58,20 @@ export function CustomPeriodSelectorModal({
 		return null;
 	}
 
+	console.log(filteredPeriodTypes, periodType, selectedPeriods, config);
+
 	return (
 		<Modal position="middle" hide={hide} onClose={onClose}>
 			<ModalTitle>{i18n.t("Select period")}</ModalTitle>
 			<ModalContent>
 				<div className="column gap-16">
 					{
-						periodType && (<span>{i18n.t("Selection is limited to period of type")}: <b>{periodType?.config.name}</b></span>)
+						periodType && (
+							<span>{i18n.t("Selection is limited to period of type")}: <b>{periodType?.config.name}</b></span>)
 					}
 					<PeriodSelector
 						enablePeriodSelector
-						excludedPeriodTypes={filteredPeriodTypes}
+						excludedPeriodTypes={isEmpty(filteredPeriodTypes) ? undefined : filteredPeriodTypes}
 						selectedPeriods={compact(selectedPeriods)}
 						onSelect={({ items }) => {
 							if (Array.isArray(items)) {
