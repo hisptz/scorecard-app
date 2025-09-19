@@ -16,7 +16,7 @@ export default function SelectedDataSourceConfigurationForm() {
 	}, [path]);
 
 	return (
-		<div className="data-configuration-row">
+		<div className="data-configuration-row flex gap-16">
 			{selectedDataHolder?.dataSources?.map(
 				(dataSource: ScorecardDataSource, index: number) => {
 					const dataSourcePath = `${path}.dataSources.${index}`;

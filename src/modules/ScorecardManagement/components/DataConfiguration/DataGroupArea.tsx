@@ -9,7 +9,7 @@ export default function DataGroupArea() {
 
 	return (
 		<DataItemSearchProvider>
-			<div className="column h-100">
+			<div className="flex flex-col h-full">
 				<div className="p-16">
 					<SearchDataItem />
 				</div>

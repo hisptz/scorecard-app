@@ -321,12 +321,7 @@ div.jsx-1730587817 {
 }
 
 .info-box {
-    padding: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #F8F9FA;
-    border-radius: 8px;
+
 }
 
 .header-row {
@@ -342,8 +337,7 @@ div.jsx-1730587817 {
 }
 
 .info-box-list > li {
-    margin-bottom: 16px;
-    color: #4A5768;
+   
 }
 
 .info-box-list > p {

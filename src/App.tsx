@@ -4,7 +4,6 @@ import { DATASTORE_NAMESPACE, FullPageError, FullPageLoader, useInitApp } from "
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { RecoilRoot } from "recoil";
-import "./media-queries.css";
 import "./App.css";
 import "./print.css";
 import "./locales";

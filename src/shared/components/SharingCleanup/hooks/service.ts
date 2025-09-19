@@ -34,7 +34,7 @@ interface DHIS2SharingObject {
 		externalAccess: boolean;
 		user: { id: string },
 		userAccesses: Array<{ id: string; access: string }>
-		useGroupAccesses: Array<{ id: string; access: string }>
+		userGroupAccesses: Array<{ id: string; access: string }>
 	};
 }
 
@@ -43,7 +43,8 @@ const allScorecardsQuery = {
 		resource: `dataStore/${DATASTORE_NAMESPACE}`,
 		params: {
 			fields: ".",
-			filter: "sharing.owner:!null",
+			filter: ["sharing.owner:!null", "user:!null", "userGroupAccesses:!null", "userAccesses:!null", "external:!null", "userGroupAccesses:!null"],
+			rootJunction: "or",
 			pageSize: 100 //This is a safe bet. If there are more than 100 scorecards, and implicit pagination will occur.
 		}
 	}
@@ -104,22 +105,40 @@ export function useSharingCleanup() {
 
 	function getSharingFromConfig(scorecardConfig: ScorecardConfig): DHIS2SharingObject {
 		const sharing = scorecardConfig.sharing;
+		if (sharing) {
+			return {
+				object: {
+					id: scorecardConfig.id,
+					user: {
+						id: sharing.owner
+					},
+					externalAccess: sharing.external,
+					publicAccess: padEnd(sharing.public, 8, "-"),
+					userAccesses: Object.values(sharing.users).map(({ access, ...rest }) => ({
+						...rest,
+						access: padEnd(access, 8, "-")
+					})),
+					userGroupAccesses: Object.values(sharing.userGroups).map(({ access, ...rest }) => ({
+						...rest,
+						access: padEnd(access, 8, "-")
+					}))
+				}
+			};
+		}
+		//We have the old format here
+
 		return {
 			object: {
-				id: scorecardConfig.id,
-				user: {
-					id: sharing.owner
-				},
-				externalAccess: sharing.external,
-				publicAccess: padEnd(sharing.public, 8, "-"),
-				userAccesses: Object.values(sharing.users).map(({ access, ...rest }) => ({
+				user: scorecardConfig.user,
+				userAccesses: scorecardConfig.userAccesses?.map(({ access, ...rest }) => ({
 					...rest,
 					access: padEnd(access, 8, "-")
 				})),
-				useGroupAccesses: Object.values(sharing.userGroups).map(({ access, ...rest }) => ({
+				userGroupAccesses: scorecardConfig.userGroupAccesses?.map(({ access, ...rest }) => ({
 					...rest,
 					access: padEnd(access, 8, "-")
-				}))
+				})),
+				publicAccess: padEnd(scorecardConfig.publicAccess?.access, 8, "-")
 			}
 		};
 	}
@@ -141,13 +160,17 @@ export function useSharingCleanup() {
 		for (const scorecard of scorecards) {
 			try {
 				await updateSharing(scorecard);
-				// @ts-expect-error will update the type to have this as optional
 				delete scorecard.sharing;
+				delete scorecard.user;
+				delete scorecard.userGroupAccesses;
+				delete scorecard.userAccesses;
+				delete scorecard.publicAccess;
 				await mutateScorecard({
 					key: scorecard.id,
 					data: scorecard
 				});
 			} catch (error) {
+				console.error(error);
 				console.error(`Could not cleanup ${scorecard.id}. Skipping.`);
 			} finally {
 				setProcessed((prev) => prev + 1);

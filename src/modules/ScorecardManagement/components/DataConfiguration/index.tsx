@@ -16,12 +16,15 @@ export default function DataConfigurationScorecardForm() {
 
 	return (
 		<SelectedDataStateProvider>
-			<div className="row h-100">
-				<div className="col-md-4 col-sm-6 p-16 groups-configuration-area">
+			<div className="flex h-full gap-4">
+				<div className="lg:w-1/4 md:w-1/3 sm:w-1/2 p-16 groups-configuration-area">
 					<Field className="h-100" validationText={fieldState?.error?.message} error={!!fieldState.error}>
 						<div
 							className=" container-bordered column"
-							style={fieldState.error ? { height: "100%", borderColor: colors.red500 } : { height: "100%", borderColor: "#A0ADBA" }}
+							style={fieldState.error ? { height: "100%", borderColor: colors.red500 } : {
+								height: "100%",
+								borderColor: "#A0ADBA"
+							}}
 						>
 							<Suspense fallback={<ContainerLoader />}>
 								<DataGroupArea />
@@ -29,7 +32,7 @@ export default function DataConfigurationScorecardForm() {
 						</div>
 					</Field>
 				</div>
-				<div className="col-md-8 p-16 h-100">
+				<div className="flex-1 p-16 h-full">
 					<Suspense fallback={<ContainerLoader />}>
 						<PreviewArea />
 						<InstructionArea />

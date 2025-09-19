@@ -14,7 +14,7 @@ import { ScorecardConfig } from "@hisptz/dhis2-scorecard";
 export async function migrateScorecard({ oldScorecard, engine }: {
 	oldScorecard: OldScorecardSchema,
 	engine: ReturnType<typeof useDataEngine>
-}): Promise<ScorecardConfig> {
+}): Promise<ScorecardConfig | undefined> {
 	try {
 		if (oldScorecard) {
 			return {
@@ -88,7 +88,7 @@ function getScorecardLegendDefinitions(oldScorecardLegendDefinitions: OldLegendD
 
 function getScorecardPeriodSelection(
 	oldScorecardPeriodSelections: any,
-	periodType: string
+	periodType?: string
 ) {
 	return {
 		periods: oldScorecardPeriodSelections?.map((period: { id: string; name: string; }) => ({
@@ -222,7 +222,7 @@ function getScorecardPublicAccess(oldScorecardUserGroups: OldUserGroup[]) {
 	return {
 		id: "public",
 		type: "public",
-		access: getScorecardAccess(publicAccess),
+		access: getScorecardAccess(publicAccess ?? { see: false, edit: false, id: "all", name: "public" }),
 		displayName: "Public"
 	};
 }

@@ -13,7 +13,7 @@ export default function DataSourceConfiguration() {
 				{selectedData ? (
 					<SelectedDataSourceConfigurationForm />
 				) : (
-					<div className="row center align-items-center">
+					<div className="flex gap-4 center align-items-center">
 						<DataSourceInstructions />
 					</div>
 				)}

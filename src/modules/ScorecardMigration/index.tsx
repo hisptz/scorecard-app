@@ -7,17 +7,22 @@ import { useNavigate } from "react-router-dom";
 export default function ScorecardMigration() {
 	const navigate = useNavigate();
 	return (
-		<div className="column h-100 w-100 p-32 gap-24">
+		<div style={{
+			height: "calc(100dvh - 48px)",
+			maxHeight: "calc(100davh - 48px)"
+		}} className="flex flex-col w-full h-full p-16 gap-8">
 			<div>
 				<Button onClick={() => navigate(-1)} icon={<IconArrowLeft24 />}>
 					{i18n.t("Back")}
 				</Button>
 			</div>
-			<div>
-				<h2>{i18n.t("Scorecards to migrate")}</h2>
+			<div className="gap-2 flex flex-col">
+				<h2 className="font-bold text-2xl">{i18n.t("Scorecards to migrate")}</h2>
 				<span>{i18n.t("Select the scorecards configuration that you would like to migrate")}</span>
 			</div>
-			<OldScorecardList />
+			<div className="flex-1">
+				<OldScorecardList />
+			</div>
 		</div>
 	);
 }

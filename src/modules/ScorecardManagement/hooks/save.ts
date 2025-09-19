@@ -1,9 +1,9 @@
 import { useCallback } from "react";
-import { ScorecardConfig } from "@hisptz/dhis2-scorecard";
+import { ScorecardConfig, ScorecardSharing } from "@hisptz/dhis2-scorecard";
 import { useParams } from "react-router-dom";
 import { useAlert, useDataEngine, useDataMutation, useDataQuery } from "@dhis2/app-runtime";
 import i18n from "@dhis2/d2-i18n";
-import { DATASTORE_NAMESPACE } from "../../../shared";
+import { DATASTORE_NAMESPACE } from "@/shared";
 
 const metadataQuery: any = {
 	meta: {
@@ -37,13 +37,13 @@ export function useSaveScorecard() {
 	const { show } = useAlert(({ message }) => message, ({ type }) => ({ ...type, duration: 3000 }));
 	const engine = useDataEngine();
 
-	const onUpdateSharing = useCallback(async (config: ScorecardConfig) => {
+	const onUpdateSharing = useCallback(async ({ id, sharing }: { id: string; sharing: ScorecardSharing }) => {
 		const metaResponse = await getKeyMetadata({
-			id: config.id
+			id
 		});
 		const meta = metaResponse.meta as Record<string, unknown>;
 		const payload = {
-			object: config.sharing
+			object: sharing
 		};
 
 		if (meta.id) {
@@ -59,20 +59,28 @@ export function useSaveScorecard() {
 		try {
 			if (id) {
 				//updating
+				const sharing = config.sharing;
+				delete config.sharing;
 				await update({
 					data: config,
 					id
 				});
-				await onUpdateSharing(config);
+				if (sharing) {
+					await onUpdateSharing({ id: config.id, sharing });
+				}
 				show({ message: i18n.t("Scorecard updated successfully"), type: { success: true } });
 			} else {
+				const sharing = config.sharing;
+				delete config.sharing;
 				const mutation: any = {
 					type: "create",
 					resource: `dataStore/${DATASTORE_NAMESPACE}/${config.id}`,
 					data: config
 				};
 				await engine.mutate(mutation);
-				await onUpdateSharing(config);
+				if (sharing) {
+					await onUpdateSharing({ id: config.id, sharing });
+				}
 				show({ message: i18n.t("Scorecard created successfully"), type: { success: true } });
 			}
 		} catch (e: any) {
@@ -83,20 +91,30 @@ export function useSaveScorecard() {
 	const saveSilently = useCallback(async (config: ScorecardConfig) => {
 		if (id) {
 			//updating
+			const sharing = config.sharing;
+			delete config.sharing;
 			await update({
 				data: config,
 				id
 			});
-			await onUpdateSharing(config);
+			if (sharing) {
+				await onUpdateSharing({ id: config.id, sharing });
+			}
 		} else {
+			const sharing = config.sharing;
+			delete config.sharing;
 			const mutation: any = {
 				type: "create",
 				resource: `dataStore/${DATASTORE_NAMESPACE}/${config.id}`,
 				data: config
 			};
 			await engine.mutate(mutation);
-
-			await onUpdateSharing(config);
+			if (sharing) {
+				await onUpdateSharing({
+					id: config.id,
+					sharing
+				});
+			}
 		}
 
 	}, [id]);

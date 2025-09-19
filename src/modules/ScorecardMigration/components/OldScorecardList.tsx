@@ -2,11 +2,12 @@ import { useOldScorecards } from "../hooks/data";
 import { CircularLoader, Tag } from "@dhis2/ui";
 import { SimpleDataTable, SimpleDataTableColumn, SimpleDataTableRow } from "@hisptz/dhis2-ui";
 import i18n from "@dhis2/d2-i18n";
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import { fromPairs, get, uniq } from "lodash";
 import { MigrateButton } from "./MigrateButton";
 import { OldScorecardSchema } from "../schemas/old";
 import { FullPageError } from "../../../shared";
+import { useResizeObserver } from "usehooks-ts";
 
 
 const columns: SimpleDataTableColumn[] = [
@@ -26,8 +27,14 @@ const columns: SimpleDataTableColumn[] = [
 ];
 
 
-function MigrationTable({ scorecards, existingScorecards }: { scorecards: Array<OldScorecardSchema>; existingScorecards: Array<string> }) {
-
+function MigrationTable({ scorecards, existingScorecards }: {
+	scorecards: Array<OldScorecardSchema>;
+	existingScorecards: Array<string>
+}) {
+	const ref = useRef<HTMLDivElement>(null);
+	const { height } = useResizeObserver({
+		ref
+	});
 	const [selectedConfig, setSelectedConfig] = useState<string[]>([]);
 	const [progress, setProgress] = useState<Record<string, "SUCCESS" | "EXISTS" | "FAILED">>(fromPairs(existingScorecards?.map((id) => ([id, "EXISTS"]))));
 
@@ -70,13 +77,25 @@ function MigrationTable({ scorecards, existingScorecards }: { scorecards: Array<
 		} as SimpleDataTableRow;
 	}) ?? [], [scorecards, progress]);
 
+
 	return (
-		<div className="column w-100 h-100 flex-1 gap-16 pb-32">
+		<div className="flex flex-col h-full gap-16">
 			<span style={{ fontSize: 14 }}>{i18n.t("Only the scorecard's owner can migrate their scorecards")}</span>
-			<SimpleDataTable emptyLabel={i18n.t("There are no v1 scorecards to migrate")} tableProps={{ scrollHeight: "100%", bordered: true }} onRowDeselect={onRemove} selectedRows={selectedConfig} onRowSelect={onAdd} selectable columns={columns} rows={rows} />
+			<div style={{ height: "stretch", maxHeight: "calc(100dvh - 320px)" }} ref={ref} className="flex-1">
+				<SimpleDataTable height={height} emptyLabel={i18n.t("There are no v1 scorecards to migrate")}
+								 tableProps={{
+									 bordered: true,
+									 scrollHeight: `${height}px`
+								 }}
+								 onRowDeselect={onRemove}
+								 selectedRows={selectedConfig} onRowSelect={onAdd} selectable columns={columns}
+								 rows={rows} />
+			</div>
 			<div className="row end">
 				{
-					!!scorecards && (<MigrateButton onClearSelection={() => setSelectedConfig([])} progress={progress} onProgressUpdate={setProgress} selected={selectedConfig} scorecards={scorecards!} />)
+					!!scorecards && (<MigrateButton onClearSelection={() => setSelectedConfig([])} progress={progress}
+													onProgressUpdate={setProgress} selected={selectedConfig}
+													scorecards={scorecards!} />)
 				}
 			</div>
 		</div>
