@@ -56,7 +56,7 @@ export function PluginScorecardList() {
 				alt="scorecard-illustration"
 			/>
 			{
-				!isEmpty(scorecards) ? <EmptyScorecardList /> : <>
+				isEmpty(scorecards) ? <EmptyScorecardList /> : <>
 					<h1 className="font-bold text-2xl">{i18n.t("Select a scorecard")}</h1>
 					<div
 						className="md:w-1/2 w-full lg:w-1/3 xl:w-1/4 p-2 min-h-[300px] gap-4 overflow-auto flex flex-col max-h-full"
