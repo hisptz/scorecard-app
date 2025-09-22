@@ -13,7 +13,7 @@ const DashboardPlugin: FC<PluginProps> = (props: PluginProps) => {
 	const { initializeState } = useInitApp();
 
 	return (
-		<div className="plugin-container">
+		<div className="w-full h-full">
 			<CssReset />
 			<DataStoreProvider
 				namespace={DATASTORE_WIDGET_NAMESPACE}

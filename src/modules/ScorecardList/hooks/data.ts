@@ -2,7 +2,7 @@ import { useDataQuery } from "@dhis2/app-runtime";
 import { ScorecardListItem } from "../types";
 import { useSearchParams } from "react-router-dom";
 import { useEffect, useMemo } from "react";
-import { DATASTORE_NAMESPACE } from "../../../shared";
+import { DATASTORE_NAMESPACE } from "@/shared";
 import { useDebounceCallback } from "usehooks-ts";
 
 const defaultKeys = ["savedObjects", "scorecard-summary", "settings"];
@@ -12,10 +12,10 @@ const query = {
 		resource: "dataStore",
 		id: DATASTORE_NAMESPACE,
 		params: ({
-			page,
-			pageSize,
-			keyword,
-		}: {
+					 page,
+					 pageSize,
+					 keyword
+				 }: {
 			page: number;
 			pageSize: number;
 			keyword?: string;
@@ -29,23 +29,23 @@ const query = {
 					"description",
 					"additionalLabels",
 					"orgUnitSelection",
-					"periodSelection",
+					"periodSelection"
 				],
 				filter: keyword
 					? [
-							`title:ilike:${keyword}`,
-							`subtitle:ilike:${keyword}`,
-							`description:ilike:${keyword}`,
-					  ]
+						`title:ilike:${keyword}`,
+						`subtitle:ilike:${keyword}`,
+						`description:ilike:${keyword}`
+					]
 					: undefined,
-				rootJunction: "or",
+				rootJunction: "or"
 			};
-		},
+		}
 	},
 	keys: {
 		resource: "dataStore",
-		id: DATASTORE_NAMESPACE,
-	},
+		id: DATASTORE_NAMESPACE
+	}
 };
 
 type ListDataQueryResponse = {
@@ -67,9 +67,9 @@ export function useScorecardListData() {
 			variables: {
 				page: searchParams.get("page") ?? 1,
 				pageSize: searchParams.get("pageSize") ?? 10,
-				keyword: searchParams.get("query"),
+				keyword: searchParams.get("query")
 			},
-			lazy: true,
+			lazy: true
 		});
 
 	const scorecards = useMemo(() => {
@@ -80,7 +80,7 @@ export function useScorecardListData() {
 		refetch({
 			keyword,
 			page: 1,
-			pageSize: 10,
+			pageSize: 10
 		});
 	}, 1000);
 
@@ -95,7 +95,7 @@ export function useScorecardListData() {
 				data?.list?.pager?.pageSize ??
 				parseInt(searchParams.get("pageSize") ?? "10"),
 			pageCount: Math.ceil(total / (data?.list?.pager?.pageSize ?? 10)),
-			total,
+			total
 		};
 	}, [data]);
 
@@ -122,7 +122,7 @@ export function useScorecardListData() {
 		refetch({
 			keyword: searchParams.get("query"),
 			page: searchParams.get("page") ?? 1,
-			pageSize: searchParams.get("pageSize") ?? 10,
+			pageSize: searchParams.get("pageSize") ?? 10
 		});
 	}, [searchParams.get("page"), searchParams.get("pageSize")]);
 
@@ -137,10 +137,11 @@ export function useScorecardListData() {
 		pager: {
 			...pager,
 			onPageChange,
-			onPageSizeChange,
+			onPageSizeChange
 		},
+		called,
 		error,
 		loading,
-		refetch,
+		refetch
 	};
 }

@@ -19,9 +19,9 @@ export function usePluginConfig() {
 }
 
 export function PluginConfigProvider({
-	children,
-	props,
-}: {
+										 children,
+										 props
+									 }: {
 	children: any;
 	props: PluginProps;
 }) {
@@ -34,13 +34,15 @@ export function PluginConfigProvider({
 	useEffect(() => {
 		if (config) {
 			if (!id) {
-				navigate(`${config.scorecardId}`);
+				if (!Array.isArray(config)) {
+					navigate(`${config.scorecardId}`);
+				}
 			}
 		}
 	}, [config]);
 
 	if (loading) {
-		return <FullPageLoader small />;
+		return <FullPageLoader />;
 	}
 
 	if (error && error.details.httpStatusCode !== 404) {
@@ -51,7 +53,7 @@ export function PluginConfigProvider({
 		<PluginConfigContext.Provider
 			value={{
 				props,
-				config,
+				config
 			}}
 		>
 			{children}

@@ -1,9 +1,20 @@
 import i18n from "@dhis2/d2-i18n";
-import { Button, ButtonStrip, CenteredContent, colors, IconError24, Modal, ModalActions, ModalContent, ModalTitle } from "@dhis2/ui";
+import {
+	Button,
+	ButtonStrip,
+	CenteredContent,
+	colors,
+	IconError24,
+	Modal,
+	ModalActions,
+	ModalContent,
+	ModalTitle
+} from "@dhis2/ui";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDataQuery } from "@dhis2/app-runtime";
 import { FallbackProps } from "react-error-boundary";
+import { IconResize } from "@/shared/components/IconResize";
 
 function ErrorDialog({
 						 error,
@@ -63,22 +74,25 @@ export default function FullPageError({
 
 	return (
 		<div
-			className="column center "
+			className="flex flex-col gap-2 center items-center"
 			style={{ height: "100%", textAlign: "center" }}
 		>
 			<CenteredContent>
-				<div className="column align-items-center">
-					<IconError24
-						color={colors.grey700}
-						style={{ fontSize: 64 }}
-					/>
-					<h2 style={{ color: colors.grey700, margin: 8 }}>
-						{error?.title ?? i18n.t("Something Went Wrong")}
-					</h2>
-					<p style={{ color: colors.grey700 }}>
-						{typeof error === "string" ? error : error?.message}
-					</p>
-					<ButtonStrip center>
+				<div className="flex flex-col justify-center items-center gap-4">
+					<IconResize size={64}>
+						<IconError24
+							color={colors.grey700}
+						/>
+					</IconResize>
+					<div>
+						<h2 className="text-2xl font-bold" style={{ color: colors.grey700, margin: 8 }}>
+							{error?.title ?? i18n.t("Something Went Wrong")}
+						</h2>
+						<span style={{ color: colors.grey700 }}>
+							{typeof error === "string" ? error : error?.message}
+						</span>
+					</div>
+					<ButtonStrip>
 						{error?.details?.httpStatusCode === 404 ? (
 							<Button primary onClick={onGoToHome}>
 								{i18n.t("Back to scorecard list")}

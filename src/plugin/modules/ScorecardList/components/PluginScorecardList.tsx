@@ -1,27 +1,21 @@
-import { useScorecardListData } from "../../../../modules/ScorecardList/hooks/data";
-import { isEmpty } from "lodash";
-import { EmptyScorecardList } from "./EmptyScorecardList";
+import { useScorecardListData } from "@/modules/ScorecardList/hooks/data";
 import i18n from "@dhis2/d2-i18n";
 import { useState } from "react";
-//@ts-expect-error missing type export
-import {
-	Button,
-	Checkbox,
-	colors,
-	IconVisualizationPivotTable24,
-	Menu,
-	MenuItem,
-} from "@dhis2/ui";
+import { Button, Checkbox, CircularLoader, IconVisualizationPivotTable24, Menu, MenuItem } from "@dhis2/ui";
 import illustration from "../../../../assets/images/scorecard_illustration.png";
 import { usePluginConfig } from "../../../components/PluginConfigProvider";
 import { useNavigate } from "react-router-dom";
 import { useManagePluginConfig } from "../../../hooks/config";
-import { FullPageError, FullPageLoader } from "../../../../shared";
+import { FullPageError } from "../../../../shared";
+import { SearchArea } from "@/modules/ScorecardList/components/SearchArea";
+import { isEmpty } from "lodash";
+import { EmptyScorecardList } from "@/plugin/modules/ScorecardList/components/EmptyScorecardList";
+import { FullPageLoader } from "@/shared";
 
 export function PluginScorecardList() {
-	const { loading, scorecards, error, refetch } = useScorecardListData();
+	const { loading, scorecards, error, refetch, called } = useScorecardListData();
 	const {
-		props: { dashboardItemId },
+		props: { dashboardItemId }
 	} = usePluginConfig();
 	const { addConfig, loading: saving } =
 		useManagePluginConfig(dashboardItemId);
@@ -30,16 +24,12 @@ export function PluginScorecardList() {
 		string | undefined
 	>(undefined);
 
-	if (loading) {
-		return <FullPageLoader small />;
-	}
-
 	if (error) {
 		return <FullPageError error={error} resetErrorBoundary={refetch} />;
 	}
 
-	if (isEmpty(scorecards)) {
-		return <EmptyScorecardList />;
+	if (loading && !called) {
+		return <FullPageLoader />;
 	}
 
 	const isChecked = (scorecardId: string) =>
@@ -49,7 +39,7 @@ export function PluginScorecardList() {
 		if (selectedScorecard) {
 			await addConfig({
 				scorecardId: selectedScorecard,
-				dashboardItemId,
+				dashboardItemId
 			});
 			navigate(`${selectedScorecard}`);
 		}
@@ -57,74 +47,67 @@ export function PluginScorecardList() {
 
 	return (
 		<div
-			style={{
-				width: "100%",
-				height: "100%",
-				alignItems: "center",
-				justifyContent: "center",
-				display: "flex",
-				flexDirection: "column",
-				gap: 16,
-			}}
+			className="w-full h-full items-center justify-center p-4 gap-2 text-center flex flex-col "
 		>
 			<img
 				width="auto"
-				height={100}
 				src={illustration}
+				className="h-[160px]"
 				alt="scorecard-illustration"
 			/>
-			<h1>{i18n.t("Select a scorecard")}</h1>
-			<div
-				style={{
-					width: "100%",
-					maxHeight: "80dvh",
-					maxWidth: 600,
-					padding: 8,
-					borderRadius: 4,
-					border: `1px solid ${colors.grey800}`,
-					overflow: "auto",
-				}}
-			>
-				<Menu>
-					{scorecards.map((scorecard) => (
-						<MenuItem
-							key={scorecard.id}
-							active={isChecked(scorecard.id)}
-							icon={<IconVisualizationPivotTable24 />}
-							onClick={() => {
-								if (isChecked(scorecard.id)) {
-									setSelectedScorecard(undefined);
-								} else {
-									setSelectedScorecard(scorecard.id);
-								}
-							}}
-							suffix={
-								<Checkbox
-									onChange={({ checked }) => {
-										if (checked) {
-											setSelectedScorecard(scorecard.id);
-										} else {
-											setSelectedScorecard(undefined);
+			{
+				!isEmpty(scorecards) ? <EmptyScorecardList /> : <>
+					<h1 className="font-bold text-2xl">{i18n.t("Select a scorecard")}</h1>
+					<div
+						className="md:w-1/2 w-full lg:w-1/3 xl:w-1/4 p-2 min-h-[300px] gap-4 overflow-auto flex flex-col max-h-full"
+					>
+						<SearchArea />
+						{
+							loading ? <div className="h-full min-h-[300px] w-full flex items-center justify-center">
+								<CircularLoader small />
+							</div> : <Menu>
+								{scorecards.map((scorecard) => (
+									<MenuItem
+										key={scorecard.id}
+										active={isChecked(scorecard.id)}
+										icon={<IconVisualizationPivotTable24 />}
+										onClick={() => {
+											if (isChecked(scorecard.id)) {
+												setSelectedScorecard(undefined);
+											} else {
+												setSelectedScorecard(scorecard.id);
+											}
+										}}
+										suffix={
+											<Checkbox
+												onChange={({ checked }) => {
+													if (checked) {
+														setSelectedScorecard(scorecard.id);
+													} else {
+														setSelectedScorecard(undefined);
+													}
+												}}
+												checked={scorecard.id === selectedScorecard}
+											/>
 										}
-									}}
-									checked={scorecard.id === selectedScorecard}
-								/>
-							}
-							checkbox
-							label={scorecard.title}
-							value={scorecard.id}
-						/>
-					))}
-				</Menu>
-			</div>
-			<Button
-				loading={saving}
-				onClick={onSelect}
-				primary
-				disabled={selectedScorecard === undefined}
-			>
-				{saving ? i18n.t("Saving...") : i18n.t("Select scorecard")}
-			</Button>
+										checkbox
+										label={scorecard.title}
+										value={scorecard.id}
+									/>
+								))}
+							</Menu>
+						}
+					</div>
+					<Button
+						loading={saving}
+						onClick={onSelect}
+						primary
+						disabled={selectedScorecard === undefined}
+					>
+						{saving ? i18n.t("Saving...") : i18n.t("Select scorecard")}
+					</Button>
+				</>
+			}
 		</div>
 	);
 }
