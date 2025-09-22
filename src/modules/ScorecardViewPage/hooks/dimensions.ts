@@ -2,10 +2,7 @@ import { useSearchParams } from "react-router-dom";
 import { useCallback, useMemo } from "react";
 import { OrgUnitSelection } from "@hisptz/dhis2-utils";
 import { useUpdateDimensionState } from "@hisptz/dhis2-scorecard";
-import {
-	getOrgUnitIdsFromOrgUnitSelection,
-	getOrgUnitSelectionFromIds,
-} from "../../../shared";
+import { getOrgUnitIdsFromOrgUnitSelection, getOrgUnitSelectionFromIds } from "@/shared";
 
 export function useRawDimensions() {
 	const [params] = useSearchParams();
@@ -24,7 +21,7 @@ export function useRawDimensions() {
 	return {
 		periods,
 		orgUnits,
-		noDimensionsSelected,
+		noDimensionsSelected
 	};
 }
 
@@ -54,9 +51,9 @@ export function useDimensions() {
 	);
 
 	const setDimensions = ({
-		orgUnitSelection,
-		periods,
-	}: {
+							   orgUnitSelection,
+							   periods
+						   }: {
 		orgUnitSelection: OrgUnitSelection;
 		periods: { id: string }[];
 	}) => {
@@ -72,7 +69,7 @@ export function useDimensions() {
 	const setPeriod = useCallback(
 		(periods: string[]) => {
 			setPeriodSelection({
-				periods: periods.map((periodId) => ({ id: periodId })),
+				periods: periods.map((periodId) => ({ id: periodId }))
 			});
 			setParam("pe")(periods.join(";"));
 		},
@@ -95,6 +92,6 @@ export function useDimensions() {
 		noDimensionsSelected,
 		setPeriod,
 		setOrgUnit,
-		setDimensions,
+		setDimensions
 	};
 }

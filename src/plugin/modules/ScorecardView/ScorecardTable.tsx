@@ -1,33 +1,19 @@
-import { Scorecard } from "@hisptz/dhis2-scorecard";
 import { useRef } from "react";
+import { useResizeObserver } from "usehooks-ts";
+import { Scorecard } from "@hisptz/dhis2-scorecard";
 
-export function ScorecardTable({
-	containerWidth,
-	containerHeight,
-	headerHeight,
-}: {
-	containerWidth: number;
-	containerHeight: number;
-	headerHeight: number;
-}) {
+export function ScorecardTable() {
 	const ref = useRef<HTMLDivElement | null>(null);
+	const { height, width } = useResizeObserver({
+		ref
+	});
 	return (
-		<div
-			ref={ref}
-			style={{
-				padding: 16,
-				position: "relative",
-				width: "100%",
-				height: "100%",
-			}}
-		>
+		<div ref={ref} className="flex-1 w-full p-4">
 			<Scorecard
 				tableProps={{
 					width: "100%",
-					scrollWidth: `${containerWidth - 32}px`,
-					scrollHeight: `${
-						containerHeight - ((headerHeight ?? 300) + 96 + 16 * 3)
-					}px`,
+					scrollWidth: `${width}px`,
+					scrollHeight: `${height ?? 100}px`
 				}}
 			/>
 		</div>

@@ -58,8 +58,6 @@ export function CustomPeriodSelectorModal({
 		return null;
 	}
 
-	console.log(filteredPeriodTypes, periodType, selectedPeriods, config);
-
 	return (
 		<Modal position="middle" hide={hide} onClose={onClose}>
 			<ModalTitle>{i18n.t("Select period")}</ModalTitle>

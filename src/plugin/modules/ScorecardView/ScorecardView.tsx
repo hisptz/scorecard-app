@@ -1,54 +1,66 @@
-import { useEffect, useRef } from "react";
-import { useResizeObserver } from "usehooks-ts";
+import { useEffect, useMemo } from "react";
 import { usePluginScorecardConfig } from "../../hooks/scorecard";
 import {
 	ScorecardContext,
 	ScorecardDataProvider,
-	ScorecardHeader,
 	ScorecardLegendsView,
+	ScorecardState,
 	ScorecardStateProvider
 } from "@hisptz/dhis2-scorecard";
 import { ScorecardTable } from "./ScorecardTable";
 import { usePluginConfig } from "../../components/PluginConfigProvider";
 import { useManagePluginConfig } from "../../hooks/config";
-import { isEmpty } from "lodash";
+import { isEmpty, set } from "lodash";
 import { getScorecardViewLink } from "@/hooks/navigate";
 import { FullPageError, FullPageLoader } from "../../../shared";
+import { ScorecardDimensionUpdate } from "@/plugin/modules/ScorecardView/ScorecardDimensionUpdate";
 
 export function ScorecardView() {
-	const containerRef = useRef<HTMLDivElement | null>(null);
-	const { loading, config, error, refetch } = usePluginScorecardConfig();
-	const headerRef = useRef<HTMLDivElement | null>(null);
-	const { height: headerHeight } = useResizeObserver<HTMLDivElement>({
-		box: "border-box",
-		ref: headerRef
-	});
-	const { height: containerHeight, width: containerWidth } =
-		useResizeObserver({
-			ref: containerRef
-		});
+	const { loading, config, error, refetch, orgUnits, periods } = usePluginScorecardConfig();
 	const {
 		props: {
 			setDashboardItemDetails,
-			dashboardItemId,
-			dashboardItemFilters
+			dashboardItemId
 		}
 	} = usePluginConfig();
 	const { deleteConfig } = useManagePluginConfig(dashboardItemId);
-
 	const getLink = getScorecardViewLink();
-
 	useEffect(() => {
 		if (config) {
-			setDashboardItemDetails({
-				itemTitle: config.title,
-				appUrl: `#${getLink(config)}`,
-				onRemove: () => {
-					deleteConfig();
-				}
-			});
+			if (setDashboardItemDetails) {
+				setDashboardItemDetails({
+					itemTitle: config.title,
+					appUrl: `#${getLink(config)}`,
+					onRemove: () => {
+						deleteConfig();
+					}
+				});
+			}
 		}
 	}, [config]);
+
+	const initialState = useMemo(() => {
+		if (config) {
+			const baseState = {
+				options: {
+					...config.options,
+					title: false,
+					disableFurtherAnalysis: true
+				}
+			};
+			if (!isEmpty(orgUnits)) {
+				set(baseState, "orgUnitSelection", {
+					orgUnits
+				});
+			}
+			if (!isEmpty(periods)) {
+				set(baseState, "periodSelection", {
+					periods
+				});
+			}
+			return baseState as ScorecardState;
+		}
+	}, [orgUnits, periods, config]);
 
 	if (loading) {
 		return <FullPageLoader small />;
@@ -68,74 +80,16 @@ export function ScorecardView() {
 	}
 
 	return (
-		<div ref={containerRef} style={{ height: "100%", width: "100%" }}>
+		<div className="w-full h-full flex flex-col gap-4">
 			<ScorecardStateProvider
-				initialState={
-					{
-						...(isEmpty(dashboardItemFilters)
-							? {
-								options: {
-									...config.options,
-									title: false,
-									disableFurtherAnalysis: true
-								}
-							}
-							: {
-								orgUnitSelection: isEmpty(
-									dashboardItemFilters.ou
-								)
-									? config.orgUnitSelection
-									: {
-										orgUnits: dashboardItemFilters.ou
-									},
-								periodSelection: isEmpty(
-									dashboardItemFilters.pe
-								)
-									? config.periodSelection
-									: {
-										periods: dashboardItemFilters.pe
-									}
-							}),
-						options: {
-							...config.options,
-							title: false,
-							disableFurtherAnalysis: true
-						}
-					}
-				}
+				initialState={initialState}
 				config={config!}
 			>
+				<ScorecardDimensionUpdate scorecardConfig={config} />
 				<ScorecardContext config={config!}>
 					<ScorecardDataProvider>
-						<div
-							style={{
-								height: "100%",
-								width: "100%",
-								display: "flex",
-								flexDirection: "column",
-								gap: 16
-							}}
-						>
-							<div
-								ref={headerRef}
-								style={{
-									display: "flex",
-									flexDirection: "column",
-									gap: 16,
-									textAlign: "center"
-								}}
-							>
-								<ScorecardHeader />
-								<ScorecardLegendsView />
-							</div>
-							<div style={{ flex: 1, gap: 16 }}>
-								<ScorecardTable
-									containerWidth={containerWidth!}
-									headerHeight={headerHeight!}
-									containerHeight={containerHeight!}
-								/>
-							</div>
-						</div>
+						<ScorecardLegendsView />
+						<ScorecardTable />
 					</ScorecardDataProvider>
 				</ScorecardContext>
 			</ScorecardStateProvider>
