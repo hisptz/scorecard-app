@@ -1,22 +1,7 @@
-import {
-	capitalize,
-	find,
-	flattenDeep,
-	head,
-	intersectionBy,
-	isEmpty,
-	reduce,
-	snakeCase,
-	truncate,
-} from "lodash";
+import { capitalize, find, flattenDeep, head, intersectionBy, isEmpty, reduce, snakeCase, truncate } from "lodash";
 import { DefaultAuthority } from "../constants";
 import { D2User } from "../state/user";
-import {
-	LegendDefinition,
-	ScorecardDataGroup,
-	ScorecardDataHolder,
-	ScorecardLegend,
-} from "@hisptz/dhis2-scorecard";
+import { LegendDefinition, ScorecardDataGroup, ScorecardDataHolder, ScorecardLegend } from "@hisptz/dhis2-scorecard";
 import { ScorecardListItem } from "../../modules/ScorecardList/types";
 import { getSharingSettingsFromOldConfiguration } from "../../utils/sharing";
 
@@ -24,7 +9,7 @@ export function getWindowDimensions() {
 	const { innerWidth: width, innerHeight: height } = window;
 	return {
 		width: width > 1366 ? width : 1366,
-		height: (height > 763 ? height : 763) - 48, //considering the appbar
+		height: (height > 763 ? height : 763) - 48 //considering the appbar
 	};
 }
 
@@ -54,10 +39,10 @@ export function generateRandomValues(max: number) {
 }
 
 export function generateLegendDefaults({
-	legendDefinitions = [],
-	weight,
-	highIsGood,
-}: {
+										   legendDefinitions = [],
+										   weight,
+										   highIsGood
+									   }: {
 	legendDefinitions: LegendDefinition[];
 	weight: number;
 	highIsGood: boolean;
@@ -77,7 +62,7 @@ export function generateLegendDefaults({
 				id: uid(),
 				startValue: Math.floor(i),
 				endValue: Math.floor(i + range),
-				legendDefinitionId: id,
+				legendDefinitionId: id
 			});
 			legendDefinitionIterator--;
 		}
@@ -109,7 +94,7 @@ export function updatePager(pager: any, itemListLength: any) {
 		page,
 		pageSize,
 		pageCount: Math.ceil(itemListLength / pageSize),
-		total: itemListLength,
+		total: itemListLength
 	};
 }
 
@@ -131,22 +116,22 @@ function findLegend(legends: any, value: any, { max, legendDefinitions }: any) {
 	}
 
 	const { legendDefinitionId } =
-		find(legends, (legend) => {
-			if (legend) {
-				const { startValue, endValue } = legend;
-				if (+endValue === max) {
-					return (
-						+startValue <= Math.round(value) &&
-						+endValue >= Math.round(value)
-					);
-				}
+	find(legends, (legend) => {
+		if (legend) {
+			const { startValue, endValue } = legend;
+			if (+endValue === max) {
 				return (
 					+startValue <= Math.round(value) &&
-					+endValue > Math.round(value)
+					+endValue >= Math.round(value)
 				);
 			}
-			return false;
-		}) ?? {};
+			return (
+				+startValue <= Math.round(value) &&
+				+endValue > Math.round(value)
+			);
+		}
+		return false;
+	}) ?? {};
 	return find(legendDefinitions, ["id", legendDefinitionId]);
 }
 
@@ -172,7 +157,7 @@ export function getLegend(
 		legendDefinitions,
 		specificTargets,
 		period,
-		orgUnit,
+		orgUnit
 	}: any
 ) {
 	if (!isEmpty(specificTargets)) {
@@ -183,7 +168,7 @@ export function getLegend(
 					getPeriodSpecificLegends(specificTarget, period) ?? legends;
 				return findLegend(specificLegends, value, {
 					max,
-					legendDefinitions,
+					legendDefinitions
 				});
 			}
 			if (specificTarget.type === "orgUnit") {
@@ -192,7 +177,7 @@ export function getLegend(
 					legends;
 				return findLegend(specificLegends, value, {
 					max,
-					legendDefinitions,
+					legendDefinitions
 				});
 			}
 		}
@@ -211,7 +196,7 @@ export function getLegend(
 			const orgUnitLegends = legends[orgUnitLevelId];
 			return findLegend(orgUnitLegends, value, {
 				max,
-				legendDefinitions,
+				legendDefinitions
 			});
 		}
 	}
@@ -223,7 +208,7 @@ function translateAccess(access: string = ""): {
 } {
 	const translatedAccess = {
 		read: false,
-		write: false,
+		write: false
 	};
 	if (access.includes("r")) {
 		translatedAccess.read = true;
@@ -274,8 +259,16 @@ export function getUserAuthority(
 		users,
 		userGroups,
 		public: publicAccess,
-		owner: userId,
+		owner: userId
 	} = sharing ?? {};
+
+	if (user.authorities.includes("ALL")) {
+		return {
+			...translateAccess("rw-----"),
+			delete: true
+		};
+	}
+
 	if (user.id === userId) {
 		return { ...translateAccess("rw-----"), delete: true };
 	}
@@ -285,7 +278,7 @@ export function getUserAuthority(
 		if (userAccess) {
 			return {
 				...translateAccess(userAccess?.access),
-				delete: user.id === userId,
+				delete: user.id === userId
 			};
 		}
 	}
@@ -313,7 +306,7 @@ export function getUserAuthority(
 					(acc, value) => acc || value.write,
 					false
 				),
-				delete: false,
+				delete: false
 			};
 		}
 	}
@@ -321,7 +314,7 @@ export function getUserAuthority(
 	if (publicAccess) {
 		return {
 			delete: false,
-			...translateAccess(publicAccess),
+			...translateAccess(publicAccess)
 		};
 	}
 	return DefaultAuthority;
