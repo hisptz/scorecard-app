@@ -1,0 +1,959 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="c5d0a278-fe2f-4857-89c5-3652f44b60db" name="Changes" comment="feat: add sharing functionality and highlighted items to scorecard">
+      <change beforePath="$PROJECT_DIR$/.github/workflows/apphub.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/apphub.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/i18n/en.pot" beforeDir="false" afterPath="$PROJECT_DIR$/i18n/en.pot" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/ScorecardManagement/components/SaveButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/ScorecardManagement/components/SaveButton.tsx" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="tsconfig.json" />
+        <option value="JavaScript File" />
+        <option value="CSS File" />
+        <option value="TypeScript File" />
+        <option value="TypeScript JSX File" />
+      </list>
+    </option>
+  </component>
+  <component name="FormatOnSaveOptions">
+    <option name="myAllFileTypesSelected" value="true" />
+    <option name="mySelectedFileTypes">
+      <set />
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="PUSH_TAGS">
+      <GitPushTagMode>
+        <option name="argument" value="--tags" />
+        <option name="title" value="All" />
+      </GitPushTagMode>
+    </option>
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="feature/typescript-migration" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;history&quot;: [
+    {
+      &quot;state&quot;: &quot;OPEN&quot;
+    }
+  ],
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;
+  }
+}</component>
+  <component name="GitToolBoxStore">
+    <option name="projectConfigVersion" value="5" />
+    <option name="recentBranches">
+      <RecentBranches>
+        <option name="branchesForRepo">
+          <list>
+            <RecentBranchesForRepo>
+              <option name="branches">
+                <list>
+                  <RecentBranch>
+                    <option name="branchName" value="develop" />
+                    <option name="lastUsedInstant" value="1758184343" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="feature/typescript-migration" />
+                    <option name="lastUsedInstant" value="1723196857" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="feature/data-schema" />
+                    <option name="lastUsedInstant" value="1721307158" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="bugfix/legends" />
+                    <option name="lastUsedInstant" value="1708940105" />
+                  </RecentBranch>
+                </list>
+              </option>
+              <option name="repositoryRootUrl" value="file://$PROJECT_DIR$" />
+            </RecentBranchesForRepo>
+          </list>
+        </option>
+      </RecentBranches>
+    </option>
+  </component>
+  <component name="GithubProjectSettings">
+    <option name="branchProtectionPatterns">
+      <list>
+        <option value="master" />
+      </list>
+    </option>
+  </component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;git@github.com:hisptz/scorecard-app.git&quot;,
+    &quot;accountId&quot;: &quot;f679fa9b-ab38-4bdf-a5ca-34bb54cd9b95&quot;
+  },
+  &quot;recentNewPullRequestHead&quot;: {
+    &quot;server&quot;: {
+      &quot;useHttp&quot;: false,
+      &quot;host&quot;: &quot;github.com&quot;,
+      &quot;port&quot;: null,
+      &quot;suffix&quot;: null
+    },
+    &quot;owner&quot;: &quot;hisptz&quot;,
+    &quot;repository&quot;: &quot;scorecard-app&quot;
+  }
+}</component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="OptimizeOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="2UyiZ1pMKlxqoKLuZSfRlBCjYHX" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1&quot;: &quot;true&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/gnnko/projects/hisptz/scorecard-app/.github/workflows&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;npm.build:app.executor&quot;: &quot;Run&quot;,
+    &quot;npm.build:shared.executor&quot;: &quot;Run&quot;,
+    &quot;npm.clean.executor&quot;: &quot;Run&quot;,
+    &quot;npm.deploy.executor&quot;: &quot;Run&quot;,
+    &quot;npm.deploy:app.executor&quot;: &quot;Run&quot;,
+    &quot;npm.dev.executor&quot;: &quot;Run&quot;,
+    &quot;npm.scorecard-app &gt; build.executor&quot;: &quot;Run&quot;,
+    &quot;npm.shared &gt; build.executor&quot;: &quot;Run&quot;,
+    &quot;npm.shared &gt; start.executor&quot;: &quot;Run&quot;,
+    &quot;npm.start.executor&quot;: &quot;Run&quot;,
+    &quot;npm.start:app.executor&quot;: &quot;Run&quot;,
+    &quot;npm.type-check.executor&quot;: &quot;Run&quot;,
+    &quot;npm.ybd.executor&quot;: &quot;Run&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/Users/gnnko/projects/hisptz/scorecard-app/node_modules/prettier&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.javascript.linters.eslint&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/gnnko/projects/hisptz/scorecard-app/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;JSON&quot;,
+      &quot;TEXT&quot;
+    ],
+    &quot;dev.nx.console.project_details_files&quot;: [
+      &quot;/Users/gnnko/projects/hisptz/scorecard-app/packages/app/package.json&quot;,
+      &quot;/Users/gnnko/projects/hisptz/scorecard-app/packages/shared/package.json&quot;
+    ],
+    &quot;stardust.markdown.MarkdownSplitEditorSuppressor:keyList&quot;: []
+  }
+}</component>
+  <component name="ReactDesignerToolWindowState">
+    <option name="myId2Visible">
+      <map>
+        <entry key="com.intellij.reactbuddy.reactComponents" value="false" />
+        <entry key="com.intellij.reactbuddy.reactInspector" value="false" />
+        <entry key="com.intellij.reactbuddy.storybook" value="false" />
+      </map>
+    </option>
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/.github/workflows" />
+      <recent name="$PROJECT_DIR$/public" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/src" />
+      <recent name="$PROJECT_DIR$/packages/app/src/widget" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public" />
+      <recent name="$PROJECT_DIR$/src/assets/images" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/packages/app/src/shared" />
+      <recent name="$PROJECT_DIR$/packages/app/public" />
+    </key>
+  </component>
+  <component name="RunManager" selected="npm.ybd">
+    <configuration name="deploy" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="deploy" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="start" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="type-check" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="type-check" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="ybd" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="ybd" />
+      </scripts>
+      <node-interpreter value="project" />
+      <package-manager value="pnpm" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="npm.deploy" />
+      <item itemvalue="npm.dev" />
+      <item itemvalue="npm.start" />
+      <item itemvalue="npm.type-check" />
+      <item itemvalue="npm.ybd" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.ybd" />
+        <item itemvalue="npm.dev" />
+        <item itemvalue="npm.deploy" />
+        <item itemvalue="npm.type-check" />
+        <item itemvalue="npm.start" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-3aa1da707db6-JavaScript-WS-252.27397.92" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c5d0a278-fe2f-4857-89c5-3652f44b60db" name="Changes" comment="" />
+      <created>1693918273071</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1693918273071</updated>
+      <workItem from="1693918274300" duration="721000" />
+      <workItem from="1693930803808" duration="839000" />
+      <workItem from="1693933928238" duration="1240000" />
+      <workItem from="1698415018055" duration="1226000" />
+      <workItem from="1701856230212" duration="2500000" />
+      <workItem from="1705911706319" duration="4671000" />
+      <workItem from="1708001243442" duration="829000" />
+      <workItem from="1708924128651" duration="1863000" />
+      <workItem from="1708933480803" duration="2641000" />
+      <workItem from="1708939892164" duration="3781000" />
+      <workItem from="1718970078783" duration="416000" />
+      <workItem from="1718971907587" duration="640000" />
+      <workItem from="1720095026588" duration="1996000" />
+      <workItem from="1720162445356" duration="2348000" />
+      <workItem from="1720591279571" duration="1776000" />
+      <workItem from="1721216512467" duration="1948000" />
+      <workItem from="1721220596534" duration="714000" />
+      <workItem from="1721306747662" duration="1894000" />
+      <workItem from="1721371815209" duration="3226000" />
+      <workItem from="1721629066284" duration="695000" />
+      <workItem from="1721640693157" duration="1976000" />
+      <workItem from="1721801260404" duration="3410000" />
+      <workItem from="1721909665792" duration="11972000" />
+      <workItem from="1722159053213" duration="5000" />
+      <workItem from="1722235492547" duration="9976000" />
+      <workItem from="1722404939645" duration="10050000" />
+      <workItem from="1722499795292" duration="5572000" />
+      <workItem from="1722574097912" duration="11199000" />
+      <workItem from="1722859100947" duration="2742000" />
+      <workItem from="1722947633602" duration="12705000" />
+      <workItem from="1723023745686" duration="5902000" />
+      <workItem from="1723032396399" duration="7440000" />
+      <workItem from="1723104855345" duration="31694000" />
+      <workItem from="1723193566859" duration="211000" />
+      <workItem from="1723193921997" duration="1500000" />
+      <workItem from="1723195486885" duration="1362000" />
+      <workItem from="1723205521360" duration="1084000" />
+      <workItem from="1723206626814" duration="959000" />
+      <workItem from="1723437478173" duration="2304000" />
+      <workItem from="1723446866953" duration="6310000" />
+      <workItem from="1723467015271" duration="15395000" />
+      <workItem from="1723528225606" duration="598000" />
+      <workItem from="1723548646554" duration="700000" />
+      <workItem from="1723613452618" duration="778000" />
+      <workItem from="1723785534774" duration="1558000" />
+      <workItem from="1724131221851" duration="196000" />
+      <workItem from="1725177950738" duration="6629000" />
+      <workItem from="1725203856204" duration="87000" />
+      <workItem from="1725281570926" duration="2088000" />
+      <workItem from="1725528884136" duration="18259000" />
+      <workItem from="1725598499189" duration="3229000" />
+      <workItem from="1725604681654" duration="23816000" />
+      <workItem from="1725719577613" duration="11832000" />
+      <workItem from="1725874440233" duration="216000" />
+      <workItem from="1725971294881" duration="1900000" />
+      <workItem from="1725979448695" duration="5910000" />
+      <workItem from="1726052792485" duration="9978000" />
+      <workItem from="1726067975035" duration="11961000" />
+      <workItem from="1726117133519" duration="3808000" />
+      <workItem from="1726476320617" duration="2796000" />
+      <workItem from="1727090544778" duration="34799000" />
+      <workItem from="1727183919251" duration="4314000" />
+      <workItem from="1727240336411" duration="2153000" />
+      <workItem from="1727252110866" duration="346000" />
+      <workItem from="1727336778459" duration="517000" />
+      <workItem from="1727423312290" duration="12258000" />
+      <workItem from="1727603861417" duration="831000" />
+      <workItem from="1727630765974" duration="917000" />
+      <workItem from="1727670726272" duration="25081000" />
+      <workItem from="1727774581568" duration="9235000" />
+      <workItem from="1727790642871" duration="440000" />
+      <workItem from="1727791089757" duration="9847000" />
+      <workItem from="1727852651425" duration="76000" />
+      <workItem from="1727853006919" duration="7705000" />
+      <workItem from="1728019388998" duration="3387000" />
+      <workItem from="1728029995514" duration="10670000" />
+      <workItem from="1728220028566" duration="3323000" />
+      <workItem from="1728276479298" duration="18584000" />
+      <workItem from="1728364488835" duration="88000" />
+      <workItem from="1728368613029" duration="21763000" />
+      <workItem from="1728453170492" duration="2896000" />
+      <workItem from="1728537469426" duration="7202000" />
+      <workItem from="1728623337578" duration="9000" />
+      <workItem from="1728981917080" duration="2809000" />
+      <workItem from="1729066806214" duration="1219000" />
+      <workItem from="1729090229024" duration="248000" />
+      <workItem from="1729090494669" duration="7492000" />
+      <workItem from="1729098808322" duration="2713000" />
+      <workItem from="1729152539989" duration="1066000" />
+      <workItem from="1729154076782" duration="128000" />
+      <workItem from="1729154314765" duration="3168000" />
+      <workItem from="1729181770263" duration="3562000" />
+      <workItem from="1729224827786" duration="8689000" />
+      <workItem from="1729687574298" duration="1110000" />
+      <workItem from="1729763562312" duration="3228000" />
+      <workItem from="1731306957990" duration="15247000" />
+      <workItem from="1731485443352" duration="19936000" />
+      <workItem from="1731562154670" duration="7895000" />
+      <workItem from="1731610496393" duration="1487000" />
+      <workItem from="1736327869626" duration="930000" />
+      <workItem from="1736399360292" duration="2549000" />
+      <workItem from="1738832795084" duration="56000" />
+      <workItem from="1740031418868" duration="3823000" />
+      <workItem from="1741774106546" duration="53000" />
+      <workItem from="1744788237481" duration="743000" />
+      <workItem from="1746010350612" duration="758000" />
+      <workItem from="1747925514849" duration="800000" />
+      <workItem from="1747979665745" duration="4689000" />
+      <workItem from="1748003066565" duration="1599000" />
+      <workItem from="1748240165182" duration="20000" />
+      <workItem from="1748846089623" duration="6414000" />
+      <workItem from="1748876531418" duration="807000" />
+      <workItem from="1748925770120" duration="561000" />
+      <workItem from="1749019954962" duration="14738000" />
+      <workItem from="1749447174759" duration="3300000" />
+      <workItem from="1750251749526" duration="710000" />
+      <workItem from="1750941345309" duration="9279000" />
+      <workItem from="1751001272189" duration="10142000" />
+      <workItem from="1751013954348" duration="194000" />
+      <workItem from="1751014216017" duration="5488000" />
+      <workItem from="1751098158215" duration="15698000" />
+      <workItem from="1751270640466" duration="1494000" />
+      <workItem from="1751455177122" duration="5416000" />
+      <workItem from="1751526709824" duration="5201000" />
+      <workItem from="1751547516559" duration="8000" />
+      <workItem from="1752135016264" duration="6644000" />
+      <workItem from="1752737788832" duration="2425000" />
+      <workItem from="1752755320386" duration="9915000" />
+      <workItem from="1753009671596" duration="597000" />
+      <workItem from="1753080873782" duration="603000" />
+      <workItem from="1755024314635" duration="606000" />
+      <workItem from="1758096957281" duration="4065000" />
+      <workItem from="1758108477917" duration="17392000" />
+      <workItem from="1758180854380" duration="15290000" />
+      <workItem from="1758262309950" duration="19354000" />
+      <workItem from="1758475844099" duration="631000" />
+      <workItem from="1758522732842" duration="16099000" />
+      <workItem from="1758551325506" duration="2817000" />
+      <workItem from="1758602557079" duration="10000" />
+      <workItem from="1758889612126" duration="949000" />
+      <workItem from="1761545610481" duration="1134000" />
+      <workItem from="1761565236206" duration="2614000" />
+      <workItem from="1761591690596" duration="4315000" />
+      <workItem from="1761626421895" duration="2272000" />
+      <workItem from="1761646020807" duration="318000" />
+    </task>
+    <task id="LOCAL-00057" summary="fix: empty page &#10;&#10;Fixed issue with empty page image">
+      <option name="closed" value="true" />
+      <created>1728387930365</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1728387930366</updated>
+    </task>
+    <task id="LOCAL-00058" summary="fix: scorecard view &#10;&#10;Fixed issues with scorecard view error when period or org unit is missing">
+      <option name="closed" value="true" />
+      <created>1728390608341</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1728390608341</updated>
+    </task>
+    <task id="LOCAL-00059" summary="fix: scorecard access&#10;&#10;Set access default to no access for public">
+      <option name="closed" value="true" />
+      <created>1728396882762</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1728396882762</updated>
+    </task>
+    <task id="LOCAL-00060" summary="fix: scorecard view&#10;&#10;Removed useDataQuery for data fetching">
+      <option name="closed" value="true" />
+      <created>1728399932038</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1728399932039</updated>
+    </task>
+    <task id="LOCAL-00061" summary="fix: *&#10;&#10;Package fixes and improvements">
+      <option name="closed" value="true" />
+      <created>1729225215544</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1729225215545</updated>
+    </task>
+    <task id="LOCAL-00062" summary="fix: help&#10;&#10;Fixed scorecard view help&#10;Fixes and improvements from library">
+      <option name="closed" value="true" />
+      <created>1729764563517</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1729764563517</updated>
+    </task>
+    <task id="LOCAL-00063" summary="feat: scorecard widget&#10;&#10;Setup of scorecard widget list view">
+      <option name="closed" value="true" />
+      <created>1731490828070</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1731490828070</updated>
+    </task>
+    <task id="LOCAL-00064" summary="feat: scorecard widget&#10;&#10;Implemented scorecard list on widget&#10;Implemented scorecard view on widget">
+      <option name="closed" value="true" />
+      <created>1731503450116</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1731503450117</updated>
+    </task>
+    <task id="LOCAL-00065" summary="feat(plugin): Implementation&#10;&#10;Implemented support for new plugin type">
+      <option name="closed" value="true" />
+      <created>1749030402690</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1749030402691</updated>
+    </task>
+    <task id="LOCAL-00066" summary="fix(loaders): Implementation&#10;&#10;- Changed all plugin loaders to small">
+      <option name="closed" value="true" />
+      <created>1749040206785</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1749040206786</updated>
+    </task>
+    <task id="LOCAL-00067" summary="fix: update scorecard view URL structure&#10;&#10;Updated appUrl path in ScorecardView to include 'view' for correct routing.">
+      <option name="closed" value="true" />
+      <created>1749450077361</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1749450077361</updated>
+    </task>
+    <task id="LOCAL-00068" summary="fix: fixed issues with view scorecard from plugin not appending the default ou and pe selections">
+      <option name="closed" value="true" />
+      <created>1749450652835</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1749450652835</updated>
+    </task>
+    <task id="LOCAL-00069" summary="chore: update dependencies and refactor scorecard-related hooks&#10;&#10;- Upgraded `@hisptz/dhis2-scorecard` to `^1.2.2` and `@hisptz/dhis2-analytics` to `2.1.10`.&#10;- Refactored hooks in ScorecardViewPage to align with updated library methods.&#10;- Improved typing and removed unnecessary dependencies in various components.">
+      <option name="closed" value="true" />
+      <created>1751007278583</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1751007278583</updated>
+    </task>
+    <task id="LOCAL-00070" summary="refactor: shared components&#10;&#10;Moved the shared folder to the app and changed all references">
+      <option name="closed" value="true" />
+      <created>1751010665399</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1751010665400</updated>
+    </task>
+    <task id="LOCAL-00071" summary="refactor: monorepo cleanup&#10;Removed monorepo setup">
+      <option name="closed" value="true" />
+      <created>1751012449572</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1751012449572</updated>
+    </task>
+    <task id="LOCAL-00072" summary="fix: ide settings&#10;&#10;Deleted IDE settings to refresh the setup">
+      <option name="closed" value="true" />
+      <created>1751013935041</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1751013935041</updated>
+    </task>
+    <task id="LOCAL-00073" summary="refactor: cleanup of dead code&#10;- Removed the access tab and moved organisation unit to general">
+      <option name="closed" value="true" />
+      <created>1751105189153</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1751105189154</updated>
+    </task>
+    <task id="LOCAL-00074" summary="fix: sharing&#10;- Improved scorecard sharing in the configuration">
+      <option name="closed" value="true" />
+      <created>1751107347574</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1751107347574</updated>
+    </task>
+    <task id="LOCAL-00075" summary="refactor: enhance scorecard dimensions and actions&#10;&#10;- Refactored `useDimensions` and related hooks for improved parameter handling.&#10;- Integrated `ScorecardSharing` into `ScorecardActions`.&#10;- Updated `ScorecardResetButton` to fix resetting logic and improve button state handling.">
+      <option name="closed" value="true" />
+      <created>1751108659774</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1751108659774</updated>
+    </task>
+    <task id="LOCAL-00076" summary="refactor: cleanup&#10;- Deleted unnecessary `console.log` statements from `useDimensions`.&#10;- Updated translation keys to align with the latest changes.">
+      <option name="closed" value="true" />
+      <created>1751108759314</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1751108759314</updated>
+    </task>
+    <task id="LOCAL-00077" summary="refactor: improve formatting, hooks, and typing in ScorecardList components&#10;&#10;- Standardized code formatting across multiple components for better readability.&#10;- Refactored `useScorecardListData` to enhance query handling and integrate better with URL parameters.&#10;- Streamlined imports by removing redundant `React` imports. &#10;- Improved typing and applied cleaner parameter handling in components like `ListScorecardDisplay` and `ScorecardListCard`.">
+      <option name="closed" value="true" />
+      <created>1751112079790</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1751112079790</updated>
+    </task>
+    <task id="LOCAL-00078" summary="refactor: streamline ScorecardList components and improve UI consistency&#10;&#10;- Removed unused imports and redundant code from `ScorecardListCard` and related components.  &#10;- Simplified access logic with default authorization values for readability.  &#10;- Adjusted styles for better layout and uniform spacing across cards.  &#10;- Optimized grid display in `GridScorecardDisplay` for responsiveness.  &#10;- Tweaked font sizes and margins for improved visual hierarchy.">
+      <option name="closed" value="true" />
+      <created>1751467160627</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1751467160628</updated>
+    </task>
+    <task id="LOCAL-00079" summary="refactor: rename &quot;widget&quot; module to &quot;plugin&quot; and improve type safety&#10;&#10;- Updated folder structure and imports to reflect the new module name.&#10;- Enhanced typing in validation functions and related utilities.&#10;- Standardized and cleaned up code formatting for consistency.">
+      <option name="closed" value="true" />
+      <created>1751529721564</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1751529721564</updated>
+    </task>
+    <task id="LOCAL-00080" summary="fix: enhance PluginScorecardList actions and improve sharing logic&#10;&#10;- Added loading state handling to `Button` and `useManagePluginConfig` for better feedback during actions.&#10;- Improved sharing configuration logic to align `dashboardItem` sharing with the related scorecard.&#10;- Updated `MenuItem` to include `key` property to resolve React warnings.&#10;- Refined translation keys and updated corresponding `.pot` file.">
+      <option name="closed" value="true" />
+      <created>1751531515568</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1751531515568</updated>
+    </task>
+    <task id="LOCAL-00081" summary="refactor: cleanup utility functions and optimize imports&#10;&#10;- Removed unused utility functions and redundant code for better clarity and maintainability.&#10;- Standardized import formatting across the `utils.ts` file.&#10;- Improved parameter handling and updated typings for consistency.&#10;- Enhanced code readability and alignment with style conventions.&#10;- Updated `yarn.lock` to clean dependencies.">
+      <option name="closed" value="true" />
+      <created>1752137919818</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1752137919819</updated>
+    </task>
+    <task id="LOCAL-00082" summary="refactor: enhance styles and fix type assertions in ScorecardList&#10;&#10;- Added `--container-width` theme variable for improved layout control.&#10;- Adjusted `.container` styles in `App.css` for consistency.&#10;- Updated `Pagination` and related components with width adjustments for better responsiveness.&#10;- Replaced `console.log` with safer `user!` type assertions for cleaner logic in `authority.ts`.">
+      <option name="closed" value="true" />
+      <created>1752139593378</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1752139593378</updated>
+    </task>
+    <task id="LOCAL-00083" summary="refactor: streamline access control and improve sharing logic&#10;&#10;- Unified access control logic by directly utilizing metadata sharing objects.&#10;- Simplified `ScorecardEditButton` and related hooks by removing redundant `useMemo` computations.&#10;- Refactored data queries to include metadata sharing for consistent access management.&#10;- Improved typing consistency and formatting across updated files.&#10;- Removed unused imports and components like `ScorecardSharing` for better maintainability.">
+      <option name="closed" value="true" />
+      <created>1752738052918</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1752738052918</updated>
+    </task>
+    <task id="LOCAL-00084" summary="refactor: update ScorecardListCard styles for better UI consistency&#10;&#10;- Replaced legacy CSS class names with Tailwind's flex utilities for improved readability.&#10;- Enhanced hover styles for better user feedback.&#10;- Standardized spacing and alignment across card elements.">
+      <option name="closed" value="true" />
+      <created>1752738365122</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1752738365122</updated>
+    </task>
+    <task id="LOCAL-00085" summary="refactor: integrate Recoil for HelpMenu state management and clean up imports&#10;&#10;- Replaced `useState` with `useRecoilState` for `helpEnabled` state in `ScorecardList`.&#10;- Updated `HelpMenu` to utilize Recoil's `useSetRecoilState`.&#10;- Cleaned up redundant `React` imports across updated files.&#10;- Adjusted line formatting for improved code readability.">
+      <option name="closed" value="true" />
+      <created>1752755772964</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1752755772964</updated>
+    </task>
+    <task id="LOCAL-00086" summary="refactor: add contextual help with EditHelpSteps and improve help text organization&#10;&#10;- Introduced `EditHelpSteps` component in `ScorecardManagement` to manage contextual help.&#10;- Enhanced `help` metadata with additional fields and consolidated help text for clarity.&#10;- Updated `TabHeader` to enable help state via Recoil.&#10;- Added distinguishing CSS classes to elements for targeted help steps.&#10;- Cleaned up and modularized code across modified components for better maintainability.">
+      <option name="closed" value="true" />
+      <created>1752758021780</created>
+      <option name="number" value="00086" />
+      <option name="presentableId" value="LOCAL-00086" />
+      <option name="project" value="LOCAL" />
+      <updated>1752758021780</updated>
+    </task>
+    <task id="LOCAL-00087" summary="refactor: improve error handling, refetch logic, and code formatting across Scorecard components&#10;&#10;- Enhanced error logging in `SaveButton` with additional `console.error` output for debugging.&#10;- Improved refetch integration in `ScorecardList` components, enabling better state management after actions like deletion.&#10;- Updated help constants in `scorecardManagement` for better contextual support.&#10;- Refined optional typing in schema fields and cleaned up overall code formatting for readability.">
+      <option name="closed" value="true" />
+      <created>1752760355217</created>
+      <option name="number" value="00087" />
+      <option name="presentableId" value="LOCAL-00087" />
+      <option name="project" value="LOCAL" />
+      <updated>1752760355217</updated>
+    </task>
+    <task id="LOCAL-00088" summary="refactor: simplify Pagination logic and adjust default page size in ScorecardList&#10;&#10;- Removed redundant page size options from `Pagination` to streamline the component.&#10;- Updated default `pageSize` from 8 to 10 for consistency across hooks and pagination logic.&#10;- Added safeguard in `onPageChange` to prevent navigating beyond available pages.">
+      <option name="closed" value="true" />
+      <created>1752762409410</created>
+      <option name="number" value="00088" />
+      <option name="presentableId" value="LOCAL-00088" />
+      <option name="project" value="LOCAL" />
+      <updated>1752762409411</updated>
+    </task>
+    <task id="LOCAL-00089" summary="refactor: remove unused inline styles from ScorecardViewPage  &#10;&#10;- Eliminated redundant `width` and `height` styles (`100dvw` and `100dvh`) from container div for cleaner code.">
+      <option name="closed" value="true" />
+      <created>1752764381756</created>
+      <option name="number" value="00089" />
+      <option name="presentableId" value="LOCAL-00089" />
+      <option name="project" value="LOCAL" />
+      <updated>1752764381762</updated>
+    </task>
+    <task id="LOCAL-00090" summary="refactor: update version to 3.0.0-beta.00 and improve translation keys in `.pot` file&#10;&#10;- Bumped application version to `3.0.0-beta.00` in `package.json`.&#10;- Added new translation keys and refined existing ones for better localization support.">
+      <option name="closed" value="true" />
+      <created>1752764445876</created>
+      <option name="number" value="00090" />
+      <option name="presentableId" value="LOCAL-00090" />
+      <option name="project" value="LOCAL" />
+      <updated>1752764445876</updated>
+    </task>
+    <task id="LOCAL-00091" summary="chore: setup pnpm &#10;&#10;Migrated to pnpm">
+      <option name="closed" value="true" />
+      <created>1758110131611</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1758110131611</updated>
+    </task>
+    <task id="LOCAL-00092" summary="feat: added support for migrating sharing settings when the app starts">
+      <option name="closed" value="true" />
+      <created>1758126013952</created>
+      <option name="number" value="00092" />
+      <option name="presentableId" value="LOCAL-00092" />
+      <option name="project" value="LOCAL" />
+      <updated>1758126013952</updated>
+    </task>
+    <task id="LOCAL-00093" summary="chore: update pnpm lockfile with dependency version bumps and esbuild platform updates">
+      <option name="closed" value="true" />
+      <created>1758126370516</created>
+      <option name="number" value="00093" />
+      <option name="presentableId" value="LOCAL-00093" />
+      <option name="project" value="LOCAL" />
+      <updated>1758126370517</updated>
+    </task>
+    <task id="LOCAL-00094" summary="chore: improvements">
+      <option name="closed" value="true" />
+      <created>1758181551439</created>
+      <option name="number" value="00094" />
+      <option name="presentableId" value="LOCAL-00094" />
+      <option name="project" value="LOCAL" />
+      <updated>1758181551439</updated>
+    </task>
+    <task id="LOCAL-00095" summary="chore: removed git hooks">
+      <option name="closed" value="true" />
+      <created>1758184179525</created>
+      <option name="number" value="00095" />
+      <option name="presentableId" value="LOCAL-00095" />
+      <option name="project" value="LOCAL" />
+      <updated>1758184179525</updated>
+    </task>
+    <task id="LOCAL-00096" summary="chore: setup ci for release and publishing to app hub">
+      <option name="closed" value="true" />
+      <created>1758195436950</created>
+      <option name="number" value="00096" />
+      <option name="presentableId" value="LOCAL-00096" />
+      <option name="project" value="LOCAL" />
+      <updated>1758195436954</updated>
+    </task>
+    <task id="LOCAL-00097" summary="chore: fixes and improvements">
+      <option name="closed" value="true" />
+      <created>1758289718935</created>
+      <option name="number" value="00097" />
+      <option name="presentableId" value="LOCAL-00097" />
+      <option name="project" value="LOCAL" />
+      <updated>1758289718936</updated>
+    </task>
+    <task id="LOCAL-00098" summary="chore: fix period type issues for migrated scorecards">
+      <option name="closed" value="true" />
+      <created>1758291217039</created>
+      <option name="number" value="00098" />
+      <option name="presentableId" value="LOCAL-00098" />
+      <option name="project" value="LOCAL" />
+      <updated>1758291217039</updated>
+    </task>
+    <task id="LOCAL-00099" summary="chore: improve null checks and update import paths in scorecard migration hook">
+      <option name="closed" value="true" />
+      <created>1758292099874</created>
+      <option name="number" value="00099" />
+      <option name="presentableId" value="LOCAL-00099" />
+      <option name="project" value="LOCAL" />
+      <updated>1758292099874</updated>
+    </task>
+    <task id="LOCAL-00100" summary="fix: dashboard plugin styling issues">
+      <option name="closed" value="true" />
+      <created>1758530095563</created>
+      <option name="number" value="00100" />
+      <option name="presentableId" value="LOCAL-00100" />
+      <option name="project" value="LOCAL" />
+      <updated>1758530095563</updated>
+    </task>
+    <task id="LOCAL-00101" summary="fix: dashboard plugin styling issues">
+      <option name="closed" value="true" />
+      <created>1758531036568</created>
+      <option name="number" value="00101" />
+      <option name="presentableId" value="LOCAL-00101" />
+      <option name="project" value="LOCAL" />
+      <updated>1758531036568</updated>
+    </task>
+    <task id="LOCAL-00102" summary="fix: dashboard plugin styling issues">
+      <option name="closed" value="true" />
+      <created>1758534524221</created>
+      <option name="number" value="00102" />
+      <option name="presentableId" value="LOCAL-00102" />
+      <option name="project" value="LOCAL" />
+      <updated>1758534524221</updated>
+    </task>
+    <task id="LOCAL-00103" summary="fix: dashboard plugin response to dimension changes">
+      <option name="closed" value="true" />
+      <created>1758545403869</created>
+      <option name="number" value="00103" />
+      <option name="presentableId" value="LOCAL-00103" />
+      <option name="project" value="LOCAL" />
+      <updated>1758545403869</updated>
+    </task>
+    <task id="LOCAL-00104" summary="chore: improve code formatting and update import paths in utils module">
+      <option name="closed" value="true" />
+      <created>1761547141864</created>
+      <option name="number" value="00104" />
+      <option name="presentableId" value="LOCAL-00104" />
+      <option name="project" value="LOCAL" />
+      <updated>1761547141864</updated>
+    </task>
+    <task id="LOCAL-00105" summary="feat: add sharing functionality and highlighted items to scorecard">
+      <option name="closed" value="true" />
+      <created>1761630506295</created>
+      <option name="number" value="00105" />
+      <option name="presentableId" value="LOCAL-00105" />
+      <option name="project" value="LOCAL" />
+      <updated>1761630506295</updated>
+    </task>
+    <option name="localTasksCounter" value="106" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
+    <MESSAGE value="refactor: rename &quot;widget&quot; module to &quot;plugin&quot; and improve type safety&#10;&#10;- Updated folder structure and imports to reflect the new module name.&#10;- Enhanced typing in validation functions and related utilities.&#10;- Standardized and cleaned up code formatting for consistency." />
+    <MESSAGE value="fix: enhance PluginScorecardList actions and improve sharing logic&#10;&#10;- Added loading state handling to `Button` and `useManagePluginConfig` for better feedback during actions.&#10;- Improved sharing configuration logic to align `dashboardItem` sharing with the related scorecard.&#10;- Updated `MenuItem` to include `key` property to resolve React warnings.&#10;- Refined translation keys and updated corresponding `.pot` file." />
+    <MESSAGE value="refactor: cleanup utility functions and optimize imports&#10;&#10;- Removed unused utility functions and redundant code for better clarity and maintainability.&#10;- Standardized import formatting across the `utils.ts` file.&#10;- Improved parameter handling and updated typings for consistency.&#10;- Enhanced code readability and alignment with style conventions.&#10;- Updated `yarn.lock` to clean dependencies." />
+    <MESSAGE value="refactor: enhance styles and fix type assertions in ScorecardList&#10;&#10;- Added `--container-width` theme variable for improved layout control.&#10;- Adjusted `.container` styles in `App.css` for consistency.&#10;- Updated `Pagination` and related components with width adjustments for better responsiveness.&#10;- Replaced `console.log` with safer `user!` type assertions for cleaner logic in `authority.ts`." />
+    <MESSAGE value="refactor: streamline access control and improve sharing logic&#10;&#10;- Unified access control logic by directly utilizing metadata sharing objects.&#10;- Simplified `ScorecardEditButton` and related hooks by removing redundant `useMemo` computations.&#10;- Refactored data queries to include metadata sharing for consistent access management.&#10;- Improved typing consistency and formatting across updated files.&#10;- Removed unused imports and components like `ScorecardSharing` for better maintainability." />
+    <MESSAGE value="refactor: update ScorecardListCard styles for better UI consistency&#10;&#10;- Replaced legacy CSS class names with Tailwind's flex utilities for improved readability.&#10;- Enhanced hover styles for better user feedback.&#10;- Standardized spacing and alignment across card elements." />
+    <MESSAGE value="refactor: integrate Recoil for HelpMenu state management and clean up imports&#10;&#10;- Replaced `useState` with `useRecoilState` for `helpEnabled` state in `ScorecardList`.&#10;- Updated `HelpMenu` to utilize Recoil's `useSetRecoilState`.&#10;- Cleaned up redundant `React` imports across updated files.&#10;- Adjusted line formatting for improved code readability." />
+    <MESSAGE value="refactor: add contextual help with EditHelpSteps and improve help text organization&#10;&#10;- Introduced `EditHelpSteps` component in `ScorecardManagement` to manage contextual help.&#10;- Enhanced `help` metadata with additional fields and consolidated help text for clarity.&#10;- Updated `TabHeader` to enable help state via Recoil.&#10;- Added distinguishing CSS classes to elements for targeted help steps.&#10;- Cleaned up and modularized code across modified components for better maintainability." />
+    <MESSAGE value="refactor: improve error handling, refetch logic, and code formatting across Scorecard components&#10;&#10;- Enhanced error logging in `SaveButton` with additional `console.error` output for debugging.&#10;- Improved refetch integration in `ScorecardList` components, enabling better state management after actions like deletion.&#10;- Updated help constants in `scorecardManagement` for better contextual support.&#10;- Refined optional typing in schema fields and cleaned up overall code formatting for readability." />
+    <MESSAGE value="refactor: simplify Pagination logic and adjust default page size in ScorecardList&#10;&#10;- Removed redundant page size options from `Pagination` to streamline the component.&#10;- Updated default `pageSize` from 8 to 10 for consistency across hooks and pagination logic.&#10;- Added safeguard in `onPageChange` to prevent navigating beyond available pages." />
+    <MESSAGE value="refactor: remove unused inline styles from ScorecardViewPage  &#10;&#10;- Eliminated redundant `width` and `height` styles (`100dvw` and `100dvh`) from container div for cleaner code." />
+    <MESSAGE value="refactor: update version to 3.0.0-beta.00 and improve translation keys in `.pot` file&#10;&#10;- Bumped application version to `3.0.0-beta.00` in `package.json`.&#10;- Added new translation keys and refined existing ones for better localization support." />
+    <MESSAGE value="chore: setup pnpm &#10;&#10;Migrated to pnpm" />
+    <MESSAGE value="feat: added support for migrating sharing settings when the app starts" />
+    <MESSAGE value="chore: update pnpm lockfile with dependency version bumps and esbuild platform updates" />
+    <MESSAGE value="chore: improvements" />
+    <MESSAGE value="chore: removed git hooks" />
+    <MESSAGE value="chore: setup ci for release and publishing to app hub" />
+    <MESSAGE value="chore: fixes and improvements" />
+    <MESSAGE value="chore: fix period type issues for migrated scorecards" />
+    <MESSAGE value="chore: improve null checks and update import paths in scorecard migration hook" />
+    <MESSAGE value="fix: dashboard plugin styling issues" />
+    <MESSAGE value="fix: dashboard plugin response to dimension changes" />
+    <MESSAGE value="chore: improve code formatting and update import paths in utils module" />
+    <MESSAGE value="feat: add sharing functionality and highlighted items to scorecard" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: add sharing functionality and highlighted items to scorecard" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
+  </component>
+  <component name="WfRunsListSearchHistory">{
+  &quot;history&quot;: [
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {}
+  ],
+  &quot;lastFilter&quot;: {}
+}</component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/modules/ScorecardMigration/schemas/old.ts</url>
+          <line>104</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/modules/ScorecardManagement/hooks/save.ts</url>
+          <line>59</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/shared/components/CustomForm/components/CustomField/index.tsx</url>
+          <line>16</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/modules/ScorecardViewPage/ScorecardViewPage.tsx</url>
+          <line>61</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/modules/ScorecardViewPage/ScorecardViewPage.tsx</url>
+          <line>71</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/shared/components/DataSourceSelector/index.tsx</url>
+          <line>97</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
