@@ -21,11 +21,14 @@ jobs:
         with:
           node-version: lts/*
 
+      - name: Install PNPM
+        uses: pnpm/action-setup@v4
+
       - name: Install JS dependencies
-        run: yarn install --frozen-lockfile
+        run: pnpm  install --frozen-lockfile
 
       - name: Build
-        run: yarn manager build
+        run: pnpm build
       # Publish to the App Hub
       - name: Set channel
         id: set_channel

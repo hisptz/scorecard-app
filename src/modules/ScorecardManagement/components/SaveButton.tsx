@@ -7,7 +7,7 @@ import { useRecoilState } from "recoil";
 import { FormLoadingState } from "../state/loading";
 import { useSaveScorecard } from "../hooks/save";
 import { useAlert } from "@dhis2/app-runtime";
-import { useNavigateToScorecardView } from "../../../hooks/navigate";
+import { useNavigateToScorecardView } from "@/hooks/navigate";
 
 export function SaveButton() {
 	const { handleSubmit } = useFormContext<ScorecardConfig>();
@@ -27,7 +27,7 @@ export function SaveButton() {
 			setLoadingState({
 				action: "save",
 				loading: false,
-				button: "save",
+				button: "save"
 			});
 			navigateToView(config);
 		} catch (err) {
@@ -44,7 +44,7 @@ export function SaveButton() {
 				setLoadingState({
 					action: "save",
 					loading: true,
-					button: "save",
+					button: "save"
 				});
 				handleSubmit(onSave, (errors) => {
 					console.error(errors);
@@ -52,12 +52,12 @@ export function SaveButton() {
 						message: i18n.t(
 							"Form contains errors. Please fix them to continue."
 						),
-						type: { info: true },
+						type: { info: true }
 					});
 					setLoadingState({
 						action: "save",
 						loading: false,
-						button: "save",
+						button: "save"
 					});
 				})();
 			}}
