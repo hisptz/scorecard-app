@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-09-22T10:08:40.656Z\n"
-"PO-Revision-Date: 2025-09-22T10:08:40.657Z\n"
+"POT-Creation-Date: 2025-10-28T04:40:55.799Z\n"
+"PO-Revision-Date: 2025-10-28T04:40:55.800Z\n"
 
 msgid "Scorecard deleted successfully"
 msgstr "Scorecard deleted successfully"
@@ -287,8 +287,11 @@ msgstr "Fixed Periods"
 msgid "Relative Periods"
 msgstr "Relative Periods"
 
-msgid "Sharing"
-msgstr "Sharing"
+msgid "Share"
+msgstr "Share"
+
+msgid "You need to create the scorecard first to share it"
+msgstr "You need to create the scorecard first to share it"
 
 msgid "Sharing settings updated successfully"
 msgstr "Sharing settings updated successfully"
@@ -987,11 +990,3 @@ msgstr "User Sub-x2-units"
 
 msgid "This group does not have any configured data sources"
 msgstr "This group does not have any configured data sources"
-
-msgctxt "Application title"
-msgid "__MANIFEST_APP_TITLE"
-msgstr "Scorecard"
-
-msgctxt "Application description"
-msgid "__MANIFEST_APP_DESCRIPTION"
-msgstr "Interactive Scorecard Application"

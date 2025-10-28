@@ -1,6 +1,7 @@
 import { useEffect, useMemo } from "react";
 import { usePluginScorecardConfig } from "../../hooks/scorecard";
 import {
+	HighlightedItems,
 	ScorecardContext,
 	ScorecardDataProvider,
 	ScorecardLegendsView,
@@ -89,6 +90,9 @@ export function ScorecardView() {
 				<ScorecardContext config={config!}>
 					<ScorecardDataProvider>
 						<ScorecardLegendsView />
+						<div className="px-4">
+							<HighlightedItems />
+						</div>
 						<ScorecardTable />
 					</ScorecardDataProvider>
 				</ScorecardContext>

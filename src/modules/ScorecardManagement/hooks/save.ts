@@ -3,7 +3,8 @@ import { ScorecardConfig, ScorecardSharing } from "@hisptz/dhis2-scorecard";
 import { useParams } from "react-router-dom";
 import { useAlert, useDataEngine, useDataMutation, useDataQuery } from "@dhis2/app-runtime";
 import i18n from "@dhis2/d2-i18n";
-import { DATASTORE_NAMESPACE } from "@/shared";
+import { DATASTORE_NAMESPACE, UserState } from "@/shared";
+import { useRecoilValue } from "recoil";
 
 const metadataQuery: any = {
 	meta: {
@@ -30,6 +31,7 @@ const sharingMutation: any = {
 };
 
 export function useSaveScorecard() {
+	const user = useRecoilValue(UserState);
 	const { id } = useParams<{ id: string }>();
 	const [update] = useDataMutation(updateMutation);
 	const [updateSharing, {}] = useDataMutation(sharingMutation);
@@ -70,7 +72,13 @@ export function useSaveScorecard() {
 				}
 				show({ message: i18n.t("Scorecard updated successfully"), type: { success: true } });
 			} else {
-				const sharing = config.sharing;
+				const sharing = config.sharing ?? {
+					owner: user!.id,
+					external: false,
+					users: {},
+					userGroups: {},
+					public: "--------"
+				};
 				delete config.sharing;
 				const mutation: any = {
 					type: "create",

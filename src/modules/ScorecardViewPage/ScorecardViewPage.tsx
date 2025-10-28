@@ -6,6 +6,7 @@ import { useResizeObserver } from "usehooks-ts";
 import { DimensionsNotSet } from "./components/DimensionsNotSet";
 import { ConfigProvider, useConfigContext } from "./ConfigProvider";
 import {
+	HighlightedItems,
 	ScorecardContext,
 	ScorecardDataProvider,
 	ScorecardHeader,
@@ -83,6 +84,9 @@ function MainView() {
 								<ScorecardActions />
 								<ScorecardHeader />
 								<ScorecardLegendsView />
+								<div className="px-4">
+									<HighlightedItems />
+								</div>
 							</div>
 							<div className="flex-1 h-100 ">
 								<ScorecardView headerHeight={height} />
