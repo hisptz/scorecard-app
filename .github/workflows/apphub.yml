@@ -42,4 +42,4 @@ jobs:
           fi
           echo "channel=$channel" >> $GITHUB_OUTPUT
       - name: Release to DHIS2 App Hub
-        run: pnpm publish:apphub --channel ${{ steps.set_channel.outputs.channel }}
+        run: pnpm apphub:publish --channel ${{ steps.set_channel.outputs.channel }}
