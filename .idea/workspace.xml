@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c5d0a278-fe2f-4857-89c5-3652f44b60db" name="Changes" comment="chore: add IDE project settings for inspections, linters, and code styles">
-      <change beforePath="$PROJECT_DIR$/.github/workflows/apphub.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/apphub.yml" afterDir="false" />
+    <list default="true" id="c5d0a278-fe2f-4857-89c5-3652f44b60db" name="Changes" comment="chore: rename App Hub publish command for consistency">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +95,7 @@
   <component name="GithubProjectSettings">
     <option name="branchProtectionPatterns">
       <list>
-        <option value="master" />
+        <option value="main" />
       </list>
     </option>
   </component>
@@ -139,7 +140,7 @@
     &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
     &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/gnnko/projects/hisptz/scorecard-app/.github/workflows&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/gnnko/projects/hisptz/scorecard-app&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
@@ -432,15 +433,9 @@
       <workItem from="1761565236206" duration="2614000" />
       <workItem from="1761591690596" duration="4315000" />
       <workItem from="1761626421895" duration="2272000" />
-      <workItem from="1761646020807" duration="1113000" />
-    </task>
-    <task id="LOCAL-00059" summary="fix: scorecard access&#10;&#10;Set access default to no access for public">
-      <option name="closed" value="true" />
-      <created>1728396882762</created>
-      <option name="number" value="00059" />
-      <option name="presentableId" value="LOCAL-00059" />
-      <option name="project" value="LOCAL" />
-      <updated>1728396882762</updated>
+      <workItem from="1761646020807" duration="6646000" />
+      <workItem from="1761658060466" duration="1803000" />
+      <workItem from="1762787863146" duration="496000" />
     </task>
     <task id="LOCAL-00060" summary="fix: scorecard view&#10;&#10;Removed useDataQuery for data fetching">
       <option name="closed" value="true" />
@@ -826,7 +821,15 @@
       <option name="project" value="LOCAL" />
       <updated>1761646663106</updated>
     </task>
-    <option name="localTasksCounter" value="108" />
+    <task id="LOCAL-00108" summary="chore: rename App Hub publish command for consistency">
+      <option name="closed" value="true" />
+      <created>1761647161624</created>
+      <option name="number" value="00108" />
+      <option name="presentableId" value="LOCAL-00108" />
+      <option name="project" value="LOCAL" />
+      <updated>1761647161624</updated>
+    </task>
+    <option name="localTasksCounter" value="109" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -846,7 +849,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="refactor: enhance styles and fix type assertions in ScorecardList&#10;&#10;- Added `--container-width` theme variable for improved layout control.&#10;- Adjusted `.container` styles in `App.css` for consistency.&#10;- Updated `Pagination` and related components with width adjustments for better responsiveness.&#10;- Replaced `console.log` with safer `user!` type assertions for cleaner logic in `authority.ts`." />
     <MESSAGE value="refactor: streamline access control and improve sharing logic&#10;&#10;- Unified access control logic by directly utilizing metadata sharing objects.&#10;- Simplified `ScorecardEditButton` and related hooks by removing redundant `useMemo` computations.&#10;- Refactored data queries to include metadata sharing for consistent access management.&#10;- Improved typing consistency and formatting across updated files.&#10;- Removed unused imports and components like `ScorecardSharing` for better maintainability." />
     <MESSAGE value="refactor: update ScorecardListCard styles for better UI consistency&#10;&#10;- Replaced legacy CSS class names with Tailwind's flex utilities for improved readability.&#10;- Enhanced hover styles for better user feedback.&#10;- Standardized spacing and alignment across card elements." />
     <MESSAGE value="refactor: integrate Recoil for HelpMenu state management and clean up imports&#10;&#10;- Replaced `useState` with `useRecoilState` for `helpEnabled` state in `ScorecardList`.&#10;- Updated `HelpMenu` to utilize Recoil's `useSetRecoilState`.&#10;- Cleaned up redundant `React` imports across updated files.&#10;- Adjusted line formatting for improved code readability." />
@@ -871,7 +873,8 @@
     <MESSAGE value="chore: updated version to the latest major&#10;&#10;&#10;&#10;BREAKING CHANGE: This release will now have new implementation of sharing settings. All previous implementation will migrated on first app start." />
     <MESSAGE value="chore: add project-specific IDE configuration files" />
     <MESSAGE value="chore: add IDE project settings for inspections, linters, and code styles" />
-    <option name="LAST_COMMIT_MESSAGE" value="chore: add IDE project settings for inspections, linters, and code styles" />
+    <MESSAGE value="chore: rename App Hub publish command for consistency" />
+    <option name="LAST_COMMIT_MESSAGE" value="chore: rename App Hub publish command for consistency" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="WfRunsListSearchHistory">{
