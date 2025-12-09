@@ -4,8 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c5d0a278-fe2f-4857-89c5-3652f44b60db" name="Changes" comment="chore: add issue templates for feature requests and bug reports">
+    <list default="true" id="c5d0a278-fe2f-4857-89c5-3652f44b60db" name="Changes" comment="chore: update pnpm version to 10.22.0 in package.json">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/d2.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/d2.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/i18n/en.pot" beforeDir="false" afterPath="$PROJECT_DIR$/i18n/en.pot" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/i18n/fr.po" beforeDir="false" afterPath="$PROJECT_DIR$/i18n/fr.po" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/ScorecardManagement/components/DataConfiguration/components/DataGroups/components/DataGroup/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/ScorecardManagement/components/DataConfiguration/components/DataGroups/components/DataGroup/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/shared/utils/orgUnit.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/utils/orgUnit.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -160,6 +167,7 @@
     &quot;npm.start.executor&quot;: &quot;Run&quot;,
     &quot;npm.start:app.executor&quot;: &quot;Run&quot;,
     &quot;npm.type-check.executor&quot;: &quot;Run&quot;,
+    &quot;npm.typecheck.executor&quot;: &quot;Run&quot;,
     &quot;npm.ybd.executor&quot;: &quot;Run&quot;,
     &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/Users/gnnko/projects/hisptz/scorecard-app/node_modules/prettier&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;settings.javascript.linters.eslint&quot;,
@@ -205,16 +213,6 @@
     </key>
   </component>
   <component name="RunManager" selected="npm.ybd">
-    <configuration name="deploy" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="deploy" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
     <configuration name="dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -245,6 +243,16 @@
       <envs />
       <method v="2" />
     </configuration>
+    <configuration name="typecheck" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="typecheck" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
     <configuration name="ybd" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -257,26 +265,26 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="npm.deploy" />
       <item itemvalue="npm.dev" />
       <item itemvalue="npm.start" />
       <item itemvalue="npm.type-check" />
+      <item itemvalue="npm.typecheck" />
       <item itemvalue="npm.ybd" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="npm.ybd" />
+        <item itemvalue="npm.typecheck" />
         <item itemvalue="npm.type-check" />
         <item itemvalue="npm.start" />
         <item itemvalue="npm.dev" />
-        <item itemvalue="npm.deploy" />
       </list>
     </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-3aa1da707db6-JavaScript-WS-252.27397.92" />
+        <option value="bundled-js-predefined-d6986cc7102b-a71380e98a7c-JavaScript-WS-252.28238.10" />
       </set>
     </attachedChunks>
   </component>
@@ -435,14 +443,14 @@
       <workItem from="1761646020807" duration="6646000" />
       <workItem from="1761658060466" duration="1803000" />
       <workItem from="1762787863146" duration="496000" />
-    </task>
-    <task id="LOCAL-00060" summary="fix: scorecard view&#10;&#10;Removed useDataQuery for data fetching">
-      <option name="closed" value="true" />
-      <created>1728399932038</created>
-      <option name="number" value="00060" />
-      <option name="presentableId" value="LOCAL-00060" />
-      <option name="project" value="LOCAL" />
-      <updated>1728399932039</updated>
+      <workItem from="1763552313515" duration="621000" />
+      <workItem from="1763925795531" duration="15000" />
+      <workItem from="1763926167341" duration="1109000" />
+      <workItem from="1763965774237" duration="601000" />
+      <workItem from="1764044577722" duration="9000" />
+      <workItem from="1764768321339" duration="980000" />
+      <workItem from="1764921758859" duration="347000" />
+      <workItem from="1764941177705" duration="611000" />
     </task>
     <task id="LOCAL-00061" summary="fix: *&#10;&#10;Package fixes and improvements">
       <option name="closed" value="true" />
@@ -828,7 +836,15 @@
       <option name="project" value="LOCAL" />
       <updated>1761647161624</updated>
     </task>
-    <option name="localTasksCounter" value="109" />
+    <task id="LOCAL-00109" summary="chore: update pnpm version to 10.22.0 in package.json">
+      <option name="closed" value="true" />
+      <created>1763459684819</created>
+      <option name="number" value="00109" />
+      <option name="presentableId" value="LOCAL-00109" />
+      <option name="project" value="LOCAL" />
+      <updated>1763459684819</updated>
+    </task>
+    <option name="localTasksCounter" value="110" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -848,8 +864,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="refactor: streamline access control and improve sharing logic&#10;&#10;- Unified access control logic by directly utilizing metadata sharing objects.&#10;- Simplified `ScorecardEditButton` and related hooks by removing redundant `useMemo` computations.&#10;- Refactored data queries to include metadata sharing for consistent access management.&#10;- Improved typing consistency and formatting across updated files.&#10;- Removed unused imports and components like `ScorecardSharing` for better maintainability." />
-    <MESSAGE value="refactor: update ScorecardListCard styles for better UI consistency&#10;&#10;- Replaced legacy CSS class names with Tailwind's flex utilities for improved readability.&#10;- Enhanced hover styles for better user feedback.&#10;- Standardized spacing and alignment across card elements." />
     <MESSAGE value="refactor: integrate Recoil for HelpMenu state management and clean up imports&#10;&#10;- Replaced `useState` with `useRecoilState` for `helpEnabled` state in `ScorecardList`.&#10;- Updated `HelpMenu` to utilize Recoil's `useSetRecoilState`.&#10;- Cleaned up redundant `React` imports across updated files.&#10;- Adjusted line formatting for improved code readability." />
     <MESSAGE value="refactor: add contextual help with EditHelpSteps and improve help text organization&#10;&#10;- Introduced `EditHelpSteps` component in `ScorecardManagement` to manage contextual help.&#10;- Enhanced `help` metadata with additional fields and consolidated help text for clarity.&#10;- Updated `TabHeader` to enable help state via Recoil.&#10;- Added distinguishing CSS classes to elements for targeted help steps.&#10;- Cleaned up and modularized code across modified components for better maintainability." />
     <MESSAGE value="refactor: improve error handling, refetch logic, and code formatting across Scorecard components&#10;&#10;- Enhanced error logging in `SaveButton` with additional `console.error` output for debugging.&#10;- Improved refetch integration in `ScorecardList` components, enabling better state management after actions like deletion.&#10;- Updated help constants in `scorecardManagement` for better contextual support.&#10;- Refined optional typing in schema fields and cleaned up overall code formatting for readability." />
@@ -873,7 +887,9 @@
     <MESSAGE value="chore: add project-specific IDE configuration files" />
     <MESSAGE value="chore: add IDE project settings for inspections, linters, and code styles" />
     <MESSAGE value="chore: rename App Hub publish command for consistency" />
-    <option name="LAST_COMMIT_MESSAGE" value="chore: rename App Hub publish command for consistency" />
+    <MESSAGE value="chore: add issue templates for feature requests and bug reports" />
+    <MESSAGE value="chore: update pnpm version to 10.22.0 in package.json" />
+    <option name="LAST_COMMIT_MESSAGE" value="chore: update pnpm version to 10.22.0 in package.json" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="WfRunsListSearchHistory">{
