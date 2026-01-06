@@ -5,6 +5,7 @@ import { HashRouter, Navigate, Route, Routes } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { steps } from "../ScorecardManagement/constants/steps";
 import { head, isEmpty } from "lodash";
+import { SyncURLWithGlobalShell } from "@/shared/components/SyncURLWithGlobalShell";
 
 const ScorecardManagement = React.lazy(
 	() => import("../ScorecardManagement")
@@ -67,6 +68,7 @@ export default function Router() {
 	useRecoilValue(SystemSettingsState);
 	return (
 		<HashRouter>
+			<SyncURLWithGlobalShell />
 			<ErrorBoundary FallbackComponent={FullPageError}>
 				<Suspense fallback={<FullPageLoader />}>
 					<Routes>
