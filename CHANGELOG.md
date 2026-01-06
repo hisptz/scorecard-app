@@ -1,3 +1,12 @@
+## [3.0.1](https://github.com/hisptz/scorecard-app/compare/v3.0.0...v3.0.1) (2026-01-06)
+
+
+### Bug Fixes
+
+* fixed layout issues with the new app-platform implementation ([ee64452](https://github.com/hisptz/scorecard-app/commit/ee64452ed7f07e8df9858f6f3822fb0844fda2d9))
+* updated scorecard lib to fix some of the reported issues ([829bdf3](https://github.com/hisptz/scorecard-app/commit/829bdf3e4d01e82ee01b4f183357c5fdfc652799)), closes [#775](https://github.com/hisptz/scorecard-app/issues/775)
+* url sync for global shell ([ebed53b](https://github.com/hisptz/scorecard-app/commit/ebed53b9de2127a8d0cd7a677eb6e314ebe3d154))
+
 # [3.0.0](https://github.com/hisptz/scorecard-app/compare/v2.6.3...v3.0.0) (2025-10-28)
 
 
