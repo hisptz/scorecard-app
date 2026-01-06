@@ -4,20 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c5d0a278-fe2f-4857-89c5-3652f44b60db" name="Changes" comment="chore: update pnpm version to 10.22.0 in package.json">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="c5d0a278-fe2f-4857-89c5-3652f44b60db" name="Changes" comment="fix: updated scorecard lib to fix some of the reported issues&#10;&#10;Fixes #775">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/d2.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/d2.config.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/i18n/en.pot" beforeDir="false" afterPath="$PROJECT_DIR$/i18n/en.pot" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/i18n/fr.po" beforeDir="false" afterPath="$PROJECT_DIR$/i18n/fr.po" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/ScorecardManagement/components/DataConfiguration/components/DataGroups/components/DataGroup/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/ScorecardManagement/components/DataConfiguration/components/DataGroups/components/DataGroup/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/ScorecardViewPage/ScorecardViewPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/ScorecardViewPage/ScorecardViewPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/ScorecardViewPage/components/ScorecardView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/ScorecardViewPage/components/ScorecardView.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/shared/utils/orgUnit.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/utils/orgUnit.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="EmbeddingIndexingInfo">
+    <option name="cachedIndexableFilesCount" value="419" />
+    <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -124,6 +129,10 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
   <component name="OptimizeOnSaveOptions">
     <option name="myRunOnSave" value="true" />
   </component>
@@ -137,14 +146,17 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1&quot;: &quot;true&quot;,
     &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
     &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
+    &quot;javascript.preferred.runtime.type.id&quot;: &quot;node&quot;,
     &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;/Users/gnnko/projects/hisptz/scorecard-app&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
@@ -154,6 +166,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs.cucumber.cucumber_node_package_dir&quot;: &quot;/Users/gnnko/projects/hisptz/scorecard-app/node_modules/cucumber&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;npm.build:app.executor&quot;: &quot;Run&quot;,
     &quot;npm.build:shared.executor&quot;: &quot;Run&quot;,
@@ -196,6 +209,13 @@
       </map>
     </option>
   </component>
+  <component name="RecapSpentCounter">
+    <option name="endsOfQuotaMs" value="1767906000000" />
+    <option name="spentUsd" value="0.003718" />
+  </component>
+  <component name="RecapUselessUpdatesCounter">
+    <option name="suspendCountdown" value="9" />
+  </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/.github/workflows" />
@@ -212,7 +232,7 @@
       <recent name="$PROJECT_DIR$/packages/app/public" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.ybd">
+  <component name="RunManager" selected="npm.dev">
     <configuration name="dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -273,18 +293,18 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.dev" />
         <item itemvalue="npm.ybd" />
         <item itemvalue="npm.typecheck" />
         <item itemvalue="npm.type-check" />
         <item itemvalue="npm.start" />
-        <item itemvalue="npm.dev" />
       </list>
     </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-a71380e98a7c-JavaScript-WS-252.28238.10" />
+        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-WS-253.29346.143" />
       </set>
     </attachedChunks>
   </component>
@@ -451,14 +471,9 @@
       <workItem from="1764768321339" duration="980000" />
       <workItem from="1764921758859" duration="347000" />
       <workItem from="1764941177705" duration="611000" />
-    </task>
-    <task id="LOCAL-00061" summary="fix: *&#10;&#10;Package fixes and improvements">
-      <option name="closed" value="true" />
-      <created>1729225215544</created>
-      <option name="number" value="00061" />
-      <option name="presentableId" value="LOCAL-00061" />
-      <option name="project" value="LOCAL" />
-      <updated>1729225215545</updated>
+      <workItem from="1765305734026" duration="4267000" />
+      <workItem from="1765347070869" duration="1002000" />
+      <workItem from="1767594139141" duration="1033000" />
     </task>
     <task id="LOCAL-00062" summary="fix: help&#10;&#10;Fixed scorecard view help&#10;Fixes and improvements from library">
       <option name="closed" value="true" />
@@ -844,7 +859,15 @@
       <option name="project" value="LOCAL" />
       <updated>1763459684819</updated>
     </task>
-    <option name="localTasksCounter" value="110" />
+    <task id="LOCAL-00110" summary="fix: updated scorecard lib to fix some of the reported issues&#10;&#10;Fixes #775">
+      <option name="closed" value="true" />
+      <created>1765306002417</created>
+      <option name="number" value="00110" />
+      <option name="presentableId" value="LOCAL-00110" />
+      <option name="project" value="LOCAL" />
+      <updated>1765306002417</updated>
+    </task>
+    <option name="localTasksCounter" value="111" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -864,7 +887,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="refactor: integrate Recoil for HelpMenu state management and clean up imports&#10;&#10;- Replaced `useState` with `useRecoilState` for `helpEnabled` state in `ScorecardList`.&#10;- Updated `HelpMenu` to utilize Recoil's `useSetRecoilState`.&#10;- Cleaned up redundant `React` imports across updated files.&#10;- Adjusted line formatting for improved code readability." />
     <MESSAGE value="refactor: add contextual help with EditHelpSteps and improve help text organization&#10;&#10;- Introduced `EditHelpSteps` component in `ScorecardManagement` to manage contextual help.&#10;- Enhanced `help` metadata with additional fields and consolidated help text for clarity.&#10;- Updated `TabHeader` to enable help state via Recoil.&#10;- Added distinguishing CSS classes to elements for targeted help steps.&#10;- Cleaned up and modularized code across modified components for better maintainability." />
     <MESSAGE value="refactor: improve error handling, refetch logic, and code formatting across Scorecard components&#10;&#10;- Enhanced error logging in `SaveButton` with additional `console.error` output for debugging.&#10;- Improved refetch integration in `ScorecardList` components, enabling better state management after actions like deletion.&#10;- Updated help constants in `scorecardManagement` for better contextual support.&#10;- Refined optional typing in schema fields and cleaned up overall code formatting for readability." />
     <MESSAGE value="refactor: simplify Pagination logic and adjust default page size in ScorecardList&#10;&#10;- Removed redundant page size options from `Pagination` to streamline the component.&#10;- Updated default `pageSize` from 8 to 10 for consistency across hooks and pagination logic.&#10;- Added safeguard in `onPageChange` to prevent navigating beyond available pages." />
@@ -889,7 +911,8 @@
     <MESSAGE value="chore: rename App Hub publish command for consistency" />
     <MESSAGE value="chore: add issue templates for feature requests and bug reports" />
     <MESSAGE value="chore: update pnpm version to 10.22.0 in package.json" />
-    <option name="LAST_COMMIT_MESSAGE" value="chore: update pnpm version to 10.22.0 in package.json" />
+    <MESSAGE value="fix: updated scorecard lib to fix some of the reported issues&#10;&#10;Fixes #775" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: updated scorecard lib to fix some of the reported issues&#10;&#10;Fixes #775" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="WfRunsListSearchHistory">{
@@ -955,18 +978,23 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/modules/ScorecardViewPage/ScorecardViewPage.tsx</url>
-          <line>61</line>
+          <line>60</line>
           <option name="timeStamp" value="12" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/modules/ScorecardViewPage/ScorecardViewPage.tsx</url>
-          <line>71</line>
+          <line>67</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/shared/components/DataSourceSelector/index.tsx</url>
           <line>97</line>
           <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/modules/ScorecardViewPage/components/ScorecardView.tsx</url>
+          <line>23</line>
+          <option name="timeStamp" value="15" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
