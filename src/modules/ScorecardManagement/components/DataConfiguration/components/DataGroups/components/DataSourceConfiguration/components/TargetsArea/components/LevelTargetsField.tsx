@@ -1,7 +1,7 @@
 import { colors, Field } from "@dhis2/ui";
-import { generateLegendDefaults, OrgUnitLevels } from "../../../../../../../../../../../shared";
+import { generateLegendDefaults, OrgUnitLevels } from "@/shared";
 
-import produce from "immer";
+import { produce } from "immer";
 import { fromPairs, get, head, set } from "lodash";
 import React, { useEffect, useMemo, useState } from "react";
 import { useFormContext } from "react-hook-form";

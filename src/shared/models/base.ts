@@ -1,4 +1,4 @@
-import produce from "immer";
+import { produce } from "immer";
 import { cloneDeep, defaultsDeep } from "lodash";
 
 export default class DataModel {
@@ -34,7 +34,7 @@ export class SavableDataModel extends DataModel {
 			JSON.parse(JSON.stringify(object)),
 			(draft: any) => {
 				draft.user = { id: user?.id };
-			},
+			}
 		);
 		return await addFunction(newObject);
 	}

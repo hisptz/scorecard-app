@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useCallback } from "react";
 import { ScorecardConfig } from "@hisptz/dhis2-scorecard";
 import { compact, isEmpty } from "lodash";
-import { getOrgUnitIdsFromOrgUnitSelection } from "../shared";
+import { getOrgUnitIdsFromOrgUnitSelection } from "@/shared";
 import { OrgUnitSelection } from "@hisptz/dhis2-utils";
 
 
@@ -12,7 +12,7 @@ export function getScorecardViewLink() {
 		const { periodSelection, orgUnitSelection } = config;
 		const searchParams = new URLSearchParams();
 		const orgUnits = compact(getOrgUnitIdsFromOrgUnitSelection(orgUnitSelection as OrgUnitSelection));
-		const periods = compact(periodSelection.periods?.map(({ id }) => id));
+		const periods = compact(periodSelection.periods?.map(({ id }: { id: string }) => id));
 
 		if (!isEmpty(periods)) {
 			searchParams.set("pe", periods.join(";"));
@@ -32,3 +32,4 @@ export function useNavigateToScorecardView() {
 		navigate(url);
 	}, [navigate]);
 }
+

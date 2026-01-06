@@ -1,11 +1,11 @@
-import produce from "immer";
+import { produce } from "immer";
 import { set } from "lodash";
 
 function sanitizeOrgUnits({ orgUnitSelection }: any) {
 	const { orgUnits } = orgUnitSelection ?? {};
 	return {
 		...orgUnitSelection,
-		orgUnits: orgUnits?.map(({ id }: any) => ({ id })),
+		orgUnits: orgUnits?.map(({ id }: any) => ({ id }))
 	};
 }
 

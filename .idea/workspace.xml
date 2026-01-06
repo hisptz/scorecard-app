@@ -4,16 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c5d0a278-fe2f-4857-89c5-3652f44b60db" name="Changes" comment="fix: updated scorecard lib to fix some of the reported issues&#10;&#10;Fixes #775">
+    <list default="true" id="c5d0a278-fe2f-4857-89c5-3652f44b60db" name="Changes" comment="fix: fixed layout issues with the new app-platform implementation">
+      <change afterPath="$PROJECT_DIR$/src/shared/components/SyncURLWithGlobalShell.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/d2.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/d2.config.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/i18n/en.pot" beforeDir="false" afterPath="$PROJECT_DIR$/i18n/en.pot" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/i18n/fr.po" beforeDir="false" afterPath="$PROJECT_DIR$/i18n/fr.po" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/ScorecardManagement/components/DataConfiguration/components/DataGroups/components/DataGroup/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/ScorecardManagement/components/DataConfiguration/components/DataGroups/components/DataGroup/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/ScorecardViewPage/ScorecardViewPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/ScorecardViewPage/ScorecardViewPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/ScorecardViewPage/components/ScorecardView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/ScorecardViewPage/components/ScorecardView.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/shared/utils/orgUnit.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/utils/orgUnit.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pnpm-lock.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pnpm-workspace.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pnpm-workspace.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hooks/navigate.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/navigate.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/Router/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/Router/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/ScorecardManagement/components/DataConfiguration/components/DataGroups/components/DataSourceConfiguration/components/TargetsArea/components/LevelTargetsField.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/ScorecardManagement/components/DataConfiguration/components/DataGroups/components/DataSourceConfiguration/components/TargetsArea/components/LevelTargetsField.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/ScorecardManagement/services/sanitizers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/ScorecardManagement/services/sanitizers.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/shared/components/Errors/AccessDeniedPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/components/Errors/AccessDeniedPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/shared/models/base.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/models/base.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -211,10 +214,10 @@
   </component>
   <component name="RecapSpentCounter">
     <option name="endsOfQuotaMs" value="1767906000000" />
-    <option name="spentUsd" value="0.003718" />
+    <option name="spentUsd" value="0.028837748" />
   </component>
   <component name="RecapUselessUpdatesCounter">
-    <option name="suspendCountdown" value="9" />
+    <option name="suspendCountdown" value="0" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -232,7 +235,7 @@
       <recent name="$PROJECT_DIR$/packages/app/public" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.dev">
+  <component name="RunManager" selected="npm.ybd">
     <configuration name="dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -293,8 +296,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.dev" />
         <item itemvalue="npm.ybd" />
+        <item itemvalue="npm.dev" />
         <item itemvalue="npm.typecheck" />
         <item itemvalue="npm.type-check" />
         <item itemvalue="npm.start" />
@@ -474,14 +477,7 @@
       <workItem from="1765305734026" duration="4267000" />
       <workItem from="1765347070869" duration="1002000" />
       <workItem from="1767594139141" duration="1033000" />
-    </task>
-    <task id="LOCAL-00062" summary="fix: help&#10;&#10;Fixed scorecard view help&#10;Fixes and improvements from library">
-      <option name="closed" value="true" />
-      <created>1729764563517</created>
-      <option name="number" value="00062" />
-      <option name="presentableId" value="LOCAL-00062" />
-      <option name="project" value="LOCAL" />
-      <updated>1729764563517</updated>
+      <workItem from="1767683379247" duration="8724000" />
     </task>
     <task id="LOCAL-00063" summary="feat: scorecard widget&#10;&#10;Setup of scorecard widget list view">
       <option name="closed" value="true" />
@@ -867,7 +863,15 @@
       <option name="project" value="LOCAL" />
       <updated>1765306002417</updated>
     </task>
-    <option name="localTasksCounter" value="111" />
+    <task id="LOCAL-00111" summary="fix: fixed layout issues with the new app-platform implementation">
+      <option name="closed" value="true" />
+      <created>1767683443978</created>
+      <option name="number" value="00111" />
+      <option name="presentableId" value="LOCAL-00111" />
+      <option name="project" value="LOCAL" />
+      <updated>1767683443979</updated>
+    </task>
+    <option name="localTasksCounter" value="112" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -887,7 +891,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="refactor: add contextual help with EditHelpSteps and improve help text organization&#10;&#10;- Introduced `EditHelpSteps` component in `ScorecardManagement` to manage contextual help.&#10;- Enhanced `help` metadata with additional fields and consolidated help text for clarity.&#10;- Updated `TabHeader` to enable help state via Recoil.&#10;- Added distinguishing CSS classes to elements for targeted help steps.&#10;- Cleaned up and modularized code across modified components for better maintainability." />
     <MESSAGE value="refactor: improve error handling, refetch logic, and code formatting across Scorecard components&#10;&#10;- Enhanced error logging in `SaveButton` with additional `console.error` output for debugging.&#10;- Improved refetch integration in `ScorecardList` components, enabling better state management after actions like deletion.&#10;- Updated help constants in `scorecardManagement` for better contextual support.&#10;- Refined optional typing in schema fields and cleaned up overall code formatting for readability." />
     <MESSAGE value="refactor: simplify Pagination logic and adjust default page size in ScorecardList&#10;&#10;- Removed redundant page size options from `Pagination` to streamline the component.&#10;- Updated default `pageSize` from 8 to 10 for consistency across hooks and pagination logic.&#10;- Added safeguard in `onPageChange` to prevent navigating beyond available pages." />
     <MESSAGE value="refactor: remove unused inline styles from ScorecardViewPage  &#10;&#10;- Eliminated redundant `width` and `height` styles (`100dvw` and `100dvh`) from container div for cleaner code." />
@@ -912,7 +915,8 @@
     <MESSAGE value="chore: add issue templates for feature requests and bug reports" />
     <MESSAGE value="chore: update pnpm version to 10.22.0 in package.json" />
     <MESSAGE value="fix: updated scorecard lib to fix some of the reported issues&#10;&#10;Fixes #775" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: updated scorecard lib to fix some of the reported issues&#10;&#10;Fixes #775" />
+    <MESSAGE value="fix: fixed layout issues with the new app-platform implementation" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: fixed layout issues with the new app-platform implementation" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="WfRunsListSearchHistory">{
