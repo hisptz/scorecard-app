@@ -1,10 +1,10 @@
 import i18n from "@dhis2/d2-i18n";
+// @ts-expect-error missing types - centered content
 import { Button, CenteredContent, colors, IconError24 } from "@dhis2/ui";
-import PropTypes from "prop-types";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function AccessDeniedPage({ accessType }: any) {
+export default function AccessDeniedPage({ accessType }: { accessType: "edit" | "view" }) {
 	const navigate = useNavigate();
 
 	const onHomeClick = () => {
@@ -17,6 +17,7 @@ export default function AccessDeniedPage({ accessType }: any) {
 				<div className="column align-items-center">
 					<IconError24
 						color={colors.grey700}
+						/* @ts-expect-error prop errors */
 						style={{ fontSize: 64 }}
 						fontSize="large"
 					/>
@@ -39,7 +40,3 @@ export default function AccessDeniedPage({ accessType }: any) {
 		</div>
 	);
 }
-
-AccessDeniedPage.propTypes = {
-	accessType: PropTypes.oneOf(["edit", "view"]).isRequired
-};

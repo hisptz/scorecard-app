@@ -38,6 +38,8 @@ export function DataGroup({
 				{(provided) => {
 					return (
 						<Accordion
+							/*
+      						// @ts-expect-error mui accordion issues */
 							innerRef={provided.innerRef}
 							onDoubleClick={(event) => event.stopPropagation()}
 							square
@@ -57,6 +59,8 @@ export function DataGroup({
 								<AccordionSummary
 									{...provided.draggableProps}
 									{...provided.dragHandleProps}
+									/*
+      								// @ts-expect-error accordion mui issues */
 									innerRef={summaryRef}
 									onClick={(event) => event.stopPropagation()}
 									expandIcon={
@@ -95,10 +99,7 @@ export function DataGroup({
 											</p>
 										</div>
 									) : (
-										// @ts-expect-error react-dnd type issues
 										<DragDropContext onDragEnd={onDragEnd}>
-											{/*
-// @ts-expect-error react-dnd type issues */}
 											<Droppable droppableId={`${id}`}>
 												{(provided) => (
 													<div

@@ -1815,3 +1815,6 @@ msgstr "et {{number}} de plus"
 msgid "Year"
 msgstr "An"
 
+msgctxt "Title for shortcut used by command palette"
+msgid "__MANIFEST_SHORTCUT_Create Scorecard"
+msgstr "créer un raccourci"

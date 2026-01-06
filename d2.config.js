@@ -16,6 +16,12 @@ const config = {
 	minDHIS2Version: "2.40",
 	maxDHIS2Version: "2.42",
 	direction: "auto",
-	viteConfigExtensions: "./viteConfigExtensions.mts"
+	viteConfigExtensions: "./viteConfigExtensions.mts",
+	shortcuts: [
+		{
+			name: "Create Scorecard",
+			url: "#/create"
+		}
+	]
 };
 module.exports = config;

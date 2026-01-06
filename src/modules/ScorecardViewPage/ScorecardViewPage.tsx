@@ -2,7 +2,6 @@ import { DimensionFilterArea } from "./components/DimensionFilterArea";
 import { useRawDimensions } from "./hooks/dimensions";
 import { useMemo, useRef } from "react";
 import { isEmpty } from "lodash";
-import { useResizeObserver } from "usehooks-ts";
 import { DimensionsNotSet } from "./components/DimensionsNotSet";
 import { ConfigProvider, useConfigContext } from "./ConfigProvider";
 import {
@@ -17,17 +16,17 @@ import {
 import { ScorecardActions } from "./components/ScorecardActions/ScorecardActions";
 import { ScorecardView } from "./components/ScorecardView";
 import { getOrgUnitSelectionFromIds } from "@/shared";
+import { useResizeObserver } from "usehooks-ts";
 
 function MainView() {
 	const { periods, orgUnits } = useRawDimensions();
 	const config = useConfigContext();
-
-	const headerRef = useRef<HTMLDivElement | null>(null);
-
-	const { height } = useResizeObserver<HTMLDivElement>({
-		box: "border-box",
-		ref: headerRef
+	const containerRef = useRef<HTMLDivElement | null>(null);
+	const { height } = useResizeObserver({
+		ref: containerRef,
+		box: "content-box"
 	});
+
 
 	const initialState = useMemo(() => {
 		if (!config) {
@@ -61,10 +60,7 @@ function MainView() {
 	return (
 		<ScorecardStateProvider initialState={initialState} config={config}>
 			<div
-				className="flex flex-col gap-[16px] w-full"
-				style={{
-					height: "stretch"
-				}}
+				className="flex flex-col gap-[16px] w-full h-full"
 			>
 				<DimensionFilterArea />
 				{dimensionNotSet ? (
@@ -73,11 +69,10 @@ function MainView() {
 					<ScorecardContext config={config}>
 						<ScorecardDataProvider>
 							<div
-								ref={headerRef}
 								style={{
 									display: "flex",
 									flexDirection: "column",
-									gap: 16,
+									gap: 8,
 									textAlign: "center"
 								}}
 							>
@@ -88,8 +83,8 @@ function MainView() {
 									<HighlightedItems />
 								</div>
 							</div>
-							<div className="flex-1 h-100 ">
-								<ScorecardView headerHeight={height} />
+							<div ref={containerRef} className="flex-1">
+								<ScorecardView height={(height ?? 800)} />
 							</div>
 						</ScorecardDataProvider>
 					</ScorecardContext>
