@@ -86,7 +86,7 @@
     "intro.js": "^8.3.2",
     "intro.js-react": "^1.0.0",
     "jodit-react": "^5.2.38",
-    "lodash": "^4.17.21",
+    "lodash": "^4.17.23",
     "luxon": "^3.7.2",
     "react": "^18.3.1",
     "react-beautiful-dnd": "^13.1.1",
