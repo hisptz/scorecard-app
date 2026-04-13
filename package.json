@@ -27,7 +27,7 @@
     "@dhis2/cli-style": "^10.7.9",
     "@dhis2/cli-utils-cypress": "^10.1.0",
     "@dhis2/cypress-commands": "^10.1.0",
-    "@dhis2/cypress-plugins": "^10.1.0",
+    "@dhis2/cypress-plugins": "^10.1.2",
     "@dhis2/d2-i18n": "^1.2.0",
     "@hookform/devtools": "^4.4.0",
     "@semantic-release/changelog": "^6.0.3",
